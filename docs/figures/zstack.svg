@@ -1,0 +1,23 @@
+<svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="y=110 지점의 Z 스택: 베드 상면 0, PCB 상면 1.8, 심 2.7, 센서 상면 6.0, 건반 밑면 정지 12.3 · 눌림 8.7, 표면 갭 정지 6.3 · 눌림 2.7" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11">
+<rect x="120" y="216.0" width="200" height="14.0" fill="#E9E5DC" fill-opacity="1" stroke="currentColor" stroke-width="0.8"/>
+<text x="328" y="227.0" fill="currentColor">키베드 상면 z=0</text>
+<rect x="120" y="190.8" width="200" height="22.4" fill="#2E7D4F" fill-opacity="1" stroke="currentColor" stroke-width="0.8"/>
+<text x="328" y="206.0" fill="currentColor">PCB 1.6 (상면 1.8)</text>
+<rect x="120" y="153.0" width="200" height="37.8" fill="#B9BCC2" fill-opacity="1" stroke="currentColor" stroke-width="0.8"/>
+<text x="328" y="175.9" fill="currentColor">심 2.7 (Honeywell 로트)</text>
+<rect x="190" y="132.0" width="60" height="21.0" fill="#222" fill-opacity="1" stroke="currentColor" stroke-width="0.8"/>
+<text x="258" y="146.5" fill="currentColor">SS49E 눕힘 1.5 → 상면 6.0</text>
+<rect x="190" y="15.8" width="60" height="28.0" fill="#D92B2B" fill-opacity="1" stroke="currentColor" stroke-width="0.8"/>
+<text x="258" y="33.8" fill="#8b0000">자석 Ø3×2 (밑면 플러시)</text>
+<rect x="120" y="27.0" width="200" height="16.8" fill="#FBF8F0" fill-opacity="1" stroke="currentColor" stroke-width="0.8"/>
+<text x="328" y="39.4" fill="currentColor">건반 밑면 (정지) 12.3</text>
+<rect x="120" y="77.4" width="200" height="16.8" fill="#1F5FD8" fill-opacity="0.12" stroke="#1F5FD8" stroke-dasharray="4 3"/><text x="328" y="98.2" fill="#1F5FD8">건반 밑면 (눌림) 8.7 = 12.3 − 3.6</text>
+<line x1="160" y1="132.0" x2="160" y2="43.8" stroke="#8b0000" stroke-dasharray="2 2"/><text x="164" y="91.9" fill="#8b0000">정지 표면 갭 6.3 (소자 7.0)</text>
+<line x1="140" y1="132.0" x2="140" y2="94.2" stroke="#1F5FD8" stroke-dasharray="2 2"/><text x="144" y="117.1" fill="#1F5FD8" font-weight="600">눌림 2.7 (소자 3.4)</text>
+<text x="14" y="16.0" fill="currentColor" font-size="10">z (mm)</text>
+<text x="112" y="220.0" text-anchor="end" fill="currentColor" font-size="10">0</text>
+<text x="112" y="194.8" text-anchor="end" fill="currentColor" font-size="10">1.8</text>
+<text x="112" y="136.0" text-anchor="end" fill="currentColor" font-size="10">6.0</text>
+<text x="112" y="98.2" text-anchor="end" fill="currentColor" font-size="10">8.7</text>
+<text x="112" y="47.8" text-anchor="end" fill="currentColor" font-size="10">12.3</text>
+</svg>

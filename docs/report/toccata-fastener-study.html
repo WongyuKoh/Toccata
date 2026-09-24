@@ -1,0 +1,738 @@
+<title>Toccata 체결부 감사</title>
+<meta name="description" content="Toccata v3 설계가 쓰는 나사·인서트·와셔 10줄을 전수 정리하고, 어디에 어떤 힘으로 쓰이는지와 3D 프린팅 대체 가능성·절감액을 계산했다.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#EFECE6;--sur:#F7F5F1;--sur2:#E7E3DB;--ink:#17181A;--ink2:#4A4F57;--mut:#6B7A90;
+  --rule:#CFCAC0;--rule2:#B9B3A8;--acc:#1F5FD8;--acc-bg:#1F5FD814;
+  --good:#2E7D4F;--good-bg:#2E7D4F14;--warn:#B08A3E;--warn-bg:#B08A3E16;--crit:#B3261E;--crit-bg:#B3261E12;
+  --steel:#8A9099;--brass:#A8842C;--petg:#DDE4EC;--petg-h:#8A9BB0;--felt:#C1553F;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#141517;--sur:#1E2024;--sur2:#262a30;--ink:#E8E6E1;--ink2:#B8BCC4;--mut:#9AA3B2;
+  --rule:#33373E;--rule2:#464c55;--acc:#6B9BFF;--acc-bg:#6B9BFF1F;
+  --good:#5BB37E;--good-bg:#5BB37E1C;--warn:#D4A653;--warn-bg:#D4A6531C;--crit:#E0625A;--crit-bg:#E0625A18;
+  --steel:#9AA0A8;--brass:#D2AC52;--petg:#2C333C;--petg-h:#6A7788;--felt:#D9735C;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141517;--sur:#1E2024;--sur2:#262a30;--ink:#E8E6E1;--ink2:#B8BCC4;--mut:#9AA3B2;
+  --rule:#33373E;--rule2:#464c55;--acc:#6B9BFF;--acc-bg:#6B9BFF1F;
+  --good:#5BB37E;--good-bg:#5BB37E1C;--warn:#D4A653;--warn-bg:#D4A6531C;--crit:#E0625A;--crit-bg:#E0625A18;
+  --steel:#9AA0A8;--brass:#D2AC52;--petg:#2C333C;--petg-h:#6A7788;--felt:#D9735C;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-block:38px 90px;padding-left:20px;padding-right:20px}
+h1,h2,h3,h4{font-family:"IBM Plex Sans KR","Noto Sans KR",sans-serif;text-wrap:balance;line-height:1.26;margin:0}
+h1{font-size:clamp(28px,4.2vw,44px);font-weight:700;letter-spacing:-.017em}
+h2{font-size:24px;font-weight:600;margin-top:66px;padding-top:22px;border-top:1px solid var(--rule)}
+h3{font-size:17px;font-weight:600;margin-top:32px}
+h4{font-size:14.5px;font-weight:600;margin-top:22px;color:var(--ink2)}
+p{max-width:70ch;margin:12px 0}
+.lede{font-size:17px;color:var(--ink2);max-width:66ch}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:8px}
+.mast{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:end;padding-bottom:20px;border-bottom:2px solid var(--ink)}
+.mast .ver{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--mut);text-align:right;line-height:1.9}
+.mast .ver b{display:block;font-size:14px;color:var(--acc);font-weight:600}
+@media (max-width:640px){.mast{grid-template-columns:1fr}.mast .ver{text-align:left}}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--rule);margin:26px 0 0;background:var(--sur)}
+.spec div{padding:13px 15px;border-right:1px solid var(--rule)}
+.spec div:last-child{border-right:0}
+.spec b{display:block;font-family:"IBM Plex Mono",monospace;font-size:20px;font-weight:600;line-height:1.2}
+.spec span{font-size:11.5px;color:var(--mut)}
+.mono,code,td.n,th.n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+code{font-size:12.5px;background:var(--sur2);padding:1px 5px;border-radius:2px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:14px 0}
+.tw{overflow-x:auto;margin:16px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:500;color:var(--mut);font-size:11px;letter-spacing:.04em;white-space:nowrap}
+td.n,th.n{text-align:right;white-space:nowrap}
+tfoot td{border-top:2px solid var(--rule2);border-bottom:0;font-weight:600}
+tbody tr:hover{background:var(--acc-bg)}
+.id{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--acc);font-weight:500;white-space:nowrap}
+figure{margin:28px 0}
+figure svg{display:block;max-width:100%;height:auto}
+.fig-scroll{overflow-x:auto;border:1px solid var(--rule);background:var(--sur);padding:14px}
+figcaption{font-size:12.5px;color:var(--mut);margin-top:10px;max-width:86ch}
+.callout{border-left:3px solid var(--acc);background:var(--acc-bg);padding:11px 15px;margin:18px 0;max-width:78ch}
+.callout.crit{border-left-color:var(--crit);background:var(--crit-bg)}
+.callout.good{border-left-color:var(--good);background:var(--good-bg)}
+.callout.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+.callout p{margin:5px 0;max-width:none}
+.chip{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:1.5px 7px;border-radius:2px;color:#fff;white-space:nowrap;vertical-align:1px}
+.c-good{background:var(--good)}.c-warn{background:var(--warn)}.c-crit{background:var(--crit)}.c-acc{background:var(--acc)}.c-mut{background:var(--mut)}
+.toc{columns:2;column-gap:32px;font-size:14px;margin:22px 0 0;padding:0;list-style:none}
+.toc li{break-inside:avoid;padding:3px 0;border-bottom:1px dotted var(--rule)}
+.toc a{color:var(--ink);text-decoration:none}
+.toc a:hover,.toc a:focus-visible{color:var(--acc)}
+a{color:var(--acc)}
+a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.card{border:1px solid var(--rule);background:var(--sur);padding:18px 20px;margin:20px 0}
+.card>h3{margin-top:0;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+.card .save{font-family:"IBM Plex Mono",monospace;font-size:19px;font-weight:600;color:var(--good)}
+.card .save.neg{color:var(--crit)}
+.card p{max-width:76ch}
+.card dl{display:grid;grid-template-columns:max-content 1fr;gap:5px 16px;margin:14px 0 0;font-size:13.5px}
+.card dt{color:var(--mut);font-size:12px;padding-top:3px;white-space:nowrap}
+.card dd{margin:0}
+@media (max-width:560px){.card dl{grid-template-columns:1fr;gap:1px 0}.card dt{padding-top:9px}}
+.calc{border:1px solid var(--rule);background:var(--sur);padding:14px 16px;margin:16px 0;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.85;overflow-x:auto;font-variant-numeric:tabular-nums}
+.calc b{color:var(--acc);font-weight:600}
+.calc .ok{color:var(--good)}.calc .no{color:var(--crit)}
+.foot{margin-top:72px;padding-top:18px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--mut)}
+.foot p{max-width:80ch}
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:22px 0}
+.verdict div{border-top:3px solid var(--rule2);padding:11px 0 0}
+.verdict div.y{border-top-color:var(--good)}
+.verdict div.m{border-top-color:var(--warn)}
+.verdict div.n{border-top-color:var(--crit)}
+.verdict b{display:block;font-family:"IBM Plex Sans KR",sans-serif;font-size:14.5px;margin-bottom:3px}
+.verdict p{margin:0;font-size:13px;color:var(--ink2);max-width:none}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div>
+    <span class="eyebrow">Toccata · 88건반 3D 프린팅 피아노</span>
+    <h1>체결부 감사</h1>
+  </div>
+  <div class="ver">
+    기준 설계 <b>제작 설계서 v3</b>
+    부품표 46줄 · 537,197원<br>
+    2026-09-25 작성
+  </div>
+</header>
+
+<p class="lede">v3 설계에서 실제로 사는 나사·인서트·와셔는 10줄, 40,566원이다. 이 문서는 그 10줄이 어디에 어떤 힘으로 쓰이는지 전수로 적고, 각각을 3D 프린팅한 형상으로 바꿀 수 있는지 하중 계산으로 판정한 뒤, 바꿀 수 있는 것의 절감액을 더했다.</p>
+
+<div class="spec">
+  <div><b>10줄</b><span>나사·체결 부품 줄</span></div>
+  <div><b>40,566원</b><span>지금 체결 부품 합계</span></div>
+  <div><b>26,002원</b><span>출력으로 대체 가능(권장 조합)</span></div>
+  <div><b>20,890원</b><span>같이 빠지는 공구</span></div>
+  <div><b>14,564원</b><span>끝까지 남는 금속 나사</span></div>
+</div>
+
+<ul class="toc">
+  <li><a href="#inventory">1 · 지금 쓰는 체결 부품 전수 10줄</a></li>
+  <li><a href="#layout">2 · 체결점 배치 도면 (모듈 1개)</a></li>
+  <li><a href="#loadpath">3 · 하중 경로와 힘</a></li>
+  <li><a href="#criteria">4 · PETG로 나사를 만들 수 있나 — 계산</a></li>
+  <li><a href="#verdict">5 · 항목별 판정</a></li>
+  <li><a href="#plans">6 · 대체안 (안별 독립)</a></li>
+  <li><a href="#cost">7 · 권장 조합과 비용</a></li>
+  <li><a href="#remain">8 · 끝까지 남는 나사</a></li>
+  <li><a href="#already">9 · 이미 얻은 이득</a></li>
+  <li><a href="#next">10 · 단계 0에 넣을 시험</a></li>
+</ul>
+
+<h2 id="inventory">1 · 지금 쓰는 체결 부품 전수 10줄</h2>
+
+<p>부품표에서 나사·인서트·와셔·스탠드오프에 해당하는 줄만 뽑았다. 줄 금액은 설계서 부품표 기준이고, L31·L32에는 그 판매처의 배송비(3,000 / 3,500원)가 포함돼 있다. 「하중」은 설계서 <code>calcs</code>에 계산된 값이다.</p>
+
+<div class="tw">
+<table>
+<thead><tr>
+  <th>줄</th><th>부품</th><th>어디에 · 어떻게 쓰이나</th><th class="n">필요</th><th class="n">구매</th><th class="n">단가</th><th class="n">줄 금액</th><th>하중</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="id">L32</td>
+  <td>SUS304 소켓캡<br><span class="mono">M3 × 35</span></td>
+  <td><b>클램프 나사.</b> 흑건 척추 → 백건 척추를 관통해 척추 레일(y201.5)의 인서트에 조인다. 모듈당 4개(x9.2 / 58 / 106 / 155.5), 끝 부속 2+2. 머리 아래에 Ø9 와셔를 끼우고 카운터보어 Ø9.5×1.0에 앉힌다. 이 4개가 88건반 전체의 기준 위치를 잡는다.</td>
+  <td class="n">32</td><td class="n">40</td><td class="n">90</td><td class="n">7,100</td>
+  <td class="mono">0.12 N·m<br>200 N/개</td>
+</tr>
+<tr>
+  <td class="id">L31</td>
+  <td>황동 열삽입 인서트<br><span class="mono">M3 × Ø4.6 × L5.0</span></td>
+  <td><b>암나사.</b> 인두로 PETG에 녹여 넣는다. 레일 클램프 4 + 척추 세트스크루 4 = 모듈당 8, 끝 부속 7, 스피커 브래킷 4. 구멍은 Ø4.0×6.5 + 아래 Ø3.4×3.5(레일 z10.7~20.7)이고, 세트스크루용은 Ø3.2 턱에 받쳐 뽑힘 하중을 받지 않는다.</td>
+  <td class="n">67</td><td class="n">100</td><td class="n">63</td><td class="n">9,270</td>
+  <td class="mono">압축 200 N<br>(턱 받침)</td>
+</tr>
+<tr>
+  <td class="id">L33</td>
+  <td>SUS304 무두(평끝)<br><span class="mono">M3 × 10</span></td>
+  <td><b>무게 조절 세트스크루.</b> 백건 척추 밑면(x33, x131.5)·흑건 척추 밑면(x45, x119.5)의 인서트에 아래로 1.5 mm 내밀어 끼운다. 1.5 mm 육각렌치로 위 구멍에서 돌려 척추 기울기 = 리프 프리로드 = 건반 무게를 바꾼다. 1/8회전 = 백건 2.4 g, 흑건 1.8 g.</td>
+  <td class="n">31</td><td class="n">40</td><td class="n">60</td><td class="n">2,400</td>
+  <td class="mono">흑 203 N<br>백 158 N</td>
+</tr>
+<tr>
+  <td class="id">L38</td>
+  <td>황동 원판<br><span class="mono">Ø8 × 1</span></td>
+  <td><b>세트스크루 받침.</b> 레일 윗면과 백건 척추 윗면의 Ø8.1×1.0 홈에 윗면과 같은 높이로 압입한다. Ø2 평끝이 PETG를 직접 파고드는 것을 막는다(원판 없는 초기안은 509 N/개에서 100 MPa 이상).</td>
+  <td class="n">31</td><td class="n">40</td><td class="n">267</td><td class="n">10,676</td>
+  <td class="mono">아래 PETG<br>4.0 MPa</td>
+</tr>
+<tr>
+  <td class="id">L34</td>
+  <td>SUS304 소켓캡<br><span class="mono">M3 × 10</span></td>
+  <td><b>센서 바 고정.</b> 센서 바와 센서 기판을 관통해 왼쪽 받침 기둥(3.0, 61.9)·(3.0, 74.6)에 조인다. 인서트 없이 출력 구멍 Ø2.7~2.8에 <b>직접 탭을 내며</b> 들어간다. 모듈당 2개.</td>
+  <td class="n">20</td><td class="n">30</td><td class="n">60</td><td class="n">1,800</td>
+  <td class="mono">경하중</td>
+</tr>
+<tr>
+  <td class="id">L35</td>
+  <td>SUS304 소켓캡<br><span class="mono">M3 × 6</span></td>
+  <td><b>제어 기판 고정.</b> 5×7 만능기판을 출력 스탠드오프 4곳(49.75/114.75, 148/193)에 자가 탭으로 조인다. 1.6T 기판 통과 후 약 4.4 mm 물림. 모듈 7 + 페달 보드 + CU = 기판 9장.</td>
+  <td class="n">36</td><td class="n">40</td><td class="n">40</td><td class="n">1,600</td>
+  <td class="mono">경하중</td>
+</tr>
+<tr>
+  <td class="id">L36</td>
+  <td>SUS 평와셔<br><span class="mono">M4 × 9 × 0.5T</span></td>
+  <td><b>면압 분산.</b> 클램프 나사 머리 아래 32개(흑건 척추 카운터보어 Ø9.5×1.0 안) + 고무발 고정 피스 아래 16개. 머리 Ø5.5가 와셔 구멍 Ø4.3에 한쪽 0.6 mm 걸린다. 설계의 「M3 대와셔 Ø9」를 외경이 정확히 9인 M4 평와셔로 대체한 것.</td>
+  <td class="n">48</td><td class="n">60</td><td class="n">10</td><td class="n">600</td>
+  <td class="mono">아래 PETG<br>4.2 MPa</td>
+</tr>
+<tr>
+  <td class="id">L37</td>
+  <td>황동 스탠드오프<br><span class="mono">M2.5 × 16 수-암</span></td>
+  <td><b>Pi 5 받침.</b> CU 상자 바닥에서 Pi 5를 16 mm 띄운다. 4개.</td>
+  <td class="n">4</td><td class="n">4</td><td class="n">1,100</td><td class="n">4,400</td>
+  <td class="mono">경하중</td>
+</tr>
+<tr>
+  <td class="id">L47</td>
+  <td>SUS304 소켓캡<br><span class="mono">M2.5 × 6</span></td>
+  <td><b>Pi 5 고정.</b> 스탠드오프(L37) 위에서 Pi 5를 누른다. 4개 + 예비 2.</td>
+  <td class="n">4</td><td class="n">6</td><td class="n">200</td><td class="n">1,200</td>
+  <td class="mono">경하중</td>
+</tr>
+<tr>
+  <td class="id">L49</td>
+  <td>SUS 둥근머리 직결피스<br><span class="mono">8호 Ø4.2 · 16/19/25</span></td>
+  <td><b>나무·판재용.</b> 25 mm ×12 = 스피커·CU 상자 고무발, 16 mm ×8 = CW-100B25 스피커 유닛 장착 홀(11.5T 합판에 약 9 mm 물림), 19 mm ×8 = PETG 그릴 고정(스페이서 링 10 mm 관통).</td>
+  <td class="n">28</td><td class="n">40</td><td class="n">50~60</td><td class="n">1,520</td>
+  <td class="mono">합판 물림<br>9 mm</td>
+</tr>
+</tbody>
+<tfoot><tr><td colspan="6">체결 부품 10줄 합계 <span style="font-weight:400;color:var(--mut)">(배송비 6,500원 포함)</span></td><td class="n">40,566</td><td></td></tr></tfoot>
+</table>
+</div>
+
+<h4>체결에 딸린 줄 (나사는 아니지만 같이 판단해야 하는 것)</h4>
+<div class="tw">
+<table>
+<thead><tr><th>줄</th><th>부품</th><th>쓰임</th><th class="n">줄 금액</th></tr></thead>
+<tbody>
+<tr><td class="id">L42</td><td>실리콘 방진 그로밋 M2/M3 20개</td><td>끝 부속 ↔ 스피커 상자 PETG 브래킷(z12), 브래킷당 2개 = 4개</td><td class="n">3,040</td></tr>
+<tr><td class="id">L14</td><td>화성고무 피스고무발 28×5 (RUB-E2)</td><td>스피커 상자 2개 × 4 + CU 상자 4 = 12개, L49 25 mm + L36 와셔로 고정</td><td class="n">11,660</td></tr>
+<tr><td class="id">T05</td><td>PINECIL 인서트 압입 전용 팁 세트</td><td><b>공구.</b> 인서트 67개를 곧게 넣기 위한 팁</td><td class="n">20,290</td></tr>
+<tr><td class="id">T11</td><td>육각렌치 1.5 / 2.5 mm</td><td><b>공구.</b> 1.5 = 세트스크루, 2.5 = 클램프·기판 나사</td><td class="n">1,200</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="layout">2 · 체결점 배치 도면 (모듈 1개)</h2>
+
+<p>옥타브 모듈 1개(폭 164.5 mm)의 척추 레일을 위에서 본 도면이다. 클램프 4개와 세트스크루 4개, 원판 2개가 이 13 mm 폭 레일 안에 모두 들어간다. 이 좁은 폭이 뒤에 나오는 「더 굵은 나사로 바꾸면 되지 않나」에 대한 답이 된다.</p>
+
+<figure>
+<div class="fig-scroll">
+<svg viewBox="0 0 786 246" role="img" aria-label="옥타브 모듈 척추 레일 평면 도면: 클램프 나사 4개, 세트스크루 4개, 황동 원판 2개의 x·y 위치">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+    </marker>
+    <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="var(--petg-h)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <g color="var(--mut)" font-family="IBM Plex Mono, monospace" font-size="10.5">
+
+  <!-- scale: 4.2 px/mm ; x_px = 44 + x_mm*4.2 ; y_px = 62 + (y_mm-194)*4.2 -->
+
+  <!-- rail body y196~209 -->
+  <rect x="44" y="70.4" width="690.9" height="54.6" fill="var(--petg)" stroke="var(--petg-h)" stroke-width="1.4"/>
+  <!-- back wall y209~212 -->
+  <rect x="44" y="125" width="690.9" height="12.6" fill="url(#hatch)" stroke="var(--petg-h)" stroke-width="1.4"/>
+  <!-- front ridge pieces y196.5~197.5, x5~73.5 and x94.5~163.5 -->
+  <rect x="65" y="72.5" width="287.7" height="4.2" fill="var(--petg-h)" opacity=".55"/>
+  <rect x="440.9" y="72.5" width="289.8" height="4.2" fill="var(--petg-h)" opacity=".55"/>
+  <!-- USB tunnel x74~94 -->
+  <rect x="354.8" y="70.4" width="84" height="67.2" fill="var(--bg)" stroke="var(--petg-h)" stroke-width="1" stroke-dasharray="3 2"/>
+  <text x="396.8" y="152" text-anchor="middle" fill="var(--mut)">USB 터널</text>
+  <text x="396.8" y="164" text-anchor="middle" fill="var(--mut)">x74~94</text>
+
+  <!-- clamp holes Ø4.0 insert at y201.5 : x 9.2 / 58 / 106 / 155.5 -->
+  <g stroke="var(--acc)" stroke-width="1.6" fill="var(--acc-bg)">
+    <circle cx="82.6" cy="101.9" r="8.4"/><circle cx="287.6" cy="101.9" r="8.4"/>
+    <circle cx="489.2" cy="101.9" r="8.4"/><circle cx="697.1" cy="101.9" r="8.4"/>
+  </g>
+  <g stroke="var(--acc)" stroke-width="1" fill="none">
+    <circle cx="82.6" cy="101.9" r="7.1"/><circle cx="287.6" cy="101.9" r="7.1"/>
+    <circle cx="489.2" cy="101.9" r="7.1"/><circle cx="697.1" cy="101.9" r="7.1"/>
+  </g>
+
+  <!-- brass disc seats Ø8.1 at (33,205) (131.5,205) -->
+  <g stroke="var(--brass)" stroke-width="1.6" fill="var(--brass)" fill-opacity=".22">
+    <circle cx="182.6" cy="116.2" r="17"/><circle cx="596.3" cy="116.2" r="17"/>
+  </g>
+  <!-- black-key setscrew through-holes Ø3.5 at (45,205) (119.5,205) -->
+  <g stroke="var(--felt)" stroke-width="1.5" fill="none">
+    <circle cx="233" cy="116.2" r="7.4"/><circle cx="545.9" cy="116.2" r="7.4"/>
+  </g>
+
+  <!-- x dimension line for clamps -->
+  <g stroke="currentColor" stroke-width=".9" fill="none">
+    <line x1="44" y1="44" x2="82.6" y2="44" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="82.6" y1="44" x2="287.6" y2="44" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="287.6" y1="44" x2="489.2" y2="44" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="489.2" y1="44" x2="697.1" y2="44" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="697.1" y1="44" x2="734.9" y2="44" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="44" y1="26" x2="734.9" y2="26" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <g fill="currentColor" text-anchor="middle">
+    <text x="63" y="40">9.2</text><text x="185" y="40">48.8</text>
+    <text x="388" y="40">48</text><text x="593" y="40">49.5</text><text x="716" y="40">9</text>
+    <text x="389" y="22" font-size="11.5" fill="var(--ink)">164.5 — 옥타브 모듈 폭 (P01)</text>
+  </g>
+  <!-- extension lines -->
+  <g stroke="var(--rule2)" stroke-width=".7" stroke-dasharray="2 2">
+    <line x1="44" y1="30" x2="44" y2="70.4"/><line x1="82.6" y1="48" x2="82.6" y2="93"/>
+    <line x1="287.6" y1="48" x2="287.6" y2="93"/><line x1="489.2" y1="48" x2="489.2" y2="93"/>
+    <line x1="697.1" y1="48" x2="697.1" y2="93"/><line x1="734.9" y1="30" x2="734.9" y2="70.4"/>
+  </g>
+
+  <!-- y dimensions on the right -->
+  <g stroke="currentColor" stroke-width=".9" fill="none">
+    <line x1="756" y1="70.4" x2="756" y2="101.9" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="756" y1="101.9" x2="756" y2="116.2" marker-start="url(#ar)" marker-end="url(#ar)"/>
+    <line x1="756" y1="116.2" x2="756" y2="137.6" marker-start="url(#ar)" marker-end="url(#ar)"/>
+  </g>
+  <g fill="currentColor" font-size="10">
+    <text x="762" y="89">5.5</text><text x="762" y="112">3.5</text><text x="762" y="131">7</text>
+  </g>
+  <g stroke="var(--rule2)" stroke-width=".7" stroke-dasharray="2 2">
+    <line x1="734.9" y1="70.4" x2="760" y2="70.4"/><line x1="705" y1="101.9" x2="760" y2="101.9"/>
+    <line x1="613" y1="116.2" x2="760" y2="116.2"/><line x1="734.9" y1="137.6" x2="760" y2="137.6"/>
+  </g>
+
+  <!-- labels -->
+  <g font-size="10.5">
+    <text x="20" y="75" fill="var(--mut)">y196</text>
+    <text x="20" y="106" fill="var(--acc)">y201.5</text>
+    <text x="20" y="120" fill="var(--brass)">y205</text>
+    <text x="20" y="142" fill="var(--mut)">y209</text>
+  </g>
+
+  <!-- legend -->
+  <g font-size="11" transform="translate(44,186)">
+    <circle cx="8" cy="0" r="7.5" fill="var(--acc-bg)" stroke="var(--acc)" stroke-width="1.6"/>
+    <text x="22" y="4" fill="var(--ink)">클램프 인서트 Ø4.0×6.5 (+Ø3.4×3.5) · M3×35 4개 · 나사당 200 N</text>
+    <g transform="translate(0,22)">
+      <circle cx="8" cy="0" r="7.5" fill="var(--brass)" fill-opacity=".22" stroke="var(--brass)" stroke-width="1.6"/>
+      <text x="22" y="4" fill="var(--ink)">황동 원판 자리 Ø8.1×1.0 — 백건 세트스크루 받침 (아래 PETG 4.0 MPa)</text>
+    </g>
+    <g transform="translate(0,42)">
+      <circle cx="8" cy="0" r="7" fill="none" stroke="var(--felt)" stroke-width="1.5"/>
+      <text x="22" y="4" fill="var(--ink)">흑건 세트스크루 관통 구멍 Ø3.5 — 받침 원판은 백건 척추 윗면에 있다</text>
+    </g>
+  </g>
+  </g>
+</svg>
+</div>
+<figcaption>척추 레일 평면 (설계서 dims P01·P125·P126·P127·D07·D11·S49 기준, 1 mm = 4.2 px). 레일 폭은 y196~209의 13 mm뿐이고, 클램프 x9.2는 왼쪽 암 도브테일(x0~4)과 벽 3.1 mm를 두고 붙어 있다. 앞 릿지(y196.5~197.5, 높이 2.71)와 세트스크루(y205)가 척추를 8.61° 기울여 받치는 두 점이다.</figcaption>
+</figure>
+
+<h2 id="loadpath">3 · 하중 경로와 힘</h2>
+
+<p>v3의 건반 무게는 스프링이 아니라 <b>리프(플렉서)의 프리로드</b>로 만든다. 척추를 얼마나 기울여 고정하느냐가 곧 건반 무게다(누르기 시작 42 g → 바닥 64 g). 그래서 이 체결부는 단순히 부품을 붙이는 나사가 아니라 <b>연주감을 결정하는 조정 기구</b>다. 힘의 흐름은 두 갈래다.</p>
+
+<figure>
+<div class="fig-scroll">
+<svg viewBox="0 0 700 396" role="img" aria-label="클램프 경로와 세트스크루 경로의 하중 전달 스택 다이어그램">
+  <g font-family="IBM Plex Mono, monospace" font-size="10.5">
+  <!-- Column A: clamp -->
+  <g transform="translate(20,0)">
+    <text x="150" y="16" text-anchor="middle" font-family="IBM Plex Sans KR, sans-serif" font-size="13" font-weight="600" fill="var(--ink)">클램프 경로 — 조이는 힘</text>
+    <text x="150" y="32" text-anchor="middle" fill="var(--mut)">x9.2 / 58 / 106 / 155.5, y201.5</text>
+
+    <g stroke-width="1.3">
+      <rect x="40" y="44" width="220" height="30" fill="var(--steel)" fill-opacity=".3" stroke="var(--steel)"/>
+      <rect x="40" y="82" width="220" height="24" fill="var(--steel)" fill-opacity=".3" stroke="var(--steel)"/>
+      <rect x="40" y="114" width="220" height="34" fill="var(--petg)" stroke="var(--petg-h)"/>
+      <rect x="40" y="156" width="220" height="34" fill="var(--petg)" stroke="var(--petg-h)"/>
+      <rect x="40" y="198" width="220" height="30" fill="var(--brass)" fill-opacity=".25" stroke="var(--brass)"/>
+      <rect x="40" y="236" width="220" height="34" fill="var(--petg)" stroke="var(--petg-h)"/>
+    </g>
+    <g fill="var(--ink)" font-size="11">
+      <text x="50" y="63">M3×35 머리 Ø5.5 · 0.12 N·m</text>
+      <text x="50" y="98">M4 와셔 Ø9×0.5T</text>
+      <text x="50" y="135">흑건 척추 카운터보어 Ø9.5×1.0</text>
+      <text x="50" y="177">백건 척추 (두께 16, Ø3.4 관통)</text>
+      <text x="50" y="217">황동 인서트 M3×Ø4.6×L5.0</text>
+      <text x="50" y="257">척추 레일 (z10.7~20.7)</text>
+    </g>
+    <!-- force arrow -->
+    <g stroke="var(--crit)" stroke-width="2" fill="none">
+      <path d="M18 50 L18 262" marker-end="url(#ar2)"/>
+    </g>
+    <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--crit)"/></marker></defs>
+    <text x="14" y="160" fill="var(--crit)" font-size="11" text-anchor="middle" transform="rotate(-90 14 160)">200 N/개</text>
+
+    <g fill="var(--mut)" font-size="10">
+      <text x="266" y="98">4.2 MPa</text>
+      <text x="266" y="217">전단 5.0 mm</text>
+    </g>
+    <text x="40" y="292" fill="var(--ink2)" font-size="11">4개 합계 800 N · 최소 필요 327 N</text>
+    <text x="40" y="308" fill="var(--ink2)" font-size="11">= 크리프 50% 손실을 가정한 여유</text>
+    <text x="40" y="330" fill="var(--mut)" font-size="10.5">운반 모드: 4개를 3바퀴 풀면 척추가</text>
+    <text x="40" y="344" fill="var(--mut)" font-size="10.5">1.5 mm 들려 리프 응력이 0이 된다</text>
+    <text x="40" y="358" fill="var(--mut)" font-size="10.5">→ 반복 분해·재조임이 설계 절차다</text>
+  </g>
+
+  <!-- Column B: setscrew -->
+  <g transform="translate(380,0)">
+    <text x="150" y="16" text-anchor="middle" font-family="IBM Plex Sans KR, sans-serif" font-size="13" font-weight="600" fill="var(--ink)">세트스크루 경로 — 버티는 힘</text>
+    <text x="150" y="32" text-anchor="middle" fill="var(--mut)">백 x33·131.5 / 흑 x45·119.5, y205</text>
+
+    <g stroke-width="1.3">
+      <rect x="40" y="44" width="220" height="34" fill="var(--petg)" stroke="var(--petg-h)"/>
+      <rect x="40" y="86" width="220" height="30" fill="var(--brass)" fill-opacity=".25" stroke="var(--brass)"/>
+      <rect x="40" y="124" width="220" height="30" fill="var(--steel)" fill-opacity=".3" stroke="var(--steel)"/>
+      <rect x="40" y="162" width="220" height="30" fill="var(--brass)" fill-opacity=".25" stroke="var(--brass)"/>
+      <rect x="40" y="200" width="220" height="34" fill="var(--petg)" stroke="var(--petg-h)"/>
+    </g>
+    <g fill="var(--ink)" font-size="11">
+      <text x="50" y="65">척추 (인서트 위 렌치 구멍 Ø3.2)</text>
+      <text x="50" y="105">황동 인서트 — Ø3.2 턱에 받침</text>
+      <text x="50" y="143">M3×10 무두 평끝 · 돌출 1.5</text>
+      <text x="50" y="181">황동 원판 Ø8×1 (압입)</text>
+      <text x="50" y="221">레일 / 백건 척추 윗면</text>
+    </g>
+    <g stroke="var(--crit)" stroke-width="2" fill="none">
+      <path d="M18 50 L18 226" marker-end="url(#ar2)"/>
+    </g>
+    <text x="14" y="140" fill="var(--crit)" font-size="11" text-anchor="middle" transform="rotate(-90 14 140)">158~203 N</text>
+    <g fill="var(--mut)" font-size="10">
+      <text x="266" y="181">4.0 MPa</text>
+    </g>
+    <text x="40" y="256" fill="var(--ink2)" font-size="11">1/8회전 = 백 2.4 g / 흑 1.8 g</text>
+    <text x="40" y="272" fill="var(--ink2)" font-size="11">조절 범위 돌출 0~4 mm (기준 1.5)</text>
+    <text x="40" y="294" fill="var(--mut)" font-size="10.5">원판이 없으면 Ø2 평끝이 PETG에</text>
+    <text x="40" y="308" fill="var(--mut)" font-size="10.5">100 MPa 이상으로 파고든다 —</text>
+    <text x="40" y="322" fill="var(--mut)" font-size="10.5">원판은 장식이 아니라 필수다</text>
+    <text x="40" y="344" fill="var(--mut)" font-size="10.5">PETG 크리프 복원도 이 나사로 한다</text>
+    <text x="40" y="358" fill="var(--mut)" font-size="10.5">(θ0의 10~25% = 백 0.86~2.15°)</text>
+  </g>
+  </g>
+</svg>
+</div>
+<figcaption>하중 전달 스택. 회색 = 강철/SUS, 노란색 = 황동, 파란색 = PETG 출력물. 설계서 <code>calcs</code>의 「척추 시트 하중」·「설치·운반 모드」 값이다. 두 경로 모두 <b>PETG가 금속을 받치는 면에서만</b> 응력이 문제가 되고, 그 면압을 4 MPa 대로 낮추기 위해 와셔와 원판이 들어가 있다.</figcaption>
+</figure>
+
+<h2 id="criteria">4 · PETG로 나사를 만들 수 있나 — 계산</h2>
+
+<p>「3D 프린팅으로 대체」는 세 가지 다른 이야기다. 섞으면 답이 틀린다.</p>
+
+<div class="verdict">
+  <div class="n"><b>(가) 나사를 출력한다</b><p>M3 볼트 자체를 PETG로 뽑는다. 아래 계산에서 <b>모두 불가</b>다.</p></div>
+  <div class="m"><b>(나) 암나사를 출력한다</b><p>인서트·너트를 없애고 출력 구멍에 직접 탭을 낸다. 경하중은 이미 그렇게 쓰고 있다.</p></div>
+  <div class="y"><b>(다) 나사를 없앤다</b><p>출력 형상(받침·보스·핀·포켓)이 나사 역할을 흡수한다. <b>실제 이득은 여기서 나온다.</b></p></div>
+</div>
+
+<h3>(가) M3 볼트를 출력할 수 있나 — 불가</h3>
+
+<div class="calc">
+<b>나사산 해상도</b><br>
+M3 피치 0.5 mm → 산 높이 h = 0.6134 × 0.5 = <b>0.307 mm</b><br>
+노즐 0.4 mm 압출 폭 0.42~0.45 mm &gt; 0.307 mm → <span class="no">산이 형성되지 않는다</span><br><br>
+<b>몸통 인장</b> (유효 단면 A = 5.03 mm²)<br>
+누워 출력(X-Y, 51 MPa) : 5.03 × 51 = 257 N<br>
+세워 출력(층간, 약 25~36 MPa) : 5.03 × 25~36 = <b>126~181 N</b><br>
+필요 예압 200 N → 안전율 <span class="no">0.63~0.91 (&lt; 1)</span><br><br>
+<b>굵게 하면?</b> M6 (A = 20.1 mm², 피치 1.0 → 산 0.613 mm &gt; 노즐)<br>
+층간 25 MPa : 20.1 × 25 = 503 N → 안전율 2.5 <span class="ok">(강도는 통과)</span><br>
+그러나 레일 폭 13 mm, 클램프 x9.2의 도브테일 쪽 벽 3.1 mm,<br>
+흑건 척추 두께 9.09 mm → M6 머리 Ø10 · 관통 Ø6.6이 <span class="no">들어갈 자리가 없다</span>
+</div>
+
+<p>즉 나사 자체를 출력하는 길은 <b>해상도(M3)와 공간(M6)에서 양쪽으로 막힌다.</b> 리프 프리로드를 200 N으로 잡아 두는 나사에 안전율 1 미만의 출력 볼트를 쓰는 것은 88건반 전체가 서서히 무게를 잃는다는 뜻이다.</p>
+
+<h3>(나) 출력 구멍에 직접 탭 — 조건부, 그러나 이득이 거의 없다</h3>
+
+<p>레일의 인서트 구멍은 z10.7~20.7의 10 mm 깊이다. 인서트를 빼고 이 10 mm에 M3 탭을 내면 어떨까. 정적 강도는 남지만 <b>크리프</b>에서 걸린다.</p>
+
+<div class="calc">
+<b>나사산 전단</b> (탭 깊이 10 mm, 유효경 d₂ = 2.675)<br>
+A = π × 2.675 × 10 = 84 mm² · 층간 전단 약 20 MPa → 1,680 N<br>
+필요 200 N → 안전율 <span class="ok">8.4 (정적은 충분)</span><br><br>
+<b>나사산 플랭크 면압</b> (크리프를 결정하는 값)<br>
+1턴 투사면적 = π/4 (3.0² − 2.459²) = 2.32 mm²<br>
+하중이 앞 6턴에 몰린다고 보면 13.9 mm²<br>
+200 N ÷ 13.9 = <b>14.4 MPa</b><br><br>
+비교 : 너트 트랩 12 MPa · 와셔 아래 4.2 MPa · 원판 아래 4.0 MPa<br>
+리프 상시 응력 6 MPa(항복의 12%) — 설계가 안전하다고 본 수준의 <span class="no">2.4배</span>
+</div>
+
+<div class="callout warn">
+<p><b>그리고 절감액이 작다.</b> 인서트를 육각너트(강철 11원)로 바꾸는 검증된 안(ME6)과 비교하면, 직접 탭이 더 버는 돈은 너트 44개 484원 + 나사를 M3×40에서 M3×35로 되돌리는 1,360원 = <b>1,844원</b>뿐이다. 1,844원을 위해 반복 분해(운반 모드 3바퀴 풀기 + 조절마다 반 바퀴)에서 PETG 나사산이 뭉개질 위험을 지는 거래다. <b>권하지 않는다.</b></p>
+</div>
+
+<p>다만 <b>경하중에는 이미 직접 탭을 쓰고 있다.</b> 센서 바(L34, Ø2.7~2.8 구멍)와 제어 기판 스탠드오프(L35, Ø2.7)는 인서트 없이 M3 나사가 PETG에 스스로 탭을 낸다. 이건 v3가 이미 얻은 이득이고, 더 줄일 대상은 개수(ME10)다.</p>
+
+<h3>(다) 나사를 없애는 출력 형상 — 여기가 답이다</h3>
+
+<p>PETG가 잘하는 것은 나사가 아니라 <b>면으로 받치는 것</b>이다. 면압을 4 MPa 대로 유지하면 PETG끼리 받쳐도 된다. 설계서의 계산이 이걸 확인해 준다: 출력 받침끼리 닿는 면압은 158~203 N ÷ 50 mm² ≈ <b>3.2~4.1 MPa</b>로 지금 황동 원판 아래(4.0 MPa)와 사실상 같다. 그래서 세트스크루+원판 조합은 출력 받침으로 바꿀 수 있고, 인서트는 육각너트 포켓으로, 스탠드오프는 보스로, 위치 결정용 나사는 출력 핀으로 바꿀 수 있다.</p>
+
+<h2 id="verdict">5 · 항목별 판정</h2>
+
+<div class="tw">
+<table>
+<thead><tr><th>줄</th><th>부품</th><th class="n">금액</th><th>판정</th><th>근거</th><th>대체안</th></tr></thead>
+<tbody>
+<tr>
+  <td class="id">L31</td><td>황동 인서트 67개</td><td class="n">9,270</td>
+  <td><span class="chip c-good">대체 가능</span></td>
+  <td>출력 육각 포켓 + 강철 M3 너트(11원). 너트가 PETG를 누르는 면압 클램프 12 / 세트스크루 백 8.2·흑 10.6 MPa. 인두 가열이 없어져 리프 뿌리 9 mm 옆이 안전해진다</td>
+  <td>ME6</td>
+</tr>
+<tr>
+  <td class="id">L33</td><td>무두 세트스크루 31개</td><td class="n">2,400</td>
+  <td><span class="chip c-good">대체 가능</span></td>
+  <td>척추와 한 몸으로 출력하는 Ø8 받침. PETG끼리 3.2~4.1 MPa로 지금 원판과 같은 면압. 조절은 캡톤 테이프(0.055 mm) 심으로</td>
+  <td>ME15</td>
+</tr>
+<tr>
+  <td class="id">L38</td><td>황동 원판 31개</td><td class="n">10,676</td>
+  <td><span class="chip c-good">대체 가능</span></td>
+  <td>세트스크루를 없애면 받침 원판도 같이 없어진다. <b>원판만 PETG로 출력하는 것은 무의미</b>(받치는 쪽과 같은 재료라 분산 효과 0)</td>
+  <td>ME15</td>
+</tr>
+<tr>
+  <td class="id">L37</td><td>황동 스탠드오프 4개</td><td class="n">4,400</td>
+  <td><span class="chip c-good">대체 가능</span></td>
+  <td>CU 상자 바닥에 보스 4개(외경 6.0, 높이 5.0)를 같이 출력. 필라멘트 약 2 g = 32원. 보드 적층 하중이 작다</td>
+  <td>CP7</td>
+</tr>
+<tr>
+  <td class="id">L35</td><td>기판 나사 36개</td><td class="n">1,600</td>
+  <td><span class="chip c-warn">절반 대체</span></td>
+  <td>대각 2곳만 나사, 나머지 2곳은 출력 위치 핀(기판 구멍 −0.3, 높이 1.4). 기판 들뜸은 대각 2개로 막힌다</td>
+  <td>ME10</td>
+</tr>
+<tr>
+  <td class="id">L47</td><td>M2.5×6 4개</td><td class="n">1,200</td>
+  <td><span class="chip c-warn">조건부</span></td>
+  <td>보스에 Ø2.1 탭을 내고 M2.5×12로 위에서 고정 → 나사는 남지만 값이 다르다. DAC/스페이서가 수-암이면 나사가 0이 된다</td>
+  <td>CP7</td>
+</tr>
+<tr>
+  <td class="id">L32</td><td>클램프 M3×35 32개</td><td class="n">7,100</td>
+  <td><span class="chip c-crit">불가</span></td>
+  <td>나사당 200 N 예압 + 반복 분해. 출력 M3는 층간 126~181 N으로 안전율 1 미만, 나사산이 노즐 폭 아래. M6은 자리가 없다. <b>ME6을 쓰면 M3×40으로 길어져 오히려 820원 늘어난다</b></td>
+  <td>—</td>
+</tr>
+<tr>
+  <td class="id">L34</td><td>센서 바 M3×10 20개</td><td class="n">1,800</td>
+  <td><span class="chip c-crit">불가</span></td>
+  <td>이미 인서트 없는 자가 탭이다. 센서-자석 갭 정밀도를 스냅·끼움으로 대신하면 벨로시티 측정이 흔들린다. 여기서 1,800원을 아끼면 D14가 위험해진다</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td class="id">L36</td><td>M4 와셔 48개</td><td class="n">600</td>
+  <td><span class="chip c-crit">무의미</span></td>
+  <td>와셔의 일은 <b>더 단단한 재료로</b> 면압을 퍼뜨리는 것이다. PETG 와셔는 받치는 PETG와 같이 눌린다. 와셔를 빼면 머리 Ø5.5가 직접 눌러 4.2 → 13.6 MPa. 600원짜리를 없애려고 3배 면압을 사는 셈</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td class="id">L49</td><td>직결피스 28개</td><td class="n">1,520</td>
+  <td><span class="chip c-crit">불가</span></td>
+  <td>합판(11.5T)과 스피커 유닛 장공에 박는 나사다. 드릴 끝·강철 나사산이 있어야 목재에 물린다. 그릴 8곳(400원)만 출력 스냅으로 바꿀 수는 있지만, 청소를 위해 반복 탈착하는 부위라 스냅이 먼저 진다</td>
+  <td>—</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="plans">6 · 대체안 (안별 독립)</h2>
+
+<p>네 개 안은 서로 독립이고 동시에 적용할 수 있다. 각 안의 금액·검증 상태는 설계서 「비용 절감」 장의 값을 그대로 따랐고, 마지막 하나는 이 감사에서 새로 검토해 <b>기각한</b> 안이다.</p>
+
+<div class="card">
+<h3><span class="id">ME6</span> 황동 인서트 67개 → 출력 육각 포켓 + 강철 너트 <span class="save">−7,625원</span> <span class="chip c-acc">공구 −20,290원</span></h3>
+<p>인서트를 녹여 넣는 대신, 출력물에 육각 포켓·통로를 만들어 M3 육각너트를 앉힌다. 레일 클램프 너트는 바닥(z3)에서 위로 낸 대변 5.8 통로의 윗단(z14.1~16.5)에 넣고, 윗단 3 mm는 대변 5.5 억지로 해 떨어지지 않게 한다. 세트스크루 너트는 척추 밑면의 아래로 열린 포켓(대변 5.5 억지 × 깊이 2.5)에 넣는다.</p>
+<dl>
+  <dt>빠지는 줄</dt><dd>L31 인서트 9,270원 + L32 M3×35 7,100원 = 16,370원</dd>
+  <dt>새로 사는 것</dt><dd>M3 육각너트 강철 75개 × 11원 = 825원 · M3×40 34개 × 130원 + 배송 3,500 = 7,920원 (나사가 너트 위치까지 4.2 mm 더 내려가 길어진다)</dd>
+  <dt>면압</dt><dd>클램프 너트 약 17 mm²로 12 MPa — 인서트보다 높다. 크리프로 클램프 힘이 10~20% 더 줄 수 있으나 설계가 가정한 50% 여유 안</dd>
+  <dt>덤으로</dt><dd>인서트 압입 전용 인두 팁(T05) 20,290원이 필요 없다. 인서트 67개를 230~245 °C 인두로 리프 뿌리 9 mm 옆에서 누르는 공정도 사라진다 (PETG 유리전이 69 °C)</dd>
+  <dt>위험</dt><dd>클램프 x9.2 통로와 왼쪽 암 도브테일(x0~4) 사이 벽이 약 1.85 mm로 얇다. 너트가 강철이라 자석 원판안(ME4)과 같이 쓰면 세트스크루 너트만 SUS로 바꿔야 한다</dd>
+  <dt>같이 못 씀</dt><dd>ME1, ME11 · 신뢰도 <b>중간</b></dd>
+</dl>
+</div>
+
+<div class="card">
+<h3><span class="id">ME15</span> 세트스크루 31개 + 황동 원판 31개 → 출력 받침 + 캡톤 심 <span class="save">−13,076원</span> <span class="chip c-acc">공구 −600원</span></h3>
+<p>척추 밑면의 세트스크루 4곳을 척추와 한 번에 출력하는 Ø8 받침으로 바꾼다. 받침 높이는 단계 0에서 실측한 E로 정해 출력하고(1°당 약 0.14 mm), 미세 조절과 크리프 복원은 클램프를 3바퀴 풀어 척추 뒤가 1.5 mm 뜬 사이에 캡톤 테이프(0.055 mm) 조각을 받침 아래에 끼워서 한다. 인서트 필요량도 67 → 36개로 준다.</p>
+<dl>
+  <dt>빠지는 줄</dt><dd>L33 무두 2,400원 + L38 황동 원판 10,676원 = 13,076원</dd>
+  <dt>새로 사는 것</dt><dd>없음 (캡톤 테이프는 이미 소모품에 있다)</dd>
+  <dt>면압</dt><dd>PETG 받침끼리 158~203 N ÷ 50 mm² ≈ 3.2~4.1 MPa — 지금 황동 원판 아래 4.0 MPa와 같은 수준</dd>
+  <dt>분해능</dt><dd>캡톤 한 겹 = 백 약 2.1 g, 흑 약 1.6 g (지금 1/8회전 = 백 2.4 g과 비슷). 크리프 10~25% 복원에는 백 2~6겹, 흑 3~7겹</dd>
+  <dt>반드시</dt><dd>받침 끝면을 <b>설치 상태에서 받는 면과 평행하게</b> 기울여 출력한다(백건 8.61°, 흑건 2.15°). 척추 면을 그대로 따르면 Ø8 받침이 8.61° 기울어 높이차 1.2 mm로 모서리만 닿고 그 모서리가 크리프로 눌린다</dd>
+  <dt>잃는 것</dt><dd>조절이 번거로워진다. 지금은 렌치로 1/8회전이면 되는데, 심 방식은 클램프를 풀고 척추를 들어야 한다. 받침 높이가 0.2 mm 층 단위라 첫 설정이 거칠고, E가 예상과 크게 다르면 콤 전체를 다시 출력해야 한다</dd>
+  <dt>같이 못 씀</dt><dd>ME1, ME4, ME5 · 신뢰도 <b>낮음</b> — 단계 0에서 E 측정이 선행 조건</dd>
+</dl>
+<div class="callout"><p><b>조절 편의를 지키고 싶다면 ME5</b>(−10,356원): 세트스크루를 뒤집어 「머리 달린 조절 나사 + 와셔」로 만든다. 아래 부품 인서트에 M3×10 렌치볼트를 머리가 위로 오게 넣고, 머리가 위 부품 밑면의 와셔를 민다. 원판(10,676원)만 빠지고 1/8회전 조절은 그대로다. 대신 ME15와 동시에 쓸 수 없고, 와셔 자리를 8.61°/2.15° 기울여 출력해야 한다.</p></div>
+</div>
+
+<div class="card">
+<h3><span class="id">CP7</span> 황동 스탠드오프 → CU 바닥 출력 보스 <span class="save">−4,160원</span> <span class="chip c-mut">소모품 +32원</span></h3>
+<p>CU 상자는 원래 PETG 출력품이니 Pi 5 받침을 바닥에 같이 뽑는다. 보스 4개(중심 간격 58×49 mm, 외경 6.0, 높이 5.0)에 Ø2.1 탭 구멍(깊이 4.5)을 두고 M2.5로 위에서 고정한다. 필라멘트 약 2 g = 32원.</p>
+<dl>
+  <dt>빠지는 줄</dt><dd>L37 스탠드오프 4,400원 + L47 M2.5×6 1,200원 = 5,600원</dd>
+  <dt>새로 사는 것</dt><dd>M2.5×12 6개 × 240원 = 1,440원 (같은 판매처 합배송이라 배송비 증가 0). 스페이서가 수-암이면 <b>나사도 0원</b></dd>
+  <dt>주의</dt><dd>PETG 나사산은 과조임에 뭉개진다 — 손으로 가볍게. Pi 높이가 16 → 5 mm로 11 mm 낮아지므로 CU 안 허브·케이블 배치를 그 높이에 맞춘다</dd>
+  <dt>신뢰도</dt><dd><b>높음</b> · 같이 못 씀 CP11, CP12</dd>
+</dl>
+</div>
+
+<div class="card">
+<h3><span class="id">ME10</span> 제어 기판 나사 4개 → 나사 2개 + 출력 위치 핀 2개 <span class="save">−800원</span></h3>
+<p>기판 9장(모듈 7 + 페달 + CU)을 대각선 두 구석만 M3×6으로 조이고, 나머지 두 스탠드오프는 윗면에 위치 핀(기판 구멍 −0.3, 높이 1.4 = 기판 두께 −0.2)을 출력해 위치만 잡는다.</p>
+<dl>
+  <dt>빠지는 줄</dt><dd>L35 36개 1,600원 → 20개 800원</dd>
+  <dt>주의</dt><dd>받은 기판의 구멍을 캘리퍼스로 재서 −0.3으로 출력한다. 핀이 크면 끼워지지 않는다</dd>
+  <dt>신뢰도</dt><dd><b>중간</b></dd>
+</dl>
+</div>
+
+<div class="card" style="border-color:var(--crit)">
+<h3>기각 · 직접 탭(인서트도 너트도 없이 PETG에 M3 탭) <span class="save neg">+1,844원어치 위험</span></h3>
+<p>레일 10 mm 깊이에 M3 탭을 내면 정적 안전율 8.4로 통과한다. 그러나 나사산 플랭크 면압이 14.4 MPa로 설계가 받아들인 너트 트랩(12 MPa)보다 높고, 원판·와셔 수준(4 MPa)의 3.5배다. 추가 절감은 너트 484원 + 나사 길이 환원 1,360원 = <b>1,844원</b>뿐인데, 운반 모드(3바퀴 풀기)와 무게 조절(반 바퀴씩)에서 나사를 수십 번 넣고 빼는 부위다. <b>ME6의 너트 트랩으로 멈추는 것이 맞다.</b></p>
+</div>
+
+<div class="card" style="border-color:var(--rule2)">
+<h3>참고 · 나사는 아니지만 같이 없어지는 것 <span class="id">SP4</span> <span class="save">−14,700원</span></h3>
+<p>고무발(L14 11,660원)과 실리콘 방진 그로밋(L42 3,040원)을 키베드용 EVA 시트(L41)의 자투리로 대신한다. 30×30 mm를 겹쳐 붙여 패드로, Ø9(구멍 Ø3.2) 조각을 방진 와셔로 쓴다. 남는 면적 약 0.19 m² &gt; 필요 0.08 m². 이때 고무발 고정용 L49 25 mm 12개와 L36 와셔 16개도 필요 없어진다. 출력이 아니라 <b>재료 재활용</b>이라 이 감사의 합계(26,002원)에는 넣지 않았다.</p>
+</div>
+
+<h2 id="cost">7 · 권장 조합과 비용</h2>
+
+<p>ME6 + ME15 + CP7 + ME10은 서로 충돌하지 않는다. ME15가 세트스크루를 없애므로 ME6의 너트 필요량도 75 → 44개로 줄어든다(−341원).</p>
+
+<div class="tw">
+<table>
+<thead><tr><th>줄</th><th>부품</th><th class="n">지금</th><th class="n">대체 후</th><th class="n">차이</th><th>무엇으로</th></tr></thead>
+<tbody>
+<tr><td class="id">L31</td><td>황동 인서트 100개</td><td class="n">9,270</td><td class="n">0</td><td class="n" style="color:var(--good)">−9,270</td><td>출력 육각 포켓 (ME6)</td></tr>
+<tr><td class="id">—</td><td>M3 육각너트 강철 44개</td><td class="n">0</td><td class="n">484</td><td class="n" style="color:var(--crit)">+484</td><td>ME6 신규 · 아이씨뱅큐 합배송</td></tr>
+<tr><td class="id">L32</td><td>클램프 M3×35 40개 → M3×40 34개</td><td class="n">7,100</td><td class="n">7,920</td><td class="n" style="color:var(--crit)">+820</td><td>너트가 4.2 mm 아래라 길어짐 (ME6)</td></tr>
+<tr><td class="id">L33</td><td>무두 세트스크루 40개</td><td class="n">2,400</td><td class="n">0</td><td class="n" style="color:var(--good)">−2,400</td><td>출력 Ø8 받침 (ME15)</td></tr>
+<tr><td class="id">L38</td><td>황동 원판 40개</td><td class="n">10,676</td><td class="n">0</td><td class="n" style="color:var(--good)">−10,676</td><td>받침이 생기면 불필요 (ME15)</td></tr>
+<tr><td class="id">L34</td><td>센서 바 M3×10 30개</td><td class="n">1,800</td><td class="n">1,800</td><td class="n">0</td><td>유지 — 센서 갭 정밀도</td></tr>
+<tr><td class="id">L35</td><td>기판 M3×6 40개 → 20개</td><td class="n">1,600</td><td class="n">800</td><td class="n" style="color:var(--good)">−800</td><td>출력 위치 핀 2개 (ME10)</td></tr>
+<tr><td class="id">L36</td><td>M4 와셔 60개</td><td class="n">600</td><td class="n">600</td><td class="n">0</td><td>유지 — PETG로는 대체 불가</td></tr>
+<tr><td class="id">L37</td><td>황동 스탠드오프 4개</td><td class="n">4,400</td><td class="n">0</td><td class="n" style="color:var(--good)">−4,400</td><td>출력 보스 4개 (CP7)</td></tr>
+<tr><td class="id">L47</td><td>M2.5×6 6개 → M2.5×12 6개</td><td class="n">1,200</td><td class="n">1,440</td><td class="n" style="color:var(--crit)">+240</td><td>보스를 관통해야 함 (CP7)</td></tr>
+<tr><td class="id">L49</td><td>직결피스 혼합 40개</td><td class="n">1,520</td><td class="n">1,520</td><td class="n">0</td><td>유지 — 목재용</td></tr>
+</tbody>
+<tfoot>
+<tr><td colspan="2">체결 부품 합계</td><td class="n">40,566</td><td class="n">14,564</td><td class="n" style="color:var(--good)">−26,002</td><td>−64%</td></tr>
+</tfoot>
+</table>
+</div>
+
+<h4>전체 예산에 미치는 영향</h4>
+<div class="tw">
+<table>
+<thead><tr><th>버킷</th><th class="n">지금</th><th class="n">대체 후</th><th class="n">차이</th><th>내용</th></tr></thead>
+<tbody>
+<tr><td>기본 구성 (부품 46줄)</td><td class="n">537,197</td><td class="n">511,195</td><td class="n" style="color:var(--good)">−26,002</td><td>위 표 · 「구조·체결」 78,376 → 52,374원</td></tr>
+<tr><td>공구</td><td class="n">185,073</td><td class="n">164,183</td><td class="n" style="color:var(--good)">−20,890</td><td>인서트 팁 T05 20,290 + 1.5 mm 육각렌치 600</td></tr>
+<tr><td>소모품 (필라멘트)</td><td class="n">—</td><td class="n">—</td><td class="n" style="color:var(--crit)">+32</td><td>CU 보스 2 g × 16원/g. 받침·핀은 척추·프레임 출력에 붙어 나와 사실상 0</td></tr>
+</tbody>
+<tfoot><tr><td>합</td><td class="n"></td><td class="n"></td><td class="n" style="color:var(--good)">−46,860</td><td>기본 구성의 4.8% + 공구의 11.3%</td></tr></tfoot>
+</table>
+</div>
+
+<div class="callout good">
+<p><b>돈보다 큰 이득이 두 가지 있다.</b></p>
+<p>① <b>공정이 사라진다.</b> 인서트 67개를 230~245 °C 인두로 수직하게 눌러 넣는 작업이 없어진다. PETG 유리전이가 69 °C이고 척추 인서트는 리프 뿌리에서 9 mm 떨어져 있어, 이 작업은 「오래 가열하지 말라」는 주의가 붙어 있던 공정이다. 조립 공수(모듈당 인서트·펠트 0.7 h)도 줄고, 인서트가 비뚤어져 세트스크루·클램프 축이 기우는 실패 모드 자체가 없어진다.</p>
+<p>② <b>부품 종류가 줄어든다.</b> 판매처가 하나 빠지고(인서트 11번가 CJONSTYLE, 배송비 3,000원 포함), 남는 체결 부품은 굿나잇몰·아이씨뱅큐 두 곳의 합배송으로 정리된다.</p>
+</div>
+
+<div class="callout crit">
+<p><b>대신 잃는 것을 분명히.</b> ME15를 넣으면 건반 무게 조절이 「렌치로 1/8회전」에서 「클램프 4개를 3바퀴 풀고 캡톤 심을 끼우고 다시 조이기」로 바뀐다. 88건반을 7개 모듈로 나눠 조절하므로 콤 단위로는 7번이지만, PETG 크리프 복원(θ₀의 10~25%)을 몇 달마다 해야 한다면 이 번거로움이 계속 돌아온다. 13,076원과 이 번거로움을 바꿀지는 취향의 문제다 — <b>ME5(−10,356원)는 2,720원을 덜 벌고 1/8회전 조절을 지킨다.</b></p>
+</div>
+
+<h2 id="remain">8 · 끝까지 남는 나사 — 14,564원</h2>
+
+<p>대체를 다 해도 이 다섯 가지는 금속으로 남는다. 88건반 전체에서 14,564원이다.</p>
+
+<div class="tw">
+<table>
+<thead><tr><th>부품</th><th class="n">수량</th><th class="n">금액</th><th>왜 못 없애나</th></tr></thead>
+<tbody>
+<tr><td>클램프 M3×40 (SUS304)</td><td class="n">32</td><td class="n">7,920</td><td>나사당 200 N을 걸어 리프 프리로드를 잡아 두는, 이 악기에서 가장 중요한 나사다. 출력 M3는 층간 강도가 126~181 N으로 안전율 1 미만이고 나사산이 노즐 폭 아래다. M6은 레일 13 mm 폭에 들어가지 않는다</td></tr>
+<tr><td>센서 바 M3×10</td><td class="n">20</td><td class="n">1,800</td><td>자석-센서 갭이 벨로시티 분해능을 정한다. 이미 인서트 없는 자가 탭이라 더 줄일 금속이 없고, 스냅으로 바꾸면 갭이 드리프트한다</td></tr>
+<tr><td>직결피스 8호 (16/19/25)</td><td class="n">28</td><td class="n">1,520</td><td>11.5T 합판과 스피커 유닛 장공에 박는다. 드릴 끝과 강철 나사산이 있어야 목재에 물린다</td></tr>
+<tr><td>Pi 5 고정 M2.5×12</td><td class="n">6</td><td class="n">1,440</td><td>출력 보스를 관통해 조인다. 스페이서가 수-암이면 0원이 될 수 있는 유일한 줄</td></tr>
+<tr><td>M4 평와셔 Ø9×0.5T</td><td class="n">60</td><td class="n">600</td><td>와셔는 「더 단단한 재료로 면압을 퍼뜨리는」 부품이다. 같은 PETG로 출력하면 기능이 0이고, 빼면 클램프 아래 면압이 4.2 → 13.6 MPa가 된다</td></tr>
+<tr><td>M3 육각너트 (신규)</td><td class="n">44</td><td class="n">484</td><td>인서트를 없앤 대가. 개당 11원으로 인서트 63원의 6분의 1이고 인두 공정이 없다</td></tr>
+</tbody>
+<tfoot><tr><td>합</td><td class="n">190</td><td class="n">14,564</td><td>88건반 + 페달 + 스피커 전체</td></tr></tfoot>
+</table>
+</div>
+
+<h2 id="already">9 · 이미 얻은 이득 — 리프 설계가 없앤 금속 부품</h2>
+
+<p>「나사를 출력으로 바꿀 수 있나」의 가장 큰 답은 이미 v3 설계에 들어가 있다. v3의 리프(플렉서) 힌지는 피벗 핀·리턴 스프링·부싱을 전부 없앴고, 통짜 출력 키베드는 알루미늄 프로파일 프레임과 T너트를 없앴다. 도면집(2026-09-24)의 A~D안 가격으로 환산하면 이렇다.</p>
+
+<div class="tw">
+<table>
+<thead><tr><th>없어진 금속 부품</th><th>원래 역할</th><th class="n">수량</th><th class="n">단가</th><th class="n">금액</th><th>v3에서 대신하는 것</th></tr></thead>
+<tbody>
+<tr><td>Ø4 평행핀 30/40 mm</td><td>발란스 레일 핀 · 프론트 가이드 핀</td><td class="n">176~200</td><td class="n">156</td><td class="n">31,192</td><td>리프 플렉서 — 핀이 없으니 부싱·펠트 펀칭도 준다</td></tr>
+<tr><td>압축 스프링 OD6</td><td>키 리턴 · 프리로드</td><td class="n">100</td><td class="n">350</td><td class="n">35,000</td><td>리프 자체의 탄성 (백 481 / 흑 244 N·mm/rad)</td></tr>
+<tr><td>알루미늄 프로파일 2020 ×3 + 2040 ×2</td><td>키베드 전·후 레일, 주 빔</td><td class="n">1250 mm ×5</td><td class="n">—</td><td class="n">48,375</td><td>한 번에 뽑는 키베드(모듈당 약 175 g) + 도브테일</td></tr>
+<tr><td>5시리즈 후입 T너트 M3/M4/M5</td><td>센서 레일 · 프레임 · 브래킷 고정</td><td class="n">100</td><td class="n">437</td><td class="n">43,700</td><td>출력 받침 기둥 · 턱 · 리브 (자가 탭 M3 2개/모듈)</td></tr>
+<tr><td>2020용 직각 브래킷</td><td>프레임 직각 결합</td><td class="n">12</td><td class="n">1,230</td><td class="n">14,760</td><td>도브테일 암·수 (앞·뒤 2조)</td></tr>
+</tbody>
+<tfoot><tr><td colspan="4">이미 없앤 금속 체결·구동 부품</td><td class="n">약 173,000</td><td>—</td></tr></tfoot>
+</table>
+</div>
+
+<p>이 17만원은 「나사를 출력으로 바꿔서」 아낀 돈이 아니라 <b>나사가 필요한 구조를 없애서</b> 아낀 돈이다. 그게 이 감사의 결론과 같다: 남은 26,002원도 나사를 출력으로 흉내 내서가 아니라, 나사가 하던 일(암나사·받침·위치 결정)을 출력 형상이 흡수해서 빠진다.</p>
+
+<div class="callout">
+<p><b>비교 기준에 대한 정직한 단서.</b> 위 금액은 도면집의 A~D안 부품 가격에 그 안들의 제안 수량을 곱한 값이다. 실제로는 네 안 중 하나만 채택됐을 것이므로 「v3가 정확히 173,000원을 아꼈다」가 아니라 「핀·스프링 방식으로 갔다면 체결·구동 금속에만 17만원대가 들었다」로 읽는 것이 맞다. Ø3 경화 샤프트(10,233원 × 8)를 쓰는 B·D안이었다면 더 컸다.</p>
+</div>
+
+<h2 id="next">10 · 단계 0에 넣을 시험</h2>
+
+<p>대체안을 채택하려면 재료 쿠폰 단계에서 확인해야 할 것이 늘어난다. 기존 단계 0 항목에 다음을 더한다.</p>
+
+<div class="tw">
+<table>
+<thead><tr><th>안</th><th>시험</th><th>합격선</th></tr></thead>
+<tbody>
+<tr><td class="id">ME6</td><td>너트 트랩 쿠폰에 M3 너트를 앉히고 0.12 N·m로 조여 30 °C·30일 이완 측정</td><td>클램프 힘 손실이 50% 안 (면압 12 MPa 기준)</td></tr>
+<tr><td class="id">ME6</td><td>대변 5.5 억지 포켓에 너트를 넣고 거꾸로 들어 떨어지는지</td><td>손으로 흔들어 빠지지 않음. 조립 전 위에서 나사로 한 번 당겨 앉힌다</td></tr>
+<tr><td class="id">ME6</td><td>클램프 x9.2 통로와 암 도브테일 사이 1.85 mm 벽의 파단 하중</td><td>200 N 예압에서 균열 없음</td></tr>
+<tr><td class="id">ME15</td><td><b>선행 조건:</b> 필라멘트 영률 E 실측 (흰색·검정 따로)</td><td>받침 높이 결정 — 1°당 0.14 mm, 예상보다 0.1~0.2 mm 낮게 출력</td></tr>
+<tr><td class="id">ME15</td><td>Ø8 PETG 받침에 203 N 정하중, 접촉면을 8.61° 기울여 출력한 것과 안 한 것 비교</td><td>기울인 쪽이 면 접촉(3.2~4.1 MPa), 안 기울인 쪽은 모서리 접촉으로 기각</td></tr>
+<tr><td class="id">ME15</td><td>캡톤 심 2~7겹을 끼우고 빼기를 10회 반복</td><td>심이 밀려 나오지 않고 두께가 유지됨</td></tr>
+<tr><td class="id">ME10</td><td>받은 만능기판의 구멍 지름 실측</td><td>위치 핀 = 구멍 −0.3 mm로 출력해 손으로 끼워짐</td></tr>
+<tr><td class="id">CP7</td><td>DAC·스페이서 형식 확인 (수-암 / 암-암)</td><td>수-암이면 Ø2.1 탭, 암-암이면 Ø2.8 관통 + 바닥 카운터보어 Ø5.0×1.5</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout warn">
+<p><b>순서가 중요하다.</b> ME15는 필라멘트 E 실측이 <b>먼저</b> 끝나야 받침 높이를 정할 수 있고, 받침은 콤(척추)과 한 몸이라 틀리면 콤 전체를 다시 출력해야 한다. 반대로 ME6·CP7·ME10은 실패해도 해당 부품만 다시 뽑으면 된다. <b>ME6 + CP7 + ME10(−12,585원, 공구 −20,290원)을 먼저 확정하고, ME15는 단계 0의 E 측정 결과를 보고 결정</b>하는 것이 안전하다.</p>
+</div>
+
+<div class="foot">
+<p><b>출처.</b> 모든 수치는 이 저장소의 <code>docs/report/toccata-build-v3.html</code>(Toccata 제작 설계서 v3, 부품표 46줄·537,197원, 2026-09-24 가격 확인)과 <code>docs/report/toccata-build-set/data/mechanical.json</code>(도면집 기계 부품 조사)에서 가져왔다. ME·CP·SP 번호는 설계서 「비용 절감」 장의 안 번호이며, 그 안들의 금액·검증 상태·충돌 관계를 그대로 인용했다.</p>
+<p><b>이 문서에서 새로 계산한 것</b>: 출력 M3/M6 볼트의 나사산 해상도와 층간 인장 한계, PETG 직접 탭의 나사산 전단·플랭크 면압(14.4 MPa)과 그 기각 근거, 와셔를 빼면 생기는 면압 13.6 MPa, 권장 조합의 합계 26,002원(너트 수량 감소 −341원 반영), 리프 설계가 이미 없앤 금속 부품 약 173,000원. PETG 물성은 Bambu PETG Basic TDS(인장 X-Y 51±1 MPa, 영률 X-Y 2,780 MPa · Z 2,550 MPa, 유리전이 69 °C)를 썼고 층간 강도는 X-Y의 50~70%로 가정했다 — <b>이 가정은 단계 0 쿠폰으로 확인해야 한다.</b></p>
+<p>Toccata · 2026-09-25</p>
+</div>
+
+</div>
