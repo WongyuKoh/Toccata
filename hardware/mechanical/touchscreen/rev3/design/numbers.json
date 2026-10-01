@@ -1,0 +1,3137 @@
+{
+ "rev": 3,
+ "revision": "3a (fix round 2026-10-01: ear outline, u24 rib, bottom notch, clip wire groove, ribbon on HDMI, power-wire count, service, studs fallback)",
+ "date": "2026-10-01",
+ "placement": {
+  "source": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/touch3/L2_cu.json",
+  "source_is_final": true,
+  "source_note": "hardware/mechanical/cad/spec/body_L2.json (CAD session, final L2, 2026-10-01 02:07) + CAD message 10/1: this REPLACES L2_cu_provisional.json",
+  "x_centre": 611.0,
+  "keepout": {
+   "y_max": 215.0,
+   "z_min": 72.85,
+   "clearance": 1.0,
+   "module_rear_y": 212.0,
+   "rear_bar_front_y": 214.0,
+   "rule": "nothing of the touchscreen at y <= 215 while z >= 72.85 (modules end y212, rear bar front y214; modules are lifted out upward)"
+  },
+  "lid": {
+   "x": [
+    501.0,
+    721.0
+   ],
+   "y": [
+    214.0,
+    341.5
+   ],
+   "top_z": 72.85,
+   "plate_t": 3.0,
+   "bed_z": 61.35,
+   "note": "CU-SCREENLID: printed PETG plate 3 + ribs to the bed plane (final L2: ribs 8.5, bottom z61.35)"
+  },
+  "floor_z": 16.5,
+  "speaker_top_z": 148.06,
+  "rear_face_y": 341.5,
+  "lid_screw": {
+   "y": [
+    246.0,
+    322.0
+   ],
+   "inset_x": 5.0,
+   "x": [
+    506.0,
+    716.0
+   ],
+   "note": "M3x10 x4: front 2 at y246, rear 2 at y322 (rail inserts; x per CAD, near the lid side edges) — x = lid edge +-5 (est.: middle of the 10 mm the lid overlaps each 20 mm seam rail)"
+  },
+  "speakers_plan": [
+   [
+    160.5,
+    258.5
+   ],
+   [
+    1061.5,
+    258.5
+   ]
+  ],
+  "speakers_plan_from": "body_L2 speakers.driver (x_centre, centre_yz)",
+  "sound_rule": {
+   "cone_lower_edge_yz": [
+    224.13,
+    70.2
+   ],
+   "baffle_deg": 43.0,
+   "line_deg": 27.0,
+   "z_at_module_rear": 76.38,
+   "clear_above_module_edge": 3.53,
+   "ok": true,
+   "screen_x": [
+    525.65,
+    696.35
+   ],
+   "screen_to_cone_x_gap": 318.15
+  },
+  "body_L2": {
+   "copy": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/touch3/design/work/body_L2_copy.json",
+   "md5": "2d716999",
+   "repo_md5": "2d716999",
+   "same_as_repo": true
+  },
+  "seam": {
+   "rail": [
+    [
+     491.0,
+     511.0,
+     214.0,
+     330.0,
+     55.35,
+     61.35
+    ],
+    [
+     711.0,
+     731.0,
+     214.0,
+     330.0,
+     55.35,
+     61.35
+    ]
+   ],
+   "post": [
+    [
+     496.0,
+     506.0,
+     241.0,
+     251.0,
+     16.5,
+     55.35
+    ],
+    [
+     716.0,
+     726.0,
+     241.0,
+     251.0,
+     16.5,
+     55.35
+    ]
+   ]
+  },
+  "body_x": [
+   -16.0,
+   1238.0
+  ],
+  "front_zone_y": [
+   214.0,
+   241.0
+  ],
+  "cad_recommendations": {
+   "hinge": {
+    "y": [
+     216,
+     218
+    ],
+    "z": 76,
+    "note": "CAD recommendation; W1 must still keep every part off the module top (modules end y212, air gap 212~214, rear bar front 214) at all angles 22~90 deg"
+   },
+   "ribbon_hole": {
+    "x": [
+     580,
+     602
+    ],
+    "y": [
+     224,
+     236
+    ]
+   },
+   "folded": "z73~98 approx; height limit speaker top z148.06; preferably not past y341.5 at the rear",
+   "exhaust": "lid slots behind the screen y300~325 (bottom intake + rear louvres + lid exhaust chimney; folded screen may cover lid slots, cooling still OK per CAD)",
+   "dsi": "Pi DISP1 (x589~592, y263~278)에서 곧게 위로 (지킴 구역 x582~600, y262~280). 뚜껑 리본 구멍 권장 x580~602, y224~236 (W1이 정함)",
+   "gpio": "Pi GPIO 2/6 (x546~562, y312~320)에서 위로"
+  },
+  "keepout_zones": {
+   "dsi": {
+    "x": [
+     582,
+     600
+    ],
+    "y": [
+     262,
+     280
+    ]
+   },
+   "dsi_z": [
+    28.1,
+    61.35
+   ],
+   "gpio": {
+    "x": [
+     546,
+     562
+    ],
+    "y": [
+     312,
+     320
+    ]
+   }
+  },
+  "hinge_axis_yz": [
+   226.55,
+   81.35
+  ],
+  "hinge_axis_rule": "y = keep-out y215 + 1.0 clearance + front reach 10.55 (cradle corner u-2.5 w-1.0 at 22.0 deg); z = lid top + 8.5",
+  "hinge_hint_from_L2": null,
+  "pi5_mipi": {
+   "disp1_mouth_xyz": [
+    589.0,
+    270.5,
+    26.0
+   ],
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "long_axis": "x",
+   "gpio_2_6_xyz": [
+    [
+     550.37,
+     315.77
+    ],
+    [
+     555.45,
+     315.77
+    ],
+    32.6
+   ],
+   "provisional": false,
+   "source": "final L2 (CAD bbox + orientation note \"USB/RJ45 end +x, GPIO edge +y\" -> rot 0)"
+  }
+ },
+ "screen": {
+  "model": "Waveshare 7-DSI-TOUCH-C (7\" 1024x600 IPS, 5-pt capacitive Goodix over I2C in the DSI FFC)",
+  "glass": [
+   166.1,
+   101.0
+  ],
+  "body": 8.0,
+  "body_with_studs": 13.4,
+  "active": [
+   154.58,
+   86.42
+  ],
+  "active_offsets": {
+   "left": 3.97,
+   "right": 7.55,
+   "top": 4.94,
+   "bottom": 9.65
+  },
+  "x_centre": 611.0,
+  "glass_x": [
+   527.95,
+   694.05
+  ],
+  "active_x": [
+   531.92,
+   686.5
+  ],
+  "active_u": [
+   9.65,
+   96.07
+  ],
+  "holes": {
+   "xr": [
+    -77.0,
+    77.0
+   ],
+   "u": [
+    6.5,
+    94.5
+   ],
+   "x": [
+    534.0,
+    688.0
+   ],
+   "thread": "M2.5",
+   "depth": "unknown"
+  },
+  "pi_holes": {
+   "xr": [
+    -19.0,
+    39.0
+   ],
+   "u": [
+    25.5,
+    74.5
+   ],
+   "note": "Pi mount holes 58 x 49 (not used; standoffs not fitted)"
+  },
+  "window": {
+   "xr": [
+    17.35,
+    43.55
+   ],
+   "u": [
+    30.2,
+    70.5
+   ]
+  },
+  "fpc": {
+   "xr": [
+    17.85,
+    23.25
+   ],
+   "u": [
+    36.5,
+    52.4
+   ],
+   "pin_u_centre": 43.8,
+   "mouth_xr": 23.25,
+   "mouth": "+x",
+   "x": [
+    628.85,
+    634.25
+   ]
+  },
+  "pwr": {
+   "xr": [
+    19.35,
+    24.35
+   ],
+   "u": [
+    56.6,
+    65.2
+   ],
+   "mouth_xr": 24.35,
+   "mouth": "+x"
+  },
+  "emboss": {
+   "xr": [
+    -56.65,
+    14.35
+   ],
+   "u": [
+    32.2,
+    71.0
+   ],
+   "h": 2.1
+  },
+  "mass_kg_est": 0.3,
+  "conn_side": 1,
+  "orientation_evidence": "drawing back view = front view flipped about the horizontal axis (photos: Pi 5 hole mirror 44/102 mm, cable x 116 vs 49 mm, power above FPC)"
+ },
+ "cradle": {
+  "xr": [
+   -85.35,
+   85.35
+  ],
+  "x": [
+   525.65,
+   696.35
+  ],
+  "u": [
+   -2.5,
+   103.5
+  ],
+  "w": [
+   -1.0,
+   16.0
+  ],
+  "size": [
+   170.7,
+   106.0,
+   17.0
+  ],
+  "rim": 2.0,
+  "clr": 0.3,
+  "w_screen_back": 8.0,
+  "plate": [
+   10.5,
+   13.0
+  ],
+  "rib": [
+   13.0,
+   16.0
+  ],
+  "emboss_clearance": 0.4,
+  "bosses": {
+   "xr": [
+    -77.0,
+    77.0
+   ],
+   "u": [
+    6.5,
+    94.5
+   ],
+   "d": 8.0,
+   "face_w": 8.0,
+   "seat_w": 11.0,
+   "cbore_d": 5.5,
+   "hole_d": 2.8,
+   "screw": "M2.5x6",
+   "engage": 3.0,
+   "w": [
+    8.0,
+    16.0
+   ],
+   "fill_to_side_wall": {
+    "xr": [
+     [
+      -83.35,
+      -77.0
+     ],
+     [
+      77.0,
+      83.35
+     ]
+    ],
+    "width_u": 8.0,
+    "note": "each boss joined to the side wall by a block 8 wide (u) over w8..16"
+   }
+  },
+  "walls": {
+   "bottom_u": [
+    -2.5,
+    0.0
+   ],
+   "top_u": [
+    101.5,
+    103.5
+   ],
+   "top_gap": 0.5,
+   "bottom_gap": 0.0,
+   "side_inner_xr": 83.35,
+   "side_gap": 0.3,
+   "front_w": -1.0,
+   "note": "glass bottom edge rests on the bottom wall inner face u0 (u datum); top gap 0.5; side gaps 0.3; walls run w-1..16"
+  },
+  "notch": {
+   "xr": [
+    48.0,
+    66.0
+   ],
+   "u": [
+    -2.5,
+    0.0
+   ],
+   "w": [
+    -1.0,
+    8.0
+   ],
+   "through": true,
+   "feature_xr": [
+    54.99,
+    59.24
+   ],
+   "feature_proud": 0.85,
+   "note": "cut through the bottom wall (u-2.5..0) over w-1..8: the feature may stick out up to ~1 and stays reachable; the glass still rests on the wall on both sides"
+  },
+  "pads": [
+   {
+    "xr": [
+     -76.0,
+     -60.0
+    ],
+    "u": [
+     20.0,
+     36.0
+    ]
+   },
+   {
+    "xr": [
+     -76.0,
+     -60.0
+    ],
+    "u": [
+     70.0,
+     86.0
+    ]
+   },
+   {
+    "xr": [
+     60.0,
+     76.0
+    ],
+    "u": [
+     20.0,
+     36.0
+    ]
+   },
+   {
+    "xr": [
+     60.0,
+     76.0
+    ],
+    "u": [
+     70.0,
+     86.0
+    ]
+   }
+  ],
+  "groove": {
+   "xr": [
+    25.75,
+    44.95
+   ],
+   "u": [
+    -2.5,
+    3.0
+   ],
+   "w": [
+    8.0,
+    16.0
+   ],
+   "note": "open at the bottom and at the back so the cables lie in from behind"
+  },
+  "insp": {
+   "xr": [
+    15.5,
+    45.0
+   ],
+   "u": [
+    33.0,
+    69.0
+   ],
+   "cover": {
+    "flange": 1.5,
+    "plug_under": 0.2,
+    "t": 2.0,
+    "dome": {
+     "xr": [
+      26.25,
+      39.95
+     ],
+     "u": [
+      36.95,
+      50.65
+     ],
+     "inner_to_w": 15.2
+    }
+   }
+  },
+  "hold_pad": {
+   "xr": [
+    26.75,
+    39.45
+   ],
+   "u": [
+    8.0,
+    16.0
+   ],
+   "w": [
+    8.6,
+    10.5
+   ],
+   "note": "pad on the plate inner face presses the ribbon lightly (gap = ribbon + 0.3) - strain relief, + Kapton tape"
+  },
+  "fold_square": {
+   "xr": [
+    27.25,
+    38.95
+   ],
+   "u": [
+    37.95,
+    49.65
+   ]
+  },
+  "rib_band_xr": [
+   27.25,
+   38.95
+  ],
+  "wire_xr": [
+   40.45,
+   43.45
+  ],
+  "cross_ribs_u": [
+   24.0,
+   80.0
+  ],
+  "rib_t": 2.0,
+  "cross_ribs_note": "low rib moved u30 -> u24 (off the leg-axle line); both cut at the leg channel xr±7.3",
+  "ear": {
+   "profile_uw": [
+    [
+     -16.26,
+     8.38
+    ],
+    [
+     -2.5,
+     8.0
+    ],
+    [
+     -2.5,
+     13.0
+    ],
+    [
+     -6.27,
+     16.19
+    ],
+    [
+     -6.47,
+     16.35
+    ],
+    [
+     -6.77,
+     16.56
+    ],
+    [
+     -7.09,
+     16.74
+    ],
+    [
+     -7.43,
+     16.89
+    ],
+    [
+     -7.77,
+     17.02
+    ],
+    [
+     -8.13,
+     17.11
+    ],
+    [
+     -8.49,
+     17.17
+    ],
+    [
+     -8.85,
+     17.2
+    ],
+    [
+     -9.22,
+     17.19
+    ],
+    [
+     -9.58,
+     17.16
+    ],
+    [
+     -9.94,
+     17.09
+    ],
+    [
+     -10.3,
+     16.99
+    ],
+    [
+     -10.64,
+     16.87
+    ],
+    [
+     -10.97,
+     16.71
+    ],
+    [
+     -11.29,
+     16.52
+    ],
+    [
+     -11.59,
+     16.31
+    ],
+    [
+     -11.86,
+     16.07
+    ],
+    [
+     -12.12,
+     15.81
+    ],
+    [
+     -12.35,
+     15.53
+    ],
+    [
+     -12.56,
+     15.23
+    ],
+    [
+     -12.69,
+     15.0
+    ]
+   ],
+   "hub": {
+    "u": -9.0,
+    "w": 13.0,
+    "R": 4.2
+   },
+   "heel_uw": [
+    -16.26,
+    8.38
+   ],
+   "front_edge": [
+    [
+     -16.26,
+     8.38
+    ],
+    [
+     -2.5,
+     8.0
+    ]
+   ],
+   "lower_edge": [
+    [
+     -16.26,
+     8.38
+    ],
+    [
+     -12.69,
+     15.0
+    ]
+   ],
+   "back_edge": [
+    [
+     -2.5,
+     13.0
+    ],
+    [
+     -6.27,
+     16.19
+    ]
+   ],
+   "attach": {
+    "u": -2.5,
+    "w": [
+     8.0,
+     13.0
+    ]
+   },
+   "min_u": -16.26,
+   "check": {
+    "gap_at_22": 0.0,
+    "min_gap_25_90": 0.37,
+    "at_deg": 25.0,
+    "min_gap_22_25": 0.0,
+    "ok": true,
+    "rule": "whole ear outline vs stop block + slot floor: >= 0 at 22 deg (contact), >= 0.3 at 25..90 deg",
+    "rev3_first_lobe": {
+     "gap_at_22": -2.1,
+     "gap_at_25": -1.83,
+     "clears_from_deg": 42.1,
+     "lobe_uw": [
+      -17.4,
+      11.15
+     ],
+     "print_height": 120.9
+    }
+   },
+   "note": "convex hull of hub R4.2 (u-9, w13), bottom attachment (u-2.5, w8..13) and the heel point only; the heel is the lowest ear point at 22 deg"
+  },
+  "print_height": 119.76,
+  "axle_check": {
+   "head_box": [
+    [
+     -10.95,
+     -9.3
+    ],
+    [
+     27.15,
+     32.85
+    ],
+    [
+     13.65,
+     19.35
+    ]
+   ],
+   "path_box": [
+    [
+     -30.95,
+     -9.3
+    ],
+    [
+     27.15,
+     32.85
+    ],
+    [
+     13.65,
+     19.35
+    ]
+   ],
+   "min_head_gap": 2.0,
+   "min_path_gap": 2.0,
+   "nearest": "다리 길 벽 1",
+   "rib_low_u": 24.0,
+   "rule": "axle head (Ø5.7 x 1.65) and the whole screw on its way in from -x (xr -30.95~-9.3) clear of every back rib/pad/boss by >= 0.5",
+   "ok": true,
+   "rev3_u30_rib": {
+    "head_gap": -2.35,
+    "path_gap": -2.35
+   }
+  },
+  "rib_relief_at_cheeks": {
+   "needed": true,
+   "chamfer": 2.0,
+   "gap_after": 0.59,
+   "gaps_without": {
+    "u-2.5_w13.0": 1.0,
+    "u-2.5_w14.0": 0.59,
+    "u-2.5_w15.0": 0.18,
+    "u-2.5_w16.0": -1.0,
+    "u-0.3_w16.0": 1.96,
+    "u0.0_w16.0": 2.26,
+    "u2.0_w16.0": 4.26
+   }
+  }
+ },
+ "hinge": {
+  "axis_yz": [
+   226.55,
+   81.35
+  ],
+  "axis_cradle_uw": [
+   -9.0,
+   13.0
+  ],
+  "tilt_use_deg": 25.0,
+  "heel_contact_deg": 22.0,
+  "cheek_R": 5.5,
+  "ear_hub_R": 4.2,
+  "heel_rel22": [
+   -7.0,
+   -5.0
+  ],
+  "heel_R": 8.6,
+  "heel_stop_z": 76.35,
+  "heel_stop_h": 3.5,
+  "heel_contact_yz": [
+   219.55,
+   76.35
+  ],
+  "heel_gap_at_25": 0.37,
+  "left": {
+   "xr": [
+    -72.4,
+    -52.0
+   ],
+   "far_cheek": [
+    -60.0,
+    -52.0
+   ],
+   "ear": [
+    -68.2,
+    -60.2
+   ],
+   "ear_slot": [
+    -68.4,
+    -60.0
+   ],
+   "near_cheek": [
+    -72.4,
+    -68.4
+   ],
+   "screw_from": "-x"
+  },
+  "right": {
+   "xr": [
+    52.0,
+    72.4
+   ],
+   "far_cheek": [
+    52.0,
+    60.0
+   ],
+   "ear": [
+    60.2,
+    68.2
+   ],
+   "ear_slot": [
+    60.0,
+    68.4
+   ],
+   "near_cheek": [
+    68.4,
+    72.4
+   ],
+   "screw_from": "+x"
+  },
+  "left_x": [
+   538.6,
+   559.0
+  ],
+  "right_x": [
+   663.0,
+   683.4
+  ],
+  "ear_x": {
+   "left": [
+    542.8,
+    550.8
+   ],
+   "right": [
+    671.2,
+    679.2
+   ]
+  },
+  "ear_slot_x": {
+   "left": [
+    542.6,
+    551.0
+   ],
+   "right": [
+    671.0,
+    679.4
+   ]
+  },
+  "heel_block": {
+   "y": [
+    217.55,
+    224.55
+   ],
+   "z": [
+    72.85,
+    76.35
+   ],
+   "x": "ear slots"
+  },
+  "ear_check": {
+   "gap_at_22": 0.0,
+   "min_gap_25_90": 0.37,
+   "at_deg": 25.0,
+   "min_gap_22_25": 0.0,
+   "ok": true,
+   "rule": "whole ear outline vs stop block + slot floor: >= 0 at 22 deg (contact), >= 0.3 at 25..90 deg",
+   "rev3_first_lobe": {
+    "gap_at_22": -2.1,
+    "gap_at_25": -1.83,
+    "clears_from_deg": 42.1,
+    "lobe_uw": [
+     -17.4,
+     11.15
+    ],
+    "print_height": 120.9
+   }
+  },
+  "knuckle_profile": {
+   "R": 5.5,
+   "base_y": [
+    217.55,
+    235.55
+   ],
+   "at_axis_y": [
+    221.05,
+    232.05
+   ],
+   "base_z": 72.85,
+   "axis_z": 81.35
+  },
+  "front_reach": 10.55,
+  "front_reach_what": "cradle corner u-2.5 w-1.0 at 22.0 deg"
+ },
+ "points": {
+  "use": {
+   "glass_bottom": [
+    218.57,
+    95.0
+   ],
+   "glass_top": [
+    261.26,
+    186.54
+   ],
+   "glass_centre": [
+    239.91,
+    140.77
+   ],
+   "act_bottom": [
+    222.65,
+    103.75
+   ],
+   "act_top": [
+    259.17,
+    182.07
+   ],
+   "act_centre": [
+    240.91,
+    142.91
+   ],
+   "cr_bot_front": [
+    216.61,
+    93.16
+   ],
+   "cr_bot_back": [
+    229.3,
+    87.24
+   ],
+   "cr_bot_rib": [
+    232.02,
+    85.97
+   ],
+   "cr_top_front": [
+    261.41,
+    189.23
+   ],
+   "cr_top_back": [
+    274.09,
+    183.31
+   ],
+   "cr_top_rib": [
+    276.81,
+    182.04
+   ]
+  },
+  "heel": {
+   "glass_bottom": [
+    217.87,
+    94.56
+   ],
+   "glass_top": [
+    255.7,
+    188.21
+   ],
+   "glass_centre": [
+    236.79,
+    141.39
+   ],
+   "act_bottom": [
+    221.48,
+    103.51
+   ],
+   "act_top": [
+    253.86,
+    183.64
+   ],
+   "act_centre": [
+    237.67,
+    143.58
+   ],
+   "cr_bot_front": [
+    216.0,
+    92.62
+   ],
+   "cr_bot_back": [
+    228.98,
+    87.38
+   ],
+   "cr_bot_rib": [
+    231.77,
+    86.25
+   ],
+   "cr_top_front": [
+    255.71,
+    190.9
+   ],
+   "cr_top_back": [
+    268.69,
+    185.66
+   ],
+   "cr_top_rib": [
+    271.47,
+    184.53
+   ]
+  },
+  "fold": {
+   "glass_bottom": [
+    235.55,
+    94.35
+   ],
+   "glass_top": [
+    336.55,
+    94.35
+   ],
+   "glass_centre": [
+    286.05,
+    94.35
+   ],
+   "act_bottom": [
+    245.2,
+    94.35
+   ],
+   "act_top": [
+    331.62,
+    94.35
+   ],
+   "act_centre": [
+    288.41,
+    94.35
+   ],
+   "cr_bot_front": [
+    233.05,
+    95.35
+   ],
+   "cr_bot_back": [
+    233.05,
+    81.35
+   ],
+   "cr_bot_rib": [
+    233.05,
+    78.35
+   ],
+   "cr_top_front": [
+    339.05,
+    95.35
+   ],
+   "cr_top_back": [
+    339.05,
+    81.35
+   ],
+   "cr_top_rib": [
+    339.05,
+    78.35
+   ]
+  }
+ },
+ "sweep_min_y": 216.0,
+ "knuckle_front_y": 217.55,
+ "all_min_y": 216.0,
+ "sweep_min_z": 78.35,
+ "sweep_max_z": 190.9,
+ "fold": {
+  "back_plane_z": 81.35,
+  "rib_plane_z": 78.35,
+  "top_z": 95.35,
+  "y": [
+   233.05,
+   339.05
+  ],
+  "rear_margin": 2.45,
+  "feet_h": 5.5,
+  "speaker_margin": 52.71,
+  "lid_rear_needed_for_2mm": 341.05
+ },
+ "fold_feet": [
+  [
+   535.0,
+   551.0,
+   255.55,
+   271.55
+  ],
+  [
+   535.0,
+   551.0,
+   305.55,
+   321.55
+  ],
+  [
+   671.0,
+   687.0,
+   255.55,
+   271.55
+  ],
+  [
+   671.0,
+   687.0,
+   305.55,
+   321.55
+  ]
+ ],
+ "leg": {
+  "pivot_cradle_uw": [
+   30.0,
+   16.5
+  ],
+  "pivot_yz": [
+   246.2,
+   115.22
+  ],
+  "tip_yz": [
+   297.7,
+   72.35
+  ],
+  "length": 67.0,
+  "x": [
+   606.0,
+   616.0
+  ],
+  "xr": [
+   -5.0,
+   5.0
+  ],
+  "section": [
+   10.0,
+   6.0
+  ],
+  "angle_deg": 39.78,
+  "stow_tip_u": 100.0,
+  "pocket": {
+   "x": [
+    604.0,
+    618.0
+   ],
+   "back_wall_y": 300.7,
+   "bottom_z": 69.35,
+   "bottom_y": [
+    297.7,
+    300.7
+   ],
+   "ramp_front_y": 290.43,
+   "ramp_front_y_rev2_rule": 291.63,
+   "ramp_clear_rev2_rule": -0.4,
+   "ramp_min_clear": 0.2,
+   "ramp_end_y": 296.49,
+   "floor_y": [
+    296.49,
+    300.7
+   ],
+   "block": {
+    "x": [
+     601.0,
+     621.0
+    ],
+    "y": [
+     287.43,
+     303.7
+    ],
+    "z": [
+     61.35,
+     69.35
+    ],
+    "note": "filled solid to the print-bed plane (v13 rule)"
+   }
+  },
+  "fold_leg_z": [
+   74.85,
+   80.85
+  ],
+  "fold_clevis_zmin": 74.05,
+  "fold_clip_zmin": 73.63,
+  "fold_leg_y": [
+   262.55,
+   335.55
+  ],
+  "pivot_shift_at_22": 2.05,
+  "clevis": {
+   "near": [
+    -9.3,
+    -5.3
+   ],
+   "leg": [
+    -5.0,
+    5.0
+   ],
+   "far": [
+    5.3,
+    11.3
+   ],
+   "hole_near": "3.3 thru",
+   "hole_far": "2.5 x 6 blind (M3x20 engages 5.4)",
+   "R": 3.8
+  },
+  "clip": {
+   "u": [
+    87.0,
+    93.0
+   ],
+   "xr_bodies": [
+    [
+     -8.5,
+     -5.3
+    ],
+    [
+     5.3,
+     8.5
+    ]
+   ],
+   "catch": 0.8,
+   "over_leg": 0.5,
+   "catch_from_w": 19.52,
+   "hook_t": 1.2,
+   "back_w": 20.72
+  },
+  "channel": {
+   "xr_walls": [
+    [
+     -7.3,
+     -5.3
+    ],
+    [
+     5.3,
+     7.3
+    ]
+   ],
+   "u": [
+    26.2,
+    103.5
+   ],
+   "w": [
+    13.0,
+    16.0
+   ]
+  },
+  "candidates_top5": [
+   {
+    "arm": 39.58,
+    "u_p": 31.0,
+    "L": 68.5,
+    "tip_y": 299.32,
+    "ang": 39.72
+   },
+   {
+    "arm": 38.78,
+    "u_p": 30.0,
+    "L": 69.5,
+    "tip_y": 300.91,
+    "ang": 38.08
+   },
+   {
+    "arm": 38.75,
+    "u_p": 30.0,
+    "L": 69.0,
+    "tip_y": 300.27,
+    "ang": 38.41
+   },
+   {
+    "arm": 38.72,
+    "u_p": 30.0,
+    "L": 68.5,
+    "tip_y": 299.63,
+    "ang": 38.74
+   },
+   {
+    "arm": 38.68,
+    "u_p": 30.0,
+    "L": 68.0,
+    "tip_y": 298.99,
+    "ang": 39.08
+   }
+  ],
+  "axle": {
+   "screw": "M3x20 ISO 7380",
+   "head_d": 5.7,
+   "head_h": 1.65,
+   "L": 20.0,
+   "from_side": "-x",
+   "tool": "육각 L렌치 2.0"
+  },
+  "pivot22_yz": [
+   244.4,
+   116.2
+  ],
+  "swing": {
+   "at_25": {
+    "pivot": [
+     246.2,
+     115.22
+    ],
+    "first_contact_deg": -36.15,
+    "first_contact": "back_wall_edge",
+    "first_contact_yz": [
+     301.2,
+     72.85
+    ],
+    "back_edge_dist": 69.34,
+    "foot_reach": 70.0,
+    "worst_overlap": -0.66,
+    "worst_at_deg": -38.2
+   },
+   "at_22": {
+    "pivot": [
+     244.4,
+     116.2
+    ],
+    "first_contact_deg": -39.95,
+    "first_contact": "ramp",
+    "first_contact_yz": [
+     294.29,
+     70.62
+    ],
+    "back_edge_dist": 71.36,
+    "foot_reach": 70.0,
+    "worst_overlap": null,
+    "worst_at_deg": null
+   },
+   "ok_at_22": true,
+   "ok_at_25": false,
+   "procedure": "deploy / stow the leg with the screen held at the 22 deg heel stop; then let go (the foot slides down the ramp to the back wall)"
+  },
+  "pocket_edge_C": 0.5
+ },
+ "eye": {
+  "eye": [
+   -350.0,
+   450.0
+  ],
+  "angle_to_centre": 27.46,
+  "tilt_diff": 2.46,
+  "angle_range": [
+   21.86,
+   33.43
+  ],
+  "dist_to_centre": 665.94,
+  "sightline_z_at_module": 110.19,
+  "sightline_z_at_module_is": "sightline to the BOTTOM of the visible area",
+  "sightline_centre_z_at_module": 157.93,
+  "px_mm": 0.151,
+  "arcmin_per_px": 0.78,
+  "arcmin_32px": 24.94,
+  "sightline_z_at_y212": 110.19
+ },
+ "footprint_y": {
+  "front_22": 216.0,
+  "front_25": 216.61,
+  "rear_25": 276.81,
+  "front_22_90": 216.0,
+  "note": "plan footprint of the standing cradle: 22 deg (heel) front vs 25 deg (use) front"
+ },
+ "lid_screw": {
+  "screw": "M3x10 ISO 7380 (머리 Ø5.7 × 1.65)",
+  "x": [
+   506.0,
+   716.0
+  ],
+  "y": [
+   246.0,
+   322.0
+  ],
+  "boss_d": 8.0,
+  "hole_d": 3.4,
+  "cbore_d": 6.5,
+  "lid_t": 11.5,
+  "under_head": 6.0,
+  "cbore_depth": 5.5,
+  "head_seat_z": 67.35,
+  "insert": "M3 heat-set insert in the seam-rail top (length 4.0 est.)",
+  "insert_engage": 4.0,
+  "insert_hole_depth": 4.5,
+  "tip_z": 57.35,
+  "rail_z": [
+   55.35,
+   61.35
+  ],
+  "rail_floor_under_hole": 1.5,
+  "posts_x": [
+   [
+    496.0,
+    506.0
+   ],
+   [
+    716.0,
+    726.0
+   ]
+  ],
+  "rails_x": [
+   [
+    491.0,
+    511.0
+   ],
+   [
+    711.0,
+    731.0
+   ]
+  ],
+  "rule": "cbore depth = lid thickness at the screw (top - bed) - (10 - insert engagement); insert hole 0.5 deeper than the insert; x = lid edge +-5 = middle of the 10 mm the lid overlaps the rail",
+  "estimate": true,
+  "ok": true
+ },
+ "service_O4": {
+  "free_ribbon_after_clip": 131.35,
+  "with_spare": 175.03,
+  "lift_with_ribbon_plugged": 96.3,
+  "steps_ko": [
+   "화면을 뒤로 접는다(다리는 클립에)",
+   "M3×10 4개를 푼다(앞 y246, 뒤 y322)",
+   "뚜껑을 화면째 천천히 든다(리본을 꽂은 채 약 96 mm까지)",
+   "Pi 5 CAM/DISP 1의 잠금 막대를 올리고 리본을 뺀다(화면 쪽 ZIF는 받침 안이라 건드리지 않음)",
+   "GPIO 2·6의 암-암 점퍼 2개를 뺀다",
+   "뚜껑을 옆에 둔다 → O4 플러그 작업",
+   "되돌릴 때: 리본 B형 방향 확인 후 잠금, 점퍼 2번 빨강·6번 검정, 나사 4개"
+  ],
+  "spare_loop_where": "클립과 45° 접기 사이 (뚜껑 밑): 뚜껑을 들 때 이 여유가 풀림",
+  "note": "lift estimate: straight line from the clip exit to the top of the drop column, minus 10 mm for bends"
+ },
+ "sound_rule": {
+  "cone_lower_edge_yz": [
+   224.13,
+   70.2
+  ],
+  "baffle_deg": 43.0,
+  "line_deg": 27.0,
+  "z_at_module_rear": 76.38,
+  "clear_above_module_edge": 3.53,
+  "ok": true,
+  "screen_x": [
+   525.65,
+   696.35
+  ],
+  "screen_to_cone_x_gap": 318.15
+ },
+ "reach": {
+  "centre_from_key_front_y": 240.91,
+  "centre_z": 142.91,
+  "top_z": 182.07,
+  "centre_above_module_top": 70.06,
+  "from_black_key_rear": 41.91
+ },
+ "paths": [
+  {
+   "src": [
+    160.5,
+    258.5
+   ],
+   "ear": [
+    536.0,
+    -350.0
+   ],
+   "dist_to_screen": 288.43
+  },
+  {
+   "src": [
+    160.5,
+    258.5
+   ],
+   "ear": [
+    686.0,
+    -350.0
+   ],
+   "dist_to_screen": 248.58
+  },
+  {
+   "src": [
+    1061.5,
+    258.5
+   ],
+   "ear": [
+    536.0,
+    -350.0
+   ],
+   "dist_to_screen": 248.58
+  },
+  {
+   "src": [
+    1061.5,
+    258.5
+   ],
+   "ear": [
+    686.0,
+    -350.0
+   ],
+   "dist_to_screen": 288.43
+  }
+ ],
+ "screen_rect_plan": [
+  525.65,
+  216.0,
+  696.35,
+  300.7
+ ],
+ "O4": {
+  "offset": -11.75,
+  "scale": 0.94,
+  "two_oct_white_px": 73.14,
+  "two_oct_white_mm": 11.04
+ },
+ "hole": {
+  "x": [
+   635.35,
+   657.35
+  ],
+  "y": [
+   228.55,
+   234.55
+  ],
+  "edge_R": 1.0,
+  "wall": 2.0
+ },
+ "clip": {
+  "pad": {
+   "x": [
+    631.35,
+    661.35
+   ],
+   "y": [
+    236.55,
+    248.55
+   ],
+   "z": [
+    61.35,
+    69.85
+   ]
+  },
+  "pins": [
+   [
+    634.35,
+    242.55
+   ],
+   [
+    658.35,
+    242.55
+   ]
+  ],
+  "pin_hole": "3.1 x 5 blind from below",
+  "pin": "3.0",
+  "clip": "30 x 12 x 3 printed, ribbon clamped under the pad",
+  "t": 3.0,
+  "pin_d": 3.0,
+  "pin_hole_d": 3.1,
+  "pin_hole_depth": 5.0,
+  "pin_len": 4.5,
+  "wire_groove": {
+   "x": [
+    652.6,
+    656.1
+   ],
+   "depth": 1.8,
+   "along": "y, full clip length",
+   "note": "groove in the clip top face for the 2 power wires side by side; the flat part clamps only the ribbon"
+  },
+  "ribbon_edge_x": 652.2,
+  "pin_edge_x": 656.85,
+  "groove_ok": true,
+  "clamp_z": [
+   61.05,
+   61.35
+  ],
+  "clip_z": [
+   58.05,
+   61.05
+  ]
+ },
+ "vents": {
+  "band_y": [
+   300.0,
+   325.0
+  ],
+  "slot": [
+   34.0,
+   4.0
+  ],
+  "rows": 4,
+  "pitch": 7.0,
+  "slots": [
+   [
+    564.0,
+    598.0,
+    300.0,
+    304.0
+   ],
+   [
+    624.0,
+    658.0,
+    300.0,
+    304.0
+   ],
+   [
+    564.0,
+    598.0,
+    307.0,
+    311.0
+   ],
+   [
+    624.0,
+    658.0,
+    307.0,
+    311.0
+   ],
+   [
+    564.0,
+    598.0,
+    314.0,
+    318.0
+   ],
+   [
+    624.0,
+    658.0,
+    314.0,
+    318.0
+   ],
+   [
+    564.0,
+    598.0,
+    321.0,
+    325.0
+   ],
+   [
+    624.0,
+    658.0,
+    321.0,
+    325.0
+   ]
+  ],
+  "note": "CAD exhaust: 8 slots 4 x 34 behind the screen in the band y300~325; split left/right of the leg-pocket block, clear of the fold feet. Folded screen covers them (transport, power off)"
+ },
+ "pi5": {
+  "rot_deg": 0,
+  "origin": [
+   542.0,
+   262.0
+  ],
+  "board_top_z": 24.1,
+  "board_x": [
+   542.0,
+   627.0
+  ],
+  "board_y": [
+   262.0,
+   318.0
+  ],
+  "disp1": {
+   "x": [
+    589,
+    592
+   ],
+   "y": [
+    263,
+    278
+   ],
+   "mouth": [
+    589.0,
+    270.5
+   ],
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "z": 26.0,
+   "depth": 3.0
+  },
+  "disp0": {
+   "x": [
+    595.5,
+    598.3
+   ],
+   "y": [
+    262.7,
+    278.2
+   ]
+  },
+  "gpio_pin2": [
+   550.37,
+   315.77
+  ],
+  "gpio_pin6": [
+   555.45,
+   315.77
+  ],
+  "gpio_top_z": 32.6,
+  "heatsink": {
+   "x": [
+    572.0,
+    583.0
+   ],
+   "y": [
+    276.0,
+    293.0
+   ],
+   "top_z": 32.1
+  },
+  "hdmi": {
+   "x": [
+    562.0,
+    585.0
+   ],
+   "y": [
+    262.0,
+    269.5
+   ],
+   "top_z": 27.3
+  },
+  "source": "final L2 (CAD bbox + orientation note \"USB/RJ45 end +x, GPIO edge +y\" -> rot 0)",
+  "cad_disp1": {
+   "x": [
+    589,
+    592
+   ],
+   "y": [
+    263,
+    278
+   ],
+   "z": [
+    24,
+    28
+   ],
+   "keepout": {
+    "x": [
+     582,
+     600
+    ],
+    "y": [
+     262,
+     280
+    ]
+   }
+  },
+  "disp1_vs_cad": 0.4
+ },
+ "ribbon": {
+  "parts": {
+   "through_lid": 11.5,
+   "down_to_run": 0.15,
+   "run_y": 38.95,
+   "run_x": 63.35,
+   "drop": 33.75,
+   "over_obstacle": 2.0,
+   "into_mouth": 4.25,
+   "fold_roll_allowance": 9.42,
+   "corner_rounding": -3.86
+  },
+  "total": 256.32,
+  "cable": 300.0,
+  "margin": 43.68,
+  "ok": true,
+  "ffc_type": "B (reverse)",
+  "folds_total": 2,
+  "z_run": 61.2,
+  "end_normal": [
+   0.0,
+   -0.0,
+   1.0
+  ],
+  "end_tangent": [
+   1.0,
+   0.0,
+   0.0
+  ],
+  "waypoints": [
+   [
+    646.35,
+    231.55,
+    72.85
+   ],
+   [
+    646.35,
+    231.55,
+    61.2
+   ],
+   [
+    646.35,
+    270.5,
+    61.2
+   ],
+   [
+    583.0,
+    270.5,
+    61.2
+   ],
+   [
+    583.0,
+    270.5,
+    27.45
+   ],
+   [
+    585.0,
+    270.5,
+    27.45
+   ],
+   [
+    589.0,
+    270.5,
+    26.0
+   ]
+  ],
+  "route_info": {
+   "turn_before_mouth": "two 90 deg bends (down, then into the mouth)",
+   "z_land": 27.45,
+   "rests_on": "unused micro-HDMI (estimated top z27.30)",
+   "approach_deg": 19.93,
+   "last_straight": 4.0,
+   "column_x_rule": "drop column = mouth - (stiffener 3.0 + R3) = 583.00"
+  },
+  "in_cradle_parts": {
+   "screen_insert": 3.5,
+   "screen_exit_to_fold": 4.0,
+   "fold_square": 11.7,
+   "fold_roll_allowance": 9.42,
+   "descend_to_cradle_bottom": 40.45,
+   "depth_jog": 2.0,
+   "hinge_loop": 23.04
+  },
+  "in_cradle_total": 94.11,
+  "loop": {
+   "length": 23.04,
+   "chord": {
+    "heel": 17.04,
+    "use": 16.95,
+    "fold": 12.34
+   },
+   "groove_exit_yz": {
+    "heel": [
+     225.51,
+     88.78
+    ],
+    "use": [
+     225.9,
+     88.83
+    ],
+    "fold": [
+     233.05,
+     85.1
+    ]
+   },
+   "single_arc_R": {
+    "heel": 8.83,
+    "use": 8.76,
+    "fold": 6.36
+   },
+   "fwd_most_y_est": 222.51
+  },
+  "screen_end_insert": 3.5,
+  "pi_end_insert": 2.7,
+  "pi_clearance": {
+   "heatsink_y_gap": -0.35,
+   "heatsink_x_gap": -0.15,
+   "heatsink_vs_cad_keepout_x": -1.0,
+   "hdmi_top_gap": 0.0,
+   "note": "HDMI / heatsink boxes are estimates from a Pi 5 layout; the ribbon lies on the unused micro-HDMI as in the Waveshare photos. The drop column stays at the stiffener rule (mouth - 6); the CAD keep-out x582~600 wins over the heatsink estimate."
+  },
+  "ffc_w": 11.7,
+  "ffc_t": 0.3,
+  "bend_R": 3.0,
+  "fold_roll_R": 3.0,
+  "stiffener_out": 4.0,
+  "formula": "L ~= 97.6 (screen ZIF -> lid top, both insertions) + 11.65 (lid + under) + |y_desc - 231.6| + |x_desc - 646.4| + (61.20 - z_conn) + 6 (into mouth) + 9.4 per 45 deg fold - 1.3 per 90 deg bend; desc = mouth - 6 mm outward; each 45 deg fold flips the FFC type (two 90 deg bends in a row are not a U-bend and add no length)",
+  "margin_pct": 14.56,
+  "loop_chord": {
+   "heel": 17.04,
+   "use": 16.95,
+   "fold": 12.34
+  }
+ },
+ "ribbon_table": [
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 646.35,
+   "y": 260,
+   "total": 169.05,
+   "margin": 130.95,
+   "ffc": "B",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 646.35,
+   "y": 280,
+   "total": 189.05,
+   "margin": 110.95,
+   "ffc": "B",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 646.35,
+   "y": 300,
+   "total": 209.05,
+   "margin": 90.95,
+   "ffc": "B",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 646.35,
+   "y": 320,
+   "total": 229.05,
+   "margin": 70.95,
+   "ffc": "B",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 606.35,
+   "y": 260,
+   "total": 227.9,
+   "margin": 72.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 606.35,
+   "y": 280,
+   "total": 247.9,
+   "margin": 52.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 606.35,
+   "y": 300,
+   "total": 267.9,
+   "margin": 32.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 606.35,
+   "y": 320,
+   "total": 287.9,
+   "margin": 12.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 686.35,
+   "y": 260,
+   "total": 227.9,
+   "margin": 72.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 686.35,
+   "y": 280,
+   "total": 247.9,
+   "margin": 52.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 686.35,
+   "y": 300,
+   "total": 267.9,
+   "margin": 32.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 686.35,
+   "y": 320,
+   "total": 287.9,
+   "margin": 12.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 566.35,
+   "y": 260,
+   "total": 267.9,
+   "margin": 32.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 566.35,
+   "y": 280,
+   "total": 287.9,
+   "margin": 12.1,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 566.35,
+   "y": 300,
+   "total": 307.9,
+   "margin": -7.9,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    -1
+   ],
+   "x": 566.35,
+   "y": 320,
+   "total": 327.9,
+   "margin": -27.9,
+   "ffc": "B",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 646.35,
+   "y": 260,
+   "total": 190.47,
+   "margin": 109.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 646.35,
+   "y": 280,
+   "total": 210.47,
+   "margin": 89.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 646.35,
+   "y": 300,
+   "total": 230.47,
+   "margin": 69.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 646.35,
+   "y": 320,
+   "total": 250.47,
+   "margin": 49.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 606.35,
+   "y": 260,
+   "total": 218.47,
+   "margin": 81.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 606.35,
+   "y": 280,
+   "total": 238.47,
+   "margin": 61.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 606.35,
+   "y": 300,
+   "total": 258.47,
+   "margin": 41.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 606.35,
+   "y": 320,
+   "total": 278.47,
+   "margin": 21.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 686.35,
+   "y": 260,
+   "total": 230.47,
+   "margin": 69.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 686.35,
+   "y": 280,
+   "total": 250.47,
+   "margin": 49.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 686.35,
+   "y": 300,
+   "total": 270.47,
+   "margin": 29.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 686.35,
+   "y": 320,
+   "total": 290.47,
+   "margin": 9.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 566.35,
+   "y": 260,
+   "total": 258.47,
+   "margin": 41.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 566.35,
+   "y": 280,
+   "total": 278.47,
+   "margin": 21.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 566.35,
+   "y": 300,
+   "total": 298.47,
+   "margin": 1.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    1,
+    0
+   ],
+   "x": 566.35,
+   "y": 320,
+   "total": 318.47,
+   "margin": -18.47,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 646.35,
+   "y": 260,
+   "total": 190.47,
+   "margin": 109.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 646.35,
+   "y": 280,
+   "total": 210.47,
+   "margin": 89.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 646.35,
+   "y": 300,
+   "total": 230.47,
+   "margin": 69.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 646.35,
+   "y": 320,
+   "total": 250.47,
+   "margin": 49.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 606.35,
+   "y": 260,
+   "total": 230.47,
+   "margin": 69.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 606.35,
+   "y": 280,
+   "total": 250.47,
+   "margin": 49.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 606.35,
+   "y": 300,
+   "total": 270.47,
+   "margin": 29.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 606.35,
+   "y": 320,
+   "total": 290.47,
+   "margin": 9.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 686.35,
+   "y": 260,
+   "total": 218.47,
+   "margin": 81.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 686.35,
+   "y": 280,
+   "total": 238.47,
+   "margin": 61.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 686.35,
+   "y": 300,
+   "total": 258.47,
+   "margin": 41.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 686.35,
+   "y": 320,
+   "total": 278.47,
+   "margin": 21.53,
+   "ffc": "A",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 566.35,
+   "y": 260,
+   "total": 270.47,
+   "margin": 29.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 566.35,
+   "y": 280,
+   "total": 290.47,
+   "margin": 9.53,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 566.35,
+   "y": 300,
+   "total": 310.47,
+   "margin": -10.47,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    -1,
+    0
+   ],
+   "x": 566.35,
+   "y": 320,
+   "total": 330.47,
+   "margin": -30.47,
+   "ffc": "B",
+   "folds": 2
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 646.35,
+   "y": 260,
+   "total": 181.05,
+   "margin": 118.95,
+   "ffc": "A",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 646.35,
+   "y": 280,
+   "total": 201.05,
+   "margin": 98.95,
+   "ffc": "A",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 646.35,
+   "y": 300,
+   "total": 221.05,
+   "margin": 78.95,
+   "ffc": "A",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 646.35,
+   "y": 320,
+   "total": 241.05,
+   "margin": 58.95,
+   "ffc": "A",
+   "folds": 1
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 606.35,
+   "y": 260,
+   "total": 239.9,
+   "margin": 60.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 606.35,
+   "y": 280,
+   "total": 259.9,
+   "margin": 40.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 606.35,
+   "y": 300,
+   "total": 279.9,
+   "margin": 20.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 606.35,
+   "y": 320,
+   "total": 299.9,
+   "margin": 0.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 686.35,
+   "y": 260,
+   "total": 239.9,
+   "margin": 60.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 686.35,
+   "y": 280,
+   "total": 259.9,
+   "margin": 40.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 686.35,
+   "y": 300,
+   "total": 279.9,
+   "margin": 20.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 686.35,
+   "y": 320,
+   "total": 299.9,
+   "margin": 0.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 566.35,
+   "y": 260,
+   "total": 279.9,
+   "margin": 20.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 566.35,
+   "y": 280,
+   "total": 299.9,
+   "margin": 0.1,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 566.35,
+   "y": 300,
+   "total": 319.9,
+   "margin": -19.9,
+   "ffc": "A",
+   "folds": 3
+  },
+  {
+   "mouth_dir": [
+    0,
+    1
+   ],
+   "x": 566.35,
+   "y": 320,
+   "total": 339.9,
+   "margin": -39.9,
+   "ffc": "A",
+   "folds": 3
+  }
+ ],
+ "ffc_tracker_check_waveshare_std": "B",
+ "power_wire": {
+  "parts": {
+   "mx_exit_to_wire_lane": 17.6,
+   "down_to_cradle_bottom": 63.4,
+   "hinge_loop": 23.04,
+   "lid_top_to_run": 12.7,
+   "run_to_gpio": 213.21,
+   "dupont_and_slack": 15.0
+  },
+  "total": 344.95,
+  "waypoints": [
+   [
+    654.35,
+    231.55,
+    72.85
+   ],
+   [
+    654.35,
+    231.55,
+    60.15
+   ],
+   [
+    654.35,
+    315.77,
+    60.15
+   ],
+   [
+    552.91,
+    315.77,
+    60.15
+   ],
+   [
+    552.91,
+    315.77,
+    32.6
+   ]
+  ],
+  "chain": "screen MX1.25 2P -> Waveshare MX1.25-to-2.54 3P cable (~100~150 est.) -> M/M 20 cm -> F/F 20 cm -> GPIO pin 2 (5V red) / pin 6 (GND black)",
+  "available": [
+   500.0,
+   550.0
+  ],
+  "ws_cable_joint_needs": 120.54,
+  "count_note": "every vertical and horizontal piece counted once from the waypoints: lid top -> run height (through the hole) -> +y -> -x -> up/down to the pin tip; rev 3 used the lid thickness (11.5) for the first piece and left out 3.5 below the lid",
+  "note": "joint WS 3-pin housing <-> M/M sits under the lid if the WS cable >= ws_cable_joint_needs (in-cradle + hinge loop + lid thickness + 5); otherwise in the hinge loop (heat-shrink it; it passes the 22x6 hole)"
+ },
+ "power": {
+  "S_W": 2.15,
+  "avg_W": [
+   15.69,
+   19.69
+  ],
+  "peak_W": 54.39,
+  "margin_60W": 5.61,
+  "w45_minus2dB": 39.39,
+  "battery_h": [
+   3.19,
+   4.01
+  ],
+  "rail_A": 2.42,
+  "pi_in_A": 2.02,
+  "screen_A_5V": 0.43,
+  "avg_after": [
+   15.69,
+   19.69
+  ],
+  "peak": [
+   52.0,
+   54.39
+  ],
+  "margin_60W_after": 5.61,
+  "pi_usbc_A": 2.02,
+  "rail_A_after": 2.42,
+  "life_after": [
+   3.19,
+   4.01
+  ],
+  "screen_at_5V_A": 0.43
+ },
+ "stability": {
+  "F": 10.0,
+  "M_push": 1.05,
+  "leg_arm_mm": 38.6,
+  "leg_force": 27.22,
+  "leg_static": 1.86,
+  "hinge_on_cradle": [
+   11.86,
+   -9.36
+  ],
+  "leg_Pcr": 792,
+  "leg_SF": 29.08,
+  "heel_force": 150,
+  "lid_screws_total": 34,
+  "lid_screw_arm": 30.5,
+  "rear_bar_alone": {
+   "m_kg_est": 3.3,
+   "M_over": 1.3,
+   "M_res": 2.06,
+   "SF": 1.58
+  },
+  "note": "rear-bar-alone case only happens when detached (screen folded for transport); attached to the key frame it is much more stable",
+  "cu_unit_M_over": 1.3,
+  "cu_unit_M_res": 2.06,
+  "cu_unit_SF": 1.58
+ },
+ "checks": {
+  "keepout_min_y": 216.0,
+  "keepout_margin": 1.0,
+  "keepout_ok": true,
+  "cables_fwd_min_y": 222.51,
+  "cables_ok": true,
+  "fold_rear_margin": 2.45,
+  "fold_rear_ok": true,
+  "fold_speaker_margin": 52.71,
+  "fold_height_ok": true,
+  "lid_x_margin": [
+   24.65,
+   24.65
+  ],
+  "pocket_back_material": 40.8,
+  "leg_stow_ok": true,
+  "fold_leg_clear_lid": 1.2,
+  "fold_clip_clear_lid": 0.78,
+  "ribbon_ok": true,
+  "sound_paths_min": 248.58,
+  "heel_gap_at_25": 0.37,
+  "sightline_z_at_module": 110.19,
+  "sightline_ok": true,
+  "cheek_gap_min": -1.0,
+  "rib_relief_needed": true,
+  "ear_block_gap_22": 0.0,
+  "ear_block_gap_25_90": 0.37,
+  "ear_block_ok": true,
+  "axle_head_gap": 2.0,
+  "axle_path_gap": 2.0,
+  "axle_ok": true,
+  "leg_swing_22_ok": true,
+  "leg_swing_25_overlap": -0.66,
+  "notch_margin": [
+   6.99,
+   6.76
+  ],
+  "notch_ok": true,
+  "clip_groove_ok": true,
+  "lid_screw_ok": true,
+  "sound_rule_ok": true,
+  "pi_orientation_ok": true,
+  "power_wire_ok": true,
+  "studs_fallback_ok": true,
+  "sightline_centre_z_at_module": 157.93
+ },
+ "sensor_gap": 149.0,
+ "context": {
+  "white_top_z": 43.5,
+  "black_top_z": 55.5,
+  "key_rear_y": 199,
+  "module_top_z": 72.85,
+  "O4_x": [
+   540.5,
+   709
+  ],
+  "O4_white_centre_x": 622.75,
+  "octave": 164.5,
+  "key_x": [
+   0.0,
+   1222.0
+  ],
+  "sensor_y": 67.0,
+  "black_front_y_draw": 70.0,
+  "player_x": 611.0,
+  "ear_dx": 75.0,
+  "eye": [
+   -350.0,
+   450.0
+  ],
+  "note": "keys from touch/context/key_numbers.json; key_x, sensor_y from rev-2 geom (L1 dict); black_front_y_draw only for the drawing; eye/ears are estimates"
+ },
+ "folded_top": 95.35,
+ "folded_y": [
+  233.05,
+  339.05
+ ],
+ "fold_feet_detail": [
+  {
+   "x": [
+    535.0,
+    551.0
+   ],
+   "y": [
+    255.55,
+    271.55
+   ],
+   "z": [
+    72.85,
+    78.35
+   ],
+   "rear": false
+  },
+  {
+   "x": [
+    535.0,
+    551.0
+   ],
+   "y": [
+    305.55,
+    321.55
+   ],
+   "z": [
+    72.85,
+    78.35
+   ],
+   "rear": true,
+   "lip": {
+    "y": [
+     322.05,
+     324.05
+    ],
+    "z": [
+     78.35,
+     80.35
+    ]
+   }
+  },
+  {
+   "x": [
+    671.0,
+    687.0
+   ],
+   "y": [
+    255.55,
+    271.55
+   ],
+   "z": [
+    72.85,
+    78.35
+   ],
+   "rear": false
+  },
+  {
+   "x": [
+    671.0,
+    687.0
+   ],
+   "y": [
+    305.55,
+    321.55
+   ],
+   "z": [
+    72.85,
+    78.35
+   ],
+   "rear": true,
+   "lip": {
+    "y": [
+     322.05,
+     324.05
+    ],
+    "z": [
+     78.35,
+     80.35
+    ]
+   }
+  }
+ ],
+ "variants": {
+  "corner_studs": {
+   "stud_h": 5.4,
+   "plate_moves_back": 2.9,
+   "result": {
+    "axis_y": 229.23,
+    "fold_rear_y": 341.73,
+    "rear_margin": -0.23,
+    "fold_top_z": 98.25
+   },
+   "note": "what would happen if the plate moved back over protruding studs (NOT the plan): rear margin goes negative -> use corner_studs_bored"
+  },
+  "corner_studs_bored": {
+   "bore_d": 6.2,
+   "bore_w": [
+    8.0,
+    13.7
+   ],
+   "boss_d": 8.6,
+   "floor_t": 2.3,
+   "screw": "M2.5x6 from the back through the boss floor into the stud thread; head sits on the rib face w16 (no counterbore)",
+   "engage": 3.7,
+   "head_out": 1.8,
+   "fold_head_bottom_z": 76.55,
+   "fold_head_to_lid": 3.7,
+   "fold_head_to_feet_plan": 3.83,
+   "note": "only if the corner features are pressed studs (cannot be removed): the studs go into the bores, the screen back still rests on the boss rims at w8, so the plate and the hinge axis do not move",
+   "ok": true
+  },
+  "rev2_frame_b17": {
+   "result": {
+    "axis_y": 229.33,
+    "fold_rear_y": 341.83,
+    "rear_margin": -0.33,
+    "fold_top_z": 98.35
+   },
+   "note": "axis at the rib face w16 as in rev 2 (b=17): shown to explain why rev 3 puts the axis on the plate back w13"
+  },
+  "connector_mirrored": {
+   "note": "if the FPC turns out on the left (mouth -x), mirror every connector-side item about x=XC",
+   "ribbon": {
+    "total": 200.32,
+    "margin": 99.68,
+    "ffc_type": "A (same side)",
+    "folds": 2,
+    "waypoints": [
+     [
+      575.65,
+      231.55,
+      72.85
+     ],
+     [
+      575.65,
+      231.55,
+      61.2
+     ],
+     [
+      575.65,
+      270.5,
+      61.2
+     ],
+     [
+      583.0,
+      270.5,
+      61.2
+     ],
+     [
+      583.0,
+      270.5,
+      27.45
+     ],
+     [
+      585.0,
+      270.5,
+      27.45
+     ],
+     [
+      589.0,
+      270.5,
+      26.0
+     ]
+    ]
+   },
+   "notch_xr": [
+    48.0,
+    66.0
+   ],
+   "notch_note": "the bottom-edge notch follows the FRONT view (not the connector side) -> it does not move",
+   "hole_x": [
+    564.65,
+    586.65
+   ],
+   "groove_xr": [
+    -44.95,
+    -25.75
+   ],
+   "insp_xr": [
+    -45.0,
+    -15.5
+   ],
+   "clip_pins_x": [
+    587.65,
+    563.65
+   ]
+  }
+ },
+ "mass_est": {
+  "cradle_g": 81.87,
+  "cradle_h": 3.72,
+  "leg_g": 5.01,
+  "note": "rough: PETG 1.27 g/cm3, 90 % solid, ~22 g/h on the P2S"
+ },
+ "poses": {
+  "note": "cradle local (xr, u, w) -> world (x, y, z): [x,y,z,1] = M @ [xr,u,w,1]; det = -1 (u,w frame is left-handed). For a proper rotation use v = -w: M_v = M with column 3 negated.",
+  "cradle_use": [
+   [
+    1,
+    0,
+    0,
+    611.0
+   ],
+   [
+    0,
+    0.42261826,
+    0.9063077900000001,
+    218.57
+   ],
+   [
+    0,
+    0.9063077900000001,
+    -0.42261826,
+    95.0
+   ],
+   [
+    0,
+    0,
+    0,
+    1
+   ]
+  ],
+  "cradle_heel": [
+   [
+    1,
+    0,
+    0,
+    611.0
+   ],
+   [
+    0,
+    0.37460659,
+    0.92718385,
+    217.87
+   ],
+   [
+    0,
+    0.92718385,
+    -0.37460659,
+    94.56
+   ],
+   [
+    0,
+    0,
+    0,
+    1
+   ]
+  ],
+  "cradle_fold": [
+   [
+    1,
+    0,
+    0,
+    611.0
+   ],
+   [
+    0,
+    1.0,
+    0.0,
+    235.55
+   ],
+   [
+    0,
+    0.0,
+    -1.0,
+    94.35
+   ],
+   [
+    0,
+    0,
+    0,
+    1
+   ]
+  ],
+  "leg_use": {
+   "pivot_xyz": [
+    611.0,
+    246.2,
+    115.22
+   ],
+   "dir_pivot_to_tip": [
+    0,
+    0.77,
+    -0.64
+   ],
+   "length": 67.0
+  },
+  "leg_stowed": {
+   "pivot_cradle": [
+    0,
+    30.0,
+    16.5
+   ],
+   "dir_cradle": [
+    0,
+    1,
+    0
+   ],
+   "note": "lies along +u in the channel, w13.5..19.5"
+  },
+  "pi5": {
+   "rot_deg": 0,
+   "origin_xy": [
+    542.0,
+    262.0
+   ],
+   "board_top_z": 24.1
+  }
+ }
+}

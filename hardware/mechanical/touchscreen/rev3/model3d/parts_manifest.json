@@ -1,0 +1,2351 @@
+{
+ "src": {
+  "numbers": "touch3/design/numbers.json (수정 3판 3a)",
+  "numbers_md5": "8f5821c7119bd4a2a80246d23ebf0cab",
+  "revision": "3a (fix round 2026-10-01: ear outline, u24 rib, bottom notch, clip wire groove, ribbon on HDMI, power-wire count, service, studs fallback)",
+  "l2": "L2_cu.json (확정)",
+  "body_l2": "cad_copy/spec/body_L2.json (스피커 옆모양)",
+  "l2_md5": "c1ad7dd69e304389dad2939164fe8c20"
+ },
+ "frames": "world mm: x from the A0 left boundary, y from the white-key front lip (away from the player), z from the desk",
+ "poses": {
+  "use": 25.0,
+  "heel22": 22.0,
+  "fold": 90.0
+ },
+ "pose_info": {
+  "use": {
+   "leg_mode": "use",
+   "leg_pivot": [
+    246.20418946251556,
+    115.21683977833689
+   ],
+   "leg_tip": [
+    297.7,
+    72.35
+   ],
+   "loop_len": 23.039999999999992,
+   "loop_min_y": 222.7047766130867,
+   "ffc_len": 244.8293078338387,
+   "wire_len": [
+    320.68255757437635,
+    320.8025575743763
+   ]
+  },
+  "heel22": {
+   "leg_mode": "hang",
+   "leg_pivot": [
+    244.40480063420435,
+    116.19904725114901
+   ],
+   "leg_tip": [
+    295.79736409960185,
+    73.21295158691018
+   ],
+   "leg_angle": 39.91,
+   "loop_len": 23.039999999999992,
+   "loop_min_y": 222.64963208688525,
+   "ffc_len": 244.82894684197788,
+   "wire_len": [
+    320.6822942592728,
+    320.8022942592727
+   ]
+  },
+  "fold": {
+   "leg_mode": "stow",
+   "loop_len": 23.039999999999985,
+   "loop_min_y": 225.5748928627311,
+   "ffc_len": 244.83236739236702,
+   "wire_len": [
+    320.6847877908525,
+    320.80478779085246
+   ]
+  }
+ },
+ "estimates": {
+  "screen_back_recess": 2.0,
+  "zif_h": 2.0,
+  "mx_h": 2.0,
+  "ribbon_mouth_w": 7.0,
+  "screen_hole_depth": 4.0,
+  "m25_head": [
+   4.5,
+   1.8
+  ],
+  "m3_head": [
+   5.7,
+   1.65
+  ],
+  "lid_rib_t": 2.0,
+  "lid_wall_t": 3.0,
+  "lid_ribs_x": [
+   541.0,
+   611.0,
+   681.0
+  ],
+  "lid_ribs_y": [
+   262.0,
+   290.0
+  ],
+  "tab_w": [
+   2.0,
+   6.0
+  ],
+  "insert_od": 4.2,
+  "stack": 0.27,
+  "ramp_from_recess": [
+   5.5,
+   1.0
+  ],
+  "lid_boss_d": 8.0,
+  "wire_d": 1.1,
+  "wire_pitch": 1.3,
+  "dupont": [
+   2.5,
+   2.5,
+   14.0
+  ],
+  "grille_d": 115.0,
+  "grille_t": 2.0,
+  "feet_d": 28.0,
+  "gpio_pin_above_base": 6.0,
+  "pi_board_t": 1.6,
+  "cover_dome_skin": 1.2,
+  "loop_len": 23.04
+ },
+ "parts": {
+  "use": [
+   {
+    "id": "TS-SCREEN",
+    "name_ko": "화면 7-DSI-TOUCH-C (더미)",
+    "kind": "bought",
+    "color": "#15181c",
+    "material": "구매품",
+    "file": "stl/use/TS-SCREEN.stl",
+    "bbox": [
+     527.95,
+     218.75,
+     91.62,
+     694.05,
+     268.51,
+     186.45
+    ],
+    "volume_mm3": 134448.6,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-BEZEL",
+    "name_ko": "화면 유리 테두리",
+    "kind": "bought",
+    "color": "#0b0c0e",
+    "material": "",
+    "file": "stl/use/TS-SCREEN-BEZEL.stl",
+    "bbox": [
+     527.95,
+     218.57,
+     94.92,
+     694.05,
+     261.44,
+     186.54
+    ],
+    "volume_mm3": 683.5,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-ACTIVE",
+    "name_ko": "화면 보이는 영역 154.58×86.42",
+    "kind": "bought",
+    "color": "#1f3a5c",
+    "material": "",
+    "file": "stl/use/TS-SCREEN-ACTIVE.stl",
+    "bbox": [
+     531.92,
+     222.65,
+     103.66,
+     686.5,
+     259.35,
+     182.07
+    ],
+    "volume_mm3": 2671.8,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-ZIF",
+    "name_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+    "kind": "bought",
+    "color": "#e8dcc0",
+    "material": "",
+    "file": "stl/use/TS-SCREEN-ZIF.stl",
+    "bbox": [
+     628.85,
+     239.43,
+     124.7,
+     634.25,
+     247.97,
+     139.96
+    ],
+    "volume_mm3": 171.7,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-MX",
+    "name_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+    "kind": "bought",
+    "color": "#f2f2f2",
+    "material": "",
+    "file": "stl/use/TS-SCREEN-MX.stl",
+    "bbox": [
+     630.35,
+     247.93,
+     142.92,
+     635.35,
+     253.38,
+     151.56
+    ],
+    "volume_mm3": 86.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-TAB",
+    "name_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+    "kind": "bought",
+    "color": "#9a9a9a",
+    "material": "",
+    "file": "stl/use/TS-SCREEN-TAB.stl",
+    "bbox": [
+     665.99,
+     220.02,
+     91.69,
+     670.24,
+     224.01,
+     94.16
+    ],
+    "volume_mm3": 14.6,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-CRADLE",
+    "name_ko": "화면 받침(크래들)",
+    "kind": "print",
+    "color": "#5f6b7a",
+    "material": "PETG",
+    "file": "stl/use/TS-CRADLE.stl",
+    "bbox": [
+     525.65,
+     216.61,
+     76.72,
+     696.35,
+     276.81,
+     189.23
+    ],
+    "volume_mm3": 67942.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-WINCOVER",
+    "name_ko": "점검창 덮개",
+    "kind": "print",
+    "color": "#3d8bd4",
+    "material": "PETG",
+    "file": "stl/use/TS-WINCOVER.stl",
+    "bbox": [
+     625.0,
+     242.3,
+     117.21,
+     657.5,
+     261.96,
+     153.4
+    ],
+    "volume_mm3": 4436.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-1",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M25-1.stl",
+    "bbox": [
+     531.75,
+     225.34,
+     93.44,
+     536.25,
+     233.87,
+     99.87
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-2",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M25-2.stl",
+    "bbox": [
+     531.75,
+     262.53,
+     173.2,
+     536.25,
+     271.06,
+     179.62
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-3",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M25-3.stl",
+    "bbox": [
+     685.75,
+     225.34,
+     93.44,
+     690.25,
+     233.87,
+     99.87
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-4",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M25-4.stl",
+    "bbox": [
+     685.75,
+     262.53,
+     173.2,
+     690.25,
+     271.06,
+     179.62
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-LEG",
+    "name_ko": "받침다리",
+    "kind": "print",
+    "color": "#e07b39",
+    "material": "PETG",
+    "file": "stl/use/TS-LEG.stl",
+    "bbox": [
+     606.0,
+     243.2,
+     69.35,
+     616.0,
+     300.7,
+     118.22
+    ],
+    "volume_mm3": 4213.7,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-LEG",
+    "name_ko": "M3×20 (다리 축)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M3X20-LEG.stl",
+    "bbox": [
+     600.05,
+     243.36,
+     112.37,
+     621.7,
+     249.05,
+     118.06
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-FFC",
+    "name_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+    "kind": "bought",
+    "color": "#e0a030",
+    "material": "",
+    "file": "stl/use/TS-FFC.stl",
+    "bbox": [
+     582.85,
+     221.63,
+     25.85,
+     652.2,
+     276.35,
+     137.1
+    ],
+    "volume_mm3": 955.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-RED",
+    "name_ko": "전원선 5V (빨강)",
+    "kind": "bought",
+    "color": "#d62828",
+    "material": "",
+    "file": "stl/use/TS-PWR-RED.stl",
+    "bbox": [
+     549.82,
+     222.4,
+     40.58,
+     654.23,
+     316.3,
+     147.2
+    ],
+    "volume_mm3": 285.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-BLK",
+    "name_ko": "전원선 GND (검정)",
+    "kind": "bought",
+    "color": "#222222",
+    "material": "",
+    "file": "stl/use/TS-PWR-BLK.stl",
+    "bbox": [
+     554.9,
+     222.4,
+     40.58,
+     655.53,
+     316.95,
+     148.38
+    ],
+    "volume_mm3": 285.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-HOUSING",
+    "name_ko": "점퍼 F 하우징 (GPIO 2·6)",
+    "kind": "bought",
+    "color": "#303030",
+    "material": "",
+    "file": "stl/use/TS-PWR-HOUSING.stl",
+    "bbox": [
+     549.12,
+     314.52,
+     26.6,
+     556.7,
+     317.02,
+     40.6
+    ],
+    "volume_mm3": 175.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-LID",
+    "name_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+    "kind": "print",
+    "color": "#b9c0c8",
+    "material": "PETG",
+    "file": "stl/use/TS-LID.stl",
+    "bbox": [
+     501.0,
+     214.0,
+     61.35,
+     721.0,
+     341.5,
+     86.85
+    ],
+    "volume_mm3": 133479.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-HINGE-L",
+    "name_ko": "M3×20 (경첩 축 왼쪽)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M3X20-HINGE-L.stl",
+    "bbox": [
+     536.95,
+     223.7,
+     78.5,
+     558.6,
+     229.4,
+     84.2
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-HINGE-R",
+    "name_ko": "M3×20 (경첩 축 오른쪽)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M3X20-HINGE-R.stl",
+    "bbox": [
+     663.4,
+     223.7,
+     78.5,
+     685.05,
+     229.4,
+     84.2
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID1",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M3X10-LID1.stl",
+    "bbox": [
+     503.15,
+     243.15,
+     57.35,
+     508.85,
+     248.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID2",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M3X10-LID2.stl",
+    "bbox": [
+     713.15,
+     243.15,
+     57.35,
+     718.85,
+     248.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID3",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M3X10-LID3.stl",
+    "bbox": [
+     503.15,
+     319.15,
+     57.35,
+     508.85,
+     324.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID4",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/use/TS-M3X10-LID4.stl",
+    "bbox": [
+     713.15,
+     319.15,
+     57.35,
+     718.85,
+     324.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-RCLIP",
+    "name_ko": "리본 클립 30×12×3",
+    "kind": "print",
+    "color": "#8e6fd1",
+    "material": "PETG",
+    "file": "stl/use/TS-RCLIP.stl",
+    "bbox": [
+     631.35,
+     236.55,
+     58.05,
+     661.35,
+     248.55,
+     65.55
+    ],
+    "volume_mm3": 1067.4,
+    "watertight": true,
+    "winding_ok": true
+   }
+  ],
+  "heel22": [
+   {
+    "id": "TS-SCREEN",
+    "name_ko": "화면 7-DSI-TOUCH-C (더미)",
+    "kind": "bought",
+    "color": "#15181c",
+    "material": "구매품",
+    "file": "stl/heel22/TS-SCREEN.stl",
+    "bbox": [
+     527.95,
+     218.05,
+     91.57,
+     694.05,
+     263.12,
+     188.14
+    ],
+    "volume_mm3": 134448.6,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-BEZEL",
+    "name_ko": "화면 유리 테두리",
+    "kind": "bought",
+    "color": "#0b0c0e",
+    "material": "",
+    "file": "stl/heel22/TS-SCREEN-BEZEL.stl",
+    "bbox": [
+     527.95,
+     217.87,
+     94.49,
+     694.05,
+     255.89,
+     188.21
+    ],
+    "volume_mm3": 683.5,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-ACTIVE",
+    "name_ko": "화면 보이는 영역 154.58×86.42",
+    "kind": "bought",
+    "color": "#1f3a5c",
+    "material": "",
+    "file": "stl/heel22/TS-SCREEN-ACTIVE.stl",
+    "bbox": [
+     531.92,
+     221.48,
+     103.44,
+     686.5,
+     254.04,
+     183.64
+    ],
+    "volume_mm3": 2671.8,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-ZIF",
+    "name_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+    "kind": "bought",
+    "color": "#e8dcc0",
+    "material": "",
+    "file": "stl/heel22/TS-SCREEN-ZIF.stl",
+    "bbox": [
+     628.85,
+     237.1,
+     125.41,
+     634.25,
+     244.91,
+     140.9
+    ],
+    "volume_mm3": 171.7,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-MX",
+    "name_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+    "kind": "bought",
+    "color": "#f2f2f2",
+    "material": "",
+    "file": "stl/heel22/TS-SCREEN-MX.stl",
+    "bbox": [
+     630.35,
+     244.63,
+     144.05,
+     635.35,
+     249.71,
+     152.77
+    ],
+    "volume_mm3": 86.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-TAB",
+    "name_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+    "kind": "bought",
+    "color": "#9a9a9a",
+    "material": "",
+    "file": "stl/heel22/TS-SCREEN-TAB.stl",
+    "bbox": [
+     665.99,
+     219.4,
+     91.53,
+     670.24,
+     223.43,
+     93.82
+    ],
+    "volume_mm3": 14.6,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-CRADLE",
+    "name_ko": "화면 받침(크래들)",
+    "kind": "print",
+    "color": "#5f6b7a",
+    "material": "PETG",
+    "file": "stl/heel22/TS-CRADLE.stl",
+    "bbox": [
+     525.65,
+     216.0,
+     76.35,
+     696.35,
+     271.92,
+     190.9
+    ],
+    "volume_mm3": 67942.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-WINCOVER",
+    "name_ko": "점검창 덮개",
+    "kind": "print",
+    "color": "#3d8bd4",
+    "material": "PETG",
+    "file": "stl/heel22/TS-WINCOVER.stl",
+    "bbox": [
+     625.0,
+     240.23,
+     118.15,
+     657.5,
+     258.19,
+     155.06
+    ],
+    "volume_mm3": 4436.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-1",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M25-1.stl",
+    "bbox": [
+     531.75,
+     224.49,
+     93.71,
+     536.25,
+     233.01,
+     99.83
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-2",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M25-2.stl",
+    "bbox": [
+     531.75,
+     257.45,
+     175.3,
+     536.25,
+     265.98,
+     181.42
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-3",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M25-3.stl",
+    "bbox": [
+     685.75,
+     224.49,
+     93.71,
+     690.25,
+     233.01,
+     99.83
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-4",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M25-4.stl",
+    "bbox": [
+     685.75,
+     257.45,
+     175.3,
+     690.25,
+     265.98,
+     181.42
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-LEG",
+    "name_ko": "받침다리 (22°에서 매달림)",
+    "kind": "print",
+    "color": "#e07b39",
+    "material": "PETG",
+    "file": "stl/heel22/TS-LEG.stl",
+    "bbox": [
+     606.0,
+     241.4,
+     70.21,
+     616.0,
+     298.8,
+     119.2
+    ],
+    "volume_mm3": 4213.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-LEG",
+    "name_ko": "M3×20 (다리 축)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M3X20-LEG.stl",
+    "bbox": [
+     600.05,
+     241.55,
+     113.35,
+     621.7,
+     247.25,
+     119.05
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-FFC",
+    "name_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+    "kind": "bought",
+    "color": "#e0a030",
+    "material": "",
+    "file": "stl/heel22/TS-FFC.stl",
+    "bbox": [
+     582.85,
+     221.69,
+     25.85,
+     652.2,
+     276.35,
+     138.03
+    ],
+    "volume_mm3": 955.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-RED",
+    "name_ko": "전원선 5V (빨강)",
+    "kind": "bought",
+    "color": "#d62828",
+    "material": "",
+    "file": "stl/heel22/TS-PWR-RED.stl",
+    "bbox": [
+     549.82,
+     222.37,
+     40.58,
+     654.24,
+     316.3,
+     148.36
+    ],
+    "volume_mm3": 285.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-BLK",
+    "name_ko": "전원선 GND (검정)",
+    "kind": "bought",
+    "color": "#222222",
+    "material": "",
+    "file": "stl/heel22/TS-PWR-BLK.stl",
+    "bbox": [
+     554.9,
+     222.37,
+     40.58,
+     655.54,
+     316.95,
+     149.56
+    ],
+    "volume_mm3": 285.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-HOUSING",
+    "name_ko": "점퍼 F 하우징 (GPIO 2·6)",
+    "kind": "bought",
+    "color": "#303030",
+    "material": "",
+    "file": "stl/heel22/TS-PWR-HOUSING.stl",
+    "bbox": [
+     549.12,
+     314.52,
+     26.6,
+     556.7,
+     317.02,
+     40.6
+    ],
+    "volume_mm3": 175.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-LID",
+    "name_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+    "kind": "print",
+    "color": "#b9c0c8",
+    "material": "PETG",
+    "file": "stl/heel22/TS-LID.stl",
+    "bbox": [
+     501.0,
+     214.0,
+     61.35,
+     721.0,
+     341.5,
+     86.85
+    ],
+    "volume_mm3": 133479.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-HINGE-L",
+    "name_ko": "M3×20 (경첩 축 왼쪽)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M3X20-HINGE-L.stl",
+    "bbox": [
+     536.95,
+     223.7,
+     78.5,
+     558.6,
+     229.4,
+     84.2
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-HINGE-R",
+    "name_ko": "M3×20 (경첩 축 오른쪽)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M3X20-HINGE-R.stl",
+    "bbox": [
+     663.4,
+     223.7,
+     78.5,
+     685.05,
+     229.4,
+     84.2
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID1",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M3X10-LID1.stl",
+    "bbox": [
+     503.15,
+     243.15,
+     57.35,
+     508.85,
+     248.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID2",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M3X10-LID2.stl",
+    "bbox": [
+     713.15,
+     243.15,
+     57.35,
+     718.85,
+     248.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID3",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M3X10-LID3.stl",
+    "bbox": [
+     503.15,
+     319.15,
+     57.35,
+     508.85,
+     324.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID4",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/heel22/TS-M3X10-LID4.stl",
+    "bbox": [
+     713.15,
+     319.15,
+     57.35,
+     718.85,
+     324.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-RCLIP",
+    "name_ko": "리본 클립 30×12×3",
+    "kind": "print",
+    "color": "#8e6fd1",
+    "material": "PETG",
+    "file": "stl/heel22/TS-RCLIP.stl",
+    "bbox": [
+     631.35,
+     236.55,
+     58.05,
+     661.35,
+     248.55,
+     65.55
+    ],
+    "volume_mm3": 1067.4,
+    "watertight": true,
+    "winding_ok": true
+   }
+  ],
+  "fold": [
+   {
+    "id": "TS-SCREEN",
+    "name_ko": "화면 7-DSI-TOUCH-C (더미)",
+    "kind": "bought",
+    "color": "#15181c",
+    "material": "구매품",
+    "file": "stl/fold/TS-SCREEN.stl",
+    "bbox": [
+     527.95,
+     235.55,
+     84.25,
+     694.05,
+     336.55,
+     94.15
+    ],
+    "volume_mm3": 134448.6,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-BEZEL",
+    "name_ko": "화면 유리 테두리",
+    "kind": "bought",
+    "color": "#0b0c0e",
+    "material": "",
+    "file": "stl/fold/TS-SCREEN-BEZEL.stl",
+    "bbox": [
+     527.95,
+     235.55,
+     94.15,
+     694.05,
+     336.55,
+     94.35
+    ],
+    "volume_mm3": 683.5,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-ACTIVE",
+    "name_ko": "화면 보이는 영역 154.58×86.42",
+    "kind": "bought",
+    "color": "#1f3a5c",
+    "material": "",
+    "file": "stl/fold/TS-SCREEN-ACTIVE.stl",
+    "bbox": [
+     531.92,
+     245.2,
+     94.15,
+     686.5,
+     331.62,
+     94.35
+    ],
+    "volume_mm3": 2671.8,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-ZIF",
+    "name_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+    "kind": "bought",
+    "color": "#e8dcc0",
+    "material": "",
+    "file": "stl/fold/TS-SCREEN-ZIF.stl",
+    "bbox": [
+     628.85,
+     272.05,
+     86.35,
+     634.25,
+     287.95,
+     88.35
+    ],
+    "volume_mm3": 171.7,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-MX",
+    "name_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+    "kind": "bought",
+    "color": "#f2f2f2",
+    "material": "",
+    "file": "stl/fold/TS-SCREEN-MX.stl",
+    "bbox": [
+     630.35,
+     292.15,
+     86.35,
+     635.35,
+     300.75,
+     88.35
+    ],
+    "volume_mm3": 86.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-SCREEN-TAB",
+    "name_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+    "kind": "bought",
+    "color": "#9a9a9a",
+    "material": "",
+    "file": "stl/fold/TS-SCREEN-TAB.stl",
+    "bbox": [
+     665.99,
+     234.7,
+     88.35,
+     670.24,
+     235.56,
+     92.35
+    ],
+    "volume_mm3": 14.6,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-CRADLE",
+    "name_ko": "화면 받침(크래들)",
+    "kind": "print",
+    "color": "#5f6b7a",
+    "material": "PETG",
+    "file": "stl/fold/TS-CRADLE.stl",
+    "bbox": [
+     525.65,
+     219.29,
+     73.63,
+     696.35,
+     339.05,
+     95.35
+    ],
+    "volume_mm3": 67942.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-WINCOVER",
+    "name_ko": "점검창 덮개",
+    "kind": "print",
+    "color": "#3d8bd4",
+    "material": "PETG",
+    "file": "stl/fold/TS-WINCOVER.stl",
+    "bbox": [
+     625.0,
+     267.05,
+     77.95,
+     657.5,
+     306.05,
+     83.65
+    ],
+    "volume_mm3": 4436.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-1",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M25-1.stl",
+    "bbox": [
+     531.75,
+     239.8,
+     81.55,
+     536.25,
+     244.3,
+     89.35
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-2",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M25-2.stl",
+    "bbox": [
+     531.75,
+     327.8,
+     81.55,
+     536.25,
+     332.3,
+     89.35
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-3",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M25-3.stl",
+    "bbox": [
+     685.75,
+     239.8,
+     81.55,
+     690.25,
+     244.3,
+     89.35
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M25-4",
+    "name_ko": "M2.5×6 (화면 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M25-4.stl",
+    "bbox": [
+     685.75,
+     327.8,
+     81.55,
+     690.25,
+     332.3,
+     89.35
+    ],
+    "volume_mm3": 55.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-LEG",
+    "name_ko": "받침다리 (접어 끼움)",
+    "kind": "print",
+    "color": "#e07b39",
+    "material": "PETG",
+    "file": "stl/fold/TS-LEG.stl",
+    "bbox": [
+     606.0,
+     262.55,
+     74.85,
+     616.0,
+     335.55,
+     80.85
+    ],
+    "volume_mm3": 4216.7,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-LEG",
+    "name_ko": "M3×20 (다리 축)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M3X20-LEG.stl",
+    "bbox": [
+     600.05,
+     262.7,
+     75.0,
+     621.7,
+     268.4,
+     80.7
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-FFC",
+    "name_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+    "kind": "bought",
+    "color": "#e0a030",
+    "material": "",
+    "file": "stl/fold/TS-FFC.stl",
+    "bbox": [
+     582.85,
+     222.2,
+     25.85,
+     652.2,
+     285.2,
+     90.77
+    ],
+    "volume_mm3": 954.8,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-RED",
+    "name_ko": "전원선 5V (빨강)",
+    "kind": "bought",
+    "color": "#d62828",
+    "material": "",
+    "file": "stl/fold/TS-PWR-RED.stl",
+    "bbox": [
+     549.83,
+     224.84,
+     40.58,
+     654.25,
+     316.32,
+     87.9
+    ],
+    "volume_mm3": 285.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-BLK",
+    "name_ko": "전원선 GND (검정)",
+    "kind": "bought",
+    "color": "#222222",
+    "material": "",
+    "file": "stl/fold/TS-PWR-BLK.stl",
+    "bbox": [
+     554.91,
+     224.84,
+     40.58,
+     655.55,
+     316.96,
+     87.9
+    ],
+    "volume_mm3": 285.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-PWR-HOUSING",
+    "name_ko": "점퍼 F 하우징 (GPIO 2·6)",
+    "kind": "bought",
+    "color": "#303030",
+    "material": "",
+    "file": "stl/fold/TS-PWR-HOUSING.stl",
+    "bbox": [
+     549.12,
+     314.52,
+     26.6,
+     556.7,
+     317.02,
+     40.6
+    ],
+    "volume_mm3": 175.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-LID",
+    "name_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+    "kind": "print",
+    "color": "#b9c0c8",
+    "material": "PETG",
+    "file": "stl/fold/TS-LID.stl",
+    "bbox": [
+     501.0,
+     214.0,
+     61.35,
+     721.0,
+     341.5,
+     86.85
+    ],
+    "volume_mm3": 133479.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-HINGE-L",
+    "name_ko": "M3×20 (경첩 축 왼쪽)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M3X20-HINGE-L.stl",
+    "bbox": [
+     536.95,
+     223.7,
+     78.5,
+     558.6,
+     229.4,
+     84.2
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X20-HINGE-R",
+    "name_ko": "M3×20 (경첩 축 오른쪽)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M3X20-HINGE-R.stl",
+    "bbox": [
+     663.4,
+     223.7,
+     78.5,
+     685.05,
+     229.4,
+     84.2
+    ],
+    "volume_mm3": 182.4,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID1",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M3X10-LID1.stl",
+    "bbox": [
+     503.15,
+     243.15,
+     57.35,
+     508.85,
+     248.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID2",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M3X10-LID2.stl",
+    "bbox": [
+     713.15,
+     243.15,
+     57.35,
+     718.85,
+     248.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID3",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M3X10-LID3.stl",
+    "bbox": [
+     503.15,
+     319.15,
+     57.35,
+     508.85,
+     324.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-M3X10-LID4",
+    "name_ko": "M3×10 (뚜껑 고정)",
+    "kind": "bought",
+    "color": "#c0c6cc",
+    "material": "",
+    "file": "stl/fold/TS-M3X10-LID4.stl",
+    "bbox": [
+     713.15,
+     319.15,
+     57.35,
+     718.85,
+     324.85,
+     69.0
+    ],
+    "volume_mm3": 112.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "TS-RCLIP",
+    "name_ko": "리본 클립 30×12×3",
+    "kind": "print",
+    "color": "#8e6fd1",
+    "material": "PETG",
+    "file": "stl/fold/TS-RCLIP.stl",
+    "bbox": [
+     631.35,
+     236.55,
+     58.05,
+     661.35,
+     248.55,
+     65.55
+    ],
+    "volume_mm3": 1067.4,
+    "watertight": true,
+    "winding_ok": true
+   }
+  ],
+  "context": [
+   {
+    "id": "L2-POD-L",
+    "name_ko": "스피커 통 L (L2 잠정 외형)",
+    "kind": "context",
+    "color": "#d9b98b",
+    "material": "",
+    "file": "stl/context/L2-POD-L.stl",
+    "bbox": [
+     -16.0,
+     214.0,
+     5.0,
+     257.0,
+     341.5,
+     148.06
+    ],
+    "volume_mm3": 3704317.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-GRILLE-L",
+    "name_ko": "스피커 그릴 L (L2 잠정)",
+    "kind": "context",
+    "color": "#2b2b2b",
+    "material": "",
+    "file": "stl/context/L2-GRILLE-L.stl",
+    "bbox": [
+     103.0,
+     215.08,
+     63.04,
+     218.0,
+     300.55,
+     142.93
+    ],
+    "volume_mm3": 20759.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-POD-R",
+    "name_ko": "스피커 통 R (L2 잠정 외형)",
+    "kind": "context",
+    "color": "#d9b98b",
+    "material": "",
+    "file": "stl/context/L2-POD-R.stl",
+    "bbox": [
+     965.0,
+     214.0,
+     5.0,
+     1238.0,
+     341.5,
+     148.06
+    ],
+    "volume_mm3": 3704317.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-GRILLE-R",
+    "name_ko": "스피커 그릴 R (L2 잠정)",
+    "kind": "context",
+    "color": "#2b2b2b",
+    "material": "",
+    "file": "stl/context/L2-GRILLE-R.stl",
+    "bbox": [
+     1004.0,
+     215.08,
+     63.04,
+     1119.0,
+     300.55,
+     142.93
+    ],
+    "volume_mm3": 20759.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-BOX",
+    "name_ko": "가운데 유닛 벽·바닥 (L2 잠정 외형)",
+    "kind": "context",
+    "color": "#d9b98b",
+    "material": "",
+    "file": "stl/context/L2-CU-BOX.stl",
+    "bbox": [
+     260.0,
+     214.0,
+     5.0,
+     962.0,
+     341.5,
+     61.35
+    ],
+    "volume_mm3": 1286549.8,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-LID-L",
+    "name_ko": "LID-L 옆 뚜껑 (L2 잠정)",
+    "kind": "context",
+    "color": "#c9a877",
+    "material": "",
+    "file": "stl/context/L2-LID-L.stl",
+    "bbox": [
+     260.0,
+     214.0,
+     61.35,
+     501.0,
+     341.5,
+     72.85
+    ],
+    "volume_mm3": 353366.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-LID-R",
+    "name_ko": "LID-R 옆 뚜껑 (L2 잠정)",
+    "kind": "context",
+    "color": "#c9a877",
+    "material": "",
+    "file": "stl/context/L2-LID-R.stl",
+    "bbox": [
+     721.0,
+     214.0,
+     61.35,
+     962.0,
+     341.5,
+     72.85
+    ],
+    "volume_mm3": 353366.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-PR-SEAMPOST-1",
+    "name_ko": "PR-SEAMPOST-1 (L2 잠정)",
+    "kind": "context",
+    "color": "#9aa3ad",
+    "material": "",
+    "file": "stl/context/L2-PR-SEAMPOST-1.stl",
+    "bbox": [
+     496.0,
+     241.0,
+     16.5,
+     506.0,
+     251.0,
+     55.35
+    ],
+    "volume_mm3": 3885.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-PR-SEAMRAIL-1",
+    "name_ko": "PR-SEAMRAIL-1 (L2 잠정)",
+    "kind": "context",
+    "color": "#9aa3ad",
+    "material": "",
+    "file": "stl/context/L2-PR-SEAMRAIL-1.stl",
+    "bbox": [
+     491.0,
+     214.0,
+     55.35,
+     511.0,
+     330.0,
+     61.35
+    ],
+    "volume_mm3": 13795.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-PR-SEAMPOST-2",
+    "name_ko": "PR-SEAMPOST-2 (L2 잠정)",
+    "kind": "context",
+    "color": "#9aa3ad",
+    "material": "",
+    "file": "stl/context/L2-PR-SEAMPOST-2.stl",
+    "bbox": [
+     716.0,
+     241.0,
+     16.5,
+     726.0,
+     251.0,
+     55.35
+    ],
+    "volume_mm3": 3885.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-PR-SEAMRAIL-2",
+    "name_ko": "PR-SEAMRAIL-2 (L2 잠정)",
+    "kind": "context",
+    "color": "#9aa3ad",
+    "material": "",
+    "file": "stl/context/L2-PR-SEAMRAIL-2.stl",
+    "bbox": [
+     711.0,
+     214.0,
+     55.35,
+     731.0,
+     330.0,
+     61.35
+    ],
+    "volume_mm3": 13795.9,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-INSERT-1",
+    "name_ko": "M3 인서트 (레일, CAD 부품, 길이 4 추정)",
+    "kind": "context",
+    "color": "#c8a24a",
+    "material": "",
+    "file": "stl/context/L2-INSERT-1.stl",
+    "bbox": [
+     503.9,
+     243.91,
+     57.35,
+     508.1,
+     248.09,
+     61.35
+    ],
+    "volume_mm3": 34.2,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-INSERT-2",
+    "name_ko": "M3 인서트 (레일, CAD 부품, 길이 4 추정)",
+    "kind": "context",
+    "color": "#c8a24a",
+    "material": "",
+    "file": "stl/context/L2-INSERT-2.stl",
+    "bbox": [
+     713.9,
+     243.91,
+     57.35,
+     718.1,
+     248.09,
+     61.35
+    ],
+    "volume_mm3": 34.2,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-INSERT-3",
+    "name_ko": "M3 인서트 (레일, CAD 부품, 길이 4 추정)",
+    "kind": "context",
+    "color": "#c8a24a",
+    "material": "",
+    "file": "stl/context/L2-INSERT-3.stl",
+    "bbox": [
+     503.9,
+     319.91,
+     57.35,
+     508.1,
+     324.09,
+     61.35
+    ],
+    "volume_mm3": 34.2,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-INSERT-4",
+    "name_ko": "M3 인서트 (레일, CAD 부품, 길이 4 추정)",
+    "kind": "context",
+    "color": "#c8a24a",
+    "material": "",
+    "file": "stl/context/L2-INSERT-4.stl",
+    "bbox": [
+     713.9,
+     319.91,
+     57.35,
+     718.1,
+     324.09,
+     61.35
+    ],
+    "volume_mm3": 34.2,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-PBHOLDER",
+    "name_ko": "CU-PBHOLDER (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-PBHOLDER.stl",
+    "bbox": [
+     284.0,
+     252.0,
+     16.5,
+     393.0,
+     327.0,
+     30.5
+    ],
+    "volume_mm3": 114450.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-PB-E-BANK",
+    "name_ko": "PB-E-BANK (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-PB-E-BANK.stl",
+    "bbox": [
+     286.0,
+     254.0,
+     18.5,
+     391.0,
+     325.0,
+     50.5
+    ],
+    "volume_mm3": 238560.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-C-XT30-L",
+    "name_ko": "C-XT30-L (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-C-XT30-L.stl",
+    "bbox": [
+     271.5,
+     236.0,
+     40.0,
+     295.0,
+     250.0,
+     48.0
+    ],
+    "volume_mm3": 2632.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-PEDBOARD",
+    "name_ko": "CU-E-PEDBOARD (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-PEDBOARD.stl",
+    "bbox": [
+     401.0,
+     247.0,
+     21.5,
+     471.0,
+     297.0,
+     23.1
+    ],
+    "volume_mm3": 5600.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-PEDZERO",
+    "name_ko": "CU-E-PEDZERO (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-PEDZERO.stl",
+    "bbox": [
+     440.0,
+     247.0,
+     23.1,
+     458.0,
+     271.8,
+     28.8
+    ],
+    "volume_mm3": 2544.5,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-FUSE",
+    "name_ko": "CU-E-FUSE (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-FUSE.stl",
+    "bbox": [
+     405.0,
+     301.0,
+     17.5,
+     451.0,
+     311.0,
+     27.5
+    ],
+    "volume_mm3": 4600.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-BUCK",
+    "name_ko": "CU-E-BUCK (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-BUCK.stl",
+    "bbox": [
+     477.5,
+     288.7,
+     21.5,
+     538.3,
+     329.0,
+     50.5
+    ],
+    "volume_mm3": 71057.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-J702BOARD",
+    "name_ko": "CU-E-J702BOARD (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-J702BOARD.stl",
+    "bbox": [
+     505.0,
+     255.0,
+     21.5,
+     535.0,
+     280.0,
+     23.1
+    ],
+    "volume_mm3": 1200.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-J702",
+    "name_ko": "CU-E-J702 (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-J702.stl",
+    "bbox": [
+     517.0,
+     255.0,
+     23.1,
+     523.0,
+     269.0,
+     28.1
+    ],
+    "volume_mm3": 420.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-GENDER",
+    "name_ko": "CU-E-GENDER (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-GENDER.stl",
+    "bbox": [
+     629.5,
+     283.0,
+     25.5,
+     647.5,
+     299.0,
+     32.0
+    ],
+    "volume_mm3": 1872.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-DONGLE",
+    "name_ko": "CU-E-DONGLE (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-DONGLE.stl",
+    "bbox": [
+     632.0,
+     262.1,
+     16.5,
+     667.5,
+     305.0,
+     31.8
+    ],
+    "volume_mm3": 23301.1,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-PB-E-HUB",
+    "name_ko": "PB-E-HUB (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-PB-E-HUB.stl",
+    "bbox": [
+     686.5,
+     282.0,
+     16.5,
+     914.5,
+     330.0,
+     40.5
+    ],
+    "volume_mm3": 262656.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-CU-E-AMP",
+    "name_ko": "CU-E-AMP (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-CU-E-AMP.stl",
+    "bbox": [
+     742.0,
+     283.0,
+     45.5,
+     796.0,
+     329.0,
+     59.5
+    ],
+    "volume_mm3": 34776.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-C-XT30-R",
+    "name_ko": "C-XT30-R (L2 잠정)",
+    "kind": "context",
+    "color": "#5d6b61",
+    "material": "",
+    "file": "stl/context/L2-C-XT30-R.stl",
+    "bbox": [
+     927.0,
+     283.0,
+     47.0,
+     950.5,
+     297.0,
+     55.0
+    ],
+    "volume_mm3": 2632.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "L2-FEET",
+    "name_ko": "고무발 (L2 잠정)",
+    "kind": "context",
+    "color": "#333333",
+    "material": "",
+    "file": "stl/context/L2-FEET.stl",
+    "bbox": [
+     -16.0,
+     248.0,
+     0.0,
+     1238.0,
+     334.0,
+     5.0
+    ],
+    "volume_mm3": 42826.2,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-BOARD",
+    "name_ko": "Pi 5 기판",
+    "kind": "context",
+    "color": "#2f7d4f",
+    "material": "",
+    "file": "stl/context/PI5-BOARD.stl",
+    "bbox": [
+     542.0,
+     262.0,
+     22.5,
+     627.0,
+     318.0,
+     24.1
+    ],
+    "volume_mm3": 7616.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-DISP1",
+    "name_ko": "Pi 5 CAM/DISP 1",
+    "kind": "context",
+    "color": "#e8e0c8",
+    "material": "",
+    "file": "stl/context/PI5-DISP1.stl",
+    "bbox": [
+     589.0,
+     263.0,
+     24.1,
+     592.0,
+     278.0,
+     28.0
+    ],
+    "volume_mm3": 175.5,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-DISP0",
+    "name_ko": "Pi 5 CAM/DISP 0",
+    "kind": "context",
+    "color": "#e8e0c8",
+    "material": "",
+    "file": "stl/context/PI5-DISP0.stl",
+    "bbox": [
+     595.5,
+     262.7,
+     24.1,
+     598.3,
+     278.2,
+     28.0
+    ],
+    "volume_mm3": 169.3,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-HDMI",
+    "name_ko": "Pi 5 HDMI 2개 (추정 자리)",
+    "kind": "context",
+    "color": "#b8b8b8",
+    "material": "",
+    "file": "stl/context/PI5-HDMI.stl",
+    "bbox": [
+     562.0,
+     262.0,
+     24.1,
+     585.0,
+     269.5,
+     27.3
+    ],
+    "volume_mm3": 552.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-HEATSINK",
+    "name_ko": "Pi 5 방열판 (추정 자리)",
+    "kind": "context",
+    "color": "#8a8f98",
+    "material": "",
+    "file": "stl/context/PI5-HEATSINK.stl",
+    "bbox": [
+     572.0,
+     276.0,
+     24.1,
+     583.0,
+     293.0,
+     32.1
+    ],
+    "volume_mm3": 1496.0,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-GPIO",
+    "name_ko": "Pi 5 GPIO 40핀",
+    "kind": "context",
+    "color": "#1d1d1f",
+    "material": "",
+    "file": "stl/context/PI5-GPIO.stl",
+    "bbox": [
+     549.1,
+     311.96,
+     24.1,
+     599.9,
+     317.04,
+     26.6
+    ],
+    "volume_mm3": 645.2,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-RJ45",
+    "name_ko": "Pi 5 RJ45",
+    "kind": "context",
+    "color": "#b8b8b8",
+    "material": "",
+    "file": "stl/context/PI5-RJ45.stl",
+    "bbox": [
+     608.3,
+     264.2,
+     24.1,
+     629.5,
+     280.2,
+     37.6
+    ],
+    "volume_mm3": 4579.2,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-USBA1",
+    "name_ko": "Pi 5 USBA1",
+    "kind": "context",
+    "color": "#b8b8b8",
+    "material": "",
+    "file": "stl/context/PI5-USBA1.stl",
+    "bbox": [
+     612.0,
+     283.8,
+     24.1,
+     629.5,
+     298.2,
+     40.5
+    ],
+    "volume_mm3": 4132.8,
+    "watertight": true,
+    "winding_ok": true
+   },
+   {
+    "id": "PI5-USBA2",
+    "name_ko": "Pi 5 USBA2",
+    "kind": "context",
+    "color": "#b8b8b8",
+    "material": "",
+    "file": "stl/context/PI5-USBA2.stl",
+    "bbox": [
+     612.0,
+     301.8,
+     24.1,
+     629.5,
+     316.2,
+     40.5
+    ],
+    "volume_mm3": 4132.8,
+    "watertight": true,
+    "winding_ok": true
+   }
+  ]
+ },
+ "context_note": "L2 잠정 외형: 확정 L2 값(L2_cu.json + body_L2.json)으로 만든 단순 모양 - 판·홈·그릴은 CAD가 정함",
+ "stl_note": "미리보기 전용 STL (출력용 아님). 출력 STL은 CAD 세션이 만듦."
+}

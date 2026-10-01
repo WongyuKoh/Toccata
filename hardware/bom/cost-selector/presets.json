@@ -1,0 +1,35 @@
+{
+ "cur": {
+  "label": "현재 목록 (4차 설계)",
+  "desc": "지금 구매 목록 + v4 4차 설계 부품을 그대로 산다",
+  "sel": {}
+ },
+ "rec": {
+  "label": "v4 부품 추천 절감",
+  "desc": "설계를 바꾸지 않는 확인된 더 싼 판매처·대체품으로(v4 부품만)",
+  "sel": {
+   "v4weight": "a2",
+   "v4levershaft": "a1",
+   "v4pins": "a3",
+   "v4felt2": "a3",
+   "v4graphite": "a1",
+   "v4cuttools": "a1",
+   "v4wirecut": "a2"
+  }
+ },
+ "tools": {
+  "label": "공구는 가진 것",
+  "desc": "공구 카드를 모두 사용 안함으로",
+  "sel": {
+   "v4cuttools": "none",
+   "v4drill4": "none",
+   "v4wirecut": "none",
+   "iron": "none",
+   "meter": "none",
+   "stripper": "none",
+   "nipper": "none",
+   "caliper": "none",
+   "hexkey": "none"
+  }
+ }
+}

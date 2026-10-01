@@ -1,0 +1,1332 @@
+{
+ "meta": {
+  "checked": "2026-09-24",
+  "fx_ko": "환율: 1 USD = 1,353.70원, 1 EUR = 1,550.27원, 1 GBP = 1,806.56원 (open.er-api.com, 2026-09-23 00:02 UTC 기준). 해외가 환산은 배송비·관세·부가세 제외.",
+  "access_notes_ko": "디바이스마트는 조사 초반(01:56~02:05)에 상품 페이지를 열어 가격·재고를 확인했고 이후 접속이 끊겨 재확인 못 함. modartt.com은 조사 시점 접속 불가 → Wayback 스냅샷(2026-08-25, 2026-09-03)으로 가격·버전 확인. raspberrypi.com은 curl 403 → 공식 문서(GitHub)·제품 브리프 PDF·The Pi Hut 이미지 사용. 엘레파츠는 브라우저 확인 페이지 때문에 브라우저로만 열람.",
+  "price_basis_ko": "국내 전자부품몰(디바이스마트·아이씨뱅큐·엘레파츠)은 VAT 별도 가격을 기본 표시 → price_krw는 VAT 포함가로 통일. Pianoteq 가격은 Wayback(미국 크롤러) 스냅샷의 USD 표시.",
+  "cost_summary_ko": "추천 T-B 소리 시스템 합계(각 품목 첫 번째 판매처, 배송·관부가세 제외) 약 1,001,000원. 그중 스피커 유닛을 국내 공식대리점(DMA105-4 2개 101,440원 + RSS210HF-4 271,800원)에서 사면 373,240원인데, PE 가격(약 54,100원 + 196,260원)으로 KABD-430·KPX·폴리필 등과 한 번에 주문하면 약 12만원 절약되지만 국제배송비·관부가세(미국발 목록통관 한도 등)가 붙는다 — 배송비는 이번에 확인하지 않음. Pianoteq Stage($139≈188,160원)는 별도.",
+  "amp_hat_pick_ko": "앰프 HAT 한 장(T-A)으로 간다면 HiFiBerry Amp4 Pro 추천(Pi 5 명시, 5V 5A, TAS5756M, GPIO4 뮤트). DigiAMP+는 2.5A·'Pi 3 이하 설계' 문구, Amp100·AAmp60은 'Pi4B까지' 급전이라 Pi 5에 부적합. 다만 전체 추천은 서브·헤드폰 자동 차단까지 하드웨어로 풀리는 T-B(DAC+ + KABD-430)."
+ },
+ "topologies": [
+  {
+   "id": "T-A",
+   "name_ko": "앰프 HAT 유지형: Amp4 Pro + 스피커레벨 서브 + USB 헤드폰",
+   "summary_ko": "Pi 5 위에 HiFiBerry Amp4 Pro(TAS5756M, 20V 브릭, Pi에 5V 최대 5A 급전)가 DMA105 두 개를 풀레인지로 직접 구동. 서브는 Amp4 Pro 스피커 출력→LOC(차동 입력)+LPF→Wondom AA-AB31184→RSS210HF-4. 헤드폰은 USB DAC→전면 NMJ6HCD2; 잭 SN→Pi GPIO→스크립트가 Amp4 Pro 뮤트(GPIO4, mute_ext_ctl)와 서브앰프 MUTE를 걸고 엔진을 USB 장치로 재시작.",
+   "parts": [
+    "a-pi5",
+    "a-cooler",
+    "a-sd",
+    "a-amphat",
+    "a-dma105",
+    "t1-loc",
+    "t1-subamp",
+    "a-subdrv",
+    "t1-usbdac",
+    "a-hpjack",
+    "t1-psu20",
+    "a-terminal",
+    "a-spkwire",
+    "a-polyfill",
+    "a-grille",
+    "a-isolator",
+    "a-gasket"
+   ],
+   "pros_ko": [
+    "'앰프 HAT이 Pi 급전' 구조와 D16을 그대로 유지(5A라 Pico 8개 USB 여유)",
+    "위성 경로가 I2S→TAS5756M 순수 디지털",
+    "서브 음량이 마스터 볼륨을 자동으로 따라감",
+    "부품 수 적음"
+   ],
+   "cons_ko": [
+    "위성에 HPF를 넣을 방법이 없음(D13으로 직렬 콘덴서 금지) → DMA105는 100Hz 이하 성분 약 2.6W(3.2Vrms)에서 Xmax 도달, ff 저음 화음+페달에서 찌그러짐 위험(R16)",
+    "헤드폰 차단이 소프트웨어 의존(데몬이 죽으면 R15 실패) + 엔진 재시작 1~3초 공백",
+    "I2S DAC와 USB DAC 두 장치 → D10 전환 로직 복잡",
+    "LOC·LPF 품질·가격 미확인",
+    "Amp4 Pro 국내 판매처 없음(직구)"
+   ],
+   "meets_requirements_ko": "지킴: R12(위성), R13, R14(음량은 2×18W@18V 수준), D7, D13, D16. 약함/굽힘: R15(소프트웨어로만), R16(위성 과진폭 위험), D10(헤드폰 전환 시 장치 교체).",
+   "recommended": false
+  },
+  {
+   "id": "T-B",
+   "name_ko": "DAC HAT(라인+헤드폰) + DSP 2.1 앰프보드 (추천)",
+   "summary_ko": "Pi 5 + Raspberry Pi DAC+(PCM5122)의 RCA 라인아웃을 Dayton KABD-430 AUX 입력에 연결. ADAU1701에서 100Hz LR4 크로스오버(위성 HPF, 서브 LPF)+EQ+리미터 → 2×30W로 DMA105-4 두 개, PBTL 60W로 RSS210HF-4(밀폐 15~18L). 헤드폰은 DAC+ 헤드폰 앰프 → 전면 NMJ6HCD2(6.35mm). 잭 슬리브 스위치(S–SN, 플러그 없을 때 닫힘)→PC817 포토커플러→KABD MP 핀 → DSP가 스피커 출력만 소프트 뮤트(팝 없음), 같은 신호를 Pi GPIO로도 읽음. 전원: GST120A24-P1M(24V 5A)→KABD-430, Pi는 공식 27W USB-C(또는 단일 브릭 원하면 Pololu D36V50F5로 GPIO 5V 급전 — 둘 중 하나만).",
+   "parts": [
+    "a-pi5",
+    "a-cooler",
+    "a-sd",
+    "a-dac",
+    "a-subamp",
+    "a-kpx",
+    "a-dma105",
+    "a-subdrv",
+    "a-hpjack",
+    "a-psu",
+    "a-pipsu",
+    "a-buck",
+    "a-opto",
+    "a-terminal",
+    "a-spkwire",
+    "a-polyfill",
+    "a-grille",
+    "a-isolator",
+    "a-gasket",
+    "a-mount"
+   ],
+   "pros_ko": [
+    "R15가 순수 하드웨어 경로(Pi 소프트웨어가 멈춰도 헤드폰을 꽂으면 스피커가 꺼짐)",
+    "DAC 하나의 클럭에서 위성·서브·헤드폰이 모두 나옴 — 엔진은 hw:DAC+ 한 곳만 씀(D7·D10 단순)",
+    "DSP HPF로 DMA105 과진폭 제거 → 위성이 30W까지 깨끗(R16), 스피커 직렬 콘덴서 없음(D13)",
+    "서브 60W ≈ RSS210HF-4 15L Xmax 한계(~77W)의 −1dB → 과진폭 보호와 출력이 균형",
+    "KABD-430은 팬 없음",
+    "DAC+ 30,360원·27W 전원 18,040원 등 핵심 부품 국내 재고"
+   ],
+   "cons_ko": [
+    "'앰프 HAT이 Pi 급전' 전제가 바뀜 → Pi 전원 별도(브릭 2개) 또는 벅 모듈",
+    "ADAU1701 프로그래밍 1회 필요(Windows + SigmaStudio + KPX $37.98)",
+    "DAC→아날로그→ADAU1701 ADC 재변환 한 단계(ADAU1701 ADC 성능이 상한)",
+    "KABD-430·RSS210HF-4 PE 직구(국내 공식가는 비쌈)",
+    "KABD AUX 입력 감도·DC잭 규격을 매뉴얼에서 확인 못 함",
+    "DAC+도 PCM512x 계열 → D11 대비 동일"
+   ],
+   "meets_requirements_ko": "지킴: R12·R13·R14·R15(하드웨어)·R16(크로스오버로 개선), D7(hw:DAC+ 직결), D9, D13(디지털 필터라 임피던스 공진 없음), D14·D15·D17(배치/기구로 대응). 바뀜: D16 — HAT이 Pi를 급전하지 않으므로 '공식 27W USB-C 한 곳으로만 급전'으로 대체(PD 5A 협상이라 PSU_MAX_CURRENT 설정 불필요). 벅→GPIO 옵션을 고르면 D16 원문 그대로(USB-C 동시 급전 금지, EEPROM 설정 필요).",
+   "recommended": true
+  },
+  {
+   "id": "T-C",
+   "name_ko": "DAC8x 8채널 + CamillaDSP 소프트 크로스오버",
+   "summary_ko": "Pi 5 + HiFiBerry DAC8x. 엔진→ALSA loopback→CamillaDSP(LR4 크로스오버, EQ, 리미터, 헤드폰 채널 분리)→DAC8x ch1/2→Wondom AA-AB32178→DMA105, ch3→AA-AB31184→서브, ch5/6→헤드폰 앰프 모듈→전면 잭. 잭 SN→Pi GPIO→CamillaDSP가 스피커 채널 뮤트(또는 앰프 MUTE 핀 직결).",
+   "parts": [
+    "a-pi5",
+    "a-cooler",
+    "a-sd",
+    "t3-dac8x",
+    "t3-satamp",
+    "t1-subamp",
+    "t3-hpamp",
+    "a-hpjack",
+    "a-dma105",
+    "a-subdrv",
+    "a-pipsu",
+    "a-psu",
+    "a-terminal",
+    "a-spkwire",
+    "a-polyfill",
+    "a-grille",
+    "a-isolator",
+    "a-gasket"
+   ],
+   "pros_ko": [
+    "가장 유연: 채널별 EQ·딜레이·리미터·Linkwitz Transform을 Pi 안에서 조정(Windows 불필요)",
+    "DAC 하나의 클럭",
+    "DAC8x 수치(SNR 112dB) 우수"
+   ],
+   "cons_ko": [
+    "D7 위배: 엔진과 hw: 사이에 loopback+CamillaDSP 층 추가, 지연 증가로 D8(10ms) 여유 감소",
+    "소프트웨어 장애 시 무음/폭음 위험, R15도 소프트웨어 의존",
+    "앰프 2장 + 헤드폰 앰프 모듈(판매처 미확인) → 배선 많음",
+    "HAT 급전 없음, DAC8x 국내 판매처 없음"
+   ],
+   "meets_requirements_ko": "지킴: R12·R13·R14·R16, D9, D13. 굽힘: D7(중간 DSP 층), D8(지연 여유), R15(소프트웨어), D16(별도 전원으로 대체).",
+   "recommended": false
+  }
+ ],
+ "items": [
+  {
+   "id": "a-pi5",
+   "category": "compute",
+   "name_ko": "라즈베리파이 5 (4GB)",
+   "model": "Raspberry Pi 5 Model B 4GB",
+   "role_ko": "음원 엔진(Pianoteq/FluidSynth/sfizz) 실행, USB-MIDI 8개 입력 병합, ALSA hw: 출력",
+   "qty_suggest": 1,
+   "specs": {
+    "CPU": "Broadcom BCM2712 2.4GHz 쿼드코어 Cortex-A76 64bit",
+    "RAM": "4GB LPDDR4X",
+    "전원": "USB-C 5V/5A 권장 (27W PD)",
+    "GPIO": "40핀 (HAT 호환)",
+    "확장": "PCIe 2.0 x1",
+    "저장": "microSD (SDR104)",
+    "기타": "RTC·전원버튼 내장, 듀얼 4Kp60",
+    "KC": "R-R-P2R-RP5"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐",
+     "url": "https://www.icbanq.com/P015956549",
+     "price_krw": 217800,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(198,000원+VAT), 국내 재고·당일 출고 표시",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=15215450",
+     "price_krw": 204600,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(186,000원+VAT), 가이드북 포함, 확인 시점 '재고확보 중'(구매 불가)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-pi5.jpg",
+   "image_source": "https://cdn.shopify.com/s/files/1/0176/3274/files/raspberry-pi-5-raspberry-pi-40958498898115.jpg (The Pi Hut 상품 이미지)",
+   "alternatives": [
+    {
+     "name": "Raspberry Pi 5 8GB",
+     "why": "RAM 여유가 필요할 때(대용량 샘플 전체 로딩 등). Pianoteq·sfizz 스트리밍엔 4GB로 충분해 추천 안 함. 4GB 대비 +104,500원",
+     "url": "https://www.icbanq.com/P015956550",
+     "price_krw": 322300
+    },
+    {
+     "name": "Raspberry Pi 5 8GB (디바이스마트)",
+     "why": "같은 가격, 확인 시점 재고확보 중",
+     "url": "https://www.devicemart.co.kr/goods/view?no=15215449",
+     "price_krw": 322300
+    }
+   ],
+   "optional": false,
+   "notes_ko": "권장 4GB. 8GB는 두 쇼핑몰 모두 322,300원(VAT 포함)으로 4GB보다 약 10만원 비싸다(2025-12 이후 메모리발 가격 인상 반영가로 보임). 엘레파츠 4GB는 184,000원(VAT 별도, 8GB 상품 페이지의 관련상품 표)이었으나 '재고확보중'."
+  },
+  {
+   "id": "a-cooler",
+   "category": "compute",
+   "name_ko": "라즈베리파이 5 공식 액티브 쿨러",
+   "model": "Raspberry Pi Active Cooler (SC1148)",
+   "role_ko": "Pi 5 발열 관리(스로틀링 방지). 온도 제어 팬이라 조용할 때는 거의 안 돔",
+   "qty_suggest": 1,
+   "specs": {
+    "구성": "알루미늄 방열판 + 온도 제어 블로어 팬",
+    "전원": "5V DC (Pi 5 전용 4핀 팬 커넥터)",
+    "최대 풍량": "1.09 CFM (판매처 요약)",
+    "최대 회전수": "8,000 RPM (판매처 요약)",
+    "고정": "스프링 핀 2개(Pi 5 전용 구멍)",
+    "호환": "Raspberry Pi 5 전용"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=15276241",
+     "price_krw": 7700,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(7,000원+VAT), 확인 시점 장바구니 가능",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "엘레파츠",
+     "url": "https://eleparts.co.kr/goods/view?no=13323153",
+     "price_krw": 7700,
+     "pack_qty": 1,
+     "price_note": "Pi5 8GB 상품 페이지의 악세사리 표에서 7,000원(VAT 별도) 확인 → VAT 포함 환산",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-cooler.jpg",
+   "image_source": "https://cdn.shopify.com/s/files/1/0176/3274/files/active-cooler-for-raspberry-pi-5-raspberry-pi-sc1148-40958504632515.jpg (The Pi Hut)",
+   "alternatives": [
+    {
+     "name": "Adafruit 판매 공식 쿨러(아이씨뱅큐)",
+     "why": "같은 제품, 더 비쌈",
+     "url": "https://www.icbanq.com/P016021437",
+     "price_krw": 18700
+    }
+   ],
+   "optional": false,
+   "notes_ko": "앰프 HAT/DAC HAT을 올리면 쿨러 높이와 GPIO 스페이서 높이가 겹치지 않는지 확인(HAT용 16~18mm 스택 헤더 필요할 수 있음). 팬 소음은 키베드에서 떨어뜨려 두면 문제 없음."
+  },
+  {
+   "id": "a-sd",
+   "category": "compute",
+   "name_ko": "microSD 64GB (A2)",
+   "model": "SanDisk Extreme microSDXC 64GB SDSQXAH-064G-GN6MN",
+   "role_ko": "OS·엔진·샘플 저장. A2 랜덤 성능이 샘플 스트리밍에 유리",
+   "qty_suggest": 1,
+   "specs": {
+    "용량": "64GB",
+    "규격": "microSDXC UHS-I U3 V30 A2 (SanDisk Extreme 제품군 표기, 데이터시트 재확인 안 함)",
+    "제품 코드": "SDSQXAH-064G-GN6MN",
+    "용도 적합": "Pi 5 SDR104 모드",
+    "가격 비교": "공식 RPi A2 64GB(39,600원)보다 저렴"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=14825254",
+     "price_krw": 33550,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(30,500원+VAT), 확인 시점 장바구니 가능",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-sd.jpg",
+   "image_source": "https://image3.compuzone.co.kr/img/product_img/2022/1110/967727/967727_600.jpg (디바이스마트 상품 이미지 원본)",
+   "alternatives": [
+    {
+     "name": "라즈베리파이 공식 A2 microSD 64GB",
+     "why": "Pi 5 SDR104 검증품이지만 확인 시점 재고확보 중",
+     "url": "https://www.devicemart.co.kr/goods/view?no=15549242",
+     "price_krw": 39600
+    }
+   ],
+   "optional": false,
+   "notes_ko": "읽기 속도 수치는 제품군 표기로, 이번에 제조사 데이터시트로 재확인하지 않음. Samsung PRO Plus 64GB는 디바이스마트 검색에서 64GB가 나오지 않아(128GB만 73,700원) 제외."
+  },
+  {
+   "id": "a-pipsu",
+   "category": "power",
+   "name_ko": "라즈베리파이 27W USB-C 공식 전원",
+   "model": "Raspberry Pi 27W USB-C Power Supply (White, SC1149 계열)",
+   "role_ko": "추천안(T-B)에서 Pi 5 단독 전원. 앰프 HAT 구성(T-A)에서는 개발 책상용으로만(D16: HAT 급전 중 USB-C 동시 연결 금지)",
+   "qty_suggest": 1,
+   "specs": {
+    "출력": "5.1V 5A (PD, 27W)",
+    "커넥터": "USB-C 일체형 케이블",
+    "효과": "5A PD 협상 시 Pi 5 USB 포트 합계 1.6A 허용 → Pico 8개 USB 급전 여유",
+    "인증": "국내 판매품 KC 여부 판매처 확인"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=15502402",
+     "price_krw": 18040,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(16,400원+VAT), 확인 시점 장바구니 가능",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-pipsu.jpg",
+   "image_source": "https://cdn.shopify.com/s/files/1/0176/3274/files/raspberry-pi-27w-usb-c-power-supply-raspberry-pi-sc1149-40958506336451.jpg (The Pi Hut)",
+   "alternatives": [
+    {
+     "name": "라즈베리파이5 PD 27W 호환 KC 아답터",
+     "why": "더 싸지만 비공식",
+     "url": "https://www.devicemart.co.kr/goods/search?search_text=27W",
+     "price_krw": 9900,
+     "url_note": "디바이스마트 검색 API 값(상품번호 15434559), 상품 페이지는 미확인"
+    }
+   ],
+   "optional": false,
+   "notes_ko": "호환 아답터 가격(9,900원)은 디바이스마트 검색 API 결과에서만 확인(상품 페이지 미확인). 5A PD가 아닌 전원이면 Pi 5는 USB 합계 600mA로 제한된다 — Pico 8개 + 홀센서 전류를 이 전원으로 감당하는지 반드시 계산."
+  },
+  {
+   "id": "a-amphat",
+   "category": "amp",
+   "name_ko": "HiFiBerry Amp4 Pro (앰프 HAT 중 추천)",
+   "model": "HiFiBerry Amp4 Pro (EAN 4260439551085)",
+   "role_ko": "앰프 HAT 경로(T-A)의 핵심: I2S→디지털 입력 D급 앰프, Pi 5에 5V 최대 5A 급전",
+   "qty_suggest": 1,
+   "specs": {
+    "칩": "TI TAS5756M (커널 오버레이 compatible 'ti,tas5756', I2C 0x4d)",
+    "출력(4Ω, THD<0.1%)": "14W@12V / 18W@18V / 20W@24V",
+    "최대 출력(4Ω, THD 10%)": "15W@12V / 30W@18V / 44W@24V",
+    "전원 입력": "12–24V (4Ω은 12–20V 권장, 절대최대 24V)",
+    "Pi 급전": "5V 최대 5A (Pi 5 명시 지원)",
+    "뮤트": "GPIO4 active-low (dtoverlay=hifiberry-amp4pro, 파라미터 mute_ext_ctl / auto_mute)",
+    "샘플레이트": "44.1–192kHz, 16–32bit",
+    "헤드폰/라인 출력": "없음",
+    "THD+N/SNR": "<0.02% (0.1–10W) / 104dB",
+    "클럭": "듀얼 도메인 클럭 내장"
+   },
+   "offers": [
+    {
+     "store": "HiFiBerry 공식(스위스, 해외배송)",
+     "url": "https://www.hifiberry.com/shop/boards/amp4pro/",
+     "price_krw": 101390,
+     "pack_qty": 1,
+     "price_note": "$74.90 × 1353.7원 환산, 배송비·부가세 별도(스위스 Swiss Post/Asendia, 1~6주)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "The Pi Hut (영국)",
+     "url": "https://thepihut.com/products/hifiberry-amp4-pro",
+     "price_krw": 151570,
+     "pack_qty": 1,
+     "price_note": "£83.90(영국 VAT 포함) × 1806.56원 환산, 해외배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-amphat.jpg",
+   "image_source": "https://www.hifiberry.com/wp-content/uploads/2024/03/amp4pro1.jpg",
+   "alternatives": [
+    {
+     "name": "HiFiBerry Amp100",
+     "why": "2×100W@4Ω(30V)이지만 데이터시트상 Pi 급전은 'Pi4B까지' → Pi 5 급전 보장 없음. DAC는 PCM5122(오버레이 기준)",
+     "url": "https://www.hifiberry.com/shop/boards/amp100/",
+     "price_krw": 134020
+    },
+    {
+     "name": "HiFiBerry AAmp60 (DAC2 HD 등 위에 얹는 아날로그 앰프)",
+     "why": "DAC 라인아웃을 살리면서 Pi 급전하지만 데이터시트상 'Pi4B까지'",
+     "url": "https://www.hifiberry.com/shop/boards/aamp60/",
+     "price_krw": 60780
+    }
+   ],
+   "optional": false,
+   "notes_ko": "앰프 HAT 한 장으로 끝내야 한다면 이것을 추천: Pi 5를 명시 지원하고 5A라서 Pico 8개 USB 부하에 여유(D16의 PSU_MAX_CURRENT를 5000으로 올릴 근거가 생김). 단점: 헤드폰·라인 출력이 없어 서브·헤드폰 자동 차단(R15)을 붙이기 어렵다. 국내: HiFiBerry 한국 리셀러(디바이스마트·엘레파츠·로보사이언스)에서 Amp4 Pro 상품을 찾지 못함(디바이스마트 검색, 엘레파츠 검색 확인) → 해외 직구. 추천 토폴로지(T-B)에서는 이 HAT을 쓰지 않는다."
+  },
+  {
+   "id": "a-amphat-alt",
+   "category": "amp",
+   "name_ko": "Raspberry Pi DigiAMP+ (차선 앰프 HAT)",
+   "model": "Raspberry Pi DigiAMP+ (구 IQaudio DigiAMP+)",
+   "role_ko": "국내 재고가 있는 공식 앰프 HAT 대안",
+   "qty_suggest": 1,
+   "specs": {
+    "칩": "TI TAS5756M",
+    "출력": "2×35W (제품 브리프 표기, 가변 출력)",
+    "전원 입력": "12–24V DC, 5.5×2.5mm 배럴(또는 P5 단자)",
+    "Pi 급전": "5.1V @ 2.5A",
+    "뮤트": "GPIO22 (dtoverlay=rpi-digiampplus,unmute_amp 또는 auto_mute_amp)",
+    "헤드폰/라인 출력": "없음",
+    "크기": "58×65mm",
+    "생산 보장": "2028년까지"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=13237162",
+     "price_krw": 46640,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(42,400원+VAT), 확인 시점 장바구니 가능",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-amphat-alt.jpg",
+   "image_source": "https://cdn.shopify.com/s/files/1/0176/3274/files/raspberry-pi-digiamp-raspberry-pi-sc0928-1207776718.jpg (The Pi Hut)",
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "싸고 국내 재고가 있지만 Pi 급전이 2.5A뿐이고, 공식 문서가 'Pi 3 이하용으로 설계, Pi 4 이후는 외부 전원 USB 허브 사용'이라고 적고 있다. Toccata는 Pico 8개를 USB로 물리므로 비추천."
+  },
+  {
+   "id": "a-dac",
+   "category": "dac",
+   "name_ko": "Raspberry Pi DAC+ (추천안의 HAT)",
+   "model": "Raspberry Pi DAC+ (구 IQaudio DAC+, SC0368)",
+   "role_ko": "T-B의 유일한 DAC: RCA 라인아웃→2.1 DSP 앰프, 헤드폰 앰프 출력→전면 잭. 한 클럭에서 스피커·서브·헤드폰이 모두 나온다",
+   "qty_suggest": 1,
+   "specs": {
+    "DAC": "TI PCM5122, 24bit/192kHz",
+    "라인 출력": "RCA 스테레오, 0–2V RMS",
+    "헤드폰": "전용 헤드폰 앰프, 3.5mm 패널 잭 (80/90Ω 헤드폰까지 구동, 공식 문서)",
+    "전원": "Pi GPIO에서 공급(외부 전원 불필요), Pi에 급전하지 않음",
+    "오버레이": "dtoverlay=rpi-dacplus",
+    "GPIO 사용": "I2C(2/3), I2S(18–21)",
+    "생산 보장": "2028년 1월까지"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=13237160",
+     "price_krw": 30360,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(29,000원−기본할인 1,400원=27,600원+VAT), 확인 시점 장바구니 가능",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-dac.jpg",
+   "image_source": "https://cdn.shopify.com/s/files/1/0176/3274/files/raspberry-pi-dac-raspberry-pi-sc0368-41756938043587.jpg (The Pi Hut)",
+   "alternatives": [
+    {
+     "name": "Raspberry Pi DAC Pro (PCM5242, RCA+밸런스 P7+헤드폰 앰프)",
+     "why": "더 좋은 DAC·밸런스 출력, 8천원 차이",
+     "url": "https://www.devicemart.co.kr/goods/view?no=13237161",
+     "price_krw": 37950
+    },
+    {
+     "name": "HiFiBerry DAC8x (8채널, Pi 5 전용)",
+     "why": "T-C용(소프트 크로스오버)",
+     "url": "https://www.hifiberry.com/shop/boards/hifiberry-dac8x/",
+     "price_krw": 87860
+    }
+   ],
+   "optional": false,
+   "notes_ko": "PCM5122는 D11(#7320, PCM512x 계열 Pi 5 I2S DMA 버그) 대상이므로 hw: 직결·스트림 상시 유지·장시간 테스트를 그대로 적용. 헤드폰 잭이 기판 위 3.5mm라서 전면 6.35mm 잭까지 3.5mm 플러그 케이블로 연장한다."
+  },
+  {
+   "id": "a-dma105",
+   "category": "speaker",
+   "name_ko": "위성 스피커 유닛 Dayton DMA105-4",
+   "model": "Dayton Audio DMA105-4 (PE 295-590)",
+   "role_ko": "본체 내장 위성 2개(밀폐 4.7L), 100Hz 이상 담당",
+   "qty_suggest": 2,
+   "specs": {
+    "구경": "4\" (알루미늄 콘, 듀얼 네오디뮴)",
+    "임피던스/Re": "4Ω / 3.4Ω",
+    "Fs/Qts": "72.7Hz / 0.51 (Qms 2.6, Qes 0.63)",
+    "Vas": "4.35L (PE 표 0.15ft³)",
+    "Xmax/Sd/Vd": "2.5mm / 54.1cm² / 13.5cm³",
+    "Bl/Mms/Le": "3.4Tm / 4.5g / 0.3mH",
+    "감도": "89.8dB @2.83V/1m",
+    "허용입력": "35W RMS / 70W max",
+    "재생대역": "70–20,000Hz",
+    "치수": "외형 4.1\"×4.1\"(104mm), 컷아웃 3.875\"(98.4mm), 깊이 1.86\"(47.2mm), 고정홀 4개"
+   },
+   "offers": [
+    {
+     "store": "다안일렉트론(데이톤 한국공식대리점)",
+     "url": "https://www.daankorea.co.kr/goods/goods_view.php?goodsNo=1000000041",
+     "price_krw": 50720,
+     "pack_qty": 1,
+     "price_note": "개당 50,720원, 5만원 이상 무료배송 → 2개 101,440원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Dayton-Audio-DMA105-4-4-Dual-Magnet-Aluminum-Cone-Full-Range-Driver-4-Ohm-295-590",
+     "price_krw": 27050,
+     "pack_qty": 1,
+     "price_note": "$19.98 × 1353.7원, 해외배송비·관부가세 별도, 확인 시 256개 재고",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-dma105.jpg",
+   "image_source": "https://www.parts-express.com/.../img/295-590_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "Dayton DMA105-8 (8Ω)",
+     "why": "같은 유닛 8Ω판, 같은 가격(다안). 4Ω 앰프 전류 여유가 부족할 때",
+     "url": "https://www.daankorea.co.kr/goods/goods_view.php?goodsNo=1000000042",
+     "price_krw": 50720
+    }
+   ],
+   "optional": false,
+   "notes_ko": "국내 공식가가 미국가의 약 1.9배. 서브 드라이버·앰프를 PE에서 함께 살 경우 같이 주문하면 배송비를 나눌 수 있다. 밀폐 4.7L 계산은 dma105_box_calc_ko 참고."
+  },
+  {
+   "id": "a-subdrv",
+   "category": "speaker",
+   "name_ko": "서브우퍼 유닛 Dayton RSS210HF-4 (추천)",
+   "model": "Dayton Audio RSS210HF-4 8\" Reference HF (PE 295-456)",
+   "role_ko": "30~100Hz 채움. 밀폐 15~18L에서 F3≈38~39Hz",
+   "qty_suggest": 1,
+   "specs": {
+    "구경": "8\" 알루미늄 콘, 트리플 쇼팅링",
+    "임피던스/Re": "4Ω / 3.1Ω",
+    "Fs/Qts": "29.6Hz / 0.57 (Qms 3.25, Qes 0.69)",
+    "Vas": "23.7L",
+    "Xmax/Sd/Vd": "9.0mm / 219cm² / 197cm³",
+    "Bl/Mms/Le": "8.12Tm / 78.4g / 0.7mH",
+    "감도": "85.6dB @2.83V/1m",
+    "허용입력": "280W RMS",
+    "치수": "외경 8.39\", 컷아웃 7.28\"(185mm), 깊이 4.88\"(124mm), 고정홀 6개",
+    "PE 권장": "밀폐 0.9ft³(25.5L) F3 41Hz / 벤트 1.25ft³ F3 23Hz"
+   },
+   "offers": [
+    {
+     "store": "다안일렉트론(데이톤 한국공식대리점)",
+     "url": "https://www.daankorea.co.kr/goods/goods_view.php?goodsNo=1000000143",
+     "price_krw": 271800,
+     "pack_qty": 1,
+     "price_note": "무료배송 조건(5만원 이상)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Dayton-Audio-RSS210HF-4-8-Reference-Series-HF-Subwoofer-4-Ohm-295-456",
+     "price_krw": 196260,
+     "pack_qty": 1,
+     "price_note": "$144.98 × 1353.7원, 해외배송·관부가세 별도, 확인 시 재고 있음",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-subdrv.jpg",
+   "image_source": "https://www.parts-express.com/.../img/295-456_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "Dayton LS10-44 10\" 로우프로파일 (듀얼 4Ω)",
+     "why": "깊이 3.32\"(84mm)로 키베드 아래 설치가 쉬움. 대신 밀폐 15~20L F3≈57Hz, Xmax까지 큰 전력 필요 → DSP 저역 보정 전제",
+     "url": "https://www.daankorea.co.kr/goods/goods_view.php?goodsNo=1000000071",
+     "price_krw": 266700
+    },
+    {
+     "name": "Dayton DCS205-4 8\" Classic",
+     "why": "싸지만 Qts 0.37이라 밀폐 15L F3≈63Hz(벤트용)",
+     "url": "https://www.daankorea.co.kr/goods/goods_view.php?goodsNo=1000000035",
+     "price_krw": 167980
+    },
+    {
+     "name": "Tang Band W6-1139SIF 6.5\"",
+     "why": "작지만 밀폐 F3≈64Hz, 감도 83dB, 깊이 4.33\"",
+     "url": "https://www.parts-express.com/Tang-Band-W6-1139SIF-6-1-2-Paper-Cone-Subwoofer-Speaker-264-919",
+     "price_krw": 125470
+    },
+    {
+     "name": "Dayton DCS165-4 6.5\" Classic",
+     "why": "PE 권장 밀폐 F3 101Hz — 밀폐 서브로 부적합",
+     "url": "https://www.parts-express.com/Dayton-Audio-DCS165-4-6-1-2-Classic-Subwoofer-4-Ohm-295-198",
+     "price_krw": 87960
+    }
+   ],
+   "optional": false,
+   "notes_ko": "Qts 0.57로 작은 밀폐함에 맞는 몇 안 되는 8인치. 필요한 앰프: 4Ω에 60~100W(Xmax 도달 약 77W@15L) → KABD-430 PBTL 60W가 적합. D14: 서브는 홀센서 열에서 15cm 이상, D15: 고무 절연 필수(무거운 자석)."
+  },
+  {
+   "id": "a-subamp",
+   "category": "amp",
+   "name_ko": "2.1 DSP 앰프보드 Dayton KABD-430 (추천안)",
+   "model": "Dayton Audio KABD-430 (PE 325-430)",
+   "role_ko": "T-B의 파워앰프 겸 크로스오버: 위성 2×30W + 서브 1×60W(PBTL), ADAU1701에서 HPF/LPF/EQ/리미터/뮤트",
+   "qty_suggest": 1,
+   "specs": {
+    "앰프 칩": "TI TPA3118 ×2",
+    "구성": "4×30W / 2×30W+1×60W(2.1) / 2×60W",
+    "최소 부하": "4Ω (스테레오·모노 모두)",
+    "전원": "12–26V DC 센터 +, 1A 이상 (하네스+DC잭 포함)",
+    "DSP": "ADI ADAU1701 (SigmaStudio, KPX/ICP1 프로그래머 필요)",
+    "입력": "3.5mm 라인 AUX(J5), Bluetooth 5.0 aptX HD",
+    "제어 핀": "J11 대기(standby) 스위치 포트, POT1–4(MP 핀: 스위치/가변저항 입력)",
+    "냉각": "팬 없음(KABD-4100은 팬 장착)",
+    "보증": "Dayton 5년"
+   },
+   "offers": [
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Dayton-Audio-KABD-430-4-x-30W-Bluetooth-Amp-Board-with-DSP-325-430",
+     "price_krw": 94730,
+     "pack_qty": 1,
+     "price_note": "$69.98 × 1353.7원(정가 $116.99에서 할인), 해외배송·관부가세 별도, 확인 시 재고 있음",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-subamp.jpg",
+   "image_source": "https://www.parts-express.com/.../img/325-430_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "Dayton KABD-4100 (4×100W, 2.1 모드 2×100+1×200W, TDA749x)",
+     "why": "출력 여유 크지만 냉각팬이 달려 있고(조용한 피아노에 불리) 5분 무신호 시 저전력 대기로 들어간다는 매뉴얼 문구가 있음. 10–39V",
+     "url": "https://www.parts-express.com/Dayton-Audio-KABD-4100-4-x-100W-Bluetooth-Amp-Board-with-DSP-325-434",
+     "price_krw": 129930
+    },
+    {
+     "name": "Dayton KABD-250 (2×50W TPA3116, DSP)",
+     "why": "위성만 구동하고 AUX 라인출력으로 별도 서브앰프를 붙이는 방식. 보드 2장 필요",
+     "url": "https://www.parts-express.com/Dayton-Audio-KABD-250-2-x-50W-DSP-Amplifier-Board-aptX-HD-Bluetooth-5.0-325-107",
+     "price_krw": 86610
+    }
+   ],
+   "optional": false,
+   "notes_ko": "30W/ch는 DMA105-4(35W RMS)와 딱 맞고, 60W PBTL은 RSS210HF-4 15L의 Xmax 한계(≈77W)보다 약 1dB 낮아 과진폭 보호 효과가 있다. 국내 판매처는 확인하지 못함(다안일렉트론 검색 'KABD' 결과 없음). 매뉴얼상 AUX 입력 감도·DC잭 규격 수치는 확인 못 함 → DAC+ 볼륨을 D9 기준(−3~−6dBFS)에서 맞춰 클립 LED/측정으로 확인. KABD-430 매뉴얼에는 자동 대기 문구가 없었다."
+  },
+  {
+   "id": "a-kpx",
+   "category": "amp",
+   "name_ko": "DSP 프로그래머 Dayton KPX",
+   "model": "Dayton Audio KPX In-Circuit Programmer USB (PE 325-139)",
+   "role_ko": "KABD-430의 ADAU1701에 SigmaStudio 크로스오버 프로그램을 한 번 굽는 용도(이후 분리)",
+   "qty_suggest": 1,
+   "specs": {
+    "인터페이스": "USB (USBi 호환)",
+    "대상": "KABD 시리즈 ADAU1701",
+    "소프트웨어": "Analog Devices SigmaStudio (무료, Windows)",
+    "사용": "EEPROM에 저장 후 제거 가능",
+    "대안": "Wondom/Dayton ICP1"
+   },
+   "offers": [
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Dayton-Audio-KPX-In-Circuit-Programmer-USB-325-139",
+     "price_krw": 51410,
+     "pack_qty": 1,
+     "price_note": "$37.98 × 1353.7원 (PE 검색 결과 가격), 배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-kpx.jpg",
+   "image_source": "https://www.parts-express.com/.../img/325-139_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "WONDOM ICP1 In-Circuit Programmer for ADAU1701",
+     "why": "KABD 매뉴얼이 ICP1도 호환으로 명시, 더 저렴",
+     "url": "https://store.sure-electronics.com/product/AA-AB32178",
+     "price_krw": 24240,
+     "url_note": "AA-AB32178 페이지의 함께 구매 목록(DB-DP11219)"
+    }
+   ],
+   "optional": false,
+   "notes_ko": "Windows PC가 한 번은 필요. KABD 예제 프로젝트 'Simple 2.1 Project.dspproj'에서 시작해 100Hz LR4 크로스오버, 위성 리미터(30W), 서브 리미터, MP 핀 뮤트를 추가하면 된다. ICP1 가격은 Wondom 스토어의 AA-AB32178 페이지 '함께 구매' 목록에서 확인($17.91 할인가)."
+  },
+  {
+   "id": "a-hpjack",
+   "category": "io",
+   "name_ko": "전면 헤드폰 잭 Neutrik NMJ6HCD2 (6.35mm 스위치드)",
+   "model": "Neutrik NMJ6HCD2",
+   "role_ko": "R15 헤드폰 자동 차단의 감지 스위치. 슬리브 스위치(S–SN)가 플러그 없을 때 닫힘 → 꽂으면 열림",
+   "qty_suggest": 1,
+   "specs": {
+    "형식": "1/4\"(6.35mm) 스테레오 잭, 스위치드, 크롬 페룰, 수평 PCB 핀",
+    "스위칭 접점": "3개(T–TN, R–RN, S–SN; Neutrik 회로도 '3x switching')",
+    "접점 정격": "신호 3A / 스위치 0.5A @50V",
+    "접촉저항": "<15mΩ(신호)/<30mΩ",
+    "패널 두께": "<4.7mm",
+    "수명": ">10,000회",
+    "표준": "EIA RS-453, IEC 60603-11"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐(해외재고)",
+     "url": "https://www.icbanq.com/P000256618",
+     "price_krw": 3484,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(3,167원+VAT), MOQ 1, 해외재고 4~6일",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-hpjack.png",
+   "image_source": "https://www.neutrik.com/uploads/media/400x/05/755-NMJ6HCD2.png",
+   "alternatives": [
+    {
+     "name": "NMJ6HCD2 (다른 공급 경로)",
+     "why": "MOQ 30이라 부적합(참고)",
+     "url": "https://www.icbanq.com/P011962236",
+     "price_krw": 4246
+    }
+   ],
+   "optional": false,
+   "notes_ko": "배선: S=헤드폰 접지, SN=감지. T-B: 3.3V–330Ω–PC817 LED(애노드→캐소드)–SN, S–GND로 두면 '플러그 없음=LED 켜짐', 꽂으면 꺼짐 → PC817 트랜지스터를 KABD MP 핀(핀1 GND, 핀2 MP#)에 연결해 DSP가 스피커 출력만 소프트 뮤트. 포토커플러로 앰프 접지와 헤드폰 접지를 따로 두어 험(그라운드 루프) 방지. 같은 SN 신호를 Pi GPIO(내부 풀업)로도 읽어 표시용으로 쓸 수 있음. 스위치 접점 0.5A라 스피커 선을 직접 끊는 용도로는 쓰지 않는다."
+  },
+  {
+   "id": "a-psu",
+   "category": "power",
+   "name_ko": "앰프용 DC 전원 Mean Well GST120A24-P1M (24V 5A)",
+   "model": "MEAN WELL GST120A24-P1M",
+   "role_ko": "T-B에서 KABD-430(12–26V) 전원. Pololu 벅을 쓰면 Pi 전원까지 이 하나로",
+   "qty_suggest": 1,
+   "specs": {
+    "출력": "24V 5A (120W)",
+    "플러그": "P1M = 5.5×2.5mm 배럴 (판매처 GST90A24-P1M 설명 '2.5x5.5plug'과 같은 코드)",
+    "AC 입력": "IEC 320 코드 타입(판매처 표기 '6FT. BLK- IEC 320')",
+    "용도 여유": "KABD-430 최대 120W 음악 신호 평균 수십 W + Pi 5 최대 25W(벅 사용 시)"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐(해외재고)",
+     "url": "https://www.icbanq.com/P010127759",
+     "price_krw": 76076,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(69,160원+VAT), MOQ 1, 해외재고 1주 이내, 전원 코드 별도 확인",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-psu.jpg",
+   "image_source": "https://kr.element14.com/productimages/large/en_GB/2815843-40.jpg (같은 GST120A 계열 20V 모델 이미지, 외형 동일)",
+   "alternatives": [
+    {
+     "name": "MEAN WELL GST120A20-P1M (20V 6A)",
+     "why": "T-A(Amp4 Pro, 4Ω은 12–20V 권장)용",
+     "url": "https://www.icbanq.com/P010127757",
+     "price_krw": 76076
+    },
+    {
+     "name": "MEAN WELL GST160A24-R7B (24V 6.67A)",
+     "why": "여유 더 크지만 R7B는 4핀 DIN 플러그라 배럴 잭에 바로 안 맞음",
+     "url": "https://www.icbanq.com/P010133211",
+     "price_krw": 89375
+    }
+   ],
+   "optional": false,
+   "notes_ko": "KABD-430 하네스 DC잭 규격(2.1/2.5mm)은 매뉴얼에서 수치를 찾지 못함 — 받은 하네스에 맞춰 P1M/P1J 선택 또는 잭 교체. 24V는 KABD-430 허용 상한(26V)에 가깝지만 범위 안. 한 브릭 구성에서 Pi를 벅으로 급전할 때도 USB-C는 절대 동시 연결 금지(D16 취지)."
+  },
+  {
+   "id": "a-buck",
+   "category": "power",
+   "name_ko": "5V 5.5A 강압 레귤레이터 Pololu D36V50F5 (단일 전원 옵션)",
+   "model": "Pololu D36V50F5",
+   "role_ko": "T-B에서 전원 브릭을 하나로 하고 싶을 때 24V→5V를 Pi GPIO 5V 핀(2·4번)에 공급",
+   "qty_suggest": 1,
+   "specs": {
+    "출력": "5V, 최대 5.5A (36V 입력 기준 연속 전류, 발열에 따라 다름)",
+    "입력": "5.5–50V",
+    "형식": "동기식 벅 모듈",
+    "용도": "HAT이 하는 5V 백피딩과 같은 방식"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐(해외재고)",
+     "url": "https://www.icbanq.com/P014849358",
+     "price_krw": 75933,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(69,030원+VAT), 해외재고 4~6일",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "Pololu (미국 직판)",
+     "url": "https://www.pololu.com/product/4091",
+     "price_krw": 54080,
+     "pack_qty": 1,
+     "price_note": "$39.95 × 1353.7원, 배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-buck.jpg",
+   "image_source": "https://a.pololu-files.com/picture/0J10723.1200x627.jpg",
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "GPIO 급전은 Pi의 입력 보호를 우회하고 PD 협상이 없으므로 EEPROM PSU_MAX_CURRENT(및 usb_max_current_enable) 설정이 필요. 27W 공식 USB-C 전원(18,040원)이 더 싸고 안전해서 기본안은 '브릭 2개'."
+  },
+  {
+   "id": "a-terminal",
+   "category": "enclosure",
+   "name_ko": "스피커 터미널 컵 (스프링식)",
+   "model": "Parts Express Round Speaker Wire Terminal Cup Spring Type (260-294)",
+   "role_ko": "위성·서브 상자의 배선 인출(분리 가능). 본체 내부 고정 배선이면 생략 가능",
+   "qty_suggest": 3,
+   "specs": {
+    "형식": "원형 스프링 클립 터미널 컵",
+    "용도": "스피커 상자 후면 인출",
+    "수량": "위성 2 + 서브 1",
+    "리뷰": "PE 52건",
+    "밀폐": "가스켓 테이프로 상자 밀폐 유지"
+   },
+   "offers": [
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Round-Speaker-Terminal-260-294",
+     "price_krw": 2020,
+     "pack_qty": 1,
+     "price_note": "개당 $1.49 × 1353.7원, 3개 필요, 배송비 별도",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "아이씨뱅큐",
+     "url": "https://www.icbanq.com/P005672249",
+     "price_krw": 3300,
+     "pack_qty": 1,
+     "price_note": "Coms BU942 2페어 스피커 터미널(VAT 포함 3,300원), 국내재고 — 패널 부착형 커넥터(컵 아님)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-terminal.jpg",
+   "image_source": "https://www.parts-express.com/.../img/260-294_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "Gold 5-Way Binding Post 원형 리세스 터미널 (PE 260-311)",
+     "why": "바나나 플러그 지원·고급",
+     "url": "https://www.parts-express.com/Gold-Banana-5-Way-Recessed-Speaker-Terminal-Round-260-311",
+     "price_krw": 8510
+    }
+   ],
+   "optional": true,
+   "notes_ko": "Coms BU942는 '제작용 스피커 터미널 커넥터 2페어'로 컵형이 아니다. 둘 다 이번에 판매 페이지를 열어 가격을 확인."
+  },
+  {
+   "id": "a-spkwire",
+   "category": "cable",
+   "name_ko": "스피커 케이블 16AWG",
+   "model": "프리즘 국산 스피커케이블 50C 16AWG (PRS-50B03 / PRS-50B07)",
+   "role_ko": "앰프→위성·서브 배선. 본체 내부 1~2m 수준이라 16AWG면 손실 무시 가능",
+   "qty_suggest": 1,
+   "specs": {
+    "굵기": "16AWG (50C)",
+    "길이": "3m 또는 7m 선택",
+    "색": "블랙",
+    "제조": "국산",
+    "도체 재질": "상품 페이지에서 OFC 표기 확인 못 함"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐",
+     "url": "https://www.icbanq.com/P017159544",
+     "price_krw": 7590,
+     "pack_qty": 1,
+     "price_note": "3m, VAT 포함(6,900원+VAT), 국내재고 3~4일",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "아이씨뱅큐",
+     "url": "https://www.icbanq.com/P017159543",
+     "price_krw": 15070,
+     "pack_qty": 1,
+     "price_note": "7m, VAT 포함(13,700원+VAT), 국내재고",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-spkwire.jpg",
+   "image_source": "https://image3.compuzone.co.kr/img/product_img/2026/0206/1319682/1319682_600.jpg",
+   "alternatives": [],
+   "optional": false,
+   "notes_ko": "OFC 여부는 미확인. 1~2m 배선에서 16AWG(약 13mΩ/m)면 4Ω 부하 대비 손실 0.1dB 미만이라 OFC가 아니어도 R14에 영향 없음. 서브 배선은 홀센서 열에서 떨어뜨려 라우팅(D14 자기장)."
+  },
+  {
+   "id": "a-polyfill",
+   "category": "enclosure",
+   "name_ko": "흡음재 폴리필 (1 lb)",
+   "model": "Acousta-Fill Nylon Polyfill 1 lb (PE 260-319)",
+   "role_ko": "밀폐함 내부 정재파 억제·실효 부피 증가(Qtc 소폭 하강)",
+   "qty_suggest": 1,
+   "specs": {
+    "재질": "나일론 폴리필",
+    "중량": "1 lb (약 454g)",
+    "권장 충전량": "밀폐함 기준 대략 0.5~1 lb/ft³ 느슨하게 (일반 가이드)",
+    "필요량": "위성 2×4.7L + 서브 15~18L ≈ 0.9ft³ → 1 lb 한 봉지로 충분",
+    "재고": "확인 시 In Stock"
+   },
+   "offers": [
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Acousta-Fill-Nylon-Polyfill-1-lb.-Bag-Speaker-Cabinet-Damping-Material-260-319",
+     "price_krw": 21630,
+     "pack_qty": 1,
+     "price_note": "$15.98 × 1353.7원, 배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-polyfill.jpg",
+   "image_source": "https://www.parts-express.com/.../img/260-319_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "Acousta-Fill 5 lb",
+     "why": "대량",
+     "url": "https://www.parts-express.com/Acousta-Fill-Nylon-Polyfill-5-lb.-Bag-Speaker-Cabinet-Damping-Material-260-331",
+     "price_krw": 74430
+    }
+   ],
+   "optional": false,
+   "notes_ko": "국내 판매처(아이씨뱅큐 '흡음재', 오디오DIY몰 검색)에서는 확인 가능한 상품을 찾지 못해 PE만 기재. 충전량 가이드는 일반 관행 값(출처 없는 참고치)."
+  },
+  {
+   "id": "a-grille",
+   "category": "enclosure",
+   "name_ko": "스피커 그릴 천 (음향 투과)",
+   "model": "Parts Express Speaker Grille Cloth Black, 1 yard × 70\" (PE 260-335)",
+   "role_ko": "D17: 3D프린트 그릴 프레임(개구율 크게)에 씌우는 음향 투과 천",
+   "qty_suggest": 1,
+   "specs": {
+    "폭": "70\" (177cm)",
+    "길이": "1 yard (91cm)",
+    "색": "블랙",
+    "리뷰": "PE 407건",
+    "용도": "위성 2 + (필요시) 서브 개구부"
+   },
+   "offers": [
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Speaker-Grill-Cloth-Black-Yard-70-Wide-260-335",
+     "price_krw": 13510,
+     "pack_qty": 1,
+     "price_note": "$9.98 × 1353.7원, 배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-grille.jpg",
+   "image_source": "https://www.parts-express.com/.../img/260-335_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "Visaton 4670 5\" 금속 그릴 (FR10 등 4\" 유닛용)",
+     "why": "천 대신 금속 타공 그릴(개구율 표기 미확인)",
+     "url": "https://www.parts-express.com/Visaton-4670-5-Grill-for-4-Speakers-292-533",
+     "price_krw": 9840
+    },
+    {
+     "name": "Mellotone 그릴 천 36\"",
+     "why": "조밀한 대체 천",
+     "url": "https://www.parts-express.com/Speaker-Grill-Cloth-Fabric-Black-Yard-36-Wide-261-800",
+     "price_krw": 13510
+    }
+   ],
+   "optional": false,
+   "notes_ko": "천의 음향 투과율 수치는 페이지에서 확인 못 함. 그릴 프레임은 유닛 앞 공간을 최대한 비우고(살 폭 좁게), 천은 팽팽하게."
+  },
+  {
+   "id": "a-isolator",
+   "category": "enclosure",
+   "name_ko": "진동 절연 고무 (볼트 방진고무)",
+   "model": "화성고무 볼트방진고무 RUB-D1 30×8 (크레텍 805-0339)",
+   "role_ko": "D15: 스피커 상자(특히 서브)를 키베드에 직접 고정하지 않고 고무로 띄워 고정",
+   "qty_suggest": 10,
+   "specs": {
+    "크기": "고무 지름 30mm × 두께 8mm (상품명 표기)",
+    "형식": "볼트 일체형 방진 고무발",
+    "판매 단위": "10개 단위(MOQ 10)",
+    "볼트 규격": "이미지상 수나사 — 나사 규격은 상세 이미지로 확인 필요",
+    "용도": "서브 상자 4점 + 위성 상자 각 2~3점"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐",
+     "url": "https://www.icbanq.com/P013051506",
+     "price_krw": 13200,
+     "pack_qty": 10,
+     "price_note": "10개 13,200원(VAT 포함, 개당 1,200원+VAT), 국내재고 4~5일",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-isolator.jpg",
+   "image_source": "http://contents.cretec.kr/nctx/resource/SBI_ITEM_IMG/2212132-1.jpg",
+   "alternatives": [
+    {
+     "name": "Subwoofer Speaker Feet 4-Pack (PE 260-7550)",
+     "why": "서브를 바닥에 둘 때 발(클리어런스)",
+     "url": "https://www.parts-express.com/search?keywords=grill%20cloth%20black",
+     "price_krw": 4450,
+     "url_note": "PE 검색 결과 목록에서 확인(개별 상품 URL 미수집)"
+    }
+   ],
+   "optional": false,
+   "notes_ko": "Sorbothane은 PE·아이씨뱅큐 검색에서 찾지 못함. 고무 경도·나사 규격 미확인 — 서브(무게 수 kg)는 고무가 너무 무르면 흔들리므로 설치 후 D14/D15 게이트 ④(20~300Hz 스윕)로 검증."
+  },
+  {
+   "id": "a-gasket",
+   "category": "enclosure",
+   "name_ko": "스피커 가스켓 테이프",
+   "model": "Parts Express Speaker Gasketing Tape 1/8\" × 1/2\" × 50ft (PE 260-542)",
+   "role_ko": "유닛 플랜지·터미널 컵·뒷판 밀폐(밀폐함 누설 방지 → Qtc 계산 유지)",
+   "qty_suggest": 1,
+   "specs": {
+    "두께": "1/8\" (3.2mm)",
+    "폭": "1/2\" (12.7mm)",
+    "길이": "50ft (15m)",
+    "형식": "폼 가스켓(접착)",
+    "리뷰": "PE 113건"
+   },
+   "offers": [
+    {
+     "store": "Parts Express (미국)",
+     "url": "https://www.parts-express.com/Speaker-Gasketing-Tape-1-8-x-1-2-x-50-ft.-Roll-260-542",
+     "price_krw": 19600,
+     "pack_qty": 1,
+     "price_note": "$14.48 × 1353.7원, 배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-gasket.jpg",
+   "image_source": "https://www.parts-express.com/.../img/260-542_HR_0.default.jpg",
+   "alternatives": [
+    {
+     "name": "1/8\" × 3/8\" × 50ft (PE 260-540)",
+     "why": "좁은 폭",
+     "url": "https://www.parts-express.com/Speaker-Gasketing-Tape-1-8-x-3-8-x-50-ft.-Roll-260-540",
+     "price_krw": 18920
+    }
+   ],
+   "optional": false,
+   "notes_ko": "3D프린트 상자는 레이어 사이로도 샐 수 있으므로 벽 두께·인필을 충분히 하고 내부 실링(도료 등)도 고려."
+  },
+  {
+   "id": "a-mount",
+   "category": "hardware",
+   "name_ko": "유닛 고정용 황동 히트셋 인서트",
+   "model": "Adafruit 4255 Brass Heat-Set Inserts M3×4mm 50pcs",
+   "role_ko": "3D프린트 위성 상자에 DMA105 고정(4점). MDF/합판 서브 상자에는 T너트/허리케인 너트",
+   "qty_suggest": 1,
+   "specs": {
+    "나사": "M3",
+    "길이": "4mm",
+    "수량": "50개",
+    "재질": "황동",
+    "설치": "인두로 열압입"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐(해외재고)",
+     "url": "https://www.icbanq.com/P013153497",
+     "price_krw": 11880,
+     "pack_qty": 50,
+     "price_note": "VAT 포함(10,800원+VAT), 해외재고 7~10일",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/a-mount.jpg",
+   "image_source": "https://cdn-shop.adafruit.com/640x480/4255-02.jpg",
+   "alternatives": [
+    {
+     "name": "PE #8-32 Hurricane Nuts 50개 (081-1080)",
+     "why": "목재 서브 상자용(≈M4급 인치 나사)",
+     "url": "https://www.parts-express.com/search?keywords=t-nut",
+     "price_krw": 12930,
+     "url_note": "PE 검색 결과 목록"
+    },
+    {
+     "name": "PE Hex Drive M6 Barbed Insert Nuts 20개 (081-1098)",
+     "why": "목재 상자에 미터 나사",
+     "url": "https://www.parts-express.com/Hex-Drive-M6-Barbed-Body-Insert-Nuts-20-Pcs.-081-1098",
+     "price_krw": 6750
+    }
+   ],
+   "optional": true,
+   "notes_ko": "요청한 M4 T너트/M4 히트셋 인서트는 이번에 연 국내·PE 페이지에서 찾지 못함(PE는 인치 규격 위주). DMA105/RSS210HF-4 고정홀 지름도 스펙시트에 없어 실물 확인 후 M3/M4 결정. 대체 두 항목 가격은 PE 검색 결과 목록에서 확인."
+  },
+  {
+   "id": "t1-subamp",
+   "category": "amp",
+   "name_ko": "모노 서브앰프 보드 Wondom AA-AB31184 (T-A/T-C용)",
+   "model": "WONDOM AA-AB31184 TPA3116 1×100W",
+   "role_ko": "라인 입력 모노 D급 앰프 → 서브 구동",
+   "qty_suggest": 1,
+   "specs": {
+    "칩": "TI TPA3116 (PBTL)",
+    "출력": "100W@2Ω 21V (THD+N 10%), 87W@2Ω (1%)",
+    "전원": "10–24V DC",
+    "입력": "싱글엔드 라인 입력",
+    "기능": "Mute·Standby 기능, 과전류·과열·역극성 보호",
+    "크기": "91.4×68.6mm",
+    "LPF": "내장 표기 없음 → 별도 LPF 필요"
+   },
+   "offers": [
+    {
+     "store": "Wondom 공식 스토어(Sure Electronics)",
+     "url": "https://store.sure-electronics.com/product/AA-AB31184",
+     "price_krw": 32770,
+     "pack_qty": 1,
+     "price_note": "$24.21(정가 $26.90) × 1353.7원, 해외배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "4Ω 출력은 표기 없음(2Ω 기준) — 4Ω에서는 대략 절반 수준으로 예상(미확인)."
+  },
+  {
+   "id": "t1-loc",
+   "category": "amp",
+   "name_ko": "스피커레벨→라인레벨 변환기(LOC) + 서브 LPF",
+   "model": "미정(범용 하이-로우 컨버터 + 연산증폭기 LPF 보드)",
+   "role_ko": "T-A에서 Amp4 Pro BTL 스피커 출력을 서브앰프 라인 입력으로 바꾸고 100Hz 이하만 통과",
+   "qty_suggest": 1,
+   "specs": {
+    "필수 조건": "BTL(양쪽 핫) 입력 허용 = 차동/트랜스 절연형",
+    "LPF": "가변 50–150Hz, 2차 이상",
+    "합산": "L+R 모노 합산"
+   },
+   "offers": [],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "이번 조사에서 판매 페이지를 열어 가격을 확인하지 못함(아이씨뱅큐 검색 결과 없음). 품질 편차가 커서 T-A의 약점."
+  },
+  {
+   "id": "t1-usbdac",
+   "category": "dac",
+   "name_ko": "USB 헤드폰 DAC (Apple USB-C to 3.5mm)",
+   "model": "Apple USB-C to 3.5mm Headphone Jack Adapter (MW2Q3KH/A)",
+   "role_ko": "T-A에서 헤드폰 전용 출력(별도 ALSA 카드)",
+   "qty_suggest": 1,
+   "specs": {
+    "연결": "USB-C (Pi 5 USB-A에는 A→C 변환 필요)",
+    "출력": "3.5mm",
+    "클래스": "USB Audio Class (드라이버 불필요)"
+   },
+   "offers": [
+    {
+     "store": "Apple 코리아",
+     "url": "https://www.apple.com/kr/search/USB-C-3.5mm-%ED%97%A4%EB%93%9C%ED%8F%B0-%EC%9E%AD-%EC%96%B4%EB%8C%91%ED%84%B0?tab=accessories",
+     "price_krw": 14900,
+     "pack_qty": 1,
+     "price_note": "Apple 공식 검색 결과 타일 가격 ₩14,900",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "I2S DAC와 클럭이 달라 동시 출력 불가 → 헤드폰 전환 시 엔진을 이 장치로 재시작해야 함(D10 서비스 전환 로직 필요)."
+  },
+  {
+   "id": "t3-dac8x",
+   "category": "dac",
+   "name_ko": "HiFiBerry DAC8x (8채널, Pi 5 전용)",
+   "model": "HiFiBerry DAC8x (EAN 4260439551016)",
+   "role_ko": "T-C: CamillaDSP로 나눈 위성/서브/헤드폰 채널을 한 클럭에서 출력",
+   "qty_suggest": 1,
+   "specs": {
+    "채널": "8ch 출력",
+    "DAC": "Burr-Brown 192kHz/24bit ×4",
+    "최대 출력": "2.1Vrms",
+    "SNR/THD+N": "112dB / −93dB",
+    "주파수": "10Hz–70kHz (−3dB)",
+    "전원": "Pi에서 공급(<0.3W), Pi 급전 안 함",
+    "오버레이": "dtoverlay=hifiberry-dac8x",
+    "호환": "Raspberry Pi 5만"
+   },
+   "offers": [
+    {
+     "store": "HiFiBerry 공식",
+     "url": "https://www.hifiberry.com/shop/boards/hifiberry-dac8x/",
+     "price_krw": 87860,
+     "pack_qty": 1,
+     "price_note": "$64.90 × 1353.7원, 배송·부가세 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "출력 커넥터 형태는 데이터시트 본문에서 확인 못 함."
+  },
+  {
+   "id": "t3-satamp",
+   "category": "amp",
+   "name_ko": "위성용 스테레오 앰프 Wondom AA-AB32178 (T-C용)",
+   "model": "WONDOM AA-AB32178 TPA3116 2×50W",
+   "role_ko": "T-C 위성 구동",
+   "qty_suggest": 1,
+   "specs": {
+    "칩": "TI TPA3116",
+    "출력": "50W@4Ω 21V (10%), 36W@4Ω (1%)",
+    "전원": "10–24V",
+    "입력": "싱글엔드 라인",
+    "크기": "91.4×68.6mm"
+   },
+   "offers": [
+    {
+     "store": "Wondom 공식 스토어",
+     "url": "https://store.sure-electronics.com/product/AA-AB32178",
+     "price_krw": 32770,
+     "pack_qty": 1,
+     "price_note": "$24.21 × 1353.7원, 해외배송비 별도",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": ""
+  },
+  {
+   "id": "t3-hpamp",
+   "category": "amp",
+   "name_ko": "헤드폰 앰프 모듈 (TPA6120/NJM4556 계열)",
+   "model": "미정",
+   "role_ko": "T-C에서 DAC8x 라인 채널을 헤드폰 레벨로",
+   "qty_suggest": 1,
+   "specs": {
+    "필요 조건": "라인 입력, 16~300Ω 구동, 잭 감지 연동 불필요(감지는 NMJ6HCD2)"
+   },
+   "offers": [],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "이번 조사에서 판매 페이지를 열어 확인하지 못함."
+  },
+  {
+   "id": "t1-psu20",
+   "category": "power",
+   "name_ko": "Amp4 Pro용 20V 전원 Mean Well GST120A20-P1M (T-A)",
+   "model": "MEAN WELL GST120A20-P1M",
+   "role_ko": "T-A: Amp4 Pro(4Ω은 12–20V 권장)와 서브앰프(10–24V) 공용 전원, Pi는 Amp4 Pro가 급전",
+   "qty_suggest": 1,
+   "specs": {
+    "출력": "20V 6A (120W)",
+    "플러그": "P1M = 5.5×2.5mm 배럴",
+    "AC 입력": "IEC 320 코드 타입(판매처 표기)",
+    "Amp4 Pro 출력(20V 부근)": "4Ω 약 18W/ch(THD<0.1%, 18V 표기값)"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐(해외재고)",
+     "url": "https://www.icbanq.com/P010127757",
+     "price_krw": 76076,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(69,160원+VAT), 해외재고 4~7일",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "Amp4 Pro DC 잭 규격은 이번에 확인 못 함(HiFiBerry 페이지에 표기 없음) → 수령 후 플러그 코드 선택."
+  },
+  {
+   "id": "a-opto",
+   "category": "io",
+   "name_ko": "포토커플러 PC817 (헤드폰 감지 → KABD MP 핀)",
+   "model": "PC817 (DIP-4)",
+   "role_ko": "NMJ6HCD2 슬리브 스위치 신호를 KABD-430 MP 핀으로 절연 전달 → DSP 스피커 뮤트(R15 하드웨어 경로)",
+   "qty_suggest": 1,
+   "specs": {
+    "형식": "트랜지스터 출력 포토커플러, 1채널, DIP-4",
+    "LED 구동": "3.3V−330Ω → 약 6mA",
+    "출력": "KABD MP 핀(핀1 GND, 핀2 MP#)을 GND로 끌어내림",
+    "부가 부품": "330Ω 저항 1개"
+   },
+   "offers": [
+    {
+     "store": "아이씨뱅큐",
+     "url": "https://www.icbanq.com/P016196009",
+     "price_krw": 1320,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(1,200원+VAT), 국내재고",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": null,
+   "image_source": "판매처 이미지가 DIP-14 범용 사진이라 사용하지 않음",
+   "alternatives": [],
+   "optional": false,
+   "notes_ko": "MP 핀을 'Input GPIO Debounce'로 설정하고 SigmaStudio에서 그 값으로 위성·서브 출력 뮤트 블록을 제어(KABD 매뉴얼의 스위치 연결 방식). 대기 포트 J11을 쓰면 더 단순하지만 전원 단계 전환이라 팝 소음 가능 — 실측 후 선택."
+  }
+ ],
+ "dma105_box_calc_ko": "Dayton DMA105-4 제조사 스펙시트(Parts Express 295-590) 값: Fs=72.7Hz, Qts=0.51, Vas=4.35L, Re=3.4Ω, Bl=3.4Tm, Cms=1.06mm/N, Sd=54.1cm², Xmax=2.5mm. 밀폐함 공식: α=Vas/Vb, Qtc=Qts·√(1+α), Fc=Fs·√(1+α), F3=Fc·√{[(1/Qtc²−2)+√((1/Qtc²−2)²+4)]/2}. Vb=4.7L → α=4.35/4.7=0.926, √(1+α)=1.3876, Qtc=0.51×1.3876=0.708, Fc=72.7×1.3876=100.9Hz, 1/Qtc²−2=-0.0033 → F3≈100.8Hz (Qtc≈0.707이라 F3≈Fc). 흡음재(폴리필)로 실효 부피가 약 15% 늘면(5.4L) Qtc=0.685, F3≈100.9Hz — 거의 같음. PE 권장(0.1ft³=2.8L, F3 113Hz)보다 조금 크게 잡은 값으로 적절. 진폭 한계 계산(Fc 아래 정적 근사): 서스펜션 강성 1/Cms=943N/m + 공기 강성 ρc²Sd²/Vb=1.2×343²×(54.1e-4)²/0.0047=879N/m → 합 1,823N/m. x=Bl·V/(Re·k)에서 x=2.5mm가 되는 전압 V=2.5e-3×3.4×1823/3.4=4.56Vpk=3.22Vrms → 4Ω 기준 약 2.6W. 즉 100Hz 이하 성분이 2.6W만 넘어도 Xmax에 닿는다. Xmax 한계 음압(1개, 반공간 1m): 50Hz 79dB, 80Hz 87dB, 100Hz 91dB, 150Hz 98dB. 결론: 위성은 ~100Hz 이하를 서브에 넘겨야(능동 HPF, 예: LR4 100Hz) R16(찌그러짐 0)을 지킬 수 있고, D13 때문에 스피커 직렬 콘덴서가 아니라 라인레벨/DSP에서 잘라야 한다.",
+ "sub_box_calc_ko": "같은 밀폐함 공식(α=Vas/Vb, Qtc=Qts√(1+α), Fc=Fs√(1+α), F3 식은 위성과 동일)과 제조사 스펙시트 T/S값으로 계산. 추천 RSS210HF-4(Fs 29.6Hz, Qts 0.57, Vas 23.7L)를 15L에 넣으면 α=23.7/15=1.58, √2.58=1.606 → Qtc=0.57×1.606=0.92, Fc=29.6×1.606=47.5Hz, F3≈39Hz. 18~20L로 키우거나 폴리필을 채우면 Qtc 0.84~0.88로 내려가 저음 봉우리가 줄어든다(권장 순부피 15~18L + 폴리필). Xmax(9mm)에 닿는 전압은 강성 합(1/Cms 2,703N/m + 공기 4,514N/m @15L)으로 약 17.5Vrms ≈ 77W@4Ω → KABD-430 PBTL 60W는 Xmax 한계보다 약 1dB 낮은 수준에서 클리핑하므로 드라이버 보호와 출력이 잘 맞는다. 후보 비교 — RSS210HF-4: 12L: Qtc 0.98, Fc 51Hz, F3 40Hz, Xmax 전압 20Vrms(≈103W@4Ω) / 15L: Qtc 0.92, Fc 48Hz, F3 39Hz, Xmax 전압 18Vrms(≈77W@4Ω) / 20L: Qtc 0.84, Fc 44Hz, F3 38Hz, Xmax 전압 15Vrms(≈55W@4Ω); Xmax 한계 음압(반공간 1m) 30Hz 93dB, 40Hz 98dB | DCS205-4: 12L: Qtc 0.67, Fc 58Hz, F3 62Hz, Xmax 전압 18Vrms(≈77W@4Ω) / 15L: Qtc 0.62, Fc 54Hz, F3 63Hz, Xmax 전압 15Vrms(≈57W@4Ω) / 20L: Qtc 0.57, Fc 50Hz, F3 65Hz, Xmax 전압 13Vrms(≈40W@4Ω); Xmax 한계 음압(반공간 1m) 30Hz 93dB, 40Hz 98dB | LS10-44(직렬 8Ω): 12L: Qtc 0.81, Fc 65Hz, F3 57Hz, Xmax 전압 55Vrms(≈747W@4Ω) / 15L: Qtc 0.75, Fc 60Hz, F3 57Hz, Xmax 전압 47Vrms(≈548W@4Ω) / 20L: Qtc 0.69, Fc 55Hz, F3 56Hz, Xmax 전압 39Vrms(≈380W@4Ω); Xmax 한계 음압(반공간 1m) 30Hz 99dB, 40Hz 104dB | W6-1139SIF: 12L: Qtc 0.56, Fc 49Hz, F3 65Hz, Xmax 전압 14Vrms(≈47W@4Ω) / 15L: Qtc 0.53, Fc 47Hz, F3 66Hz, Xmax 전압 12Vrms(≈37W@4Ω) / 20L: Qtc 0.50, Fc 44Hz, F3 68Hz, Xmax 전압 11Vrms(≈28W@4Ω); Xmax 한계 음압(반공간 1m) 30Hz 92dB, 40Hz 97dB | DCS165-4: 12L: Qtc 0.48, Fc 51Hz, F3 83Hz, Xmax 전압 6Vrms(≈9W@4Ω) / 15L: Qtc 0.46, Fc 48Hz, F3 85Hz, Xmax 전압 5Vrms(≈7W@4Ω) / 20L: Qtc 0.43, Fc 45Hz, F3 87Hz, Xmax 전압 5Vrms(≈6W@4Ω); Xmax 한계 음압(반공간 1m) 30Hz 85dB, 40Hz 90dB. 해석: Qts가 낮은 DCS205-4·W6-1139SIF·DCS165-4는 밀폐 10~20L에서 F3가 60~85Hz로 올라가 30~100Hz 채우기(R 기준선)에 불리(이들은 베이스리플렉스용). LS10-44는 깊이 84mm(얇음)가 장점이지만 F3≈57Hz, 스택 강성이 커서 Xmax까지 수백 W가 필요. Parts Express 직원 권장값도 RSS210HF-4 밀폐 0.9ft³(25.5L)→F3 41Hz, LS10-44 0.62ft³→73Hz, DCS205-4 0.28ft³→68Hz로 같은 경향. 주의: RSS210HF-4 장착 깊이 4.88in(124mm) → 하향 발사 상자로 눕혀도 외부 높이 약 16~17cm 필요. 키베드 아래 공간이 그보다 낮으면 LS10-44(깊이 3.32in=84mm)+DSP 저역 보정이 차선.",
+ "software": [
+  {
+   "name": "Pianoteq 9 Stage",
+   "price": "$139 (≈188,160원, 1353.7원/$)",
+   "license": "상용, 영구 라이선스(버전 업그레이드 유료 $29)",
+   "linux_arm": "지원 — 구매 페이지 'Linux (x86, arm)', 체험판 v9.2.4 Linux tar.xz(2026-08-25)",
+   "features": "악기 팩 2개 선택, 물리 모델링(88키, 샘플 없음, ~50MB), 연속 벨로시티(127+ 단계, 곡선·자동 보정), 할당 가능 페달 4개(서스테인·소프트·소스테누토·하모닉 등 12종), 폴리 애프터터치, EQ·리버브. Stage는 물리 모델 파라미터·마이크 위치·Scala 조율 편집 불가. 체험판은 일부 키가 꺼지고 일정 시간 뒤 무음(R4 불충족 → 구매 필요). 하프페달(CC64 연속)·릴리즈 벨로시티·활성화 대수는 널리 알려진 기능이지만 modartt.com이 조사 시점(2026-09-24) 접속 불가라 공식 페이지로 재확인하지 못함.",
+   "url": "https://www.modartt.com/buy"
+  },
+  {
+   "name": "Pianoteq 9 Standard",
+   "price": "$269 (≈364,150원), Stage→Standard 업그레이드 $130",
+   "license": "상용",
+   "linux_arm": "지원",
+   "features": "악기 팩 3개 + 피아노 모델 조정, 고급 조율, 마이크 믹스·이동, 외부 리버브 IR, 모핑·레이어",
+   "url": "https://www.modartt.com/buy"
+  },
+  {
+   "name": "Pianoteq 9 PRO",
+   "price": "$399 (≈540,130원)",
+   "license": "상용",
+   "linux_arm": "지원",
+   "features": "악기 팩 4개 + Note Edit(음마다 파라미터) 등. Studio Bundle(PRO+모든 팩) $929",
+   "url": "https://www.modartt.com/buy"
+  },
+  {
+   "name": "FluidSynth 2.6.1 + Salamander Grand Piano V3 (SF2)",
+   "price": "무료",
+   "license": "FluidSynth LGPL-2.1 / Salamander CC-BY 3.0(저작자 표기)",
+   "linux_arm": "지원(소스·배포판 패키지), 최신 v2.6.1 (2026-09-19)",
+   "features": "Salamander: Yamaha C5, 48kHz/24bit, 16 벨로시티 레이어, SF2 296MiB. FluidSynth 소스상 서스테인은 CC64<64면 해제되는 온/오프 방식 → 하프페달 불가(R3 기준선 미달), D1의 연속값도 64 경계로만 해석",
+   "url": "https://github.com/FluidSynth/fluidsynth"
+  },
+  {
+   "name": "sfizz 1.2.3 + Salamander Grand Piano V3 (SFZ+FLAC)",
+   "price": "무료",
+   "license": "sfizz BSD-2-Clause / Salamander CC-BY 3.0",
+   "linux_arm": "지원(소스 빌드), 최신 릴리스 1.2.3 (2024-01-14)",
+   "features": "SFZ+FLAC 707MiB(48kHz/24bit). sfizz 소스상 sustain_cc·sustain_lo(문턱값) 방식 → 문턱 조정은 되지만 연속 하프페달 모델은 아님. 릴리즈 트리거 등은 SFZ 악기 정의에 따라 다름",
+   "url": "https://github.com/sfztools/sfizz"
+  },
+  {
+   "name": "Upright Piano KW (SFZ/SF2)",
+   "price": "무료",
+   "license": "CC0 1.0 (퍼블릭 도메인)",
+   "linux_arm": "FluidSynth/sfizz로 재생",
+   "features": "Kawai 업라이트, 스테레오 2 벨로시티 레이어, SFZ+FLAC 32MiB — 가볍지만 표현력 낮음",
+   "url": "https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html"
+  },
+  {
+   "name": "CamillaDSP 4.1.3 (T-C 전용)",
+   "price": "무료",
+   "license": "GPL-3.0",
+   "linux_arm": "지원",
+   "features": "크로스오버·EQ·리미터·채널 라우팅(웹소켓 제어)",
+   "url": "https://github.com/HEnquist/camilladsp"
+  },
+  {
+   "name": "Analog Devices SigmaStudio (T-B 전용)",
+   "price": "무료",
+   "license": "ADI 무료 소프트웨어(등록 필요)",
+   "linux_arm": "해당 없음 — Windows PC에서 한 번 KABD-430 프로그래밍",
+   "features": "ADAU1701 그래픽 DSP 설계, EEPROM 기록. Dayton KABD 예제 프로젝트 제공",
+   "url": "https://www.parts-express.com/pedocs/manuals/sigmastudio-programming-for-the-dayton-audio-kabd-series-of-amplifiers-v1.pdf"
+  }
+ ]
+}

@@ -1,47 +1,98 @@
-<svg viewBox="0 0 805 452" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="건반 1개의 측면 단면(참 척도): 피벗·요람·가이드 핀·자석·홀센서·PCB·스프링 훅 개구·다운스톱·정지 블록·베이스 보드" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11">
-<rect x="5.6" y="319.2" width="768.0" height="57.6" fill="#D8C7A3" fill-opacity="0.9" stroke="currentColor" stroke-width="1"/>
-<rect x="602.4" y="319.2" width="80.0" height="9.6" fill="#B9BCC2" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<text x="95.2" y="351.2" text-anchor="start" fill="#5b4a2a" font-weight="400" font-size="11">합판 베이스 보드 18mm</text>
-<text x="642.4" y="341.6" text-anchor="middle" fill="#333" font-weight="400" font-size="10">평철 25×3 매립 (y 174.5~199.5)</text>
-<rect x="44.0" y="300.0" width="691.2" height="19.2" fill="#E9E5DC" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<rect x="572.0" y="261.3" width="41.6" height="38.7" fill="#E9E5DC" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<rect x="546.4" y="211.0" width="83.2" height="89.0" fill="#E9E5DC" fill-opacity="0.5" stroke="currentColor" stroke-width="1" stroke-dasharray="3 2"/>
-<rect x="709.6" y="266.4" width="25.6" height="33.6" fill="#E9E5DC" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<rect x="709.6" y="261.6" width="25.6" height="4.8" fill="#8E8A7C" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<rect x="95.2" y="296.6" width="32.0" height="3.4" fill="#E9E5DC" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<rect x="95.2" y="291.8" width="32.0" height="4.8" fill="#8E8A7C" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<rect x="210.4" y="289.1" width="25.6" height="10.9" fill="#E9E5DC" fill-opacity="0.5" stroke="currentColor" stroke-width="1" stroke-dasharray="3 2"/>
-<rect x="210.4" y="284.3" width="25.6" height="4.8" fill="#8E8A7C" fill-opacity="0.5" stroke="currentColor" stroke-width="1"/>
-<rect x="300.0" y="294.2" width="192.0" height="5.1" fill="#2E7D4F" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<text x="306.4" y="289.1" text-anchor="start" fill="#2E7D4F" font-weight="400" font-size="10">PCB (y 80~140)</text>
-<rect x="391.2" y="285.6" width="9.6" height="8.6" fill="#B9BCC2" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<rect x="389.6" y="280.8" width="12.8" height="4.8" fill="#222" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<text x="408.8" y="279.5" text-anchor="start" fill="currentColor" font-weight="400" font-size="10">SS49E 눕힘 + 심 2.7 → 상면 6.0</text>
-<rect x="44.0" y="220.0" width="691.2" height="40.6" fill="#FBF8F0" fill-opacity="1" stroke="currentColor" stroke-width="1"/>
-<circle cx="572.0" cy="249.1" r="9.6" fill="#FBF8F0" stroke="currentColor"/><circle cx="572.0" cy="249.1" r="2" fill="currentColor"/>
-<rect x="391.2" y="254.2" width="9.6" height="6.4" fill="#D92B2B" fill-opacity="1" stroke="#8b0000" stroke-width="1"/>
-<rect x="533.6" y="220.0" width="134.4" height="40.6" fill="none" fill-opacity="1" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/>
-<rect x="690.4" y="246.2" width="16.0" height="14.4" fill="#FBF8F0" fill-opacity="1" stroke="#1F5FD8" stroke-width="1.4"/>
-<circle cx="698.4" cy="252.3" r="2.4" fill="#555"/>
-<line x1="698.4" y1="252.3" x2="698.4" y2="376.8" stroke="#5f6b7a" stroke-width="2.5"/>
-<circle cx="698.4" cy="376.8" r="3" fill="#5f6b7a"/>
-<text x="680.8" y="386.4" text-anchor="end" fill="#5f6b7a" font-weight="400" font-size="10">스프링 런 ≈36.5 · k 0.10~0.12 N/mm</text>
-<polygon points="44.4,226.1 734.1,271.3 736.8,230.7 47.0,185.5" fill="#1F5FD8" fill-opacity="0.10" stroke="#1F5FD8" stroke-dasharray="5 3"/>
-<line x1="396.0" y1="260.6" x2="395.6" y2="249.1" stroke="#1F5FD8" stroke-width="1.5"/>
-<text x="354.4" y="270.6" text-anchor="start" fill="#1F5FD8" font-weight="600" font-size="10">자석 3.6↓</text>
-<text x="56.8" y="211.7" text-anchor="start" fill="#1F5FD8" font-weight="400" font-size="10">눌림: 앞끝 10.8↓ (3.75°)</text>
-<text x="572.0" y="199.2" text-anchor="middle" fill="currentColor" font-weight="600" font-size="11">피벗 y=165</text>
-<text x="584.8" y="233.4" text-anchor="start" fill="currentColor" font-weight="400" font-size="10">요람 r3.1 · 30° 열림 · 중심 z=22.0</text>
-<text x="396.0" y="246.9" text-anchor="middle" fill="#8b0000" font-weight="600" font-size="10">자석 Ø3×2 @ y=110</text>
-<text x="725.6" y="241.1" text-anchor="end" fill="currentColor" font-weight="400" font-size="10">정지 블록 상면 16.5 + 펠트</text>
-<text x="698.4" y="268.0" text-anchor="end" fill="#1F5FD8" font-weight="600" font-size="10">훅 개구 202~207 + 횡핀 Ø1.5</text>
-<text x="111.2" y="285.9" text-anchor="middle" fill="currentColor" font-weight="400" font-size="10">백건 다운스톱 y16~26</text>
-<text x="223.2" y="274.7" text-anchor="middle" fill="currentColor" font-weight="400" font-size="9">흑건 y52~60 (별 x)</text>
-<text x="588.0" y="204.6" text-anchor="start" fill="currentColor" font-weight="400" font-size="10">가이드 핀 157~183 ↑27.8</text>
-<line x1="428.0" y1="280.8" x2="428.0" y2="260.6" stroke="#8b0000" stroke-width="1" stroke-dasharray="2 2"/>
-<text x="434.4" y="269.3" text-anchor="start" fill="#8b0000" font-weight="400" font-size="10">정지 표면 갭 6.3 (소자 7.0)</text>
-<line x1="450.4" y1="280.8" x2="450.4" y2="272.2" stroke="#1F5FD8" stroke-width="1" stroke-dasharray="2 2"/>
-<text x="456.8" y="277.3" text-anchor="start" fill="#1F5FD8" font-weight="400" font-size="10">눌림 2.7 (소자 3.4)</text>
-<text x="44.0" y="396.0" text-anchor="start" fill="currentColor" font-weight="400" font-size="10">y=0 (연주자 앞)</text>
-<text x="735.2" y="396.0" text-anchor="end" fill="currentColor" font-weight="400" font-size="10">y=216 (뒤)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1010 400" width="1010" height="400" role="img" aria-label="Toccata v2.0 모노리식 건반 측면 단면">
+<title>Toccata v2.0 — 모노리식 컴플라이언트 건반 측면 단면 (실축 1:4)</title>
+<style>
+ text{font-family:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif}
+ .bed{fill:#D8D2C6;stroke:#8A8377;stroke-width:.8}
+ .comb{fill:#C6BFB0;stroke:#8A8377;stroke-width:.6}
+ .key{fill:#FDFCF9;stroke:#2B2B2B;stroke-width:1.1}
+ .leaf{fill:#1F5FD8;stroke:#12409A;stroke-width:.5}
+ .blade{stroke:#B3261E;stroke-width:2.6;stroke-linecap:round}
+ .piv{fill:#fff;stroke:#B3261E;stroke-width:1.6}
+ .rail{fill:#9AA0A8;stroke:#5C626A;stroke-width:.8}
+ .pcb{fill:#1D6B3A;stroke:#0E3B20;stroke-width:.6}
+ .sens{fill:#222} .mag{fill:#C62828}
+ .lbl{font-size:10.5px;fill:#2B2B2B} .dim-t{font-size:10px;fill:#B3261E}
+ .tick{stroke:#8A8377;stroke-width:.8} .tick-t{font-size:9.5px;fill:#6B6459}
+ .dimarrow{stroke:#B3261E;stroke-width:1;marker-end:url(#a);marker-start:url(#a)}
+ @media (prefers-color-scheme: dark){
+   .bed{fill:#3A3730;stroke:#6E675B} .comb{fill:#46423A;stroke:#6E675B}
+   .key{fill:#EDEAE3;stroke:#111} .lbl{fill:#E6E2DA} .tick-t{fill:#A8A093}
+ }
+</style>
+<defs><marker id="a" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,3 L6,0 L6,6 Z" fill="#B3261E"/></marker></defs>
+<rect width="1010" height="400" fill="none"/>
+<rect x="46.0" y="294.0" width="920.0" height="24.0" class="bed" />
+<rect x="110.0" y="289.8" width="40.0" height="4.2" class="bed" />
+<rect x="294.0" y="277.8" width="32.0" height="16.2" class="bed" />
+<rect x="166.0" y="222.0" width="48.0" height="96.0" class="comb" />
+<rect x="334.0" y="222.0" width="24.0" height="96.0" class="comb" />
+<rect x="614.0" y="222.0" width="48.0" height="96.0" class="comb" />
+<rect x="830.0" y="290.0" width="48.0" height="4.0" class="bed" />
+<rect x="926.0" y="71.2" width="40.0" height="246.8" class="bed" />
+<path d="M 666.0 318.0 L 666.0 269.2 L 674.8 269.2 L 674.8 281.2 L 737.2 281.2 L 737.2 269.2 L 742.0 269.2 L 742.0 318.0 Z" class="bed"/>
+<rect x="366.0" y="286.8" width="240.0" height="6.4" class="pcb" />
+<rect x="480.0" y="270.0" width="12.0" height="16.8" class="sens" />
+<rect x="480.0" y="244.8" width="12.0" height="8.0" class="mag" />
+<rect x="46.0" y="194.0" width="203.2" height="50.8" class="key" />
+<rect x="242.8" y="194.0" width="435.2" height="50.8" class="key" />
+<rect x="654.0" y="174.0" width="112.0" height="48.0" class="key" />
+<rect x="750.0" y="174.0" width="16.0" height="100.0" class="key" />
+<rect x="750.0" y="274.0" width="168.0" height="16.0" class="key" />
+<rect x="676.0" y="266.6" width="60.0" height="14.6" class="key" />
+<line x1="683.4" y1="267.4" x2="728.6" y2="222.2" class="blade" />
+<line x1="728.6" y1="267.4" x2="683.4" y2="222.2" class="blade" />
+<circle cx="706.0" cy="244.8" r="3.4" class="piv"/>
+<rect x="766.0" y="256.8" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="251.6" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="243.2" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="238.0" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="229.6" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="224.5" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="216.1" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="210.9" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="202.5" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="197.3" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="188.9" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="183.7" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="175.3" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="170.2" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="161.8" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="156.6" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="148.2" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="143.0" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="134.6" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="129.4" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="121.0" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="115.9" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="107.5" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="256.8" width="8.4" height="17.2" class="leaf" />
+<circle cx="766.0" cy="107.5" r="4.0" class="leaf"/>
+<rect x="734.0" y="95.2" width="56.0" height="8.0" class="rail" />
+<rect x="734.0" y="71.2" width="200.0" height="24.0" class="rail" />
+<text x="706.0" y="186.8" class="lbl" text-anchor="middle">피벗 (교차 판 4장)</text>
+<text x="486.0" y="174.8" class="lbl" text-anchor="middle">자석 Ø3×2 · 3.600↓</text>
+<text x="842.0" y="61.5" class="lbl" text-anchor="middle">예하중 레일 ↑ 반작용이 꼬리를 누른다</text>
+<text x="842.0" y="186.0" class="lbl" text-anchor="middle">12단 사행 판 t=2.10</text>
+<text x="854.0" y="312.0" class="lbl" text-anchor="middle">업스톱 = 정지 위치</text>
+<text x="130.0" y="309.8" class="lbl" text-anchor="middle">백건 다운스톱</text>
+<text x="310.0" y="271.8" class="lbl" text-anchor="middle">흑건</text>
+<text x="638.0" y="214.0" class="lbl" text-anchor="middle">가이드 콤</text>
+<text x="486.0" y="310.8" class="lbl" text-anchor="middle">SS49E</text>
+<text x="704.0" y="305.2" class="lbl" text-anchor="middle">드롭인 앵커</text>
+<line x1="46.0" y1="244.8" x2="46.0" y2="288.0" class="dim" />
+<text x="102.0" y="274.0" class="dim-t" text-anchor="start">딥 10.8</text>
+<line x1="46.0" y1="244.8" x2="46.0" y2="288.0" class="dimarrow"/>
+<line x1="46.0" y1="322.0" x2="46.0" y2="334.0" class="tick"/>
+<text x="46.0" y="354.0" class="tick-t" text-anchor="middle">0</text>
+<line x1="249.2" y1="322.0" x2="249.2" y2="334.0" class="tick"/>
+<text x="249.2" y="354.0" class="tick-t" text-anchor="middle">50.8</text>
+<line x1="486.0" y1="322.0" x2="486.0" y2="334.0" class="tick"/>
+<text x="486.0" y="354.0" class="tick-t" text-anchor="middle">110</text>
+<line x1="706.0" y1="322.0" x2="706.0" y2="334.0" class="tick"/>
+<text x="706.0" y="354.0" class="tick-t" text-anchor="middle">165</text>
+<line x1="766.0" y1="322.0" x2="766.0" y2="334.0" class="tick"/>
+<text x="766.0" y="354.0" class="tick-t" text-anchor="middle">180</text>
+<line x1="918.0" y1="322.0" x2="918.0" y2="334.0" class="tick"/>
+<text x="918.0" y="354.0" class="tick-t" text-anchor="middle">218</text>
+<text x="506.0" y="398.0" class="tick-t" text-anchor="middle">y (mm) — 0 = 연주자 앞끝, 165 = 피벗</text>
 </svg>

@@ -1,0 +1,2041 @@
+{
+ "panels": [
+  {
+   "id": "spkL_side_outer",
+   "name_ko": "스피커 파트 L 옆판(바깥쪽)",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    195,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    -16,
+    -4.5
+   ],
+   "y": [
+    215,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "note": "옆판이 앞판·뒤판·위아래판을 감싼다(끝면이 정면에 보임)",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면: 옆판 끝면 11.5 폭, 전체 180; hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkL_side_inner",
+   "name_ko": "스피커 파트 L 옆판(가운데 유닛 쪽)",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    195,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    152.5,
+    164
+   ],
+   "y": [
+    215,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "note": "가운데 유닛과 맞닿는 면에 EVA 3T 띠(MEV1), 도브테일 블록·래치 걸이 자리",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4); docs/report/toccata-build-v3.html §09 결합(R26)"
+  },
+  {
+   "id": "spkL_back",
+   "name_ko": "스피커 파트 L 뒤판",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    157,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    -4.5,
+    152.5
+   ],
+   "y": [
+    398.5,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 단면: 뒤판 y398.5~410; hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkL_top",
+   "name_ko": "스피커 파트 L 윗판",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    157,
+    172
+   ],
+   "thickness": 11.5,
+   "x": [
+    -4.5,
+    152.5
+   ],
+   "y": [
+    226.5,
+    398.5
+   ],
+   "z": [
+    220.5,
+    232
+   ],
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 단면: 윗판 157×172 앞판과 뒤판 사이; hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkL_bottom",
+   "name_ko": "스피커 파트 L 아랫판",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    157,
+    172
+   ],
+   "thickness": 11.5,
+   "x": [
+    -4.5,
+    152.5
+   ],
+   "y": [
+    226.5,
+    398.5
+   ],
+   "z": [
+    22,
+    33.5
+   ],
+   "note": "밑면에 고무발 4 + 받침 4 mm(직결피스 25 mm가 아랫판 11.5에 박힘)",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkL_baffle",
+   "name_ko": "스피커 파트 L 앞판(배플, PETG 출력)",
+   "material": "PETG 출력 (printed[] spk_baffle 참고)",
+   "size": [
+    157,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    -4.5,
+    152.5
+   ],
+   "y": [
+    215,
+    226.5
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "note": "연주자 쪽(-y, y215 면)을 향한 배플. 옆판 사이에 끼워 목공본드(SP6)로 둘레 밀봉. 유닛 중심 x=74, z142",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면 제목 '정면 (배플, 연주자 쪽)'; docs/report/toccata-build-v3.html §스피커 파트 '배플은 연주자 쪽'; D17 '배플이 연주자 쪽(-y)'"
+  },
+  {
+   "id": "spkR_side_inner",
+   "name_ko": "스피커 파트 R 옆판(가운데 유닛 쪽)",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    195,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    1058,
+    1069.5
+   ],
+   "y": [
+    215,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "note": "옆판이 앞판·뒤판·위아래판을 감싼다(끝면이 정면에 보임). 가운데 유닛 쪽 옆판 바깥면에 EVA 3T 띠",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면: 옆판 끝면 11.5 폭, 전체 180; hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkR_side_outer",
+   "name_ko": "스피커 파트 R 옆판(바깥쪽)",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    195,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    1226.5,
+    1238
+   ],
+   "y": [
+    215,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "note": "",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4); docs/report/toccata-build-v3.html §09 결합(R26)"
+  },
+  {
+   "id": "spkR_back",
+   "name_ko": "스피커 파트 R 뒤판",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    157,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    1069.5,
+    1226.5
+   ],
+   "y": [
+    398.5,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 단면: 뒤판 y398.5~410; hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkR_top",
+   "name_ko": "스피커 파트 R 윗판",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    157,
+    172
+   ],
+   "thickness": 11.5,
+   "x": [
+    1069.5,
+    1226.5
+   ],
+   "y": [
+    226.5,
+    398.5
+   ],
+   "z": [
+    220.5,
+    232
+   ],
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 단면: 윗판 157×172 앞판과 뒤판 사이; hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkR_bottom",
+   "name_ko": "스피커 파트 R 아랫판",
+   "material": "오꾸메 합판 11.5T (L10)",
+   "size": [
+    157,
+    172
+   ],
+   "thickness": 11.5,
+   "x": [
+    1069.5,
+    1226.5
+   ],
+   "y": [
+    226.5,
+    398.5
+   ],
+   "z": [
+    22,
+    33.5
+   ],
+   "note": "밑면에 고무발 4 + 받침 4 mm(직결피스 25 mm가 아랫판 11.5에 박힘)",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); hardware/bom/final-bom/data.json L10 (조각: 옆판 195x210 x4, 뒤판 157x210 x2, 위·아래판 172x157 x4)"
+  },
+  {
+   "id": "spkR_baffle",
+   "name_ko": "스피커 파트 R 앞판(배플, PETG 출력)",
+   "material": "PETG 출력 (printed[] spk_baffle 참고)",
+   "size": [
+    157,
+    210
+   ],
+   "thickness": 11.5,
+   "x": [
+    1069.5,
+    1226.5
+   ],
+   "y": [
+    215,
+    226.5
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "note": "연주자 쪽(-y, y215 면)을 향한 배플. 옆판 사이에 끼워 목공본드(SP6)로 둘레 밀봉. 유닛 중심 x=1148, z142",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면 제목 '정면 (배플, 연주자 쪽)'; docs/report/toccata-build-v3.html §스피커 파트 '배플은 연주자 쪽'; D17 '배플이 연주자 쪽(-y)'"
+  }
+ ],
+ "printed": [
+  {
+   "id": "spkL_baffle",
+   "name_ko": "스피커 앞판(배플) L",
+   "qty": 1,
+   "material": "PETG (Bambu PETG Basic 블랙 CT2 / 회색)",
+   "dims": [
+    157,
+    11.5,
+    210
+   ],
+   "dims_axes": "x × y(두께) × z",
+   "world": {
+    "x": [
+     -4.5,
+     152.5
+    ],
+    "y": [
+     215,
+     226.5
+    ],
+    "z": [
+     22,
+     232
+    ]
+   },
+   "holes": [
+    {
+     "name_ko": "유닛 컷아웃",
+     "type": "through",
+     "dia": 94,
+     "center": {
+      "x": 74,
+      "z": 142
+     },
+     "axis": "y",
+     "source": "docs/report/toccata-build-v3.html table A08 (컷아웃 Ø94, 중심 x74/x1148, z142, 장공 4-Ø4.8×6.8 PCD115 45°); docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면 원 r65.8 px"
+    },
+    {
+     "name_ko": "유닛 고정 파일럿 ×4 (유닛 장공 Ø4.8×6.8 자리)",
+     "type": "blind from front face y215",
+     "dia": 3.4,
+     "depth": 10,
+     "pcd": 115,
+     "angles_deg": [
+      45,
+      135,
+      225,
+      315
+     ],
+     "centers": [
+      {
+       "x": 114.66,
+       "z": 182.66
+      },
+      {
+       "x": 33.34,
+       "z": 182.66
+      },
+      {
+       "x": 33.34,
+       "z": 101.34
+      },
+      {
+       "x": 114.66,
+       "z": 101.34
+      }
+     ],
+     "screw": "직결피스 8호 16 mm ×4 (L49)",
+     "assumed_fields": [
+      "depth=10 (막힌 구멍: 밀폐 상자라 관통하지 않음, 물림 약 9 + 1)"
+     ],
+     "source": "docs/report/toccata-build-v3.html table A08 (컷아웃 Ø94, 중심 x74/x1148, z142, 장공 4-Ø4.8×6.8 PCD115 45°); final-bom data.json L07 CW-100B25 (프레임 105×105, 깊이 57 + 플랜지 4, 컷아웃 Ø94, 4-Ø4.8×6.8 PCD Ø115, 0.74 kg); final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발)"
+    },
+    {
+     "name_ko": "그릴 고정 파일럿 ×4",
+     "type": "blind from front face y215",
+     "dia": 3.4,
+     "depth": 9,
+     "centers": [
+      {
+       "x": 131,
+       "z": 199
+      },
+      {
+       "x": 17,
+       "z": 199
+      },
+      {
+       "x": 17,
+       "z": 85
+      },
+      {
+       "x": 131,
+       "z": 85
+      }
+     ],
+     "screw": "직결피스 8호 19 mm ×4 (그릴 2 + 링 10 관통 후 약 7 mm 물림)",
+     "assumed_fields": [
+      "dia 3.4 (유닛 파일럿과 같게)",
+      "depth 9"
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면: 그릴 고정 원 (314.2,112.6)… → 중심에서 ±57, ±57; final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발)"
+    },
+    {
+     "name_ko": "스피커선 구멍",
+     "type": "through",
+     "dia": 6,
+     "center": {
+      "x": 6,
+      "z": 38
+     },
+     "axis": "y",
+     "note": "선을 통과시킨 뒤 목공본드로 막는다. 선은 앞면(y215)으로 나와 틈 3 mm를 따라 내려가 케이블 통로(z0~22)의 XT30 받침으로 간다",
+     "assumed_fields": [],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면: 원 (298.8,338.0) r4.2 px → 상자 왼쪽 끝에서 22, 상자 바닥에서 16(z38), Ø6"
+    }
+   ],
+   "features": [
+    {
+     "name_ko": "앞면 유닛 자리",
+     "note": "유닛 플랜지(y208~212) + EVA 가스켓 3T(y212~215)가 앞면(y215)에 닿는다: 유닛은 앞에서 끼우는 전면 장착"
+    },
+    {
+     "name_ko": "둘레 밀봉",
+     "note": "옆판 사이에 끼워(x 157) 위·아래판·옆판과 목공본드(SP6)로 밀봉"
+    }
+   ],
+   "print_orientation": "큰 면(157×210)을 베드에 눕혀 출력(두께 11.5가 z). 앞면(y215, 유닛·그릴 면)을 베드 쪽으로 두면 평탄. 서포트 없음(컷아웃·구멍 모두 수직 관통/막힘).",
+   "mass_g": 155,
+   "print_h": 10,
+   "source": "docs/report/toccata-build-v3.html 출력 표 (그릴 2개 32 g/2.5 h; 앞판 2개 155 g/10 h; 도브테일 블록 4개 10 g/0.6 h; 받침 4 mm 14개 1 g; XT30 받침 2개 5 g; 방진 브래킷 2개 6 g); docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm)",
+   "assumed": false
+  },
+  {
+   "id": "spkR_baffle",
+   "name_ko": "스피커 앞판(배플) R",
+   "qty": 1,
+   "material": "PETG (Bambu PETG Basic 블랙 CT2 / 회색)",
+   "dims": [
+    157,
+    11.5,
+    210
+   ],
+   "dims_axes": "x × y(두께) × z",
+   "world": {
+    "x": [
+     1069.5,
+     1226.5
+    ],
+    "y": [
+     215,
+     226.5
+    ],
+    "z": [
+     22,
+     232
+    ]
+   },
+   "holes": [
+    {
+     "name_ko": "유닛 컷아웃",
+     "type": "through",
+     "dia": 94,
+     "center": {
+      "x": 1148,
+      "z": 142
+     },
+     "axis": "y",
+     "source": "docs/report/toccata-build-v3.html table A08 (컷아웃 Ø94, 중심 x74/x1148, z142, 장공 4-Ø4.8×6.8 PCD115 45°); docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면 원 r65.8 px"
+    },
+    {
+     "name_ko": "유닛 고정 파일럿 ×4 (유닛 장공 Ø4.8×6.8 자리)",
+     "type": "blind from front face y215",
+     "dia": 3.4,
+     "depth": 10,
+     "pcd": 115,
+     "angles_deg": [
+      45,
+      135,
+      225,
+      315
+     ],
+     "centers": [
+      {
+       "x": 1188.66,
+       "z": 182.66
+      },
+      {
+       "x": 1107.34,
+       "z": 182.66
+      },
+      {
+       "x": 1107.34,
+       "z": 101.34
+      },
+      {
+       "x": 1188.66,
+       "z": 101.34
+      }
+     ],
+     "screw": "직결피스 8호 16 mm ×4 (L49)",
+     "assumed_fields": [
+      "depth=10 (막힌 구멍: 밀폐 상자라 관통하지 않음, 물림 약 9 + 1)"
+     ],
+     "source": "docs/report/toccata-build-v3.html table A08 (컷아웃 Ø94, 중심 x74/x1148, z142, 장공 4-Ø4.8×6.8 PCD115 45°); final-bom data.json L07 CW-100B25 (프레임 105×105, 깊이 57 + 플랜지 4, 컷아웃 Ø94, 4-Ø4.8×6.8 PCD Ø115, 0.74 kg); final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발)"
+    },
+    {
+     "name_ko": "그릴 고정 파일럿 ×4",
+     "type": "blind from front face y215",
+     "dia": 3.4,
+     "depth": 9,
+     "centers": [
+      {
+       "x": 1205,
+       "z": 199
+      },
+      {
+       "x": 1091,
+       "z": 199
+      },
+      {
+       "x": 1091,
+       "z": 85
+      },
+      {
+       "x": 1205,
+       "z": 85
+      }
+     ],
+     "screw": "직결피스 8호 19 mm ×4 (그릴 2 + 링 10 관통 후 약 7 mm 물림)",
+     "assumed_fields": [
+      "dia 3.4 (유닛 파일럿과 같게)",
+      "depth 9"
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면: 그릴 고정 원 (314.2,112.6)… → 중심에서 ±57, ±57; final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발)"
+    },
+    {
+     "name_ko": "스피커선 구멍",
+     "type": "through",
+     "dia": 6,
+     "center": {
+      "x": 1216,
+      "z": 38
+     },
+     "axis": "y",
+     "note": "선을 통과시킨 뒤 목공본드로 막는다. 선은 앞면(y215)으로 나와 틈 3 mm를 따라 내려가 케이블 통로(z0~22)의 XT30 받침으로 간다",
+     "assumed_fields": [
+      "R은 L을 좌우 대칭(바깥쪽 끝)으로 둔 값"
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면: 원 (298.8,338.0) r4.2 px → 상자 왼쪽 끝에서 22, 상자 바닥에서 16(z38), Ø6"
+    }
+   ],
+   "features": [
+    {
+     "name_ko": "앞면 유닛 자리",
+     "note": "유닛 플랜지(y208~212) + EVA 가스켓 3T(y212~215)가 앞면(y215)에 닿는다: 유닛은 앞에서 끼우는 전면 장착"
+    },
+    {
+     "name_ko": "둘레 밀봉",
+     "note": "옆판 사이에 끼워(x 157) 위·아래판·옆판과 목공본드(SP6)로 밀봉"
+    }
+   ],
+   "print_orientation": "큰 면(157×210)을 베드에 눕혀 출력(두께 11.5가 z). 앞면(y215, 유닛·그릴 면)을 베드 쪽으로 두면 평탄. 서포트 없음(컷아웃·구멍 모두 수직 관통/막힘).",
+   "mass_g": 155,
+   "print_h": 10,
+   "source": "docs/report/toccata-build-v3.html 출력 표 (그릴 2개 32 g/2.5 h; 앞판 2개 155 g/10 h; 도브테일 블록 4개 10 g/0.6 h; 받침 4 mm 14개 1 g; XT30 받침 2개 5 g; 방진 브래킷 2개 6 g); docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm)",
+   "assumed": false
+  },
+  {
+   "id": "spk_grille",
+   "name_ko": "스피커 육각 그릴 + 스페이서 링 (일체 출력)",
+   "qty": 2,
+   "material": "PETG 회색 또는 검정",
+   "dims": {
+    "outer": [
+     130,
+     130
+    ],
+    "grille_face_thickness": 2.0,
+    "ring_height": 10,
+    "ring_wall": 12,
+    "ring_inner": [
+     106,
+     106
+    ],
+    "total_depth_y": 12
+   },
+   "world": {
+    "L": {
+     "x": [
+      9,
+      139
+     ],
+     "y": [
+      203,
+      215
+     ],
+     "z": [
+      77,
+      207
+     ],
+     "face_y": [
+      203,
+      205
+     ],
+     "ring_y": [
+      205,
+      215
+     ]
+    },
+    "R": {
+     "x": [
+      1083,
+      1213
+     ],
+     "y": [
+      203,
+      215
+     ],
+     "z": [
+      77,
+      207
+     ],
+     "face_y": [
+      203,
+      205
+     ],
+     "ring_y": [
+      205,
+      215
+     ]
+    }
+   },
+   "lattice": {
+    "cell": "정육각형",
+    "across_flats": 10.0,
+    "bar_width": 1.8,
+    "pitch": 11.8,
+    "open_area_pct": 71.8,
+    "border": "링 벽과 같은 12 mm 테두리는 막힘(링과 겹침)",
+    "assumed": true,
+    "reason": "v3는 개구율 약 72 %(D17)만 정함; 맞은편 10 + 살 1.8 → (10/11.8)² = 71.8 %"
+   },
+   "holes": [
+    {
+     "name_ko": "그릴 고정 관통 ×4 (링 모서리)",
+     "type": "through (y)",
+     "dia": 4.5,
+     "centers_rel_to_driver_axis": [
+      [
+       57,
+       57
+      ],
+      [
+       -57,
+       57
+      ],
+      [
+       -57,
+       -57
+      ],
+      [
+       57,
+       -57
+      ]
+     ],
+     "note": "링 벽(중심에서 53~65) 모서리 안. 8호 19 mm",
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발) (출력 관통 Ø4.5)"
+    }
+   ],
+   "print_orientation": "그릴 면(130×130, 2 mm)을 베드에 두고 링(10)을 위로 세워 출력. 서포트 없음.",
+   "mass_g": 32,
+   "print_h": 2.5,
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 단면: 그릴 면 2.8 px = 2.0 mm(y203~205), 스페이서 링 14 px = 10 mm(y205~215), 링 벽 16.8 px = 12 mm(z77~89, z195~207); 정면: 그릴 130×130; docs/report/toccata-build-v3.html 출력 표 (그릴 2개 32 g/2.5 h; 앞판 2개 155 g/10 h; 도브테일 블록 4개 10 g/0.6 h; 받침 4 mm 14개 1 g; XT30 받침 2개 5 g; 방진 브래킷 2개 6 g); docs/report/toccata-build-v3.html D17(개구율 약 72 %)",
+   "assumed": [
+    "lattice cell/bar (개구율만 정해짐)",
+    "그릴 면 두께 2.0은 도면 8 단면 실측(글자 치수 없음)"
+   ]
+  },
+  {
+   "id": "spk_gasket",
+   "name_ko": "유닛 EVA 가스켓 3T",
+   "qty": 2,
+   "material": "EVA 3T (MEV1 자투리)",
+   "dims": {
+    "outer": [
+     105,
+     105
+    ],
+    "inner_dia": 94,
+    "thickness": 3
+   },
+   "holes": [
+    {
+     "dia": 4.8,
+     "pcd": 115,
+     "angles_deg": [
+      45,
+      135,
+      225,
+      315
+     ],
+     "note": "유닛 장공 자리"
+    }
+   ],
+   "world": {
+    "L": {
+     "x": [
+      21.5,
+      126.5
+     ],
+     "y": [
+      212,
+      215
+     ],
+     "z": [
+      89.5,
+      194.5
+     ]
+    },
+    "R": {
+     "x": [
+      1095.5,
+      1200.5
+     ],
+     "y": [
+      212,
+      215
+     ],
+     "z": [
+      89.5,
+      194.5
+     ]
+    }
+   },
+   "print_orientation": "출력 아님(칼로 재단)",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 단면: EVA 가스켓 3T y212~215, 유닛 플랜지 y208~212; MEV1 BOM",
+   "assumed": [
+    "안쪽 Ø94(컷아웃과 같게)",
+    "바깥 105×105(유닛 프레임과 같게)"
+   ]
+  },
+  {
+   "id": "xt30_holder_L",
+   "name_ko": "XT30 받침 L (케이블 통로 안, 스피커 파트 쪽)",
+   "qty": 1,
+   "material": "PETG 회색",
+   "dims": [
+    36,
+    20,
+    14
+   ],
+   "dims_axes": "x × y × z",
+   "world": {
+    "x": [
+     128,
+     164
+    ],
+    "y": [
+     218,
+     238
+    ],
+    "z": [
+     8,
+     22
+    ]
+   },
+   "pocket": {
+    "name_ko": "XT30U-F(암) 끼움 홈",
+    "size": [
+     12.6,
+     10.8,
+     5.6
+    ],
+    "size_axes": "x(길이) × y × z (커넥터 앞면 10.2×5.2, 길이 12.4 + 여유 0.2~0.3)",
+    "world": {
+     "x": [
+      151.4,
+      164
+     ],
+     "y": [
+      222.6,
+      233.4
+     ],
+     "z": [
+      12.2,
+      17.8
+     ]
+    },
+    "mouth": "+x (x=164 이음면, 가운데 유닛 쪽 통로를 향함)",
+    "wire_exit": "홈 뒤끝에서 아래로 6×4 선 슬롯"
+   },
+   "holes": [
+    {
+     "name_ko": "고정 관통 ×2 (위로, 스피커 아랫판 밑면에)",
+     "dia": 4.5,
+     "counterbore": {
+      "dia": 9,
+      "depth": 11
+     },
+     "centers": [
+      {
+       "x": 133,
+       "y": 228
+      },
+      {
+       "x": 143,
+       "y": 228
+      }
+     ],
+     "screw": "직결피스 8호 13 mm (L49, \"XT30 받침 4\" = 2개 × 2)",
+     "note": "나사 머리 밑 PETG 3 mm, 합판 물림 약 10 (아랫판 11.5 안에서 멈춤, 밀폐 유지); 옆판 끝면(x152.5~164 / x1058~1069.5 밑면)에는 박지 않는다"
+    }
+   ],
+   "print_orientation": "윗면(합판에 닿는 면)을 베드에. 홈 천장은 브리지 10.8.",
+   "mass_g": 5,
+   "source": "final-bom L61 XT30U-F (앞면 10.2×5.2, 길이 12.4) \"통로 안 XT30 받침(스피커 파트 쪽)에 끼워 두고\"; L49 13 mm \"XT30 받침 4\"; docs/report/toccata-build-v3.html 출력 표 (그릴 2개 32 g/2.5 h; 앞판 2개 155 g/10 h; 도브테일 블록 4개 10 g/0.6 h; 받침 4 mm 14개 1 g; XT30 받침 2개 5 g; 방진 브래킷 2개 6 g); docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) XT30 사각형 L x172~186·y223~233, R x1036~1050",
+   "assumed": true,
+   "reason": "모양 치수는 v3에 없음. 도면 10은 XT30을 이음(x164/x1058) 너머 가운데 유닛 밑(x172~186)에 그렸지만, 받침이 스피커 파트에 붙고 스피커 파트를 위에서 내려 끼우므로 받침은 x≤164(L)/x≥1058(R) 안에 두고 암 입구를 이음면에 맞췄다. 수·암을 꽂으면 짝이 x≈152~178(L)에 놓여 도면 위치와 거의 겹친다."
+  },
+  {
+   "id": "xt30_holder_R",
+   "name_ko": "XT30 받침 R (케이블 통로 안, 스피커 파트 쪽)",
+   "qty": 1,
+   "material": "PETG 회색",
+   "dims": [
+    36,
+    20,
+    14
+   ],
+   "dims_axes": "x × y × z",
+   "world": {
+    "x": [
+     1058,
+     1094
+    ],
+    "y": [
+     218,
+     238
+    ],
+    "z": [
+     8,
+     22
+    ]
+   },
+   "pocket": {
+    "name_ko": "XT30U-F(암) 끼움 홈",
+    "size": [
+     12.6,
+     10.8,
+     5.6
+    ],
+    "size_axes": "x(길이) × y × z (커넥터 앞면 10.2×5.2, 길이 12.4 + 여유 0.2~0.3)",
+    "world": {
+     "x": [
+      1058,
+      1070.6
+     ],
+     "y": [
+      222.6,
+      233.4
+     ],
+     "z": [
+      12.2,
+      17.8
+     ]
+    },
+    "mouth": "-x (x=1058 이음면)",
+    "wire_exit": "홈 뒤끝에서 아래로 6×4 선 슬롯"
+   },
+   "holes": [
+    {
+     "name_ko": "고정 관통 ×2 (위로, 스피커 아랫판 밑면에)",
+     "dia": 4.5,
+     "counterbore": {
+      "dia": 9,
+      "depth": 11
+     },
+     "centers": [
+      {
+       "x": 1089,
+       "y": 228
+      },
+      {
+       "x": 1079,
+       "y": 228
+      }
+     ],
+     "screw": "직결피스 8호 13 mm (L49, \"XT30 받침 4\" = 2개 × 2)",
+     "note": "나사 머리 밑 PETG 3 mm, 합판 물림 약 10 (아랫판 11.5 안에서 멈춤, 밀폐 유지); 옆판 끝면(x152.5~164 / x1058~1069.5 밑면)에는 박지 않는다"
+    }
+   ],
+   "print_orientation": "윗면(합판에 닿는 면)을 베드에. 홈 천장은 브리지 10.8.",
+   "mass_g": 5,
+   "source": "final-bom L61 XT30U-F (앞면 10.2×5.2, 길이 12.4) \"통로 안 XT30 받침(스피커 파트 쪽)에 끼워 두고\"; L49 13 mm \"XT30 받침 4\"; docs/report/toccata-build-v3.html 출력 표 (그릴 2개 32 g/2.5 h; 앞판 2개 155 g/10 h; 도브테일 블록 4개 10 g/0.6 h; 받침 4 mm 14개 1 g; XT30 받침 2개 5 g; 방진 브래킷 2개 6 g); docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) XT30 사각형 L x172~186·y223~233, R x1036~1050",
+   "assumed": true,
+   "reason": "모양 치수는 v3에 없음. 도면 10은 XT30을 이음(x164/x1058) 너머 가운데 유닛 밑(x172~186)에 그렸지만, 받침이 스피커 파트에 붙고 스피커 파트를 위에서 내려 끼우므로 받침은 x≤164(L)/x≥1058(R) 안에 두고 암 입구를 이음면에 맞췄다. 수·암을 꽂으면 짝이 x≈152~178(L)에 놓여 도면 위치와 거의 겹친다."
+  },
+  {
+   "id": "foot_spacer",
+   "name_ko": "뒷바 고무발 받침 4 mm",
+   "qty": 14,
+   "material": "PETG 회색",
+   "dims": {
+    "dia": 20,
+    "thickness": 4,
+    "hole_dia": 4.5
+   },
+   "world_z": [
+    18,
+    22
+   ],
+   "positions": "feet[] 참고 (스피커 파트 8 + 가운데 유닛 6)",
+   "print_orientation": "평평하게(두께 4가 z)",
+   "mass_g": 1,
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면·단면: 받침 4 mm 폭 28 px/1.4 = 20; docs/report/toccata-build-v3.html drawing 10 bottom (옆 단면, scale 1.25 px/mm) 받침 25 px/1.25 = 20 × 5 px = 4; docs/report/toccata-build-v3.html A15; docs/report/toccata-build-v3.html 출력 표 (그릴 2개 32 g/2.5 h; 앞판 2개 155 g/10 h; 도브테일 블록 4개 10 g/0.6 h; 받침 4 mm 14개 1 g; XT30 받침 2개 5 g; 방진 브래킷 2개 6 g); final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발)",
+   "assumed": [
+    "지름 20은 도면 실측(글자 치수 없음) = 고무발 윗면 지름과 같게"
+   ]
+  },
+  {
+   "id": "spk_bracket",
+   "name_ko": "방진 브래킷 (끝 부속 ↔ 스피커 파트)",
+   "qty": 2,
+   "material": "PETG (v3 출력 표: 회색 / C02 행: 검정)",
+   "dims": [
+    40,
+    17,
+    6
+   ],
+   "dims_axes": "x × y × z (평판)",
+   "world": {
+    "L": {
+     "x": [
+      -8,
+      32
+     ],
+     "y": [
+      205,
+      222
+     ],
+     "z": [
+      9,
+      15
+     ]
+    },
+    "R": {
+     "x": [
+      1200,
+      1236
+     ],
+     "y": [
+      205,
+      222
+     ],
+     "z": [
+      9,
+      15
+     ],
+     "note": "도면 7은 R을 36 폭(x1200~1236)으로 그림 — 끝 부속 R이 39.5 폭이라 40이면 O7 쪽으로 0.5 넘침"
+    }
+   },
+   "holes": [
+    {
+     "name_ko": "그로밋 구멍 ×2 (M3 실리콘 방진 그로밋, 1.6 mm 판용 홈)",
+     "count": 2,
+     "grommet_center_z": 12,
+     "centers_y": [
+      208.5,
+      218.5
+     ],
+     "dia": 6.5,
+     "groove_web": 1.6,
+     "assumed_fields": [
+      "y208.5(끝 부속 쪽)·y218.5(스피커 쪽) — 이음 양쪽에 하나씩으로 가정",
+      "구멍 Ø6.5 / 1.6 웹은 FPV 그로밋 규격 가정"
+     ]
+    }
+   ],
+   "print_orientation": "평판(40×17)을 베드에",
+   "mass_g": 6,
+   "print_h": 0.4,
+   "source": "docs/report/toccata-build-v3.html A12 (y205~222, PETG 40×17×6, 틈 3 mm용, 고무 그로밋 M3 ×2(z12)); drawing 7 (전체 배치, 0.62 px/mm): L x−8~32 · y205~222, R x1200~1236; final-bom L42 (브래킷마다 2개 = 4개, 위치만 잡고 무게는 고무발); docs/report/toccata-build-v3.html 출력 표 (그릴 2개 32 g/2.5 h; 앞판 2개 155 g/10 h; 도브테일 블록 4개 10 g/0.6 h; 받침 4 mm 14개 1 g; XT30 받침 2개 5 g; 방진 브래킷 2개 6 g)",
+   "assumed": true,
+   "reason": "v3 A12는 외형·y 범위·그로밋 높이만 정한다. v4 끝 부속은 뒷벽 y209~212가 z5~72.85로 막혀 있고(왼쪽은 z5~12의 리드 노치 x13.5~22.5 = EXT 선 출구), 스피커 쪽 y215~222는 z22 아래가 케이블 통로(재료 없음)라 z9~15 평판은 양쪽 모두 닿을 곳이 없다. STL 전에 설계 결정이 필요(conflicts 참고)."
+  },
+  {
+   "id": "dovetail_L_speaker",
+   "name_ko": "뒷바 결합 도브테일 블록 L — 스피커 파트 쪽(암, 아래 열림) + 래치 걸이 받침",
+   "qty": 1,
+   "material": "PETG 회색",
+   "world": {
+    "bar": {
+     "x": [
+      157.5,
+      164
+     ],
+     "y": [
+      268,
+      410
+     ],
+     "z": [
+      6,
+      22
+     ]
+    },
+    "ears": [
+     {
+      "x": [
+       136,
+       157.5
+      ],
+      "y": [
+       268,
+       280
+      ],
+      "z": [
+       16,
+       22
+      ]
+     },
+     {
+      "x": [
+       136,
+       157.5
+      ],
+      "y": [
+       322,
+       356
+      ],
+      "z": [
+       16,
+       22
+      ]
+     },
+     {
+      "x": [
+       136,
+       157.5
+      ],
+      "y": [
+       396,
+       410
+      ],
+      "z": [
+       16,
+       22
+      ]
+     }
+    ],
+    "latch_seat": {
+     "x": [
+      137.5,
+      164
+     ],
+     "y": [
+      410,
+      418
+     ],
+     "z": [
+      6,
+      50
+     ]
+    }
+   },
+   "dovetail": {
+    "count": 2,
+    "y_ranges": [
+     [
+      275,
+      293
+     ],
+     [
+      360,
+      378
+     ]
+    ],
+    "slide_axis": "z (스피커 파트를 위에서 내려 끼움)",
+    "profile_plan": {
+     "root": 14,
+     "tip": 18,
+     "depth": 4,
+     "clearance_per_side": 0.1
+    },
+    "groove": "암 홈: 바닥 관통(아래 열림), 천장 z21.7 없음 — 합판 밑면이 천장",
+    "note": "홈은 이음면(x=164)에서 스피커 쪽으로 깊이 4",
+    "groove_x": [
+     160,
+     164
+    ],
+    "web_behind_groove": 2.5
+   },
+   "holes": [
+    {
+     "name_ko": "합판 고정 ×4 (위로)",
+     "dia": 4.5,
+     "counterbore": {
+      "dia": 9
+     },
+     "screw": "직결피스 8호 13 mm (L49 \"도브테일 블록 4×4\")",
+     "note": "귀(ear) 3곳(두께 6, z16~22)에 둔다: 고무발(Ø28, 중심 x144·y299/y379)과 받침 Ø20을 피하고, 옆판 밑 끝면(x152.5~164)에는 박지 않는다. 막대는 발 원뿔(z6에서 반지름 13.3)과 0.2 이상 떨어짐",
+     "centers": [
+      {
+       "x": 142,
+       "y": 274
+      },
+      {
+       "x": 142,
+       "y": 331
+      },
+      {
+       "x": 142,
+       "y": 347
+      },
+      {
+       "x": 142,
+       "y": 403
+      }
+     ]
+    },
+    {
+     "name_ko": "래치 걸이 나사 ×2",
+     "dia": 2.75,
+     "screw": "M3×10 자가 탭 (L34, 출력 구멍 Ø2.7~2.8)",
+     "spacing": 12.5,
+     "note": "걸이 23.3×11.8, 구멍 간격 12.5"
+    }
+   ],
+   "print_orientation": "긴 면을 베드에(y가 x-y 평면), 받침 판은 세워서 한 번에; 도브테일 면 서포트 없음",
+   "mass_g": 10,
+   "print_h": 0.6,
+   "source": "docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) 도브테일 사각형 x160~168(L)/x1054~1062(R) × y275~293 · y360~378, 토글 래치 x152~176 / x1046~1070 뒷면; docs/report/toccata-build-v3.html §09 결합(R26) \"출력 도브테일 2개(위에서 내려 끼움) + 뒷면 토글 래치 1개, 맞닿는 면 사이에 EVA 3T\"; 출력 표 \"도브테일 블록 4, 10 g\"; L64 \"본체는 가운데 유닛 쪽, 걸이는 스피커 파트 쪽 도브테일 블록의 출력 받침에 M3×10 4개\"; L49 13 mm \"도브테일 블록 4×4\"; D01 모듈 도브테일(뿌리 6·끝 9·깊이 4·틈 0.10)",
+   "assumed": true,
+   "reason": "v3는 개수·무게·위치(평면)·나사만 정하고 블록 모양은 없다. 합판 면에 홈을 팔 수 없으니(드릴 없는 조립) 이음 한 곳에 수 블록(가운데 유닛) + 암 블록(스피커) 한 쌍, 각 블록에 도브테일 2개(도면 10 y 위치)와 뒷면 래치 받침을 합친 모양으로 제안. 22 mm 띄움 공간(z0~22)의 아랫판 밑면에 단다. 도브테일 평면 18 mm는 도면 10 사각형 길이, 깊이 4는 모듈 D01과 같게."
+  },
+  {
+   "id": "dovetail_L_centre",
+   "name_ko": "뒷바 결합 도브테일 블록 L — 가운데 유닛 쪽(수) + 래치 본체 받침",
+   "qty": 1,
+   "material": "PETG 회색",
+   "world": {
+    "bar": {
+     "x": [
+      164,
+      184
+     ],
+     "y": [
+      268,
+      410
+     ],
+     "z": [
+      6,
+      22
+     ]
+    },
+    "male": {
+     "x": [
+      160,
+      164
+     ],
+     "y_ranges": [
+      [
+       275,
+       293
+      ],
+      [
+       360,
+       378
+      ]
+     ],
+     "z": [
+      6,
+      21.7
+     ]
+    },
+    "latch_seat": {
+     "x": [
+      164,
+      210
+     ],
+     "y": [
+      410,
+      418
+     ],
+     "z": [
+      6,
+      50
+     ]
+    }
+   },
+   "dovetail": {
+    "count": 2,
+    "y_ranges": [
+     [
+      275,
+      293
+     ],
+     [
+      360,
+      378
+     ]
+    ],
+    "male": "이음면에서 스피커 쪽으로 4 돌출, 윗면 z21.7(암 천장=합판 밑면과 0.3 틈)",
+    "profile_plan": {
+     "root": 14,
+     "tip": 18,
+     "depth": 4
+    }
+   },
+   "holes": [
+    {
+     "name_ko": "합판 고정 ×4 (위로, 가운데 유닛 아랫판)",
+     "dia": 4.5,
+     "counterbore": {
+      "dia": 9
+     },
+     "screw": "직결피스 8호 13 mm (L49)",
+     "centers": [
+      {
+       "x": 178,
+       "y": 274
+      },
+      {
+       "x": 178,
+       "y": 330
+      },
+      {
+       "x": 178,
+       "y": 350
+      },
+      {
+       "x": 178,
+       "y": 404
+      }
+     ],
+     "note": "가운데 유닛 발(x200/x1022, Ø28 → x186~214 / x1008~1036)을 피해 막대 폭 20. 가운데 유닛 끝판 두께·결 방향은 body_centre_unit 쪽 값으로 확인(끝면이면 x≥176/≤1046로 옮김)"
+    },
+    {
+     "name_ko": "래치 본체 나사 ×2",
+     "dia": 2.75,
+     "screw": "M3×10 자가 탭 (L34)",
+     "spacing": 10.5,
+     "note": "본체 폭 25.2, 높이 10, 길이 43.3"
+    }
+   ],
+   "print_orientation": "긴 면을 베드에",
+   "mass_g": 10,
+   "print_h": 0.6,
+   "source": "docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) 도브테일 사각형 x160~168(L)/x1054~1062(R) × y275~293 · y360~378, 토글 래치 x152~176 / x1046~1070 뒷면; docs/report/toccata-build-v3.html §09 결합(R26) \"출력 도브테일 2개(위에서 내려 끼움) + 뒷면 토글 래치 1개, 맞닿는 면 사이에 EVA 3T\"; 출력 표 \"도브테일 블록 4, 10 g\"; L64 \"본체는 가운데 유닛 쪽, 걸이는 스피커 파트 쪽 도브테일 블록의 출력 받침에 M3×10 4개\"; L49 13 mm \"도브테일 블록 4×4\"; D01 모듈 도브테일(뿌리 6·끝 9·깊이 4·틈 0.10)",
+   "assumed": true,
+   "reason": "v3는 개수·무게·위치(평면)·나사만 정하고 블록 모양은 없다. 합판 면에 홈을 팔 수 없으니(드릴 없는 조립) 이음 한 곳에 수 블록(가운데 유닛) + 암 블록(스피커) 한 쌍, 각 블록에 도브테일 2개(도면 10 y 위치)와 뒷면 래치 받침을 합친 모양으로 제안. 22 mm 띄움 공간(z0~22)의 아랫판 밑면에 단다. 도브테일 평면 18 mm는 도면 10 사각형 길이, 깊이 4는 모듈 D01과 같게."
+  },
+  {
+   "id": "dovetail_R_speaker",
+   "name_ko": "뒷바 결합 도브테일 블록 R — 스피커 파트 쪽(암, 아래 열림) + 래치 걸이 받침",
+   "qty": 1,
+   "material": "PETG 회색",
+   "world": {
+    "bar": {
+     "x": [
+      1058,
+      1064.5
+     ],
+     "y": [
+      268,
+      410
+     ],
+     "z": [
+      6,
+      22
+     ]
+    },
+    "ears": [
+     {
+      "x": [
+       1064.5,
+       1086
+      ],
+      "y": [
+       268,
+       280
+      ],
+      "z": [
+       16,
+       22
+      ]
+     },
+     {
+      "x": [
+       1064.5,
+       1086
+      ],
+      "y": [
+       322,
+       356
+      ],
+      "z": [
+       16,
+       22
+      ]
+     },
+     {
+      "x": [
+       1064.5,
+       1086
+      ],
+      "y": [
+       396,
+       410
+      ],
+      "z": [
+       16,
+       22
+      ]
+     }
+    ],
+    "latch_seat": {
+     "x": [
+      1058,
+      1084.5
+     ],
+     "y": [
+      410,
+      418
+     ],
+     "z": [
+      6,
+      50
+     ]
+    }
+   },
+   "dovetail": {
+    "count": 2,
+    "y_ranges": [
+     [
+      275,
+      293
+     ],
+     [
+      360,
+      378
+     ]
+    ],
+    "slide_axis": "z (스피커 파트를 위에서 내려 끼움)",
+    "profile_plan": {
+     "root": 14,
+     "tip": 18,
+     "depth": 4,
+     "clearance_per_side": 0.1
+    },
+    "groove": "암 홈: 바닥 관통(아래 열림), 천장 z21.7 없음 — 합판 밑면이 천장",
+    "note": "홈은 이음면(x=1058)에서 스피커 쪽으로 깊이 4",
+    "groove_x": [
+     1058,
+     1062
+    ],
+    "web_behind_groove": 2.5
+   },
+   "holes": [
+    {
+     "name_ko": "합판 고정 ×4 (위로)",
+     "dia": 4.5,
+     "counterbore": {
+      "dia": 9
+     },
+     "screw": "직결피스 8호 13 mm (L49 \"도브테일 블록 4×4\")",
+     "note": "귀(ear) 3곳(두께 6, z16~22)에 둔다: 고무발(Ø28, 중심 x1078·y299/y379)과 받침 Ø20을 피하고, 옆판 밑 끝면(x1058~1069.5)에는 박지 않는다. 막대는 발 원뿔(z6에서 반지름 13.3)과 0.2 이상 떨어짐",
+     "centers": [
+      {
+       "x": 1080,
+       "y": 274
+      },
+      {
+       "x": 1080,
+       "y": 331
+      },
+      {
+       "x": 1080,
+       "y": 347
+      },
+      {
+       "x": 1080,
+       "y": 403
+      }
+     ]
+    },
+    {
+     "name_ko": "래치 걸이 나사 ×2",
+     "dia": 2.75,
+     "screw": "M3×10 자가 탭 (L34, 출력 구멍 Ø2.7~2.8)",
+     "spacing": 12.5,
+     "note": "걸이 23.3×11.8, 구멍 간격 12.5"
+    }
+   ],
+   "print_orientation": "긴 면을 베드에(y가 x-y 평면), 받침 판은 세워서 한 번에; 도브테일 면 서포트 없음",
+   "mass_g": 10,
+   "print_h": 0.6,
+   "source": "docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) 도브테일 사각형 x160~168(L)/x1054~1062(R) × y275~293 · y360~378, 토글 래치 x152~176 / x1046~1070 뒷면; docs/report/toccata-build-v3.html §09 결합(R26) \"출력 도브테일 2개(위에서 내려 끼움) + 뒷면 토글 래치 1개, 맞닿는 면 사이에 EVA 3T\"; 출력 표 \"도브테일 블록 4, 10 g\"; L64 \"본체는 가운데 유닛 쪽, 걸이는 스피커 파트 쪽 도브테일 블록의 출력 받침에 M3×10 4개\"; L49 13 mm \"도브테일 블록 4×4\"; D01 모듈 도브테일(뿌리 6·끝 9·깊이 4·틈 0.10)",
+   "assumed": true,
+   "reason": "v3는 개수·무게·위치(평면)·나사만 정하고 블록 모양은 없다. 합판 면에 홈을 팔 수 없으니(드릴 없는 조립) 이음 한 곳에 수 블록(가운데 유닛) + 암 블록(스피커) 한 쌍, 각 블록에 도브테일 2개(도면 10 y 위치)와 뒷면 래치 받침을 합친 모양으로 제안. 22 mm 띄움 공간(z0~22)의 아랫판 밑면에 단다. 도브테일 평면 18 mm는 도면 10 사각형 길이, 깊이 4는 모듈 D01과 같게."
+  },
+  {
+   "id": "dovetail_R_centre",
+   "name_ko": "뒷바 결합 도브테일 블록 R — 가운데 유닛 쪽(수) + 래치 본체 받침",
+   "qty": 1,
+   "material": "PETG 회색",
+   "world": {
+    "bar": {
+     "x": [
+      1038,
+      1058
+     ],
+     "y": [
+      268,
+      410
+     ],
+     "z": [
+      6,
+      22
+     ]
+    },
+    "male": {
+     "x": [
+      1058,
+      1062
+     ],
+     "y_ranges": [
+      [
+       275,
+       293
+      ],
+      [
+       360,
+       378
+      ]
+     ],
+     "z": [
+      6,
+      21.7
+     ]
+    },
+    "latch_seat": {
+     "x": [
+      1012,
+      1058
+     ],
+     "y": [
+      410,
+      418
+     ],
+     "z": [
+      6,
+      50
+     ]
+    }
+   },
+   "dovetail": {
+    "count": 2,
+    "y_ranges": [
+     [
+      275,
+      293
+     ],
+     [
+      360,
+      378
+     ]
+    ],
+    "male": "이음면에서 스피커 쪽으로 4 돌출, 윗면 z21.7(암 천장=합판 밑면과 0.3 틈)",
+    "profile_plan": {
+     "root": 14,
+     "tip": 18,
+     "depth": 4
+    }
+   },
+   "holes": [
+    {
+     "name_ko": "합판 고정 ×4 (위로, 가운데 유닛 아랫판)",
+     "dia": 4.5,
+     "counterbore": {
+      "dia": 9
+     },
+     "screw": "직결피스 8호 13 mm (L49)",
+     "centers": [
+      {
+       "x": 1044,
+       "y": 274
+      },
+      {
+       "x": 1044,
+       "y": 330
+      },
+      {
+       "x": 1044,
+       "y": 350
+      },
+      {
+       "x": 1044,
+       "y": 404
+      }
+     ],
+     "note": "가운데 유닛 발(x200/x1022, Ø28 → x186~214 / x1008~1036)을 피해 막대 폭 20. 가운데 유닛 끝판 두께·결 방향은 body_centre_unit 쪽 값으로 확인(끝면이면 x≥176/≤1046로 옮김)"
+    },
+    {
+     "name_ko": "래치 본체 나사 ×2",
+     "dia": 2.75,
+     "screw": "M3×10 자가 탭 (L34)",
+     "spacing": 10.5,
+     "note": "본체 폭 25.2, 높이 10, 길이 43.3"
+    }
+   ],
+   "print_orientation": "긴 면을 베드에",
+   "mass_g": 10,
+   "print_h": 0.6,
+   "source": "docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) 도브테일 사각형 x160~168(L)/x1054~1062(R) × y275~293 · y360~378, 토글 래치 x152~176 / x1046~1070 뒷면; docs/report/toccata-build-v3.html §09 결합(R26) \"출력 도브테일 2개(위에서 내려 끼움) + 뒷면 토글 래치 1개, 맞닿는 면 사이에 EVA 3T\"; 출력 표 \"도브테일 블록 4, 10 g\"; L64 \"본체는 가운데 유닛 쪽, 걸이는 스피커 파트 쪽 도브테일 블록의 출력 받침에 M3×10 4개\"; L49 13 mm \"도브테일 블록 4×4\"; D01 모듈 도브테일(뿌리 6·끝 9·깊이 4·틈 0.10)",
+   "assumed": true,
+   "reason": "v3는 개수·무게·위치(평면)·나사만 정하고 블록 모양은 없다. 합판 면에 홈을 팔 수 없으니(드릴 없는 조립) 이음 한 곳에 수 블록(가운데 유닛) + 암 블록(스피커) 한 쌍, 각 블록에 도브테일 2개(도면 10 y 위치)와 뒷면 래치 받침을 합친 모양으로 제안. 22 mm 띄움 공간(z0~22)의 아랫판 밑면에 단다. 도브테일 평면 18 mm는 도면 10 사각형 길이, 깊이 4는 모듈 D01과 같게."
+  }
+ ],
+ "joints": [
+  {
+   "id": "J1",
+   "name_ko": "가운데 유닛 ↔ 스피커 파트 (L: x164, R: x1058)",
+   "type": "출력 도브테일 2(위에서 내려 끼움) + 뒷면 토글 래치 1 + 맞닿는 면 EVA 3T 띠",
+   "parts": [
+    "dovetail_L_speaker",
+    "dovetail_L_centre",
+    "toggle_latch_L64",
+    "EVA 3T 띠"
+   ],
+   "detail": {
+    "dovetail_y": [
+     [
+      275,
+      293
+     ],
+     [
+      360,
+      378
+     ]
+    ],
+    "latch_x_L": [
+     137,
+     191
+    ],
+    "latch_x_R": [
+     1031,
+     1085
+    ],
+    "eva": {
+     "thickness": 3,
+     "size_assumed": [
+      195,
+      20
+     ],
+     "note": "맞닿는 면(옆판 바깥면) 아래쪽 띠, 크기 가정"
+    }
+   },
+   "note": "A16/A06은 이음선을 x164·x1058로 두므로 EVA 3T는 압축 후 두께 0으로 본 공칭값(실제로는 3 mm만큼 스피커 파트가 바깥으로 밀림 → 전체 폭 1254+6 가능, conflicts 참고)",
+   "source": "docs/report/toccata-build-v3.html §09 결합(R26); docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18); L64; MEV1 \"가운데 유닛 ↔ 스피커 파트 맞닿는 면의 띠\"",
+   "assumed": [
+    "도브테일 블록 모양",
+    "EVA 띠 크기"
+   ]
+  },
+  {
+   "id": "J2",
+   "name_ko": "끝 부속 ↔ 스피커 파트 (틈 3 mm)",
+   "type": "방진 브래킷 40×17×6 + M3 실리콘 그로밋 2",
+   "parts": [
+    "spk_bracket"
+   ],
+   "detail": {
+    "L_x": [
+     -8,
+     32
+    ],
+    "R_x": [
+     1200,
+     1236
+    ],
+    "y": [
+     205,
+     222
+    ],
+    "grommet_z": 12
+   },
+   "note": "위치만 잡고 스피커 무게는 고무발이 받는다(L42)",
+   "source": "docs/report/toccata-build-v3.html A12; drawing 7; L42",
+   "assumed": true
+  },
+  {
+   "id": "J3",
+   "name_ko": "스피커선 XT30 (L: X703↔X704, R: X705↔X706)",
+   "type": "XT30U-M(앰프 쪽, 통로를 지나 온 선) → XT30U-F(스피커 쪽, 받침에 끼움)",
+   "parts": [
+    "xt30_holder_L",
+    "xt30_holder_R"
+   ],
+   "detail": {
+    "channel": {
+     "y": [
+      215,
+      258
+     ],
+     "z": [
+      0,
+      22
+     ]
+    },
+    "holder_L_x": [
+     128,
+     164
+    ],
+    "holder_R_x": [
+     1058,
+     1094
+    ],
+    "center_y": 228
+   },
+   "source": "final-bom L61; docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18); docs/report/toccata-build-v3.html A13",
+   "assumed": true
+  },
+  {
+   "id": "J4",
+   "name_ko": "앞판(배플) ↔ 상자",
+   "type": "목공본드(오공 205) 밀봉, 나사 없음",
+   "source": "SP6; docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm)"
+  },
+  {
+   "id": "J5",
+   "name_ko": "유닛 ↔ 앞판",
+   "type": "앞에서 장착: 유닛 플랜지(y208~212) + EVA 가스켓 3T(y212~215) + 직결피스 8호 16 mm ×4(PCD115, 45°)",
+   "source": "final-bom data.json L07 CW-100B25 (프레임 105×105, 깊이 57 + 플랜지 4, 컷아웃 Ø94, 4-Ø4.8×6.8 PCD Ø115, 0.74 kg); final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발); docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm)"
+  },
+  {
+   "id": "J6",
+   "name_ko": "그릴 ↔ 앞판",
+   "type": "그릴+링(y203~215)을 직결피스 8호 19 mm ×4로 (±57, ±57)",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); final-bom data.json L49 직결피스 8호 Ø4.2 (16 mm: 유닛, PETG 파일럿 Ø3.4, 물림 16−4−3≈9; 19 mm: 그릴, 링 10 관통; 13 mm: 뒷바 출력 부품, 출력 관통 Ø4.5; 25 mm: 고무발)"
+  },
+  {
+   "id": "J7",
+   "name_ko": "상자 판재끼리",
+   "type": "맞대기 + 목공본드, 옆판이 앞·뒤·위·아래판을 감쌈(옆판 195×210 전체, 나머지 157 폭)",
+   "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); L10; SP6"
+  }
+ ],
+ "feet": {
+  "count": 14,
+  "foot": {
+   "part": "L14 화성고무 RUB-E2 피스고무발",
+   "bottom_dia": 28,
+   "top_dia": 20,
+   "height": 18,
+   "hole_dia": 5,
+   "z": [
+    0,
+    18
+   ],
+   "spacer": {
+    "part": "받침 4 mm (출력, printed[] foot_spacer)",
+    "dia": 20,
+    "t": 4,
+    "z": [
+     18,
+     22
+    ]
+   },
+   "screw": "직결피스 8호 25 mm (L49) + M4 와셔 9×0.5 (L36), 아래에서 위로"
+  },
+  "positions": [
+   {
+    "group": "스피커 L",
+    "x": 4,
+    "y": 299,
+    "y_top_face": [
+     289,
+     309
+    ],
+    "y_bottom": [
+     285,
+     313
+    ]
+   },
+   {
+    "group": "스피커 L",
+    "x": 4,
+    "y": 379,
+    "y_top_face": [
+     369,
+     389
+    ],
+    "y_bottom": [
+     365,
+     393
+    ]
+   },
+   {
+    "group": "스피커 L",
+    "x": 144,
+    "y": 299,
+    "y_top_face": [
+     289,
+     309
+    ],
+    "y_bottom": [
+     285,
+     313
+    ]
+   },
+   {
+    "group": "스피커 L",
+    "x": 144,
+    "y": 379,
+    "y_top_face": [
+     369,
+     389
+    ],
+    "y_bottom": [
+     365,
+     393
+    ]
+   },
+   {
+    "group": "가운데 유닛",
+    "x": 200,
+    "y": 299,
+    "y_top_face": [
+     289,
+     309
+    ],
+    "y_bottom": [
+     285,
+     313
+    ]
+   },
+   {
+    "group": "가운데 유닛",
+    "x": 200,
+    "y": 379,
+    "y_top_face": [
+     369,
+     389
+    ],
+    "y_bottom": [
+     365,
+     393
+    ]
+   },
+   {
+    "group": "가운데 유닛",
+    "x": 620,
+    "y": 299,
+    "y_top_face": [
+     289,
+     309
+    ],
+    "y_bottom": [
+     285,
+     313
+    ]
+   },
+   {
+    "group": "가운데 유닛",
+    "x": 620,
+    "y": 379,
+    "y_top_face": [
+     369,
+     389
+    ],
+    "y_bottom": [
+     365,
+     393
+    ]
+   },
+   {
+    "group": "가운데 유닛",
+    "x": 1022,
+    "y": 299,
+    "y_top_face": [
+     289,
+     309
+    ],
+    "y_bottom": [
+     285,
+     313
+    ]
+   },
+   {
+    "group": "가운데 유닛",
+    "x": 1022,
+    "y": 379,
+    "y_top_face": [
+     369,
+     389
+    ],
+    "y_bottom": [
+     365,
+     393
+    ]
+   },
+   {
+    "group": "스피커 R",
+    "x": 1078,
+    "y": 299,
+    "y_top_face": [
+     289,
+     309
+    ],
+    "y_bottom": [
+     285,
+     313
+    ]
+   },
+   {
+    "group": "스피커 R",
+    "x": 1078,
+    "y": 379,
+    "y_top_face": [
+     369,
+     389
+    ],
+    "y_bottom": [
+     365,
+     393
+    ]
+   },
+   {
+    "group": "스피커 R",
+    "x": 1218,
+    "y": 299,
+    "y_top_face": [
+     289,
+     309
+    ],
+    "y_bottom": [
+     285,
+     313
+    ]
+   },
+   {
+    "group": "스피커 R",
+    "x": 1218,
+    "y": 379,
+    "y_top_face": [
+     369,
+     389
+    ],
+    "y_bottom": [
+     365,
+     393
+    ]
+   }
+  ],
+  "rule": "스피커 상자마다 상자 끝에서 20 mm 안쪽(x 상자-local 20·160), 앞 y215에서 84·164(=y299·y379); 가운데 유닛 x200·620(CU 칸 중심)·1022",
+  "source": "docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) 원 r10.36 px(=Ø28) 중심 → x 4,144,200,620,1022,1078,1218 · y299,379; docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 정면: 발 윗면 x상자+10~30·150~170, 단면: y215+74~94·154~174; docs/report/toccata-build-v3.html drawing 10 bottom (옆 단면, scale 1.25 px/mm) 발 y299·379, 윗면 20·밑면 28·높이 18 + 받침 4; final-bom data.json L14 화성고무 RUB-E2 (외경 28, 구멍 약 Ø5, 높이 약 18~20 원뿔대, 25 mm 직결피스 + M4 와셔 L36; 스피커 4×2 + 가운데 6 = 14); docs/report/toccata-build-v3.html A15",
+  "assumed": [
+   "윗면 지름 20은 도면 실측(판매처 표기는 외경 28만)"
+  ],
+  "caution": "25 mm 피스: 고무발 머리 자리 깊이에 따라 합판 물림이 11.5를 넘으면 스피커 아랫판을 뚫어 밀폐가 깨진다 — 받은 고무발로 (25 − 4 − 발 속 두께) ≤ 11 확인"
+ },
+ "names_ko": {
+  "speaker_part": "스피커 파트",
+  "baffle": "앞판(배플)",
+  "side_panel": "옆판",
+  "back_panel": "뒤판",
+  "top_panel": "윗판",
+  "bottom_panel": "아랫판",
+  "grille": "PETG 육각 그릴",
+  "spacer_ring": "스페이서 링",
+  "gasket": "EVA 가스켓",
+  "xt30_holder": "XT30 받침",
+  "foot": "고무발",
+  "foot_spacer": "뒷바 고무발 받침 4 mm",
+  "bracket": "방진 브래킷",
+  "grommet": "실리콘 방진 그로밋",
+  "dovetail_block": "뒷바 결합 도브테일 블록",
+  "toggle_latch": "토글 래치(매미고리)",
+  "cable_channel": "케이블 통로",
+  "centre_unit": "가운데 유닛",
+  "end_part": "끝 부속",
+  "fill": "흡음솜",
+  "driver": "스피커 유닛 CW-100B25"
+ },
+ "notes": [
+  "단위 mm, 월드 좌표: x 가로(0 = A0 왼쪽 경계), y 백건 앞끝에서 뒤로(+), z 책상에서 위로",
+  "스피커 파트 L/R은 x에 대해 거울 대칭(L 상자 x−16~164, R 상자 x1058~1238); 유닛 축 L x74, R x1148, z142",
+  "패널 id의 inner/outer: inner = 가운데 유닛과 맞닿는 옆판",
+  "assumed 표시: 문서에 수치가 없어 제안한 값(이유 포함). 나머지는 v3 보고서(toccata-build-v3.html) 표·도면 실측(도면 스케일 px/mm로 환산, 소수 0.1 이내 일치) 또는 final-bom data.json 스펙",
+  "도면 스케일: 도면 8 = 1.4 px/mm(180 = 252 px), 도면 10 평면 = 0.74 px/mm(1254 = 927.96 px), 도면 10 단면 = 1.25 px/mm, 도면 7 = 0.62 px/mm"
+ ],
+ "box_summary": {
+  "outer": [
+   180,
+   195,
+   210
+  ],
+  "inner": [
+   157,
+   172,
+   187
+  ],
+  "inner_volume_L": 5.05,
+  "L": {
+   "x": [
+    -16,
+    164
+   ],
+   "y": [
+    215,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "driver_axis": {
+    "x": 74,
+    "z": 142
+   }
+  },
+  "R": {
+   "x": [
+    1058,
+    1238
+   ],
+   "y": [
+    215,
+    410
+   ],
+   "z": [
+    22,
+    232
+   ],
+   "driver_axis": {
+    "x": 1148,
+    "z": 142
+   }
+  },
+  "baffle_face": "y215 (연주자 쪽, -y를 향함)",
+  "lift": "z0~22 = 고무발 18 + 출력 받침 4 (A15)",
+  "cable_channel": "y215~258, z0~22 (A13) - 상자 밑 앞쪽 43 mm",
+  "fill": "흡음솜 40~60 g (L12) 뒤쪽에 느슨하게",
+  "joinery": "맞대기 + 목공본드(오공 205, SP6)만, 드릴·나사 없음; 마스킹테이프로 눌러 굳힘",
+  "source": "docs/report/toccata-build-v3.html table A06 (L x-16~164, R x1058~1238, y215~410, z22~232); docs/report/toccata-build-v3.html A08, A20; docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm); SP6 BOM"
+ },
+ "latch": {
+  "id": "toggle_latch_L64",
+  "name_ko": "토글 래치 (매미고리 1-20, SUS304)",
+  "qty": 2,
+  "bought": true,
+  "dims": {
+   "closed_length": 54,
+   "body": {
+    "length": 43.3,
+    "width": 25.2,
+    "height": 10,
+    "holes": "2-Ø4, 간격 10.5"
+   },
+   "catch": {
+    "length": 23.3,
+    "width": 11.8,
+    "height": 8.8,
+    "holes": "2-Ø4, 간격 12.5"
+   },
+   "sheet_t": "1.0~1.2"
+  },
+  "placement": {
+   "L": {
+    "joint_x": 164,
+    "face": "뒷면 y410(받침 판 y410~418 바깥면 y418)",
+    "x": [
+     137,
+     191
+    ],
+    "z_center": 35,
+    "body_side": "가운데 유닛 쪽(x164~191)",
+    "catch_side": "스피커 쪽(x137~164)"
+   },
+   "R": {
+    "joint_x": 1058,
+    "x": [
+     1031,
+     1085
+    ],
+    "z_center": 35,
+    "body_side": "가운데 유닛 쪽(x1031~1058)",
+    "catch_side": "스피커 쪽(x1058~1085)"
+   }
+  },
+  "fasteners": "M3×10 자가 탭 ×4 per latch (L34, 본체 2 + 걸이 2), 출력 받침 구멍 Ø2.7~2.8",
+  "source": "final-bom L64 (25.2×43.3×10 본체, 걸이 23.3×11.8×8.8, 2-Ø4 간격 10.5/12.5); v3 L64 행 \"본체는 가운데 유닛 쪽, 걸이는 스피커 파트 쪽 도브테일 블록의 출력 받침에 M3×10 4개\"; docs/report/toccata-build-v3.html drawing 10 top (뒷바 속 배치, scale 0.74 px/mm, x=-16 at px 50.36, y215 at px 273.18) 토글 래치 x152~176 · y407~413(L), x1046~1070(R)",
+  "assumed": [
+   "x 범위: 잠근 길이 54를 이음선 중심으로 둔 값(도면 10은 24 폭 기호)",
+   "z 중심 35: 받침 판 z6~50 안에서 폭 25.2가 들어가는 높이(v3에 z 없음)",
+   "받침 판 두께 8(y410~418): M3×10 물림 확보를 위한 가정"
+  ]
+ },
+ "driver": {
+  "model": "삼미 CW-100B25",
+  "frame": [
+   105,
+   105
+  ],
+  "depth_total": 61,
+  "flange_t": 4,
+  "basket_depth": 57,
+  "magnet_g": 280,
+  "mass_kg": 0.74,
+  "world": {
+   "L": {
+    "x": [
+     21.5,
+     126.5
+    ],
+    "y": [
+     208,
+     269
+    ],
+    "z": [
+     89.5,
+     194.5
+    ]
+   },
+   "R": {
+    "x": [
+     1095.5,
+     1200.5
+    ],
+    "y": [
+     208,
+     269
+    ],
+    "z": [
+     89.5,
+     194.5
+    ]
+   }
+  },
+  "note": "플랜지 앞면 y208, 뒤끝 y269(상자 안 y226.5 이후 43 mm)",
+  "source": "final-bom data.json L07 CW-100B25 (프레임 105×105, 깊이 57 + 플랜지 4, 컷아웃 Ø94, 4-Ø4.8×6.8 PCD Ø115, 0.74 kg); docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; scale 1.4 px/mm) 단면 유닛 깊이 61"
+ },
+ "conflicts": [
+  "feet y: 과제 문구의 y258~276·y392~410과 달리 도면 8 단면·도면 10 평면·단면 모두 발 중심 y299·y379(윗면 y289~309·y369~389)로 일치 → 도면 값 사용",
+  "XT30: 도면 10은 x172~186(가운데 유닛 밑)에 그렸으나 BOM/출력 표는 \"스피커 파트 쪽\" 받침 → 받침을 스피커 파트 밑 x128~164(L)/x1058~1094(R)에 두고 입구를 이음면에 맞춤",
+  "방진 브래킷 A12(y205~222, z9~15 평판, 그로밋 z12)는 v4 끝 부속과 맞지 않음: v4 뒷벽 y209~212가 z5~72.85로 막힘(왼쪽 z5~12 리드 노치 x13.5~22.5는 EXT 선 출구와 겹침), 스피커 쪽 y215~222는 z22 아래 재료 없음 → 장착 방식 결정 필요(예: 앞판을 출력하니 앞판 아래에 러그를 붙이거나, 끝 부속 뒷벽 바깥면에 그로밋 보스를 추가)",
+  "방진 브래킷 R 폭: A12/출력 표 40 vs 도면 7 36(x1200~1236); 끝 부속 R이 39.5 폭이라 36 권장",
+  "EVA 3T(가운데 유닛 ↔ 스피커 파트)를 넣으면 이음이 공칭 x164/x1058보다 3 mm씩 벌어져 전체 폭이 1254 → 약 1260이 된다(v3 A05는 반영 안 함)",
+  "브래킷 재질 색: 출력 표 \"PETG 회색\" vs C02 행 \"검정 1 kg — 방진 브래킷\"",
+  "고무발 25 mm 피스가 발 속 두께에 따라 스피커 아랫판(11.5)을 뚫을 수 있음 — 받은 부품으로 확인"
+ ]
+}

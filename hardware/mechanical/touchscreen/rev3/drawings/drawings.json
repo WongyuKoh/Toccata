@@ -1,0 +1,587 @@
+{
+ "project": "Toccata R31 터치스크린 수정 3a판 (B1 · L2) · 도면 고침 1",
+ "date": "2026-10-01",
+ "rev": "3a",
+ "sources": {
+  "design/numbers.json": "8f5821c7119bd4a2a80246d23ebf0cab",
+  "design/CAD_SPEC_rev3.md": "ef2b24916710ef0c50a1be79186d6b16",
+  "L2_cu.json": "c1ad7dd69e304389dad2939164fe8c20",
+  "drawings/src/ctx/body_L2.json": "2d716999e7db36987f50e018a41b8a35"
+ },
+ "checks": [
+  {
+   "item": "pose 25 deg matrix = formula (u-2.5 w-1)",
+   "ok": true,
+   "detail": "216.607,93.157 vs 216.609,93.158"
+  },
+  {
+   "item": "pose 25 deg matrix = formula (u103.5 w16)",
+   "ok": true,
+   "detail": "276.812,182.041 vs 276.813,182.042"
+  },
+  {
+   "item": "pose 25 deg matrix = formula (u30 w16.5)",
+   "ok": true,
+   "detail": "246.203,115.216 vs 246.204,115.217"
+  },
+  {
+   "item": "pose 22 deg matrix = formula (u-2.5 w-1)",
+   "ok": true,
+   "detail": "216.006,92.617 vs 216.004,92.621"
+  },
+  {
+   "item": "pose 22 deg matrix = formula (u103.5 w16)",
+   "ok": true,
+   "detail": "271.477,184.530 vs 271.475,184.534"
+  },
+  {
+   "item": "pose 22 deg matrix = formula (u30 w16.5)",
+   "ok": true,
+   "detail": "244.407,116.195 vs 244.405,116.199"
+  },
+  {
+   "item": "pose 90 deg matrix = formula (u-2.5 w-1)",
+   "ok": true,
+   "detail": "233.050,95.350 vs 233.050,95.350"
+  },
+  {
+   "item": "pose 90 deg matrix = formula (u103.5 w16)",
+   "ok": true,
+   "detail": "339.050,78.350 vs 339.050,78.350"
+  },
+  {
+   "item": "pose 90 deg matrix = formula (u30 w16.5)",
+   "ok": true,
+   "detail": "265.550,77.850 vs 265.550,77.850"
+  },
+  {
+   "item": "walls (numbers cradle.walls) = glass + gaps: bottom u0, top gap 0.5, side inner face = glass/2 + 0.3",
+   "ok": true,
+   "detail": "u0.0 / top 101.5 gap 0.50 / side 83.35"
+  },
+  {
+   "item": "cradle outer width = glass + 2 (clr + rim)",
+   "ok": true,
+   "detail": "170.7"
+  },
+  {
+   "item": "bosses joined to the side walls (numbers bosses.fill_to_side_wall)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "rib thickness (numbers) stated in CAD_SPEC C-9",
+   "ok": true,
+   "detail": "2.0"
+  },
+  {
+   "item": "bottom-wall notch clears the bottom-edge feature on both sides (numbers notch_margin)",
+   "ok": true,
+   "detail": "[6.99, 6.76]"
+  },
+  {
+   "item": "notch cuts the whole bottom wall (u) in front of the ear attachment (w < 8)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "cover flange (1.5) < window rib offset (1.8)",
+   "ok": true,
+   "detail": "1.5 < 1.8"
+  },
+  {
+   "item": "heel radius = numbers heel_R",
+   "ok": true,
+   "detail": "8.602325267042627"
+  },
+  {
+   "item": "heel point at 22 deg = heel_contact_yz",
+   "ok": true,
+   "detail": "(219.55, 76.35)"
+  },
+  {
+   "item": "ear heel point (numbers) = heel contact pulled back to the cradle frame at 22 deg",
+   "ok": true,
+   "detail": "(-16.25816542674532, 8.382745985112049)"
+  },
+  {
+   "item": "ear profile = hull(hub R4.2, bottom attachment, heel point) (CAD_SPEC C-12)",
+   "ok": true,
+   "detail": "0.008"
+  },
+  {
+   "item": "ear heel point is the lowest ear point at 22 deg",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "ear + bottom wall vs heel stop block: touching at 22 deg (>= -0.02), >= 0.3 at 25..90 deg (drawn outline, 0.25 deg steps)",
+   "ok": true,
+   "detail": "22: -0.00, 25~90: 0.37"
+  },
+  {
+   "item": "ear gaps = numbers ear.check",
+   "ok": true,
+   "detail": "-0.00/0.37 vs 0.0/0.37"
+  },
+  {
+   "item": "the same test catches the rev-3 first ear (extra lobe point): negative at 22 and 25 deg",
+   "ok": true,
+   "detail": "-2.10 / -1.83"
+  },
+  {
+   "item": "leg channel starts at the lug (u_p - R)",
+   "ok": true,
+   "detail": "26.2"
+  },
+  {
+   "item": "leg axle length = the M3x20 named in the clevis note",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "leg clevis: M3x20 from the near lug engages the far lug as stated",
+   "ok": true,
+   "detail": "5.3999999999999995"
+  },
+  {
+   "item": "knuckle trapezoid meets the R5.5 at the axis height",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "ear slot gap each side 0.2",
+   "ok": true,
+   "detail": "0.20000000000004547"
+  },
+  {
+   "item": "귀 / 귀 홈 x = numbers hinge.ear_x / ear_slot_x",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "heel stop block (numbers heel_block) = knuckle base front .. axis y - 2, lid top .. heel_stop_z",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "heel stop y range = CAD_SPEC A-1",
+   "ok": true,
+   "detail": "[217.55, 224.55]"
+  },
+  {
+   "item": "heel contact inside the stop block",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "knuckle holes = CAD_SPEC A-1",
+   "ok": true,
+   "detail": "[3.3, 2.5]"
+  },
+  {
+   "item": "M3x20 engages the far cheek 7.6 (CAD_SPEC)",
+   "ok": true,
+   "detail": "7.600000000000023"
+  },
+  {
+   "item": "pocket ramp 30 deg",
+   "ok": true,
+   "detail": "30.008915278201325"
+  },
+  {
+   "item": "lid screw counterbore depth = lid thickness - (screw L - insert engagement) (A-7 rule)",
+   "ok": true,
+   "detail": "5.5"
+  },
+  {
+   "item": "lid screw x/y = placement block",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "lid screw: rail top = lid bed, insert hole bottom = rail floor + 1.5, screw tip >= 0.5 above the hole bottom",
+   "ok": true,
+   "detail": "tip 57.35 / hole bottom 56.85"
+  },
+  {
+   "item": "clip pin length = hole depth - 0.5 (numbers pin_len)",
+   "ok": true,
+   "detail": "4.5"
+  },
+  {
+   "item": "clip clamps the ribbon at the lid bed: clip top + ribbon = bed z; ribbon run z = clamp middle",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "L2 lid z (body_L2) = placement lid",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "L2 rear face = placement",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "speaker top (body_L2) = placement",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "sound path 27 deg line >= 3 above (y212, z72.85); drawing = numbers sound_rule",
+   "ok": true,
+   "detail": "3.525 vs 3.53"
+  },
+  {
+   "item": "screen x inside the gap between the speakers",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "plan sound paths clear the screen; driver centres + nearest distance = numbers (one value)",
+   "ok": true,
+   "detail": "248.58 vs 248.58"
+  },
+  {
+   "item": "sweep 22..90: every cradle/ear point behind the keep-out line",
+   "ok": true,
+   "detail": "216.00 at (np.float64(22.0), -2.5, -1.0)"
+  },
+  {
+   "item": "sweep min y = numbers all_min_y",
+   "ok": true,
+   "detail": "216.004 vs 216.0"
+  },
+  {
+   "item": "leg axle head + insertion path over the plate back face >= 0.5",
+   "ok": true,
+   "detail": "0.65 (뒷판)"
+  },
+  {
+   "item": "leg axle head + insertion path clear every back rib/pad/boss by >= 0.5 (drawn prisms) and = numbers axle_check",
+   "ok": true,
+   "detail": "head 2.00 (다리 길 벽), path 2.00 (다리 길 벽)"
+  },
+  {
+   "item": "the same test catches a cross rib on the axle line u30 (rev-3 first)",
+   "ok": true,
+   "detail": "-1.73 (가로 리브)"
+  },
+  {
+   "item": "low cross rib rule: u = pivot u - lug R - 1.2 - rib/2 (floor)",
+   "ok": true,
+   "detail": "24.0"
+  },
+  {
+   "item": "ribbon pieces under the lid = waypoint distances (run y, run x, drop, landing, approach)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "ribbon lands on the micro-HDMI top and enters the mouth at the stated angle (route_info)",
+   "ok": true,
+   "detail": "19.93 deg"
+  },
+  {
+   "item": "drop column x = mouth - (stiffener 3.0 + R3) (route_info rule)",
+   "ok": true,
+   "detail": "583.0"
+  },
+  {
+   "item": "Pi end insertion = min(3.5, connector depth - 0.3)",
+   "ok": true,
+   "detail": "2.7"
+  },
+  {
+   "item": "print height standing on the top edge = u103.5 - heel u (drawn ear) = numbers print_height = CAD_SPEC C-17",
+   "ok": true,
+   "detail": "119.76"
+  },
+  {
+   "item": "cover flange stays inside the window rib (flange < rib offset)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "cover dome inside the plug outline",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "clip pins inside the clip",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "ribbon between the clip pins",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "power wire lane between the ribbon edge and the right pin",
+   "ok": true,
+   "detail": "652.20 < 654.35 < 656.85"
+  },
+  {
+   "item": "clip wire groove: wire lane inside the groove, groove between the ribbon edge and the pin (numbers ribbon_edge_x / pin_edge_x)",
+   "ok": true,
+   "detail": "rib 652.20 | groove [652.6, 656.1] | pin 656.85"
+  },
+  {
+   "item": "power wire runs in the clip groove (z between the groove floor and the clip top)",
+   "ok": true,
+   "detail": "60.15"
+  },
+  {
+   "item": "power chain parts all in the SCH-06 BOM",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "X604 pin 1 = +5V, pin 3 = GND (netlist)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "A605 pin 1 = 5V, pin 2 = GND (netlist)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "W606 + W607 = 400 mm and the WS lead estimate = available - 400",
+   "ok": true,
+   "detail": "[100.0, 150.0]"
+  },
+  {
+   "item": "every numbers ribbon.parts key has a drawing label (no silent new piece)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "ribbon segments sum = numbers ribbon total",
+   "ok": true,
+   "detail": "256.32 vs 256.32"
+  },
+  {
+   "item": "every numbers power_wire.parts key has a drawing label",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "power wire segments sum = numbers total",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "power wire: lid top -> run -> GPIO pieces = waypoint polyline length (each piece counted once)",
+   "ok": true,
+   "detail": "225.91"
+  },
+  {
+   "item": "Pi 5 rotation parsed from the L2 note (body_L2 CU-E-PI5) = numbers pi5.rot_deg",
+   "ok": true,
+   "detail": "note 'Raspberry Pi 5 on 6 mm standoffs (USB/RJ45 end +x, GPIO edge +y)' -> 0"
+  },
+  {
+   "item": "drawn CAM/DISP 1 box within 1.5 of the CAD box; mouth on the -x face when mouth_dir = -x",
+   "ok": true,
+   "detail": "[589.0, 592.0, 263.0, 278.0, 24.1, 28.1]"
+  },
+  {
+   "item": "placement pi5_mipi mouth_dir = pi5.disp1 mouth_dir",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "leg swing: back-wall top edge (C0.5) nearer than the foot reach at 25 deg, farther at 22 deg (numbers leg.swing)",
+   "ok": true,
+   "detail": "25: 69.34 / 22: 71.36 vs reach 70.0"
+  },
+  {
+   "item": "leg pivot at 22 deg = pose formula",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "footprint 25 deg front/rear and 22 deg front = pose formula",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "item": "drawing context body_L2.json = the design copy (numbers placement.body_L2 md5)",
+   "ok": true,
+   "detail": "2d716999"
+  },
+  {
+   "item": "frame t01 side contains its subject",
+   "ok": true,
+   "detail": "view [118.0, 402.0, -44.0, 214.0] subject [212.0, 341.5, 0.0, 190.9]"
+  },
+  {
+   "item": "frame t01 zoom A (hinge) contains its subject",
+   "ok": true,
+   "detail": "view [204.0, 250.0, 57.0, 97.0] subject [217.55, 235.55, 72.85, 86.85]"
+  },
+  {
+   "item": "frame t01 zoom B (fold) contains its subject",
+   "ok": true,
+   "detail": "view [224.0, 404.0, 0.0, 103.0] subject [233.05, 341.5, 61.35, 95.35]"
+  },
+  {
+   "item": "frame t02 plan contains its subject",
+   "ok": true,
+   "detail": "view [440.0, 808.0, 118.0, 356.0] subject [501.0, 721.0, 214.0, 341.5]"
+  },
+  {
+   "item": "frame t02 zoom C (left hinge) contains its subject",
+   "ok": true,
+   "detail": "view [532.0, 566.0, 212.0, 246.0] subject [538.6, 559.0, 217.55, 235.55]"
+  },
+  {
+   "item": "frame t02 zoom D (hole, clip, right hinge) contains its subject",
+   "ok": true,
+   "detail": "view [626.0, 690.0, 212.0, 252.0] subject [633.35, 683.4, 228.55, 248.55]"
+  },
+  {
+   "item": "frame t02 overview contains its subject",
+   "ok": true,
+   "detail": "view [-40.0, 1280.0, -380.0, 360.0] subject [-16.0, 1238.0, -350.0, 341.5]"
+  },
+  {
+   "item": "frame t03 detail H contains its subject",
+   "ok": true,
+   "detail": "view [3.0, 47.0, 26.5, 40.5] subject [7.0, 43.0, 29.5, 34.5]"
+  },
+  {
+   "item": "t03 back view (mirrored): '+x' marker on the side the title names, window (+xr) on that side, ordinate −xr = drawing u",
+   "ok": true,
+   "detail": "+x at u-60, window at u-30.25"
+  },
+  {
+   "item": "frame t04 plan contains its subject",
+   "ok": true,
+   "detail": "view [478.0, 772.0, 150.0, 350.0] subject [501.0, 721.0, 214.0, 341.5]"
+  },
+  {
+   "item": "ribbon corner correction = 3 bends x (pi/2 - 2) R",
+   "ok": true,
+   "detail": "-3.86"
+  },
+  {
+   "item": "frame t06 B side route contains its subject",
+   "ok": true,
+   "detail": "view [206.0, 300.0, 16.0, 150.0] subject [231.55, 270.5, 26.0, 134.7]"
+  },
+  {
+   "item": "frame t06 C plan route contains its subject",
+   "ok": true,
+   "detail": "view [538.0, 712.0, 222.0, 326.0] subject [552.91, 654.35, 231.55, 315.77]"
+  },
+  {
+   "item": "t01: no two texts overlap (page text boxes, 119 texts)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t01: no text runs out of its panel",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t02: no two texts overlap (page text boxes, 143 texts)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t02: no text runs out of its panel",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t03: no two texts overlap (page text boxes, 270 texts)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t03: no text runs out of its panel",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t04: no two texts overlap (page text boxes, 150 texts)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t04: no text runs out of its panel",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t05: no two texts overlap (page text boxes, 96 texts)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t05: no text runs out of its panel",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t06: no two texts overlap (page text boxes, 178 texts)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "item": "t06: no text runs out of its panel",
+   "ok": true,
+   "detail": "[]"
+  }
+ ],
+ "sheets": [
+  {
+   "id": "t01",
+   "title_ko": "조립 옆 단면 (x611)",
+   "caption_ko": "화면 가운데 x611 단면. 25° 사용(실선), 22° 뒤꿈치(파랑 점선), 90° 접음(점쇄선), 경첩 축 y226.55 z81.35, 받침다리 67 mm 39.78°, 모듈 위 금지(y≤215, 가장 앞 y216), 스피커 27° 소리 길 3.53 위, 스피커 윗면 z148.06 (접은 화면과 52.71), 시선(가운데 y212에서 z157.93, 보이는 영역 아래 끝 z110.19), 건반 모듈·L2 뒷바 윤곽. 확대 A 경첩(오른쪽 귀 단면, 귀 윤곽 = numbers 3a: 22°에서 멈춤 블록에 닿고 25~90°에서 0.37 이상 뜸), B 접은 상태, 자세별 값·점검 표.",
+   "svg_file": "t01_assembly_side.svg",
+   "png_file": "t01_assembly_side.png"
+  },
+  {
+   "id": "t02",
+   "title_ko": "가운데 뚜껑 평면",
+   "caption_ko": "L2 가운데 화면 뚜껑 x501.0~721.0, y214.0~341.5 평면. 받침 발자국(25° y216.61~276.81, 22° 앞끝 y216, 접음 y233.05~339.05), 경첩 2 (귀 홈 8.4), 멈춤 블록, 다리 주머니, 리본 구멍 22×6, 클립(전원선 홈), 통풍 8, 받침 발 4, 뚜껑 나사 4, Pi 5·CAM/DISP 1(입구 −x)·GPIO 2·6, DSI 리본(폭 11.7, 기둥 x583 → HDMI 위 → 입구)과 전원선 길. 확대: 왼 경첩, 구멍·클립·오른 경첩. 전체 평면: 소리 길 4개 (화면까지 248.58).",
+   "svg_file": "t02_lid_plan.svg",
+   "png_file": "t02_lid_plan.png"
+  },
+  {
+   "id": "t03",
+   "title_ko": "화면 받침 부품도",
+   "caption_ko": "받침 170.7×106×17 앞·뒤 모습(테·벽 안쪽 면 u0/u101.5, 보스·자리파기, 점검창, 가로 리브 u24·u80, 패드, 경첩 귀·축 구멍, 다리 걸이·클립, 아래 홈, 아래 벽 홈 xr48.00~66.00), 뒤 모습 ±x 표시 고침, 가로 단면 F–F u30(다리 걸이 + M3×20 ISO 7380, 머리·넣는 길 둘레 2) · G–G u90(클립), 세로 단면 B–B(걸이·길·클립) C–C(귀 3a 윤곽·패드) D–D(홈·누름 패드·창) E–E(보스·나사), 상세 H(아래 벽 홈), 출력 높이 119.76.",
+   "svg_file": "t03_cradle_part.svg",
+   "png_file": "t03_cradle_part.png"
+  },
+  {
+   "id": "t04",
+   "title_ko": "가운데 뚜껑 변경 (수정 3a판)",
+   "caption_ko": "CU-SCREENLID에 더하는 것: 경첩 받침 2(볼·귀 홈 8.4·멈춤 블록 3.5, M3×20 축 물림 7.6), 받침다리 주머니(30° 경사, 뒷벽 C0.5, 22°에서 다리 넣기), 리본·전원선 구멍 22×6, 클립 덩어리·핀 구멍, 통풍 8, 접이 받침 발 4(뒤 턱), 뚜껑 나사 【변경】 자리파기 Ø6.5×5.5 (나사 끝 z57.35, 추정). 위·밑 모습, 경첩 축 단면, y–z 단면 A·A'·B·C·E·F.",
+   "svg_file": "t04_lid_changes.svg",
+   "png_file": "t04_lid_changes.png"
+  },
+  {
+   "id": "t05",
+   "title_ko": "받침다리 · 작은 부품",
+   "caption_ko": "받침다리 73×10×6 (축–발끝 67, R3 끝, Ø3.3; 넣고 빼기는 화면 22°에서), 점검창 덮개 (끼움부·턱·볼록 자리, 두 단면), 리본 클립 30×12×3 (핀 Ø3×4.5 두 개, 윗면 전원선 홈 x652.60~656.10 깊이 1.8), 화면 덮개(선택), 나사·축 목록 (M3 ISO 7380).",
+   "svg_file": "t05_leg_small_parts.svg",
+   "png_file": "t05_leg_small_parts.png"
+  },
+  {
+   "id": "t06",
+   "title_ko": "배선 (DSI 리본 · 화면 전원 · O4 정비)",
+   "caption_ko": "DSI FFC 22핀 0.5 mm 300 mm B형: 펼친 길이 256.32 (구간별, 접기 2, 90° 굽힘 R3 3곳, U자 없음, 여유 43.68), 옆·위에서 본 길 (뚜껑 밑 z61.2 클립에 물림 → 기둥 x583 → HDMI 위 z27.45 → 19.93°로 입구, 2.7 꽂음), 접점 면. 전원선: Pi 헤더 핀 2·6 → W606 F/F 20 cm ×2 → W607 M/M 20 cm ×2 → X604 3핀(1 빨강·2 빈칸·3 검정) → W608 동봉선 → P604 MX1.25 → A605, 필요 344.95 / 500~550 (클립 홈 z60.15). 선 목록, 설정 한 줄, O4 정비 순서 (꽂은 채 약 96 mm 들기).",
+   "svg_file": "t06_wiring.svg",
+   "png_file": "t06_wiring.png"
+  }
+ ]
+}

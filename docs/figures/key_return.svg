@@ -1,0 +1,35 @@
+<svg viewBox="0 0 815 332" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="건반 복귀 원리: 인장 스프링이 피벗 뒤 꼬리를 아래로 당겨 앞끝을 밀어 올리는 시소 구조. 정지와 눌림 두 상태를 겹쳐 표시" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="11">
+<defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#B3261E"/></marker><marker id="fb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1F5FD8"/></marker><marker id="fg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7A90"/></marker></defs>
+<rect x="15.6" y="216.8" width="639.6" height="26.0" fill="#D8C7A3" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="26.0" y="232.4" text-anchor="start" fill="#5b4a2a" font-weight="400" font-size="10">베이스 보드</text>
+<rect x="52.0" y="131.0" width="561.6" height="33.0" fill="#FBF8F0" stroke="currentColor" stroke-width="1.1"/>
+<polygon points="52.3,135.9 612.7,172.7 614.9,139.7 54.5,103.0" fill="#1F5FD8" fill-opacity="0.09" stroke="#1F5FD8" stroke-width="1.1" stroke-dasharray="5 3"/>
+<circle cx="481.0" cy="154.7" r="7.8" fill="#FBF8F0" stroke="currentColor" stroke-width="1.2"/><circle cx="481.0" cy="154.7" r="2.4" fill="currentColor"/>
+<text x="481.0" y="119.3" text-anchor="middle" fill="currentColor" font-weight="600" font-size="11">피벗 y=165</text>
+<polyline points="583.7,157.3 577.7,157.3 589.7,165.8 577.7,174.3 589.7,182.8 577.7,191.3 589.7,199.8 577.7,208.3 589.7,216.8 583.7,216.8" fill="none" stroke="#5f6b7a" stroke-width="1.6"/>
+<polyline points="586.8,164.0 580.8,164.0 592.8,171.5 580.8,179.1 592.8,186.6 580.8,194.2 592.8,201.7 580.8,209.3 592.8,216.8 586.8,216.8" fill="none" stroke="#1F5FD8" stroke-width="1.6" stroke-dasharray="4 3"/>
+<circle cx="583.7" cy="157.3" r="3" fill="#555"/>
+<circle cx="583.3" cy="164.0" r="3" fill="#1F5FD8"/>
+<line x1="583.7" y1="168.7" x2="583.7" y2="188.2" stroke="#B3261E" stroke-width="2.0" marker-end="url(#fa)"/>
+<text x="583.7" y="193.4" text-anchor="middle" fill="#B3261E" font-weight="600" font-size="10">스프링 2.0 N ↓</text>
+<line x1="277.7" y1="144.0" x2="277.7" y2="127.1" stroke="#6B7A90" stroke-width="1.6" marker-end="url(#fg)"/>
+<text x="277.7" y="123.2" text-anchor="middle" fill="#6B7A90" font-weight="400" font-size="10">자중 18 g (CG y=86.8)</text>
+<line x1="72.8" y1="120.6" x2="72.8" y2="127.9" stroke="#6B7A90" stroke-width="1.6" marker-end="url(#fg)"/>
+<line x1="52.0" y1="127.1" x2="52.0" y2="112.8" stroke="#1F5FD8" stroke-width="1.8" marker-end="url(#fb)"/>
+<text x="62.4" y="108.9" text-anchor="start" fill="#1F5FD8" font-weight="600" font-size="10">복귀 ↑ 업웨이트 40 gf</text>
+<line x1="608.4" y1="127.1" x2="608.4" y2="115.4" stroke="#1F5FD8" stroke-width="1.8" stroke-dasharray="3 2" marker-end="url(#fb)"/>
+<text x="598.0" y="111.5" text-anchor="end" fill="#1F5FD8" font-weight="400" font-size="10">꼬리 2.59 ↑</text>
+<line x1="52.0" y1="203.8" x2="481.0" y2="203.8" stroke="currentColor" stroke-width="0.9" stroke-dasharray="3 2"/>
+<text x="265.2" y="212.9" text-anchor="middle" fill="currentColor" font-weight="400" font-size="10">손가락 팔 165 mm</text>
+<line x1="481.0" y1="203.8" x2="583.7" y2="203.8" stroke="#B3261E" stroke-width="0.9" stroke-dasharray="3 2"/>
+<text x="533.0" y="212.9" text-anchor="middle" fill="#B3261E" font-weight="400" font-size="10">스프링 팔 39.5</text>
+<rect x="644.8000000000001" y="123.2" width="142" height="96" fill="none" stroke="currentColor" stroke-opacity="0.4"/>
+<text x="652.8000000000001" y="143.2" fill="#B3261E" font-size="10" font-weight="600">스프링 토크</text>
+<text x="652.8000000000001" y="155.2" fill="currentColor" fill-opacity="0.65" font-size="9">2.0 N × 39.5</text>
+<text x="778.8000000000001" y="143.2" text-anchor="end" fill="#B3261E" font-size="11" font-weight="600">79 N·mm</text>
+<text x="652.8000000000001" y="171.2" fill="#6B7A90" font-size="10" font-weight="600">자중 모멘트</text>
+<text x="652.8000000000001" y="183.2" fill="currentColor" fill-opacity="0.65" font-size="9">0.18 N × 78.2</text>
+<text x="778.8000000000001" y="171.2" text-anchor="end" fill="#6B7A90" font-size="11" font-weight="600">14 N·mm</text>
+<text x="652.8000000000001" y="199.2" fill="#1F5FD8" font-size="10" font-weight="600">여유</text>
+<text x="778.8000000000001" y="199.2" text-anchor="end" fill="#1F5FD8" font-size="11" font-weight="600">5.7 배</text>
+</svg>

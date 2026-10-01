@@ -1,0 +1,269 @@
+
+====================================================================================================
+K1 - rear-pivot key + steel compression spring + encapsulated steel inertia mass  (calc.py)
+====================================================================================================
+assumptions: mu_pivot=0.25 (steel/PETG dry), guide drag 2.0 gf at the tab, spring rub 0.3 gf, retention magnet 2.0 N, felt 3T P=2.30*eps^2.5 MPa, e=0.4; re-trigger at 40% magnet rise; re-press with 150/300 gf at the finger
+
+====================================================================================================
+1. spring choice: one common spring vs white/black springs
+====================================================================================================
+common spring (white spec) on the black key: seat would have to be at z60.0 (search limit; black skin underside is z53.5 -> infeasible, black DW there 59.2 g) and the black BW rise rest->bottom would be 17.2 g (white 8.9 g)  -> rejected, black spring gets its own spec
+white: 984 feasible (d, OD, n) combos; flattest 5:
+   d 0.50 OD 6.5 n  37 L0 85.0 k 0.077 N/mm rise 8.7 g tau 548 MPa surge 134 Hz
+   d 0.45 OD 5.5 n  40 L0 84.1 k 0.078 N/mm rise 8.9 g tau 638 MPa surge 157 Hz
+   d 0.40 OD 5.0 n  33 L0 84.1 k 0.078 N/mm rise 8.9 g tau 826 MPa surge 204 Hz
+   d 0.45 OD 6.0 n  30 L0 83.9 k 0.078 N/mm rise 8.9 g tau 694 MPa surge 173 Hz
+   d 0.50 OD 6.5 n  36 L0 83.7 k 0.079 N/mm rise 8.9 g tau 549 MPa surge 137 Hz
+black: 1473 feasible (d, OD, n) combos; flattest 5:
+   d 0.45 OD 5.0 n  75 L0 85.0 k 0.057 N/mm rise 12.2 g tau 335 MPa surge 103 Hz
+   d 0.40 OD 6.0 n  25 L0 84.8 k 0.057 N/mm rise 12.3 g tau 566 MPa surge 182 Hz
+   d 0.40 OD 5.0 n  45 L0 84.7 k 0.057 N/mm rise 12.3 g tau 475 MPa surge 149 Hz
+   d 0.40 OD 5.5 n  33 L0 84.7 k 0.057 N/mm rise 12.3 g tau 521 MPa surge 166 Hz
+   d 0.45 OD 6.0 n  41 L0 84.7 k 0.057 N/mm rise 12.3 g tau 399 MPa surge 127 Hz
+torsion alternative (coaxial on the shaft, coil <= 8 mm long between key ears):
+   d 1.3 Dm 6.0 n 5: white preload 44 deg, rise 8.3 g, bending 1376 MPa (0.65 UTS)
+   d 1.3 Dm 6.0 n 5: black preload 24 deg, rise 14.6 g, bending 821 MPa (0.39 UTS)
+   d 1.2 Dm 6.0 n 5: white preload 60 deg, rise 6.1 g, bending 1695 MPa (0.79 UTS)
+   d 1.2 Dm 6.0 n 5: black preload 33 deg, rise 10.6 g, bending 991 MPa (0.46 UTS)
+
+====================================================================================================
+2. inertia sweep (white insert; black 6x19x47) - m_eff vs return time; spring re-picked each time
+====================================================================================================
+white insert                steel   meff0  meff13     DW     UW  DWbot    rise    t_rt  t_full   Hz150
+none                          0.0    10.2    11.7   50.0   44.4   54.2     4.2    13.6    20.9    43.1
+2 x 5/8in balls              32.9    37.3    42.7   50.0   44.0   56.4     6.4    25.5    39.3    22.8
+bar 16x16x20                 40.2    45.0    51.5   50.0   43.9   57.0     7.0    27.9    43.0    20.7
+2x flat 19x6x34              60.9    59.1    67.6   50.0   43.6   58.3     8.3    31.7    48.9    18.2
+bar 16x16x34 (design)        68.3    65.2    74.5   50.0   43.6   58.8     8.7    33.1    51.2    17.3
+bar 16x16x46 (hypoth.)       92.4    79.8    91.3   50.0   43.3   60.2    10.1    36.3    56.1    15.7
+bar 16x16x60 (hypoth.)      120.6    94.3   107.8   50.0   43.1   61.7    11.6    39.0    60.4    14.5
+black inserts:
+none                          0.0     7.2       -   50.0   44.7   57.4     7.4    10.8    16.4    53.6
+5 x 5/16in balls             10.3    14.9       -   50.0   44.6   58.7     8.7    15.3    23.3    37.4
+flat 6x19x22                 19.7    24.1       -   50.0   44.5   59.9     9.9    19.3    29.4    29.5
+flat 6x19x47 (design)        42.1    37.2       -   50.0   44.3   62.2    12.2    23.5    35.9    23.9
+
+====================================================================================================
+3. design point: coordinates (y, z) at rest -> fully pressed (dip contact)
+====================================================================================================
+WHITE (D key, representative): rotation to the bottom 2.862 deg
+   pivot shaft axis (fixed)             rest (200.0, 33.5)    bottom (fixed)
+   key top front edge (dip ref.)        rest (0.0, 43.5)      bottom (-0.2, 33.5)
+   finger point for DW/UW               rest (13.0, 43.5)     bottom (12.7, 34.1)
+   centre of mass (key+steel)           rest (37.9, 33.5)     bottom (38.1, 25.4)
+   spring upper seat                    rest (138.0, 40.9)    bottom (137.7, 37.8)
+   spring lower seat (fixed)            rest (138.0, 5.0)     bottom (fixed)
+   up-stop crossbar top (centre)        rest (43.2, 25.1)     bottom (43.9, 17.3)
+   down-stop pad (centre, underside)    rest (7.5, 23.5)      bottom (8.2, 13.9)
+   sensor magnet face centre            rest (65.8, 24.1)     bottom (66.4, 17.4)
+   rear arm top at y146                 rest (146.0, 43.5)    bottom (145.6, 40.8)
+   fork tip (key end)                   rest (204.0, 33.5)    bottom (204.0, 33.7)
+   frame: up-stop felt free bottom z24.63, hook finger z27.63-29.63 (y42.50-45.50); down-stop felt top z13.90 (rail top z10.90) at y7.5; spring post top z20
+BLACK (C#, representative): rotation to the bottom 3.675 deg
+   pivot shaft axis (fixed)             rest (200.0, 33.5)    bottom (fixed)
+   key top front edge (dip ref.)        rest (52.5, 55.5)     bottom (51.4, 46.0)
+   finger point for DW/UW               rest (62.5, 55.5)     bottom (61.4, 46.6)
+   centre of mass (key+steel)           rest (87.9, 41.7)     bottom (87.6, 34.5)
+   spring upper seat                    rest (138.0, 53.5)    bottom (136.8, 49.5)
+   spring lower seat (fixed)            rest (138.0, 5.0)     bottom (fixed)
+   up-stop crossbar top (centre)        rest (105.0, 25.1)    bottom (105.7, 19.0)
+   down-stop pad (centre, underside)    rest (55.1, 23.5)     bottom (56.0, 14.2)
+   sensor magnet face centre            rest (64.2, 23.7)     bottom (65.1, 15.0)
+   rear arm top at y146                 rest (146.0, 43.5)    bottom (145.5, 40.0)
+   fork tip (key end)                   rest (204.0, 33.5)    bottom (204.0, 33.8)
+   frame: up-stop felt free bottom z24.59, hook finger z27.59-29.59 (y104.25-107.25); down-stop felt top z14.23 (rail top z11.23) at y55.1; spring post top z30
+
+====================================================================================================
+4. masses and inertia
+====================================================================================================
+white: total 92.9 g (PETG 24.0, steel 68.3, magnets 0.59), COM (37.9, 33.5), I_pivot 2606038 g*mm^2
+   m_eff at front edge (arm 200.0): key+steel 65.2 g, +spring 0.03 g -> 65.2 g
+   m_eff at finger     (arm 187.0): key+steel 74.5 g, +spring 0.03 g -> 74.6 g
+   largest inertia contributors: steel square bar 16x16xL 84%; top skin head y0-50 4%; side walls head 3%; side walls tail (end y144, clear of the board) 2%
+black: total 59.3 g (PETG 16.6, steel 42.1, magnets 0.59), COM (87.9, 41.7), I_pivot 810231 g*mm^2
+   m_eff at front edge (arm 147.5): key+steel 37.2 g, +spring 0.08 g -> 37.3 g
+   m_eff at finger     (arm 137.5): key+steel 42.9 g, +spring 0.09 g -> 42.9 g
+   largest inertia contributors: steel flat bar 6x19xL 81%; side walls y51.5-144 12%; top skin y52.5-146 3%; front wall 1%
+
+====================================================================================================
+5. springs (music wire SWP-A, closed & ground ends)
+====================================================================================================
+white: d 0.45 OD 5.50 (ID 4.60) n 40 active (42 total), L0 84.1, k 0.0781 N/mm, solid 18.9, mass 0.83 g
+   installed 35.90 (rest) -> 32.79 (bottom): F 3.767 -> 4.010 N (+6.4%); preload defl 48.2, stroke 3.11; tau 600/638 MPa = 0.26 UTS; defl/available 0.79; surge 157 Hz; lateral seat shift -0.29 mm
+   per-key trim: 0.5 mm printed shim under the spring = 1.32 g at the finger
+   spring load tolerance +-10% at L_rest -> +-12.7 g at the finger (order load-tolerance springs or bin them)
+black: d 0.45 OD 5.00 (ID 4.10) n 75 active (77 total), L0 85.0, k 0.0570 N/mm, solid 34.6, mass 1.37 g
+   installed 48.50 (rest) -> 44.48 (bottom): F 2.077 -> 2.305 N (+11.0%); preload defl 36.5, stroke 4.02; tau 302/335 MPa = 0.13 UTS; defl/available 0.80; surge 103 Hz; lateral seat shift -1.15 mm
+   per-key trim: 0.5 mm printed shim under the spring = 1.31 g at the finger
+   spring load tolerance +-10% at L_rest -> +-9.5 g at the finger (order load-tolerance springs or bin them)
+
+====================================================================================================
+6. static forces (g) - BW = frictionless balance force; DW/UW include friction
+====================================================================================================
+white at finger y13.0:
+     0% dip: BW 46.8  DW 50.0  UW 43.6  (at front edge y0.0: BW 43.7 DW 46.8 UW 40.7)
+    25% dip: BW 49.0  DW 52.2  UW 45.7  (at front edge y0.0: BW 45.8 DW 48.8 UW 42.8)
+    50% dip: BW 51.2  DW 54.4  UW 48.0  (at front edge y0.0: BW 47.9 DW 50.9 UW 44.8)
+    75% dip: BW 53.4  DW 56.7  UW 50.2  (at front edge y0.0: BW 50.0 DW 53.0 UW 46.9)
+   100% dip: BW 55.6  DW 58.9  UW 52.4  (at front edge y0.0: BW 52.0 DW 55.1 UW 49.0)
+   friction at the finger: pivot_R 0.81 g, pivot_magnet 0.68 g, guide 1.63 g, spring_rub 0.10 g -> total 3.21 g; DW-UW = 6.45 g (= 2 x friction: spring is conservative)
+   balance weight (DW+UW)/2 = 46.8 g; start DW 50.0 / UW 43.6; bottom DW 58.9 / UW 52.4
+   friction x3: DW 56.4  UW 37.0 (start), UW at bottom 45.8
+black at finger y62.5:
+     0% dip: BW 47.2  DW 50.0  UW 44.3  (at front edge y52.5: BW 44.0 DW 46.6 UW 41.3)
+    25% dip: BW 50.2  DW 53.0  UW 47.3  (at front edge y52.5: BW 46.8 DW 49.4 UW 44.1)
+    50% dip: BW 53.2  DW 56.1  UW 50.4  (at front edge y52.5: BW 49.6 DW 52.3 UW 46.9)
+    75% dip: BW 56.3  DW 59.1  UW 53.4  (at front edge y52.5: BW 52.5 DW 55.2 UW 49.8)
+   100% dip: BW 59.4  DW 62.2  UW 56.5  (at front edge y52.5: BW 55.4 DW 58.1 UW 52.7)
+   friction at the finger: pivot_R 0.47 g, pivot_magnet 0.93 g, guide 1.29 g, spring_rub 0.14 g -> total 2.82 g; DW-UW = 5.66 g (= 2 x friction: spring is conservative)
+   balance weight (DW+UW)/2 = 47.2 g; start DW 50.0 / UW 44.3; bottom DW 62.2 / UW 56.5
+   friction x3: DW 55.6  UW 38.6 (start), UW at bottom 50.7
+front/back: white DW at y90 84.8 g / at y13 50.0 g = 1.70  (pure lever (200-13)/(200-90) = 1.70)
+
+====================================================================================================
+7. dynamics - release from the bottom (felt contact, v=0), re-press, full return
+====================================================================================================
+white friction x1: t(bottom->40% rise) 33.1 ms, full return (up-stop contact) 51.1 ms, impact 357 mm/s at the front, 4.16 mJ, felt max 1.20 mm, rebound 0.72 mm, settled (<0.1 mm) 97 ms
+      re-press 150/300 gf: 24.6/15.3 ms -> re-trigger rate 17.3/20.7 Hz; pivot vertical reaction |R| 1.52..2.54 N
+white friction x3: t(bottom->40% rise) 35.4 ms, full return (up-stop contact) 54.7 ms, impact 332 mm/s at the front, 3.59 mJ, felt max 1.15 mm, rebound 0.60 mm, settled (<0.1 mm) 112 ms
+      re-press 150/300 gf: 25.5/15.5 ms -> re-trigger rate 16.4/19.7 Hz; pivot vertical reaction |R| 1.67..2.61 N
+   same inertia with a constant (gravity-like) return torque = rest BW: t_rt 35.8 ms, full 54.8 ms
+   without the spring the key does not return (front-heavy: gravity torque +148 N*mm pushes the front down)
+   spring never unloads: F at rest 3.77 N, min over stroke 3.77 N (no separation; steel is encapsulated)
+black friction x1: t(bottom->40% rise) 23.5 ms, full return (up-stop contact) 35.9 ms, impact 465 mm/s at the front, 4.04 mJ, felt max 1.20 mm, rebound 0.80 mm, settled (<0.1 mm) 102 ms
+      re-press 150/300 gf: 18.3/11.3 ms -> re-trigger rate 23.9/28.7 Hz; pivot vertical reaction |R| 0.00..1.10 N
+black friction x3: t(bottom->40% rise) 24.8 ms, full return (up-stop contact) 38.0 ms, impact 438 mm/s at the front, 3.58 mJ, felt max 1.16 mm, rebound 0.80 mm, settled (<0.1 mm) 86 ms
+      re-press 150/300 gf: 18.9/11.4 ms -> re-trigger rate 22.9/27.6 Hz; pivot vertical reaction |R| 0.00..1.16 N
+   same inertia with a constant (gravity-like) return torque = rest BW: t_rt 26.3 ms, full 39.7 ms
+   without the spring the key does not return (front-heavy: gravity torque +65 N*mm pushes the front down)
+   spring never unloads: F at rest 2.08 N, min over stroke 2.08 N (no separation; steel is encapsulated)
+v2.0 claim check (constant force F=BW-friction on m_eff, 10 mm): m_eff 47 g, BW 44, fric 6.0 -> 50 ms; m_eff 65 g, BW 47, fric 2.5 -> 55 ms; m_eff 128 g, BW 44, fric 6.0 -> 83 ms; => time scales with sqrt(m_eff/(BW-friction)); not fixed.
+
+====================================================================================================
+8. constant stress in plastic at rest (MPa)
+====================================================================================================
+white: spring 3.77 N up, up-stop 0.55 N down (felt pre-compression 0.47 mm), pivot reaction 2.31 N (key pushes the shaft up)
+   body bending max (U-channel)         0.89
+   fork lower prong bending             0.38
+   fork bearing pressure                0.14
+   top skin under spring seat           0.56
+   frame hook finger (up-stop)          0.30
+   insert floor (steel weight)          0.30
+   shaft fin tension                    0.06
+   bending moment along the key at rest (y, N*mm): 30:7, 50:25, 70:52, 100:92, 120:120, 138:145, 144:131, 160:93, 180:46, 192:19
+black: spring 2.08 N up, up-stop 0.67 N down (felt pre-compression 0.51 mm), pivot reaction 0.83 N (key pushes the shaft up)
+   body bending max (U-channel)         0.33
+   fork lower prong bending             0.14
+   fork bearing pressure                0.09
+   top skin under spring seat           0.41
+   frame hook finger (up-stop)          0.36
+   insert floor (steel weight)          0.06
+   shaft fin tension                    0.02
+   bending moment along the key at rest (y, N*mm): 30:0, 50:0, 70:2, 100:12, 120:31, 138:53, 144:48, 160:34, 180:17, 192:7
+max constant plastic stress = 0.89 MPa (target < 2); the only permanently loaded parts are felt (stops) and steel (spring, shaft)
+
+====================================================================================================
+9. sensing at the v3 Hall row (y67)
+====================================================================================================
+white: magnet face recessed 0.57 mm into the key underside; face->element rest 11.39, bottom 4.70, travel 6.69 mm; magnet y 65.8 -> 66.4 (element y67); on-axis B 3.7 -> 31.9 mT (DRV5055A2 @3.3 V linear to ~42 mT)
+black: magnet face recessed 0.23 mm into the key underside; face->element rest 13.58, bottom 4.90, travel 8.68 mm; magnet y 64.2 -> 65.1 (element y67); on-axis B 2.3 -> 29.2 mT (DRV5055A2 @3.3 V linear to ~42 mT)
+nearest steel to a sensor magnet: white insert ends y38 (27.8 mm in front of its magnet); black insert bottom z33 = 7.5 mm above its magnet top (moves with it: calibrated offset)
+
+====================================================================================================
+10. clearances (mm) and envelope
+====================================================================================================
+   white: key underside - sensor bar top @dip                 2.87
+   white: key ceiling - hook finger top @dip                  3.40
+   white: cavity wall (y39.5) - finger tip, y @dip            2.30
+   white: tail end (y144) - board footprint y145.5, y @dip (info: key edge is at z>19.8, board top z10.6) 0.93
+   white: rear arm underside - board parts (z20) @dip         6.78
+   white: rear arm top - cover fascia (rest)                  1.00
+   white: spring spigot - guide post top @dip                 14.79
+   white: spring coil - key wall (radial)                     3.23
+   white: fork - fin (x, per side, design)                    0.30
+   white: magnet face - Hall element @dip                     4.70
+   black: key underside - sensor bar top @dip                 2.98
+   black: key ceiling - hook finger top @dip                  17.73
+   black: insert floor end (y101) - finger tip, y @dip        2.95
+   black: black top @dip - white top                          2.50
+   black: tail end (y144) - board footprint y145.5, y @dip (info: key edge is at z>19.8, board top z10.6) 0.74
+   black: rear arm underside - board parts (z20) @dip         6.01
+   black: rear arm top - cover fascia (rest)                  1.00
+   black: spring spigot - guide post top @dip                 16.48
+   black: spring coil - key wall (radial)                     1.80
+   black: fork - fin (x, per side, design)                    0.30
+   black: magnet face - Hall element @dip                     4.90
+   y range: keys y0 (lip) .. y204 (fork tip); frame y0..212 (v3); rear bar from y215 -> total depth 410 (unchanged)
+   z: white top 43.5, black top 55.5, highest moving part z55.5 (black top at rest; parts behind the pivot rise <= 0.26 mm); lowest moving part z13.66 (white front underside at the bottom), black z14.00; frame floor z5; cover top z59
+
+====================================================================================================
+11. parts, print plan, steel, filament
+====================================================================================================
+printed parts per octave: 7 white keys (24.0 g each), 5 black keys (16.6 g each), 1 frame (165 g: v3 175 spine -18.9 rear_stop -9.1 fins +15.6 posts +2.1), 1 sensor bar (17 g, v3), 1 rear cover (44 g, v3) = 15 parts, 477 g
+88 keys: 52 white x 24.0 + 36 black x 16.6 + 7.53 module-equivalents x 226 g, +10% waste = 3.90 kg, 260 h at 15 g/h (v3: 4.13 kg / 275 h)
+bed 220x220: white key plate 7 x (22.5+1.5) = 168 x 204 (h20), black plate 5 x 13 = 65 x 152.5 (h32), frame 168.5 x 212 (h36.5), sensor bar + cover as v3 -> all fit; keys print top-down with a PAUSE at z19.0 (white) / z22.5 (black) from the bed to drop the steel in, then the floor bridges over it
+steel per octave: inserts 689 g + shaft 25 g + springs 12.7 g = 714 g; 88 keys: inserts 5.07 kg, total 5.27 kg
+module mass: v3 0.59 kg -> K1 1.28 kg (keys+frame printed 477 g replaces 502 g, + steel)
+
+====================================================================================================
+12. purchased items and cost delta vs v3.2 base 583,219 KRW
+====================================================================================================
+   + S45C 연마봉 Ø5 × 1 m                  회전축, 164 mm × 8개로 절단(끝 부속 2개 포함)             x  2    4790  =    9580  [배관몰 baegwan.net goods 4320 (확인 4,790원/1 m, 배송 6,000원 별도)]
+   + 배송비(연마봉)                           1 m 기준 기본 배송                                 x  1    6000  =    6000  [배관몰 상품 안내 (확인)]
+   + SS400 사각봉 16×16, 34 mm 절단          백건 관성 추 (68.3 g)                             x 56     800  =   44800  [국내 철강 온라인몰 절단 주문 — estimate (자재 약 7,000원/m + 절단 개당 약 500원)]
+   + SS400 평철 6×19, 47 mm 절단            흑건 관성 추 (42.1 g)                             x 40     700  =   28000  [국내 철강 온라인몰 절단 주문 — estimate]
+   + 네오디뮴 원형자석 Ø5×2 N35                 포크 끝 고정 자석 (센서 자석과 같은 품목)                    x100      80  =    8000  [dgmagnet (v3 구매목록 L21 단가 80원)]
+   + springs 60 white + 40 black (custom lot incl. setup)                            =   60000  [estimate]
+   - 스텐 유두 렌치볼트 M3×40 (척추 클램프) 34개                                          =   -4420
+   - 스텐 무두 렌치볼트 M3×10 (세트스크루) 40개                                           =   -2400
+   - 황동 원판 Ø8×1 4봉                                                          =  -10676
+   - M3 육각너트 63개 (클램프·세트스크루용, 75→12개)                                       =    -693
+   delta = +156380 - 18189 = +138191 KRW -> base 721410 KRW (cap 1,000,000)
+
+====================================================================================================
+13. noise: every impact
+====================================================================================================
+white down-stop (felt 3T, 181 mm^2): key-front speed 0.3/0.6/1.0 m/s -> 2.9/11.7/32.6 mJ into the felt, felt compression 25/38/50%  (spring actions A/B in the brief: m_eff 12 g -> x5.4 the energy)
+white up-stop on release: 4.16 mJ into the 24 mm^2 hook felt (40% compression), rebound 0.72 mm, settled 97 ms
+white spring: surge 157 Hz (can ring on stop impacts; guide-post contact + a smear of silicone grease damp it)
+black down-stop (felt 3T, 82 mm^2): key-front speed 0.3/0.6/1.0 m/s -> 1.7/6.7/18.6 mJ into the felt, felt compression 27/40/54%  (spring actions A/B in the brief: m_eff 12 g -> x3.1 the energy)
+black up-stop on release: 4.04 mJ into the 24 mm^2 hook felt (40% compression), rebound 0.80 mm, settled 102 ms
+black spring: surge 103 Hz (can ring on stop impacts; guide-post contact + a smear of silicone grease damp it)
+pivot: fork seated on the shaft by the magnet, 0.05 slot clearance taken up -> no rattle; no coupling (single lever) -> the Casio release rattle has no source here
+
+====================================================================================================
+14. metrics (brief section 6)
+====================================================================================================
+   dw_white_g                     50.00
+   uw_white_g                     43.55
+   dw_black_g                     50.00
+   uw_black_g                     44.34
+   dw_white_bottom_g              58.90
+   uw_white_bottom_g              52.37
+   friction_white_g               3.22
+   m_eff_white_g                  65.15
+   m_eff_white_y13_g              74.52
+   m_eff_black_g                  37.24
+   t_rt_white_ms                  33.10
+   t_rt_black_ms                  23.54
+   full_return_ms_white           51.11
+   full_return_ms_black           35.94
+   retrigger_hz_white             17.34
+   retrigger_hz_black             23.91
+   front_back_ratio               1.70
+   max_plastic_rest_stress_mpa    0.89
+   magnet_travel_white_mm         6.69
+   magnet_travel_black_mm         8.68
+   min_gap_sensor_mm              4.70
+   min_clearance_moving_mm        1.00
+   white_top_z_mm                 43.50
+   max_z_mm                       55.50
+   frame_depth_mm                 212.00
+   total_instrument_depth_mm      410.00
+   printed_parts_per_octave       15.00
+   bought_parts_per_octave        37.00
+   steel_g_per_octave             713.86
+   filament_g_88                  3901.01
+   print_h_88                     260.07
+   cost_delta_krw                 138191.00
+   min clearance item: white: rear arm top - cover fascia (rest)

@@ -1,0 +1,217 @@
+================================================================================================
+Toccata v4 - S1 mini seesaw - calc.py results  (final design point y_b = 140)
+================================================================================================
+
+[1] parameters (after configure)
+  y_b              140.0
+  z_p              27.0
+  pin_d            3.0
+  z_kb_w           11.0
+  z_kb_b           9.01
+  bar_t            9.0
+  bar_h            32.0
+  bar_len_w        50.0
+  bar_len_b        37.0
+  bar_rear         198.0
+  well_y           202.5
+  stop_bar_z       (51.28, 56.2)
+  stop_felt        (186.0, 198.0)
+  front_felt_gap   0.5
+  E_felt           1.0
+  mu_pin           0.3
+  mu_bush          0.25
+  spring: d 0.40  OD 6.0  L0 50.0  n_act 40  ->  k 0.0360 N/mm  index C 14.0  solid 16.8 mm  mass 0.73 g
+  notes: none
+
+[2-w] white key (D)
+  mass total 142.8 g = PETG 28.6 + steel 113.8 (bar 113.0, pin, 1/3 spring) + magnet 0.29
+  COM (y 159.6, z 29.0): d_G = +19.6 mm behind the pin;  I_pivot 313130 g*mm^2 (I_G 257652 + m d^2 55477)
+  largest inertia terms: steel bar 9x32x50 156459; head top skin 38458; head side walls 34849; narrow side walls 13378; guide ribs x2 (hook tab slot) 13170
+  full-dip angle 4.079 deg (0.07119 rad)
+  spring well bottom z17.63 (seat z54.28): installed 36.65 mm at rest, 32.18 at bottom; force 0.480 -> 0.641 N; solid margin 15.4 mm; max shear 157 MPa
+  finger y13.0: DW 50.0 g (at rest), UW 42.4 g (near rest) / 50.0 g (leaving the bottom); balance 46.2 g, friction 3.79 g; DW at the bottom 57.9 g
+     friction split at DW (g at finger): pin 0.86, tab 2.98, fin 0.02
+  front edge y0.0: DW 45.3 g, UW 38.5 g
+  y90: DW 130.2 g -> front/back ratio F(y90)/F(y13.0) = 2.60
+  return torque at rest (as g at finger): gravity 22.0 + spring 24.1  -> gravity share 48 %; steel bar alone 29.4 g
+  m_eff at finger 19.4 g, at front edge 16.0 g
+  sensor y67: rest gap 10.82, bottom gap 5.55, magnet travel 5.27 mm; magnet at bottom y66.24 (element y67)
+  centre of percussion 112 mm behind pin; tail-felt contact points 48.0 / 56.0 mm -> in front of CoP (impact pushes pin INTO notch)
+  DW along the stroke (g): 0%:50.0  20%:51.6  40%:53.2  60%:54.7  80%:56.3  100%:57.9
+
+[2-b] black key (C#)
+  mass total 107.5 g = PETG 23.0 + steel 84.2 (bar 83.6, pin, 1/3 spring) + magnet 0.29
+  COM (y 173.7, z 27.9): d_G = +33.7 mm behind the pin;  I_pivot 256339 g*mm^2 (I_G 133869 + m d^2 122471)
+  largest inertia terms: steel bar 9x32x37 199946; black lower side walls 14233; tail side walls 10321; black upper side walls 8238; black top skin (raised part ends y144) 6948
+  full-dip angle 6.126 deg (0.10692 rad)
+  no spring: pure gravity (bar runs to the tail end wall)
+  finger y62.5: DW 49.9 g (at rest), UW 43.8 g (near rest) / 42.0 g (leaving the bottom); balance 46.8 g, friction 3.05 g; DW at the bottom 47.9 g
+     friction split at DW (g at finger): pin 0.91, tab 2.15, fin 0.03
+  front edge y52.5: DW 44.1 g, UW 38.9 g
+  y90: DW 78.0 g -> front/back ratio F(y90)/F(y62.5) = 1.56
+  return torque at rest (as g at finger): gravity 46.8 + spring 0.0  -> gravity share 100 %; steel bar alone 50.5 g
+  m_eff at finger 42.7 g, at front edge 33.5 g
+  sensor y67: rest gap 13.35, bottom gap 5.28, magnet travel 8.07 mm; magnet at bottom y65.01 (element y67)
+  centre of percussion 71 mm behind pin; tail-felt contact points 48.0 / 56.0 mm -> in front of CoP (impact pushes pin INTO notch)
+  DW along the stroke (g): 0%:49.9  20%:49.5  40%:49.1  60%:48.7  80%:48.3  100%:47.9
+
+[3] impact impulse on the pin (analytic, per unit angular velocity, g*mm; + = pin pushed into its notch)
+  white: key hits tail felt (s=+52.0) +3222 | front felt (s=-133.4) -5147  || returns onto hook (s=-127.8) +5251 | onto a back rail under the tail end (s=+62.5) -2210
+  black: key hits tail felt (s=+52.0) +1302 | front felt (s=-84.2) -6674  || returns onto hook (s=-61.8) +7779 | onto a back rail under the tail end (s=+62.5) -474
+
+[4] return simulation: released at the bottom (after a 1 N hold), 2 DOF with pin lift; felt E 1.0 MPa, zeta 0.30
+  white: sensor travel 5.36 mm | re-trigger point (risen 40 % of travel) 16.4 ms | full return (hook) 26.4 ms | pin lift 0.0000 mm | bounce after hook 0.82 mm | settled +-0.2 mm at 52.3 ms
+        re-trigger rate: 1/(2 t_rt) = 30.5 Hz (finger as slow as gravity); finger pushes back at 0.3 m/s: 34.9 Hz; full-return based 1/(2 t_full) = 19.0 Hz
+  black: sensor travel 8.24 mm | re-trigger point (risen 40 % of travel) 24.7 ms | full return (hook) 39.3 ms | pin lift 0.0000 mm | bounce after hook 1.08 mm | settled +-0.2 mm at 85.0 ms
+        re-trigger rate: 1/(2 t_rt) = 20.3 Hz (finger as slow as gravity); finger pushes back at 0.3 m/s: 27.9 Hz; full-return based 1/(2 t_full) = 12.7 Hz
+  white with felt E 0.5 MPa: t_rt 16.4 ms, t_full 26.3 ms, bounce 0.74 mm, pin lift 0.0000 mm
+  white with felt E 2.0 MPa: t_rt 16.5 ms, t_full 26.4 ms, bounce 0.91 mm, pin lift 0.0000 mm
+  (same white key with a broken/missing spring: DW 25.3 g, UW 18.9 g -> still returns by gravity, t_full 40.1 ms)
+
+[5] press simulation from rest with a constant finger force (2 DOF with pin lift)
+  white F=3 N: hits tail felt first at 1.53 m/s (finger) after 11.9 ms; pin lift 0.213 mm; peak tail felt 34.8 N, front felt 27.8 N; overtravel 0.96 mm
+  white F=8 N: hits tail felt first at 2.66 m/s (finger) after 6.9 ms; pin lift 0.432 mm; peak tail felt 59.8 N, front felt 53.0 N; overtravel 1.39 mm
+  black F=3 N: hits tail felt first at 1.03 m/s (finger) after 16.9 ms; pin lift 0.165 mm; peak tail felt 33.9 N, front felt 14.7 N; overtravel 1.62 mm
+  black F=8 N: hits tail felt first at 1.78 m/s (finger) after 9.8 ms; pin lift 0.305 mm; peak tail felt 58.0 N, front felt 27.5 N; overtravel 2.43 mm
+  impact experiment: key arrives at the first down-stop with finger speed v, finger keeps pushing 2 N
+  white v=0.5 m/s: pin lift 0.011 mm (off the notch 1.3 ms), overtravel 0.63 mm, tail felt 13.9 N, front felt 6.5 N
+  white v=1.0 m/s: pin lift 0.099 mm (off the notch 4.3 ms), overtravel 0.78 mm, tail felt 23.8 N, front felt 16.5 N
+  white v=1.5 m/s: pin lift 0.230 mm (off the notch 7.5 ms), overtravel 0.94 mm, tail felt 34.0 N, front felt 27.0 N
+  black v=0.5 m/s: pin lift 0.030 mm (off the notch 2.3 ms), overtravel 1.16 mm, tail felt 17.5 N, front felt 6.1 N
+  black v=1.0 m/s: pin lift 0.174 mm (off the notch 4.4 ms), overtravel 1.55 mm, tail felt 32.9 N, front felt 14.1 N
+  black v=1.5 m/s: pin lift 0.331 mm (off the notch 6.2 ms), overtravel 1.95 mm, tail felt 48.2 N, front felt 22.3 N
+  white v=1.0, front felt gap 0.3 mm: pin lift 0.141 mm, overtravel 0.61 mm
+  white v=1.0, front felt gap 1.0 mm: pin lift 0.014 mm, overtravel 1.19 mm
+  white v=1.0, front felt gap 5.0 mm: pin lift 0.000 mm, overtravel 1.40 mm
+  white v=1.0, harder felt E 2.5 MPa: pin lift 0.028 mm, overtravel 0.64 mm
+  white F=8 N, front felt gap 0.0 mm: pin lift 0.564 mm, overtravel 0.93 mm, tail felt 57.3 N
+  white F=8 N, front felt gap 1.0 mm: pin lift 0.326 mm, overtravel 1.83 mm, tail felt 62.3 N
+
+[6] coordinates (rest / full dip), mm
+  white key: feature                               rest (y, z)          bottom (y, z)
+    pivot pin axis                           ( 140.00,  27.00)   ( 140.00,  27.00)
+    finger point                             (  13.00,  43.50)   (  12.15,  34.42)
+    front top edge                           (   0.00,  43.50)   (  -0.82,  33.50)
+    hook contact (crossbar top)              (  12.25,  25.10)   (  12.71,  16.02)
+    front felt contact (plate centre)        (   6.60,  23.50)   (   7.19,  14.02)
+    magnet face centre                       (  65.80,  23.50)   (  66.24,  18.23)
+    key COM (incl. bar)                      ( 159.61,  29.00)   ( 159.42,  30.39)
+    steel bar centroid                       ( 173.00,  28.20)   ( 172.83,  30.54)
+    bar top front corner                     ( 148.00,  44.20)   ( 146.76,  44.73)
+    bar top rear corner                      ( 198.00,  44.20)   ( 196.63,  48.28)
+    tail stop felt contact pts               ( 188.00,  44.20)   ( 186.65,  47.57)
+                                             ( 196.00,  44.20)   ( 194.63,  48.14)
+    spring well bottom (spring lower seat)   ( 202.50,  17.63)   ( 203.01,  22.10)
+    keel bottom front / rear                 ( 146.00,  11.00)   ( 147.12,  11.47)
+                                             ( 206.50,  11.00)   ( 207.47,  15.77)
+    tail end top                             ( 206.50,  44.20)   ( 205.11,  48.89)
+  black key: feature                               rest (y, z)          bottom (y, z)
+    pivot pin axis                           ( 140.00,  27.00)   ( 140.00,  27.00)
+    finger point                             (  62.50,  55.50)   (  59.90,  47.07)
+    front top edge                           (  52.50,  55.50)   (  49.96,  46.00)
+    hook contact (crossbar top)              (  78.25,  25.10)   (  78.81,  18.52)
+    front felt contact (plate centre)        (  55.85,  23.50)   (  56.70,  14.54)
+    magnet face centre                       (  64.20,  23.50)   (  65.01,  15.43)
+    key COM (incl. bar)                      ( 173.74,  27.94)   ( 173.45,  31.53)
+    steel bar centroid                       ( 186.80,  26.21)   ( 186.62,  31.21)
+    bar top front corner                     ( 168.30,  42.21)   ( 166.52,  45.14)
+    bar top rear corner                      ( 205.30,  42.21)   ( 203.30,  49.09)
+    tail stop felt contact pts               ( 188.00,  42.21)   ( 186.10,  47.24)
+                                             ( 196.00,  42.21)   ( 194.06,  48.10)
+    (no spring well)                         ( 206.50,  42.21)   ( 204.50,  49.22)
+    keel bottom front / rear                 ( 146.00,   9.01)   ( 147.89,   9.75)
+                                             ( 206.50,   9.01)   ( 208.04,  16.21)
+    tail end top                             ( 206.50,  42.21)   ( 204.50,  49.22)
+
+[6b] frame features derived from the key geometry (mm)
+  white front felt (secondary down-stop): felt top z13.24 at y3.29 .. z13.80 at y11.09 (slope 4.08 deg = key angle), rail top = felt top - 3.0
+  black front felt (secondary down-stop): felt top z13.70 at y53.55 .. z14.38 at y59.85 (slope 6.13 deg = key angle), rail top = felt top - 3.0
+  tail stop felt underside: z47.57 at y186.65 .. z48.14 at y194.63 (inclined 4.08 deg, = white bar top at full dip); black bars meet it at their own full dip (keel z9.01)
+  balance rail y135..145 top z21.5; fins 2.0 thick, notch for the pin axis z27.0: PETG R2.0 bottom z25.0 + 0.5 cloth -> seat R1.5; flat lead-in top z27.0 for 3.9 mm in front of the notch
+  spring (white only): pocket in the stop bar at y202.5, seat z54.28; key well bottom z17.63 (well Ø6.6)
+  control board y94..133 x47.25..117.25 (cut 5x7 stripboard to 39 x 70), components <= z15.0; USB cable lane under the F tail x71..80 z5..10.5 (white keel z11.0)
+
+[7] clearances and envelope
+  white: rearmost point of the tail (low keel corner) y207.47 at full dip -> clearance to the rear wall y209 1.53 mm
+  white: tail top z44.20 rest -> z48.89 bottom (rise 4.69); keel bottom z11.00; key underside over the control board at full dip z20.24 (components <= z15.0 -> 5.24 mm)
+  black: rearmost point of the tail (low keel corner) y208.04 at full dip -> clearance to the rear wall y209 0.96 mm
+  black: tail top z42.21 rest -> z49.22 bottom (rise 7.01); keel bottom z9.01; key underside over the control board at full dip z18.61 (components <= z15.0 -> 3.61 mm)
+  rear-cover front plate (y146..148.5) bottom raised z44.5 -> z46.5: white tail top there at full dip z44.76 (clear 1.74); black raised top end y144 at full dip z55.76 vs cover underside z56.5 (clear 0.74)
+  stop felt z48.28..51.28 (glued under the tail stop bar z51.28..56.2, 4.9 thick); cover underside z56.5
+  highest moving part z55.5 (black key top at rest, moves down); lowest moving part z9.01 (black keel at rest, moves up); depth used y0..206.5; frame 212, total depth 410 mm (unchanged)
+
+[8] constant stress in plastic parts at rest (MPa)
+  key front arm at the pivot boss (hook load + own weight)     0.306
+  key tail box behind the boss (bar + spring)                  0.080
+  pin on the fin notch, projected bearing (R = 2.33 N)         0.388
+  pin in the key boss, bearing                                 0.075
+  pocket floor under the steel bar (plate)                     0.119
+  spring well floor (plate)                                    0.197
+  frame hook cantilever (F = 0.450 N, v3 hook)                 0.664
+  tail stop bar, cantilever from rear-wall groove (springs 3.4 N) 0.033
+  max constant stress 0.664 MPa (target < 2)
+  transient only: 8 N finger held at the bottom, front arm at the boss if the tail felt carried it: 4.4 MPa
+  transient only: 5-key ff chord (1.5 m/s, 34.0 N per key) on the tail stop bar (cantilever from the rear-wall groove): 10.5 MPa, deflection 0.21 mm
+
+[9] parts, steel, filament, print
+  PETG: white key 28.6 g, black key 23.0 g, frame 169 g (v3 175 - spine rail 25 + balance rail/fins 20), tail stop bar 12 g, cover 44 g, sensor bar 16 g
+  per octave module 557 g -> 37.1 h; 88 keys 4.14 kg (+10 % waste 4.56 kg) -> 304 h at 15 g/h
+  steel per octave 1225 g (bars 1210 g = 7 x 113 + 5 x 84); 88 keys 9.00 kg
+  octave module mass ~1.87 kg (v3 0.59 kg)
+  flat bar 9x32 to cut: 4.06 m incl. 1.5 mm kerf -> 5 x 1 m pieces
+  largest print: frame 164.5 x 212 (fits 220x220), key 206.5 long lying on its top face (fits straight: yes); keys per 220 plate with 2 mm gaps: white 8, black 14
+  regulation: white well spacer +1 mm -> DW +1.81 g; black: +1 g tungsten putty on the tail (y192) -> DW +0.67 g, +1 g under the front (y57) -> DW -1.07 g
+
+[10] purchased items vs v3 (KRW)
+  + flat bar SS400 9x32, 1 m pieces (cut at home)                        5 x   7000 =   35000  [estimate]
+  + dowel pin 3x10 SUS, 100 pcs                                          1 x  10000 =   10000  [estimate (NFAS lists ~100 won/ea)]
+  + compression spring d0.4 OD6 L50 (white keys only, 52 + spares), 100 pcs   1 x  60000 =   60000  [NaviMRO Hyundai-Spring 100EA packs 47,990-69,990 won; this size = estimate]
+  + hacksaw blade bi-metal x2 (88 cuts)                                  2 x   3000 =    6000  [estimate]
+  + (option) steel balls d10 1 kg for white key leads, 208 pcs           0 x   6500 =       0  [danawa/bearingstore listings 5,900-6,900 won/kg]
+  + M3 knurled thumb screw + nut, tail stop bar, 2 per module (18 sets)  18 x    300 =    5400  [estimate]
+  + bushing cloth 0.5T for notches (felt already in BOM)                 0 x      0 =       0  [BOM]
+  - v3 clamp M3x35/40 x4 + setscrew M3x10 x4 + brass disc x4 per module (9 modules)               -16920  [v3 BOM lines, approx]
+  cost delta vs v3 base BOM: +99480 KRW
+
+[10b] options on the final geometry (white key)
+  key lead: 4 steel balls d10 (16.4 g) in the head at y38                  m_eff 31.0 g, gravity share 17 %, spring preload 0.76 N (well bottom z25.5 ok), DW rest->bottom 50.0->57.6 g, t_rt 20.9 ms, t_full 33.5 ms, key mass 161 g
+  key lead: 8 steel balls d10 (32.9 g, 2 layers) at y38                    m_eff 41.6 g, gravity share -12 %, spring preload 1.02 N (well bottom z32.7 NOT FEASIBLE with this spring), DW rest->bottom 50.0->57.1 g, t_rt 24.4 ms, t_full 39.1 ms, key mass 177 g
+  steel balls d10 instead of the flat bar (no cutting; 3 layers, fill 0.545) m_eff 15.0 g, gravity share 19 %, spring preload 0.75 N (well bottom z25.1 ok), DW rest->bottom 50.0->57.7 g, t_rt 14.4 ms, t_full 23.2 ms, key mass 91 g
+  no white bar at all (spring only)                                        m_eff 9.7 g, gravity share -16 %, spring preload 1.07 N (well bottom z34.0 NOT FEASIBLE with this spring), DW rest->bottom 50.0->57.1 g, t_rt 11.7 ms, t_full 18.7 ms, key mass 30 g
+
+[11] y_b sweep of the S1 family (longest bar that fits + helper spring to DW 50 g at y13)
+   y_b  bar_w  grav%  spr_N  DW   UWbot  ratio  trav_w  m_eff  t_rt  t_full  Hz(sym)  lift8N  bar_b  keel_b  trav_b  DW_b UWbot_b notes
+   130   106g    61   0.29  50.0  54.8   3.02   4.90   23.8  17.5   28.1    28.6   0.427    55g    8.1   7.87  49.4  41.9  -
+   135   124g    64   0.29  50.0  51.9   2.79   5.09   23.3  17.7   28.4    28.2   0.459    63g    8.6   7.97  49.8  42.0  -
+   140   113g    48   0.48  50.0  50.0   2.60   5.27   19.4  16.4   26.4    30.5   0.432    84g    9.0   8.07  49.9  42.0  -
+   145   102g    33   0.69  50.0  48.2   2.45   5.43   16.5  15.3   24.7    32.6   0.389   102g    9.3   8.15  50.0  57.0  black spring well bottom z8.8 below the pocket floor z10.5
+   150    90g    21   0.93  50.0  46.5   2.33   5.59   14.3  14.5   23.3    34.5   0.332    90g    9.6   8.23  50.0  53.4  -
+   155    79g    11   1.21  50.0  44.9   2.23   5.73   12.7  13.8   22.3    36.2   0.267    79g    9.9   8.29  50.0  50.4  white spring near solid
+   160    68g     1   1.54  50.0  43.2   2.14   5.86   11.6  13.3   21.6    37.6   0.204    68g   10.1   8.36  50.0  47.7  white spring near solid
+
+[12] pure gravity (no spring)
+  (a) inside the 212 frame (tail end y206.5); bar 9 thick fills the whole tail; DW target 50 g
+      y_b  white bar max(LxH, g)  DW_max  -> bar for DW50 (g)  UW   ratio  travel  m_eff | black: bar(g) DW  travel  tail rise  keel
+       110     88x25.0   156 g    84.2       60 g           42.3   5.19   3.98   52.7 |    20 g  50.0   7.23    15.1  z7.0
+       115     83x25.0   147 g    70.8       73 g           42.3   4.30   4.24   46.9 |    26 g  50.0   7.43    13.2  z7.0
+       118     80x25.0   141 g    63.5       83 g           42.3   3.93   4.39   43.5 |    30 g  50.0   7.54    12.2  z7.0
+       120     78x25.0   138 g    59.0       92 g           42.3   3.72   4.48   41.3 |    33 g  50.0   7.60    11.6  z7.0
+       122     76x25.0   134 g    54.7      103 g           42.3   3.55   4.57   39.0 |    36 g  50.0   7.66    11.0  z7.0
+       125     73x25.0   129 g    48.6      129 g           40.9   3.32   4.70   35.2 |    42 g  50.0   7.74    10.2  z7.0
+       130     68x25.0   120 g    39.6      120 g           32.3   3.02   4.90   28.8 |    48 g  50.0   7.87     8.9  z7.0
+       135     63x25.0   111 g    31.6      111 g           24.8   2.79   5.09   23.8 |    61 g  50.0   7.97     7.9  z7.0
+       140     58x32.0   131 g    33.7      131 g           26.4   2.60   5.27   23.5 |    80 g  50.0   8.07     6.9  z7.0
+       150     48x32.0   109 g    19.3      109 g           12.8   2.33   5.59   16.8 |   109 g  37.2   8.23     5.3  z7.0
+       160     38x32.0    86 g     8.4       86 g            2.6   2.14   5.86   13.1 |    86 g  19.4   8.36     3.9  z7.0
+      -> furthest-back pin that still reaches DW 50 g on gravity alone: y_b 122 (ratio 3.55, travel 4.57 mm, m_eff 39.0 g, white bar 103 g, black bar 36 g)
+  (b) pin kept at y_b 150 / 160, tail lengthened (deeper frame) until gravity alone gives DW 50 g
+      y_b  tail end  frame  total depth  white bar(g)  UW    ratio  m_eff  black bar(g)  steel 88 keys
+       150  y 246.5    251       449        115      42.5   2.33   37.8        52         7.8 kg
+       150  y 256.5    261       459         88      42.7   2.33   43.6        43         6.2 kg
+       150  y 306.5    311       509         44      42.9   2.33   66.5        21         3.1 kg
+       160  y 256.5    261       459        145      42.5   2.14   35.1        56         9.6 kg
+       160  y 306.5    311       509         55      42.9   2.14   59.1        29         3.9 kg
+  (c) in-frame pure gravity at y_b 122, full evaluation (bars 9x25: white 62 mm, black 21 mm) ['black keel z6.8 below floor limit']
+      white: bar 110 g, DW 50.3, UW 42.9/42.5, ratio 3.55, travel 4.57, m_eff 38.4, t_rt 24.8 ms, t_full 39.4 ms, re-trigger 20.2 Hz, pin lift @1 m/s 0.131 mm, tail rise 6.8
+      black: bar 37 g, DW 48.9, UW 43.6/41.2, ratio 1.88, travel 7.66, m_eff 70.9, t_rt 31.8 ms, t_full 50.1 ms, re-trigger 15.7 Hz, pin lift @1 m/s 0.076 mm, tail rise 11.0
+      steel for 88 keys 7.0 kg; control board would have to fit y94..115 (21 mm deep)

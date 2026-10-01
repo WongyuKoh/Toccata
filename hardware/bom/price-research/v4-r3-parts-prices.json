@@ -1,0 +1,3865 @@
+{
+ "parts": [
+  {
+   "part_id": "weight",
+   "name_ko": "무게 블록 SS400 9×50×21.5 (약 76 g)",
+   "role_ko": "레버 캐리어에 가두는 강철 추. 누른 건반을 중력으로 되돌리고(끝까지 복귀 52 ms) DW 51.9 g·UW 43.9 g을 만든다.",
+   "spec_required": "SS400(SS275) 9 × 50 × 21.5 mm, 75.8 g ± 1 g, 앞 윗모서리 2.0×45° 모따기. 두께 9·폭 50은 캐리어 주머니, 21.5는 높이.",
+   "qty_needed": "92개 (88 + 예비 4: 보관함 레버 2 + 단계 0·무게 선별 2), 강철 약 7.0 kg",
+   "current": {
+    "title_ko": "r3 계획: 올스틸샵 9T 50×1100 띠 2장 → 21.5 mm 간격 직접 톱질",
+    "items": [
+     {
+      "name": "사각철판 9T (SS275) 50×1100 맞춤 재단",
+      "spec": "9T × 50 × 1100 mm, 1장 3.886 kg, 계산기 개당 18,720원(4,815원/kg)",
+      "qty": 2,
+      "unit_krw": 18720,
+      "shipping_krw": 3500,
+      "store": "올스틸샵 (allsteelshop.com)",
+      "url": "https://www.allsteelshop.com/product/squareplate/9t",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_9t.jpg",
+      "note_ko": "9/27 상품 페이지의 가격 변수(LOG_3STEP: kg당 8,800→4,400원, 기준 5 kg, 10원 올림, 최소금액 = 같은 두께 100×100 값)와 배송비 API(판: 0~10 kg 3,500원, 10~30 kg 6,600원, 30 kg 이상 11,000원)로 다시 계산했다. VAT 포함, 발송 2영업일, 맞춤 절단이라 반품 불가. 레일용 3T 60×1300(1.84 kg)을 같은 주문에 넣어도 합 9.6 kg이라 배송비 3,500원 한 번이다. 4.5T 띠까지 더하면 10.5 kg이 되어 6,600원으로 오른다."
+     }
+    ],
+    "total_krw": 40940,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "가장 싼 정확한 소재다. 두께 9와 폭 50은 압연면·레이저면이라 정확하고, 톱으로 맞출 치수는 21.5 하나다. 1.1 m라 택배로 온다. 두 장에서 94~96개가 나온다.",
+    "cons_ko": "92번 톱질(9×50 단면)과 모따기·버 제거를 직접 한다. 쇠톱·날·줄·바이스(공구 목록 T01~T03·C02, 따로 셈)가 필요하다.",
+    "extra_labor_ko": "22.8 mm 간격 금긋기 → 쇠톱 92컷(컷당 3~4분) → 버 제거와 앞 윗모서리 2×45° 줄 모따기(개당 약 1분) → 0.1 g 저울로 75.8 ± 1 g 선별. 약 7~8시간(앵글 그라인더 1 mm 절단석이면 약 2시간).",
+    "risk_ko": "톱 길이 오차 ±0.3 mm = ±1.1 g(캡스턴 반 바퀴 1.3 g 안). 손목 피로와 톱날 소모."
+   },
+   "alternatives": [
+    {
+     "title_ko": "올스틸샵 9T 50×2200 1장 (같은 소재, 한 장으로)",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 50×2200 맞춤 재단",
+       "spec": "9T × 50 × 2200 mm, 7.771 kg, 개당 34,200원(4,400원/kg)",
+       "qty": 1,
+       "unit_krw": 34200,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_9t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가). 판(plate) 상품은 길이 요금이 붙지 않아 API가 3,500원을 준다. 다만 2.2 m는 보통 택배 규격을 넘으므로 주문 뒤 화물 배송이나 추가 운임 연락이 올 수 있다."
+      }
+     ],
+     "total_krw": 37700,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "현재 안보다 3,240원 싸다. 자르는 일은 같다.",
+     "cons_ko": "2.2 m 한 장이라 배송이 화물로 바뀔 수 있고, 집에서 바이스에 물리기 불편하다.",
+     "extra_labor_ko": "현재 안과 같음(92컷).",
+     "risk_ko": "택배 거절 시 운임 추가."
+    },
+    {
+     "title_ko": "올스틸샵 9T 21×1250 4장 → 50 mm 간격 톱질 (블록 9×50×21, 톱질 면적 42 %)",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 21×1250 맞춤 재단",
+       "spec": "9T × 21 × 1250 mm, 1장 1.855 kg, 개당 11,050원; 한 장에서 50 mm 블록 24개",
+       "qty": 4,
+       "unit_krw": 11050,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_9t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가). 1 mm 단위라 21.5는 주문할 수 없어 21로 했다(22로 하면 45,800원, 블록 77.7 g)."
+      }
+     ],
+     "total_krw": 47700,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "톱이 지나가는 면이 9×21로 현재(9×50)의 42 %라 톱질 시간이 절반 아래로 준다. 레이저면 21이 블록 높이가 되어 정확하고, 톱 길이 50 ±0.3은 무게 ±0.6 %라 선별이 쉽다.",
+     "cons_ko": "블록이 9×50×21(74.2 g, −1.6 g)이 되어 캐리어 주머니보다 0.5 mm 낮다. 0.5T 천(L40)을 한 겹 붙이거나 주머니를 21로 줄여야 하고, DW가 약 −1.2 g 바뀌어 캡스턴으로 다시 맞춘다. 6,760원 비싸다.",
+     "extra_labor_ko": "92컷(컷당 약 1.5분) + 모따기·선별. 약 4~5시간.",
+     "risk_ko": "주머니 치수를 21로 바꾸는 설계 반영이 필요(22로 받으면 R3 캡 밑 벽 0.80 mm가 줄어듦)."
+    },
+    {
+     "title_ko": "올스틸샵 9T 50×21 개별 레이저 재단 92개 (톱질 없음)",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 50×21 맞춤 재단",
+       "spec": "9T × 50 × 21 mm, 0.074 kg, 작은 조각이라 최소금액 5,080원(=100×100 값) 적용",
+       "qty": 92,
+       "unit_krw": 5080,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_9t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가). 50×22도 같은 5,080원이다. 전화 견적(010-2655-2443)은 받지 않았다."
+      }
+     ],
+     "total_krw": 470860,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "톱질이 없다. 쇠톱·날·바이스를 따로 살 필요가 없어진다(가진 게 없으면 공구 약 4만 원 절약). 치수가 고르다.",
+     "cons_ko": "42만 원 넘게 비싸다. 21.5는 주문 불가(21 또는 22)라 위 21 mm 안과 같은 주머니 조정이 필요하다. 모따기는 여전히 줄로 한다.",
+     "extra_labor_ko": "모따기·선별만(약 2시간).",
+     "risk_ko": "최소금액 때문에 수량이 늘어도 단가가 내려가지 않는다."
+    },
+    {
+     "title_ko": "레이저1번가 9T SS400 레이저 재단 92개 50×21.5 (도면 견적)",
+     "items": [
+      {
+       "name": "온라인 레이저 절단 SS400 9.0T, 50×21.5 × 92개",
+       "spec": "DWG 1:1 도면 업로드 → 익일 견적 → 무통장 결제, 기본 생산 1~2일",
+       "qty": 1,
+       "unit_krw": 60000,
+       "shipping_krw": 4000,
+       "store": "레이저1번가 (laser1st.co.kr, (주)시우하이텍)",
+       "url": "http://laser1st.co.kr/online_laser_service/",
+       "verified": false,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_laser1st_logo.png",
+       "note_ko": "확인 안 됨: 가격표가 없고 도면을 올려 회원가입해야 견적이 나오는 방식이라 금액을 받지 못했다. 값은 추정(절단 길이 약 13 m + 피어싱 92회 + 소재 7 kg + 준비비)이다. 자재표에 SS400 9.0T 보유, 업체 표기 기계 공차 1 mm, 배송은 경동택배(금액은 견적에 포함). 레일·탭 띠와 한 도면으로 같이 견적 받으면 준비비를 나눌 수 있다."
+      }
+     ],
+     "total_krw": 64000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "21.5를 그대로 받을 수 있고 톱질이 없다. 레일(구멍 포함)·탭 띠와 한 번에 맡길 수 있다.",
+     "cons_ko": "견적 절차(DWG 도면, 회원가입, 무통장)가 번거롭고 값이 확정되지 않았다. 업체 표기 공차가 1 mm라 무게 선별은 여전히 필요할 수 있다.",
+     "extra_labor_ko": "DWG 도면 작성(블록 배열 1장) + 모따기·선별 약 2시간.",
+     "risk_ko": "값이 추정이다. 공차 1 mm면 ±3.5 g."
+    },
+    {
+     "title_ko": "올스틸샵 띠 + 동네 철공소에 절단·모따기 맡김 (r3 선택안)",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 50×1100 맞춤 재단",
+       "spec": "현재 안과 같은 소재",
+       "qty": 2,
+       "unit_krw": 18720,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_9t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가)."
+      },
+      {
+       "name": "철공소 절단 92컷 + 앞 윗모서리 2×45° 모따기",
+       "spec": "밴드쏘 절단 후 그라인더 모따기, 개당 약 650원(r3 추정)",
+       "qty": 92,
+       "unit_krw": 650,
+       "shipping_krw": 0,
+       "store": "동네 철공소(견적 필요)",
+       "url": "",
+       "verified": false,
+       "note_ko": "확인 안 됨: 온라인 가격이 없는 서비스라 r3 추정 단가를 그대로 옮겼다. 원자재닷컴 9~10t 절단이 컷당 3,000원이고 올스틸샵은 밴드쏘 오차를 ±1~2 mm로 적어 두었으니, 맡길 때 21.5 ±0.3과 모따기를 따로 요구해야 한다."
+      }
+     ],
+     "total_krw": 100740,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "손 작업이 거의 없다.",
+     "cons_ko": "방문·운반이 필요하고 값·공차가 업체마다 다르다. 밴드쏘 ±1 mm면 무게 ±3.5 g.",
+     "extra_labor_ko": "방문 1~2회, 선별 약 1시간.",
+     "risk_ko": "공차를 지키지 않으면 줄질로 다시 맞춰야 한다."
+    },
+    {
+     "title_ko": "원자재닷컴 평철 50×9 6 m + 업체 절단 92컷",
+     "items": [
+      {
+       "name": "[스틸 형강류] 스틸 평철 6M 폭 50 / 두께 9",
+       "spec": "6,000 mm 1본(약 21 kg), 기본 8,600 + 두께 옵션 35,930원",
+       "qty": 1,
+       "unit_krw": 44530,
+       "shipping_krw": 0,
+       "store": "원자재닷컴 (onezaze.com)",
+       "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=141",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_onezaze_141.jpg",
+       "note_ko": "9/27 옵션 화면에서 폭 50 → 두께 9 \"+35,930\"을 확인했다. 배송은 착불(수령 시 지불, 6 m라 화물)이라 금액을 모른다."
+      },
+      {
+       "name": "평철절단 추가상품 (9~10t, 컷당)",
+       "spec": "추가상품 \"평철절단 (절단(컷당) 9~10t / +3,000원)\"",
+       "qty": 92,
+       "unit_krw": 3000,
+       "shipping_krw": 0,
+       "store": "원자재닷컴 (onezaze.com)",
+       "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=141",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_onezaze_141.jpg",
+       "note_ko": "같은 페이지 추가상품 목록에서 확인했다."
+      }
+     ],
+     "total_krw": 320530,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "톱질이 없다.",
+     "cons_ko": "32만 원이 넘고 6 m 화물 착불 운임이 더 붙는다. 톱 절단 공차가 적혀 있지 않다(무게 ±1 g를 못 지킬 수 있음).",
+     "extra_labor_ko": "모따기·선별 약 2시간.",
+     "risk_ko": "착불 화물비 미확인."
+    },
+    {
+     "title_ko": "기성품 강철·주철 블록 (맞는 것 없음 — 참고)",
+     "items": [
+      {
+       "name": "주물 사각 철블록 무게추 5×3×1 cm 약 110 g",
+       "spec": "옵션 \"단단한 5x3x1cm 약 110g\", 주철",
+       "qty": 92,
+       "unit_krw": 25200,
+       "shipping_krw": 0,
+       "store": "11번가 애수니",
+       "url": "https://www.11st.co.kr/products/9441536032",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9441536032.webp",
+       "note_ko": "9/27 옵션 목록에서 25,200원(무료배송)을 확인했다. 가장 작은 3×3×1 cm(66 g)도 24,300원이다. 9×50×21.5 ±2 mm 주머니에 들어가는 70~80 g 기성품은 찾지 못했다(휠 밸런스 웨이트는 폭 19 두 겹이 약 50 g, 교정 분동은 원통형)."
+      }
+     ],
+     "total_krw": 2318400,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가공이 없다.",
+     "cons_ko": "크기(50×30×10)와 무게(110 g)가 설계와 다르고 개당 2.5만 원이라 비현실적이다.",
+     "risk_ko": "쓰지 말 것 — 비교용."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다. 이 블록의 무게가 건반을 되돌리는 유일한 힘이라(스프링 없음) 없으면 건반이 올라오지 않는다. 9T 평철이나 같은 크기 강철 조각을 이미 가지고 있을 때만 사용 안함으로 둔다.",
+   "r4_note_ko": "r4 검토(block_study)에서 블록 길이 45·40 mm, 높이 19·17 mm 안(무게 53~68 g)을 계산 중이다. 50 mm 폭 띠는 길이를 바꿔도 그대로 쓰고, 21 mm 폭 안은 높이가 바뀌면 띠 폭만 바꿔 주문하면 된다."
+  },
+  {
+   "part_id": "rail",
+   "name_ko": "업스톱 레일 SS400 3T×60",
+   "role_ko": "레버 앞 R3 캡이 올라와 닿는 강철 멈춤 레일(밑면에 패드). 손나사 8개로 브리지에 고정하고 먼지 커버를 받친다.",
+   "spec_required": "SS400 3T × 60 × 163.3, 구멍 Ø3.4 ×8 + 위치 핀 Ø3.2 ×2 (모듈 7장). 끝 부속: 왼쪽 61.1 × 60(손나사 4), 오른쪽 36.4 × 60(손나사 2).",
+   "qty_needed": "9장(모듈 7 + 끝 부속 2), 구멍 약 76개, 강철 약 1.75 kg",
+   "current": {
+    "title_ko": "r3 계획: 올스틸샵 3T 60×1300 1장 → 직접 톱질 8컷 + 드릴 약 76구멍",
+    "items": [
+     {
+      "name": "사각철판 3T (SS275/GS400) 60×1300 맞춤 재단",
+      "spec": "3T × 60 × 1300 mm, 1.837 kg, 개당 10,970원; 163.3 ×7 + 61.1 + 36.4 + 톱날 8컷 = 약 1,251 mm",
+      "qty": 1,
+      "unit_krw": 10970,
+      "shipping_krw": 3500,
+      "store": "올스틸샵 (allsteelshop.com)",
+      "url": "https://www.allsteelshop.com/product/squareplate/3t",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_3t.jpg",
+      "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가). r3 표의 \"1 m 2개\"보다 1.3 m 한 장이 싸다(1 m 2장은 17,920원). 무게 블록 띠와 같은 주문이면 배송비는 한 번(합 9.6 kg)."
+     },
+     {
+      "name": "철공용 드릴 3.2 mm (M4 탭용, 국산 HSS)",
+      "spec": "Ø3.2 트위스트 드릴, 옵션 \"철공용드릴 3.2mm(M4용)\"",
+      "qty": 2,
+      "unit_krw": 990,
+      "shipping_krw": 3000,
+      "store": "11번가 산업정품샵",
+      "url": "https://www.11st.co.kr/products/1986654212",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_1986654212.jpg",
+      "note_ko": "9/27 옵션 목록에서 2.5 mm 790원 / 3.2 mm 990원, 배송비 3,000원(10만 원 이상 무료)을 확인했다. M3 나사 통과 구멍은 Ø3.2(ISO 273 fine)로도 되고 위치 핀 구멍 Ø3.2와 같은 날로 뚫는다. 같은 가게 2.5 mm(탭 띠용)와 합배송."
+     }
+    ],
+    "total_krw": 19450,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "가장 싸다. 폭 60은 레이저 재단면이라 정확하다.",
+    "cons_ko": "톱질 8컷과 구멍 약 76개(모듈 10개씩 + 끝 부속 약 6개)를 직접 뚫는다. 구멍 위치가 탭 띠·핀 보스와 ±0.2로 맞아야 해서 출력 드릴 지그가 필요하다.",
+    "extra_labor_ko": "쇠톱 8컷(3×60 단면, 컷당 약 1분)과 끝면 줄질. 출력한 드릴 지그를 레일에 물리고 센터펀치 → Ø3.2 드릴(구멍당 1~2분). 약 2~3시간, 손 드릴은 가진 것을 쓴다.",
+    "risk_ko": "지그 없이 뚫으면 손나사가 탭 띠에 비스듬히 물린다. 탭 띠를 레일에 대고 함께 뚫으면(합구멍) 어긋남이 없다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "올스틸샵 3T 60×163 7장 + 60×61 + 60×36 개별 재단 (톱질 없음)",
+     "items": [
+      {
+       "name": "사각철판 3T 60×163 / 60×61 / 60×36 맞춤 재단",
+       "spec": "9장, 작은 조각이라 모두 최소금액 1,910원(=100×100 값)",
+       "qty": 9,
+       "unit_krw": 1910,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/3t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_3t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가). 1 mm 단위라 163.3→163, 61.1→61, 36.4→36으로 주문한다(모듈 레일 끝 틈 1.20 → 1.50, 영향 없음)."
+      },
+      {
+       "name": "철공용 드릴 3.2 mm (M4 탭용, 국산 HSS)",
+       "spec": "Ø3.2 트위스트 드릴, 옵션 \"철공용드릴 3.2mm(M4용)\"",
+       "qty": 2,
+       "unit_krw": 990,
+       "shipping_krw": 3000,
+       "store": "11번가 산업정품샵",
+       "url": "https://www.11st.co.kr/products/1986654212",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_1986654212.jpg",
+       "note_ko": "9/27 옵션 목록에서 2.5 mm 790원 / 3.2 mm 990원, 배송비 3,000원(10만 원 이상 무료)을 확인했다. M3 나사 통과 구멍은 Ø3.2(ISO 273 fine)로도 되고 위치 핀 구멍 Ø3.2와 같은 날로 뚫는다. 같은 가게 2.5 mm(탭 띠용)와 합배송."
+      }
+     ],
+     "total_krw": 25670,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "톱질과 끝면 다듬기가 없어지고 길이가 고르다.",
+     "cons_ko": "6,220원 비싸다. 구멍은 여전히 직접 뚫는다.",
+     "extra_labor_ko": "드릴 지그로 약 76구멍, 약 2시간.",
+     "risk_ko": "현재 안과 같은 구멍 위치 위험."
+    },
+    {
+     "title_ko": "레이저1번가 SS400 3T 레이저 재단 9장 + 구멍 76개 (도면 견적)",
+     "items": [
+      {
+       "name": "온라인 레이저 절단 SS400 3.0T(또는 3.2T), 60×163.3 ×7 + 끝 부속 2, 구멍 포함",
+       "spec": "DWG 1:1 도면, 구멍 Ø3.4·Ø3.2를 레이저로 함께 뚫음",
+       "qty": 1,
+       "unit_krw": 35000,
+       "shipping_krw": 4000,
+       "store": "레이저1번가 (laser1st.co.kr, (주)시우하이텍)",
+       "url": "http://laser1st.co.kr/online_laser_service/",
+       "verified": false,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_laser1st_logo.png",
+       "note_ko": "확인 안 됨: 도면 견적 방식이라 값을 받지 못했다(추정). 드롭다운에는 SS400 3.0이 있으나 보유 자재표에는 3.2가 적혀 있다 — 3.2T면 레일 윗면이 0.2 mm 올라가 커버·손나사 높이를 확인해야 한다. 올스틸샵 홀가공은 사각철판 페이지에 옵션이 없어 전화 문의(010-2655-2443)만 가능하다."
+      }
+     ],
+     "total_krw": 39000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "톱질·드릴이 모두 없어지고 구멍 위치가 정확하다(지그 불필요). 블록·탭 띠와 한 번에 견적 가능.",
+     "cons_ko": "값이 확정되지 않았고 도면·회원가입·무통장 절차가 번거롭다.",
+     "extra_labor_ko": "DWG 도면 작성(레일 9장) 약 1시간.",
+     "risk_ko": "업체 표기 공차 1 mm — 구멍 위치 공차를 도면에 적어 요구해야 한다."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다. 레일이 없으면 레버가 위로 튀어 올라 유령 재타건·소음이 생기고 먼지 커버도 얹을 곳이 없다. 3T 강판 자투리를 이미 가지고 있을 때만 사용 안함으로 둔다.",
+   "r4_note_ko": "r4 업스톱 검토(upstop 폴더)에서 고정 방식이 바뀌면 구멍 수·위치가 달라질 수 있다. 소재(3T×60)는 그대로 쓸 가능성이 크다."
+  },
+  {
+   "part_id": "strip",
+   "name_ko": "탭 강철 띠 SS400 4T×20 (M3 탭)",
+   "role_ko": "브리지 주머니에 밑에서 밀어 넣는 너트 역할의 강철 띠. 손나사 M3를 받아 레일–지붕–띠를 한 덩어리로 죄고 예하중 422 N을 넓게 퍼뜨린다(지붕 지압 1.90 MPa).",
+   "spec_required": "SS400 4T × 20. 모듈마다 4개(길이 38.36 / 39.26 / 38.21 / 37.28), M3 탭 2개씩. 끝 부속: 왼쪽 44.8(탭 3), 오른쪽 21.1(탭 1), 볼 속 판 12×20×4 2개(탭 1씩).",
+   "qty_needed": "32개(모듈 28 + 끝 부속 띠 2 + 볼 판 2), M3 탭 62구멍, 합 약 1.16 m + 톱날 폭",
+   "current": {
+    "title_ko": "r3 사양 4T: 레이저1번가 SS400 4.0T 재단 32개 + 직접 M3 탭 62구멍",
+    "items": [
+     {
+      "name": "온라인 레이저 절단 SS400 4.0T 띠 20 × 37.3~44.8 ×30 + 볼 판 12×20 ×2",
+      "spec": "DWG 1:1 도면(띠 32개 배열). 4T에 Ø2.5는 레이저 최소 구멍(두께 이상)보다 작아 구멍은 직접 뚫음",
+      "qty": 1,
+      "unit_krw": 30000,
+      "shipping_krw": 4000,
+      "store": "레이저1번가 (laser1st.co.kr, (주)시우하이텍)",
+      "url": "http://laser1st.co.kr/online_laser_service/",
+      "verified": false,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_laser1st_logo.png",
+      "note_ko": "확인 안 됨: 4T 평철·판을 1 mm 단위로 파는 온라인 판매처를 찾지 못했다(올스틸샵은 2·3·4.5·6·9T, 원자재닷컴 평철은 3·4.5·6T, 11번가에는 SUS 3T·5T뿐). 4.0T를 보유 자재로 적은 곳은 레이저1번가뿐이라 도면 견적 추정값을 넣었다. 탭 후가공도 요청할 수 있다고 적혀 있다(값 미확인)."
+     },
+     {
+      "name": "철공용 드릴 2.5 mm (M3 탭 밑구멍, 국산 HSS)",
+      "spec": "Ø2.5 트위스트 드릴, 옵션 \"철공용드릴 2.5mm(M3용)\"",
+      "qty": 2,
+      "unit_krw": 790,
+      "shipping_krw": 3000,
+      "store": "11번가 산업정품샵",
+      "url": "https://www.11st.co.kr/products/1986654212",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_1986654212.jpg",
+      "note_ko": "9/27 옵션 목록에서 790원, 배송비 3,000원(10만 원 이상 무료)을 확인했다. 레일용 3.2 mm와 같은 가게라 배송비는 한 번이다. 62구멍에 날이 부러질 수 있어 2개."
+     },
+     {
+      "name": "사파코리아 HSS 핸드탭 M3×0.5",
+      "spec": "옵션 \"HSS M3\"(손탭)",
+      "qty": 2,
+      "unit_krw": 2300,
+      "shipping_krw": 3000,
+      "store": "11번가 twovtool1 (사파코리아)",
+      "url": "https://www.11st.co.kr/products/5796623030",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+      "note_ko": "9/27 상품 페이지 옵션 목록에서 HSS M3 2,300원, HSS-6542 M3(기계탭) 3,500원, 자동T핸드탭 6,350원, 배송비 3,000원(CJ, 9/29 도착 예정)을 확인했다. 강철 4T에 62구멍이라 1개 예비."
+     },
+     {
+      "name": "사파코리아 자동T핸드탭 (탭 핸들)",
+      "spec": "옵션 \"자동T핸드탭\", M3~M8 물림",
+      "qty": 1,
+      "unit_krw": 6350,
+      "shipping_krw": 0,
+      "store": "11번가 twovtool1 (사파코리아)",
+      "url": "https://www.11st.co.kr/products/5796623030",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+      "note_ko": "같은 상품의 옵션이라 배송비는 위 줄에 한 번만 넣었다."
+     }
+    ],
+    "total_krw": 52530,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "r3 설계(띠 두께 4, 주머니 깊이 7.5)를 바꾸지 않는다.",
+    "cons_ko": "4T 판매처가 견적 업체뿐이라 값이 확정되지 않았다. M3 탭 62구멍을 직접 낸다.",
+    "extra_labor_ko": "출력 지그로 Ø2.5 62구멍(구멍당 약 1분) → 탭 핸들로 M3 탭(구멍당 2~3분, 절삭유) → 버 제거. 약 3~4시간.",
+    "risk_ko": "탭이 부러지면 띠를 버린다(예비 탭 1개 포함). 값 추정."
+   },
+   "alternatives": [
+    {
+     "title_ko": "올스틸샵 4.5T 20×1250 1장 → 직접 톱질·드릴·탭 (주머니 +0.5 mm)",
+     "items": [
+      {
+       "name": "사각철판 4.5T (SS275) 20×1250 맞춤 재단",
+       "spec": "4.5T × 20 × 1250 mm, 0.883 kg, 개당 6,130원",
+       "qty": 1,
+       "unit_krw": 6130,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/4.5t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_4_5t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가). 무게 블록 띠(7.77 kg)·레일(1.84 kg)과 한 주문이면 합 10.5 kg이 되어 배송비가 6,600원 한 번으로 바뀐다(따로 3,500원보다 +3,100원)."
+      },
+      {
+       "name": "철공용 드릴 2.5 mm (M3 탭 밑구멍, 국산 HSS)",
+       "spec": "Ø2.5 트위스트 드릴, 옵션 \"철공용드릴 2.5mm(M3용)\"",
+       "qty": 2,
+       "unit_krw": 790,
+       "shipping_krw": 3000,
+       "store": "11번가 산업정품샵",
+       "url": "https://www.11st.co.kr/products/1986654212",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_1986654212.jpg",
+       "note_ko": "9/27 옵션 목록에서 790원, 배송비 3,000원(10만 원 이상 무료)을 확인했다. 레일용 3.2 mm와 같은 가게라 배송비는 한 번이다. 62구멍에 날이 부러질 수 있어 2개."
+      },
+      {
+       "name": "사파코리아 HSS 핸드탭 M3×0.5",
+       "spec": "옵션 \"HSS M3\"(손탭)",
+       "qty": 2,
+       "unit_krw": 2300,
+       "shipping_krw": 3000,
+       "store": "11번가 twovtool1 (사파코리아)",
+       "url": "https://www.11st.co.kr/products/5796623030",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+       "note_ko": "9/27 상품 페이지 옵션 목록에서 HSS M3 2,300원, HSS-6542 M3(기계탭) 3,500원, 자동T핸드탭 6,350원, 배송비 3,000원(CJ, 9/29 도착 예정)을 확인했다. 강철 4T에 62구멍이라 1개 예비."
+      },
+      {
+       "name": "사파코리아 자동T핸드탭 (탭 핸들)",
+       "spec": "옵션 \"자동T핸드탭\", M3~M8 물림",
+       "qty": 1,
+       "unit_krw": 6350,
+       "shipping_krw": 0,
+       "store": "11번가 twovtool1 (사파코리아)",
+       "url": "https://www.11st.co.kr/products/5796623030",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+       "note_ko": "같은 상품의 옵션이라 배송비는 위 줄에 한 번만 넣었다."
+      }
+     ],
+     "total_krw": 28160,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "검증된 가장 싼 소재다(현재 추정보다 약 2.4만 원 쌈). 띠가 0.5 mm 두꺼워 굽힘 강성이 1.42배라 지붕 지압은 오히려 준다.",
+     "cons_ko": "띠가 주머니 밑으로 0.5 mm 더 내려와 레버와의 틈(공칭 1.64, 공차 뒤 1.34 mm)이 약 1.14 / 0.84 mm로 줄 수 있다. 주머니 턱 위치와 틈을 설계에서 다시 확인해야 한다.",
+     "extra_labor_ko": "쇠톱 31컷(4.5×20 단면, 컷당 약 40초) + 끝면 줄질 + 드릴·탭 62구멍. 약 4~5시간.",
+     "risk_ko": "레버 틈 1.0 mm 기준을 못 맞추면 띠 밑면을 줄로 0.5 mm 갈아야 한다."
+    },
+    {
+     "title_ko": "올스틸샵 3T 20×1250 1장 + 출력 스페이서 1 mm",
+     "items": [
+      {
+       "name": "사각철판 3T (SS275/GS400) 20×1250 맞춤 재단",
+       "spec": "3T × 20 × 1250 mm, 0.589 kg, 개당 4,350원",
+       "qty": 1,
+       "unit_krw": 4350,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/3t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_3t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가)."
+      },
+      {
+       "name": "철공용 드릴 2.5 mm (M3 탭 밑구멍, 국산 HSS)",
+       "spec": "Ø2.5 트위스트 드릴, 옵션 \"철공용드릴 2.5mm(M3용)\"",
+       "qty": 2,
+       "unit_krw": 790,
+       "shipping_krw": 3000,
+       "store": "11번가 산업정품샵",
+       "url": "https://www.11st.co.kr/products/1986654212",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_1986654212.jpg",
+       "note_ko": "9/27 옵션 목록에서 790원, 배송비 3,000원(10만 원 이상 무료)을 확인했다. 레일용 3.2 mm와 같은 가게라 배송비는 한 번이다. 62구멍에 날이 부러질 수 있어 2개."
+      },
+      {
+       "name": "사파코리아 HSS 핸드탭 M3×0.5",
+       "spec": "옵션 \"HSS M3\"(손탭)",
+       "qty": 2,
+       "unit_krw": 2300,
+       "shipping_krw": 3000,
+       "store": "11번가 twovtool1 (사파코리아)",
+       "url": "https://www.11st.co.kr/products/5796623030",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+       "note_ko": "9/27 상품 페이지 옵션 목록에서 HSS M3 2,300원, HSS-6542 M3(기계탭) 3,500원, 자동T핸드탭 6,350원, 배송비 3,000원(CJ, 9/29 도착 예정)을 확인했다. 강철 4T에 62구멍이라 1개 예비."
+      },
+      {
+       "name": "사파코리아 자동T핸드탭 (탭 핸들)",
+       "spec": "옵션 \"자동T핸드탭\", M3~M8 물림",
+       "qty": 1,
+       "unit_krw": 6350,
+       "shipping_krw": 0,
+       "store": "11번가 twovtool1 (사파코리아)",
+       "url": "https://www.11st.co.kr/products/5796623030",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+       "note_ko": "같은 상품의 옵션이라 배송비는 위 줄에 한 번만 넣었다."
+      }
+     ],
+     "total_krw": 26380,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가장 싸고 레일과 같은 두께라 한 번에 산다. M3 물림 3 mm(6산)는 예하중 422 N에 충분하다.",
+     "cons_ko": "굽힘 강성이 (3/4)³ = 0.42배라 띠가 예하중을 덜 퍼뜨려 지붕 상시 지압 1.90 MPa(한도 2 MPa)를 넘을 수 있다. 재계산이 필요하다.",
+     "extra_labor_ko": "4.5T 안과 같음 + 1 mm 스페이서 출력.",
+     "risk_ko": "지붕 크리프 위험 — 단계 0 시험 12번으로 확인."
+    },
+    {
+     "title_ko": "올스틸샵 4.5T 20×39 등 32개 개별 재단 (톱질 없음)",
+     "items": [
+      {
+       "name": "사각철판 4.5T 20×(37~45) / 12×20 맞춤 재단",
+       "spec": "32개, 작은 조각이라 모두 최소금액 2,770원(=100×100 값)",
+       "qty": 32,
+       "unit_krw": 2770,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/4.5t",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_allsteel_4_5t.jpg",
+       "note_ko": "9/27 올스틸샵 가격식·배송비 API로 다시 계산(VAT 포함, 발송 2영업일, 반품 불가). 1 mm 단위라 38.36→38, 39.26→39 식으로 주문(끝 틈 0.3 mm 늘어남)."
+      },
+      {
+       "name": "철공용 드릴 2.5 mm (M3 탭 밑구멍, 국산 HSS)",
+       "spec": "Ø2.5 트위스트 드릴, 옵션 \"철공용드릴 2.5mm(M3용)\"",
+       "qty": 2,
+       "unit_krw": 790,
+       "shipping_krw": 3000,
+       "store": "11번가 산업정품샵",
+       "url": "https://www.11st.co.kr/products/1986654212",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_1986654212.jpg",
+       "note_ko": "9/27 옵션 목록에서 790원, 배송비 3,000원(10만 원 이상 무료)을 확인했다. 레일용 3.2 mm와 같은 가게라 배송비는 한 번이다. 62구멍에 날이 부러질 수 있어 2개."
+      },
+      {
+       "name": "사파코리아 HSS 핸드탭 M3×0.5",
+       "spec": "옵션 \"HSS M3\"(손탭)",
+       "qty": 2,
+       "unit_krw": 2300,
+       "shipping_krw": 3000,
+       "store": "11번가 twovtool1 (사파코리아)",
+       "url": "https://www.11st.co.kr/products/5796623030",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+       "note_ko": "9/27 상품 페이지 옵션 목록에서 HSS M3 2,300원, HSS-6542 M3(기계탭) 3,500원, 자동T핸드탭 6,350원, 배송비 3,000원(CJ, 9/29 도착 예정)을 확인했다. 강철 4T에 62구멍이라 1개 예비."
+      },
+      {
+       "name": "사파코리아 자동T핸드탭 (탭 핸들)",
+       "spec": "옵션 \"자동T핸드탭\", M3~M8 물림",
+       "qty": 1,
+       "unit_krw": 6350,
+       "shipping_krw": 0,
+       "store": "11번가 twovtool1 (사파코리아)",
+       "url": "https://www.11st.co.kr/products/5796623030",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_5796623030.webp",
+       "note_ko": "같은 상품의 옵션이라 배송비는 위 줄에 한 번만 넣었다."
+      }
+     ],
+     "total_krw": 110670,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "톱질이 없다.",
+     "cons_ko": "8.9만 원으로 비싸고 4.5T라 위 4.5T 안과 같은 주머니·틈 문제가 있다.",
+     "extra_labor_ko": "드릴·탭 62구멍, 약 3시간.",
+     "risk_ko": "4.5T 안과 같음."
+    },
+    {
+     "title_ko": "띠 대신 M3 육각너트 (B07 아이씨뱅큐, 이미 목록에 있는 부품)",
+     "items": [
+      {
+       "name": "XHHD M3 육각너트 (대변 5.5 × 2.4)",
+       "spec": "손나사 62개 몫, B07 주문에 추가",
+       "qty": 62,
+       "unit_krw": 11,
+       "shipping_krw": 0,
+       "store": "아이씨뱅큐 (icbanq.com)",
+       "url": "https://www.icbanq.com/P015976209",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_icb_m3nut.jpg",
+       "note_ko": "9/27 페이지에서 100~999개 10원(VAT 별도) = 11원(VAT 포함), 최소 1개, 해외 재고, 배송 1주 이내를 다시 확인했다. B07과 같은 주문이라 배송비는 추가되지 않는다."
+      }
+     ],
+     "total_krw": 682,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "탭 작업과 강철 띠가 모두 없어진다. 682원.",
+     "cons_ko": "r2에서 뺀 방식에 가깝다: 너트 한 개(대변 5.5 mm)가 예하중 422 N을 좁은 면적으로 지붕에 전해 상시 지압이 2 MPa 한도를 크게 넘는다(추정). 브리지 주머니를 육각 너트 트랩으로 다시 설계하고 강도 재계산이 필요하다.",
+     "extra_labor_ko": "주머니 재설계(출력)만.",
+     "risk_ko": "지붕 크리프·균열. r4 단순화에서 고정 방식을 바꿀 때만 의미 있음."
+    }
+   ],
+   "if_unused_ko": "r3 그대로면 뺄 수 없다: 손나사가 물릴 곳이 없어 업스톱 레일을 고정하지 못한다. r4 단순화에서 고정 방식이 바뀌어 띠가 빠지면 사용 안함으로 둔다(이때 탭·핸들·2.5 mm 드릴도 필요 없어진다).",
+   "r4_note_ko": "r4 단순화에서 빠질 수 있는 부품이다. 값은 선택기를 위해 매겼다."
+  },
+  {
+   "part_id": "keyrod",
+   "name_ko": "건반 봉 SUS304 Ø4 × 161.4",
+   "role_ko": "건반 시소의 피벗(봉 중심 y141, z21.5). 스냅 노치(R2.55 + 천 0.5T)가 봉을 223° 감싼다.",
+   "spec_required": "SUS304 Ø4, 길이 161.4 ± 0.2 (모듈 7) + 끝 부속 왼쪽 43.9 / 오른쪽 20.4 + 보관함 예비 161.4 1개",
+   "qty_needed": "10토막(모듈 7 + 끝 부속 2 + 예비 1), 합 약 1.36 m → 1 m 봉 2개",
+   "current": {
+    "title_ko": "11번가 onezaze SUS 환봉 Ø4 1 m 2개 → 직접 자르기",
+    "items": [
+     {
+      "name": "[onezaze] 스텐환봉 절단판매 1M (4mm)",
+      "spec": "SUS 환봉 Ø4 × 1000 mm",
+      "qty": 2,
+      "unit_krw": 1500,
+      "shipping_krw": 3500,
+      "store": "11번가 onezaze (원자재닷컴)",
+      "url": "https://www.11st.co.kr/products/1304631510",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_1304631510.jpg",
+      "note_ko": "9/27 상품 페이지에서 1,500원, 배송비 3,500원, 재고 충분(99,997,144)을 확인했다. 봉 1 = 161.4 ×6 + 20.4, 봉 2 = 161.4 ×2 + 43.9(나머지 약 630 mm 남음)."
+     }
+    ],
+    "total_krw": 6500,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "검증된 가장 싼 Ø4 SUS 봉이다(B03 요기가최저가 8,000원보다 1,500원 쌈).",
+    "cons_ko": "Ø3·Ø2 봉을 같은 가게에서 살 수 없다(원자재닷컴은 4ø부터). 레버 봉·핀을 봉으로 사면 다른 가게 배송비가 한 번 더 붙는다.",
+    "extra_labor_ko": "쇠톱 9컷(Ø4 SUS 컷당 약 1분) → 줄로 길이 161.4 ± 0.2 맞춤(캘리퍼스) → 끝 모따기. 약 40분.",
+    "risk_ko": "인발봉이라 1 m 전체는 조금 휠 수 있으나 161 mm 토막에서는 문제없다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "11번가 요기가최저가 Ø4 1 m 2개 (B03, 9/27 확인 판매처)",
+     "items": [
+      {
+       "name": "스텐레스 환봉 SUS304 1M, 외경 4MM",
+       "spec": "옵션 \"스텐레스 환봉 1M / 4MM\" 1,000 + 1,000원",
+       "qty": 2,
+       "unit_krw": 2000,
+       "shipping_krw": 4000,
+       "store": "11번가 요기가최저가",
+       "url": "https://www.11st.co.kr/products/8661208614",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_8661208614.webp",
+       "note_ko": "9/27 옵션 API로 다시 확인: 4MM +1,000원(재고 20), 3MM +500원(재고 20), 2MM +0원(재고 1), 배송비 4,000원(9/30 도착 예정). 레버 봉 Ø3(B04)을 같이 사면 배송비 한 번."
+      }
+     ],
+     "total_krw": 8000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "Ø3(레버 봉 SUS 안)·Ø2 봉을 한 가게에서 같이 산다.",
+     "cons_ko": "Ø4만 사면 onezaze보다 1,500원 비싸다.",
+     "extra_labor_ko": "현재 안과 같음."
+    },
+    {
+     "title_ko": "11번가 에이제트툴 Ø4 1 m 2개 (Ø3·Ø2도 같은 가게)",
+     "items": [
+      {
+       "name": "스텐 환봉 4mm 1M SUS",
+       "spec": "SUS 환봉 Ø4 × 1000 mm",
+       "qty": 2,
+       "unit_krw": 1960,
+       "shipping_krw": 3500,
+       "store": "11번가 에이제트툴",
+       "url": "https://www.11st.co.kr/products/9536791872",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9536791872.webp",
+       "note_ko": "9/27 상품 페이지에서 1,960원, 배송비 3,500원(CJ, 10/1 이내 도착 예정), 재고 충분을 확인했다. 같은 가게 Ø3 1,630원·Ø2 1,080원 — 레버 봉·핀을 봉으로 할 때 합배송."
+      }
+     ],
+     "total_krw": 7420,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "Ø4·Ø3·Ø2를 한 번에 사면 배송비 3,500원 한 번으로 가장 싸다.",
+     "cons_ko": "Ø4만이면 920원 비싸다.",
+     "extra_labor_ko": "현재 안과 같음."
+    },
+    {
+     "title_ko": "원자재닷컴 Ø4 1 m 2개 + 업체 절단 10컷 (길이로 잘라 받기)",
+     "items": [
+      {
+       "name": "국내최초 스텐환봉 절단판매 1M, 지름 4ø",
+       "spec": "SUS 환봉 Ø4 × 1000 mm, 판매가 1,200원(4ø 추가금 0)",
+       "qty": 2,
+       "unit_krw": 1200,
+       "shipping_krw": 4000,
+       "store": "원자재닷컴 (onezaze.com)",
+       "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=1350",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_onezaze_1350.jpg",
+       "note_ko": "9/27 페이지에서 1,200원을 확인했다. 배송은 착불(수령 시 지불)이라 금액이 적혀 있지 않아 4,000원으로 추정해 넣었다."
+      },
+      {
+       "name": "환봉절단 추가상품 (4~12ø, 컷당)",
+       "spec": "추가상품 \"환봉절단 (절단(컷당) 4~12ø / +500원)\"",
+       "qty": 10,
+       "unit_krw": 500,
+       "shipping_krw": 0,
+       "store": "원자재닷컴 (onezaze.com)",
+       "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=1350",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_onezaze_1350.jpg",
+       "note_ko": "같은 페이지 추가상품에서 확인했다. 절단 공차는 적혀 있지 않아 161.6 등 조금 길게 주문하고 줄로 맞춘다."
+      }
+     ],
+     "total_krw": 11400,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "톱질이 없다.",
+     "cons_ko": "착불 배송비가 얼마인지 모른다. 절단 공차가 없어 줄질은 남는다.",
+     "extra_labor_ko": "길이 맞춤 줄질·모따기 약 20분.",
+     "risk_ko": "착불 운임 미확인."
+    },
+    {
+     "title_ko": "한국미스미 SSFJ4 연마 샤프트 (SUS440C g6) 길이 지정 9개",
+     "items": [
+      {
+       "name": "연마 샤프트 한쪽 끝 단순 SSFJ4-161.4 (SUS440C, g6)",
+       "spec": "Ø4 g6, L 지정(0.1 mm 단위 가능 여부 확인 필요)",
+       "qty": 9,
+       "unit_krw": 15452,
+       "shipping_krw": 0,
+       "store": "한국미스미 (kr.misumi-ec.com)",
+       "url": "https://kr.misumi-ec.com/vona2/detail/110302634310/?HissuCode=SSFJ4-164",
+       "verified": false,
+       "note_ko": "확인 안 됨(오늘 재확인 실패): 9/27 오전 앞 조사에서 SSFJ4-164가 5~12개 14,047원(VAT 별도) = 약 15,452원(VAT 포함)이었다. 지금은 한국미스미 서버 점검(9/27 10:00 ~ 9/28 8:00)이라 페이지가 열리지 않는다. 배송비는 검색 결과상 무료."
+      }
+     ],
+     "total_krw": 139068,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "길이·지름이 정밀하고 자르거나 다듬을 일이 없다.",
+     "cons_ko": "인발봉의 20배가 넘는 값이다.",
+     "extra_labor_ko": "없음.",
+     "risk_ko": "값이 오전 조사 기준."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다. 건반 88개의 피벗이다. Ø4 SUS 봉(1.4 m 이상)을 이미 가지고 있을 때만 사용 안함으로 둔다.",
+   "r4_note_ko": "r4에서도 그대로 쓰일 것으로 본다(스냅 노치 검토는 봉 지름 4를 전제)."
+  },
+  {
+   "part_id": "levershaft",
+   "name_ko": "레버 봉 Ø3 경화 샤프트 (SUJ2 h6)",
+   "role_ko": "무게 레버 12개가 매달리는 피벗 축(L = (203.25, 33.5)). 핀 5장의 황동 부싱을 지난다. 6레버 동시 2.0 m/s에서 굽힘 720 MPa라 경화강이 필요하다.",
+   "spec_required": "Ø3 SUJ2 경화 h6, 길이 161.4 ± 0.2 (모듈 7) + 끝 부속 약 46 / 약 22 (상세 설계 값) + 보관함 예비 161.4 1개. 쇠톱으로 안 잘림.",
+   "qty_needed": "10토막(모듈 7 + 끝 부속 2 + 예비 1; r3 비용표는 예비 없이 9개)",
+   "current": {
+    "title_ko": "r3 사양: 배관랜드 SUJ2 열처리 연마봉 Ø3 × 0.5 m 3개 + 업체 절단 10컷",
+    "items": [
+     {
+      "name": "LM샤프트 열처리연마봉 SUJ2 Φ3×0.5M (최소구매 3개)",
+      "spec": "SUJ2 열처리 연마, Ø3 × 500 mm; 봉 1·2 = 161.4 ×3, 봉 3 = 161.4 ×2 + 약 46 + 약 22",
+      "qty": 3,
+      "unit_krw": 14440,
+      "shipping_krw": 7000,
+      "store": "배관랜드 (baegwanland.com)",
+      "url": "https://www.baegwanland.com/goods/view?no=4343",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_baegwan_4343.jpg",
+      "note_ko": "9/27 상품 페이지에서 옵션 Φ3x0.5M 14,440원, 최소 구매 3개, 택배 착불을 확인했다. 착불 운임은 \"7,000원은 임의의 숫자로 주문량에 따라 책정\"이라고만 적혀 있어 7,000원을 넣었다(수령 시 지불)."
+     },
+     {
+      "name": "절단 추가 (1컷)",
+      "spec": "옵션 \"1컷 (추가 750원)\"",
+      "qty": 10,
+      "unit_krw": 750,
+      "shipping_krw": 0,
+      "store": "배관랜드 (baegwanland.com)",
+      "url": "https://www.baegwanland.com/goods/view?no=4343",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_baegwan_4343.jpg",
+      "note_ko": "같은 페이지 옵션에서 확인했다. 절단 공차는 적혀 있지 않다 — 161.6으로 요청하고 끝을 갈아 161.4 ± 0.2로 맞춘다."
+     },
+     {
+      "name": "안전포장 (Φ9 이하 필수)",
+      "spec": "옵션 \"안전포장 (추가 1,500원)\"",
+      "qty": 1,
+      "unit_krw": 1500,
+      "shipping_krw": 0,
+      "store": "배관랜드 (baegwanland.com)",
+      "url": "https://www.baegwanland.com/goods/view?no=4343",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_baegwan_4343.jpg",
+      "note_ko": "같은 페이지 옵션에서 확인했다."
+     }
+    ],
+    "total_krw": 59320,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "r3 사양(SUJ2 경화 연마, 업체가 길이로 절단)을 검증된 값으로 산다. 쇠톱으로 못 자르는 문제를 업체 절단으로 푼다.",
+    "cons_ko": "최소 3개(1.5 m)라 필요량보다 조금 많고, 착불 운임이 따로 든다. r3 추정 22,500원보다 약 3.7만 원 비싸다.",
+    "extra_labor_ko": "끝면을 숫돌·다이아몬드 줄로 갈아 길이 맞춤 + 모따기, 약 30분.",
+    "risk_ko": "절단 공차 미확인. SUJ2는 녹이 슬 수 있어 기름을 얇게 바른다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "11번가 에브로se 크롬 도금 경화 샤프트 Ø3 × 400 mm 4개 → 직접 절단",
+     "items": [
+      {
+       "name": "크롬 도금 경화 봉 광축 3mm 리니어 샤프트",
+       "spec": "옵션 길이 400mm / \"06 4pc 3mm\" (+4,100원); 400 mm마다 161.4 ×2 + 끝 부속 토막",
+       "qty": 1,
+       "unit_krw": 15980,
+       "shipping_krw": 0,
+       "store": "11번가 에브로se",
+       "url": "https://www.11st.co.kr/products/9480296508",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9480296508.jpg",
+       "note_ko": "9/27 옵션 API로 11,880 + 4,100 = 15,980원, 무료배송, \"우체국택배/등기 9/29(화) 도착 예정\" 표시를 확인했다(배송지 옵션은 China Mainland라 실제로는 해외 발송일 수 있음). 같은 상품을 루멘브릿지_(9340807563)가 15,100원에 팔지만 중국 발송 5~15영업일. 공차(h6/g6) 표기는 없다."
+      },
+      {
+       "name": "다이아몬드줄 연마 야스리 5종 세트",
+       "spec": "반원·삼각·원형·사각·평면 5종",
+       "qty": 1,
+       "unit_krw": 6310,
+       "shipping_krw": 0,
+       "store": "11번가 주_제이야드",
+       "url": "https://www.11st.co.kr/products/9610481057",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9610481057.webp",
+       "note_ko": "9/27 상품 페이지에서 6,310원, 무료배송(CJ 10/1 이내)을 확인했다. 옵션(사이즈) 값 차이는 확인하지 못했다. 경화강 홈 파기·끝 연마용."
+      }
+     ],
+     "total_krw": 22290,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "약 3.7만 원 싸다. 경화 크롬 도금 축이라 강도·마모는 r3 사양과 같은 급이다.",
+     "cons_ko": "경화강이라 쇠톱이 안 들어 다이아몬드 줄로 홈을 내고 바이스에서 꺾어야 한다(또는 미니 그라인더 절단석). 지름 공차가 적혀 있지 않다.",
+     "extra_labor_ko": "12컷: 다이아몬드 줄로 둘레 홈 → 꺾기 → 끝면 연마로 161.4 ± 0.2 → 모따기. 약 1~1.5시간. 받으면 마이크로미터로 2.990~3.000인지 확인.",
+     "risk_ko": "꺾을 때 끝이 비스듬히 깨질 수 있어 1~2 mm 여유를 두고 갈아 맞춘다."
+    },
+    {
+     "title_ko": "한국미스미 SFJ3 경화 샤프트 길이 지정 10개 (r3 표의 방식)",
+     "items": [
+      {
+       "name": "리니어 샤프트 한쪽 끝 단순 SFJ3-161.4 (SUJ2 경화, h6)",
+       "spec": "Ø3 h6, L 지정 절단 공급; 끝 부속 2개는 짧은 L로 따로",
+       "qty": 10,
+       "unit_krw": 2500,
+       "shipping_krw": 0,
+       "store": "한국미스미 (kr.misumi-ec.com)",
+       "url": "https://kr.misumi-ec.com/",
+       "verified": false,
+       "note_ko": "확인 안 됨: 한국미스미 서버 점검(9/27 10:00 ~ 9/28 8:00)으로 가격 페이지가 열리지 않는다. 2,500원은 r3 표의 추정값이고 실제는 더 높을 수 있다. 점검이 끝나면 SFJ3-161.4와 끝 부속 길이로 다시 확인한다."
+      }
+     ],
+     "total_krw": 25000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "자르거나 갈 일이 없고 h6 공차가 보장된다.",
+     "cons_ko": "값을 확인하지 못했다.",
+     "extra_labor_ko": "없음.",
+     "risk_ko": "추정값이라 선택기 합계가 틀릴 수 있다."
+    },
+    {
+     "title_ko": "SUS304 Ø3 환봉 1 m 2개 (B04 요기가최저가) — r4에서 채택될 수 있음",
+     "items": [
+      {
+       "name": "스텐레스 환봉 SUS304 1M, 외경 3MM",
+       "spec": "옵션 \"3MM\" 1,000 + 500원",
+       "qty": 2,
+       "unit_krw": 1500,
+       "shipping_krw": 4000,
+       "store": "11번가 요기가최저가",
+       "url": "https://www.11st.co.kr/products/8661208614",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_8661208614.webp",
+       "note_ko": "9/27 옵션 API로 1,500원, 재고 20, 배송비 4,000원을 다시 확인했다. 건반 봉(Ø4)을 같은 가게에서 사면 배송비 한 번."
+      }
+     ],
+     "total_krw": 7000,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "쇠톱으로 잘리고 가장 싸다. 자투리로 위치 핀 Ø3×14도 만든다.",
+     "cons_ko": "r3 기준 강도가 모자란다: 6레버 동시 2.0 m/s에서 봉 굽힘 720 MPa인데 SUS304 인발봉 항복은 약 200~600 MPa라 휠 수 있다. r4에서 핀 간격·하중을 바꿔야 쓸 수 있다.",
+     "extra_labor_ko": "쇠톱 12컷 + 줄질·모따기, 약 40분.",
+     "risk_ko": "r3 그대로 쓰면 세게 친 화음에서 봉이 영구히 휠 수 있다."
+    },
+    {
+     "title_ko": "SUS304 Ø3 환봉 1 m 2개 (에이제트툴, Ø4·Ø2와 합배송)",
+     "items": [
+      {
+       "name": "스텐 환봉 3mm 1M SUS",
+       "spec": "SUS 환봉 Ø3 × 1000 mm",
+       "qty": 2,
+       "unit_krw": 1630,
+       "shipping_krw": 3500,
+       "store": "11번가 에이제트툴",
+       "url": "https://www.11st.co.kr/products/9536791852",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9536791852.webp",
+       "note_ko": "9/27 상품 페이지에서 1,630원, 배송비 3,500원, 재고 충분을 확인했다. 같은 가게 Ø4 1,960원·Ø2 1,080원."
+      }
+     ],
+     "total_krw": 6760,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "B04 안보다 240원 싸고 Ø4·Ø2와 한 번에 산다.",
+     "cons_ko": "B04 안과 같은 강도 문제.",
+     "extra_labor_ko": "쇠톱 12컷 + 줄질, 약 40분.",
+     "risk_ko": "B04 안과 같음."
+    },
+    {
+     "title_ko": "피아노선(고탄소 경강선) Ø3 1 m 2개",
+     "items": [
+      {
+       "name": "피아노선 1M 3mm 피아노줄 고탄소강선",
+       "spec": "옵션 \"3mm\" (+640원)",
+       "qty": 2,
+       "unit_krw": 1940,
+       "shipping_krw": 3000,
+       "store": "11번가 최저가보장힐링트리스토어",
+       "url": "https://www.11st.co.kr/products/9554061223",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9554061223.webp",
+       "note_ko": "9/27 옵션 목록에서 1mm 1,300 / 2mm 1,520 / 3mm 1,940원, 배송비 3,000원(9/30 이내 도착 예정)을 확인했다. 같은 가게 SUS 환봉 2mm 1,650원·3mm 2,210원."
+      }
+     ],
+     "total_krw": 6880,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "인장강도 약 1,700 MPa급이라 굽힘 720 MPa를 견딘다. 경화 샤프트의 1/8 값이다.",
+     "cons_ko": "지름 공차가 약 ±0.03이라 Ø3.0 H7 리밍 허브·황동 부싱에 헐겁거나 안 들어갈 수 있다(받은 뒤 실측해 리머 치수 조정). 녹이 슬어 기름칠이 필요하고, 1 m 직선도는 받아 봐야 안다.",
+     "extra_labor_ko": "볼트커터나 절단석으로 12컷 + 끝 연마, 약 1시간.",
+     "risk_ko": "지름이 3.03이면 허브를 다시 리밍해야 한다."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다. 레버 88개의 피벗이다. Ø3 경화 샤프트(약 1.4 m)를 이미 가지고 있을 때만 사용 안함으로 둔다.",
+   "r4_note_ko": "r4 단순화에서 SUS304 Ø3(B04)로 바꾸는 안이 검토 중이다. 채택되면 \"SUS304 Ø3 환봉\" 대안을 고르면 되고, 이때 강도 조건이 바뀐 r4 수치로 다시 판단한다."
+  },
+  {
+   "part_id": "pins",
+   "name_ko": "밸런스 핀 Ø2×12 + 위치 핀 Ø3×14",
+   "role_ko": "밸런스 핀: 밸런스 레일에 압입해 건반 블록 밑 홈을 물고 건반 뒤쪽 x를 잡는다(꼭대기 z23.30 ± 0.1). 위치 핀: 브리지에 압입해 업스톱 레일과 먼지 커버를 ±0.10으로 잡는다.",
+   "spec_required": "ISO 2338 Ø2×12 (SUS 권장) 100개 + ISO 2338 Ø3×14 20개",
+   "qty_needed": "밸런스 핀 100개(88 + 예비 12), 위치 핀 20개(모듈 14 + 끝 부속 + 예비)",
+   "current": {
+    "title_ko": "r3 사양: 11번가 Ø2×12 100개(에브로se) + Ø3×14 100개(자성팡)",
+    "items": [
+     {
+      "name": "호환 100pcs 2mm 베어링 강철 원통형 핀 (길이 12mm)",
+      "spec": "옵션 \"08 12mm\" / \"01 2MM\" (+2,700원), Ø2 × 12, 100개",
+      "qty": 1,
+      "unit_krw": 12600,
+      "shipping_krw": 0,
+      "store": "11번가 에브로se",
+      "url": "https://www.11st.co.kr/products/9480290583",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9480290583.jpg",
+      "note_ko": "9/27 옵션 API로 9,900 + 2,700 = 12,600원, 무료배송, 우체국택배/등기 9/29 도착 예정을 확인했다. 베어링강(니들 롤러급)이라 지름 공차는 ISO 2338 m6보다 좁지만 SUS가 아니어서 녹 방지 기름이 필요하다."
+     },
+     {
+      "name": "평행핀 맞춤핀 베어링 스틸 3×14 100개",
+      "spec": "옵션 \"3*14/100개\" (+400원)",
+      "qty": 1,
+      "unit_krw": 17630,
+      "shipping_krw": 0,
+      "store": "11번가 자성팡",
+      "url": "https://www.11st.co.kr/products/9594529677",
+      "verified": true,
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9594529677.jpg",
+      "note_ko": "9/27 옵션 목록에서 17,630원, 무료배송(CJ 9/29 도착 예정)을 확인했다. 필요한 20개보다 많지만 20개 묶음을 파는 곳을 찾지 못했다."
+     }
+    ],
+    "total_krw": 30230,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "둘 다 무료배송·9/29 도착 표시로 가장 빠르고, 이 조합이 ISO 2338 치수를 가장 싸게 맞춘다.",
+    "cons_ko": "둘 다 베어링강이라 SUS가 아니다(녹 방지 기름). 위치 핀은 20개만 필요한데 100개 묶음이다.",
+    "extra_labor_ko": "출력 높이 게이지로 밸런스 핀 88개를 z23.30 ± 0.1로 압입, 위치 핀 14~18개 압입. 약 1시간.",
+    "risk_ko": "베어링강 핀이 녹슬면 블록 밑 천이 물든다 — 압입 전에 기름을 닦아 얇게 바른다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "엔파스(NFAS) 국산 평행핀 M2×12 100개 + SUS 다웰핀 M3×14 100개",
+     "items": [
+      {
+       "name": "평행핀 M2 (길이 12)",
+       "spec": "판매가 198원, 옵션 \"12 (-53원)\" → 145원/개, 최소 주문 100개",
+       "qty": 100,
+       "unit_krw": 145,
+       "shipping_krw": 3500,
+       "store": "엔파스 NFAS (nfas.co.kr, (주)신성기공)",
+       "url": "https://nfas.co.kr/product/detail.html?product_no=670",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_nfas_670.jpg",
+       "note_ko": "9/27 상품 페이지에서 확인했다. 제조국 국내, 재질 표기 없음(평행핀), 배송비 3,500원(15만 원 이상 무료), 배송 3~7일."
+      },
+      {
+       "name": "다윌핀 미리 SUS M3 (길이 14)",
+       "spec": "판매가 100원, 옵션 \"14 (+43원)\" → 143원/개, 최소 주문 100개",
+       "qty": 100,
+       "unit_krw": 143,
+       "shipping_krw": 0,
+       "store": "엔파스 NFAS (nfas.co.kr, (주)신성기공)",
+       "url": "https://nfas.co.kr/product/detail.html?product_no=652",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_nfas_652.jpg",
+       "note_ko": "9/27 상품 페이지에서 확인했다. SUS 다웰핀, 같은 가게라 배송비는 위 줄에 한 번."
+      }
+     ],
+     "total_krw": 32300,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "국내 제조사 제품이고 위치 핀은 SUS다.",
+     "cons_ko": "2,070원 비싸고 둘 다 최소 100개다. 평행핀 M2의 재질이 적혀 있지 않다.",
+     "extra_labor_ko": "현재 안과 같음."
+    },
+    {
+     "title_ko": "밸런스 핀만 구매 + 위치 핀은 Ø3 SUS 봉 자투리로 자르기",
+     "items": [
+      {
+       "name": "호환 100pcs 2mm 베어링 강철 원통형 핀 (길이 12mm)",
+       "spec": "옵션 \"08 12mm\" / \"01 2MM\" (+2,700원), Ø2 × 12, 100개",
+       "qty": 1,
+       "unit_krw": 12600,
+       "shipping_krw": 0,
+       "store": "11번가 에브로se",
+       "url": "https://www.11st.co.kr/products/9480290583",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9480290583.jpg",
+       "note_ko": "9/27 옵션 API로 9,900 + 2,700 = 12,600원, 무료배송, 우체국택배/등기 9/29 도착 예정을 확인했다. 베어링강(니들 롤러급)이라 지름 공차는 ISO 2338 m6보다 좁지만 SUS가 아니어서 녹 방지 기름이 필요하다."
+      },
+      {
+       "name": "스텐 환봉 3mm 1M SUS (위치 핀 20개용)",
+       "spec": "Ø3 × 1000 mm에서 14 mm 20개(약 0.3 m)",
+       "qty": 1,
+       "unit_krw": 1630,
+       "shipping_krw": 3500,
+       "store": "11번가 에이제트툴",
+       "url": "https://www.11st.co.kr/products/9536791852",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9536791852.webp",
+       "note_ko": "9/27 페이지에서 1,630원 + 배송비 3,500원을 확인했다. 레버 봉을 SUS·피아노선으로 사거나 건반 봉과 같은 가게(에이제트툴)에서 사면 이 줄은 자투리·합배송으로 0원에 가깝다."
+      }
+     ],
+     "total_krw": 17730,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "위치 핀 100개 묶음을 사지 않는다. 위치 핀은 r4에서 빠질 수 있어 낭비가 적다.",
+     "cons_ko": "위치 핀 20개를 직접 자르고 끝을 다듬는다.",
+     "extra_labor_ko": "쇠톱 20컷 + 끝 모따기, 약 30분.",
+     "risk_ko": "지름 공차가 인발봉 수준(약 ±0.03)이라 Ø3.1 커버 구멍 놀음 ±0.10이 조금 커질 수 있다."
+    },
+    {
+     "title_ko": "둘 다 SUS 봉에서 직접 자르기 (에이제트툴 Ø2 1 m 2개 + Ø3 1 m 1개)",
+     "items": [
+      {
+       "name": "스텐 환봉 2mm 1M SUS",
+       "spec": "Ø2 × 1000 mm; 12 mm 핀 약 75개/m",
+       "qty": 2,
+       "unit_krw": 1080,
+       "shipping_krw": 3500,
+       "store": "11번가 에이제트툴",
+       "url": "https://www.11st.co.kr/products/9536791834",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9536791834.webp",
+       "note_ko": "9/27 페이지에서 1,080원, 배송비 3,500원, 재고 충분을 확인했다(요기가최저가 2MM은 재고 1개뿐)."
+      },
+      {
+       "name": "스텐 환봉 3mm 1M SUS",
+       "spec": "Ø3 × 1000 mm; 위치 핀 20개",
+       "qty": 1,
+       "unit_krw": 1630,
+       "shipping_krw": 0,
+       "store": "11번가 에이제트툴",
+       "url": "https://www.11st.co.kr/products/9536791852",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9536791852.webp",
+       "note_ko": "같은 가게라 배송비는 위 줄에 한 번."
+      }
+     ],
+     "total_krw": 7290,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "가장 싸고 모두 SUS304다. 핀 높이는 출력 게이지로 압입해 정하므로 길이 오차(±0.5)는 상관없다.",
+     "cons_ko": "120개를 직접 자르고 끝을 다듬어야 한다. 끝이 거칠면 블록 밑 홈의 천(0.5T)이 해진다.",
+     "extra_labor_ko": "쇠톱이나 강한 니퍼로 120컷 + 줄로 끝 모따기, 약 2.5~3시간.",
+     "risk_ko": "인발봉 지름 공차로 압입 힘이 고르지 않을 수 있다."
+    },
+    {
+     "title_ko": "SUS304 규격 핀으로 모두 (11번가 GB119 Ø2×12 200개 + NFAS SUS M3×14 100개)",
+     "items": [
+      {
+       "name": "M2 GB119 SUS304 맞춤 핀 평행 핀 직경 2mm (12mm 200pcs)",
+       "spec": "옵션 \"M2\" / \"12mm 200pcs\" (+1,600원)",
+       "qty": 1,
+       "unit_krw": 28390,
+       "shipping_krw": 0,
+       "store": "11번가 s8xx8s22",
+       "url": "https://www.11st.co.kr/products/9548598715",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_11st_9548598715.jpg",
+       "note_ko": "9/27 옵션 API로 26,790 + 1,600 = 28,390원, 무료배송을 확인했다. 해외 발송 — \"명절 연휴로 10/12(월) 발송\", 발송국가별 3~15일 소요."
+      },
+      {
+       "name": "다윌핀 미리 SUS M3 (길이 14)",
+       "spec": "143원/개, 최소 주문 100개",
+       "qty": 100,
+       "unit_krw": 143,
+       "shipping_krw": 3500,
+       "store": "엔파스 NFAS (nfas.co.kr, (주)신성기공)",
+       "url": "https://nfas.co.kr/product/detail.html?product_no=652",
+       "verified": true,
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/steel_nfas_652.jpg",
+       "note_ko": "9/27 상품 페이지에서 확인했다. 배송비 3,500원."
+      }
+     ],
+     "total_krw": 46190,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "r3 표의 \"SUS 밸런스 핀\"을 그대로 지킨다(녹 걱정 없음).",
+     "cons_ko": "가장 비싸고 밸런스 핀이 10월 중순 이후에 온다.",
+     "extra_labor_ko": "현재 안과 같음.",
+     "risk_ko": "해외 배송 지연."
+    }
+   ],
+   "if_unused_ko": "밸런스 핀은 뺄 수 없다: 없으면 건반 뒤쪽이 옆으로 흔들려(요 ±0.10 가정이 깨짐) 이웃 건반·레버와 스친다. 위치 핀은 r4에서 빠질 수 있고, 빼면 레일·커버를 손나사 구멍 놀음(약 ±0.3)으로만 맞추므로 커버 가림판 틈을 다시 봐야 한다. 같은 지름의 핀이나 봉을 이미 가지고 있으면 사용 안함으로 둔다.",
+   "r4_note_ko": "위치 핀 Ø3×14는 r4 단순화에서 빠질 수 있다. 밸런스 핀은 남는다. 위치 핀만 빠지면 \"밸런스 핀만 구매\" 대안이 가장 싸다."
+  },
+  {
+   "part_id": "capstan",
+   "name_ko": "캡스턴 나사 M3×6 버튼헤드 + M3 너트",
+   "role_ko": "건반 꼬리 숨은 빔의 캡스턴(D02). 머리가 레버 밑 펠트 띠를 들어 올리고, 1/8회전(0.0625 mm)으로 업스톱 시점과 DW를 건반마다 맞춘다. 너트는 빔 옆의 너트 트랩에 끼운다.",
+   "spec_required": "ISO 7380 M3×6 SUS 버튼헤드(머리 Ø5.7 × 1.65, 육각 2 mm) + M3 육각너트(대변 5.5 × 2.4)",
+   "qty_needed": "나사 96개(건반 88 + 예비 8), 너트 96개",
+   "current": {
+    "title_ko": "아이씨뱅큐 AOFENG ISO7380 M3×6 SUS304 100개 + XHHD M3 너트 96개",
+    "items": [
+     {
+      "name": "AOFENG ISO7380 M3-0.5X6 304 (Hex socket pan head cap screw)",
+      "spec": "ISO 7380 M3×6 SUS304 버튼헤드, 최소 주문 100개",
+      "qty": 100,
+      "unit_krw": 11,
+      "shipping_krw": 0,
+      "store": "아이씨뱅큐 (P015973844, 해외 재고)",
+      "url": "https://www.icbanq.com/P015973844",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지: 10원(VAT 별도) / 11원(VAT 포함), 최소 100개, 100~3,000개 구간 10원, 해외 재고 배송 1주 이내. 상품 사진이 준비 중 이미지라 같은 규격(나사코리아 둥근렌치 M3 SUS304) 사진을 붙였다. 배송비는 v3 아이씨뱅큐 주문과 합배송이라 0원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_nasa_button_m3.jpg"
+     },
+     {
+      "name": "XHHD hexagon nut M3 (LCSC C133377)",
+      "spec": "M3 육각너트 강철, 대변 5.5 × 두께 2.4",
+      "qty": 96,
+      "unit_krw": 11,
+      "shipping_krw": 0,
+      "store": "아이씨뱅큐 (P015976209, 해외 재고)",
+      "url": "https://www.icbanq.com/P015976209",
+      "verified": true,
+      "note_ko": "9/27 다시 열어 봄: 10원(VAT 별도) / 11원(VAT 포함), 최소 1개, 해외 재고, 배송 1주 이내. parts.json B07(136개) 안의 캡스턴 몫 96개와 같은 너트다. B07을 그대로 사면 이 줄의 너트는 겹치므로 한쪽만 센다. 배송비는 v3 목록의 아이씨뱅큐 주문(L20 홀센서 등)과 합배송이라 0원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_lcsc_m3nut.jpg"
+     }
+    ],
+    "total_krw": 2156,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "가장 싸다(나사 100개 1,100원). 너트·홀센서와 같은 아이씨뱅큐 주문이라 배송비가 붙지 않는다.",
+    "cons_ko": "해외 재고라 1주쯤 걸리고 최소 100개다. 상품 사진이 없어 머리 치수를 받아서 확인해야 한다.",
+    "extra_labor_ko": "없음",
+    "risk_ko": "머리 높이가 1.65에서 조금 달라도 캡스턴 윗면 z31.0을 나사로 다시 맞추면 된다(조정 범위 ±1 mm)."
+   },
+   "alternatives": [
+    {
+     "title_ko": "11번가 굿나잇몰 둥근머리 렌치볼트 M3×6 SUS304 96개 (국내 발송) + XHHD 너트",
+     "items": [
+      {
+       "name": "스텐 둥근머리 렌치볼트 M3 6mm (SUS304)",
+       "spec": "ISO 7380 계열 M3×6, 옵션 둥근머리 / M3 / 6mm",
+       "qty": 96,
+       "unit_krw": 40,
+       "shipping_krw": 0,
+       "store": "11번가 굿나잇몰 (상품 4236198413)",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "verified": true,
+       "note_ko": "9/27 옵션 API: 기본 20원 + 옵션 20원 = 40원, 옵션 재고 9,223개. 한진택배, 9/29 도착 예정 표시. 배송비 3,500원은 v3 목록에서 계속 사는 굿나잇몰 줄(L34·L35 등)과 합배송이라 0원으로 잡았다(굿나잇몰에서 아무것도 안 사면 3,500원).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_goodnight_bolts.jpg"
+      },
+      {
+       "name": "XHHD hexagon nut M3 (LCSC C133377)",
+       "spec": "M3 육각너트 강철, 대변 5.5 × 두께 2.4",
+       "qty": 96,
+       "unit_krw": 11,
+       "shipping_krw": 0,
+       "store": "아이씨뱅큐 (P015976209, 해외 재고)",
+       "url": "https://www.icbanq.com/P015976209",
+       "verified": true,
+       "note_ko": "9/27 다시 열어 봄: 10원(VAT 별도) / 11원(VAT 포함), 최소 1개, 해외 재고, 배송 1주 이내. parts.json B07(136개) 안의 캡스턴 몫 96개와 같은 너트다. B07을 그대로 사면 이 줄의 너트는 겹치므로 한쪽만 센다. 배송비는 v3 목록의 아이씨뱅큐 주문(L20 홀센서 등)과 합배송이라 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_lcsc_m3nut.jpg"
+      }
+     ],
+     "total_krw": 4896,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "국내 발송이라 이틀 안에 온다. parts.json B05와 같은 가게라 주문이 단순하다.",
+     "cons_ko": "나사값이 아이씨뱅큐의 3.6배다(3,840원 대 1,100원).",
+     "extra_labor_ko": "없음"
+    },
+    {
+     "title_ko": "나사코리아 둥근렌치 M3×6 SUS304 100개 한 봉 + XHHD 너트",
+     "items": [
+      {
+       "name": "둥근렌치 M3*4~50 SUS304 — 옵션 3*6(100개)/STS304",
+       "spec": "M3×6 SUS304 버튼헤드 100개 한 봉",
+       "qty": 1,
+       "unit_krw": 2220,
+       "shipping_krw": 3300,
+       "store": "나사코리아 nasakorea.com (goodsNo 2486)",
+       "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=2486",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 판매가 100원 + 옵션 3*6(100개) 2,120원 = 2,220원. 배송비 3,300원, 10만 원 이상 무료, 평균 1~3일. 손나사를 나사코리아에서 사는 안(thumb 대안)을 고르면 배송비가 한 번만 붙는다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_nasa_button_m3.jpg"
+      },
+      {
+       "name": "XHHD hexagon nut M3 (LCSC C133377)",
+       "spec": "M3 육각너트 강철, 대변 5.5 × 두께 2.4",
+       "qty": 96,
+       "unit_krw": 11,
+       "shipping_krw": 0,
+       "store": "아이씨뱅큐 (P015976209, 해외 재고)",
+       "url": "https://www.icbanq.com/P015976209",
+       "verified": true,
+       "note_ko": "9/27 다시 열어 봄: 10원(VAT 별도) / 11원(VAT 포함), 최소 1개, 해외 재고, 배송 1주 이내. parts.json B07(136개) 안의 캡스턴 몫 96개와 같은 너트다. B07을 그대로 사면 이 줄의 너트는 겹치므로 한쪽만 센다. 배송비는 v3 목록의 아이씨뱅큐 주문(L20 홀센서 등)과 합배송이라 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_lcsc_m3nut.jpg"
+      }
+     ],
+     "total_krw": 6576,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "국내 전문 나사몰, 100개 한 봉.",
+     "cons_ko": "단독으로 사면 배송비 3,300원이 나사값보다 크다.",
+     "extra_labor_ko": "없음"
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다. 캡스턴은 건반 꼬리가 레버를 들어 올리는 유일한 접점이고 DW·업스톱 조정도 이 나사로 한다. M3×6~8 둥근머리(또는 유두) SUS 렌치볼트와 M3 너트를 이미 96개 넘게 가지고 있을 때만 사용 안함으로 둔다.",
+   "r4_note_ko": "r4에서도 남는 부품이다. parts.json B05는 M3×8(40원)로 잡았지만 r3 도면은 M3×6이다. 길이는 r4 빔 두께가 정해지면 다시 맞춘다(길이가 바뀌어도 값은 같다). 너트는 B07과 겹치므로 합계에서 한 번만 센다."
+  },
+  {
+   "part_id": "thumb",
+   "name_ko": "손나사 M3×12 널링(DIN 653) — 업스톱 레일 고정",
+   "role_ko": "업스톱 레일을 브리지 속 탭 강철 띠에 고정한다(모듈당 8개, 끝 부속 6개). 머리 밑 접시 스프링 9장이 평평해질 때까지 조여 예하중 459 N을 만든다. 머리는 먼지 커버의 Ø13.6 구멍으로 나오고 출력 드라이버 Ø30(D16)으로 조인다.",
+   "spec_required": "M3×12 SUS 널링 손나사 DIN 653(낮은 머리, Ø12급), 탭 띠에 직접 체결(너트 없음)",
+   "qty_needed": "62개(모듈 8 × 7 + 끝 부속 왼쪽 4 + 오른쪽 2) + 예비 3 = 65개",
+   "current": {
+    "title_ko": "11번가 해외직구 GB835(=DIN 653) SUS304 M3×12 5개들이 13팩",
+    "items": [
+     {
+      "name": "M3 M10 GB835 304 스테인레스 스틸 널링 플랫 빅 라운드 헤드 엄지 나사 DIN653 — 옵션 23 5pcs M3x12mm",
+      "spec": "GB835 / DIN 653 M3×12 SUS304, 5개 한 팩",
+      "qty": 13,
+      "unit_krw": 8000,
+      "shipping_krw": 0,
+      "store": "11번가 콜라푸딩 (상품 9638303854, 해외직구)",
+      "url": "https://www.11st.co.kr/products/9638303854",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지·옵션 목록: 5pcs M3x12mm 8,000원(기본가 7,200원 + 800원), 옵션 재고 455, 무료배송. 해외직구 분류이고 도착 예정일은 페이지에 나오지 않았다(보통 1~2주). 머리 지름·높이 표기가 없어 받아서 재야 한다. 같은 GB835 M3×12를 11번가에서 파는 곳 중 개당 값이 가장 쌌다(다른 곳 5개 9,700~16,960원, 10개 13,450~17,700원).",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_gb835.jpg"
+     }
+    ],
+    "total_krw": 104000,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "설계 그대로의 낮은 널링 머리라 커버 구멍 Ø13.6, 드라이버 D16을 바꾸지 않는다.",
+    "cons_ko": "비싸다(개당 1,600원, 65개 104,000원). 해외직구라 1~2주 걸린다.",
+    "extra_labor_ko": "없음",
+    "risk_ko": "머리 크기 표기가 없다. Ø12보다 크면 커버 구멍(Ø13.6)을 넓혀야 한다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "아이씨뱅큐 DIN912 M3×12 SUS304 100개 + 출력 널링 손잡이(B06 방식)",
+     "items": [
+      {
+       "name": "AOFENG DIN912 M3-0.5X12 304 (Hex socket cylindrical head screw)",
+       "spec": "DIN 912 M3×12 SUS304 소켓 캡, 50개 단위",
+       "qty": 100,
+       "unit_krw": 11,
+       "shipping_krw": 0,
+       "store": "아이씨뱅큐 (P015971568, 해외 재고)",
+       "url": "https://www.icbanq.com/P015971568",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 10원(VAT 별도) / 11원(VAT 포함), 구매 단위 50개, 해외 재고 1주 이내. 상품 사진이 없어 같은 종류(유두 렌치볼트) 사진을 붙였다. 배송비는 v3 아이씨뱅큐 주문과 합배송이라 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_goodnight_bolts.jpg"
+      }
+     ],
+     "total_krw": 1100,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "거의 공짜다(65개 몫이 1,100원). 머리 밑 면이 평평해 접시 스프링을 그대로 받는다.",
+     "cons_ko": "손잡이 65개를 출력해 머리에 끼우고 CA로 붙여야 한다. 손잡이가 헛돌면 조일 수 없다.",
+     "extra_labor_ko": "PETG 널링 손잡이(Ø12, 머리용 Ø5.6 구멍) 65개 출력(한 판, 약 1 h) + 끼우고 CA 한 방울씩 약 30분",
+     "risk_ko": "0.30 N·m를 손잡이로 전달한다. 소켓 머리 옆면 널링에 억지 끼움 + CA면 충분하다고 보지만 단계 0에서 한 개 비틀어 확인한다."
+    },
+    {
+     "title_ko": "아이씨뱅큐 DIN912 M3×12 SUS304 100개, 손잡이 없이 드라이버 D16에 2.5 mm 육각 박기",
+     "items": [
+      {
+       "name": "AOFENG DIN912 M3-0.5X12 304 (Hex socket cylindrical head screw)",
+       "spec": "DIN 912 M3×12 SUS304 소켓 캡, 50개 단위",
+       "qty": 100,
+       "unit_krw": 11,
+       "shipping_krw": 0,
+       "store": "아이씨뱅큐 (P015971568, 해외 재고)",
+       "url": "https://www.icbanq.com/P015971568",
+       "verified": true,
+       "note_ko": "위와 같은 상품. 조이는 공구는 출력 드라이버 D16(Ø30)의 가운데에 2.5 mm 육각 렌치 토막을 박아 만든다(v3 T11 2.5 mm 렌치를 쓰거나 하나 더 산다).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_goodnight_bolts.jpg"
+      }
+     ],
+     "total_krw": 1100,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가장 싸고 손잡이 출력·접착이 없다. r3도 원래 드라이버 D16으로 조이므로 작업 순서는 같다.",
+     "cons_ko": "손으로는 못 돌리고 반드시 드라이버가 있어야 한다. D16 모양과 커버 머리 구멍을 바꿔야 한다.",
+     "extra_labor_ko": "D16을 육각 비트형으로 다시 그림(약 30분) + 2.5 mm 렌치 토막을 잘라 박기",
+     "risk_ko": "육각 구멍이 뭉개지지 않게 드라이버 테두리 20 N(0.30 N·m)만 준다."
+    },
+    {
+     "title_ko": "11번가 굿나잇몰 유두 렌치볼트 M3×12 SUS304 65개 + 출력 손잡이 (parts.json B06 원안)",
+     "items": [
+      {
+       "name": "스텐 유두 렌치볼트 M3 12mm (SUS304)",
+       "spec": "DIN 912 계열 M3×12, 옵션 유두 / M3 / 12mm",
+       "qty": 65,
+       "unit_krw": 60,
+       "shipping_krw": 0,
+       "store": "11번가 굿나잇몰 (상품 4236198413)",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "verified": true,
+       "note_ko": "9/27 옵션 API: 기본 20원 + 옵션 40원 = 60원, 옵션 재고 9,204개. 배송비는 v3 굿나잇몰 줄과 합배송이라 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_goodnight_bolts.jpg"
+      }
+     ],
+     "total_krw": 3900,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "국내 발송(9/29 도착 예정). 아이씨뱅큐보다 비싸도 4천 원 안쪽이다.",
+     "cons_ko": "손잡이 출력·접착이 필요하다.",
+     "extra_labor_ko": "PETG 널링 손잡이 65개 출력 + CA 접착(약 1.5 h)",
+     "risk_ko": "손잡이 접착 강도는 첫 번째 대안과 같다."
+    },
+    {
+     "title_ko": "나사코리아 SUS304 나비볼트 M3×12 100개",
+     "items": [
+      {
+       "name": "나비볼트 M3 SUS304 — 옵션 12/100개",
+       "spec": "DIN 316 계열 날개 나사 M3×12 SUS304, 100개",
+       "qty": 1,
+       "unit_krw": 39300,
+       "shipping_krw": 3300,
+       "store": "나사코리아 nasakorea.com (goodsNo 4578)",
+       "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=4578",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 판매가 4,200원 + 옵션 12/100개 35,100원 = 39,300원(개당 393원). 10개들이는 4,650원. 배송비 3,300원, 10만 원 이상 무료.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_nasa_wingbolt.jpg"
+      }
+     ],
+     "total_krw": 42600,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "공구 없이 손으로 조인다. 국내 1~3일.",
+     "cons_ko": "날개가 커서 먼지 커버 머리 구멍(Ø13.6)을 슬롯으로 바꿔야 하고 드라이버 D16을 쓸 수 없다. 손으로 조이면 0.30 N·m를 넘기기 쉬워 스프링이 평평해진 뒤에도 더 조일 수 있다.",
+     "extra_labor_ko": "커버 구멍 다시 그리기",
+     "risk_ko": "날개 폭·머리 밑 지름을 페이지에서 확인하지 못했다."
+    },
+    {
+     "title_ko": "나사코리아 평로렛 손잡이볼트 M3×12 SUS304 (머리 Ø8×6) 65개",
+     "items": [
+      {
+       "name": "평로렛손잡이볼트M3*5~16 스텐304 — 옵션 3*12/50개",
+       "spec": "M3×12 SUS304 널링 손나사, 머리 Ø8 × 6 (상세 사진 표기), 50개",
+       "qty": 1,
+       "unit_krw": 39700,
+       "shipping_krw": 3300,
+       "store": "나사코리아 nasakorea.com (goodsNo 6089)",
+       "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=6089",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 판매가 100원 + 옵션 3*12/50개 39,600원 = 39,700원. 배송비 3,300원, 10만 원 이상 무료, 평균 1~3일. 상세 사진의 치수표에 M3 머리 8 × 6으로 나온다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_nasa_knurl_thumb.jpg"
+      },
+      {
+       "name": "평로렛손잡이볼트M3*5~16 스텐304 — 옵션 3*12/5개",
+       "spec": "같은 나사 5개",
+       "qty": 3,
+       "unit_krw": 5050,
+       "shipping_krw": 0,
+       "store": "나사코리아 nasakorea.com (goodsNo 6089)",
+       "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=6089",
+       "verified": true,
+       "note_ko": "판매가 100원 + 옵션 3*12/5개 4,950원 = 5,050원. 50개 + 5개 × 3 = 65개.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_nasa_knurl_thumb.jpg"
+      }
+     ],
+     "total_krw": 58150,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "국내에서 파는 SUS 널링 손나사 중 값이 가장 쌌다(개당 약 840원).",
+     "cons_ko": "머리가 Ø8 × 6으로 DIN 653(낮은 머리)보다 좁고 높다. 머리 윗면이 커버 위로 약 3.5 mm 더 나오고 드라이버 소켓을 Ø8로 바꿔야 한다.",
+     "extra_labor_ko": "드라이버 D16 소켓 치수 변경",
+     "risk_ko": "머리 윗면 높이가 뒷바보다 낮아야 한다는 조건(A06)을 다시 확인해야 한다."
+    }
+   ],
+   "if_unused_ko": "빼려면 레일 고정 방식이 바뀌어야 한다. r3에서는 이 나사가 업스톱 레일을 누르는 유일한 체결이라, 없으면 fff 타건 때 레일이 들린다. 같은 M3×12 SUS 나사를 이미 65개 넘게 가지고 있거나, r4에서 레일을 다른 방법(스냅·핀 등)으로 잡게 되면 사용 안함.",
+   "r4_note_ko": "r4 단순화에서 탭 띠·접시 스프링 방식이 바뀌면 길이(12)와 개수(62)가 달라진다. 접시 스프링을 빼면 머리 밑 스택 3.15 mm가 없어져 M3×10으로 충분할 수 있다. v3 L34(M3×10 유두 50개)는 센서 바·CU에 40개를 써서 남는 게 10개뿐이다. AliExpress GB835 M3×12는 상품 페이지가 로봇 확인(CAPTCHA) 화면이라 열지 못해 대안에 넣지 않았다(11번가 해외직구 목록으로 대신 비교)."
+  },
+  {
+   "part_id": "disc",
+   "name_ko": "접시 스프링 DIN 2093 6×3.2×0.3 — 손나사 예하중",
+   "role_ko": "손나사 머리 밑에 3장 병렬 × 3묶음 직렬(9장)로 끼운다. 평평해질 때까지 조이면 예하중 459 N(24 h 뒤 다시 조여 사용 422 N)이 토크 렌치 없이 정해진다. 조금 앉아도 예하중이 크게 떨어지지 않게 하는 여유 스프링 역할도 한다.",
+   "spec_required": "DIN 2093 계열 외경 6 × 내경 3.2 × 두께 0.3 스프링강(자유 높이 약 0.45, 평평 하중 약 153 N/장)",
+   "qty_needed": "558장(손나사 62 × 9) + 예비 42 = 600장",
+   "current": {
+    "title_ko": "한국미스미 접시 스프링(MDS 계열) 6×3.2×0.3 600장 — 가격 미확인",
+    "items": [
+     {
+      "name": "MISUMI 접시 스프링 외경 6 / 내경 3.2 / 두께 0.3",
+      "spec": "DIN 2093 계열 6×3.2×0.3 스프링강",
+      "qty": 600,
+      "unit_krw": 35,
+      "shipping_krw": 0,
+      "store": "한국미스미 kr.misumi-ec.com (접시 스프링 카테고리)",
+      "url": "https://kr.misumi-ec.com/vona2/mech/M1200000000/M1202000000/M1202040000/",
+      "verified": false,
+      "note_ko": "확인 못 함: 한국미스미가 9/27 10:00~9/28 08:00 서버 점검 중이라 상품 페이지가 열리지 않았다(점검 안내 화면 확인). 검색 결과로는 미스미 접시 스프링(MDS 계열)이 외경 6·내경 3.2부터 있다. 단가 35원은 r3 추정(200장 7,000원)을 그대로 둔 값이고, 배송비도 모른다. 9/28 이후 다시 확인해야 한다. 국내 다른 곳(11번가·G마켓·나비엠알오·나사코리아·디바이스마트)에서는 6×3.2×0.3을 찾지 못했다."
+     }
+    ],
+    "total_krw": 21000,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "설계 그대로(153 N × 3 병렬 = 459 N, 이동 0.45 mm).",
+    "cons_ko": "가격·재고·최소 수량을 확인하지 못했다.",
+    "extra_labor_ko": "없음",
+    "risk_ko": "미스미 최소 수량·단가에 따라 금액이 크게 달라질 수 있다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "나비엠알오 대동 접시 스프링 DB-4L 8×4.2×0.3 100개들이 6팩 (같은 3×3 스택)",
+     "items": [
+      {
+       "name": "[대동] 접시 스프링 (경하중용 DB-L) — DB-4L",
+       "spec": "외경 8 × 내경 4.2 × 두께 0.3 스프링강 흑색, 1PK(100EA), 한국산",
+       "qty": 6,
+       "unit_krw": 5489,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (상품 388694, 상품코드 K14631193)",
+       "url": "https://www.navimro.com/g/388694/",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 4,990원(VAT 별도) / 5,489원(VAT 포함), 100개들이, 9/30(수) 출하. 나비엠알오 배송비 3,300원(5만 원(VAT 별도) 이상 무료)은 리머 줄에 한 번만 넣었다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_db4l.jpg"
+      }
+     ],
+     "total_krw": 32934,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "국내 재고, 1팩 100장 5,489원. 계산(Almen–László, h0 0.25 가정)으로 1장 평평 하중 약 142 N → 3병렬 425 N, 30 µm 앉은 뒤 414 N, 80 µm 뒤 396 N이라 오히려 앉음에 덜 민감하다. 2.5 m/s 한 건반 360 N(끝 부속 385 N)보다 크다.",
+     "cons_ko": "평평 예하중이 459 → 425 N으로 줄어 설계 여유가 작아진다. 내경 4.2라 M3 나사에서 0.6 mm 놀고, 외경 8이라 머리 밑 자리가 커진다. 스택 높이 3.15 → 3.45 mm.",
+     "extra_labor_ko": "스프링 가운데를 잡는 얇은 출력 슬리브(외경 4.1, 내경 3.2) 62개 또는 M3 와셔 조합; 머리 밑 자리 치수 변경",
+     "risk_ko": "대동 DB-L의 자유 높이를 페이지에서 확인하지 못해 h0 0.25(DIN 2093 B열 8×4.2×0.3)로 계산했다. 받으면 한 장 높이를 잰다."
+    },
+    {
+     "title_ko": "나비엠알오 대동 DB-4L 2팩 — r4 단순화: 손나사당 3장 병렬 1묶음",
+     "items": [
+      {
+       "name": "[대동] 접시 스프링 (경하중용 DB-L) — DB-4L",
+       "spec": "외경 8 × 내경 4.2 × 두께 0.3, 1PK(100EA)",
+       "qty": 2,
+       "unit_krw": 5489,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (상품 388694)",
+       "url": "https://www.navimro.com/g/388694/",
+       "verified": true,
+       "note_ko": "위와 같은 상품 2팩(200장 = 62 × 3 + 예비 14). 배송비는 리머 줄에 포함.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_db4l.jpg"
+      }
+     ],
+     "total_krw": 10978,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "스프링 수가 1/3이라 값도 조립 시간도 1/3이다.",
+     "cons_ko": "직렬 묶음이 하나라 앉음에 민감하다: 계산으로 평평 425 N, 30 µm 뒤 392 N, 80 µm 뒤 332 N(360 N 아래). 24 h 뒤·운반 뒤 다시 조이기가 꼭 필요하다.",
+     "extra_labor_ko": "위 대안과 같은 가운데 잡기 슬리브",
+     "risk_ko": "예하중 여유가 작아 단계 0 시험 10(레일 이음)을 다시 해야 한다."
+    },
+    {
+     "title_ko": "11번가 SUS304 접시형 스프링 와셔 \"M3x6\" 100개들이 6팩 — 두께 미표기",
+     "items": [
+      {
+       "name": "M3~M51 스테인리스 스틸 원형 탄성 웨이브 주름 금속 와셔 오목볼록 접시형 스프링 — 옵션 [14]M3x6 (100pcs)",
+       "spec": "SUS304 접시형(원뿔) 와셔, 내경 M3 × 외경 6 추정, 두께 표기 없음",
+       "qty": 6,
+       "unit_krw": 12500,
+       "shipping_krw": 0,
+       "store": "11번가 소확행Store (상품 9390644671)",
+       "url": "https://www.11st.co.kr/products/9390644671",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지·옵션: [14]M3x6 (100pcs) 12,500원, 재고 9,999, 무료배송, CJ 10/1 도착 예정. 두께·높이·하중 표기가 없고 대표 사진 문구는 \"WAVE WASHERS\"다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_conical_washer.jpg"
+      }
+     ],
+     "total_krw": 75000,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "외경 6·M3라 치수는 설계와 가장 가깝고 국내 배송이다.",
+     "cons_ko": "비싸다(600장 75,000원). 두께·원뿔 높이를 모르니 하중을 알 수 없다. 웨이브 와셔면 쓸 수 없다.",
+     "extra_labor_ko": "받아서 한 장 두께·높이를 재고, 3장 병렬로 눌러 평평 하중을 확인",
+     "risk_ko": "규격 미상 — 먼저 1팩만 사서 확인한 뒤 나머지를 사는 편이 안전하다."
+    },
+    {
+     "title_ko": "굿나잇몰 스텐 스프링와셔(분할 와셔) M3 66개 — 평평 멈춤 대신 토크로 조임",
+     "items": [
+      {
+       "name": "스텐 스프링 와셔 M3 (추가구성품)",
+       "spec": "SUS 분할 스프링와셔 M3",
+       "qty": 66,
+       "unit_krw": 10,
+       "shipping_krw": 0,
+       "store": "11번가 굿나잇몰 (상품 4236198413 추가구성품)",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지 추가구성품: 스텐 스프링 와셔 M3 10원, 재고 9,991. 배송비는 굿나잇몰 합배송.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_goodnight_bolts.jpg"
+      }
+     ],
+     "total_krw": 660,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "660원이면 끝난다. 손나사당 1장이라 조립이 빠르다.",
+     "cons_ko": "분할 와셔는 예하중을 정해 주지 못한다. 드라이버 테두리 20 N(0.30 N·m)만으로 조이면 나사 마찰에 따라 예하중이 ±30 % 흔들리고, 몇십 µm만 앉아도 예하중이 거의 사라진다.",
+     "extra_labor_ko": "토크를 일정하게 주는 연습 또는 토크 드라이버",
+     "risk_ko": "fff 타건에서 레일 이음이 열릴 수 있다(설계 한 건반 2.5 m/s 360 N)."
+    }
+   ],
+   "if_unused_ko": "빼면 손나사 예하중을 토크로만 정해야 한다(0.30 N·m ≈ 400~500 N, 마찰에 따라 ±30 %). PETG 지붕과 띠가 수십 µm만 앉아도 예하중이 크게 떨어져 fff 타건에서 레일 이음이 열릴 수 있다. r4에서 레일 고정 방식이 바뀌어 예하중이 필요 없어지면 뺀다.",
+   "r4_note_ko": "r4 단순화에서 빠질 수 있는 부품이다. 남으면 9/28 08:00 이후 한국미스미 가격을 다시 확인한다. AliExpress 검색 목록에는 DIN 2093 스프링이 외경 8부터만 보였고 상품 페이지는 로봇 확인 화면이라 열지 않았다. 하중은 Almen–László 식(E 206 GPa, ν 0.3)으로 계산했고 6×3.2×0.3(h0 0.15) 평평 153 N이 r3 값(3병렬 459 N)과 맞는다."
+  },
+  {
+   "part_id": "brass",
+   "name_ko": "황동 파이프 외경 5 × 내경 3 — 레버 봉 부싱 39개",
+   "role_ko": "핀 보스(Ø7)에 압입해 Ø3 SUJ2 레버 봉을 받친다(D06). 봉 반력을 넓은 면으로 PETG에 넘겨 지압을 낮춘다(6레버 2.0 m/s에서 부싱 뒤 PETG 19.5 MPa).",
+   "spec_required": "황동(신주) 파이프 OD 5 × ID 3 (두께 1), 부싱 39개(핀 5 × 모듈 7 + 끝 부속 4) × 약 7 mm ≈ 300 mm",
+   "qty_needed": "300 mm (1 m 한 가닥이 최소 판매 단위)",
+   "current": {
+    "title_ko": "11번가 라파이브 신주파이프 외경 5 mm × 두께 1 mm, 1 m",
+    "items": [
+     {
+      "name": "신주 파이프 1M 황동 파이프 외경 4mm 5mm 6mm — 옵션 5mm (1T)",
+      "spec": "황동 파이프 OD 5 × 두께 1 (ID 3), 길이 1 m",
+      "qty": 1,
+      "unit_krw": 7200,
+      "shipping_krw": 3000,
+      "store": "11번가 라파이브 (상품 9347015508)",
+      "url": "https://www.11st.co.kr/products/9347015508",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지·옵션: 5mm (1T) 7,200원, 재고 985. 배송비 3,000원, CJ대한통운 9/29 도착 예정(국내 발송). 같은 규격을 파는 11번가 다른 곳은 8,250~20,340원이었다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_brass_pipe.jpg"
+     }
+    ],
+    "total_krw": 10200,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "국내 2일, 1 m라 700 mm가 남는다(예비 부싱·다른 용도).",
+    "cons_ko": "배송비가 값의 40 %다. 내경 공차 표기가 없어 Ø3 h6 봉이 빡빡하거나 헐거울 수 있다.",
+    "extra_labor_ko": "쇠톱(T01)과 줄(T02)로 약 7 mm씩 39개 자르고 버 제거, 필요하면 리머로 내경 맞춤 — 약 1.5 h",
+    "risk_ko": "내경이 3.0보다 작으면 리머(reamer 줄)로 다듬고, 크면 봉이 덜걱거린다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "나비엠알오 HIKARI 황동 파이프 외경 4 × 395 mm (리머·탭과 합배송)",
+     "items": [
+      {
+       "name": "HIKARI 황동 파이프 BP395-4",
+       "spec": "황동 파이프 외경 4 × 길이 395, 내경 표기 없음",
+       "qty": 1,
+       "unit_krw": 3179,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (상품 420031, 상품코드 K25619689, 해외직수입)",
+       "url": "https://www.navimro.com/g/420031/",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 2,890원(VAT 별도) / 3,179원(VAT 포함), 캠페인 코드 할인가 2,530원(VAT 포함), 10/07 출하 예정. 내경이 적혀 있지 않다. 배송비는 리머 줄의 나비엠알오 배송비에 합쳐진다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_hikari_brass.jpg"
+      }
+     ],
+     "total_krw": 3179,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "나비엠알오에서 리머·탭을 같이 사면 배송비가 붙지 않아 7천 원쯤 싸다.",
+     "cons_ko": "외경 4라 핀 보스 구멍을 Ø4로 바꿔야 하고, 부싱 뒤 PETG 지압이 외경 5보다 약 25 % 커진다(19.5 → 약 24 MPa). 내경이 3.0인지 모른다.",
+     "extra_labor_ko": "핀 보스 구멍 치수 변경",
+     "risk_ko": "내경 미확인 — 문의하거나 받아서 재야 한다. 10/07 출하로 늦다."
+    }
+   ],
+   "if_unused_ko": "부싱 없이 레버 봉이 PETG 핀 구멍에 직접 닿는다. 받는 폭이 외경 5에서 3으로 줄어 지압이 약 1.7배가 된다(6레버 2.0 m/s 약 32 MPa, 2.5 m/s 약 41 MPa, PETG 항복 약 50 MPa 근처). 구멍이 닳아 유격이 생길 수 있어 r4에서 핀 두께·구멍 설계를 다시 봐야 한다. r4 단순화에서 빠질 수 있는 부품이다.",
+   "r4_note_ko": "r4에서 빠지면 이 줄은 사용 안함. 리머는 레버 허브 구멍 때문에 계속 필요하므로 따로 뺐다(reamer 줄)."
+  },
+  {
+   "part_id": "reamer",
+   "name_ko": "Ø3 H7 핸드 리머 + 탭 핸들 — 레버 허브·부싱 구멍 다듬기",
+   "role_ko": "레버 캐리어 허브(출력 Ø2.9)를 Ø3.0 H7로 다듬고(조립 5단계), 필요하면 황동 부싱 내경을 맞춘다. 탭 핸들은 M3 탭(tap 줄)과 같이 쓴다.",
+   "spec_required": "HSS 핸드 리머 Ø3.0 H7 + 탭 핸들(3~12 mm)",
+   "qty_needed": "리머 1개, 탭 핸들 1개",
+   "current": {
+    "title_ko": "나비엠알오 스마토 핸드리머 Ø3 H7 + 탭 핸들",
+    "items": [
+     {
+      "name": "[스마토] 핸드리머 Ø3 (날장 35, 전장 65, HSS(M2), 공차 H7)",
+      "spec": "HSS 핸드 리머 Ø3.0 H7, 중국산",
+      "qty": 1,
+      "unit_krw": 3289,
+      "shipping_krw": 3300,
+      "store": "나비엠알오 (상품 3279839, 상품코드 K93009242)",
+      "url": "https://www.navimro.com/g/3279839/",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지: 2,990원(VAT 별도) / 3,289원(VAT 포함), 10/01(목) 출하, 특징란에 공차 H7. 나비엠알오 배송비 3,300원(VAT 포함, 5만 원(VAT 별도) 이상 무료). 탭·드릴·접시 스프링(DB-4L) 대안·HIKARI 파이프를 같은 주문에 넣으면 한 번만 붙는다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_reamer_smato.jpg"
+     },
+     {
+      "name": "나비엠알오 탭 핸들 (사용범위 3~12 mm, 전장 200)",
+      "spec": "수동 탭 핸들, 리머·M3 탭 겸용",
+      "qty": 1,
+      "unit_krw": 5489,
+      "shipping_krw": 0,
+      "store": "나비엠알오 (상품 179331, 상품코드 K06564912)",
+      "url": "https://www.navimro.com/g/179331/",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지: 4,990원(VAT 별도) / 5,489원(VAT 포함), 9/28(월) 출하. 리머와 M3 탭(tap 줄)에 같이 쓴다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_taphandle.jpg"
+     }
+    ],
+    "total_krw": 12078,
+    "bucket": "tool",
+    "fits_design": true,
+    "pros_ko": "리머가 3천 원대로 싸고, 핸들 하나로 리머와 탭을 다 돌린다.",
+    "cons_ko": "중국산이라 첫 구멍에서 Ø3 봉이 맞는지 확인해야 한다.",
+    "extra_labor_ko": "레버 92개 허브 리밍 약 1 h",
+    "risk_ko": "PETG를 리밍하면 구멍이 약간 오므라들 수 있다. 첫 몇 개로 봉 끼움을 확인한다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "나비엠알오 상신정밀 GEM100 핸드 리머 Ø3 (국산) + 탭 핸들",
+     "items": [
+      {
+       "name": "[상신정밀] 핸드 리머 (GEM100) GEM100030",
+       "spec": "HSS 핸드 리머 Ø3, 날장 40, 전장 72, 한국산",
+       "qty": 1,
+       "unit_krw": 6589,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (상품 10477, 상품코드 K01480900)",
+       "url": "https://www.navimro.com/g/10477/",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 5,990원(VAT 별도) / 6,589원(VAT 포함), 9/28(월) 출하. 페이지에 공차 표기는 따로 없다. 나비엠알오 배송비 3,300원(VAT 포함, 5만 원(VAT 별도) 이상 무료). 탭·드릴·접시 스프링(DB-4L) 대안·HIKARI 파이프를 같은 주문에 넣으면 한 번만 붙는다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_reamer_gem100.jpg"
+      },
+      {
+       "name": "나비엠알오 탭 핸들 (사용범위 3~12 mm, 전장 200)",
+       "spec": "수동 탭 핸들, 리머·M3 탭 겸용",
+       "qty": 1,
+       "unit_krw": 5489,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (상품 179331, 상품코드 K06564912)",
+       "url": "https://www.navimro.com/g/179331/",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 4,990원(VAT 별도) / 5,489원(VAT 포함), 9/28(월) 출하. 리머와 M3 탭(tap 줄)에 같이 쓴다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_taphandle.jpg"
+      }
+     ],
+     "total_krw": 15378,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "국산이고 다음 날 출하.",
+     "cons_ko": "스마토보다 3,300원 비싸다. 공차 표기가 없다.",
+     "extra_labor_ko": "위와 같음"
+    },
+    {
+     "title_ko": "리머만 사고 핸들 없이(핀바이스·전동 드릴 척에 물려 손으로 돌림)",
+     "items": [
+      {
+       "name": "[스마토] 핸드리머 Ø3 (HSS(M2), H7)",
+       "spec": "HSS 핸드 리머 Ø3.0 H7",
+       "qty": 1,
+       "unit_krw": 3289,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (상품 3279839)",
+       "url": "https://www.navimro.com/g/3279839/",
+       "verified": true,
+       "note_ko": "위와 같은 상품. 가진 핀바이스나 드릴 척(전원 끄고 손으로)에 물려 돌린다. 나비엠알오 배송비 3,300원(VAT 포함, 5만 원(VAT 별도) 이상 무료). 탭·드릴·접시 스프링(DB-4L) 대안·HIKARI 파이프를 같은 주문에 넣으면 한 번만 붙는다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_reamer_smato.jpg"
+      }
+     ],
+     "total_krw": 6589,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "핸들값 5,489원을 아낀다.",
+     "cons_ko": "M3 탭(tap 줄)을 쓰면 탭 핸들이 결국 필요하다.",
+     "extra_labor_ko": "없음",
+     "risk_ko": "곧게 세우기 어려워 구멍이 조금 비뚤어질 수 있다."
+    },
+    {
+     "title_ko": "리머 대신 HSS 드릴 Ø3.0",
+     "items": [
+      {
+       "name": "[나비엠알오] 스트레이트 드릴 SD 3.0",
+       "spec": "HSS(M2) 드릴 Ø3.0, 날장 43, 전장 72",
+       "qty": 1,
+       "unit_krw": 770,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (상품 171100, 상품코드 K11176300)",
+       "url": "https://www.navimro.com/g/171100/",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 700원(VAT 별도) / 770원(VAT 포함), 9/28(월) 출하. 나비엠알오 배송비 3,300원(VAT 포함, 5만 원(VAT 별도) 이상 무료). 탭·드릴·접시 스프링(DB-4L) 대안·HIKARI 파이프를 같은 주문에 넣으면 한 번만 붙는다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_drill.jpg"
+      }
+     ],
+     "total_krw": 4070,
+     "bucket": "tool",
+     "fits_design": false,
+     "pros_ko": "가장 싸다.",
+     "cons_ko": "드릴 구멍은 H7보다 0.03~0.1 mm 크게 나와 레버가 봉 위에서 흔들린다(설계는 레버 요 ±0.10 가정). 부싱 내경도 맞출 수 없다.",
+     "extra_labor_ko": "없음",
+     "risk_ko": "레버 소음·흔들림, 틈 검사 가정 초과"
+    }
+   ],
+   "if_unused_ko": "리머가 없으면 허브 출력 구멍 Ø2.9에 Ø3 봉이 들어가지 않는다(드릴로 넓히면 헐겁다). 같은 Ø3 리머를 이미 가지고 있을 때만 사용 안함으로 둔다. 탭 핸들이 이 줄에 들어 있으므로, 리머를 빼고 탭(tap 줄)을 쓰면 핸들(5,489원)을 따로 사야 한다. 나비엠알오 배송비 3,300원도 이 줄에 들어 있다.",
+   "r4_note_ko": "황동 부싱(brass)이 r4에서 빠져도 레버 허브 구멍 다듬기에는 계속 필요하다."
+  },
+  {
+   "part_id": "tap",
+   "name_ko": "M3 핸드 탭 + Ø2.5 드릴 — 탭 강철 띠 나사산",
+   "role_ko": "탭 강철 띠(SS400 4T×20, 모듈당 4개 × 2구멍 + 끝 부속 판)에 손나사용 M3 암나사 62개를 낸다.",
+   "spec_required": "M3×0.5 HSS 핸드 탭(1·2·3번 1조) + HSS 드릴 Ø2.5. 탭 핸들은 reamer 줄에 포함, 전동 드릴과 센터펀치 필요",
+   "qty_needed": "탭 1조, 드릴 Ø2.5 2개(1개 예비)",
+   "current": {
+    "title_ko": "나비엠알오 REX HSS 핸드탭 M3 1조 + HSS 드릴 Ø2.5 2개",
+    "items": [
+     {
+      "name": "[REX] HSS 핸드 탭 M 3.0×0.5 (1SET 3EA)",
+      "spec": "HSS 핸드 탭 M3×0.5, 황·중·정삭 3개 1조, 중국산",
+      "qty": 1,
+      "unit_krw": 3729,
+      "shipping_krw": 0,
+      "store": "나비엠알오 (상품 200030, 상품코드 K07323082)",
+      "url": "https://www.navimro.com/g/200030/",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지: 3,390원(VAT 별도) / 3,729원(VAT 포함), 10/02(금) 출하. 배송비는 reamer 줄의 나비엠알오 배송비에 합쳐진다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_tap_rex.jpg"
+     },
+     {
+      "name": "[나비엠알오] 스트레이트 드릴 SD 2.5",
+      "spec": "HSS(M2) 드릴 Ø2.5, 날장 35, 전장 60",
+      "qty": 2,
+      "unit_krw": 770,
+      "shipping_krw": 0,
+      "store": "나비엠알오 (상품 171100, 상품코드 K11176297)",
+      "url": "https://www.navimro.com/g/171100/",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지: 700원(VAT 별도) / 770원(VAT 포함), 9/28(월) 출하. 가는 드릴은 잘 부러져 2개로 잡았다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_drill.jpg"
+     }
+    ],
+    "total_krw": 5269,
+    "bucket": "tool",
+    "fits_design": true,
+    "pros_ko": "HSS라 연강 62구멍에 무리가 없다. 리머와 한 주문이라 배송비가 없다.",
+    "cons_ko": "10/02 출하라 리머보다 하루 늦다.",
+    "extra_labor_ko": "센터펀치 → Ø2.5 드릴 → 탭 3개 순서로 62구멍, 절삭유 사용 — 약 2~3 h(전동 드릴 필요)",
+    "risk_ko": "탭이 부러지면 띠를 버려야 한다. 한 번에 반 바퀴씩 돌리고 되돌린다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "나비엠알오 스마토 SKS 핸드탭 M3 1조 + HSS 드릴 Ø2.5 2개",
+     "items": [
+      {
+       "name": "[스마토] SKS 핸드 탭 M 3.0×0.5 (1SET 3EA)",
+       "spec": "SKS(합금공구강) 핸드 탭 M3×0.5, 3개 1조",
+       "qty": 1,
+       "unit_krw": 2959,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (상품 53392, 상품코드 K03174312)",
+       "url": "https://www.navimro.com/g/53392/",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 2,690원(VAT 별도) / 2,959원(VAT 포함), 9/28(월) 출하.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_tap_smato.jpg"
+      },
+      {
+       "name": "[나비엠알오] 스트레이트 드릴 SD 2.5",
+       "spec": "HSS(M2) 드릴 Ø2.5",
+       "qty": 2,
+       "unit_krw": 770,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (상품 171100)",
+       "url": "https://www.navimro.com/g/171100/",
+       "verified": true,
+       "note_ko": "위와 같음.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_drill.jpg"
+      }
+     ],
+     "total_krw": 4499,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "770원 싸고 다음 날 출하.",
+     "cons_ko": "SKS는 HSS보다 연강에서 빨리 무뎌진다. 62구멍은 될 것으로 보지만 마지막 구멍들이 뻑뻑해질 수 있다.",
+     "extra_labor_ko": "위와 같음",
+     "risk_ko": "탭 마모"
+    },
+    {
+     "title_ko": "탭 없이: 띠 구멍 Ø3.4 + M3 너트 62개(띠 밑)",
+     "items": [
+      {
+       "name": "[나비엠알오] 스트레이트 드릴 SD 3.4",
+       "spec": "HSS(M2) 드릴 Ø3.4, 날장 46, 전장 74",
+       "qty": 1,
+       "unit_krw": 1199,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (상품 171100, 상품코드 K11176333)",
+       "url": "https://www.navimro.com/g/171100/",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 1,090원(VAT 별도) / 1,199원(VAT 포함), 9/28(월) 출하. r3 레일 구멍 Ø3.4에도 쓸 수 있다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_navi_drill.jpg"
+      },
+      {
+       "name": "XHHD hexagon nut M3 (LCSC C133377)",
+       "spec": "M3 육각너트 강철",
+       "qty": 62,
+       "unit_krw": 11,
+       "shipping_krw": 0,
+       "store": "아이씨뱅큐 (P015976209)",
+       "url": "https://www.icbanq.com/P015976209",
+       "verified": true,
+       "note_ko": "9/27 확인 11원(VAT 포함). 아이씨뱅큐 합배송.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_lcsc_m3nut.jpg"
+      }
+     ],
+     "total_krw": 1881,
+     "bucket": "tool",
+     "fits_design": false,
+     "pros_ko": "탭 작업이 없어 부러질 걱정이 없다.",
+     "cons_ko": "띠 밑(주머니가 열린 쪽)에 너트 2.4 mm가 매달려 레버 쪽 틈이 줄고, 너트 돌림 멈춤이 필요하다. r3의 \"띠-지붕 한 덩어리 체결\" 구조가 바뀐다.",
+     "extra_labor_ko": "띠 주머니·너트 자리 다시 설계, Ø3.4 구멍 62개",
+     "risk_ko": "레버가 브리지 쪽으로 올라갈 때(서비스 자세 14~15°) 너트와 닿을 수 있다."
+    }
+   ],
+   "if_unused_ko": "r4에서 탭 강철 띠가 빠지면 필요 없다. 띠가 남는데 탭이 없으면 손나사를 체결할 곳이 없다. M3 탭과 Ø2.5 드릴을 이미 가지고 있으면 사용 안함.",
+   "r4_note_ko": "r3 업스톱 레일에는 Ø3.4 구멍 8개와 위치 핀 구멍 Ø3.2 2개도 있어 Ø3.4 드릴(나비엠알오 1,199원)이 따로 필요하다. 이 줄의 기본안에는 넣지 않았다. 전동 드릴이 없으면 구멍 뚫기를 외주해야 한다."
+  },
+  {
+   "part_id": "magnet",
+   "name_ko": "커버 자석 Ø6×3 N35 — 먼지 커버를 레일에 붙임",
+   "role_ko": "먼지 커버 밑면 포켓에 2개씩 붙여 강철 업스톱 레일에 달라붙게 한다. 모듈을 세우거나 옮길 때 커버가 떨어지지 않게 한다(단계 0 시험 14).",
+   "spec_required": "네오디뮴 N35 원형 Ø6×3",
+   "qty_needed": "20개(모듈 7 × 2 + 끝 부속 커버 + 예비)",
+   "current": {
+    "title_ko": "대건상사 초강력 네오디움 원형자석 6mm 3.0T 20개",
+    "items": [
+     {
+      "name": "초강력 네오디움 원형자석 6mm — 옵션 3.0T",
+      "spec": "N35 Ø6×3",
+      "qty": 20,
+      "unit_krw": 140,
+      "shipping_krw": 0,
+      "store": "대건상사 dgmagnet.com (product_no=15)",
+      "url": "https://dgmagnet.com/product/detail.html?product_no=15",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지 옵션 데이터: 3.0T 140원, 판매 중(재고 관리 안 하는 상품). 배송비 2,500원(5만 원 이상 무료)은 v3 L21 자석(같은 가게) 주문과 합배송이라 0원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_dg_6mm.jpg"
+     }
+    ],
+    "total_krw": 2800,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "설계 그대로. L21과 같은 가게라 배송비가 없다.",
+    "cons_ko": "없음",
+    "extra_labor_ko": "포켓에 CA로 붙임(20개, 약 10분)"
+   },
+   "alternatives": [
+    {
+     "title_ko": "대건상사 Ø5×2 (L21과 같은 품목) 20개 — L21 수량을 100 → 120으로",
+     "items": [
+      {
+       "name": "초강력 네오디움 원형자석 5mm — 옵션 2.0T",
+       "spec": "N35 Ø5×2 (v3 L21과 같은 품목)",
+       "qty": 20,
+       "unit_krw": 80,
+       "shipping_krw": 0,
+       "store": "대건상사 dgmagnet.com (product_no=13)",
+       "url": "https://dgmagnet.com/product/detail.html?product_no=13",
+       "verified": true,
+       "note_ko": "9/27 옵션 데이터: 2.0T 80원, 판매 중. L21 주문 수량만 늘리면 된다. L21 예비 11개를 일부 돌려 써도 된다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_dg_5mm.jpg"
+      }
+     ],
+     "total_krw": 1600,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가장 싸고 품목이 하나 줄어 주문이 단순하다.",
+     "cons_ko": "흡착력이 Ø6×3의 절반쯤이다. 커버가 40 g이라 충분하다고 보지만 시험 14로 확인해야 한다.",
+     "extra_labor_ko": "커버 포켓을 Ø5.2 × 2로 다시 그림",
+     "risk_ko": "커버를 세운 채 운반하면 떨어질 수 있다."
+    },
+    {
+     "title_ko": "대건상사 Ø6×2 20개",
+     "items": [
+      {
+       "name": "초강력 네오디움 원형자석 6mm — 옵션 2.0T",
+       "spec": "N35 Ø6×2",
+       "qty": 20,
+       "unit_krw": 100,
+       "shipping_krw": 0,
+       "store": "대건상사 dgmagnet.com (product_no=15)",
+       "url": "https://dgmagnet.com/product/detail.html?product_no=15",
+       "verified": true,
+       "note_ko": "9/27 옵션 데이터: 2.0T 100원, 판매 중. L21 주문과 합배송.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_dg_6mm.jpg"
+      }
+     ],
+     "total_krw": 2000,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "800원 싸다. 커버 포켓 지름은 그대로.",
+     "cons_ko": "흡착력이 3.0T보다 약 30 % 약하다.",
+     "extra_labor_ko": "포켓 깊이를 2 mm로"
+    },
+    {
+     "title_ko": "대건상사 Ø8×3 (L65와 같은 품목) 20개",
+     "items": [
+      {
+       "name": "초강력 네오디움 원형자석 8mm — 옵션 3.0T",
+       "spec": "N35 Ø8×3 (v3 L65와 같은 품목)",
+       "qty": 20,
+       "unit_krw": 160,
+       "shipping_krw": 0,
+       "store": "대건상사 dgmagnet.com (product_no=17)",
+       "url": "https://dgmagnet.com/product/detail.html?product_no=17",
+       "verified": true,
+       "note_ko": "9/27 옵션 데이터: 3.0T 160원, 판매 중. v3 L65 14개는 가운데 유닛 뚜껑에 다 쓰므로(12 + 예비 2) 재사용할 여분은 없고, 같은 품목을 20개 더 사는 안이다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_dg_8mm.jpg"
+      }
+     ],
+     "total_krw": 3200,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "흡착력이 가장 세고 L65와 품목을 합칠 수 있다.",
+     "cons_ko": "400원 비싸고 커버 포켓을 Ø8.2로 키워야 한다.",
+     "extra_labor_ko": "커버 포켓 지름 변경"
+    }
+   ],
+   "if_unused_ko": "자석 없이 위치 핀 2개로만 커버가 얹힌다. 눕혀 두면 문제없지만 모듈을 세우거나 기울여 옮기면 커버가 미끄러져 떨어질 수 있다(시험 14 불합격). 마스킹테이프나 출력 클립으로 대신할 수 있다. 같은 자석이 이미 있거나 r4에서 커버 고정 방식이 바뀌면 사용 안함.",
+   "r4_note_ko": "r4 단순화에서 빠질 수 있는 부품이다."
+  },
+  {
+   "part_id": "lead",
+   "name_ko": "흑건 추 5 g 납 봉돌 — y99 추 칸",
+   "role_ko": "흑건 앞쪽 y99 추 칸에 접착하고 출력 뚜껑을 덮는다. 흑건 타격 중심을 앞 멈춤 안쪽으로 옮겨 바닥 충돌 때 노치 들림을 줄인다(D13, 비자성).",
+   "spec_required": "5 g 납(비자성), 흑건 속 폭 약 8 mm(밑폭 10.4 − 벽 1.2 × 2) 안에 들어가는 모양",
+   "qty_needed": "40개(흑건 36 = 5 × 7 + A#0, 예비 4)",
+   "current": {
+    "title_ko": "11번가 TEASER A020 탄환형 납 5 g 50개들이",
+    "items": [
+     {
+      "name": "티저 A020 50개입 탄환형 납 라운드 헤드 — 옵션 [2]5g-50pcs",
+      "spec": "납 5 g, 둥근 머리 + 철사 고리(지그헤드형), 50개",
+      "qty": 1,
+      "unit_krw": 20000,
+      "shipping_krw": 0,
+      "store": "11번가 몰진스디 (상품 9617745617)",
+      "url": "https://www.11st.co.kr/products/9617745617",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지·옵션: [2]5g-50pcs 20,000원, 재고 16, 무료배송, CJ 9/29 도착 예정(국내 재고). 5 g 납으로 표기된 것 중 개당 값이 가장 쌌다(다른 곳 10개 10,500원).",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_bullet_lead.jpg"
+     }
+    ],
+    "total_krw": 20000,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "무게가 정확히 5 g, 재질이 납, 이틀 안에 온다.",
+    "cons_ko": "사진상 둥근 머리(5 g 납 구 ≈ Ø9.4)에 철사 고리가 달려 있어, 고리를 자르고 망치로 눌러 폭 8 mm 이하로 만들어야 한다.",
+    "extra_labor_ko": "고리 절단 + 망치로 납작하게 + 저울로 5.0 g 확인, 40개 약 1 h(장갑 착용)",
+    "risk_ko": "철사 고리가 강철이면 자성이 있으니 반드시 떼어 낸다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "11번가 낚시천국 친환경 양도래추 1.5호(5.6 g) 40개 — 국내생산",
+     "items": [
+      {
+       "name": "친환경 양도래추 벌크 봉돌 1.5호 40pcs 국내생산",
+       "spec": "1.5호(포장 표기 5.6 g), 길쭉한 모양 양끝 도래, 40개",
+       "qty": 1,
+       "unit_krw": 7000,
+       "shipping_krw": 3500,
+       "store": "11번가 낚시천국 (상품 2520477575)",
+       "url": "https://www.11st.co.kr/products/2520477575",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 7,000원, 배송비 3,500원, 로젠 9/29 도착 예정. 포장 사진에 \"1.5호 5.6g\". 재질 표기가 없고 \"친환경\"이라 납이 아닐 수 있다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_swivel_sinker.jpg"
+      }
+     ],
+     "total_krw": 10500,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가장 싸다(10,500원). 길쭉해서 폭 8 mm 칸에 넣기 쉽다.",
+     "cons_ko": "5.6 g이라 0.6 g 무겁고, 양끝 도래를 잘라야 한다. 재질을 모른다.",
+     "extra_labor_ko": "도래 절단 + 칼로 깎아 5.0 g 맞춤, 약 1 h",
+     "risk_ko": "받으면 자석을 대 보아 붙으면(철) 쓰지 않는다."
+    },
+    {
+     "title_ko": "11번가 손피싱 오뚜기싱커 3/16온즈(1.5호, 약 5.3 g) 19개들이 2팩",
+     "items": [
+      {
+       "name": "도래추 벌크 50개입 봉돌 — 옵션 장타!! 오뚜기싱커 / [G9-2] 3/16온즈 1.5호(19개입)",
+       "spec": "약 5.3 g 싱커 19개",
+       "qty": 2,
+       "unit_krw": 6900,
+       "shipping_krw": 3000,
+       "store": "11번가 손피싱 (상품 1140022227)",
+       "url": "https://www.11st.co.kr/products/1140022227",
+       "verified": true,
+       "note_ko": "9/27 옵션 API: 오뚜기싱커 1.5호(19개입) 6,900원, 재고 9,999. 배송비 3,000원(5만 원 이상 무료), 롯데 9/29 도착 예정. 2팩 38개 = 흑건 36 + 예비 2. 같은 가게의 스위벨봉돌 1.5호 약 5 g(40개입)은 9/27 재고 0이었다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_sonfishing.jpg"
+      }
+     ],
+     "total_krw": 16800,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "약 5.3 g이라 거의 그대로 쓴다(DW 차이는 캡스턴·퍼티로 흡수).",
+     "cons_ko": "예비가 2개뿐이다. 모양·재질이 텍스트로 적혀 있지 않다.",
+     "extra_labor_ko": "저울로 확인, 필요하면 칼로 조금 깎음",
+     "risk_ko": "폭이 8 mm를 넘으면 눌러 납작하게 해야 한다."
+    },
+    {
+     "title_ko": "11번가 기마월드 낚시추 1 kg 한 덩어리를 5 g씩 잘라 쓰기",
+     "items": [
+      {
+       "name": "심해 갈치 낚시추 1000g 봉돌 육각추 1kg",
+       "spec": "육각 막대형 낚시추 1 kg 1개(사진상 한 덩어리)",
+       "qty": 1,
+       "unit_krw": 7740,
+       "shipping_krw": 0,
+       "store": "11번가 기마월드 (상품 9628833686)",
+       "url": "https://www.11st.co.kr/products/9628833686",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 7,740원, 무료배송, CJ 9/30 도착 예정. 재질 표기는 텍스트에 없다(낚시추는 보통 납). 200 g만 쓰고 800 g이 남는다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_lead_1kg.jpg"
+      }
+     ],
+     "total_krw": 7740,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "g당 가장 싸고 모양을 칸에 맞춰 자를 수 있다. 남는 납은 DW 조정추로 쓸 수 있다.",
+     "cons_ko": "자르는 품이 크다.",
+     "extra_labor_ko": "쇠톱으로 약 5 mm 두께로 켜고 다시 5 g 조각으로 자름, 저울로 맞춤 — 40개 약 2~3 h. 장갑·마스크, 녹이지 말 것",
+     "risk_ko": "납 가루·조각 처리(손 씻기, 작업대 닦기)."
+    },
+    {
+     "title_ko": "11번가 SUS304 스텐볼 7 mm 100개들이 2봉 — 흑건당 4알",
+     "items": [
+      {
+       "name": "스텐구슬 쇠구슬 스텐레스볼 1봉 100개입 — 옵션 7mm",
+       "spec": "SUS304 볼 Ø7 (1알 약 1.42 g), 100개",
+       "qty": 2,
+       "unit_krw": 5570,
+       "shipping_krw": 3000,
+       "store": "11번가 펌프킨스토어 (상품 7194103988)",
+       "url": "https://www.11st.co.kr/products/7194103988",
+       "verified": true,
+       "note_ko": "9/27 옵션: 7mm 5,570원, 재고 9,970. 배송비 3,000원, CJ 10/1 도착 예정. 4알 = 5.7 g, 3알 = 4.3 g.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_sus_balls.jpg"
+      }
+     ],
+     "total_krw": 14140,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "납을 다루지 않아도 된다.",
+     "cons_ko": "밀도가 납의 70 %라 칸이 길어진다(4알 한 줄 28 mm). 5 g을 정확히 못 맞춘다(4.3 또는 5.7 g). SUS304 볼은 가공 경화로 약하게 자석에 붙을 수 있다.",
+     "extra_labor_ko": "추 칸을 폭 7.2 × 길이 28 홈으로 다시 그림",
+     "risk_ko": "길어진 추 칸 때문에 흑건 관성·타격 중심 계산을 다시 해야 한다."
+    },
+    {
+     "title_ko": "텅스텐 퍼티(v3 C20과 같은 상품)로 채우기",
+     "items": [
+      {
+       "name": "텅스텐 퍼티 소프트 싱커 웨이트",
+       "spec": "텅스텐 퍼티 1통(용량 텍스트 표기 없음)",
+       "qty": 1,
+       "unit_krw": 12500,
+       "shipping_krw": 0,
+       "store": "11번가 지니로버 (상품 9621047304)",
+       "url": "https://www.11st.co.kr/products/9621047304",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지: 12,500원(v3 목록 13,150원에서 내림), 옵션 1개 재고 13, 무료배송. 한 통 용량이 텍스트로 적혀 있지 않다. 필요량은 36 × 5 g = 180 g이다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/fast_11st_tungsten_putty.jpg"
+      }
+     ],
+     "total_krw": 12500,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "비자성·고밀도라 칸에 눌러 담기 쉽고 g 단위로 맞춘다. C20을 이미 샀다면 남는 양만큼 쓸 수 있다.",
+     "cons_ko": "한 통 용량을 모른다. 180 g이 되려면 여러 통이 필요할 수 있어 가장 비쌀 수 있다.",
+     "extra_labor_ko": "저울로 5 g씩 떼어 칸에 눌러 넣고 뚜껑",
+     "risk_ko": "퍼티가 오래되면 굳거나 흘러내릴 수 있어 뚜껑으로 꼭 가둔다."
+    }
+   ],
+   "if_unused_ko": "추를 빼면 흑건 타격 중심이 앞 멈춤 밖으로 나가 2.0 m/s 이상 타건에서 노치 들림이 커진다(r3가 추를 넣은 이유). r4에서 흑건 형상이 바뀌어 추가 필요 없다고 계산되거나, 텅스텐 퍼티·납을 이미 180 g 넘게 가지고 있으면 사용 안함.",
+   "r4_note_ko": "r4 단순화에서 빠질 수 있는 부품이다. 남으면 추 칸 치수(폭 8 mm 이하)를 기준으로 모양을 고른다."
+  },
+  {
+   "part_id": "felt2",
+   "name_ko": "양모 펠트 2T·1T·1.5T (캡스턴 띠, 앞 펠트, 키퍼, 패드 윗면, 쉼 펠트)",
+   "role_ko": "레버 밑 캡스턴 펠트 띠 2T(S14), 앞 펠트 2T(S21·S22, PU 1T 위), 키퍼 펠트 2T(S20), 업스톱 패드 윗면 1T(P16·D11), 꼬리 쉼 펠트 1.5T(P28·D10). 건반·레버가 닿는 모든 곳의 소리와 반발을 정한다.",
+   "spec_required": "2T 약 320 cm² (캡스턴 7×18.5 ×92 = 119 cm², 앞 펠트 띠 백 8.3 mm·흑 4.5 mm × 약 1,235 mm = 158 cm², 키퍼 5.2 폭 약 40 cm²) + 1T 약 100 cm² (14×7.6 ×92) + 1.5T 양모 약 20 cm² (2.7×8 ×92). 모두 예비 4건반 포함.",
+   "qty_needed": "2T 20×30 cm 1장 + 1T 20×30 cm 1장 (1.5T는 1T + 0.5T 겹침)",
+   "current": {
+    "title_ko": "r3 사양: 스튜디오분트 메리노 2T + 1T (v3 L39와 합배송)",
+    "items": [
+     {
+      "name": "100% 메리노양모 70수 펠트지 2mm 20×30cm (35 블랙)",
+      "spec": "울 100 %, 2 mm, 20×30 cm 1장",
+      "qty": 1,
+      "unit_krw": 13800,
+      "shipping_krw": 0,
+      "store": "스튜디오분트 (studiobunt.com, product_no=4117)",
+      "url": "https://studiobunt.com/product/detail.html?product_no=4117",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지 다시 확인: 판매가 13,800원, 요약 \"20*30cm, 100% wool\", 41색 중 너트·베이비핑크·딥그레이멜란지·오트밀·비리디언만 품절(35 블랙·33 화이트 재고 있음). 배송비 3,000원, 5만 원 이상 무료. 같은 가게의 v3 L39(DHG 3T) 줄에 배송비 3,000원이 이미 있어 여기서는 0원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_merino2t_bunt.jpg"
+     },
+     {
+      "name": "100% 메리노양모 70수 펠트지 1mm 20×30cm (80 블랙)",
+      "spec": "울 100 %, 1 mm, 20×30 cm 1장",
+      "qty": 1,
+      "unit_krw": 6900,
+      "shipping_krw": 0,
+      "store": "스튜디오분트 (studiobunt.com, product_no=1157)",
+      "url": "https://studiobunt.com/product/detail.html?product_no=1157",
+      "verified": true,
+      "note_ko": "9/27 페이지: 판매가 6,900원, 요약 \"20*30cm, 100% wool\", 119색 중 아이보리·베이비옐로우·네이비·마쉬멜로우만 품절(80 블랙·76 화이트 재고 있음). 2T와 같은 주문이라 배송비 추가 없음. 1.5T 쉼 펠트는 이 1T 위에 L40 0.5T를 한 겹 붙여 만든다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_merino1t_bunt.jpg"
+     }
+    ],
+    "total_krw": 20700,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "울 펠트라 r3 동역학 모델의 펠트 K·e 가정에 가장 가깝다. 두 장 모두 필요량의 2~6배라 예비 건반분과 실수분이 넉넉하다. v3 L39와 같은 가게라 배송비가 더 붙지 않는다.",
+    "cons_ko": "공예용 메리노라 피아노용 프레스 펠트보다 무르다(단계 0 시험 3·12로 확인). 1.5T 울은 이 가게에 없어 1T + 0.5T로 겹친다. r3 추정(6,000원)보다 14,700원 비싸다.",
+    "risk_ko": "r3 도면에는 3T 펠트를 쓰는 곳이 없다. v3 L39(3T)를 목록에서 빼면 이 줄에 배송비 3,000원이 붙는다.",
+    "extra_labor_ko": "칼과 쇠자로 띠 재단(약 1시간). 쉼 펠트 92장은 1T에 L40을 붙인 뒤 2.7×8로 자른다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "메리노 2T 한 장만 사고, 1T는 L40 두 겹, 쉼 펠트는 2T + 선반 0.5 mm 낮춤",
+     "items": [
+      {
+       "name": "100% 메리노양모 70수 펠트지 2mm 20×30cm (35 블랙)",
+       "spec": "울 100 %, 2 mm, 20×30 cm 1장",
+       "qty": 1,
+       "unit_krw": 13800,
+       "shipping_krw": 0,
+       "store": "스튜디오분트 (studiobunt.com, product_no=4117)",
+       "url": "https://studiobunt.com/product/detail.html?product_no=4117",
+       "verified": true,
+       "note_ko": "현재안 첫 줄과 같은 상품. 배송비는 L39와 합배송.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_merino2t_bunt.jpg"
+      },
+      {
+       "name": "[대원] 얇은 칼라펠트지 H 0.5mm 접착 30×45cm (v3 L40 재사용)",
+       "spec": "0.5T 폴리에스터 공예 펠트, 접착, 30×45 cm",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "11번가 상우아트 (v3 L40)",
+       "url": "https://www.11st.co.kr/products/8517880969",
+       "verified": true,
+       "note_ko": "v3 L40(0.5T 접착)을 두 겹 붙여 업스톱 패드 윗면 1T(약 100 cm² × 2겹)를 만든다. L40 2장(2,700 cm²)에서 충분히 남는다. 9/27 11번가 페이지에서 1,500원/장, 재고 있음, 배송비 3,000원(7만 원 이상 무료)을 확인했다. 이미 v3 목록 L40(2장)에 들어 있으므로 여기서는 0원으로 잡았다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_L40_05t.webp"
+      }
+     ],
+     "total_krw": 13800,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "1T 메리노(6,900원)를 사지 않는다. parts.json B10에서 이미 권했던 방식(2T 자투리를 쉼 펠트로)과 같다.",
+     "cons_ko": "업스톱 패드 윗면이 폴리에스터 0.5T 두 겹(접착층 포함)이 된다. 쉼 펠트를 2T로 쓰려면 뒤 선반 윗면(S10 z20.055)을 0.5 mm 낮춰 출력해야 한다.",
+     "risk_ko": "겹친 폴리에스터 패드 윗면은 단계 0 시험 1(패드 e ≤ 0.07)에서 다시 본다. 영향은 PU가 대부분이라 작다고 본다.",
+     "extra_labor_ko": "상세 설계에서 S10을 z19.555로 바꿈. L40 두 겹 붙이기."
+    },
+    {
+     "title_ko": "전부 합성 펠트: 대원 A 두꺼운 칼라펠트지 2mm (스쿨피아) + L40",
+     "items": [
+      {
+       "name": "대원 A 두꺼운 칼라펠트지 2mm 비접착 30×45cm (A-10 검정)",
+       "spec": "폴리에스터 부직 펠트 2 mm, 30×45 cm",
+       "qty": 1,
+       "unit_krw": 1950,
+       "shipping_krw": 3000,
+       "store": "11번가 스쿨피아 (상품 8463137543)",
+       "url": "https://www.11st.co.kr/products/8463137543",
+       "verified": true,
+       "note_ko": "9/27 페이지·옵션 확인: 1,950원(판매가 2,000원에서 2 % 할인), 12색 중 A-10 검정 재고 994, 배송비 3,000원(7만 원 이상 무료). 같은 가게에 대원 H 0.5T 접착(1,600원)도 있어 L40을 이리로 옮기면 배송비를 한 번만 낸다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_daewon2t_schoolpia.webp"
+      },
+      {
+       "name": "[대원] 얇은 칼라펠트지 H 0.5mm 접착 30×45cm (v3 L40 재사용)",
+       "spec": "0.5T 폴리에스터 공예 펠트, 접착, 30×45 cm",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "11번가 상우아트 (v3 L40)",
+       "url": "https://www.11st.co.kr/products/8517880969",
+       "verified": true,
+       "note_ko": "1T(두 겹)·1.5T(세 겹 또는 2T + 선반 0.5 mm 낮춤)를 L40으로 만든다. 9/27 11번가 페이지에서 1,500원/장, 재고 있음, 배송비 3,000원(7만 원 이상 무료)을 확인했다. 이미 v3 목록 L40(2장)에 들어 있으므로 여기서는 0원으로 잡았다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_L40_05t.webp"
+      }
+     ],
+     "total_krw": 4950,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "15,750원 절감. 30×45 cm라 2T 필요량의 4배다.",
+     "cons_ko": "울이 아니라 폴리에스터 부직포라 K·e·크리프가 다르다. D10(쉼 펠트 1.5T 양모)과 재질이 다르다.",
+     "risk_ko": "단계 0 시험 3(앞 펠트 e ≤ 0.22, K ≥ 설계의 0.7배), 6(마찰), 12(60 °C 크리프, 높이 변화 ≤ 0.2 mm)에서 떨어지면 메리노를 다시 사야 한다(+20,700원).",
+     "extra_labor_ko": "재단은 같음. 쉼 펠트를 L40 세 겹으로 만들면 접착 겹이 늘어 약 30분 더."
+    },
+    {
+     "title_ko": "정확한 1.5T 울: 아이라움가게 울펠트 1.5mm + 메리노 2T (1T는 L40 두 겹)",
+     "items": [
+      {
+       "name": "100% 메리노양모 70수 펠트지 2mm 20×30cm (35 블랙)",
+       "spec": "울 100 %, 2 mm, 20×30 cm 1장",
+       "qty": 1,
+       "unit_krw": 13800,
+       "shipping_krw": 0,
+       "store": "스튜디오분트 (studiobunt.com, product_no=4117)",
+       "url": "https://studiobunt.com/product/detail.html?product_no=4117",
+       "verified": true,
+       "note_ko": "현재안 첫 줄과 같은 상품. 배송비는 L39와 합배송.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_merino2t_bunt.jpg"
+      },
+      {
+       "name": "울펠트 55색(낱장) 1.5mm 20×30cm (33 블랙)",
+       "spec": "울펠트 1.5 mm, 20×30 cm 1장 (혼용률은 글에 없음, 같은 가게의 혼방품은 따로 \"울 50 %·레이온 50 %\"로 표시)",
+       "qty": 1,
+       "unit_krw": 6500,
+       "shipping_krw": 3500,
+       "store": "아이라움가게 (iraumshop.com, product_no=1203)",
+       "url": "https://iraumshop.com/product/detail.html?product_no=1203&cate_no=51&display_group=1",
+       "verified": true,
+       "note_ko": "9/27 페이지: 소비자가 7,500원, 판매가 6,500원, 55색 중 33 블랙 있음, 배송비 3,500원(15만 원 이상 무료). 색별 재고 수는 페이지에 없다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_wool15t_iraum.jpg"
+      },
+      {
+       "name": "[대원] 얇은 칼라펠트지 H 0.5mm 접착 30×45cm (v3 L40 재사용)",
+       "spec": "0.5T 폴리에스터 공예 펠트, 접착, 30×45 cm",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "11번가 상우아트 (v3 L40)",
+       "url": "https://www.11st.co.kr/products/8517880969",
+       "verified": true,
+       "note_ko": "업스톱 패드 윗면 1T를 L40 두 겹으로 만든다. 9/27 11번가 페이지에서 1,500원/장, 재고 있음, 배송비 3,000원(7만 원 이상 무료)을 확인했다. 이미 v3 목록 L40(2장)에 들어 있으므로 여기서는 0원으로 잡았다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_L40_05t.webp"
+      }
+     ],
+     "total_krw": 23800,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "쉼 펠트 1.5T를 겹치지 않은 울 한 장으로 쓴다(D10 그대로). 접착층이 없어 쉼 높이 크리프가 가장 적다. 국내에서 찾은 유일한 1.5 mm 울 낱장이다.",
+     "cons_ko": "현재안보다 3,100원 비싸다(배송비 3,500원이 따로 붙음). 패드 윗면은 L40 두 겹(폴리에스터).",
+     "risk_ko": "혼용률이 글에 적혀 있지 않다(상품명은 \"울펠트\").",
+     "extra_labor_ko": "재단만."
+    }
+   ],
+   "if_unused_ko": "이미 같은 두께의 펠트가 있을 때만 사용 안함으로 둔다. 펠트를 빼면 캡스턴 나사 머리가 PETG 레버를 직접 긁고(마모·딸깍 소리), 건반 바닥과 키퍼가 딱딱하게 부딪히며, 쉼 높이도 펠트 두께로 정해져 맞지 않는다. 가진 펠트 두께가 다르면 선반(S10)·패드 홀더(S16) 출력 높이를 바꿔야 한다.",
+   "r4_note_ko": "r4 단순화에서 키퍼·쉼 펠트·패드 구성이 바뀌면 1T·1.5T 필요량이 줄 수 있다. 2T 한 장(캡스턴·앞 펠트)은 거의 확실히 남는다."
+  },
+  {
+   "part_id": "pu",
+   "name_ko": "저반발 PU 폼 (포론 계열) 1T·2T·3T",
+   "role_ko": "업스톱 패드(백 3T·흑 2T, 위에 펠트 1T, P16·S16)와 앞 펠트 밑 1T(S21·S22). 레버·건반이 멈출 때 튀지 않게 한다. 단계 0 합격선: 패드 e ≤ 0.07, 흑 패드 K ≥ 25 N/mm^1.5, 앞 펠트 e ≤ 0.22.",
+   "spec_required": "PORON 4701/LE-20 같은 미세기포 저반발 우레탄. 3T 약 60 cm² (14×7.6 × 백 52 + 예비 4), 2T 약 45 cm² (× 흑 36 + 예비 4), 1T 약 160 cm² (앞 펠트 띠 밑).",
+   "qty_needed": "3T·2T·1T 각 작은 시트 1장 (r3 추정은 A4 2장)",
+   "current": {
+    "title_ko": "r3 사양 그대로: 3T 스웨그키 LE-20 + 2T 11번가 키보드 포론 + 1T 알리",
+    "items": [
+     {
+      "name": "스웨그키 포론 하부 흡음재 3mm (LE-20, 425×122 mm)",
+      "spec": "로저스이노악 PORON LE-20 미세기포 우레탄 3 mm, 425×122 mm 1장",
+      "qty": 1,
+      "unit_krw": 5000,
+      "shipping_krw": 3000,
+      "store": "스웨그키 (swagkey.kr, idx=253)",
+      "url": "https://www.swagkey.kr/24/?idx=253",
+      "verified": true,
+      "note_ko": "9/27 페이지·옵션 확인: 기본가 4,000원, 두께 옵션은 \"3\" 하나만 남아 5,000원(1.5·2.5·2.7 mm는 목록에 없음). 설명 \"2.7mm 은 rogers 92-15250, 그 외는 LE-20\". 배송비 3,000원(10만 원 이상 무료), 우체국택배.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_poron3t_swagkey.jpg"
+     },
+     {
+      "name": "기계식 키보드 포론 바닥 폼 2mm (60% 옵션)",
+      "spec": "포론(표기) 2 mm, 60 % 키보드 바닥 크기(치수는 글에 없음)",
+      "qty": 1,
+      "unit_krw": 15000,
+      "shipping_krw": 0,
+      "store": "11번가 방가마트1 (상품 9134369832, 해외직구)",
+      "url": "https://www.11st.co.kr/products/9134369832",
+      "verified": true,
+      "note_ko": "9/27 옵션 확인: \"07 60 64 63 61 Key\" +0원(재고 297), 65 % +900, 84키 +1,900, 100 % +5,000. 무료배송, 해외직구. 실제 로저스 PORON인지는 글로 확인하지 못했다. 흑 패드 45 cm²에는 60 %면 충분하다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_poron2t_11st.jpg"
+     },
+     {
+      "name": "포론 커버 하단 면 방음 폼 1mm (알리익스프레스 1005004850918011)",
+      "spec": "포론(표기) 1 mm, 크기 미확인",
+      "qty": 1,
+      "unit_krw": 4851,
+      "shipping_krw": 0,
+      "store": "알리익스프레스",
+      "url": "https://ko.aliexpress.com/item/1005004850918011.html",
+      "verified": false,
+      "note_ko": "9/27 알리 검색 목록에서 \"1 2 3 4 mm 두께\" 상품 ₩4,851(할인가, 옵션별로 다를 수 있음)을 봤다. 상품 페이지는 로봇 확인(CAPTCHA)이 떠서 옵션값·크기·배송비를 확인하지 않았다. 배송 보통 1~3주.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_poron_ali.webp"
+     }
+    ],
+    "total_krw": 27851,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "r3 두께 구성(백 3T·흑 2T·앞 1T)을 그대로 쓴다. 3T는 국내 재고 정품 LE-20이다.",
+    "cons_ko": "세 가게로 나뉘어 배송비·기간이 다르다. 1T는 국내 소량 판매처를 찾지 못해 알리(미확인)다. r3 추정(10,000원)보다 17,851원 비싸다.",
+    "risk_ko": "해외직구 \"포론\"은 재질을 확인할 수 없다. 단계 0 시험 1·2(패드 e ≤ 0.07, 흑 K ≥ 25)로 거른다.",
+    "extra_labor_ko": "칼로 패드 14×7.6 조각 92개와 앞 펠트 띠 재단(약 1시간)."
+   },
+   "alternatives": [
+    {
+     "title_ko": "1T 없이 2T·3T 두 장 (앞 펠트 = 펠트 1T + PU 2T, 총 3 mm 그대로)",
+     "items": [
+      {
+       "name": "스웨그키 포론 하부 흡음재 3mm (LE-20, 425×122 mm)",
+       "spec": "로저스이노악 PORON LE-20 미세기포 우레탄 3 mm, 425×122 mm 1장",
+       "qty": 1,
+       "unit_krw": 5000,
+       "shipping_krw": 3000,
+       "store": "스웨그키 (swagkey.kr, idx=253)",
+       "url": "https://www.swagkey.kr/24/?idx=253",
+       "verified": true,
+       "note_ko": "9/27 페이지·옵션 확인: 기본가 4,000원, 두께 옵션은 \"3\" 하나만 남아 5,000원(1.5·2.5·2.7 mm는 목록에 없음). 설명 \"2.7mm 은 rogers 92-15250, 그 외는 LE-20\". 배송비 3,000원(10만 원 이상 무료), 우체국택배.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_poron3t_swagkey.jpg"
+      },
+      {
+       "name": "기계식 키보드 포론 바닥 폼 2mm (84키 옵션)",
+       "spec": "포론(표기) 2 mm, 84키(75 %) 바닥 크기",
+       "qty": 1,
+       "unit_krw": 16900,
+       "shipping_krw": 0,
+       "store": "11번가 방가마트1 (상품 9134369832, 해외직구)",
+       "url": "https://www.11st.co.kr/products/9134369832",
+       "verified": true,
+       "note_ko": "9/27 옵션 \"01 84 Key\" +1,900원 → 16,900원(재고 295), 무료배송. 앞 펠트 띠(약 160 cm²)와 흑 패드(45 cm²)를 함께 자르려고 60 %보다 한 단계 큰 것을 골랐다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_poron2t_11st.jpg"
+      }
+     ],
+     "total_krw": 24900,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "2,951원 절감. 국내 가게·11번가만으로 끝나고 알리를 기다리지 않는다.",
+     "cons_ko": "앞 펠트 층이 펠트 2T + PU 1T에서 펠트 1T + PU 2T로 바뀐다. PU가 두꺼워 e는 낮아지지만 K도 낮아진다.",
+     "risk_ko": "단계 0 시험 3(앞 펠트 K ≥ 설계의 0.7배)에서 떨어지면 1T PU를 따로 사야 한다.",
+     "extra_labor_ko": "펠트 1T 약 160 cm²가 더 필요하다(felt2의 1T 메리노 또는 L40 두 겹)."
+    },
+    {
+     "title_ko": "2T 한 장으로 통일 (백 패드도 2T, 홀더를 1.0 mm 두껍게 출력)",
+     "items": [
+      {
+       "name": "기계식 키보드 포론 바닥 폼 2mm (84키 옵션)",
+       "spec": "포론(표기) 2 mm, 84키(75 %) 바닥 크기",
+       "qty": 1,
+       "unit_krw": 16900,
+       "shipping_krw": 0,
+       "store": "11번가 방가마트1 (상품 9134369832, 해외직구)",
+       "url": "https://www.11st.co.kr/products/9134369832",
+       "verified": true,
+       "note_ko": "9/27 옵션 \"01 84 Key\" 16,900원, 무료배송. 백 패드 60 cm² + 흑 패드 45 cm² + 앞 펠트 160 cm² ≈ 265 cm²를 한 장에서 자른다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_poron2t_11st.jpg"
+      }
+     ],
+     "total_krw": 16900,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "10,951원 절감. 한 장만 산다.",
+     "cons_ko": "백 패드 PU가 3T → 2T로 얇아져 패드 강성이 약 1.5배가 된다. 업스톱 힘과 숨은 빔 반복 응력이 커진다. 앞 펠트도 펠트 1T + PU 2T로 바뀐다.",
+     "risk_ko": "단계 0 시험 1·2·3을 모두 다시 봐야 한다. 백 패드 틈(+0.20 mm) 설정도 다시 맞춘다.",
+     "extra_labor_ko": "패드 홀더 백 칸을 1.0 mm 두껍게 다시 출력(S16 7.61 유지). 펠트 1T 약 160 cm² 추가."
+    },
+    {
+     "title_ko": "알리 한 판매자에서 1·2·3T (미확인)",
+     "items": [
+      {
+       "name": "포론 커버 하단 면 방음 폼 1/2/3mm (알리익스프레스 1005004850918011)",
+       "spec": "포론(표기) 1·2·3 mm 각 1장, 크기 미확인",
+       "qty": 3,
+       "unit_krw": 4851,
+       "shipping_krw": 0,
+       "store": "알리익스프레스",
+       "url": "https://ko.aliexpress.com/item/1005004850918011.html",
+       "verified": false,
+       "note_ko": "검색 목록가 ₩4,851을 세 두께에 똑같이 곱한 값이다. 상품 페이지가 CAPTCHA라 두께별 값·크기·배송비를 확인하지 못했다. 배송 보통 1~3주.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_poron_ali.webp"
+      }
+     ],
+     "total_krw": 14553,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "13,298원 절감(목록가 기준). r3 두께 구성 그대로.",
+     "cons_ko": "가격·크기·재질을 확인하지 못했다. 배송이 느려 단계 0 일정이 1~3주 밀린다.",
+     "risk_ko": "두께별 옵션값이 목록가보다 비쌀 수 있다. 재질이 PORON이 아닐 수 있다(단계 0 시험 1·2).",
+     "extra_labor_ko": "재단만."
+    },
+    {
+     "title_ko": "v3 EVA 3T(L41) 자투리 재사용 — 저반발 아님",
+     "items": [
+      {
+       "name": "1000×500mm EVA 폼 시트 3mm (v3 L41 재사용)",
+       "spec": "EVA 3 mm (이미 v3 목록에 있음)",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "11번가 (v3 L41)",
+       "url": "https://www.11st.co.kr/products/9628503624",
+       "verified": true,
+       "note_ko": "9/27 페이지에서 상품이 판매 중(기본 16,450원)인 것만 확인했다. v3 L41로 이미 사는 물건이라 추가 비용은 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_pu_eva_L41.webp"
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "추가 비용 0원. 단계 0 시편을 먼저 조립해 볼 때 임시 패드로 쓸 수 있다.",
+     "cons_ko": "EVA는 저반발 폼이 아니다. 되튐이 커서(e가 대략 0.4 이상으로 봄) 패드 e ≤ 0.07을 맞추지 못한다.",
+     "risk_ko": "흑 노치 들림·유령 재타건이 커진다(r3 계산: 패드 e 0.10에서도 거름 규칙이 못 잡는 경우가 생김). 최종 조립에는 쓰지 않는다."
+    }
+   ],
+   "if_unused_ko": "이미 저반발 PU(포론 등)를 가지고 있을 때만 사용 안함으로 둔다. 사용자가 가진 EVA는 저반발이 아니라서 대신할 수 없다. PU를 빼면 업스톱 패드가 펠트만 남아 되튐이 커지고 단계 0 시험 1(패드 e ≤ 0.07)에서 떨어진다.",
+   "r4_note_ko": "r4 단순화에서 앞 펠트 밑 1T PU나 업스톱 패드 구성이 빠질 수 있다. 빠지면 1T(또는 2T) 줄만 빼면 된다."
+  },
+  {
+   "part_id": "cloth",
+   "name_ko": "부싱 천 0.5T (스냅 노치·밸런스 핀 홈·가이드 탭)",
+   "role_ko": "건반 스냅 노치 R2.55 안쪽(천을 대서 유효 R2.05, 입구 3.82 → 천이 한쪽 0.09 눌리며 끼움), 밸런스 핀 홈 양벽(3.2 → 2.2), 가이드 탭 앞면·옆면(리브 8.6 사이 옆 놀음 ±0.05).",
+   "spec_required": "0.5T 접착 펠트/천. 노치 12×8 ×92 ≈ 88 cm², 핀 홈 ≈ 18 cm², 가이드 탭 ≈ 140 cm² → 약 250 cm² (추정)",
+   "qty_needed": "약 250 cm² (30×45 cm 한 장 = 1,350 cm²)",
+   "current": {
+    "title_ko": "v3 L40 대원 얇은 칼라펠트지 0.5T 접착 재사용 (추가 구매 없음)",
+    "items": [
+     {
+      "name": "[대원] 얇은 칼라펠트지 H 0.5mm 접착 30×45cm (v3 L40 재사용)",
+      "spec": "0.5T 폴리에스터 공예 펠트, 접착, 30×45 cm",
+      "qty": 1,
+      "unit_krw": 0,
+      "shipping_krw": 0,
+      "store": "11번가 상우아트 (v3 L40)",
+      "url": "https://www.11st.co.kr/products/8517880969",
+      "verified": true,
+      "note_ko": "9/27 11번가 페이지에서 1,500원/장, 재고 있음, 배송비 3,000원(7만 원 이상 무료)을 확인했다. 이미 v3 목록 L40(2장)에 들어 있으므로 여기서는 0원으로 잡았다. v3에서 L40의 한 용도였던 뒤 스톱 2겹 띠가 W1+에서 없어져, 약 250 cm²(1T·1.5T를 L40으로 겹치는 펠트 대안을 고르면 +약 250 cm²)만 쓴다. 2장 대신 1장만 사도 된다(v3 L40 줄에서 1,500원 절감).",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_L40_05t.webp"
+     }
+    ],
+    "total_krw": 0,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "추가 비용 0원. r3 노치 치수(R2.55 + 0.5T)가 이 두께로 계산되어 있다.",
+    "cons_ko": "폴리에스터 공예 펠트라 진짜 울 부싱 천보다 빨리 닳을 수 있다.",
+    "risk_ko": "마모 수명은 단계 0 시험 4(빠짐 힘 4~8 N, 끼운 채 DW 변화 ≤ 0.5 g)로 확인. 두께를 0.4T/0.6T로 바꿀 수도 있다.",
+    "extra_labor_ko": "노치·핀 홈·탭에 작은 조각 붙이기(92건반, 약 2시간)."
+   },
+   "alternatives": [
+    {
+     "title_ko": "스쿨피아 대원 H 0.5mm 접착 (합성 펠트 대안과 합배송할 때)",
+     "items": [
+      {
+       "name": "대원 H 얇은 칼라펠트지 0.5mm 접착 30×45cm",
+       "spec": "0.5T 폴리에스터 접착 펠트 30×45 cm 1장 (L40과 같은 제품)",
+       "qty": 1,
+       "unit_krw": 1600,
+       "shipping_krw": 3000,
+       "store": "11번가 스쿨피아 (상품 9433942162)",
+       "url": "https://www.11st.co.kr/products/9433942162",
+       "verified": true,
+       "note_ko": "9/27 페이지: 1,600원, 재고 있음, 배송비 3,000원(7만 원 이상 무료). felt2의 \"전부 합성 펠트\" 안과 같은 가게라 배송비를 한 번만 낸다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_felt_daewon05t_schoolpia.webp"
+      }
+     ],
+     "total_krw": 4600,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "v3 L40 줄(상우아트 2장 + 배송비 = 6,000원) 대신 이 한 장을 쓰면 따로 사도 1,400원, felt2의 합성 펠트 안과 같은 주문으로 묶으면(배송비 0) 4,400원이 줄어든다.",
+     "cons_ko": "L40을 그대로 두면 필요 없는 중복 구매다."
+    },
+    {
+     "title_ko": "PTFE(테프론) 필름 테이프 0.13T",
+     "items": [
+      {
+       "name": "내열테프론테이프 25mm × 10M 0.13t",
+       "spec": "PTFE 필름 + 실리콘 점착, 0.13 mm",
+       "qty": 1,
+       "unit_krw": 12500,
+       "shipping_krw": 3000,
+       "store": "11번가 에이스마하 (상품 2311996578)",
+       "url": "https://www.11st.co.kr/products/2311996578",
+       "verified": true,
+       "note_ko": "9/27 페이지: 12,500원, 재고 있음, 배송비 3,000원(10만 원 이상 무료), 9/29 도착 예정.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_cloth_ptfe_tape.webp"
+      }
+     ],
+     "total_krw": 15500,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "마찰이 가장 낮고 닳지 않는다.",
+     "cons_ko": "0.13T라 노치를 R2.55 → 약 R2.18로 다시 설계해야 하고, 천처럼 눌려 끼우는(0.09) 여유가 없다. 되앉을 때 소리를 흡수하지 못해 딸깍 소리가 난다.",
+     "risk_ko": "스냅 노치·핀 홈·탭 치수를 모두 다시 계산해야 한다.",
+     "extra_labor_ko": "노치 형상 재설계 + 재출력."
+    },
+    {
+     "title_ko": "진짜 울 피아노 부싱 천 .043\"(1.09 mm)",
+     "items": [
+      {
+       "name": "피아노 펠트 건반 부싱 천 54인치 .043인치",
+       "spec": "울 부싱 클로스 1.09 mm, 폭 54인치",
+       "qty": 1,
+       "unit_krw": 37560,
+       "shipping_krw": 0,
+       "store": "11번가 캐롯스퀘어 (상품 9571578308, 해외직구)",
+       "url": "https://www.11st.co.kr/products/9571578308",
+       "verified": true,
+       "note_ko": "9/27 페이지: 판매가 62,600원에서 할인 37,560원, 무료배송, 해외직구.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_cloth_bushing_wool.webp"
+      }
+     ],
+     "total_krw": 37560,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "실제 피아노 부싱 천이라 마모·소리가 가장 좋다.",
+     "cons_ko": "두께가 1.09 mm라 노치를 R3.1로 키우는 등 설계를 바꿔야 하고 가장 비싸다.",
+     "extra_labor_ko": "노치·핀 홈·탭 치수 재설계."
+    }
+   ],
+   "if_unused_ko": "v3 L40이 이미 목록에 있어 이 항목은 추가 구매가 없다(0원). L40까지 빼면 노치에 천이 없어 봉에 끼워지는 스냅(천 0.09 눌림)이 성립하지 않고, 되앉을 때 딸깍 소리와 PETG 마모가 생긴다.",
+   "r4_note_ko": "r4에서 노치나 핀 홈 형상이 바뀌어도 0.5T 천 필요량은 L40 한 장 안이다."
+  },
+  {
+   "part_id": "graphite",
+   "name_ko": "흑연 가루 (캡스턴이 닿는 펠트 면)",
+   "role_ko": "레버 밑 캡스턴 펠트 띠(S14)에 발라 캡스턴 버튼 머리와의 미끄럼 마찰을 줄인다. 단계 0 시험 6(백 마찰 ≤ 8.0 g)의 대책 1순위.",
+   "spec_required": "건식 흑연 가루 몇 g (펠트 띠 92장에 붓으로 얇게)",
+   "qty_needed": "소량 1통 (몇 g)",
+   "current": {
+    "title_ko": "크레타칼라 흑연파우더 30 ml (11번가 비젼몰)",
+    "items": [
+     {
+      "name": "크레타칼라 흑연파우더(소/30ml)",
+      "spec": "미술용 흑연 가루 30 ml",
+      "qty": 1,
+      "unit_krw": 2750,
+      "shipping_krw": 3000,
+      "store": "11번가 비젼몰 (상품 1333385437)",
+      "url": "https://www.11st.co.kr/products/1333385437",
+      "verified": true,
+      "note_ko": "9/27 페이지: 2,750원, 재고 있음, 배송비 3,000원(8만 원 이상 무료), 9/29 도착 예정. 11번가 다른 판매자의 30 ml는 3,960원 이상이었다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_graphite_cretacolor.jpg"
+     }
+    ],
+    "total_krw": 5750,
+    "bucket": "consumable",
+    "fits_design": true,
+    "pros_ko": "순수 흑연 가루라 펠트에 고르게 먹는다. 30 ml면 평생 쓴다.",
+    "cons_ko": "물건값보다 배송비가 더 크다. r3 추정(3,000원)보다 2,750원 비싸다.",
+    "extra_labor_ko": "붓으로 펠트 띠에 바르고 털어 냄(약 15분)."
+   },
+   "alternatives": [
+    {
+     "title_ko": "다이소 4B 연필심 긁어 쓰기 (매장 픽업)",
+     "items": [
+      {
+       "name": "사무용 연필 4B 5개 × 2세트",
+       "spec": "4B 흑연 연필 10자루",
+       "qty": 1,
+       "unit_krw": 1000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (품번 1063355)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1063355",
+       "verified": true,
+       "note_ko": "9/27 페이지: 1,000원, 온라인 재고 108, 배송비 3,000원(3만 원 이상 무료). 매장 픽업이면 배송비 0원이라 픽업 기준으로 잡았다. 택배로 받으면 +3,000원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_graphite_4b_daiso.jpg"
+      }
+     ],
+     "total_krw": 1000,
+     "bucket": "consumable",
+     "fits_design": true,
+     "pros_ko": "4,750원 절감. parts.json에서 이미 권했던 방법이다.",
+     "cons_ko": "연필심은 점토가 섞여 있어 순수 흑연보다 미끄럼 효과가 약간 떨어진다.",
+     "extra_labor_ko": "칼로 심을 긁어 가루를 냄(약 10분)."
+    },
+    {
+     "title_ko": "흑연 생략 (마찰이 크면 그때 추가)",
+     "items": [
+      {
+       "name": "흑연 없음",
+       "spec": "—",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "(구매 없음)",
+       "url": "",
+       "verified": true,
+       "note_ko": "단계 0 시험 6에서 마찰이 8.0 g을 넘을 때만 흑연을 산다."
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "consumable",
+     "fits_design": true,
+     "pros_ko": "0원. 집에 연필이 있으면 사실상 같은 효과를 공짜로 낸다.",
+     "cons_ko": "펠트-캡스턴 마찰이 조금 크다(DW−UW 차이 증가)."
+    }
+   ],
+   "if_unused_ko": "빼도 조립은 된다. 캡스턴 펠트의 마찰이 조금 커질 뿐이고, 단계 0 시험 6에서 마찰이 크면 그때 연필심 가루로 해결한다. 집에 4B 연필이 있으면 사용 안함으로 두면 된다.",
+   "r4_note_ko": ""
+  },
+  {
+   "part_id": "epoxy",
+   "name_ko": "5분 에폭시 (강철 블록 떨림 방지 점 접착)",
+   "role_ko": "강철 블록 9×50×21.5를 레버 캐리어의 스냅 립에 끼운 뒤 한 방울로 떨림(소리)을 막는다. 블록을 붙잡는 힘은 스냅 립이 맡는다.",
+   "spec_required": "2액형 에폭시, 블록 92개 × 한 방울(약 0.05~0.1 ml) = 약 5~9 ml",
+   "qty_needed": "1통",
+   "current": {
+    "title_ko": "엘레파츠 LOCTITE 5분 에폭시 14 ml (parts.json C01)",
+    "items": [
+     {
+      "name": "[LOCTITE] 에폭시접착제 / 5분 에폭시 14ml (1365868)",
+      "spec": "2액형 5분 경화 에폭시 14 ml",
+      "qty": 1,
+      "unit_krw": 4260,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (goods no=16596617)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=16596617",
+      "verified": true,
+      "note_ko": "9/27 페이지 다시 확인: 3,872.73원(VAT 별도), 4,260원(VAT 포함), 평균 발송 1.5일(9/30), 1인 최대 1개. 엘레파츠는 공급가 6만 원 이상이면 무료배송이고 v3 목록의 엘레파츠 줄과 합배송이라 0원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_epoxy_loctite14_ele.jpg"
+     }
+    ],
+    "total_krw": 4260,
+    "bucket": "consumable",
+    "fits_design": true,
+    "pros_ko": "14 ml로 넉넉하고 5분 경화가 확실히 표기되어 있다. 엘레파츠 합배송.",
+    "cons_ko": "떨림 방지만 하는 용도에는 조금 과하다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "다이소 록타이트 에폭시 6 ml (매장 픽업)",
+     "items": [
+      {
+       "name": "록타이트 에폭시 접착제 6 ml",
+       "spec": "2액형 에폭시 6 ml (경화 시간은 페이지 글에서 확인 못 함)",
+       "qty": 1,
+       "unit_krw": 2000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (품번 1069190)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1069190",
+       "verified": true,
+       "note_ko": "9/27 페이지 제목에서 2,000원 확인(온라인 재고 99). 매장 픽업 기준 배송비 0원, 택배면 3,000원(3만 원 이상 무료). 6 ml는 한 방울을 작게 쓰면 92개에 맞고, 모자라면 한 통 더(2,000원).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_epoxy_loctite6_daiso.jpg"
+      }
+     ],
+     "total_krw": 2000,
+     "bucket": "consumable",
+     "fits_design": true,
+     "pros_ko": "2,260원 절감(픽업 기준).",
+     "cons_ko": "6 ml라 여유가 적다. 5분형인지 페이지 글로 확인하지 못했다.",
+     "risk_ko": "택배로 받으면 오히려 740원 비싸다."
+    },
+    {
+     "title_ko": "v3 C18 록타이트 401 순간접착제 재사용",
+     "items": [
+      {
+       "name": "LOCTITE 록타이트 401 순간접착제 20g (v3 C18 재사용)",
+       "spec": "시아노아크릴레이트 20 g",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "아이씨뱅큐 (P014446272, v3 C18)",
+       "url": "https://www.icbanq.com/P014446272",
+       "verified": true,
+       "note_ko": "9/27 페이지가 열리는 것만 확인했다. 자석 압입용으로 이미 v3 목록에 있어 추가 비용 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_epoxy_ca401_icbanq.jpg"
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "consumable",
+     "fits_design": true,
+     "pros_ko": "0원. 떨림 방지 한 방울이면 충분하다.",
+     "cons_ko": "강철-PETG 사이 충격에는 에폭시보다 약해 오래 치면 떨어질 수 있다(그래도 스냅 립이 블록을 가둔다)."
+    },
+    {
+     "title_ko": "접착 생략 (스냅 립만)",
+     "items": [
+      {
+       "name": "접착제 없음",
+       "spec": "—",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "(구매 없음)",
+       "url": "",
+       "verified": true,
+       "note_ko": "블록은 캐리어 5면 스냅으로 갇혀 있다. 떨림 소리가 나는 레버에만 CA를 한 방울 떨어뜨린다."
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "consumable",
+     "fits_design": true,
+     "pros_ko": "0원. 나중에 블록을 빼기 쉽다.",
+     "cons_ko": "스냅 공차에 따라 블록이 미세하게 덜걱거릴 수 있다.",
+     "risk_ko": "단계 0 시편에서 덜걱 소리를 확인한다."
+    }
+   ],
+   "if_unused_ko": "빼도 된다. 블록은 캐리어 스냅 립이 가두므로 접착은 떨림 방지뿐이다. v3 C18 순간접착제가 이미 있어 필요하면 그것을 한 방울 쓴다.",
+   "r4_note_ko": "r4에서 블록 고정 방식이 바뀌면(예: 핀 고정) 필요 없어질 수 있다."
+  },
+  {
+   "part_id": "cuttools",
+   "name_ko": "강철 자르기 공구 (쇠톱·바이메탈 날·평줄·고정 바이스)",
+   "role_ko": "9T×50 평철 띠를 21.5 mm 간격으로 92번, 레일 띠 8번, 봉 약 20번 직접 자르고 버를 줄로 다듬는다(외주 절단 대신).",
+   "spec_required": "12인치(300 mm) 프레임 쇠톱, 바이메탈 18~24 TPI 날 3장(날 하나로 9×50 약 30~40컷), 철공용 평줄 200 mm 안팎, 9T 띠를 붙잡는 바이스 또는 C클램프",
+   "qty_needed": "쇠톱 1, 날 3, 평줄 1, 고정 공구 1 (공구라 88건반 수량과 무관)",
+   "current": {
+    "title_ko": "엘레파츠 세트 (parts.json T01·C02·T02·T03)",
+    "items": [
+     {
+      "name": "[CK6930] 코텍스 쇠톱(대) 300mm K-9301",
+      "spec": "프레임 쇠톱, 300 mm 날",
+      "qty": 1,
+      "unit_krw": 6500,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (goods no=9100747)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=9100747",
+      "verified": true,
+      "note_ko": "9/27 페이지: 5,909.09원(VAT 별도), 6,500원(VAT 포함), 평균 발송 3.5일(10/2), 해외재고. 엘레파츠 합배송이라 배송비 0원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_hacksaw_ele.jpg"
+     },
+     {
+      "name": "[LENOX] 쇠톱날(USA) 12인치 T2355",
+      "spec": "12인치 쇠톱날, TPI 표기 없음",
+      "qty": 3,
+      "unit_krw": 2200,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (goods no=4101973)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=4101973",
+      "verified": true,
+      "note_ko": "9/27 페이지: 2,000원(VAT 별도), 2,200원(VAT 포함), 평균 발송 3.5일, 미국산. TPI·재질(바이메탈 여부)이 적혀 있지 않다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_blade_lenox_ele.jpg"
+     },
+     {
+      "name": "[BD079] Coms 연마봉 평줄 야스리",
+      "spec": "철공용 평줄(합금)",
+      "qty": 1,
+      "unit_krw": 6800,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (goods no=12185326)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=12185326",
+      "verified": true,
+      "note_ko": "9/27 페이지: 6,181.82원(VAT 별도), 6,800원(VAT 포함), 평균 발송 3.5일.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_file_ele.jpg"
+     },
+     {
+      "name": "[PD-374] Prokit 공작물 고정 바이스 / 탁상 바이스",
+      "spec": "책상 모서리에 조이는 소형 바이스",
+      "qty": 1,
+      "unit_krw": 20000,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (goods no=2923219)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=2923219",
+      "verified": true,
+      "note_ko": "9/27 페이지: 18,181.82원(VAT 별도), 20,000원(VAT 포함), 평균 발송 3.5일.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_vise_pd374_ele.jpg"
+     }
+    ],
+    "total_krw": 39900,
+    "bucket": "tool",
+    "fits_design": true,
+    "pros_ko": "한 가게(v3 엘레파츠 합배송)에서 끝난다. 바이스가 있어 92컷이 편하다.",
+    "cons_ko": "쇠톱날 TPI·재질이 표기되지 않았다. 바이스가 전체의 절반이다.",
+    "risk_ko": "해외재고라 3.5일 발송.",
+    "extra_labor_ko": "직접 절단 약 7~8시간(notes.md §2)."
+   },
+   "alternatives": [
+    {
+     "title_ko": "엘레파츠 그대로, 바이스만 락킹 바이스 플라이어로",
+     "items": [
+      {
+       "name": "[CK6930] 코텍스 쇠톱(대) 300mm K-9301",
+       "spec": "프레임 쇠톱, 300 mm 날",
+       "qty": 1,
+       "unit_krw": 6500,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (goods no=9100747)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=9100747",
+       "verified": true,
+       "note_ko": "현재안과 같은 상품. 합배송 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_hacksaw_ele.jpg"
+      },
+      {
+       "name": "[LENOX] 쇠톱날(USA) 12인치 T2355",
+       "spec": "12인치 쇠톱날",
+       "qty": 3,
+       "unit_krw": 2200,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (goods no=4101973)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=4101973",
+       "verified": true,
+       "note_ko": "현재안과 같은 상품.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_blade_lenox_ele.jpg"
+      },
+      {
+       "name": "[BD079] Coms 연마봉 평줄 야스리",
+       "spec": "철공용 평줄",
+       "qty": 1,
+       "unit_krw": 6800,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (goods no=12185326)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=12185326",
+       "verified": true,
+       "note_ko": "현재안과 같은 상품.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_file_ele.jpg"
+      },
+      {
+       "name": "[ID874] Coms 락킹 바이스 플라이어",
+       "spec": "락킹 바이스그립",
+       "qty": 1,
+       "unit_krw": 5100,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (goods no=8153032)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=8153032",
+       "verified": true,
+       "note_ko": "9/27 페이지: 4,636.36원(VAT 별도), 5,100원(VAT 포함), 평균 발송 3.5일.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_vplier_id874_ele.jpg"
+      }
+     ],
+     "total_krw": 25000,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "14,900원 절감, 가게·배송은 그대로.",
+     "cons_ko": "플라이어로 띠를 물고 책상에 눌러 가며 자르므로 92컷에는 불편하고 톱 선이 흔들리기 쉽다.",
+     "risk_ko": "자른 길이 오차가 커지면 무게 선별(±1 g)에서 줄질이 늘어난다.",
+     "extra_labor_ko": "바이스 대비 컷당 1분 정도 더."
+    },
+    {
+     "title_ko": "나비엠알오 세트 (바이메탈 18T 명시, C클램프 2개)",
+     "items": [
+      {
+       "name": "[나비엠알오] 손톱날 톱대 (610702)",
+       "spec": "12인치(300) 프레임 쇠톱, 전장 420 mm, 354 g",
+       "qty": 1,
+       "unit_krw": 5269,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (g/179334)",
+       "url": "https://www.navimro.com/g/179334/",
+       "verified": true,
+       "note_ko": "9/27 페이지: 4,790원(VAT 별도), 5,269원(VAT 포함), 9/28 출하. 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_hacksaw_navi.jpg"
+      },
+      {
+       "name": "[나비엠알오] 하이스 손톱날 (N6107) 18T",
+       "spec": "12인치 300 mm, 18 TPI, 재질 Bi-Metal",
+       "qty": 3,
+       "unit_krw": 1199,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (g/183741)",
+       "url": "https://www.navimro.com/g/183741/",
+       "verified": true,
+       "note_ko": "9/27 페이지: N610712(18T) 1EA 1,090원(VAT 별도), 1,199원(VAT 포함), 9/28 출하. 설명에 \"재질: Bi-Metal\". 24T(N610716)도 같은 값.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_blade_navi.jpg"
+      },
+      {
+       "name": "[나비엠알오] 철공용줄 (평형) 200mm 중목",
+       "spec": "8인치(200 mm) 평줄, 중목(보통날)",
+       "qty": 1,
+       "unit_krw": 4169,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (g/212304)",
+       "url": "https://www.navimro.com/g/212304/",
+       "verified": true,
+       "note_ko": "9/27 페이지: 3,790원(VAT 별도), 4,169원(VAT 포함), 9/28 출하. 주의사항에 \"스테인리스 사용불가\"가 있어 SUS 봉 끝 모따기에는 쓰지 않는다(봉은 사포로).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_file_navi.jpg"
+      },
+      {
+       "name": "[나비엠알오] 만력기 3인치 (600201)",
+       "spec": "C클램프, 입 벌림 90 mm",
+       "qty": 2,
+       "unit_krw": 5489,
+       "shipping_krw": 0,
+       "store": "나비엠알오 (g/183739)",
+       "url": "https://www.navimro.com/g/183739/",
+       "verified": true,
+       "note_ko": "9/27 페이지: 4,990원(VAT 별도), 5,489원(VAT 포함), 9/28 출하. 책상 두께가 30 mm 이하면 2인치(60 mm, 1,969원)로 더 싸게 된다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_cclamp_navi.jpg"
+      },
+      {
+       "name": "나비엠알오 기본 배송비",
+       "spec": "5만 원(VAT 별도) 미만",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 3300,
+       "store": "나비엠알오",
+       "url": "https://www.navimro.com/g/179334/",
+       "verified": true,
+       "note_ko": "상품 페이지 배송 안내: 기본 3,300원(3,000 + 부가세)."
+      }
+     ],
+     "total_krw": 27313,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "12,587원 절감. 날이 바이메탈 18 TPI로 명시되어 있어 9 mm 강판에 맞다. 9/28 출하.",
+     "cons_ko": "바이스 대신 C클램프 두 개로 띠를 나무 받침과 함께 책상 모서리에 물린다. 가게가 하나 늘어 배송비 3,300원.",
+     "risk_ko": "평줄은 스테인리스에 쓰지 말라고 되어 있다.",
+     "extra_labor_ko": "띠를 옮길 때마다 클램프를 다시 조여야 해 컷당 약 30초 더."
+    },
+    {
+     "title_ko": "다이소 세트 (매장 픽업, 미니 쇠톱)",
+     "items": [
+      {
+       "name": "미니 타입 쇠톱",
+       "spec": "미니 쇠톱(날 길이 글에 없음, 보통 150 mm)",
+       "qty": 1,
+       "unit_krw": 2000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (품번 1045580)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1045580",
+       "verified": true,
+       "note_ko": "9/27 페이지: 2,000원, 온라인 재고 167, 배송비 3,000원(3만 원 이상 무료). 매장 픽업 기준 0원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_minisaw_daiso.jpg"
+      },
+      {
+       "name": "미니 톱날 4개입",
+       "spec": "미니 쇠톱용 날 4장(TPI·재질 글에 없음)",
+       "qty": 2,
+       "unit_krw": 1000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (품번 1045582)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1045582",
+       "verified": true,
+       "note_ko": "9/27 페이지: 1,000원, 온라인 재고 256, 9/28 매장 픽업 가능. 미니 날은 빨리 닳아 두 팩(8장)으로 잡았다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_miniblade_daiso.jpg"
+      },
+      {
+       "name": "공구용줄 #120 3개 세트",
+       "spec": "철공 줄 3종(크기 글에 없음)",
+       "qty": 1,
+       "unit_krw": 2000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (품번 60759)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=60759",
+       "verified": true,
+       "note_ko": "9/27 페이지: 2,000원, 온라인 재고 62, 평균 3일 배송, 9/28 매장 픽업 가능. 후기상 \"길이는 긴 편, 폭은 작은 편\".",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_file_daiso.jpg"
+      },
+      {
+       "name": "클램프 바이스플라이어 인핸드 약 15 cm",
+       "spec": "C형 락킹 클램프 플라이어",
+       "qty": 1,
+       "unit_krw": 3000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (품번 1023938)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1023938",
+       "verified": true,
+       "note_ko": "9/27 페이지: 3,000원, 온라인 재고 31. 택배면 배송비 3,000원(3만 원 이상 무료).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_vplier_daiso.jpg"
+      }
+     ],
+     "total_krw": 9000,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "30,900원 절감(매장 픽업 기준). 동네 다이소에서 바로 산다.",
+     "cons_ko": "미니 쇠톱은 날이 짧고 프레임이 약해 9×50 강판 92컷에는 느리고 힘들다. 날 재질·TPI 표기가 없다.",
+     "risk_ko": "컷이 비뚤어지기 쉬워 무게 선별(±1 g) 줄질이 늘어난다. 택배로 받으면 +3,000원.",
+     "extra_labor_ko": "직접 절단 시간이 약 1.5배(10~12시간)로 늘어난다고 본다."
+    },
+    {
+     "title_ko": "외주 절단 (강철 그룹에서 개별 재단·절단 주문을 고를 때)",
+     "items": [
+      {
+       "name": "공구 구매 없음 — 강철을 재단 주문",
+       "spec": "올스틸샵 9T 50×22 개별 재단 92개 또는 원자재닷컴 막대 + 컷 절단",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "note_ko": "9/27 올스틸샵 9T 페이지가 열리는 것을 확인했다. 외주 비용은 이 항목이 아니라 강철 그룹에 들어간다(parts.json: 올스틸샵 개별 재단 470,860원, 원자재닷컴 컷 절단 320,530원 + 착불 화물). 레일 8컷·봉 20컷은 여전히 자르므로 쇠톱은 하나 있으면 좋다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_tool_outsource_allsteel.jpg"
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "이 항목 비용 0원, 톱질 7~8시간이 없어진다.",
+     "cons_ko": "강철 그룹 비용이 28만~43만 원 늘어난다. 봉·레일은 따로 잘라야 한다.",
+     "risk_ko": "1 mm 단위 재단이라 21.5는 주문할 수 없다(21 또는 22)."
+    }
+   ],
+   "if_unused_ko": "이미 쇠톱·줄·바이스(또는 C클램프)가 있거나, 강철을 외주로 잘라 받으면 사용 안함으로 둔다. 둘 다 아니면 블록 92개를 만들 방법이 없어 뺄 수 없다.",
+   "r4_note_ko": "r4에서 블록 형상이 9×22×49로 바뀌거나(톱질 면적 44 %) 외주로 가면 날 수·작업 시간이 줄어든다."
+  },
+  {
+   "part_id": "spring",
+   "name_ko": "보조 압축 스프링 (선택, W1-S)",
+   "role_ko": "단계 0 시험 7(복귀 t50 ≤ 37.6 ms)이 불합격일 때만 레일 밑 자리판과 캐리어 컵 사이에 끼워 레버 이동 55 %부터 바닥에서 +12 g(백)을 더한다. 기본 구성은 스프링 없음.",
+   "spec_required": "r3 D05: SUS d0.25 · 외경 4.0 · 유효 12.2권 · 자유장 12.3, k ≈ 0.053 N/mm. 윗끝은 자리판 포켓 Ø4.4×1.5에 접착, 아랫끝은 캐리어 컵 Ø6.4",
+   "qty_needed": "88 + 예비 8 = 96개",
+   "current": {
+    "title_ko": "r3 사양 주문 제작 (d0.25·OD4.0·L12.3) — 견적 필요",
+    "items": [
+     {
+      "name": "SUS304 압축 스프링 주문 제작 d0.25 × OD4.0 × L0 12.3, 유효 12.2권",
+      "spec": "r3 D05 사양 그대로",
+      "qty": 96,
+      "unit_krw": 150,
+      "shipping_krw": 0,
+      "store": "(스프링 제작소 견적 필요)",
+      "url": "",
+      "verified": false,
+      "note_ko": "r3 비용표의 추정 단가(개당 150원)다. 국내 쇼핑몰에서 이 사양 소량 주문 상품 페이지를 찾지 못했다. 제작소는 보통 최소 주문 금액·금형비가 붙으므로 실제로는 더 비쌀 수 있다."
+     }
+    ],
+    "total_krw": 14400,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "설계 k(0.053 N/mm)와 자리 치수에 딱 맞아 다시 계산할 것이 없다.",
+    "cons_ko": "가격을 확인하지 못했다(추정). 소량이라 최소 금액이 붙을 가능성이 크다.",
+    "risk_ko": "단계 0 결과를 보고 주문하므로 일정이 1~2주 늘어난다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "11번가 포유리테일 SUS304 0.3×4×15 mm 150개",
+     "items": [
+      {
+       "name": "압축 스프링 150개 304 스테인리스 (옵션 0.3*4*15mm)",
+       "spec": "선경 0.3, 외경 4, 자유장 15, 권수 미표기, 150개",
+       "qty": 1,
+       "unit_krw": 28080,
+       "shipping_krw": 0,
+       "store": "11번가 포유리테일 (상품 9554143146)",
+       "url": "https://www.11st.co.kr/products/9554143146",
+       "verified": true,
+       "note_ko": "9/27 옵션 확인: 0.3*4*15mm 재고 있음(0.3*4*10mm는 품절), 판매가 31,200원에서 할인 28,080원, 무료배송, CJ대한통운 9/29 도착 예정. 같은 조건의 포리식스코퍼레이션(상품 9585456174)은 0.3/15 mm/외경 4 mm 20개 9,300원이라 96개면 46,500원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_spring_150pcs_11st.jpg"
+      }
+     ],
+     "total_krw": 28080,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "미스미보다 28,944원 싸고 150개라 선별·예비가 넉넉하다. 외경 4.0이 설계와 같아 컵·포켓을 그대로 쓴다.",
+     "cons_ko": "선경 0.3이라 같은 길이면 설계보다 단단하다(권수가 적혀 있지 않아 k를 모름). 자유장 15로 설계 12.3보다 2.7 mm 길다.",
+     "risk_ko": "단계 0에서 k를 재서(추 + 캘리퍼스) 예압·자리 깊이를 다시 계산해야 한다.",
+     "extra_labor_ko": "자리판 포켓을 2.7 mm 깊게 다시 출력하거나 스프링을 잘라 씀. 스프링 k 측정 약 30분."
+    },
+    {
+     "title_ko": "한국미스미 E-GUY6-20 96개 (parts.json O01)",
+     "items": [
+      {
+       "name": "한국미스미 E-GUY6-20 SUS304 압축 스프링",
+       "spec": "선경 0.35, 외경 6, 자유장 20, k 0.098 N/mm, 최대 1.47 N",
+       "qty": 96,
+       "unit_krw": 594,
+       "shipping_krw": 0,
+       "store": "한국미스미 (detail 110310903599)",
+       "url": "https://kr.misumi-ec.com/vona2/detail/110310903599/?HissuCode=E-GUY6-20",
+       "verified": false,
+       "note_ko": "9/27 오전 parts.json 조사에서 1~299개 540원(VAT 별도), 594원(VAT 포함), 출하 9/29를 확인한 값이다. 이번에 다시 열려 했으나 한국미스미가 서버 점검 중(9/27 10:00 ~ 9/28 08:00)이라 503이 떠서 다시 확인하지 못했다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt/img/soft_spring_misumi.jpg"
+      }
+     ],
+     "total_krw": 57024,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "규격품이라 k가 보증된다. 반품·재주문이 쉽다.",
+     "cons_ko": "외경 6이라 윗 포켓 Ø4.4를 Ø6.4로 다시 설계해야 하고, k 0.098로 설계(0.053)의 약 1.85배다. 가장 비싸다.",
+     "risk_ko": "예압·자리 깊이를 k 0.098로 다시 계산해야 한다.",
+     "extra_labor_ko": "자리판 재설계·재출력."
+    }
+   ],
+   "if_unused_ko": "기본 구성은 스프링 없이 중력으로 돌아오므로 사용 안함이 기본값이다. 단계 0 시험 7(복귀 t50 ≤ 37.6 ms)에서 떨어질 때만 산다.",
+   "r4_note_ko": "r4 단순화에서 보조 스프링 자리(P18)가 빠질 수 있다. 빠지면 이 항목은 필요 없다."
+  }
+ ],
+ "check": {
+  "results": [
+   {
+    "part_id": "weight",
+    "url": "https://www.allsteelshop.com/product/squareplate/9t",
+    "status": "ok",
+    "found_price_krw": 18720,
+    "option_title": "9T SS275 50x1100 (also 50x2200 34,200 / 21x1250 11,050 / 50x21 min 5,080)",
+    "note": "Checked 9/27 against the page's own JS pricing formula (LOG_3STEP 8800->4400, ref 5 kg, density 7.85, round up to 10 won, minimum = the 100x100 piece) and /api/delivery-fee: 3,500 for 0-10 kg, 6,600 for 10.5 kg, 11,000 at 30 kg or more. The page JS says 'VAT 포함'. The API ignores length for plates, so 2.2 m also returns 3,500. The page shows shippingDays 2, but /guide/shipping says custom-cut orders ship in 3-7 business days and cannot be returned."
+   },
+   {
+    "part_id": "weight",
+    "url": "http://laser1st.co.kr/online_laser_service/",
+    "status": "unverifiable",
+    "note": "The page loads but its service section is empty (the Elementor content does not render). There is no price list; quotes need a drawing. The /guide/ page confirms 1 mm machine tolerance and 경동택배. No SS400 material table was found on any public page, so 9.0T stock is not re-confirmed. The 60,000 figure is an estimate."
+   },
+   {
+    "part_id": "weight",
+    "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=141",
+    "status": "ok",
+    "found_price_krw": 44530,
+    "option_title": "폭 50 / 두께 9 (8,600 + 35,930); 추가상품 평철절단 9~10t +3,000/컷",
+    "note": "The godomall option_select API for width 50 returns thicknesses 4.5/6/9/12/16/19, with 9 = +35,930. The cut add-on is still +3,000 per cut. Shipping is 착불 (amount not shown) and the average ship time is 3 days."
+   },
+   {
+    "part_id": "weight",
+    "url": "https://www.11st.co.kr/products/9441536032",
+    "status": "ok",
+    "found_price_krw": 25200,
+    "option_title": "단단한 5x3x1cm 약 110g",
+    "note": "25,200, stock 50, free shipping. The 3x3x1 66 g option is 24,300. Delivery is now shown as '10/10 이내 도착 예정' (slow). Reference only."
+   },
+   {
+    "part_id": "rail",
+    "url": "https://www.allsteelshop.com/product/squareplate/3t",
+    "status": "ok",
+    "found_price_krw": 10970,
+    "option_title": "3T 60x1300 (60x163 / 61 / 36 each at minimum 1,910)",
+    "note": "Same formula and delivery API as the 9T page; the material is listed as 'SS275 또는 GS400'. 60x1000 x2 = 17,920. Every sub-100x100 piece gets the 1,910 minimum. Shipping 3,500 below 10 kg."
+   },
+   {
+    "part_id": "rail",
+    "url": "https://www.11st.co.kr/products/1986654212",
+    "status": "ok",
+    "found_price_krw": 990,
+    "option_title": "철공용드릴 3.2mm(M4용)",
+    "note": "3.2 mm = 990 (stock 99,960) and 2.5 mm = 790. Shipping 3,000, free from 100,000. Arrival 9/29."
+   },
+   {
+    "part_id": "rail",
+    "url": "http://laser1st.co.kr/online_laser_service/",
+    "status": "unverifiable",
+    "note": "Quote-only service and the page's service content does not render, so the 3.0T vs 3.2T dropdown and stock table could not be re-checked. The guide confirms 1 mm tolerance. The 35,000 figure is an estimate."
+   },
+   {
+    "part_id": "strip",
+    "url": "http://laser1st.co.kr/online_laser_service/",
+    "status": "unverifiable",
+    "note": "Quote-only, so the 4.0T SS400 availability claim could not be re-confirmed (no public material table). The 30,000 figure is an estimate."
+   },
+   {
+    "part_id": "strip",
+    "url": "https://www.11st.co.kr/products/1986654212",
+    "status": "ok",
+    "found_price_krw": 790,
+    "option_title": "철공용드릴 2.5mm(M3용)",
+    "note": "790, stock 99,971. Shipping 3,000 (same shop as the 3.2 mm drill)."
+   },
+   {
+    "part_id": "strip",
+    "url": "https://www.11st.co.kr/products/5796623030",
+    "status": "ok",
+    "found_price_krw": 2300,
+    "option_title": "HSS M3 (2,300) / 자동T핸드탭 (6,350)",
+    "note": "Options inside product 01 (checked in the browser): HSS M3 2,300, HSS-6542 M3 3,500, 자동T핸드탭 6,350. Caution: the separate group item '상품02 사파코리아 자동T탭핸들' on the same page is 6,900. Order the handle as the option of product 01 to get 6,350. Shipping 3,000, arrival 9/29."
+   },
+   {
+    "part_id": "strip",
+    "url": "https://www.allsteelshop.com/product/squareplate/4.5t",
+    "status": "ok",
+    "found_price_krw": 6130,
+    "option_title": "4.5T 20x1250 (small pieces minimum 2,770)",
+    "note": "Formula and delivery API re-checked: 0.883 kg = 6,130; 32 pieces x 2,770 = 88,640. A combined order at 10.5 kg costs 6,600 shipping."
+   },
+   {
+    "part_id": "strip",
+    "url": "https://www.allsteelshop.com/product/squareplate/3t",
+    "status": "ok",
+    "found_price_krw": 4350,
+    "option_title": "3T 20x1250",
+    "note": "0.589 kg = 4,350 by the page formula. Shipping 3,500."
+   },
+   {
+    "part_id": "strip",
+    "url": "https://www.icbanq.com/P015976209",
+    "status": "ok",
+    "found_price_krw": 11,
+    "option_title": "XHHD hexagon nut M3",
+    "note": "10 won excl. VAT / 11 won incl. VAT. Minimum 1, overseas stock, ships within 1 week. The page does not list dimensions (5.5 x 2.4 not re-confirmed)."
+   },
+   {
+    "part_id": "keyrod",
+    "url": "https://www.11st.co.kr/products/1304631510",
+    "status": "ok",
+    "found_price_krw": 1500,
+    "option_title": "스텐환봉 1M (4mm)",
+    "note": "1,500 on sale. Shipping 3,500, arrival 9/29."
+   },
+   {
+    "part_id": "keyrod",
+    "url": "https://www.11st.co.kr/products/8661208614",
+    "status": "ok",
+    "found_price_krw": 2000,
+    "option_title": "스텐레스 환봉 1M / 4MM (+1,000)",
+    "note": "Option API: 4MM +1,000 (stock 20), 3MM +500 (stock 20), 2MM +0 (stock 1), 5MM +3,000 (stock 1). Shipping 4,000, arrival 9/30."
+   },
+   {
+    "part_id": "keyrod",
+    "url": "https://www.11st.co.kr/products/9536791872",
+    "status": "ok",
+    "found_price_krw": 1960,
+    "option_title": "스텐 환봉 4mm 1M",
+    "note": "1,960. Shipping 3,500, arrival by 10/1."
+   },
+   {
+    "part_id": "keyrod",
+    "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=1350",
+    "status": "ok",
+    "found_price_krw": 1200,
+    "option_title": "지름 4ø (+0); 추가상품 환봉절단 4~12ø +500/컷",
+    "note": "1,200 with 4ø at +0. Cut add-on 500 per cut. Shipping 착불 (amount not stated)."
+   },
+   {
+    "part_id": "keyrod",
+    "url": "https://kr.misumi-ec.com/vona2/detail/110302634310/?HissuCode=SSFJ4-164",
+    "status": "unverifiable",
+    "note": "HTTP 503 server maintenance page (2026/9/27 10:00 - 9/28 8:00). The price 15,452 is from the morning survey."
+   },
+   {
+    "part_id": "levershaft",
+    "url": "https://www.baegwanland.com/goods/view?no=4343",
+    "status": "mismatch_spec",
+    "found_price_krw": 14440,
+    "option_title": "Φ3x0.5M + 1컷 750 + 안전포장 1,500",
+    "note": "Prices unchanged: Φ3x0.5M 14,440 (same as Φ4), cut 750 per cut, safe packaging 1,500, minimum 3, 택배 착불 ('7,000원은 임의의 숫자'). However, the page says '컷추가 100mm이하는 제작 불가', so the shop will not cut the ~46 mm and ~22 mm end pieces planned from rod 3. Those must be cut by hand (hardened SUJ2) or the plan changed. The page also offers 1,000 and 5,000 won coupons valid to 9/30. Cut orders cannot be cancelled."
+   },
+   {
+    "part_id": "levershaft",
+    "url": "https://www.11st.co.kr/products/9480296508",
+    "status": "ok",
+    "found_price_krw": 15980,
+    "option_title": "05 400mm / 06 4pc 3mm / China Mainland",
+    "note": "3-level option API: the combination add price is +4,100 on a 11,880 base, so 15,980. Free shipping, 9/29 shown; the 배송지 option is 'China Mainland'. No h6/g6 tolerance stated."
+   },
+   {
+    "part_id": "levershaft",
+    "url": "https://www.11st.co.kr/products/9610481057",
+    "status": "ok",
+    "found_price_krw": 6310,
+    "option_title": "다이아몬드줄 5종 세트",
+    "note": "6,310, free shipping, arrival by 10/1."
+   },
+   {
+    "part_id": "levershaft",
+    "url": "https://kr.misumi-ec.com/",
+    "status": "unverifiable",
+    "note": "HTTP 503 maintenance until 9/28 08:00. The SFJ3 figure of 2,500 remains an r3 estimate."
+   },
+   {
+    "part_id": "levershaft",
+    "url": "https://www.11st.co.kr/products/8661208614",
+    "status": "ok",
+    "found_price_krw": 1500,
+    "option_title": "스텐레스 환봉 1M / 3MM (+500)",
+    "note": "Stock 20. Shipping 4,000."
+   },
+   {
+    "part_id": "levershaft",
+    "url": "https://www.11st.co.kr/products/9536791852",
+    "status": "ok",
+    "found_price_krw": 1630,
+    "option_title": "스텐 환봉 3mm 1M",
+    "note": "1,630. Shipping 3,500, arrival by 10/1."
+   },
+   {
+    "part_id": "levershaft",
+    "url": "https://www.11st.co.kr/products/9554061223",
+    "status": "ok",
+    "found_price_krw": 1940,
+    "option_title": "3mm (+640)",
+    "note": "1 mm 1,300 / 2 mm 1,520 / 3 mm 1,940, stock 9,999. Shipping 3,000, arrival by 9/30."
+   },
+   {
+    "part_id": "pins",
+    "url": "https://www.11st.co.kr/products/9480290583",
+    "status": "ok",
+    "found_price_krw": 12600,
+    "option_title": "08 12mm / 01 2MM",
+    "note": "Option API: 12mm/2MM add +2,700 on 9,900, stock 988. Free shipping, 9/29."
+   },
+   {
+    "part_id": "pins",
+    "url": "https://www.11st.co.kr/products/9594529677",
+    "status": "ok",
+    "found_price_krw": 17630,
+    "option_title": "3*14/100개 (+400)",
+    "note": "Base 17,230 + 400 = 17,630, stock 999. Free shipping, 9/29."
+   },
+   {
+    "part_id": "pins",
+    "url": "https://nfas.co.kr/product/detail.html?product_no=670",
+    "status": "ok",
+    "found_price_krw": 145,
+    "option_title": "평행핀 M2 길이 12 (-53원)",
+    "note": "198 - 53 = 145 per pin, minimum 100. Made in Korea. Shipping 3,500 (free from 150,000). No material stated."
+   },
+   {
+    "part_id": "pins",
+    "url": "https://nfas.co.kr/product/detail.html?product_no=652",
+    "status": "ok",
+    "found_price_krw": 143,
+    "option_title": "다윌핀 미리 SUS M3 길이 14 (+43원)",
+    "note": "100 + 43 = 143, minimum 100, SUS. Shipping 3,500 (combined with the M2 pins)."
+   },
+   {
+    "part_id": "pins",
+    "url": "https://www.11st.co.kr/products/9536791852",
+    "status": "ok",
+    "found_price_krw": 1630,
+    "option_title": "스텐 환봉 3mm 1M",
+    "note": "1,630. Shipping 3,500."
+   },
+   {
+    "part_id": "pins",
+    "url": "https://www.11st.co.kr/products/9536791834",
+    "status": "ok",
+    "found_price_krw": 1080,
+    "option_title": "스텐 환봉 2mm 1M",
+    "note": "1,080. Shipping 3,500, arrival by 10/1."
+   },
+   {
+    "part_id": "pins",
+    "url": "https://www.11st.co.kr/products/9548598715",
+    "status": "ok",
+    "found_price_krw": 28390,
+    "option_title": "M2 / 12mm 200pcs (+1,600)",
+    "note": "26,790 + 1,600 = 28,390, stock 999. Free shipping, overseas direct purchase (해외직구). Page JSON says '지금 주문 시 10/12(월) 발송'."
+   },
+   {
+    "part_id": "capstan",
+    "url": "https://www.icbanq.com/P015973844",
+    "status": "ok",
+    "found_price_krw": 11,
+    "option_title": "AOFENG ISO7380 M3-0.5X6 304",
+    "note": "10 won excl. VAT / 11 incl. VAT. Minimum and order unit 100 (100 pcs = 1,100 incl. VAT). Overseas stock, within 1 week."
+   },
+   {
+    "part_id": "capstan",
+    "url": "https://www.icbanq.com/P015976209",
+    "status": "ok",
+    "found_price_krw": 11,
+    "option_title": "XHHD hexagon nut M3",
+    "note": "11 won incl. VAT, minimum 1."
+   },
+   {
+    "part_id": "capstan",
+    "url": "https://www.11st.co.kr/products/4236198413",
+    "status": "ok",
+    "found_price_krw": 40,
+    "option_title": "스텐 둥근머리 렌치볼트 / M3 / 6mm",
+    "note": "3-level option API: M3 +20, 6mm +20 on a 20 base = 40, stock 9,223. Shipping 3,500, 9/29."
+   },
+   {
+    "part_id": "capstan",
+    "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=2486",
+    "status": "ok",
+    "found_price_krw": 2220,
+    "option_title": "3*6(100개)/STS304 (+2,120)",
+    "note": "100 + 2,120 = 2,220. Shipping 3,300 (free from 100,000)."
+   },
+   {
+    "part_id": "thumb",
+    "url": "https://www.11st.co.kr/products/9638303854",
+    "status": "ok",
+    "found_price_krw": 8000,
+    "option_title": "23 5pcs M3x12mm (+800)",
+    "note": "7,200 + 800 = 8,000, stock 455. Free shipping, overseas direct purchase (해외직구), no arrival date shown."
+   },
+   {
+    "part_id": "thumb",
+    "url": "https://www.icbanq.com/P015971568",
+    "status": "ok",
+    "found_price_krw": 11,
+    "option_title": "AOFENG DIN912 M3-0.5X12 304",
+    "note": "10 excl. / 11 incl. VAT. Minimum and order unit 50. Overseas stock, within 1 week."
+   },
+   {
+    "part_id": "thumb",
+    "url": "https://www.11st.co.kr/products/4236198413",
+    "status": "ok",
+    "found_price_krw": 60,
+    "option_title": "스텐 유두 렌치볼트 / M3(3mm) / 12mm",
+    "note": "20 + 40 = 60, stock 9,204."
+   },
+   {
+    "part_id": "thumb",
+    "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=4578",
+    "status": "ok",
+    "found_price_krw": 39300,
+    "option_title": "12/100개 (+35,100)",
+    "note": "4,200 + 35,100 = 39,300. Shipping 3,300. Wing size was not checked."
+   },
+   {
+    "part_id": "thumb",
+    "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=6089",
+    "status": "ok",
+    "found_price_krw": 39700,
+    "option_title": "3*12/50개/스텐304 (+39,600); 3*12/5개 (+4,950)",
+    "note": "100 + 39,600 = 39,700 and 100 + 4,950 = 5,050. Shipping 3,300. The head size Ø8 x 6 is in an image and was not re-checked."
+   },
+   {
+    "part_id": "disc",
+    "url": "https://kr.misumi-ec.com/vona2/mech/M1200000000/M1202000000/M1202040000/",
+    "status": "unverifiable",
+    "note": "HTTP 503 maintenance (9/27 10:00 - 9/28 08:00). The 35 won unit price is still the r3 estimate."
+   },
+   {
+    "part_id": "disc",
+    "url": "https://www.navimro.com/g/388694/",
+    "status": "ok",
+    "found_price_krw": 5489,
+    "option_title": "K14631193 DB-4L 8.0x4.2x0.3 1PK(100EA)",
+    "note": "4,990 excl. / 5,489 incl. VAT, made in Korea, ships Wednesday 09/30. Navimro shipping is 3,300 (free from 50,000 excl. VAT)."
+   },
+   {
+    "part_id": "disc",
+    "url": "https://www.11st.co.kr/products/9390644671",
+    "status": "ok",
+    "found_price_krw": 12500,
+    "option_title": "[14]M3x6 (100pcs) (+1,880)",
+    "note": "12,500, stock 9,999. Free shipping, by 10/1. The title mixes 'wave' and '접시형', and no thickness is stated (as already noted)."
+   },
+   {
+    "part_id": "disc",
+    "url": "https://www.11st.co.kr/products/4236198413",
+    "status": "ok",
+    "found_price_krw": 10,
+    "option_title": "추가구성품 스텐 스프링 와셔 M3",
+    "note": "Add-on item at 10 won, stock 9,991."
+   },
+   {
+    "part_id": "brass",
+    "url": "https://www.11st.co.kr/products/9347015508",
+    "status": "ok",
+    "found_price_krw": 7200,
+    "option_title": "5mm (1T)",
+    "note": "7,200, stock 985 (the 4mm option is sold out). Shipping 3,000, 9/29."
+   },
+   {
+    "part_id": "brass",
+    "url": "https://www.navimro.com/g/420031/",
+    "status": "ok",
+    "found_price_krw": 3179,
+    "option_title": "K25619689 BP395-4 황동 4x395",
+    "note": "2,890 excl. / 3,179 incl. VAT. Campaign price 2,300 / 2,530 incl. VAT. Ships 10/07. Inner diameter not stated."
+   },
+   {
+    "part_id": "reamer",
+    "url": "https://www.navimro.com/g/3279839/",
+    "status": "ok",
+    "found_price_krw": 3289,
+    "option_title": "K93009242 스마토 핸드리머 Ø3",
+    "note": "2,990 excl. / 3,289 incl. VAT. HSS(M2), tolerance listed as H7. Ships Thursday 10/01."
+   },
+   {
+    "part_id": "reamer",
+    "url": "https://www.navimro.com/g/179331/",
+    "status": "ok",
+    "found_price_krw": 5489,
+    "option_title": "K06564912 탭 핸들 3~12",
+    "note": "4,990 excl. / 5,489 incl. VAT. Ships 09/28."
+   },
+   {
+    "part_id": "reamer",
+    "url": "https://www.navimro.com/g/10477/",
+    "status": "ok",
+    "found_price_krw": 6589,
+    "option_title": "K01480900 GEM100030 Ø3",
+    "note": "5,990 excl. / 6,589 incl. VAT, made in Korea. Ships 09/28."
+   },
+   {
+    "part_id": "reamer",
+    "url": "https://www.navimro.com/g/171100/",
+    "status": "ok",
+    "found_price_krw": 770,
+    "option_title": "K11176300 SD 3.0",
+    "note": "700 excl. / 770 incl. VAT. Ships 09/28."
+   },
+   {
+    "part_id": "tap",
+    "url": "https://www.navimro.com/g/200030/",
+    "status": "ok",
+    "found_price_krw": 3729,
+    "option_title": "K07323082 REX HSS M3.0x0.5 1SET(3EA)",
+    "note": "3,390 excl. / 3,729 incl. VAT. Ships Friday 10/02."
+   },
+   {
+    "part_id": "tap",
+    "url": "https://www.navimro.com/g/171100/",
+    "status": "ok",
+    "found_price_krw": 770,
+    "option_title": "K11176297 SD 2.5 (770); K11176333 SD 3.4 (1,199)",
+    "note": "Both codes confirmed with prices incl. VAT. Ships 09/28."
+   },
+   {
+    "part_id": "tap",
+    "url": "https://www.navimro.com/g/53392/",
+    "status": "ok",
+    "found_price_krw": 2959,
+    "option_title": "K03174312 스마토 SKS M3.0x0.5 1SET(3EA)",
+    "note": "2,690 excl. / 2,959 incl. VAT. Ships 09/28."
+   },
+   {
+    "part_id": "tap",
+    "url": "https://www.icbanq.com/P015976209",
+    "status": "ok",
+    "found_price_krw": 11,
+    "option_title": "XHHD hexagon nut M3",
+    "note": "11 won incl. VAT."
+   },
+   {
+    "part_id": "magnet",
+    "url": "https://dgmagnet.com/product/detail.html?product_no=15",
+    "status": "ok",
+    "found_price_krw": 140,
+    "option_title": "6mm 3.0T (2.0T = 100)",
+    "note": "option_stock_data: 3.0T 140, 2.0T 100, both on sale. N35 appears on the page. Shipping 2,500 (free from 50,000)."
+   },
+   {
+    "part_id": "magnet",
+    "url": "https://dgmagnet.com/product/detail.html?product_no=13",
+    "status": "ok",
+    "found_price_krw": 80,
+    "option_title": "5mm 2.0T",
+    "note": "80, on sale."
+   },
+   {
+    "part_id": "magnet",
+    "url": "https://dgmagnet.com/product/detail.html?product_no=17",
+    "status": "ok",
+    "found_price_krw": 160,
+    "option_title": "8mm 3.0T",
+    "note": "160, on sale."
+   },
+   {
+    "part_id": "lead",
+    "url": "https://www.11st.co.kr/products/9617745617",
+    "status": "ok",
+    "found_price_krw": 20000,
+    "option_title": "[2]5g-50pcs (+1,880)",
+    "note": "18,120 + 1,880 = 20,000, stock 16. Free shipping, 9/29."
+   },
+   {
+    "part_id": "lead",
+    "url": "https://www.11st.co.kr/products/2520477575",
+    "status": "ok",
+    "found_price_krw": 7000,
+    "option_title": "양도래추 1.5호 40pcs",
+    "note": "7,000. Shipping 3,500, 9/29. Material not stated."
+   },
+   {
+    "part_id": "lead",
+    "url": "https://www.11st.co.kr/products/1140022227",
+    "status": "ok",
+    "found_price_krw": 6900,
+    "option_title": "장타!! 오뚜기싱커 / [G9-2] 3/16온즈 1.5호(19개입)",
+    "note": "Option API: +0, stock 9,999. The 스위벨봉돌 1.5호 option is still stock 0. Shipping 3,000 (free from 50,000), 9/29."
+   },
+   {
+    "part_id": "lead",
+    "url": "https://www.11st.co.kr/products/9628833686",
+    "status": "ok",
+    "found_price_krw": 7740,
+    "option_title": "낚시추 1000g",
+    "note": "7,740, free shipping, by 9/30."
+   },
+   {
+    "part_id": "lead",
+    "url": "https://www.11st.co.kr/products/7194103988",
+    "status": "ok",
+    "found_price_krw": 5570,
+    "option_title": "7mm (+1,170)",
+    "note": "5,570, stock 9,970. Shipping 3,000, by 10/1."
+   },
+   {
+    "part_id": "lead",
+    "url": "https://www.11st.co.kr/products/9621047304",
+    "status": "ok",
+    "found_price_krw": 12500,
+    "option_title": "[1]옵션1",
+    "note": "12,500, stock 13, free shipping, 9/29."
+   },
+   {
+    "part_id": "felt2",
+    "url": "https://studiobunt.com/product/detail.html?product_no=4117",
+    "status": "ok",
+    "found_price_krw": 13800,
+    "option_title": "35. 블랙",
+    "note": "13,800, '20*30cm, 100% wool'. Sold out: 너트, 베이비핑크, 딥그레이멜란지, 오트밀, 비리디언; 블랙 and 화이트 are selling. Shipping 3,000 (free from 50,000)."
+   },
+   {
+    "part_id": "felt2",
+    "url": "https://studiobunt.com/product/detail.html?product_no=1157",
+    "status": "ok",
+    "found_price_krw": 6900,
+    "option_title": "80.블랙",
+    "note": "6,900, 20*30cm, 100% wool. Sold out: 아이보리, 베이비옐로우, 네이비, 마쉬멜로우."
+   },
+   {
+    "part_id": "felt2",
+    "url": "https://www.11st.co.kr/products/8517880969",
+    "status": "ok",
+    "found_price_krw": 1500,
+    "option_title": "[대원] H 0.5mm 접착 30x45",
+    "note": "1,500, stock about 1,000 per colour. Shipping 3,000 (free from 70,000)."
+   },
+   {
+    "part_id": "felt2",
+    "url": "https://www.11st.co.kr/products/8463137543",
+    "status": "ok",
+    "found_price_krw": 1950,
+    "option_title": "A-10 검정",
+    "note": "1,950 (list price 2,000), stock 994. Shipping 3,000, by 10/1."
+   },
+   {
+    "part_id": "felt2",
+    "url": "https://iraumshop.com/product/detail.html?product_no=1203&cate_no=51&display_group=1",
+    "status": "ok",
+    "found_price_krw": 6500,
+    "option_title": "33. 블랙",
+    "note": "'울펠트 55색(낱장) 1.5mm 20x30cm' at 6,500 (consumer price 7,500). 블랙 is selling. Shipping 3,500 (free from 150,000). Wool blend ratio not stated."
+   },
+   {
+    "part_id": "pu",
+    "url": "https://www.swagkey.kr/24/?idx=253",
+    "status": "ok",
+    "found_price_krw": 5000,
+    "option_title": "두께 3",
+    "note": "Browser check: the thickness dropdown has only '3 - 5,000원' (base 4,000). The 3 mm size is 425x122. The page says 2.7 mm is Rogers 92-15250 and the others are LE-20. Shipping 3,000 (free from 100,000)."
+   },
+   {
+    "part_id": "pu",
+    "url": "https://www.11st.co.kr/products/9134369832",
+    "status": "ok",
+    "found_price_krw": 15000,
+    "option_title": "07 60 64 63 61 Key (+0); 01 84 Key 16,900",
+    "note": "60% = 15,000 (stock 297); 84 Key = 16,900 (stock 295). Free shipping, overseas direct purchase (해외직구)."
+   },
+   {
+    "part_id": "pu",
+    "url": "https://ko.aliexpress.com/item/1005004850918011.html",
+    "status": "unverifiable",
+    "note": "The listing is live (og:title still reads 'Poron ... 1 2 3 4 mm 두께'), but the page loads behind a robot check (reCAPTCHA). It was not bypassed, so the price, sizes and shipping were not read."
+   },
+   {
+    "part_id": "pu",
+    "url": "https://www.11st.co.kr/products/9628503624",
+    "status": "ok",
+    "found_price_krw": 17250,
+    "option_title": "Thickness 3mm (+800); base 2mm 16,450",
+    "note": "On sale; 3 mm = 17,250 (stock 168). This line reuses v3 L41 at 0 cost."
+   },
+   {
+    "part_id": "cloth",
+    "url": "https://www.11st.co.kr/products/8517880969",
+    "status": "ok",
+    "found_price_krw": 1500,
+    "option_title": "[대원] H 0.5mm 접착",
+    "note": "1,500. Shipping 3,000."
+   },
+   {
+    "part_id": "cloth",
+    "url": "https://www.11st.co.kr/products/9433942162",
+    "status": "ok",
+    "found_price_krw": 1600,
+    "option_title": "대원 H 0.5mm 접착 30x45",
+    "note": "1,600. Shipping 3,000 (free from 70,000)."
+   },
+   {
+    "part_id": "cloth",
+    "url": "https://www.11st.co.kr/products/2311996578",
+    "status": "ok",
+    "found_price_krw": 12500,
+    "option_title": "25mm x 10M 0.13t",
+    "note": "12,500. Shipping 3,000 (free from 100,000), 9/29."
+   },
+   {
+    "part_id": "cloth",
+    "url": "https://www.11st.co.kr/products/9571578308",
+    "status": "ok",
+    "found_price_krw": 37560,
+    "option_title": "54인치 .043인치",
+    "note": "37,560, free shipping, by 10/2."
+   },
+   {
+    "part_id": "graphite",
+    "url": "https://www.11st.co.kr/products/1333385437",
+    "status": "ok",
+    "found_price_krw": 2750,
+    "option_title": "크레타칼라 흑연파우더 30ml",
+    "note": "2,750. Shipping 3,000 (free from 80,000), 9/29."
+   },
+   {
+    "part_id": "graphite",
+    "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1063355",
+    "status": "ok",
+    "found_price_krw": 1000,
+    "option_title": "사무용 연필 4B 5개 X 2세트",
+    "note": "1,000. Stock and pickup counts were not re-read."
+   },
+   {
+    "part_id": "epoxy",
+    "url": "https://www.eleparts.co.kr/goods/view?no=16596617",
+    "status": "ok",
+    "found_price_krw": 4260,
+    "option_title": "LOCTITE 5분 에폭시 14ml (1365868)",
+    "note": "Browser check: 3,872.73 excl. / 4,260 incl. VAT, ships in 1.5 days (09/30). Free shipping from 60,000 (supply price), otherwise 3,000. curl gets a JS cookie browser-check page, so the browser was used."
+   },
+   {
+    "part_id": "epoxy",
+    "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1069190",
+    "status": "ok",
+    "found_price_krw": 2000,
+    "option_title": "록타이트 에폭시 접착제 6 ml",
+    "note": "2,000. Online purchase and store pickup are both available. Cure time not stated."
+   },
+   {
+    "part_id": "epoxy",
+    "url": "https://www.icbanq.com/P014446272",
+    "status": "ok",
+    "found_price_krw": 5170,
+    "option_title": "LOCTITE 401 20g",
+    "note": "The page opens: 4,700 excl. / 5,170 incl. VAT, domestic stock, 2-3 days. The line reuses v3 C18 at 0 cost."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.eleparts.co.kr/goods/view?no=9100747",
+    "status": "ok",
+    "found_price_krw": 6500,
+    "option_title": "코텍스 쇠톱(대) 300mm K-9301",
+    "note": "5,909.09 excl. / 6,500 incl. VAT. Ships in 3.5 days (10/02)."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.eleparts.co.kr/goods/view?no=4101973",
+    "status": "ok",
+    "found_price_krw": 2200,
+    "option_title": "LENOX 쇠톱날 12인치",
+    "note": "2,000 excl. / 2,200 incl. VAT. Made in USA, ships 10/02. TPI and material still not stated."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.eleparts.co.kr/goods/view?no=12185326",
+    "status": "ok",
+    "found_price_krw": 6800,
+    "option_title": "Coms BD079 연마봉 평줄",
+    "note": "6,181.82 excl. / 6,800 incl. VAT. Listed as 줄(합금) under 금속가공툴, but the title says DIY 공예 세공."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.eleparts.co.kr/goods/view?no=2923219",
+    "status": "ok",
+    "found_price_krw": 20000,
+    "option_title": "Prokit PD-374 탁상 바이스",
+    "note": "18,181.82 excl. / 20,000 incl. VAT. Ships 10/02. Jaw size not read."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.eleparts.co.kr/goods/view?no=8153032",
+    "status": "ok",
+    "found_price_krw": 5100,
+    "option_title": "Coms ID874 락킹 바이스 플라이어",
+    "note": "4,636.36 excl. / 5,100 incl. VAT."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.navimro.com/g/179334/",
+    "status": "ok",
+    "found_price_krw": 5269,
+    "option_title": "K06564945 610702 12(300)",
+    "note": "4,790 excl. / 5,269 incl. VAT. Ships 09/28. Navimro shipping 3,300 (3,000 + VAT)."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.navimro.com/g/183741/",
+    "status": "ok",
+    "found_price_krw": 1199,
+    "option_title": "K11174820 N610712 18T",
+    "note": "1,090 excl. / 1,199 incl. VAT. Material listed as Bi-Metal. The 24T blade is the same price. Ships 09/28."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.navimro.com/g/212304/",
+    "status": "ok",
+    "found_price_krw": 4169,
+    "option_title": "K08040479 610637 200(8\") 중목",
+    "note": "3,790 excl. / 4,169 incl. VAT. Ships 09/28."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.navimro.com/g/183739/",
+    "status": "ok",
+    "found_price_krw": 5489,
+    "option_title": "K06700929 600201 3인치",
+    "note": "4,990 excl. / 5,489 incl. VAT. The 2-inch clamp is 1,969. Ships 09/28."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1045580",
+    "status": "mismatch_spec",
+    "found_price_krw": 2000,
+    "option_title": "미니 타입 쇠톱",
+    "note": "The 2,000 price is correct. The product description says it cuts wood, plastic and non-ferrous metal (목재와 플라스틱, 비철금속) with a pull stroke. It is not described for steel, so it is unsuitable for 92 cuts of 9x50 SS275 (a bigger problem than the plan's 'slow' caveat)."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1045582",
+    "status": "mismatch_spec",
+    "found_price_krw": 1000,
+    "option_title": "미니 톱날 4개입",
+    "note": "The 1,000 price is correct. It is the ~15 cm replacement blade for the same mini saw, and the description talks about cutting wood. It is not a steel-rated blade."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=60759",
+    "status": "ok",
+    "found_price_krw": 2000,
+    "option_title": "공구용줄 #120 3개 세트",
+    "note": "2,000. Flat, half-round and triangle files described for fine finishing in craft and precision work, so metal removal on steel will be slow."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1023938",
+    "status": "ok",
+    "found_price_krw": 3000,
+    "option_title": "클램프 바이스플라이어 약 15 cm",
+    "note": "3,000."
+   },
+   {
+    "part_id": "cuttools",
+    "url": "https://www.allsteelshop.com/product/squareplate/9t",
+    "status": "ok",
+    "found_price_krw": 0,
+    "option_title": "외주 절단 (강철 그룹 참조)",
+    "note": "The page opens and the pricing variables are unchanged. The cost belongs to the steel group."
+   },
+   {
+    "part_id": "spring",
+    "url": "https://www.11st.co.kr/products/9554143146",
+    "status": "ok",
+    "found_price_krw": 28080,
+    "option_title": "0.3*4*15mm",
+    "note": "28,080, stock 99,999 (the 0.3*4*10mm option is sold out). The title mentions 25 mm, but the 15 mm option exists. Free shipping, 9/29."
+   },
+   {
+    "part_id": "spring",
+    "url": "https://kr.misumi-ec.com/vona2/detail/110310903599/?HissuCode=E-GUY6-20",
+    "status": "unverifiable",
+    "note": "HTTP 503 maintenance until 9/28 08:00. The 594 won unit price is from the morning survey."
+   }
+  ]
+ }
+}

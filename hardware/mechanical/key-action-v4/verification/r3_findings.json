@@ -1,0 +1,462 @@
+[
+ {
+  "lens": "PHYSICS/DYNAMICS round 3: independent mass model from geometry.json prisms, rigid 1-DOF statics/return, and an independent 4-DOF free-notch model (dyn4.py) that reproduces the designer's runs (up-stop 185 N, 0.6 N ghost 20 %/42 %, t50 35.0 ms) before testing the as-built geometry.",
+  "errors": [
+   {
+    "severity": "major",
+    "issue": "The up-stop pad faces (S15) come from a snapshot taken while the key was still bouncing. held_bottom() reads the state at 320 ms (200 ms settle + 120 ms ramp + 200 ms), but at that moment the white lever is still turning at 0.58 rad/s after the ramped key hit bottom. The same routine sets z_us_w/z_us_b (model_v4.py 2117-2121), the end-part pads (2939) and the capstan-adjustment table (run_all.py 610-614). With the pads as modelled, the white lever reaches its pad about 0.7 mm before the key reaches its front felt. The design says the white key reaches its felt first (+0.20). Built per §11 (0.20 feeler at 1 N for white, 0.79 shim for black), the instrument no longer matches the simulation. White repetition then misses 13.3 Hz, the white notch lift exceeds 0.2 mm at the pass-line materials, and black capstan and beam loads roughly double.",
+    "evidence": "My 4-DOF at 320 ms matches the designer's 'settled' state: b 10.82 deg (designer 10.76), cap top 64.74 (64.69), front z33.84 (33.87). At 600 and 1200 ms, when it is truly settled (|w| < 1e-7 rad/ms), white is b 11.88 deg with cap top 65.60 and black is cap top 64.51. Actual gaps: white 64.89 - 65.60 = -0.71 (design +0.20), black -0.47 (design -0.70). The designer's own results.txt shows white 'push 0.8 N: front 0 N, up-stop 16 N'. Static load split with the designer's pads: white held at 0.6/0.8/1.0 N puts 0 N on the front felt, 0.16/0.34/0.51 N on the pad and 1.9/2.5/3.1 N on the capstan. Release from a 1 N hold with the designer's pads gives t50 35.0 ms (designer 35.2). That fast return comes from the capstan felt being pre-compressed to about 2.9 N between the pad and the finger. As adjusted per §11 (capstan screwed in 0.288 mm, lever rest -2.26 deg), white t50 is 37.9 ms (13.2 Hz), 40.2 ms with friction x2 (12.4 Hz); raising the pad instead gives 38.2/40.9 ms (13.1/12.2 Hz). As adjusted with pass-line materials, white 2.5 m/s staccato lift is 0.237 mm and keeper gap -0.08 (contact). Black as adjusted: capstan peak 22.2 N at 2.0 m/s (designer 11.8), which puts 13.2 MPa on the hidden beam (8 x 6.7 section, arm 35.6); the largest beam stress the designer reports is 11.9 MPa.",
+    "fix": "Take S15 from a real static equilibrium: a static solve, or a settle of at least 600 ms with |w| < 1e-6 rad/ms. That gives white pad face 65.80 (pad stack 0.91 thinner) and black 63.81 (0.23 thicker). Otherwise, restate §11 so it describes the geometry that was simulated. Then make the assist spring standard on white keys: as adjusted it gives 14.2 Hz, 13.4 Hz with friction x2. Re-run the dynamics, ghost grid, lift/keeper cases, loads, end parts and the capstan-adjustment table. Re-sweep clearances for the new lever rest (-2.26 deg) and overshoot angles."
+   },
+   {
+    "severity": "major",
+    "issue": "The snap-notch retention criterion ('snap pull < minimum pull-off 4 N') does not match the lip law in the model itself. The model treats the lip corners as rigid points on the ends of the R2.05 arc, with cloth K 120 N/mm^1.5 and mu 0.25. With that law the static pull-off is about 2.0 N, not 4-8 N. The pulls the model reports (2.72 N nominal, 3.8 N with bad materials) are already above this capacity. In the model the key is held by the velocity-dependent Flores damping force, not by the snap.",
+    "evidence": "snap.py, quasi-static vertical pull: the lips only touch after 0.20 mm of lift. Holding force is 0.55 N at 0.30 mm lift, 1.23 N at 0.40 mm, and peaks at 1.99 N at 0.64 mm (mu 0.35: 2.60 N; mu 0: 0.67 N). The key pops out at 0.80 mm lift. In my runs lipV reaches 2.3-2.9 N, and 4.0-5.9 N with the damping floor set to 0.1 m/s, while lift stays at 0.13-0.21 mm. Stage-0 test 4 asks for 4-8 N, which 0.09 mm of cloth squeeze per side cannot give. Its remedy (0.6T cloth) would make the lined notch R1.95, smaller than the R2.0 rod, if the cloth covers the whole notch, so the key would bind. Upside down in transport, a shock of about 2.0/0.23 = 8.7 g pops a key.",
+    "fix": "Judge retention by lift against the 0.80 mm pop-out lift and report that margin. Drop the 4 N force comparison, or calibrate the lip law to a stage-0 force-lift curve. If a 4-8 N snap is required, get it from the lip lands alone (a narrower entry of about 3.70 mm with cloth only on the lips, or a steeper lip angle) and check that the lips still clear the rod by at least 0.05 at rest. Correct the stage-0 remedy so it does not change the running notch radius."
+   },
+   {
+    "severity": "minor",
+    "issue": "The ghost re-trigger grid starts at 0.6 N. A lightly resting finger at 0.45-0.55 N (above the 0.43 N rest UW) lets the key rise 70-99 % after a 2.5 m/s note. That is above the 60 % peak limit of the firmware filter, so the filter cannot drop it, and the key then comes back down slowly and plays a soft ghost note. The filter also drops real soft repeats (< 0.3 m/s) within 120 ms of a loud note.",
+    "evidence": "Holding 0.5 N after 2.5 m/s: white 84 % (designer pads) and 81 % (as adjusted), black 78 %/74 %. The key comes back down at 0.03-0.12 m/s, with the peak 72-115 ms after the bottom. Holding 0.55 N as adjusted: white 47 % (61 % with the spring, 82 % with the spring and pad e 0.07), black 53-77 %. The cause is the lever dropping back onto the capstan after the pad hit. The pad rebound itself is only e_sys 0.061.",
+    "fix": "Add 0.45-0.55 N holds to the ghost grid. In firmware, after a note of 1.5 m/s or more, ignore re-presses slower than about 0.12-0.15 m/s for 250 ms, or require the magnet to reach 90 % before re-arming when the rise was slow. Do not use the peak < 60 % rule. On the mechanical side, lower capstan-felt e (0.35 to about 0.2) or reduce the lever's travel above the capstan at the bottom."
+   },
+   {
+    "severity": "minor",
+    "issue": "The notch-lift and keeper pass/fail results depend on a numerical parameter: the Flores onset-velocity floor V0_FLOOR = 0.02 m/s, which sets the damping of every contact that starts slowly (notch cloth, lips, capstan).",
+    "evidence": "With v_floor 0.1 m/s: white as modelled at 2.0 m/s, lift goes from 0.105 to 0.155 mm (+48 %). White as adjusted at 2.5 m/s, lift goes from 0.163 to 0.205 mm, over the 0.2 target, and keeper gap drops to 0.05. Black lipV rises from 2.7 to 5.9 N.",
+    "fix": "Use a contact damping law that does not depend on the onset speed (Hunt-Crossley or Kelvin, with damping measured in stage 0) for the cloth, lip and capstan contacts, or report the lift and keeper results over v_floor 0.02-0.1 and keep margin against 0.2 mm."
+   },
+   {
+    "severity": "minor",
+    "issue": "Nothing positively limits the thumb-screw preload. Once the 3x3 disc stack is flat (459 N), any extra turn loads the joint solid, and with the 30 mm driver a hobbyist can easily go past 0.3 N m. The constant roof bearing stress then goes well over the 2 MPa limit.",
+    "evidence": "My finite beam on a Winkler layer gives 1.85 MPa peak at 459 N, 1.92 MPa with the 3.4 mm screw hole (designer 1.90), so the design value holds. At 0.5-0.6 N m (preload about 800-1000 N at K 0.2) the peak is about 3.2-4 MPa constant. The Almen-Laszlo check gives 152.8 N per disc when flat, matching the designer.",
+    "fix": "Use a slip-clutch (torque-limiting) printed driver set to 0.30 N m, or a steel crush sleeve or shoulder under the head so the screw bottoms out at the flat-stack length."
+   },
+   {
+    "severity": "minor",
+    "issue": "Doubled friction pushes DW and bottom UW outside the targets. The designer knows this but it is unresolved. Black capstan friction is 2.0 g of the 4.8 g total because the capstan slips 4.8 units per unit of key rotation.",
+    "evidence": "My statics, friction x2: DW 56.0 g white / 55.3 g black (limit 55); black UW at the bottom 16.9 g (target 20). Friction x1 rest values match the designer within 1 %.",
+    "fix": "Fitting the assist spring as standard raises bottom UW. Also lower capstan mu for black keys (graphite plus PTFE-faced felt), or move the black capstan so the slip ratio is below about 3."
+   }
+  ],
+  "confirmed": [
+   "Statics are right: my prism mass model with my own virtual-work code gives white DW/UW 52.0/44.0 g at y13, 47.2 at y0 and 131.2 at y90, a ratio of 2.52. Black at front+10 is 50.5/40.9 (51.4/41.8 with the designer's mass). All within 1 %.",
+   "Friction breakdown is reproduced: white key rod 0.88, lever rod 0.72, capstan 0.46, guide 1.93 g; black 1.14/0.22/1.97/1.48 g.",
+   "Mass and inertia: key D 23.62 g (designer 23.29), lever 79.50 g with I_L 90452 (designer 90630). m_eff is 68.9 white and 65.5 black (designer 64.7). Black I_K is 9 % higher in my prism model; this changes DW by less than 1 g.",
+   "My independent 4-DOF model reproduces the designer's dynamics at the modelled pad heights: white 2.0 m/s gives 185 N up-stop, 69 N front felt, lift 0.105 (designer 0.096); 0.6 N hold 20 % (19 %); black 2.5 m/s 0.6 N 42 % (42 %); t50 35.0 ms (35.2). Halving the time step from 3 to 1.5 us does not change these results.",
+   "Restitution: each contact law gives its design e in a single-body drop test (10 g at 0.1 m/s and 60 g at 2 m/s). In the full system the lever-on-pad e is 0.061 (design 0.06) and the key-on-front-felt e is 0.10-0.14.",
+   "The faster return in the 4-DOF model compared with the rigid 1-DOF (43 ms) is physical: with friction removed the two give 36.4 and 38.3 ms. The 1-DOF uses static reactions for friction, while the dynamic capstan force during the return is only about 0.5 N.",
+   "Rest stresses: thin tail 0.41/0.46 MPa and beam 0.16 MPa agree with hand checks. Roof bearing under the tapped strip is 1.85-1.92 MPa at 459 N. Disc-spring flat force is 153 N per disc, so 459 N for 3 in parallel.",
+   "Up-stop peaks per key match the designer (white 183-185 N at 2.0 m/s; black 260-265 N at 2.5 m/s), as do lever rod reactions (113-156 N). Single-key joint closure (360 N against 422 N preload) holds using the designer's influence factor; I did not re-derive the rail FE.",
+   "Lever roll: the capstan, pad holder and steel are centred on the lever, so there is no lever roll moment. Key roll from the capstan offset is carried by the rod or lip couple and by the front felt at the bottom.",
+   "Full return stays under 60 ms in every variant: 54.4 ms white as adjusted, 57.6 ms with friction x2.",
+   "Dust-cover/transport tilt: the key's weight (0.23 N) is far below the lip capacity (about 2 N), so keys stay on the rod when tilted, apart from the shock limit noted in the snap finding."
+  ],
+  "recomputed": [
+   {
+    "metric": "DW white y13 / y0 / y90 (g)",
+    "model": "51.9 / 47.1 / 131.0",
+    "mine": "52.0 / 47.2 / 131.2",
+    "ok": true
+   },
+   {
+    "metric": "UW white rest (g)",
+    "model": "43.9",
+    "mine": "44.0",
+    "ok": true
+   },
+   {
+    "metric": "DW / UW black front+10 (g)",
+    "model": "51.0 / 41.4",
+    "mine": "50.5 / 40.9 (my mass), 51.4 / 41.8 (designer mass)",
+    "ok": true
+   },
+   {
+    "metric": "m_eff white / black (g)",
+    "model": "68.9 / 64.7",
+    "mine": "68.9 / 65.5",
+    "ok": true
+   },
+   {
+    "metric": "DW friction x2 white / black (g)",
+    "model": "55.9 / 55.8",
+    "mine": "56.0 / 55.3 (both > 55)",
+    "ok": true
+   },
+   {
+    "metric": "black UW at bottom, friction x2 (g)",
+    "model": "17.4",
+    "mine": "16.9 (< 20 target)",
+    "ok": true
+   },
+   {
+    "metric": "white up-stop gap in settled 1 N state (mm)",
+    "model": "+0.20 (key first)",
+    "mine": "-0.71 (lever first; settled cap top 65.60, not 64.69)",
+    "ok": false
+   },
+   {
+    "metric": "black up-stop gap in settled 1 N state (mm)",
+    "model": "-0.70",
+    "mine": "-0.47",
+    "ok": false
+   },
+   {
+    "metric": "white t50 / repetition, pads as modelled",
+    "model": "35.2 ms / 14.2 Hz",
+    "mine": "35.0 ms / 14.3 Hz",
+    "ok": true
+   },
+   {
+    "metric": "white t50 / repetition built per §11 (+0.20 at 1 N)",
+    "model": "35.2 ms / 14.2 Hz",
+    "mine": "37.9-38.2 ms / 13.1-13.2 Hz (< 13.3)",
+    "ok": false
+   },
+   {
+    "metric": "white repetition per §11, friction x2",
+    "model": "13.7 Hz",
+    "mine": "12.2-12.4 Hz; with assist spring 13.4 Hz",
+    "ok": false
+   },
+   {
+    "metric": "black repetition per §11 (x1 / x2)",
+    "model": "14.8 / 13.8 Hz",
+    "mine": "15.3 / 14.2 Hz",
+    "ok": true
+   },
+   {
+    "metric": "black capstan peak 2.0 m/s / hidden beam stress",
+    "model": "11.7 N / max beam 11.9 MPa (white)",
+    "mine": "22.2 N / 13.2 MPa (as adjusted)",
+    "ok": false
+   },
+   {
+    "metric": "notch lift black 2.5 m/s let go (mm)",
+    "model": "0.152",
+    "mine": "0.158 as modelled, 0.176 as adjusted",
+    "ok": true
+   },
+   {
+    "metric": "notch lift / keeper, white, pass-line materials, 2.5 m/s",
+    "model": "0.149 mm / keeper 0.16",
+    "mine": "0.237 mm / keeper -0.08 (contact), as adjusted",
+    "ok": false
+   },
+   {
+    "metric": "snap notch static pull-off (N)",
+    "model": "4-8 (assumed; criterion 2.72 < 4)",
+    "mine": "1.99 with the model's own lip law (mu 0.25); pop-out at 0.80 mm lift",
+    "ok": false
+   },
+   {
+    "metric": "ghost 2.5 m/s, 0.6 N hold, black / white",
+    "model": "42 % / 37 %",
+    "mine": "42 % / 38 %",
+    "ok": true
+   },
+   {
+    "metric": "ghost 2.5 m/s, 0.5 N hold, white / black",
+    "model": "not evaluated",
+    "mine": "81-84 % / 74-78 % (above 60 %, filter cannot drop)",
+    "ok": false
+   },
+   {
+    "metric": "up-stop peak white 2.0 m/s / black 2.5 m/s (N)",
+    "model": "185 / 261",
+    "mine": "185 / 260",
+    "ok": true
+   },
+   {
+    "metric": "lever rod reaction white 2.0 m/s (N)",
+    "model": "116",
+    "mine": "113",
+    "ok": true
+   },
+   {
+    "metric": "lever-on-pad restitution in the system",
+    "model": "0.06",
+    "mine": "0.061",
+    "ok": true
+   },
+   {
+    "metric": "roof bearing under tapped strip at 459 N (MPa)",
+    "model": "1.90",
+    "mine": "1.85 (1.92 with 3.4 mm hole)",
+    "ok": true
+   },
+   {
+    "metric": "disc spring 6x3.2x0.3 flat force (N per disc)",
+    "model": "153",
+    "mine": "152.8",
+    "ok": true
+   },
+   {
+    "metric": "full return white per §11 (x1 / x2, ms)",
+    "model": "52.4 / 54.8",
+    "mine": "54.4 / 57.6 (< 60)",
+    "ok": true
+   }
+  ],
+  "files": [
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/raw_outputs.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/scen.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/dyn4.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/common.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/massprops.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/statics.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/return1dof.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/t_settle.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/t_split.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/t_capadj.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/t_release2.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/t_ghost_adj.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/t_liftsens.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/t_restit.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/snap.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/strip_bearing.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/physics_r3/scen.py"
+  ]
+ },
+ {
+  "lens": "GEOMETRY/BUILD, round 3. I re-checked geometry.json and model_v4.py independently. My own numpy prism sweep covered module, adjacent modules and end parts: keys at rest, 25/50/75 %, dip, ff and over, plus ff/over with the maximum notch lift; levers at rest, b0, 25/50/75 %, dip, ff, dip_rigid and over. Lateral play: tab play plus pin play for keys; yaw plus directional axial float from the ring/boss layout for levers; cover play ±0.10. Pass rule 1.3 nominal, i.e. 1.0 after ±0.3. I also checked cross-seam fixed-to-fixed parts, re-ran the designer's removal_path for all 12 keys (the designer reported 7), the lever swing with the rail off, capstan access, the spring seat, the balance pin against the stepped block, the dims tables against the polygons, masses, print plan and the spare bay, and tested every judge must-fix and graft against the geometry.",
+  "errors": [
+   {
+    "severity": "major",
+    "issue": "The end-part seams are not buildable as exported. (a) end_fixed_prisms() gives the outer seam fins two-sided bosses, as if they were interior fins. The left end part's boss x43.85–48.15 runs past its own edge (x47) into module 1's end fin (x47.2–48.8) and boss (x47.2–50.15): 0.95 mm x-overlap, with the whole Ø7 boss circle overlapping in y/z at y199.75–206.75, z30–37. The right end part's boss x−1.15–3.15 overlaps module 7's end fin (x−1.8 to −0.2) in the same way. (b) The right end part's seam fin (x0.2–1.8) is a full rectangle, y152–209, z5–72.5. It fills the dovetail groove (x0–4, y198–207, z3–17.3) that module 7's rear male tongue drops into. The module's own end fins are notched to z17.9 over y197.7–207.3 for exactly this reason; the end parts are not. (c) The end parts export no dovetail at all. (d) End-part fins lack the 0.1 inset on the y152–176 front extension, so lever B0 to its fin is 1.255 (0.955 after tolerance). (e) end_part_sweep() never includes the adjacent module, so the reported 'end fin gap 0.40' and 'min 1.31/1.32' miss all of this. Result: an end part cannot be lowered onto module 1 or module 7.",
+    "fix": "In end_fixed_prisms, use one-sided bosses on seam fins (left part [43.85, 46.8]; right part [0.2, 3.15]), as fixed_prisms already does through boss_len. Notch the seam fins (z≥17.9 over y197.7–207.3) the same way as module fins, apply fin_ext_inset, and export the left part's male root/tongue and the right part's female groove. Then add a seam sweep, both fixed-to-fixed and moving, that includes module 1's C/C#/D and module 7's A/A#/B.",
+    "evidence": "seam_check.txt: LEFT end-part boss (43.85, 48.15) vs module 1 fin (47.2, 48.8): −9.25 (full y/z overlap), and vs module 1 boss: −0.001. Module 7 fin (−1.8, −0.2) vs RIGHT part boss (−1.15, 3.15): −9.25. Module 7's male tongue in the right part's groove vs the right part's fin (0.2, 1.8): −11.0. Exported end-part fin polygon [(152,5),(209,5),(209,72.5),(152,72.5)] against the module end fin notched at (197.7,17.9)–(207.3,17.9). end_sweep2.txt: lever B0 rest vs fin 1.255."
+   },
+   {
+    "severity": "major",
+    "issue": "The black-key guide geometry contradicts the tab play used in every sweep and in the roll check. Black keys have no guide ribs; their low walls, 1.2 thick, straddle the tab with an inner width of 10.4 − 2×1.2 = 8.0. The black tab is 7.5 wide. P31 and assembly step 2 put 0.5T cloth on the tab sides ('탭 폭 7.5 + 천 0.5T 양쪽 … ±0.05', '탭 앞면 천·옆 천'). With that cloth the stack is 8.5 in an 8.0 gap: 0.25 mm per side of interference, crushing the cloth to half its thickness. That gives several N of normal force, and a friction far above the modelled guide_drag of 0.02 N, which could jam the black keys. Without the cloth the play is ±0.25, not the ±0.05 (tab_play) that the model applies to every key. The designer's own removal output shows the bare gap: 'pull up 0.25 (wall L low vs tab C#)'. The roll-check note ('tab 7.5 + 0.5T cloth in 8.6 ribs') describes the white keys only.",
+    "fix": "Narrow the black tabs to 6.9 (6.9 + 2×0.5 cloth = 7.9 in the 8.0 gap, ±0.05). The keeper hook, ±2.6 wide, still fits. Then give the black keys their real play in the sweep and the roll check. Because the printed rib and wall gaps are ±0.3 while the target play is ±0.05, also add a stage-0 fit coupon, or choose the cloth thickness per batch.",
+    "evidence": "sweep3_black025.txt (black tab play 0.25): black-white key 1.059 nominal (0.76 after tolerance) against the designer's 1.33; black low wall vs own keeper hook 1.092; A# thin tail (ff with lift) vs lever B 1.082; black thin tail vs fin 1.193. With play 0.05 (sweep3_base.txt) the same pairs are ≥1.3. Geometry: key C# wall L low x16.015–17.215, tab C# x17.465–24.965."
+   },
+   {
+    "severity": "major",
+    "issue": "The optional assist spring (judge must-fix 6 / graft 8, the stated fallback for the 13.7/13.8 Hz doubled-friction repetition margin and for black bottom upweight 17.4 g) cannot be built as drawn. (1) Its seat is a Ø7 plate at y168 under the rail, i.e. y164.5–171.5. The pad holders end at y164.0 and the bridge's top edge begins at y170.0, leaving a 6.0 mm slot, so the plate runs 1.5 mm into the bridge. (2) The carrier-side cup sits on the carrier top at (168, 55.5) at b=0. Because the carrier top is 22 mm above L, the cup moves backward as the lever rises: to y171.05 at spring engagement (55 %) and y173.92 at the white rigid bottom (black 170.56 / 172.93). The spring, modelled as vertical, would lean 14–33° and its axis passes through the bridge front face: at y170 it is at z64.0–69.0, inside the solid z65.2–72.5. (3) P18 gives the seat pocket as Ø4.4×0.6 in a 1.0 plate, while D05 gives Ø4.4×1.5, which a 1.0 plate cannot hold.",
+    "fix": "Redesign the spring. Either use a small torsion spring on the lever rod, with one leg bearing on the bridge underside and the other on the web; it gives pure torque with no sliding and no fight for space under the rail. Or keep a vertical spring but let its lower end slide on a flat steel dish on the carrier top rather than a cup, and fit a Ø≤5.5 seat recessed between y164.2 and y169.8. Then recompute force direction and travel, and make P18 and D05 agree.",
+    "evidence": "misc_checks.txt: seat and cup kinematics (rot about L=(203.25,33.5)); the bridge polygon starts at (170.0,72.5)/(170.26,65.2); pads y150–164. solved.spring: y_s 168, D_out 4.0, z_seat 72.1."
+   },
+   {
+    "severity": "major",
+    "issue": "None of the key adjustments can be made in place, so the procedure in §11 cannot be carried out (judge must-fix 10 is resolved only on paper). Up-stop timing is set by turning the capstan (an M3 button head with a hex socket). The capstan sits under its own lever's felt strip and steel block, and above that are the tapped strip, the rail and the cover. Even with the rail off and the lever pushed to the bridge stop at 15.25°, the felt is only 3.9 mm above the capstan head, which leaves no hex-key access. §11-1 says to set cap-to-pad contact with a 0.79 shim at 1 N, which needs the rail on and the capstan reachable at the same time. Key height (punchings glued under the rest pad) and front putty also need the key out. So every eighth-turn iteration means: cover off, 8 thumb screws out, rail off, hook pull, key out, adjust, then refit and re-flatten all 8 screws, with another 24 h re-tighten. That is repeated for 88 keys.",
+    "fix": "Move the in-place adjustments to parts that can be reached. Set up-stop timing with 0.1 mm shims under each pad holder (reachable with the rail lifted, no key removal), and set the capstan once on a printed height gauge before the key goes in. Set key level on a bench jig that reproduces the rod and shelf, before insertion. Otherwise, add Ø2.5 access holes through steel, felt, strip and rail at each capstan; note that the black C# capstan (x21.215, y181.55) is 1.8 mm from the x23/y182 thumb screw, so the screw would have to move.",
+    "evidence": "misc_checks.txt: with the lever at 15.25° the felt bottom above the white capstan is at z34.90 against the head top at z31.0. The bridge contact angle from my own swing check is 15.1–15.25°, matching the model's service_swing of 15.25°. The strip spans y172–192 across each bay; the rail is solid over y150–210."
+   },
+   {
+    "severity": "major",
+    "issue": "The r3 stepped balance block brings a PETG face to 0.19–0.26 mm from the steel balance pin, and neither sweep checks it. The pin occupies y135.5–137.5 up to z23.3. The lip-region front wall of the stepped block stands at y137.76 over z20.75–22.3, 0.26 behind the pin's rear face at rest, 0.21 (white) and 0.19 (black) at ff. The printed slot's rear end at y138 is only 0.50 behind the pin, falling to 0.26 at the black ff pose. Both sweeps skip the pair as a 'designed fit', but only the slot's x fit is designed; y is supposed to be set by the notch lips. With ±0.3 FDM the pin can bear on the lip wall, fighting the snap notch's y location and stopping it from seating.",
+    "fix": "Move the pin forward by about 1.2 mm, to y135.3 (rear face 136.3, giving 1.46/1.39 to the lip wall). Extend the block front and the slot to y134, and move the rail front to y132.3 so the pin hole keeps its 2.0 front wall. Alternatively, move the slot's rear end and the lip wall at least 1.3 behind the pin.",
+    "evidence": "misc_checks.txt: lip wall vs pin 0.260 at rest, 0.208 at white ff, 0.188 at black ff; slot rear end vs pin 0.500 at rest, 0.261 at black ff. The stepped block polygon in geometry.json contains (137.76,22.3)–(137.76,20.75)."
+   },
+   {
+    "severity": "major",
+    "issue": "Dims entry D11 still carries the r2 pad specification, 'pad e ≤ 0.12 (drop test)'. The r3 design uses e 0.06 with a stage-0 pass line of e ≤ 0.07 (§16 test 1, DESIGN §6). By the design's own ghost tables, a pad accepted at e 0.10–0.12 gives a 97–99 % magnet rise that the firmware filter does not catch. The value is off by more than 70 % and would lead a builder to accept pads that fail.",
+    "fix": "Set D11 to 'pad effective e ≤ 0.07 (R3-cap drop weight 60 g at 2.5 m/s; design 0.06)', matching §16 test 1, and regenerate the dims table in export_geo.py (line 157).",
+    "evidence": "dims_dump.txt line 88 and export_geo.py:157 against DESIGN.md §16 test 1 and §6's ghost tables (e 0.10: white 97 %, black 99 % at 2.5 m/s and 0.6 N, not filtered)."
+   },
+   {
+    "severity": "minor",
+    "issue": "The §0 claim that every clearance is at least 1.0 after ±0.3 tolerance is not true. The white front felt (y1.5–9.8) sits 0.876 from the crossbar and guide-rib front-bottom corner at ff (0.58 after tolerance). This is not a designed contact, and the felt edge is hand-cut. The designer lists it only as a separate 'check item'.",
+    "fix": "Cut the felt to y1.5–9.0 (the floor, y2.7–9.5, stays on it), or chamfer the rib and crossbar front-bottom corners 1×45°, and state the exception in §0.",
+    "evidence": "sweep3_base.txt: 0.876 for every white key at ff (crossbar, rib L, rib R vs the white front felt), matching the designer's 0.87."
+   },
+   {
+    "severity": "minor",
+    "issue": "The white skin-tail-to-cover-curtain clearance of 1.31 ignores the notch lift at the bottom. A slam held at 2.5 m/s lifts the notch 0.062 while the key is at the bottom, giving 1.25 (0.95 after tolerance); a released slam lifts it 0.100, giving 1.21 (0.91).",
+    "fix": "Raise the white curtain bottom from z45.2 to z45.4, or include the notch lift in the ff pose that gets exported.",
+    "evidence": "sweep3_base.txt: skin tail (ff with lift) vs cover curtain 1.210 for keys A–G; results.txt lines 99–100 give white lift 0.062 held and 0.100 released at 2.5 m/s."
+   },
+   {
+    "severity": "minor",
+    "issue": "The spare-key bay has no margin: key length 199.0 plus side zone 139.8 is exactly the 338.8 inner length. There is no divider and no allowance for FDM, since keys can print +0.3.",
+    "fix": "Define the side zone as 338.8 − 199.6 − 1.2 (divider) = 138.0 mm. The contents still fit: both rods, 161.4, lie along the 172 depth, and levers are 58.4 × 26.3 × 10.6.",
+    "evidence": "misc_checks.txt, results.txt §M."
+   },
+   {
+    "severity": "minor",
+    "issue": "Single-key removal is not tool-free, contrary to graft 3's 'removal stays tool-free' and the removal_geometry docstring ('tool-free … fingernail'). It needs the printed Ø30 driver (flattening the discs takes 0.30 N·m, a 50 N rim force on the Ø12 knurl) to take out and refit 8 screws of about 6.5 turns each, then a re-flatten 24 h later, plus the printed hook. A black key needs both white neighbours out first; the designer's model gives −6.55 mm with only one out. Yet assembly step 8 never says to install black keys before their white neighbours. The 72 disc springs per module are not captive. If an L block is forgotten, the levers of E, F, F#, G and G# drop 13–13.5° onto the board components.",
+    "fix": "State the tools in §10 and in the model. Add 'install the 5 black keys first' to step 8. Make the disc stacks captive with an O-ring under the head. Add a permanent printed lever catch about 1° below rest so a lever with no key can never reach the board. Consider a quarter-turn cam clamp in place of the 8 screws.",
+    "evidence": "designer_removal.txt (designer's own removal_path for all 12 keys): with one neighbour out, draw −6.55; results.txt lever-drop lines; DESIGN.md §9–§11."
+   },
+   {
+    "severity": "minor",
+    "issue": "The lever-angle window for removal is narrow and shrinks with adjustment. The pull-up raises the lever to 13.95°, and it meets the bridge at 15.1–15.25° (about 0.9° of window if the bridge underside prints 0.3 low). Each eighth-turn of capstan adds 0.25° at the end of the pull-up, so the half-turn cited in §11-1 adds about 2.0°. Past the window, the lever reaches the bridge before the rear notch lip clears the rod.",
+    "fix": "Relieve the bridge underside at y170–176 by 1.5 mm, or chamfer the carrier's top-front corner, so the lever can reach at least 17°. Also tell the user to push the lever up to the bridge stop, rather than holding it at 14.5°.",
+    "evidence": "My lever swing: bridge clearance 0.43 at 14.5°, 0.08 at 15.0°, −0.06 at 15.2°. removal_w lever_angle_needed_deg 13.95. The capstan-to-L arm is 14.49 mm, so 0.0625 mm is 0.25°."
+   },
+   {
+    "severity": "minor",
+    "issue": "Smaller table, text and fit inconsistencies. P10 gives the maximum lever offset as 1.67, measured from the v3 x-centre; against the actual r3 tail centre it is 1.82 for F (75.693 vs 77.514). results.txt §K says the pull-up stops 0.3 above the rod top, while DESIGN and the parameters say 0.1. S15 says pad face = settled cap top +0.20/−0.70, but the key-point table (64.64/64.69) gives +0.25/−0.65. Dims IDs P06, P08 and P09 are missing. The strip-to-fin clearance of 0.30 per side does not absorb a hand-cut strip at ±0.2 plus ±0.3 FDM. The key rod has 0.25 per end, and its stop posts are 1.0 × 1.4 × 16 printed pins. The cover magnets are Ø6×3 in a 2.5 plate (0.5 proud). Cover and screw heads at z78.0 and z80.7 are 7–10 % above the brief's roughly z73.",
+    "fix": "Regenerate P10 from the actual tail centres, fix the text values, and specify strip length +0/−0.5 with the pocket +0.3. Thicken the rod stop posts to 2×2 or use rod-end clips. Use Ø6×2 magnets or add a 1 mm boss.",
+    "evidence": "misc_checks.txt (P10), dims_dump.txt, results.txt §K, key-point table in DESIGN §4."
+   }
+  ],
+  "confirmed": [
+   "Module sweep reproduced with an independent code and a stricter play model (directional lever axial float from the ring/boss layout, 0.075 per interface, 0.3 per span). Minima: key-key 1.30, lever-lever 1.298 (A#|B at over), lever-fin 1.300, key-curtain 1.31 without lift, key-cradle ≥1.31, lever-bridge 1.41, lever-strip ≥1.64, USB plug-shelf 1.60, beam/thin tail to board ≥1.41, key to sensor bar ≥1.70. No new sub-1.3 pairs apart from the felt edge (0.876) and the ff+lift curtain case, provided the black tab play really is ±0.05.",
+   "Own key to own lever in coupled poses: min 1.345 (beam vs felt strip, over+lift). Rest/over combinations giving 1.21 are physically impossible.",
+   "Exported poses match the stated angles: key dip 4.04/6.23°, ff 4.37/6.82°, over −0.39/−0.37°; lever rest −1.13/−0.61°, rigid bottom 13.13/11.18°, ff 13.03/11.66°, over −2.77/−2.04°, service 14.49°.",
+   "Designer's removal_path, run for all 12 module keys: white pull 0.42, slide 0.10, tilt 0.11, draw 0.52 at a 14.5° hold; black 0.25/0.11/0.11/0.79 with both white neighbours out. Holding at 12° collides (−0.19 to −0.52), 15° improves it (0.67). The lever meets the bridge at about 15.1–15.25° with the rail off.",
+   "Module dovetails: module end fins notched to z17.9 over y197.7–207.3; key tail/rest pad to the rear dovetail 2.43; module-to-module seams 0.4 (cover and fin), 1.2 (rail); module bosses one-sided; neighbouring strips 4.2 apart; screw heads 4.0 apart across a seam.",
+   "Must-fix/graft items resolved in the geometry: MF1 (thumb screws into tapped strips, end fins 1.6), MF2 (black pad faces 0.85 lower, holder 5.46 vs 3.61), MF5 (tree supports, steel capstan screw), MF8 (listed pairs now ≥1.3), MF9 (11 cradles, block to cradle 1.48 nominal), MF11 (rings/bosses give ≥1.5 lever-lever and ≥1.35 lever-fin at zero float), MF12 (ribs at x75/x93, 2.15 from the plug), MF16 (cover on the rail with 2 Ø3 pins; skirt 1.8 from the rear bar; cover z78 below the centre unit's z122 and the speaker cutout bottom at about z95), G1, G4, G5, G6 (2.0×45 chamfer, 0.80 wall), G7.",
+   "Dims agree with the polygons: P03 22.04, P04 1.46/1.62, P05 10.4/9.5, P07 1.654, P12 fins and spans 40.7/41.7/40.6/39.6, P13 screws, P14 rings (gap minus ring = 0.07–0.08), P15, P16, P17, P20, P21, P22, S04 (opening 3.816, wrap 222.9°), S05 (groove width 3.52), S07–S19 stack (12 − 9.2 = 2.8 engagement, tip 1.2 above the strip bottom), A09 metal total 9.52 kg.",
+   "Disc stack: Almen-László for 6×3.2×0.3 with h0 0.15 gives 152.8 N per disc when flat, so 3 in parallel = 458 N (model 459).",
+   "Masses and print: steel block 75.8 g, rail 231 g, strips 96 g, rods 16.1/9.0 g, module 2.031 kg by summation; 6.54 kg at 15 g/h = 436 h; every part fits a 220×220 bed (frame 164.5 plus 4 mm tongue × 212, key 199 × 22.04, left end part 67 × 212). Keys print top-down with the notch and pin slot opening at the print top.",
+   "Spare bay: 7 white layer (199 × 160.3 × 23.4) plus black and end-key layer (199 × 139.8 × 35.4), 58.8 of 77 high; rods (161.4) fit along the 172 depth; the only problem is zero length margin."
+  ],
+  "recomputed": [
+   {
+    "metric": "min lever-lever clearance incl. axial float + yaw (nominal)",
+    "model": "1.37",
+    "mine": "1.298",
+    "ok": true
+   },
+   {
+    "metric": "min lever-fin clearance incl. float",
+    "model": "1.37",
+    "mine": "1.300",
+    "ok": true
+   },
+   {
+    "metric": "black-white key clearance with the real black guide play (±0.25, no side cloth)",
+    "model": "1.33",
+    "mine": "1.059",
+    "ok": false
+   },
+   {
+    "metric": "black low wall vs own keeper hook (±0.25 play)",
+    "model": "1.33",
+    "mine": "1.092",
+    "ok": false
+   },
+   {
+    "metric": "white front felt vs crossbar/rib (nominal)",
+    "model": "0.87",
+    "mine": "0.876",
+    "ok": true
+   },
+   {
+    "metric": "white skin tail vs curtain at ff incl. 2.5 m/s notch lift",
+    "model": "1.31",
+    "mine": "1.21-1.25",
+    "ok": false
+   },
+   {
+    "metric": "left end-part boss vs module-1 end fin (x gap)",
+    "model": "0.40 (fin-fin only)",
+    "mine": "-0.95 (overlap)",
+    "ok": false
+   },
+   {
+    "metric": "right end-part seam fin vs module-7 rear male tongue",
+    "model": "not checked",
+    "mine": "-11 (full overlap)",
+    "ok": false
+   },
+   {
+    "metric": "end-part lever B0 vs fin (float + yaw, no inset)",
+    "model": "≥1.31",
+    "mine": "1.255",
+    "ok": false
+   },
+   {
+    "metric": "balance pin vs stepped-block lip wall (rest / black ff)",
+    "model": "excluded as designed fit",
+    "mine": "0.26 / 0.19",
+    "ok": false
+   },
+   {
+    "metric": "assist-spring cup y-travel at white rigid bottom / spring tilt",
+    "model": "0 (vertical)",
+    "mine": "5.9 mm / 32.8 deg",
+    "ok": false
+   },
+   {
+    "metric": "space for Ø7 spring seat between pad (y164) and bridge (y170)",
+    "model": "fits",
+    "mine": "6.0 available, 7.0 needed",
+    "ok": false
+   },
+   {
+    "metric": "felt-to-capstan head gap with rail off, lever at bridge stop",
+    "model": "(capstan adjustable in place)",
+    "mine": "3.9 mm, no tool access",
+    "ok": false
+   },
+   {
+    "metric": "lever angle at bridge contact (rail off)",
+    "model": "15.25",
+    "mine": "15.1-15.25",
+    "ok": true
+   },
+   {
+    "metric": "lever angle reached by the pull-up",
+    "model": "13.95",
+    "mine": "13.95 (designer model rerun)",
+    "ok": true
+   },
+   {
+    "metric": "removal draw-out min clearance, white / black (14.5 deg hold)",
+    "model": "0.52 / 0.79",
+    "mine": "0.52 / 0.79 for all 12 keys",
+    "ok": true
+   },
+   {
+    "metric": "disc stack flat preload",
+    "model": "459 N",
+    "mine": "458 N",
+    "ok": true
+   },
+   {
+    "metric": "module mass",
+    "model": "2.03 kg",
+    "mine": "2.03 kg",
+    "ok": true
+   },
+   {
+    "metric": "filament / print time (88 keys)",
+    "model": "6.54 kg / 436 h",
+    "mine": "6.54 kg / 436 h",
+    "ok": true
+   },
+   {
+    "metric": "spare bay length used",
+    "model": "338.8 of 338.8",
+    "mine": "338.8 of 338.8 (0 margin)",
+    "ok": false
+   },
+   {
+    "metric": "max lever offset from tail centre (P10)",
+    "model": "1.67",
+    "mine": "1.82 (F)",
+    "ok": false
+   },
+   {
+    "metric": "pad effective e spec in D11 vs stage-0 line",
+    "model": "0.12",
+    "mine": "0.07",
+    "ok": false
+   }
+  ],
+  "files": [
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/g3lib.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/fit_poses.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/pose_fit.json",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/sweep3.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/sweep3_base.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/sweep3_black025.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/end_sweep2.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/end_sweep2.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/seam_check.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/seam_check.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/misc_checks.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/misc_checks.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/run_designer_removal.py",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/designer_removal.txt",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/designer_removal_all.json",
+   "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify2/geometry_r3/dims_dump.txt"
+  ]
+ }
+]

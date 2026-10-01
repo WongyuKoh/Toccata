@@ -1,0 +1,1372 @@
+{
+ "_meta": {
+  "compiled": "2026-09-24",
+  "scope": "reference dimensions for piano keys/actions; every number has a source URL or is marked derived",
+  "raw_files": "research/raw/"
+ },
+ "layout": {
+  "_convention": "All x positions measured from the left edge of the C key slot, no gaps (nominal pitch) unless stated. Octave used for derived tables: 164.5 mm.",
+  "octave_span": {
+   "value": [
+    164,
+    165
+   ],
+   "unit": "mm",
+   "source": "https://en.wikipedia.org/wiki/Musical_keyboard",
+   "note": "'Modern piano keyboards ordinarily have an octave span of 164-165 mm'"
+  },
+  "octave_span_6.5in": {
+   "value": 165.1,
+   "unit": "mm",
+   "source": "https://www.steingraeber.de/innovationen/schmale-klaviaturen/",
+   "note": "Steingraeber: today's standard keyboards have octave 6.5 in = 165.1 mm"
+  },
+  "din_8995_50_white_keys": {
+   "value": 1180,
+   "unit": "mm (+/-4)",
+   "source": "https://de.wikipedia.org/wiki/Klaviatur",
+   "note": "DIN 8995:1985 'Klaviatur fuer Pianos und Fluegel; Masse': 7 full octaves (50 white keys) = 118.0 +/- 0.4 cm -> 23.6 mm white pitch, 165.2 mm octave (derived)"
+  },
+  "octave_older_dorf": {
+   "value": [
+    164.0,
+    164.2
+   ],
+   "unit": "mm",
+   "source": "http://www.quadibloc.com/other/cnv05.htm",
+   "note": "citing Dorf, Electronic Musical Instruments (~6.46 in)"
+  },
+  "white_key_pitch": {
+   "value": 23.5,
+   "unit": "mm",
+   "source": "https://en.wikipedia.org/wiki/Musical_keyboard",
+   "note": "'white keys about 23.5 mm at the base, disregarding space between keys'"
+  },
+  "black_key_pitch_average": {
+   "value": 13.7,
+   "unit": "mm",
+   "source": "https://en.wikipedia.org/wiki/Musical_keyboard",
+   "note": "Wikipedia 'black keys averaging 13.7 mm' = octave/12 tail pitch, NOT the black keytop width"
+  },
+  "white_key_front_width": {
+   "keytop_head_width_7_8in": {
+    "value": 22.2,
+    "unit": "mm",
+    "source": "https://www.amazon.com/Piano-Keytops-Replacement-White-Complete/dp/B076CLDMWL",
+    "confidence": "low",
+    "note": "short-head replacement keytop set: head 1-15/16 in long x 7/8 in wide, tail 1/2 in wide x 4-1/16 in long (from search-result text; product page not rendered)"
+   },
+   "minimum_acceptable": {
+    "value": 22.0,
+    "unit": "mm",
+    "source": "https://www.reyburnpianoworks.com/evaluation",
+    "note": "Reyburn: minimum acceptable key width about 0.870 in / 22.0 mm; max variation between adjacent keys about 1.0 mm"
+   },
+   "key_front_piece_width": {
+    "value": 22.2,
+    "unit": "mm",
+    "source": "https://www.howardpianoindustries.com/piano-key-fronts-white/",
+    "note": "replacement key fronts 7/8 in wide x 1-1/32 in (22 x 27 mm)"
+   }
+  },
+  "white_key_gap": {
+   "organ_nominal": {
+    "value": 1.27,
+    "unit": "mm",
+    "source": "http://web.archive.org/web/20211204101032/http://rwgiangiulio.com/construction/manual/",
+    "note": "Giangiulio built his manuals with a nominal .050 in gap between all surfaces; natural fronts drawn at 22.15 mm on a 164/7 = 23.43 mm pitch"
+   },
+   "piano_derived": {
+    "value": [
+     1.0,
+     1.5
+    ],
+    "unit": "mm",
+    "source": "derived",
+    "derived_from": [
+     "https://en.wikipedia.org/wiki/Musical_keyboard",
+     "https://www.howardpianoindustries.com/piano-key-fronts-white/"
+    ],
+    "calc": "23.5 pitch - ~22.2 head width = ~1.3 mm"
+   }
+  },
+  "black_key": {
+   "width_ebony_sharp": {
+    "value": 11.5,
+    "unit": "mm",
+    "source": "https://www.reyburnpianoworks.com/store/ebony-sharps",
+    "note": "Reyburn genuine ebony sharps: 95 mm long, 11.5 mm wide, 14.0 or 14.5 mm tall"
+   },
+   "width_base_plastic_sharp": {
+    "value": 10.3,
+    "unit": "mm",
+    "source": "https://www.howardpianoindustries.com/piano-sharps-high-gloss/",
+    "note": "'Base of keytop is 13/32 in wide' (10.3 mm) - this is the plastic sharp shell base"
+   },
+   "width_organ_laukhuff": {
+    "value": 11.0,
+    "unit": "mm",
+    "source": "http://web.archive.org/web/20211204101032/http://rwgiangiulio.com/construction/manual/",
+    "note": "Laukhuff catalog via Giangiulio: width of sharps 11 mm (organ)"
+   },
+   "top_width": {
+    "value": null,
+    "note": "No authoritative top-width figure found; sharps taper to roughly 9-10 mm at the top (unverified). Treat as design choice."
+   },
+   "length_visible": [
+    {
+     "value": 88.9,
+     "unit": "mm (3-1/2 in)",
+     "source": "https://www.stevespianoservice.com/Online-Piano-Parts-Catalog/piano-key-keytops-and-ivories.htm"
+    },
+    {
+     "value": 95.25,
+     "unit": "mm (3-3/4 in)",
+     "source": "https://www.stevespianoservice.com/Online-Piano-Parts-Catalog/piano-key-keytops-and-ivories.htm"
+    },
+    {
+     "value": 95,
+     "unit": "mm",
+     "source": "https://www.reyburnpianoworks.com/store/ebony-sharps"
+    },
+    {
+     "value": 80,
+     "unit": "mm (organ, Laukhuff)",
+     "source": "http://web.archive.org/web/20211204101032/http://rwgiangiulio.com/construction/manual/"
+    },
+    {
+     "value": 86,
+     "unit": "mm (Fatar TP/9S synth action)",
+     "source": "https://www.antonus-synths.com/enlo-1/fatar/DataSheet-TP9S+P.pdf"
+    }
+   ],
+   "sharp_stock_height": [
+    {
+     "value": 14.0,
+     "unit": "mm (.550 in)",
+     "source": "https://www.stevespianoservice.com/Online-Piano-Parts-Catalog/piano-key-keytops-and-ivories.htm"
+    },
+    {
+     "value": 15.1,
+     "unit": "mm (.595 in)",
+     "source": "https://www.stevespianoservice.com/Online-Piano-Parts-Catalog/piano-key-keytops-and-ivories.htm"
+    },
+    {
+     "value": [
+      14.0,
+      14.5
+     ],
+     "unit": "mm",
+     "source": "https://www.reyburnpianoworks.com/store/ebony-sharps"
+    }
+   ],
+   "top_above_white_surface": [
+    {
+     "value": [
+      12.0,
+      12.7
+     ],
+     "unit": "mm",
+     "source": "http://www.pianosinsideout.com/action.pdf",
+     "note": "'black keys ... are set to 0.475-0.500 in [12.0-12.7 mm] above white tops'"
+    },
+    {
+     "value": 12.7,
+     "unit": "mm (1/2 in)",
+     "source": "http://pianotuningmatters.blogspot.com/2015/11/50-point-guide-to-grand-regulation.html"
+    },
+    {
+     "value": 10.27,
+     "unit": "mm",
+     "source": "https://www.antonus-synths.com/enlo-1/fatar/DataSheet-TP9S+P.pdf",
+     "calc": "57.77 - 47.5 from side-view drawing"
+    }
+   ],
+   "rear_shorter_than_front_organ": {
+    "value": 1.5,
+    "unit": "mm",
+    "source": "http://web.archive.org/web/20211204101032/http://rwgiangiulio.com/construction/manual/",
+    "note": "Laukhuff: sharps 1.5 mm shorter at the rear (i.e., slightly tapered in plan/side)"
+   }
+  },
+  "white_key_visible_length": [
+   {
+    "value": 154.0,
+    "unit": "mm (6-1/16 in)",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2376240/Steinway_Key_Length.html",
+    "note": "1942 Steinway B white surface"
+   },
+   {
+    "value": 150.8,
+    "unit": "mm (5-15/16 in)",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2376240/Steinway_Key_Length.html",
+    "note": "Estonia 190, Mason & Hamlin BB, Young Chang"
+   },
+   {
+    "value": 146.0,
+    "unit": "mm (~5-3/4 in)",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2376240/Steinway_Key_Length.html",
+    "note": "Steinway L"
+   },
+   {
+    "value": 155.6,
+    "unit": "mm (6-1/8 in)",
+    "source": "https://www.everettpianoservices.com/products/german-piano-keytops-with-attached-fronts-for-keytop-replacement",
+    "note": "German replacement keytop overall length"
+   },
+   {
+    "value": 158.8,
+    "unit": "mm (6.25 in)",
+    "source": "https://www.reyburnpianoworks.com/store/ivocor-shaped-keytop-set-with-fronts",
+    "note": "Ivocor keytop blank 6.25 x 1.0 in (159 x 25 mm), trimmed to fit"
+   },
+   {
+    "value": 136,
+    "unit": "mm",
+    "source": "https://www.antonus-synths.com/enlo-1/fatar/DataSheet-TP9S+P.pdf",
+    "note": "Fatar TP/9S synth action (short)"
+   },
+   {
+    "value": 126.27,
+    "unit": "mm (organ)",
+    "source": "http://web.archive.org/web/20211204101032im_/http://rwgiangiulio.com/construction/manual/layout.jpg",
+    "note": "organ manual: 45 head + 1.27 gap + 80 sharp"
+   }
+  ],
+  "black_key_front_from_white_front": [
+   {
+    "value": [
+     50,
+     52
+    ],
+    "unit": "mm",
+    "source": "https://www.everettpianoservices.com/products/german-piano-keytops-with-attached-fronts-for-keytop-replacement",
+    "note": "keytop 'head' length (front wide part ahead of sharps) 50 or 52 mm"
+   },
+   {
+    "value": [
+     50,
+     52
+    ],
+    "unit": "mm",
+    "source": "https://www.stevespianoservice.com/Online-Piano-Parts-Catalog/piano-key-keytops-and-ivories.htm",
+    "note": "German keytops with 50 mm or 52 mm heads"
+   },
+   {
+    "value": 50,
+    "unit": "mm",
+    "source": "https://www.antonus-synths.com/enlo-1/fatar/DataSheet-TP9S+P.pdf"
+   },
+   {
+    "value": 46.27,
+    "unit": "mm (organ)",
+    "source": "http://web.archive.org/web/20211204101032im_/http://rwgiangiulio.com/construction/manual/layout.jpg",
+    "note": "45 mm natural front + 1.27 gap"
+   }
+  ],
+  "white_keytop_thickness": [
+   {
+    "value": 2.03,
+    "unit": "mm (.080 in)",
+    "source": "https://www.everettpianoservices.com/products/german-piano-keytops-with-attached-fronts-for-keytop-replacement"
+   },
+   {
+    "value": 1.9,
+    "unit": "mm (.075 in, molded with .066 in fronts)",
+    "source": [
+     "http://www.pianorepairtools.com/Keytops-with-Fronts-Kluge.html",
+     "https://www.amazon.com/Piano-Key-Fronts-Simulated-Ivory/dp/B014UC0QK2"
+    ],
+    "confidence": "low",
+    "note": "pre-molded keytops .075 in thick with attached .066 in fronts, heads 7/8 x 15/16 in; also Kluge blanks 158 x 25 x 2 mm - taken from search-result text, pages not rendered"
+   }
+  ],
+  "front_skirt_key_front_piece": {
+   "value": {
+    "width": 22.2,
+    "height": 26.2
+   },
+   "unit": "mm (7/8 x 1-1/32 in)",
+   "source": "https://www.howardpianoindustries.com/piano-key-fronts-white/",
+   "note": "replacement key-front plate; ~26 mm is the vertical face height of a wooden key head"
+  },
+  "total_88_key_width_derived": {
+   "value": 1222,
+   "unit": "mm",
+   "source": "derived",
+   "derived_from": [
+    "https://en.wikipedia.org/wiki/Musical_keyboard"
+   ],
+   "calc": "52 white keys x 23.5 mm"
+  }
+ },
+ "tails": {
+  "_explanation": "Behind the heads, 12 key 'tails' (7 white-key tail strips + 5 black keys) share one octave. C-E holds 5 tails in 3 white heads; F-B holds 7 tails in 4 heads. With equal heads (W = O/7) the ideal equal tail (O/12) cannot fit both groups: 3W/5 = 14.10 != 4W/7 = 13.43 (quadibloc, datagenetics, mathpages). German practice names two divisions: 'Pianoteilung' (every key equally wide, black keys not all centred) and 'Riegerteilung' (rear/tail keys of F, G and A made wider) - de.wikipedia Klaviatur.",
+  "sources": [
+   "http://www.quadibloc.com/other/cnv05.htm",
+   "http://datagenetics.com/blog/may32016/index.html",
+   "https://www.mathpages.com/home/kmath043.htm",
+   "https://de.wikipedia.org/wiki/Klaviatur",
+   "http://web.archive.org/web/20211204101032/http://rwgiangiulio.com/construction/manual/"
+  ],
+  "octave_mm": 164.5,
+  "white_head_mm": 23.5,
+  "method_equal": {
+   "description": "All 12 tails = O/12 = 13.708 mm; black keys on a uniform 13.708 mm grid (centres at (k+0.5)*O/12). With equal 23.5 mm heads the E|F boundary sits at 70.50 mm at the front but 68.54 mm at the back -> a 1.96 mm jog in E and F (B|C boundary has no jog). Alternative per quadibloc: keep tails equal and make heads unequal: C,D,E heads = 5p/3 = 22.85 mm, F,G,A,B heads = 7p/4 = 23.99 mm (20:21 ratio).",
+   "source": [
+    "http://www.quadibloc.com/other/cnv05.htm",
+    "https://de.wikipedia.org/wiki/Klaviatur",
+    "http://datagenetics.com/blog/may32016/index.html"
+   ],
+   "keys": {
+    "C": {
+     "tail_width_mm": 13.71,
+     "left_mm": 0,
+     "right_mm": 13.71
+    },
+    "C#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 13.71,
+     "right_mm": 27.42,
+     "centre_mm": 20.56
+    },
+    "D": {
+     "tail_width_mm": 13.71,
+     "left_mm": 27.42,
+     "right_mm": 41.12
+    },
+    "D#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 41.12,
+     "right_mm": 54.83,
+     "centre_mm": 47.98
+    },
+    "E": {
+     "tail_width_mm": 13.71,
+     "left_mm": 54.83,
+     "right_mm": 68.54
+    },
+    "F": {
+     "tail_width_mm": 13.71,
+     "left_mm": 68.54,
+     "right_mm": 82.25
+    },
+    "F#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 82.25,
+     "right_mm": 95.96,
+     "centre_mm": 89.1
+    },
+    "G": {
+     "tail_width_mm": 13.71,
+     "left_mm": 95.96,
+     "right_mm": 109.67
+    },
+    "G#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 109.67,
+     "right_mm": 123.37,
+     "centre_mm": 116.52
+    },
+    "A": {
+     "tail_width_mm": 13.71,
+     "left_mm": 123.37,
+     "right_mm": 137.08
+    },
+    "A#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 137.08,
+     "right_mm": 150.79,
+     "centre_mm": 143.94
+    },
+    "B": {
+     "tail_width_mm": 13.71,
+     "left_mm": 150.79,
+     "right_mm": 164.5
+    }
+   },
+   "EF_jog_mm": 1.96,
+   "unequal_head_variant_mm": {
+    "C_D_E": 22.85,
+    "F_G_A_B": 23.99
+   }
+  },
+  "method_group": {
+   "description": "Divide C-E (3 heads = 70.5 mm) into 5 equal tails of 14.10 mm and F-B (4 heads = 94.0 mm) into 7 equal tails of 13.43 mm. Straight E|F and B|C boundaries, G# exactly centred on G|A, D symmetric. Black keys C#/D# are 0.67 mm wider than F#/G#/A# if they fill their tails (datagenetics 'scenario 1': 504 vs 480 units of 5880/octave).",
+   "source": [
+    "http://datagenetics.com/blog/may32016/index.html",
+    "http://www.quadibloc.com/other/cnv05.htm"
+   ],
+   "keys": {
+    "C": {
+     "tail_width_mm": 14.1,
+     "left_mm": 0,
+     "right_mm": 14.1
+    },
+    "C#": {
+     "tail_width_mm": 14.1,
+     "left_mm": 14.1,
+     "right_mm": 28.2,
+     "centre_mm": 21.15
+    },
+    "D": {
+     "tail_width_mm": 14.1,
+     "left_mm": 28.2,
+     "right_mm": 42.3
+    },
+    "D#": {
+     "tail_width_mm": 14.1,
+     "left_mm": 42.3,
+     "right_mm": 56.4,
+     "centre_mm": 49.35
+    },
+    "E": {
+     "tail_width_mm": 14.1,
+     "left_mm": 56.4,
+     "right_mm": 70.5
+    },
+    "F": {
+     "tail_width_mm": 13.43,
+     "left_mm": 70.5,
+     "right_mm": 83.93
+    },
+    "F#": {
+     "tail_width_mm": 13.43,
+     "left_mm": 83.93,
+     "right_mm": 97.36,
+     "centre_mm": 90.64
+    },
+    "G": {
+     "tail_width_mm": 13.43,
+     "left_mm": 97.36,
+     "right_mm": 110.79
+    },
+    "G#": {
+     "tail_width_mm": 13.43,
+     "left_mm": 110.79,
+     "right_mm": 124.21,
+     "centre_mm": 117.5
+    },
+    "A": {
+     "tail_width_mm": 13.43,
+     "left_mm": 124.21,
+     "right_mm": 137.64
+    },
+    "A#": {
+     "tail_width_mm": 13.43,
+     "left_mm": 137.64,
+     "right_mm": 151.07,
+     "centre_mm": 144.36
+    },
+    "B": {
+     "tail_width_mm": 13.43,
+     "left_mm": 151.07,
+     "right_mm": 164.5
+    }
+   }
+  },
+  "method_identical_sharps": {
+   "description": "mathpages: identical black keys of width B with white tails c=d=e=W-2B/3 and f=g=a=b=W-3B/4; max discrepancy B/12 (used on Roland PC-100). Table uses B = O/12.",
+   "source": "https://www.mathpages.com/home/kmath043.htm",
+   "keys": {
+    "C": {
+     "tail_width_mm": 14.36,
+     "left_mm": 0,
+     "right_mm": 14.36
+    },
+    "C#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 14.36,
+     "right_mm": 28.07,
+     "centre_mm": 21.22
+    },
+    "D": {
+     "tail_width_mm": 14.36,
+     "left_mm": 28.07,
+     "right_mm": 42.43
+    },
+    "D#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 42.43,
+     "right_mm": 56.14,
+     "centre_mm": 49.28
+    },
+    "E": {
+     "tail_width_mm": 14.36,
+     "left_mm": 56.14,
+     "right_mm": 70.5
+    },
+    "F": {
+     "tail_width_mm": 13.22,
+     "left_mm": 70.5,
+     "right_mm": 83.72
+    },
+    "F#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 83.72,
+     "right_mm": 97.43,
+     "centre_mm": 90.57
+    },
+    "G": {
+     "tail_width_mm": 13.22,
+     "left_mm": 97.43,
+     "right_mm": 110.65
+    },
+    "G#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 110.65,
+     "right_mm": 124.35,
+     "centre_mm": 117.5
+    },
+    "A": {
+     "tail_width_mm": 13.22,
+     "left_mm": 124.35,
+     "right_mm": 137.57
+    },
+    "A#": {
+     "tail_width_mm": 13.71,
+     "left_mm": 137.57,
+     "right_mm": 151.28,
+     "centre_mm": 144.43
+    },
+    "B": {
+     "tail_width_mm": 13.22,
+     "left_mm": 151.28,
+     "right_mm": 164.5
+    }
+   }
+  },
+  "giangiulio_measured_organ": {
+   "description": "R. Giangiulio homemade organ manual (Laukhuff-based): octave 164 mm, all sharps 11 mm, naturals 22.15 mm wide at front, 0.050 in (1.27 mm) gap everywhere; white-key tail widths (material, excluding gap): C=D=E 13.97, F=B 12.83, G=A 13.08 mm; sharps 80 mm long, natural fronts 45 mm, overall 126.27 mm. Equivalent to the identical-sharps method with the F-B error split between F/B and G/A.",
+   "source": [
+    "http://web.archive.org/web/20211204101032/http://rwgiangiulio.com/construction/manual/",
+    "http://web.archive.org/web/20211204101032im_/http://rwgiangiulio.com/construction/manual/layout.jpg"
+   ],
+   "tail_material_mm": {
+    "C": 13.97,
+    "C#": 11,
+    "D": 13.97,
+    "D#": 11,
+    "E": 13.97,
+    "F": 12.83,
+    "F#": 11,
+    "G": 13.08,
+    "G#": 11,
+    "A": 13.08,
+    "A#": 11,
+    "B": 12.83
+   },
+   "black_centres_mm_derived": {
+    "C#": 21.38,
+    "D#": 48.89,
+    "F#": 90.5,
+    "G#": 117.12,
+    "A#": 143.74
+   },
+   "derived_calc": "cumulative (width+1.27) from C left edge; check sum 163.97 vs 164"
+  },
+  "not_found": "No 'Bill Hyde' piano-key-dimension reference could be located."
+ },
+ "touch": {
+  "key_dip_white": [
+   {
+    "value": [
+     9.5,
+     11.0
+    ],
+    "unit": "mm",
+    "source": "http://www.pianosinsideout.com/action.pdf",
+    "note": "modern piano, 0.375-0.435 in"
+   },
+   {
+    "value": 10.16,
+    "unit": "mm (0.4 in +/-0.01; 13/32 common)",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "Steinway NY grand & upright"
+   },
+   {
+    "value": [
+     9.9,
+     10.6
+    ],
+    "unit": "mm",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "Steinway Hamburg grand"
+   },
+   {
+    "value": 10.0,
+    "unit": "mm",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "Steinway Hamburg upright"
+   },
+   {
+    "value": 10.0,
+    "unit": "mm",
+    "source": "https://www.designreview.byu.edu/collections/meeting-the-pianists-expectations-the-grand-piano-action-ratio"
+   },
+   {
+    "value": 9.5,
+    "unit": "mm (3/8 in)",
+    "source": "https://www.pianofinders.com/educational/touchweight.htm"
+   }
+  ],
+  "key_dip_black_derived": {
+   "value": 9.5,
+   "unit": "mm",
+   "source": "derived",
+   "derived_from": [
+    "http://pianotuningmatters.blogspot.com/2015/11/50-point-guide-to-grand-regulation.html"
+   ],
+   "calc": "sharp sits 1/2 in above naturals at rest and ~1/8 in above naturals when depressed -> 12.7-3.2 = ~9.5 mm"
+  },
+  "aftertouch": [
+   {
+    "value": 1.5,
+    "unit": "mm",
+    "source": "https://www.designreview.byu.edu/collections/meeting-the-pianists-expectations-the-grand-piano-action-ratio"
+   },
+   {
+    "value": [
+     0.8,
+     1.2
+    ],
+    "unit": "mm",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "Hamburg grand"
+   },
+   {
+    "value": [
+     1.0,
+     1.4
+    ],
+    "unit": "mm (0.04-0.055 in)",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "NY"
+   }
+  ],
+  "downweight": [
+   {
+    "value": 50,
+    "unit": "g",
+    "source": "https://www.pianofinders.com/educational/touchweight.htm",
+    "note": "'about standard'; <45 light, >=55 heavy; Steinway S/M/L taper 50 bass -> 47 treble"
+   },
+   {
+    "value": {
+     "bass": 50,
+     "middle": 48,
+     "treble": [
+      46,
+      47
+     ]
+    },
+    "unit": "g",
+    "source": "http://www.pianosinsideout.com/action.pdf",
+    "note": ">55 g perceived heavy; <=45 g light; note-to-note +/-2 g"
+   },
+   {
+    "value": [
+     47,
+     52
+    ],
+    "unit": "g",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/"
+   }
+  ],
+  "upweight": [
+   {
+    "value": ">=20",
+    "unit": "g",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/"
+   },
+   {
+    "value": [
+     23,
+     24
+    ],
+    "unit": "g",
+    "source": "http://www.pianosinsideout.com/action.pdf",
+    "note": "for DW 48 g on a new well-lubricated action"
+   },
+   {
+    "value": 20,
+    "unit": "g",
+    "source": "https://www.pianofinders.com/educational/touchweight.htm"
+   }
+  ],
+  "dw_minus_uw_normal": {
+   "value": [
+    20,
+    30
+   ],
+   "unit": "g",
+   "source": "https://www.pianofinders.com/educational/touchweight.htm"
+  },
+  "measurement_point": {
+   "value": 13,
+   "unit": "mm from key front",
+   "source": "http://www.pianosinsideout.com/action.pdf",
+   "note": "standard measurement position; DW read from ~4 mm dip"
+  },
+  "blow_distance": [
+   {
+    "value": [
+     45,
+     48
+    ],
+    "unit": "mm",
+    "source": "http://www.pianosinsideout.com/action.pdf"
+   },
+   {
+    "value": 47,
+    "unit": "mm",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "Hamburg grand"
+   },
+   {
+    "value": 45,
+    "unit": "mm (+/-2)",
+    "source": "https://www.designreview.byu.edu/collections/meeting-the-pianists-expectations-the-grand-piano-action-ratio"
+   }
+  ],
+  "action_leverage": [
+   {
+    "value": [
+     5.2,
+     5.6
+    ],
+    "unit": ": 1 typical",
+    "source": "http://www.pianosinsideout.com/action.pdf",
+    "note": "measured as hammer rise / 6 mm key dip; worked example 5.4"
+   },
+   {
+    "value": [
+     4.9,
+     5.3
+    ],
+    "unit": ": 1",
+    "source": "https://www.designreview.byu.edu/collections/meeting-the-pianists-expectations-the-grand-piano-action-ratio"
+   },
+   {
+    "value": [
+     5,
+     7
+    ],
+    "unit": ": 1",
+    "source": "https://www.pianofinders.com/educational/touchweight.htm"
+   }
+  ],
+  "strike_weight": {
+   "value": {
+    "bass": [
+     9.5,
+     14
+    ],
+    "treble": [
+     3.5,
+     7
+    ]
+   },
+   "unit": "g",
+   "source": "http://www.pianosinsideout.com/action.pdf",
+   "note": "'Strike weight is the single largest source of inertia in the grand action'"
+  },
+  "inertia_notes": [
+   {
+    "note": "Static touchweight governs soft playing; inertia (strike weight x leverage, key leads) governs force in loud/fast playing. Lead in keys raises key inertia; springs/magnets can lower static touchweight without adding inertia.",
+    "source": "http://www.pianosinsideout.com/action.pdf"
+   },
+   {
+    "note": "Reflected hammer mass at key front ~ SW x leverage^2 ~ 10 g x 5.5^2 ~ 300 g-equivalent (order of magnitude).",
+    "source": "derived",
+    "derived_from": [
+     "http://www.pianosinsideout.com/action.pdf"
+    ]
+   },
+   {
+    "note": "Forum observation: digital actions tend to have higher static touchweight but lower moment of inertia than acoustic actions.",
+    "source": "https://forum.pianotell.com/d/1602-digital-piano-action-pivot-length",
+    "confidence": "low"
+   }
+  ],
+  "grand_front_to_balance": [
+   {
+    "value": 259.5,
+    "unit": "mm",
+    "source": "https://www.reyburnpianoworks.com/evaluation",
+    "note": "worked example: F=259.5, capstan C=398, key ratio 0.53"
+   },
+   {
+    "value": 270,
+    "unit": "mm",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/2.html",
+    "note": "Steinway Model B 27 cm (forum measurement)"
+   },
+   {
+    "value": 262,
+    "unit": "mm",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/2.html",
+    "note": "Kawai GX-2 26.2 cm"
+   },
+   {
+    "value": 282,
+    "unit": "mm",
+    "source": "https://cdn-01.pianotell.com/imgur/P9Mgd1Gh.jpeg",
+    "note": "grand action picture used as 100% reference, scaled from image",
+    "confidence": "low"
+   },
+   {
+    "note": "'Few grands have a shorter pivot than the low 20s. Large grands are usually mid 20s to around 30' cm",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/key-pivot-length.html"
+   }
+  ],
+  "key_ratio": {
+   "value": {
+    "range": [
+     0.47,
+     0.6
+    ],
+    "large_B_D": [
+     0.5,
+     0.52
+    ],
+    "smaller": [
+     0.48,
+     0.5
+    ]
+   },
+   "unit": "",
+   "source": "https://www.reyburnpianoworks.com/evaluation"
+  },
+  "upright_front_to_balance": {
+   "value": null,
+   "note": "No authoritative upright figure found; forum lore puts small uprights ~18-20 cm, but unverified.",
+   "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/key-pivot-length.html",
+   "confidence": "low"
+  },
+  "total_key_length": [
+   {
+    "value": 622.3,
+    "unit": "mm (24-1/2 in, longest key, Steinway D)",
+    "source": "https://www.steinway.com/pianos/steinway/grand/model-d"
+   },
+   {
+    "value": 673,
+    "unit": "mm (26.5 in, organ)",
+    "source": "http://web.archive.org/web/20211204101032/http://rwgiangiulio.com/construction/manual/"
+   }
+  ],
+  "key_width_tolerance": {
+   "value": {
+    "min_width": 22.0,
+    "max_adjacent_variation": 1.0
+   },
+   "unit": "mm",
+   "source": "https://www.reyburnpianoworks.com/evaluation"
+  },
+  "balance_rail_bushing_clearance": {
+   "value": [
+    0.1,
+    0.2
+   ],
+   "unit": "mm lateral",
+   "source": "http://pianotuningmatters.blogspot.com/2015/11/50-point-guide-to-grand-regulation.html",
+   "note": "front rail pin 0.3 mm lateral"
+  }
+ },
+ "digital_actions": [
+  {
+   "name": "Roland Hybrid Grand (LX)",
+   "pivot_length_mm": 260,
+   "source": "https://cdn-01.pianotell.com/imgur/P9Mgd1Gh.jpeg",
+   "confidence": "medium (scaled from maker images by forum user)",
+   "alt": {
+    "value": "~26 cm",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/1.html"
+   }
+  },
+  {
+   "name": "Kawai Grand Feel III / II",
+   "pivot_length_mm": 240,
+   "source": "https://cdn-01.pianotell.com/imgur/P9Mgd1Gh.jpeg",
+   "alt": {
+    "value": "MP11 GF/GF2 24.13 cm",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/2.html"
+   },
+   "hammer_arrangement": "Wooden key on balance pins (seesaw) with pivot mid-key; key pushes the weighted hammer upward from the back of the key like a grand; graded key counterweights; let-off; triple sensor.",
+   "hammer_source": "https://kawaius.com/technology/wooden-key-actions/"
+  },
+  {
+   "name": "Kawai Grand Feel Compact",
+   "pivot_length_mm": 210,
+   "source": "https://cdn-01.pianotell.com/imgur/P9Mgd1Gh.jpeg",
+   "hammer_arrangement": "wooden keysticks, seesaw, counterweight",
+   "hammer_source": "https://kawaius.com/technology/wooden-key-actions/"
+  },
+  {
+   "name": "Kawai RM3 Grand II (VPC1)",
+   "pivot_length_mm": 190,
+   "source": "https://cdn-01.pianotell.com/imgur/P9Mgd1Gh.jpeg",
+   "alt": {
+    "value": "18-19 cm",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/1.html"
+   }
+  },
+  {
+   "name": "Kawai RHIII",
+   "pivot_length_mm": 197,
+   "source": "https://cdn-01.pianotell.com/imgur/Uzpjon3h.png",
+   "hammer_arrangement": "Plastic key pivoting at the back of the key (Kawai); separate weighted hammer lever under the key with its own 'hammer pivot point'; let-off; counterweights; triple sensor.",
+   "hammer_source": [
+    "https://kawaius.com/technology/wooden-key-actions/",
+    "https://cdn-01.pianotell.com/imgur/Uzpjon3h.png"
+   ]
+  },
+  {
+   "name": "Kawai RHII / RH Compact",
+   "pivot_length_mm": {
+    "RHII": 194,
+    "RHC": 182
+   },
+   "source": "https://cdn-01.pianotell.com/imgur/Uzpjon3h.png"
+  },
+  {
+   "name": "Roland PHA-50",
+   "pivot_length_mm": 220,
+   "source": "https://cdn-01.pianotell.com/imgur/Uzpjon3h.png",
+   "alt": {
+    "value": "22 cm",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/1.html"
+   },
+   "hammer_arrangement": "hybrid wood/plastic key with stabilizing pin; hammer under rear of key (per profile image); escapement; triple sensor",
+   "hammer_source": [
+    "https://kraftmusic.com/blogs/articles/understanding-roland-digital-piano-key-actions-pha-4-pha-50-and-hybrid-grand",
+    "https://cdn-01.pianotell.com/imgur/Uzpjon3h.png"
+   ]
+  },
+  {
+   "name": "Roland PHA-4 Standard",
+   "pivot_length_mm": 203,
+   "source": "https://forum.pianotell.com/d/1602-digital-piano-action-pivot-length",
+   "hammer_arrangement": "all-plastic; hammers are metal-weighted and fold under the FRONT of the keys ('inverted' vs other Roland actions); commonly-circulated side profile images are wrong",
+   "hammer_source": [
+    "https://forum.pianotell.com/d/1602-digital-piano-action-pivot-length",
+    "https://kraftmusic.com/blogs/articles/understanding-roland-digital-piano-key-actions-pha-4-pha-50-and-hybrid-grand"
+   ]
+  },
+  {
+   "name": "Yamaha GrandTouch (CLP-685)",
+   "pivot_length_mm": 240,
+   "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/2.html",
+   "note": ">24 cm per johnstaf"
+  },
+  {
+   "name": "Yamaha AvantGrand N1/2/3",
+   "pivot_length_mm": 230,
+   "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/2.html"
+  },
+  {
+   "name": "Yamaha GHS (P-45/P-125)",
+   "pivot_length_mm": null,
+   "hammer_arrangement": "Hollow plastic keys with NO pin: 'a thin flexible bit of plastic that attaches the keys' (a living hinge); separate hammer lever with one pivot midway and a linkage to the key; weight = thin metal rod, 8 grades; two rubber-dome switches per key; hammers stop between two padded bars.",
+   "source": "https://www.cameratim.com/reviews/audio/yamaha-p45-piano/",
+   "confidence": "medium (reviewer reading service manual + disassembly)"
+  },
+  {
+   "name": "Yamaha GHC (P-145/P-225)",
+   "pivot_length_mm": null,
+   "note": "GHS successor with shortened pivot length to reduce hidden key length; two sensors; no escapement; downweight rises toward back of key.",
+   "source": "https://www.pianodreamers.com/yamaha-p143-p145-review/"
+  },
+  {
+   "name": "Yamaha GH3",
+   "note": "third sensor for repetition; no pivot figure found",
+   "source": "https://musescore.org/en/node/219416",
+   "confidence": "low"
+  },
+  {
+   "name": "Casio AP-470 / PX-800",
+   "pivot_length_mm": 180,
+   "note": "18 cm to pivot with 15 cm visible key (measured)",
+   "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/1.html"
+  },
+  {
+   "name": "Fatar TP/40 Wood",
+   "pivot_length_mm": 201,
+   "source": "https://forum.pianotell.com/d/1602-digital-piano-action-pivot-length",
+   "confidence": "low (scaled from image)"
+  },
+  {
+   "name": "Generic digital hammer action",
+   "note": "cam under the key presses one end of a hammer, lifting the hammer weight; retaining hook with cushion limits key rise; sensors; pivots.",
+   "source": "https://en.wikipedia.org/wiki/Digital_piano"
+  },
+  {
+   "name": "Fatar TP/9S (synth action, datasheet)",
+   "source": "https://www.antonus-synths.com/enlo-1/fatar/DataSheet-TP9S+P.pdf",
+   "dims_mm": {
+    "white_visible": 136,
+    "black_length": 86,
+    "black_front_from_white_front": 50,
+    "overall_key_incl_rear": 161.5,
+    "white_top_above_mount": 47.5,
+    "black_top_above_mount": 57.77,
+    "black_above_white_derived": 10.27
+   },
+   "travel_mm": {
+    "white": "10.0 +/-1.0 (220 gf at 5 mm from front)",
+    "black": "5.7 +/-1.0 (220 gf at 10 mm from front)"
+   },
+   "force_gf": {
+    "white_1mm_at_5mm": "50 +/-7",
+    "black_1mm_at_10mm": "65 +/-7"
+   },
+   "endurance": "1 million strokes at fortissimo"
+  },
+  {
+   "name": "Forum rule of thumb",
+   "note": "'once you get much over 20 cm you have quickly diminishing returns'; 24-25 cm felt like the inflection point",
+   "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2852613/1.html",
+   "confidence": "low (opinion)"
+  }
+ ],
+ "heights": {
+  "floor_to_white_key_top": [
+   {
+    "value": 730,
+    "unit": "mm",
+    "source": "https://faq.yamaha.com/in/s/article/000001202",
+    "note": "Yamaha grands ~730 mm (28-47/64 in); value read from search-result text of the JS-rendered FAQ",
+    "confidence": "medium"
+   },
+   {
+    "value": [
+     730,
+     750
+    ],
+    "unit": "mm",
+    "source": "https://www.partykeys.com/blogs/news/ideal-piano-keyboard-height",
+    "note": "Yamaha factory spec 730-750 mm (uprights vary by model)"
+   },
+   {
+    "value": 714,
+    "unit": "mm (28-1/8 in)",
+    "source": "https://www.partykeys.com/blogs/news/ideal-piano-keyboard-height",
+    "note": "Steinway grands"
+   },
+   {
+    "value": [
+     711,
+     762
+    ],
+    "unit": "mm (28-30 in)",
+    "source": "https://www.partykeys.com/blogs/news/ideal-piano-keyboard-height",
+    "note": "typical range"
+   },
+   {
+    "value": [
+     673,
+     762
+    ],
+    "unit": "mm (26.5-30 in)",
+    "source": "https://forum.pianoworld.com/ubbthreads.php/topics/2822598/piano-height-from-floor-to-top-of-piano-keys-not-standard.html",
+    "note": "measured instruments vary; 'there is no standard'"
+   }
+  ],
+  "bench_height": {
+   "value": {
+    "<=160cm player": [
+     46,
+     48
+    ],
+    "163-183cm": [
+     48,
+     51
+    ],
+    ">=185cm": [
+     51,
+     56
+    ]
+   },
+   "unit": "cm",
+   "source": "https://www.partykeys.com/blogs/news/ideal-piano-keyboard-height",
+   "confidence": "low-medium (retail blog)"
+  },
+  "keybed_thickness": {
+   "value": 44.5,
+   "unit": "mm (1-3/4 in)",
+   "source": "https://www.steinway.com/pianos/steinway/grand/model-d"
+  },
+  "key_height_keybed_to_white_top": [
+   {
+    "value": 63,
+    "unit": "mm",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "Hamburg grand S,M,L,O,A,B; 65 mm C,D"
+   },
+   {
+    "value": 67.5,
+    "unit": "mm (2-21/32 in)",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "NY grand"
+   },
+   {
+    "value": 62.5,
+    "unit": "mm",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "Hamburg upright"
+   },
+   {
+    "value": [
+     60.3,
+     61.9
+    ],
+    "unit": "mm (2-3/8 to 2-7/16 in)",
+    "source": "https://www.steinwayreference.com/action-regulation-specifications/",
+    "note": "NY upright"
+   }
+  ]
+ },
+ "diy_projects": [
+  {
+   "name": "Dovetail (Brian Yu) - 'I 3D Printed a Working Piano'",
+   "url": "https://www.youtube.com/watch?v=BAQskCuPaeY",
+   "pivot": "compliant mechanisms (printed flexures) instead of pins; modular key units; IR sensors, daisy-chained PCBs",
+   "dims": "not published in text sources (video only)",
+   "lessons": "Designer's stated next steps: switch IR -> hall-effect sensors, improve action, different filament; commenters/designer note clicking noise (no felt damping) and durability concerns of plastic flexures.",
+   "sources": [
+    "https://hackaday.com/2026/08/29/3d-printed-piano-action-faithful-to-the-original/",
+    "https://laughingsquid.com/3d-printed-piano-keyboard/"
+   ]
+  },
+  {
+   "name": "Mechanistic - 3D Printed Grand Piano (24 keys)",
+   "url": "https://www.youtube.com/watch?v=PIIh2xiP-oM",
+   "pivot": "pinned joints ('except for screws, pins, and felt sheets'), accurate grand action geometry",
+   "dims": "24 keys; parts split to fit 180x180 mm bed; ~3 kg PLA+, 240 h printing",
+   "lessons": "Rods used instead of strings because printed plastic creeps under continuous tension (tuning drift, failure over time) - creep is the governing risk for any preloaded printed part."
+  },
+  {
+   "name": "Toast - 3D printable mini piano",
+   "url": "https://www.youtube.com/watch?v=sS2sAIIYqig",
+   "pivot": "printed keys driving hinged hammers; rubber bands return hammers",
+   "dims": "mini keyboard; tubes instead of strings",
+   "lessons": "Iterated hammer-to-key attachment; simplified action because tubes tolerate hammer blocking.",
+   "sources": [
+    "https://hackaday.com/2025/11/13/3d-printing-a-piano-action/"
+   ]
+  },
+  {
+   "name": "PianoClack 'Heathen' - printed action plan",
+   "url": "https://pianoclack.com/forum/d/2189-3d-printing-piano-keys",
+   "pivot": "conventional pinned action planned in PAHT-CF",
+   "dims": "5-6 kg filament; hall sensors on keys 16-bit @ ~2 kHz, optical on hammers 100-140 kHz",
+   "lessons": "PLA creeps; tolerances are stringent and reaming printed holes is hard - PTFE bushings suggested; another builder spent close to $1000 getting printed-part tolerances right; ASA rejected for impact."
+  },
+  {
+   "name": "PianoClack DIY Hickman action",
+   "url": "https://pianoclack.com/forum/d/1855-diy-digital-piano-hickman-action",
+   "pivot": "pin joints: felt-bushed (grand style), inverse-felt, and hard PTFE-tube bushings; 1.5 mm pins in PTFE tube 1.5 ID/3 OD (1.3 mm also used); original Hickman centerpins 1.2-1.4 mm",
+   "dims": "Janko 5.1 in octave; springs 0.032/0.039/0.047 in piano wire; key weight adjustable ~40-80 g via single lever",
+   "lessons": "PETG used for 'bendable links'; repetition required adding a driving-lever spring."
+  },
+  {
+   "name": "PianoClack laser-cut action prototype",
+   "url": "https://pianoclack.com/forum/d/1749-action-prototype-eliminating-pins-minimizing-construction-time",
+   "pivot": "no pins: keysticks rest in laser-cut 'combs' with felt glued in the gaps - the keysticks become the pins",
+   "dims": "3 mm acrylic keysticks (4.5 mm tried earlier); octave 141 mm then 120 mm prototypes",
+   "lessons": "Permanently attached weights, no escapement ('constant up-weight'); cutting assembly time was the driver."
+  },
+  {
+   "name": "Cybrid (real AvantGrand N1X action -> MIDI)",
+   "url": "https://github.com/ekumanov/cybrid",
+   "pivot": "real grand-style action",
+   "dims": "88 keys, 3 CNY70 optical thresholds per hammer, Teensy, ~2 W",
+   "lessons": "Threshold-timing velocity; per-note calibration <10 min."
+  },
+  {
+   "name": "Arduino forum hall-effect MIDI keyboard",
+   "url": "https://forum.arduino.cc/t/velocity-sensitive-midi-keyboard-using-hall-effect-sensors/1355837",
+   "pivot": "abandoned piano keys for Wooting Lekker switches",
+   "dims": "57 x 49E linear hall sensors in 6x10 matrix",
+   "lessons": "Per-sensor calibration needed (tolerances); non-linear field vs distance; MCU timing concerns for many keys."
+  },
+  {
+   "name": "Yamaha GHS (commercial reference for a flexure key hinge)",
+   "url": "https://www.cameratim.com/reviews/audio/yamaha-p45-piano/",
+   "pivot": "injection-moulded living hinge: 'The keys ... don't have a hinge or pivot. There's a thin flexible bit of plastic that attaches the keys'",
+   "dims": "n/a",
+   "lessons": "Reviewer judged it not robust to abuse; see-saw feel ('you can continuously wiggle the keys'). Shows a flexure key pivot is viable in mass production when moulded, not printed."
+  }
+ ],
+ "flexure": {
+  "materials": {
+   "PETG_prusament": {
+    "value": {
+     "E_GPa": 1.5,
+     "yield_MPa": 47,
+     "elong_at_yield_pct": 5.1,
+     "interlayer_adhesion_MPa": 18,
+     "HDT_C": 68
+    },
+    "unit": "",
+    "source": "https://prusament.com/wp-content/uploads/2022/10/PETG_Prusament_TDS_2021_10_EN.pdf",
+    "note": "printed ISO 527 bars, horizontal; vertical xz: 50 MPa, 1.6 GPa, 5.1 %"
+   },
+   "PLA_prusament": {
+    "value": {
+     "E_GPa": 2.3,
+     "yield_MPa": 51,
+     "elong_at_yield_pct": 2.9,
+     "interlayer_adhesion_MPa": 17,
+     "HDT_C": 55
+    },
+    "unit": "",
+    "source": "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf"
+   }
+  },
+  "fatigue_evidence": [
+   {
+    "value": {
+     "stress_amplitude_MPa": [
+      2.5,
+      5.0
+     ],
+     "cycles": "run-out at 1.5e6",
+     "load": "fully reversed rotating bending, 100 Hz"
+    },
+    "unit": "",
+    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8800022/",
+    "note": "FDM PLA; tested 2.5-17.5 MPa"
+   },
+   {
+    "value": {
+     "basquin": "sigma_a = 294.6 * N^-0.274 MPa",
+     "at_1e6_derived_MPa": 6.7,
+     "at_1e7_derived_MPa": 3.6
+    },
+    "unit": "",
+    "source": "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0300569",
+    "note": "FDM PLA-wood, fully reversed rotating bending; authors state pure PLA comparable"
+   },
+   {
+    "note": "Derived: FDM PLA endurance ~4-7 MPa at 1e6 cycles => strain amplitude ~0.2-0.3 % (E ~2.3 GPa). ~10 % of yield strain.",
+    "source": "derived",
+    "derived_from": [
+     "https://pmc.ncbi.nlm.nih.gov/articles/PMC8800022/",
+     "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0300569",
+     "https://prusament.com/wp-content/uploads/2022/10/PLA_Prusament_TDS_2021_10_EN.pdf"
+    ]
+   },
+   {
+    "note": "PETG FDM tension-tension fatigue (R=0.1) tested at 60-90 % UTS; longitudinal raster best at high stress, diagonal best at 60 % UTS. Full S-N numbers not accessible (paywalled).",
+    "source": "https://link.springer.com/article/10.1007/s11668-019-00631-z",
+    "confidence": "low (abstract-level)"
+   }
+  ],
+  "allowable_strain_guidance": {
+   "low_cycle_static_flexure": {
+    "value": 2.4,
+    "unit": "% max strain",
+    "source": "https://arxiv.org/abs/1509.05394",
+    "note": "OpenFlexure PLA flexures t=0.72 mm, l=1.5 mm, w=4 mm, bend <=6 deg; 'close to the yield strain of both PLA and ABS'; no snapping in 6 months, but flexures snapped when over-bent -> use hard stops"
+   },
+   "hobby_primitive": {
+    "value": 0.35,
+    "unit": "% max strain (derived)",
+    "source": "https://s3files.core77.com/images/c77_webinar_series/Akaki-Kuumeri-3D-printed-flexures.pdf",
+    "calc": "cantilever eps = 3*t*d/(2*L^2) with t=0.75, L=40, d=5 mm",
+    "note": "Akaki Kuumeri primitive: 0.75 mm thick (2 lines @0.4 nozzle), >=10 mm wide, >=40 mm long, 5 mm tip travel"
+   },
+   "recommended_for_1e6_to_1e7_cycles": {
+    "value": "<=0.5 % (PETG), <=0.3 % (PLA)",
+    "source": "derived (synthesis)",
+    "derived_from": [
+     "https://pmc.ncbi.nlm.nih.gov/articles/PMC8800022/",
+     "https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0300569",
+     "https://prusament.com/wp-content/uploads/2022/10/PETG_Prusament_TDS_2021_10_EN.pdf",
+     "https://s3files.core77.com/images/c77_webinar_series/Akaki-Kuumeri-3D-printed-flexures.pdf"
+    ],
+    "note": "engineering judgement: ~10 % of printed yield strain; PLA strongly discouraged (creep, low HDT 55 C)"
+   },
+   "piano_key_rotation_check": {
+    "value": "10 mm dip at 200 mm pivot = 0.05 rad (2.9 deg); cross-spring a=0.5 leaf strain = t*theta/(2L) = 0.10 % for t=0.8, L=20 mm",
+    "source": "derived",
+    "derived_from": [
+     "https://www.jpe-innovations.com/precision-point/cross-spring-pivot/"
+    ]
+   }
+  },
+  "living_hinge_fdm": {
+   "thickness": [
+    {
+     "value": [
+      0.4,
+      0.6
+     ],
+     "unit": "mm, >=2 layers",
+     "source": "https://www.hubs.com/knowledge-base/how-design-living-hinges-3d-printing/"
+    }
+   ],
+   "orientation": [
+    {
+     "value": "orient so hinge WIDTH is built layer by layer (hinge axis vertical/Z) - bending along extrusion roads, never across layer interfaces",
+     "unit": "",
+     "source": "https://www.hubs.com/knowledge-base/how-design-living-hinges-3d-printing/"
+    },
+    {
+     "value": "hinge axes horizontal, flexure thickness built from layers (thinner/stronger than min extrusion width)",
+     "unit": "",
+     "source": "https://arxiv.org/abs/1509.05394"
+    },
+    {
+     "value": "always print flexure walls vertically; if flat, print lines must run longitudinally; keep seam away from flexure; filleted corners",
+     "unit": "",
+     "source": "https://s3files.core77.com/images/c77_webinar_series/Akaki-Kuumeri-3D-printed-flexures.pdf"
+    }
+   ],
+   "expected_life": {
+    "value": "FDM living hinges usually for prototypes/few cycles; example: 25 cycles before optimisation; anneal in boiling water and work the hinge",
+    "unit": "",
+    "source": "https://www.hubs.com/knowledge-base/how-design-living-hinges-3d-printing/"
+   },
+   "creep": {
+    "value": "3D printed plastic creeps easily - never leave a flexure under tension; use end stops",
+    "unit": "",
+    "source": "https://s3files.core77.com/images/c77_webinar_series/Akaki-Kuumeri-3D-printed-flexures.pdf"
+   }
+  },
+  "cross_spring_pivot": {
+   "stiffness": {
+    "value": "K = 8(1-3a+3a^2) * E*w*t^3/(12L); K_ref(a=0.5) = E*w*t^3/(6L)",
+    "unit": "",
+    "source": "https://www.jpe-innovations.com/precision-point/cross-spring-pivot/"
+   },
+   "max_angle": {
+    "value": "theta = 2*sigma_max*L/(E*t) (a=0.5)  <=> eps_max = theta*t/(2L)",
+    "unit": "",
+    "source": "https://www.jpe-innovations.com/precision-point/cross-spring-pivot/"
+   },
+   "buckling": {
+    "value": "F_b = 8*pi^2*E*I/L^2 = pi^2*E*b*t^3/(3L^2)",
+    "unit": "",
+    "source": "https://www.jpe-innovations.com/precision-point/cross-spring-pivot/"
+   },
+   "centre_shift": {
+    "value": "rho/L = -(sqrt2/30)*(36(a-0.5)^2 - 5); symmetric a=0.5 -> rho/L = 0.236; Haberland a = 0.5 +/- sqrt5/6 (cross at 12.73 % of leaf length) -> rho/L = 0, stiffness 2.67 K_ref; monolithic Haberland rho/L = -0.047, 4 K_ref",
+    "unit": "",
+    "source": "https://www.jpe-innovations.com/precision-point/cross-spring-pivot/"
+   },
+   "references": [
+    {
+     "cite": "Jensen & Howell, 'The modeling of cross-axis flexural pivots', Mech. Mach. Theory 37 (2002) 461-476",
+     "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094114X02000071"
+    },
+    {
+     "cite": "'Accuracy characteristics of the generalized cross-spring pivot', Mech. Mach. Theory (2010)",
+     "url": "https://www.sciencedirect.com/science/article/abs/pii/S0094114X10000819"
+    }
+   ]
+  }
+ }
+}

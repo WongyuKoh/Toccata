@@ -1,0 +1,1462 @@
+{
+ "features": [
+  {
+   "part": "key (all 88: white C D E F G A B + A0 B0 C8, black C# D# F# G# A# + A#0)",
+   "feature": "magnet pocket (N35 D5x2, S pole down, press + 1 drop CA)",
+   "type": "cut: blind cylinder, axis z, opens on the key underside",
+   "dims": {
+    "d": 5.2,
+    "depth": 2.1,
+    "magnet_d": 5.0,
+    "magnet_t": 2.0,
+    "fit": "D5.2 printed (prints ~0.1-0.2 under) = press on D5.0 + one drop of CA",
+    "chamfer_entry": "none specified"
+   },
+   "position": {
+    "y": 67.0,
+    "z_open_face": 23.5,
+    "z_floor": 25.6,
+    "magnet_z": [
+     23.5,
+     25.5
+    ],
+    "x": "per_key.x",
+    "in_boss": true,
+    "boss": "'magnet boss' prism: white = x+-3.8 (D7.6 boss outline), y63.2-70.8, z23.5-41.5 (key underside to top-skin underside); black = full inner width wall to wall (x = body x0..x1 of the 10.4 black body minus 0), y63.2-70.8, z23.5-53.5; plus 'magnet boss rib' y66.4-67.6 wall to wall",
+    "note": "the pocket is cut into the underside of the 'magnet boss' (z23.5 = key body underside = S02 white/black bottom). Magnet face flush at z23.5 (geometry key_points 'magnet face' rest (67.0, 23.5)). 0.1 air gap above the magnet (pocket 2.1)."
+   },
+   "per_key": {
+    "C": {
+     "x": 7.431,
+     "boss_x": [
+      3.631,
+      11.231
+     ]
+    },
+    "C#": {
+     "x": 21.215,
+     "boss_x": [
+      17.215,
+      25.215
+     ]
+    },
+    "D": {
+     "x": 35.25,
+     "boss_x": [
+      31.45,
+      39.05
+     ]
+    },
+    "D#": {
+     "x": 49.285,
+     "boss_x": [
+      45.285,
+      53.285
+     ]
+    },
+    "E": {
+     "x": 63.07,
+     "boss_x": [
+      59.27,
+      66.87
+     ]
+    },
+    "F": {
+     "x": 77.359,
+     "boss_x": [
+      73.559,
+      81.159
+     ]
+    },
+    "F#": {
+     "x": 90.573,
+     "boss_x": [
+      86.573,
+      94.573
+     ]
+    },
+    "G": {
+     "x": 104.037,
+     "boss_x": [
+      100.237,
+      107.837
+     ]
+    },
+    "G#": {
+     "x": 117.5,
+     "boss_x": [
+      113.5,
+      121.5
+     ]
+    },
+    "A": {
+     "x": 130.964,
+     "boss_x": [
+      127.164,
+      134.764
+     ]
+    },
+    "A#": {
+     "x": 144.427,
+     "boss_x": [
+      140.427,
+      148.427
+     ]
+    },
+    "B": {
+     "x": 157.641,
+     "boss_x": [
+      153.841,
+      161.441
+     ]
+    },
+    "A0": {
+     "x": 10.287,
+     "boss_x": [
+      6.487,
+      14.087
+     ]
+    },
+    "A#0": {
+     "x": 26.927,
+     "boss_x": [
+      22.927,
+      30.927
+     ]
+    },
+    "B0": {
+     "x": 40.141,
+     "boss_x": [
+      36.341,
+      43.941
+     ]
+    },
+    "C8": {
+     "x": 11.75,
+     "boss_x": [
+      7.95,
+      15.55
+     ]
+    }
+   },
+   "x_frame": "x in the key's own frame: module keys = module x (world x = 47 + 164.5*(k-1) + x); A0/A#0/B0 = left end part x (= world x); C8 = right end part local x (world x = 1198.5 + x)",
+   "source": "v4: DESIGN.md P29 (y67), K table (자석 x per key), geometry.json plan 'key X magnet' circle r2.5 + parts 'magnet boss'/'magnet boss rib', key_points 'magnet face' (67.0, 23.5); drawings d05/d06 note '자석 Ø5×2 압입 + CA (P29)'. Pocket D5.2 x depth 2.1 from the underside z23.5 = v3 S12 (model/v3_extract.txt: '자석 포켓 Ø5.2 깊이 2.1, 밑면 z23.5에서 위로 자석 Ø5×2 압입 + CA 한 방울'), boss OD 7.6 = v3 S13 (v4 model_v4.py key_body a_boss uses 7.6/5.2)",
+   "assumed": false
+  },
+  {
+   "part": "key (all 88)",
+   "feature": "capstan: M3x6 ISO 7380 button-head screw, self-locking bore, side-loaded M3 nut trap, tip clearance (D02, S07, S08)",
+   "type": "cuts in the hidden beam (3 coaxial cuts + side slot), axis z at (x_lever, y_cap)",
+   "dims": {
+    "screw": "M3x6 ISO 7380 (dk 5.7, k 1.65), SUS (v3.2 L35 same screw)",
+    "head_top_z": 31.0,
+    "head_underside_z": 29.35,
+    "shank_tip_z_at_design": 23.35,
+    "beam_top_at_capstan_z": 27.5,
+    "beam_top_elsewhere_z": 28.5,
+    "beam_seat_zone_y": "y_cap-6 .. y_cap+4 at z27.5, ramp (y_cap-7, z28.5)->(y_cap-6, z27.5) (already in the 'beam' prism)",
+    "self_locking_bore": {
+     "d": 2.8,
+     "z": [
+      26.4,
+      27.5
+     ],
+     "length": 1.1,
+     "note": "printed D2.8, the M3 thread cuts into it = anti-rotation friction; stage-0 C08a variants D2.7/2.8/2.9"
+    },
+    "nut_trap": {
+     "nut": "M3 hex nut ISO 4032 (s 5.5, e 6.35, m 2.4), steel",
+     "slot_width_y": 5.6,
+     "slot_height_z": 2.6,
+     "z": [
+      23.8,
+      26.4
+     ],
+     "orientation": "nut flats facing +-y (5.5 across flats spans y), corners along x",
+     "closed_end": "hex pocket AF 5.6 centred on the screw axis (corner at axis -3.233 in x -> 0.767 wall to the closed beam face)",
+     "x_extent": "from axis - 3.233 (hex corner) to the open beam face at axis + 4.0 (beam half width) -> runs 7.233 in x",
+     "insertion_side": "+x face of the beam (all keys)",
+     "bridge": "the slot ceiling in print (face z23.8, key printed top-down) is a 5.6 bridge"
+    },
+    "tip_clearance_bore": {
+     "d": 3.3,
+     "z": [
+      "beam underside (21.8; E/F/G raised, see per_key)",
+      23.8
+     ],
+     "note": "through the beam underside: the M3x6 tip reaches z23.35 at design and z21.5 with the head seated on z27.5"
+    },
+    "adjust": "1/8 turn = 0.0625 mm (pitch 0.5)"
+   },
+   "position": {
+    "x": "lever centre = beam centre (per_key.x_axis)",
+    "y": "white 188.34 / black 180.31 (end parts per_key)",
+    "beam_z": [
+     21.8,
+     28.5
+    ],
+    "beam_width": 8.0
+   },
+   "per_key": {
+    "C": {
+     "x_axis": 8.525,
+     "y_axis": 188.34,
+     "beam_x": [
+      4.525,
+      12.525
+     ],
+     "beam_y": [
+      146.0,
+      192.34
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      185.54,
+      191.14
+     ],
+     "nut_slot_open_face_x": 12.525
+    },
+    "C#": {
+     "x_axis": 21.215,
+     "y_axis": 180.31,
+     "beam_x": [
+      17.215,
+      25.215
+     ],
+     "beam_y": [
+      146.0,
+      184.31
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      177.51,
+      183.11
+     ],
+     "nut_slot_open_face_x": 25.215
+    },
+    "D": {
+     "x_axis": 34.035,
+     "y_axis": 188.34,
+     "beam_x": [
+      30.035,
+      38.035
+     ],
+     "beam_y": [
+      146.0,
+      192.34
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      185.54,
+      191.14
+     ],
+     "nut_slot_open_face_x": 38.035
+    },
+    "D#": {
+     "x_axis": 49.285,
+     "y_axis": 180.31,
+     "beam_x": [
+      45.285,
+      53.285
+     ],
+     "beam_y": [
+      146.0,
+      184.31
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      177.51,
+      183.11
+     ],
+     "nut_slot_open_face_x": 53.285
+    },
+    "E": {
+     "x_axis": 63.07,
+     "y_axis": 188.34,
+     "beam_x": [
+      59.07,
+      67.07
+     ],
+     "beam_y": [
+      146.0,
+      192.34
+     ],
+     "beam_underside_z_at_capstan": 21.9,
+     "nut_slot_y": [
+      185.54,
+      191.14
+     ],
+     "nut_slot_open_face_x": 67.07
+    },
+    "F": {
+     "x_axis": 75.693,
+     "y_axis": 188.34,
+     "beam_x": [
+      71.693,
+      79.693
+     ],
+     "beam_y": [
+      146.0,
+      192.34
+     ],
+     "beam_underside_z_at_capstan": 21.95,
+     "nut_slot_y": [
+      185.54,
+      191.14
+     ],
+     "nut_slot_open_face_x": 79.693
+    },
+    "F#": {
+     "x_axis": 90.943,
+     "y_axis": 180.31,
+     "beam_x": [
+      86.943,
+      94.943
+     ],
+     "beam_y": [
+      146.0,
+      184.31
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      177.51,
+      183.11
+     ],
+     "nut_slot_open_face_x": 94.943
+    },
+    "G": {
+     "x_axis": 104.037,
+     "y_axis": 188.34,
+     "beam_x": [
+      100.037,
+      108.037
+     ],
+     "beam_y": [
+      146.0,
+      192.34
+     ],
+     "beam_underside_z_at_capstan": 21.9,
+     "nut_slot_y": [
+      185.54,
+      191.14
+     ],
+     "nut_slot_open_face_x": 108.037
+    },
+    "G#": {
+     "x_axis": 116.3,
+     "y_axis": 180.31,
+     "beam_x": [
+      112.3,
+      120.3
+     ],
+     "beam_y": [
+      146.0,
+      184.31
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      177.51,
+      183.11
+     ],
+     "nut_slot_open_face_x": 120.3
+    },
+    "A": {
+     "x_axis": 131.55,
+     "y_axis": 188.34,
+     "beam_x": [
+      127.55,
+      135.55
+     ],
+     "beam_y": [
+      146.0,
+      192.34
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      185.54,
+      191.14
+     ],
+     "nut_slot_open_face_x": 135.55
+    },
+    "A#": {
+     "x_axis": 143.8,
+     "y_axis": 180.31,
+     "beam_x": [
+      139.8,
+      147.8
+     ],
+     "beam_y": [
+      146.0,
+      184.31
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      177.51,
+      183.11
+     ],
+     "nut_slot_open_face_x": 147.8
+    },
+    "B": {
+     "x_axis": 155.975,
+     "y_axis": 188.34,
+     "beam_x": [
+      151.975,
+      159.975
+     ],
+     "beam_y": [
+      146.0,
+      192.34
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      185.54,
+      191.14
+     ],
+     "nut_slot_open_face_x": 159.975
+    },
+    "A0": {
+     "x_axis": 10.287,
+     "y_axis": 188.43,
+     "beam_x": [
+      6.287,
+      14.287
+     ],
+     "beam_y": [
+      146.0,
+      192.43
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      185.63,
+      191.23
+     ],
+     "nut_slot_open_face_x": 14.287
+    },
+    "A#0": {
+     "x_axis": 26.3,
+     "y_axis": 180.31,
+     "beam_x": [
+      22.3,
+      30.3
+     ],
+     "beam_y": [
+      146.0,
+      184.31
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      177.51,
+      183.11
+     ],
+     "nut_slot_open_face_x": 30.3
+    },
+    "B0": {
+     "x_axis": 38.475,
+     "y_axis": 188.32,
+     "beam_x": [
+      34.475,
+      42.475
+     ],
+     "beam_y": [
+      146.0,
+      192.32
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      185.52,
+      191.12
+     ],
+     "nut_slot_open_face_x": 42.475
+    },
+    "C8": {
+     "x_axis": 11.75,
+     "y_axis": 188.48,
+     "beam_x": [
+      7.75,
+      15.75
+     ],
+     "beam_y": [
+      146.0,
+      192.48
+     ],
+     "beam_underside_z_at_capstan": 21.8,
+     "nut_slot_y": [
+      185.68,
+      191.28
+     ],
+     "nut_slot_open_face_x": 15.75
+    }
+   },
+   "x_frame": "x in the key's own frame: module keys = module x (world x = 47 + 164.5*(k-1) + x); A0/A#0/B0 = left end part x (= world x); C8 = right end part local x (world x = 1198.5 + x)",
+   "source": "DESIGN.md S07 (beam z21.8~28.5 w8, y146 -> cap+4), S08 (M3x6 ISO 7380, white y188.34 / black y180.31, head top z31.0), D02 ('M3 육각 너트, 옆에서 끼움, 위 Ø2.8 자가 잠김 구멍'), K table (beam x per key); model_v4.py P cap_dk 5.7 / cap_k 1.65 / beam_z_cap 27.5, key_body 'nut trap void' y_cap+-2.8 z23.8-26.4 w5.6; printables/stage0/make_stage0.py c08() (C08a: slot 5.6 open to the +x beam face from axis-2.8, D2.8 self-locking hole z26.4..27.5, D3.3 tip clearance z21.8..23.8; variants 5.6/5.7/5.8 x D2.7/2.8/2.9); geometry.json end_parts caps (A0 188.43, B0 188.32, C8 188.48), tail_relief (model_v4.py)",
+   "assumed": true,
+   "assumed_reason": "D02 gives no numbers for the trap; values are the model's mass-model void + the stage-0 C08a coupon default (5.6 / D2.8), to be replaced by the stage-0 test C pick. Insertion side (+x) and the hex-shaped closed end are proposed: C08a's square-ended slot stops at axis-2.8, which forces the nut centre 0.375 off the screw axis (e/2 = 3.175 > 2.8) - flagged in conflicts"
+  },
+  {
+   "part": "key (all 88)",
+   "feature": "balance-pin guide groove under the balance block (P32)",
+   "type": "cut: rectangular slot, open at the block front face (y134.0) and at the block underside",
+   "dims": {
+    "width_printed": 3.2,
+    "width_after_cloth": 2.2,
+    "cloth": "bushing cloth 0.5T glued on both x side faces (ceiling and front not lined)",
+    "depth": 2.5,
+    "length_y": 4.0,
+    "pin": "ISO 2338 D2.0x12, y135.3, top z23.30 +-0.1 (set with the printed pin height gauge T4)"
+   },
+   "position": {
+    "y": [
+     134.0,
+     138.0
+    ],
+    "z": [
+     22.3,
+     24.8
+    ],
+    "z_underside_at_groove": 22.3,
+    "note": "block underside at the groove = block_step_z 22.3 (the stepped block: z22.3 for y134.0-137.763 and 144.237-146.0, lip region z20.75 between). The groove's last 0.237 mm (y137.763-138.0) runs into the front lip wall above z22.3 only (the lip wall below z22.3 stays solid). Groove ceiling z24.8 = 1.5 above the pin top at rest.",
+    "x": "centred on the balance block = balance pin x (per_key)"
+   },
+   "per_key": {
+    "C": {
+     "x_centre": 7.591,
+     "x": [
+      5.991,
+      9.191
+     ],
+     "block_x": [
+      2.02,
+      13.161
+     ]
+    },
+    "C#": {
+     "x_centre": 21.215,
+     "x": [
+      19.615,
+      22.815
+     ],
+     "block_x": [
+      17.215,
+      25.215
+     ]
+    },
+    "D": {
+     "x_centre": 35.25,
+     "x": [
+      33.65,
+      36.85
+     ],
+     "block_x": [
+      29.269,
+      41.231
+     ]
+    },
+    "D#": {
+     "x_centre": 49.285,
+     "x": [
+      47.685,
+      50.885
+     ],
+     "block_x": [
+      45.285,
+      53.285
+     ]
+    },
+    "E": {
+     "x_centre": 62.91,
+     "x": [
+      61.31,
+      64.51
+     ],
+     "block_x": [
+      57.339,
+      68.48
+     ]
+    },
+    "F": {
+     "x_centre": 77.52,
+     "x": [
+      75.92,
+      79.12
+     ],
+     "block_x": [
+      72.52,
+      82.519
+     ]
+    },
+    "F#": {
+     "x_centre": 90.573,
+     "x": [
+      88.973,
+      92.173
+     ],
+     "block_x": [
+      86.573,
+      94.573
+     ]
+    },
+    "G": {
+     "x_centre": 104.037,
+     "x": [
+      102.437,
+      105.637
+     ],
+     "block_x": [
+      98.627,
+      109.446
+     ]
+    },
+    "G#": {
+     "x_centre": 117.5,
+     "x": [
+      115.9,
+      119.1
+     ],
+     "block_x": [
+      113.5,
+      121.5
+     ]
+    },
+    "A": {
+     "x_centre": 130.964,
+     "x": [
+      129.364,
+      132.564
+     ],
+     "block_x": [
+      125.554,
+      136.373
+     ]
+    },
+    "A#": {
+     "x_centre": 144.427,
+     "x": [
+      142.827,
+      146.027
+     ],
+     "block_x": [
+      140.427,
+      148.427
+     ]
+    },
+    "B": {
+     "x_centre": 157.481,
+     "x": [
+      155.881,
+      159.081
+     ],
+     "block_x": [
+      152.481,
+      162.48
+     ]
+    },
+    "A0": {
+     "x_centre": 10.447,
+     "x": [
+      8.847,
+      12.047
+     ],
+     "block_x": [
+      2.02,
+      18.873
+     ]
+    },
+    "A#0": {
+     "x_centre": 26.927,
+     "x": [
+      25.327,
+      28.527
+     ],
+     "block_x": [
+      22.927,
+      30.927
+     ]
+    },
+    "B0": {
+     "x_centre": 39.981,
+     "x": [
+      38.381,
+      41.581
+     ],
+     "block_x": [
+      34.981,
+      44.98
+     ]
+    },
+    "C8": {
+     "x_centre": 11.75,
+     "x": [
+      10.15,
+      13.35
+     ],
+     "block_x": [
+      4.3,
+      19.2
+     ]
+    }
+   },
+   "x_frame": "x in the key's own frame: module keys = module x (world x = 47 + 164.5*(k-1) + x); A0/A#0/B0 = left end part x (= world x); C8 = right end part local x (world x = 1198.5 + x)",
+   "source": "DESIGN.md P32 ('블록 밑 홈 출력 폭 3.2(천 0.5T 양쪽 → 2.2), 깊이 2.5, y134.0~138.0 앞이 열림', pin at '블록 가운데 x'), K table ('핀 홈 가운데 x' per key); model_v4.py P slot_w_print 3.2 / slot_w 2.2 / slot_depth 2.5 / slot_y (134,138) / block_step_z 22.3; drawings/src/render_v4.py pin_groove(): z0 = block polygon first vertex (22.3), z1 = z0 + 2.5; geometry.json fixed 'balance pin D2 X' prisms (x, y134.3-136.3, z11.3-23.3) for the end-part pins A0 10.447, A#0 26.927, B0 39.981, C8 11.75",
+   "assumed": false
+  },
+  {
+   "part": "key (all 88)",
+   "feature": "snap-notch and pin-groove lining (D01, S04, P32) - printed sizes are PRE-cloth",
+   "type": "note / assembly: glued cloth, no printed feature change",
+   "dims": {
+    "notch_printed_R": 2.55,
+    "cloth_t": 0.5,
+    "notch_effective_R": 2.05,
+    "rod_R": 2.0,
+    "radial_clear_after_cloth": 0.05,
+    "notch_centre": "K (y141.0, z21.5)",
+    "block_underside_at_notch_z": 20.75,
+    "printed_arc_deg": 214.209,
+    "effective_wrap_deg": 223,
+    "entry_after_cloth": 3.82,
+    "entry_printed": 4.874,
+    "notch_cloth_strip": {
+     "length": 9.53,
+     "width": "= balance block x width (per key)",
+     "note": "covers the whole printed arc from lip edge to lip edge at z20.75 (derived: 2*pi*2.55*214.2/360)"
+    },
+    "pin_groove_cloth": {
+     "pieces": 2,
+     "size": "4.0 (y134.0-138.0) x 2.5 (z22.3-24.8)",
+     "t": 0.5
+    },
+    "stage0": "notch radius picked by coupon C04 from R2.50..2.60 (pull-off 1-2 N); groove width by the test P fit"
+   },
+   "position": {
+    "notch_y": [
+     138.5627884786092,
+     143.4372115213908
+    ],
+    "lip_walls_y": [
+     137.763,
+     144.237
+    ]
+   },
+   "per_key": {
+    "C": {
+     "block_x": [
+      2.02,
+      13.161
+     ],
+     "strip_width": 11.141
+    },
+    "C#": {
+     "block_x": [
+      17.215,
+      25.215
+     ],
+     "strip_width": 8.0
+    },
+    "D": {
+     "block_x": [
+      29.269,
+      41.231
+     ],
+     "strip_width": 11.962
+    },
+    "D#": {
+     "block_x": [
+      45.285,
+      53.285
+     ],
+     "strip_width": 8.0
+    },
+    "E": {
+     "block_x": [
+      57.339,
+      68.48
+     ],
+     "strip_width": 11.141
+    },
+    "F": {
+     "block_x": [
+      72.52,
+      82.519
+     ],
+     "strip_width": 9.999
+    },
+    "F#": {
+     "block_x": [
+      86.573,
+      94.573
+     ],
+     "strip_width": 8.0
+    },
+    "G": {
+     "block_x": [
+      98.627,
+      109.446
+     ],
+     "strip_width": 10.819
+    },
+    "G#": {
+     "block_x": [
+      113.5,
+      121.5
+     ],
+     "strip_width": 8.0
+    },
+    "A": {
+     "block_x": [
+      125.554,
+      136.373
+     ],
+     "strip_width": 10.819
+    },
+    "A#": {
+     "block_x": [
+      140.427,
+      148.427
+     ],
+     "strip_width": 8.0
+    },
+    "B": {
+     "block_x": [
+      152.481,
+      162.48
+     ],
+     "strip_width": 9.999
+    },
+    "A0": {
+     "block_x": [
+      2.02,
+      18.873
+     ],
+     "strip_width": 16.853
+    },
+    "A#0": {
+     "block_x": [
+      22.927,
+      30.927
+     ],
+     "strip_width": 8.0
+    },
+    "B0": {
+     "block_x": [
+      34.981,
+      44.98
+     ],
+     "strip_width": 9.999
+    },
+    "C8": {
+     "block_x": [
+      4.3,
+      19.2
+     ],
+     "strip_width": 14.9
+    }
+   },
+   "x_frame": "x in the key's own frame: module keys = module x (world x = 47 + 164.5*(k-1) + x); A0/A#0/B0 = left end part x (= world x); C8 = right end part local x (world x = 1198.5 + x)",
+   "source": "DESIGN.md D01 ('부싱 천 0.5T, 노치 R2.55 안쪽'), S04 ('R2.55 + 천 0.5T → 유효 R2.05, 블록 밑면 z20.75, 감싸는 각 223°, 입구 3.82'), P32 (3.2 → 2.2 after cloth), parts table row '스냅 노치 R2.55 + 천 0.5T'; model_v4.py notch_block_poly (the 'balance block' prism already carries the printed R2.55); printables/stage0/make_stage0.py C04 notch coupons R2.50-2.60",
+   "assumed": false,
+   "answer": "Yes: the printed notch R2.55 and the printed groove 3.2 are the pre-cloth sizes; cloth 0.5T brings them to R2.05 / 2.2."
+  },
+  {
+   "part": "lever carrier (88 = 16 position files; module C..B + end A0 A#0 B0 C8)",
+   "feature": "hub bore for the D4 SUS304 h9 lever rod (S11, P22, D18)",
+   "type": "cut: through cylinder, axis x at L",
+   "dims": {
+    "d_print": 3.9,
+    "d_final": 4.0,
+    "finish": "drill D4.0 after printing (twist drill by hand / pin vise), then check the lever turns freely under its own weight",
+    "rod": "D4 SUS304 h9, shared rod x1.5-162.9 per module",
+    "print_note": "axis vertical in print (carrier lies on its side) -> round hole, no teardrop needed"
+   },
+   "position": {
+    "axis_yz": [
+     203.25,
+     33.5
+    ],
+    "frame": "lever frame b = 0 (side_rigid0); world at rest = rotated about L by the settled rest angle (white -1.09 deg / black -0.55 deg)",
+    "x": "through everything from the outer end of the left collar to the outer end of the right collar: hub L (x_l-5.3..x_l-1.5), spring pocket (x_l+-1.5, D6.6 so the bore is inside the pocket there), hub R (x_l+1.5..x_l+5.3), collars D6 (P14)"
+   },
+   "per_key": {
+    "C": {
+     "x_lever": 8.525,
+     "bore_x": [
+      3.225,
+      14.785
+     ],
+     "collars_LR": [
+      0.0,
+      0.96
+     ]
+    },
+    "C#": {
+     "x_lever": 21.215,
+     "bore_x": [
+      14.955,
+      27.545
+     ],
+     "collars_LR": [
+      0.96,
+      1.03
+     ]
+    },
+    "D": {
+     "x_lever": 34.035,
+     "bore_x": [
+      27.705,
+      39.335
+     ],
+     "collars_LR": [
+      1.03,
+      0.0
+     ]
+    },
+    "D#": {
+     "x_lever": 49.285,
+     "bore_x": [
+      43.985,
+      56.095
+     ],
+     "collars_LR": [
+      0.0,
+      1.51
+     ]
+    },
+    "E": {
+     "x_lever": 63.07,
+     "bore_x": [
+      56.26,
+      69.3
+     ],
+     "collars_LR": [
+      1.51,
+      0.93
+     ]
+    },
+    "F": {
+     "x_lever": 75.693,
+     "bore_x": [
+      69.463,
+      80.993
+     ],
+     "collars_LR": [
+      0.93,
+      0.0
+     ]
+    },
+    "F#": {
+     "x_lever": 90.943,
+     "bore_x": [
+      85.643,
+      97.403
+     ],
+     "collars_LR": [
+      0.0,
+      1.16
+     ]
+    },
+    "G": {
+     "x_lever": 104.037,
+     "bore_x": [
+      97.577,
+      110.097
+     ],
+     "collars_LR": [
+      1.16,
+      0.76
+     ]
+    },
+    "G#": {
+     "x_lever": 116.3,
+     "bore_x": [
+      110.24,
+      121.6
+     ],
+     "collars_LR": [
+      0.76,
+      0.0
+     ]
+    },
+    "A": {
+     "x_lever": 131.55,
+     "bore_x": [
+      126.25,
+      137.61
+     ],
+     "collars_LR": [
+      0.0,
+      0.76
+     ]
+    },
+    "A#": {
+     "x_lever": 143.8,
+     "bore_x": [
+      137.74,
+      149.86
+     ],
+     "collars_LR": [
+      0.76,
+      0.76
+     ]
+    },
+    "B": {
+     "x_lever": 155.975,
+     "bore_x": [
+      149.915,
+      161.275
+     ],
+     "collars_LR": [
+      0.76,
+      0.0
+     ]
+    },
+    "A0": {
+     "x_lever": 10.287,
+     "bore_x": [
+      4.987,
+      18.207
+     ],
+     "collars_LR": [
+      0.0,
+      2.62
+     ]
+    },
+    "A#0": {
+     "x_lever": 26.3,
+     "bore_x": [
+      18.38,
+      32.36
+     ],
+     "collars_LR": [
+      2.62,
+      0.76
+     ]
+    },
+    "B0": {
+     "x_lever": 38.475,
+     "bore_x": [
+      32.415,
+      43.775
+     ],
+     "collars_LR": [
+      0.76,
+      0.0
+     ]
+    },
+    "C8": {
+     "x_lever": 11.75,
+     "bore_x": [
+      6.45,
+      17.05
+     ],
+     "collars_LR": [
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "x_frame": "x in the key's own frame: module keys = module x (world x = 47 + 164.5*(k-1) + x); A0/A#0/B0 = left end part x (= world x); C8 = right end part local x (world x = 1198.5 + x)",
+   "source": "DESIGN.md S11 ('허브 R4.3, 구멍 Ø3.9 출력 → Ø4.0 드릴'), P22, D18, parts table row 레버 캐리어 (collar list), P14 collars, section 15 (허브 구멍이 세로); geometry.json lever prisms 'hub' / 'hub collar' (no bore in the prisms); end_parts collars/levers; printables/stage0/make_stage0.py c16() cuts 'circle(d=3.9)' at L in every carrier prism",
+   "assumed": false
+  },
+  {
+   "part": "lever carrier",
+   "feature": "steel-block cavity (the 'carrier core (steel bottom)' prism is SOLID through the steel volume)",
+   "type": "cut: box from the core prism only",
+   "dims": {
+    "y": [
+     150.0,
+     190.0
+    ],
+    "z": [
+     33.0,
+     52.0
+    ],
+    "x": "core width x_l+-4.6 (9.2 = steel 9.0 + 2 x 0.10 bond line)",
+    "steel": "SS400 9x19x40 (y150-190, z33-52, no chamfer), bonded on both 19x40 faces with MS polymer (0.10 per side), snapped in from below"
+   },
+   "position": {
+    "result": "leaves: front wall y149.2-150 (R3 corner + fingernail tab), full-width lid y150-153 z52-53, rear wall y190-190.8 up to z50 with the slope to (190.0, 52.0); cavity open at the bottom (z33) and at the top between the lips (y153-190)",
+    "frame": "lever frame b = 0"
+   },
+   "per_key": {},
+   "source": "printables/stage0/make_stage0.py c16() (cav2 = square from (y_steel_front, z_sb) size steel_len x steel_h, cut only from 'carrier core'); DESIGN.md S12, D07, P11; geometry.json lever 'carrier core (steel bottom)' polygon",
+   "assumed": false
+  },
+  {
+   "part": "lever carrier",
+   "feature": "rear top snap lip joint patch (manifold)",
+   "type": "geometry patch: extend the rear lips 'carrier top snap lip L/R y184-190' into the rear wall",
+   "dims": {
+    "rule": "lip polygon points with y >= 190.0: y + 0.05; of those, points with z <= 52.0 also z - 0.2 -> rear-bottom corner (190.05, 51.8)",
+    "reason": "the lip's rear-bottom edge only touches the rear wall's sloped top corner (190.0, 52.0) = non-manifold line contact"
+   },
+   "position": {
+    "x": "lip L x_l-4.6..x_l-3.7, lip R x_l+3.7..x_l+4.6",
+    "y": [
+     184.0,
+     190.05
+    ],
+    "z": [
+     51.8,
+     53.0
+    ]
+   },
+   "per_key": {},
+   "source": "printables/stage0/make_stage0.py c16() (production carrier export) ; also: neighbouring carrier prisms that only share a face get 0.02 x-overlap before union",
+   "assumed": false
+  },
+  {
+   "part": "lever carrier",
+   "feature": "spring pocket / insertion slot / long-leg window / short-leg capture groove - what the prisms already carry and what they do not",
+   "type": "check (no extra cut needed except the bore)",
+   "dims": {
+    "pocket": "D6.6 x 3.0 (x_l+-1.5) - implicit: the two 'hub (spring pocket section A/B)' prisms span only x_l+-1.5 and are the ring R3.3..R4.3 + web; hub L/R prisms are solid R4.3 discs outside +-1.5 -> pocket walls 3.8 each side",
+    "insertion_slot": "316.83 deg (lever frame, from +y toward +z), faces +-3.25 (6.5 wide), open rear-down - in section B / between A and B",
+    "long_leg_window": "35 deg, upper face at +2.6 from the axis, open to the rear - in section A (edge (203.42, 36.80)-(204.56, 37.59))",
+    "short_leg_groove": "width 0.70 (band 2.511..3.211 from the axis, direction 136.83 deg), from -0.5 inside the pocket through the hub wall into the web, blind end 0.3 past the 8.0 leg tip; cuts the web underside 3.787 deep; x = the pocket width 3.0 (x_l+-1.5) - it is the split between sections A and B, so it IS in the prisms",
+    "not_in_prisms": "only the D3.9 bore (above). No chamfers, no lead-in on the pocket/slot/groove are specified (stage-0 C06b uses the same outline). Assembly: groove may be dressed with a 0.5 blade if the 0.5 wire does not enter; a D2 toothpick holds the coil until the rod goes in",
+    "print": "pocket D6.6 is closed one layer above by a bridge (x = build direction); the 3.0-wide groove through the hub wall prints without support"
+   },
+   "position": {
+    "axis": "L (203.25, 33.5)",
+    "x": "x_l+-1.5 (per_key pocket_x)"
+   },
+   "per_key": {
+    "C": {
+     "pocket_x": [
+      7.025,
+      10.025
+     ]
+    },
+    "C#": {
+     "pocket_x": [
+      19.715,
+      22.715
+     ]
+    },
+    "D": {
+     "pocket_x": [
+      32.535,
+      35.535
+     ]
+    },
+    "D#": {
+     "pocket_x": [
+      47.785,
+      50.785
+     ]
+    },
+    "E": {
+     "pocket_x": [
+      61.57,
+      64.57
+     ]
+    },
+    "F": {
+     "pocket_x": [
+      74.193,
+      77.193
+     ]
+    },
+    "F#": {
+     "pocket_x": [
+      89.443,
+      92.443
+     ]
+    },
+    "G": {
+     "pocket_x": [
+      102.537,
+      105.537
+     ]
+    },
+    "G#": {
+     "pocket_x": [
+      114.8,
+      117.8
+     ]
+    },
+    "A": {
+     "pocket_x": [
+      130.05,
+      133.05
+     ]
+    },
+    "A#": {
+     "pocket_x": [
+      142.3,
+      145.3
+     ]
+    },
+    "B": {
+     "pocket_x": [
+      154.475,
+      157.475
+     ]
+    },
+    "A0": {
+     "pocket_x": [
+      8.787,
+      11.787
+     ]
+    },
+    "A#0": {
+     "pocket_x": [
+      24.8,
+      27.8
+     ]
+    },
+    "B0": {
+     "pocket_x": [
+      36.975,
+      39.975
+     ]
+    },
+    "C8": {
+     "pocket_x": [
+      10.25,
+      13.25
+     ]
+    }
+   },
+   "source": "DESIGN.md P18 / D05 / section 15 / 10 step 4; geometry.json lever prisms 'hub (spring pocket section A ...)' and '(... section B ...)' polygons, solved.spring.short_leg_groove (nn 2.511/3.211, band_deg 136.827, slot_deg 316.827, window [35, 2.6], web_cut_depth 3.787); model_v4.py spring_pocket (6.6, 3.0), spring_slot, spring_window, spring_notch (0.20, -0.5, 0.3)",
+   "assumed": false
+  },
+  {
+   "part": "lever carrier",
+   "feature": "note-name engraving ('옆벽에 음 이름 새김')",
+   "type": "cut: engraved text on the outer side face, over the solid web (not over the 0.7 steel-pocket wall)",
+   "dims": {
+    "text": "position name exactly as the file name: C, C#, D, D#, E, F, F#, G, G#, A, A#, B, A0, A#0, B0, C8 ('#' as ASCII)",
+    "font": "Liberation Sans:style=Bold (project convention, make_stage0.text_)",
+    "size": 3.2,
+    "depth": 0.4,
+    "halign": "center",
+    "valign": "center"
+   },
+   "position": {
+    "face": "outer side face of the web, on the face that is UP in print (the collar-free face goes on the bed); for C8 (no collars) the +x face",
+    "box_y": [
+     191.2,
+     198.4
+    ],
+    "box_z": [
+     34.0,
+     39.6
+    ],
+    "centre_yz": [
+     194.8,
+     36.8
+    ],
+    "reading": "upright with lever +z up, text runs toward +y (toward the hub) when the face is viewed from outside",
+    "why": "web is 3.8 thick at the face (x_l+-1.5..+-5.3), top line z = 44.0 - 0.4788*(y-190.3), hub circle starts at y198.95; the steel-pocket side wall is only 0.7 and carries the bond line inside"
+   },
+   "per_key": {
+    "C": {
+     "text": "C",
+     "face": "+x"
+    },
+    "C#": {
+     "text": "C#",
+     "face": "+x (after the collar fix in conflicts)"
+    },
+    "D": {
+     "text": "D",
+     "face": "-x"
+    },
+    "D#": {
+     "text": "D#",
+     "face": "+x"
+    },
+    "E": {
+     "text": "E",
+     "face": "+x (after the collar fix in conflicts)"
+    },
+    "F": {
+     "text": "F",
+     "face": "-x"
+    },
+    "F#": {
+     "text": "F#",
+     "face": "+x"
+    },
+    "G": {
+     "text": "G",
+     "face": "+x (after the collar fix in conflicts)"
+    },
+    "G#": {
+     "text": "G#",
+     "face": "-x"
+    },
+    "A": {
+     "text": "A",
+     "face": "+x"
+    },
+    "A#": {
+     "text": "A#",
+     "face": "+x (after the collar fix in conflicts)"
+    },
+    "B": {
+     "text": "B",
+     "face": "-x"
+    },
+    "A0": {
+     "text": "A0",
+     "face": "+x"
+    },
+    "A#0": {
+     "text": "A#0",
+     "face": "+x (after the collar fix in conflicts)"
+    },
+    "B0": {
+     "text": "B0",
+     "face": "-x"
+    },
+    "C8": {
+     "text": "C8",
+     "face": "+x"
+    }
+   },
+   "source": "DESIGN.md parts table row 레버 캐리어 '옆벽에 음 이름 새김', P11 '캐리어는 위치별(옆벽에 음 이름)', section 15 / 10 step 4 (위치 이름이 새겨진 캐리어); text size/depth/face not specified anywhere",
+   "assumed": true,
+   "assumed_reason": "DESIGN only says the note name is engraved on the side wall; face, box, font, size 3.2 and depth 0.4 (2 layers) are proposed so the 0.7 steel-pocket wall is not thinned"
+  },
+  {
+   "part": "lever carrier",
+   "feature": "print support inside the steel cavity ('강철 칸 안에 지지대 1개(z 틈 0.2)')",
+   "type": "print support (not part geometry)",
+   "dims": {
+    "what": "one support under the far (upper-in-print) side wall + its bottom lip, which otherwise bridge 40 mm (y150-190) over the cavity",
+    "primary": "slicer support ENFORCER box (C16a exports the carrier WITHOUT a support body: '생산 캐리어와 같은 설정' = slicer setting), top Z distance 0.2, normal/snug support, interface off",
+    "enforcer_box": {
+     "y": [
+      168.0,
+      172.0
+     ],
+     "z": [
+      32.0,
+      49.4
+     ],
+     "x": "whole cavity width x_l+-4.6 (print Z: from the near wall's inner face to the far wall)"
+    },
+    "fallback_modelled_rib": {
+     "y": [
+      169.4,
+      170.6
+     ],
+     "thickness_y": 1.2,
+     "body_z_33_to_49_4": {
+      "x_from": "near side wall inner face (x_l-4.6 when the -x face is on the bed)",
+      "x_to": "far wall inner face - 0.2 (x_l+4.4)"
+     },
+     "under_far_bottom_lip_z_32_to_33": {
+      "x_from": "near bottom lip top (x_l-3.5)",
+      "x_to": "far bottom lip - 0.2 (x_l+3.3)"
+     },
+     "root": "first 0.6 in print Z narrowed to a 0.4-wide (y169.8-170.2) break-off root on the near wall; snap off and sand the 0.4 scar flush before bonding"
+    },
+    "removal": "must be removed before the steel is bonded (both inner side faces are bond faces)"
+   },
+   "position": {
+    "frame": "lever frame b = 0, mirrored in x for parts printed +x face down"
+   },
+   "per_key": {},
+   "source": "DESIGN.md section 15 (옆으로 눕혀, 강철 칸 안에 지지대 1개(z 틈 0.2): 먼 쪽 옆벽·립이 칸 위를 40 mm 건넘); model/run_all.py 1806; printables/stage0/make_stage0.py c16() C16a (no support body in the STL) + stage0_procedure.md C16a row; drawings d07 note",
+   "assumed": true,
+   "assumed_reason": "the design fixes only 'one support, z gap 0.2'; its y position (mid-span y170), footprint and the modelled fallback are proposed"
+  }
+ ],
+ "names_ko": {
+  "자석 포켓": "magnet pocket",
+  "자석 보스": "magnet boss",
+  "자석 Ø5×2 압입 + CA": "D5x2 magnet, press fit + cyanoacrylate",
+  "캡스턴": "capstan (M3x6 ISO 7380 button-head)",
+  "너트 트랩": "nut trap",
+  "옆에서 끼움": "side-loaded",
+  "위 Ø2.8 자가 잠김 구멍": "D2.8 self-locking bore above the nut",
+  "숨은 빔": "hidden beam",
+  "얇은 꼬리": "thin tail",
+  "밸런스 블록": "balance block",
+  "밸런스 핀 홈": "balance-pin groove",
+  "밸런스 핀": "balance pin (ISO 2338 D2x12)",
+  "스냅 노치": "snap notch",
+  "노치 라이닝 / 부싱 천 0.5T": "notch lining / bushing cloth 0.5T",
+  "입술 벽": "lip wall",
+  "레버 캐리어": "lever carrier",
+  "허브": "hub",
+  "허브 구멍 Ø3.9 출력 → Ø4.0 드릴": "hub bore printed D3.9, drilled D4.0",
+  "허브 칼라": "hub collar (D6)",
+  "스프링 주머니": "spring pocket (D6.6x3.0)",
+  "넣는 슬롯": "insertion slot (316.83 deg, +-3.25)",
+  "긴 다리 창": "long-leg window (35 deg, +2.6)",
+  "짧은 다리 가둠 홈": "short-leg capture groove (0.70 wide)",
+  "웹": "web",
+  "강철 칸": "steel cavity",
+  "강철 칸 안 지지대 (z 틈 0.2)": "support inside the steel cavity (0.2 Z gap)",
+  "음 이름 새김": "note-name engraving",
+  "손톱 턱": "fingernail tab",
+  "윗 스냅 립 / 아래 립": "top snap lip / bottom lip",
+  "뒤 바닥": "rear floor",
+  "펠트 띠": "felt strip (capstan felt 2T)",
+  "비틀림 스프링 (미스미 C-UA90R5-3-0.5)": "torsion spring (MISUMI C-UA90R5-3-0.5)",
+  "MS 폴리머": "MS-polymer adhesive"
+ },
+ "print_orientation": {
+  "white_keys": {
+   "orientation": "top face (z43.5) on smooth PEI, key upside down (v3 orientation); print Z = 43.5 - z",
+   "supports": "tree supports ONLY under the hidden beam / thin tail y146-199 (their top faces z28.5 / 27.5 / 24.9 face down in print)",
+   "features": "magnet pocket opens upward in print (no bridge); snap notch R2.55 = open groove at the top of the print; balance-pin groove opens at the block underside (up); capstan nut slot ceiling (face z23.8) = 5.6 bridge; D2.8 bore opens on the supported capstan seat z27.5",
+   "source": "DESIGN.md section 15 + drawings d05 header ('PETG 한 덩어리, 윗면을 베드에 대고 뒤집어 출력 (서포트 = 숨은 빔·꼬리 밑만)'); stage0 C08a note"
+  },
+  "black_keys": {
+   "orientation": "same as white: top face z55.5 on the bed, print Z = 55.5 - z",
+   "supports": "under the beam / tail only; no lead / mass pocket (r4)",
+   "source": "DESIGN.md section 15, drawings d06"
+  },
+  "lever_carriers": {
+   "orientation": "on its side: one outer side face on the bed, hub bore vertical (print Z = x). Bed face = the collar-free face (-x if the left collar is 0, else +x); C8 has no collars (-x on the bed)",
+   "supports": "one support inside the steel cavity with 0.2 top Z gap (see feature 'print support inside the steel cavity'); everything else support-free (pocket D6.6 bridged one layer above, 3.0-wide short-leg groove prints straight)",
+   "per_position": {
+    "C": "-x (left) face",
+    "C#": "both faces carry a collar - see print_orientation / conflicts",
+    "D": "+x (right) face",
+    "D#": "-x (left) face",
+    "E": "both faces carry a collar - see print_orientation / conflicts",
+    "F": "+x (right) face",
+    "F#": "-x (left) face",
+    "G": "both faces carry a collar - see print_orientation / conflicts",
+    "G#": "+x (right) face",
+    "A": "-x (left) face",
+    "A#": "both faces carry a collar - see print_orientation / conflicts",
+    "B": "+x (right) face",
+    "A0": "-x (left) face",
+    "A#0": "both faces carry a collar - see print_orientation / conflicts",
+    "B0": "+x (right) face",
+    "C8": "-x (left) face"
+   },
+   "two_collar_positions": [
+    "C#",
+    "E",
+    "G",
+    "A#",
+    "A#0"
+   ],
+   "proposal_for_two_collar_positions": "(assumed, not in the design) move each neighbouring collar pair onto the lower-x lever's +x side (same total length, same hub-to-hub gaps) so every carrier has at most a right collar and prints -x face down: C .R 1.92, C# .R 2.06, D 0, D# .R 3.02, E .R 1.86, F 0, F# .R 2.32, G .R 1.52, G# 0, A .R 1.52, A# .R 1.52, B 0; A0 .R 5.24, A#0 .R 1.52, B0 0, C8 0 (all left collars 0). Alternative without a design change: print those 5 with the shorter collar as a loose D6 x t washer (bore D4.0)",
+   "source": "DESIGN.md section 15, model/run_all.py 1806, printables/stage0/make_stage0.py c16() (C16a: print Z = x - xmin, position C = left face on the bed)"
+  },
+  "per_part_mass_g": {
+   "white_module": 21.68,
+   "black": 16.78,
+   "carrier": 2.84,
+   "source": "DESIGN.md sections 4 / 15"
+  }
+ },
+ "conflicts": [
+  "Capstan nut trap: the stage-0 coupon C08a (make_stage0.c08) cuts a square-ended side slot that stops at axis-2.8; an M3 nut (e/2 = 3.175) then sits 0.375 off the screw axis. The spec here uses a hex-ended pocket centred on the axis (closed-side wall 0.77). The model's mass-model void is a centred 5.6 x 5.6 x 2.6 box (not side-open).",
+  "Lever carriers C#, E, G, A#, A#0 have hub collars on BOTH sides (P14 / end_parts collars), so neither side face can lie flat on the bed as DESIGN 15 prescribes ('옆벽이 베드'). Proposal in print_orientation.lever_carriers (merge collar pairs onto the +x side) - needs the owner's OK because it changes P14.",
+  "The 'carrier core (steel bottom)' prism in geometry.json is solid through the steel volume; the production export (C16a) cuts the 40 x 19 cavity. Anyone building the carrier straight from the prisms must apply that cut (feature listed).",
+  "Balance-pin groove y134.0-138.0 ends 0.237 inside the front lip wall (lip region starts y137.763): the groove above z22.3 cuts into that wall's upper part; harmless, noted for the CAD boolean."
+ ],
+ "coords": "all key features in the key frame at rest (design pose) and all carrier features in the lever frame at b = 0 (geometry side_rigid0), module x unless noted; world x = 47 + 164.5*(k-1) + x for module Ok, left end part x = world x, right end part world x = 1198.5 + local x",
+ "sources_root": "/Users/kwg/Desktop/mydrive/project/Toccata/hardware/mechanical/key-action-v4 (DESIGN.md r4.5, model/geometry.json, model/model_v4.py, printables/stage0/make_stage0.py) + model/v3_extract.txt for v3 S12/S13",
+ "status": "complete"
+}

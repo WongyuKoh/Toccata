@@ -1,0 +1,1883 @@
+{
+ "checked": "2026-09-24",
+ "currency_note": "price_krw는 확인한 판매 페이지 가격. 미스미는 VAT 포함가를 price_krw에, VAT 별도가는 price_note에 기재. 해외 판매처(US$)는 price_krw=null",
+ "items": [
+  {
+   "id": "m-petg-white",
+   "category": "filament",
+   "name_ko": "PETG 필라멘트 화이트 1kg (흰 건반·키 본체)",
+   "model": "Bambu Lab PETG Basic 화이트 (30106), 1.75mm",
+   "role_ko": "흰 건반 일체형 출력(A 플렉서 힌지 포함), B/C/D 키 스틱",
+   "qty_suggest": "3–4 kg (88키 + 시험 쿠폰/재출력 여유)",
+   "specs": {
+    "밀도": "1.25 g/cm³ (ISO 1183)",
+    "영률 X-Y": "2780 ± 65 MPa (ISO 527)",
+    "영률 Z": "2550 ± 100 MPa",
+    "인장강도 X-Y": "51 ± 1 MPa",
+    "파단연신 X-Y": "9.5 ± 0.7 %",
+    "굽힘탄성률 X-Y": "1950 ± 50 MPa",
+    "HDT 1.8 MPa": "68 °C",
+    "유리전이": "69 °C",
+    "노즐/베드": "230–260 °C / 65–75 °C",
+    "출처": "Bambu PETG Basic TDS V3.0"
+   },
+   "offers": [
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/petg-basic",
+     "price_krw": 19000,
+     "pack_qty": "1 kg 스풀 포함",
+     "price_note": "화이트 스풀 19,000원(재고 있음), 리필 15,000원(재고 있음). VAT 포함 표기",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/petg-hf",
+     "price_krw": 19000,
+     "pack_qty": "1 kg 스풀 포함",
+     "price_note": "PETG HF 화이트 19,000원 — 확인 시점 전 색상 품절(OutOfStock)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-petg-white.png",
+   "image_source": "https://store.bblcdn.com/s3/default/9b8629d12b2f4fc1af2a8f297711fa02/PETG_BASIC_WHITE.png",
+   "alternatives": [
+    {
+     "name": "eSUN PETG 1kg 1.75mm (프랩스)",
+     "why": "국내 재고, 가장 저렴한 축. 단 eSUN 공개값은 굽힘탄성률 1.23 GPa로 Bambu PETG Basic보다 유연 → 플렉서 치수 재계산 필요",
+     "url": "https://plabs.co.kr/product/detail.html?product_no=161",
+     "price_krw": 18700
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "PETG Basic는 2025년 V3로 배합이 바뀌어 E≈2.8 GPa(이전/HF 대비 강성↑). 플렉서 계산은 실제 구매 로트로 쿠폰 시험 필수. 스풀 포함 19,000원 vs 리필 15,000원(AMS 등 스풀 재사용 시)."
+  },
+  {
+   "id": "m-petg-black",
+   "category": "filament",
+   "name_ko": "PETG 필라멘트 블랙 1kg (검은 건반)",
+   "model": "Bambu Lab PETG Basic 블랙 (30105), 1.75mm",
+   "role_ko": "검은 건반(36개) 및 보이는 프레임 부품",
+   "qty_suggest": "1.5–2 kg",
+   "specs": {
+    "밀도": "1.25 g/cm³",
+    "영률 X-Y": "2780 ± 65 MPa",
+    "인장강도 X-Y": "51 MPa",
+    "파단연신 X-Y": "9.5 %",
+    "HDT 1.8 MPa": "68 °C",
+    "흡수율(25°C,55%RH)": "0.45 %",
+    "건조": "65 °C 8 h",
+    "출처": "Bambu PETG Basic TDS V3.0"
+   },
+   "offers": [
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/petg-basic",
+     "price_krw": 19000,
+     "pack_qty": "1 kg 스풀 포함",
+     "price_note": "블랙 스풀 19,000원 재고 있음 / 블랙 리필 15,000원은 확인 시점 품절",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/petg-hf",
+     "price_krw": 15000,
+     "pack_qty": "1 kg 리필",
+     "price_note": "PETG HF 블랙 리필 15,000원(스풀 19,000원) — 확인 시점 품절",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-petg-black.png",
+   "image_source": "https://store.bblcdn.com/s3/default/aa2f3868b53344d593e8be707dee031c/PETG_BASIC_BLACK.png",
+   "alternatives": [
+    {
+     "name": "eSUN PETG 1kg 블랙 (프랩스)",
+     "why": "국내 재고, 18,700원",
+     "url": "https://plabs.co.kr/product/detail.html?product_no=161",
+     "price_krw": 18700
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "흰/검 건반은 같은 브랜드·같은 라인으로 통일해야 강성·수축이 같아 터치 편차가 줄어듦."
+  },
+  {
+   "id": "m-pla",
+   "category": "filament",
+   "name_ko": "PLA 필라멘트 1kg (비가동 케이스·지그)",
+   "model": "Bambu Lab PLA Basic (제이드 화이트 10100 / 블랙 10101)",
+   "role_ko": "센서 레일 커버, 스피커 그릴, 지그·치구 등 움직이지 않는 부품",
+   "qty_suggest": "1–2 kg",
+   "specs": {
+    "밀도": "1.24 g/cm³",
+    "영률 X-Y": "2580 ± 220 MPa",
+    "인장강도 X-Y": "35 ± 4 MPa",
+    "파단연신 X-Y": "12.2 %",
+    "HDT 1.8 MPa": "54 °C",
+    "Vicat": "57 °C",
+    "노즐/베드": "190–230 °C / 35–45 °C",
+    "출처": "Bambu PLA Basic TDS V3.0"
+   },
+   "offers": [
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/pla-basic-filament",
+     "price_krw": 22000,
+     "pack_qty": "1 kg 스풀 포함",
+     "price_note": "제이드 화이트/블랙 스풀 22,000원, 리필 18,000원 (재고 있음)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-pla.png",
+   "image_source": "https://store.bblcdn.com/s3/default/7e26e79875824de5bfb86229f6d3786c/e49fef1348214d5a9c156b0b6b7b95c3.png",
+   "alternatives": [
+    {
+     "name": "eSUN PLA 1kg (프랩스)",
+     "why": "저가 국내 재고",
+     "url": "https://plabs.co.kr/product/detail.html?product_no=285",
+     "price_krw": 19800
+    },
+    {
+     "name": "eSUN PLA+HS 1kg (프랩스)",
+     "why": "고속 출력용 PLA+",
+     "url": "https://plabs.co.kr/product/detail.html?product_no=299",
+     "price_krw": 24200
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "HDT 54 °C — 여름 차 안/직사광선 환경에 두는 부품은 PETG로. 확인 시점에는 PLA가 PETG보다 비쌌음(스풀 22,000 vs 19,000)."
+  },
+  {
+   "id": "m-tpu",
+   "category": "filament",
+   "name_ko": "TPU 95A 필라멘트 (범퍼·스톱 패드)",
+   "model": "Bambu Lab TPU 95A HF 1kg",
+   "role_ko": "키 업/다운 스톱 범퍼, 해머 착지 패드, 케이스 발",
+   "qty_suggest": "0.2–0.5 kg 사용(1 kg 단위 판매)",
+   "specs": {
+    "경도": "Shore 95A",
+    "밀도": "1.22 g/cm³",
+    "영률 X-Y": "9.8 ± 0.7 MPa",
+    "인장강도 X-Y": "27.3 MPa",
+    "파단연신": "> 650 % (X-Y)",
+    "노즐/베드": "220–240 °C / 30–35 °C",
+    "흡수율": "1.08 % (건조 70 °C 8 h)",
+    "출처": "Bambu TPU 95A HF TDS V1.0"
+   },
+   "offers": [
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/tpu-95a-hf",
+     "price_krw": 66000,
+     "pack_qty": "1 kg 스풀 포함",
+     "price_note": "전 색상 66,000원, 재고 있음",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-tpu.jpg",
+   "image_source": "https://store.bblcdn.com/s3/default/55efb6b5dafa4421bf326a5cda306720/b4e9f1a5-1d13-4abc-82bf-3f68f4d8775b.jpeg",
+   "alternatives": [
+    {
+     "name": "eSUN eTPU-95A 1kg (프랩스)",
+     "why": "2/3 가격. 소량 범퍼용이면 충분",
+     "url": "https://plabs.co.kr/product/detail.html?product_no=181",
+     "price_krw": 44000
+    }
+   ],
+   "optional": true,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "펠트/PORON으로 스톱을 만들면 TPU는 생략 가능. TPU는 AMS 비호환(95A HF는 외부 스풀)."
+  },
+  {
+   "id": "m-shaft3",
+   "category": "shaft",
+   "name_ko": "Ø3 mm 경화 샤프트 (길이 지정, 옥타브 분할)",
+   "model": "MISUMI 경제형 샤프트 스트레이트형 E-SFJ3-[L] (S45C 고주파 열처리, g7)",
+   "role_ko": "D안 해머 피벗축, B안 분할 키 피벗축(베드별 1개)",
+   "qty_suggest": "D안 163 mm × 8개 (+예비 1–2)",
+   "specs": {
+    "재질": "S45C 상당, 고주파 열처리 55HRC~",
+    "공차": "g7: Ø3 = −0.002/−0.012 mm",
+    "길이": "10–400 mm, 1 mm 단위 지정 (Ø3·Ø4 최대 400 mm)",
+    "L 공차": "120–400 mm: ±0.5",
+    "직각도": "끝단 0.2",
+    "표면조도": "Ra 0.4 (연삭, 판매자 Q&A)",
+    "유효경화층": "≥0.5 mm",
+    "SUS 버전": "E-SSFJ3 (마르텐사이트 SUS)"
+   },
+   "offers": [
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310559529/?HissuCode=E-SFJ3-163",
+     "price_krw": 10233,
+     "pack_qty": "1개",
+     "price_note": "E-SFJ3-163: 9,303원(VAT 별도)/10,233원(VAT 포함), 10개 이상 구간 할인. 참고 출하일 2026/10/12",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310559529/?HissuCode=E-SFJ3-300",
+     "price_krw": 14779,
+     "pack_qty": "1개",
+     "price_note": "E-SFJ3-300: 13,435원(VAT 별도)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310559529/?HissuCode=E-SSFJ3-300",
+     "price_krw": 41919,
+     "pack_qty": "1개",
+     "price_note": "스테인리스 E-SSFJ3-300: 38,108원(VAT 별도) — 비쌈",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-shaft3.jpg",
+   "image_source": "https://kr.misumi-ec.com/linked/material/mech/MSM1/PHOTO/110310559529_001.jpg",
+   "alternatives": [
+    {
+     "name": "배관몰 스텐연마봉 SUS304 Φ3×1M + 절단",
+     "why": "1 m 9,600원 + 절단 1컷 500원. 163 mm×8개 = 연마봉 2본 + 8컷 ≈ 23,200원(착불). 비경화 SUS304지만 연마봉이라 직경 정밀",
+     "url": "https://baegwan.net/goods/view?no=4356",
+     "price_krw": 9600
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "B",
+    "D"
+   ],
+   "notes_ko": "미스미 Ø3/Ø4는 최대 400 mm라 1250 mm 연속축 불가 → 출력 베드(≈옥타브) 단위 분할축으로 설계. 163 mm×8개 미스미 총액 ≈ 74,400원(VAT 별도) vs 연마봉 절단 ≈ 23,200원+배송."
+  },
+  {
+   "id": "m-shaft4",
+   "category": "shaft",
+   "name_ko": "Ø4 mm 연마봉/샤프트 (1 m 또는 절단)",
+   "model": "배관몰 스텐연마봉 SUS304 Φ4×1M (절단 옵션)",
+   "role_ko": "B/D안 키 피벗축, 긴 레일축",
+   "qty_suggest": "163 mm × 8개 (=연마봉 2본) 또는 1 m 단위",
+   "specs": {
+    "재질": "SUS304 (비열처리)",
+    "직경": "Φ4",
+    "길이": "1 m 기준, 그 외 견적",
+    "절단": "1컷 +500원",
+    "배송": "착불",
+    "대안 공차(미스미 E-SFJ4)": "g7 −0.004/−0.016 mm, 경화 55HRC~",
+    "미스미 최대길이": "400 mm (Ø4)"
+   },
+   "offers": [
+    {
+     "store": "배관몰",
+     "url": "https://baegwan.net/goods/view?no=4356",
+     "price_krw": 9600,
+     "pack_qty": "1 m",
+     "price_note": "Φ3/Φ4/Φ5 동일 9,600원, 절단 1컷 500원, 착불",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310559529/?HissuCode=E-SFJ4-163",
+     "price_krw": 8834,
+     "pack_qty": "1개",
+     "price_note": "E-SFJ4-163: 8,031원(VAT 별도), 10개↑ 7,228원. 8개 ≈ 64,250원(VAT 별도). 참고 출하일 2026/10/12",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310559529/?HissuCode=E-SFJ4-300",
+     "price_krw": 12593,
+     "pack_qty": "1개",
+     "price_note": "E-SFJ4-300: 11,448원(VAT 별도)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "11번가 (공구인)",
+     "url": "https://www.11st.co.kr/products/4239823741",
+     "price_krw": 1830,
+     "pack_qty": "1 m",
+     "price_note": "SUS304 4파이 1M 환봉 1,830원 + 배송 3,500원 — 연마봉 아님(직경 공차 미표기)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "원자재닷컴",
+     "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=352",
+     "price_krw": 4400,
+     "pack_qty": "4 m",
+     "price_note": "SUS304 환봉 4ø 4 m 4,400원, 절단 1컷 500원(4–12ø). 1250 mm 연속축 3본 확보 가능",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-shaft4.jpg",
+   "image_source": "https://baegwan.net/data/goods/201907/15120705large.jpg",
+   "alternatives": [
+    {
+     "name": "MISUMI E-SFJ4-[L] 경화 샤프트",
+     "why": "키 부싱 마모가 걱정되면 경화(55HRC)·g7 공차품",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310559529/?HissuCode=E-SFJ4-163",
+     "price_krw": 8834
+    },
+    {
+     "name": "원자재닷컴 SUS304 4ø 4 m",
+     "why": "1250 mm 연속축이 꼭 필요할 때 (화물·착불 가능성)",
+     "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=352",
+     "price_krw": 4400
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "B",
+    "D"
+   ],
+   "notes_ko": "연속 1250 mm Ø4 축은 처짐·조립 난이도 큼 → 베드별 분할 권장. 플라스틱 부싱 + SUS 연마봉 조합이면 경화 불필요."
+  },
+  {
+   "id": "m-dowel4",
+   "category": "pin",
+   "name_ko": "Ø4 평행핀 30/40 mm (발란스핀·프론트핀)",
+   "model": "오키타(OHKITA) 평행 핀 B종 h7 SPB-S45C-D4-30 / D4-40 (미스미 판매)",
+   "role_ko": "C안 발란스 레일 핀·프론트 가이드 핀",
+   "qty_suggest": "176–200개 (100개 팩 ×2)",
+   "specs": {
+    "재질": "S45C, 열처리·표면처리 없음",
+    "공차": "h7 (0/−0.012)",
+    "치수": "Ø4 × 30 또는 40 mm",
+    "포장": "100개 팩",
+    "끝단": "표준 모따기",
+    "주의": "무도금 → 방청유/왁스 권장"
+   },
+   "offers": [
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/221005016322/?HissuCode=SPB-S45C-D4-30",
+     "price_krw": 15596,
+     "pack_qty": "100개",
+     "price_note": "14,178원(VAT 별도)/팩, 참고 출하일 2026/10/14",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/221005016322/?HissuCode=SPB-S45C-D4-40",
+     "price_krw": 21267,
+     "pack_qty": "100개",
+     "price_note": "19,334원(VAT 별도)/팩, 참고 출하일 2026/10/01",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-dowel4.jpg",
+   "image_source": "https://kr.misumi-ec.com/linked/material/mech/OKT1/PHOTO/D001AB.jpg",
+   "alternatives": [
+    {
+     "name": "베어링웍스 MS 맞춤핀 SUJ2 4X30mm 100개",
+     "why": "경화(HRC55–58) SUJ2 — 마모에 강함, 익일 발송. 19,600+5,500원",
+     "url": "https://bearingworks.co.kr/503/?idx=20427",
+     "price_krw": 25100
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "C"
+   ],
+   "notes_ko": "4×40은 베어링웍스에 없음(4X30까지). 프론트핀은 윗단을 둥글게 다듬거나 Ø3 볼엔드 핀(m-pin3) 사용."
+  },
+  {
+   "id": "m-pin3",
+   "category": "pin",
+   "name_ko": "Ø3×30 평행핀 (키 가이드핀)",
+   "model": "MISUMI 경제형 맞춤핀 E-MSH3-30 (편단 테이퍼·편단 볼, h8)",
+   "role_ko": "키 가이드핀(프론트) — 볼 끝단이라 부싱 진입이 부드러움",
+   "qty_suggest": "100개",
+   "specs": {
+    "재질": "마르텐사이트 스테인리스",
+    "공차": "h8 (0/−0.014)",
+    "치수": "Ø3 × 30 mm",
+    "끝단": "한쪽 테이퍼, 한쪽 구형(볼)",
+    "최소주문": "10개",
+    "구간단가(VAT 별도)": "10–19: 620원 / 20–49: 560원 / 50–540: 500원"
+   },
+   "offers": [
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310993689/?HissuCode=E-MSH3-30",
+     "price_krw": 550,
+     "pack_qty": "1개 (최소 10개)",
+     "price_note": "50개 이상 500원(VAT 별도)/550원(VAT 포함) → 100개 ≈ 55,000원. 참고 출하일 2026/10/01",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-pin3.jpg",
+   "image_source": "https://kr.misumi-ec.com/linked/material/mech/MSM1/PHOTO/110310993689_001.jpg",
+   "alternatives": [
+    {
+     "name": "베어링웍스 MS 맞춤핀 SUJ2 3X25mm 100개",
+     "why": "100개 23,200원으로 절반 가격. 단 3X30은 확인 시점 품절, 3X25는 판매 중",
+     "url": "https://bearingworks.co.kr/503/?idx=20427",
+     "price_krw": 23200
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "오키타 SPB-S45C-D3는 22 mm까지만 목록, SUS303 SPB-303-D3-30은 1000개 팩 360,902원(VAT 별도)이라 비추천."
+  },
+  {
+   "id": "m-springpin",
+   "category": "pin",
+   "name_ko": "Ø2 스프링핀 100개",
+   "model": "베어링웍스 스프링핀 지름 2mm (2X5–2X30mm 선택)",
+   "role_ko": "출력 부품 힌지·스토퍼 고정용",
+   "qty_suggest": "100개 1봉",
+   "specs": {
+    "직경": "2 mm",
+    "길이 옵션": "5–30 mm (2X10, 2X12, 2X16 등)",
+    "포장": "100개",
+    "원산지": "다국적"
+   },
+   "offers": [
+    {
+     "store": "베어링웍스",
+     "url": "https://bearingworks.co.kr/503/?idx=20152",
+     "price_krw": 4400,
+     "pack_qty": "100개",
+     "price_note": "전 길이 동일가 4,400원, 배송 3,500원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-springpin.jpg",
+   "image_source": "https://cdn.imweb.me/thumbnail/20230830/d4fd38c13817e.jpg",
+   "alternatives": [],
+   "optional": true,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": ""
+  },
+  {
+   "id": "m-springs",
+   "category": "spring",
+   "name_ko": "압축 스프링 OD5 × L15 (k 0.05–0.29 N/mm)",
+   "model": "MISUMI 경제형 코일스프링 외경기준 초경하중 스테인리스 C-UY5-15",
+   "role_ko": "B안 키 리턴 스프링 기본형",
+   "qty_suggest": "88 + 예비 12 = 100개",
+   "specs": {
+    "재질": "SUS304-WPB",
+    "외경/내경": "5 / 4.4 mm",
+    "선경": "0.3 mm",
+    "자유길이": "15 mm",
+    "스프링정수": "0.098 N/mm (±10 %)",
+    "최대하중": "1.1 N @ 허용변위 11.25 mm",
+    "총권수": "9.5",
+    "밀착길이": "3.15 mm"
+   },
+   "offers": [
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310295109/?HissuCode=C-UY5-15",
+     "price_krw": 348,
+     "pack_qty": "1개",
+     "price_note": "316원(VAT 별도), 1000개↑ 296원. 참고 출하일 2026/09/29",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310295109/?HissuCode=C-UV5-15",
+     "price_krw": 383,
+     "pack_qty": "1개",
+     "price_note": "C-UV5-15: k 0.05 N/mm, 선경 0.26, 348원(VAT 별도)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310295109/?HissuCode=C-UR5-15",
+     "price_krw": 326,
+     "pack_qty": "1개",
+     "price_note": "C-UR5-15: k 0.29 N/mm, 선경 0.38, 최대하중 2.6 N, 296원(VAT 별도)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-springs.jpg",
+   "image_source": "https://kr.misumi-ec.com/linked/material/mech/MSM1/PHOTO/110310295109_001.jpg",
+   "alternatives": [
+    {
+     "name": "오케이스프링 (11번가) 재고/주문제작 스프링",
+     "why": "국내 제작사, 재고 규격 400원~, 원하는 사양 주문제작 문의",
+     "url": "https://www.11st.co.kr/products/6820905679",
+     "price_krw": 400
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "B",
+    "D"
+   ],
+   "notes_ko": "같은 외경·길이에서 C-UV(0.05)/C-UY(0.098)/C-UR(0.29) 3단계로 정수 선택 가능 — 시제품 때 3종 각 10개씩 사서 터치 비교 추천."
+  },
+  {
+   "id": "m-spring-spec",
+   "category": "spring",
+   "name_ko": "설계 사양 압축 스프링 A/B (OD6)",
+   "model": "A: MISUMI C-UR6-25 / B: 최근접 C-UY6-30 또는 주문제작",
+   "role_ko": "최종 설계 리턴·프리로드 스프링 (A: 0.28 N/mm, B: 0.125 N/mm)",
+   "qty_suggest": "A 100개, B 100개",
+   "specs": {
+    "A 요구": "선경 0.5, OD 6, L0≈24, 유효 13권, 0.28 N/mm",
+    "A 재고품 C-UR6-25": "선경 0.5, OD 6/ID 5, L0 25, 총 13권, k 0.29 N/mm, Fmax 4.4 N @15 mm, 밀착 7 mm",
+    "B 요구": "선경 0.4, OD 6, L0≈28, 유효 11.5권, 0.125 N/mm",
+    "B 최근접 C-UY6-30": "선경 0.4, OD 6/ID 5.2, L0 30, 총 16권, k 0.098 N/mm, Fmax 2.21 N @22.5 mm",
+    "B 대안 C-UR6-30": "선경 0.5, L0 30, k≈0.29 N/mm (5.3 N/18 mm)",
+    "정수 공차": "±10 % (SUS304-WPB)"
+   },
+   "offers": [
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310295109/?HissuCode=C-UR6-25",
+     "price_krw": 355,
+     "pack_qty": "1개",
+     "price_note": "A안: 323원(VAT 별도, 1–99개) / 100개↑ 274원 → 100개 ≈ 30,100원(VAT 포함). 참고 출하일 2026/09/29",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310295109/?HissuCode=C-UY6-30",
+     "price_krw": 383,
+     "pack_qty": "1개",
+     "price_note": "B 최근접: 348원(VAT 별도). k 0.098 — 요구치보다 22 % 낮음",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "오케이스프링 (11번가)",
+     "url": "https://www.11st.co.kr/products/6820905679",
+     "price_krw": 400,
+     "pack_qty": "1개",
+     "price_note": "B 주문제작처: 재고 규격 400원~(예: 선경0.4×외경4×기장40 400원). 0.4×6×28 맞춤은 가격 문의 필요(미확인)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-spring-spec.jpg",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/6820905679/B.jpg?181000000",
+   "alternatives": [
+    {
+     "name": "C-UY6-30 절단 사용",
+     "why": "k∝1/유효권수: 총 16권 중 약 3권 잘라 유효권수를 줄이면 ≈0.12 N/mm 근사(추정, 끝단 미연삭)",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310295109/?HissuCode=C-UY6-30",
+     "price_krw": 383
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "B",
+    "D"
+   ],
+   "notes_ko": "A는 C-UR6-25가 사실상 일치(0.29 vs 0.28). B(0.125)는 미스미 경제형 OD6 라인업 사이값이 없어 주문제작 또는 C-UY6-30으로 설계 보정 필요. 미스미 C-UY/C-UR 규격표에는 100개입 PACK 형번도 있음."
+  },
+  {
+   "id": "m-musicwire",
+   "category": "spring",
+   "name_ko": "피아노선(경강선) 직선 1 m",
+   "model": "11번가 피아노선/강선 직선봉 1 m, 0.5–2.0 mm",
+   "role_ko": "판스프링·와이어 스프링 리턴, 해머 리턴 스프링 시험",
+   "qty_suggest": "0.5/0.6/0.8 mm 각 5–10본",
+   "specs": {
+    "길이": "1 m 직선",
+    "0.5 mm": "1,100원",
+    "0.6 mm": "1,200원",
+    "0.7 mm": "1,300원",
+    "0.8 mm": "1,400원",
+    "1.0 mm": "1,600원",
+    "탄성계수(강 일반값)": "≈200 GPa (일반 강선 값, 판매자 미표기)"
+   },
+   "offers": [
+    {
+     "store": "11번가",
+     "url": "https://www.11st.co.kr/products/196696669",
+     "price_krw": 1100,
+     "pack_qty": "1 m",
+     "price_note": "0.5 mm 1,100원 ~ 2.0 mm 2,400원, 배송비 4,000원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-musicwire.jpg",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/196696669/B.jpg?74000000",
+   "alternatives": [
+    {
+     "name": "11번가 피아노선 0.5–10 mm 1 M",
+     "why": "다른 판매자, 1,000원~ / 배송 3,500원",
+     "url": "https://www.11st.co.kr/products/574782429",
+     "price_krw": 1000
+    }
+   ],
+   "optional": true,
+   "used_by": [
+    "A",
+    "B",
+    "D"
+   ],
+   "notes_ko": ""
+  },
+  {
+   "id": "m-steelball",
+   "category": "counterweight",
+   "name_ko": "강구(쇠구슬) 10 mm / 12.7 mm, 1 kg",
+   "model": "베어링웍스 강구 쇠구슬 (탄소강) 1 kg 소분",
+   "role_ko": "C안 키 카운터웨이트, D안 해머 웨이트 (출력 포켓에 압입/접착)",
+   "qty_suggest": "10 mm 1 kg(≈250개) 또는 12.7 mm 1–2 kg",
+   "specs": {
+    "재질": "탄소강(S45C)",
+    "밀도(강)": "7.85 g/cm³",
+    "Ø8 mm": "≈2.1 g/개 (1 kg ≈ 490개)",
+    "Ø10 mm": "≈4.1 g/개 (1 kg ≈ 250개)",
+    "Ø11.11 mm": "≈5.6 g/개 (1 kg ≈ 180개)",
+    "Ø12.7 mm": "≈8.4 g/개 (1 kg ≈ 120개)",
+    "질량 계산": "m = π/6·d³·7.85 g/cm³ (판매자 개수와 일치)"
+   },
+   "offers": [
+    {
+     "store": "베어링웍스",
+     "url": "https://bearingworks.co.kr/179/?idx=267",
+     "price_krw": 5500,
+     "pack_qty": "1 kg",
+     "price_note": "6/7/8/10 mm 5,500원, 6.35 mm +2,200, 9 mm +3,300. 배송 3,500원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "베어링웍스",
+     "url": "https://bearingworks.co.kr/179/?idx=1112",
+     "price_krw": 7700,
+     "pack_qty": "1 kg",
+     "price_note": "12.7 mm(약 120개) 5,500+2,200원, 11.11 mm(약 180개) 9,900원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-steelball.jpg",
+   "image_source": "https://cdn.imweb.me/thumbnail/20230711/1b0ba530ff906.jpg",
+   "alternatives": [
+    {
+     "name": "볼트집 M8/M10 육각너트",
+     "why": "너트는 볼트로 조절 고정 가능 (m-nut 참조)",
+     "url": "https://boltzip.com/product/detail.html?product_no=70",
+     "price_krw": 50
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "C",
+    "D"
+   ],
+   "notes_ko": "5–20 g/키 목표면 12.7 mm 볼 1–2개 또는 10 mm 볼 2–4개 조합. 납(11.34 g/cm³) 대비 부피 1.45배 필요."
+  },
+  {
+   "id": "m-nut",
+   "category": "counterweight",
+   "name_ko": "육각너트 M6/M8/M10/M12 (철 아연도금)",
+   "model": "볼트집 철 육각너트 (미리 규격)",
+   "role_ko": "조절형 카운터웨이트(볼트에 적층), 해머 웨이트",
+   "qty_suggest": "M8 200개 또는 M10 100개",
+   "specs": {
+    "M6": "2.50 g/개 (DIN934 2.50 kg/1000), 30원",
+    "M8": "5.20 g/개 (5.20 kg/1000), 50원",
+    "M10": "11.6 g/개 (11.6 kg/1000), 90원",
+    "M12": "17.3 g/개 (17.3 kg/1000), 130원",
+    "재질": "철, 백색/천연색 아연도금",
+    "무게 출처": "Fuller Fasteners DIN 934 weight table"
+   },
+   "offers": [
+    {
+     "store": "볼트집",
+     "url": "https://boltzip.com/product/detail.html?product_no=70",
+     "price_krw": 50,
+     "pack_qty": "1개",
+     "price_note": "M8 50원/개 (M6 30, M10 90, M12 130원), 배송 3,000원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-nut.png",
+   "image_source": "https://boltzip.com/web/product/big/202211/250b82cd95494e8994b3b28afab6d0c7.png",
+   "alternatives": [],
+   "optional": false,
+   "used_by": [
+    "C",
+    "D"
+   ],
+   "notes_ko": "무게 출처: https://fullerfasteners.com/tech/weights-for-din-934/ (근사치). 볼트+너트 적층이면 키별 미세 조정이 쉬움."
+  },
+  {
+   "id": "m-flat925",
+   "category": "counterweight",
+   "name_ko": "평철 9×25 mm (C안 카운터웨이트 48 mm×88)",
+   "model": "원자재닷컴 [스틸 형강류] 스틸 평철 6M — 폭 25 × 두께 9",
+   "role_ko": "C안 키 카운터웨이트 블록 (48 mm 절단 88개, 총 ≈4.3 m)",
+   "qty_suggest": "6 m 1본 (톱날 손실 포함 여유)",
+   "specs": {
+    "규격": "25 × 9 mm, 6 m",
+    "재질": "스틸 평철(SS275/SS400 계열, 판매 페이지 재질 등급 미표기)",
+    "가격": "8,600 + 15,130 = 23,730원/6 m (≈3,955원/m)",
+    "절단비": "9–10t 컷당 3,000원",
+    "88개 절단비": "87–88컷 × 3,000 ≈ 261,000–264,000원",
+    "개당 질량": "25×9×48 mm = 10.8 cm³ → ≈84.8 g",
+    "배송": "착불(6 m 장척)"
+   },
+   "offers": [
+    {
+     "store": "원자재닷컴",
+     "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=141",
+     "price_krw": 23730,
+     "pack_qty": "6 m 1본",
+     "price_note": "기본 8,600원 + 25×9 옵션 15,130원. 절단 추가상품 컷당 3,000원(9–10t). 착불 배송",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-flat925.jpg",
+   "image_source": "https://godomall-storage.cdn-nhncommerce.com/9314e6ec81e1bebdead2446aba786ef4/goods/141/image/detail/1342587402_m_0.jpg",
+   "alternatives": [
+    {
+     "name": "같은 판매처 6 m 구매 후 자가 절단/동네 철물점 절단",
+     "why": "88컷 절단비(≈26만원)가 재료비의 10배 → 금속용 밴드쏘·고속절단기 자가 절단 또는 몇 컷 단위로 사서 직접 분할이 경제적",
+     "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=141",
+     "price_krw": 23730
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "C"
+   ],
+   "notes_ko": "판매 옵션 두께: 폭 25는 3/4.5/6/9t. 48 mm 조각 88개는 한 조각 84.8 g로 5–20 g 목표보다 훨씬 무거움 — 설계 질량 재확인 필요."
+  },
+  {
+   "id": "m-flat616",
+   "category": "counterweight",
+   "name_ko": "평철 6×16 mm (D안 해머 웨이트 55 mm×88) — 최근접 19×6",
+   "model": "원자재닷컴 스틸 평철 6M — 폭 19 × 두께 6 (16 mm 폭 미취급)",
+   "role_ko": "D안 해머 웨이트 (55 mm 절단 88개, 총 ≈4.9 m)",
+   "qty_suggest": "6 m 1본",
+   "specs": {
+    "요청 규격": "16 × 6 mm — 판매처 폭 옵션 19/25/32…(16 없음)",
+    "최근접": "19 × 6 mm, 6 m: 8,600 + 5,770 = 14,370원 (≈2,395원/m)",
+    "대안": "25 × 6 mm: 8,600 + 8,110 = 16,710원",
+    "절단비": "6–7t 컷당 2,000원 → 88컷 ≈ 176,000원",
+    "개당 질량 16×6×55": "5.28 cm³ → ≈41.4 g",
+    "개당 질량 19×6×55": "6.27 cm³ → ≈49.2 g",
+    "배송": "착불"
+   },
+   "offers": [
+    {
+     "store": "원자재닷컴",
+     "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=141",
+     "price_krw": 14370,
+     "pack_qty": "6 m 1본",
+     "price_note": "19×6 옵션(+5,770원). 19×3은 품절. 절단 컷당 2,000원(6–7t)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-flat616.jpg",
+   "image_source": "https://godomall-storage.cdn-nhncommerce.com/9314e6ec81e1bebdead2446aba786ef4/goods/141/image/detail/1342587402_m_0.jpg",
+   "alternatives": [
+    {
+     "name": "25×6 평철 6 m",
+     "why": "폭을 줄이지 않고 두께 6 유지, 16,710원",
+     "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=141",
+     "price_krw": 16710
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "D"
+   ],
+   "notes_ko": "16 mm 폭이 필수면 19×6을 설계에 반영(질량 +19 %)하거나 판재 레이저 재단 견적 필요(미조사)."
+  },
+  {
+   "id": "m-tungsten",
+   "category": "counterweight",
+   "name_ko": "텅스텐 퍼티 1 oz (미세 조정용)",
+   "model": "Maximum Velocity Tungsten Putty 1 oz",
+   "role_ko": "키별 무게 미세 보정(수 g)",
+   "qty_suggest": "1–2 oz (보정용만)",
+   "specs": {
+    "밀도": "≥10 g/cm³ (판매자 표기)",
+    "용량": "1 oz(28 g) 표기, 추가정보 1.1 oz",
+    "형태": "비경화 퍼티(텅스텐 분말+폴리머)",
+    "가격": "US$9.99"
+   },
+   "offers": [
+    {
+     "store": "Maximum Velocity (미국)",
+     "url": "https://www.maximum-velocity.com/product/tungsten-putty-1-ounce/",
+     "price_krw": null,
+     "pack_qty": "1 oz",
+     "price_note": "US$9.99 — 원화 가격 없음, 해외배송 가능 여부 미확인",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-tungsten.jpg",
+   "image_source": "https://www.maximum-velocity.com/wp-content/uploads/2018/05/tungstenputty.jpg",
+   "alternatives": [
+    {
+     "name": "Howard Piano 라운드 키 리드(납)",
+     "why": "1/2\" 면 90개 ≈ 2-7/8 lb → 개당 ≈14.5 g, 개당 $0.99. 단 '미국 고객 전용, 수출 불가' 표기 + 납 독성 → 비추천",
+     "url": "https://www.howardpianoindustries.com/round-key-leads-tapered/",
+     "price_krw": null
+    }
+   ],
+   "optional": true,
+   "used_by": [
+    "C",
+    "D"
+   ],
+   "notes_ko": "88–200개×5–20 g 전량을 텅스텐으로 하면 수 kg 필요 → 비용 과다. 국내 판매처는 확인 못 함(검색 한도). 주 웨이트는 강구/너트/평철 권장."
+  },
+  {
+   "id": "m-felt3",
+   "category": "felt",
+   "name_ko": "고밀도 양모(모직) 펠트 3 mm",
+   "model": "11번가 '산업용 양모펠트 고밀도' 3 mm 옵션",
+   "role_ko": "업스톱/다운스톱 스트립, 발란스 와셔 대용",
+   "qty_suggest": "1장 (스트립으로 재단)",
+   "specs": {
+    "두께 옵션/가격": "1mm 20,700 / 2mm 21,800 / 3mm 22,500 / 4mm 23,600 / 5mm 25,100 / 6mm 26,900 / 8mm 30,600원",
+    "재질": "압축 양모(모직) 펠트 — 상세 이미지상 '산업용 모직 펠트 스트립'",
+    "시트 크기": "텍스트 미표기(상세 이미지에도 치수 없음) — 구매 전 문의",
+    "배송": "무료배송(해외셀러 구매대행)",
+    "주의": "상세 이미지에 '가격은 참고용' 문구"
+   },
+   "offers": [
+    {
+     "store": "11번가 (해외셀러)",
+     "url": "https://www.11st.co.kr/products/9629232363",
+     "price_krw": 22500,
+     "pack_qty": "1장(크기 미표기)",
+     "price_note": "3 mm 옵션 22,500원, 무료배송. 시트 치수·밀도 미표기 → 문의 필요",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-felt3.webp",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/9629232363/B.webp?854373848",
+   "alternatives": [
+    {
+     "name": "11번가 '양모 펠트지' 1m×1m×3mm",
+     "why": "크기 명확·저렴(12,790원)하나 사진상 부드러운 니들펠트 → 스톱 소음은 줄지만 눌림 큼",
+     "url": "https://www.11st.co.kr/products/9614793757",
+     "price_krw": 12790
+    },
+    {
+     "name": "Howard(Schaff) 백레일 크로스 .145\" (3.7 mm)",
+     "why": "피아노 전용, 1.5\"×52\" 1줄로 88키 커버 (m-felt5 참조)",
+     "url": "https://www.howardpianoindustries.com/piano-backrail-or-key-cloth/",
+     "price_krw": null
+    },
+    {
+     "name": "MISUMI 펠트시트 FELW 양모(밀도 0.6 g/cm³)",
+     "why": "품질 확실하나 매우 비쌈: FELWA5-500-500 186,495원(VAT 별도), 3 mm 양모는 없음(2/5/10)",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110301981120/?HissuCode=FELWA5-500-500",
+     "price_krw": 205145
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "국내에서 '피아노 펠트'를 m 단위로 파는 곳은 이번 조사에서 확인하지 못함."
+  },
+  {
+   "id": "m-felt5",
+   "category": "felt",
+   "name_ko": "피아노 백레일(키) 크로스 4.7–6 mm × 38 mm × 1321 mm",
+   "model": "Schaff Piano Supply 'Piano Backrail or Key Cloth' (Howard Piano Industries 판매)",
+   "role_ko": "키 뒤쪽 다운스톱/백레일 펠트, 키 프레임 스트립",
+   "qty_suggest": "1–2줄",
+   "specs": {
+    "크기": "1-1/2\" 폭 × 52\" 길이 (≈38 × 1321 mm)",
+    "두께 옵션": ".145/.165/.185/.215/.235\" (3.7/4.2/4.7/5.5/6.0 mm)",
+    "용도": "백레일(키 후단 낙하) 소음 저감",
+    "접착 팁": "앞쪽 가장자리만 접착 (판매자 설명)",
+    "가격": "US$16.95–24.95 (두께별)"
+   },
+   "offers": [
+    {
+     "store": "Howard Piano Industries (미국)",
+     "url": "https://www.howardpianoindustries.com/piano-backrail-or-key-cloth/",
+     "price_krw": null,
+     "pack_qty": "1줄",
+     "price_note": "US$16.95~24.95 — 원화 가격 없음. 판매처 정책상 해외배송 제공(국가별 확인 필요)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-felt5.jpg",
+   "image_source": "https://cdn11.bigcommerce.com/s-sramxo/products/73/images/28234/Piano-Backrail-or-Key-Cloth_27035__25645.1755830065.500.659.jpg?c=2",
+   "alternatives": [
+    {
+     "name": "11번가 산업용 양모펠트 고밀도 5 mm",
+     "why": "국내 배송, 25,100원 (시트 크기 미표기)",
+     "url": "https://www.11st.co.kr/products/9629232363",
+     "price_krw": 25100
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "52\" 길이가 88키 폭(≈1223 mm)을 한 줄로 커버."
+  },
+  {
+   "id": "m-punching",
+   "category": "felt",
+   "name_ko": "피아노 프론트/발란스 레일 펠트 펀칭 (100개)",
+   "model": "Schaff Piano Front Rail Felt Punchings / Balance Rail Felt Punchings",
+   "role_ko": "C안 프론트핀·발란스핀 와셔(키 딥 조절은 종이 펀칭 병용)",
+   "qty_suggest": "프론트 100 + 발란스 100",
+   "specs": {
+    "프론트 레일": "100개, 3/4\" 지름, 두께 .145–.235\" 선택(7/8\" .185\"도 있음), US$16.45–23.95",
+    "발란스 레일": "100개, 1/2\" 지름, US$9.95–13.95",
+    "재질": "firm felt, 미국산",
+    "구멍 지름": "판매자 미표기 — Ø4 핀 호환 확인 필요",
+    "키 부싱 크로스": "3/8\"×54\", 1.0–1.6 mm, US$4.95–6.45 (별도)"
+   },
+   "offers": [
+    {
+     "store": "Howard Piano Industries (미국)",
+     "url": "https://www.howardpianoindustries.com/piano-front-rail-felt-punchings/",
+     "price_krw": null,
+     "pack_qty": "100개",
+     "price_note": "US$16.45~ (원화 미표기)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "Howard Piano Industries (미국)",
+     "url": "https://www.howardpianoindustries.com/piano-balance-rail-felt-punchings/",
+     "price_krw": null,
+     "pack_qty": "100개",
+     "price_note": "US$9.95~ (원화 미표기)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-punching.jpg",
+   "image_source": "https://cdn11.bigcommerce.com/s-sramxo/products/59/images/28242/Piano-Front-Rail-Felt-Punchings_27309__32119.1755830072.500.659.jpg?c=2",
+   "alternatives": [
+    {
+     "name": "Howard 키 부싱 크로스 (스칼렛)",
+     "why": "가이드핀 부싱용 1.0–1.6 mm 직물",
+     "url": "https://www.howardpianoindustries.com/key-bushing-cloth-high-quality-scarlet-with-white-center/",
+     "price_krw": null
+    },
+    {
+     "name": "m-felt3 펠트를 가죽 펀치로 직접 타공",
+     "why": "국내 조달 가능, 품질은 떨어짐",
+     "url": "https://www.11st.co.kr/products/9629232363",
+     "price_krw": 22500
+    }
+   ],
+   "optional": true,
+   "used_by": [
+    "C"
+   ],
+   "notes_ko": "국내 피아노 부품 쇼핑몰에서 펀칭 단품 판매는 확인하지 못함(조율사 공급 채널 추정, 미확인)."
+  },
+  {
+   "id": "m-poron",
+   "category": "felt",
+   "name_ko": "PORON 마이크로셀 우레탄 3 mm 양면테이프 롤",
+   "model": "INOAC PORON L24-3100-MT (3×100×1000 mm, 양면테이프 부착)",
+   "role_ko": "조용한 업/다운 스톱 패드(펠트 대안), 센서 레일 방진",
+   "qty_suggest": "1롤 (10 mm 폭 스트립 10줄 = 10 m)",
+   "specs": {
+    "두께": "3 mm",
+    "폭×길이": "100 × 1000 mm",
+    "밀도": "240 kg/m³ (L24 시리즈)",
+    "압축잔류변형": "2.7 %",
+    "색": "흑색",
+    "테이프": "양면테이프 부착",
+    "질량": "98 g",
+    "사용온도": "~70 °C"
+   },
+   "offers": [
+    {
+     "store": "한국미스미 (이노악)",
+     "url": "https://kr.misumi-ec.com/vona2/detail/221006195646/?HissuCode=L24-3100-MT",
+     "price_krw": 20394,
+     "pack_qty": "1장",
+     "price_note": "18,540원(VAT 별도), 36개↑ 17,620원. 참고 출하일 2026/09/29",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-poron.jpg",
+   "image_source": "https://kr.misumi-ec.com/linked/material/mech/INO1/PHOTO/221006195646.jpg",
+   "alternatives": [
+    {
+     "name": "PORON L32 시리즈 (320 kg/m³)",
+     "why": "더 단단한 스톱감, 1.5 mm 두께 등",
+     "url": "https://kr.misumi-ec.com/vona2/detail/221006195646/",
+     "price_krw": null
+    }
+   ],
+   "optional": true,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "압축잔류 2.7 %라 펠트보다 스톱 위치가 오래 유지됨. 소리는 펠트보다 약간 '둔탁'."
+  },
+  {
+   "id": "m-ext2020",
+   "category": "frame",
+   "name_ko": "알루미늄 프로파일 2020 (절단 판매)",
+   "model": "11번가 알루미늄 프로파일 2020 100mm 단위 절단",
+   "role_ko": "키베드 전·후 레일, 센서 레일 지지",
+   "qty_suggest": "1250 mm × 2–3, 300 mm × 4–6",
+   "specs": {
+    "가격": "530원/100 mm (1250 mm = 13단위 6,890원, 300 mm = 1,590원)",
+    "주문법": "원하는 치수를 100 mm 단위로 올림해 수량 입력",
+    "절단": "포함, 1500 mm까지 택배",
+    "배송": "'1개당 4,000원' 표기(판매자 확인)",
+    "미스미 HFS5-2020 참고": "0.5 kg/m, 단면적 183 mm², Ix=Iy=0.742×10⁴ mm⁴, A6N01SS-T5 백색 알루마이트, 홈폭 6"
+   },
+   "offers": [
+    {
+     "store": "11번가 (알루미늄 프로파일 절단)",
+     "url": "https://www.11st.co.kr/products/8022972251",
+     "price_krw": 530,
+     "pack_qty": "100 mm",
+     "price_note": "1250 mm 1본 = 6,890원; 배송비 4,000원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110302683830/?HissuCode=HFS5-2020-1250",
+     "price_krw": 15125,
+     "pack_qty": "1본 1250 mm",
+     "price_note": "13,750원(VAT 별도), 0.5 mm 단위 지정. 참고 출하일 2026/10/01",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110302683830/?HissuCode=HFS5-2020-300",
+     "price_krw": 3630,
+     "pack_qty": "1본 300 mm",
+     "price_note": "3,300원(VAT 별도)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-ext2020.webp",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/8022972251/B.webp?323047163",
+   "alternatives": [
+    {
+     "name": "MISUMI HFS5-2020-[L]",
+     "why": "0.5 mm 단위 정밀 절단·규격표 제공, 가격 약 2배",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110302683830/?HissuCode=HFS5-2020-1250",
+     "price_krw": 15125
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "11번가 판매처 프로파일의 슬롯 규격(6 mm 유럽형 여부)은 상세 이미지 기준 — T너트 구매 전 확인."
+  },
+  {
+   "id": "m-ext2040",
+   "category": "frame",
+   "name_ko": "알루미늄 프로파일 2040 (절단 판매)",
+   "model": "11번가 알루미늄 프로파일 2040 100mm 단위 절단",
+   "role_ko": "키베드 주 빔(처짐 방지)",
+   "qty_suggest": "1250 mm × 2",
+   "specs": {
+    "가격": "1,140원/100 mm (1250 mm = 13단위 14,820원)",
+    "절단": "포함",
+    "미스미 HFS5-2040 참고": "0.88 kg/m, 단면적 324 mm², Ix 1.358×10⁴ / Iy 5.13×10⁴ mm⁴",
+    "L 지정": "미스미 50–4000 mm, 0.5 mm 단위",
+    "재질(미스미)": "A6N01SS-T5"
+   },
+   "offers": [
+    {
+     "store": "11번가 (알루미늄 프로파일 절단)",
+     "url": "https://www.11st.co.kr/products/8999879652",
+     "price_krw": 1140,
+     "pack_qty": "100 mm",
+     "price_note": "1250 mm 1본 = 14,820원; 배송비 4,000원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110302684350/?HissuCode=HFS5-2040-1250",
+     "price_krw": 27500,
+     "pack_qty": "1본 1250 mm",
+     "price_note": "25,000원(VAT 별도). 참고 출하일 2026/10/01",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-ext2040.webp",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/8999879652/B.webp?345808501",
+   "alternatives": [
+    {
+     "name": "MISUMI HFS5-2040-1250",
+     "why": "정밀 절단·규격 확실",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110302684350/?HissuCode=HFS5-2040-1250",
+     "price_krw": 27500
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "1250 mm 스팬 처짐: 2040을 세워(Iy 5.13×10⁴) 쓰면 2020 대비 약 7배 강성."
+  },
+  {
+   "id": "m-tnut",
+   "category": "frame",
+   "name_ko": "2020/2040용 후입 T너트 M3/M4/M5",
+   "model": "MISUMI 5시리즈 후입 스토퍼 너트 HNTA5-3 / -4 / -5",
+   "role_ko": "센서 레일·키 프레임·브래킷 고정",
+   "qty_suggest": "M4 50개 + M5 50개",
+   "specs": {
+    "대응": "5시리즈(홈폭 6 mm) 20/25/40각",
+    "형식": "후입(조립 후 삽입), 스토퍼",
+    "재질": "S10C 상당 스틸, 3가 크로메이트",
+    "HNTA5-3": "418원 (VAT 별도)",
+    "HNTA5-4": "418원",
+    "HNTA5-5": "397원",
+    "선입 너트 HNTT5-5": "449원"
+   },
+   "offers": [
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110302608320/",
+     "price_krw": 437,
+     "pack_qty": "1개",
+     "price_note": "397–418원(VAT 별도)/개, 재고품 당일 출하 가능",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-tnut.jpg",
+   "image_source": "https://kr.misumi-ec.com/linked/material/mech/MSM1/PHOTO/10302608320.jpg",
+   "alternatives": [
+    {
+     "name": "11번가 해머헤드 T너트 20-M3/M4/M5 50개",
+     "why": "한 봉지 단위, 20-M3 13,440 / M4 14,330 / M5 16,720원, 무료배송",
+     "url": "https://www.11st.co.kr/products/7510575523",
+     "price_krw": 14330
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": ""
+  },
+  {
+   "id": "m-bracket",
+   "category": "frame",
+   "name_ko": "2020용 직각 브래킷",
+   "model": "MISUMI HBLFSN5 (5시리즈 1열 홈용 돌기 붙이 반전 브래킷)",
+   "role_ko": "프레임 직각 결합(베드-측판)",
+   "qty_suggest": "8–16개",
+   "specs": {
+    "대응": "5시리즈 홈폭 6 mm, 20각",
+    "적합 볼트": "M5",
+    "타입": "돌기 붙이 반전 브래킷(위치결정 돌기)",
+    "가격": "1,118원/개 (VAT 별도, SALE 표시 606원~ 구간 있음)",
+    "출하": "재고품 1일째"
+   },
+   "offers": [
+    {
+     "store": "한국미스미",
+     "url": "https://kr.misumi-ec.com/vona2/detail/110300437260/?HissuCode=HBLFSN5",
+     "price_krw": 1230,
+     "pack_qty": "1개",
+     "price_note": "1,118원(VAT 별도)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-bracket.jpg",
+   "image_source": "https://kr.misumi-ec.com/linked/material/mech/MSM1/PHOTO/10300437260.jpg",
+   "alternatives": [
+    {
+     "name": "11번가 2020 블랙 L 브래킷",
+     "why": "상품명 '1 개' 9,300원 무료배송 — 수량 대비 비쌈, 구성 확인 필요",
+     "url": "https://www.11st.co.kr/products/9635762858",
+     "price_krw": 9300
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": ""
+  },
+  {
+   "id": "m-plywood",
+   "category": "case",
+   "name_ko": "자작합판/MDF 18T 맞춤 재단",
+   "model": "11번가 '웰빙천사' 자작나무 합판 사각 재단 18T (가로+세로 합 구간 가격)",
+   "role_ko": "케이스 바닥·뒤판(1300×350), 전면/뚜껑 스트립(1300×150), 스피커 박스 패널",
+   "qty_suggest": "1300×350 1–2장, 1300×150 2장, 스피커 패널 6–10장",
+   "specs": {
+    "가격 방식": "가로+세로 합 구간별 1장 가격",
+    "자작 18T 1300×350 (합 1650)": "88,400원 (1600–1800 구간)",
+    "자작 18T 1300×150 (합 1450)": "70,000원 (1400–1600 구간)",
+    "MDF 18T 1300×350": "28,100원",
+    "MDF 18T 1300×150": "22,400원",
+    "MDF 12T 1300×350 / 1300×150": "19,000 / 15,200원",
+    "MDF 18T 합 800–1000 (예: 스피커 판 500×400)": "9,200원",
+    "배송": "8,000원 (소형 5,000원)"
+   },
+   "offers": [
+    {
+     "store": "11번가 (웰빙천사)",
+     "url": "https://www.11st.co.kr/products/7975709861",
+     "price_krw": 88400,
+     "pack_qty": "1장",
+     "price_note": "자작 18T, 가로+세로 1600–1800 mm 구간, 배송 8,000원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "11번가 (웰빙천사)",
+     "url": "https://www.11st.co.kr/products/7975709981",
+     "price_krw": 70000,
+     "pack_qty": "1장",
+     "price_note": "자작 18T, 1400–1600 mm 구간",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "11번가 (웰빙천사)",
+     "url": "https://www.11st.co.kr/products/7949084158",
+     "price_krw": 28100,
+     "pack_qty": "1장",
+     "price_note": "MDF 18T, 1600–1800 mm 구간",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "11번가 (웰빙천사)",
+     "url": "https://www.11st.co.kr/products/7949084215",
+     "price_krw": 22400,
+     "pack_qty": "1장",
+     "price_note": "MDF 18T, 1400–1600 mm 구간",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "11번가 (웰빙천사)",
+     "url": "https://www.11st.co.kr/products/7949084524",
+     "price_krw": 19000,
+     "pack_qty": "1장",
+     "price_note": "MDF 12T, 1600–1800 mm 구간",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-plywood.webp",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/7975709861/B.webp?387812729",
+   "alternatives": [
+    {
+     "name": "동진나무공장 자작합판 18T (200/400/600)×1200",
+     "why": "무료재단·무료배송, 200×1200 18,680 / 400×1200 30,360 / 600×1200 42,040원 — 단 길이 1200 mm 한계(1300 불가)",
+     "url": "https://www.11st.co.kr/products/8930042334",
+     "price_krw": 30360
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "자작 18T 전면 사용 시 케이스만 20만원대 → 보이는 면만 자작, 스피커 박스·내부는 MDF 권장(음향적으로도 MDF 유리). 전문 목재 재단몰(판 1장 구매+재단) 비교는 이번 조사에서 못 함."
+  },
+  {
+   "id": "m-glue",
+   "category": "case",
+   "name_ko": "목공 본드 타이트본드 I",
+   "model": "Titebond Original (I) 473 ml",
+   "role_ko": "케이스·스피커 박스 접착",
+   "qty_suggest": "473 ml 1병",
+   "specs": {
+    "제품": "Titebond Original Wood Glue",
+    "용량": "473 ml (946 ml 옵션)",
+    "방수": "I은 실내용(III가 방수)",
+    "236 ml": "6,500원 (다른 판매자)",
+    "946 ml III": "46,200원"
+   },
+   "offers": [
+    {
+     "store": "11번가",
+     "url": "https://www.11st.co.kr/products/7033278474",
+     "price_krw": 11500,
+     "pack_qty": "473 ml",
+     "price_note": "11,500원~ (옵션가), 배송 3,000원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "11번가",
+     "url": "https://www.11st.co.kr/products/3165971786",
+     "price_krw": 6500,
+     "pack_qty": "236 ml",
+     "price_note": "6,500원, 배송 3,000원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-glue.jpg",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/7033278474/B.jpg?25000000",
+   "alternatives": [
+    {
+     "name": "Titebond III 946 ml",
+     "why": "방수·오픈타임 김, 과사양",
+     "url": "https://www.11st.co.kr/products/5583895294",
+     "price_krw": 46200
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": ""
+  },
+  {
+   "id": "m-woodscrew",
+   "category": "case",
+   "name_ko": "목재 피스 #6×32 (500개)",
+   "model": "명화금속 목재피스 코스 (백색) #6×32",
+   "role_ko": "케이스·스피커 박스 조립",
+   "qty_suggest": "500개 1봉",
+   "specs": {
+    "#6×25": "7,890원/500개",
+    "#6×32": "9,550원/500개",
+    "#6×38": "11,000원/500개",
+    "#6×50": "13,500원/500개",
+    "흑색/델타 도금": "약간 비쌈"
+   },
+   "offers": [
+    {
+     "store": "볼트집",
+     "url": "https://boltzip.com/product/detail.html?product_no=186",
+     "price_krw": 9550,
+     "pack_qty": "500개",
+     "price_note": "#6×32 백색 9,550원, 배송 3,000원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-woodscrew.png",
+   "image_source": "https://boltzip.com/web/product/big/202211/740d0d376fc80d8a153d6569a5421286.png",
+   "alternatives": [],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": ""
+  },
+  {
+   "id": "m-insert",
+   "category": "fastener",
+   "name_ko": "M3 황동 열삽입 인서트 100개",
+   "model": "11번가 100개 M3 황동 열삽입 너트 'M3x3x4'",
+   "role_ko": "출력 부품 나사 체결(키 프레임·센서 레일·해머 랙)",
+   "qty_suggest": "200–300개",
+   "specs": {
+    "나사": "M3",
+    "표기 치수": "M3×3×4 (길이×외경 표기 순서 판매자별 상이 — 확인 필요)",
+    "재질": "황동, 이중 널링",
+    "포장": "100개",
+    "배송": "무료(해외직구)"
+   },
+   "offers": [
+    {
+     "store": "11번가 (해외직구)",
+     "url": "https://www.11st.co.kr/products/9624103643",
+     "price_krw": 11000,
+     "pack_qty": "100개",
+     "price_note": "11,000원, 무료배송",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-insert.jpg",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/9624103643/B.jpg?857769114",
+   "alternatives": [
+    {
+     "name": "M3x4x5mm 인서트 (11번가)",
+     "why": "더 긴/굵은 규격: 50개 10,320 / 100개 27,820원",
+     "url": "https://www.11st.co.kr/products/9624499823",
+     "price_krw": 10320
+    },
+    {
+     "name": "M2–M5 인서트 키트 330/220PCS",
+     "why": "여러 규격 시험용 18,980원",
+     "url": "https://www.11st.co.kr/products/9602447383",
+     "price_krw": 18980
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "요청한 M3×5×4 정확 규격 단품은 확인 못 함 — 주문 전 판매자에 길이/외경 확인."
+  },
+  {
+   "id": "m-screws",
+   "category": "fastener",
+   "name_ko": "육각 렌치볼트(캡스크류) M3/M4/M5 + 와셔",
+   "model": "볼트집 SCM435 육각렌지볼트 (1000개 단위)",
+   "role_ko": "프레임·인서트 체결",
+   "qty_suggest": "M3×8/10/12 각 1봉, M5×10 1봉",
+   "specs": {
+    "M3×5–12": "27,750원/1000개",
+    "M3×15": "29,200원/1000개",
+    "M3×20": "33,580원/1000개",
+    "M4×6–12": "27,750원/1000개",
+    "M5×6–10": "29,200원/1000개",
+    "스텐 평와셔 M3/M4/M5": "20원/개",
+    "재질": "SCM435 (흑색)"
+   },
+   "offers": [
+    {
+     "store": "볼트집",
+     "url": "https://boltzip.com/product/detail.html?product_no=64",
+     "price_krw": 27750,
+     "pack_qty": "1000개",
+     "price_note": "M3×8 1000개 27,750원 (≈28원/개), 배송 3,000원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "볼트집",
+     "url": "https://boltzip.com/product/detail.html?product_no=87",
+     "price_krw": 20,
+     "pack_qty": "1개",
+     "price_note": "스텐 평와셔 M3/M4/M5 각 20원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-screws.png",
+   "image_source": "https://boltzip.com/web/product/big/202211/ef336840a018e23ae5cc89481b226318.png",
+   "alternatives": [
+    {
+     "name": "11번가 880개 볼트·너트·와셔 세트 M2–M5 (8–20 mm)",
+     "why": "소량 다규격 → 시제품 단계에 적합, 무료배송",
+     "url": "https://www.11st.co.kr/products/9620442948",
+     "price_krw": 20100
+    },
+    {
+     "name": "11번가 520개 스텐 볼트·너트 세트 M2–M5",
+     "why": "16,270원, 무료배송",
+     "url": "https://www.11st.co.kr/products/9631491191",
+     "price_krw": 16270
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "볼트집은 소경 렌치볼트를 1000개 단위로만 판매 → 규격 수가 많으면 세트가 경제적."
+  },
+  {
+   "id": "m-setscrew",
+   "category": "fastener",
+   "name_ko": "M3 무두볼트(세트스크류) M3×8 / M3×10",
+   "model": "볼트집 스텐 무두렌치볼트 M3",
+   "role_ko": "스프링 프리로드 조절 나사",
+   "qty_suggest": "100개",
+   "specs": {
+    "M3×8": "40원/개",
+    "M3×10": "50원/개",
+    "M3×12": "50원/개",
+    "M3×6": "40원/개",
+    "재질": "스테인리스",
+    "구동": "육각 렌치(무두)"
+   },
+   "offers": [
+    {
+     "store": "볼트집",
+     "url": "https://boltzip.com/product/detail.html?product_no=162",
+     "price_krw": 50,
+     "pack_qty": "1개",
+     "price_note": "M3×10 50원(100개 5,000원), M3×8 40원(100개 4,000원). 배송 3,000원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-setscrew.png",
+   "image_source": "https://boltzip.com/web/product/big/202211/ac9650d103e1cca53a2d87f0a25c2a9d.png",
+   "alternatives": [
+    {
+     "name": "볼트집 CM 무두렌지볼트 (1000개)",
+     "why": "대량: M3×8 13,520원 / M3×10 18,590원 per 1000",
+     "url": "https://boltzip.com/product/detail.html?product_no=63",
+     "price_krw": 13520
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "B",
+    "D"
+   ],
+   "notes_ko": "끝 형상(평단/컵) 표기는 확인 못 함 — 스프링 시트용이면 평단이 유리."
+  },
+  {
+   "id": "m-lube",
+   "category": "finish",
+   "name_ko": "PTFE 함유 합성 그리스 (슈퍼루브)",
+   "model": "Super Lube 21030 튜브 85 g",
+   "role_ko": "키 부싱·피벗축·가이드핀 윤활(소음·마찰 저감)",
+   "qty_suggest": "1개",
+   "specs": {
+    "용량": "85 g 튜브",
+    "성분": "PTFE 함유 합성 그리스",
+    "플라스틱 호환": "PETG/PLA에 흔히 사용(석유계 용제 없음 — 제조사 일반 설명, 페이지 미확인)",
+    "대안(오일)": "슈퍼루브 PTFE 합성오일 10 ml 11,610원"
+   },
+   "offers": [
+    {
+     "store": "11번가",
+     "url": "https://www.11st.co.kr/products/25928215",
+     "price_krw": 9510,
+     "pack_qty": "85 g",
+     "price_note": "9,510원 + 배송 3,000원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-lube.webp",
+   "image_source": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/product/25928215/B.webp?449695326",
+   "alternatives": [
+    {
+     "name": "슈퍼루브 PTFE 합성오일 10 ml",
+     "why": "가이드핀·부싱처럼 얇게 발라야 하는 곳",
+     "url": "https://www.11st.co.kr/products/8009906002",
+     "price_krw": 11610
+    },
+    {
+     "name": "키탑 마감: 2T 백색 아크릴 재단(11번가)",
+     "why": "출력 키탑 대신 아크릴 캡. 가격 1,000원 단위 견적형 → 미확정",
+     "url": "https://www.11st.co.kr/products/4918717495",
+     "price_krw": null
+    }
+   ],
+   "optional": false,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "A안(플렉서)은 윤활 불필요. 키탑 표면은 출력 시 아이로닝(ironing) + #400→#1000 사포 마감이 무비용 대안(사포 가격 미조사)."
+  },
+  {
+   "id": "m-printer",
+   "category": "printer",
+   "name_ko": "3D 프린터 (보유 없을 때)",
+   "model": "Bambu Lab A1 (256×256×256 mm)",
+   "role_ko": "키·베드·해머 출력 (옥타브 단위 베드)",
+   "qty_suggest": "1대",
+   "specs": {
+    "빌드 볼륨": "256×256×256 mm",
+    "가격": "419,000원 (A1), 599,000원 (A1 combo)",
+    "구조": "오픈 베드슬링거 — PETG/PLA 적합",
+    "대안 P2S": "256³ 밀폐, 799,000원",
+    "대안 H2S": "340×320×340, 1,690,000원"
+   },
+   "offers": [
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/a1",
+     "price_krw": 419000,
+     "pack_qty": "1대",
+     "price_note": "재고 있음",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "Bambu Lab KR 공식 스토어",
+     "url": "https://kr.store.bambulab.com/products/p2s",
+     "price_krw": 799000,
+     "pack_qty": "1대",
+     "price_note": "P2S 단품, 재고 있음",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/m-printer.jpg",
+   "image_source": "https://store.bblcdn.com/s3/default/b775e8d907a24d36a6640981cee41388/A1_C-compressed.jpg",
+   "alternatives": [
+    {
+     "name": "Bambu Lab P2S",
+     "why": "밀폐형이라 PETG 휨·온도 안정, 동일 256³",
+     "url": "https://kr.store.bambulab.com/products/p2s",
+     "price_krw": 799000
+    }
+   ],
+   "optional": true,
+   "used_by": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "notes_ko": "256 mm 베드면 옥타브(12키 ≈ 164 mm 폭) 단위 베드 출력 가능. 키 길이 >256 mm면 대각 배치 또는 H2S급 필요."
+  }
+ ],
+ "material_data": {
+  "PETG": {
+   "primary": "Bambu PETG Basic (TDS V3.0)",
+   "density_g_cm3": 1.25,
+   "tensile_modulus_MPa": {
+    "XY": "2780 ± 65",
+    "Z": "2550 ± 100"
+   },
+   "tensile_strength_MPa": {
+    "XY": "51 ± 1",
+    "Z": "35 ± 6"
+   },
+   "elongation_break_pct": {
+    "XY": "9.5 ± 0.7",
+    "Z": "5.2 ± 1.4"
+   },
+   "flexural_modulus_MPa": {
+    "XY": "1950 ± 50",
+    "Z": "1740 ± 40"
+   },
+   "flexural_strength_MPa": {
+    "XY": "75 ± 3",
+    "Z": "56 ± 4"
+   },
+   "HDT_C": {
+    "1.8MPa": 68,
+    "0.45MPa": 71
+   },
+   "Tg_C": 69,
+   "vicat_C": 69,
+   "water_absorption_pct": 0.45,
+   "impact_kJ_m2": {
+    "XY": "34.2 ± 4.1",
+    "Z": "10.5 ± 1.8"
+   },
+   "specimen": "100 % infill, X1C, 255 °C, 150 mm/s",
+   "source": "https://store.bblcdn.com/s1/default/cb94589bf7994fdcbfa833badefae9cd/Bambu_PETG_Basic_Technical_Data_Sheet.pdf",
+   "PETG_HF": {
+    "density_g_cm3": 1.28,
+    "tensile_modulus_MPa": {
+     "XY": "1810 ± 190",
+     "Z": "1540 ± 130"
+    },
+    "tensile_strength_MPa": {
+     "XY": "34 ± 4",
+     "Z": "23 ± 4"
+    },
+    "elongation_break_pct": {
+     "XY": "8.6 ± 1.2",
+     "Z": "5.1 ± 0.8"
+    },
+    "flexural_modulus_MPa": {
+     "XY": "2050 ± 120",
+     "Z": "1810 ± 140"
+    },
+    "flexural_strength_MPa": {
+     "XY": "64 ± 3",
+     "Z": "48 ± 4"
+    },
+    "HDT_C": {
+     "1.8MPa": 62,
+     "0.45MPa": 69
+    },
+    "Tg_C": 66,
+    "note": "시편 75 °C 8 h 어닐링 후 측정",
+    "source": "https://store.bblcdn.com/ce12d65176a94f1086e6aefa238e62e2.pdf"
+   },
+   "eSUN_PETG": {
+    "density_g_cm3": 1.27,
+    "HDT_C": 64,
+    "tensile_strength_MPa": {
+     "XY": 34.77,
+     "Z": 28.65
+    },
+    "elongation_break_pct": {
+     "XY": 5.15,
+     "Z": 3.91
+    },
+    "flexural_modulus_MPa": {
+     "XY": 1228.33,
+     "Z": 1276.45
+    },
+    "flexural_strength_MPa": {
+     "XY": 41.9,
+     "Z": 39.9
+    },
+    "izod_kJ_m2": {
+     "XY": 4.86,
+     "Z": 1.78
+    },
+    "source": "https://www.esun3d.com/petg-product/"
+   },
+   "yield_strength_note": "Bambu/eSUN TDS에는 항복강도가 따로 없음 — 인장강도(≈항복 근처, 연신 5–10 %)를 상한으로 보고, 반복 굽힘 플렉서는 표면 변형률을 수 % 이하로 잡는 것이 통례(이번 조사에서 PETG 피로 데이터 출처 미확보, 쿠폰 시험 필요).",
+   "flexure_hint": "같은 PETG라도 제품별 E가 1.2–2.8 GPa로 2배 이상 차이 → 플렉서/판스프링 강성 계산은 구매할 정확한 제품값 사용"
+  },
+  "PLA": {
+   "primary": "Bambu PLA Basic (TDS V3.0)",
+   "density_g_cm3": 1.24,
+   "tensile_modulus_MPa": {
+    "XY": "2580 ± 220",
+    "Z": "2060 ± 170"
+   },
+   "tensile_strength_MPa": {
+    "XY": "35 ± 4",
+    "Z": "31 ± 3"
+   },
+   "elongation_break_pct": {
+    "XY": "12.2 ± 1.8",
+    "Z": "7.5 ± 1.3"
+   },
+   "flexural_modulus_MPa": {
+    "XY": "2750 ± 160",
+    "Z": "2370 ± 150"
+   },
+   "flexural_strength_MPa": {
+    "XY": "76 ± 5",
+    "Z": "59 ± 6"
+   },
+   "HDT_C": {
+    "1.8MPa": 54,
+    "0.45MPa": 57
+   },
+   "Tg_C": 60,
+   "vicat_C": 57,
+   "melting_C": 160,
+   "impact_kJ_m2": {
+    "XY": "26.6 ± 2.8",
+    "Z": "13.8 ± 0.9"
+   },
+   "note": "시편 55 °C 8 h 어닐링·건조 후 측정. PLA는 크리프가 커서 상시 하중 스프링/플렉서에 부적합",
+   "source": "https://store.bblcdn.com/s1/default/58b85d0f3db94878854a28fdb8a0006e/Bambu_PLA_Basic_Technical_Data_Sheet.pdf"
+  },
+  "TPU95A": {
+   "primary": "Bambu TPU 95A HF (TDS V1.0)",
+   "shore": "95A",
+   "density_g_cm3": 1.22,
+   "tensile_modulus_MPa": {
+    "XY": "9.8 ± 0.7",
+    "Z": "7.4 ± 0.6"
+   },
+   "tensile_strength_MPa": {
+    "XY": "27.3 ± 0.8",
+    "Z": "22.3 ± 0.6"
+   },
+   "elongation_break_pct": {
+    "XY": ">650",
+    "Z": ">480"
+   },
+   "impact_kJ_m2": {
+    "XY": 123.2,
+    "Z": 86.3
+   },
+   "melting_C": 183,
+   "water_absorption_pct": 1.08,
+   "print": "노즐 220–240 °C, 베드 30–35 °C, <200 mm/s",
+   "source": "https://store.bblcdn.eu/s8/default/16df21baf482453999b3dbb61cc110e7/Bambu_TPU_95A_HF_Technical_Data_Sheet.pdf"
+  },
+  "steel_counterweight": {
+   "density_g_cm3": 7.85,
+   "lead_density_g_cm3": 11.34,
+   "tungsten_putty_density_g_cm3": ">=10 (Maximum Velocity 표기)",
+   "note": "강 밀도 7.85, 납 11.34는 일반 물성값(이번 조사 페이지 출처 아님)"
+  }
+ },
+ "printers": [
+  {
+   "name": "Bambu Lab A1 mini",
+   "bed_mm": "180×180×180",
+   "price_krw": 319000,
+   "url": "https://kr.store.bambulab.com/products/a1-mini"
+  },
+  {
+   "name": "Bambu Lab A1",
+   "bed_mm": "256×256×256",
+   "price_krw": 419000,
+   "url": "https://kr.store.bambulab.com/products/a1"
+  },
+  {
+   "name": "Bambu Lab P1S",
+   "bed_mm": "256×256×256",
+   "price_krw": 629000,
+   "url": "https://kr.store.bambulab.com/products/p1s"
+  },
+  {
+   "name": "Bambu Lab P2S",
+   "bed_mm": "256×256×256",
+   "price_krw": 799000,
+   "url": "https://kr.store.bambulab.com/products/p2s"
+  },
+  {
+   "name": "Bambu Lab H2S",
+   "bed_mm": "340×320×340",
+   "price_krw": 1690000,
+   "url": "https://kr.store.bambulab.com/products/h2s"
+  },
+  {
+   "name": "Bambu Lab H2D",
+   "bed_mm": "325×320×325 (단일 노즐; 양 노즐 300×320×325)",
+   "price_krw": 2499000,
+   "url": "https://kr.store.bambulab.com/products/h2d"
+  },
+  {
+   "name": "Prusa CORE One",
+   "bed_mm": "250×220×270",
+   "price_krw": null,
+   "url": "https://www.prusa3d.com/product/prusa-core-one/",
+   "note": "US$1,199 (프루사 공식, 원화 판매가 미확인)"
+  },
+  {
+   "name": "Creality K1/K2 계열",
+   "bed_mm": "K2 Plus 350³ 등 (미확인)",
+   "price_krw": null,
+   "url": null,
+   "note": "국내 판매가 확인 못 함 (웹검색 한도 소진)"
+  }
+ ],
+ "method_answers": {
+  "(5) 163 mm 축 절단": "Ø4×163 8개: 미스미 E-SFJ4-163 8,031원×8 ≈ 64,250원(VAT 별도) / 배관몰 SUS304 연마봉 Φ4 1 m 9,600원×2 + 절단 500원/컷 ≈ 23,200원(착불). Ø3×163 8개: 미스미 E-SFJ3-163 9,303원×8 ≈ 74,420원(VAT 별도) / 배관몰 Φ3 동일 ≈ 23,200원."
+ }
+}

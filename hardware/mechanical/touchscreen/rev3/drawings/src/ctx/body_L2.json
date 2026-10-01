@@ -1,0 +1,2442 @@
+{
+ "name": "L2 한 몸 뒷바 (2026-10-01, 사용자 요청 '건반과 뒤 부품을 합쳐서 뒤 영역을 최대한 줄이고, 케이블이 밖으로 안 나오게, 스피커는 더 눕히고 작게')",
+ "status": "설계안 (L1 대체). 수치는 scratchpad l2/final/l2_geom.py·l2_layout.py·l2_build.py로 다시 계산해 확인함. W1 세션 음향 확인 필요 (그릴 아래 링 벽 없앰, 43°, 2.22 L). 화면 받침은 W1이 다시 정함",
+ "units": "mm",
+ "coords": "world: x across (0 = A0 left boundary), y from the white-key lip toward the back, z up from the desk",
+ "selection": {
+  "winner": "C (심사 평균 7.27: A 6.17, B 5.33). 치명 결함 없음(C의 바스켓-앞벽 겹침은 턱 뒷면 2.85 mm로 고침)",
+  "fixes_applied": [
+   "C의 스피커 코(건반 위로 나온 앞판)를 없애고 A처럼 앞판 아랫부분을 건반 뒤(y214~) 낮은 곳에서 시작: 스피커 윗면 z157.2 → z148.06",
+   "스피커 윗면은 정직한 규칙으로 계산: 그릴 판(w13)이 프레임 윗모서리(s+52.5)를 덮는 높이 + 0.5 (심사 2)",
+   "그릴은 C 방식(아래 링 벽 없음, 판 s-50부터): A의 그릴-건반 겹침과 A의 0.5 mm 소리 길 위반을 없앰",
+   "그릴 판 아래 모서리를 y213 뒤로 (R18: 모듈을 위로 뺄 때 걸리지 않음, 심사 3)",
+   "각도 43°: 플랜지 모서리 위 3.11 mm (가장 엄격한 읽기로도 3 mm 이상, 심사 2가 42.3° 이상 요구)",
+   "가운데 뚜껑은 A처럼 건반 윗면과 같은 높이(z72.85)로 가운데 유닛 벽 위에만 얹음 (C의 턱이 모듈 위 펠트에 얹히던 것 없앰: D15·R18, 심사 1·3)",
+   "가운데 유닛 앞벽 없음 (C): 뚜껑을 열면 모듈 USB-C 플러그를 위에서 바로 잡을 수 있는 27 mm 앞 공간",
+   "스피커-가운데 결합은 나비나사 + 고무 슬리브만 (가로 다월 없음) → 스피커를 볼 핀에서 곧게 들어 올림 (심사 3)",
+   "볼 핀 L 둥근 / R 긴 구멍 (A): 1254 mm 뒷바를 과구속 없이 위치",
+   "앞벽·통로 지붕 출력물 두께 4 → 6 mm (심사 2)",
+   "유닛을 스피커 가운데보다 40 mm 안쪽(x160.5 / 1061.5)으로 (B 접목): 3D 조준이 L1과 같거나 조금 나음. 바깥 끝 100 mm에 흡음솜을 모아 x방향 공진(약 686 Hz) 억제 (심사 2)",
+   "허브는 뒤벽에 붙여 바닥에, 포트는 -y, 꽂는 자리는 선반 밑이 아닌 뚜껑 R 아래 (A, 심사 3)",
+   "바닥 흡기 + 뒤 루버 + 뚜껑 배기 (C 굴뚝): 접힌 화면이 뚜껑 홈을 덮어도 냉각 유지",
+   "각도-높이-깊이 표 (B 접목)를 pareto_by_angle에 둠"
+  ],
+  "vs_concepts": {
+   "A": "깊이 342, 스피커 z138로 적었으나 정직한 규칙이면 약 z144.5; 그릴이 모듈 윗모서리와 2.3×2.7 겹침, 그릴 판 소리 길 0.5 mm, 가로 다월+세운 핀 분리 불가",
+   "B": "깊이 361.5, z134, 스피커 폭 352 ×2 (폭의 56 %), 건반 뒤 36 mm 골, 통로 끝이 열려 옆에서 선이 보임",
+   "C": "깊이 330, z157.2, 뚜껑 턱이 모듈 위 펠트에 얹힘 (+3.5 mm 턱)",
+   "L2": "깊이 341.5, z148.06, 가운데 z72.85 평평, 골 없음에 가까움 (앞벽 턱 z65.08는 앉은 자리에서 가려짐)"
+  }
+ },
+ "overall": {
+  "x": [
+   -16.0,
+   1238.0
+  ],
+  "y": [
+   0.0,
+   341.5
+  ],
+  "z_max": 148.06,
+  "rear_unit_y": [
+   214.0,
+   341.5
+  ],
+  "air_gap_to_modules_y": [
+   212.0,
+   214.0
+  ],
+  "depth_behind_keys": 129.5,
+  "note": "평면이 직사각형 (R27). 폭 1254 그대로. 뒤 래치 없음 → 가장 뒤 y341.5 (L1 447, 래치 포함 471)"
+ },
+ "feet": {
+  "type": "화성고무 피스고무발 28×5 (i039), 14개, 8호 13 mm 나사",
+  "h": 5.0,
+  "box_bottom_z": 5.0,
+  "positions_xy": {
+   "pod_L": [
+    [
+     -2,
+     262
+    ],
+    [
+     231,
+     262
+    ],
+    [
+     -2,
+     320
+    ],
+    [
+     231,
+     320
+    ]
+   ],
+   "pod_R": [
+    [
+     1224,
+     262
+    ],
+    [
+     991,
+     262
+    ],
+    [
+     1224,
+     320
+    ],
+    [
+     991,
+     320
+    ]
+   ],
+   "centre": [
+    [
+     292,
+     262
+    ],
+    [
+     611,
+     262
+    ],
+    [
+     930,
+     262
+    ],
+    [
+     292,
+     320
+    ],
+    [
+     611,
+     320
+    ],
+    [
+     930,
+     320
+    ]
+   ]
+  },
+  "note": "모든 발은 통로 뒤(y≥248). 모듈(EVA 3T 바닥)과 뒷바(고무발 5)가 각자 책상에 섬. 가운데 뚜껑이 건반과 같은 높이가 되게 발 눌림 ±0.5는 얇은 받침으로 맞춤"
+ },
+ "front_joint_to_key_bed": {
+  "air_gap_y": [
+   212.0,
+   214.0
+  ],
+  "note": "뒷바 앞면(y214)과 모듈 뒷벽(y212) 사이 2.0 mm 공기 (D15: 딱딱하게 닿지 않음). 위치는 볼 브래킷 핀이 정함. 뚜껑 앞 윗모서리 1×45° 모따기로 틈이 일부러 둔 그림자 선처럼 보이게. 선택: 회색 펠트 2 mm 띠(부드러운 닿음, D15 허용)"
+ },
+ "speakers": {
+  "L": {
+   "x": [
+    -16.0,
+    257.0
+   ],
+   "inner_x": [
+    -4.5,
+    245.5
+   ]
+  },
+  "R": {
+   "x": [
+    965.0,
+    1238.0
+   ],
+   "inner_x": [
+    976.5,
+    1226.5
+   ]
+  },
+  "width_outer": 273.0,
+  "width_inner": 250.0,
+  "y": [
+   214.0,
+   341.5
+  ],
+  "z": [
+   5.0,
+   148.06
+  ],
+  "outer_yz_polygon": [
+   [
+    214.0,
+    27.0
+   ],
+   [
+    214.0,
+    65.08
+   ],
+   [
+    218.64,
+    65.08
+   ],
+   [
+    307.63,
+    148.06
+   ],
+   [
+    341.5,
+    148.06
+   ],
+   [
+    341.5,
+    5.0
+   ],
+   [
+    241.0,
+    5.0
+   ],
+   [
+    241.0,
+    27.0
+   ]
+  ],
+  "outer_yz_note": "앞벽 y214 (z27~65.08) → 턱 4.64 mm → 43° 앞판 바깥면 F[218.64, 65.08] → 윗면 z148.06 → 뒤 y341.5 → 아래 z5 → 통로 홈 y214~241 × z5~27",
+  "inner_yz_polygon": [
+   [
+    220.0,
+    33.0
+   ],
+   [
+    247.0,
+    33.0
+   ],
+   [
+    247.0,
+    16.5
+   ],
+   [
+    330.0,
+    16.5
+   ],
+   [
+    330.0,
+    136.56
+   ],
+   [
+    312.16,
+    136.56
+   ],
+   [
+    235.5,
+    65.08
+   ],
+   [
+    225.0,
+    65.08
+   ],
+   [
+    225.0,
+    57.08
+   ],
+   [
+    220.0,
+    57.08
+   ]
+  ],
+  "panels": [
+   {
+    "part": "옆판 ×2 (스피커마다)",
+    "material": "오꾸메 11.5",
+    "shape": "outer_yz_polygon"
+   },
+   {
+    "part": "뒤판",
+    "material": "오꾸메 11.5",
+    "yz": [
+     [
+      330.0,
+      341.5
+     ],
+     [
+      5.0,
+      148.06
+     ]
+    ],
+    "x": "옆판 사이 250"
+   },
+   {
+    "part": "윗판",
+    "material": "오꾸메 11.5",
+    "yz": [
+     [
+      312.16,
+      330.0
+     ],
+     [
+      136.56,
+      148.06
+     ]
+    ]
+   },
+   {
+    "part": "아랫판",
+    "material": "오꾸메 11.5",
+    "yz": [
+     [
+      241.0,
+      330.0
+     ],
+     [
+      5.0,
+      16.5
+     ]
+    ]
+   },
+   {
+    "part": "앞판 (baffle)",
+    "material": "PETG 출력 11.5 (법선)",
+    "yz_polygon": [
+     [
+      218.64,
+      65.08
+     ],
+     [
+      307.63,
+      148.06
+     ],
+     [
+      312.16,
+      148.06
+     ],
+     [
+      312.16,
+      136.56
+     ],
+     [
+      235.5,
+      65.08
+     ]
+    ],
+    "note": "바깥면 F[218.64, 65.08] → [307.63, 148.06], 경사 길이 121.7 (≥118), 아래면 z65.08가 앞벽 턱(y214~225) 위에 MS 폴리머로 붙음 (붙는 폭 6.4). Ø94 구멍 중심 s54.5(바깥면 아래 끝에서), 인서트 M4 4개 PCD115, 그릴 나사 4, 윗마개가 윗판 앞까지"
+   },
+   {
+    "part": "통로 틀 (duct former)",
+    "material": "PETG 출력 6",
+    "yz_polygon": [
+     [
+      214.0,
+      27.0
+     ],
+     [
+      247.0,
+      27.0
+     ],
+     [
+      247.0,
+      16.5
+     ],
+     [
+      241.0,
+      16.5
+     ],
+     [
+      241.0,
+      33.0
+     ],
+     [
+      220.0,
+      33.0
+     ],
+     [
+      220.0,
+      57.08
+     ],
+     [
+      225.0,
+      57.08
+     ],
+     [
+      225.0,
+      65.08
+     ],
+     [
+      214.0,
+      65.08
+     ]
+    ],
+    "note": "앞벽 y214~220 z27~65.08, 턱 y220~225 z57.08~65.08, 통로 지붕 z27~33 (y214~247), 세움벽 y241~247 z16.5~27 — 한 번에 출력, 밀폐 상자의 앞·아래 벽"
+   },
+   {
+    "part": "그릴",
+    "material": "PETG 출력",
+    "note": "L1 육각 격자, 판 w11~13, s-50~+53.2 (윗면 z148.06에서 잘림), 옆벽 22, 아래 링 벽 없음 (소리 길)"
+   },
+   {
+    "part": "가스켓",
+    "material": "EVA 3T",
+    "note": "105×105, 안 Ø94 (L1 그대로)"
+   },
+   {
+    "part": "흡음솜",
+    "material": "폴리에스터 약 35 g/통",
+    "note": "유닛 반대편(바깥 끝 100 mm)과 자석 뒤에 느슨하게 (기존 흡음솜 줄)"
+   }
+  ],
+  "baffle": {
+   "angle_from_horizontal_deg": 43.0,
+   "angle_from_vertical_deg": 47.0,
+   "outer_face_from_yz": [
+    218.64,
+    65.08
+   ],
+   "outer_face_to_yz": [
+    307.63,
+    148.06
+   ],
+   "slant_length": 121.67
+  },
+  "driver": {
+   "model": "CW-100B25 (프레임 105, 구멍 Ø94, 깊이 61 = 플랜지 4 포함, 자석 Ø85×17), 앞에서 달기 (가스켓 3 + 플랜지 4가 바깥면 위)",
+   "centre_yz": [
+    258.5,
+    102.25
+   ],
+   "x_centre": {
+    "L": 160.5,
+    "R": 1061.5
+   },
+   "axis_xyz": [
+    0.0,
+    -0.682,
+    0.7314
+   ],
+   "axis_elevation_deg": 47.0,
+   "why_centre": "y: 그릴 판 아래 모서리 D(-50,13)이 y213 뒤 (R18). z: 27° 소리 길이 (y212, z72.85) 위 3.5 (W1 3.0 + 조립 여유 0.5)",
+   "x_note": "스피커 가운데(x120.5 / 1101.5)보다 40 안쪽. 그릴 x85.5~235.5는 안폭 x-4.5~245.5 안"
+  },
+  "inner_volume": {
+   "section_mm2": 8873.0,
+   "gross_L": 2.218,
+   "net_L": 2.118,
+   "how": "안쪽 단면(판 안면 기준, 유닛 빼기 전) 8873 mm² × 안폭 250",
+   "w1_limits": "≥2.0 L 권장, 1.8 L 최저 → 여유 +0.22 L"
+  },
+  "qtc": {
+   "gross": 1.104,
+   "net": 1.119,
+   "with_fill_+17.5pct": 1.056,
+   "assumption": "Qts 0.72, Vas 3.0 L (재지 않음)"
+  },
+  "fc_hz": {
+   "range": [
+    138.0,
+    196.0
+   ],
+   "mid_fs109": 167.0,
+   "note": "Fs 90~128 Hz. 앰프 입력 RC 필터가 약 93 Hz 아래를 자름"
+  },
+  "driver_clearances_mm": {
+   "basket_D94_generators": {
+    "duct roof top (z33)": 10.41,
+    "riser rear face (y247)": 10.41,
+    "bottom ply top (z16.5)": 26.64,
+    "back ply inner face (y330)": 11.89,
+    "top ply underside": 15.64,
+    "front-wall sill rear face (y225)": 2.85,
+    "sill underside": 8.31,
+    "front wall inner face (y220)": 11.96
+   },
+   "magnet_D85": {
+    "duct roof top (z33)": 14.36,
+    "riser rear face (y247)": 14.36,
+    "bottom ply top (z16.5)": 17.27,
+    "back ply inner face (y330)": 3.59,
+    "top ply underside": 32.39,
+    "front-wall sill rear face (y225)": 29.71,
+    "sill underside": 29.71,
+    "front wall inner face (y220)": 32.65
+   },
+   "magnet_back_rim_to_back_ply": 3.59,
+   "magnet_lowest_rim_above_bottom_ply": 17.27,
+   "inside_depth_along_normal_from_outer_face": 104.8,
+   "w1_limits": "깊이 ≥72, 자석-벽 ≥2 (뒤판은 합판 공차로 3.5 목표)"
+  },
+  "aim": {
+   "axis_elevation_deg": 47.0,
+   "middle_ear_elevation_deg": 32.6,
+   "yz_offaxis_deg": {
+    "middle (y-300, z460)": 14.4,
+    "near_low": 15.0,
+    "near_high": 9.0,
+    "far_low": 19.4,
+    "far_high": 13.8
+   },
+   "3d_offaxis_deg_no_toe_in": {
+    "L driver -> left ear (x536)": 32.5,
+    "L driver -> right ear (x686)": 40.6
+   },
+   "L1_same_model": {
+    "3d": [
+     32.8,
+     40.7
+    ],
+    "yz_middle": 2.9
+   },
+   "treble_loss_4kHz_dB_piston_a40": {
+    "yz_middle": -0.6,
+    "3d_near": -2.9,
+    "3d_far": -4.3,
+    "L1_3d": [
+     -2.9,
+     -4.3
+    ]
+   },
+   "note": "W1 한계 '축 ≤53°, 가운데 귀와 20° 안' 충족 (14.4°). 3D 각은 L1과 거의 같음 (유닛을 안쪽으로 옮긴 효과). 8 kHz는 피스톤 모형이 첫 영점을 넘어 믿기 어려움 — 대략 4 kHz 손실의 두 배로 봄"
+  },
+  "sightline": {
+   "from": "Ø94 구멍 아래 가장자리 D(-47,0) = [224.13, 70.2], 27° 위로 연주자 쪽",
+   "vertical_clearance_mm": {
+    "module rear top edge (y212, z72.85)": 3.52,
+    "driver flange lower corner D(-52.5, 7)": 3.11,
+    "EVA gasket lower corner D(-52.5, 3)": 4.65,
+    "baffle outer lower edge F": 7.91,
+    "front-wall top front edge (y214)": 10.27,
+    "grille side-wall foot D(-50, 0) (outside the cone in x)": 3.16,
+    "pad bars / curtain / keys (<= z72.85, y <= 185)": 17.28
+   },
+   "grille_plate_lower_edge": "소리 길은 그릴 판 아래 모서리(s-50, w11) 밑으로 0.94 mm (수직 거리) 지나감 — 판은 구멍 뚫린 격자, 아래 링 벽 없음 (C와 같음, W1 확인 필요)",
+   "status": "모든 단단한 것 ≥3.0 mm (가장 좁은 곳: 유닛 플랜지 모서리 3.11)"
+  },
+  "d14": {
+   "magnet_centre_yz": [
+    289.53,
+    68.97
+   ],
+   "to_sensor_row_mm": 230.7,
+   "nearest_steel_point_mm": 161.4,
+   "nearest_steel_yz": [
+    215.33,
+    71.56
+   ],
+   "note": "센서 줄 y67 z8 (A0 끝 부속~C8 끝 부속 전체, x가 같은 곳이 가장 가까움). 가장 가까운 쇠는 플랜지 아래 모서리"
+  },
+  "d15": "스피커는 모듈에 닿지 않음: 앞 2.0 mm 공기, 그릴 판도 y213 뒤·모듈 윗면 위 4.8. 볼 브래킷(실리콘 그로밋 L42)의 핀에 얹히고, 가운데 유닛과는 EVA 3T + 고무 슬리브 나비나사로만 이어짐",
+  "xt30": "스피커 선(XT30U-F 꼬리 150)이 안쪽 옆판의 밀봉 구멍 Ø6(L y243 z40 / R y290 z40, EVA 띠 사이)으로 나와 3 mm 틈을 건너 가운데 끝벽 구멍 Ø14로 들어가 끝벽 집게의 짝과 꽂힘",
+  "valley": "건반 뒤 윗모서리(212, 72.85)와 앞판 사이: 앞벽 턱 z65.08까지 7.8 mm 낮음, y212~218.6. 앉은 눈높이(귀 z460)에서 y218 앞까지 가려짐. 그릴 판 아래 모서리(213.07, 77.66)가 건반 바로 뒤에서 시작해 한 덩어리처럼 보임"
+ },
+ "pareto_by_angle": {
+  "rows": [
+   {
+    "baffle_deg": 38.0,
+    "driver_centre_yz": [
+     260.5,
+     99.45
+    ],
+    "pod_top_z": 142.52,
+    "back_y": 342.5,
+    "gross_L_at_250": 2.114,
+    "qtc": 1.12,
+    "yz_offaxis_mid_ear_deg": 19.2,
+    "flange_corner_clearance_mm": 2.27,
+    "w1_strict_ok": false
+   },
+   {
+    "baffle_deg": 40.0,
+    "driver_centre_yz": [
+     260.0,
+     100.45
+    ],
+    "pod_top_z": 144.65,
+    "back_y": 342.5,
+    "gross_L_at_250": 2.159,
+    "qtc": 1.113,
+    "yz_offaxis_mid_ear_deg": 17.3,
+    "flange_corner_clearance_mm": 2.61,
+    "w1_strict_ok": false
+   },
+   {
+    "baffle_deg": 42.0,
+    "driver_centre_yz": [
+     259.0,
+     101.65
+    ],
+    "pod_top_z": 146.94,
+    "back_y": 342.0,
+    "gross_L_at_250": 2.204,
+    "qtc": 1.106,
+    "yz_offaxis_mid_ear_deg": 15.3,
+    "flange_corner_clearance_mm": 2.95,
+    "w1_strict_ok": false
+   },
+   {
+    "baffle_deg": 42.5,
+    "driver_centre_yz": [
+     259.0,
+     101.85
+    ],
+    "pod_top_z": 147.4,
+    "back_y": 342.0,
+    "gross_L_at_250": 2.211,
+    "qtc": 1.105,
+    "yz_offaxis_mid_ear_deg": 14.9,
+    "flange_corner_clearance_mm": 3.03,
+    "w1_strict_ok": true
+   },
+   {
+    "baffle_deg": 43.0,
+    "driver_centre_yz": [
+     258.5,
+     102.25
+    ],
+    "pod_top_z": 148.06,
+    "back_y": 341.5,
+    "gross_L_at_250": 2.218,
+    "qtc": 1.104,
+    "yz_offaxis_mid_ear_deg": 14.4,
+    "flange_corner_clearance_mm": 3.11,
+    "w1_strict_ok": true
+   },
+   {
+    "baffle_deg": 44.0,
+    "driver_centre_yz": [
+     258.0,
+     102.8
+    ],
+    "pod_top_z": 149.12,
+    "back_y": 341.5,
+    "gross_L_at_250": 2.247,
+    "qtc": 1.1,
+    "yz_offaxis_mid_ear_deg": 13.4,
+    "flange_corner_clearance_mm": 3.28,
+    "w1_strict_ok": true
+   },
+   {
+    "baffle_deg": 45.0,
+    "driver_centre_yz": [
+     258.0,
+     103.1
+    ],
+    "pod_top_z": 149.92,
+    "back_y": 341.5,
+    "gross_L_at_250": 2.259,
+    "qtc": 1.099,
+    "yz_offaxis_mid_ear_deg": 12.4,
+    "flange_corner_clearance_mm": 3.44,
+    "w1_strict_ok": true
+   }
+  ],
+  "note": "같은 규칙(소리 길 3.5, 그릴 y213, 자석 뒤 3.5)으로 각도만 바꿈. 깊이 1 mm 늘릴 때 윗면 약 0.51 mm 낮아짐. 40°는 z144.7이지만 플랜지 2.61 mm (W1 엄격 읽기 불합격)"
+ },
+ "centre": {
+  "x": [
+   260.0,
+   962.0
+  ],
+  "inner_x": [
+   271.5,
+   950.5
+  ],
+  "y": [
+   214.0,
+   341.5
+  ],
+  "z": [
+   5.0,
+   72.85
+  ],
+  "floor_zone": {
+   "y": [
+    241.0,
+    330.0
+   ],
+   "z": [
+    16.5,
+    61.349999999999994
+   ]
+  },
+  "front_zone": {
+   "y": [
+    214.0,
+    241.0
+   ],
+   "z": [
+    0.0,
+    61.349999999999994
+   ],
+   "note": "앞벽 없음: 통로와 이어진 열린 공간 (케이블이 올라오는 곳). 뚜껑을 열면 O2~O5 USB-C 플러그를 위에서 잡음"
+  },
+  "walls": {
+   "end_L": [
+    260.0,
+    271.5
+   ],
+   "end_R": [
+    950.5,
+    962.0
+   ],
+   "back_y": [
+    330.0,
+    341.5
+   ],
+   "bottom_z": [
+    5.0,
+    16.5
+   ],
+   "lid_z": [
+    61.349999999999994,
+    72.85
+   ],
+   "end_wall_notch": "y214~241 × z5~27 (통로)"
+  },
+  "bays_x": {
+   "A_power_bank": [
+    271.5,
+    395.5
+   ],
+   "B_io_ped_fuse": [
+    395.5,
+    475.5
+   ],
+   "D_buck_j702": [
+    475.5,
+    540.0
+   ],
+   "E_pi_dongle": [
+    540.0,
+    668.0
+   ],
+   "F_hub_amp_shelf": [
+    668.0,
+    950.5
+   ]
+  },
+  "lids": [
+   {
+    "id": "LID-L",
+    "x": [
+     260.0,
+     501.0
+    ],
+    "material": "오꾸메 11.5",
+    "fix": "자석 8×3 3쌍 (뒤판 윗모서리 2, 끝벽 윗모서리 1)"
+   },
+   {
+    "id": "CU-SCREENLID",
+    "x": [
+     501.0,
+     721.0
+    ],
+    "material": "PETG 출력 (판 3 + 갈비)",
+    "fix": "M3×10 4개 (레일 인서트: 앞 2는 기둥 위 y246, 뒤 2는 y322)"
+   },
+   {
+    "id": "LID-R",
+    "x": [
+     721.0,
+     962.0
+    ],
+    "material": "오꾸메 11.5",
+    "fix": "자석 8×3 3쌍"
+   }
+  ],
+  "touchscreen_lid_zone_for_W1": {
+   "x": [
+    501.0,
+    721.0
+   ],
+   "width": 220.0,
+   "y": [
+    214.0,
+    341.5
+   ],
+   "depth": 127.5,
+   "top_z": 72.85,
+   "hinge_line": "x방향, 뚜껑 앞 모서리 근처 (축 y216~218, z76 권장 — 이 범위면 접은 7인치가 뚜껑 뒤 끝을 1.5 이하로 넘음)",
+   "folded": "7인치 화면을 뒤로 접으면 z73~약 98, 스피커 윗면 z148.06 아래. 경첩에서 약 125 필요 → 경첩 축이 y216~218이면 y341~343까지 (뚜껑 뒤 끝 341.5를 넘어도 1.5). L1식 받침(141.7)이면 뒤로 16~18 튀어나옴 (운반할 때만, 뒤에 아무것도 없음)",
+   "dsi": "Pi DISP1 (x589~592, y263~278)에서 곧게 위로 (지킴 구역 x582~600, y262~280). 뚜껑 리본 구멍 권장 x580~602, y224~236 (W1이 정함)",
+   "gpio_power": "Pi GPIO 2/6 (x546~562, y312~320)에서 위로",
+   "vents": "화면 뒤 배기 홈 y300~325 (접으면 덮임 — 운반 상태라 전원 끔)",
+   "rule": "화면·경첩·받침에 자석 금지 (D14). 뚜껑은 가운데 유닛 벽·레일·기둥에만 얹힘 (모듈에 힘이 가지 않음)"
+  },
+  "back_plate_io": {
+   "part": "PR-BACKPLATE",
+   "x": [
+    397.5,
+    538.0
+   ],
+   "y": [
+    330.0,
+    341.5
+   ],
+   "z": [
+    16.5,
+    61.349999999999994
+   ],
+   "holes_xz": {
+    "cable_pass_D12": [
+     405.0,
+     38.0
+    ],
+    "usb_c_pd_input_HUSB238": [
+     421.0,
+     38.0
+    ],
+    "rocker_KCD1_13.2x19.2": [
+     438.5,
+     38.5
+    ],
+    "pedal_jack_J501_D6": [
+     462.5,
+     40.5
+    ]
+   },
+   "louvres": "x480~536, z18~46 (강압 뒤, 낮은 흡기)",
+   "note": "모두 뒤판 안면 y330 기준으로 안쪽 부품 깊이: KCD1 23 (2 mm 오목 자리에 테두리 → y341.5와 같은 면), J501 보드 24, HUSB238 16.4"
+  },
+  "vents": {
+   "intake": "아랫판 홈 4×34: 강압 아래 6개(x482~534), Pi 아래 8개(x546~622), 앰프 앞 허브 사이 없음 — 약 2,400 mm², 고무발 5 mm 틈으로 들어옴 + 뒤판 루버",
+   "exhaust": "뚜껑 L 홈 6×(4×30) 강압 위, 화면 뚜껑 뒤쪽 8×(4×34), 뚜껑 R 10×(4×40) 앰프·허브 위, 뒤판 앰프 뒤 8×(4×15) — 약 4,000 mm²",
+   "estimate": "약 12 W (Pi 5~7, 강압 2~3.5, 앰프 1~2, 허브 1): 안 온도 12~20 °C 상승 예상. 최대 부하에서 vcgencmd get_throttled = 0x0 확인, 안 되면 Pi Active Cooler (+8,000원)"
+  }
+ },
+ "centre_contents": [
+  {
+   "id": "CU-PBHOLDER",
+   "name": "power-bank holder (printed tray: floor 2, walls 1.5 x 14 high, strap slots)",
+   "bbox_x0x1y0y1z0z1": [
+    284.0,
+    393.0,
+    252.0,
+    327.0,
+    16.5,
+    30.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "PB-E-BANK",
+   "name": "Morui MT-65 power bank 105x71x32 (optional O07), USB-C end +x",
+   "bbox_x0x1y0y1z0z1": [
+    286.0,
+    391.0,
+    254.0,
+    325.0,
+    18.5,
+    50.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-BANK-PLUG",
+   "name": "right-angle USB-C plug on the bank + cable along +y to the cable pass",
+   "bbox_x0x1y0y1z0z1": [
+    391.0,
+    404.0,
+    278.0,
+    330.0,
+    26.0,
+    43.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "C-XT30-L",
+   "name": "XT30U pair L (pod pigtail F + amp lead M) in a printed clip on the left end wall, front zone",
+   "bbox_x0x1y0y1z0z1": [
+    271.5,
+    295.0,
+    236.0,
+    250.0,
+    40.0,
+    48.0
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-SPKLEAD-L2",
+   "name": "amp lead L down the left end wall from the back lane to the XT30 L",
+   "bbox_x0x1y0y1z0z1": [
+    271.5,
+    284.0,
+    236.0,
+    330.0,
+    50.0,
+    58.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-TS-L1",
+   "name": "M4 thumb screw head + rubber sleeve (pod L joint, front)",
+   "bbox_x0x1y0y1z0z1": [
+    271.5,
+    281.5,
+    222.0,
+    232.0,
+    40.0,
+    50.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-TS-L2",
+   "name": "M4 thumb screw head + rubber sleeve (pod L joint, rear, beside the bank)",
+   "bbox_x0x1y0y1z0z1": [
+    271.5,
+    281.5,
+    310.0,
+    320.0,
+    38.0,
+    48.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "PR-BACKPLATE",
+   "name": "printed back plate: I/O (pass, USB-C PD in, KCD1, J501) + louvres behind the buck",
+   "bbox_x0x1y0y1z0z1": [
+    397.5,
+    538.0,
+    330.0,
+    341.5,
+    16.5,
+    61.35
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "IO-CABLEPASS",
+   "name": "cable pass D12 (bank cable loops out to the PD input)",
+   "bbox_x0x1y0y1z0z1": [
+    399.0,
+    411.0,
+    329.0,
+    341.5,
+    32.0,
+    44.0
+   ],
+   "kind": "io"
+  },
+  {
+   "id": "CU-E-PDTRIG",
+   "name": "HUSB238 PD trigger + USB-C input in the plate pocket (mouth 2 inside the outer face)",
+   "bbox_x0x1y0y1z0z1": [
+    416.0,
+    426.0,
+    323.1,
+    339.5,
+    35.8,
+    40.2
+   ],
+   "kind": "io"
+  },
+  {
+   "id": "CU-E-SWITCH",
+   "name": "KCD1-101A rocker (bezel in a 2 mm recess, flush with y341.5)",
+   "bbox_x0x1y0y1z0z1": [
+    431.0,
+    446.0,
+    318.0,
+    341.5,
+    28.0,
+    49.0
+   ],
+   "kind": "io"
+  },
+  {
+   "id": "CU-E-J501BOARD",
+   "name": "J501 pedal-jack board 25x24 on a plate ledge",
+   "bbox_x0x1y0y1z0z1": [
+    450.0,
+    475.0,
+    315.5,
+    339.5,
+    36.4,
+    38.0
+   ],
+   "kind": "io"
+  },
+  {
+   "id": "CU-E-J501",
+   "name": "pedal jack PJ-313 (J501), nose in the plate",
+   "bbox_x0x1y0y1z0z1": [
+    459.5,
+    465.5,
+    327.5,
+    341.5,
+    38.0,
+    43.0
+   ],
+   "kind": "io"
+  },
+  {
+   "id": "CU-E-PEDBOARD",
+   "name": "PED pedal board 70x50 perfboard on 5 mm printed standoffs",
+   "bbox_x0x1y0y1z0z1": [
+    401.0,
+    471.0,
+    247.0,
+    297.0,
+    21.5,
+    23.1
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-PEDZERO",
+   "name": "RP2040-Zero on the PED board, USB-C faces -y",
+   "bbox_x0x1y0y1z0z1": [
+    440.0,
+    458.0,
+    247.0,
+    271.8,
+    23.1,
+    28.8
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-PED-PLUG",
+   "name": "PED USB-C plug + boot 25, then the cable turns +x in the front zone",
+   "bbox_x0x1y0y1z0z1": [
+    442.75,
+    455.25,
+    222.0,
+    247.0,
+    22.0,
+    30.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-PED-LANE",
+   "name": "PED cable lane in the front zone to hub port 2 (x740.5)",
+   "bbox_x0x1y0y1z0z1": [
+    455.25,
+    732.0,
+    222.0,
+    232.0,
+    33.0,
+    41.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "CU-E-FUSE",
+   "name": "BU914 inline fuse holder + 5 A T, clipped to the floor",
+   "bbox_x0x1y0y1z0z1": [
+    405.0,
+    451.0,
+    301.0,
+    311.0,
+    17.5,
+    27.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-BUCK",
+   "name": "XL4016 buck XH-M401 60.8x40.3x29 on 5 mm standoffs, against the louvres",
+   "bbox_x0x1y0y1z0z1": [
+    477.5,
+    538.3,
+    288.7,
+    329.0,
+    21.5,
+    50.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-J702BOARD",
+   "name": "amp-input jack board J702 30x25 on 5 mm standoffs",
+   "bbox_x0x1y0y1z0z1": [
+    505.0,
+    535.0,
+    255.0,
+    280.0,
+    21.5,
+    23.1
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-J702",
+   "name": "PJ-313 (J702), nose -y",
+   "bbox_x0x1y0y1z0z1": [
+    517.0,
+    523.0,
+    255.0,
+    269.0,
+    23.1,
+    28.1
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-J702-PLUG",
+   "name": "3.5 mm plug of W702 into J702, cable rises from the duct",
+   "bbox_x0x1y0y1z0z1": [
+    514.0,
+    526.0,
+    222.0,
+    255.0,
+    18.0,
+    30.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "CU-E-PI5",
+   "name": "Raspberry Pi 5 on 6 mm standoffs (USB/RJ45 end +x, GPIO edge +y)",
+   "bbox_x0x1y0y1z0z1": [
+    542.0,
+    627.0,
+    262.0,
+    318.0,
+    22.5,
+    32.6
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-PI5-RJ45",
+   "name": "Pi 5 RJ45 (unused)",
+   "bbox_x0x1y0y1z0z1": [
+    608.3,
+    629.5,
+    264.2,
+    280.2,
+    24.1,
+    37.6
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-PI5-USBA1",
+   "name": "Pi 5 USB-A stack 1 (lower port: IH190 gender + dongle)",
+   "bbox_x0x1y0y1z0z1": [
+    612.0,
+    629.5,
+    283.8,
+    298.2,
+    24.1,
+    40.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-PI5-USBA2",
+   "name": "Pi 5 USB-A stack 2 (upper port: hub upstream W209)",
+   "bbox_x0x1y0y1z0z1": [
+    612.0,
+    629.5,
+    301.8,
+    316.2,
+    24.1,
+    40.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-PI5-DISP1",
+   "name": "Pi 5 CAM/DISP 1 (DSI ribbon up to the screen lid)",
+   "bbox_x0x1y0y1z0z1": [
+    589.0,
+    592.0,
+    263.0,
+    278.0,
+    24.1,
+    28.1
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-PI-PWR",
+   "name": "MT666 right-angle USB-C pigtail into the Pi USB-C (-y edge)",
+   "bbox_x0x1y0y1z0z1": [
+    546.0,
+    560.0,
+    249.0,
+    262.0,
+    22.0,
+    31.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-DSI",
+   "name": "DSI ribbon keep-out: DISP1 straight up to the screen-lid slot",
+   "bbox_x0x1y0y1z0z1": [
+    582.0,
+    600.0,
+    262.0,
+    280.0,
+    28.1,
+    61.35
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-GPIO-LEAD",
+   "name": "screen power lead from GPIO pins 2/6 up to the lid",
+   "bbox_x0x1y0y1z0z1": [
+    546.0,
+    562.0,
+    312.0,
+    320.0,
+    32.6,
+    61.35
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "CU-E-GENDER",
+   "name": "Coms IH190 right-angle gender in USB-A stack 1 (lower)",
+   "bbox_x0x1y0y1z0z1": [
+    629.5,
+    647.5,
+    283.0,
+    299.0,
+    25.5,
+    32.0
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "CU-E-DONGLE",
+   "name": "Apple USB-C -> 3.5 mm adapter (L51) lying on the floor, socket -y",
+   "bbox_x0x1y0y1z0z1": [
+    632.0,
+    667.5,
+    262.1,
+    305.0,
+    16.5,
+    31.8
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-DONGLE-PLUG",
+   "name": "3.5 mm plug of W701 into the dongle socket, cable drops into the duct",
+   "bbox_x0x1y0y1z0z1": [
+    644.0,
+    656.0,
+    222.0,
+    262.1,
+    17.0,
+    29.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-UP-PLUG",
+   "name": "hub upstream W209: straight USB-A plug in stack 2 upper port",
+   "bbox_x0x1y0y1z0z1": [
+    629.5,
+    654.5,
+    301.0,
+    317.0,
+    32.5,
+    40.5
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-UP-BEND",
+   "name": "W209 S-bend (R>=15) Pi -> hub -x end, up to z50",
+   "bbox_x0x1y0y1z0z1": [
+    654.5,
+    686.5,
+    296.0,
+    318.0,
+    33.0,
+    50.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "PB-E-HUB",
+   "name": "NEXTU 710U3 10-port hub 228x48x24 on the floor against the back ply, ports -y",
+   "bbox_x0x1y0y1z0z1": [
+    686.5,
+    914.5,
+    282.0,
+    330.0,
+    16.5,
+    40.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-HUB-UP",
+   "name": "hub upstream right-angle (up-turned) USB plug on the -x end face (as L1)",
+   "bbox_x0x1y0y1z0z1": [
+    670.0,
+    686.5,
+    297.0,
+    314.0,
+    24.0,
+    44.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-HUB-PLUGS",
+   "name": "8 straight USB-A plugs + boots 35 in ports 2..9 (x740.5..894.5)",
+   "bbox_x0x1y0y1z0z1": [
+    732.5,
+    902.5,
+    247.0,
+    282.0,
+    22.5,
+    34.5
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-HUB-DROPS",
+   "name": "cables from the plugs bend down (R15) into the duct: front zone keep-out",
+   "bbox_x0x1y0y1z0z1": [
+    732.0,
+    903.0,
+    214.0,
+    247.0,
+    0.0,
+    40.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-HUB-DC",
+   "name": "hub 5 V DC plug (+x end face, assumed) + lead turning -y",
+   "bbox_x0x1y0y1z0z1": [
+    914.5,
+    934.5,
+    276.0,
+    314.0,
+    22.0,
+    44.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "PR-HUBSHELF",
+   "name": "printed shelf 224x47x2 over the hub, hung on the back ply by 2 brackets",
+   "bbox_x0x1y0y1z0z1": [
+    688.0,
+    912.0,
+    282.0,
+    329.0,
+    41.5,
+    43.5
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "PR-SHELFBRK-1",
+   "name": "shelf bracket L (screwed to the back ply, under the back lane)",
+   "bbox_x0x1y0y1z0z1": [
+    688.0,
+    698.0,
+    322.0,
+    330.0,
+    41.5,
+    50.0
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "PR-SHELFBRK-2",
+   "name": "shelf bracket R (screwed to the back ply)",
+   "bbox_x0x1y0y1z0z1": [
+    902.0,
+    912.0,
+    322.0,
+    330.0,
+    41.5,
+    50.0
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "CU-E-AMP",
+   "name": "XH-A232 TPA3110 amp 54x46x14 on 2 mm pads on the shelf",
+   "bbox_x0x1y0y1z0z1": [
+    742.0,
+    796.0,
+    283.0,
+    329.0,
+    45.5,
+    59.5
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-SPKLEAD-R",
+   "name": "amp -> XT30 R speaker lead over the shelf",
+   "bbox_x0x1y0y1z0z1": [
+    796.0,
+    927.0,
+    286.0,
+    296.0,
+    45.0,
+    52.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "C-XT30-R",
+   "name": "XT30U pair R in a printed clip on the right end wall",
+   "bbox_x0x1y0y1z0z1": [
+    927.0,
+    950.5,
+    283.0,
+    297.0,
+    47.0,
+    55.0
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-TS-R1",
+   "name": "M4 thumb screw head + rubber sleeve (pod R joint, front)",
+   "bbox_x0x1y0y1z0z1": [
+    940.5,
+    950.5,
+    222.0,
+    232.0,
+    40.0,
+    50.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-TS-R2",
+   "name": "M4 thumb screw head + rubber sleeve (pod R joint, rear)",
+   "bbox_x0x1y0y1z0z1": [
+    940.5,
+    950.5,
+    310.0,
+    320.0,
+    45.0,
+    55.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-SPKLEAD-L",
+   "name": "back lane: amp -> XT30 L lead + 20 V amp feed, along the back ply",
+   "bbox_x0x1y0y1z0z1": [
+    284.0,
+    742.0,
+    322.0,
+    330.0,
+    51.0,
+    55.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "Z-PWR-LANE",
+   "name": "front-of-shelf lane: 5 V buck -> hub DC, 20 V to the amp",
+   "bbox_x0x1y0y1z0z1": [
+    731.0,
+    935.0,
+    274.0,
+    281.5,
+    45.0,
+    52.0
+   ],
+   "kind": "zone"
+  },
+  {
+   "id": "PR-SEAMPOST-1",
+   "name": "printed seam post 10x10 on the floor (M3 insert on top for the screen lid)",
+   "bbox_x0x1y0y1z0z1": [
+    496.0,
+    506.0,
+    241.0,
+    251.0,
+    16.5,
+    55.35
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "PR-SEAMRAIL-1",
+   "name": "printed seam rail 20x6 under the lid seam, back ply -> y214",
+   "bbox_x0x1y0y1z0z1": [
+    491.0,
+    511.0,
+    214.0,
+    330.0,
+    55.35,
+    61.35
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "PR-SEAMPOST-2",
+   "name": "printed seam post 10x10 on the floor (M3 insert on top for the screen lid)",
+   "bbox_x0x1y0y1z0z1": [
+    716.0,
+    726.0,
+    241.0,
+    251.0,
+    16.5,
+    55.35
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "PR-SEAMRAIL-2",
+   "name": "printed seam rail 20x6 under the lid seam, back ply -> y214",
+   "bbox_x0x1y0y1z0z1": [
+    711.0,
+    731.0,
+    214.0,
+    330.0,
+    55.35,
+    61.35
+   ],
+   "kind": "wall"
+  }
+ ],
+ "centre_contents_check": {
+  "pairs_checked": 1368,
+  "problems": [],
+  "tightest_gaps_mm": [
+   [
+    0.5,
+    "CU-E-BUCK",
+    "Z-SPKLEAD-L"
+   ],
+   [
+    0.5,
+    "PB-E-BANK",
+    "Z-SPKLEAD-L"
+   ],
+   [
+    0.7,
+    "CU-E-DONGLE",
+    "Z-UP-PLUG"
+   ],
+   [
+    1.0,
+    "PB-E-HUB",
+    "PR-HUBSHELF"
+   ],
+   [
+    1.0,
+    "PB-E-HUB",
+    "PR-SHELFBRK-1"
+   ],
+   [
+    1.0,
+    "PB-E-HUB",
+    "PR-SHELFBRK-2"
+   ],
+   [
+    1.0,
+    "PR-BACKPLATE",
+    "CU-E-BUCK"
+   ],
+   [
+    1.0,
+    "PR-SHELFBRK-1",
+    "Z-SPKLEAD-L"
+   ],
+   [
+    1.0,
+    "Z-BANK-PLUG",
+    "CU-E-FUSE"
+   ],
+   [
+    1.0,
+    "Z-HUB-DC",
+    "Z-SPKLEAD-R"
+   ],
+   [
+    1.2,
+    "CU-E-DONGLE",
+    "Z-UP-BEND"
+   ],
+   [
+    1.5,
+    "C-XT30-R",
+    "Z-PWR-LANE"
+   ]
+  ],
+  "rule": "관련 없는 두 물건 사이 ≥1.0 (물건-물건), ≥0.5 (자리/케이블 구역 포함). 플러그·짝은 관련으로 뺌. 모든 물건은 가운데 안 공간(x271.5~950.5, y214~330, z≤61.35) 안, 앞 공간에서는 z27 위"
+ },
+ "cable_duct": {
+  "cross_section": {
+   "y": [
+    212.0,
+    241.0
+   ],
+   "z": [
+    0.0,
+    27.0
+   ],
+   "area_mm2": 783.0
+  },
+  "front": "모듈·끝 부속 뒷벽 (y209~212, USB 구멍 x0+74~94, z5~21)",
+  "top": "스피커 밑은 출력 통로 지붕 z27, 가운데는 위로 열린 앞 공간 (뚜껑이 덮음)",
+  "back": "스피커 세움벽·가운데 아랫판 앞 모서리 y241",
+  "floor": "책상 (아래가 열림, L1처럼 선이 책상 위)",
+  "ends": "스피커 바깥 옆판 홈에 출력 마개 (옆에서 선이 보이지 않음)",
+  "x": [
+   -16.0,
+   1238.0
+  ],
+  "module_usb": "곧은 플러그+부트 y196.8~221.8 z10.7~18.3 → x-y면에서 R15로 꺾여 y236.8을 따라 x로 → 허브 포트 x에서 앞 공간으로 올라가 R15로 +y → USB-A 플러그 (y247~282)",
+  "openings_per_module": {
+   "O1": [
+    121.0,
+    141.0
+   ],
+   "O2": [
+    285.5,
+    305.5
+   ],
+   "O3": [
+    450.0,
+    470.0
+   ],
+   "O4": [
+    614.5,
+    634.5
+   ],
+   "O5": [
+    779.0,
+    799.0
+   ],
+   "O6": [
+    943.5,
+    963.5
+   ],
+   "O7": [
+    1108.0,
+    1128.0
+   ]
+  },
+  "hub": {
+   "bbox": [
+    686.5,
+    914.5,
+    282.0,
+    330.0,
+    16.5,
+    40.5
+   ],
+   "ports_x": [
+    696.5,
+    718.5,
+    740.5,
+    762.5,
+    784.5,
+    806.5,
+    828.5,
+    850.5,
+    872.5,
+    894.5
+   ],
+   "port_z": 28.5,
+   "port_map": {
+    "PED": 2,
+    "O3": 3,
+    "O1": 4,
+    "O2": 5,
+    "O4": 6,
+    "O5": 7,
+    "O6": 8,
+    "O7": 9
+   },
+   "upstream": "-x 끝면 (y305.5 z28.5), ㄱ자(위로 꺾인) 플러그 (L1 그대로)",
+   "dc": "+x 끝면 (추정)",
+   "note": "포트 위치·간격(22)·업스트림·DC 자리는 L1 추정 그대로. 포트 0/1(화면 뚜껑 아래)은 비워 둠"
+  },
+  "cables": [
+   {
+    "cable": "O1 USB-C (W201)",
+    "module_plug_x": 131.0,
+    "hub_port": 4,
+    "hub_port_x": 784.5,
+    "run_x": 653.5,
+    "path_mm": 769,
+    "std_m": 1.0,
+    "slack_mm": 231,
+    "plug_zone": "L pod duct (under the pod)"
+   },
+   {
+    "cable": "O2 USB-C (W202)",
+    "module_plug_x": 295.5,
+    "hub_port": 5,
+    "hub_port_x": 806.5,
+    "run_x": 511.0,
+    "path_mm": 627,
+    "std_m": 1.0,
+    "slack_mm": 373,
+    "plug_zone": "centre front zone (reach from above with a lid off)"
+   },
+   {
+    "cable": "O3 USB-C (W203)",
+    "module_plug_x": 460.0,
+    "hub_port": 3,
+    "hub_port_x": 762.5,
+    "run_x": 302.5,
+    "path_mm": 418,
+    "std_m": 0.5,
+    "slack_mm": 82,
+    "plug_zone": "centre front zone (reach from above with a lid off)"
+   },
+   {
+    "cable": "O4 USB-C (W204)",
+    "module_plug_x": 624.5,
+    "hub_port": 6,
+    "hub_port_x": 828.5,
+    "run_x": 204.0,
+    "path_mm": 320,
+    "std_m": 0.5,
+    "slack_mm": 180,
+    "plug_zone": "centre front zone (reach from above with a lid off)"
+   },
+   {
+    "cable": "O5 USB-C (W205)",
+    "module_plug_x": 789.0,
+    "hub_port": 7,
+    "hub_port_x": 850.5,
+    "run_x": 61.5,
+    "path_mm": 177,
+    "std_m": 0.3,
+    "slack_mm": 123,
+    "plug_zone": "centre front zone (reach from above with a lid off)"
+   },
+   {
+    "cable": "O6 USB-C (W206)",
+    "module_plug_x": 953.5,
+    "hub_port": 8,
+    "hub_port_x": 872.5,
+    "run_x": 81.0,
+    "path_mm": 197,
+    "std_m": 0.3,
+    "slack_mm": 103,
+    "plug_zone": "under the CU end wall / pod joint"
+   },
+   {
+    "cable": "O7 USB-C (W207)",
+    "module_plug_x": 1118.0,
+    "hub_port": 9,
+    "hub_port_x": 894.5,
+    "run_x": 223.5,
+    "path_mm": 339,
+    "std_m": 0.5,
+    "slack_mm": 161,
+    "plug_zone": "R pod duct (under the pod)"
+   },
+   {
+    "cable": "PED USB-C (W208)",
+    "module_plug_x": 449.0,
+    "hub_port": 2,
+    "hub_port_x": 740.5,
+    "run_x": 291.5,
+    "path_mm": 399,
+    "std_m": 0.5,
+    "slack_mm": 101,
+    "plug_zone": "centre (PED board)"
+   }
+  ],
+  "other_leads": {
+   "EL/ER leads + JST-XH 6P": "그대로: XH x52~69 / 1160~1177, y222~240, z0~6 — 스피커 밑 통로 안",
+   "O1/O7 EXT leads": "그대로 통로 바닥",
+   "headphone W701/W702": "왼쪽 볼 홈(x-12.6~-4.1, z3~7.5)에서 통로 바닥을 따라 가운데로 → W701은 동글 소켓(x650 앞, y222~262), W702는 J702(x520, y222~255)로 올라감",
+   "speaker": "스피커 꼬리 XT30U-F → 끝벽 집게 (L 앞 공간 y236~250 z40~48 / R y283~297 z47~55). 앰프 선은 뒤판을 따라 z51~55 (L), 선반 위 z45~52 (R)",
+   "power": "USB-C PD 입력(또는 보조배터리를 케이블 통과로 빼서 입력에 꽂음) → HUSB238 → 퓨즈(x405~451) → KCD1 → 20 V를 강압(D칸)과 앰프(선반)로. 5.1 V는 강압 → Pi(MT666), 허브 DC(선반 앞 줄 z45~52)",
+   "PED": "PED Zero USB-C → 앞 공간 줄 z33~41 → 허브 포트 2 (0.5 m)",
+   "DSI": "Pi DISP1에서 곧게 위로 화면 뚜껑 구멍까지"
+  },
+  "fill": "가장 붐비는 곳(허브 앞 x740 근처): USB 선 최대 7개 OD 4 → 약 88 mm², 통로 단면 783 mm²의 약 11 %",
+  "unplug_rule": "뒷바를 들 때: 뚜껑 L·R을 열고 허브의 USB-A 8개와 3.5 mm 플러그 2개(동글, J702)를 뽑음 → 선은 모두 건반 쪽에 남아 통로에 놓임 → 뒷바를 곧게 들어 올림 (앞 공간은 아래가 열려 있어 선 위로 빠짐)"
+ },
+ "joints": {
+  "rear_unit_to_key_bed": {
+   "brackets": "BRK2-L/R: 볼 뒷면 M3 자리(y212, z12, x-11.80/-4.88 · 1226.88/1233.80)에 L42 실리콘 그로밋 + M3×16 (L1 그대로). 판 z8~14는 헤드폰 선(z3~7.5) 위, EL 리드(x14.8~) 옆을 피함",
+   "pins": "세운 핀 Ø6 z14~24: L (x0.5, y230) → 둥근 소켓 Ø6.5 / R (x1221.5, y230) → x방향 긴 소켓 6.5×11 (1221 mm 사이 공차 ±2.3)",
+   "sockets": "스피커 통로 지붕 아래에 붙인 출력 블록 (밀폐 상자를 뚫지 않음), 핀과 소켓 바닥 사이 2 mm → 위아래 힘이 핀으로 가지 않음",
+   "gap": "앞 2.0 mm 공기 (y212~214)",
+   "d15": "스피커→핀→그로밋→볼, 가운데→스피커→같은 길. 모듈에 나사로 박는 것 없음"
+  },
+  "pods_to_centre": {
+   "per_side": "M4 나비나사 2개 (가운데 안에서, 끝벽의 Ø8 고무 슬리브를 지나 스피커 안쪽 옆판의 M4 목재 인서트로, 8 깊이 막힘) + 3 mm 틈에 EVA 3T 띠 2줄 (z8~26은 y243~339, z48~70은 y216~339; 나사 자리에 Ø10 구멍)",
+   "screw_yz": {
+    "L": [
+     [
+      227.0,
+      45.0
+     ],
+     [
+      315.0,
+      43.0
+     ]
+    ],
+    "R": [
+     [
+      227.0,
+      45.0
+     ],
+     [
+      315.0,
+      50.0
+     ]
+    ]
+   },
+   "separation": "뚜껑 열기 → XT30 뽑기 → 나비나사 2개 풀기 → 스피커를 볼 핀에서 곧게 들어 올림 (가로 다월 없음)",
+   "replaced_from_L1": "도브테일 블록 4개 + 토글 래치 2개 (y447~471) 없앰"
+  },
+  "service": {
+   "pad_bars": "언제나: 뒷바가 y214부터라 패드 바(y146.5~185) 위가 비어 있음",
+   "modules_O2_O3_O5": "해당 뚜껑(L 또는 R)을 열고 앞 공간에서 USB-C 부트를 위로 뽑은 뒤 모듈을 곧게 들어 올림",
+   "module_O4": "플러그가 화면 뚜껑 아래 → 화면 뚜껑을 열거나(나사 4 + 리본) 아래 전체 방법",
+   "modules_O1_O6_O7_EL_ER": "플러그가 스피커 밑 또는 가운데 끝벽 밑 → 허브에서 뽑고 해당 스피커(또는 뒷바 전체)를 들어낸 뒤",
+   "rule": "모듈은 도브테일 때문에 위로만 빠짐 — 앞으로 밀지 않음"
+  }
+ },
+ "key_storage": {
+  "decision": "R29 예비 건반 칸을 본체에서 뺌 (사용자 확인 필요)",
+  "why": "뚜껑이 건반과 같은 높이라 안 높이가 44.85 (z16.5~61.35)뿐인데 예비 빗살 2층은 58.8 필요. 안폭 679도 전자부로 꽉 참. 칸을 두면 높이나 깊이가 커져 '큰 빈 공간 없게'에 어긋남",
+  "alternatives": [
+   "(a) 따로 출력하는 예비 부품 상자 약 210×180×65 (256 판에 반씩 2번), 모듈 가방과 같이 들고 다님",
+   "(b) 가운데 뒤에 붙였다 떼는 보관 칸 (y341.5~약 510, 같은 나비나사 결합) — 붙였을 때만 깊이 +170"
+  ]
+ },
+ "printed_parts": {
+  "bed": "Bambu P2S 256×256×256",
+  "list": [
+   {
+    "part": "SPK-BAFFLE-L/R",
+    "qty": 2,
+    "print_size_mm": [
+     250.0,
+     124.98,
+     11.5
+    ],
+    "fits_256_bed": true,
+    "note": "43° 경사 앞판, 바깥면을 바닥에 두고 출력 (브림). Ø94 구멍, PCD115 인서트 4, 그릴 나사 4, 윗마개",
+    "g_each_est": 148.0
+   },
+   {
+    "part": "SPK-DUCTFORMER-L/R",
+    "qty": 2,
+    "print_size_mm": [
+     250.0,
+     33.0,
+     48.58
+    ],
+    "fits_256_bed": true,
+    "note": "앞벽 y214~220 + 턱 y220~225 + 통로 지붕 z27~33 + 세움벽 y241~247, 두께 6 (C 접목, 심사 수정 4→6). 끝면을 바닥에",
+    "g_each_est": 63.0
+   },
+   {
+    "part": "SPK-GRILLE-L/R",
+    "qty": 2,
+    "print_size_mm": [
+     150.0,
+     103.23,
+     13.0
+    ],
+    "fits_256_bed": true,
+    "note": "L1 육각 그릴에서 아래 링 벽 없앰(C), 판은 s-50부터, 위는 z148.06에서 잘림",
+    "g_each_est": 40.0
+   },
+   {
+    "part": "DUCT-CAP-L/R",
+    "qty": 2,
+    "print_size_mm": [
+     3.0,
+     27.0,
+     26.0
+    ],
+    "fits_256_bed": true,
+    "note": "통로 옆 마개 (스피커 바깥 옆판 홈에 붙임, 브래킷 판 자리 y214~237 × z7~15 따냄)",
+    "g_each_est": 3.0
+   },
+   {
+    "part": "BRK2-L/R",
+    "qty": 2,
+    "print_size_mm": [
+     22.0,
+     24.0,
+     16.0
+    ],
+    "fits_256_bed": true,
+    "note": "볼 M3 자리 + L42 그로밋(L1 그대로) 판 z8~14, 세운 핀 Ø6 z14~24 (x0.5 / x1221.5, y230)",
+    "g_each_est": 8.0
+   },
+   {
+    "part": "POD-SOCKET-L/R",
+    "qty": 2,
+    "print_size_mm": [
+     11.0,
+     12.0,
+     10.0
+    ],
+    "fits_256_bed": true,
+    "note": "스피커 통로 지붕 아래 붙이는 소켓 블록 z17~27: L 둥근 Ø6.5, R x방향 긴 구멍 6.5×11",
+    "g_each_est": 2.0
+   },
+   {
+    "part": "CU-SCREENLID",
+    "qty": 1,
+    "print_size_mm": [
+     220.0,
+     127.5,
+     11.5
+    ],
+    "fits_256_bed": true,
+    "note": "가운데 화면 뚜껑 x501~721 (W1이 경첩·리본 구멍을 넣음), 판 3 + 갈비 8.5, 윗면 z72.85",
+    "g_each_est": 90.0
+   },
+   {
+    "part": "SEAM-POSTRAIL-1/2",
+    "qty": 2,
+    "print_size_mm": [
+     116.0,
+     20.0,
+     44.85
+    ],
+    "fits_256_bed": true,
+    "note": "뚜껑 이음 레일 20×6 (y214~330, z55.35~61.35) + 앞 기둥 10×10 (y241~251), 기둥 위 M3 인서트",
+    "g_each_est": 25.0
+   },
+   {
+    "part": "PR-BACKPLATE",
+    "qty": 1,
+    "print_size_mm": [
+     140.5,
+     11.5,
+     44.85
+    ],
+    "fits_256_bed": true,
+    "note": "뒤판 창에 끼우는 판: 케이블 통과 Ø12, USB-C PD 입력 주머니, KCD1(2 mm 오목), J501 + 강압 뒤 루버",
+    "g_each_est": 55.0
+   },
+   {
+    "part": "CU-PBHOLDER",
+    "qty": 1,
+    "print_size_mm": [
+     109.0,
+     75.0,
+     14.0
+    ],
+    "fits_256_bed": true,
+    "note": "보조배터리 받침 (바닥 2, 벽 1.5, 끈 구멍)",
+    "g_each_est": 35.0
+   },
+   {
+    "part": "PR-HUBSHELF",
+    "qty": 1,
+    "print_size_mm": [
+     224.0,
+     48.0,
+     10.5
+    ],
+    "fits_256_bed": true,
+    "note": "허브 위 선반 224×47×2 + 뒤판에 거는 받침 2개 (앰프 자리)",
+    "g_each_est": 45.0
+   },
+   {
+    "part": "XT30-CLIP-L/R",
+    "qty": 2,
+    "print_size_mm": [
+     24.0,
+     14.0,
+     10.0
+    ],
+    "fits_256_bed": true,
+    "note": "끝벽 안쪽 XT30 짝 집게",
+    "g_each_est": 3.0
+   },
+   {
+    "part": "STANDOFFS",
+    "qty": 6,
+    "print_size_mm": [
+     90.0,
+     60.0,
+     6.0
+    ],
+    "fits_256_bed": true,
+    "note": "Pi 6 mm, 강압·PED·J702 5 mm, 앰프 2 mm 받침",
+    "g_each_est": 30.0
+   },
+   {
+    "part": "CABLE-CLIPS",
+    "qty": 8,
+    "print_size_mm": [
+     20.0,
+     10.0,
+     8.0
+    ],
+    "fits_256_bed": true,
+    "note": "통로 지붕 아래·끝벽 케이블 집게",
+    "g_each_est": 10.0
+   }
+  ],
+  "all_fit": true,
+  "petg_total_g_est": 1070.0,
+  "removed_from_L1": "CU 트레이, CU 뚜껑 v2, 모서리 받침 12, 예비 건반 칸막이, 작은 부품 상자(+뚜껑), 도브테일 블록 4, XT30 받침 2, L1 브래킷 2, I/O 판, 보조배터리 받침 → 필라멘트는 대략 같음"
+ },
+ "plywood_cut_list": {
+  "material": "오꾸메 11.5",
+  "pieces": [
+   {
+    "id": "PLY-POD-SIDE",
+    "name": "스피커 옆판 (L 바깥/안, R 안/바깥)",
+    "qty": 4,
+    "blank_mm": [
+     127.5,
+     143.06
+    ],
+    "profile_yz": [
+     [
+      214.0,
+      27.0
+     ],
+     [
+      214.0,
+      65.08
+     ],
+     [
+      218.64,
+      65.08
+     ],
+     [
+      307.63,
+      148.06
+     ],
+     [
+      341.5,
+      148.06
+     ],
+     [
+      341.5,
+      5.0
+     ],
+     [
+      241.0,
+      5.0
+     ],
+     [
+      241.0,
+      27.0
+     ]
+    ],
+    "note": "직선 자르기: 43° 경사 1번 + 앞 턱 + 통로 홈(y214~241 × z5~27). 안쪽 옆판에 M4 목재 인서트 2개(바깥면에서 8 깊이, 막힘)와 XT30 선 구멍 Ø6(밀봉)"
+   },
+   {
+    "id": "PLY-POD-BACK",
+    "name": "스피커 뒤판",
+    "qty": 2,
+    "blank_mm": [
+     250.0,
+     143.06
+    ],
+    "profile_yz": null,
+    "note": "옆판 사이 y330~341.5, z5~148.06"
+   },
+   {
+    "id": "PLY-POD-TOP",
+    "name": "스피커 윗판",
+    "qty": 2,
+    "blank_mm": [
+     250.0,
+     17.84
+    ],
+    "profile_yz": null,
+    "note": "y312.16~330, 앞 모서리는 출력 앞판 윗마개에 맞댐"
+   },
+   {
+    "id": "PLY-POD-BOTTOM",
+    "name": "스피커 아랫판",
+    "qty": 2,
+    "blank_mm": [
+     250.0,
+     89.0
+    ],
+    "profile_yz": null,
+    "note": "y241~330, z5~16.5 (앞 모서리 y241이 통로 뒷벽 아래쪽)"
+   },
+   {
+    "id": "PLY-CU-END",
+    "name": "가운데 유닛 끝벽 L/R (ㄴ자)",
+    "qty": 2,
+    "blank_mm": [
+     116.0,
+     56.35
+    ],
+    "profile_yz": null,
+    "note": "y214~330 × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌. XT30 선 구멍 Ø14, 나비나사 구멍 Ø8(고무 슬리브) 2개"
+   },
+   {
+    "id": "PLY-CU-BACK",
+    "name": "가운데 유닛 뒤판",
+    "qty": 1,
+    "blank_mm": [
+     702.0,
+     56.35
+    ],
+    "profile_yz": null,
+    "note": "x260~962, y330~341.5, z5~61.35. 뒤판 출력물 창 x397.5~538 × z16.5~61.35 (위가 열림, 뚜껑이 덮음), 앰프 뒤 환기 홈 8개 4×15"
+   },
+   {
+    "id": "PLY-CU-BOTTOM",
+    "name": "가운데 유닛 아랫판",
+    "qty": 1,
+    "blank_mm": [
+     679.0,
+     89.0
+    ],
+    "profile_yz": null,
+    "note": "끝벽 사이 x271.5~950.5, y241~330. 앞 모서리 R3 (케이블이 넘어감), 강압·Pi 아래 흡기 홈"
+   },
+   {
+    "id": "PLY-CU-LID-L",
+    "name": "뚜껑 L",
+    "qty": 1,
+    "blank_mm": [
+     241.0,
+     127.5
+    ],
+    "profile_yz": null,
+    "note": "x260~501, 윗면 z72.85 (건반 윗면과 같은 높이), 앞 윗모서리 1×45° 모따기"
+   },
+   {
+    "id": "PLY-CU-LID-R",
+    "name": "뚜껑 R",
+    "qty": 1,
+    "blank_mm": [
+     241.0,
+     127.5
+    ],
+    "profile_yz": null,
+    "note": "x721~962, 앰프 위 배기 홈"
+   }
+  ],
+  "area_m2": 0.346,
+  "blank_area_m2": 0.372,
+  "L1_area_m2": 0.633,
+  "nesting_400x1200": {
+   "fits": true,
+   "used_mm": [
+    1180.8,
+    386.4
+   ],
+   "kerf": 3.0,
+   "layout_xywh": [
+    [
+     "PLY-CU-BACK",
+     0,
+     0,
+     702.0,
+     56.3
+    ],
+    [
+     "PLY-CU-BOTTOM",
+     0,
+     59.3,
+     679.0,
+     89.0
+    ],
+    [
+     "PLY-POD-SIDE",
+     705.0,
+     0,
+     127.5,
+     143.1
+    ],
+    [
+     "PLY-POD-SIDE",
+     835.5,
+     0,
+     127.5,
+     143.1
+    ],
+    [
+     "PLY-POD-SIDE",
+     966.0,
+     0,
+     127.5,
+     143.1
+    ],
+    [
+     "PLY-CU-END",
+     1096.5,
+     0,
+     56.3,
+     116.0
+    ],
+    [
+     "PLY-POD-SIDE",
+     0.0,
+     151.4,
+     127.5,
+     143.1
+    ],
+    [
+     "PLY-POD-BACK",
+     130.5,
+     151.4,
+     250.0,
+     143.1
+    ],
+    [
+     "PLY-POD-BACK",
+     383.5,
+     151.4,
+     250.0,
+     143.1
+    ],
+    [
+     "PLY-CU-LID-L",
+     636.5,
+     151.4,
+     241.0,
+     127.5
+    ],
+    [
+     "PLY-CU-LID-R",
+     880.5,
+     151.4,
+     241.0,
+     127.5
+    ],
+    [
+     "PLY-CU-END",
+     1124.5,
+     151.4,
+     56.3,
+     116.0
+    ],
+    [
+     "PLY-POD-BOTTOM",
+     0.0,
+     297.4,
+     250.0,
+     89.0
+    ],
+    [
+     "PLY-POD-BOTTOM",
+     253.0,
+     297.4,
+     250.0,
+     89.0
+    ],
+    [
+     "PLY-POD-TOP",
+     506.0,
+     297.4,
+     250.0,
+     17.8
+    ],
+    [
+     "PLY-POD-TOP",
+     506.0,
+     318.3,
+     250.0,
+     17.8
+    ]
+   ],
+   "note": "가게에서 직사각형 조각으로 자르고, 옆판 경사·턱·홈과 끝벽 홈·뒤판 창은 직접 톱으로. 가게가 이 배치를 못 하면 600×1200을 그대로 삼"
+  }
+ },
+ "bom_changes": [
+  {
+   "item": "오꾸메 합판 600×1200 (가운데 유닛)",
+   "change": "뺌 — 모든 판이 400×1200 한 장에 들어감",
+   "krw": -22520
+  },
+  {
+   "item": "토글 래치 매미고리 L64 ×2",
+   "change": "뺌 (도브테일 출력물도 없음)",
+   "krw": -4800
+  },
+  {
+   "item": "M4 나비나사 ×4 + M4 목재 인서트 ×4 + 고무 슬리브(그로밋) ×4",
+   "change": "추가 (스피커-가운데 결합)",
+   "krw": 4200
+  },
+  {
+   "item": "ㄱ자 USB-C to C 케이블 0.3 m (보조배터리 → 케이블 통과)",
+   "change": "추가",
+   "krw": 2060
+  },
+  {
+   "item": "USB-A→C 케이블 (NA993 1 m ×8)",
+   "change": "1 m ×2 (O1, O2) 유지, 0.5 m ×4 (O3, O4, O7, PED), 0.3 m ×2 (O5, O6) — 같은 계열 짧은 것",
+   "krw": 0,
+   "note": "짧은 것 1,300~1,900원으로 거의 같음. 1 m ×8을 그대로 써도 되지만 남는 선 약 2.3 m를 감아 둬야 함"
+  },
+  {
+   "item": "고무발 14, L42 그로밋 4, EVA 3T, 흡음솜, XT30 짝, 네오디뮴 8×3",
+   "change": "기존 줄로 충분 (개수 같거나 줄어듦)",
+   "krw": 0
+  },
+  {
+   "item": "PETG",
+   "change": "L2 뒷바 출력물 약 1.1 kg (추정). L1 뒷바 출력물(트레이·뚜껑 v2·받침 12·칸막이·상자·도브테일·앞판 등)을 빼므로 대략 같다고 봄",
+   "krw": 0,
+   "note": "모자라면 1 kg 스풀 +16,150원"
+  },
+  {
+   "item": "예비 부품 상자 (R29 대안 a)",
+   "change": "선택: 출력 약 250 g 또는 산 정리함 3,000~6,000원",
+   "krw": 0
+  },
+  {
+   "item": "Pi Active Cooler",
+   "change": "선택: 온도 시험에서 걸리면",
+   "krw": 0,
+   "note": "+8,000~9,000"
+  }
+ ],
+ "bom_net_krw": -21060,
+ "comparison_vs_L1": {
+  "depth_y": {
+   "L1": 447.0,
+   "L1_with_latches": 471.0,
+   "L2": 341.5,
+   "pct": -23.6
+  },
+  "behind_keys_area_mm2": {
+   "L1": 294690,
+   "L1_with_latches": 324786,
+   "L2": 162393.0,
+   "pct_vs_L1": -44.9,
+   "pct_vs_L1_latches": -50.0
+  },
+  "heights_z": {
+   "key_bed": 72.85,
+   "centre_L1": 88.0,
+   "centre_L2": 72.85,
+   "pods_L1": 134.0,
+   "pods_L2": 148.06,
+   "note": "가운데는 건반과 같은 높이 (-15.15). 스피커는 +14.1 (소리 길·R18·43°가 정함, pareto 표 참고)"
+  },
+  "pod": {
+   "L1": "213 × 195 × 129 (z5~134), 30° (수직에서), 2.95 L",
+   "L2": "273 × 127.5 × 143.1 (z5~148.06), 47° (수직에서) = 43° (수평에서), 2.22 L",
+   "side_silhouette_mm2": {
+    "L1": 21982.0,
+    "L2": 13569.0,
+    "pct": -38.3
+   }
+  },
+  "envelope_volume_L": {
+   "L1": 22.67,
+   "L2": 13.06,
+   "pct": -42.4
+  },
+  "open_trough": {
+   "L1": "y212~252 위가 열린 통로 (선이 보임)",
+   "L2": "없음 — 선은 모두 스피커·가운데 밑 통로와 앞 공간 안"
+  },
+  "plywood_m2": {
+   "L1": 0.633,
+   "L2": 0.346
+  }
+ },
+ "risks": [
+  "스피커 윗면 z148.06 = L1보다 +14.1. 27° 소리 길(3.5), 그릴 R18 규칙(y213), 43°(플랜지 3 mm)가 정함. 깊이 1 mm마다 약 0.51 mm 낮아짐; 40°면 z144.7 (W1이 플랜지 2.61을 받아들여야 함)",
+  "그릴 변경 (아래 링 벽 없음, 판 s-50부터): 소리 길이 판 아래 0.94 mm로 지나감. W1 확인 필요 (C와 같은 조건)",
+  "Vas를 재지 않음: 3.0 L면 Qtc 1.10, 4 L면 약 1.21 → 흡음솜으로 낮춤. 단계 0에서 Vas 측정",
+  "유닛이 스피커 가운데보다 40 mm 안쪽 → 첫 x방향 공진(약 686 Hz)이 일부 들뜸 (결합 약 0.48). 바깥 끝 100 mm에 흡음솜",
+  "화면 뚜껑 깊이 127.5: 받침이 141.7인 L1식이면 접었을 때 뒤로 16~18 튀어나옴. 맨 7인치 화면(약 125)이면 경첩 축을 y216~218 (뚜껑 앞 2~4 mm)에",
+  "O4 플러그는 화면 뚜껑 아래, O1·O6·O7·EL·ER 플러그는 스피커나 가운데 끝벽 밑 → 이 모듈을 뺄 때는 허브에서 뽑고 뒷바(또는 스피커)를 먼저 들어냄",
+  "허브 포트 간격 22·업스트림 -x 끝·DC +x 끝은 L1 추정. 다르면 허브 칸이 x로 움직임 (오른쪽 끝 여유 16)",
+  "열: 약 12 W가 높이 45의 닫힌 상자에. 바닥 흡기 + 뒤 루버 + 뚜껑 배기. 최대 음량에서 Pi throttle 확인, 안 되면 Active Cooler",
+  "뚜껑 높이 맞춤: 고무발(5)과 모듈 EVA(3)의 눌림 차이로 뚜껑이 ±0.5 뜨거나 낮을 수 있음 → 얇은 받침으로 맞춤",
+  "출력 앞판이 250 폭으로 256 판에 3 mm씩 여유 → 브림 필수, 휘면 앞판을 2조각(혀-홈 + MS 폴리머, 누설 시험)",
+  "합판 400×1200 한 장은 주어진 배치대로 잘라야 들어감 (여유 높이 14 mm). 가게가 못 하면 600×1200 유지 (+22,520원)",
+  "건반 뒤 좁은 골(y212~218.6, z65~72.85)에 먼지가 모임. 앉은 자리에서는 가려짐",
+  "보조배터리를 뺄 때 뒤판을 따라가는 선(z51~55)이 0.5 위에 있어 배터리를 기울여 빼야 함",
+  "케이블 길이는 약 ±30 mm 추정 — 사기 전에 끈으로 재기. O1/O2 1 m는 남는 선 약 0.23/0.37 m를 앞 공간에 감음",
+  "예비 건반 칸(R29)을 본체에서 빼는 것은 사용자 확인 필요"
+ ],
+ "implementation_notes": {
+  "body.py": {
+   "source": "SRC_L1 대신 SRC_L2 = 'spec/body_L2.json'. Y_TR(열린 통로) → cable_duct y212~241 z0~27. Y_RB (252, 447) → (214, 341.5). SPK_ZT 134 → 148.06",
+   "slant": "30°(수직에서) → 47°(수직에서). C30/S30 → cos/sin 47. R_SL = rot_x(-47), R_SL_BED = rot_x(137). SL_A → F[218.64, 65.08], SL_LEN → 121.67. DRV_YZ → [258.5, 102.25], DRV_X → L 160.5 / R 1061.5",
+   "delete": [
+    "SPK*-PLY-FRONT (아래 앞 띠)",
+    "SPK*-XT30HOLDER (XT_PAD/XT_BODY/XT_SLOT)",
+    "JOIN-DT-* 도브테일 4",
+    "JOIN-LATCH-* 2",
+    "CU-PLY-P05 앞판, P10 칸막이, P11 낮은 칸막이",
+    "CU-TRAY",
+    "CU-LIDSUP-* 12 + CU-MAG-*",
+    "CU-KSINSERT",
+    "CU-SMALLBOX(+LID)",
+    "CU-LID v2 (W1의 새 화면 뚜껑으로)",
+    "BRK-L/R L1 브래킷 (BRK2로)"
+   ],
+   "move_resize": [
+    "SPK*-PLY-SIDEOUT/SIDEIN → outer_yz_polygon (8점)",
+    "SPK*-PLY-BACK/TOP/BOTTOM → speakers.panels",
+    "SPK*-BAFFLE → baffle yz_polygon (43°, 폭 250)",
+    "SPK*-GRILLE → 아래 링 벽 없음, 판 s-50~, z148.06에서 자름",
+    "SPK*-GASKET → 새 유닛 자리",
+    "FOOT-01~14 → feet.positions_xy",
+    "JOIN-EVA-* → x257~260 / 962~965, z8~26 (y243~339) · z48~70 (y216~339)",
+    "CU-PLY-P01/P02 → 아랫판 하나 679×89",
+    "CU-PLY-P03/P04 → 뚜껑 L/R 241×127.5 z61.35~72.85",
+    "CU-PLY-P06/P07 → 뒤판 하나 702×56.35 (창 x397.5~538)",
+    "CU-PLY-P08/P09 → ㄴ자 끝벽 (통로 홈)",
+    "CU-IOPLATE → PR-BACKPLATE",
+    "CU-PBHOLDER → 새 받침"
+   ],
+   "new": [
+    "SPK*-DUCTFORMER",
+    "DUCT-CAP-L/R",
+    "POD-SOCKET-L/R",
+    "BRK2-L/R (핀)",
+    "SEAM-POSTRAIL-1/2",
+    "CU-SCREENLID (자리만, W1)",
+    "PR-HUBSHELF + 받침 2",
+    "XT30-CLIP-L/R (끝벽)",
+    "M4 나비나사·인서트·고무 슬리브 4쌍",
+    "환기 홈 (아랫판, 뚜껑, 뒤판)"
+   ],
+   "MIRROR_X": "611 그대로 (R = 2·611 − x)"
+  },
+  "electronics.py": {
+   "cu_shift": "L1처럼 v3에서 한꺼번에 옮기지 않음 — CU-E-*, PB-E-* 는 centre_contents의 bbox를 그대로 씀 (manifest id 같음)",
+   "hub": "HUB_X0 686.5, HUB_Y 282 (포트 면), HUB_BACK 330, HUB_Z0 16.5, HUB_PORT_X = 696.5 + 22i, HUB_PORT = cable_duct.hub.port_map",
+   "module_cables": "플러그 → R15 → y236.8·z13 줄로 통로 안 x 방향 → 포트 x에서 앞 공간으로 올라가 R15 → +y로 포트 (길이는 cable_duct.cables)",
+   "upstream": "Pi USB-A 2단 위 포트 (x629.5~654.5) → S자 → 허브 -x 끝 ㄱ자 플러그 (x670~686.5)",
+   "speakers": "SPK_C = speakers.driver, _A = 47° (수직에서), SPK_N = (0, -sin43, cos43)",
+   "xt30": "C-XT30F/M-L → x271.5~295 y236~250 z40~48 (앞 공간 끝벽 집게), -R → x927~950.5 y283~297 z47~55. body.XT30_POCKET 새로",
+   "unchanged": "모듈 안 전자부, EL/ER 리드·XH, EXT 리드, J701"
+  },
+  "touchscreen.py": "TS-* 현재 자리(경첩 y290 z96, 옛 뚜껑)를 지움. W1이 centre.touchscreen_lid_zone_for_W1 안에서 다시 정함 (경첩 y218 근처, 접으면 z≤148.06, 가능하면 y≤341.5)",
+  "check_body.py": [
+   "L1 trough_rule 대신 L2 소리 길 규칙: D(-47,0)에서 27° 선이 (212, 72.85)와 앞의 모든 단단한 것 위 ≥3.0 (수직)",
+   "그릴 판 아래 모서리 y ≥ 213 (R18), 뒷바의 어떤 것도 y<214에서 z<75 금지",
+   "스피커 안 부피 ≥2.0 L, 자석-벽 ≥2 (뒤판 ≥3.5), 법선 깊이 ≥72, 경사 길이 ≥118, D14 ≥100",
+   "스피커 윗면 = 그릴 판 D(52.5,13) + 0.5",
+   "출력물 256 판",
+   "평면 직사각형 x-16~1238, y0~341.5"
+  ],
+  "check_electronics.py": [
+   "centre_contents 쌍 검사 (rel 제외, ≥1.0 / ≥0.5)",
+   "모든 물건이 가운데 안 공간 안, 뚜껑 아래 z61.35",
+   "허브 플러그 구역이 선반 밑이 아님 (뚜껑 R에서 닿음)",
+   "케이블 길이 ≤ 표준 길이 − 40"
+  ],
+  "check_interf.py": "y212~214 공기 틈 (뒷바-모듈 닿음 없음, 볼 브래킷 그로밋만)"
+ },
+ "files": {
+  "scripts": "scratchpad l2/final/l2_geom.py, l2_layout.py, l2_build.py, l2_svg.py",
+  "drawings": "scratchpad l2/L2_section.svg, l2/L2_plan.svg"
+ },
+ "w1_acoustic_check": {
+  "date": "2026-10-01",
+  "result": "통과 (W1 세션)",
+  "qtc": "유닛 뺀 부피 2.118 L 기준 Qtc 1.12, Fc 140~199 Hz (Vas 3 L 가정). 솜 기본 포함 → 약 1.07. Vas 4 L이면 1.21이라 솜은 필수",
+  "pole_vent": "자석 뒤 폴 벤트(가운데 구멍) 축 방향으로 10 mm 이상 비움 — 뒤판·윗판·솜 모두. 자석-뒤판 3.59는 모서리 거리로 허용",
+  "fill": "폴리에스터 솜을 상자 전체에 느슨하게 (가운데 포함). 686 Hz x 방향 모드는 가운데에서 공기 속도가 커서 바깥 끝에만 모으면 효과 작음. 유닛 뒤 10 mm와 폴 벤트 앞은 비움",
+  "grille": "아래 링 벽 삭제 승인. 조건: 개구율 40 % 이상, 구멍 Ø3 이상, 판 두께 2 mm 이하(두꺼우면 구멍 앞쪽 모따기), 나사 4개로 떨리지 않게 고정",
+  "angle": "43° 로 진행. 40° (윗면 z144.7)도 음향상 가능 — 모듈 모서리 여유 3 이상 조건. 사용자 답에 따라 바뀔 수 있음 (W1이 사용자에게 높이 +14 mm를 알림)"
+ }
+}

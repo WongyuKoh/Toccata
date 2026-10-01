@@ -1,0 +1,97 @@
+<style>
+#p-summary{--sum-bar:var(--blue);--sum-track:var(--tint-blue)}
+#p-summary .lead{max-width:68ch;color:var(--ink-2);margin:4px 0 14px}
+#p-summary .hero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start;margin-bottom:22px}
+@media (max-width:860px){#p-summary .hero{grid-template-columns:minmax(0,1fr)}}
+#p-summary .hero figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+#p-summary .hero figure img{display:block;width:100%;height:auto;background:#f6f7f9}
+#p-summary .hero figcaption{font-size:12.5px;color:var(--ink-3);padding:8px 12px}
+#p-summary .side{display:flex;flex-direction:column;gap:12px;min-width:0}
+#p-summary .money{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px 16px}
+#p-summary .money .lab{font-size:12px;letter-spacing:.04em;color:var(--ink-3)}
+#p-summary .money .big{font-family:var(--mono);font-size:34px;line-height:1.15;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+#p-summary .money .big small{font-size:16px;margin-left:2px;color:var(--ink-2)}
+#p-summary .money .brk{font-size:13px;color:var(--ink-2)}
+#p-summary .money .note{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+#p-summary .specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+#p-summary .kv{background:var(--card);padding:10px 12px;display:flex;flex-direction:column;gap:1px;min-width:0}
+#p-summary .kv .k{font-size:11.5px;color:var(--ink-3);letter-spacing:.03em}
+#p-summary .kv .v{font-size:16px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+#p-summary .kv .d{font-size:12px;color:var(--ink-2)}
+#p-summary h3.sec{font-size:16px;margin:26px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink);text-wrap:balance}
+#p-summary .parts{display:flex;flex-direction:column;gap:12px}
+#p-summary .part{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px}
+@media (max-width:760px){#p-summary .part{grid-template-columns:minmax(0,1fr)}}
+#p-summary .part figure{margin:0;background:#fff;border:1px solid var(--rule);border-radius:8px;overflow:hidden;align-self:start}
+#p-summary .part figure img{display:block;width:100%;height:auto;max-height:220px;object-fit:contain;background:#fff}
+#p-summary .part h3{font-size:15px;margin:2px 0 6px}
+#p-summary .part ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:13.5px;color:var(--ink-2);max-width:72ch}
+#p-summary .part .links{margin:8px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+#p-summary a.go{font-size:12.5px;text-decoration:none;border:1px solid var(--rule-2);border-radius:999px;padding:2px 10px;color:var(--blue-ink)}
+#p-summary a.go:hover{border-color:var(--blue)}
+#p-summary .cost{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){#p-summary .cost{grid-template-columns:minmax(0,1fr)}}
+#p-summary .bars{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+#p-summary .bars .cap{font-size:12.5px;color:var(--ink-3)}
+#p-summary .bar{display:grid;grid-template-columns:92px minmax(0,1fr) 96px;gap:10px;align-items:center;font-size:13px}
+#p-summary .bar .bl{color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#p-summary .bar .bt{height:12px;background:var(--sum-track);border-radius:0 4px 4px 0;overflow:hidden}
+#p-summary .bar .bf{display:block;height:100%;background:var(--sum-bar);border-radius:0 4px 4px 0}
+#p-summary .bar:hover .bf{filter:brightness(1.12)}
+#p-summary .bar .bv{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+#p-summary .bar .bv small{font-size:11px;color:var(--ink-3);margin-left:1px}
+#p-summary .shipbox{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;min-width:0}
+#p-summary .shipbox .tw{overflow-x:auto}
+#p-summary .shipbox table{width:100%;border-collapse:collapse;font-size:13px}
+#p-summary .shipbox th{text-align:left;font-weight:500;color:var(--ink-3);font-size:12px;border-bottom:1px solid var(--rule);padding:4px 6px}
+#p-summary .shipbox td{border-bottom:1px solid var(--rule);padding:4px 6px}
+#p-summary .shipbox .num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+#p-summary .shipbox tfoot td{font-weight:600;border-bottom:0}
+#p-summary .shipbox .free{font-size:12.5px;color:var(--ink-2);margin-top:8px}
+#p-summary .next{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;background:var(--card);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+#p-summary .next li{display:grid;grid-template-columns:110px 120px minmax(0,1fr);gap:12px;padding:10px 14px;border-top:1px solid var(--rule);font-size:13.5px}
+#p-summary .next li:first-child{border-top:0}
+@media (max-width:640px){#p-summary .next li{grid-template-columns:minmax(0,1fr)}}
+#p-summary .next .when{font-family:var(--mono);font-size:12.5px;color:var(--blue-ink)}
+#p-summary .next .what{color:var(--ink-2)}
+#p-summary .checks{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:13.5px;color:var(--ink-2);max-width:80ch}
+#p-summary .src{font-size:12.5px;color:var(--ink-3);margin-top:18px;max-width:90ch}
+#p-summary .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+</style>
+<section class="page" id="p-summary" hidden>
+<h2>Toccata 한눈에 보기 (2026-10-02 확정 설계)</h2>
+<p class="lead">3D 프린터로 만드는 88건반 디지털 피아노입니다. 건반 밑 홀센서가 누르는 속도를 재고, Raspberry Pi 5가 소리를 내며, 본체에 내장 스피커 2개와 7인치 터치스크린이 있습니다. 이 탭은 지금 설계와 실제 구매 비용을 한 번에 보여 주고, 자세한 내용은 각 탭으로 이어집니다.</p>
+<div class="hero">
+  <figure><img src="rear/R01_front.png" alt="Toccata 앞 3/4 렌더: 88건반, 양 끝 스피커, 가운데 7인치 화면"><figcaption>앞 3/4 (쓰는 상태). 건반 모듈 7개 + 끝 부속, 양 끝 스피커(앞판 40°), 가운데 터치스크린 25°. CAD 렌더 R01</figcaption></figure>
+  <div class="side">
+    <div class="money">
+      <div class="lab">실제 구매 금액 (가진 부품·예비 뺌, 배송비 포함)</div>
+      <div class="big">731,485<small>원</small></div>
+      <div class="brk">부품 683,385원 (86품목) + 배송비 48,100원</div>
+      <div class="note">최종 재료 목록 기준입니다. 품목별로 켜고 끄려면 <a href="https://claude.ai/artifact/9CJ3HwhbhoodCAui94g28n" target="_blank" rel="noopener">최종 재료 페이지</a>에서 고칩니다. 판매처별 목록은 05 구매 목록 탭에 있습니다. 가진 부품·공구·예비까지 모두 넣은 전체 목록은 1,134,177원(저장소 엑셀)입니다.</div>
+    </div>
+    <div class="specs"><div class="kv"><span class="k">건반</span><b class="v">88건반</b><span class="d">옥타브 모듈 7개 + 끝 부속 2개</span></div><div class="kv"><span class="k">본체 크기</span><b class="v">1254 × 342.5 mm</b><span class="d">건반 뒤 뒷바 깊이 130.5 mm</span></div><div class="kv"><span class="k">높이</span><b class="v">z72.85 · z144.65</b><span class="d">건반·가운데 윗면 · 스피커 윗면 (mm)</span></div><div class="kv"><span class="k">누르는 힘</span><b class="v">51.9 / 51.0 g</b><span class="d">백건 / 흑건, 연타 16.3 / 18.8 Hz</span></div><div class="kv"><span class="k">화면</span><b class="v">7인치 1024×600</b><span class="d">25° 세움, 접으면 z78~95</span></div><div class="kv"><span class="k">전력</span><b class="v">평균 16~20 W</b><span class="d">순간 54.4 W · 보조배터리 3.2~4.0시간</span></div></div>
+  </div>
+</div>
+
+<h3 class="sec">설계 구성</h3>
+<div class="parts"><article class="part" id="sum-action"><figure><img src="dwg/d01_white_D_side.svg" alt="흰건반 D 옆 단면" loading="lazy"></figure><div class="pt"><h3>건반 액션 · W1+ r4.5</h3><ul><li>짧은 시소 건반이 Ø4 강철 봉 위에서 돌고, 꼬리가 무게 레버(SS400 9×19×40, MS 폴리머 접착)를 들어 올립니다.</li><li>되돌림은 레버 무게 + 미스미 비틀림 스프링 C-UA90R5-3-0.5(다리 22.3 / 8.0, 짧은 다리 가둠 홈).</li><li>누르는 힘 백 51.9 g · 흑 51.0 g, 올라오는 힘 42.8 / 40.8 g, 연타 16.3 / 18.8 Hz. 검증 45개 통과.</li></ul><p class="links"><a class="go" href="#design">01 건반 액션 구조 →</a> <a class="go" href="#drawings">02 건반 도면 →</a> <a class="go" href="#check">03 남은 위험 →</a></p></div></article><article class="part" id="sum-body"><figure><img src="rear/R02_rear_left.png" alt="뒤 왼쪽 3/4 렌더" loading="lazy"></figure><div class="pt"><h3>본체 · L2 한 몸 뒷바</h3><ul><li>뒷바가 건반 모듈 바로 뒤(틈 2 mm)에 붙어 전체 깊이가 447 → 342.5 mm로 줄었습니다.</li><li>가운데 유닛 윗면이 건반과 같은 z72.85로 평평하고, 선은 모두 닫힌 통로(y212~241)와 앞 공간 안으로 지납니다.</li><li>합판은 오꾸메 400×1200 한 장, 뒤 래치 없음. 예비 건반은 따로 출력한 상자에 보관합니다(R29, 10/2).</li></ul><p class="links"><a class="go" href="#rear">08 뒷부분 도면 →</a> <a class="go" href="#cad">07 CAD 모델 →</a></p></div></article><article class="part" id="sum-speaker"><figure><img src="rear/D02_speaker_section.png" alt="D02 스피커 단면" loading="lazy"></figure><div class="pt"><h3>스피커 · 앞판 40°</h3><ul><li>4인치 CW-100B25 2개, 밀폐 상자 안 부피 2.16 L, 앞판을 수평에서 40° 눕혀 연주자 귀 쪽(17° 차이)을 봅니다.</li><li>Qtc 1.13(흡음솜 넣으면 1.08), 콘 아래 끝 27° 소리 길이 건반 모서리 위 3.50 mm로 지나갑니다.</li><li>자석에서 가장 가까운 홀센서까지 228.5 mm(기준 100 mm). TPA3110 앰프, 저음 차단 약 93 Hz.</li></ul><p class="links"><a class="go" href="#rear">08 뒷부분 도면 D02 →</a></p></div></article><article class="part" id="sum-touch"><figure><img src="rear/D05_touchscreen.png" alt="D05 터치스크린" loading="lazy"></figure><div class="pt"><h3>터치스크린 · 3판</h3><ul><li>Waveshare 7-DSI-TOUCH-C(7인치 가로 1024×600, DSI). 가운데 뚜껑에 25° 기울여 세우고 받침다리 1개로 받칩니다.</li><li>경첩 축 y226.55 · z81.35라 어느 각도에서도 건반 모듈 위로 넘어가지 않습니다(가장 앞 y216.0). 접으면 z78~95.</li><li>리본 22핀 300 mm(쓰는 길이 254 mm), 전원은 Pi 헤더 2·6번에서 약 2.15 W.</li></ul><p class="links"><a class="go" href="#rear">08 뒷부분 도면 D05 →</a></p></div></article><article class="part" id="sum-elec"><figure><img src="sch/SCH-01_system.svg" alt="SCH-01 시스템 연결도" loading="lazy"></figure><div class="pt"><h3>전자부 · 회로 개정 C</h3><ul><li>건반마다 홀센서 DRV5055(모두 89개) → 모듈마다 RP2040-Zero + 16채널 먹스 → USB 허브 → Raspberry Pi 5(FluidSynth).</li><li>USB-C PD 20 V → 퓨즈 → 스위치 → 5.1 V 강압. 벽 충전기 또는 보조배터리(65 W PD)로 씁니다.</li><li>회로도 9장, 연결 검사 오류 0. 개정 C(10/1)에서 화면 연결 △16을 더했습니다.</li></ul><p class="links"><a class="go" href="#circuit">06 회로도 →</a></p></div></article></div>
+
+<h3 class="sec">비용 — 무엇에 쓰나 (실제 구매 목록)</h3>
+<div class="cost">
+  <div class="bars"><div class="cap">묶음별 부품값 (배송비 뺌). 많이 드는 곳: 건반 액션 24%, 센서·MCU·기판 23%, 제어·전원 20%</div><div class="bar" title="건반 액션: 162,479원 · 부품의 23.8% · 16품목"><span class="bl">건반 액션</span><span class="bt"><span class="bf" style="width:100.00%"></span></span><span class="bv num">162,479<small>원</small></span></div><div class="bar" title="센서·MCU·기판: 154,960원 · 부품의 22.7% · 15품목"><span class="bl">센서·MCU·기판</span><span class="bt"><span class="bf" style="width:95.37%"></span></span><span class="bv num">154,960<small>원</small></span></div><div class="bar" title="제어·전원: 133,960원 · 부품의 19.6% · 8품목"><span class="bl">제어·전원</span><span class="bt"><span class="bf" style="width:82.45%"></span></span><span class="bv num">133,960<small>원</small></span></div><div class="bar" title="터치스크린: 87,095원 · 부품의 12.7% · 9품목"><span class="bl">터치스크린</span><span class="bt"><span class="bf" style="width:53.60%"></span></span><span class="bv num">87,095<small>원</small></span></div><div class="bar" title="본체·결합: 71,755원 · 부품의 10.5% · 24품목"><span class="bl">본체·결합</span><span class="bt"><span class="bf" style="width:44.16%"></span></span><span class="bv num">71,755<small>원</small></span></div><div class="bar" title="오디오: 62,686원 · 부품의 9.2% · 9품목"><span class="bl">오디오</span><span class="bt"><span class="bf" style="width:38.58%"></span></span><span class="bv num">62,686<small>원</small></span></div><div class="bar" title="소모품: 6,600원 · 부품의 1.0% · 1품목"><span class="bl">소모품</span><span class="bt"><span class="bf" style="width:4.06%"></span></span><span class="bv num">6,600<small>원</small></span></div><div class="bar" title="페달: 2,860원 · 부품의 0.4% · 1품목"><span class="bl">페달</span><span class="bt"><span class="bf" style="width:1.76%"></span></span><span class="bv num">2,860<small>원</small></span></div><div class="bar" title="공구: 990원 · 부품의 0.1% · 1품목"><span class="bl">공구</span><span class="bt"><span class="bf" style="width:0.61%"></span></span><span class="bv num">990<small>원</small></span></div></div>
+  <div class="shipbox"><div class="cap" style="font-size:12.5px;color:var(--ink-3);margin-bottom:6px">배송비가 붙는 판매처</div>
+    <div class="tw"><table><thead><tr><th>판매처</th><th class="num">주문액</th><th class="num">배송비</th></tr></thead>
+    <tbody><tr><td>세운상가새한음향</td><td class="num">19,200</td><td class="num">4,000</td></tr><tr><td>굿나잇몰</td><td class="num">6,730</td><td class="num">3,500</td></tr><tr><td>onezaze</td><td class="num">6,000</td><td class="num">3,500</td></tr><tr><td>알씨뱅크</td><td class="num">10,500</td><td class="num">3,500</td></tr><tr><td>올스틸샵</td><td class="num">34,440</td><td class="num">3,500</td></tr><tr><td>나비엠알오</td><td class="num">37,521</td><td class="num">3,300</td></tr><tr><td>나사코리아 nasakorea.com</td><td class="num">23,300</td><td class="num">3,300</td></tr><tr><td>두유레디</td><td class="num">2,700</td><td class="num">3,000</td></tr><tr><td>상우아트</td><td class="num">7,800</td><td class="num">3,000</td></tr><tr><td>비젼몰</td><td class="num">2,750</td><td class="num">3,000</td></tr><tr><td>주영종합상사</td><td class="num">16,000</td><td class="num">3,000</td></tr><tr><td>메카솔루션</td><td class="num">4,160</td><td class="num">3,000</td></tr><tr><td>파츠파츠</td><td class="num">29,900</td><td class="num">3,000</td></tr><tr><td>스튜디오분트</td><td class="num">20,700</td><td class="num">3,000</td></tr><tr><td>대건상사</td><td class="num">9,040</td><td class="num">2,500</td></tr></tbody><tfoot><tr><td>합계</td><td></td><td class="num">48,100</td></tr></tfoot></table></div>
+    <p class="free">무료 배송: 아이씨뱅큐 · G마켓 · 엘레파츠 · 한국미스미 · 동진나무공장 · Apple Store 온라인 · 11번가. 엘레파츠는 예비 부품 1,386원을 더해 무료 배송 기준(66,000원)을 넘겼습니다.</p>
+  </div>
+</div>
+
+<h3 class="sec">다음 할 일</h3>
+<ol class="next"><li><span class="when">지금</span><b>주문</b><span class="what">최종 재료 목록대로 주문합니다. 해외에서 오는 화면(10/15~22 도착 예상)과 10/26에 출하되는 스피커 결합 인서트(반품 불가)를 먼저 넣습니다.</span></li><li><span class="when">10월</span><b>단계 0 시험</b><span class="what">시편 34개와 공구 4개를 먼저 출력합니다. 시험 순서는 1(패드 반발) → 3a(윗판 굽힘) → 20(접착)·21(첫 모듈 정하중)·8(스프링 토크)입니다.</span></li><li><span class="when">10~11월</span><b>출력·조립</b><span class="what">건반 액션 7 모듈과 뒷바·스피커·화면 출력물을 뽑고 모듈부터 조립합니다. 출력용 STL은 hardware/mechanical/cad/stl/print에 있습니다.</span></li><li><span class="when">11/16~12/14</span><b>통합·시연</b><span class="what">본체·전자부·소리·터치 메뉴를 합치고 리듬게임 MVP를 Pi 5로 옮깁니다. 시연은 12/14 주입니다.</span></li></ol>
+
+<h3 class="sec">부품을 받으면 먼저 확인할 것</h3>
+<ul class="checks"><li>화면 뒤 DSI 커넥터 방향(반대면 받침을 좌우로 뒤집고 A형 리본을 씀)과 M2.5 구멍 깊이</li><li>보조배터리 USB-C 포트 중심이 바닥에서 15.5 mm 이상인지(NC888 꺾인 머리)</li><li>허브 DC 플러그가 잭 면에서 32 mm 안인지(넘으면 ㄱ자 플러그를 따로 삼)</li><li>업스톱 패드 PORON: 목록은 5T, 설계는 6T — 5T면 패드 바 쐐기를 1.0 mm 두껍게 다시 출력</li><li>스피커 결합 인서트 구멍은 자투리 판에 Ø5.8부터 시험(헐거우면 Ø5.5)</li></ul>
+
+<p class="src">원본: 설계서 docs/01-hardware-design.md (v4 확정본) · 설계 기준 hardware/mechanical/sound-requirements.md (R1~R32, D1~D24) · 건반 액션 hardware/mechanical/key-action-v4 (r4.5) · 본체·스피커 hardware/mechanical/cad/spec/body_L2.json · 터치스크린 hardware/mechanical/touchscreen/rev3 · 회로 hardware/pcb (개정 C) · 재료 hardware/bom (최종 재료 페이지 = 실제 구매). 좌표는 mm, x 가로(0 = A0 왼쪽 끝), y 흰건반 앞 끝에서 뒤로, z 책상에서 위로.</p>
+</section>

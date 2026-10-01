@@ -1,0 +1,737 @@
+{
+ "configs": [
+  {
+   "id": "A",
+   "name_ko": "개별 페달 3개: DP-10(연속 댐퍼) + KP-2 스위치 ×2",
+   "parts": [
+    {
+     "id": "p-damper",
+     "qty": 1
+    },
+    {
+     "id": "p-switch",
+     "qty": 2
+    },
+    {
+     "id": "p-trsjack",
+     "qty": 3
+    },
+    {
+     "id": "b-pedalboard",
+     "qty": 1
+    }
+   ],
+   "total_krw": 142122,
+   "total_note": "프리버드 페달(무료배송) 65,000 + 38,000×2 + 디바이스마트 PJ-603A 374×3. 페달보드 자재·디바이스마트 배송비(2,700원) 제외",
+   "pros_ko": [
+    "가장 저렴하면서 댐퍼는 진짜 하프페달(CC64 0–127)",
+    "DP-10은 Roland EV-5 배선이라 Pico에 저항 3개로 직결",
+    "페달 하나 고장 시 개별 교체, 나중에 KP-2를 DP-10으로 업그레이드 가능",
+    "모두 국내 재고 확인(프리버드)"
+   ],
+   "cons_ko": [
+    "소프트·소스테누토는 온/오프만(연속 소프트 불가)",
+    "페달 3개가 따로 놀아 보드 제작 필요",
+    "DP-10(박스형 힌지)과 KP-2의 감촉·높이가 다름"
+   ],
+   "recommended": true
+  },
+  {
+   "id": "B",
+   "name_ko": "트리플 페달 유닛: Roland RPU-3",
+   "parts": [
+    {
+     "id": "p-triple",
+     "qty": 1
+    },
+    {
+     "id": "p-trsjack",
+     "qty": 3
+    }
+   ],
+   "total_krw": 231122,
+   "total_note": "코스모스악기 230,000(5만원 이상 무료배송) + PJ-603A 374×3",
+   "pros_ko": [
+    "그랜드 피아노와 같은 3페달 배치·일체형 프레임(2.5 kg)으로 안정적",
+    "세 페달 모두 연속(3.2 kΩ 포트) → 연속 소프트(CC67)까지 가능",
+    "배선은 DP-10과 동일(Tip=와이퍼) — 펌웨어 공용",
+    "페달보드 제작 불필요"
+   ],
+   "cons_ko": [
+    "구성 A보다 약 9만원 비쌈",
+    "국내 판매처가 적음(확인된 곳: 코스모스악기)",
+    "케이블 2.2 m 고정, 단일 유닛 고장 시 통째 수리"
+   ],
+   "recommended": false
+  }
+ ],
+ "items": [
+  {
+   "id": "p-damper",
+   "category": "pedal",
+   "name_ko": "롤랜드 DP-10 댐퍼(하프) 페달",
+   "model": "Roland DP-10",
+   "role_ko": "댐퍼(서스테인) 페달 — CC64 연속값(하프페달링)",
+   "qty_suggest": 1,
+   "specs": {
+    "기능 스위치": "Continuous(하프 댐퍼) / Switch 선택 (Roland 설명서)",
+    "센서": "10 kΩ 선형 포텐셔미터 (포럼 실측·분해; 내부 기판에 'DP-8' 표기)",
+    "플러그": "6.35 mm TRS(스테레오) 1개",
+    "핀 배치": "Tip=와이퍼(흰선), Ring=+기준(빨간선), Sleeve=GND(검은선) — Roland EV-5 익스프레션과 동일",
+    "극성": "뗌: 와이퍼가 Sleeve쪽(저전압) → 밟으면 Ring쪽으로 증가. Roland 기술지원이 GP-10 EXP 입력에서 EV-5처럼 동작함을 확인(포럼 사용자 전언)",
+    "Pico 직결": "가능 — Ring에 3.3 V(1 kΩ 경유), Sleeve=GND, Tip→ADC 로 0~약 3.0 V 분압 출력(소비 약 0.3 mA)",
+    "케이블": "2.2 m",
+    "크기/무게": "68×220×64 mm(고무판 장착 시 깊이 402 mm), 700 g",
+    "주의": "포럼 사례: 펠트 패드가 두꺼워 뗌 상태가 0까지 안 돌아오는 개체(MIDI 24~127) → 펠트 절반 깎아 해결"
+   },
+   "offers": [
+    {
+     "store": "프리버드",
+     "url": "https://www.freebud.co.kr/products/21194",
+     "price_krw": 65000,
+     "pack_qty": 1,
+     "price_note": "무료배송, 상품페이지 '재고 2개' 표기",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "피스뮤직",
+     "url": "https://peacemusic.kr/product/%EB%A1%A4%EB%9E%9C%EB%93%9C-%EB%8C%90%ED%8D%BC-%ED%8E%98%EB%8B%AC-dp-10-roland-dp10/5060/",
+     "price_krw": 61000,
+     "pack_qty": 1,
+     "price_note": "최저가 확인분, 배송비 별도 여부는 페이지 확인 필요",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "11번가(본사 악기총판점)",
+     "url": "https://www.11st.co.kr/products/1404514299",
+     "price_krw": 75000,
+     "pack_qty": 1,
+     "price_note": "배송비 3,000원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/p-damper.jpg",
+   "image_source": "https://images.freebud.co.kr/shop/data/goods/1380184918536l0.jpg",
+   "alternatives": [
+    {
+     "name": "Roland DP-10 ×3 (소프트·소스테누토도 연속)",
+     "why": "세 페달 모두 동일 감촉·연속 소프트(CC67) 가능. 비용 약 3배",
+     "url": "https://www.freebud.co.kr/products/21194",
+     "price_krw": 65000
+    },
+    {
+     "name": "Kawai F-10H",
+     "why": "하프페달 지원이나 광학식 센서 — 전기 인터페이스 비공개라 Pico 직결 검증 안 됨(비추천)",
+     "url": "https://cosmosmusicmall.com/product/kawai-f-10h-%EA%B0%80%EC%99%80%EC%9D%B4-%EC%A0%95%ED%92%88-%ED%95%98%ED%94%84%EC%84%9C%EC%8A%A4%ED%85%8C%EC%9D%B8%ED%8E%98%EB%8B%AC-es%EC%8B%9C%EB%A6%AC%EC%A6%88-%EC%A0%84%EC%9A%A9/1411/",
+     "price_krw": 80000
+    },
+    {
+     "name": "Korg DS-1H",
+     "why": "Tip–Sleeve 가변저항(뗌 ≈30 kΩ → 밟음 ≈3 kΩ), Ring 미사용 → 풀업 방식으로 읽힘. 프리버드는 품절(72,300원 표기)",
+     "url": "https://www.freebud.co.kr/products/36312",
+     "price_krw": null
+    }
+   ],
+   "optional": false,
+   "notes_ko": "권장 댐퍼. 반드시 옆면 스위치를 'Continuous'로. Pico 회로에서 가장 선형적인 신호(와이퍼 직접 출력)를 준다. Kawai F-1r은 하프페달 정보가 불명확해 제외."
+  },
+  {
+   "id": "p-damper-alt",
+   "category": "pedal",
+   "name_ko": "야마하 FC3A 하프댐퍼 페달",
+   "model": "Yamaha FC3A",
+   "role_ko": "댐퍼 대안(연속) — 배선 변환 필요",
+   "qty_suggest": 1,
+   "specs": {
+    "센서": "10 kΩ 선형 포텐셔미터",
+    "플러그": "6.35 mm TRS, 케이블 약 1.8 m(6 ft)",
+    "핀 배치": "포트 양끝=Tip·Sleeve(T–S 항상 ≈10 kΩ), 와이퍼=Ring",
+    "실측(포럼)": "뗌: R(Ring–Tip)≈0, R(Ring–Sleeve)≈10 kΩ / 밟음: R(Ring–Tip)≈10 kΩ, R(Ring–Sleeve)≈0",
+    "Roland식 회로에서": "읽히기는 하나(≈3.0 V→≈1.0 V) 행정 앞 절반 변화가 ≈0.15 V뿐 → 하프페달 해상도 나쁨",
+    "Pico 직결 조건": "Tip=3.3 V, Ring=ADC, Sleeve=GND 로 바꾸면 이상적 분압기(Tip↔Ring 스왑 어댑터/DPDT 스위치 또는 내부 3선 재납땜)",
+    "하프페달": "야마하 공식몰: 하프 페달링 기능 호환"
+   },
+   "offers": [
+    {
+     "store": "야마하뮤직 온라인몰(공식)",
+     "url": "https://shop.kr.yamaha.com/fc3a.html",
+     "price_krw": 82000,
+     "pack_qty": 1,
+     "price_note": "무료배송(회원)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "프리버드",
+     "url": "https://www.freebud.co.kr/products/41346",
+     "price_krw": 82000,
+     "pack_qty": 1,
+     "price_note": "정가 98,400원 → 82,000원, 무료배송",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/p-damper-alt.jpg",
+   "image_source": "https://images.freebud.co.kr/shop/data/goods/1518486741943l0.jpg",
+   "alternatives": [
+    {
+     "name": "Casio SP-34 (3페달)",
+     "why": "오른쪽 페달 하프댐퍼지만 6핀 mini-DIN 전용 커넥터 — 포럼 역공학 핀맵 필요, 국내가 미확인",
+     "url": "https://www.casiomusicforums.com/index.php?%2Ftopic%2F17230-sp-34-functionality%2F=",
+     "price_krw": null
+    }
+   ],
+   "optional": true,
+   "notes_ko": "DP-10보다 17,000원 비싸고 배선 스왑이 필요하므로 대안으로만. 각 잭에 Tip/Ring 스왑 DPDT 슬라이드 스위치를 달면 Roland·Yamaha 두 방식 모두 수용 가능."
+  },
+  {
+   "id": "p-switch",
+   "category": "pedal",
+   "name_ko": "커즈와일 KP-2 피아노형 스위치 페달",
+   "model": "Kurzweil KP-2",
+   "role_ko": "소프트(CC67)·소스테누토(CC66) 온/오프 페달",
+   "qty_suggest": 2,
+   "specs": {
+    "형태": "피아노 페달형(롱 프레임) 풋스위치",
+    "플러그": "6.35 mm 모노(TS) — Kurzweil 공식",
+    "극성": "Normally-closed(뗌=닫힘, 밟음=열림) — Kurzweil 공식, 극성 전환 스위치 없음",
+    "Pico 판독": "Tip 22 kΩ 풀업: 뗌 0 V / 밟음 3.3 V (TS 플러그가 Ring을 GND로 단락 → 1 kΩ로 전류 3.3 mA 제한)",
+    "구조": "금속 바디 + 두꺼운 우레탄 범퍼, 넓은 고무 바닥",
+    "호환": "Yamaha·Roland·Kawai·Korg 등(판매처 설명); Kurzweil 건반은 전원 투입 시 극성 자동감지"
+   },
+   "offers": [
+    {
+     "store": "프리버드",
+     "url": "https://www.freebud.co.kr/products/21192",
+     "price_krw": 38000,
+     "pack_qty": 1,
+     "price_note": "정가 49,000원 → 38,000원, 무료배송",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/p-switch.jpg",
+   "image_source": "https://images.freebud.co.kr/shop/data/goods/1380184171000_l.jpg",
+   "alternatives": [
+    {
+     "name": "Yamaha FC4A",
+     "why": "피아노형·NC 극성, 공식몰/프리버드 55,000원 — 감촉 동급, 1.7만원 비쌈",
+     "url": "https://shop.kr.yamaha.com/fc4a.html",
+     "price_krw": 55000
+    },
+    {
+     "name": "Roland DP-2",
+     "why": "가장 저렴(NC, 박스형) — 피아노 느낌은 떨어짐",
+     "url": "https://www.11st.co.kr/products/1761097997",
+     "price_krw": 22900
+    },
+    {
+     "name": "Roland DP-2 (코스모스악기)",
+     "why": "공식 대리점 판매가",
+     "url": "https://cosmosmusicmall.com/product/rolandboss-dp-2-%EB%A1%9C%EB%9E%9C%EB%93%9C-%EC%A0%95%ED%92%88-%EC%84%9C%EC%8A%A4%ED%85%8C%EC%9D%B8%ED%8E%98%EB%8B%AC/391/",
+     "price_krw": 32000
+    },
+    {
+     "name": "M-Audio SP-2",
+     "why": "피아노형+극성 스위치지만 확인한 국내 판매처(나인오디오 30,000원, 뮤플) 모두 품절/재고없음",
+     "url": "https://nineaudio.co.kr/product/m-audio-sp-2-sustain-pedal/957/",
+     "price_krw": null
+    }
+   ],
+   "optional": false,
+   "notes_ko": "Korg·Casio 계열(NO) 페달을 섞어도 부팅 시 극성 자동인식으로 처리됨."
+  },
+  {
+   "id": "p-triple",
+   "category": "pedal",
+   "name_ko": "롤랜드 RPU-3 3페달 유닛",
+   "model": "Roland RPU-3",
+   "role_ko": "댐퍼·소프트·소스테누토 일체형(3개 모두 연속)",
+   "qty_suggest": 1,
+   "specs": {
+    "구성": "3페달(그랜드 배치), 3개 모두 연속 검출 대응(공식 설명서)",
+    "센서": "3.2 kΩ 선형(자동차 TPS류 90° 회전 포트) ×3 — 포럼 분해 실측",
+    "플러그": "6.35 mm TRS ×3 (L/C/R 표기)",
+    "핀 배치": "Ring=+, Sleeve=GND, Tip=와이퍼 (EV-5와 동일; Arduino 3페달 제작기에서 동일 결선 사용)",
+    "극성": "뗌=저임피던스(Tip≈GND) → 밟을수록 증가",
+    "케이블": "2.2 m",
+    "크기/무게": "314×240×85 mm, 2.5 kg",
+    "주의(설명서)": "익스프레션 전용 잭 사용 금지, 플러그 금속부 단락 주의, 세 플러그 모두 연결"
+   },
+   "offers": [
+    {
+     "store": "코스모스악기",
+     "url": "https://cosmosmusicmall.com/product/roland-rpu-3-%EB%A1%9C%EB%9E%9C%EB%93%9C-%EC%A0%95%ED%92%88-3%ED%8E%98%EB%8B%AC-%EB%B3%B4%EB%93%9C/124/",
+     "price_krw": 230000,
+     "pack_qty": 1,
+     "price_note": "5만원 이상 무료배송",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/p-triple.jpg",
+   "image_source": "https://cosmosmusicmall.com/web/product/big/202104/6aa89b41c0af3d82d013f3e947c89de7.jpg",
+   "alternatives": [
+    {
+     "name": "Studiologic VFP3 (3페달)",
+     "why": "프리버드 품절(80,000원 표기) — 구성/센서 사양 미확인",
+     "url": "https://www.freebud.co.kr/products/57916",
+     "price_krw": null
+    },
+    {
+     "name": "Yamaha LP-1 / P-145 전용 3페달",
+     "why": "전용 커넥터(1선) — 범용 TRS 아님, 비추천",
+     "url": "https://www.freebud.co.kr/products/56550",
+     "price_krw": 110000
+    }
+   ],
+   "optional": true,
+   "notes_ko": "Pico 회로는 DP-10과 완전히 동일(3채널). 포트가 3.2 kΩ라 22 kΩ 풀업에 의한 휨이 DP-10보다 작다."
+  },
+  {
+   "id": "p-trsjack",
+   "category": "connector",
+   "name_ko": "6.35 mm 스테레오 잭 (팁 스위치, M12 너트)",
+   "model": "GEC PJ-603A",
+   "role_ko": "페달 입력 잭 ×3",
+   "qty_suggest": 3,
+   "specs": {
+    "규격": "6.35 mm 스테레오(TRS) 암",
+    "핀": "1=Sleeve, 2=Ring, 3=Tip, 4=Tip 노멀(플러그 없을 때 Tip과 접촉)",
+    "장착": "M12×1 나사 부싱(패널 12 mm 구멍+너트), PCB 핀",
+    "정격": "DC 30 V 1.0 A",
+    "접촉저항/절연": "≤0.03 Ω / ≥100 MΩ",
+    "수명": "5,000회 삽발, 삽입력 5–30 N",
+    "외형": "25 mm 길이, 14×12.8 mm 본체"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1067737",
+     "price_krw": 374,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(340원+VAT), 배송비 2,700원(66,000원 이상 무료)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "엘레파츠(BSUN PJ-603A)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=67839",
+     "price_krw": 352,
+     "pack_qty": 1,
+     "price_note": "320원 VAT별도 → VAT포함 352원, MOQ 5개",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/p-trsjack.jpg",
+   "image_source": "https://img2.eleparts.co.kr/goods/thumb/6/0040130050070000492.jpg (엘레파츠 동일 규격품 BSUN 사진)",
+   "alternatives": [
+    {
+     "name": "Neutrik NMJ6HCD2",
+     "why": "스위칭 접점·크롬 노즈, 1만회 이상, 너트 포함 — 내구성 우선 시(해외 재고, 6.5일)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=657930",
+     "price_krw": 3330
+    },
+    {
+     "name": "GEC PJ-604A",
+     "why": "절연 SPDT 스위치 2조 포함 — 플러그 감지를 완전 분리하고 싶을 때",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1067739",
+     "price_krw": 660
+    }
+   ],
+   "optional": false,
+   "notes_ko": "Tip 노멀(4번 핀)을 Pico GPIO(100 kΩ 풀다운)에 연결하면 플러그 유무 감지 가능. PJ-612A는 국내 판매처 미확인. 아이씨뱅큐는 검색 페이지가 스크립트 렌더링이라 가격 확인 못함."
+  },
+  {
+   "id": "p-hpjack",
+   "category": "connector",
+   "name_ko": "6.35 mm 헤드폰 잭 (절연 스위치 2조)",
+   "model": "GEC PJ-604A",
+   "role_ko": "헤드폰 출력 + 삽입 감지(스피커 뮤트)",
+   "qty_suggest": 1,
+   "specs": {
+    "규격": "6.35 mm 스테레오(TRS) 암",
+    "핀": "1=Sleeve, 2·3=Ring·Tip, 4-5-6 및 7-8-9 = 플러그 삽입 시 전환되는 절연 SPDT 스위치 2조(데이터시트 회로도; 실물은 멀티미터로 확인)",
+    "장착": "M12×1 나사 부싱, 9핀 PCB",
+    "정격": "DC 30 V 1.0 A",
+    "수명": "5,000회",
+    "외형": "18×11 mm 본체, 길이 24 mm + 부싱 11.5 mm"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1067739",
+     "price_krw": 660,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(600원+VAT), 10개 이상 627원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "엘레파츠(BSUN PJ-604A)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=67838",
+     "price_krw": 473,
+     "pack_qty": 1,
+     "price_note": "430원 VAT별도 → VAT포함 473원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/p-hpjack.jpg",
+   "image_source": "https://img2.eleparts.co.kr/goods/thumb/6/0040130050070000482.jpg (엘레파츠 동일 규격품 BSUN 사진)",
+   "alternatives": [
+    {
+     "name": "Neutrik NMJ6HCD2",
+     "why": "스위칭 접점 3개(0.5 A@50 V), 크롬 페룰, 수평 PCB, 패널 두께 <4.7 mm, 1만회 이상 — 고급형",
+     "url": "https://www.eleparts.co.kr/goods/view?no=657930",
+     "price_krw": 3330
+    }
+   ],
+   "optional": false,
+   "notes_ko": "절연 스위치 한 조는 GPIO 감지용, 다른 한 조는 앰프 SD/MUTE를 하드웨어로 직접 끊는 용도로 쓸 수 있음. Neutrik NRJ6HF·Cliff S2BBBPC·Switchcraft 112BX는 국내 3사에서 확인하지 못함."
+  },
+  {
+   "id": "p-hpjack35",
+   "category": "connector",
+   "name_ko": "3.5 mm 스테레오 헤드폰 잭 (노멀 접점)",
+   "model": "PJ-307 (LF-307)",
+   "role_ko": "보조 3.5 mm 헤드폰 출력 + 삽입 감지",
+   "qty_suggest": 1,
+   "specs": {
+    "규격": "3.5 mm 스테레오 암, PCB 실장(나사 부싱 없음)",
+    "핀": "1=Sleeve, 2/3·4/5 = 각 채널 접점과 NC 노멀",
+    "외형": "12×11 mm, 높이 약 8 mm, 노즈 ⌀6",
+    "정격": "DC 30 V 0.5 A(동급 제품 기준)",
+    "비고": "PJ-320은 3핀(스위치 없음)이라 감지 불가 — 비추천",
+    "PCB 풋프린트": "5핀(1.5×0.8 슬롯) + ⌀1.2 고정 핀, 핀 간 5 mm(데이터시트)",
+    "재질": "ABS/나일론 베이스, 황동·인청동 접점"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=2673",
+     "price_krw": 165,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(150원+VAT)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "엘레파츠(BSUN PJ-307)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=67823",
+     "price_krw": 154,
+     "pack_qty": 1,
+     "price_note": "140원 VAT별도 → VAT포함 154원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/p-hpjack35.jpg",
+   "image_source": "https://img2.eleparts.co.kr/goods/thumb/6/0040130050070000332.jpg (엘레파츠 동일 규격품 BSUN 사진)",
+   "alternatives": [
+    {
+     "name": "PJ-320 (3.5파이)",
+     "why": "싸지만 스위치 접점 없음(3핀)",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1067709",
+     "price_krw": 176
+    }
+   ],
+   "optional": true,
+   "notes_ko": "패널 고정 너트가 없으므로 전면 PCB에 납땜하고 패널에 ⌀6 mm 구멍."
+  },
+  {
+   "id": "c-encoder",
+   "category": "control",
+   "name_ko": "로터리 엔코더 20펄스 D컷 (푸시 스위치 내장)",
+   "model": "SMG 로터리엔코더 20펄스 D컷 샤프트 15mm (EC11 호환형)",
+   "role_ko": "마스터 볼륨(소프트웨어) + 누름=뮤트/메뉴",
+   "qty_suggest": 1,
+   "specs": {
+    "분해능": "20 ppr",
+    "스위치": "택트(푸시) 스위치 내장",
+    "샤프트": "D컷, 길이 15 mm",
+    "실장": "스루홀",
+    "전원(판매처 표기)": "5 V 10 mA — 기계식 접점이므로 3.3 V 풀업으로 사용 가능",
+    "배선": "A·B·SW → Pico GPIO(내부 풀업), C·SW 공통 → GND, 1–10 nF 디바운스 권장"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=12501931",
+     "price_krw": 1650,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(1,500원+VAT)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/c-encoder.jpg",
+   "image_source": "https://img2.eleparts.co.kr/goods/external/1814/18149708_d09592260725025334view.jpg (유사 EC11형 — SR Passives EC11E20-20P20C-SW 사진)",
+   "alternatives": [
+    {
+     "name": "로터리엔코더 20펄스 기어(세레이션) 샤프트 15mm",
+     "why": "세레이션 축 노브용",
+     "url": "https://www.devicemart.co.kr/goods/view?no=12501930",
+     "price_krw": 1320
+    },
+    {
+     "name": "DFRobot EC11 로터리 엔코더 모듈 [SEN0235]",
+     "why": "브레이크아웃 기판 일체형(배선 간편)",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1346011",
+     "price_krw": 5170
+    },
+    {
+     "name": "SR Passives EC11E20-20P20C-SW (엘레파츠, 해외 6.5일)",
+     "why": "사양 명확: 20펄스/20디텐트, 푸시 버튼, ⌀6 D축 20 mm, 나사 7 mm, 5 V 5 mA, 수명 3만 회 — 2,418.18원 VAT별도",
+     "url": "https://www.eleparts.co.kr/goods/view?no=18149708",
+     "price_krw": 2660
+    },
+    {
+     "name": "ALPS EC11E15244G1 (엘레파츠, 해외)",
+     "why": "정품 ALPS EC11(15펄스/30디텐트, 스위치) — 5,027.27원 VAT별도",
+     "url": "https://www.eleparts.co.kr/goods/view?no=18149707",
+     "price_krw": 5530
+    }
+   ],
+   "optional": false,
+   "notes_ko": "권장. Pico의 외부 ADC(GP26–28)는 페달 3개가 모두 쓰므로 볼륨은 가변저항 대신 엔코더(디지털)로."
+  },
+  {
+   "id": "c-volpot",
+   "category": "control",
+   "name_ko": "10 kΩ 포텐셔미터 24 mm (대안)",
+   "model": "KP RV2402-20SL 10KΩ",
+   "role_ko": "아날로그 볼륨 대안 — 외장 ADC가 있을 때만",
+   "qty_suggest": 1,
+   "specs": {
+    "저항": "10 kΩ",
+    "바디": "24 mm 로터리",
+    "샤프트": "⌀6 mm 세레이션, 길이 20 mm",
+    "테이퍼": "판매 페이지에 표기 없음 — 'B'(선형) 각인 확인 필요",
+    "필요 조건": "Pico ADC 3채널이 페달로 소진 → ADS1115 등 외장 ADC 또는 앰프의 하드웨어 볼륨 입력",
+    "결선": "양끝 3V3/GND, 와이퍼 → ADC(소비 0.33 mA)",
+    "장착": "나사 부싱 + 너트 패널 장착(RV24 계열)"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=5319",
+     "price_krw": 1199,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(1,090원+VAT)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/c-volpot.jpg",
+   "image_source": "https://img2.eleparts.co.kr/goods/thumb/1/0020040410080010152.jpg (유사 24 mm 포트 — 알파전자 VR24MSS103 사진)",
+   "alternatives": [
+    {
+     "name": "KP RV1601-15SP 10KΩ (16 mm, ⌀6 세레이션 15 mm, 너트 포함)",
+     "why": "더 작고 저렴",
+     "url": "https://www.devicemart.co.kr/goods/view?no=5333",
+     "price_krw": 627
+    },
+    {
+     "name": "Tocos RV24YN-20S 10KΩ (서멧, 슬롯 축 20 mm)",
+     "why": "고급 서멧 포트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=21386",
+     "price_krw": 5060
+    },
+    {
+     "name": "알파전자 VR24MSS103 10 kΩ 24 mm (엘레파츠, 국산)",
+     "why": "0.5 W, 회전각 300°, 수명 15,000회 — 630원 VAT별도(테이퍼 표기 없음)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=10276",
+     "price_krw": 693
+    },
+    {
+     "name": "Alpha RV24AF-10-20K-B10K-LA (엘레파츠, 해외)",
+     "why": "'B10K' 선형 테이퍼가 품번에 명시, 널링 축 20 mm — 3,236.36원 VAT별도",
+     "url": "https://www.eleparts.co.kr/goods/view?no=17543324",
+     "price_krw": 3560
+    }
+   ],
+   "optional": true,
+   "notes_ko": "기본 설계에서는 불필요(엔코더 권장)."
+  },
+  {
+   "id": "c-knob",
+   "category": "control",
+   "name_ko": "알루미늄 노브 20 mm 블랙(삼각 마크)",
+   "model": "SZH-TH0029",
+   "role_ko": "볼륨 엔코더 노브",
+   "qty_suggest": 1,
+   "specs": {
+    "크기": "⌀20 × 15.5 mm",
+    "재질": "알루미늄",
+    "표시": "삼각형 마크",
+    "용도": "포텐셔미터/엔코더 ⌀6 mm 축용(판매처 분류 '포텐셔미터용')",
+    "색상 옵션": "블랙(TH0029) / 실버(TH0030, 2,640원)",
+    "보어/고정(동일 규격 엘레파츠품 기준)": "⌀6 mm 축, 측면 M3 육각 세트스크루(렌치 미포함)",
+    "가공": "CNC 알루미늄 합금, 아노다이징"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1385999",
+     "price_krw": 2750,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(2,500원+VAT)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "디바이스마트(실버 TH0030)",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1386000",
+     "price_krw": 2640,
+     "pack_qty": 1,
+     "price_note": "VAT 포함",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "엘레파츠(ShenzenAV 알루미늄 노브 소형 블랙 ⌀20×15.5)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=9332948",
+     "price_krw": 2860,
+     "pack_qty": 1,
+     "price_note": "2,600원 VAT별도 → 2,860원; 동일 규격 추정(판매 코드 다름)",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/c-knob.jpg",
+   "image_source": "https://img2.eleparts.co.kr/goods/1/2020/04/9332948_tmp_94ac70dc9b52d36aa0c809f7519e1e366729view.jpg (동일 규격 엘레파츠품 사진)",
+   "alternatives": [
+    {
+     "name": "알루미늄 노브 17 mm 블랙 [SZH-TH0028]",
+     "why": "작은 패널용",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1385998",
+     "price_krw": 2750
+    },
+    {
+     "name": "Adafruit 20 mm 가공 알루미늄 노브 [ada-5528]",
+     "why": "고급 가공품",
+     "url": "https://www.devicemart.co.kr/goods/view?no=14595741",
+     "price_krw": 5940
+    }
+   ],
+   "optional": false,
+   "notes_ko": "세트스크루형이라 D컷 엔코더 축·세레이션 포트 축 모두 고정 가능."
+  },
+  {
+   "id": "c-powerbtn",
+   "category": "control",
+   "name_ko": "16 mm LED 메탈 푸시 스위치(전원 마크, 모멘터리)",
+   "model": "HX16-A4 (숏타입)",
+   "role_ko": "Pi 5 전원 버튼(J2) + 상태 LED 링",
+   "qty_suggest": 1,
+   "specs": {
+    "동작": "모멘터리(자복귀) 1NO",
+    "정격": "3 A / 36 VDC",
+    "장착 구멍": "⌀16 mm (M16×1), 헤드 ⌀18–19 mm",
+    "길이": "숏타입(본체 약 16.5 mm + 단자 4 mm)",
+    "LED": "전원 기호 발광, 컬러 선택(파랑/빨강/녹색) — 내장 저항 여부 불명(24 V 인가 시 LED 소손 문의 있음)",
+    "보호/수명": "IP65, 약 3–4 N, 기계 수명 50만 회(데이터시트)",
+    "재질": "크롬 도금 금속"
+   },
+   "offers": [
+    {
+     "store": "디바이스마트(파랑)",
+     "url": "https://www.devicemart.co.kr/goods/view?no=12229955",
+     "price_krw": 4950,
+     "pack_qty": 1,
+     "price_note": "VAT 포함(4,500원+VAT)",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "디바이스마트(빨강)",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1325032",
+     "price_krw": 4950,
+     "pack_qty": 1,
+     "price_note": "VAT 포함",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/c-powerbtn.png",
+   "image_source": "https://www.devicemart.co.kr/goods/download?id=1325032&rank=1 (제조사 데이터시트 도면 발췌 — 제품 사진 아님)",
+   "alternatives": [
+    {
+     "name": "메탈 푸쉬 스위치 플랫형 [HX16-B1]",
+     "why": "LED 없는 저가형",
+     "url": "https://www.devicemart.co.kr/goods/view?no=1325010",
+     "price_krw": 2970
+    }
+   ],
+   "optional": false,
+   "notes_ko": "Pi 5 공식 문서: J2(RTC 배터리 커넥터와 보드 가장자리 사이)에 NO 모멘터리 스위치를 연결하면 온보드 전원 버튼과 같은 동작. 꺼진 상태에서 누르면 부팅, 데스크톱에선 짧게 눌러 종료 메뉴(두 번 빠르게=종료), Lite에선 1회로 종료, 길게 누르면 강제 종료. J2는 미실장 스루홀 2개 → 2핀 헤더 납땜 후 배선. LED는 3.3 V GPIO + 직렬 100–220 Ω로 먼저 시험."
+  },
+  {
+   "id": "c-led",
+   "category": "control",
+   "name_ko": "3 mm 배선 LED(녹색, 3–12 V 구동) + 3 mm 메탈 홀더",
+   "model": "CHANZON 3mm 배선 LED Green + CHANZON 3mm LED Metal Holder",
+   "role_ko": "상태 LED(예: Pico 동작/MIDI 활동)",
+   "qty_suggest": 1,
+   "specs": {
+    "LED": "3 mm 녹색, 리드선 20 cm 배선형",
+    "구동": "판매처 표기 3–12 V(저항 내장형으로 보임) — 3.3 V GPIO에서 밝기 확인",
+    "홀더": "3 mm 금속 홀더",
+    "대안 회로": "일반 3 mm LED면 GPIO→220 Ω→LED→GND (약 5 mA)",
+    "배선": "리드선 20 cm 일체형 — 커넥터/점퍼로 바로 연결",
+    "표시 예": "점등=Pico 정상·MIDI 연결, 깜빡임=페달 캘리브레이션 모드"
+   },
+   "offers": [
+    {
+     "store": "엘레파츠(LED)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=16079144",
+     "price_krw": 297,
+     "pack_qty": 1,
+     "price_note": "270원 VAT별도 → VAT포함 297원",
+     "checked": "2026-09-24"
+    },
+    {
+     "store": "엘레파츠(메탈 홀더)",
+     "url": "https://www.eleparts.co.kr/goods/view?no=16091358",
+     "price_krw": 176,
+     "pack_qty": 1,
+     "price_note": "160원 VAT별도 → VAT포함 176원",
+     "checked": "2026-09-24"
+    }
+   ],
+   "image_file": "img/c-led.png",
+   "image_source": "https://img2.eleparts.co.kr/goods/1/2024/09/16079144_2024090208313319.png",
+   "alternatives": [
+    {
+     "name": "HX16-A4 전원 버튼의 LED 링",
+     "why": "별도 LED 없이 버튼 LED를 상태 표시로 겸용",
+     "url": "https://www.devicemart.co.kr/goods/view?no=12229955",
+     "price_krw": 4950
+    }
+   ],
+   "optional": true,
+   "notes_ko": "합계에는 LED+홀더 1세트(473원)."
+  },
+  {
+   "id": "b-pedalboard",
+   "category": "pedal",
+   "name_ko": "페달 보드(자작)",
+   "model": "합판 보드 — 자재 목록",
+   "role_ko": "개별 페달 3개를 그랜드 배치로 고정(구성 A 전용)",
+   "qty_suggest": 1,
+   "specs": {
+    "판재": "자작/미송 합판 12–18 mm, 약 560×300 mm(DP-10 폭 68 mm + KP-2 2개 기준, 페달 간격은 실측 후 결정)",
+    "미끄럼 방지": "바닥 고무 시트 또는 고무발",
+    "고정": "페달을 둘러싸는 3D 프린트 PETG 포켓/클램프 또는 벨크로 + 케이블 타이",
+    "케이블": "3가닥을 묶어 본체 뒤 잭으로 — 뒤꿈치 쪽에 케이블 채널",
+    "마감": "오일/바니시"
+   },
+   "offers": [],
+   "image_file": null,
+   "image_source": null,
+   "alternatives": [],
+   "optional": true,
+   "notes_ko": "가격 조사 안 함(요청 범위 밖). RPU-3를 쓰면 불필요."
+  }
+ ],
+ "wiring_notes_ko": "■ 페달 잭 1개당 회로(PJ-603A 핀: 1=Sleeve, 2=Ring, 3=Tip, 4=Tip 노멀) — 3개 동일, ADC는 GP26/27/28\n  · Sleeve → Pico AGND\n  · Ring → 1 kΩ → 3V3(OUT). TS(모노) 플러그를 꽂으면 Ring이 GND로 단락되므로 1 kΩ가 전류를 3.3 mA로 제한(Roland RPU-3 설명서도 '플러그 금속부 단락 주의' 명시).\n  · Tip → 22 kΩ 풀업 → 3V3,  Tip → 1 kΩ 직렬 → ADC 핀, ADC 핀–AGND 100 nF (RC 필터/ESD 완화). 입력은 최대 3.3 V라 클램프 불필요(원하면 BAT54S 추가).\n  · Tip 노멀(4번) → GPIO + 100 kΩ 풀다운: 플러그 없음=Tip 스프링(22 kΩ 풀업)과 접촉해 HIGH(≈2.7 V), 플러그 삽입=분리되어 LOW → 연결 감지. (내부 풀다운 50–80 kΩ만 쓰면 ≈2.3 V로 VIH 여유가 작음)\n  · (선택) Ring → 10 kΩ → GPIO: 부팅 시 LOW면 TS 스위치 페달, HIGH면 TRS 연속 페달(표시용).\n■ 페달별 기대 전압(위 회로, 3.3 V)\n  · Roland DP-10(Continuous): Tip=와이퍼, Ring=+, Sleeve=GND(EV-5 동일). 뗌 ≈0 V → 밟음 ≈3.0 V(10 kΩ 포트 + Ring 직렬 1 kΩ). 22 kΩ 풀업 때문에 중간에서 약 +0.2 V 휨 → 보정 LUT로 선형화.\n  · Roland RPU-3(3.2 kΩ 포트 ×3): 같은 배선, 뗌 ≈0 V → 밟음 ≈2.5 V(1 kΩ 직렬 때문에 상한이 낮음, 휨은 더 작음). 페달당 약 0.8 mA.\n  · 스위치 페달(TS): NC형(Roland DP-2, Yamaha FC4A, Kurzweil KP-2) 뗌 0 V / 밟음 3.3 V. NO형(Korg·Casio 계열) 뗌 3.3 V / 밟음 0 V.\n  · Korg DS-1H(Tip–Sleeve 가변저항 30 k→3 k, Ring 미사용): 뗌 ≈1.9 V → 밟음 ≈0.4 V.\n  · Yamaha FC3A(와이퍼=Ring): 이 회로에선 뗌 ≈3.0 V → 밟음 ≈1.0 V지만 앞 절반 행정에서 ≈0.15 V만 변함 → Tip↔Ring 스왑(DPDT 스위치/어댑터/내부 재납땜) 후 사용.\n■ 부팅 시 극성·범위 자동 인식(페달을 밟지 않은 채 전원 ON — Kurzweil 등 상용 건반과 같은 방식)\n  1) 플러그 감지 GPIO로 미연결 채널 제외. 2) 16회 평균으로 V_rest 측정: V_rest < 1.65 V면 '밟으면 증가', 아니면 '밟으면 감소'.\n  3) 스팬은 작은 기본값(≈1.2 V — DS-1H처럼 스팬이 좁은 페달도 127에 도달하도록)에서 시작해 사용 중 관측된 최대 편차로 자동 확장, 엔코더를 누른 채 부팅하면 '끝까지 밟기' 캘리브레이션 후 플래시에 저장.\n  4) 값 = clamp((|V−V_rest| − 데드밴드)/(스팬 − 2·데드밴드))×127. CC64는 연속 전송(값이 바뀔 때만, ±1 히스테리시스), CC67은 페달이 연속이면 연속·스위치면 0/127, CC66은 50%±10% 히스테리시스로 0/127.\n  5) RP2040 ADC는 유효 약 9비트·특정 코드 DNL 튐 → 오버샘플링+IIR 후 7비트면 충분.\n■ ADC 채널 한계: Pico/Pico 2의 외부 ADC는 GP26–28 3개(GP29는 보드에서 VSYS/3 측정) → 페달이 모두 사용. 볼륨은 EC11 엔코더(A/B/SW → GPIO 내부 풀업, 공통 → GND)로, 가변저항은 ADS1115 등 외장 ADC가 있을 때만.\n■ 전원 버튼: HX16-A4의 NO 접점 2단자 → Pi 5 J2 두 패드(미실장 스루홀, RTC 배터리 커넥터와 보드 가장자리 사이). 공식 문서상 온보드 버튼과 동일 동작(꺼진 상태 누름=부팅, 짧게=종료, 길게=강제 종료). 버튼 LED는 GPIO + 100–220 Ω(내장 저항 불명이므로 벤치 테스트 먼저).\n■ 헤드폰 감지: PJ-604A의 절연 SPDT(4-5-6) 공통=GND, 삽입 시 닫히는 쪽 → Pi/Pico GPIO(풀업): LOW=헤드폰 꽂힘 → 스피커 앰프 MUTE/SD. 다른 한 조(7-8-9)는 앰프 SD를 하드웨어로 직접 제어 가능. 3.5 mm PJ-307은 절연 스위치가 없어 노멀 핀을 100 kΩ 풀업 GPIO로 읽고 헤드폰 라인에 DC 경로(10–47 kΩ 블리더)를 둬서 미삽입=LOW/삽입=HIGH로 판정.",
+ "sources_ko": [
+  "DP-10 설명서: https://static.roland.com/assets/media/pdf/DP-10_eng01_W.pdf",
+  "RPU-3 설명서: https://static.roland.com/assets/media/pdf/RPU-3_je02_W.pdf",
+  "DP-10/RPU-3 배선·분해: https://www.vguitarforums.com/smf/index.php?topic=23478.0 (p.1–2)",
+  "RPU-3 Arduino 3페달: http://manoreken2.blogspot.com/2015/05/building-midi-3pedal-for-pianoteq-5.html",
+  "FC3/DS-1H 실측: https://yamahasynth.com/community/montage-series-synthesizers/korg-ds1h-half-damper-pedal-ng/",
+  "FC3 저항/극성: https://forum.modartt.com/viewtopic.php?id=355",
+  "KP-2 사양: https://kurzweil.com/kp-2/",
+  "브랜드별 극성: https://www.soundhouse.co.jp/en/howto/keyboard/pedal/",
+  "Pi 5 전원 버튼/J2: https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-button",
+  "Casio SP-34 mini-DIN: https://www.casiomusicforums.com/index.php?%2Ftopic%2F17230-sp-34-functionality%2F=",
+  "Neutrik NMJ6HCD2: https://www.neutrik.com/en/product/nmj6hcd2",
+  "PJ-603A/604A/307 데이터시트: 디바이스마트 관련자료(goods/download?id=1067737 / 1067739 / 2673)"
+ ]
+}

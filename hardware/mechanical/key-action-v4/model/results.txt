@@ -1,0 +1,652 @@
+
+====================================================================================================
+A. PLAN LAYOUT - lever centres, fins, hub collars, pad bars (module x, 0 = C left boundary)
+====================================================================================================
+white head width 22.04, head gap 1.46; white-white tail gap 1.64; black base 10.4, top 9.5
+key head x           tail x           tail c   lever c  offset   beam/block x       collars L/R   
+C   0.73-22.77       0.820-14.361     7.431    8.525    +1.09    4.53-12.53         0.00 / 0.95
+C#  16.02-26.41      16.015-26.415    21.215   21.215   +0.00    17.21-25.21        0.95 / 1.02
+D   24.23-46.27      28.069-42.431    35.250   34.035   -1.22    30.03-38.03        1.02 / 0.00
+D#  44.08-54.48      44.085-54.485    49.285   49.285   +0.00    45.28-53.28        0.00 / 1.50
+E   47.73-69.77      56.139-69.680    63.070   63.070   +0.00    59.07-67.07        1.50 / 0.93
+F   71.23-93.27      71.320-83.719    77.359   75.693   -1.67    71.69-79.69        0.93 / 0.00
+F#  85.37-95.77      85.373-95.773    90.573   90.943   +0.37    86.94-94.94        0.00 / 1.16
+G   94.73-116.77     97.427-110.646   104.037  104.037  +0.00    100.04-108.04      1.16 / 0.76
+G#  112.30-122.70    112.300-122.700  117.500  116.300  -1.20    112.30-120.30      0.76 / 0.00
+A   118.23-140.27    124.354-137.573  130.964  131.550  +0.59    127.55-135.55      0.00 / 0.76
+A#  139.23-149.63    139.227-149.627  144.427  143.800  -0.63    139.80-147.80      0.76 / 0.76
+B   141.73-163.77    151.281-163.680  157.641  155.975  -1.67    151.97-159.97      0.76 / 0.00
+fins: x0.20-1.80, x40.76-42.56, x82.42-84.22, x123.03-124.83, x162.70-164.30 (end fins 1.6, interior 1.8: D|D#, F|F#, G#|A)
+lever-rod spans between fins: 40.7, 41.7, 40.6, 39.6 (max 41.7)
+gaps along the rod: 1.43, 2.09, 2.22, 1.43, 1.43, 3.19, 2.02, 1.43, 1.43, 2.49, 1.66, 1.43, 1.43, 1.65, 1.57, 1.43
+r3 C-rings -> hub collars: every lever-lever ring (>= 1.50 + axial play share) split in half onto the two hubs; lever-fin rings = fin bosses (one-sided at the ends) 0.00/1.37, 1.37/1.37, 1.37/1.37, 1.37/1.37, 1.37/0.00
+largest lever offset: 1.67 mm from the v3 sensor centre, 1.83 mm from the actual tail centre (beam and balance block follow the lever, inside the tail)
+pad bars (one per fin bay, 3 pads each): x3.10-39.46, x43.86-81.12, x85.52-121.73, x126.12-161.40
+
+====================================================================================================
+B. CAPSTANS AND STATICS (DW target white 52.0 g at y13, black 51.0 g at front + 10; friction at every contact; torsion assist spring k_t 8.44 N mm/rad, free angle -28.45 deg)
+====================================================================================================
+per-key capstan solve: C 188.34, C# 180.31, D 188.36, D# 180.31, E 188.34, F 188.33, F# 180.31, G 188.34, G# 180.31, A 188.34, A# 180.31, B 188.32
+common capstan y: white 188.34, black 180.31 (M3x6 ISO 7380 button head, crown z31.0)
+C   key PETG 21.81 g  BW 47.42 DW 51.99 UW 42.85 fric 4.57 m_eff 55.2
+C#  key PETG 16.78 g  BW 45.91 DW 51.01 UW 40.80 fric 5.11 m_eff 46.5
+D   key PETG 22.14 g  BW 47.35 DW 51.92 UW 42.78 fric 4.57 m_eff 55.2
+D#  key PETG 16.78 g  BW 45.91 DW 51.01 UW 40.80 fric 5.11 m_eff 46.5
+E   key PETG 21.80 g  BW 47.41 DW 51.98 UW 42.84 fric 4.57 m_eff 55.2
+F   key PETG 21.32 g  BW 47.50 DW 52.07 UW 42.93 fric 4.57 m_eff 55.1
+F#  key PETG 16.76 g  BW 45.89 DW 51.00 UW 40.79 fric 5.11 m_eff 46.5
+G   key PETG 21.67 g  BW 47.44 DW 52.01 UW 42.87 fric 4.57 m_eff 55.2
+G#  key PETG 16.78 g  BW 45.91 DW 51.01 UW 40.80 fric 5.11 m_eff 46.5
+A   key PETG 21.68 g  BW 47.44 DW 52.01 UW 42.88 fric 4.57 m_eff 55.2
+A#  key PETG 16.78 g  BW 45.91 DW 51.01 UW 40.80 fric 5.11 m_eff 46.5
+B   key PETG 21.35 g  BW 47.51 DW 52.08 UW 42.95 fric 4.57 m_eff 55.1
+white (D): key 23.41 g (PETG 22.14), lever 56.95 g (steel 53.69, carrier 2.84); I_key 143540, I_lever 75529 g mm2
+   BW 47.35 DW 51.92 UW 42.78 friction 4.57 = key rod 0.88 + lever rod 1.20 + capstan 0.57 + guide 1.93; m_eff 55.2 (key 8.8 + lever 46.5); capstan N 1.504
+   spring torque rest 4.19 / bottom 6.03 N mm; the spring gives 11.2 g of the 51.9 g DW (without it DW 40.7)
+   friction x2: DW 56.49 UW 38.21; stroke -> DW/UW (friction, capstan part, spring N mm): 0.00: 51.9/42.8 (4.6, 0.6, 4.19); 0.25: 53.5/41.7 (5.9, 1.8, 4.66); 0.50: 54.4/39.9 (7.2, 3.2, 5.13); 0.75: 54.5/37.6 (8.5, 4.4, 5.59); 1.00: 54.0/34.7 (9.7, 5.7, 6.03)
+   friction x2 along the stroke DW/UW: 0.00: 56.5/38.2; 0.25: 59.4/35.8; 0.50: 61.6/32.7; 0.75: 63.0/29.1; 1.00: 63.7/25.0
+black (C#): key 18.04 g (PETG 16.78), lever 56.95 g (steel 53.69, carrier 2.84); I_key 45650, I_lever 75529 g mm2
+   BW 45.91 DW 51.01 UW 40.80 friction 5.11 = key rod 1.08 + lever rod 0.48 + capstan 2.06 + guide 1.48; m_eff 46.5 (key 7.9 + lever 38.6); capstan N 0.977
+   spring torque rest 4.19 / bottom 5.69 N mm; the spring gives 10.4 g of the 51.0 g DW (without it DW 40.6)
+   friction x2: DW 56.12 UW 35.69; stroke -> DW/UW (friction, capstan part, spring N mm): 0.00: 51.0/40.8 (5.1, 2.1, 4.19); 0.25: 51.2/38.7 (6.2, 3.2, 4.58); 0.50: 50.9/36.3 (7.3, 4.3, 4.96); 0.75: 50.0/33.5 (8.3, 5.3, 5.33); 1.00: 48.7/30.5 (9.1, 6.3, 5.69)
+   friction x2 along the stroke DW/UW: 0.00: 56.1/35.7; 0.25: 57.4/32.5; 0.50: 58.2/29.0; 0.75: 58.3/25.2; 1.00: 57.9/21.3
+white lip y0: DW 47.12 (band at y13 like v3); y90: DW 131.00 -> front/back ratio 2.52
+torsion spring C-UA90R5-3-0.5 (SUS304-WPB d0.50 ID 5.0, 3.25 body turns, E 186000 from the catalogue rates): coil body rate 10.16 N mm/rad, with the cut legs 22.1 / 8.0 (N_e 3.914) k_t 8.437 N mm/rad = 0.1473 /deg (catalogue 0.1368 /deg with legs 25 / 25, this model 0.1368), C 11.0, K_i 1.073; free angle -28.45 deg (same b = 0 torque 4.189 N mm as D05); rest b 0.02 wound 28.5 deg 4.19 N mm 366 MPa, bottom b 12.64 wound 41.1 deg 6.03 N mm 527 MPa, service b 16.00 wound 44.4 deg 6.52 N mm 570 MPa, hand 25 deg b 25.00 wound 53.4 deg 7.83 N mm 685 MPa (Su 2150: 32 %); ID at the bottom 4.83 / hand lift 4.78 on the D4 rod; catalogue max-use 55 deg = 7.52 N mm (658 MPa): hand lift 53.4 deg, 104 % of that torque; one cut spring 0.134 g (wire 86.3 mm)
+r4.5 fix 2 coil float on the D4 rod (ID 5.0): short leg / notch -> rest / bottom torque, unwind, coil shift (dir), rod force rest / bottom, hysteresis mu N r at the bottom -> D DW / DW lip y0 / UW, C# DW / UW; friction x2 D DW, C# UW at the bottom:
+   r4.5 as built (short leg 2.5 on one face), mu 0.0          T 2.18 / 4.15 N mm, unwind 13.4 deg, shift 0.47 (54 deg), N 1.18 / 2.22 N, H 0.00 N mm -> D 46.5 / 42.2 / 38.0, C# 46.0 / 36.5; x2: D DW 50.8, C# UW bottom 18.9
+   notch rotated -12.9 deg (short leg 2.5), mu 0.0            T 4.19 / 6.16 N mm, unwind 13.4 deg, shift 0.44 (41 deg), N 2.23 / 3.23 N, H 0.00 N mm -> D 51.9 / 47.1 / 42.8, C# 51.0 / 40.8; x2: D DW 56.5, C# UW bottom 21.5
+   notch rotated -12.9 deg (short leg 2.5), mu 0.1            T 4.19 / 6.16 N mm, unwind 13.4 deg, shift 0.44 (41 deg), N 2.23 / 3.23 N, H 0.65 N mm -> D 53.0 / 48.1 / 41.6, C# 52.0 / 39.8; x2: D DW 58.8, C# UW bottom 19.0
+   notch rotated -12.9 deg (short leg 2.5), mu 0.3            T 4.19 / 6.16 N mm, unwind 13.4 deg, shift 0.44 (41 deg), N 2.23 / 3.23 N, H 1.94 N mm -> D 55.3 / 50.2 / 39.4, C# 54.1 / 37.7; x2: D DW 63.3, C# UW bottom 14.2
+   short leg 5.0 + notch rotated -5.6 deg, mu 0.0             T 4.19 / 6.13 N mm, unwind 5.8 deg, shift 0.44 (55 deg), N 0.76 / 1.07 N, H 0.00 N mm -> D 51.9 / 47.1 / 42.8, C# 51.0 / 40.8; x2: D DW 56.5, C# UW bottom 21.4
+   short leg 5.0 + notch rotated -5.6 deg, mu 0.1             T 4.19 / 6.13 N mm, unwind 5.8 deg, shift 0.44 (55 deg), N 0.76 / 1.07 N, H 0.21 N mm -> D 52.3 / 47.5 / 42.4, C# 51.4 / 40.4; x2: D DW 57.3, C# UW bottom 20.6
+   short leg 5.0 + notch rotated -5.6 deg, mu 0.3             T 4.19 / 6.13 N mm, unwind 5.8 deg, shift 0.44 (55 deg), N 0.76 / 1.07 N, H 0.64 N mm -> D 53.1 / 48.2 / 41.6, C# 52.1 / 39.7; x2: D DW 58.8, C# UW bottom 19.0
+   r4.5 fix 2 captured short leg 8.0 (groove 0.70)            T 4.19 / 6.03 N mm, unwind 0.0 deg, shift 0.00 (0 deg), N 0.00 / 0.00 N, H 0.00 N mm -> D 51.9 / 47.1 / 42.8, C# 51.0 / 40.8; x2: D DW 56.5, C# UW bottom 21.3
+r4.5 fix 2 captured short leg: groove 0.70 (play 0.20), leg cocked 1.99 deg in it, contacts arm 5.75 -> couple 0.73 N at rest; coil off the rod 0.435 (rest) / 0.379 (bottom) / 0.326 (hand 25 deg); groove printed dp (both faces dp/2): -0.20 -> -1.99 deg, rest 4.48 N mm, rod gap 0.26, -0.15 -> -1.49 deg, rest 4.41 N mm, rod gap 0.30, -0.10 -> -1.00 deg, rest 4.34 N mm, rod gap 0.35, +0.00 -> 0.00 deg, rest 4.19 N mm, rod gap 0.43, +0.10 -> 1.00 deg, rest 4.04 N mm, rod gap 0.35, +0.20 -> 2.00 deg, rest 3.89 N mm, rod gap 0.26, +0.30 -> 3.00 deg, rest 3.75 N mm, rod gap 0.17
+r4.5 fix 2 captured leg, long-leg reaction along the groove: b 0.0: 0.145 N of 0.199 toward the blind end -> friction needed 0.100 (2 contacts x 0.73 N); slid 0.3 onto the blind end: rod gap 0.435 -> 0.135; b 12.6: 0.161 N of 0.287 toward the blind end -> friction needed 0.077 (2 contacts x 1.05 N); slid 0.3 onto the blind end: rod gap 0.379 -> 0.079; b 25.0: 0.139 N of 0.373 toward the blind end -> friction needed 0.051 (2 contacts x 1.36 N); slid 0.3 onto the blind end: rod gap 0.326 -> 0.026
+
+====================================================================================================
+C. HEIGHTS - truly settled 1 N bottom, pad faces, pad bar seat, top plate, curtain, shelf, keeper
+====================================================================================================
+cap top at the bottom: rigid 63.77 (white) / 61.83 (black); rigid - capstan-felt set 63.19 / 61.56; TRULY settled 4-DOF state held at 1 N (no pad): 62.73 / 61.30, |w| at the end 4.6e-09 rad/ms
+   (key front held at 1 N: white z33.46, black z45.94; lever angle held 11.36 / 9.63 deg)
+white pad: face parallel to the steel top at 11.36 deg, -0.40 along its normal (lever first when negative); face at y170 z58.64 / y182 z56.23; first contact at 10.45 deg; damping c 16.39 for e 0.060
+black pad: face parallel to the steel top at 9.63 deg, -0.45 along its normal (lever first when negative); face at y170 z57.45 / y182 z55.41; first contact at 8.58 deg; damping c 16.55 for e 0.060
+pad 6T foam + 1T felt (E 1.0 MPa: 0.36 MPa at 25 %), 6 wide, y170-182; wedges white 0.35-2.76, black 1.50-3.54; pad bar 1.5: seat (bar top) z67.35, front part in the plate channel z67.35-68.85
+top plate: top z72.85 (= seat + 5.5), front channel underside z68.85, pad zone z67.35, behind the pads z60.85 (thickness 12.0); nothing above it (r3 cover z78.0, heads z80.7; v3 z59)
+lever extremes from all dynamic cases: max b 12.91 / 10.85 deg (sweep 'ff' +0.25), return overshoot -2.85 / -1.81, settled rest -1.09 / -0.55; key max 4.32 / 6.66 deg, max rise above rest -0.42 / -0.32 deg
+real bottom (1 N, pad present): white lever 10.75 deg, key front z33.50 (+0.04 above its felt); black 8.97 deg, z46.21 (+0.27)
+balance rail: lowered to z19.0 under the blocks (lowest block corner over all poses z20.38), rod cradles between the blocks (x clearance 1.48), saddle lip z20.5
+rear shelf top z20.054; keeper felt underside z26.60 (crossbar + 1.5); curtain strip bottom z45.5 (white) / z57.5 (black notches)
+
+====================================================================================================
+D. SENSOR (magnet D5x2 at y67)
+====================================================================================================
+white: rest gap 10.82, bottom 5.60, max over-travel (2.5 m/s abuse) 5.24, travel 5.22, y shift 0.04; 50% re-arm = 2.61 mm rise
+black: rest gap 13.35, bottom 5.32, max over-travel (2.5 m/s abuse) 4.76, travel 8.03, y shift 0.22; 50% re-arm = 4.02 mm rise
+
+====================================================================================================
+E. DYNAMICS - 4-DOF (free key on the cloth-lined snap notch with lip friction + keeper + lever with torsion spring), flat foam pad on the steel top in series with its seat (1490 N/mm = weakest key of the plate FE), Flores contact law, dt 4 us
+====================================================================================================
+load envelopes (R4 brief): PLAY = key-FRONT speed 1.5 m/s at the felt contact (Askenfelt & Jansson 1991: forte key speed seldom above 1 m/s; Goebl et al. 2005: loudest struck attacks 6.4-7.8 m/s hammer = about 1.3-1.6 m/s at the key with the ~5x ratio); ABUSE = 2.5 m/s single, 2.0 m/s 6-key chord
+  contact front    K 30 N/mm^1.5, design (effective) e 0.20 -> Flores input 0.245 -> simulated drop restitution 0.200
+  contact front_b  K 20 N/mm^1.5, design (effective) e 0.20 -> Flores input 0.245 -> simulated drop restitution 0.200
+  contact rest     K 30 N/mm^1.5, design (effective) e 0.35 -> Flores input 0.388 -> simulated drop restitution 0.350
+  contact cap      K 20 N/mm^1.5, design (effective) e 0.35 -> Flores input 0.388 -> simulated drop restitution 0.350
+  contact keeper   K 20 N/mm^1.5, design (effective) e 0.35 -> Flores input 0.388 -> simulated drop restitution 0.350
+  contact cloth    K 120 N/mm^1.5, design (effective) e 0.30 -> Flores input 0.341 -> simulated drop restitution 0.300
+white settled rest: key front z43.497, keeper gap 1.509, lever -1.090 deg (capstan felt set), rod penetration 0.031; finger-start speed for PLAY 0.933, ABUSE 1.920, 1.0 m/s 0.149, 2.0 m/s 1.483 m/s
+   PLAY 1.5 m/s front, let go             front 1.50 m/s | lift 0.136 (lip pull 0.90 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 12.6 N | keeper gap 0.57 | rod 27 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   PLAY 1.5 m/s front, hold 0.45 N        front 1.50 m/s | lift 0.000 (lip pull 0.87 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 8.4 N | keeper gap 1.51 | rod 27 N | ghost: rise 2.18, magnet 17 %, desc 0.00 m/s
+   PLAY 1.5 m/s front, hold 0.50 N        front 1.50 m/s | lift 0.000 (lip pull 0.87 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 8.4 N | keeper gap 1.51 | rod 27 N | ghost: rise 1.57, magnet 11 %, desc 0.02 m/s
+   PLAY 1.5 m/s front, hold 0.55 N        front 1.50 m/s | lift 0.000 (lip pull 0.87 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 8.4 N | keeper gap 1.51 | rod 27 N | ghost: rise 1.28, magnet 8 %, desc 0.03 m/s
+   PLAY 1.5 m/s front, hold 0.60 N        front 1.50 m/s | lift 0.000 (lip pull 0.87 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 8.4 N | keeper gap 1.51 | rod 27 N | ghost: rise 1.10, magnet 6 %, desc 0.02 m/s
+   PLAY 1.5 m/s front, hold 0.80 N        front 1.50 m/s | lift 0.000 (lip pull 0.86 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 8.4 N | keeper gap 1.51 | rod 27 N | ghost: rise 0.74, magnet 2 %, desc 0.00 m/s
+   PLAY 1.5 m/s front, hold 1.00 N        front 1.50 m/s | lift 0.000 (lip pull 0.85 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 8.4 N | keeper gap 1.51 | rod 27 N | ghost: rise 0.56, magnet 0 %, desc 0.00 m/s
+   PLAY 1.5 m/s front, hold 2.00 N        front 1.50 m/s | lift 0.000 (lip pull 0.80 N) | pad 89 N (comp 0.76, seat 0.06) | front felt 38 N | capstan 8.4 N | keeper gap 1.51 | rod 27 N | ghost: rise 0.37, magnet 0 %, desc 0.00 m/s
+   ABUSE 2.5 m/s front, let go            front 2.50 m/s | lift 0.135 (lip pull 2.06 N) | pad 145 N (comp 1.25, seat 0.10) | front felt 69 N | capstan 14.2 N | keeper gap 0.53 | rod 44 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   ABUSE 2.5 m/s front, hold 0.45 N       front 2.50 m/s | lift 0.038 (lip pull 2.06 N) | pad 145 N (comp 1.25, seat 0.10) | front felt 69 N | capstan 8.7 N | keeper gap 1.51 | rod 44 N | ghost: rise 6.37, magnet 57 %, desc 0.00 m/s
+   ABUSE 2.5 m/s front, hold 0.60 N       front 2.50 m/s | lift 0.038 (lip pull 2.06 N) | pad 145 N (comp 1.25, seat 0.10) | front felt 69 N | capstan 8.7 N | keeper gap 1.51 | rod 44 N | ghost: rise 2.15, magnet 14 %, desc 0.06 m/s
+   ABUSE 2.5 m/s front, hold 1.00 N       front 2.50 m/s | lift 0.039 (lip pull 2.06 N) | pad 145 N (comp 1.25, seat 0.10) | front felt 69 N | capstan 8.7 N | keeper gap 1.51 | rod 44 N | ghost: rise 0.88, magnet 2 %, desc 0.00 m/s
+   ABUSE 2.5 m/s front, hold 2.00 N       front 2.50 m/s | lift 0.048 (lip pull 2.06 N) | pad 145 N (comp 1.25, seat 0.10) | front felt 69 N | capstan 8.7 N | keeper gap 1.51 | rod 44 N | ghost: rise 0.63, magnet 0 %, desc 0.00 m/s
+   push 0.8 N                             front 0.07 m/s | lift 0.096 (lip pull 0.00 N) | pad 15 N (comp 0.24, seat 0.01) | front felt 0 N | capstan 13.0 N | keeper gap 0.70 | rod 10 N | ghost: rise 0.21, magnet 1 %, desc 0.00 m/s
+   push 1.5 N                             front 0.62 m/s | lift 0.091 (lip pull 0.00 N) | pad 27 N (comp 0.35, seat 0.02) | front felt 13 N | capstan 13.1 N | keeper gap 0.72 | rod 10 N | ghost: rise 0.17, magnet 0 %, desc 0.00 m/s
+   push 3 N                               front 0.99 m/s | lift 0.091 (lip pull 0.00 N) | pad 53 N (comp 0.52, seat 0.04) | front felt 24 N | capstan 13.2 N | keeper gap 0.72 | rod 16 N | ghost: rise 0.20, magnet 0 %, desc 0.00 m/s
+   push 6 N                               front 1.46 m/s | lift 0.162 (lip pull 1.57 N) | pad 86 N (comp 0.74, seat 0.06) | front felt 40 N | capstan 16.3 N | keeper gap 0.52 | rod 26 N | ghost: rise 0.23, magnet 0 %, desc 0.00 m/s
+   1.0 m/s front, let go                  front 1.00 m/s | lift 0.112 (lip pull 0.36 N) | pad 55 N (comp 0.53, seat 0.04) | front felt 24 N | capstan 13.6 N | keeper gap 0.64 | rod 17 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   2.0 m/s front, let go                  front 2.00 m/s | lift 0.159 (lip pull 1.67 N) | pad 119 N (comp 1.03, seat 0.08) | front felt 53 N | capstan 12.3 N | keeper gap 0.49 | rod 36 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   ff_h1.00                               front 1.00 m/s | lift 0.000 (lip pull 0.00 N) | pad 55 N (comp 0.53, seat 0.04) | front felt 24 N | capstan 8.1 N | keeper gap 1.51 | rod 17 N | ghost: rise 0.38, magnet 0 %, desc 0.00 m/s
+   chord20_h1.00                          front 2.00 m/s | lift 0.016 (lip pull 1.67 N) | pad 119 N (comp 1.03, seat 0.08) | front felt 53 N | capstan 8.6 N | keeper gap 1.51 | rod 36 N | ghost: rise 0.76, magnet 1 %, desc 0.00 m/s
+   1.5 m/s at the FINGER start, let go    front 2.02 m/s | lift 0.160 (lip pull 1.67 N) | pad 120 N (comp 1.04, seat 0.08) | front felt 53 N | capstan 12.3 N | keeper gap 0.48 | rod 36 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   1.5 m/s finger, hold 0.45 N            front 2.02 m/s | lift 0.016 (lip pull 1.67 N) | pad 120 N (comp 1.04, seat 0.08) | front felt 53 N | capstan 8.6 N | keeper gap 1.51 | rod 36 N | ghost: rise 3.92, magnet 33 %, desc 0.00 m/s
+   1.5 m/s finger, hold 1 N               front 2.02 m/s | lift 0.017 (lip pull 1.67 N) | pad 120 N (comp 1.04, seat 0.08) | front felt 53 N | capstan 8.6 N | keeper gap 1.51 | rod 36 N | ghost: rise 0.75, magnet 1 %, desc 0.00 m/s
+   release from a settled 1 N hold        front 0.36 m/s | lift 0.099 (lip pull 0.00 N) | pad 20 N (comp 0.28, seat 0.01) | front felt 5 N | capstan 13.1 N | keeper gap 0.69 | rod 10 N | ghost: rise 0.14, magnet 0 %, desc 0.00 m/s
+   repetition (re-arm at 50 %, released from a 1.2 s settled 1 N hold): t50 30.8 ms (t40 26.9), full 45.4 ms -> 1/(2 t50) 16.3 Hz | friction x2 t50 32.9 / full 48.5 ms -> 15.2 Hz
+black settled rest: key front z55.445, keeper gap 1.561, lever -0.552 deg (capstan felt set), rod penetration 0.027; finger-start speed for PLAY 0.768, ABUSE 1.755, 1.0 m/s 0.050, 2.0 m/s 1.336 m/s
+   PLAY 1.5 m/s front, let go             front 1.50 m/s | lift 0.068 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 12.7 N | keeper gap 1.19 | rod 24 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   PLAY 1.5 m/s front, hold 0.45 N        front 1.50 m/s | lift 0.027 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 7.9 N | keeper gap 1.56 | rod 24 N | ghost: rise 1.73, magnet 13 %, desc 0.01 m/s
+   PLAY 1.5 m/s front, hold 0.50 N        front 1.50 m/s | lift 0.027 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 7.9 N | keeper gap 1.56 | rod 24 N | ghost: rise 1.42, magnet 10 %, desc 0.02 m/s
+   PLAY 1.5 m/s front, hold 0.55 N        front 1.50 m/s | lift 0.027 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 7.9 N | keeper gap 1.56 | rod 24 N | ghost: rise 1.27, magnet 8 %, desc 0.02 m/s
+   PLAY 1.5 m/s front, hold 0.60 N        front 1.50 m/s | lift 0.027 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 7.9 N | keeper gap 1.56 | rod 24 N | ghost: rise 1.16, magnet 7 %, desc 0.01 m/s
+   PLAY 1.5 m/s front, hold 0.80 N        front 1.50 m/s | lift 0.027 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 7.9 N | keeper gap 1.56 | rod 24 N | ghost: rise 0.88, magnet 4 %, desc 0.00 m/s
+   PLAY 1.5 m/s front, hold 1.00 N        front 1.50 m/s | lift 0.027 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 7.9 N | keeper gap 1.56 | rod 24 N | ghost: rise 0.69, magnet 2 %, desc 0.00 m/s
+   PLAY 1.5 m/s front, hold 2.00 N        front 1.50 m/s | lift 0.027 (lip pull 1.64 N) | pad 76 N (comp 0.65, seat 0.05) | front felt 28 N | capstan 7.9 N | keeper gap 1.56 | rod 24 N | ghost: rise 0.40, magnet 0 %, desc 0.00 m/s
+   ABUSE 2.5 m/s front, let go            front 2.50 m/s | lift 0.177 (lip pull 3.21 N) | pad 128 N (comp 1.07, seat 0.09) | front felt 50 N | capstan 11.4 N | keeper gap 1.14 | rod 40 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   ABUSE 2.5 m/s front, hold 0.45 N       front 2.50 m/s | lift 0.174 (lip pull 3.21 N) | pad 128 N (comp 1.07, seat 0.09) | front felt 50 N | capstan 8.6 N | keeper gap 1.56 | rod 40 N | ghost: rise 3.44, magnet 29 %, desc 0.02 m/s
+   ABUSE 2.5 m/s front, hold 0.60 N       front 2.50 m/s | lift 0.173 (lip pull 3.21 N) | pad 128 N (comp 1.07, seat 0.09) | front felt 50 N | capstan 8.6 N | keeper gap 1.56 | rod 40 N | ghost: rise 1.75, magnet 11 %, desc 0.04 m/s
+   ABUSE 2.5 m/s front, hold 1.00 N       front 2.50 m/s | lift 0.172 (lip pull 3.21 N) | pad 128 N (comp 1.07, seat 0.09) | front felt 50 N | capstan 8.6 N | keeper gap 1.56 | rod 40 N | ghost: rise 1.07, magnet 4 %, desc 0.00 m/s
+   ABUSE 2.5 m/s front, hold 2.00 N       front 2.50 m/s | lift 0.169 (lip pull 3.21 N) | pad 128 N (comp 1.07, seat 0.09) | front felt 50 N | capstan 8.6 N | keeper gap 1.56 | rod 40 N | ghost: rise 0.63, magnet 0 %, desc 0.00 m/s
+   push 0.8 N                             front  -   m/s | lift 0.040 (lip pull 0.00 N) | pad 14 N (comp 0.25, seat 0.01) | front felt 0 N | capstan 12.6 N | keeper gap 1.26 | rod 8 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   push 1.5 N                             front 0.60 m/s | lift 0.047 (lip pull 0.00 N) | pad 28 N (comp 0.36, seat 0.02) | front felt 8 N | capstan 13.1 N | keeper gap 1.23 | rod 9 N | ghost: rise 0.17, magnet 0 %, desc 0.00 m/s
+   push 3 N                               front 1.10 m/s | lift 0.038 (lip pull 0.48 N) | pad 42 N (comp 0.51, seat 0.03) | front felt 20 N | capstan 13.1 N | keeper gap 1.25 | rod 13 N | ghost: rise 0.25, magnet 0 %, desc 0.00 m/s
+   push 6 N                               front 1.65 m/s | lift 0.053 (lip pull 3.07 N) | pad 84 N (comp 0.71, seat 0.06) | front felt 34 N | capstan 13.3 N | keeper gap 1.22 | rod 26 N | ghost: rise 0.28, magnet 0 %, desc 0.00 m/s
+   1.0 m/s front, let go                  front 1.11 m/s | lift 0.060 (lip pull 0.53 N) | pad 42 N (comp 0.51, seat 0.03) | front felt 20 N | capstan 13.6 N | keeper gap 1.20 | rod 13 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   2.0 m/s front, let go                  front 2.00 m/s | lift 0.098 (lip pull 2.26 N) | pad 107 N (comp 0.88, seat 0.07) | front felt 38 N | capstan 11.9 N | keeper gap 1.12 | rod 33 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   ff_h1.00                               front 1.11 m/s | lift 0.000 (lip pull 0.53 N) | pad 42 N (comp 0.51, seat 0.03) | front felt 20 N | capstan 5.9 N | keeper gap 1.56 | rod 13 N | ghost: rise 0.53, magnet 2 %, desc 0.00 m/s
+   chord20_h1.00                          front 2.00 m/s | lift 0.095 (lip pull 2.26 N) | pad 107 N (comp 0.88, seat 0.07) | front felt 38 N | capstan 7.6 N | keeper gap 1.56 | rod 33 N | ghost: rise 0.87, magnet 3 %, desc 0.00 m/s
+   1.5 m/s at the FINGER start, let go    front 2.18 m/s | lift 0.122 (lip pull 2.57 N) | pad 115 N (comp 0.95, seat 0.08) | front felt 42 N | capstan 11.6 N | keeper gap 1.17 | rod 36 N | ghost: rise 0.00, magnet 0 %, desc 0.00 m/s
+   1.5 m/s finger, hold 0.45 N            front 2.18 m/s | lift 0.121 (lip pull 2.57 N) | pad 115 N (comp 0.95, seat 0.08) | front felt 42 N | capstan 8.2 N | keeper gap 1.56 | rod 36 N | ghost: rise 2.88, magnet 24 %, desc 0.02 m/s
+   1.5 m/s finger, hold 1 N               front 2.18 m/s | lift 0.121 (lip pull 2.57 N) | pad 115 N (comp 0.95, seat 0.08) | front felt 42 N | capstan 8.2 N | keeper gap 1.56 | rod 36 N | ghost: rise 0.93, magnet 3 %, desc 0.00 m/s
+   release from a settled 1 N hold        front 0.13 m/s | lift 0.041 (lip pull 0.00 N) | pad 19 N (comp 0.30, seat 0.01) | front felt 0 N | capstan 12.7 N | keeper gap 1.26 | rod 8 N | ghost: rise 0.24, magnet 2 %, desc 0.00 m/s
+   repetition (re-arm at 50 %, released from a 1.2 s settled 1 N hold): t50 26.5 ms (t40 23.2), full 39.9 ms -> 1/(2 t50) 18.8 Hz | friction x2 t50 28.3 / full 42.4 ms -> 17.7 Hz
+
+====================================================================================================
+E1. SENSITIVITY - pad seat, contact-law floor, pad and felt materials, lip friction, doubled friction (PLAY 1.5 m/s front, ABUSE 2.5 m/s)
+====================================================================================================
+seat stiffest key                                          W: lift 0.139 keep 0.56 pad 90 N ghost 0.45/0.6 N 17/6 % (desc 0.02) | abuse lift 0.120 keep 0.58 pad 146 | rep 16.3 Hz || B: lift 0.061 keep 1.20 pad 77 N ghost 0.45/0.6 N 13/7 % (desc 0.01) | abuse lift 0.183 keep 1.12 pad 129 | rep 18.8 Hz
+v_floor 0.1                                                W: lift 0.189 keep 0.41 pad 91 N ghost 0.45/0.6 N 18/5 % (desc 0.01) | abuse lift 0.167 keep 0.46 pad 139 | rep 17.0 Hz || B: lift 0.121 keep 1.09 pad 75 N ghost 0.45/0.6 N 14/7 % (desc 0.02) | abuse lift 0.197 keep 0.93 pad 124 | rep 19.8 Hz
+pad e 0.07 (pass line)                                     W: lift 0.142 keep 0.55 pad 82 N ghost 0.45/0.6 N 22/7 % (desc 0.03) | abuse lift 0.138 keep 0.52 pad 134 | rep 16.3 Hz || B: lift 0.061 keep 1.20 pad 72 N ghost 0.45/0.6 N 15/8 % (desc 0.02) | abuse lift 0.239 keep 1.03 pad 119 | rep 18.9 Hz
+pad e 0.10                                                 W: lift 0.153 keep 0.50 pad 67 N ghost 0.45/0.6 N 47/14 % (desc 0.06) | abuse lift 0.168 keep 0.41 pad 112 | rep 16.6 Hz || B: lift 0.063 keep 1.22 pad 61 N ghost 0.45/0.6 N 25/12 % (desc 0.05) | abuse lift 0.333 keep 0.98 pad 99 | rep 19.3 Hz
+pad E 0.7 (softer foam)                                    W: lift 0.154 keep 0.51 pad 74 N ghost 0.45/0.6 N 17/5 % (desc 0.00) | abuse lift 0.170 keep 0.44 pad 121 | rep 16.2 Hz || B: lift 0.082 keep 1.17 pad 66 N ghost 0.45/0.6 N 12/7 % (desc 0.01) | abuse lift 0.310 keep 0.98 pad 106 | rep 18.7 Hz
+pad E 1.4 (firmer foam)                                    W: lift 0.114 keep 0.62 pad 104 N ghost 0.45/0.6 N 23/7 % (desc 0.03) | abuse lift 0.161 keep 0.45 pad 171 | rep 16.3 Hz || B: lift 0.050 keep 1.21 pad 83 N ghost 0.45/0.6 N 18/8 % (desc 0.02) | abuse lift 0.105 keep 1.12 pad 152 | rep 19.0 Hz
+front felt e 0.28                                          W: lift 0.141 keep 0.55 pad 89 N ghost 0.45/0.6 N 17/6 % (desc 0.02) | abuse lift 0.181 keep 0.40 pad 145 | rep 16.3 Hz || B: lift 0.056 keep 1.22 pad 77 N ghost 0.45/0.6 N 13/7 % (desc 0.01) | abuse lift 0.227 keep 0.98 pad 128 | rep 18.8 Hz
+pass lines together (pad e 0.07, E 0.7, front e 0.22)      W: lift 0.159 keep 0.50 pad 67 N ghost 0.45/0.6 N 25/7 % (desc 0.03) | abuse lift 0.176 keep 0.41 pad 112 | rep 16.3 Hz || B: lift 0.097 keep 1.13 pad 61 N ghost 0.45/0.6 N 14/7 % (desc 0.02) | abuse lift 0.349 keep 0.97 pad 98 | rep 18.8 Hz
+worst (pad e 0.10, E 0.7, front e 0.28, v_floor 0.1)       W: lift 0.204 keep 0.34 pad 55 N ghost 0.45/0.6 N 58/15 % (desc 0.06) | abuse lift 0.271 keep 0.08 pad 89 | rep 17.2 Hz || B: lift 0.186 keep 1.20 pad 49 N ghost 0.45/0.6 N 23/11 % (desc 0.05) | abuse lift 0.303 keep 0.83 pad 80 | rep 20.1 Hz
+lip friction 0.35                                          W: lift 0.136 keep 0.57 pad 89 N ghost 0.45/0.6 N 17/6 % (desc 0.02) | abuse lift 0.135 keep 0.53 pad 145 | rep 16.3 Hz || B: lift 0.068 keep 1.19 pad 76 N ghost 0.45/0.6 N 13/7 % (desc 0.01) | abuse lift 0.177 keep 1.14 pad 128 | rep 18.8 Hz
+pass lines + v_floor 0.1                                   W: lift 0.198 keep 0.37 pad 69 N ghost 0.45/0.6 N 25/7 % (desc 0.03) | abuse lift 0.131 keep 0.58 pad 108 | rep 17.0 Hz || B: lift 0.099 keep 1.13 pad 61 N ghost 0.45/0.6 N 15/7 % (desc 0.02) | abuse lift 0.298 keep 0.89 pad 96 | rep 19.7 Hz
+pad e 0.15                                                 W: lift 0.177 keep 0.40 pad 53 N ghost 0.45/0.6 N 98/31 % (desc 0.09) | abuse lift 0.207 keep 0.25 pad 92 | rep 16.8 Hz || B: lift 0.130 keep 1.12 pad 47 N ghost 0.45/0.6 N 52/20 % (desc 0.08) | abuse lift 0.398 keep 0.94 pad 80 | rep 19.8 Hz
+pad e 0.25                                                 W: lift 0.208 keep 0.24 pad 42 N ghost 0.45/0.6 N 100/91 % (desc 0.19) | abuse lift 0.314 keep -0.16 pad 77 | rep 17.0 Hz || B: lift 0.192 keep 1.09 pad 36 N ghost 0.45/0.6 N 100/49 % (desc 0.17) | abuse lift 0.400 keep 0.72 pad 64 | rep 20.3 Hz
+fallback 1: pad e 0.15, gap -0.60/-0.65, E 1.4             W: lift 0.116 keep 0.59 pad 73 N ghost 0.45/0.6 N 99/35 % (desc 0.10) | abuse lift 0.198 keep 0.28 pad 119 | rep 17.6 Hz || B: lift 0.043 keep 1.22 pad 64 N ghost 0.45/0.6 N 77/30 % (desc 0.09) | abuse lift 0.197 keep 1.08 pad 107 | rep 20.8 Hz
+friction x2                                                W: lift 0.100 keep 0.68 pad 89 N ghost 0.45/0.6 N 7/- % (desc 0.01) | abuse lift 0.131 keep 0.58 pad 143 | rep 15.2 Hz || B: lift 0.059 keep 1.22 pad 85 N ghost 0.45/0.6 N 8/- % (desc 0.00) | abuse lift 0.132 keep 1.20 pad 125 | rep 17.7 Hz
+rest felt landing (USB slot)                               W: lift 0.114 keep 0.41 pad 89 N ghost 0.45/0.6 N 17/6 % (desc 0.02) | abuse lift 0.113 keep 0.37 pad 145 | rep 16.3 Hz || B: lift 0.061 keep 1.11 pad 76 N ghost 0.45/0.6 N 13/7 % (desc 0.01) | abuse lift 0.177 keep 1.07 pad 128 | rep 18.8 Hz
+time-step check (white PLAY, hold 1 N): dt 4 us lift 0.000 pad 89.3 N magnet 0.2 % | dt 2 us lift 0.000 pad 89.3 N magnet 0.2 %
+
+====================================================================================================
+H0. TOP PLATE FE (grillage 1 mm, fins as line springs / the board fin F|F# as a deep beam, rear wall) - pad seats and chord seats
+====================================================================================================
+per-key pad-seat stiffness (100 N on one pad): C 1722, C# 1492, D 1966, D# 1956, E 1525, F 1873, F# 1891, G 1563, G# 2036, A 1985, A# 1527, B 1742 N/mm -> the dynamics use the weakest, 1490 N/mm
+   play           single pads 89 / 76 N (sum 89 N): plate 2.3 MPa (in layer), fin top 1.3 MPa (across layers), rear wall 0.9 N/mm, max seat deflection 0.06 mm, chord-equivalent seat 1492 N/mm (C#)
+   play           chord  pads 89 / 76 N (sum 510 N): plate 5.5 MPa (in layer), fin top 4.2 MPa (across layers), rear wall 3.5 N/mm, max seat deflection 0.17 mm, chord-equivalent seat 492 N/mm (C-C#-D-D#-E-F)
+   abuse_chord20  single pads 119 / 107 N (sum 119 N): plate 3.0 MPa (in layer), fin top 1.8 MPa (across layers), rear wall 1.2 N/mm, max seat deflection 0.08 mm, chord-equivalent seat 1492 N/mm (C#)
+   abuse_chord20  chord  pads 119 / 107 N (sum 690 N): plate 7.5 MPa (in layer), fin top 5.7 MPa (across layers), rear wall 4.8 N/mm, max seat deflection 0.23 mm, chord-equivalent seat 505 N/mm (C-C#-D-D#-E-F)
+   abuse          single pads 145 / 128 N (sum 145 N): plate 3.7 MPa (in layer), fin top 2.2 MPa (across layers), rear wall 1.5 N/mm, max seat deflection 0.10 mm, chord-equivalent seat 1492 N/mm (C#)
+   keel (y144.5-148.6 z3-19, t 1.6) play           single: shear 27.8 N -> 1.60 MPa, bending 3.35 MPa (in the layer plane; every note 12 / rare 25)
+   keel (y144.5-148.6 z3-19, t 1.6) play           chord : shear 108.6 N -> 6.25 MPa, bending 13.02 MPa (in the layer plane; every note 12 / rare 25)
+   keel (y144.5-148.6 z3-19, t 1.6) abuse_chord20  single: shear 37.0 N -> 2.13 MPa, bending 4.46 MPa (in the layer plane; every note 12 / rare 25)
+   keel (y144.5-148.6 z3-19, t 1.6) abuse_chord20  chord : shear 147.5 N -> 8.48 MPa, bending 17.68 MPa (in the layer plane; every note 12 / rare 25)
+   keel (y144.5-148.6 z3-19, t 1.6) abuse          single: shear 45.1 N -> 2.59 MPa, bending 5.44 MPa (in the layer plane; every note 12 / rare 25)
+r4.5 fix 2 keel root on the rail spring (fins: rail y132.3-144.5 z3-19.00 + floor strip, ribbon lane x59-82 not composite, supports x (1.0, 163.5), interior fin lines [41.7, 123.9]): kv 970 N/mm, kr 130174 N mm/rad, rear face 6.10 behind the twist axis -> 759 N/mm at the face; PLAY chord seat 491.6 N/mm (C-C#-D-D#-E-F; keel z19.3, F|F# fin front y148.6; rigid rail 494.7; keel to z18 as r4.4 447.5), keel root sinks 0.125 mm; first-module dead load 6 pads x 60 N on D-D#-E-F-F#-G: seats D 0.062, D# 0.097, E 0.121, F 0.110, F# 0.098, G 0.087 mm (E/F max 0.121, pass line 60 / 460 = 0.130)
+   r4.5 fix 2 keel variants (PLAY chord seat N/mm): first fix-2 pass keel z21 / fin front y152 470.3 (D#-E-F-F#-G-G#; clearance to key F: section G), keel z19.3 with the fin front still at y152 458.0 (D#-E-F-F#-G-G#), this design 491.6 (C-C#-D-D#-E-F; FE keel 5.0 long to the first plate node behind y148.6); rail support bounds for this design: clamped at the hatch edges 492.9, simply supported between the neighbouring fin lines only (no continuity, no EVA) 337.6 (D#-E-F-F#-G-G#) - dead-load E/F 0.164 mm; the model's case (continuous over the fin lines, no EVA) 491.6
+6-key PLAY chord (every seat at 492 N/mm) white: rel lift 0.118 keep 0.56 magnet 0 % desc 0.00; h0.45 lift 0.000 keep 1.51 magnet 99 % desc 0.03; h0.50 lift 0.000 keep 1.51 magnet 76 % desc 0.02; h0.60 lift 0.000 keep 1.51 magnet 35 % desc 0.10; h0.80 lift 0.000 keep 1.51 magnet 15 % desc 0.10; h1.00 lift 0.000 keep 1.51 magnet 7 % desc 0.07; h2.00 lift 0.000 keep 1.51 magnet 0 % desc 0.00
+6-key PLAY chord (every seat at 492 N/mm) black: rel lift 0.046 keep 1.21 magnet 0 % desc 0.00; h0.45 lift 0.029 keep 1.56 magnet 85 % desc 0.01; h0.50 lift 0.029 keep 1.56 magnet 49 % desc 0.06; h0.60 lift 0.029 keep 1.56 magnet 28 % desc 0.10; h0.80 lift 0.029 keep 1.56 magnet 14 % desc 0.10; h1.00 lift 0.029 keep 1.56 magnet 8 % desc 0.06; h2.00 lift 0.029 keep 1.56 magnet 1 % desc 0.00
+6-key ABUSE chord 2.0 m/s (every seat at 505 N/mm) white: rel lift 0.203 keep 0.27 magnet 0 % desc 0.00; h0.45 lift 0.014 keep 1.43 magnet 100 % desc 0.07; h1.00 lift 0.014 keep 1.51 magnet 15 % desc 0.13
+6-key ABUSE chord 2.0 m/s (every seat at 505 N/mm) black: rel lift 0.116 keep 1.15 magnet 0 % desc 0.00; h0.45 lift 0.116 keep 1.54 magnet 100 % desc 0.03; h1.00 lift 0.116 keep 1.56 magnet 12 % desc 0.12
+sweep 'ff' poses incl. the chord seats: lever 12.91 / 10.85 deg, key 4.32 / 6.66 deg
+
+====================================================================================================
+E3. r4.1 GRIDS - 6-key chord seat 492 N/mm (F|F# fin: through the stripboard slot, keel to the balance rail since r4.4 fix 2b) swept 1.0-1.5 m/s in 0.05 steps, ghost grid 0.5-1.5 m/s in 0.1 steps, single keys 0.5 / 1.0 m/s, end keys A0 / C8, paper-strip holds (680 cases, 313 s)
+====================================================================================================
+chord sweep white nom       max lift 0.135, min keeper 0.53 | 1.00:0.122 1.05:0.124 1.10:0.125 1.15:0.114 1.20:0.130 1.25:0.135 1.30:0.135 1.35:0.132 1.40:0.126 1.45:0.121 1.50:0.118
+chord sweep white passline  max lift 0.149, min keeper 0.51 | 1.00:0.112 1.05:0.122 1.10:0.127 1.15:0.123 1.20:0.102 1.25:0.108 1.30:0.124 1.35:0.132 1.40:0.138 1.45:0.144 1.50:0.149
+chord sweep white vf01      max lift 0.219, min keeper 0.26 | 1.00:0.190 1.05:0.193 1.10:0.195 1.15:0.197 1.20:0.201 1.25:0.204 1.30:0.207 1.35:0.209 1.40:0.211 1.45:0.215 1.50:0.219
+chord sweep white pass_vf01 max lift 0.202, min keeper 0.35 | 1.00:0.187 1.05:0.189 1.10:0.190 1.15:0.191 1.20:0.192 1.25:0.194 1.30:0.196 1.35:0.197 1.40:0.199 1.45:0.200 1.50:0.202
+chord sweep white worst     max lift 0.204, min keeper 0.34 | 1.00:0.194 1.05:0.195 1.10:0.194 1.15:0.198 1.20:0.199 1.25:0.201 1.30:0.202 1.35:0.203 1.40:0.204 1.45:0.204 1.50:0.203
+chord sweep black nom       max lift 0.062, min keeper 1.18 | 1.00:0.062 1.05:0.062 1.10:0.061 1.15:0.057 1.20:0.054 1.25:0.050 1.30:0.046 1.35:0.044 1.40:0.043 1.45:0.044 1.50:0.046
+chord sweep black passline  max lift 0.081, min keeper 1.15 | 1.00:0.061 1.05:0.060 1.10:0.061 1.15:0.062 1.20:0.072 1.25:0.079 1.30:0.081 1.35:0.079 1.40:0.075 1.45:0.069 1.50:0.075
+chord sweep black vf01      max lift 0.113, min keeper 1.10 | 1.00:0.111 1.05:0.113 1.10:0.113 1.15:0.109 1.20:0.111 1.25:0.111 1.30:0.111 1.35:0.108 1.40:0.107 1.45:0.107 1.50:0.108
+chord sweep black pass_vf01 max lift 0.129, min keeper 1.06 | 1.00:0.112 1.05:0.114 1.10:0.114 1.15:0.106 1.20:0.107 1.25:0.109 1.30:0.117 1.35:0.127 1.40:0.129 1.45:0.123 1.50:0.117
+chord sweep black worst     max lift 0.187, min keeper 1.06 | 1.00:0.108 1.05:0.117 1.10:0.124 1.15:0.130 1.20:0.130 1.25:0.125 1.30:0.119 1.35:0.135 1.40:0.152 1.45:0.169 1.50:0.187
+single grid white nom  : 0.5_rel lift 0.104 keep 0.67 magnet 0 % | 0.5_h0.45 lift 0.000 keep 1.51 magnet 5 % | 0.5_h0.50 lift 0.000 keep 1.51 magnet 4 % | 0.5_h0.60 lift 0.000 keep 1.51 magnet 2 % | 0.5_h1.00 lift 0.000 keep 1.51 magnet 0 % | 0.5_h2.00 lift 0.000 keep 1.51 magnet 0 % | 1.0_rel lift 0.096 keep 0.69 magnet 0 % | 1.0_h0.45 lift 0.000 keep 1.51 magnet 10 % | 1.0_h0.50 lift 0.000 keep 1.51 magnet 7 % | 1.0_h0.60 lift 0.000 keep 1.51 magnet 4 % | 1.0_h1.00 lift 0.000 keep 1.51 magnet 0 % | 1.0_h2.00 lift 0.000 keep 1.51 magnet 0 %
+single grid white worst: 0.5_rel lift 0.182 keep 0.45 magnet 0 % | 0.5_h0.45 lift 0.000 keep 1.51 magnet 8 % | 0.5_h0.50 lift 0.000 keep 1.51 magnet 5 % | 0.5_h0.60 lift 0.000 keep 1.51 magnet 2 % | 0.5_h1.00 lift 0.000 keep 1.51 magnet 0 % | 0.5_h2.00 lift 0.000 keep 1.51 magnet 0 % | 1.0_rel lift 0.194 keep 0.39 magnet 0 % | 1.0_h0.45 lift 0.057 keep 1.51 magnet 26 % | 1.0_h0.50 lift 0.056 keep 1.51 magnet 15 % | 1.0_h0.60 lift 0.055 keep 1.51 magnet 7 % | 1.0_h1.00 lift 0.051 keep 1.51 magnet 1 % | 1.0_h2.00 lift 0.044 keep 1.51 magnet 0 % | 1.5_rel lift 0.204 keep 0.34 magnet 0 % | 1.5_h0.45 lift 0.052 keep 1.51 magnet 58 % | 1.5_h0.50 lift 0.053 keep 1.51 magnet 31 % | 1.5_h0.60 lift 0.054 keep 1.51 magnet 15 % | 1.5_h1.00 lift 0.049 keep 1.51 magnet 1 % | 1.5_h2.00 lift 0.038 keep 1.51 magnet 0 %
+single grid black nom  : 0.5_rel lift 0.055 keep 1.22 magnet 0 % | 0.5_h0.45 lift 0.000 keep 1.56 magnet 8 % | 0.5_h0.50 lift 0.000 keep 1.56 magnet 7 % | 0.5_h0.60 lift 0.000 keep 1.56 magnet 5 % | 0.5_h1.00 lift 0.000 keep 1.56 magnet 1 % | 0.5_h2.00 lift 0.000 keep 1.56 magnet 0 % | 1.0_rel lift 0.052 keep 1.22 magnet 0 % | 1.0_h0.45 lift 0.020 keep 1.56 magnet 10 % | 1.0_h0.50 lift 0.020 keep 1.56 magnet 8 % | 1.0_h0.60 lift 0.020 keep 1.56 magnet 6 % | 1.0_h1.00 lift 0.020 keep 1.56 magnet 2 % | 1.0_h2.00 lift 0.019 keep 1.56 magnet 0 %
+single grid black worst: 0.5_rel lift 0.106 keep 1.13 magnet 0 % | 0.5_h0.45 lift 0.000 keep 1.56 magnet 8 % | 0.5_h0.50 lift 0.000 keep 1.56 magnet 7 % | 0.5_h0.60 lift 0.000 keep 1.56 magnet 5 % | 0.5_h1.00 lift 0.000 keep 1.56 magnet 0 % | 0.5_h2.00 lift 0.000 keep 1.56 magnet 0 % | 1.0_rel lift 0.109 keep 1.12 magnet 0 % | 1.0_h0.45 lift 0.071 keep 1.56 magnet 16 % | 1.0_h0.50 lift 0.071 keep 1.56 magnet 12 % | 1.0_h0.60 lift 0.071 keep 1.56 magnet 7 % | 1.0_h1.00 lift 0.071 keep 1.56 magnet 1 % | 1.0_h2.00 lift 0.070 keep 1.56 magnet 0 % | 1.5_rel lift 0.186 keep 1.20 magnet 0 % | 1.5_h0.45 lift 0.165 keep 1.56 magnet 23 % | 1.5_h0.50 lift 0.164 keep 1.56 magnet 18 % | 1.5_h0.60 lift 0.161 keep 1.56 magnet 11 % | 1.5_h1.00 lift 0.154 keep 1.56 magnet 2 % | 1.5_h2.00 lift 0.144 keep 1.56 magnet 0 %
+end key A0  nom   (seat 1675 N/mm): 1.5_rel lift 0.137 keep 0.57 pad 91 N magnet 0 % | 1.5_h0.45 lift 0.000 keep 1.51 pad 91 N magnet 17 % | 1.5_h1.00 lift 0.000 keep 1.51 pad 91 N magnet 0 % | 1.5_h2.00 lift 0.000 keep 1.51 pad 91 N magnet 0 % | 1.0_rel lift 0.099 keep 0.68 pad 65 N magnet 0 % | 1.0_h0.45 lift 0.001 keep 1.51 pad 65 N magnet 10 % | 0.5_rel lift 0.114 keep 0.65 pad 27 N magnet 0 % | 2.5_rel lift 0.129 keep 0.56 pad 146 N magnet 0 % | release 16.1 Hz (full 45.8 ms) | release_f2 15.0 Hz (full 49.0 ms)
+end key A0  worst (seat 1675 N/mm): 1.5_rel lift 0.202 keep 0.35 pad 56 N magnet 0 % | 1.5_h0.45 lift 0.055 keep 1.51 pad 56 N magnet 59 % | 1.5_h1.00 lift 0.054 keep 1.51 pad 56 N magnet 1 % | 1.5_h2.00 lift 0.042 keep 1.51 pad 56 N magnet 0 % | 1.0_rel lift 0.193 keep 0.40 pad 39 N magnet 0 % | 1.0_h0.45 lift 0.059 keep 1.51 pad 39 N magnet 26 % | 0.5_rel lift 0.183 keep 0.45 pad 15 N magnet 0 % | 2.5_rel lift 0.282 keep 0.04 pad 90 N magnet 0 % | release 17.0 Hz (full 44.4 ms) | release_f2 16.0 Hz (full 47.2 ms)
+end key C8  nom   (seat 2446 N/mm): 1.5_rel lift 0.140 keep 0.56 pad 93 N magnet 0 % | 1.5_h0.45 lift 0.000 keep 1.51 pad 93 N magnet 17 % | 1.5_h1.00 lift 0.000 keep 1.51 pad 93 N magnet 0 % | 1.5_h2.00 lift 0.000 keep 1.51 pad 93 N magnet 0 % | 1.0_rel lift 0.104 keep 0.67 pad 67 N magnet 0 % | 1.0_h0.45 lift 0.004 keep 1.51 pad 67 N magnet 10 % | 0.5_rel lift 0.119 keep 0.63 pad 27 N magnet 0 % | 2.5_rel lift 0.164 keep 0.46 pad 148 N magnet 0 % | release 16.0 Hz (full 46.0 ms) | release_f2 15.0 Hz (full 49.3 ms)
+end key C8  worst (seat 2446 N/mm): 1.5_rel lift 0.201 keep 0.35 pad 56 N magnet 0 % | 1.5_h0.45 lift 0.055 keep 1.51 pad 56 N magnet 60 % | 1.5_h1.00 lift 0.055 keep 1.51 pad 56 N magnet 1 % | 1.5_h2.00 lift 0.043 keep 1.51 pad 56 N magnet 0 % | 1.0_rel lift 0.194 keep 0.40 pad 40 N magnet 0 % | 1.0_h0.45 lift 0.059 keep 1.51 pad 40 N magnet 26 % | 0.5_rel lift 0.183 keep 0.45 pad 15 N magnet 0 % | 2.5_rel lift 0.297 keep -0.00 pad 91 N magnet 0 % | release 16.9 Hz (full 44.7 ms) | release_f2 15.9 Hz (full 47.5 ms)
+paper strip black gap -0.55: stop-floor gap to the free felt 0.6 N +0.759, 0.8 N +0.551, 1.0 N +0.379, 1.2 N +0.219, 1.5 N -0.001, 2.0 N -0.046, 3.0 N -0.101 -> a 0.05 strip is pinched from 1.43 N
+paper strip black gap -0.45: stop-floor gap to the free felt 0.6 N +0.566, 0.8 N +0.367, 1.0 N +0.200, 1.2 N +0.039, 1.5 N -0.027, 2.0 N -0.061, 3.0 N -0.112 -> a 0.05 strip is pinched from 1.19 N
+paper strip black gap -0.35: stop-floor gap to the free felt 0.6 N +0.374, 0.8 N +0.188, 1.0 N +0.020, 1.2 N -0.021, 1.5 N -0.044, 2.0 N -0.075, 3.0 N -0.123 -> a 0.05 strip is pinched from 0.96 N
+paper strip white gap -0.50: stop-floor gap to the free felt 0.6 N +0.540, 0.8 N +0.285, 1.0 N +0.068, 1.2 N -0.012, 1.5 N -0.032, 2.0 N -0.056, 3.0 N -0.094 -> a 0.05 strip is pinched from 1.05 N
+paper strip white gap -0.40: stop-floor gap to the free felt 0.6 N +0.378, 0.8 N +0.131, 1.0 N -0.007, 1.2 N -0.023, 1.5 N -0.040, 2.0 N -0.062, 3.0 N -0.099 -> a 0.05 strip is pinched from 0.92 N
+paper strip white gap -0.30: stop-floor gap to the free felt 0.6 N +0.217, 0.8 N -0.000, 1.0 N -0.019, 1.2 N -0.031, 1.5 N -0.047, 2.0 N -0.068, 3.0 N -0.104 -> a 0.05 strip is pinched from 0.75 N
+sweep 'ff' poses incl. the r4.1 grids (nominal + pass-line + worst materials, PLAY): lever 12.91 / 10.85 deg, key 4.32 / 6.66 deg
+r4.4 sweep 'over' poses incl. the PLAY chord seats and grids (nominal + pass line + worst): lever -3.05 / -1.82 deg (r4.3 -2.85 / -1.81), key -0.460 / -0.351 deg (r4.3 -0.415 / -0.325)
+grid strikes: achieved key-front speed within 0.001 m/s of the target in every case (finger 1 N below 1.15 m/s, 3 N above)
+
+====================================================================================================
+E2. GHOST RE-TRIGGER - magnet rise vs the 50 % re-arm line; firmware filter (U6, r4.5 circuit 2nd wording = SCH-03 note 9): a note >= 0.3 m/s whose key re-arms within 250 ms of its note-on makes the key suspect; the FIRST re-press that lands within 500 ms of that note-on is dropped if its finger-point descent is < 0.45 m/s and < 25 % of the note's speed. Held strikes that re-arm run on to 1500 ms after the note-on (ghost_reland)
+====================================================================================================
+single key, weakest seat white: play_h0.45 17 % | play_h0.50 11 % | play_h0.55 8 % | play_h0.60 6 % | play_h0.80 2 % | play_h1.00 0 % | play_h2.00 0 % | abuse_h0.45 57 % (re-arms, desc 0.00 -> dropped) | abuse_h0.60 14 % | abuse_h1.00 2 % | abuse_h2.00 0 % | chord20_h1.00 1 %
+single key, weakest seat black: play_h0.45 13 % | play_h0.50 10 % | play_h0.55 8 % | play_h0.60 7 % | play_h0.80 4 % | play_h1.00 2 % | play_h2.00 0 % | abuse_h0.45 29 % | abuse_h0.60 11 % | abuse_h1.00 4 % | abuse_h2.00 0 % | chord20_h1.00 3 %
+6-key chord seat, 1.5 m/s white: play_h0.45 99 % (re-arms, desc 0.03 -> dropped) | play_h0.50 76 % (re-arms, desc 0.02 -> dropped) | play_h0.60 35 % | play_h0.80 15 % | play_h1.00 7 % | play_h2.00 0 %
+6-key chord seat, 1.5 m/s black: play_h0.45 85 % (re-arms, desc 0.01 -> dropped) | play_h0.50 49 % | play_h0.60 28 % | play_h0.80 14 % | play_h1.00 8 % | play_h2.00 1 %
+6-key chord seat, 1.2 m/s white: play_h0.45 97 % (re-arms, desc 0.00 -> dropped) | play_h0.60 22 % | play_h1.00 4 %
+6-key chord seat, 1.2 m/s black: play_h0.45 40 % | play_h0.60 16 % | play_h1.00 4 %
+6-key ABUSE chord seat, 2.0 m/s white: play_h0.45 100 % (re-arms, desc 0.07 -> dropped) | play_h1.00 15 %
+6-key ABUSE chord seat, 2.0 m/s black: play_h0.45 100 % (re-arms, desc 0.03 -> dropped) | play_h1.00 12 %
+6-key chord seat ghost grid white (0.5-1.5 m/s x 0.45-2 N): re-arming cases: 0.9_h0.45 53 % desc 0.00 dropped; 1.0_h0.45 73 % desc 0.00 dropped; 1.1_h0.45 97 % desc 0.01 dropped; 1.2_h0.45 97 % desc 0.00 dropped; 1.3_h0.45 98 % desc 0.01 dropped; 1.3_h0.50 52 % desc 0.02 dropped; 1.4_h0.45 99 % desc 0.02 dropped; 1.4_h0.50 62 % desc 0.02 dropped; 1.5_h0.45 99 % desc 0.03 dropped; 1.5_h0.50 76 % desc 0.02 dropped
+6-key chord seat ghost grid black (0.5-1.5 m/s x 0.45-2 N): re-arming cases: 1.3_h0.45 53 % desc 0.01 dropped; 1.4_h0.45 68 % desc 0.01 dropped; 1.5_h0.45 85 % desc 0.01 dropped
+
+====================================================================================================
+E4. r4.4 F / F# REST-FELT LANDING (R44 issue 2) - own key, own landing, 6-key chord seat 492 N/mm; PLAY 0.5/1.0/1.5 m/s x let go / 0.45 / 1 / 2 N, ABUSE 2.5 m/s (chord seat = brief, single seat 1490), ABUSE chord 2.0 m/s (505), releases
+====================================================================================================
+r43 F  felt x71.69-79.69 lands x71.69-76.45 (59 % of the 8.0 felt, reaction -1.62 off the lever line):
+   nom      PLAY lift 0.103 keeper 0.40 ghost max 100 % (re-arm 2, not dropped 0, desc 0.03) | ABUSE lift 0.190 keeper 0.02 | rep 16.3 / 15.3 Hz, full 45.2 / 48.3 ms | over (PLAY chord seat + ABUSE single) key -0.482 lever -2.69 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.607 lever -3.21; PLAY only key -0.477 lever -2.56 | rest felt peak 14.6 N
+   passline PLAY lift 0.130 keeper 0.37 ghost max 43 % (re-arm 0, not dropped 0, desc 0.00) | ABUSE lift 0.182 keeper 0.14 | rep 16.4 / 15.3 Hz, full 45.1 / 48.2 ms | over (PLAY chord seat + ABUSE single) key -0.510 lever -2.95 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.556 lever -3.23; PLAY only key -0.479 lever -2.79 | rest felt peak 11.9 N
+   worst    PLAY lift 0.188 keeper 0.19 ghost max 70 % (re-arm 1, not dropped 0, desc 0.00) | ABUSE lift 0.243 keeper -0.04 | rep 17.3 / 16.3 Hz, full 43.9 / 46.6 ms | over (PLAY chord seat + ABUSE single) key -0.607 lever -3.15 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.612 lever -3.21; PLAY only key -0.534 lever -3.06 | rest felt peak 11.7 N
+r43 F# felt x86.94-94.94 lands x91.55-94.94 (42 % of the 8.0 felt, reaction +2.30 off the lever line):
+   nom      PLAY lift 0.054 keeper 1.07 ghost max 85 % (re-arm 1, not dropped 0, desc 0.01) | ABUSE lift 0.234 keeper 0.94 | rep 18.9 / 17.7 Hz, full 39.8 / 42.3 ms | over (PLAY chord seat + ABUSE single) key -0.419 lever -1.82 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.505 lever -1.87; PLAY only key -0.419 lever -1.50 | rest felt peak 11.3 N
+   passline PLAY lift 0.075 keeper 1.08 ghost max 30 % (re-arm 0, not dropped 0, desc 0.00) | ABUSE lift 0.353 keeper 0.86 | rep 18.8 / 17.7 Hz, full 39.8 / 42.3 ms | over (PLAY chord seat + ABUSE single) key -0.513 lever -1.84 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.475 lever -1.90; PLAY only key -0.413 lever -1.55 | rest felt peak 9.7 N
+   worst    PLAY lift 0.187 keeper 1.02 ghost max 26 % (re-arm 0, not dropped 0, desc 0.00) | ABUSE lift 0.302 keeper 0.73 | rep 20.2 / 18.9 Hz, full 38.2 / 40.8 ms | over (PLAY chord seat + ABUSE single) key -0.580 lever -1.89 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.575 lever -2.00; PLAY only key -0.423 lever -1.82 | rest felt peak 8.9 N
+r44 F  felt x71.69-76.45 lands x71.69-76.45 (59 % of the 8.0 felt, reaction -1.62 off the lever line):
+   nom      PLAY lift 0.103 keeper 0.40 ghost max 100 % (re-arm 2, not dropped 0, desc 0.03) | ABUSE lift 0.190 keeper 0.02 | rep 16.3 / 15.3 Hz, full 45.2 / 48.3 ms | over (PLAY chord seat + ABUSE single) key -0.482 lever -2.69 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.607 lever -3.21; PLAY only key -0.477 lever -2.56 | rest felt peak 14.6 N
+   passline PLAY lift 0.130 keeper 0.37 ghost max 43 % (re-arm 0, not dropped 0, desc 0.00) | ABUSE lift 0.182 keeper 0.14 | rep 16.4 / 15.3 Hz, full 45.1 / 48.2 ms | over (PLAY chord seat + ABUSE single) key -0.510 lever -2.95 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.556 lever -3.23; PLAY only key -0.479 lever -2.79 | rest felt peak 11.9 N
+   worst    PLAY lift 0.188 keeper 0.19 ghost max 70 % (re-arm 1, not dropped 0, desc 0.00) | ABUSE lift 0.243 keeper -0.04 | rep 17.3 / 16.3 Hz, full 43.9 / 46.6 ms | over (PLAY chord seat + ABUSE single) key -0.607 lever -3.15 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.612 lever -3.21; PLAY only key -0.534 lever -3.06 | rest felt peak 11.7 N
+r44 F# felt x91.55-95.94 lands x91.55-95.94 (55 % of the 8.0 felt, reaction +2.80 off the lever line):
+   nom      PLAY lift 0.056 keeper 1.11 ghost max 84 % (re-arm 1, not dropped 0, desc 0.01) | ABUSE lift 0.234 keeper 0.99 | rep 18.9 / 17.7 Hz, full 39.8 / 42.3 ms | over (PLAY chord seat + ABUSE single) key -0.382 lever -1.73 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.460 lever -1.77; PLAY only key -0.380 lever -1.41 | rest felt peak 11.9 N
+   passline PLAY lift 0.074 keeper 1.12 ghost max 30 % (re-arm 0, not dropped 0, desc 0.00) | ABUSE lift 0.353 keeper 0.89 | rep 18.8 / 17.7 Hz, full 39.8 / 42.3 ms | over (PLAY chord seat + ABUSE single) key -0.474 lever -1.75 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.435 lever -1.80; PLAY only key -0.374 lever -1.47 | rest felt peak 10.4 N
+   worst    PLAY lift 0.187 keeper 1.06 ghost max 26 % (re-arm 0, not dropped 0, desc 0.00) | ABUSE lift 0.302 keeper 0.76 | rep 20.2 / 18.9 Hz, full 38.2 / 40.8 ms | over (PLAY chord seat + ABUSE single) key -0.542 lever -1.80 deg; ABUSE chord 2.0 / 2.5 at the chord seat key -0.535 lever -1.91; PLAY only key -0.387 lever -1.73 | rest felt peak 9.3 N
+F / F# own return-overshoot poses (r4.4 felts, nominal + pass line, PLAY chord seat + ABUSE single key): F key -0.534 lever -3.31 deg, F# key -0.474 lever -2.00 deg
+ghost cases re-arming mechanically: 28 of 350; not dropped by the filter: 0 []
+r4.5 circuit 2nd: re-armed cases run on to 1500 ms after the note-on (shortest run 1500 ms of simulated time): 0 of 28 land again (latest 0 ms after the note-on; window 500 ms); the key stops at its float point by 222 ms at the latest (re-arm by 67.1 ms); float at the end of the run 22-96 %; creep at the end max 0.00051 m/s at the magnet (model friction: linear below 0.2 mm/s slip) -> at that rate the earliest would reach the bottom 3.8 s after the note-on
+   main_white_abuse_h0.45                                                 rise  57 % re-arm  67.1 ms, settle 86 ms, desc 0.000 m/s, lands no, float at 1500 ms 57 %, creep -0.00006 m/s
+   chord_white_play_h0.45                                                 rise  99 % re-arm  31.8 ms, settle 122 ms, desc 0.030 m/s, lands no, float at 1500 ms 88 %, creep -0.00006 m/s
+   chord_white_play_h0.50                                                 rise  76 % re-arm  36.6 ms, settle 222 ms, desc 0.024 m/s, lands no, float at 1500 ms 40 %, creep 0.00047 m/s -> bottom ~6.0 s
+   chord_black_play_h0.45                                                 rise  85 % re-arm  31.3 ms, settle 122 ms, desc 0.009 m/s, lands no, float at 1500 ms 78 %, creep 0.00010 m/s -> bottom ~65.0 s
+   chord12_white_play_h0.45                                               rise  97 % re-arm  42.0 ms, settle 129 ms, desc 0.002 m/s, lands no, float at 1500 ms 96 %, creep -0.00000 m/s
+   chord20_white_play_h0.45                                               rise 100 % re-arm  24.4 ms, settle 135 ms, desc 0.066 m/s, lands no, float at 1500 ms 67 %, creep -0.00007 m/s
+   chord20_black_play_h0.45                                               rise 100 % re-arm  23.5 ms, settle 115 ms, desc 0.035 m/s, lands no, float at 1500 ms 80 %, creep 0.00009 m/s -> bottom ~72.3 s
+   gridc_white_0.9_h0.45                                                  rise  53 % re-arm  67.1 ms, settle 78 ms, desc 0.000 m/s, lands no, float at 1500 ms 53 %, creep -0.00006 m/s
+   gridc_white_1.0_h0.45                                                  rise  73 % re-arm  48.8 ms, settle 100 ms, desc 0.000 m/s, lands no, float at 1500 ms 73 %, creep -0.00007 m/s
+   gridc_white_1.1_h0.45                                                  rise  97 % re-arm  40.8 ms, settle 121 ms, desc 0.007 m/s, lands no, float at 1500 ms 96 %, creep -0.00000 m/s
+   gridc_white_1.2_h0.45                                                  rise  97 % re-arm  42.0 ms, settle 129 ms, desc 0.002 m/s, lands no, float at 1500 ms 96 %, creep -0.00000 m/s
+   gridc_white_1.3_h0.45                                                  rise  98 % re-arm  38.2 ms, settle 120 ms, desc 0.014 m/s, lands no, float at 1500 ms 95 %, creep -0.00006 m/s
+   gridc_white_1.3_h0.50                                                  rise  52 % re-arm  54.4 ms, settle 160 ms, desc 0.022 m/s, lands no, float at 1500 ms 22 %, creep 0.00051 m/s -> bottom ~3.8 s
+   gridc_white_1.4_h0.45                                                  rise  99 % re-arm  34.8 ms, settle 121 ms, desc 0.023 m/s, lands no, float at 1500 ms 92 %, creep -0.00006 m/s
+   gridc_white_1.4_h0.50                                                  rise  62 % re-arm  42.7 ms, settle 181 ms, desc 0.022 m/s, lands no, float at 1500 ms 31 %, creep 0.00049 m/s -> bottom ~4.8 s
+   gridc_white_1.5_h0.45                                                  rise  99 % re-arm  31.8 ms, settle 122 ms, desc 0.030 m/s, lands no, float at 1500 ms 88 %, creep -0.00006 m/s
+   gridc_white_1.5_h0.50                                                  rise  76 % re-arm  36.6 ms, settle 222 ms, desc 0.024 m/s, lands no, float at 1500 ms 40 %, creep 0.00047 m/s -> bottom ~6.0 s
+   gridc_black_1.3_h0.45                                                  rise  53 % re-arm  47.1 ms, settle 90 ms, desc 0.015 m/s, lands no, float at 1500 ms 43 %, creep 0.00029 m/s -> bottom ~13.1 s
+   gridc_black_1.4_h0.45                                                  rise  68 % re-arm  35.7 ms, settle 111 ms, desc 0.012 m/s, lands no, float at 1500 ms 60 %, creep 0.00019 m/s -> bottom ~26.5 s
+   gridc_black_1.5_h0.45                                                  rise  85 % re-arm  31.3 ms, settle 122 ms, desc 0.009 m/s, lands no, float at 1500 ms 78 %, creep 0.00010 m/s -> bottom ~65.0 s
+   grids_worst_white_1.5_h0.45                                            rise  58 % re-arm  67.0 ms, settle 93 ms, desc 0.000 m/s, lands no, float at 1500 ms 58 %, creep -0.00006 m/s
+   end_A0_worst_1.5_h0.45                                                 rise  59 % re-arm  66.6 ms, settle 93 ms, desc 0.000 m/s, lands no, float at 1500 ms 59 %, creep -0.00007 m/s
+   end_C8_worst_1.5_h0.45                                                 rise  60 % re-arm  65.7 ms, settle 93 ms, desc 0.000 m/s, lands no, float at 1500 ms 60 %, creep -0.00007 m/s
+   worst (pad e 0.10, E 0.7, front e 0.28, v_floor 0.1)_white_play_h0.45  rise  58 % re-arm  67.0 ms, settle 93 ms, desc 0.000 m/s, lands no, float at 1500 ms 58 %, creep -0.00006 m/s
+   land_r44_F_nom_1.0_h0.45_play_chord                                    rise  75 % re-arm  48.6 ms, settle 110 ms, desc 0.000 m/s, lands no, float at 1500 ms 75 %, creep -0.00008 m/s
+   land_r44_F_nom_1.5_h0.45_play_chord                                    rise 100 % re-arm  31.8 ms, settle 122 ms, desc 0.031 m/s, lands no, float at 1500 ms 88 %, creep -0.00007 m/s
+   land_r44_F_worst_1.5_h0.45_play_chord                                  rise  70 % re-arm  58.1 ms, settle 103 ms, desc 0.000 m/s, lands no, float at 1500 ms 70 %, creep -0.00008 m/s
+   land_r44_F#_nom_1.5_h0.45_play_chord                                   rise  84 % re-arm  31.3 ms, settle 122 ms, desc 0.009 m/s, lands no, float at 1500 ms 78 %, creep 0.00010 m/s -> bottom ~62.5 s
+
+====================================================================================================
+F. TRANSPORT TILT - module rotated about x, keys settle 400 ms, then laid flat 400 ms (lip friction included)
+====================================================================================================
+white  +90 deg, lip mu 0.25: notch lift 0.01 (pop-out 0.80), y offset -0.06, keeper 0.00 N; laid flat: lift -0.032, front -0.003, y -0.01
+black  +90 deg, lip mu 0.25: notch lift 0.00 (pop-out 0.80), y offset -0.05, keeper 0.00 N; laid flat: lift -0.028, front -0.001, y -0.01
+white  -90 deg, lip mu 0.25: notch lift 0.05 (pop-out 0.80), y offset +0.06, keeper 0.00 N; laid flat: lift -0.031, front -0.001, y +0.01
+black  -90 deg, lip mu 0.25: notch lift 0.06 (pop-out 0.80), y offset +0.06, keeper 0.00 N; laid flat: lift -0.028, front -0.001, y -0.00
+white -120 deg, lip mu 0.25: notch lift 0.30 (pop-out 0.80), y offset +0.00, keeper 0.00 N; laid flat: lift -0.031, front -0.001, y +0.01
+black -120 deg, lip mu 0.25: notch lift 0.27 (pop-out 0.80), y offset +0.00, keeper 0.00 N; laid flat: lift -0.027, front -0.000, y +0.00
+white +180 deg, lip mu 0.25: notch lift 0.35 (pop-out 0.80), y offset -0.00, keeper 0.00 N; laid flat: lift -0.031, front -0.001, y +0.01
+black +180 deg, lip mu 0.25: notch lift 0.29 (pop-out 0.80), y offset -0.00, keeper 0.00 N; laid flat: lift -0.027, front -0.000, y +0.00
+white  +90 deg, lip mu 0.35: notch lift 0.01 (pop-out 0.80), y offset -0.06, keeper 0.00 N; laid flat: lift -0.032, front -0.003, y -0.01
+black  +90 deg, lip mu 0.35: notch lift 0.00 (pop-out 0.80), y offset -0.05, keeper 0.00 N; laid flat: lift -0.028, front -0.001, y -0.01
+white  -90 deg, lip mu 0.35: notch lift 0.05 (pop-out 0.80), y offset +0.06, keeper 0.00 N; laid flat: lift -0.031, front -0.001, y +0.01
+black  -90 deg, lip mu 0.35: notch lift 0.06 (pop-out 0.80), y offset +0.06, keeper 0.00 N; laid flat: lift -0.028, front -0.001, y -0.00
+white -120 deg, lip mu 0.35: notch lift 0.29 (pop-out 0.80), y offset +0.00, keeper 0.00 N; laid flat: lift -0.031, front -0.000, y +0.01
+black -120 deg, lip mu 0.35: notch lift 0.26 (pop-out 0.80), y offset +0.00, keeper 0.00 N; laid flat: lift -0.028, front -0.001, y -0.00
+white +180 deg, lip mu 0.35: notch lift 0.34 (pop-out 0.80), y offset -0.00, keeper 0.00 N; laid flat: lift -0.031, front -0.001, y +0.01
+black +180 deg, lip mu 0.35: notch lift 0.29 (pop-out 0.80), y offset -0.00, keeper 0.00 N; laid flat: lift -0.028, front -0.001, y -0.00
+snap notch (RET-2): lips clear the rod by 0.07 at rest, touch after 0.20 of lift, let go at 0.80; model lip law pull-off 1.99 N (mu 0.25) -> coupon band 1-2 N; upside-down shock that pops a white key 8.7 g (key 23.4 g)
+
+====================================================================================================
+G. CLEARANCE SWEEP - keys rest/dip/ff/over, levers settled rest/dip/ff/overshoot (all from the dynamics), own pairs coupled; yaw play (keys +-0.10 at the pin + tab play +-0.05, levers +-0.10 at the front) over the shared y-range; rule nominal - 0.3 >= 1.0
+====================================================================================================
+r4.5 fix 2 F|F# fin (front y148.6) vs keys E / F / F#: min 1.40 (key F skin tail, over)
+r4.5 fix 2 keel vs keys E / F / F# (all poses): first fix-2 pass keel z21 min 0.21 (key F balance block, dip_rigid) -> rejected; this keel z19.3 to y148.6 min 1.34 (key F balance block, over)
+1444 part pairs checked (10041 pose records); 0 below 1.3 nominal
+r4.4 fix 2: key poses translated by the notch on the rod (dy, dz after the rotation about K): w rest (+0.007, -0.081), dip (-0.020, -0.154), ff (+0.000, -0.250), over (+0.000, -0.105) | b rest (+0.003, -0.077), dip (-0.014, -0.143), ff (+0.000, -0.215), over (+0.000, -0.137); balance-rail pocket: white top z18.90 behind y137.4 (lowest lip-region corner z20.258 at ff); black top z18.80 behind y137.2 (lowest lip-region corner z20.165 at ff)
+r4.4 fix 2: lever axial float on the rod (left / right, from the collar / boss gap chain; bosses +0.02, collars >= 0.76): C 0.055/0.405, C# 0.235/0.225, D 0.405/0.055, D# 0.055/0.403, E 0.230/0.228, F 0.403/0.055, F# 0.055/0.372, G 0.229/0.198, G# 0.372/0.055, A 0.055/0.240, A# 0.185/0.110, B 0.240/0.055; neighbour free gaps C|C# 0.180, C#|D 0.170, D#|E 0.175, E|F 0.173, F#|G 0.174, G|G# 0.143, A|A# 0.130, A#|B 0.055; pad bars +-0.3 sideways (pads, wedges, strips, leaves, grip) - all in the sweep
+  min own key-lever  1.31 mm (after tol 1.01): key F# [block web, over] vs lever F# [fingernail tab over] (yz)
+  min key-fixed      1.31 mm (after tol 1.01): key F# [beam, over] vs board components (<= z20) [ -] (yz)
+  min key-key        1.31 mm (after tol 1.01): key A [skin head, over] vs key B [skin head over] (x)
+  min lever-lever    1.32 mm (after tol 1.02): lever A [carrier side wall R, over] vs lever A# [carrier side wall L over] (x)
+  min lever-fixed    1.32 mm (after tol 1.02): lever D [carrier side wall R, rest] vs fin [ -] (x)
+  min key-lever      1.36 mm (after tol 1.06): key E [skin tail, over] vs lever F [carrier side wall L over] (xyz)
+closest 20 pairs:
+  1.31 yz   key F#                 over  block web                  | lever F#                           over  fingernail tab
+  1.31 yz   key F#                 over  beam                       | board components (<= z20)          -     
+  1.31 x    key A                  over  skin head                  | key B                              over  skin head
+  1.31 x    key B                  over  skin head                  | key C(right module)                over  skin head
+  1.31 x    key C                  over  skin head                  | key B(left module)                 over  skin head
+  1.31 x    key D                  over  skin head                  | key E                              over  skin head
+  1.31 x    key C                  over  skin head                  | key D                              over  skin head
+  1.31 x    key E                  over  skin head                  | key F                              over  skin head
+  1.31 x    key F                  over  skin head                  | key G                              over  skin head
+  1.31 x    key G                  over  skin head                  | key A                              over  skin head
+  1.31 x    key C#                 dip   balance block              | balance rail cradle                -     
+  1.31 x    key D#                 dip   balance block              | balance rail cradle                -     
+  1.31 x    key F#                 dip   balance block              | balance rail cradle                -     
+  1.31 x    key G#                 dip   balance block              | balance rail cradle                -     
+  1.31 x    key A#                 dip   balance block              | balance rail cradle                -     
+  1.32 x    lever A                over  carrier side wall R        | lever A#                           over  carrier side wall L
+  1.32 x    lever A#               over  carrier side wall R        | lever B                            over  carrier side wall L
+  1.32 x    lever G                over  carrier side wall R        | lever G#                           over  carrier side wall L
+  1.32 x    lever D                rest  carrier side wall R        | fin                                -     
+  1.32 x    lever D#               rest  carrier side wall L        | fin                                -     
+designed contacts / sliding fits excluded: down-stop floor~white front felt; stop floor~black front felt; rest felt~rear shelf; balance block~key rod; crossbar~keeper felt; guide rib~tab ; wall L low~tab ; wall R low~tab ; hub~fin; capstan head~felt strip; front wall~white front felt; front wall~black front felt; head wall~white front felt; wall L low~black front felt; wall R low~black front felt; crossbar~white front felt; guide rib~white front felt; hub~fin boss; web~fin boss; carrier side wall~fin boss; balance block~balance pin; carrier core~fin boss; bottom lip~fin boss; crossbar~tab ; thin tail~rear shelf; carrier core~up-stop pad; hub collar~hub collar; hub collar~fin boss; hub collar~hub; hub collar~web; hub~lever rod D4; hub collar~lever rod D4; web~lever rod D4
+  named: 건반 ↔ 밸런스 레일                1.31 (after tol 1.01)  key C# [balance block, dip] vs balance rail cradle [ -]
+  named: 건반 옆벽 ↔ 건반 봉               1.46 (after tol 1.16)  key C [tail wall L, ff] vs key rod SUS304 D4 [ -]
+  named: 건반 ↔ 센서 바                  1.70 (after tol 1.40)  key D# [wall L low, ff] vs sensor bar [ -]
+  named: 건반 ↔ 센서 바 오른쪽 턱 (v3 P112, r4.5 회로 2차) 1.95 (after tol 1.65)  key B [tail wall R, ff] vs sensor-bar ledge lip front (frame, v3 P112; underside z13.6 = bar top) [ -]
+  named: 건반 빔·꼬리 ↔ 제어 기판 부품         1.31 (after tol 1.01)  key F# [beam, over] vs board components (<= z20) [ -]
+  named: 건반 꼬리·쉼 펠트 ↔ USB-C 플러그     1.56 (after tol 1.26)  key F# [rest felt, over] vs USB-C plug envelope (z10.7-18.3) [ -]
+  named: 건반 ↔ 가림판 띠                 1.63 (after tol 1.33)  key F# [rear wall, rest] vs cover curtain [ -]
+  named: 건반 옆벽·리브 ↔ 키퍼 훅            1.33 (after tol 1.03)  key C# [wall L low, rest] vs keeper hook C# [ -]
+  named: 건반 꼬리 ↔ 도브테일               2.25 (after tol 1.95)  key C [rest felt, over] vs rear dovetail (female groove, neighbour male inside) [ -]
+  named: 건반 ↔ 핀                     1.40 (after tol 1.10)  key F [skin tail, over] vs fin [ -]
+  named: 흑건 ↔ 이웃 백건                 1.32 (after tol 1.02)  key F [skin tail, rest] vs key F# [rear wall over]
+  named: 백건 ↔ 백건 (x 틈)              1.31 (after tol 1.01)  key A [skin head, over] vs key B [skin head over]
+  named: 자기 건반 ↔ 자기 레버              1.31 (after tol 1.01)  key F# [block web, over] vs lever F# [fingernail tab over]
+  named: 건반 ↔ 이웃 레버                 1.36 (after tol 1.06)  key E [skin tail, over] vs lever F [carrier side wall L over]
+  named: 레버 ↔ 레버                    1.32 (after tol 1.02)  lever A [carrier side wall R, over] vs lever A# [carrier side wall L over]
+  named: 레버 ↔ 핀                     1.32 (after tol 1.02)  lever D [carrier side wall R, rest] vs fin [ -]
+  named: 레버 ↔ 윗판                    4.04 (after tol 3.74)  lever C [fingernail tab, ff] vs top plate (ledge + bridge) [ -]
+  named: 레버 ↔ 패드 바·레일               1.54 (after tol 1.24)  lever D [carrier side wall R, ff] vs pad bar rail [ -]
+  named: 레버 ↔ 패드 쐐기                 5.00 (after tol 4.70)  lever C [carrier top snap lip L y150-163, ff] vs pad wedge C [ -]
+  named: 레버 ↔ 이웃 패드                 1.44 (after tol 1.14)  lever C [carrier side wall L, ff] vs up-stop pad C [ -]
+  named: 레버 ↔ 뒷벽                    1.45 (after tol 1.15)  lever C# [hub, rest] vs rear wall [ -]
+  named: 레버 ↔ 가림판 띠                 1.66 (after tol 1.36)  lever F [fingernail tab, over] vs cover curtain [ -]
+  named: 건반 블록 ↔ 밸런스 레일(낮춘 곳·받침)    1.31 (after tol 1.01)  key C# [balance block, dip] vs balance rail cradle [ -]
+designed rear y-stop (crossbar rear corners -> 0.5T cloth on the guide-tab front face): 0.80 nominal, min over all poses 0.59
+white front felt (y1.5-9.0) vs crossbar / guide ribs over all poses: 1.68 mm (after tol 1.38) [r3 0.88]
+balance pin rear face vs the snap-lip wall of the stepped block: 1.39 (r3 0.19-0.26); vs the slot rear end 1.63 (pin moved to y135.3, rail front y132.3 -> hole front wall 2.0)
+r4.3 front top lip y150-168 (lever frame) vs its own pad: min 0.638 (x) at lever A pose dip (b 10.75 deg): rear-top corner at world y172.26 z59.23 -> after FDM 0.338 (rule 1.0)
+r4.4 top snap lips (y150-163 / 184-190, lever frame) in the sweep: min 1.812 lever D [carrier top snap lip R y150-163 ff] vs pad bar rail; vs the pads 2.156 (lever C ff); vs the pad bars / rails 1.812 (lever D ff pad bar rail)
+r4.4 lever rod x1.5-162.9, fin-boss bores 5 (D4.0, the right end fin blind to x163.1 = wall 1.2), plug x0.20-1.40 flush with the end-fin face (seam gap 0.40 unchanged); axial play 0.10 + 0.20 (rod 161.4 +- 0.2: 0.10-0.50); closest moving part in the sweep 1.77 (lever C [hub] vs lever rod end plug (printed, pressed flush))
+r4.3 felts (8.0 centred, F / F# land 59 / 42 %) with their own overshoot (key -0.510 / -0.513, lever -3.20 / -2.09 deg): 4 pairs below 1.3, min 1.144: 1.144 key F# [rest felt over] vs USB-C plug envelope (z10.7-18.3) []; 1.179 key F [rest felt over] vs USB-C plug envelope (z10.7-18.3) []; 1.260 key F# [rear wall over] vs lever F# [fingernail tab]; 1.278 key F# [beam over] vs board components (<= z20) []
+r4.4 felts, F / F# at their ABUSE overshoot (6-key chord 2.0 m/s, and the brief's 2.5 m/s on the chord seat; key -0.607 / -0.460, lever -3.48 / -2.05 deg): min 1.267 (after FDM 0.967 > 0: no contact, no damage) key F [skin tail] vs lever F [carrier side wall R]
+r4.4 felts, F / F# own overshoot poses in the module sweep: closest 1.307 (after FDM 1.007) key F# [block web] vs lever F# [fingernail tab]
+r4.4 dip export (settled 1 N with the pad = full planar key state; rigid = kinematic bottom): white key 3.984 deg + notch shift (-0.020, -0.154) = front point 4.046 deg about K, front z33.50 (rigid 4.045 deg, z33.50); lever 10.750 (rigid 12.638) | black key 5.992 deg + notch shift (-0.014, -0.143) = front point 6.080 deg about K, front z46.21 (rigid 6.222 deg, z46.00); lever 8.971 (rigid 10.266); r4.3 exported max(settled angle, rigid angle) = the rigid angle for both colours; the sweep checks both poses
+carrier side walls beside the pad (x gap to the wall 1.60; r4.4 fix 2: lever float + yaw and pad-bar +-0.3 counted): min 3D distance over the bottom / ff poses 1.44 (side-wall top 2.6 below the steel top between the lips; with the fix-1 wall top = steel top 0.73)
+fixed-fixed: seam gaps plates 0.40, end fins 0.40; USB-C plug vs shelf / fins / ribs / rear wall 1.30 (rear shelf); neighbour's dovetail groove vs the end fin 1.30
+end part left: 527 pairs, 0 below 1.3, min 1.31 (key B0 [skin head] vs key C(right module) [skin head]); key/lever vs cheek min 1.33; across the seam: moving 1.31, fixed-fixed 1.32 (fin vs rear dovetail (female groove, neighbour male inside) (module)), seam faces 0.40 (fin vs fin (module)), dovetail pair 0.00 (rear dovetail male root vs rear dovetail (female groove, neighbour male inside) (module))
+end part right: 310 pairs, 0 below 1.3, min 1.31 (key C8 [skin head] vs key B(left module) [skin head]); key/lever vs cheek min 1.33; across the seam: moving 1.31, fixed-fixed 1.32 (rear dovetail (female groove, neighbour male inside) vs fin (module)), seam faces 0.40 (fin vs fin (module)), dovetail pair 0.00 (rear dovetail (female groove, neighbour male inside) vs rear dovetail male root (module))
+lever C  with its key out falls 30.2 deg onto floor (rests there with 0.40 N at its front bottom corner)
+lever D  with its key out falls 30.2 deg onto floor (rests there with 0.40 N at its front bottom corner)
+lever E  with its key out falls 13.2 deg onto board part: CD74HC4067 module on pin headers (<= z20) (rests there with 0.40 N at its front bottom corner)
+lever F  with its key out falls 13.2 deg onto board part: CD74HC4067 module on pin headers (<= z20) (rests there with 0.40 N at its front bottom corner)
+lever G  with its key out falls 23.5 deg onto control board (rests there with 0.40 N at its front bottom corner)
+lever B  with its key out falls 30.2 deg onto floor (rests there with 0.40 N at its front bottom corner)
+lever C# with its key out falls 30.8 deg onto floor (rests there with 0.40 N at its front bottom corner)
+lever F# with its key out falls 24.0 deg onto control board (rests there with 0.40 N at its front bottom corner)
+lever A# with its key out falls 30.8 deg onto floor (rests there with 0.40 N at its front bottom corner)
+removal D   (lever held 15.0 deg by its tab, key tilt 2 deg): pull up 0.43 (balance block vs key rod SUS304 D4) | slide 3 mm 0.10 | tilt 0.11 | draw out 0.86 (capstan head vs felt strip (own lever))
+removal E   (lever held 15.0 deg by its tab, key tilt 2 deg): pull up 0.43 (balance block vs key rod SUS304 D4) | slide 3 mm 0.10 | tilt 0.11 | draw out 0.86 (capstan head vs felt strip (own lever))
+removal B   (lever held 15.0 deg by its tab, key tilt 2 deg): pull up 0.43 (balance block vs key rod SUS304 D4) | slide 3 mm 0.10 | tilt 0.11 | draw out 0.86 (capstan head vs felt strip (own lever))
+removal C   (lever held 15.0 deg by its tab, key tilt 2 deg): pull up 0.43 (balance block vs key rod SUS304 D4) | slide 3 mm 0.10 | tilt 0.11 | draw out 0.86 (capstan head vs felt strip (own lever))
+removal F   (lever held 15.0 deg by its tab, key tilt 2 deg): pull up 0.43 (balance block vs key rod SUS304 D4) | slide 3 mm 0.10 | tilt 0.11 | draw out 0.86 (capstan head vs felt strip (own lever))
+removal C#  (lever held 15.0 deg by its tab, key tilt 5 deg, neighbours C+D out first): pull up 0.42 (balance block vs key rod SUS304 D4) | slide 3 mm 0.11 | tilt 0.11 | draw out 1.39 (capstan head vs felt strip (own lever))
+removal F#  (lever held 15.0 deg by its tab, key tilt 5 deg, neighbours F+G out first): pull up 0.42 (balance block vs key rod SUS304 D4) | slide 3 mm 0.11 | tilt 0.11 | draw out 1.39 (capstan head vs felt strip (own lever))
+removal A#  (lever held 15.0 deg by its tab, key tilt 5 deg, neighbours A+B out first): pull up 0.42 (balance block vs key rod SUS304 D4) | slide 3 mm 0.11 | tilt 0.11 | draw out 1.39 (capstan head vs felt strip (own lever))
+lever service swing (curtain and the bay's pad bar out, top plate stays): C 15.5, C# 17.8, D 15.5, F 15.5, F# 15.5, B 15.5 deg; removal needs 13.1 (white) / 9.2 (black), held at 15.0
+lever insertion C  : no keys in -> reachable (hub on the rod line at pitch -31..-1 deg)
+lever insertion C# : no keys in -> reachable (hub on the rod line at pitch -31..-1 deg); all keys in first (r4.0 order) -> blocked
+lever insertion D  : no keys in -> reachable (hub on the rod line at pitch -31..-1 deg); all keys in first (r4.0 order) -> blocked
+lever insertion E  : no keys in -> reachable (hub on the rod line at pitch -13..-1 deg); all keys in first (r4.0 order) -> blocked
+lever insertion F  : no keys in -> reachable (hub on the rod line at pitch -13..-1 deg)
+lever insertion F# : no keys in -> reachable (hub on the rod line at pitch -13..-1 deg)
+lever insertion G# : no keys in -> reachable (hub on the rod line at pitch -14..-1 deg); all keys in first (r4.0 order) -> blocked
+lever insertion B  : no keys in -> reachable (hub on the rod line at pitch -31..-1 deg)
+lever insertion A0 : no keys in -> reachable (hub on the rod line at pitch -31..-1 deg)
+lever insertion A#0: no keys in -> reachable (hub on the rod line at pitch -31..-1 deg)
+lever insertion C8 : no keys in -> reachable (hub on the rod line at pitch -31..-1 deg)
+pad bar slide fit against the plate / rails / lips over the whole pull (contact -0.01 = designed sliding fit): min -0.010 (pad bar vs top plate (ledge + bridge) at 0.0 mm)
+pad bar slide bay1    : straight min -0.39 at 38.5 mm (up-stop pad C# vs key C# skin) | straight_3shims min -0.69 at 38.5 mm (up-stop pad C# vs key C# skin) | pressed min 1.30 at 0.5 mm (pad bar (edge strip, behind the leaf window) vs fin) | pressed_3shims min 1.11 at 38.0 mm (up-stop pad C# vs key C# skin)
+pad bar slide bay2    : straight min -0.39 at 38.5 mm (up-stop pad D# vs key D# skin) | straight_3shims min -0.69 at 38.5 mm (up-stop pad D# vs key D# skin) | pressed min 1.30 at 0.5 mm (pad bar (edge strip, behind the leaf window) vs fin) | pressed_3shims min 1.11 at 38.0 mm (up-stop pad D# vs key D# skin)
+pad bar slide bay3    : straight min -0.39 at 38.5 mm (up-stop pad F# vs key F# skin) | straight_3shims min -0.69 at 38.5 mm (up-stop pad F# vs key F# skin) | pressed min 1.30 at 0.5 mm (pad bar (edge strip, behind the leaf window) vs fin) | pressed_3shims min 1.11 at 38.0 mm (up-stop pad F# vs key F# skin)
+pad bar slide bay4    : straight min -0.39 at 38.5 mm (up-stop pad A# vs key A# skin) | straight_3shims min -0.69 at 38.5 mm (up-stop pad A# vs key A# skin) | pressed min 1.30 at 0.5 mm (pad bar (edge strip, behind the leaf window) vs fin) | pressed_3shims min 1.11 at 38.0 mm (up-stop pad A# vs key A# skin)
+pad bar slide left end: pressed min 1.30 at 0.5 mm (pad bar (edge strip, behind the leaf window) vs fin)
+spring leg of a keyless lever (groove mouth y207.8 on the printed boss, bottom y211.0, lead-in 0.5): C_+0: lever -31.3 deg, free -28.4 -> unloaded, tip 1.88 inside the mouth (0.82 with the coil float), C_+5: lever -31.3 deg, free -23.4 -> unloaded, tip -0.01 inside the mouth (-1.08 with the coil float), C_-5: lever -31.3 deg, free -33.4 -> loaded, tip 2.95 inside the mouth (2.95 with the coil float), C#_+0: lever -31.3 deg, free -28.4 -> unloaded, tip 1.89 inside the mouth (0.84 with the coil float), C#_+5: lever -31.3 deg, free -23.4 -> unloaded, tip 0.01 inside the mouth (-1.07 with the coil float), C#_-5: lever -31.3 deg, free -33.4 -> loaded, tip 2.95 inside the mouth (2.95 with the coil float), E_+0: lever -14.3 deg, free -28.4 -> loaded, tip 2.95 inside the mouth (2.95 with the coil float), E_+5: lever -14.3 deg, free -23.4 -> loaded, tip 2.95 inside the mouth (2.95 with the coil float), E_-5: lever -14.3 deg, free -33.4 -> loaded, tip 2.95 inside the mouth (2.95 with the coil float)
+r4.5 fix 2 keyless leg in x: groove and boss centred on the long leg (lever x +0.8); coil slides 0.438 each way in the 3.0 pocket, lever floats up to 0.405 -> leg off the groove centre <= 0.843, the groove catches 1.45 (half width 1.2 + lead-in 0.5 - wire 0.25): margin 0.61 (groove on the lever centre as first built: -0.19)
+r4.2 fixed-part fit (raster 0.02, different prints, x overlap > 0.05): module 0 overlaps; left end 0, right end 0
+r4.2 pad bar: joggle 1.5 x 1.5 at y165.5-167.0, 1.0 in front of the plate's channel end y168.0; rear end on the step y185.0; wedges / pads to the plate step and rails 1.42 / 1.43 (end parts 1.43 / 1.43)
+r4.2 L-rails: web 1.0 down to z64.75, lip 1.3 wide (1.0 under the bar edge) z64.75-65.55 from y163.5; leaf tongue 0.6 x 1.6 x 8 per bar edge, bump on the lip, preload 0.3: 0.329 N/mm, 0.10 N per leaf (0.20 N per bar), constant bending stress 8.2 MPa (16.5 at +0.3 FDM)
+r4.2 torsion spring: hub slot 317 deg, faces +3.25 / -3.25; long leg (tangent, rear side) inside the slot over -31.3..18.0 deg with >= 0.57 to the faces (worst at 17.91 deg, r 4.30); leg reaches the boss face at z41.45 (boss from z47.0), groove open from z47.0 -> in the groove
+r4.5 fix 2 short leg (captured): tangent point 228.82 deg (lever frame) y201.48 z31.48, straight 8.0 along 138.82 deg to the tip y195.46 z36.75 (r 8.44); groove 0.70 wide (play 0.20) along 136.83 deg (the loaded leg turned 1.99 deg CW), faces at 2.511 / 3.211 from the axis, from ss -0.5 in the pocket to the blind end ss 8.21 (0.3 past the tip) in the web; contacts: leg tip on the outer face y195.30 z36.56, leg on the inner face's pocket edge y199.97 z33.13, arm 5.75; web underside cut 3.79 over x +-1.5; insertion slot along the leg (316.83 deg, faces +-3.25), long-leg window face 35.0 deg +2.6
+r4.5 fix 2 insertion (free spring slid tip-first along its short leg's groove, no rod): CLEAR; short leg to the groove faces 0.100 (groove printed 0.10 / 0.15 narrower: 0.050 / 0.025), coil to piece A 0.219 / B 0.141, free long leg (46.8 deg) to A 4.34 / B 3.14
+r4.2 fingernail tab: fills the R3 corner above z51.5, distance to the carrier -0.036 (<= 0 = one piece; r4.1 +0.37)
+r4.2 end key A0  own pad face (tilt 11.445 deg, gap -0.40): wedge 0.291~2.720 (module 0.347~2.757, delta -0.056 / -0.037)
+r4.2 end key A#0 own pad face (tilt 9.627 deg, gap -0.45): wedge 1.501~3.536 (module 1.501~3.536, delta +0.000 / +0.000)
+r4.2 end key B0  own pad face (tilt 11.338 deg, gap -0.40): wedge 0.359~2.765 (module 0.347~2.757, delta +0.012 / +0.008)
+r4.2 end key C8  own pad face (tilt 11.494 deg, gap -0.40): wedge 0.259~2.699 (module 0.347~2.757, delta -0.088 / -0.059)
+axial play per fin bay (collars 0.05 short each, never below 0.76; fin bosses +0.02): 0.46, 0.46, 0.43, 0.29
+
+====================================================================================================
+H. STRESSES AND LOADS (PETG across layers: every note < 5 MPa, rare (6-key chords, abuse, <= 1e4 events) < 15 MPa; in the layer plane < 12 / 25 MPa; constant < 2 MPa)
+====================================================================================================
+white at rest: capstan 1.504 N, shelf 1.049 N, key rod 0.684 N, lever rod 0.945 N | thin tail 0.43 MPa, beam 0.16, beam at capstan 0.37, notch section 0.25 | cloth 0.021, hub 0.022 MPa
+black at rest: capstan 0.977 N, shelf 0.602 N, key rod 0.552 N, lever rod 0.419 N | thin tail 0.50 MPa, beam 0.04, beam at capstan 0.32, notch section 0.09 | cloth 0.017, hub 0.010 MPa
+torsion-spring long leg on the rear-wall groove: 4.19 N mm -> 0.188 N on the groove flank (0.38 MPa)
+-> max constant stress in any plastic part 0.50 MPa (target < 2); no preloaded joint left
+up-stop peaks (white / black, real pad normal force): PLAY 89 / 76 N, 2.0 m/s (chord) 119 / 107 N, ABUSE 2.5 m/s 145 / 128 N (r3: 138 / 159 N at 1.5 m/s finger start)
+pad: bearing on the wedge / pad bar 2.01 MPa at the ABUSE peak (6 x 12 footprint); foam compression max 18 % / 15 % of 7 (densification at 80 %)
+   plate play           single 89 N: plate 2.3 MPa (in layer), fin top junction 1.3 MPa (across layers), rear wall 0.30 MPa, seat deflection max 0.06 mm
+   plate play           chord  510 N: plate 5.5 MPa (in layer), fin top junction 4.2 MPa (across layers), rear wall 1.17 MPa, seat deflection max 0.17 mm
+   plate abuse_chord20  single 119 N: plate 3.0 MPa (in layer), fin top junction 1.8 MPa (across layers), rear wall 0.40 MPa, seat deflection max 0.08 mm
+   plate abuse_chord20  chord  690 N: plate 7.5 MPa (in layer), fin top junction 5.7 MPa (across layers), rear wall 1.59 MPa, seat deflection max 0.23 mm
+   plate abuse          single 145 N: plate 3.7 MPa (in layer), fin top junction 2.2 MPa (across layers), rear wall 0.49 MPa, seat deflection max 0.10 mm
+   lever rod SUS304 D4 (play, rod peaks 27 / 24 N): 6-key chord 65 MPa (defl 0.014, fin 93 N -> printed boss 7.9 MPa); single worst 31 MPa; hub 0.6 MPa  [yield cold-drawn 205, annealed 205]
+   lever rod SUS304 D4 (chord20, rod peaks 36 / 33 N): 6-key chord 88 MPa (defl 0.019, fin 127 N -> printed boss 10.7 MPa); single worst 43 MPa; hub 0.9 MPa  [yield cold-drawn 205, annealed 205]
+   lever rod SUS304 D4 (abuse, rod peaks 44 / 40 N): 6-key chord 107 MPa (defl 0.023, fin 153 N -> printed boss 12.9 MPa); single worst 52 MPa; hub 1.0 MPa  [yield cold-drawn 205, annealed 205]
+   r4.5 fix 2 hub/web at the captured short-leg groove (abuse, rod 44.1 N): section y198.57 M 263 N mm -> 3.98 MPa in layer (x Kt 2.0 = 7.96; without the groove 3.44), shear 0.99; the two leg contacts 1.36 N each (couple, both on piece A, 5.4 MPa on d x d); piece B carries no leg force; rod on the two full hub segments 1.45 MPa (full width 1.04)
+   r4.5 fix 2 hub/web at the captured short-leg groove (play, rod 27.1 N): section y198.57 M 163 N mm -> 2.46 MPa in layer (x Kt 2.0 = 4.93; without the groove 2.13), shear 0.61; the two leg contacts 1.05 N each (couple, both on piece A, 4.2 MPa on d x d); piece B carries no leg force; rod on the two full hub segments 0.89 MPa (full width 0.64)
+   r4.5 fix 2 hub/web at the captured short-leg groove (chord20, rod 36.1 N): section y198.57 M 215 N mm -> 3.25 MPa in layer (x Kt 2.0 = 6.51; without the groove 2.81), shear 0.81; the two leg contacts 1.05 N each (couple, both on piece A, 4.2 MPa on d x d); piece B carries no leg force; rod on the two full hub segments 1.19 MPa (full width 0.85)
+peak stresses: hidden beam at the block 11.5 MPa (capstan 16.3 N, PLAY) / 10.0 MPa (ABUSE 14.2 N); thin tail white 5.4 / black 9.7 MPa at PLAY (rest-felt 12.9 / 11.7 N), 5.6 / 9.7 MPa ABUSE; shelf beside the USB slot (F / F# landing) 3.2 MPa
+key roll (restoring / overturning): C 9.0/3.3, C# 99.0/99.0, D 7.4/2.7, D# 99.0/99.0, E 52.2/19.1, F 3.9/1.5, F# 1.4/6.3, G 99.0/99.0, G# 4.9/1.9, A 13.9/5.1, A# 9.4/3.7, B 5.0/1.8 (rest / held PLAY stroke); guide tab takes at most 0.00 N (white tab 7.5 in 8.6 ribs, black tab 6.9 in 8.0 walls, 0.5T cloth each side: +-0.05)
+steel retention play  (limit 5 MPa across layers): top-front (cap + lips 10) 29.5 N -> lips alone 3.5 MPa | top-rear lips (6 long) 19.2 N -> 3.8 MPa | bottom lips (11.5 long) 51.9 N -> 6.8 MPa (root-biased 4.7) || r4.3 lips: front 33.3 N 2.7 MPa, rear (2 long) 21.9 N 13.1 MPa
+steel retention abuse (limit 15 MPa across layers): top-front (cap + lips 10) 43.7 N -> lips alone 5.2 MPa | top-rear lips (6 long) 19.7 N -> 3.9 MPa | bottom lips (11.5 long) 78.1 N -> 10.2 MPa (root-biased 7.1) || r4.3 lips: front 49.3 N 3.9 MPa, rear (2 long) 22.4 N 13.5 MPa
+steel retention chord (limit 15 MPa across layers): top-front (cap + lips 10) 24.8 N -> lips alone 3.0 MPa | top-rear lips (6 long) 21.8 N -> 4.4 MPa | bottom lips (11.5 long) 44.9 N -> 5.9 MPa (root-biased 4.1) || r4.3 lips: front 28.0 N 2.2 MPa, rear (2 long) 24.9 N 14.9 MPa
+steel retention, handling: the steel weighs 0.53 N; the 15 MPa rare limit is reached at a shock of 295 g upward on the rear lips, 459 g on the front lips (cap not counted), 218 g downward on the bottom lips; upside down (1 g) 0.254 N on the rear lips.  Geometric capture: the steel can leave only downward past the bottom snap lips (front / rear walls, side walls, the solid front cap and the rear lips close the other five sides)
+snap alone (no bond), side-wall plate play_a0.50_pinned         : lip line opens 1.70 (mean 1.61) of the 1.0 overhang, flank 14.2 deg, wall at the lip root 23.5 MPa (plate max 32.6; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate play_a0.50_clamped        : lip line opens 1.11 (mean 1.03) of the 1.0 overhang, flank 12.4 deg, wall at the lip root 23.5 MPa (plate max 32.2; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate play_a0.75_pinned         : lip line opens 2.20 (mean 2.08) of the 1.0 overhang, flank 18.4 deg, wall at the lip root 30.4 MPa (plate max 42.2; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate play_a0.75_clamped        : lip line opens 1.44 (mean 1.33) of the 1.0 overhang, flank 16.1 deg, wall at the lip root 30.4 MPa (plate max 41.7; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_a0.50_pinned        : lip line opens 2.56 (mean 2.42) of the 1.0 overhang, flank 21.4 deg, wall at the lip root 35.4 MPa (plate max 49.1; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_a0.50_clamped       : lip line opens 1.68 (mean 1.55) of the 1.0 overhang, flank 18.7 deg, wall at the lip root 35.4 MPa (plate max 48.5; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_a0.75_pinned        : lip line opens 3.32 (mean 3.14) of the 1.0 overhang, flank 27.7 deg, wall at the lip root 45.8 MPa (plate max 63.6; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_a0.75_clamped       : lip line opens 2.17 (mean 2.01) of the 1.0 overhang, flank 24.2 deg, wall at the lip root 45.8 MPa (plate max 62.7; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_x1.5_a0.50_pinned   : lip line opens 3.84 (mean 3.64) of the 1.0 overhang, flank 32.1 deg, wall at the lip root 53.0 MPa (plate max 73.7; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_x1.5_a0.50_clamped  : lip line opens 2.52 (mean 2.33) of the 1.0 overhang, flank 28.0 deg, wall at the lip root 53.0 MPa (plate max 72.7; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_x1.5_a0.75_pinned   : lip line opens 4.97 (mean 4.70) of the 1.0 overhang, flank 41.6 deg, wall at the lip root 68.6 MPa (plate max 95.4; in the layer plane, limit 12 / 25)
+snap alone (no bond), side-wall plate abuse_x1.5_a0.75_clamped  : lip line opens 3.26 (mean 3.01) of the 1.0 overhang, flank 36.3 deg, wall at the lip root 68.6 MPa (plate max 94.1; in the layer plane, limit 12 / 25)
+steel bond play : |V| 22.4 N, |M| 528 N mm -> shear 0.067 MPa over 1411 mm2 (2 faces, J 234967 mm4, r 22.7) + thermal (dT 15 K, bond line 0.02) 0.189 = 0.256 | allowed 0.38 (MS polymer 1.5 MPa / 4); slip under the peak 0.0016 mm; rigid 5-min epoxy (G 700, line 0.10) thermal alone 2.24 MPa
+steel bond abuse: |V| 35.2 N, |M| 783 N mm -> shear 0.100 MPa over 1411 mm2 (2 faces, J 234967 mm4, r 22.7) + thermal (dT 30 K, bond line 0.02) 0.379 = 0.478 | allowed 0.75 (MS polymer 1.5 MPa / 2); slip under the peak 0.0025 mm; rigid 5-min epoxy (G 700, line 0.10) thermal alone 4.48 MPa
+steel bond chord: |V| 20.1 N, |M| 447 N mm -> shear 0.057 MPa over 1411 mm2 (2 faces, J 234967 mm4, r 22.7) + thermal (dT 30 K, bond line 0.02) 0.379 = 0.436 | allowed 0.75 (MS polymer 1.5 MPa / 2); slip under the peak 0.0014 mm; rigid 5-min epoxy (G 700, line 0.10) thermal alone 4.48 MPa
+steel bond thermal edge shear (MS polymer G 1.0 / rigid epoxy G 700 MPa; wall 0.7, E 1950, dalpha 48.3 e-6/K, shear-lag length 11.7 mm << 40): day line 0.10: 0.085 / 2.24, day line 0.05: 0.120 / 3.17, day line 0.02: 0.189 / 5.01, rare line 0.10: 0.169 / 4.48, rare line 0.05: 0.239 / 6.33, rare line 0.02: 0.379 / 10.02
+steel bond, handling: a shock of 2009 g (any direction) reaches the rare-load bond stress; the snap lips alone (glue not yet cured) hold the steel's own weight (upside down 0.53 N: lip root 0.05 MPa)
+
+====================================================================================================
+Q. r4.3 CONTROL-BOARD INTERFACE (circuit BRD-01 against r4.1): RP2040-Zero on pin headers (+1.3), USB-C plug z10.7-18.3, 4067 on headers, 16-core ribbon, EXT pads
+====================================================================================================
+USB-C plug envelope x77.75-90.25 y196.8-221.8 z10.70-18.30 (r4.2 z9.45-16.95): to the rear shelf 1.30 (slot x76.45-91.55, r4.2 thin shelf underside z18.55 would leave 0.25), shelf ribs 2.15, F|F# fin 3.20 (hung from z21.5), rear wall opening 2.70 (x74-94 z5-21 unchanged), cable passage behind the modules z0-22 (v3): 3.7 above the plug
+rest felts beside the slot: F lands on x71.69-76.45 (59 % of 8.0), reaction -1.62 off the lever line -> roll restoring / overturning at rest 3.93 (r4.2 4.1), landing couple bound 2.57 N on the guide tab (rest-felt peak 13.4 N x 3.45 / rib 18); F# lands on x91.55-95.94 (55 % of 8.0), reaction 2.80 off the lever line -> roll restoring / overturning at rest 1.42 (r4.2 15.9), landing couple bound 2.06 N on the guide tab (rest-felt peak 11.7 N x 3.17 / rib 18)
+rest-felt contact K x 0.55 (F# landing, applied to both colours): W rep 16.3 Hz (main 16.3), full return 45.4 ms (main 45.4), friction x2 15.2 Hz / 48.5 ms, PLAY lift 0.114 keep 0.41, ABUSE lift 0.113 || B rep 18.8 Hz (main 18.8), full return 39.9 ms (main 39.9), friction x2 17.7 Hz / 42.4 ms, PLAY lift 0.061 keep 1.11, ABUSE lift 0.177
+shelf beside the slot (2.0 thick, 13.2 deep): F rest-felt peak 13.4 N: span 28.0 / cantilever 11.4 N mm -> 3.18 MPa; F# rest-felt peak 11.7 N: span 20.8 / cantilever 9.9 N mm -> 2.36 MPa
+plate FE with the F|F# fin hung over the USB tunnel behind y196.8 (r4.2 grounded it there through the thin shelf): pad seat E 1525 (1568), F 1873 (1978), F# 1891 (1996), G 1563 (1607) N/mm (r4.2 in brackets); weakest C# 1492 -> dynamics seat 1490 (r4.2 1490); 6-key PLAY chord seat 492 (r4.2 492)
+F|F# fin behind the board: grounded foot y148.6-170.7 (stripboard slot to y172.0), hung from z21.5 behind it up to the rear wall; rear face of the foot -> RP2040-Zero front edge y172.0: 1.30; largest lever-rod reaction on a fin boss 153 N (ABUSE chord) into the fin-rear wall junction (1.8 x 39.4): shear 2.17 MPa, bending 1.90 MPa (in the layer plane)
+BRD-01 parts / component envelope vs the printed frame (fins, shelf, ribs, rail, rear wall): board components (<= z20) 1.30 (fin); board components, rear strip (<= z16.7) 1.30 (shelf rib); RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3) 1.30 (shelf rib); USB-C receptacle of the RP2040-Zero (centre z14.5) 3.65 (rear shelf); CD74HC4067 module on pin headers (<= z20) 1.93 (control-board boss D6 hung over the board (frame, bracket to the balance rail rear face; screw bore D2.5 to z15.4)); J301 ribbon 2x8 pads (ribbon soldered from the underside, joints <= z12.0) 2.56 (fin); J301 16-core ribbon under the board (z5-9) 1.88 (fin); J302 EXT 1x6 pads (lead from the underside) 1.99 (shelf rib)
+ribbon: 16 cores x 1.27 = 20.32 wide centred on J301 (x70.17) in the lane x59.0-82.0 under the balance rail (r4.2 x60-82): margins 1.32 / 1.36, height 5.0 (z5-10)
+J302 EXT lead (O1 / O7 only): pads x94.30-107.00 y193.91 are behind a closed pocket under the shelf (x93.6-103.4, rear wall without opening) -> solder from the underside, route under the stripboard (z5.0-9.0, 4.0 high) into the USB tunnel x75.6-92.4 and under the plug (z5.0-10.7, 5.7 high) out through the rear-wall opening
+key beams / tails over the board parts (sweep, all poses): 1.31 (after tol 1.01) key F# [beam over]; key tail / rest felt over the plug 1.56 (after tol 1.26) key F# [rest felt over]
+end parts: no control board, no USB (read by O1 / O7 through EXT): their rear shelf and rear wall are the module's clipped outside x74-94; r4.4: sensor-board support, lead lane and rear-wall notch (Q2)
+EXT / JST-XH order (circuit): 1 GND, 2-5 EXT1-4, 6 3V3 (red edge wire); ribbon uses all 16 cores - the model and DESIGN.md state no pin order (nothing to update)
+
+====================================================================================================
+Q2. r4.4 CIRCUIT CROSS-CHECK REQUESTS (hardware/pcb README 'W1 기구 쪽에 요청한 것', 7 items) - measured on this model
+====================================================================================================
+1. BRD-01 on the Zero lattice (x = 76.52 + 2.54 i): Zero x75.14-93.14 y172.0-195.5 (receptacle centre x84.00 = shelf-slot centre x84.00), 4067 x54.93-72.71 y152.0-192.64 (to the keep-out 8.51), J301 x61.28-79.06 y148.19 / 150.73 soldered from the underside (top joints <= z12.0), J302 x94.30-107.00 y193.91 (to the rib face 1.99); named parts vs the printed frame min 1.30 (RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3) vs shelf rib)
+   ribbon (16 x 1.27 = 20.32) centred on SB J201 x70.48 in the lane x59.0-82.0: margins 1.32 / 1.36; J301 centre x70.17 -> last 6 mm shifted -0.31, under the board z5-9 (4.0 high) x60.01-80.64 y144.5-151.63: to the F|F# fin foot 1.88, to the stand-off (50,149) 7.16, 0.58 outside the keep-out x81.22
+2. USB-C plug face y196.8 (r4.3 y195.5), overmould y196.8-221.8, receptacle y189.5-196.8 (1.3 past the board edge): shelf slot x76.45-91.55 -> 1.30 / 1.30 over the whole shelf y196.8-209.0; ribs x75.0 / x93.0 -> 2.15 / 2.15; rear-wall opening x74-94 z5-21 (y209-212) -> x 3.75 / 3.75, top 2.70; cable passage y215-258 z0-22 (v3 A13): plug end + 25 bend = y246.8 (11.2 spare), 3.7 over the plug; receptacle to the slot edges 3.08, to the ribs 3.93, top z16.1 vs the rear-strip limit z16.7
+3. boss (50.0, 149.0) screw D6 hung over the board z10.6-17.00 on a bracket to the balance rail rear face y144.5 (x47.00-53.00 y144.50-152.00) + M3x6 from below, head D5.7 z6.0-9.0 under the board (L35 ISO 7380 D5.7 x 1.65): to the rail's rear face 1.65, to the shelf ribs 44.95 (on the rib axis 44.95), inside the board by -0.10 (board ring around the D3.2 hole 1.15), to the floor hatch edge 0.90, closest BRD-01 part 1.93 (CD74HC4067 module on pin headers (<= z20)), closest fin / keel 4.54
+3. boss (114.5, 149.0) pin   D6 hung over the board z10.6-17.00 on a bracket to the balance rail rear face y144.5 (x111.50-117.50 y144.50-152.00) + pin D2.8 hanging through the board to z7.8: to the rail's rear face 3.10, to the shelf ribs 46.41 (on the rib axis 46.40), inside the board by 1.35, to the floor hatch edge 2.35, closest BRD-01 part 27.15 (RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)), closest fin / keel 5.62
+3. boss (50.0, 192.5) pin   D6 hung over the board z10.6-18.05 on a bracket to the shelf rib front face y196.8 + shelf underside z18.05 (x47.00-53.00 y189.50-196.80) + pin D2.8 hanging through the board to z7.8: to the rail's rear face 46.60, to the shelf ribs 2.90 (on the rib axis 2.90), inside the board by 1.35, to the floor hatch edge 2.35, closest BRD-01 part 1.93 (CD74HC4067 module on pin headers (<= z20)), closest fin / keel 4.44
+3. boss (114.5, 192.5) screw D6 hung over the board z10.6-18.05 on a bracket to the shelf rib front face y196.8 + shelf underside z18.05 (x111.50-117.50 y189.50-196.80) + M3x6 from below, head D5.7 z6.0-9.0 under the board (L35 ISO 7380 D5.7 x 1.65): to the rail's rear face 45.15, to the shelf ribs 1.54 (on the rib axis 1.45), inside the board by -0.10 (board ring around the D3.2 hole 1.15), to the floor hatch edge 0.90, closest BRD-01 part 3.60 (J302 EXT 1x6 pads (lead from the underside)), closest fin / keel 5.53
+   M3x6 from below: head under the board z7.35-9.0 (envelope z6.0-9.0, 3.0 above the floor's underside), board 1.6 + 4.4 into the boss; tip z15.0, bore D2.5 to z15.4 (0.4 above the tip), boss cap over the bore 1.6; locating pins D2.8 in D3.0 holes (radial play 0.10), tips z7.8
+4. left end part: board x1.0-46.5 in the sensor bar x0.5-46.5 (0.5 / 0.0), support post x0.5-6.0 + ribs x6.0-45.0 (front y61.0-62.8, rear y73.2-75.5 open x15.0-38.0, top z7.0); lead pads x18.41-28.57 -> gap margins 2.51 / 8.53, underside wires enter the rib band at x16.69/27.75/35.97/18.41/28.57 -> 1.69 / 2.03; lead 5 x 1.27 = 6.35 centred x18.00 (x14.83-21.18, fanned in from the pad row by y77.39), lane under the rail x13.53-22.48 (8.95) z5-10, rear-wall notch same x z5-12; lead path (fan-in included) to the floor parts 1.30 (balance rail (lowered under the blocks; pocket z18.80 behind y137.2)), to the A#0 black tab base 1.75, balance pins over the lane none, lane / notch to the fins 13.72, rod end posts 12.22, rear dovetail 20.52
+4. right end part: board x1.0-23.0 in the sensor bar x0.5-23.0 (0.5 / 0.0), support post x0.5-6.0 + ribs x6.0-21.5 (front y61.0-62.8, rear y73.2-75.5 open x6.0-16.0, top z7.0); lead pads x8.25-13.33 -> gap margins 1.35 / 1.77, underside wires enter the rib band at x13.63/8.25/13.33 -> 2.25 / 2.37; lead 3 x 1.27 = 3.81 centred x10.79 (x8.89-12.70, fanned in from the pad row by y77.39), lane under the rail x7.59-14.00 (6.41) z5-10, rear-wall notch same x z5-12; lead path (fan-in included) to the floor parts 1.30 (balance rail (lowered under the blocks; pocket z18.90 behind y137.4)), to the A#0 black tab base (none), balance pins over the lane C8 x11.75 (1.3 of rail under the pin), lane / notch to the fins 5.79, rod end posts 6.29, rear dovetail 3.58
+5. SB rear support rib (v3 P113 y73.2-75.5) gap x60-82 -> x59-82: ribbon x60.32-80.64 margins 1.32 / 1.36 (r4.3 / v3 gap: 0.32 / 1.36); J201 pads 1.69 / 1.73
+6. keep-out x81.22-85.42 y145.5-173.2: the RP2040-Zero PCB (z11.9-12.9, on headers) overhangs x81.22-85.42 y172.0-173.2 - no pins / pads / traces there (header columns x76.52 / x91.76); Zero front edge to the fin foot's rear face 1.30, top parts to the hung fin (z21.5) 5.20 -> kept to y173.2 on the stripboard, the overhang recorded in P23
+7. key out, lever let go: D# 16.8 deg onto control-board boss D6 hung over the board (frame, bracket to the balance rail rear face; screw bore D2.5 to z15.4) (z20 envelope: 13.5); E 13.2 deg onto CD74HC4067 module on pin headers (<= z20) (z20 envelope: 13.0); F 13.2 deg onto CD74HC4067 module on pin headers (<= z20) (z20 envelope: 13.0); F# 24.0 deg onto control board (z20 envelope: 13.5); G 23.5 deg onto control board (z20 envelope: 13.0), O1 / O7 20.8 onto R301; G# 16.8 deg onto control-board boss D6 hung over the board (frame, bracket to the balance rail rear face; locating pin) (z20 envelope: 14.2); C301 of the control board is a 1206 chip on the underside (text fix in 1d)
+   module sweep, closest moving part to the new / moved fixed parts: control-board 1.57 (key D# [rest felt over]); sensor board 5.28 (key C# [wall L low ff]); board part: J301 16-core ribbon under 11.62 (key F [balance block over]); board part: USB-C receptacle 4.41 (key F# [rest felt over]); USB-C plug 1.56 (key F# [rest felt over]); board part: CD74HC4067 1.35 (key E [beam over]); board components (<= z20) 1.31 (key F# [beam over])
+r4.4 fix 2b: control board goes in from below through the floor hatch x46.25-118.25 y144.5-196.5 (notch x78.53-89.47 to y197.8 behind the receptacle), straight up along z, its slot sliding along the F|F# foot + keel: closest frame part along the path 0.60 (control board | fin); per frame part: fin 0.60 (control board); fin keel (F|F# foot grounded to the balance  0.60 (control board); balance rail (lowered under the blocks; pock 1.00 (control board); balance rail (lowered under the blocks; pock 1.00 (control board); balance rail cradle 1.00 (control board); floor 1.00 (control board); floor (behind the board hatch) 1.00 (board part: RP2040-Zero on pin); floor (in front of the board hatch) 1.00 (control board); stops (above the board, contact 0 = seat): control-board boss D6 hung over the boar 0.00; control-board boss D6 hung over the boar 0.00; control-board boss D6 hung over the boar 0.00; control-board boss D6 hung over the boar 0.00; fin 5.20; fin 5.40; locating pins radial play 0.10
+r4.4 fix 2b: capstan crown top at the settled rest (key sinks on its notch cloth / rest felt, lever on the capstan): white 30.892, black 30.912 (key frame z31.0) -> T2 dummy-lever floor / zero pads at z30.90
+
+====================================================================================================
+Q3. r4.5 CIRCUIT 2ND CROSS-CHECK (hardware/pcb README '2차 요청' items 8-11; 12-13 handled elsewhere) - measured on this model
+====================================================================================================
+8. sensor-bar right ledge (v3 P112) back in the frame: two pieces y59.0-63.4 / y70.6-77.5 (off the B sensor leads y63.9-70.1 by 0.5 / 0.5), each an inverted L - lip x161.5-163.0 z13.6-15.1 (underside = white bar top z13.6, over the bar end x162.9 by 1.4 -> 15.8 mm2 held), post x163.0-164.3 from the floor z5.0 (0.1 from the bar end, 0.4 from the board end x162.6; 0.2 seam inset); B lead holes at x160.65 (sensor x157.641 + 3.0 -> first 2.54 grid), lip 0.85 beyond; C214 (underside x156.91-159.31) and the J201 pads are far; closest moving part 1.95 (after tol 1.65): key B [tail wall R ff]; across the seam: next module 0.70 (sensor-bar ledge post front (frame, v3 P112) vs sensor bar), right end part ER 0.70 (sensor-bar ledge post front (frame, v3 P112) vs sensor board support post (v3 P111, M3x10 of bar + board into it)); other own frame parts 32.00 (white front rail)
+11. left end part floor: 1 piece(s) x0.20-46.80 y0.0-212.0, holes in it: none
+11. right end part floor: 1 piece(s) x0.20-23.30 y0.0-212.0, holes in it: none
+10. key out, lever let go (DESIGN 11 step 6 now uses these): C 30.25 deg onto floor; C# 30.75 deg onto floor; D 30.25 deg onto floor; D# 16.75 deg onto control-board boss D6 hung over the board (frame; E 13.25 deg onto board part: CD74HC4067 module on pin headers (<=; F 13.25 deg onto board part: CD74HC4067 module on pin headers (<=; F# 24.00 deg onto control board; G 23.50 deg onto control board; G# 16.75 deg onto control-board boss D6 hung over the board (frame; A 30.25 deg onto floor; A# 30.75 deg onto floor; B 30.25 deg onto floor
+interface: ribbon lane x59-82 z5-10, SB x1.0-162.6 y60.65-75.89 z7.0-8.6, control-board hatch, USB-C plug z10.7-18.3 - unchanged
+
+====================================================================================================
+I. MASS, PRINT PLAN (PETG 1.25 g/cm3, 15 g/h, 220x220 bed)
+====================================================================================================
+per key PETG: C 21.8, C# 16.8, D 22.1, D# 16.8, E 21.8, F 21.3, F# 16.8, G 21.7, G# 16.8, A 21.7, A# 16.8, B 21.4 g; lever carrier 2.84 g
+frame 284.0 g = v3_frame 175.0 + minus_spine_rail -14.6 + minus_back_stop -6.3 + balance_rail 13.6 + rear_shelf 4.9 + shelf_ribs 2.9 + fins 33.1 + fin_bosses 0.7 + top_plate 71.7 + bar_rails 0.9 + taller_rear_wall 10.1 + floor_board_hatch -9.4 + fin_keel 0.6 + board_bosses 1.0 + spring_bosses -0.2
+supports: keys 25.4 g (white 1.6, black 2.9 each) + under the top plate 88.1 g = 113.5 g per module
+curtain strip 6.3 g, sensor bar 17 g, 4 pad bars 2.9 / 3.0 / 2.9 / 2.8 g
+module print: 589 g parts + 114 g supports = 702 g, 46.8 h
+module mass: prints 589 + steel blocks 12 x 53.7 = 644 + rods 32 + pads 12 x 0.15 + magnets/felt/pins/capstans/springs 21 + EVA/electronics 86 = 1.374 kg (v3 0.59, r3 2.03)
+  백건 (7종)                    22.1 + 서포트 1.6   g | 윗면을 매끈한 PEI에 대고 뒤집어(v3 방향). 트리 서포트는 숨은 빔·꼬리(y146~199) 밑에만. 노치 R2.55는 출력 맨 위의 열린 홈, 밸런스 핀 홈(폭 2.2+천)은 블록 밑면에서 열림
+  흑건 (4종: C#·D#은 같음)         16.8 + 서포트 2.9   g | 같은 방향(윗면이 베드). 서포트는 빔·꼬리 밑. 납·추 칸 없음
+  레버 캐리어 (칼라가 위치마다 달라 모듈 12종 + 끝 부속 3종 = 15종, 옆벽에 음 이름 새김) 2.84             g | 옆으로 눕혀(옆벽이 베드, 허브 구멍이 세로). 강철 칸 안에 지지대 1개(z 틈 0.2): 먼 쪽 옆벽·립이 칸 위를 40 mm 건넘. 허브 구멍 Ø3.9로 뽑아 Ø4.0 드릴, 허브 칼라·스프링 주머니 함께 출력
+  프레임                        284 + 서포트 88     g | 바로 세워(v3). 윗판 밑(y146.5~209)은 바닥·선반에서 올라오는 트리 서포트. 패드 바 레일(도브테일)은 윗판에 붙어 있음. 핀 보스 구멍 Ø3.9 눈물방울, Ø4.0 드릴
+  패드 바 (4개, 칸마다 다름: 모듈 4종 + 끝 부속 2종, 손잡이에 칸 이름 새김) 2.9              g | 윗면을 베드에(쐐기가 위). 앞 손잡이 3 mm, 뒤 계단 양쪽에 예하중 잎 0.6×4×8
+  가림판 띠                      6                g | 넓은 면을 베드에, 걸이 립은 위로
+  센서 바                       17               g | v3 (포켓이 위)
+
+====================================================================================================
+J. END PARTS - same section and mechanism; left A0/A#0/B0 (keys x0-47, cheek x-16.00..-0.68), right C8 (local x, cheek x24.18..39.50)
+====================================================================================================
+left: levers {'A0': 10.287, 'A#0': 26.3, 'B0': 38.475}, fins [(-1.8, -0.2), (45.2, 46.8)], fin bosses (L/R) [(0.0, 5.13), (1.37, 0.0)], collars {'A0': (0.0, 2.62), 'A#0': (2.62, 0.76), 'B0': (0.76, 0.0)}
+   A0  capstan y188.43 DW 51.98 UW 42.81 m_eff 56.2 key 24.1 g; its steel top vs its colour's pad face at its own settled bottom -0.45 (design -0.40; PET shims trim it)
+   A#0 capstan y180.31 DW 51.01 UW 40.80 m_eff 46.5 key 16.8 g; its steel top vs its colour's pad face at its own settled bottom -0.45 (design -0.45; PET shims trim it)
+   B0  capstan y188.32 DW 51.98 UW 42.85 m_eff 55.0 key 21.4 g; its steel top vs its colour's pad face at its own settled bottom -0.39 (design -0.40; PET shims trim it)
+   seats A0 1675, A#0 1200, B0 1564 N/mm; all keys at the 2.5 m/s peak at once: plate 9.3 MPa, fin top 4.4 MPa, seat 0.27 mm
+right: levers {'C8': 11.75}, fins [(0.2, 1.8), (23.5, 25.1)], fin bosses (L/R) [(0.0, 4.52), (6.319999999999999, 0.0)], collars {'C8': (0.0, 0.0)}
+   C8  capstan y188.48 DW 52.02 UW 42.85 m_eff 56.7 key 24.7 g; its steel top vs its colour's pad face at its own settled bottom -0.48 (design -0.40; PET shims trim it)
+   seats C8 2446 N/mm; all keys at the 2.5 m/s peak at once: plate 3.2 MPa, fin top 1.5 MPa, seat 0.06 mm
+
+88 keys: 7 modules 4.91 kg + end parts 0.33 kg + other v3 prints 0.97 kg + spare set 0.33 kg = 6.55 kg filament, 436 h at 15 g/h
+metal: blocks 90 x 53.7 g = 4.83 kg (88 + 2 spare); rods 0.27 kg (7 x 2 + end parts + 2 spare) -> 5.10 kg (r3 9.52 kg)
+88-key body about 10.6 kg (v3 4.5 kg, r3 15.3 kg); heaviest single part to carry = one module 1.37 kg
+
+====================================================================================================
+K. SINGLE-KEY REMOVAL AND ADJUSTMENT (tool-free)
+====================================================================================================
+lift the curtain strip; slide that bay's pad bar out by its grip; lift the own lever by its fingernail tab (0.47 N white / 0.45 N black) to 15.0 deg; with the other hand's fingernail under the 1.0 mm rear lip (y146-147) pull up 2.7 N (white) / 2.5 N (black) with the snap at 2 N (5.2 / 5.0 N with the tightest R2.50 coupon; 4.0 / 3.4 N if the lever rests on the capstan): the key pivots on its tail pad (front rises 1.5 to the keeper), then on the keeper until the rear notch lip is 0.1 above the rod top; the block is then 3.32 / 3.23 above its balance pin; slide 3 mm forward, tilt, draw out. Black keys: both white neighbours first. A lever whose key is out lies on the floor / board parts (above)
+white: capstan 1/8 turn out (bench gauge, before the key goes in): DW +0.20 g, held cap +0.19 mm | half turn: DW +0.77 g | putty 1 g on the steel front top +1.23 g, at the key front -1.06 g | 0.1 PET shim under the pad: the lever meets it 0.23 deg earlier = 0.18 mm earlier at the key front
+black: capstan 1/8 turn out (bench gauge, before the key goes in): DW +0.11 g, held cap +0.12 mm | half turn: DW +0.41 g | putty 1 g on the steel front top +1.14 g, at the key front -1.09 g | 0.1 PET shim under the pad: the lever meets it 0.24 deg earlier = 0.22 mm earlier at the key front
+key levelling: each 0.1 mm punching under a rest pad lowers the key front 0.25 mm (bench jig: D4 rod stub + rest shelf z20.054 + 43.5 height block)
+
+====================================================================================================
+L. PURCHASED PARTS AND COST DELTA vs v3.2 (KRW; '추정' = estimate)
+====================================================================================================
+  + SS400 평철 9T×19, 1 m 4개 (블록 90 × (40 + 톱날 2) = 3.78 m)                      4 x   3500 =   14000  [추정 (9T×50의 단면 38 %)]
+  + 강철 약 5 kg 택배                                                               1 x   5000 =    5000  [추정]
+  + SUS304 환봉 Ø4 h9 × 4 m (건반 봉 + 레버 봉 2.73 m)                                 1 x   7000 =    7000  [추정 (W1)]
+  + M3×6 ISO 7380 버튼헤드 SUS (캡스턴) 100개 + M3 너트 100개                             1 x   7000 =    7000  [추정]
+  + 비틀림 스프링 미스미 C-UA90R5-3-0.5 (SUS304-WPB d0.5 ID5 3권 암 90°, 두 다리를 22.3 / 8.0로 잘라 씀) 100개 (88 + 단계 0 시험 4 + 예비 8) 100 x    310 =   31000  [한국미스미 9/28 확인: 100개 이상 282원 + VAT]
+  + 경선(피아노선) 니퍼 — 스프링 다리 200곳 자름 (d0.5 SUS 경강선)                                1 x  15000 =   15000  [추정 (공구, 악기당 1)]
+  + 밸런스 핀 SUS Ø2×12 (ISO 2338) 100개                                            1 x   6000 =    6000  [추정]
+  + Ø4.0 드릴                                                                    1 x   2000 =    2000  [추정]
+  - v3.2 척추 클램프 M3×40 + 와셔                                                    32 x    120 =    3840  [추정]
+  - 세트스크루 M3×10 평끝                                                            32 x    120 =    3840  [추정]
+  - 황동 원판 8×1                                                                 32 x    250 =    8000  [추정]
+  - M3 너트 (클램프 + 세트스크루)                                                       64 x     30 =    1920  [추정]
+  consumable: MS 폴리머(하이브리드) 탄성 접착제 튜브 약 80 mL (r4.4 고침 2b: 강철 블록 90개 × 두 옆면 약 0.2 mL; 고침 2의 5분 에폭시 대신)    8000  [추정]
+  consumable: 부싱 천 0.5T (노치·밸런스 핀 홈·탭) A4 한 장                                 5000  [추정]
+  consumable: 펠트 1T·1.5T·2T 띠 추가                                              6000  [추정]
+  consumable: 미세셀 우레탄 폼 6T (PORON 계열, 업스톱 패드 100개) + 앞 펠트 밑 PU 1T, 약 200×300   15000  [추정]
+  consumable: OHP 필름 (PET 심 0.1)                                              1000  [추정]
+  consumable: 흑연 가루                                                           3000  [추정]
+  optional:   평철 90조각 절단을 철공소에 맡김 (모따기 없음)                                   31500  [추정 1개 350원]
+  optional:   직접 자를 때 쇠톱·바이스 (90번 약 4시간)                                         0  [가진 공구]
+base (non-consumable) delta = +87000 - 17600 = +69400 KRW -> base BOM 583,219 + 69400 = 652619 (cap 1,000,000; r3 +130,400)
+
+====================================================================================================
+M. SPARE-KEY BAY (R29, inner 338.8 x 172 x 77) - r4 (A9): key zone 1.0 + 199.3 + 1.0, divider 1.2, side zone 136.3
+====================================================================================================
+key zone 201.3 (1.0 + key 199.3 (199.0 + FDM 0.3) + 1.0); layer 1: 7 white keys C..B top-down 160.3 x 23.4; layer 2: 5 black + A#0 + A0, B0, C8 139.8 x 35.4; stack 58.8 of 77; width margin 5.85 / side
+side zone 136.3 x 172 x 77: 2 spare steel blocks, D4 rods 161.4 (x2, along the 172 depth: 5.3 each end), 12 spare pads, (r4.1: no complete spare levers / pad bar - position-specific, printed from the file) 12 torsion springs, PET shims, small-parts box
+
+====================================================================================================
+N. ENVELOPE AND TARGET CHECK (R4 brief load envelopes)
+====================================================================================================
+  [OK ] PLAY   DW 47~55 g (y13, 흑 앞+10), 기본 마찰 (백 / 흑)                                51.9 / 51.0 (마찰 2배 56.5 / 56.1, 참고)
+  [OK ] PLAY   UW 20 g 이상 (쉼·바닥, 마찰 2배 바닥 포함)                                         42.8 / 40.8 (바닥 마찰 2배 최소 21.3)
+  [OK ] PLAY   DW 립 y0 47 g 이상 (백)                                                    47.1
+  [OK ] PLAY   연타 13.3 Hz 이상 (1/(2·t50), 50 % 재무장, 1.2 s 정착 뒤 뗌)                      16.3 / 18.8
+  [OK ] PLAY   연타, 마찰 2배 (비틀림 보조 스프링 기본; 끝 건반 A0·C8 포함)                               15.2 / 17.7 (끝 건반 최소 15.0)
+  [OK ] PLAY   끝까지 복귀 60 ms 미만 (마찰 2배, 끝 건반 포함)                                       45.4 / 39.9 (마찰 2배 48.5, 끝 건반 최대 49.3)
+  [OK ] PLAY   노치 들림 0.20 이하 (들림으로만 판정; 0.5~1.5 m/s, 뗌·0.45~2 N, 한 건반·6건반 화음 자리 1.0~1.5 m/s 0.05 간격, 끝 건반, 합격선 재료; 접촉 하한 0.02) 0.162 (재료 조합 0.159, 화음 자리 0.135 / 합격선 0.149, 끝 건반 0.140); 모델 하한 v_floor 0.1 모서리: 한 건반 0.198, 화음 0.219 (18장); 합격선 밖 최악 0.204 / 화음 0.204
+  [OK ] PLAY   키퍼 무접촉 (합격선 재료, 화음 자리 포함)                                              최소 틈 0.52 (조합 0.41, 화음 0.51; v_floor 0.1 화음 0.26; 합격선 밖 최악 0.34 / 화음 0.34)
+  [OK ] PLAY   유령: 재무장선 50 %를 넘는 경우는 모두 펌웨어 거름이 버림 (한 건반·6건반 화음 자리 0.5~1.5 m/s 0.1 간격, 0.45~2 N, 끝 건반, 거름 문턱 0.3 m/s; r4.5 회로 2차: 창 = note-on부터 재무장 250 ms, 첫 다시 눌림은 note-on부터 500 ms 안, 재무장한 경우는 note-on 뒤 1500 ms까지 돌림) 한 건반 1.5 m/s 최대 17 %; 350건 중 재무장 28건 모두 거름 (못 거른 것 0); 재무장 28건 중 1500 ms 안에 다시 닿는 것 0건, 모두 222 ms까지 멈춤(뜬 자리 22~96 %, 기어내림 ≤ 0.0005 m/s)
+  [OK ] PLAY   업스톱 이음 닫힘                                                              이음 없음: 패드 → 패드 바 → 윗판 압축 (나사·예하중 없음)
+  [OK ] PLAY   센서 최소 간격 3.0 이상 (2.5 m/s 과다 누름)                                        4.76
+  [OK ] PLAY   모든 틈 ±0.3 공차 뒤 1.0 이상 (모듈, 끝 부속, 이음매)                                  1.01 (끝 부속 1.01 / 1.01, 이음매 너머 고정 부품 1.02 / 1.02; 이음 면 0.40 / 0.40 = 모듈 이음과 같은 0.4)
+  [OK ] PLAY   쉼 상시 응력 2 MPa 미만                                                       0.50 MPa
+  [OK ] PLAY   매 음 층간 응력 5 MPa 미만 (핀-윗판 이음, 한 건반 1.5 m/s)                             1.3 MPa
+  [OK ] PLAY   6건반 화음 층간 응력 15 MPa 미만 (드문 하중, r3 기준)                                  4.2 MPa (윗판 층 안 5.5)
+  [OK ] PLAY   숨은 빔·얇은 꼬리 매 음 12 MPa 미만 (층 안: 건반은 윗면이 베드)                             빔 11.5, 꼬리 9.7 MPa
+  [OK ] PLAY   레버 봉 SUS304 Ø4: 6건반 화음 응력 < 항복/1.5                                     65 MPa (항복 205, 풀림재 최소값)
+  [OK ] ABUSE  노치 들림 0.40 이하 (빠짐 0.80 / 안전율 2), 모든 재료 조합, 2.0 m/s 6건반 화음 자리 포함        0.177 (조합 최대 0.349, 화음 자리 0.203)
+  [OK ] ABUSE  항복 없음: 레버 봉 (2.0 m/s 6건반, 2.5 m/s 한 건반)                                88 MPa < 205
+  [OK ] ABUSE  피로 10^4회: 층간 15 MPa, 층 안 25 MPa 미만 (2.0 m/s 6건반)                       핀 이음 5.7, 윗판 7.5 MPa
+  [OK ] ABUSE  숨은 빔·얇은 꼬리 25 MPa 미만 (층 안, 2.5 m/s)                                    빔 10.0, 꼬리 9.7 MPa
+  [OK ] ABUSE  제자리 이탈·조정 풀림 없음                                                        패드 바는 압축, 조정은 인쇄 쐐기·PET 심·캡스턴(벤치)
+  [OK ] BUILD  레버를 건반보다 먼저: 모든 레버가 윗판 밑 제자리(레버 봉 선)에 들어감 (2D C-공간, 끝 부속 포함)           11 / 11 도달 (건반을 먼저 넣으면 흑 레버 막힘)
+  [OK ] BUILD  고정 부품끼리 겹침 없음 (따로 출력하는 부품, 모듈·끝 부속; r4.1: 패드 바 ↔ 윗판 2.5 mm²)           모듈 0, 끝 부속 0 / 0; 패드 바를 넣고 빼는 내내 윗판·레일과 최소 -0.01 (접촉 −0.01)
+  [OK ] BUILD  패드 쐐기·패드 ↔ 윗판 계단·레일 1.3 이상 (패드 바 뒤끝만 계단에 닿음)                           쐐기 1.42, 패드 1.43 (끝 부속 1.43)
+  [OK ] BUILD  비틀림 스프링 조립: 코일이 허브 홈으로 들어가고, 긴 다리가 레버 전 범위에서 홈 안(면까지 0.2 이상), 뒷벽 홈에 아래로 들어감 레버 -31.3°~18.0°에서 여유 0.57; 다리는 보스 면에 z41.45(보스 밑 z47.0 아래)에서 닿고 홈(z47부터)으로 들어감
+  [OK ] BUILD  r4.5 고침 2 짧은 다리 가둠 홈에 넣기: 스프링을 짧은 다리 끝부터 홈을 따라 밀어 넣음 (홈이 0.15 좁게 나와도 틈 ≥ 0; 더 좁으면 0.5 날로 다듬음) 짧은 다리 ↔ 홈 면 0.100 (0.10 / 0.15 좁게: 0.050 / 0.025), 코일 ↔ 조각 A 0.22 · B 0.14, 긴 다리 ↔ A 4.34 · B 3.14
+  [OK ] PLAY   r4.5 고침 2 코일 뜸(검증 major): 짧은 다리를 가둬 코일이 봉에 닿지 않음 — 쉼 토크 설계값, 봉 마찰 이력 0, 홈이 +0.3 넓게 나와도 봉과 틈 > 0 쉼 4.19 N·mm (r4.5 한 면 받침이면 코일이 봉으로 0.47 밀려 2.18), 봉과 틈 쉼 0.43 · 바닥 0.38 · 손 25° 0.33, 홈 +0.3이면 쉼 3.75 N·mm·틈 0.17; 짝 힘 0.73 N
+  [OK ] BUILD  r4.5 고침 2 건반 뺀 레버의 긴 다리: 뒷벽 홈·보스를 다리 x(+0.8)에 맞춤 — 코일 축 놀음 + 레버 놀음을 더해도 홈 입구(모따기 포함)가 다리를 받음 다리 x 어긋남 최대 0.84 (코일 0.44 + 레버 0.41) ≤ 받는 폭 1.45: 여유 0.61 (레버 중심 홈이면 -0.19)
+  [OK ] BUILD  r4.5 스프링 카탈로그 한계: 손 들기(레버 25°) 감김각 ≤ 최대 사용각 55°                        감김 53.4°, 토크 7.83 N·mm = 카탈로그 55° 토크 7.52의 104 % (18장 위험), 응력 685 MPa (Su 32 %)
+  [OK ] ABUSE  r4.5 고침 2 허브·웹 (가둠 홈 자리): 층 안 < 25 MPa (홈 모서리 Kt 2 포함), 매 음 PLAY < 12 MPa ABUSE 7.96 MPa (홈 없던 단면 3.44), PLAY 4.93 MPa; 다리 두 닿는 점 1.36 N (손 25°), 봉 지압 1.45 MPa
+  [OK ] BUILD  패드 바 빼기 (앞부분이 나온 21.5 mm부터 윗판에 밀어 올림): 공칭 1.3 이상, PET 심 3장 1.0 이상      공칭 1.30, 심 3장 1.11 (곧게만 당기면 끝 0.5 mm에서 -0.39)
+  [OK ] PLAY   r4.3 쉼 펠트가 USB 홈 옆에 55 %만 앉을 때 (F#, 두 색에 적용): 연타 13.3 Hz 이상(마찰 2배 포함), 복귀 60 ms 미만, 들림 0.20 이하, 키퍼 무접촉 연타 16.3 / 18.8 Hz (마찰 2배 최소 15.2), 복귀 45.4 / 39.9 ms (마찰 2배 최대 48.5), 들림 0.114 / 0.061, 키퍼 0.41 / 1.11
+  [OK ] BUILD  r4.3 USB-C 플러그(RP2040-Zero 핀 헤더 위, z10.7~18.3) ↔ 뒤 선반·리브·핀·뒷벽 1.3 이상   최소 1.30 (rear shelf); 선반 홈 x76.45~91.55, 리브 2.15, 핀 3.20, 뒷벽 개구 2.70
+  [OK ] BUILD  r4.3 제어 기판 부품(BRD-01)·부품 한계 ↔ 출력 프레임 1.3 이상, 리본(16심) 차선 양옆 1.3 이상      최소 1.30 (board components (<= z20) ↔ fin); 핀 발 ↔ 제로 앞 모서리 1.30; 리본 1.32 / 1.36
+  [OK ] PLAY   r4.4 윗 스냅 립 ↔ 패드·패드 바·레일 1.3 이상 (립을 geometry·스윕에 넣음; r4.3 립 y150~168은 0.64) 최소 1.81 (패드 2.16, 패드 바·레일 1.81); r4.3 립은 1 N 바닥에서 패드 옆 0.64 (공차 뒤 0.34)
+  [OK ] PLAY   r4.4 강철 블록 유지 (고침 2b: MS 폴리머 탄성 접착, 접착층 한쪽 0.10): 캐리어 → 강철 힘·모멘트의 전단 + 열팽창 차이 전단(매 음 ΔT 15 K, 드문 30 K, 가장 얇은 접착층 0.02) — 매 음 0.375, 드문 0.750 MPa 이하 (설계 1.5 MPa / 4·2); 스냅 립만으로는 안 됨(18장) 전단(하중 + 열) 매 음 0.067 + 0.189, 화음 0.057 + 0.379, ABUSE 0.100 + 0.379 MPa (면적 1411 mm²; 5분 에폭시면 열만 2.24 MPa), 충격 2009 g까지; 접착 없이 스냅만: 아래 립 뿌리 층간 6.8 MPa(한계 5), 옆벽 립 뿌리 층 안 23.5 MPa(한계 12), 립 선이 1.11 벌어짐(물림 1.0)
+  [OK ] PLAY   r4.4 F·F# 쉼 펠트 착지(r4.4 펠트) 6건반 화음 자리: 들림 0.20 이하, 키퍼 무접촉, 유령 모두 거름, 연타 13.3 Hz 이상·복귀 60 ms 미만(마찰 2배) F 59 %: 들림 0.130 키퍼 0.37 연타 15.3 Hz 복귀 48.3 ms; F# 55 %: 들림 0.074 키퍼 1.11 연타 17.7 Hz 복귀 42.3 ms
+  [OK ] ABUSE  r4.4 F·F# 착지 ABUSE (2.5 m/s 한 건반·화음 자리, 2.0 m/s 화음): 들림 0.40 이하, ABUSE 복귀 넘침 자세에서 닿지 않음 들림 최대 0.353; ABUSE 복귀 넘침 최소 틈 1.27 (공차 뒤 0.97)
+  [OK ] BUILD  r4.4 레버 봉·핀 보스 구멍·봉 마개를 geometry·스윕에 넣음 (마개는 끝 핀 면과 같은 면, 축 놀음 > 0)    마개 x0.2~1.4, 막힌 끝 x163.1; 축 놀음 0.10~0.50; 가장 가까운 움직이는 부품 1.77
+  [OK ] BUILD  r4.4 고침 2b 제어 기판 넣기: 한 덩어리 프레임에 기판이 들어갈 길 — 바닥 구멍으로 밑에서 곧게 올림(기판 홈이 F|F# 핀 발·킬을 따라감), 길 위 고정 부품과 평면 틈 > 0, 걸리는 것은 매단 보스(자리)뿐 길 위 최소 0.60 (기판 ↔ fin); 바닥 구멍 x46.25~118.25 y144.5~196.5(리셉터클 뒤 x78.53~89.47는 y197.8까지); 멈춤 = 기판 위 매단 보스 4개(z10.6에 닿음), 위치 핀 반경 놀음 0.10; r4.4 고침 2까지는 길이 없었음(핀 발이 바닥~윗판, 기판 뒤 여유 1.3)
+  [OK ] PLAY   r4.4 고침 2b F|F# 핀 발 킬(밸런스 레일 뒷면까지, 바닥 대신): 화음 자리 강성 460 N/mm 이상(단계 0 합격선), 킬 굽힘 층 안 매 음 12 / 드문 25 MPa, 전단 층간 기준 매 음 5 / 드문 15 MPa 화음 자리 492 N/mm (r4.5 고침 2: 레일 + 바닥 띠를 핀 선 사이 보로; 킬 z19.3 + F|F# 핀 앞끝 y148.6; 레일 고정이면 495, r4.4 킬 z18·앞끝 y152면 447, 첫 시도 킬 z21은 건반 F에 0.21); 킬 한 건반 PLAY 3.35 MPa (전단 1.60), 6건반 화음 PLAY 13.02 (6.25), ABUSE 화음 2.0 m/s 17.68 (8.48) MPa
+  [OK ] BUILD  r4.5 고침 2 첫 모듈 정하중 확인(단계 0): 6패드 × 60 N에서 E·F 패드 자리 처짐 ≤ 60 / 460 = 0.13 mm (모델) 모델 E·F 최대 0.121 mm (D-D#-E-F-F#-G 화음), 가장 무른 자리 496 N/mm
+  [OK ] BUILD  r4.4 회로 대조: 스탠드오프 M3 머리(L35 Ø5.7)·핀 ↔ 레일·리브 1.3, 핀은 기판 안·나사 구멍 둘레 기판 1.0 이상; 리본(차선·기판 밑·SB 리브 틈) 양옆 1.3; 플러그 y196.8~221.8 ↔ 선반 홈·뒷벽 개구 1.3; 끝 부속 리드 패드·선 ↔ 리브 틈 1.3, 리드 길(모음 포함) ↔ 바닥 부품 1.3, 기판이 센서 바 안 머리 ↔ 레일 1.65, ↔ 리브 1.54 (축 위 1.45), 구멍 둘레 기판 1.15 (머리는 모서리 밖 0.10); 리본 1.32 / 1.36 (SB 리브 틈 1.32 / 1.36, 기판 밑 ↔ 핀 발 1.88); 플러그 홈 1.30, 뒷벽 개구 2.70; 리드 틈 최소 1.35, 리드 길 ↔ 바닥 부품 1.30 (A#0 탭 받침 1.75); 기판 부품 ↔ 프레임 1.30
+  [OK ] PLAY   r4.4 고침 2: 스윕에 레버 축 놀음(칼라·보스 사슬, 한쪽)·패드 바 옆 놀음 ±0.3·건반 노치가 봉에 앉음/파고듦(쉼·1 N 바닥 평면 상태, ff·복귀 넘침 동역학 최저) — 모든 쌍 1.3 이상 레버 ↔ 레버 1.32, 레버 ↔ 핀 1.32, 레버 ↔ 패드 바·패드·쐐기 1.44, 옆벽 ↔ 자기 패드 1.44 (고침 1 옆벽이면 0.73), 흑 블록 ↔ 밸런스 레일 1.31 (포켓 백 z18.90 y137.4~; 흑 z18.80 y137.2~)
+
+====================================================================================================
+O. SIMPLIFICATION r3 -> r4 (per module unless noted)
+====================================================================================================
+pieces per module: printed 76 -> 32, bought 173 -> 88, total 249 -> 120 (tools per instrument: r3 D30 driver + removal hook + M3 tap + D3 H7 reamer -> r4 D4.0 drill + 2.0 hex key + printed bench jig / capstan gauge / pin gauge)
+module mass 2.03 -> 1.37 kg; top of the module z78.0 (heads z80.7) -> z72.85, nothing above; base cost delta +130400 -> +69400 KRW; filament 6.54 -> 6.55 kg, 436 -> 436 h; metal 9.52 -> 5.10 kg
+carrier variants (left / right collar): C 0.00/0.95, C# 0.95/1.02, D 1.02/0.00, D# 0.00/1.50, E 1.50/0.93, F 0.93/0.00, F# 0.00/1.16, G 1.16/0.76, G# 0.76/0.00, A 0.00/0.76, A# 0.76/0.76, B 0.76/0.00, A0 0.00/2.62, A#0 2.62/0.76, B0 0.76/0.00, C8 0.00/0.00 -> 14 kinds; pad bars: 4 module bays + 2 end parts = 6 kinds; lever rods: module 161.4, left end 45.9, right end 22.2
+
+run time 1159 s (dynamics 194 s)

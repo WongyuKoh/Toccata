@@ -1,0 +1,3444 @@
+{
+ "cards": [
+  {
+   "id": "pi",
+   "cat": "cpu",
+   "title": "Raspberry Pi 5 2GB",
+   "role": "FluidSynth 소프트웨어 신스를 돌리고 USB-MIDI 8개(O1~O7, PED) 입력을 한 곳에서 병합하는 중앙 컴퓨터. 소리는 USB 동글(L51)로 내보낸다(R25: HAT 없음, GPIO 배선 없음)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "Raspberry Pi 5 2GB (라즈베리파이 5 2GB Raspberry pi 5)",
+       "qty": 1,
+       "unit": 119900,
+       "b": "base",
+       "store": "아이씨뱅큐",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P016286897",
+       "role": "FluidSynth 소프트웨어 신스를 돌리고 USB-MIDI 8개(O1~O7, PED) 입력을 한 곳에서 병합하는 중앙 컴퓨터. 소리는 USB 동글(L51)로 내보낸다(R25: HAT 없음, GPIO 배선 없음)",
+       "note": "",
+       "img": "L-L01",
+       "code": "L01",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "CP1",
+     "title": "Pi 5 2GB를 같은 Pi 5의 1GB 모델(디바이스마트)로",
+     "items": [
+      {
+       "name": "라즈베리파이5 (Raspberry Pi 5) 1GB + 가이드북",
+       "qty": 1,
+       "unit": 76725,
+       "b": "base",
+       "store": "디바이스마트 (상품번호 15895268)",
+       "ship": null,
+       "ship_fee": 0,
+       "url": "https://www.devicemart.co.kr/goods/view?no=15895268",
+       "role": "",
+       "note": "할인이 끝나면 80,300원(VAT 포함)이 되어 절감이 39,600원으로 줄어든다.",
+       "img": null,
+       "code": "CP1",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "디바이스마트는 평균 준비 1~2일이라, 배송기간 '8주 이상'으로 표기된 지금 아이씨뱅큐 2GB보다 훨씬 빨리 받는다.",
+      "SoC(BCM2712 2.4GHz)·장착 구멍·전원 경로가 같아 출력 보스·방열판·5.1 V 전원 설정을 그대로 쓴다.",
+      "Salamander SF2(약 296 MB)와 OS Lite가 1GB 안에 들어가, 소리·지연·안정성은 2GB와 같다."
+     ],
+     "cons": [
+      "R25(9/24)에서 Pi 5 2GB를 그대로 두기로 정했으므로, 이 안은 그 결정 전에 T2·T3에 넣은 안이다.",
+      "RAM 여유가 줄어 600 MB 이상 큰 음원이나 엔진 두 개 동시 실행은 어렵고, 데스크톱 OS 대신 OS Lite를 써야 한다.",
+      "'한정수량 초특가' 5% 할인가라, 할인이 끝나면 값이 80,300원(VAT 포함)으로 오른다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "음원 컴퓨터가 없어진다. 가진 Pi 5나 PC·노트북을 음원 호스트로 쓸 때만 고른다."
+  },
+  {
+   "id": "heatsink",
+   "cat": "cpu",
+   "title": "Pi 5 방열판",
+   "role": "SoC·메모리·RP1·이더넷 칩의 열을 뺀다. 팬 없는 저높이 스티커형(R25 이후 위에 HAT이 없어 높이 제한도 없다)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "라즈베리파이5 방열판 / 5B 전용 / 알루미늄 (4개 세트)",
+       "qty": 1,
+       "unit": 1400,
+       "b": "base",
+       "store": "메카솔루션",
+       "ship": "메카솔루션",
+       "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=605179",
+       "role": "SoC·메모리·RP1·이더넷 칩의 열을 뺀다. 팬 없는 저높이 스티커형(R25 이후 위에 HAT이 없어 높이 제한도 없다)",
+       "note": "",
+       "img": "L-L02",
+       "code": "L02",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "piscrew",
+   "cat": "cpu",
+   "title": "Pi 고정 나사 M2.5×6",
+   "role": "Pi 5를 CU 트레이의 출력 보스 4개(Ø2.2 탭 구멍)에 바로 조이는 나사(4개 + 예비 2). R26으로 황동 스탠드오프(L37)가 빠졌다(비용 절감안 CP7)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "스텐 유두 렌치볼트 M2.5 × 6mm",
+       "qty": 6,
+       "unit": 200,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "role": "Pi 5를 CU 트레이의 출력 보스 4개(Ø2.2 탭 구멍)에 바로 조이는 나사(4개 + 예비 2). R26으로 황동 스탠드오프(L37)가 빠졌다(비용 절감안 CP7)",
+       "note": "",
+       "img": "L-L47",
+       "code": "L47",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "sd",
+   "cat": "cpu",
+   "title": "microSD 카드",
+   "role": "Raspberry Pi OS Lite, FluidSynth, Salamander 음원(SF2 296MB)을 담는 부팅 카드",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "SanDisk micro SD Ultra 2022 32GB (SDSQUA4-032G-GN6MA)",
+       "qty": 1,
+       "unit": 15490,
+       "b": "base",
+       "store": "다나와 최저가 판매처",
+       "ship": "다나와 최저가 판매처",
+       "url": "https://prod.danawa.com/info/?pcode=20358155",
+       "role": "Raspberry Pi OS Lite, FluidSynth, Salamander 음원(SF2 296MB)을 담는 부팅 카드",
+       "note": "다나와에서 최저가 판매처로 이동해 구매. 판매처·가격이 바뀔 수 있다",
+       "img": "L-L03",
+       "code": "L03",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "CPV1",
+     "title": "microSD를 SanDisk 32GB에서 국내 재고 8GB 카드로",
+     "items": [
+      {
+       "name": "[서율] SY MicroSD Card 8GB SY-008G (SDHC, Class10, 벌크)",
+       "qty": 1,
+       "unit": 7260,
+       "b": "base",
+       "store": "아이씨뱅큐 (P016848363)",
+       "ship": "아이씨뱅큐",
+       "ship_fee": 0,
+       "url": "https://www.icbanq.com/P016848363",
+       "role": "",
+       "note": "아이씨뱅큐 주문이 VAT 제외 5만원을 넘어 무료배송. PC에 SD 리더가 없으면 선택 O06이 필요한 것은 원안과 같다.",
+       "img": null,
+       "code": "CPV1",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "Pi OS Lite(설치 후 약 2.5~3GB)에 FluidSynth와 Salamander 음원(296MB)을 더해도 4GB 안이라 8GB로 충분하다.",
+      "아이씨뱅큐 국내 재고라 2~3일에 오고, 같은 아이씨뱅큐 주문에 합쳐 배송비가 따로 붙지 않는다.",
+      "소리에는 영향이 없고, 카드에 5년 보증이 붙는다."
+     ],
+     "cons": [
+      "읽기가 20MB/s라 음원 296MB를 읽는 데 약 15초가 걸려, 켜고 소리가 나기까지 지금보다 10초 이상 늦다.",
+      "무명 브랜드 벌크 카드라 수명이 불확실하고, 여유가 약 4GB라 음원을 여러 개 넣으려면 16GB 이상이 필요하다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "가진 microSD(8 GB 이상)를 쓸 때."
+  },
+  {
+   "id": "hub",
+   "cat": "cpu",
+   "title": "전원형 USB 허브",
+   "role": "모듈 7개 + PED의 USB-MIDI를 Pi 5 USB 한 포트로 모은다. 전원은 본체 5.1 V 강압 모듈(L58)에서 DC 잭으로 받는다(허브에 딸린 5 V 3 A 어댑터 선을 잘라 플러그 쪽을 쓴다). 길이 228 mm라 CU 칸(안폭 189)이 아니라 보조배터리 칸 뒤 벽에 둔다(R26·R28)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "이지넷유비쿼터스 NEXTU 유우젠 710U3 (10포트/USB 3.0, 유전원)",
+       "qty": 1,
+       "unit": 30700,
+       "b": "base",
+       "store": "다나와 최저가 (쿠팡 로켓배송)",
+       "ship": null,
+       "url": "https://prod.danawa.com/info/?pcode=29865749",
+       "role": "모듈 7개 + PED의 USB-MIDI를 Pi 5 USB 한 포트로 모은다. 전원은 본체 5.1 V 강압 모듈(L58)에서 DC 잭으로 받는다(허브에 딸린 5 V 3 A 어댑터 선을 잘라 플러그 쪽을 쓴다). 길이 228 mm라 CU 칸(안폭 189)이 아니라 보조배터리 칸 뒤 벽에 둔다(R26·R28)",
+       "note": "다나와에서 최저가 판매처로 이동해 구매",
+       "img": "L-L17",
+       "code": "L17",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "CP8",
+     "title": "USB 허브를 7포트 USB 2.0으로, PED 보드는 Pi에 직결",
+     "items": [
+      {
+       "name": "유니콘 XH-800A (USB허브/7포트, USB 2.0, 어댑터 포함) [블랙]",
+       "qty": 1,
+       "unit": 8860,
+       "b": "base",
+       "store": "엘레파츠 (no=14151893)",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=14151893",
+       "role": "",
+       "note": "엘레파츠 합배송(공급가 6만원 이상 무료). '주문' 표시상품이라 단순 변심 반품이 안 된다. 다나와 최저가는 7,350원 + 배송비다.",
+       "img": null,
+       "code": "CP8",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "USB-MIDI는 Full-Speed라 USB 2.0 허브로 충분하고, 소리와 MIDI 지연에는 차이가 없다.",
+      "PED 보드(약 30 mA)는 CU 안에서 Pi USB 포트에 바로 꽂아도 전류 여유가 크고, 허브 포트 1~7은 모듈 O1~O7에 고정한다.",
+      "포트별 전원 스위치·LED가 있고, 엘레파츠 다른 부품과 합배송된다(공급가 6만원 이상 무료)."
+     ],
+     "cons": [
+      "어댑터 정격이 공개되지 않았고 판매처 사양란은 '무전원'이라, 받은 뒤 어댑터 포함 여부와 전압을 확인해야 한다.",
+      "예비 포트가 없어 포트 스위치를 실수로 끄면 모듈이 사라진다(스위치는 켠 채 테이프로 고정한다).",
+      "업스트림 케이블이 일체형이라 역급전을 케이블 교체로 막을 수 없고, '주문' 상품이라 단순 변심 반품이 안 된다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "가진 전원형 USB 허브(8포트 이상)를 쓸 때. 없으면 모듈을 Pi에 다 꽂을 수 없다."
+  },
+  {
+   "id": "charger",
+   "cat": "cpu",
+   "title": "65 W PD 벽 충전기",
+   "role": "벽 전원. 피아노 I/O 판의 USB-C 입력(L57)에 2 m C-C 선(C23)으로 잇는다. C1 또는 C2 포트 하나만 쓴다(두 포트를 함께 쓰면 45 W로 줄어 최대 음량에서 모자람). 제작 중에는 같은 충전기로 인두(T01)를 쓴다(R28)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "파워마스터 PD PPS 65W 3포트 GaN 접지형 충전기 PG65PDG2C1A (케이블미포함)",
+       "qty": 1,
+       "unit": 19800,
+       "b": "base",
+       "store": "다나와 최저가 판매처",
+       "ship": "다나와 최저가 판매처",
+       "url": "https://prod.danawa.com/info/?pcode=59074565",
+       "role": "벽 전원. 피아노 I/O 판의 USB-C 입력(L57)에 2 m C-C 선(C23)으로 잇는다. C1 또는 C2 포트 하나만 쓴다(두 포트를 함께 쓰면 45 W로 줄어 최대 음량에서 모자람). 제작 중에는 같은 충전기로 인두(T01)를 쓴다(R28)",
+       "note": "다나와에서 최저가 판매처로 이동해 구매",
+       "img": "L-L62",
+       "code": "L62",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "65 W 이상 USB-C PD 충전기가 있으면(노트북 충전기 등)."
+  },
+  {
+   "id": "pd",
+   "cat": "cpu",
+   "title": "PD 트리거 (USB-C 20 V 입력)",
+   "role": "피아노의 전원 입력(USB-C). 벽 충전기(L62)나 보조배터리와 PD로 협상해 20 V를 받아 퓨즈(L60) → 스위치(L59) → 20 V 버스로 보낸다. I/O 판 안쪽 포켓에 끼워 USB-C 구멍이 밖을 향한다(R28)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "100W QC PD 트리거 디코이 고정출력 모듈 5V-20V (HAM6113, HUSB238)",
+       "qty": 1,
+       "unit": 4950,
+       "b": "base",
+       "store": "아이씨뱅큐 (제노)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P017179277",
+       "role": "피아노의 전원 입력(USB-C). 벽 충전기(L62)나 보조배터리와 PD로 협상해 20 V를 받아 퓨즈(L60) → 스위치(L59) → 20 V 버스로 보낸다. I/O 판 안쪽 포켓에 끼워 USB-C 구멍이 밖을 향한다(R28)",
+       "note": "",
+       "img": "L-L57",
+       "code": "L57",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "buck",
+   "cat": "cpu",
+   "title": "5.1 V 강압 모듈",
+   "role": "20 V 버스 → 5.1 V. Pi 5(USB-C 전원선 C24)와 USB 허브(L17, DC 잭)에 전원을 준다. Pi에는 이 5 V만 들어간다(D16). CU 트레이 보스에 M3×10(L34) 4개로 고정(R28)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "200W XL4016 DC-DC 강압 컨버터 모듈 IN 4-40V OUT 1.25-36V 5A (HAM6415, XH-M401)",
+       "qty": 1,
+       "unit": 5170,
+       "b": "base",
+       "store": "아이씨뱅큐 (제노)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P017179502",
+       "role": "20 V 버스 → 5.1 V. Pi 5(USB-C 전원선 C24)와 USB 허브(L17, DC 잭)에 전원을 준다. Pi에는 이 5 V만 들어간다(D16). CU 트레이 보스에 M3×10(L34) 4개로 고정(R28)",
+       "note": "",
+       "img": "L-L58",
+       "code": "L58",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "switch",
+   "cat": "cpu",
+   "title": "전원 스위치",
+   "role": "피아노 전원 스위치. PD 트리거·퓨즈 뒤 20 V 쪽에 넣어 앰프와 강압 모듈을 함께 켜고 끈다. I/O 판의 출력 구멍에 끼운다(스냅인, R28)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[ZX Electronics] KCD1-101A BLACK I/O 로커 스위치 (2P ON-OFF, 6A 250VAC / 10A 125VAC)",
+       "qty": 1,
+       "unit": 385,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=32569",
+       "role": "피아노 전원 스위치. PD 트리거·퓨즈 뒤 20 V 쪽에 넣어 앰프와 강압 모듈을 함께 켜고 끈다. I/O 판의 출력 구멍에 끼운다(스냅인, R28)",
+       "note": "",
+       "img": "L-L59",
+       "code": "L59",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "fuse",
+   "cat": "cpu",
+   "title": "퓨즈 홀더 + 퓨즈",
+   "role": "20 V 버스 보호 퓨즈 홀더. PD 트리거 출력 + 선에 끼워 배선 단락 때 선이 타지 않게 한다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[Coms] BU914 원형 휴즈 홀더 (5×20 mm, 인라인)",
+       "qty": 1,
+       "unit": 1110,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=3237821",
+       "role": "20 V 버스 보호 퓨즈 홀더. PD 트리거 출력 + 선에 끼워 배선 단락 때 선이 타지 않게 한다",
+       "note": "",
+       "img": "L-L60",
+       "code": "L60",
+       "verified": true
+      },
+      {
+       "name": "[LITTELFUSE] 0218005.MXP 5 A 지연형 퓨즈 5×20 mm",
+       "qty": 5,
+       "unit": 110,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=12766820",
+       "role": "홀더에 넣는 5 A 지연형 퓨즈 1개 + 예비 4개(R28)",
+       "note": "최소 5개",
+       "img": "L-L60",
+       "code": "L60",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "pdcable",
+   "cat": "cpu",
+   "title": "USB-C PD 케이블 (보조배터리·벽 충전기)",
+   "role": "보조배터리 → 피아노 USB-C 입력. 보조배터리 칸에서 낮은 칸막이 위 → CU 칸 → I/O 판 선 통과 구멍으로 빼서 입력(L57)에 꽂는다(R28)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[MachLink] USB-C to C PD 60W 초고속충전 케이블, ML-CPD606 [블랙/0.6m]",
+       "qty": 1,
+       "unit": 1440,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=17806172",
+       "role": "보조배터리 → 피아노 USB-C 입력. 보조배터리 칸에서 낮은 칸막이 위 → CU 칸 → I/O 판 선 통과 구멍으로 빼서 입력(L57)에 꽂는다(R28)",
+       "note": "",
+       "img": "L-C22",
+       "code": "C22",
+       "verified": true
+      },
+      {
+       "name": "[MachLink] USB-C to C PD 60W 초고속충전 케이블, ML-CPD62 [블랙/2m]",
+       "qty": 1,
+       "unit": 2670,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=17806170",
+       "role": "벽 충전기(L62) → 피아노 USB-C 입력(L57). 제작 중에는 인두(T01) 전원선으로도 쓴다(R28)",
+       "note": "",
+       "img": "L-C23",
+       "code": "C23",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "pipower",
+   "cat": "cpu",
+   "title": "Pi 전원선 (USB-C 제작용)",
+   "role": "5.1 V 강압 모듈(L58) 출력 → Pi 5 USB-C 전원 입력. 벗겨진 두 선(빨강 +, 검정 −)을 강압 모듈 출력 단자에 물린다(R28)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[MAXTEK] 맥스텍 USB C타입 제작용 케이블 2선 Type-C Male(숫) DIY PD 전원 [MT666]",
+       "qty": 1,
+       "unit": 1190,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=17358965",
+       "role": "5.1 V 강압 모듈(L58) 출력 → Pi 5 USB-C 전원 입력. 벗겨진 두 선(빨강 +, 검정 −)을 강압 모듈 출력 단자에 물린다(R28)",
+       "note": "",
+       "img": "L-C24",
+       "code": "C24",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "mcu",
+   "cat": "sen",
+   "title": "RP2040-Zero 8개 · 4067 먹스 7개",
+   "role": "모듈마다 1개(O1~O7) + 페달 보드 1개, 예비 없음. 4067 먹스를 스캔해 속도를 계산하고 USB-MIDI 장치('Toccata O1'~'O7', 'Toccata PED')가 된다. 안쪽 구멍 핀 헤더 1×9 ×2(몰드 뺌)로 제어 기판에 납땜, 캡톤 위 약 +1.3 mm",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "(PP-A799-2) 라즈베리 파이 피코 PICO RP2040-ZERO",
+       "qty": 8,
+       "unit": 3300,
+       "b": "base",
+       "store": "파츠파츠 (동신전자)",
+       "ship": "파츠파츠",
+       "url": "https://parts-parts.co.kr/product/detail.html?product_no=2383",
+       "role": "모듈마다 1개(O1~O7) + 페달 보드 1개, 예비 없음. 4067 먹스를 스캔해 속도를 계산하고 USB-MIDI 장치('Toccata O1'~'O7', 'Toccata PED')가 된다. 안쪽 구멍 핀 헤더 1×9 ×2(몰드 뺌)로 제어 기판에 납땜, 캡톤 위 약 +1.3 mm",
+       "note": "예비 없음(SEV2)",
+       "img": null,
+       "code": "SEV2",
+       "verified": true
+      },
+      {
+       "name": "(PP-A324) 16채널 아날로그/디지털 멀티플렉서 모듈",
+       "qty": 7,
+       "unit": 500,
+       "b": "base",
+       "store": "파츠파츠 (동신전자)",
+       "ship": "파츠파츠",
+       "url": "https://parts-parts.co.kr/product/detail.html?product_no=303",
+       "role": "모듈마다 1개, 예비 없음. 홀센서 12개(C0~C11)와 끝 부속 EXT 4채널(C12~C15)을 RP2040 ADC 한 채널로 읽는다; 제어 기판에 직접 납땜(SE7)",
+       "note": "합배송",
+       "img": null,
+       "code": "SEV2",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "빼면 건반 모듈이 동작하지 않는다. 가진 RP2040-Zero가 있을 때만."
+  },
+  {
+   "id": "hall",
+   "cat": "sen",
+   "title": "선형 홀센서 100개",
+   "role": "건반 88 + 페달 1 = 89개 사용, 예비 11. 표시면을 위로 눕혀 센서 바 포켓에 넣고 건반 밑 자석(Ø5×2)의 거리를 연속으로 잰다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "TI DRV5055A2QLPG (TO-92-3 Linear Hall Effect Sensor, LCSC 경유)",
+       "qty": 100,
+       "unit": 891,
+       "b": "base",
+       "store": "아이씨뱅큐 (LCSC 해외 재고)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P018076669",
+       "role": "건반 88 + 페달 1 = 89개 사용, 예비 11. 표시면을 위로 눕혀 센서 바 포켓에 넣고 건반 밑 자석(Ø5×2)의 거리를 연속으로 잰다",
+       "note": "",
+       "img": "L-L20",
+       "code": "L20",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "SE1",
+     "title": "홀센서 DRV5055A2를 OH49E(49E 원제조사) 100개로",
+     "items": [
+      {
+       "name": "OH49E (Nanjing Ouzhuo, TO-92S 선형 홀센서)",
+       "qty": 100,
+       "unit": 231,
+       "b": "base",
+       "store": "아이씨뱅큐 (LCSC 경유 해외 재고, P015597030)",
+       "ship": "아이씨뱅큐",
+       "ship_fee": 0,
+       "url": "https://www.icbanq.com/P015597030",
+       "role": "",
+       "note": "아이씨뱅큐 페이지 사진이 '준비중' 이미지라 제조사(ohhallsensor.com) 제품 사진을 썼다. 95개(21,945원)나 90개(20,790원)로도 살 수 있다. 아이씨뱅큐 합배송이다.",
+       "img": null,
+       "code": "SE1",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "핀 배치(1 VCC·2 GND·3 OUT)와 TO-92 계열 크기가 같아 센서 기판 배선과 핀 순서를 그대로 둔다.",
+      "센서 자체 출력 잡음이 90 µV(약 0.1 LSB)로 DRV5055(6 mVpp)보다 작다.",
+      "지금처럼 아이씨뱅큐(LCSC) 합배송이고, 5개 단위라 95개나 90개로 줄여 살 수도 있다."
+     ],
+     "cons": [
+      "3.3 V 감도가 약 13 mV/mT로 DRV5055A2(30 mV/mT)의 절반이 안 돼, 행정당 ADC가 백 1051→462카운트로 준다.",
+      "8회 평균을 해도 벨로시티 잡음 오차가 백 0.53→0.86%, 흑 0.70→1.12%로 커져 MIDI 한 단계(2.93%)까지 여유가 준다(R2 저하).",
+      "3.3 V 감도·출력 상한은 5 V 값에서 추정한 값이고, 3.3 V 전원은 제조사 페이지 하한(3.0 V)과 0.3 V 차이다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "빼면 건반을 감지할 수 없다. 가진 선형 홀센서가 있을 때만."
+  },
+  {
+   "id": "magnet",
+   "cat": "sen",
+   "title": "네오디뮴 자석 Ø5×2 100개",
+   "role": "건반 밑면 포켓에 압입하는 센서용 자석(S극 아래). 건반 88 + 페달 1 = 89개 사용, 예비 11",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "초강력 네오디움 원형자석 5mm (Ø5×2.0T, N35)",
+       "qty": 100,
+       "unit": 80,
+       "b": "base",
+       "store": "대건상사",
+       "ship": "대건상사",
+       "url": "https://dgmagnet.com/product/%EC%B4%88%EA%B0%95%EB%A0%A5-%EB%84%A4%EC%98%A4%EB%94%94%EC%9B%80-%EC%9B%90%ED%98%95%EC%9E%90%EC%84%9D-5mm/13/",
+       "role": "건반 밑면 포켓에 압입하는 센서용 자석(S극 아래). 건반 88 + 페달 1 = 89개 사용, 예비 11",
+       "note": "",
+       "img": "L-L21",
+       "code": "L21",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "SE3",
+     "title": "자석 Ø5×2를 대건상사 N35에서 정신마그네트 제품으로",
+     "items": [
+      {
+       "name": "원형-5mm 사이즈 네오디움 자석 (04_D5X2T)",
+       "qty": 100,
+       "unit": 60,
+       "b": "base",
+       "store": "정신마그네트 (jungshinmagnet.co.kr)",
+       "ship": "O:정신마그네트 (jungshinmagnet.co.kr)",
+       "ship_fee": 3000,
+       "url": "https://jungshinmagnet.co.kr/product/%EC%9B%90%ED%98%95-5mm-%EC%82%AC%EC%9D%B4%EC%A6%88/21/",
+       "role": "",
+       "note": "옵션 데이터(option_stock_data)에서 60원, 판매 중임을 다시 확인했다. 92개만 사면 480원 더 준다.",
+       "img": null,
+       "code": "SE3",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "치수가 Ø5×2로 같아 건반 밑면 자석 포켓과 설계를 바꿀 필요가 없다.",
+      "N52급처럼 세더라도 끝까지 눌렀을 때 약 39mT로 지금 홀센서(DRV5055)의 선형 범위 44mT 안이다.",
+      "옵션(04_D5X2T)이 60원에 판매 중인 것을 9/24에 다시 확인했고, 택배로 1~3일에 온다."
+     ],
+     "cons": [
+      "등급 표기가 없어 자기장 계산 기준인 N35(Br 1.20 T)와 세기가 다를 수 있다.",
+      "N52급이면 ff 과행정에서 선형 범위를 넘고, 로트가 섞이면 건반마다 신호 크기가 보정 범위 안에서 달라진다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "빼면 센서가 건반을 볼 수 없다. 가진 Ø5×2 자석이 있을 때만."
+  },
+  {
+   "id": "sensorpcb",
+   "cat": "sen",
+   "title": "센서 기판 (만능기판 12×18)",
+   "role": "센서 기판(162×15.24mm, 6행) 띠를 잘라 낸다. 1장에서 약 6띠 → 2장으로 모듈 7개 + 끝 부속 2개분",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "PCB기판/양면기판/에폭시/프로토보드 (12x18cm)",
+       "qty": 2,
+       "unit": 2200,
+       "b": "base",
+       "store": "메카솔루션",
+       "ship": "메카솔루션",
+       "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=540645",
+       "role": "센서 기판(162×15.24mm, 6행) 띠를 잘라 낸다. 1장에서 약 6띠 → 2장으로 모듈 7개 + 끝 부속 2개분",
+       "note": "",
+       "img": "L-L22",
+       "code": "L22",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "ctrlpcb",
+   "cat": "sen",
+   "title": "제어 기판 (만능기판 5×7)",
+   "role": "모듈 제어 기판(RP2040-Zero + 4067) 7장 + PED 보드 1장. 자투리는 PJ-313 받침",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "PCB기판/양면기판/에폭시/프로토보드 (5x7cm)",
+       "qty": 8,
+       "unit": 520,
+       "b": "base",
+       "store": "메카솔루션",
+       "ship": "메카솔루션",
+       "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=329798",
+       "role": "모듈 제어 기판(RP2040-Zero + 4067) 7장 + PED 보드 1장. 자투리는 PJ-313 받침",
+       "note": "L02·L22와 같은 주문",
+       "img": null,
+       "code": "SE8",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "header",
+   "cat": "sen",
+   "title": "핀헤더 1×40 (먹스·제로)",
+   "role": "4067 먹스 7개 × (16+8)핀 = 168핀 + RP2040-Zero 8개 × 1×9 ×2 = 144핀 → 312핀, 1×40 9줄(360핀)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "핀헤더 1×40 - 2.54MM(S/T) _ 11.5MM(1단몰드)",
+       "qty": 9,
+       "unit": 165,
+       "b": "base",
+       "store": "아이씨뱅큐",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P005666127",
+       "role": "4067 먹스 7개 × (16+8)핀 = 168핀 + RP2040-Zero 8개 × 1×9 ×2 = 144핀 → 312핀, 1×40 9줄(360핀)",
+       "note": "모듈에 수 헤더가 들어 있으면 줄여도 된다",
+       "img": null,
+       "code": "SE7",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "c100n",
+   "cat": "sen",
+   "title": "100nF 1206 콘덴서",
+   "role": "센서마다 1개(3V3–GND 디커플링, 센서 기판 아랫면) + PED 보드 + 제어 기판 C301 ×7 = 97개 사용, 예비 3",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "Samsung CL31B104KCFNNNE (1206 100nF 100V X7R)",
+       "qty": 100,
+       "unit": 44,
+       "b": "base",
+       "store": "아이씨뱅큐 (LCSC 해외 재고)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P014968846",
+       "role": "센서마다 1개(3V3–GND 디커플링, 센서 기판 아랫면) + PED 보드 + 제어 기판 C301 ×7 = 97개 사용, 예비 3",
+       "note": "삼성 CL31B104KCFNNNE(100 V). 판매처 사진이 안 열려 품번으로 확인",
+       "img": null,
+       "code": "SE4",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "SEV4",
+     "title": "49E 홀센서일 때 100nF를 센서마다 1개에서 모듈당 3개로",
+     "items": [
+      {
+       "name": "Samsung CL31B104KCFNNNE (1206 100nF 100V X7R)",
+       "qty": 100,
+       "unit": 44,
+       "b": "base",
+       "store": "아이씨뱅큐 (LCSC 해외 재고)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P014968846",
+       "role": "센서마다 1개(3V3–GND 디커플링, 센서 기판 아랫면) + PED 보드 + 제어 기판 C301 ×7 = 97개 사용, 예비 3",
+       "note": "삼성 CL31B104KCFNNNE(100 V). 판매처 사진이 안 열려 품번으로 확인",
+       "img": null,
+       "code": "SE4",
+       "verified": true
+      },
+      {
+       "name": "Samsung CL31B104KCFNNNE (1206 100nF 100V X7R)",
+       "qty": 30,
+       "unit": 44,
+       "b": "base",
+       "store": "아이씨뱅큐 (LCSC 경유 해외 재고, P014968846)",
+       "ship": "아이씨뱅큐",
+       "ship_fee": 0,
+       "url": "https://www.icbanq.com/P014968846",
+       "role": "",
+       "note": "모듈 7 × 3 = 21 + 끝 부속 2 + PED 필터 1 + 예비 6",
+       "img": null,
+       "code": "SEV4",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "49E는 초퍼가 없는 단순 선형 센서이고 데이터시트도 외부 필터가 필요 없다고 적어, 센서별 콘덴서가 필요 없다.",
+      "납땜할 1206 콘덴서가 센서마다 1개(88개)에서 센서 기판 양 끝과 가운데 3개로 준다.",
+      "49E는 거의 일정한 직류(약 4mA)를 끌어 순간 전류가 작아, 3개로도 180mm 리본 끝 버스의 임피던스가 충분히 낮다."
+     ],
+     "cons": [
+      "DRV5055 데이터시트는 센서마다 0.01µF 이상을 권장해, 홀센서를 49E로 바꾸는 안(SE1)을 고를 때만 쓸 수 있다.",
+      "49E 안(SE1)이 불합격해 DRV5055로 되돌리면 콘덴서 70개(약 3,080원, 1주)를 더 주문해야 한다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "c10u",
+   "cat": "sen",
+   "title": "10 µF 1206 콘덴서 (전원 안정)",
+   "role": "센서 기판 C213·C214 ×7 + 끝 부속 EL C404 + ER C412 = 16개(회로 △1·△3). 34개 남음",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "C3216-10UF(K 16V) — 1206 10 µF 16 V 칩 세라믹 콘덴서 (50개 단위)",
+       "qty": 1,
+       "unit": 7150,
+       "b": "base",
+       "store": "아이씨뱅큐 (오렌지반도체)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P001248090",
+       "role": "센서 기판 C213·C214 ×7 + 끝 부속 EL C404 + ER C412 = 16개(회로 △1·△3). 34개 남음",
+       "note": "9/28 확인: 6,500원 + VAT = 7,150원, 국내 재고, 1~2일. 제조사·유전체 표기 없음. 주문 제작 상품이라 취소·반품 불가",
+       "img": "P-L67",
+       "code": "L67",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "cl31k16",
+     "title": "삼성 CL31A106KOHNNNE 20개 (같은 16 V, LCSC 해외 재고)",
+     "src": "9/28 조사",
+     "verified": true,
+     "fits": true,
+     "items": [
+      {
+       "name": "Samsung CL31A106KOHNNNE (1206 10 µF 16 V X5R)",
+       "qty": 20,
+       "unit": 242,
+       "b": "base",
+       "store": "아이씨뱅큐 (LCSC 해외 재고, P014969585)",
+       "ship": "아이씨뱅큐",
+       "ship_fee": 0,
+       "url": "https://www.icbanq.com/P014969585",
+       "role": "",
+       "note": "10~99개 220원 + VAT = 242원, 1개 단위. 16개 + 예비 4",
+       "img": "P-L67-cl31",
+       "code": "L67",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "같은 규격(16 V X5R)을 필요한 만큼만 산다",
+      "제조사·품번이 분명하다"
+     ],
+     "cons": [
+      "해외 재고라 1주 이내 도착, 취소·반품 불가"
+     ],
+     "note": ""
+    },
+    {
+     "id": "cl31k25",
+     "title": "삼성 CL31A106KAHNNNE 29개 (25 V, Arrow 해외 재고)",
+     "src": "9/28 조사",
+     "verified": true,
+     "fits": true,
+     "items": [
+      {
+       "name": "Samsung CL31A106KAHNNNE (1206 10 µF 25 V X5R)",
+       "qty": 29,
+       "unit": 44,
+       "b": "base",
+       "store": "아이씨뱅큐 (Arrow 해외 재고, P011854568)",
+       "ship": "아이씨뱅큐",
+       "ship_fee": 0,
+       "url": "https://www.icbanq.com/P011854568",
+       "role": "",
+       "note": "29개 단위, 40원 + VAT = 44원. 9/28 재고 29개뿐",
+       "img": "P-L67-cl31",
+       "code": "L67",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "가장 싸다",
+      "25 V라 전압 여유가 더 크다"
+     ],
+     "cons": [
+      "도착이 1달 이내로 느리다",
+      "재고가 29개뿐이라 주문할 때 없을 수 있다"
+     ],
+     "note": ""
+    }
+   ],
+   "unused": "빼면 센서 기판·끝 부속의 전원 안정 콘덴서(△1·△3)를 달 수 없다. 가진 1206 10 µF(16 V 이상)가 16개 있을 때만."
+  },
+  {
+   "id": "r1k1206",
+   "cat": "sen",
+   "title": "1 kΩ 1206 칩 저항 (끝 부속)",
+   "role": "끝 부속 EL R401~R403 + ER R411 = 4개(회로 △13, 기판 아랫면). 10개 단위 판매",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "Yageo RC1206JR-071KL — 1206 1 kΩ 5 % 1/4 W 칩 저항",
+       "qty": 10,
+       "unit": 44,
+       "b": "base",
+       "store": "아이씨뱅큐 (element14 해외 재고)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P011433924",
+       "role": "끝 부속 EL R401~R403 + ER R411 = 4개(회로 △13, 기판 아랫면). 10개 단위 판매",
+       "note": "9/28 확인: 40원 + VAT = 44원, 10개 단위, 해외 재고 4,690개, 4~6일. 해외 재고는 취소·반품 불가",
+       "img": "P-L68",
+       "code": "L68",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "빼면 끝 부속 R401~R403·R411을 달 수 없다. 가진 1206 1 kΩ가 4개 있을 때만."
+  },
+  {
+   "id": "extlead",
+   "cat": "sen",
+   "title": "끝 부속 6핀 잠금 커넥터 선",
+   "role": "끝 부속 ↔ O1·O7 센서 선 6가닥을 잇는 잠금형 커넥터 2쌍. 200 mm 연장선을 모듈 쪽 150 · 끝 부속 쪽 50으로 잘라 수·암 리드 1쌍으로 쓴다(압착 공구 불필요, R26)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "리튬폴리머 배터리 밸런스잭 연장선 5셀용 (JST-XH 6핀 수↔암, BU-LP 5S, 200mm)",
+       "qty": 2,
+       "unit": 3000,
+       "b": "base",
+       "store": "알씨뱅크",
+       "ship": "알씨뱅크",
+       "url": "https://www.rcbank.co.kr/shop/goods/goods_view.php?goodsno=29812",
+       "role": "끝 부속 ↔ O1·O7 센서 선 6가닥을 잇는 잠금형 커넥터 2쌍. 200 mm 연장선을 모듈 쪽 150 · 끝 부속 쪽 50으로 잘라 수·암 리드 1쌍으로 쓴다(압착 공구 불필요, R26)",
+       "note": "",
+       "img": "L-L66",
+       "code": "L66",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "usbcable",
+   "cat": "sen",
+   "title": "모듈 USB 케이블 8가닥",
+   "role": "모듈 7개 + PED 보드 → 허브 USB 8가닥. 허브에 꽂힌 채 뒷바 아래 케이블 통로에 두고, 설치 때 모듈 쪽만 꽂는다(R27). 모듈 쪽 C 플러그 몰드 ≤ 12.5 × 7.6 × 25(폭 초과 금지)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[NA993] Coms USB 3.1 Type C 케이블 1M USB 2.0 A to C타입 White",
+       "qty": 8,
+       "unit": 1620,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=4313490",
+       "role": "모듈 7개 + PED 보드 → 허브 USB 8가닥. 허브에 꽂힌 채 뒷바 아래 케이블 통로에 두고, 설치 때 모듈 쪽만 꽂는다(R27). 모듈 쪽 C 플러그 몰드 ≤ 12.5 × 7.6 × 25(폭 초과 금지)",
+       "note": "NA993은 몰드 두께가 공개되지 않았다. 폭 약 11.3·길이 약 19.5는 사진으로 잰 추정값이다. 단계 0 시험 19(프레임 뒤 조각에 10번 꽂고 빼기)로 확인한다",
+       "img": "L-C04",
+       "code": "C04",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "dh20m",
+     "title": "CVILUX DH-20M50052 8개 — 몰드 치수가 공개된 유일한 선 (DigiKey)",
+     "src": "케이블 조사",
+     "verified": true,
+     "fits": true,
+     "items": [
+      {
+       "name": "CVILUX DH-20M50052 USB 2.0 A(수) → C(수) 1 m 검정 (DigiKey 2987-DH-20M50052-ND)",
+       "qty": 8,
+       "unit": 2593,
+       "b": "consumable",
+       "store": "DigiKey Korea (digikey.kr)",
+       "ship": "DigiKey",
+       "ship_fee": 20000,
+       "url": "https://www.digikey.kr/ko/products/detail/cvilux-usa/DH-20M50052/13177409",
+       "role": "",
+       "note": "C 몰드 11.97 × 6.42 × 20.93(DigiKey 캘리퍼 실측 사진) — 한계 12.5 × 7.6 × 25 안",
+       "img": "P-C04-dh20m",
+       "code": "C04",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "C 쪽 몰드 폭·두께·길이가 모두 공개 실측값이고 한계 안에 든다",
+      "홈 가장자리·건반 꼬리와의 틈이 지금보다 늘어난다"
+     ],
+     "cons": [
+      "DigiKey 배송비 20,000원(6만원 미만). 8개 + 배송비 40,744원으로 NA993보다 27,784원 많다"
+     ],
+     "note": "10개는 22,009원(개당 2,200.9원)이라 1,265원 더 내면 예비 2개가 생긴다. DigiKey에서 다른 부품과 합쳐 6만원을 넘기면 배송비가 없다. 받으면 단계 0 시험 19에 그대로 쓴다."
+    },
+    {
+     "id": "gcm01",
+     "title": "NETmate NM-GCM01BN 8개 — 길이 약 32로 맞지 않음",
+     "src": "케이블 조사",
+     "verified": true,
+     "fits": false,
+     "items": [
+      {
+       "name": "NETmate NM-GCM01BN USB-A 2.0 → C 1 m 블랙",
+       "qty": 8,
+       "unit": 2880,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=13026814",
+       "role": "",
+       "note": "폭 11.5·두께 6은 공개 도면 값. 몰드 길이는 공개되지 않았고 도면 축척으로 잰 추정 약 32(부트 포함)",
+       "img": "P-C04-gcm01",
+       "code": "C04",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "엘레파츠 합배송이라 배송비가 더 붙지 않는다"
+     ],
+     "cons": [
+      "추정 길이 약 32가 한계 25를 넘는다. 인터페이스를 \"딱딱한 몰드 ≤ 25, 부트 포함 ≤ 35\"로 고칠 때만 쓸 수 있다"
+     ],
+     "note": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "ribbon",
+   "cat": "sen",
+   "title": "리본 케이블 (센서 → 제어 기판, 배선)",
+   "role": "센서 기판 → 제어 기판 리본 16심 전부(OUT 12 + 3V3 ×2 + GND ×2, 약 180 mm) ×7 + EL·ER 리드 가닥",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[EUNSUNG] Flat Data Cable 2651-16P (1m단위)",
+       "qty": 2,
+       "unit": 1529,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=425",
+       "role": "센서 기판 → 제어 기판 리본 16심 전부(OUT 12 + 3V3 ×2 + GND ×2, 약 180 mm) ×7 + EL·ER 리드 가닥",
+       "note": "",
+       "img": "L-C05",
+       "code": "C05",
+       "verified": true
+      },
+      {
+       "name": "[EUNSUNG] Flat Data Cable 2651-16P (1m단위)",
+       "qty": 1,
+       "unit": 1529,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=425",
+       "role": "점퍼 단선 대신 리본 가닥으로: 센서 기판 3V3·GND 버스, 제어 기판 링크(SIG·S0~S3·EN), ID 브리지, 기판 배선(듀폰 점퍼 X1 대체)",
+       "note": "C05와 같은 품목을 1 m 더 산다. 주문 때 C05와 합쳐 3 m로 담아도 된다",
+       "img": null,
+       "code": "SE12",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "shrink",
+   "cat": "sen",
+   "title": "열수축튜브",
+   "role": "EXT 리드(L66 JST-XH)를 패드에 납땜한 곳, 선 이음, 페달 잭 뒤쪽 절연",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[엘레파츠] 열수축튜브 530세트 - 프라스틱케이스",
+       "qty": 1,
+       "unit": 6600,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=8170311",
+       "role": "EXT 리드(L66 JST-XH)를 패드에 납땜한 곳, 선 이음, 페달 잭 뒤쪽 절연",
+       "note": "",
+       "img": "L-C10",
+       "code": "C10",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "CT7",
+     "title": "수축튜브 530개 세트를 2·3·5파이 1 m씩으로",
+     "items": [
+      {
+       "name": "[한국에이스통신] 열수축튜브 2파이(1m) 색상옵션 — 흑색",
+       "qty": 1,
+       "unit": 165,
+       "b": "consumable",
+       "store": "엘레파츠 (no=6996)",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=6996",
+       "role": "",
+       "note": "세 상품의 이미지가 같은 일반 사진이다.",
+       "img": null,
+       "code": "CT7",
+       "verified": true
+      },
+      {
+       "name": "[한국에이스통신] 열수축튜브 3파이(1m) 색상옵션 — 흑색",
+       "qty": 1,
+       "unit": 187,
+       "b": "consumable",
+       "store": "엘레파츠 (no=6998)",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=6998",
+       "role": "",
+       "note": "",
+       "img": null,
+       "code": "CT7",
+       "verified": true
+      },
+      {
+       "name": "[한국에이스통신] 열수축튜브 5파이(1m) 색상옵션 — 흑색",
+       "qty": 1,
+       "unit": 242,
+       "b": "consumable",
+       "store": "엘레파츠 (no=7000)",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=7000",
+       "role": "",
+       "note": "",
+       "img": null,
+       "code": "CT7",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "필요한 굵기만 1 m씩 사서 20 mm로 자르면 굵기마다 50개가 나온다.",
+      "같은 2:1 수축 튜브라 절연 품질이 같고, 엘레파츠 통합 주문이라 배송비가 없다."
+     ],
+     "cons": [
+      "세트에 있던 1.5·4·6·8·10 mm 굵기가 없어, 굵기를 잘못 고르면 한 번 더 주문해야 한다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "kapton",
+   "cat": "sen",
+   "title": "캡톤 테이프",
+   "role": "RP2040-Zero 아래 절연(캡톤 1장), 기판 아랫면 절연",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[KzPton] 캡톤테이프 10mm폭x33m",
+       "qty": 1,
+       "unit": 4059,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=557",
+       "role": "RP2040-Zero 아래 절연(캡톤 1장), 기판 아랫면 절연",
+       "note": "",
+       "img": "L-C11",
+       "code": "C11",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "ties",
+   "cat": "sen",
+   "title": "케이블 타이",
+   "role": "USB 케이블을 뒷벽 고리에 묶어 당김 방지, EXT 리드(L66) 당김 방지 · 케이블 통로 안 USB 8가닥 묶음(R27)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "티테크놀로지 케이블타이, 100개 [소/100mm] [블랙] [T-C2510B]",
+       "qty": 1,
+       "unit": 438,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=9100003",
+       "role": "USB 케이블을 뒷벽 고리에 묶어 당김 방지, EXT 리드(L66) 당김 방지 · 케이블 통로 안 USB 8가닥 묶음(R27)",
+       "note": "",
+       "img": "L-C12",
+       "code": "C12",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "solder",
+   "cat": "sen",
+   "title": "실납 0.8 mm 50 g",
+   "role": "모듈당 약 200점, 전체 약 1,500점 손 납땜. 코어 플럭스만 쓴다(플럭스 펜 생략, CT22)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[YUN FANG] 유연납 0.8mm 50g",
+       "qty": 1,
+       "unit": 3850,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=12755646",
+       "role": "모듈당 약 200점, 전체 약 1,500점 손 납땜. 코어 플럭스만 쓴다(플럭스 펜 생략, CT22)",
+       "note": "모자라면 같은 상품을 더 산다(이 주문에 함께 넣으면 배송비 없음)",
+       "img": null,
+       "code": "CT5",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "speaker",
+   "cat": "aud",
+   "title": "스피커 유닛 2개 (삼미 CW-100B25)",
+   "role": "좌우 스피커 유닛 2개(R25: 서브 없음). 스피커 파트(오꾸메 밀폐 상자, 내부 5.05 L)의 출력 앞판에 끼워 연주자 쪽을 향하게 한다. 앰프(L53)가 채널당 약 21 W(20 V)를 준다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "삼미스피커(SAAT) CW-100B25 4인치 풀레인지 8Ω 25W (KS 인증)",
+       "qty": 2,
+       "unit": 9600,
+       "b": "base",
+       "store": "세운상가새한음향",
+       "ship": "세운상가새한음향",
+       "url": "https://www.11st.co.kr/products/1565354988",
+       "role": "좌우 스피커 유닛 2개(R25: 서브 없음). 스피커 파트(오꾸메 밀폐 상자, 내부 5.05 L)의 출력 앞판에 끼워 연주자 쪽을 향하게 한다. 앰프(L53)가 채널당 약 21 W(20 V)를 준다",
+       "note": "",
+       "img": "L-L07",
+       "code": "L07",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "내장 스피커 없이 헤드폰만 쓴다(R13·R14 요구를 포기). 앰프·스피커 상자도 함께 빼는 것이 맞다."
+  },
+  {
+   "id": "amp",
+   "cat": "aud",
+   "title": "TPA3110 앰프 보드",
+   "role": "좌우 스피커(L07)를 울리는 D급 앰프. 20 V 버스(PD 트리거 L57 → 퓨즈 → 스위치)에서 8 Ω 채널당 약 21 W. 입력은 CU 트레이의 앰프 입력 잭(L15 ③)에서 받는다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "XH-A232 (HW-404) TPA3110 2채널 앰프 보드 (제노 HAM6104)",
+       "qty": 1,
+       "unit": 2750,
+       "b": "base",
+       "store": "아이씨뱅큐 (제노)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P017179248",
+       "role": "좌우 스피커(L07)를 울리는 D급 앰프. 20 V 버스(PD 트리거 L57 → 퓨즈 → 스위치)에서 8 Ω 채널당 약 21 W. 입력은 CU 트레이의 앰프 입력 잭(L15 ③)에서 받는다",
+       "note": "",
+       "img": "L-L53",
+       "code": "L53",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "내장 스피커를 쓰지 않을 때만."
+  },
+  {
+   "id": "ampcap",
+   "cat": "aud",
+   "title": "앰프 입력 필터 1 µF",
+   "role": "앰프 입력의 저음 차단(고역 통과) 필터. 채널마다 1 µF 2개를 병렬(2 µF)로 직렬에 넣고 1 kΩ 풀다운(L29)과 묶어 약 93 Hz 아래를 6 dB/옥타브로 줄인다(D18)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "Monolithic Capacitor 1uF X7R 50V (리드형 적층 세라믹)",
+       "qty": 5,
+       "unit": 133,
+       "b": "base",
+       "store": "아이씨뱅큐 (동신전자)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P014159115",
+       "role": "앰프 입력의 저음 차단(고역 통과) 필터. 채널마다 1 µF 2개를 병렬(2 µF)로 직렬에 넣고 1 kΩ 풀다운(L29)과 묶어 약 93 Hz 아래를 6 dB/옥타브로 줄인다(D18)",
+       "note": "",
+       "img": "L-L56",
+       "code": "L56",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "resist",
+   "cat": "aud",
+   "title": "저항 4종 (필터·풀다운)",
+   "role": "1 kΩ: R701·R702·R501·R551 / 100 kΩ: R301(O1·O7)·R302·R303·R502 / 100 Ω: R503(100 Ω ×5 = 20 Ω, 필수) / 10 kΩ: 회로에서 안 씀(예비)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[ABCO] CFR 1/4W 5% 탄소피막 저항 1kΩ (10개 단위)",
+       "qty": 10,
+       "unit": 25,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=10911",
+       "role": "1 kΩ ×4: R701·R702(앰프 입력), R501·R551(페달). 6개 남음",
+       "note": "10개 단위 판매(M.O.Q 10)",
+       "img": "L-L29",
+       "code": "L29",
+       "verified": true
+      },
+      {
+       "name": "[ABCO] CFR 1/4W 5% 탄소피막 저항 10kΩ (10개 단위)",
+       "qty": 10,
+       "unit": 25,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=10951",
+       "role": "회로에서 쓰지 않음(예비). 빼도 된다",
+       "note": "10개 단위 판매(M.O.Q 10)",
+       "img": "L-L29",
+       "code": "L29",
+       "verified": true
+      },
+      {
+       "name": "[ABCO] CFR 1/4W 5% 탄소피막 저항 100kΩ (10개 단위)",
+       "qty": 10,
+       "unit": 25,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=10993",
+       "role": "100 kΩ ×5: R301(O1·O7)·R302·R303(제어 기판), R502(페달). 5개 남음",
+       "note": "10개 단위 판매(M.O.Q 10)",
+       "img": "L-L29",
+       "code": "L29",
+       "verified": true
+      },
+      {
+       "name": "[ABCO] CFR 1/4W 5% 탄소피막 저항 100Ω (10개 단위)",
+       "qty": 10,
+       "unit": 25,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=10873",
+       "role": "100 Ω ×5 병렬 = 20 Ω: R503(페달, 필수). 5개 남음",
+       "note": "10개 단위 판매(M.O.Q 10)",
+       "img": "L-L29",
+       "code": "L29",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "jack",
+   "cat": "aud",
+   "title": "3.5 mm 스테레오 잭",
+   "role": "① 왼쪽 볼 앞면 헤드폰 잭: 동글(L51) 출력이 팁·링으로 들어오고 팁·링 노멀 접점이 앰프 쪽으로 나간다. 헤드폰을 꽂으면 노멀 접점이 떨어져 스피커가 기계적으로 끊긴다(R15) ② I/O 판의 댐퍼 페달 잭(R24) ③ CU 트레이의 앰프 입력 잭: 선 ②의 플러그를 받아 저음 차단 RC를 거쳐 앰프(L53) 입력으로 보낸다(R26, 파트 분리)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[BSUN] PJ-313 3.5Ф 스테레오잭 (이어폰잭)",
+       "qty": 3,
+       "unit": 198,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=67811",
+       "role": "① 왼쪽 볼 앞면 헤드폰 잭: 동글(L51) 출력이 팁·링으로 들어오고 팁·링 노멀 접점이 앰프 쪽으로 나간다. 헤드폰을 꽂으면 노멀 접점이 떨어져 스피커가 기계적으로 끊긴다(R15) ② I/O 판의 댐퍼 페달 잭(R24) ③ CU 트레이의 앰프 입력 잭: 선 ②의 플러그를 받아 저음 차단 RC를 거쳐 앰프(L53) 입력으로 보낸다(R26, 파트 분리)",
+       "note": "",
+       "img": "L-L15",
+       "code": "L15",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "dongle",
+   "cat": "aud",
+   "title": "USB 오디오 동글 · 젠더",
+   "role": "Apple 동글(USB-C 수)을 Pi 5 USB-A 포트에 꽂는 젠더",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[Coms] IH190 USB-C(F) → USB-A(M) 변환 젠더 좌향 꺾임",
+       "qty": 1,
+       "unit": 1700,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=11043038",
+       "role": "Apple 동글(USB-C 수)을 Pi 5 USB-A 포트에 꽂는 젠더",
+       "note": "",
+       "img": "L-L52",
+       "code": "L52",
+       "verified": true
+      },
+      {
+       "name": "Apple USB-C–3.5mm 헤드폰 잭 어댑터 (MW2Q3KH/A)",
+       "qty": 1,
+       "unit": 14900,
+       "b": "base",
+       "store": "Apple",
+       "ship": null,
+       "url": "https://www.apple.com/kr/shop/product/mw2q3kh/a",
+       "role": "USB DAC 겸 헤드폰 앰프. 젠더(L52)로 Pi 5 USB-A 포트에 직결해 소리를 아날로그로 바꾼다. 출력은 헤드폰 잭(L15)을 거쳐 앰프(L53)로 간다",
+       "note": "",
+       "img": "L-L51",
+       "code": "L51",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "AE7",
+     "title": "Apple 동글·젠더를 젠더형 USB 사운드카드 하나로",
+     "items": [
+      {
+       "name": "[티테크놀로지] USB Virtual 5.1 채널 사운드 카드 젠더형 [T-USOUND51BK]",
+       "qty": 1,
+       "unit": 1210,
+       "b": "base",
+       "store": "아이씨뱅큐 (P016851263)",
+       "ship": "아이씨뱅큐",
+       "ship_fee": 0,
+       "url": "https://www.icbanq.com/P016851263",
+       "role": "",
+       "note": "아이씨뱅큐 합배송이다(5만원 이상 무료). 대안: 케이블형 T-USOUND71CW 1,650원(P016851261), KC 인증(LCC-U3396)이 표기된 Coms BS135 2,980원(엘레파츠 8075349).",
+       "img": null,
+       "code": "AE7",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "USB-A 젠더형 한 덩어리라 변환 젠더 없이 Pi 5 USB 포트에 바로 꽂고, 드라이버 없이 USB 오디오 클래스로 잡힌다.",
+      "헤드폰을 직접 구동하고, 스피커로 보통 음량에서 들으면 지금 동글과 차이가 작다.",
+      "아이씨뱅큐 국내 재고(3~4일)라 다른 아이씨뱅큐 부품과 합배송된다."
+     ],
+     "cons": [
+      "칩이 표기되지 않은 16bit급 저가 칩(SNR 약 85~90 dB 추정)이라 Apple 동글(SNR 113 dB)보다 잡음·왜곡이 분명히 크다(R12 저하).",
+      "헤드폰이나 조용한 구간에서는 쉿 소리가 드러날 수 있고, 제품마다 품질 편차가 크다.",
+      "출력 전압·KC 표기를 확인하지 못했고, USB 접지 잡음이 나면 그라운드 루프 차단기(수천 원)가 더 필요할 수 있다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "xt30",
+   "cat": "aud",
+   "title": "XT30 커넥터 수·암",
+   "role": "앰프 쪽 스피커선 커넥터(좌우 2개). 통로 양 끝으로 나온 선에 납땜",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[AMASS] XT30U-M 수 커넥터 18AWG 10cm 실리콘 와이어",
+       "qty": 2,
+       "unit": 1760,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=12779720",
+       "role": "앰프 쪽 스피커선 커넥터(좌우 2개). 통로 양 끝으로 나온 선에 납땜",
+       "note": "",
+       "img": "L-L61",
+       "code": "L61",
+       "verified": true
+      },
+      {
+       "name": "[AMASS] XT30U-F 암 커넥터 18AWG 10cm 실리콘 와이어",
+       "qty": 2,
+       "unit": 1760,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=12779721",
+       "role": "스피커 쪽 커넥터(좌우 2개). 스피커 파트 앞판 아래로 나온 선에 납땜",
+       "note": "",
+       "img": "L-L61",
+       "code": "L61",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "spkwire",
+   "cat": "aud",
+   "title": "스피커선 16AWG 7 m",
+   "role": "앰프(L53) → 통로 → XT30 수(L61) 2쌍(좌우 각 약 0.6 m) + 스피커 파트 안 유닛 → XT30 암(각 약 0.3 m) + 20 V 전원선(PD 트리거 → 퓨즈 → 스위치 → 앰프·강압 모듈, 약 1 m)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[케이블스토어] 프리즘 국산 스피커케이블 50C 16AWG, 7M [블랙/PRS-50B07]",
+       "qty": 1,
+       "unit": 14300,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=18388615",
+       "role": "앰프(L53) → 통로 → XT30 수(L61) 2쌍(좌우 각 약 0.6 m) + 스피커 파트 안 유닛 → XT30 암(각 약 0.3 m) + 20 V 전원선(PD 트리거 → 퓨즈 → 스위치 → 앰프·강압 모듈, 약 1 m)",
+       "note": "",
+       "img": "L-C13",
+       "code": "C13",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "AE8",
+     "title": "스피커선 16AWG 7 m를 20AWG 5 m로",
+     "items": [
+      {
+       "name": "[Coms] [BT991] Coms 스피커 케이블 전선 스피커선 앰프선 레드/블랙 5M",
+       "qty": 1,
+       "unit": 2130,
+       "b": "consumable",
+       "store": "엘레파츠 (no=9011609)",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=9011609",
+       "role": "",
+       "note": "20AWG 표기는 제조사 상세 이미지(comsmart BT991.jpg)에서 확인했다. 도체 재질(구리/CCA)은 표기되지 않았다.",
+       "img": null,
+       "code": "AE8",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "좌우 스피커선(약 0.9 m씩)과 20 V 전원선(약 1 m, 최대 약 3 A)을 합쳐 약 3 m라 5 m로 충분하다.",
+      "20AWG(구리 0.033 Ω/m)라도 좌우 약 0.9 m 선이라 16AWG와 들리는 차이가 없다.",
+      "정밀 스트리퍼 CP-301G(AWG 20~30)로 벗길 수 있어 16AWG용 스트리퍼를 사지 않는다."
+     ],
+     "cons": [
+      "도체 재질(구리/CCA)이 표기되지 않아, 구리가 아니면 손실 계산보다 저항이 커질 수 있다.",
+      "설계 부품 목록의 스피커선 스펙을 16AWG에서 20AWG로 낮추는 것이다.",
+      "평균 발송이 3.5일(10/02 예정)로 지금 선(평균 2.5일)보다 늦다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "aux",
+   "cat": "aud",
+   "title": "3.5 mm AUX 케이블",
+   "role": "① 동글(L51) → 왼쪽 볼 헤드폰 잭(L15 ①) ② 헤드폰 잭 노멀 접점 → CU 트레이 앰프 입력 잭(L15 ③). 두 선 모두 CU 쪽 플러그를 남기고 끝 부속 쪽을 잘라 잭에 납땜한다(선이 끝 부속에 붙어 다니고 CU에서 뽑는다, R26)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[AV0176] Coms 스테레오 케이블 1.5M AUX 3극 Stereo 3.5 M/M",
+       "qty": 2,
+       "unit": 1710,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=2925673",
+       "role": "① 동글(L51) → 왼쪽 볼 헤드폰 잭(L15 ①) ② 헤드폰 잭 노멀 접점 → CU 트레이 앰프 입력 잭(L15 ③). 두 선 모두 CU 쪽 플러그를 남기고 끝 부속 쪽을 잘라 잭에 납땜한다(선이 끝 부속에 붙어 다니고 CU에서 뽑는다, R26)",
+       "note": "",
+       "img": "L-C14",
+       "code": "C14",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "fill",
+   "cat": "aud",
+   "title": "스피커 흡음 솜",
+   "role": "밀폐 스피커 상자 2개의 흡음재(상자당 40~60 g, 폴리필 대용)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "두유레디 구름솜 300g (100% 국내산 할로우화이버)",
+       "qty": 1,
+       "unit": 2700,
+       "b": "base",
+       "store": "두유레디",
+       "ship": "두유레디",
+       "url": "https://www.11st.co.kr/products/2325598213",
+       "role": "밀폐 스피커 상자 2개의 흡음재(상자당 40~60 g, 폴리필 대용)",
+       "note": "",
+       "img": "L-L12",
+       "code": "L12",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "SP5",
+     "title": "흡음 솜을 사지 않고 집에 있는 폴리에스터 솜을 쓴다",
+     "items": [],
+     "pros": [
+      "스피커 상자 2개에 상자당 40~60 g만 들어, 안 쓰는 쿠션이나 베개 속 할로우화이버로 충분하다.",
+      "같은 폴리에스터 솜이면 소리 차이가 없고, 흡음재 유무에 따른 상자 특성(Qtc) 변화 폭도 작다.",
+      "솜을 못 구해 흡음재를 빼더라도 요구사항을 어기지 않는다."
+     ],
+     "cons": [
+      "집에 남는 솜이 있어야 하고, 재사용 솜은 먼지가 있을 수 있어 헌 스타킹 같은 천 주머니에 넣어 써야 한다.",
+      "흡음재 없이 쓰면 상자 안 정재파(약 800 Hz 이상)가 콘을 통해 조금 들릴 수 있다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "feet",
+   "cat": "aud",
+   "title": "고무발 · 방진 그로밋",
+   "role": "스피커 파트 2개(각 4개)와 가운데 유닛(6개)의 고무발 14개. 출력 받침 4 mm와 함께 뒷바를 22 mm 띄워 아래 앞쪽을 케이블 통로로 만든다(R27). 본체와 스피커 진동을 떼어 놓는다(D15)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[화성고무] 피스고무발 / 28x5 (RUB-E2)",
+       "qty": 20,
+       "unit": 583,
+       "b": "base",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=16628292",
+       "role": "스피커 파트 2개(각 4개)와 가운데 유닛(6개)의 고무발 14개. 출력 받침 4 mm와 함께 뒷바를 22 mm 띄워 아래 앞쪽을 케이블 통로로 만든다(R27). 본체와 스피커 진동을 떼어 놓는다(D15)",
+       "note": "",
+       "img": "L-L14",
+       "code": "L14",
+       "verified": true
+      },
+      {
+       "name": "FPV 비행 컨트롤러용 20개 M2/M3 실리콘 방진 그로밋",
+       "qty": 1,
+       "unit": 3040,
+       "b": "base",
+       "store": "WorldBridge Store",
+       "ship": null,
+       "url": "https://ko.aliexpress.com/item/1005012184121268.html",
+       "role": "끝 부속 ↔ 스피커 파트 짧은 PETG 브래킷(40×17×6, R26)의 방진 그로밋(브래킷당 2개). 위치 고정용이고 스피커 무게는 바닥 고무발이 받친다",
+       "note": "해외 배송, 환율에 따라 가격 변동",
+       "img": "L-L42",
+       "code": "L42",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "SP4",
+     "title": "고무발 20개·방진 그로밋을 키베드 EVA 시트 자투리로",
+     "items": [],
+     "pros": [
+      "고무발 14개 자리를 EVA 6장(18 mm) 패드로 바꾸고 출력 받침 4 mm는 그대로 둬, 뒷바 22 mm 띄움(케이블 통로)을 지킨다.",
+      "EVA 패드로도 본체와 스피커 진동을 떼어 놓는 방진(D15)에는 충분하다.",
+      "캡차로 가격을 재확인하지 못한 AliExpress 그로밋 주문(도착 9/30~10/07 예상)이 빠진다."
+     ],
+     "cons": [
+      "EVA 패드는 고무발보다 오래 쓰면 조금 주저앉는다.",
+      "30×30 mm EVA를 6장씩 양면테이프(C19)로 겹쳐 패드 14개를 만들고, 스피커 파트 브래킷을 고쳐 출력해야 한다.",
+      "바닥 EVA 시트 자투리를 스피커 가스켓과 나눠 써야 한다(MEV1을 함께 고르면 그 3T 시트의 자투리)."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "ply400",
+   "cat": "aud",
+   "title": "오꾸메 합판 400×1200 (스피커 상자)",
+   "role": "스피커 파트 2개의 상자(외형 180×195×210, 내부 5.05 L)를 한 장에서 재단한다. 앞판(배플)은 PETG 출력이라 합판은 10장이다(도면 8의 재단도)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "무료배송 오꾸메 합판 400×1200×11.5mm 무료재단",
+       "qty": 1,
+       "unit": 17680,
+       "b": "base",
+       "store": "동진나무공장",
+       "ship": null,
+       "url": "https://namugongjang.com/product/detail.html?product_no=1378",
+       "role": "스피커 파트 2개의 상자(외형 180×195×210, 내부 5.05 L)를 한 장에서 재단한다. 앞판(배플)은 PETG 출력이라 합판은 10장이다(도면 8의 재단도)",
+       "note": "무료재단·무료배송. 재단도는 도면 8",
+       "img": "L-L10",
+       "code": "L10",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "스피커 상자를 만들지 않을 때만(내장 스피커 포기)."
+  },
+  {
+   "id": "ply600",
+   "cat": "aud",
+   "title": "오꾸메 합판 600×1200 (가운데 유닛)",
+   "role": "가운데 유닛(894×195×100) 상자를 한 장에서 재단한다. 바닥 2·뚜껑 2·앞판·뒤판 2·끝판 2·칸막이 2 = 11장(도면 11의 재단도, R26)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "무료배송 오꾸메 합판 600×1200×11.5mm 무료재단",
+       "qty": 1,
+       "unit": 22520,
+       "b": "base",
+       "store": "동진나무공장",
+       "ship": null,
+       "url": "https://namugongjang.com/product/detail.html?product_no=1378",
+       "role": "가운데 유닛(894×195×100) 상자를 한 장에서 재단한다. 바닥 2·뚜껑 2·앞판·뒤판 2·끝판 2·칸막이 2 = 11장(도면 11의 재단도, R26)",
+       "note": "무료재단·무료배송. 재단도는 도면 11",
+       "img": "L-L63",
+       "code": "L63",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "가운데 유닛(건반 보관함·CU·보조배터리 칸)을 만들지 않을 때만. Pi·앰프를 둘 자리를 따로 마련해야 한다."
+  },
+  {
+   "id": "latch",
+   "cat": "aud",
+   "title": "토글 래치 2개",
+   "role": "가운데 유닛 ↔ 스피커 파트를 뒷면에서 당겨 잠그는 토글 래치(이음마다 1개, 2개). 도브테일이 위치를 잡고 래치가 벌어지지 않게 한다(R26)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "매미고리 1-20 (SUS304 스테인리스 토글 래치, 25×54mm)",
+       "qty": 2,
+       "unit": 2400,
+       "b": "base",
+       "store": "철물박사",
+       "ship": "철물박사",
+       "url": "https://www.metaldiy.com/item/itemView.do?itemId=8806379117286",
+       "role": "가운데 유닛 ↔ 스피커 파트를 뒷면에서 당겨 잠그는 토글 래치(이음마다 1개, 2개). 도브테일이 위치를 잡고 래치가 벌어지지 않게 한다(R26)",
+       "note": "",
+       "img": "L-L64",
+       "code": "L64",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "lidmag",
+   "cat": "aud",
+   "title": "뚜껑 자석 Ø8×3",
+   "role": "가운데 유닛 뚜껑 3장을 제자리에 붙여 두는 자석. 뚜껑마다 대각선 2곳에 뚜껑·받침 한 쌍씩(12개) + 예비 2. 출력 받침·뚜껑의 Ø8.2 포켓에 순간접착제(C18)로 붙인다(R26)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "초강력 네오디움 원형자석 8mm — 3.0T (Ø8×3mm, N35)",
+       "qty": 14,
+       "unit": 160,
+       "b": "base",
+       "store": "대건상사",
+       "ship": "대건상사",
+       "url": "https://dgmagnet.com/product/detail.html?product_no=17",
+       "role": "가운데 유닛 뚜껑 3장을 제자리에 붙여 두는 자석. 뚜껑마다 대각선 2곳에 뚜껑·받침 한 쌍씩(12개) + 예비 2. 출력 받침·뚜껑의 Ø8.2 포켓에 순간접착제(C18)로 붙인다(R26)",
+       "note": "옵션 3.0T 선택",
+       "img": "L-L65",
+       "code": "L65",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "woodscrew",
+   "cat": "aud",
+   "title": "직결피스 4종 (뒷바·스피커)",
+   "role": "뒷바 출력 부품(도브테일 블록·CU 트레이·I/O 판·보조배터리 받침·콤 받침·XT30 받침)을 합판 면에 고정",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "스텐 둥근머리 직결피스 8호(Ø4.2) 13mm",
+       "qty": 40,
+       "unit": 40,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4353471537",
+       "role": "뒷바 출력 부품(도브테일 블록·CU 트레이·I/O 판·보조배터리 받침·콤 받침·XT30 받침)을 합판 면에 고정",
+       "note": "같은 상품의 옵션. 굿나잇몰 묶음배송(주문 화면에서 묶음 여부 확인)",
+       "img": "L-L49",
+       "code": "L49",
+       "verified": true
+      },
+      {
+       "name": "스텐 둥근머리 직결피스 8호(Ø4.2) 16mm",
+       "qty": 8,
+       "unit": 50,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4353471537",
+       "role": "CW-100B25 유닛 8홀을 PETG 앞판에 고정",
+       "note": "같은 상품의 옵션. 굿나잇몰 묶음배송(주문 화면에서 묶음 여부 확인)",
+       "img": "L-L49",
+       "code": "L49",
+       "verified": true
+      },
+      {
+       "name": "스텐 둥근머리 직결피스 8호(Ø4.2) 19mm",
+       "qty": 8,
+       "unit": 50,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4353471537",
+       "role": "PETG 그릴 8곳 고정",
+       "note": "같은 상품의 옵션. 굿나잇몰 묶음배송(주문 화면에서 묶음 여부 확인)",
+       "img": "L-L49",
+       "code": "L49",
+       "verified": true
+      },
+      {
+       "name": "스텐 둥근머리 직결피스 8호(Ø4.2) 25mm",
+       "qty": 14,
+       "unit": 60,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4353471537",
+       "role": "고무발 14개 고정",
+       "note": "같은 상품의 옵션. 굿나잇몰 묶음배송(주문 화면에서 묶음 여부 확인)",
+       "img": "L-L49",
+       "code": "L49",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "woodglue",
+   "cat": "aud",
+   "title": "목공본드",
+   "role": "스피커 상자 2개(5.05 L ×2)와 가운데 유닛(오꾸메 11장) 접합, 출력 앞판 둘레 밀봉. 합판은 본드로만 붙이고 마스킹테이프로 눌러 굳힌다(드릴 없음)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "오공 201 205 본드 800g 목공용본드 (옵션: 오공 205본드 800g)",
+       "qty": 1,
+       "unit": 2840,
+       "b": "consumable",
+       "store": "오공 본드 판매처",
+       "ship": "오공 본드 판매처",
+       "url": "https://www.11st.co.kr/products/1874655675",
+       "role": "스피커 상자 2개(5.05 L ×2)와 가운데 유닛(오꾸메 11장) 접합, 출력 앞판 둘레 밀봉. 합판은 본드로만 붙이고 마스킹테이프로 눌러 굳힌다(드릴 없음)",
+       "note": "옵션에서 \"오공 205본드 800g\"을 고른다(201은 다른 제품)",
+       "img": null,
+       "code": "SP6",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "nut",
+   "cat": "mec",
+   "title": "M3 육각너트 (캡스턴용)",
+   "role": "v4: 건반 캡스턴 나사(M3 버튼헤드) 너트 88 + 예비 8, 스피커 브래킷 4",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "XHHD 육각너트 M3 강철 (LCSC C133377)",
+       "qty": 100,
+       "unit": 11,
+       "b": "base",
+       "store": "아이씨뱅큐 (LCSC 해외 재고)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P015976209",
+       "role": "v4: 건반 캡스턴 나사(M3 버튼헤드) 너트 88 + 예비 8, 스피커 브래킷 4",
+       "note": "",
+       "img": "P-m3nut",
+       "code": "L31",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "m3x10",
+   "cat": "mec",
+   "title": "M3×10 렌치볼트 (센서 바·CU)",
+   "role": "센서 바·센서 기판을 왼쪽 받침 기둥에 고정(모듈당 2, 끝 부속 포함)하고, CU 트레이 부품(앰프 4·강압 모듈 4·PD 트리거 2·앰프 입력 잭 기판 2·퓨즈 홀더 2)과 토글 래치 2개(각 4, L64)를 출력 보스·받침에 고정한다. PETG 구멍에 직접 탭을 내며 조인다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "스텐 유두 렌치볼트 M3 × 10mm",
+       "qty": 50,
+       "unit": 60,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "role": "센서 바·센서 기판을 왼쪽 받침 기둥에 고정(모듈당 2, 끝 부속 포함)하고, CU 트레이 부품(앰프 4·강압 모듈 4·PD 트리거 2·앰프 입력 잭 기판 2·퓨즈 홀더 2)과 토글 래치 2개(각 4, L64)를 출력 보스·받침에 고정한다. PETG 구멍에 직접 탭을 내며 조인다",
+       "note": "",
+       "img": "L-L34",
+       "code": "L34",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "m3x6",
+   "cat": "mec",
+   "title": "M3×6 렌치볼트 (제어 기판)",
+   "role": "제어 기판을 프레임의 매단 보스 4개에 고정 — 모듈마다 대각 2곳을 밑에서 나사로 조임(7 × 2 = 14 + 예비 6), 나머지 2곳은 보스의 위치 핀. r4.5: 바닥 구멍으로 기판을 밑에서 넣음. 스텐 유두(ISO 7380, 머리 Ø5.7 × 1.65)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "스텐 유두 렌치볼트 M3 × 6mm",
+       "qty": 20,
+       "unit": 40,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "role": "제어 기판을 프레임의 매단 보스 4개에 고정 — 모듈마다 대각 2곳을 밑에서 나사로 조임(7 × 2 = 14 + 예비 6), 나머지 2곳은 보스의 위치 핀. r4.5: 바닥 구멍으로 기판을 밑에서 넣음. 스텐 유두(ISO 7380, 머리 Ø5.7 × 1.65)",
+       "note": "",
+       "img": "L-L35",
+       "code": "L35",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "washer",
+   "cat": "mec",
+   "title": "M4 와셔",
+   "role": "고무발 고정 피스 머리 밑 와셔 14 + 예비 6 (v4: 클램프 나사용 32개는 빠짐)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "스텐 와셔 M4x9x0.5T",
+       "qty": 20,
+       "unit": 10,
+       "b": "base",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "role": "고무발 고정 피스 머리 밑 와셔 14 + 예비 6 (v4: 클램프 나사용 32개는 빠짐)",
+       "note": "",
+       "img": "L-L36",
+       "code": "L36",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "felt3",
+   "cat": "mec",
+   "title": "양모 펠트 3T (앞 멈춤)",
+   "role": "건반 앞 멈춤 펠트 3T(백·흑)와 키퍼 훅 밑 펠트. v4에서도 그대로 쓴다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[DHG] 3mm 대폭 양모펠트지 150×10cm",
+       "qty": 1,
+       "unit": 5500,
+       "b": "base",
+       "store": "스튜디오분트",
+       "ship": "스튜디오분트",
+       "url": "https://studiobunt.com/product/detail.html?product_no=2948",
+       "role": "건반 앞 멈춤 펠트 3T(백·흑)와 키퍼 훅 밑 펠트. v4에서도 그대로 쓴다",
+       "note": "",
+       "img": "L-L39",
+       "code": "L39",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "ME13",
+     "title": "3T 양모 펠트를 3 mm 공예 펠트 45×30 한 장으로",
+     "items": [
+      {
+       "name": "3mm펠트지 연두색 비접착 원단지 45x30 만들기용",
+       "qty": 1,
+       "unit": 1330,
+       "b": "base",
+       "store": "11번가 (샤이니데이)",
+       "ship": "O:11번가 (샤이니데이)",
+       "ship_fee": 3000,
+       "url": "https://www.11st.co.kr/products/9076283674",
+       "role": "",
+       "note": "",
+       "img": null,
+       "code": "ME13",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "두께가 3 mm로 같아 딥과 정지 높이가 그대로고, 설계 치수를 바꾸지 않는다.",
+      "450×300 mm(1,350 cm²) 한 장이라 필요 면적 약 450 cm²보다 넉넉하다.",
+      "옵션 재고가 999개라, 50색 중 1색만 남은 지금 양모 펠트보다 구하기 쉽다."
+     ],
+     "cons": [
+      "재질 미표기라 양모(90%)보다 복원력이 약할 수 있고, 훅 펠트가 영구 눌리면 정지 높이가 조금 내려가고 복귀 소리가 커질 수 있다(R6 저하).",
+      "밀도를 몰라 단계 0 충돌 쿠폰과 30일 압축 확인을 거쳐야 하고, 떨어지면 지금 양모 펠트(L39)로 되돌린다.",
+      "색이 연두 한 가지라 백건 앞 스톱 펠트가 연두색으로 조금 보인다."
+     ],
+     "note": "v4에서 3T 펠트는 건반 앞 멈춤과 키퍼 훅 밑에 쓴다. 훅은 평소 닿지 않는 키퍼라 v3보다 부담이 작지만, 앞 멈춤 펠트의 반발(e)은 단계 0에서 확인한다.",
+     "verified": true,
+     "src": "v3 절감안"
+    },
+    {
+     "id": "ME16",
+     "title": "3T 스톱 펠트를 바닥 EVA 3T 자투리로(극단안)",
+     "items": [],
+     "pros": [
+      "바닥 EVA 시트를 자르고 남는 3T 자투리(약 1,100~2,200 cm²)가 필요량(약 450 cm²)보다 많아 따로 살 것이 없다.",
+      "두께가 3T로 같아 스톱 치수가 그대로이고, 정지 상태 훅 하중(약 0.02 MPa)이 작아 정지 높이도 크게 변하지 않는다.",
+      "펠트는 9/24 기준 50색 중 1색만 남아 품절 전에 서둘러 사야 하지만, 이 안은 그럴 필요가 없다."
+     ],
+     "cons": [
+      "EVA는 펠트보다 감쇠가 작고 반발이 커 복귀 때 작은 되튐과 '툭' 소리가 날 수 있어 요구사항 R6이 나빠진다.",
+      "밀도를 모르는 공예 EVA라 무르면 훅 충돌 때 바닥까지 눌려 딸깍 소리가 날 수 있고, 바닥 느낌도 펠트보다 나쁠 가능성이 크다.",
+      "단계 0 '훅·펠트 충돌 소리' 쿠폰에서 펠트와 반드시 비교해야 하고, 나쁘면 펠트를 다시 사야 한다."
+     ],
+     "note": "v4의 앞 멈춤은 흑건 노치 들림과 유령 재타건에 영향을 준다(앞 펠트 반발 e ≤ 0.22가 단계 0 합격선). EVA는 반발이 커서 v4에서는 더 권하지 않는다.",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "빼면 건반 바닥이 딱딱하게 부딪혀 소리가 난다. 가진 3T 펠트가 있을 때만."
+  },
+  {
+   "id": "floor",
+   "cat": "mec",
+   "title": "EVA 3T 바닥 시트 · 0.5T 접착 펠트",
+   "role": "모듈 7개·끝 부속 2개 바닥 전체에 붙이는 3T 시트(164×211 한 장씩). 남는 조각은 스피커 유닛 가스켓과 가운데 유닛 ↔ 스피커 파트 맞닿는 면의 띠(R26)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "에바폼 EVA 컬러 고밀도 칼라스펀지 3T (E-210 검정, 330×490)",
+       "qty": 3,
+       "unit": 2100,
+       "b": "base",
+       "store": "상우아트",
+       "ship": "상우아트",
+       "url": "https://www.11st.co.kr/products/7591566666",
+       "role": "모듈 7개·끝 부속 2개 바닥 전체에 붙이는 3T 시트(164×211 한 장씩). 남는 조각은 스피커 유닛 가스켓과 가운데 유닛 ↔ 스피커 파트 맞닿는 면의 띠(R26)",
+       "note": "상우아트 묶음배송",
+       "img": null,
+       "code": "MEV1",
+       "verified": true
+      },
+      {
+       "name": "[대원] 얇은 칼라펠트지 H 두께0.5mm 접착 30x45cm (H-20 검정)",
+       "qty": 1,
+       "unit": 1500,
+       "b": "base",
+       "store": "상우아트",
+       "ship": "상우아트",
+       "url": "https://www.11st.co.kr/products/8517880969",
+       "role": "가이드 탭 양옆 부싱(0.5T, 모듈당 24조각)과, 2겹으로 겹친 뒤 스톱 펠트(1T, y138~144)",
+       "note": "EVA와 같은 판매자라 묶음배송",
+       "img": null,
+       "code": "MEV1",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "tungsten",
+   "cat": "mec",
+   "title": "텅스텐 퍼티 (건반별 무게 조정)",
+   "role": "무거운 건반만 낮추는 건반별 무게 미세 조정(필요할 때만, 백 ≤6 g·흑 ≤2.5 g)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "텅스텐 퍼티 소프트 싱커 무게추 (낚시용, 22 g)",
+       "qty": 1,
+       "unit": 8750,
+       "b": "consumable",
+       "store": "골드그로브",
+       "ship": null,
+       "url": "https://www.11st.co.kr/products/9579455646",
+       "role": "무거운 건반만 낮추는 건반별 무게 미세 조정(필요할 때만, 백 ≤6 g·흑 ≤2.5 g)",
+       "note": "",
+       "img": null,
+       "code": "ME14",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "건반별 무게 편차가 작으면 필요 없다. 단계 0 시편 뒤 정해도 된다."
+  },
+  {
+   "id": "ca",
+   "cat": "mec",
+   "title": "순간접착제",
+   "role": "센서 자석 Ø5×2·뚜껑 자석을 포켓에 압입한 뒤 한 방울, 건반 봉 끝을 봉 받침에 고정(v4)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "순간접착제 (814-2010) — V-tech 강력 순간접착제 5g (VT-041)",
+       "qty": 1,
+       "unit": 1100,
+       "b": "consumable",
+       "store": "아이씨뱅큐 (크레텍)",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P015309984",
+       "role": "센서 자석 Ø5×2·뚜껑 자석을 포켓에 압입한 뒤 한 방울, 건반 봉 끝을 봉 받침에 고정(v4)",
+       "note": "록타이트 401 20 g 대신(ME8). 성분·점도 표기는 페이지에 없다",
+       "img": null,
+       "code": "ME8",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "tape",
+   "cat": "mec",
+   "title": "종이 양면테이프",
+   "role": "EVA 바닥 시트와 비접착 3T 펠트를 프레임에 붙인다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[NAVI] 종이 양면테이프, 백색/48mm/6m",
+       "qty": 1,
+       "unit": 1080,
+       "b": "consumable",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=17897439",
+       "role": "EVA 바닥 시트와 비접착 3T 펠트를 프레임에 붙인다",
+       "note": "2롤 → 1롤(ME9)",
+       "img": null,
+       "code": "ME9",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "pedal",
+   "cat": "ped",
+   "title": "댐퍼 페달 (홀센서 개조)",
+   "role": "댐퍼(서스테인) 페달 1개(R24). 안의 스위치를 떼고 예비 홀센서·자석을 달아 CC64를 0~127 연속값(하프페달)으로 보낸다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "듀로 피아노 페달 서스테인 (스위치형) — 홀센서 연속형 개조",
+       "qty": 1,
+       "unit": 8500,
+       "b": "base",
+       "store": "피아노모아",
+       "ship": "피아노모아",
+       "url": "https://pianomoa.com/product/%EB%93%80%EB%A1%9C-%ED%94%BC%EC%95%84%EB%85%B8-%ED%8E%98%EB%8B%AC-%EC%84%9C%EC%8A%A4%ED%85%8C%EC%9D%B8-%EC%A0%84%EA%B8%B0%EC%A2%85%ED%98%B8%ED%99%98%EA%B0%80%EB%8A%A5-%EC%A0%84%EC%9E%90%ED%82%A4%EB%B3%B4%EB%93%9C-%EB%94%94%EC%A7%80%ED%84%B8-%ED%94%BC%EC%95%84%EB%85%B8-%EB%8C%90%ED%8D%BC/4117/",
+       "role": "댐퍼(서스테인) 페달 1개(R24). 안의 스위치를 떼고 예비 홀센서·자석을 달아 CC64를 0~127 연속값(하프페달)으로 보낸다",
+       "note": "",
+       "img": "L-L43",
+       "code": "L43",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "댐퍼 페달 없이 연주한다(R24 포기) 또는 가진 서스테인 페달을 쓸 때."
+  },
+  {
+   "id": "pedalcable",
+   "cat": "ped",
+   "title": "페달 신호선 3 m",
+   "role": "댐퍼 페달 신호선. 한쪽 플러그를 잘라 페달 안 홀센서에 납땜(팁 = 출력, 링 = 3V3, 슬리브 = GND)하고, 다른 쪽은 CU의 PJ-313 잭(L15의 두 번째)에 꽂는다",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[BC256] Coms 스테레오 케이블 3M AUX 3극 Stereo 3.5 M/M 고급포장",
+       "qty": 1,
+       "unit": 2860,
+       "b": "base",
+       "store": "아이씨뱅큐",
+       "ship": "아이씨뱅큐",
+       "url": "https://www.icbanq.com/P004711396",
+       "role": "댐퍼 페달 신호선. 한쪽 플러그를 잘라 페달 안 홀센서에 납땜(팁 = 출력, 링 = 3V3, 슬리브 = GND)하고, 다른 쪽은 CU의 PJ-313 잭(L15의 두 번째)에 꽂는다",
+       "note": "",
+       "img": "L-L50",
+       "code": "L50",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "software",
+   "cat": "ped",
+   "title": "FluidSynth · Salamander 음원 (무료)",
+   "role": "기본 피아노 엔진(0원). midi.autoconnect=1로 USB-MIDI 8개 입력을 한 곳에서 병합하고 ALSA hw:로 USB 동글(L51)에 출력, 출력 리미터 synth.limiter.active=1(D18)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "FluidSynth 2.6.1",
+       "qty": 1,
+       "unit": 0,
+       "b": "base",
+       "store": "FluidSynth",
+       "ship": null,
+       "url": "https://www.fluidsynth.org/",
+       "role": "기본 피아노 엔진(0원). midi.autoconnect=1로 USB-MIDI 8개 입력을 한 곳에서 병합하고 ALSA hw:로 USB 동글(L51)에 출력, 출력 리미터 synth.limiter.active=1(D18)",
+       "note": "구매 없음",
+       "img": "L-L45",
+       "code": "L45",
+       "verified": true
+      },
+      {
+       "name": "Salamander Grand Piano V3 (FreePats SF2판)",
+       "qty": 1,
+       "unit": 0,
+       "b": "base",
+       "store": "FreePats",
+       "ship": null,
+       "url": "https://freepats.zenvoid.org/Piano/acoustic-grand-piano.html",
+       "role": "FluidSynth에 넣는 무료 그랜드 피아노 음원",
+       "note": "구매 없음",
+       "img": "L-L46",
+       "code": "L46",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "이미 가지고 있거나 다른 방법으로 해결할 때 고른다."
+  },
+  {
+   "id": "filament",
+   "cat": "fil",
+   "title": "PETG 필라멘트 8 kg (흰 2 · 검정 6)",
+   "role": "백건 콤 7개 + 끝 부속 백건 콤 + 흰색 리프 쿠폰 + 센서 바(남는 흰색으로)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "Bambu Lab PETG Basic 화이트(30106) 스풀 포함 1kg",
+       "qty": 1,
+       "unit": 16150,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "백건 콤 7개 + 끝 부속 백건 콤 + 흰색 리프 쿠폰 + 센서 바(남는 흰색으로)",
+       "note": "4개 이상 구매 시 15% 할인가",
+       "img": null,
+       "code": "CT2",
+       "verified": true
+      },
+      {
+       "name": "Bambu Lab PETG Basic 화이트(30106) 리필 1kg",
+       "qty": 1,
+       "unit": 12750,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "흰색 두 번째 1 kg. 첫 흰색 스풀을 다 쓴 뒤 그 스풀에 끼운다",
+       "note": "4개 이상 구매 시 15% 할인가",
+       "img": null,
+       "code": "CT2",
+       "verified": true
+      },
+      {
+       "name": "Bambu Lab PETG Basic 블랙(30105) 스풀 포함 1kg",
+       "qty": 5,
+       "unit": 16150,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "v4: 프레임·레버 캐리어·흑건·커버 등. v4 출력물이 약 6.5 kg(서포트 포함)으로 늘어 블랙 2 kg 추가(3 → 5)",
+       "note": "검정 리필은 품절이라 스풀 포함. 4개 이상 15% 할인가",
+       "img": null,
+       "code": "CT2",
+       "verified": true
+      },
+      {
+       "name": "Bambu Lab PETG Basic 스풀 포함 1kg 추가 (흰색 또는 검정)",
+       "qty": 1,
+       "unit": 16150,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "R26 출력물 증가분(가운데 유닛 부품, 보관함 등) — 도면집 자동 보정 항목",
+       "note": "색은 출력 순서를 보고 정한다. 동전 받침(CT15)도 여기서 출력",
+       "img": null,
+       "code": "CT2+",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "CT3",
+     "title": "프리미엄 PETG를 국내 저가 쎄에프 PETG(G마켓)로",
+     "items": [
+      {
+       "name": "Bambu Lab PETG Basic 화이트(30106) 스풀 포함 1kg",
+       "qty": 1,
+       "unit": 16150,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "백건 콤 7개 + 끝 부속 백건 콤 + 흰색 리프 쿠폰 + 센서 바(남는 흰색으로)",
+       "note": "4개 이상 구매 시 15% 할인가",
+       "img": null,
+       "code": "CT2",
+       "verified": true
+      },
+      {
+       "name": "Bambu Lab PETG Basic 화이트(30106) 리필 1kg",
+       "qty": 1,
+       "unit": 12750,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "흰색 두 번째 1 kg. 첫 흰색 스풀을 다 쓴 뒤 그 스풀에 끼운다",
+       "note": "4개 이상 구매 시 15% 할인가",
+       "img": null,
+       "code": "CT2",
+       "verified": true
+      },
+      {
+       "name": "Bambu Lab PETG Basic 블랙(30105) 스풀 포함 1kg",
+       "qty": 5,
+       "unit": 16150,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "v4: 프레임·레버 캐리어·흑건·커버 등. v4 출력물이 약 6.5 kg(서포트 포함)으로 늘어 블랙 2 kg 추가(3 → 5)",
+       "note": "검정 리필은 품절이라 스풀 포함. 4개 이상 15% 할인가",
+       "img": null,
+       "code": "CT2",
+       "verified": true
+      },
+      {
+       "name": "Bambu Lab PETG Basic 스풀 포함 1kg 추가 (흰색 또는 검정)",
+       "qty": 1,
+       "unit": 16150,
+       "b": "consumable",
+       "store": "Bambu Lab",
+       "ship": "Bambu Lab",
+       "url": "https://kr.store.bambulab.com/products/petg-basic",
+       "role": "R26 출력물 증가분(가운데 유닛 부품, 보관함 등) — 도면집 자동 보정 항목",
+       "note": "색은 출력 순서를 보고 정한다. 동전 받침(CT15)도 여기서 출력",
+       "img": null,
+       "code": "CT2+",
+       "verified": true
+      },
+      {
+       "name": "쎄에프 PETG 1kg 1.75mm — 8. 화이트 분리 스풀형",
+       "qty": 2,
+       "unit": 9800,
+       "b": "consumable",
+       "store": "G마켓 (주식회사투루주, 4848929314)",
+       "ship": "O:G마켓 (주식회사투루주, 4848929314)",
+       "ship_fee": 2900,
+       "url": "https://item.gmarket.co.kr/Item?goodscode=4848929314",
+       "role": "",
+       "note": "옵션 추가금이 없다. 다나와 G마켓 목록가 9,120원은 할인 적용가로 보여 쓰지 않았다.",
+       "img": null,
+       "code": "CT3",
+       "verified": true
+      },
+      {
+       "name": "쎄에프 PETG 1kg 1.75mm — 2. 블랙 분리 스풀형",
+       "qty": 6,
+       "unit": 9800,
+       "b": "consumable",
+       "store": "G마켓 (주식회사투루주, 4848929314)",
+       "ship": null,
+       "ship_fee": 0,
+       "url": "https://item.gmarket.co.kr/Item?goodscode=4848929314",
+       "role": "",
+       "note": "같은 상품의 옵션이라 배송비는 한 번이다.",
+       "img": null,
+       "code": "CT3",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "쎄에프 PETG는 1 kg 9,800원(스풀 포함, AMS 호환)이고, G마켓 한 주문이라 배송비는 2,900원 한 번이다.",
+      "회색 없이 흰·검정 두 색으로 모아 뽑는 색 재배치라 부품 치수는 바뀌지 않는다."
+     ],
+     "cons": [
+      "물성 자료(E·크리프)가 없어 단계 0에서 E와 30일 이완을 재야 하고, 이완이 25%를 넘으면 재료를 바꾼다(R23 저하).",
+      "무명 브랜드에 상품평이 0개라 지름 공차·수분·기포 편차가 있을 수 있다.",
+      "검정 분리 스풀형 재고가 5개뿐이고, 1스풀로 먼저 시험하면 배송비 2,900원이 한 번 더 든다."
+     ],
+     "note": "v4에서는 PETG가 스프링 역할을 하지 않아(건반은 강철 봉 위 시소, 복귀는 강철 추), 필라멘트 물성 편차와 크리프가 동작에 주는 영향이 v3보다 훨씬 작다. 대신 치수 정밀도(노치·가이드 폭)는 여전히 중요하다.",
+     "verified": true,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "가진 PETG가 충분할 때만(흰 약 1.6 kg, 검정 약 5.4 kg 필요)."
+  },
+  {
+   "id": "iron",
+   "cat": "tool",
+   "title": "납땜 인두 세트 (Pinecil)",
+   "role": "제어 기판·센서 기판 손 납땜(v3.2부터 인서트 열압입은 없다)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "PINECIL – Smart Mini Portable Soldering Iron (Version 2)",
+       "qty": 1,
+       "unit": 35200,
+       "b": "tool",
+       "store": "PINE STORE",
+       "ship": "PINE STORE",
+       "url": "https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/",
+       "role": "제어 기판·센서 기판 손 납땜(v3.2부터 인서트 열압입은 없다)",
+       "note": "해외 직구. 배송비는 아래 줄",
+       "img": "L-T01",
+       "code": "T01",
+       "verified": true
+      },
+      {
+       "name": "PINECIL Portable Mini Stand",
+       "qty": 1,
+       "unit": 2690,
+       "b": "tool",
+       "store": "PINE STORE",
+       "ship": "PINE STORE",
+       "url": "https://pine64.com/product/pinecil-portable-mini-stand/",
+       "role": "인두 거치대",
+       "note": "",
+       "img": "L-T02",
+       "code": "T02",
+       "verified": true
+      },
+      {
+       "name": "USB TYPE-C TO USB TYPE-C SILICONE POWER CHARGING CABLE - 1 meter",
+       "qty": 1,
+       "unit": 4720,
+       "b": "tool",
+       "store": "PINE STORE",
+       "ship": "PINE STORE",
+       "url": "https://pine64.com/product/usb-type-c-to-usb-type-c-silicone-power-charging-cable-1-meter-length/",
+       "role": "Pinecil(T01)과 65 W PD 충전기(L62, 피아노 벽 전원)를 잇는 실리콘 C-C 케이블. 제작 중에는 피아노 충전기를 인두 전원으로 쓴다(R26)",
+       "note": "",
+       "img": "L-T03",
+       "code": "T03",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    },
+    {
+     "id": "CTV3",
+     "title": "Pinecil 인두 세트를 JAYA 30 W 인두 + 금속 스탠드로",
+     "items": [
+      {
+       "name": "JAYA 인두기 ZD-70RA (30W)",
+       "qty": 1,
+       "unit": 4620,
+       "b": "tool",
+       "store": "엘레파츠 (no=45365)",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=45365",
+       "role": "",
+       "note": "엘레파츠 통합 주문",
+       "img": null,
+       "code": "CTV3",
+       "verified": true
+      },
+      {
+       "name": "[Prokit] [8PK-362S] 미니 인두 스탠드 2개 1팩",
+       "qty": 1,
+       "unit": 2550,
+       "b": "tool",
+       "store": "엘레파츠 (no=6356897)",
+       "ship": "엘레파츠",
+       "ship_fee": 0,
+       "url": "https://www.eleparts.co.kr/goods/view?no=6356897",
+       "role": "",
+       "note": "니크롬 인두는 금속 관이 뜨거워지므로 PETG 출력 스탠드 대신 금속 거치대를 쓴다.",
+       "img": null,
+       "code": "CTV3",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "엘레파츠 통합 주문으로 평균 3~3.5일에 발송돼, Pine64 해외 배송(15~45영업일)을 기다리지 않는다.",
+      "국내 브랜드 인두이고, 팁 청소 스펀지가 딸린 금속 와이어 스탠드 2개가 함께 온다."
+     ],
+     "cons": [
+      "30 W에 온도 조절이 없어 캐스털레이션·잭 러그·16AWG 납땜이 느리고 과열·냉납 위험이 커진다(R19 저하).",
+      "열 회복이 느려 넓은 패드·굵은 선에 오래 대야 하고, 이때 PETG·기판이 상할 수 있다.",
+      "온도 되먹임이 없어 대기 중 팁이 과열돼 산화가 빠르고, KC 번호는 페이지 본문에서 확인하지 못했다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    },
+    {
+     "id": "CT17",
+     "title": "Pinecil 세트를 국내 발송 60W 다이얼 인두 세트로",
+     "items": [
+      {
+       "name": "전기 납땜 인두 60W 220V 온도조절 세트(인두+팁 5+스탠드) — 옵션 Soldering Iron Set",
+       "qty": 1,
+       "unit": 14790,
+       "b": "tool",
+       "store": "G마켓 (리리로드, 상품번호 4241219737)",
+       "ship": null,
+       "ship_fee": 0,
+       "url": "https://item.gmarket.co.kr/Item?goodscode=4241219737",
+       "role": "",
+       "note": "쿠폰가(7,330원)는 기본 옵션 기준이라 반영하지 않았다. 판매자는 개인사업자이고 상품평은 0개다.",
+       "img": null,
+       "code": "CT17",
+       "verified": true
+      }
+     ],
+     "pros": [
+      "G마켓 CJ 무료배송으로 9/28 출발 예정이라 Pine64 해외 배송(15~45영업일)을 기다리지 않는다.",
+      "인두·팁 5종·스탠드(스펀지)가 한 세트라 Pinecil 스탠드와 C-C 케이블을 따로 사지 않는다."
+     ],
+     "cons": [
+      "다이얼은 전력만 조절해(온도 되먹임 없음) 실제 온도가 30~50°C 넘게 벗어날 수 있고, 가열·회복이 느리다.",
+      "과열·팁 산화가 빨라 캐스털레이션에서 냉납·패드 들뜸 위험이 커진다(R19 저하).",
+      "KC 인증 번호가 페이지에 없고('상세 설명에 별도 표기') 상품평이 0개라, 받은 뒤 본체 표기를 확인해야 한다."
+     ],
+     "note": "",
+     "verified": true,
+     "src": "v3 절감안"
+    },
+    {
+     "id": "CT10",
+     "title": "Pinecil 미니 스탠드 대신 공개 STL 스탠드를 PETG로 출력",
+     "items": [
+      {
+       "name": "PINECIL – Smart Mini Portable Soldering Iron (Version 2)",
+       "qty": 1,
+       "unit": 35200,
+       "b": "tool",
+       "store": "PINE STORE",
+       "ship": "PINE STORE",
+       "url": "https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/",
+       "role": "제어 기판·센서 기판 손 납땜(v3.2부터 인서트 열압입은 없다)",
+       "note": "해외 직구. 배송비는 아래 줄",
+       "img": "L-T01",
+       "code": "T01",
+       "verified": true
+      },
+      {
+       "name": "USB TYPE-C TO USB TYPE-C SILICONE POWER CHARGING CABLE - 1 meter",
+       "qty": 1,
+       "unit": 4720,
+       "b": "tool",
+       "store": "PINE STORE",
+       "ship": "PINE STORE",
+       "url": "https://pine64.com/product/usb-type-c-to-usb-type-c-silicone-power-charging-cable-1-meter-length/",
+       "role": "Pinecil(T01)과 65 W PD 충전기(L62, 피아노 벽 전원)를 잇는 실리콘 C-C 케이블. 제작 중에는 피아노 충전기를 인두 전원으로 쓴다(R26)",
+       "note": "",
+       "img": "L-T03",
+       "code": "T03",
+       "verified": true
+      },
+      {
+       "name": "Pinecil 접이식 스탠드 공개 STL(Soldering iron stand – really compact)",
+       "qty": 1,
+       "unit": 0,
+       "b": "tool",
+       "store": "Printables (Pine64 위키 링크)",
+       "ship": null,
+       "ship_fee": 0,
+       "url": "https://www.printables.com/model/441414-soldering-iron-stand-really-compact",
+       "role": "",
+       "note": "Printables는 Cloudflare 확인 화면이 떠서 열지 않았다(풀지 않음). 위키 페이지는 열린다.",
+       "img": null,
+       "code": "CT10",
+       "verified": false
+      }
+     ],
+     "pros": [
+      "Pine64 위키 'Pinecil Cases, Stands, Supplies'에 링크된 접이식 스탠드 STL을 남는 PETG 약 15 g으로 뽑는다.",
+      "손잡이 쪽을 받치는 구조라 PETG(열변형 68°C)로 충분하다."
+     ],
+     "cons": [
+      "뜨거운 팁이 스탠드에 닿으면 녹으므로, 올릴 때 방향을 지켜야 한다.",
+      "Printables 페이지가 Cloudflare 확인 화면이라 STL 자체는 열어 보지 못했다(위키 링크만 확인)."
+     ],
+     "note": "",
+     "verified": false,
+     "src": "v3 절감안"
+    }
+   ],
+   "unused": "가지고 있거나 빌릴 수 있으면 고른다. 피아노에는 남지 않는 공구다."
+  },
+  {
+   "id": "meter",
+   "cat": "tool",
+   "title": "멀티미터",
+   "role": "페달 T–R–S 저항 측정, 잭 핀 확인, 통전 검사, 허브 역급전(Pi 5V 핀 0V) 확인",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[Coms] [NT117] Coms 디지털 테스트기 (DT-832, 9개 항목)",
+       "qty": 1,
+       "unit": 7600,
+       "b": "tool",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=6779159",
+       "role": "페달 T–R–S 저항 측정, 잭 핀 확인, 통전 검사, 허브 역급전(Pi 5V 핀 0V) 확인",
+       "note": "",
+       "img": null,
+       "code": "CT11",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "가지고 있거나 빌릴 수 있으면 고른다. 피아노에는 남지 않는 공구다."
+  },
+  {
+   "id": "stripper",
+   "cat": "tool",
+   "title": "정밀 와이어 스트리퍼",
+   "role": "리본·단선·점퍼선 등 가는 선(AWG 20~30) 피복 벗기기",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[Prokit] [CP-301G] PROKIT 정밀 스트리퍼",
+       "qty": 1,
+       "unit": 4500,
+       "b": "tool",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=3787704",
+       "role": "리본·단선·점퍼선 등 가는 선(AWG 20~30) 피복 벗기기",
+       "note": "",
+       "img": null,
+       "code": "CT21",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "가지고 있거나 빌릴 수 있으면 고른다. 피아노에는 남지 않는 공구다."
+  },
+  {
+   "id": "nipper",
+   "cat": "tool",
+   "title": "니퍼",
+   "role": "센서 리드·헤더 핀 자르기, 출력물 다듬기. 16AWG 스피커선 피복도 니퍼 날로 칼집을 내 벗긴다(CT16)",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[JAKEMY] JM-CT2-2 5인치 니퍼",
+       "qty": 1,
+       "unit": 3960,
+       "b": "tool",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=7663472",
+       "role": "센서 리드·헤더 핀 자르기, 출력물 다듬기. 16AWG 스피커선 피복도 니퍼 날로 칼집을 내 벗긴다(CT16)",
+       "note": "",
+       "img": null,
+       "code": "CT13",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "가지고 있거나 빌릴 수 있으면 고른다. 피아노에는 남지 않는 공구다."
+  },
+  {
+   "id": "caliper",
+   "cat": "tool",
+   "title": "버니어 캘리퍼스",
+   "role": "리프 두께·훅 높이·164.5 수축 시편·세트스크루 돌출(1.5±0.05)·펠트 두께 측정",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "[블루텍] 버니어캘리퍼(경제형) NA530-200 (200×0.05)",
+       "qty": 1,
+       "unit": 13400,
+       "b": "tool",
+       "store": "엘레파츠",
+       "ship": "엘레파츠",
+       "url": "https://www.eleparts.co.kr/goods/view?no=16549359",
+       "role": "리프 두께·훅 높이·164.5 수축 시편·세트스크루 돌출(1.5±0.05)·펠트 두께 측정",
+       "note": "",
+       "img": null,
+       "code": "CT12",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "가지고 있거나 빌릴 수 있으면 고른다. 피아노에는 남지 않는 공구다."
+  },
+  {
+   "id": "hexkey",
+   "cat": "tool",
+   "title": "육각 렌치 2.5 mm · 2 mm",
+   "role": "M3 렌치볼트 조이기",
+   "options": [
+    {
+     "id": "cur",
+     "title": "현재 목록",
+     "items": [
+      {
+       "name": "육각 렌치 2.5mm (볼트 상품 옵션)",
+       "qty": 1,
+       "unit": 600,
+       "b": "tool",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "role": "M3 렌치볼트 조이기",
+       "note": "",
+       "img": "L-T11",
+       "code": "T11",
+       "verified": true
+      },
+      {
+       "name": "육각 렌치 2 mm (볼트 상품 옵션)",
+       "qty": 1,
+       "unit": 600,
+       "b": "tool",
+       "store": "굿나잇몰",
+       "ship": "굿나잇몰",
+       "url": "https://www.11st.co.kr/products/4236198413",
+       "role": "v4 캡스턴 M3 버튼헤드 조정용",
+       "note": "v4에서 추가 (세트스크루용 1.5 mm 대신)",
+       "img": "P-hex",
+       "code": "T04",
+       "verified": true
+      }
+     ],
+     "pros": [],
+     "cons": [],
+     "note": "",
+     "verified": true,
+     "src": ""
+    }
+   ],
+   "unused": "가지고 있거나 빌릴 수 있으면 고른다. 피아노에는 남지 않는 공구다."
+  }
+ ],
+ "dropped": [
+  {
+   "code": "SE7",
+   "name": "핀헤더 소켓 1X40(2.54피치)",
+   "reason": "EXT 암 커넥터용 — 회로 검토에서 빠짐(EXT는 L66 JST-XH 리드를 패드에 직접 납땜)",
+   "price": 528
+  },
+  {
+   "code": "L32",
+   "name": "스텐 유두 렌치볼트 M3 × 40mm (SUS304)",
+   "reason": "척추 클램프 나사 — v4에서 리프 콤·척추가 없어져 빠짐",
+   "price": 4420
+  },
+  {
+   "code": "L33",
+   "name": "스텐 무두 렌치볼트 M3 × 10mm (평끝 세트스크루)",
+   "reason": "무게 조절 세트스크루 — v4에서 빠짐(무게는 캡스턴·텅스텐 퍼티로)",
+   "price": 2400
+  },
+  {
+   "code": "T11",
+   "name": "육각 렌치 1.5mm (볼트 상품 옵션)",
+   "reason": "1.5 mm 렌치(세트스크루용) — v4에서 빠짐",
+   "price": 600
+  },
+  {
+   "code": "L38",
+   "name": "황동 라운드 디스크 8-20mm 1mm 두께 10pcs (Ø8×1, 품절이면 Ø10×1)",
+   "reason": "세트스크루 받침 황동 원판 — v4에서 빠짐",
+   "price": 10676
+  }
+ ],
+ "ship": {
+  "아이씨뱅큐": {
+   "fee": 2700,
+   "b": "base",
+   "thr": 50000,
+   "vat": true,
+   "label": "아이씨뱅큐 (공급가 5만원 미만)"
+  },
+  "엘레파츠": {
+   "fee": 3000,
+   "b": "consumable",
+   "thr": 60000,
+   "vat": true,
+   "label": "엘레파츠 (공급가 6만원 미만)"
+  },
+  "Bambu Lab": {
+   "fee": 3000,
+   "b": "consumable",
+   "thr": 70000,
+   "vat": false,
+   "label": "Bambu Lab (7만원 미만)"
+  },
+  "세운상가새한음향": {
+   "fee": 4000,
+   "b": "base",
+   "label": "11번가 세운상가새한음향"
+  },
+  "두유레디": {
+   "fee": 3000,
+   "b": "base",
+   "label": "11번가 두유레디"
+  },
+  "상우아트": {
+   "fee": 3000,
+   "b": "base",
+   "label": "11번가 상우아트"
+  },
+  "오공 본드 판매처": {
+   "fee": 2500,
+   "b": "consumable",
+   "label": "11번가 오공 본드 판매처"
+  },
+  "굿나잇몰": {
+   "fee": 3500,
+   "b": "base",
+   "label": "11번가 굿나잇몰"
+  },
+  "메카솔루션": {
+   "fee": 3000,
+   "b": "base",
+   "label": "메카솔루션"
+  },
+  "파츠파츠": {
+   "fee": 3000,
+   "b": "base",
+   "label": "파츠파츠 직영몰"
+  },
+  "다나와 최저가 판매처": {
+   "fee": 3000,
+   "b": "base",
+   "label": "다나와 최저가 판매처"
+  },
+  "대건상사": {
+   "fee": 2500,
+   "b": "base",
+   "label": "대건상사"
+  },
+  "알씨뱅크": {
+   "fee": 3500,
+   "b": "base",
+   "label": "알씨뱅크"
+  },
+  "철물박사": {
+   "fee": 3000,
+   "b": "base",
+   "label": "철물박사"
+  },
+  "스튜디오분트": {
+   "fee": 3000,
+   "b": "base",
+   "label": "스튜디오분트"
+  },
+  "피아노모아": {
+   "fee": 3000,
+   "b": "base",
+   "label": "피아노모아"
+  },
+  "PINE STORE": {
+   "fee": 16200,
+   "b": "tool",
+   "label": "PINE STORE (해외)"
+  },
+  "DigiKey": {
+   "fee": 20000,
+   "b": "consumable",
+   "thr": 60000,
+   "vat": false,
+   "label": "DigiKey Korea (6만원 미만)"
+  }
+ },
+ "cats": {
+  "key": [
+   "건반 액션 (v4 신규)",
+   "v4 W1+ 4차(짧은 시소 건반 + 무게 레버 + 토션 스프링)에 새로 들어가는 부품. 3차에서 쓰던 레일·손나사·접시 스프링·탭 띠·납 등은 빠졌다(맨 아래 목록)."
+  ],
+  "cpu": [
+   "제어 컴퓨터·전원",
+   "Pi 5, 저장장치, USB 허브, USB-C PD 전원부."
+  ],
+  "sen": [
+   "센서·MCU·배선",
+   "건반 모듈 7개와 페달 보드의 감지 전자부와 배선."
+  ],
+  "aud": [
+   "오디오·스피커·뒷바",
+   "USB 동글 → TPA3110 앰프 → 스피커 2개, 스피커 상자와 가운데 유닛."
+  ],
+  "mec": [
+   "체결·펠트·접착",
+   "나사, 펠트·EVA, 텅스텐 퍼티, 접착제."
+  ],
+  "ped": [
+   "페달·소프트웨어",
+   "댐퍼 페달 1개와 무료 소프트웨어."
+  ],
+  "fil": [
+   "필라멘트",
+   "Bambu PETG Basic. v4에서 출력량이 늘었다."
+  ],
+  "tool": [
+   "공구",
+   "제작에만 쓰고 피아노에는 남지 않는다. 기본 구성(100만원 한도) 밖."
+  ]
+ }
+}

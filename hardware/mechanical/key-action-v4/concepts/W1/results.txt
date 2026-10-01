@@ -1,0 +1,294 @@
+
+==============================================================================
+A0. DESIGN EXPLORATION - white capstan y vs steel height h for DW(y13) = 50.5 g (no spring)
+==============================================================================
+  ycap   h    steel g  m_eff  UW    t40   t_full  1/(2t40)  highest steel z at dip
+  186.0  25.9    91.5   58.1  42.9   33.5   52.5    14.9 Hz     68.1
+  187.0  24.0    84.6   61.1  43.2   34.3   53.8    14.6 Hz     67.0
+  188.0  22.1    78.0   64.5  43.5   35.2   55.2    14.2 Hz     66.0
+  189.0  20.3    71.7   68.6  43.8   36.3   57.0    13.8 Hz     65.1
+  190.0  18.6    65.5   73.4  44.2   37.6   58.9    13.3 Hz     64.5
+  -> chosen: capstan ~189 with h = 21.5 mm (cut length of 9T x 50 flat bar): meets 13.3 Hz and < 60 ms with the least steel height; capstans are then re-solved for exactly DW = 50.5 g.
+
+==============================================================================
+A. SOLVE - capstan positions for DW = 50.5 g (white at y13, black at y62.5); steel 9 x 50 x 21.5 fixed
+==============================================================================
+white capstan y = 188.32  (lever arm a_L = 15.18, key arm a_K = 47.32)
+black capstan y = 180.61  (a_L = 22.89, a_K = 39.61)
+  DW sensitivity white: +0.3 mm capstan -> +1.51 g
+  DW sensitivity black: +0.3 mm capstan -> +1.14 g
+
+==============================================================================
+B. GEOMETRY (white key, D / C# representative)  coordinates (y, z) mm
+==============================================================================
+point                                      rest               bottom (dip)      
+key pivot K (SUS 4 rod centre)             (141.00, 21.50)    (141.00, 21.50)   
+lever pivot L (SUS 3 rod centre)           (203.50, 33.50)    (203.50, 33.50)   
+key top front (lip / black front edge)     (0.00, 43.50)      (-1.20, 33.50)    
+finger point                               (13.00, 43.50)     (11.77, 34.42)    
+front down-stop contact (key underside)    (6.00, 23.50)      (6.20, 13.97)     
+rest felt bottom (on rear shelf)           (197.50, 20.00)    (197.47, 23.99)   
+magnet face centre                         (67.00, 23.50)     (67.04, 18.28)    
+key COM                                    (85.03, 33.70)     (84.31, 29.72)    
+capstan crown (contact at rest)            (188.32, 31.00)    (187.53, 34.31)   
+lever COM                                  (174.52, 43.63)    (177.36, 49.60)   
+steel front-top corner                     (149.00, 54.50)    (154.76, 65.68)   
+steel rear-top corner                      (199.00, 54.50)    (203.60, 54.98)   
+capstan contact point                      (188.32, 31.00)    (188.39, 34.25)   
+key rotation at dip a = 0.0706 rad (4.04 deg); lever rotation b = 0.2157 rad (12.36 deg)
+front down-stop felt top plane z = 13.97 ; rear shelf top z = 20.00 ; up-stop felt face z = 65.68
+
+==============================================================================
+C. STATICS (white)
+==============================================================================
+masses: key 21.77 g (COM y85.0), lever 80.16 g (steel 75.95 g, PETG 4.09 g, felt 0.12 g)
+inertia about own pivot: key I_k = 142185 g mm^2, lever I_L = 96255 g mm^2
+at rest (start of motion), finger (13.00, 43.50):
+  balance weight BW = 47.05 g, friction = 3.45 g  ->  DW = 50.50 g, UW = 43.60 g
+  friction split (g at finger): key pivot 0.69, lever pivot 0.67, capstan slip 0.62, guide bushing 1.47
+  capstan normal force 1.501 N ; key pivot reaction 2.175 N ; lever pivot reaction 0.714 N
+  lever ratio j = db/da = 3.117 (rest), 2.919 (dip); capstan slip 1.73 mm per rad of key
+  m_eff at finger = 65.8 g (key 8.7 + lever 57.1)
+  at lip y0: BW 42.71, DW 45.83, UW 39.59 g, m_eff 54.2 g
+  at y90: DW 127.29 g  -> front/back ratio DW(y90)/DW(y13) = 2.52
+  force along the stroke (finger point), fraction of dip -> BW / DW / UW g, j, m_eff:
+   0.00 :  47.05 /  50.50 /  43.60   j 3.117  m_eff 65.8
+   0.25 :  45.59 /  50.21 /  40.97   j 3.110  m_eff 65.1
+   0.50 :  43.49 /  49.22 /  37.76   j 3.074  m_eff 63.5
+   0.75 :  40.85 /  47.58 /  34.12   j 3.009  m_eff 60.9
+   1.00 :  37.77 /  45.37 /  30.17   j 2.919  m_eff 57.6
+  steel centroid rise 6.08 mm, lever COM rise 5.97 mm, finger drop 9.08 mm -> velocity ratio 0.67
+  highest steel corner rise 11.18 mm (front-top corner)
+
+==============================================================================
+D. SENSOR (white)
+==============================================================================
+magnet y67.0: rest face-element 10.82 mm, bottom 5.60 mm, travel 5.22 mm, y shift at dip 0.04 mm
+40% re-trigger point = 2.09 mm of magnet rise above the bottom
+
+==============================================================================
+E. CLEARANCES along the stroke (white), mm (negative = interference)
+==============================================================================
+  beam_vs_lever_underside                2.16
+  key_tail_vs_hub                        2.26
+  key_underside_vs_sensor_bar            3.77
+  magnet_face_vs_element                 5.28
+  balance_block_vs_rail                  1.55
+  beam_vs_board_ceiling                  1.50
+  lever_front_vs_curtain                 2.00
+  steel_top_max_z                       66.27
+
+==============================================================================
+B. GEOMETRY (black key, D / C# representative)  coordinates (y, z) mm
+==============================================================================
+point                                      rest               bottom (dip)      
+key pivot K (SUS 4 rod centre)             (141.00, 21.50)    (141.00, 21.50)   
+lever pivot L (SUS 3 rod centre)           (203.50, 33.50)    (203.50, 33.50)   
+key top front (lip / black front edge)     (54.50, 55.50)     (51.35, 46.00)    
+finger point                               (64.50, 55.50)     (61.29, 47.08)    
+front down-stop contact (key underside)    (56.10, 23.50)     (56.38, 14.36)    
+rest felt bottom (on rear shelf)           (197.50, 20.00)    (197.33, 26.09)   
+magnet face centre                         (67.00, 23.50)     (67.21, 15.53)    
+key COM                                    (112.59, 36.78)    (111.11, 33.63)   
+capstan crown (contact at rest)            (180.61, 31.00)    (179.36, 35.20)   
+lever COM                                  (174.52, 43.63)    (176.79, 48.63)   
+steel front-top corner                     (149.00, 54.50)    (153.61, 63.87)   
+steel rear-top corner                      (199.00, 54.50)    (202.81, 54.97)   
+capstan contact point                      (180.61, 31.00)    (180.22, 35.17)   
+key rotation at dip a = 0.1078 rad (6.17 deg); lever rotation b = 0.1791 rad (10.26 deg)
+front down-stop felt top plane z = 14.36 ; rear shelf top z = 20.00 ; up-stop felt face z = 63.87
+
+==============================================================================
+C. STATICS (black)
+==============================================================================
+masses: key 16.70 g (COM y112.6), lever 80.16 g (steel 75.95 g, PETG 4.09 g, felt 0.12 g)
+inertia about own pivot: key I_k = 44558 g mm^2, lever I_L = 96255 g mm^2
+at rest (start of motion), finger (64.50, 55.50):
+  balance weight BW = 46.34 g, friction = 4.17 g  ->  DW = 50.51 g, UW = 42.16 g
+  friction split (g at finger): key pivot 0.86, lever pivot 0.18, capstan slip 2.06, guide bushing 1.07
+  capstan normal force 0.995 N ; key pivot reaction 1.613 N ; lever pivot reaction 0.209 N
+  lever ratio j = db/da = 1.730 (rest), 1.558 (dip); capstan slip 5.18 mm per rad of key
+  m_eff at finger = 56.9 g (key 7.6 + lever 49.2)
+  force along the stroke (finger point), fraction of dip -> BW / DW / UW g, j, m_eff:
+   0.00 :  46.34 /  50.51 /  42.16   j 1.730  m_eff 56.9
+   0.25 :  44.13 /  49.35 /  38.92   j 1.708  m_eff 54.3
+   0.50 :  41.54 /  47.68 /  35.39   j 1.670  m_eff 51.1
+   0.75 :  38.65 /  45.61 /  31.70   j 1.619  m_eff 47.6
+   1.00 :  35.58 /  43.21 /  27.94   j 1.558  m_eff 43.8
+  steel centroid rise 5.09 mm, lever COM rise 5.00 mm, finger drop 8.42 mm -> velocity ratio 0.60
+  highest steel corner rise 9.37 mm (front-top corner)
+
+==============================================================================
+D. SENSOR (black)
+==============================================================================
+magnet y67.0: rest face-element 13.35 mm, bottom 5.38 mm, travel 7.97 mm, y shift at dip 0.21 mm
+40% re-trigger point = 3.19 mm of magnet rise above the bottom
+
+==============================================================================
+E. CLEARANCES along the stroke (black), mm (negative = interference)
+==============================================================================
+  beam_vs_lever_underside                1.49
+  key_tail_vs_hub                        1.25
+  key_underside_vs_sensor_bar            2.62
+  magnet_face_vs_element                 4.89
+  balance_block_vs_rail                  1.31
+  beam_vs_board_ceiling                  1.50
+  lever_front_vs_curtain                 2.00
+  black_front_vs_white_notch             1.18
+  steel_top_max_z                       64.39
+
+==============================================================================
+F. DYNAMICS - release from the bottom (finger lifted instantly), 4 us steps
+==============================================================================
+felt model: Hunt-Crossley, K / e = {'front': (30.0, 0.35), 'front_b': (20.0, 0.35), 'rest': (40.0, 0.35), 'cap': (30.0, 0.3), 'up': (40.0, 0.35)}
+re-trigger assumption: firmware re-arms when the MAGNET has risen 40 % of its travel from the bottom;
+rate = 1/(2 t40) assumes the finger re-presses as slowly as the key rose (conservative); 1/(t40+10ms) assumes a 10 ms re-press.
+  white (no spring)                  t(40%)   35.5 ms  t(full)   55.8 ms  rate 1/(2 t40)  14.1 Hz  1/(t40+10)  22.0 Hz  sep max 0.000 mm  rebound below rest 22.3 % dip  rest-felt peak 13.89 N
+  black (no spring)                  t(40%)   31.2 ms  t(full)   49.3 ms  rate 1/(2 t40)  16.0 Hz  1/(t40+10)  24.3 Hz  sep max 0.000 mm  rebound below rest 22.6 % dip  rest-felt peak 11.97 N
+  option: assist spring for white: k 0.066 N/mm, touches at 50% lever travel, compression 2.99 mm, F max 0.198 N, SUS wire d0.30 OD6.0 n 5.7 active, tau 115 MPa, solid 2.3 mm, free length 9.9 (cover to tip) -> fits True
+  white (+12 g assist spring)        t(40%)   31.4 ms  t(full)   50.4 ms  rate 1/(2 t40)  15.9 Hz  1/(t40+10)  24.2 Hz  sep max 0.000 mm  rebound below rest 24.5 % dip  rest-felt peak 14.51 N
+  option: assist spring for black: k 0.087 N/mm, touches at 50% lever travel, compression 2.54 mm, F max 0.221 N, SUS wire d0.30 OD6.0 n 4.3 active, tau 128 MPa, solid 1.9 mm, free length 8.6 (cover to tip) -> fits True
+  black (+12 g assist spring)        t(40%)   27.3 ms  t(full)   44.3 ms  rate 1/(2 t40)  18.3 Hz  1/(t40+10)  26.8 Hz  sep max 0.000 mm  rebound below rest 24.9 % dip  rest-felt peak 12.56 N
+
+==============================================================================
+F2. OPTION W1-S - heavier inertia + assist spring (white): capstan y191.5, steel h solved for DW 50.5
+==============================================================================
+  h 15.9 mm, steel 56.2 g, DW 50.5, UW 43.5, m_eff 81.4 g, highest steel z at dip 63.96 (cover top 68.46)
+  W1-S no spring                     t(40%)   40.0 ms  t(full)   62.7 ms  rate 1/(2 t40)  12.5 Hz  1/(t40+10)  20.0 Hz  sep max 0.000 mm  rebound below rest 21.1 % dip  rest-felt peak 13.68 N
+  spring +12 g: k 0.038 N/mm, F max 0.151 N, d0.30 OD6.0 n 10.0, solid 3.6, free 12.6 mm, fits True
+  W1-S + 12 g spring                 t(40%)   35.2 ms  t(full)   56.5 ms  rate 1/(2 t40)  14.2 Hz  1/(t40+10)  22.1 Hz  sep max 0.000 mm  rebound below rest 23.2 % dip  rest-felt peak 14.30 N
+  spring +20 g: k 0.063 N/mm, F max 0.252 N, d0.30 OD6.0 n 6.0, solid 2.4, free 12.6 mm, fits True
+  W1-S + 20 g spring                 t(40%)   32.8 ms  t(full)   53.3 ms  rate 1/(2 t40)  15.3 Hz  1/(t40+10)  23.4 Hz  sep max 0.000 mm  rebound below rest 24.6 % dip  rest-felt peak 14.71 N
+
+==============================================================================
+G. DYNAMICS - press (constant finger force at the finger point, held 120 ms, then released)
+==============================================================================
+  white pp     finger 0.80 N: key speed at felt 0.31 m/s, lever flight gap max 0.13 mm (16.0 ms), up-stop hits 2 peak 10.29 N, re-landing 0.117 m/s, front felt peak 4.4 N, capstan peak 11.0 N; after release t40 29.7 ms, full 48.9 ms
+  white mf     finger 1.50 N: key speed at felt 0.55 m/s, lever flight gap max 0.21 mm (7.5 ms), up-stop hits 3 peak 21.82 N, re-landing 0.190 m/s, front felt peak 8.7 N, capstan peak 11.4 N; after release t40 36.1 ms, full 56.8 ms
+  white ff     finger 3.00 N: key speed at felt 0.86 m/s, lever flight gap max 0.27 mm (12.1 ms), up-stop hits 4 peak 38.19 N, re-landing 0.301 m/s, front felt peak 15.3 N, capstan peak 12.3 N; after release t40 33.4 ms, full 53.8 ms
+  white fff    finger 6.00 N: key speed at felt 1.28 m/s, lever flight gap max 0.34 mm (12.2 ms), up-stop hits 4 peak 61.57 N, re-landing 0.462 m/s, front felt peak 25.7 N, capstan peak 23.7 N; after release t40 33.6 ms, full 53.7 ms
+  black pp     finger 0.80 N: key speed at felt 0.34 m/s, lever flight gap max 0.15 mm (18.9 ms), up-stop hits 3 peak 10.11 N, re-landing 0.151 m/s, front felt peak 3.9 N, capstan peak 10.6 N; after release t40 35.5 ms, full 53.4 ms
+  black mf     finger 1.50 N: key speed at felt 0.60 m/s, lever flight gap max 0.23 mm (11.7 ms), up-stop hits 4 peak 20.70 N, re-landing 0.247 m/s, front felt peak 7.6 N, capstan peak 10.9 N; after release t40 29.8 ms, full 47.9 ms
+  black ff     finger 3.00 N: key speed at felt 0.94 m/s, lever flight gap max 0.31 mm (22.2 ms), up-stop hits 7 peak 35.96 N, re-landing 0.393 m/s, front felt peak 13.4 N, capstan peak 13.5 N; after release t40 28.4 ms, full 46.1 ms
+  black fff    finger 6.00 N: key speed at felt 1.39 m/s, lever flight gap max 1.57 mm (77.8 ms), up-stop hits 5 peak 57.93 N, re-landing 0.600 m/s, front felt peak 22.6 N, capstan peak 19.4 N; after release t40 11.4 ms, full 41.2 ms
+  up-stop height tolerance (lever up-stop felt face vs its nominal 'touch at dip' position), ff 3 N:
+  white gap-0.3 finger 3.00 N: key speed at felt 0.86 m/s, lever flight gap max 0.15 mm (14.0 ms), up-stop hits 6 peak 38.35 N, re-landing 0.227 m/s, front felt peak 15.3 N, capstan peak 14.3 N; after release t40 32.7 ms, full 52.9 ms
+  white gap+0.3 finger 3.00 N: key speed at felt 0.86 m/s, lever flight gap max 0.39 mm (20.8 ms), up-stop hits 4 peak 38.02 N, re-landing 0.341 m/s, front felt peak 15.3 N, capstan peak 12.8 N; after release t40 27.2 ms, full 47.4 ms
+  black gap-0.3 finger 3.00 N: key speed at felt 0.94 m/s, lever flight gap max 0.34 mm (35.3 ms), up-stop hits 5 peak 36.17 N, re-landing 0.238 m/s, front felt peak 13.3 N, capstan peak 13.5 N; after release t40 25.1 ms, full 43.1 ms
+  black gap+0.3 finger 3.00 N: key speed at felt 0.94 m/s, lever flight gap max 0.50 mm (36.5 ms), up-stop hits 4 peak 35.79 N, re-landing 0.484 m/s, front felt peak 13.4 N, capstan peak 11.1 N; after release t40 27.8 ms, full 46.2 ms
+
+==============================================================================
+H. CHECK of the v2.0 claim 'gravity return ~40 ms regardless of mass' (white, same capstan)
+==============================================================================
+  steel h 10.0: DW  19.2 UW  14.4 m_eff  32.7  m_eff/UW 2.27 -> t40  44.6 ms, full  70.2 ms
+  steel h 14.0: DW  30.1 UW  24.6 m_eff  43.3  m_eff/UW 1.76 -> t40  38.5 ms, full  60.5 ms
+  steel h 19.0: DW  43.7 UW  37.3 m_eff  57.8  m_eff/UW 1.55 -> t40  36.0 ms, full  56.5 ms
+  steel h 24.0: DW  57.3 UW  49.9 m_eff  74.3  m_eff/UW 1.49 -> t40  35.4 ms, full  55.5 ms
+  -> return time scales with sqrt(m_eff/UW); re-trigger needs only the 40 % rise (~62 % of full-return time).
+
+==============================================================================
+H2. SENSITIVITY of the white release to the assumed felt / friction values
+==============================================================================
+  baseline                   DW  50.5 UW  43.6  t40  35.5 ms  full  55.8 ms  rebound below rest 22.3 % dip
+  rest felt e 0.2            DW  50.5 UW  43.6  t40  35.5 ms  full  55.8 ms  rebound below rest 20.7 % dip
+  rest felt e 0.5            DW  50.5 UW  43.6  t40  35.5 ms  full  55.8 ms  rebound below rest 24.9 % dip
+  rest felt K 15 (soft)      DW  50.5 UW  43.6  t40  35.5 ms  full  55.8 ms  rebound below rest 21.5 % dip
+  capstan felt K 12 (soft)   DW  50.5 UW  43.6  t40  35.7 ms  full  55.8 ms  rebound below rest 19.6 % dip
+  all friction x2            DW  53.9 UW  40.2  t40  38.1 ms  full  59.6 ms  rebound below rest 17.4 % dip
+
+==============================================================================
+I. CONSTANT STRESS IN PLASTIC AT REST (gravity only) and rod deflections
+==============================================================================
+  white: capstan force 1.501 N, rear-shelf reaction 1.045 N, key-rod reaction 0.669 N, lever-rod reaction 0.714 N
+    thin tail (8 x 3.0) bending 0.54 MPa | beam at capstan 0.15 MPa | beam at pivot (notch) 0.22 MPa
+    rear shelf plate (t2, span 13.7 between ribs) 0.67 MPa | key notch on rod 0.021 MPa | lever hub on rod 0.021 MPa
+  black: capstan force 0.995 N, rear-shelf reaction 0.615 N, key-rod reaction 0.544 N, lever-rod reaction 0.209 N
+    thin tail (8 x 3.0) bending 0.71 MPa | beam at capstan 0.16 MPa | beam at pivot (notch) 0.08 MPa
+    rear shelf plate (t2, span 13.7 between ribs) 0.40 MPa | key notch on rod 0.017 MPa | lever hub on rod 0.006 MPa
+  lever carrier: steel carries the lever load; PETG only clamps it (web moment < 0.1 MPa)
+  lever rod SUS 3 mm, span 82.3 mm between fins (x41.1 / x123.4), 6 levers at rest: sag 0.030 mm
+  key rod SUS 4 mm lies in a continuous groove of the balance rail: no span
+  up-stop rail 3T x 19 steel, span 82.3: 6-key ff chord (6 x 38.2 N peak) sag 0.194 mm, stress 83 MPa; single fff hit 61.6 N at mid-span sag 0.084 mm
+  -> the up-stop must be a steel rail anchored in the fins (a PETG cover plate would lift/deflect)
+  -> max constant plastic stress 0.71 MPa (target < 2)
+
+==============================================================================
+J. ENVELOPE
+==============================================================================
+  depth used y0..212 (key lip moves to y-1.20 at dip); total instrument depth 212 + 3 + 195 = 410 mm
+  key top z43.5 (white) / z55.5 (black); highest moving part = steel corner z66.27 (incl. ff over-travel)
+  lever up-stop felt face z65.68 -> felt 2T -> steel rail top z70.68 -> dust cover top z73.18 (v3: z59.0, +14.2 mm)
+  lowest moving point: white key underside at the front at dip z13.50; frame floor z5
+
+==============================================================================
+J2. WHY v3 COVER z59 CANNOT BE KEPT
+==============================================================================
+  under a z59 cover the steel may reach z51.5 at dip (cover 2.5 + rail 3 + felt 2 above it)
+  best case: capstan y185.5, steel h 9.4 mm -> DW only 12.3 g (target 47-55), m_eff 22.8 g
+  if the control board were moved off the tail zone the key beam could drop 9 mm (beam bottom z12.5 on a low balance rail): cover top would still be z64.2 > z59
+
+==============================================================================
+K. MASS, FILAMENT, PRINT TIME (PETG 1.25 g/cm3, 15 g/h)
+==============================================================================
+  per key: white 21.5 g, black 16.4 g, lever carrier 4.1 g (+ steel 75.9 g)
+  frame: v3 175 - spine rail 14.6 - leaf back-stop rail 6.3 + balance rail 8.3 + rear shelf/ribs 7.8 + 4 fins 19.2 + taller rear wall 8.7 = 198.2 g
+  cover (taller, with up-stop ribs) 48.7 g ; sensor bar 17 g
+  module (C-B) printed: 545 g = 36.3 h
+  88 keys: 7 modules + end parts 363 g + other v3 prints 974 g + spare keys 232 g = 5.39 kg, 359 h
+  steel: 75.9 g per lever, 911 g per octave, 6.68 kg for 88 keys; module mass incl. steel ~1.54 kg
+  bed: longest part = frame 164.5 x 212 (fits 220 x 220); key 199 x 22.5; lever 64 x 13; cover 164.5 x 67
+  per module hardware: SUS 4 rod 16.3 g, SUS 3 rod 9.2 g, up-stop rail 3x19x163 72.9 g
+  key removal: lever can be swung up 27.0 deg before its rear-top corner touches the rear wall; capstan then clears by 7.2 mm (enough to lift the key notch 2.05 mm off its rod)
+
+==============================================================================
+L. PURCHASED PARTS AND COST DELTA vs v3 (KRW)
+==============================================================================
+  + SS400 flat bar 9T x 50, 6 m (88 blocks x 21.5 mm + 2 mm kerf = 2.07 m)   1 x  14000 =   14000  [estimate (9T x 32 6 m listed 8,542-9,085; scaled by width)]
+  + SUS304 round bar 4 mm x 4 m (key rods, 1.23 m used)                      1 x   7000 =    7000  [estimate (onezaze/changhojajae 3-14 mm 4 m listings)]
+  + SUS304 round bar 3 mm x 4 m (lever rods, 1.23 m used)                    1 x   6000 =    6000  [estimate]
+  + SS400 flat bar 3T x 19, 2 m (up-stop rails, 9 pieces)                    1 x   3000 =    3000  [estimate]
+  + extra wool felt 1.5T/2T (capstan strips, rest pads, up-stop strips)      1 x   5000 =    5000  [estimate (consumable)]
+  - M3 x 35 clamp screws (v3 spine), 4/module + 2/end part                  32 x    100 =    3200  [estimate]
+  - M3 x 10 flat-point set screws + nuts                                    32 x    150 =    4800  [estimate]
+  - brass disc 8 x 1 (set-screw seats)                                      32 x    250 =    8000  [estimate]
+  - M3 nuts (clamp + set screw)                                             64 x     30 =    1920  [estimate]
+  optional: cutting service 88 cuts x 500 = 44,000 (estimate) - or cut by hand (bandsaw/hacksaw), 0
+  optional: 88 assist springs (SUS 0.30 wire, OD6, ~6 coils) x 150 = 13,200 (estimate) - not in the baseline
+  base (non-consumable) delta = +30000 - 17920 = +12080 KRW  (felt +5,000 is consumable)
+
+==============================================================================
+M. SUMMARY (metrics used in the structured result)
+==============================================================================
+  dw_white_g                        50.50
+  uw_white_g                        43.60
+  dw_black_g                        50.51
+  uw_black_g                        42.16
+  dw_white_lip_g                    45.83
+  friction_white_g                   3.45
+  m_eff_white_g                     65.77
+  m_eff_white_lip_g                 54.20
+  m_eff_black_g                     56.86
+  front_back_ratio                   2.52
+  t40_white_ms                      35.55
+  full_return_ms_white              55.76
+  t40_black_ms                      31.18
+  full_return_ms_black              49.27
+  retrigger_hz_white                14.07
+  retrigger_hz_black                16.03
+  spring_t40_white                  31.39
+  spring_full_white                 50.42
+  magnet_travel_white_mm             5.22
+  magnet_travel_black_mm             7.97
+  gap_bottom_white                   5.60
+  gap_bottom_black                   5.38
+  max_plastic_rest_stress_mpa        0.71
+  max_z_mm                          66.27
+  cover_top                         73.18
+  steel_g_per_octave               911.38
+  steel_kg_88                        6.68
+  filament_g_88                   5385.83
+  print_h_88                       359.06
+  cost_delta_krw                 12080.00
+  min_clear_moving                   1.18
+  min_gap_sensor                     5.38
+  steel_rise_front_white            11.18

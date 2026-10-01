@@ -1,0 +1,1328 @@
+[
+ {
+  "id": "e-hall",
+  "category": "센서",
+  "name_ko": "TI DRV5055A3 선형(아날로그) 홀 효과 센서, TO-92 스루홀",
+  "model": "DRV5055A3QLPG (소량 포장 DRV5055A3QLPGM도 동일 칩) — 3.3 V에서 15 mV/mT, ±88 mT",
+  "role_ko": "건반 밑면 자석이 5–6 mm 내려오는 동안의 거리를 연속 전압으로 바꿔 주는 핵심 센서입니다. 위치를 연속으로 읽어 속도(벨로시티)를 계산하므로 스위치형이 아닌 선형 아날로그 출력이 필요합니다.",
+  "qty_suggest": "100개 — 88건반 + 페달·예비 12 (엘레파츠 100개 가격구간 적용)",
+  "specs": {
+   "감도 @3.3V": "15 mV/mT typ (14.3–15.8), 5 V에서는 25 mV/mT",
+   "선형 측정범위 @3.3V": "±88 mT (A3). 참고: A1 ±22 / A2 ±44 / A4 ±176 mT",
+   "전원 전압": "3.0–3.63 V 또는 4.5–5.5 V (Pico 3V3에 직결 가능)",
+   "출력 형식": "비율계(ratiometric) 아날로그 전압, 0 mT에서 VCC/2(1.65 V), 선형 출력 0.2 V ~ VCC−0.2 V, ±1 mA 구동",
+   "대역폭 / 지연": "20 kHz / 10 µs",
+   "노이즈 @3.3V": "입력환산 215 nT/√Hz → 20 kHz 전대역 0.2 mTpp, A3 출력환산 약 3 mVpp (RC 필터로 저감 가능)",
+   "온도 특성": "감도 +0.12 %/°C 자석 온도보상(A 시리즈), 영점 드리프트 ±1 %×VCC (−40~125 °C)",
+   "소비 전류": "2 mA typ / 4 mA max @3.3 V",
+   "패키지 / 핀": "TO-92 3핀(LPG): 1=VCC, 2=GND, 3=OUT. 패키지 마킹면에 수직인 자속만 감지",
+   "바이패스": "VCC–GND 사이 세라믹 0.01 µF 이상 권장(데이터시트)"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=8320049",
+    "price_krw": 1010,
+    "pack_qty": 1,
+    "price_note": "DRV5055A3QLPG. 100개 이상 구간 918.18원(VAT별도, 관세·수입운송비 포함) → VAT 포함 약 1,010원/개. 1개 구매 시 1,290.91원(VAT별도)=1,420원. 해외 주문품, 평균 발송 4.5일",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "LCSC (해외 직구)",
+    "url": "https://www.lcsc.com/product-detail/Hall-Sensor_Texas-Instruments-DRV5055A3QLPGM_C266124.html",
+    "price_krw": 633,
+    "pack_qty": 1,
+    "price_note": "DRV5055A3QLPGM (C266124). 100개 구간 US$0.4671 → 약 633원/개 (배송비·통관 비용 별도, 1개 US$0.7418). 페이지 표시 재고 6,369개. 환율 1 USD = 1,355 KRW (open.er-api.com 2026-09-23 1,353.7 / fawazahmed0 currency-api 2026-09-22 1,358.4 평균, 반올림)",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "디바이스마트 (해외 리셀러 검색결과)",
+    "url": "https://www.devicemart.co.kr/goods/search?search_text=DRV5055A3QLPGM",
+    "price_krw": 1551,
+    "pack_qty": 1,
+    "price_note": "디바이스마트 검색결과의 LCSC 리셀러 행 1,410원 / DigiKey 리셀러 행 1,630원 (1개, 납기 4–14일). 표시가가 VAT 별도라고 보고 ×1.1=1,551원으로 계산(추정). 별도 상품페이지가 없는 API 목록",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-hall.jpg",
+  "image_source": "https://assets.lcsc.com/images/lcsc/900x900/20230109_Texas-Instruments-DRV5055A3QLPGM_C266124_front.jpg",
+  "alternatives": [
+   {
+    "name": "TI DRV5055A4QLPG (3.3 V에서 7.5 mV/mT, ±176 mT)",
+    "why": "눌림 시 자석–센서 간격이 3.5 mm보다 가까워져 70 mT를 넘으면 A3가 포화되므로 A4로 바꿉니다. 해상도는 절반이 됩니다(엘레파츠 100개 이상 972.73원 VAT별도).",
+    "url": "https://www.eleparts.co.kr/goods/view?no=7339085",
+    "price_krw": 1070
+   },
+   {
+    "name": "Honeywell SS49E (TO-92S, 2.7–6.5 V)",
+    "why": "더 싸지만 감도가 5 V 기준 1.4 mV/G(≈14 mV/mT)로 규정되고, 비율계라 3.3 V에서는 약 9 mV/mT로 줄어듭니다(추정). 온도보상·편차 규격이 느슨하고, 무명 '49E' 호환품은 편차가 더 큽니다(엘레파츠 100개 이상 616.36원 VAT별도).",
+    "url": "https://www.eleparts.co.kr/goods/view?no=14212823",
+    "price_krw": 678
+   },
+   {
+    "name": "Allegro A1308 / A1324 (SIP 스루홀)",
+    "why": "정밀도는 좋지만 공급전압이 4.5–5.5 V 전용이라 3.3 V ADC에 바로 연결할 수 없습니다(5 V 공급 + 분압 필요). 이 프로젝트에는 권하지 않습니다(데이터시트 확인, 국내 가격 미조사).",
+    "url": "https://www.allegromicro.com/-/media/Files/Datasheets/A1308-9-Datasheet.ashx",
+    "price_krw": null
+   }
+  ],
+  "optional": false,
+  "notes_ko": "감도 변형 선택: 3.3 V 기준 A1 60 mV/mT(±22 mT), A2 30(±44), A3 15(±88), A4 7.5(±176) (TI 데이터시트 SBAS640C, 2026-06 개정). '5–20 mT' 스윙이면 A1, '15–150 mT' 스윙이면 A4가 맞습니다. 권장 자석 Ø6×3 N35(Br≈1.18 T)의 축상 자장을 계산하면 간격 3 mm≈110 mT, 4 mm≈70 mT, 5 mm≈47 mT, 8 mm≈17 mT, 10 mm≈10 mT입니다. 눌림 간격 4 mm, 휴지 간격 9.5 mm(행정 5.5 mm)로 잡으면 약 11→70 mT가 되고, A3 출력 스윙은 약 0.9 V(12비트 ADC 기준 약 1,100 LSB)로 벨로시티 계산에 충분하며 포화 여유도 있습니다. 간격을 3.5 mm보다 가깝게 설계하면 A4를 쓰세요. S극이 마킹면을 향하면 출력이 VCC/2 위로 올라가도록 모든 자석의 극성을 통일하세요. TO-92는 마킹면에 수직인 자속을 감지하므로, 리드를 90° 꺾어 마킹면이 위(자석 쪽)를 보도록 눕혀 장착합니다. 자장 값은 이상적인 원통 자석의 축상 근사치이며 실제로는 자석 편차와 수평 어긋남 때문에 달라지므로 시험 쿠폰으로 확인이 필요합니다. 비율계 출력이라 센서와 Pico ADC_VREF를 같은 3V3에서 공급하면 전원 변동이 상쇄됩니다."
+ },
+ {
+  "id": "e-magnet",
+  "category": "센서",
+  "name_ko": "네오디움 원형(디스크) 자석 Ø6×3 mm, N35, Ni-Cu-Ni 도금",
+  "model": "원형 네오디움 자석 옵션 '6*3' (N35) — 이마그넷(페타크리에이티브)",
+  "role_ko": "건반 밑면 포켓에 넣어 건반과 함께 움직이는 자기장원입니다. 홀 센서가 이 자석까지의 거리를 읽어 건반 위치와 속도를 계산합니다.",
+  "qty_suggest": "100개 — 88건반 + 페달 + 예비(파손·극성 실수 대비)",
+  "specs": {
+   "치수": "Ø6 × 3 mm 원판, 두께 방향(축방향) 자화 — 일반 원판 자석 기준, 판매 페이지에 자화 방향 명시 없음",
+   "등급": "N35 (판매 페이지 표기)",
+   "잔류자속밀도 Br": "N35 표준값 약 1.17–1.21 T (등급 표준, 판매처 미기재)",
+   "도금": "Ni-Cu-Ni (판매 페이지 표기)",
+   "흡착력": "약 0.9 kg (판매 페이지 '수직당김')",
+   "판매 단위": "10개 1,500원",
+   "계산 자장(축상)": "간격 4 mm ≈ 70 mT, 6 mm ≈ 32 mT, 10 mm ≈ 10 mT (Br 1.18 T 가정)",
+   "원산지": "중국 (판매 페이지 표기)"
+  },
+  "offers": [
+   {
+    "store": "이마그넷(페타크리에이티브)",
+    "url": "https://emagnet.co.kr/product/%EC%9B%90%ED%98%95-%EB%84%A4%EC%98%A4%EB%94%94%EC%9B%80-%EC%9E%90%EC%84%9D-%C3%982mm-%C3%9850mm-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%84%A0%ED%83%9D-%EA%B0%80%EB%8A%A5/344/",
+    "price_krw": 1500,
+    "pack_qty": 10,
+    "price_note": "옵션 6*3 = 10개 1,500원 → 100개 15,000원. 배송비 3,000원, 배송 3–7일",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "엘레파츠 (정우자석)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=13805",
+    "price_krw": 1870,
+    "pack_qty": 10,
+    "price_note": "네오디움 원형 6Ø×3T 개당 170원(VAT별도), 최소·판매단위 10개 → 10개 1,870원(VAT 포함). 등급 표기 없음. 다른 부품과 합배송 가능",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "다온마그네트",
+    "url": "https://domagnet.co.kr/product/%EC%B4%88%EA%B0%95%EB%A0%A5-%EC%9B%90%ED%98%95-%EB%84%A4%EC%98%A4%EB%94%94%EC%9B%80%EC%9E%90%EC%84%9D-%EC%9B%90%ED%98%95%EC%9E%90%EC%84%9Dd2mmd6mm-%EC%86%8C/15/",
+    "price_krw": 4400,
+    "pack_qty": 20,
+    "price_note": "옵션 D6x3T-(20개) 4,400원 → 100개 22,000원. 배송비 3,000원(5만원 이상 무료). 등급 표기 없음",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-magnet.jpg",
+  "image_source": "https://emagnet.co.kr/web/product/big/emagnet5_344.jpg",
+  "alternatives": [
+   {
+    "name": "Ø5×2 mm N35 (이마그넷, 15개 1,200원)",
+    "why": "건반 포켓이 좁을 때. 자장이 약해(4 mm에서 ≈44 mT) 간격을 1 mm쯤 더 좁혀야 합니다.",
+    "url": "https://emagnet.co.kr/product/%EC%9B%90%ED%98%95-%EB%84%A4%EC%98%A4%EB%94%94%EC%9B%80-%EC%9E%90%EC%84%9D-%C3%982mm-%C3%9850mm-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%84%A0%ED%83%9D-%EA%B0%80%EB%8A%A5/344/",
+    "price_krw": 1200
+   },
+   {
+    "name": "Ø8×3 mm N35 (이마그넷, 10개 2,000원)",
+    "why": "간격을 5–6 mm로 넓게 잡아야 할 때. 4 mm에서 ≈95 mT라 A3는 포화되므로 A4와 함께 쓰세요.",
+    "url": "https://emagnet.co.kr/product/%EC%9B%90%ED%98%95-%EB%84%A4%EC%98%A4%EB%94%94%EC%9B%80-%EC%9E%90%EC%84%9D-%C3%982mm-%C3%9850mm-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%84%A0%ED%83%9D-%EA%B0%80%EB%8A%A5/344/",
+    "price_krw": 2000
+   }
+  ],
+  "optional": false,
+  "notes_ko": "N52 Ø6×3은 4 mm에서 약 85 mT로 A3 선형 한계(±88 mT)에 너무 가까워 오히려 불리하므로 N35를 권합니다. 국내 판매처에서 N52 Ø6×3 상품은 확인하지 못했습니다(해외 직구 미검증). 모든 자석은 같은 극이 센서를 향하게 장착하세요(기준 자석으로 극 확인). 네오디움은 고온에서 자력이 떨어지므로 인두 열로 포켓에 녹여 박지 말고 압입 또는 접착하세요."
+ },
+ {
+  "id": "e-mux",
+  "category": "MCU/인터페이스",
+  "name_ko": "CD74HC4067 16채널 아날로그 멀티플렉서 브레이크아웃 모듈",
+  "model": "CD74HC4067 16CH Analog/Digital MUX Breakout (파란색 범용 모듈)",
+  "role_ko": "한 모듈의 센서 12–15개 출력을 Pico의 ADC 핀 1개로 차례로 골라 읽게 해 주는 아날로그 스위치입니다. S0–S3 4비트 주소로 채널을 고릅니다.",
+  "qty_suggest": "10개 — 8모듈(건반 7 + 페달 1) + 예비 2",
+  "specs": {
+   "채널": "16:1 단일 아날로그/디지털 양방향 스위치",
+   "공급 전압": "2–6 V (HC 타입) → 3.3 V로 구동",
+   "ON 저항": "70 Ω typ / 160 Ω max @VCC 4.5 V, 25 °C (3.3 V 값은 데이터시트 표에 없음, 이보다 다소 큼)",
+   "채널 간 ON 저항 차": "ΔRON 10 Ω typ @4.5 V",
+   "OFF 누설": "±0.8 µA max @6 V, 25 °C",
+   "스위칭": "break-before-make 6 ns typ @4.5 V",
+   "입력 전압 범위": "0 ~ VCC (VCC 초과 금지)",
+   "모듈 핀": "C0–C15 1×16, SIG·S3·S2·S1·S0·EN·VCC·GND 1×8 (2.54 mm)",
+   "동작 온도": "−55 ~ 125 °C"
+  },
+  "offers": [
+   {
+    "store": "툴파츠",
+    "url": "https://toolparts.co.kr/product/cd74hc4067-16ch-analog-digital-mux-breakout-board-cd74hc4067-%EA%B3%A0%EC%86%8D-cmos-1/66263/",
+    "price_krw": 4400,
+    "pack_qty": 1,
+    "price_note": "판매가 4,400원(상품가 4,000 + 세액 400). 배송비 3,000원. 공급사 JKEMC",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "가치창조기술(vctec)",
+    "url": "https://vctec.co.kr/product/16%EC%B1%84%EB%84%90-%EC%95%84%EB%82%A0%EB%A1%9C%EA%B7%B8%EB%94%94%EC%A7%80%ED%84%B8-%EB%A9%80%ED%8B%B0%ED%94%8C%EB%A0%89%EC%84%9C-%EB%AA%A8%EB%93%88-cd74hc4067-16-channel-analog-multiplexer-cd74hc4/10524/",
+    "price_krw": 4950,
+    "pack_qty": 1,
+    "price_note": "판매가 4,500원(VAT별도) → 4,950원. 10만원 미만 주문 배송비 3,500원",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "아이씨뱅큐",
+    "url": "https://www.icbanq.com/P007324744",
+    "price_krw": 5060,
+    "pack_qty": 1,
+    "price_note": "4,600원(VAT별도) → 5,060원. 국내 재고, 2–3일",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-mux.jpg",
+  "image_source": "https://vctec.co.kr/web/product/big/201611/10524_shop1_734064.jpg",
+  "alternatives": [
+   {
+    "name": "SparkFun Analog/Digital MUX Breakout BOB-09056",
+    "why": "정품 SparkFun 보드라 회로도·문서가 확실하지만 가격이 2–3배입니다.",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1247665",
+    "price_krw": 12320
+   }
+  ],
+  "optional": false,
+  "notes_ko": "VCC는 Pico 3V3로 공급하세요(5 V 금지 — SIG 전압이 VCC까지 올라가 ADC 입력 한계를 넘을 수 있음). EN은 GND에 묶거나(활성 Low) GPIO로 제어합니다. 채널을 바꾼 뒤 수 µs 정착 시간을 두고 첫 샘플은 버리면 안전합니다. 모듈 크기는 일반적으로 약 40×18 mm이지만 판매 페이지에 치수가 없습니다. 세 판매처 모두 같은 형태의 범용(호환) 모듈로 보이며, 이미지는 vctec 상품 사진입니다. 핀헤더 동봉 여부는 판매처마다 다르니 e-header를 함께 사세요."
+ },
+ {
+  "id": "e-pico",
+  "category": "MCU/인터페이스",
+  "name_ko": "라즈베리파이 피코 2 (RP2350) 마이크로컨트롤러 보드 — 헤더 미납땜",
+  "model": "Raspberry Pi Pico 2 (SC1631)",
+  "role_ko": "각 모듈에서 먹스 주소를 돌리며 센서 16채널을 ADC로 계속 스캔하고, 위치에서 속도를 계산해 USB-MIDI 장치로 Pi 5에 노트 이벤트를 보냅니다.",
+  "qty_suggest": "9개 — 8모듈 + 예비 1",
+  "specs": {
+   "MCU": "RP2350A, 듀얼 Cortex-M33 또는 Hazard3 RISC-V @150 MHz, 520 KB SRAM, 4 MB QSPI 플래시",
+   "ADC": "12비트 SAR, 500 kS/s, ENOB 9.2 (RP2350 데이터시트), 헤더에 3채널(GPIO26–28) 노출",
+   "ADC 기준": "ADC_VREF = 3.3 V를 필터링한 전압(외부 기준 연결 가능)",
+   "USB": "Micro-USB B, USB 1.1 Device/Host (Full-speed 12 Mbps) — TinyUSB로 USB-MIDI 구현",
+   "GPIO": "26개 3.3 V GPIO (먹스 S0–S3용 4핀으로 충분)",
+   "입력 전압": "VSYS 1.8–5.5 V, 3V3 핀 외부 부하는 300 mA 미만 권장",
+   "크기": "51 × 21 mm, 2.54 mm 스루홀·캐스텔레이션 40핀, 고정홀 4 × Ø2.1 mm",
+   "동작 온도": "−20 ~ 85 °C",
+   "비교: Pico(RP2040)": "ENOB 8.7, Cortex-M0+ 133 MHz, 264 KB SRAM, 2 MB 플래시"
+  },
+  "offers": [
+   {
+    "store": "디바이스마트",
+    "url": "https://www.devicemart.co.kr/goods/view?no=15540884",
+    "price_krw": 7480,
+    "pack_qty": 1,
+    "price_note": "6,800원(VAT별도) → 7,480원. 6.6만원(VAT 포함) 이상 무료배송, 미만 3,000원. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=16580031",
+    "price_krw": 7810,
+    "pack_qty": 1,
+    "price_note": "1개 7,200원 / 10개 이상 7,100원(VAT별도) → 10개 이상 7,810원(VAT 포함). 24시간 이내 발송, 공급가 6만원 이상 무료배송",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "아이씨뱅큐",
+    "url": "https://www.icbanq.com/P016314420",
+    "price_krw": 12100,
+    "pack_qty": 1,
+    "price_note": "11,000원(VAT별도) → 12,100원",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-pico.png",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2024/11/16580031_tmp_e4131d8dfe31a2a26927417820f7ea241861large.png",
+  "alternatives": [
+   {
+    "name": "Raspberry Pi Pico (RP2040, SC0915)",
+    "why": "더 싸고 자료가 많지만 ADC ENOB가 8.7이고 특정 코드에서 DNL 튐 현상(RP2040 에라타 E11)이 알려져 있어 실효 해상도가 낮습니다.",
+    "url": "https://www.devicemart.co.kr/goods/view?no=13921792",
+    "price_krw": 5940
+   },
+   {
+    "name": "Raspberry Pi Pico H (RP2040, 헤더 납땜 완료, SC0917)",
+    "why": "헤더 납땜을 피하고 싶을 때. 칩은 RP2040이라 ADC 성능은 Pico와 같습니다.",
+    "url": "https://www.devicemart.co.kr/goods/view?no=14021609",
+    "price_krw": 7040
+   }
+  ],
+  "optional": false,
+  "notes_ko": "Pico 2는 Pico와 핀·크기가 완전히 호환됩니다. 2025년 7월 공개된 RP2350 A4 스테핑에서 GPIO 풀다운 관련 에라타 E9가 수정되었습니다(ADC로 쓰는 핀은 SDK가 디지털 입력 버퍼를 꺼서 구형 스테핑에서도 영향이 작음). 이 설계는 먹스 1개 → ADC 1핀이라 3채널로 충분합니다. 헤더가 없는 제품이므로 1×40 핀헤더를 Pico 1개당 1줄(1×20 두 개로 절단) 준비하세요(e-header). ADC 잡음을 줄이려면 온보드 SMPS를 PWM 모드로 고정(GPIO23 High)하는 방법이 데이터시트에 설명되어 있습니다. 디바이스마트 재고는 조사 초반 '장바구니' 버튼으로만 확인했습니다."
+ },
+ {
+  "id": "e-perf",
+  "category": "기판/배선",
+  "name_ko": "양면 에폭시(FR-4) 만능기판 70×90 mm, 2.54 mm 피치 — 모듈 메인 보드",
+  "model": "범용 에폭시 만능 PCB 기판 70X90-양면 [PCB-0709S]",
+  "role_ko": "각 모듈의 Pico 2, 먹스 모듈, 커넥터를 올려 손납땜하는 메인 보드입니다(PCB 제작 없이).",
+  "qty_suggest": "10장 — 8모듈 + 예비·연습 2",
+  "specs": {
+   "재질": "에폭시(FR-4), 양면",
+   "크기": "70 × 90 mm",
+   "홀 수": "26 × 31 = 806홀",
+   "피치": "2.54 mm",
+   "두께": "1.6 mm",
+   "배치 여유": "Pico(51×21 mm) + 먹스 모듈(약 40×18 mm) + 커넥터 배치 가능"
+  },
+  "offers": [
+   {
+    "store": "디바이스마트",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1341719",
+    "price_krw": 1188,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 1,188원. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "엘레파츠 (삼일피앤유 A5, 70×80 양면 원형패드)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=8127469",
+    "price_krw": 1925,
+    "pack_qty": 1,
+    "price_note": "1,750원(VAT별도) → 1,925원. 크기 70×80 mm(25×29홀), FR-4. 평균 발송 3일",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-perf.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2019/08/8127469_tmp_0688a653f81b2d664246e85ff7ec70e89499large.jpg",
+  "alternatives": [
+   {
+    "name": "PCB-0507S 50×70 양면 (18×24홀)",
+    "why": "페달 모듈처럼 작게 만들 때",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1341717",
+    "price_krw": 660
+   },
+   {
+    "name": "PCB-0915S 90×150 양면 (33×54홀)",
+    "why": "Pico, 먹스, 커넥터를 넉넉하게 배치하거나 두 모듈을 한 판에 올릴 때",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1341720",
+    "price_krw": 1870
+   }
+  ],
+  "optional": false,
+  "notes_ko": "이미지는 디바이스마트 서버 차단 때문에 같은 규격(양면 FR-4, 2.54 mm)인 엘레파츠 두 번째 판매처 상품 사진입니다. 스탠드오프(M3)용 모서리 구멍은 3.2 mm로 직접 뚫어야 합니다."
+ },
+ {
+  "id": "e-perf-strip",
+  "category": "기판/배선",
+  "name_ko": "단면 에폭시 만능기판 150×200 mm — 센서 레일용 긴 스트립으로 절단",
+  "model": "범용 에폭시 만능 PCB 기판 150X200-단면 [PCB-1520D]",
+  "role_ko": "y=110 mm 레일에 붙는 센서 스트립입니다. 20 mm 폭으로 자르면 길이 200 mm 스트립이 7개 나오므로, 한 모듈(12–15건반)의 센서를 한 줄로 실장하고 VCC/GND 버스를 깔 수 있습니다.",
+  "qty_suggest": "2장 — 1장당 20 mm 스트립 7개, 7모듈 + 페달·예비",
+  "specs": {
+   "재질": "에폭시, 단면",
+   "크기": "150 × 200 mm",
+   "홀 수": "57 × 74 = 4,218홀",
+   "피치": "2.54 mm",
+   "두께": "1.6 mm",
+   "절단 예": "20 mm(약 7홀) 폭 × 200 mm 스트립 7개/장"
+  },
+  "offers": [
+   {
+    "store": "디바이스마트",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1341716",
+    "price_krw": 4510,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 4,510원. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "아이씨뱅큐 ([GB5] 150x200 사각 만능기판 단면)",
+    "url": "https://www.icbanq.com/P000623366",
+    "price_krw": 11880,
+    "pack_qty": 1,
+    "price_note": "10,800원(VAT별도) → 11,880원. FR-4, 57×76핀, 국내 재고 2–3일",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-perf-strip.jpg",
+  "image_source": "https://www.icbanq.com/icdownload/data/ICBShop/Product/p_images/1277875482_m_0.jpg",
+  "alternatives": [
+   {
+    "name": "PCB-0208S 20×80 양면 스트립 (6×28홀)",
+    "why": "자를 필요가 없는 기성 스트립. 길이가 80 mm라 한 모듈에 2–3개를 이어 붙여야 합니다.",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1341707",
+    "price_krw": 319
+   },
+   {
+    "name": "PCB-2030D 200×300 단면",
+    "why": "15건반 모듈을 스트립 하나에 올리려고 300 mm 길이가 필요할 때",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1341725",
+    "price_krw": 13860
+   }
+  ],
+  "optional": false,
+  "notes_ko": "건반 폭 계산: 흰건반 약 23.5 mm → 12건반(흰 7) 약 164.5 mm, 15건반(흰 9) 약 211 mm. 센서 중심 사이 최대 거리는 약 188 mm라 200 mm 스트립에 들어갑니다. 건반 피치는 2.54 mm 격자와 맞지 않으므로 가장 가까운 구멍을 쓰거나, 센서는 3D 프린트 레일에 고정하고 스트립은 배선용으로만 쓰세요. 자를 때는 커터로 양면에 여러 번 홈을 낸 뒤 꺾거나 쇠톱을 쓰고, FR-4 가루는 마스크를 쓰고 물걸레로 치우세요. 이미지는 디바이스마트 차단 때문에 같은 크기(150×200 단면)인 아이씨뱅큐 두 번째 판매처 상품 사진입니다."
+ },
+ {
+  "id": "e-header",
+  "category": "기판/배선",
+  "name_ko": "2.54 mm 1×40 핀헤더(수) — Pico·먹스 모듈 실장용",
+  "model": "[ShenzenAV] 2.54mm 핀 헤더 1x40P (Black)",
+  "role_ko": "헤더가 없는 Pico 2와 먹스 모듈을 만능기판에 납땜하거나 꽂기 위한 핀입니다. 1×40을 1×20 두 개로 잘라 Pico 한 개에 씁니다.",
+  "qty_suggest": "20개 — Pico 9개(개당 1줄) + 먹스 10개(1×16 + 1×8) 분량 + 여유",
+  "specs": {
+   "피치": "2.54 mm",
+   "배열": "1열 40핀, 스트레이트",
+   "색상": "블랙 (레드·옐로·그린·블루·화이트 옵션 있음)",
+   "판매 설명": "라즈베리파이 Pico에 맞는 핀헤더",
+   "가격 구간": "1개~ 100원, 100개~ 90원 (VAT별도)",
+   "발송": "24시간 이내"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=10955856",
+    "price_krw": 110,
+    "pack_qty": 1,
+    "price_note": "100원(VAT별도) → 110원",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "디바이스마트 (핀헤더 Single 1x40Pin Straight)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=2825",
+    "price_krw": 220,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 220원. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-header.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2021/10/10955856_tmp_7e57d4c541c09424ce7eeece17108bcb1557large.jpg",
+  "alternatives": [
+   {
+    "name": "적층형 핀헤더소켓 Single 1×40 (암, 다리 9.1 mm)",
+    "why": "Pico를 떼었다 붙일 수 있게 기판 쪽에 암 소켓을 쓰고 싶을 때(1×40을 자르면 1핀을 잃으니 Pico 1개당 2개 권장)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=35611",
+    "price_krw": 1100
+   },
+   {
+    "name": "JINLING PH01(2.54)-SS40P-11.5MM (1×40 수)",
+    "why": "브랜드 표준 헤더(160원 VAT별도)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=4767",
+    "price_krw": 176
+   }
+  ],
+  "optional": false,
+  "notes_ko": "Pico를 소켓 없이 바로 납땜하면 가장 싸고 접촉 불량이 없습니다. 예비 Pico로 바꿔 끼우고 싶다면 암 소켓을 쓰세요."
+ },
+ {
+  "id": "e-cap",
+  "category": "수동소자",
+  "name_ko": "0.1 µF(104) 50 V 모노리틱(적층) 세라믹 콘덴서, 리드형",
+  "model": "HUI YI TECHNOLOGY Mono Cap 0.1uF 50V (Y5V/Z5U)",
+  "role_ko": "각 홀 센서의 VCC–GND 바로 옆에 다는 디커플링 콘덴서입니다(데이터시트 최소 0.01 µF). 먹스와 Pico 전원 디커플링에도 씁니다.",
+  "qty_suggest": "120개 — 센서 88 + 페달 + 먹스·Pico 16 + 예비",
+  "specs": {
+   "정전용량": "0.1 µF (104)",
+   "정격 전압": "50 V",
+   "유전체": "Y5V/Z5U (온도에 따른 용량 변화가 크지만 전원 디커플링용으로 충분)",
+   "형태": "레이디얼 리드, 모노리틱(적층) 세라믹",
+   "판매 단위": "10개 (최소주문 10)",
+   "가격 구간": "1개~ 30원, 100개~ 26.36원, 500개~ 23.64원 (VAT별도)",
+   "발송": "24시간 이내"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=10226",
+    "price_krw": 29,
+    "pack_qty": 1,
+    "price_note": "100개 이상 26.36원(VAT별도) → 약 29원/개, 10개 단위 판매. 120개 ≈ 3,500원",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "부품가게 (적층 콘덴서 104 100V)",
+    "url": "https://ghstore.co.kr/product/%EC%A0%81%EC%B8%B5-%EC%BD%98%EB%8D%B4%EC%84%9C-102-472-103-333-473-104-224-334-474-684-105-100v/126/",
+    "price_krw": 7000,
+    "pack_qty": 100,
+    "price_note": "옵션 104-100PCS 7,000원 (10PCS 800원). 100 V 정격. 배송 방법·배송비는 주문 시 선택",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "디바이스마트 (Ceramic 0.1㎌ 50V)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1343",
+    "price_krw": 440,
+    "pack_qty": 1,
+    "price_note": "낱개 VAT 포함 440원 — 소량 추가용. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-cap.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/thumb/1/002002050004000020.jpg",
+  "alternatives": [
+   {
+    "name": "모노리틱 커패시터 샘플 키트 [CA-KIT-06] (0.1–10 µF 10종 × 50개, 50 V)",
+    "why": "0.1 µF 50개에 1–10 µF 세라믹까지 한 번에 필요할 때",
+    "url": "https://www.devicemart.co.kr/goods/view?no=12779010",
+    "price_krw": 13200
+   }
+  ],
+  "optional": false,
+  "notes_ko": "X7R 등급이 더 좋지만 디커플링용으로는 Y5V도 괜찮습니다. 리드 간격은 판매 페이지에 없으니 만능기판에서는 리드를 구부려 맞추세요."
+ },
+ {
+  "id": "e-cap10u",
+  "category": "수동소자",
+  "name_ko": "10 µF 50 V 알루미늄 전해 콘덴서 (105 °C, Ø5×11 mm)",
+  "model": "삼영전자 KMG 10uF 50V 105℃ (5x11)",
+  "role_ko": "각 모듈의 3.3 V 센서 버스 입구(스트립 끝)와 Pico 3V3 근처에 다는 벌크 콘덴서입니다. 센서 12–15개가 함께 끌어가는 전류로 생기는 전압 흔들림을 줄입니다.",
+  "qty_suggest": "20개 — 모듈당 2개(보드 + 센서 스트립) + 예비",
+  "specs": {
+   "정전용량": "10 µF",
+   "정격 전압": "50 V",
+   "온도 등급": "105 °C (KMG 시리즈)",
+   "크기": "Ø5 × 11 mm, 레이디얼",
+   "제조사": "삼영전자(SamYoung Electronics)",
+   "가격 구간": "1개~ 30원, 200개~ 26.36원 (VAT별도), 최소주문 5"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=6754632",
+    "price_krw": 33,
+    "pack_qty": 1,
+    "price_note": "30원(VAT별도) → 33원, 최소주문 5개, 24시간 이내 발송",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "디바이스마트 (E/C 50V 10uF 85℃ 5×11)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1318",
+    "price_krw": 330,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 330원. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-cap10u.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2018/10/6754632_tmp_dcedd61aceefcb215856b50da3ddce6d8166large.jpg",
+  "alternatives": [
+   {
+    "name": "모노리틱 커패시터 샘플 키트 [CA-KIT-06]",
+    "why": "10 µF를 세라믹(ESR 낮음)으로 쓰고 싶을 때",
+    "url": "https://www.devicemart.co.kr/goods/view?no=12779010",
+    "price_krw": 13200
+   }
+  ],
+  "optional": false,
+  "notes_ko": "전해 콘덴서는 극성이 있습니다(긴 다리 +). 모듈당 센서 15개 × 2 mA ≈ 30 mA + 먹스 정도라 Pico 3V3 권장 부하(300 mA 미만) 안에 여유 있게 들어갑니다."
+ },
+ {
+  "id": "e-res",
+  "category": "수동소자",
+  "name_ko": "막대(리드형) 저항 10종 × 10개 패키지 (10 Ω–1 MΩ, 5 %)",
+  "model": "LK임베디드 아두이노 실험 필수 저항 패키지 E4-3",
+  "role_ko": "먹스 SIG → ADC 직렬 저항(100 Ω–1 kΩ)과 RC 필터, EN 풀다운 10 kΩ, 상태 LED 전류 제한 등 소량의 범용 저항입니다.",
+  "qty_suggest": "1세트 — 값마다 10개면 8모듈에 충분",
+  "specs": {
+   "구성": "10 Ω, 100 Ω, 200 Ω, 330 Ω, 1 kΩ, 2 kΩ, 5.1 kΩ, 10 kΩ, 100 kΩ, 1 MΩ",
+   "수량": "값마다 10개, 총 100개",
+   "오차": "±5 %",
+   "형태": "리드형(막대) 저항",
+   "제조/판매": "LK임베디드",
+   "발송": "24시간 이내"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=12858123",
+    "price_krw": 5500,
+    "pack_qty": 1,
+    "price_note": "5,000원(VAT별도) → 5,500원",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "디바이스마트 (아두이노 막대저항 키트 KIT050014)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1385274",
+    "price_krw": 1980,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 1,980원 — 220 Ω, 470 Ω, 1 kΩ, 4.7 kΩ, 10 kΩ 각 50개(약 250개), 1/4 W. 100 Ω은 없음. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-res.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2023/07/12858123_tmp_b26d869fb963b886631d8f336af6e2163928large.jpg",
+  "alternatives": [
+   {
+    "name": "1/4W F급(1 %) 금속피막 저항 130종 샘플키트 (각 20개, 총 2,600개, 1 Ω–3 MΩ)",
+    "why": "앞으로 다른 회로도 만들 계획이면 한 번에 갖추기 좋음",
+    "url": "https://www.devicemart.co.kr/goods/view?no=12533737",
+    "price_krw": 17600
+   }
+  ],
+  "optional": false,
+  "notes_ko": "요청한 10 kΩ·1 kΩ·100 Ω이 모두 들어 있는 엘레파츠 패키지를 추천했습니다. 디바이스마트 키트가 더 싸지만 100 Ω이 없습니다(220 Ω로 대체 가능)."
+ },
+ {
+  "id": "e-wire-sil",
+  "category": "기판/배선",
+  "name_ko": "26AWG 실리콘 연선 6색 세트 (총 60 m)",
+  "model": "CBAZY 26AWG 실리콘 와이어 6색 SET (60M)",
+  "role_ko": "센서 스트립에서 모듈 보드(먹스 입력)까지 가는 신호선과 전원선입니다. 실리콘 피복이라 유연하고 납땜 열에 녹지 않습니다.",
+  "qty_suggest": "1세트 — 모듈당 신호 16가닥 × 약 0.2 m ≈ 3.2 m + 전원 0.5 m → 8모듈 약 30 m",
+  "specs": {
+   "규격": "26AWG 연선",
+   "피복": "실리콘(내열, 유연)",
+   "색상": "적·녹·청·황·흑·백 6색",
+   "길이": "총 60 m (색마다 10 m)",
+   "브랜드": "CBAZY",
+   "발송": "24시간 이내"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=7695533",
+    "price_krw": 22880,
+    "pack_qty": 1,
+    "price_note": "20,800원(VAT별도) → 22,880원",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "디바이스마트 (26AWG 6색 실리콘 와이어 키트 60M)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=12375539",
+    "price_krw": 24200,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 24,200원, 색마다 10 m, 연선. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-wire-sil.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2019/07/7695533_tmp_c2d78b96b3a86b9ec8690e4c6f662cfa9685large.jpg",
+  "alternatives": [
+   {
+    "name": "CBAZY 28AWG 실리콘 와이어 6색 SET (60 m)",
+    "why": "더 가늘어 좁은 곳 배선이 쉬움. 신호선엔 충분",
+    "url": "https://www.eleparts.co.kr/goods/view?no=7696554",
+    "price_krw": 21450
+   },
+   {
+    "name": "디바이스마트 28AWG 6색 실리콘 와이어 키트 (48 m)",
+    "why": "같은 28AWG지만 길이가 짧고 비쌈",
+    "url": "https://www.devicemart.co.kr/goods/view?no=15080723",
+    "price_krw": 32340
+   }
+  ],
+  "optional": false,
+  "notes_ko": "색 규칙 예: 빨강 3V3, 검정 GND, 나머지 4색을 채널 순서로 돌려 쓰기. 긴 신호선은 GND선과 꼬아(트위스트) 잡음 결합을 줄이세요."
+ },
+ {
+  "id": "e-wire-bus",
+  "category": "기판/배선",
+  "name_ko": "주석도금 동선(나선) 0.5 mm 단선 — VCC/GND 버스용",
+  "model": "SME 주석도금선 0.5 mm (롤)",
+  "role_ko": "센서 스트립과 모듈 보드 위에 VCC·GND 버스 레일을 까는 피복 없는 단선입니다. 센서 전원 핀을 짧게 바로 버스에 납땜할 수 있습니다.",
+  "qty_suggest": "1롤 (0.5 mm = 50 m) — 스트립 8개 × 2가닥 × 0.2 m + 보드 배선에 충분",
+  "specs": {
+   "선경": "0.5 mm (≈24AWG). 0.1–1.0 mm 옵션 동일가",
+   "길이": "0.5 mm 50 m (0.6 mm 40 m, 0.8 mm 20 m)",
+   "재질": "순도 99.9 % 동 + 주석도금 (산화 방지, 납땜성 좋음)",
+   "용도": "PCB 점퍼선, 버스선, 브레드보드 점프",
+   "제조사": "SME(에스엠이교역)",
+   "발송": "평균 2.5일"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=7749121",
+    "price_krw": 6600,
+    "pack_qty": 1,
+    "price_note": "옵션 가격 6,600원(VAT 포함), 모든 선경 동일",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "네로마트 ([19767] 주석도금선 150 g)",
+    "url": "https://www.neromart.co.kr/goods/view?no=19767",
+    "price_krw": 17600,
+    "pack_qty": 1,
+    "price_note": "0.3–1.0 mm 옵션, 150 g 17,600원. 배송비 3,500원(20만원 이상 무료). VAT 별도 표기 없음(포함가로 추정)",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-wire-bus.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2019/07/7749121_tmp_55720c0368ef7ccb280e22624c70b87c9794large.jpg",
+  "alternatives": [
+   {
+    "name": "3색 점퍼용 단선 0.6 mm (피복, 1 m 단위)",
+    "why": "절연이 필요한 교차 구간용 피복 단선(빨강·검정·흰색 1 m씩 꼬아 배송)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1153807",
+    "price_krw": 440
+   }
+  ],
+  "optional": false,
+  "notes_ko": "나선 버스는 서로 닿지 않게 3–4홀 간격을 두고, 교차 구간에는 피복선이나 수축튜브를 쓰세요."
+ },
+ {
+  "id": "e-ribbon",
+  "category": "기판/배선",
+  "name_ko": "10P(2×5) IDC 플랫 케이블 + IDC 암 소켓 (선택)",
+  "model": "EUNSUNG Flat Data Cable 2651-10P (1 m 단위) + Adam Tech FCS-10-SG IDC 소켓",
+  "role_ko": "센서 스트립과 모듈 보드 사이의 신호 8가닥 + 전원 2가닥을 한 번에 탈착하는 방법입니다. 16채널이면 모듈당 10P 케이블 2가닥이 필요합니다(선택 사항).",
+  "qty_suggest": "케이블 4 m + IDC 소켓 32개 (8모듈 × 2가닥 × 양끝) — 선택",
+  "specs": {
+   "심수": "10심 플랫 케이블",
+   "도체 간격": "1.27 mm (2.54 mm 2×5 IDC 소켓용)",
+   "규격": "#2651 계열",
+   "판매 단위": "1 m (61 m 이상 750원/m, VAT별도)",
+   "소켓": "Adam Tech FCS-10-SG, 2×5 IDC 암, 금도금 접점",
+   "소켓 가격 구간": "1개 765.45원, 10개 646.36원, 25개 605.45원 (VAT별도, 해외 주문품)"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠 (플랫 케이블 10P, 1 m)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=424",
+    "price_krw": 990,
+    "pack_qty": 1,
+    "price_note": "900원(VAT별도) → 990원/m",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "엘레파츠 (IDC 소켓 FCS-10-SG)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=8411888",
+    "price_krw": 711,
+    "pack_qty": 1,
+    "price_note": "25개 이상 605.45원(VAT별도) → 약 666원, 10개 이상 646.36원 → 711원. 해외 주문품, 평균 4.5일",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "디바이스마트 (NT-IDC 10핀 케이블 200 mm, 완제품)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=25429",
+    "price_krw": 2310,
+    "pack_qty": 1,
+    "price_note": "양끝 IDC 소켓이 달린 완제품, 20 cm(±3 cm). 압착 공구가 필요 없음. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-ribbon.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/thumb/0/014005001000004013.jpg",
+  "alternatives": [
+   {
+    "name": "IDC DIP PLUG-10P (보드 쪽에 납땜하는 2×5 수 커넥터)",
+    "why": "만능기판 쪽에 IDC 소켓을 꽂을 자리가 필요할 때(2×5 핀헤더로 대체 가능)",
+    "url": "https://www.devicemart.co.kr/goods/view?no=14693",
+    "price_krw": 440
+   },
+   {
+    "name": "Flat Cable 10P 1 m (디바이스마트)",
+    "why": "케이블만 디바이스마트에서 함께 살 때",
+    "url": "https://www.devicemart.co.kr/goods/view?no=4073",
+    "price_krw": 1210
+   }
+  ],
+  "optional": true,
+  "notes_ko": "IDC 소켓 압착은 바이스나 전용 공구로 평행하게 눌러야 합니다. 조립이 번거로우면 실리콘선 직접 납땜 + JST-XH 커넥터 방식으로 충분합니다. 16핀(2×8) 케이블을 쓰면 모듈당 1가닥으로 16신호를 보낼 수 있지만 전원선은 따로 필요합니다."
+ },
+ {
+  "id": "e-jst",
+  "category": "기판/배선",
+  "name_ko": "JST-XH 호환 2.5 mm 커넥터 키트 (2·3·4핀 하우징 + 기판 헤더 + 크림프 단자)",
+  "model": "DFRobot FIT0255 XH2.54 Connector Kit",
+  "role_ko": "센서 스트립 ↔ 모듈 보드, 전원 분배선을 떼었다 붙일 수 있게 해 주는 잠금형 커넥터입니다. 수리·교체 때 납땜을 풀지 않아도 됩니다.",
+  "qty_suggest": "1키트 (2·3·4핀 각 20세트) — 모듈 8개의 전원·스트립 연결에 충분. 신호 16선을 XH로 하려면 8핀 하우징 별도 구매",
+  "specs": {
+   "구성": "XH-2/3/4 하우징 각 20개, 스루홀 헤더(B2B/B3B/B4B-XH) 각 20개, 크림프 단자 100개",
+   "피치": "2.5 mm (XH 규격)",
+   "정격 전류": "3 A (AWG22 기준)",
+   "정격 전압": "250 V AC/DC",
+   "동작 온도": "−25 ~ 85 °C (통전 온도상승 포함)",
+   "접촉 저항": "초기 10 mΩ max",
+   "절연 저항 / 내전압": "1000 MΩ min / AC 1000 V 1분"
+  },
+  "offers": [
+   {
+    "store": "디바이스마트",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1321203",
+    "price_krw": 10780,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 10,780원. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "DFRobot (해외 직구)",
+    "url": "https://www.dfrobot.com/product-828.html",
+    "price_krw": 7450,
+    "pack_qty": 1,
+    "price_note": "US$5.50 → 약 7,450원 (배송비 별도). 환율 1 USD = 1,355 KRW (open.er-api.com 2026-09-23 1,353.7 / fawazahmed0 currency-api 2026-09-22 1,358.4 평균, 반올림)",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-jst.jpg",
+  "image_source": "https://dfimg.dfrobot.com/enshop/image/data/FIT0255/FIT0255_TOP_03.jpg",
+  "alternatives": [
+   {
+    "name": "Adafruit 2.5 mm Pitch Connector Kit — JST XH Compatible, 560개 [ada-4423]",
+    "why": "핀수가 더 다양한 큰 키트",
+    "url": "https://www.devicemart.co.kr/goods/view?no=15531000",
+    "price_krw": 49830
+   }
+  ],
+  "optional": false,
+  "notes_ko": "XH 단자 압착에는 전용 압착기가 필요합니다(t-crimper). XH 피치는 2.50 mm라 2.54 mm 만능기판 구멍에 헤더를 꽂을 수는 있지만 핀이 많으면 약간 비틀립니다(4핀 이하는 문제 없음). 이미지는 제조사(DFRobot) 사진입니다."
+ },
+ {
+  "id": "e-dupont",
+  "category": "기판/배선",
+  "name_ko": "듀폰(2.54 mm) 점퍼 케이블 40P 암-암(F/F) 20 cm",
+  "model": "테스트[CH254] 소켓 점퍼 케이블 40P 칼라 (F/F) 20cm",
+  "role_ko": "시제품 단계에서 센서·먹스·Pico를 납땜 없이 연결해 시험하는 용도입니다. 최종 조립은 진동에 빠질 수 있으므로 납땜이나 JST로 바꾸세요.",
+  "qty_suggest": "3개 (120가닥) — 브레드보드 시험·디버깅용",
+  "specs": {
+   "형태": "40가닥 무지개색 플랫 점퍼, 양끝 암(F/F)",
+   "커넥터": "2.54 mm 피치 CH254 소켓",
+   "길이": "20 cm",
+   "가닥 수": "40",
+   "색상": "칼라(무지개) 플랫",
+   "사용": "원하는 가닥 수만큼 떼어 사용"
+  },
+  "offers": [
+   {
+    "store": "디바이스마트",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1321192",
+    "price_krw": 935,
+    "pack_qty": 1,
+    "price_note": "VAT 포함 935원. 디바이스마트 가격은 2026-09-24 조사 초반 상품페이지에서 확인(VAT 포함가). 조사 도중 디바이스마트 서버가 이 조사 환경의 접속을 차단해 이미지는 받지 못했음.",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "엘레파츠 (소켓 점퍼케이블 DC-40P 20cm F/F)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=12162",
+    "price_krw": 3135,
+    "pack_qty": 1,
+    "price_note": "2,850원(VAT별도) → 3,135원, 24시간 이내 발송",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-dupont.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/thumb/1/014003001000010275.jpg",
+  "alternatives": [
+   {
+    "name": "테스트[CH254] 소켓 점퍼 케이블 40P (F/F) 30 cm",
+    "why": "모듈 사이 거리가 멀 때",
+    "url": "https://www.devicemart.co.kr/goods/view?no=32284",
+    "price_krw": 1100
+   }
+  ],
+  "optional": false,
+  "notes_ko": "이미지는 디바이스마트 서버 차단 때문에 같은 형태(40P F/F 20 cm)인 엘레파츠 두 번째 판매처 상품 사진입니다."
+ },
+ {
+  "id": "e-usbcable",
+  "category": "USB/전원",
+  "name_ko": "USB-A ↔ 마이크로 5핀(Micro-B) 케이블 0.3 m (USB 2.0 데이터 지원)",
+  "model": "강원전자 NETmate NMC-FMB03",
+  "role_ko": "각 Pico 2를 케이스 안의 USB 허브에 연결하는 짧은 데이터 겸 전원 케이블입니다. Pico 2는 Micro-USB B 단자입니다.",
+  "qty_suggest": "9개 — 8모듈 + 예비 1",
+  "specs": {
+   "커넥터": "USB-A(수) ↔ Micro 5핀 B(수)",
+   "길이": "0.3 m",
+   "데이터": "USB 2.0 (다나와 스펙 표기)",
+   "최대 전류": "2.1 A",
+   "브랜드": "강원전자 NETmate",
+   "재고": "아이씨뱅큐 국내 재고, 2–3일"
+  },
+  "offers": [
+   {
+    "store": "아이씨뱅큐",
+    "url": "https://www.icbanq.com/P013738737",
+    "price_krw": 3080,
+    "pack_qty": 1,
+    "price_note": "2,800원(VAT별도) → 3,080원. 다나와에는 790원(쿠팡 등) 최저가가 표시되지만 해당 판매 페이지는 직접 확인하지 않음",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-usbcable.jpg",
+  "image_source": "https://www.icbanq.com/icdownload/data/ICBShop/Product/%EA%B0%95%EC%9B%90%EC%A0%84%EC%9E%90/%EA%B0%95%EC%9B%90%EC%A0%84%EC%9E%90_105098.jpg",
+  "alternatives": [
+   {
+    "name": "Coms IH158 USB-A ↔ Micro 5핀 30 cm, 180° 꺾임",
+    "why": "허브와 보드가 나란히 있을 때 U자로 꺾인 형태가 편할 수 있음(3,200원 VAT별도)",
+    "url": "https://www.icbanq.com/P013035941",
+    "price_krw": 3520
+   },
+   {
+    "name": "마이크로 5핀 To USB 고속충전 케이블 0.5 m [DW-USBM5AC-0.5M]",
+    "why": "더 싸지만 '충전용'으로만 표기되어 데이터 선 유무를 확인해야 함",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1355827",
+    "price_krw": 1540
+   }
+  ],
+  "optional": false,
+  "notes_ko": "충전 전용(데이터선 없음) 케이블을 쓰면 Pico가 PC/Pi에서 인식되지 않습니다. 케이블 한 개로 먼저 USB-MIDI 인식을 확인한 뒤 나머지를 사세요."
+ },
+ {
+  "id": "e-hub",
+  "category": "USB/전원",
+  "name_ko": "ORICO 유전원 USB 3.0 허브 10포트 (포트별 개별 스위치)",
+  "model": "ORICO CT2U3-10AB",
+  "role_ko": "Pico 8개를 케이스 안에서 Pi 5 한 포트로 모으고, 어댑터로 전원을 공급하는 허브입니다. 포트별 스위치로 모듈 하나만 껐다 켤 수 있습니다.",
+  "qty_suggest": "1개 — Pico 8 + 예비 2포트",
+  "specs": {
+   "포트": "USB-A 10포트, 포트마다 전원 스위치 + LED",
+   "규격": "USB 3.0 5 Gbps (USB 2.0/1.1 하위호환)",
+   "칩셋": "VIA VL817",
+   "전원": "외장 어댑터 포함(유전원)",
+   "포트당 출력": "BC1.2, 2.4 A 표기 (해외 판매처 eventus.si 기준)",
+   "크기": "190 × 58 × 26 mm",
+   "업스트림": "분리형 USB-A ↔ USB-B 케이블 1 m",
+   "색상": "블랙 / 화이트"
+  },
+  "offers": [
+   {
+    "store": "오리코 한국 공식몰",
+    "url": "https://orico.co.kr/product/ct2u3-10ab/18/",
+    "price_krw": 71000,
+    "pack_qty": 1,
+    "price_note": "판매가 71,000원, 배송비 무료. 색상 블랙/화이트 선택",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/e-hub.jpg",
+  "image_source": "https://orico.co.kr/web/product/big/202206/7b9699ee1cbe3d70751125484bbd6391.jpg",
+  "alternatives": [
+   {
+    "name": "ORICO A3H10 (알루미늄, 10포트 USB 3.0, 12 V 어댑터)",
+    "why": "금속 케이스가 필요할 때. 실버 재고 있음, 블랙은 품절 표시",
+    "url": "https://orico.co.kr/product/a3h10/24/",
+    "price_krw": 79000
+   },
+   {
+    "name": "ipTIME UH308 (유전원)",
+    "why": "싸지만 USB 3.0 4포트 + USB 2.0 3포트 + 충전 전용 1포트라 데이터 포트가 7개뿐입니다 → Pico 8개에 부족(비추천)",
+    "url": "https://www.icbanq.com/P006960075",
+    "price_krw": 33330
+   }
+  ],
+  "optional": false,
+  "notes_ko": "Pico는 USB Full-speed(12 Mbps) 장치이고 MIDI 데이터는 매우 적어 허브 대역폭은 문제가 되지 않습니다. 어댑터 정격은 한국 판매 페이지에 없고 해외 리뷰 제목에 48 W로 나와 있으나 직접 확인하지 못했습니다. 유전원 허브는 업스트림 포트로 Pi 쪽에 역전류를 흘리는 경우가 있으니, 처음 연결할 때 Pi 전원을 끈 상태에서 허브만 켰을 때 Pi가 켜지지 않는지 확인하세요."
+ },
+ {
+  "id": "t-solder",
+  "category": "납땜 소모품",
+  "name_ko": "유연 실납 Sn63/Pb37, 0.8 mm, 100 g",
+  "model": "Pro'sKit 8PK-033D",
+  "role_ko": "센서·콘덴서·배선 수백 곳을 납땜하는 기본 소모품입니다. 공정 조성(Sn63)이라 183 °C에서 바로 굳어 초보자도 냉납이 적습니다.",
+  "qty_suggest": "1개 (100 g) — 센서 88개 × 3핀 + 보드·배선 수백 조인트에 충분",
+  "specs": {
+   "조성": "주석 63 % / 납 37 % (공정 조성)",
+   "융점": "183 °C (Sn63/Pb37 공정점)",
+   "선경": "0.8 mm",
+   "중량": "100 g",
+   "원산지": "대만 (Pro'sKit)",
+   "플럭스": "제조사 페이지에 코어 플럭스 종류·함량 미기재"
+  },
+  "offers": [
+   {
+    "store": "KJ-MALL (프로스킷 판매점)",
+    "url": "https://kj-mall.com/product/detail.html?product_no=27969",
+    "price_krw": 13090,
+    "pack_qty": 1,
+    "price_note": "즉시할인가 13,090원(상품가 11,900 + VAT 1,190). 배송비 3,300원(15만원 이상 무료)",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-solder.jpg",
+  "image_source": "https://ref.prokits.com.tw/ProductPic/8PK-033D/1/2015042316504557937.jpg",
+  "alternatives": [
+   {
+    "name": "하코툴 LT소재 소량 일반납 1.0 mm 100 g",
+    "why": "국산(희성/LT소재) 소량 포장. 조성은 목록에 명시 없음",
+    "url": "https://hakkotool.com/goods/view?no=2212",
+    "price_krw": 9460
+   },
+   {
+    "name": "Alpha Telecore XL-806 Sn63/Pb37 0.6 mm 500 g (무세척 플럭스 코어)",
+    "why": "고품질 브랜드 실납, 대용량",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1328324",
+    "price_krw": 66000
+   }
+  ],
+  "optional": false,
+  "notes_ko": "유연 vs 무연: 유연(Sn63/Pb37)은 녹는점이 낮고(183 °C) 인두 온도 320–340 °C 정도로 작업이 쉬워 취미용에 유리합니다. 대신 납 성분이므로 환기하고 작업 후 손을 씻으세요. 무연(Sn99.3Cu0.7 약 227 °C, SAC305 약 217–220 °C)은 더 높은 온도가 필요하고 광택이 덜해 초보자에겐 까다롭습니다."
+ },
+ {
+  "id": "t-flux",
+  "category": "납땜 소모품",
+  "name_ko": "무세척 플럭스 펜 (유연납용) 2자루 세트",
+  "model": "SME 무세척 플럭스 펜 유연납용 HS02 (펜촉 0.2 mm + 0.5 mm)",
+  "role_ko": "산화된 리드나 만능기판 패드에 발라 납이 잘 퍼지게 하고, 납 브리지·재작업을 쉽게 합니다.",
+  "qty_suggest": "1세트",
+  "specs": {
+   "종류": "무세척(No-clean) 플럭스 펜",
+   "대상": "유연납용",
+   "구성": "2자루 1세트",
+   "펜촉": "0.2 mm 1자루 + 0.5 mm 1자루 (가는 패드·넓은 면 겸용)",
+   "리필": "빈 펜 용기 HS07(4자루+스포이드) 별매",
+   "제조사": "SME(에스엠이교역)",
+   "발송": "평균 2일"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=2305031",
+    "price_krw": 9900,
+    "pack_qty": 1,
+    "price_note": "9,000원(VAT별도) → 9,900원",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-flux.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/thumb/230/025005001000012369.jpg",
+  "alternatives": [
+   {
+    "name": "Pro'sKit 납땜용 페이스트 8S005",
+    "why": "가장 싼 페이스트형(붓/이쑤시개로 도포)",
+    "url": "https://kj-mall.com/product/detail.html?product_no=27946",
+    "price_krw": 4070
+   },
+   {
+    "name": "Chemtronics CW8200 로진 플럭스 펜 9 g",
+    "why": "Kester 186 대체 로진 플럭스 펜(10,000원 VAT별도)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=16299474",
+    "price_krw": 11000
+   }
+  ],
+  "optional": false,
+  "notes_ko": "무세척 플럭스도 잔여물이 끈적하면 IPA로 닦아 주세요. 센서 신호선 주변 잔여물은 습기를 먹으면 누설 경로가 될 수 있습니다."
+ },
+ {
+  "id": "t-wick",
+  "category": "납땜 소모품",
+  "name_ko": "납 흡입 심지(솔더윅) 2 mm × 2 m",
+  "model": "Pro'sKit DP-033B",
+  "role_ko": "잘못 붙은 납, 브리지, 부품 교체 시 남은 납을 빨아들여 제거합니다.",
+  "qty_suggest": "1개",
+  "specs": {
+   "폭": "2.0 mm",
+   "길이": "2 m",
+   "재질": "고품질 구리선 정밀 편조 (제조사 표기)",
+   "케이스": "손잡이형 방열 케이스 + 스테인리스 노즐, 풀림 길이 조절식",
+   "크기": "101 × 47.5 × 18.5 mm (시리즈 표기)",
+   "모델 / 브랜드": "DP-033B / Pro'sKit",
+   "원산지": "중국 (판매 페이지 표기)"
+  },
+  "offers": [
+   {
+    "store": "KJ-MALL",
+    "url": "https://kj-mall.com/product/detail.html?product_no=27976",
+    "price_krw": 4180,
+    "pack_qty": 1,
+    "price_note": "즉시할인가 4,180원(상품가 3,800 + VAT 380). 배송비 3,300원(15만원 이상 무료)",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-wick.jpg",
+  "image_source": "https://kj-mall.com/web/product/big/202207/0e444dd6032cec587165c5680a55b5c2.jpg",
+  "alternatives": [
+   {
+    "name": "Pro'sKit 솔더위크 8PK-031B (녹색, 2.0 mm)",
+    "why": "더 싼 소포장(길이 표기 없음)",
+    "url": "https://kj-mall.com/product/detail.html?product_no=27954",
+    "price_krw": 1760
+   }
+  ],
+  "optional": false,
+  "notes_ko": "플럭스를 조금 발라 쓰면 흡입이 훨씬 잘 됩니다."
+ },
+ {
+  "id": "t-heatshrink",
+  "category": "납땜 소모품",
+  "name_ko": "열수축 튜브 세트 530개 (2:1, Ø1.5–10 mm, 5색, 보관 케이스)",
+  "model": "엘레파츠 열수축튜브 530세트 - 프라스틱케이스",
+  "role_ko": "선과 선을 이은 곳, 센서 리드, 버스 교차부를 절연하고 색으로 구분합니다.",
+  "qty_suggest": "1세트",
+  "specs": {
+   "수축률": "2:1",
+   "직경": "1.5–10 mm",
+   "색상": "흑·적·황·청·녹",
+   "구성": "12종 530개",
+   "포장": "플라스틱 보관 케이스",
+   "발송": "24시간 이내"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=8170311",
+    "price_krw": 6600,
+    "pack_qty": 1,
+    "price_note": "6,000원(VAT별도) → 6,600원",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-heatshrink.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2019/09/8170311_tmp_d2a55da835e09dd16fc6aa78bb87b11e7133large.jpg",
+  "alternatives": [
+   {
+    "name": "엘레파츠 열수축튜브 280세트 (Ø1–10 mm, 5색, 케이스)",
+    "why": "개수가 적은 대신 쌈",
+    "url": "https://www.eleparts.co.kr/goods/view?no=8170312",
+    "price_krw": 4620
+   },
+   {
+    "name": "엘레파츠 열수축튜브 328세트 (Ø1–14 mm 8종 5색, 비닐 포장)",
+    "why": "가장 쌈, 케이스 없음",
+    "url": "https://www.eleparts.co.kr/goods/view?no=9866020",
+    "price_krw": 3380
+   }
+  ],
+  "optional": false,
+  "notes_ko": "센서 TO-92 리드처럼 얇은 곳엔 Ø1.5 mm, 26AWG 선 이음엔 Ø2 mm가 맞습니다. 라이터보다 열풍기나 인두 옆면을 쓰세요."
+ },
+ {
+  "id": "t-ties",
+  "category": "납땜 소모품",
+  "name_ko": "케이블 타이 소형 2.5 × 100 mm, 블랙 100개",
+  "model": "티테크놀로지 T-C2510B",
+  "role_ko": "모듈마다 신호선 다발을 묶고 케이스 안에서 허브 케이블을 정리합니다.",
+  "qty_suggest": "2봉 (200개)",
+  "specs": {
+   "크기": "2.5 × 100 mm (소)",
+   "수량": "100개",
+   "색상": "블랙",
+   "재질": "나일론 66, UL94 V-2 (포장 라벨 표기)",
+   "브랜드": "티테크놀로지",
+   "발송": "평균 2.5일"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=9100003",
+    "price_krw": 438,
+    "pack_qty": 1,
+    "price_note": "398.18원(VAT별도) → 438원 / 100개",
+    "checked": "2026-09-24"
+   },
+   {
+    "store": "엘레파츠 (SMATO 케이블타이 100 mm 흑색 1,000개)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=16596284",
+    "price_krw": 3010,
+    "pack_qty": 1,
+    "price_note": "2,736.36원(VAT별도) → 3,010원 / 1,000개",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-ties.jpg",
+  "image_source": "https://image3.compuzone.co.kr/img/product_img/2020/0117/635095/635095_600.jpg",
+  "alternatives": [],
+  "optional": false,
+  "notes_ko": "이미지는 엘레파츠 T-C2510B 상품페이지가 대표 이미지로 쓰는 사진(컴퓨존 서버)입니다. 대량으로 쓰려면 두 번째 판매처의 1,000개 묶음이 개당 훨씬 쌉니다."
+ },
+ {
+  "id": "t-standoff",
+  "category": "납땜 소모품",
+  "name_ko": "M3 나일론 스탠드오프 키트 (길이 10 mm, 10세트)",
+  "model": "DFRobot FIT0066 M3×10 Nylon Standoff Kit",
+  "role_ko": "만능기판 모듈을 3D 프린트 케이스나 레일 위에 띄워 고정합니다. 나일론이라 기판 뒷면 납땜부와 단락되지 않습니다.",
+  "qty_suggest": "4키트 (40세트) — 보드 8장 × 모서리 4개 + 예비",
+  "specs": {
+   "나사 규격": "M3",
+   "스탠드오프 길이": "10 mm",
+   "구성": "나일론 기둥 M3×10 ×10, M3×5 나사 ×10, M3 너트 ×10 (DFRobot 구성표)",
+   "형태": "세트당 나사·너트 각 1개 → 한쪽 수나사형(M-F) 기둥으로 추정",
+   "재질": "나일론(비전도)",
+   "재고": "아이씨뱅큐 해외 재고, 1주 이내"
+  },
+  "offers": [
+   {
+    "store": "아이씨뱅큐",
+    "url": "https://www.icbanq.com/P013130273",
+    "price_krw": 2420,
+    "pack_qty": 1,
+    "price_note": "2,200원(VAT별도) → 2,420원 / 10세트",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-standoff.jpg",
+  "image_source": "https://www.icbanq.com/icdownload/data/ICBShop/Product/DFRobot/DFRobot_FIT0066.jpg",
+  "alternatives": [
+   {
+    "name": "DFRobot FIT0182 M3×20 나일론 스탠드오프 세트",
+    "why": "보드 아래로 선을 지나가게 높이가 더 필요할 때(2,800원 VAT별도)",
+    "url": "https://www.icbanq.com/P013130275",
+    "price_krw": 3080
+   },
+   {
+    "name": "Adafruit 4685 검정 나일론 M3 나사·스탠드오프 세트",
+    "why": "여러 길이가 들어 있는 큰 키트",
+    "url": "https://www.icbanq.com/P013153342",
+    "price_krw": 37070
+   },
+   {
+    "name": "디바이스마트 PCB 플라스틱 서포트 키트 M3 [NT-KIT-E018]",
+    "why": "6/10/15/20 mm 여러 길이 + 볼트·너트. 가격은 차단으로 확인하지 못함",
+    "url": "https://www.devicemart.co.kr/goods/view?no=1323561",
+    "price_krw": null
+   }
+  ],
+  "optional": false,
+  "notes_ko": "만능기판 모서리에 3.2 mm 구멍을 뚫어야 M3가 들어갑니다. Pico 2 자체의 고정 구멍은 Ø2.1 mm(M2용)지만 Pico는 헤더로 기판에 납땜되므로 따로 고정할 필요가 없습니다."
+ },
+ {
+  "id": "t-iron",
+  "category": "공구(선택)",
+  "name_ko": "휴대용 스마트 인두기 Pinecil V2 (USB-C PD, 온도 조절)",
+  "model": "PINE64 Pinecil V2 (SKU PINECIL-BB2, B2 팁 포함)",
+  "role_ko": "온도 조절 인두기가 없다면 가장 싼 선택지입니다. 적정 온도(유연납 약 320–340 °C)를 유지해 센서를 과열시키지 않고 조인트 품질을 일정하게 합니다.",
+  "qty_suggest": "1개 (이미 온도조절 인두기가 있으면 생략)",
+  "specs": {
+   "전원": "USB-C PD/QC 3.0 12–20 V 3 A 또는 DC5525 배럴 12–24 V 3 A",
+   "칩셋": "Bouffalo BL-706, 32비트 RISC-V @144 MHz",
+   "펌웨어": "IronOS (오픈소스)",
+   "디스플레이": "0.69인치 OLED 96×16",
+   "길이": "155 mm (팁 포함) / 103 mm (팁 제외)",
+   "팁": "B2 (길이 86 mm, 8.2 g)",
+   "구성": "본체 + ST(Short Tip)-B2 팁",
+   "보증": "30일"
+  },
+  "offers": [
+   {
+    "store": "PINE64 공식 스토어 (해외 직구)",
+    "url": "https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/",
+    "price_krw": 35220,
+    "pack_qty": 1,
+    "price_note": "커뮤니티 가격 US$25.99(정가 US$35.99) → 약 35,220원, 배송비 별도, 페이지에 재고 있음 표시. 환율 1 USD = 1,355 KRW (open.er-api.com 2026-09-23 1,353.7 / fawazahmed0 currency-api 2026-09-22 1,358.4 평균, 반올림)",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-iron.jpg",
+  "image_source": "https://pine64.com/wp-content/uploads/2020/11/Pinecilv2-4.jpg",
+  "alternatives": [
+   {
+    "name": "HAKKO FX-888D 스테이션형 디지털 인두기 (70 W, 200–480 °C)",
+    "why": "책상에서 오래 쓸 표준 스테이션",
+    "url": "https://sungdotool.cafe24.com/product/hakko-%EB%82%A9%EB%95%9C%EC%9D%B8%EB%91%90-fx-888d/1108/",
+    "price_krw": 242000
+   },
+   {
+    "name": "SparkFun 판 Pinecil (TOL-23913, 디바이스마트 Mouser 리셀러)",
+    "why": "국내 결제가 편하지만 가격이 4배 가까이 비쌈",
+    "url": "https://www.devicemart.co.kr/goods/view?no=15482740",
+    "price_krw": 141394
+   }
+  ],
+  "optional": true,
+  "notes_ko": "Pinecil은 전원을 따로 공급해야 합니다: 20 V 3 A(60 W 이상) USB-C PD 충전기 + C-C 케이블(별도). 5 V 충전기로는 제대로 가열되지 않습니다. 해외 직구 배송비는 결제 시 확인하세요."
+ },
+ {
+  "id": "t-stripper",
+  "category": "공구(선택)",
+  "name_ko": "전자선 와이어 스트리퍼 AWG 30–20 (0.2–0.8 mm)",
+  "model": "Pro'sKit 8PK-3001D",
+  "role_ko": "26/28AWG 실리콘선 피복을 심선 손상 없이 일정한 길이로 벗깁니다. 신호선 100가닥 이상을 다듬어야 해서 있으면 작업 시간이 크게 줄어듭니다.",
+  "qty_suggest": "1개",
+  "specs": {
+   "적용 선경": "AWG 30, 28, 26, 24, 22, 20 / 0.2–0.8 mm",
+   "날 재질": "SK7 공구강, 고주파 열처리",
+   "경도": "HRC 50 ± 3",
+   "전장": "156 mm",
+   "손잡이": "PVC, 스프링, 잠금 고리",
+   "기능": "탈피·절단·집기"
+  },
+  "offers": [
+   {
+    "store": "KJ-MALL",
+    "url": "https://kj-mall.com/product/detail.html?product_no=28255",
+    "price_krw": 13090,
+    "pack_qty": 1,
+    "price_note": "즉시할인가 13,090원(상품가 11,900 + VAT 1,190). 배송비 3,300원(15만원 이상 무료)",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-stripper.jpg",
+  "image_source": "https://ref.prokits.com.tw/ProductPic/8PK-3001D/1/8PK-3001D-pic01.jpg",
+  "alternatives": [
+   {
+    "name": "HOZAN 와이어 스트리퍼 P-967",
+    "why": "일본산 고급형(적용 선경은 제조사 사양 확인 필요)",
+    "url": "https://kj-mall.com/product/detail.html?product_no=34124",
+    "price_krw": 63800
+   }
+  ],
+  "optional": true,
+  "notes_ko": "실리콘 피복은 부드러워 한 치수 작은 구멍에서 끊어지기 쉽습니다. 26AWG 선은 26 구멍에서 먼저 시험해 보세요."
+ },
+ {
+  "id": "t-crimper",
+  "category": "공구(선택)",
+  "name_ko": "소형 단자 압착기 AWG 18–28 (JST-XH·듀폰·몰렉스 오픈배럴 단자용)",
+  "model": "IWISS SN-28B (라쳇식)",
+  "role_ko": "JST-XH 크림프 단자와 듀폰 단자를 26/28AWG 선에 압착합니다. JST 커넥터를 쓰기로 했다면 사실상 필수입니다.",
+  "qty_suggest": "1개",
+  "specs": {
+   "적용 선경": "0.1–1.0 mm², AWG 28–18 (IWISS 공식 페이지)",
+   "대상 단자": "2.5 / 2.54 / 3.96 mm 피치 비절연 오픈배럴 — JST XH·VH·NH, 듀폰 2.54 mm",
+   "XH 적용 표": "XH 2.5 mm 피치 AWG 30–20 (제조사 표기)",
+   "구조": "라쳇식, 20° 경사 헤드, 자동 해제 잠금, 출고 시 보정(장력 조절 가능)",
+   "무게": "0.71 lb (약 320 g)",
+   "브랜드": "IWISS",
+   "발송": "평균 1.5일"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=16016624",
+    "price_krw": 35090,
+    "pack_qty": 1,
+    "price_note": "31,900원(VAT별도) → 35,090원",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-crimper.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2024/08/16016624_tmp_eecf5aa7179d899b6fe2f021dff224267908large.jpg",
+  "alternatives": [
+   {
+    "name": "ENGINEER PA-09 마이크로 압착기 (AWG32–20, 1.25–2.5 mm 피치 커넥터)",
+    "why": "일본산, 더 가는 선과 정밀 압착(64,600원 VAT별도)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=3851994",
+    "price_krw": 71060
+   }
+  ],
+  "optional": true,
+  "notes_ko": "처음 몇 개는 버리는 셈 치고 연습하세요. 심선 쪽과 피복 쪽 날개를 각각 맞는 구멍에서 두 번 누르는 방식이 확실합니다."
+ },
+ {
+  "id": "t-multimeter",
+  "category": "공구(선택)",
+  "name_ko": "포켓형 디지털 멀티미터 (4000 카운트, AC/DC 전압·mA 전류, 저항, 도통, 정전용량)",
+  "model": "동화전자 DM-300A",
+  "role_ko": "3.3 V 버스 전압, 센서 출력(자석을 댔을 때 1.65 V에서 변하는지), 배선 단락과 끊김을 확인합니다.",
+  "qty_suggest": "1개",
+  "specs": {
+   "표시": "4000 카운트 (제품 전면 표기; 목록 제목은 3200카운트로 적혀 있어 불일치)",
+   "전압": "AC/DC V",
+   "전류": "AC/DC mA",
+   "기타 측정": "저항, 다이오드/도통 부저, 정전용량(CAP), 주파수·듀티(Hz)",
+   "편의 기능": "상대값(REL), 자동 전원 차단, 테스트 리드 일체형 케이스 (제품 사진 기준)",
+   "형태": "포켓형",
+   "제조사": "동화전자(DONG HWA)",
+   "발송": "24시간 이내"
+  },
+  "offers": [
+   {
+    "store": "엘레파츠",
+    "url": "https://www.eleparts.co.kr/goods/view?no=2080",
+    "price_krw": 18700,
+    "pack_qty": 1,
+    "price_note": "17,000원(VAT별도) → 18,700원",
+    "checked": "2026-09-24"
+   }
+  ],
+  "image_file": "img/t-multimeter.jpg",
+  "image_source": "https://img2.eleparts.co.kr/goods/1/2009/04/2080_tmp_5eb5619320f28fcce68102f5710e9ebb9482large.jpg",
+  "alternatives": [
+   {
+    "name": "태광 TK-3204 디지털 멀티미터 (3200 카운트, 바그래프)",
+    "why": "화면이 크고 바그래프가 있어 센서 출력 변화를 보기 쉬움(40,000원 VAT별도)",
+    "url": "https://www.eleparts.co.kr/goods/view?no=451",
+    "price_krw": 44000
+   },
+   {
+    "name": "UNI-T UT33A+ (디바이스마트)",
+    "why": "많이 쓰이는 보급형. 가격은 디바이스마트 차단으로 확인하지 못함",
+    "url": "https://www.devicemart.co.kr/goods/view?no=6500232",
+    "price_krw": null
+   }
+  ],
+  "optional": true,
+  "notes_ko": "도통 부저가 있으면 수십 가닥 신호선 점검이 빨라집니다. 전류는 mA 레인지만 있어 큰 전류 측정에는 맞지 않지만, 이 프로젝트(모듈당 수십 mA)에는 충분합니다."
+ }
+]

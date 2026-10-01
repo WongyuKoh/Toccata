@@ -1,0 +1,1681 @@
+{
+ "_status": "complete",
+ "units": "mm",
+ "coords": "module-local x unless *_world/*_local stated; y from white-key front lip; z from desk",
+ "dovetail": {
+  "summary": "Two trapezoid (plan-view) dovetails per module seam, extruded in z. Male tongue on the RIGHT edge of each module (and of the left end part) protrudes 4.0 past the seam into the neighbour; female groove in the LEFT edge (and in the right end part), open at the bottom (z3, the bed/desk side) so the right-hand part is lowered onto the left part's tongue from above and lifted off.",
+  "source": "hardware/mechanical/key-action-v4/DESIGN.md table D09 (v3 D01~D03) | hardware/mechanical/key-action-v4/drawings/src/render_v4.py dovetail_polys() | docs/report/toccata-build-v3.html drawing 6 + table D01~D03 | hardware/mechanical/key-action-v4/drawings/d08_frame.svg section y=203.25 (164.3 / 168.5 수 끝)",
+  "profile_male": {
+   "root_width_at_seam": 6.0,
+   "tip_width": 9.0,
+   "depth_x": 4.0,
+   "flank_half_angle_deg": 20.56,
+   "note": "root (narrow, 6.0) at the seam face x=164.5 (module local), widening to 9.0 at x=168.5; i.e. the tongue is a dovetail that locks in y, free in z"
+  },
+  "joints": [
+   {
+    "name": "front",
+    "y_center": 11.0,
+    "y_range_male_tip": [
+     6.5,
+     15.5
+    ],
+    "y_range_male_root": [
+     8.0,
+     14.0
+    ],
+    "z_male": [
+     3.0,
+     8.5
+    ],
+    "z_female_roof": 8.8,
+    "height_male": 5.5,
+    "source": "hardware/mechanical/key-action-v4/DESIGN.md D09; v3 D02 (y중심 11, 천장 z8.8)"
+   },
+   {
+    "name": "rear",
+    "y_center": 202.5,
+    "y_range_male_tip": [
+     198.0,
+     207.0
+    ],
+    "y_range_male_root": [
+     199.5,
+     205.5
+    ],
+    "z_male": [
+     3.0,
+     17.0
+    ],
+    "z_female_roof": 17.3,
+    "height_male": 14.0,
+    "source": "hardware/mechanical/key-action-v4/DESIGN.md D09; v3 D03 (y중심 202.5, 천장 z17.3)"
+   }
+  ],
+  "male_local_x": {
+   "root_face": 164.5,
+   "tip_face": 168.5,
+   "protrudes_into_neighbour": true,
+   "protrusion": 4.0,
+   "polygon_xy_front": [
+    [
+     164.5,
+     8.0
+    ],
+    [
+     168.5,
+     6.5
+    ],
+    [
+     168.5,
+     15.5
+    ],
+    [
+     164.5,
+     14.0
+    ]
+   ],
+   "polygon_xy_rear": [
+    [
+     164.5,
+     199.5
+    ],
+    [
+     168.5,
+     198.0
+    ],
+    [
+     168.5,
+     207.0
+    ],
+    [
+     164.5,
+     205.5
+    ]
+   ],
+   "source": "hardware/mechanical/key-action-v4/drawings/src/render_v4.py dovetail_polys (male = (W, yc-r/2),(W+d, yc-t/2),(W+d, yc+t/2),(W, yc+r/2)); d08 section y203.25 '168.5 수 끝'"
+  },
+  "male_root_block": {
+   "x": [
+    160.5,
+    164.5
+   ],
+   "note": "geometry.json 'front/rear dovetail male root' boxes are the solid anchor INSIDE the module under the tongue (same y/z as the tongue envelope); the tongue itself is the separate trapezoid prism x164.5..168.5 above, union both into the frame",
+   "source": "hardware/mechanical/key-action-v4/model/geometry.json parts 'front dovetail male root', 'rear dovetail male root'"
+  },
+  "female_groove": {
+   "fit_clearance_per_flank": 0.1,
+   "clearance_note": "normal offset 0.10 on both flanks and on the end face (v3 drawing 6 ghost polyline: 6.21 wide at the seam, 9.29 at depth 4.1); choose 0.05/0.10/0.15 from the stage-0 coupon, 0.10 = design value",
+   "width_at_seam": 6.214,
+   "depth_x": 4.1,
+   "width_at_bottom": 9.288,
+   "polygon_xy_front_local": [
+    [
+     0.0,
+     7.893
+    ],
+    [
+     4.1,
+     6.356
+    ],
+    [
+     4.1,
+     15.644
+    ],
+    [
+     0.0,
+     14.107
+    ]
+   ],
+   "polygon_xy_rear_local": [
+    [
+     0.0,
+     199.393
+    ],
+    [
+     4.1,
+     197.856
+    ],
+    [
+     4.1,
+     207.144
+    ],
+    [
+     0.0,
+     205.607
+    ]
+   ],
+   "z_front": [
+    3.0,
+    8.8
+   ],
+   "z_rear": [
+    3.0,
+    17.3
+   ],
+   "roof_clearance": 0.3,
+   "open_bottom": true,
+   "note": "cut from z3 (frame underside, open) to the roof; geometry.json box 'front/rear dovetail (female)' x0..4 is only the envelope -- cut the trapezoid above, depth 4.1 so the tongue tip (x4.0) never bottoms before the seam faces meet",
+   "source": "docs/report/toccata-build-v3.html drawing 6 (암 홈 한쪽 틈 0.10, 쿠폰 0.05/0.10/0.15) | docs/report/toccata-build-v3.html D01~D03 (천장 z8.8 / z17.3, 바닥 관통) | hardware/mechanical/key-action-v4/model/geometry.json 'front dovetail (female)' z3..8.8, 'rear dovetail (female groove...)' z3..17.3"
+  },
+  "seam": {
+   "floor_faces": "floors meet at the seam x=164.5 (floor x0..164.5); fins / top plate / curtain are inset 0.2 each side (seam gap 0.4)",
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md §끝 부속 (이음 면 0.40, 0.2씩 들여 뜀); hardware/mechanical/key-action-v4/model/geometry.json floor prisms"
+  },
+  "end_parts": {
+   "left": {
+    "has": "male on its right edge",
+    "root_block_x": [
+     43.0,
+     47.0
+    ],
+    "tongue_world_x": [
+     47.0,
+     51.0
+    ],
+    "mates": "O1 female groove at world x47.0..51.1",
+    "source": "hardware/mechanical/key-action-v4/model/geometry.json end_parts.left 'front/rear dovetail male root' x43..47; d10 note (왼쪽 부속 오른쪽 끝에 수 x47~51)"
+   },
+   "right": {
+    "has": "female groove on its left edge",
+    "groove_local_x": [
+     0.0,
+     4.1
+    ],
+    "groove_world_x": [
+     1198.5,
+     1202.6
+    ],
+    "mates": "O7 male tongue world x1198.5..1202.5",
+    "source": "hardware/mechanical/key-action-v4/model/geometry.json end_parts.right 'front/rear dovetail (female)' x0..4; A03/A04"
+   }
+  },
+  "print": "frame printed upright (floor on the bed): tongue is a plain vertical prism; groove roof (z8.8 / z17.3) bridges 9.3 mm -- no support needed",
+  "assumed": false
+ },
+ "features": [
+  {
+   "id": "balance_pin_holes",
+   "part": "frame (module, end parts)",
+   "type": "blind hole, vertical",
+   "count_module": 12,
+   "x": {
+    "C": 7.591,
+    "C#": 21.215,
+    "D": 35.25,
+    "D#": 49.285,
+    "E": 62.91,
+    "F": 77.52,
+    "F#": 90.573,
+    "G": 104.037,
+    "G#": 117.5,
+    "A": 130.964,
+    "A#": 144.427,
+    "B": 157.481
+   },
+   "x_end_parts": {
+    "A0": 10.447,
+    "A#0": 26.927,
+    "B0": 39.981,
+    "C8_local": 11.75
+   },
+   "y": 135.3,
+   "d_printed": 1.95,
+   "z_top": 19.0,
+   "z_bottom": 11.3,
+   "depth": 7.7,
+   "pin": "ISO 2338 D2.0 x 12 stainless dowel, pressed; top z23.30 +-0.1 (4.3 proud), checked with the printed height gauge",
+   "assumed_fields": [
+    "d_printed"
+   ],
+   "assumed": true,
+   "assumed_reason": "P32 gives pin, y, top and hole bottom (z11.3) but not the printed bore; D1.95 printed = light press for a D2.0 m6 dowel in PETG (holes print ~0.05-0.1 small; ream D2.0 if it will not go)",
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P32 (Ø2.0×12, y135.3, 꼭대기 z23.30 ± 0.1, 출력 높이 게이지), P20 (핀 구멍 앞벽 2.0) | hardware/mechanical/key-action-v4/model/geometry.json 'balance pin D2 <key>' prisms x/y/z11.3..23.3 | hardware/mechanical/key-action-v4/drawings/d08 section x=21.22 'z11.3 핀 구멍 바닥 (P32)'"
+  },
+  {
+   "id": "sensor_post_pilot_holes",
+   "part": "frame (module + both end parts)",
+   "type": "pilot hole for self-tapping M3x10",
+   "count": 2,
+   "xy": [
+    [
+     3.0,
+     61.9
+    ],
+    [
+     3.0,
+     74.6
+    ]
+   ],
+   "d_printed": 2.75,
+   "z_top": 7.0,
+   "z_bottom": 3.0,
+   "through": true,
+   "screw": "M3x10 stainless button head (v3.2 L34), head on the bar top z13.6 → tip z3.6",
+   "engagement_in_PETG": 3.4,
+   "assumed": true,
+   "assumed_reason": "size from v3.2 L34 note (Ø2.6 too tight → print Ø2.7~2.8); depth: post z5..7 + floor z3..5, screw tip at z3.6 so make it through (0.6 skin would be pierced anyway)",
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P36 (M3×10 자가 탭 2개 (3.0,61.9)·(3.0,74.6), 기둥 x0.5~6.0 z5~7) | docs/report/toccata-build-v3.html L34 체결 방식 'Ø2.7~2.8에 자가 탭'"
+  },
+  {
+   "id": "control_board_screw_bores",
+   "part": "frame (module only)",
+   "type": "blind hole from BELOW in a hung boss",
+   "count": 2,
+   "xy": [
+    [
+     50.0,
+     149.0
+    ],
+    [
+     114.5,
+     192.5
+    ]
+   ],
+   "d": 2.5,
+   "z_open": 10.6,
+   "z_bottom": 15.4,
+   "boss": "D6 cylinder z10.6..17.0 (front, bracketed to the balance-rail rear face y144.5) / z10.6..18.05 (rear, bracketed to shelf rib x116 front face y196.8 and the shelf underside)",
+   "screw": "M3x6 ISO 7380 (v3.2 L35) from below through the board: head z7.35..9.0, tip z15.0",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P35 | hardware/mechanical/key-action-v4/model/geometry.json 'control-board boss D6 hung over the board ... screw bore D2.5 to z15.4' | hardware/mechanical/key-action-v4/drawings/d04 section D-D"
+  },
+  {
+   "id": "control_board_locating_pins",
+   "part": "frame (module only)",
+   "type": "round pin hanging down from a hung boss",
+   "count": 2,
+   "xy": [
+    [
+     114.5,
+     149.0
+    ],
+    [
+     50.0,
+     192.5
+    ]
+   ],
+   "d": 2.8,
+   "z": [
+    7.8,
+    10.6
+   ],
+   "board_hole_d": 3.0,
+   "shape": "round (geometry.json exports it as a 2.8 square box; model it as a D2.8 cylinder)",
+   "boss": "D6 z10.6..17.0 front (rail bracket) / z10.6..18.05 rear (rib x50 bracket)",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P35 (위치 핀 Ø2.8가 보스에서 기판 Ø3.0 구멍으로) | hardware/mechanical/key-action-v4/model/geometry.json 'control-board locating pin D2.8 (frame, hanging through the board, tip z7.8)'"
+  },
+  {
+   "id": "board_floor_hatch",
+   "part": "frame (module only)",
+   "type": "through opening in the floor",
+   "x": [
+    46.25,
+    118.25
+   ],
+   "y": [
+    144.5,
+    196.5
+   ],
+   "notch_behind_receptacle": {
+    "x": [
+     78.53,
+     89.47
+    ],
+    "y": [
+     196.5,
+     197.8
+    ]
+   },
+   "z": [
+    3.0,
+    5.0
+   ],
+   "note": "already implied by the split floor prisms; the board goes in from below with the module upside down. End parts have NO hatch (left end-part floor is one piece x0.2..46.8)",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P35 (바닥 구멍 x46.25~118.25 y144.5~196.5, 리셉터클 뒤 x78.53~89.47는 y197.8까지) | hardware/mechanical/key-action-v4/drawings/d10 note r4.5 회로 2차"
+  },
+  {
+   "id": "usb_openings",
+   "part": "frame (module only)",
+   "items": [
+    {
+     "what": "rear shelf slot (through, full depth)",
+     "x": [
+      76.45,
+      91.55
+     ],
+     "y": [
+      195.8,
+      209.0
+     ],
+     "z": [
+      18.05,
+      20.05
+     ]
+    },
+    {
+     "what": "rear wall opening",
+     "x": [
+      74.0,
+      94.0
+     ],
+     "y": [
+      209.0,
+      212.0
+     ],
+     "z": [
+      5.0,
+      21.0
+     ]
+    }
+   ],
+   "plug_envelope": "x77.75..90.25 y196.8..221.8 z10.7..18.3 (P24)",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P19 (선반 홈 x76.45~91.55), S28 (USB 개구 x74~94 z5~21), P24 | hardware/mechanical/key-action-v4/model/geometry.json 'rear wall (over USB opening)' x74..94 z21..72.85"
+  },
+  {
+   "id": "lever_rod_fin_bores",
+   "part": "frame fins (module 5, end parts 2 each)",
+   "type": "horizontal bore along x (lever rod D4 SUS304)",
+   "axis": {
+    "y": 203.25,
+    "z": 33.5
+   },
+   "d_printed": 3.9,
+   "d_final": 4.0,
+   "finish": "drill D4.0 after printing",
+   "teardrop": {
+    "apex": "+z",
+    "half_angle_deg": 45,
+    "note": "print upright → horizontal hole: teardrop point up, apex 0.5*3.9/sin45 from the axis; the drill removes it where it matters"
+   },
+   "fin_boss": "D7 x z30..37 around the bore (D06), x per fin: [0.2,3.17],[39.39,43.93],[81.048,85.588],[121.655,126.195],[161.33,164.3]",
+   "ends": "module: left end fin x0.2..3.17 through (rod end plug x0.2..1.4 pressed flush), right end fin blind to x163.1 (1.2 wall to x164.3); end parts: plug on the seam-side fin, cheek-side fin blind",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md D18, D06 | hardware/mechanical/key-action-v4/model/geometry.json 'fin boss', 'fin boss bore D4.0 (printed D3.9, drilled...)', 'lever rod end plug' | hardware/mechanical/key-action-v4/drawings/d08 '핀 보스 구멍 Ø3.9 눈물방울, Ø4.0 드릴'"
+  },
+  {
+   "id": "lever_rod_end_plug",
+   "part": "separate print",
+   "shape": "cylinder D4.0 x 1.2 (x0.2..1.4), pressed flush with the end-fin face",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md D18 | hardware/mechanical/key-action-v4/model/geometry.json 'lever rod end plug (printed, pressed flush)'"
+  },
+  {
+   "id": "key_rod_end_walls",
+   "part": "frame (module, end parts)",
+   "what": "rod-end stop posts at both ends of the key (balance) rod D4 x1.55..162.95",
+   "posts": [
+    {
+     "x": [
+      0.3,
+      1.3
+     ]
+    },
+    {
+     "x": [
+      163.2,
+      164.2
+     ]
+    }
+   ],
+   "y": [
+    140.0,
+    142.0
+   ],
+   "z": [
+    5.0,
+    21.0
+   ],
+   "cradles": "11 cradles with R2.05 x depth 1 grooves (z19.5 floor, lips z20.5), rod axis y141 z21.5 — already in the prism polygons",
+   "note": "already a prism ('rod end stop post'); listed only so the end walls are not missed",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P21 (홈 끝 벽 x1.3 / 163.2) | hardware/mechanical/key-action-v4/model/geometry.json 'rod end stop post' | hardware/mechanical/key-action-v4/drawings/d08 확대 봉 받침"
+  },
+  {
+   "id": "sensor_bar_right_ledge",
+   "part": "frame (module only)",
+   "what": "two inverted-L pieces capturing the bar's right end",
+   "pieces_y": [
+    [
+     59.0,
+     63.4
+    ],
+    [
+     70.6,
+     77.5
+    ]
+   ],
+   "lip": {
+    "x": [
+     161.5,
+     163.0
+    ],
+    "z": [
+     13.6,
+     15.1
+    ]
+   },
+   "post": {
+    "x": [
+     163.0,
+     164.3
+    ],
+    "z": [
+     5.0,
+     15.1
+    ]
+   },
+   "note": "already prisms; lip underside is an overhang 1.5 wide at z13.6 → prints as a short bridge/overhang, fine upright",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P36 | hardware/mechanical/key-action-v4/model/geometry.json 'sensor-bar ledge lip/post front/rear'"
+  },
+  {
+   "id": "v32_hex_nut_pockets",
+   "part": "frame",
+   "status": "none in v4",
+   "note": "v3.2 ME6/ME10 printed hex pockets served the rail clamp M3x40 (D07) and spine set screws (D09); v4 r4 has no clamp screws, set screws, brass bushings, tab steel strips, locating pins or thumb-screw holes, so no nut pocket remains in the frame. Only new fastener seats: the proposed anti-vibration-bracket nut pockets in the end-part cheeks (see 'bracket')",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/drawings/d08 '압입: ... r4: 황동 부싱·탭 강철 띠·위치 핀·손나사 구멍 없음' | hardware/mechanical/key-action-v4/drawings/d10 '레일·손나사·탭 강철 판 없음 (r4)' | docs/report/toccata-build-v3.html D07, D09 (v3.2 nut pockets)"
+  },
+  {
+   "id": "teardrops",
+   "part": "all upright-printed frames",
+   "list": [
+    "lever-rod fin bores D3.9 (axis x) - teardrop apex +z, then drill D4.0",
+    "headphone-jack nose hole D5.2 in the left cheek front wall (axis y) - teardrop apex +z (proposed)",
+    "bracket bolt holes D3.4 in the cheek rear faces (axis y) - teardrop apex +z (proposed)"
+   ],
+   "vertical_holes_need_none": [
+    "balance pin holes",
+    "sensor-post pilots",
+    "board boss bores",
+    "sensor-bar pockets / lead holes (bar printed flat)"
+   ],
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/drawings/d08 출력 note | hardware/mechanical/key-action-v4/DESIGN.md §출력 (바로 세워, 윗판 밑 트리 서포트)"
+  },
+  {
+   "id": "ribbon_and_lead_lanes",
+   "part": "frame",
+   "what": "ribbon lane under the balance rail x59..82 z5..10 and the rear-rib gap x59..82 (module); end-part lead lanes EL x13.53..22.48 / ER x7.59..14.00 under the rail z5..10 + rear-wall notches z5..12; rear-rib gaps EL x15..38, ER x6..16",
+   "note": "already in prisms; listed as cut features to verify after the boolean",
+   "assumed": false,
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P20, A02, A03 | hardware/mechanical/key-action-v4/model/geometry.json 'balance rail' / 'rear wall (over the lead notch z5-12)' prisms"
+  },
+  {
+   "id": "end_part_floor_bridge",
+   "part": "end-part frames",
+   "what": "floor strip joining the cheek to the key-area floor",
+   "left_x": [
+    -0.68,
+    0.2
+   ],
+   "right_local_x": [
+    23.3,
+    24.18
+   ],
+   "y": [
+    0.0,
+    212.0
+   ],
+   "z": [
+    3.0,
+    5.0
+   ],
+   "assumed": true,
+   "assumed_reason": "geometry.json floor starts at x0.2 (left) / ends x23.3 (right) while the cheek is x-16..-0.68 / 24.18..39.5, so the cheek joins the frame only through the end fin (y176..209) and the top plate; a 0.88 floor strip under the keys (keys bottom z23.5, cheek clearance 1.33 unaffected) makes the print one solid piece",
+   "source": "hardware/mechanical/key-action-v4/model/geometry.json end_parts left/right 'floor', 'cheek', 'fin'"
+  },
+  {
+   "id": "pad_bar_grip_text",
+   "part": "pad bars (6 kinds: module bays 1-4 + end parts L/R)",
+   "requirement": "bay name engraved at the front grip (DESIGN.md parts table: '앞 손잡이(칸 이름 새김)'; geometry review m2: '바 손잡이에 음 이름을 새김')",
+   "labels": {
+    "bay1 x3.10~39.46": "1 C·C#·D",
+    "bay2 x43.86~81.12": "2 D#·E·F",
+    "bay3 x85.52~121.73": "3 F#·G·G#",
+    "bay4 x126.13~161.40": "4 A·A#·B",
+    "end L x1.1~43.9": "L A0·A#0·B0",
+    "end R x3.1~22.2 (local)": "R C8"
+   },
+   "placement": "the grip itself is only 1.0 x 1.5 (y146.5..147.5 z65.85..67.35), too small; engrave on the bar TOP face z68.85 over y148.5..160.0 (front zone, 1.5 thick), centred in x",
+   "style": "debossed 0.4 deep (2 layers), sans-serif, cap height 3.5 (end-part R bar: 3.0), print top face on the bed → text mirrored in the slicer view, reads correctly on the part",
+   "assumed": true,
+   "assumed_reason": "only 'engrave the bay name' is specified; label text, face, depth and size proposed (grip face too small; 0.4 of 1.5 leaves 1.1 in the front zone which is not in the load path of the wedges)",
+   "other_text": "lever carriers get the note name on a side wall (DESIGN.md; carriers are outside this task); no text specified on frame, sensor bar, curtain, rod plug",
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md parts table '패드 바 ... 앞 손잡이(칸 이름 새김)', review 기하 m2 | hardware/mechanical/key-action-v4/model/geometry.json pad bar / pad bar grip prisms | hardware/mechanical/key-action-v4/DESIGN.md P13"
+  }
+ ],
+ "sensor_bar": {
+  "part": "sensor bar (separate PETG print, one per module + one per end part)",
+  "outline_module": {
+   "x": [
+    0.5,
+    162.9
+   ],
+   "y": [
+    59.0,
+    77.5
+   ],
+   "z": [
+    8.6,
+    13.6
+   ],
+   "source": "hardware/mechanical/key-action-v4/model/geometry.json 'sensor bar' prisms | hardware/mechanical/key-action-v4/DESIGN.md P36 (v3 P107)"
+  },
+  "black_low_zones": {
+   "half_width": 7.0,
+   "top_z": 11.5,
+   "zones_x": {
+    "C#": [
+     14.215,
+     28.215
+    ],
+    "D#": [
+     42.285,
+     56.285
+    ],
+    "F#": [
+     83.573,
+     97.573
+    ],
+    "G#": [
+     110.5,
+     124.5
+    ],
+    "A#": [
+     137.427,
+     151.427
+    ]
+   },
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P25 (v3 ±6.0 → ±7.0) | hardware/mechanical/key-action-v4/model/geometry.json 'sensor bar' z8.6..11.5 prisms e.g. x14.215..28.215"
+  },
+  "white_zone_top_z": 13.6,
+  "underside_z": 8.6,
+  "sits_on": "sensor board SB x1.0..162.6 y60.65..75.89 z7.0..8.6 (bar underside flat on the board top)",
+  "end_parts": {
+   "left": {
+    "x": [
+     0.5,
+     46.5
+    ],
+    "low_zone_A#0": [
+     19.927,
+     33.927
+    ]
+   },
+   "right_local": {
+    "x": [
+     0.5,
+     23.0
+    ]
+   },
+   "note": "no right ledge on end-part bars: held by the 2 left M3x10 + ribs",
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md A02/A03 | hardware/mechanical/key-action-v4/model/geometry.json end_parts sensor bar prisms | hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B)"
+  },
+  "sensor": {
+   "part": "TI DRV5055A2QLPG (LPG = flat TO-92, 3 leads)",
+   "mount": "laid flat, branded (chamfered, '55A2') face UP, leads toward +x, bent down 1.40~3.44 from the body at 2.54 spacing into the lead holes; pin1 VCC front (y64.46), GND y67.00, OUT rear y69.54",
+   "element_row_y": 67.0,
+   "body_thickness_derived": 1.52,
+   "element_below_top": 1.03,
+   "element_from_non_lead_edge": 1.54,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) 주 2 | docs/report/toccata-build-v3.html D04 (DRV5055 LPG: 소자가 윗면 아래 1.03, 리드 반대쪽 모서리에서 1.54) | docs/report/toccata-build-v3.html P86 (y67)"
+  },
+  "pocket_rule": {
+   "pocket_xy": "3.55 (x) x 4.4 (y): x = sensor_x -1.74 .. +1.81, y = 64.8..69.2 (centred on y67.0)",
+   "pocket_floor": "white zones z12.189 (depth 1.41 from z13.6, element z12.68, sensor top 0.11 proud); black zones z9.656 (depth 1.84 from z11.5, element z10.15)",
+   "lead_groove": "y63.9..70.1, from the pocket's +x edge to lead-hole x + 0.6, floor = pocket floor",
+   "lead_holes": "3 x D0.9 through the rest of the bar (floor → z8.6) at y64.46 / 67.00 / 69.54, x = lead-hole x (first 2.54 grid point >= sensor x + 3.0, grid origin 0.63)",
+   "source": "docs/report/toccata-build-v3.html D04, D05, S23, S24, P110 | docs/report/toccata-build-v3.html drawing 5 polygons 'C 센서 포켓 + 리드 홈' (scale 3.1 px/mm: C pocket x5.69..9.24, y64.8..69.2; groove to x11.39 = 10.79+0.6) | hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor / lead-hole x table"
+  },
+  "pockets_module": [
+   {
+    "key": "C",
+    "sensor_x": 7.431,
+    "black": false,
+    "pocket_x": [
+     5.691,
+     9.241
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     9.241,
+     11.39
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 12.189,
+    "lead_holes": [
+     {
+      "x": 10.79,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 10.79,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 10.79,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     }
+    ]
+   },
+   {
+    "key": "C#",
+    "sensor_x": 21.215,
+    "black": true,
+    "pocket_x": [
+     19.475,
+     23.025
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 9.656,
+    "pocket_depth": 1.844,
+    "lead_groove_x": [
+     23.025,
+     26.63
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 9.656,
+    "lead_holes": [
+     {
+      "x": 26.03,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 26.03,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 26.03,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     }
+    ]
+   },
+   {
+    "key": "D",
+    "sensor_x": 35.25,
+    "black": false,
+    "pocket_x": [
+     33.51,
+     37.06
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     37.06,
+     39.33
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 12.189,
+    "lead_holes": [
+     {
+      "x": 38.73,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 38.73,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 38.73,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     }
+    ]
+   },
+   {
+    "key": "D#",
+    "sensor_x": 49.285,
+    "black": true,
+    "pocket_x": [
+     47.545,
+     51.095
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 9.656,
+    "pocket_depth": 1.844,
+    "lead_groove_x": [
+     51.095,
+     54.57
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 9.656,
+    "lead_holes": [
+     {
+      "x": 53.97,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 53.97,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 53.97,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     }
+    ]
+   },
+   {
+    "key": "E",
+    "sensor_x": 63.07,
+    "black": false,
+    "pocket_x": [
+     61.33,
+     64.88
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     64.88,
+     67.27
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 12.189,
+    "lead_holes": [
+     {
+      "x": 66.67,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 66.67,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 66.67,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     }
+    ]
+   },
+   {
+    "key": "F",
+    "sensor_x": 77.359,
+    "black": false,
+    "pocket_x": [
+     75.619,
+     79.169
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     79.169,
+     82.51
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 12.189,
+    "lead_holes": [
+     {
+      "x": 81.91,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 81.91,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 81.91,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     }
+    ]
+   },
+   {
+    "key": "F#",
+    "sensor_x": 90.573,
+    "black": true,
+    "pocket_x": [
+     88.833,
+     92.383
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 9.656,
+    "pocket_depth": 1.844,
+    "lead_groove_x": [
+     92.383,
+     95.21
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 9.656,
+    "lead_holes": [
+     {
+      "x": 94.61,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 94.61,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 94.61,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     }
+    ]
+   },
+   {
+    "key": "G",
+    "sensor_x": 104.037,
+    "black": false,
+    "pocket_x": [
+     102.297,
+     105.847
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     105.847,
+     107.91
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 12.189,
+    "lead_holes": [
+     {
+      "x": 107.31,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 107.31,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 107.31,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     }
+    ]
+   },
+   {
+    "key": "G#",
+    "sensor_x": 117.5,
+    "black": true,
+    "pocket_x": [
+     115.76,
+     119.31
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 9.656,
+    "pocket_depth": 1.844,
+    "lead_groove_x": [
+     119.31,
+     123.15
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 9.656,
+    "lead_holes": [
+     {
+      "x": 122.55,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 122.55,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 122.55,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     }
+    ]
+   },
+   {
+    "key": "A",
+    "sensor_x": 130.964,
+    "black": false,
+    "pocket_x": [
+     129.224,
+     132.774
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     132.774,
+     135.85
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 12.189,
+    "lead_holes": [
+     {
+      "x": 135.25,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 135.25,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 135.25,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     }
+    ]
+   },
+   {
+    "key": "A#",
+    "sensor_x": 144.427,
+    "black": true,
+    "pocket_x": [
+     142.687,
+     146.237
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 9.656,
+    "pocket_depth": 1.844,
+    "lead_groove_x": [
+     146.237,
+     148.55
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 9.656,
+    "lead_holes": [
+     {
+      "x": 147.95,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 147.95,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     },
+     {
+      "x": 147.95,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       9.656
+      ]
+     }
+    ]
+   },
+   {
+    "key": "B",
+    "sensor_x": 157.641,
+    "black": false,
+    "pocket_x": [
+     155.901,
+     159.451
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     159.451,
+     161.25
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_groove_floor_z": 12.189,
+    "lead_holes": [
+     {
+      "x": 160.65,
+      "y": 64.46,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 160.65,
+      "y": 67.0,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     },
+     {
+      "x": 160.65,
+      "y": 69.54,
+      "d": 0.9,
+      "z": [
+       8.6,
+       12.189
+      ]
+     }
+    ]
+   }
+  ],
+  "pockets_end_parts": [
+   {
+    "part": "left EL",
+    "key": "A0",
+    "sensor_x": 10.287,
+    "lead_x": 13.33,
+    "black": false,
+    "pocket_x": [
+     8.547,
+     12.097
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     12.097,
+     13.93
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_holes_d": 0.9,
+    "lead_holes_y": [
+     64.46,
+     67.0,
+     69.54
+    ]
+   },
+   {
+    "part": "left EL",
+    "key": "A#0",
+    "sensor_x": 26.927,
+    "lead_x": 31.11,
+    "black": true,
+    "pocket_x": [
+     25.187,
+     28.737
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 9.656,
+    "pocket_depth": 1.844,
+    "lead_groove_x": [
+     28.737,
+     31.71
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_holes_d": 0.9,
+    "lead_holes_y": [
+     64.46,
+     67.0,
+     69.54
+    ]
+   },
+   {
+    "part": "left EL",
+    "key": "B0",
+    "sensor_x": 40.141,
+    "lead_x": 43.81,
+    "black": false,
+    "pocket_x": [
+     38.401,
+     41.951
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     41.951,
+     44.41
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_holes_d": 0.9,
+    "lead_holes_y": [
+     64.46,
+     67.0,
+     69.54
+    ]
+   },
+   {
+    "part": "right ER (local x)",
+    "key": "C8",
+    "sensor_x": 11.75,
+    "lead_x": 15.87,
+    "black": false,
+    "pocket_x": [
+     10.01,
+     13.56
+    ],
+    "pocket_y": [
+     64.8,
+     69.2
+    ],
+    "pocket_floor_z": 12.189,
+    "pocket_depth": 1.411,
+    "lead_groove_x": [
+     13.56,
+     16.47
+    ],
+    "lead_groove_y": [
+     63.9,
+     70.1
+    ],
+    "lead_holes_d": 0.9,
+    "lead_holes_y": [
+     64.46,
+     67.0,
+     69.54
+    ]
+   }
+  ],
+  "screw_holes": {
+   "positions": [
+    [
+     3.0,
+     61.9
+    ],
+    [
+     3.0,
+     74.6
+    ]
+   ],
+   "screw": "M3x10 stainless button head (v3.2 L34, ISO 7380), self-tapping into the frame post",
+   "bar_hole_d": 3.4,
+   "bar_hole_note": "clearance through the bar z8.6..13.6 (white C zone); head seats on the bar top z13.6",
+   "board_slot": "SB has U-slots D3.4 at the same points (BRD-02)",
+   "assumed_bar_hole": true,
+   "assumed_reason": "v3/v4 give only 'bar + board pass-through'; D3.4 = the BRD-02 U-slot / v3 D08 clearance size",
+   "source": "hardware/mechanical/key-action-v4/DESIGN.md P36 | docs/report/toccata-build-v3.html P111 | hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) 'M3×10 자가 탭 ×2 (3.0, 61.9)·(3.0, 74.6) — 기판 앞·뒤에 U홈 Ø3.4'"
+  },
+  "right_end_capture": "bar end x162.9 slides under the frame's right ledge (lip x161.5..163.0 underside z13.6, post x163.0..164.3, two pieces y59.0..63.4 / y70.6..77.5 clear of the B lead groove y63.9..70.1) -- no bar feature needed; install: bar+board 1.5 left, slide right, then the 2 left screws",
+  "print": "flat, underside (z8.6) on the bed; pockets/grooves open upward, lead holes vertical",
+  "text": "none specified on the bar",
+  "assumed": false
+ },
+ "cheeks": {
+  "left": {
+   "x": [
+    -16.0,
+    -0.68
+   ],
+   "width": 15.32,
+   "y": [
+    0.0,
+    212.0
+   ],
+   "z": [
+    3.0,
+    72.85
+   ],
+   "top_z": 72.85,
+   "printed_with": "left end-part frame (one piece)",
+   "source": "hardware/mechanical/key-action-v4/model/geometry.json end_parts.left cheek [-16.0,-0.68], polygon y0..212 z3..72.85 | hardware/mechanical/key-action-v4/DESIGN.md A02 (볼 x−16~-0.68) | hardware/mechanical/key-action-v4/drawings/d10 '볼 윗면 z72.85 = 윗판 윗면 (S18)'"
+  },
+  "right": {
+   "x_local": [
+    24.18,
+    39.5
+   ],
+   "x_world": [
+    1222.68,
+    1238.0
+   ],
+   "width": 15.32,
+   "y": [
+    0.0,
+    212.0
+   ],
+   "z": [
+    3.0,
+    72.85
+   ],
+   "top_z": 72.85,
+   "printed_with": "right end-part frame",
+   "source": "hardware/mechanical/key-action-v4/model/geometry.json end_parts.right cheek [24.18,39.5] | hardware/mechanical/key-action-v4/DESIGN.md A03"
+  },
+  "note": "v4 exports the cheek as a solid block; v3 called it '볼 16' (x-16..0); v4 leaves 0.68 to the key-area floor (see features end_part_floor_bridge). Print with normal infill; no shelling specified.",
+  "headphone_jack": {
+   "part": "PJ-313 3.5 mm switched stereo jack (BOM L15 #1, BSUN / SHOU HAN PJ-313 5JCJ)",
+   "location": "left cheek FRONT face (y0), plug inserted toward +y",
+   "source_location": "docs/report/toccata-build-v3.html end-part text '볼 앞면에 PJ-313 헤드폰 잭(노멀 접점으로 스피커 차단)' | docs/report/toccata-build-v3.html L15 ① '왼쪽 끝 부속 볼 앞면 1' | docs/report/toccata-build-v3.html drawing 9",
+   "jack_dims": {
+    "body_L": 11.5,
+    "nose_L": 2.5,
+    "overall_L": 14.0,
+    "body_W": 6.0,
+    "body_H": 5.0,
+    "nose_d": 5.0,
+    "plug_hole_d": 3.6,
+    "axis_above_base": 2.5,
+    "pins_below_base": 3.2,
+    "pin_pitch_along_L": [
+     1.8,
+     3.2,
+     3.5
+    ],
+    "locating_pegs": "2 x D1.0 (PCB holes D1.3), 6.0 apart",
+    "source": "SHOU HAN PJ-313 5JCJ drawing (LCSC C668607), read from the datasheet page; hardware/pcb/research/audio.md §2 (pin letters S/T/TN/R/RN, check normals with a meter)"
+   },
+   "pocket": {
+    "centre_x": -8.34,
+    "axis_z": 20.0,
+    "front_wall": {
+     "y": [
+      0.0,
+      2.5
+     ],
+     "nose_hole_d": 5.2,
+     "teardrop": "apex +z"
+    },
+    "body_cavity": {
+     "x": [
+      -11.49,
+      -5.19
+     ],
+     "y": [
+      2.5,
+      14.2
+     ],
+     "z": [
+      17.4,
+      22.6
+     ]
+    },
+    "insert_slot_below": {
+     "x": [
+      -11.49,
+      -5.19
+     ],
+     "y": [
+      2.5,
+      14.2
+     ],
+     "z": [
+      3.0,
+      17.4
+     ],
+     "note": "open at the cheek underside (covered by the 3T base sheet); the jack goes in from below, pins down, solder cup space below it; fix with a hot-glue/CA drop"
+    },
+    "wire_channel": {
+     "x": [
+      -10.34,
+      -6.34
+     ],
+     "y": [
+      14.2,
+      212.0
+     ],
+     "z": [
+      3.0,
+      8.0
+     ],
+     "note": "open-bottom groove to the cheek rear face for cable C14 ① (cut 3.5 mm AUX, ~D3.5) → cable passage y215..258"
+    },
+    "retention": "insertion force (3~25 N) bears on the cavity rear wall y14.2, pull-out on the front-wall shoulder; x and top by the cavity walls",
+    "assumed": true,
+    "assumed_reason": "v3/v4 say only 'printed pocket in the left cheek front face'; no pocket drawing exists. Axis z20 keeps a plug overmould (<= D8) clear of the desk, jack sits mid-cheek with 4.5 walls each side, nose flush with the front face"
+   }
+  },
+  "text": "none specified on the cheeks"
+ },
+ "bracket": {
+  "v3_definition": {
+   "id": "A12 방진 브래킷",
+   "size": "PETG 40 x 17 x 6 (for the 3 mm gap)",
+   "y": [
+    205.0,
+    222.0
+   ],
+   "grommets": "2 x M3 silicone FC grommets (L42) per bracket, at z12",
+   "grommet_seat": "6T plate thinned to a 1.6 ledge at each grommet (FC grommet groove fits ~1.6 PCB)",
+   "x_measured_on_drawing7": {
+    "left": [
+     -8.0,
+     32.0
+    ],
+    "right": [
+     1200.0,
+     1236.0
+    ]
+   },
+   "end_part_fastening_v3": "'레일·뒷벽 덩어리(z12)에 수평 인서트 2개' per end part; v3.2 ME6 turned them into printed hex pockets + M3 nuts (L31: 스피커 브래킷 4 = 2 per end part)",
+   "role": "location only; speaker weight is on its own rubber feet (L14); gap end part ↔ speaker box 3 mm (y212..215)",
+   "source": "docs/report/toccata-build-v3.html A12, L42, L31, end-part text (§끝 부속), drawing 7 polygons '방진 브래킷 L/R' (scale 0.62 px/mm)"
+  },
+  "v4_status": "not defined in v4 r4.5 geometry. The v3 'rail / rear-wall mass' no longer exists: in v4 the end part has a full-height rear wall y209..212 z5..72.85 (with the lead notch z5..12 at EL x13.53..22.48 / ER x7.59..14.00) and a hollow under-shelf zone, and the speaker box bottom is at z22 (22 mm feet), so a plate at z12 cannot pass the rear wall",
+  "proposal_v4": {
+   "concept": "End-part side only: each cheek gets two horizontal M3 bolt seats (axis y, entering from the cheek rear face y212) at z12, keeping v3's '2 horizontal fasteners at z12 per end part' but moving them into the solid cheek, the only v4 material at y205..212 z12 that is not the 3 mm rear wall or a lead notch. Bracket plate shape / speaker-side seat must be re-derived with the speaker-part spec (box bottom z22, front y215): the v3 40x17x6 plate at y205..222 would cross the v4 full-height rear wall.",
+   "end_part_features": {
+    "left": {
+     "bolt_holes": [
+      {
+       "x": -12.24,
+       "z": 12.0
+      },
+      {
+       "x": -4.44,
+       "z": 12.0
+      }
+     ],
+     "hole_d": 3.4,
+     "hole_y": [
+      203.0,
+      212.0
+     ],
+     "nut_pocket": {
+      "af_press": 5.5,
+      "y": [
+       205.0,
+       207.5
+      ],
+      "slot_from_underside": "z3.0..14.9 (nut drops in from below before the base sheet)",
+      "x_width": 5.5
+     }
+    },
+    "right": {
+     "bolt_holes_world": [
+      {
+       "x": 1226.94,
+       "z": 12.0
+      },
+      {
+       "x": 1234.74,
+       "z": 12.0
+      }
+     ],
+     "bolt_holes_local": [
+      {
+       "x": 28.44,
+       "z": 12.0
+      },
+      {
+       "x": 36.24,
+       "z": 12.0
+      }
+     ],
+     "hole_d": 3.4,
+     "hole_y": [
+      203.0,
+      212.0
+     ],
+     "nut_pocket": {
+      "af_press": 5.5,
+      "y": [
+       205.0,
+       207.5
+      ],
+      "slot_from_underside": "z3.0..14.9",
+      "x_width": 5.5
+     }
+    },
+    "teardrop": "D3.4 holes teardrop apex +z",
+    "hardware": "M3x10 button head + L36 washer through the grommet (bracket hole D6, ledge 1.6) into a v3.2-style pressed M3 nut (AF 5.5 press, D07/D09 style)"
+   },
+   "spacing_note": "two bolts 7.8 apart centred on the cheek (x-8.34 / world 1230.84) leave 1.2 wall to each cheek face and 2.3 between the nut pockets",
+   "assumed": true,
+   "assumed_reason": "v4 defines no bracket seat; this keeps v3's 2 horizontal M3 at z12 per end part but moves them into the solid cheek, which is the only v4 material at y205..212 z12 that is not the 3 mm rear wall or a lead notch. Confirm the speaker-side half against the v3.2 speaker front panel before printing.",
+   "bracket_plate": "TBD with the speaker-part task (v3: PETG 40x17x6, grommet seats thinned to a 1.6 ledge, holes D6 so the bolt shank does not touch the plate)"
+  },
+  "conflicts": [
+   "v3 drawing 7 right bracket measures 36 wide (x1200..1236), A12 says 40",
+   "v3 'y205~222' implies a plate crossing the rear wall; in v4 the rear wall is full height, so the v3 shape cannot be reused as is",
+   "v3 speaker box bottom z22 (22 mm feet) is above the z12 grommet height; the speaker-side attachment height is unresolved in v3 text"
+  ]
+ },
+ "names_ko": {
+  "dovetail": "도브테일 (수 = 오른쪽 끝, 암 홈 = 왼쪽 끝, 아래 열림)",
+  "dovetail_male": "도브테일 수",
+  "dovetail_female": "도브테일 암 홈",
+  "sensor_bar": "센서 바",
+  "sensor_pocket": "센서 포켓 + 리드 홈",
+  "lead_hole": "리드 구멍 Ø0.9",
+  "black_low_zone": "센서 바 흑 낮은 구간 (±7.0)",
+  "sensor_bar_screw_hole": "센서 바 고정 나사 구멍 (M3×10 자가 탭)",
+  "sensor_post_pilot": "센서 기판 받침 기둥 파일럿 구멍 Ø2.75",
+  "balance_pin_holes": "밸런스 핀 구멍 (Ø2×12 압입)",
+  "control_board_screw_bores": "제어 기판 보스 막힌 구멍 Ø2.5",
+  "control_board_locating_pins": "제어 기판 위치 핀 Ø2.8",
+  "board_floor_hatch": "바닥 구멍 (기판을 밑에서)",
+  "usb_openings": "USB 선반 홈 · 뒷벽 개구",
+  "lever_rod_fin_bores": "핀 보스 구멍 Ø3.9 출력 → Ø4.0 드릴 (눈물방울)",
+  "lever_rod_end_plug": "레버 봉 끝 마개",
+  "key_rod_end_walls": "건반 봉 끝 멈춤 기둥",
+  "sensor_bar_right_ledge": "센서 바 오른쪽 턱 (립 + 기둥)",
+  "v32_hex_nut_pockets": "v3.2 출력 육각 너트 포켓 (v4에 없음)",
+  "teardrops": "눈물방울 구멍",
+  "ribbon_and_lead_lanes": "리본 차선 · 끝 부속 리드 길",
+  "end_part_floor_bridge": "끝 부속 볼-바닥 잇는 띠 (제안)",
+  "cheek": "볼 (끝 부속, 16 폭)",
+  "headphone_jack_pocket": "헤드폰 잭 PJ-313 자리 (왼쪽 볼 앞면)",
+  "bracket": "방진 브래킷 (끝 부속 ↔ 스피커 파트)",
+  "pad_bar_grip_text": "패드 바 손잡이 칸 이름 새김"
+ }
+}
