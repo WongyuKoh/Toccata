@@ -96,6 +96,19 @@ def write_mesh_stl(v, f, path, header=""):
 
 
 # ------------------------------------------------------------------ print files
+EXTRA = "@extra/"           # print folders that start with this go to stl/print_extra/ (alternatives, options, spares)
+
+# spare keys per the parts list (parts_list.json): every white-key file +1, black C#.D# +2, F# +1, G# +1, A#.A#0 +2
+SPARE_KEYS = {"흑건_C#·D#": 2, "흑건_F#": 1, "흑건_G#": 1, "흑건_A#·A#0": 2}
+
+
+def print_path(folder, fn):
+    """stl/print/<folder>/<fn>, or stl/print_extra/<rest>/<fn> for '@extra/<rest>' folders."""
+    if folder.startswith(EXTRA):
+        return os.path.join(OUT, "stl", "print_extra", folder[len(EXTRA):], fn)
+    return os.path.join(OUT, "stl", "print", folder, fn)
+
+
 def write_print(parts):
     groups = collections.OrderedDict()
     for p in parts:
@@ -118,7 +131,7 @@ def write_print(parts):
             name = names[0]
         qty = len(ps)
         fn = "%s__%d개.stl" % (safe(name), qty)
-        path = os.path.join(OUT, "stl", "print", folder, fn)
+        path = print_path(folder, fn)
         b = ps[0].print_solid.bounding_box()
         write_stl(ps[0].print_solid, path, "Toccata %s x%d  %.1fx%.1fx%.1f mm" % (ps[0].id, qty, b[3] - b[0], b[4] - b[1], b[5] - b[2]))
         for p in ps:
@@ -129,18 +142,19 @@ def write_print(parts):
             "volume_cm3": round(ps[0].print_solid.volume() / 1000.0, 2),
             "mass_g_solid_petg": round(ps[0].print_solid.volume() / 1000.0 * 1.27, 1),
             "material": ps[0].material, "note": ps[0].print_note, "ids": [p.id for p in ps],
-            "name_ko": name.replace("_", " "),
+            "name_ko": name.replace("_", " "), "extra": folder.startswith(EXTRA),
         })
     # print-only variants (not in the assembly), e.g. pad bars for the PORON 5T that the purchase list buys
     import keyaction_parts
     for (folder, name, solid, qty, material, note) in keyaction_parts.EXTRA_PRINTS:
-        path = os.path.join(OUT, "stl", "print", folder, "%s__%d개.stl" % (safe(name), qty))
+        path = print_path(folder, "%s__%d개.stl" % (safe(name), qty))
         b = solid.bounding_box()
         write_stl(solid, path, "Toccata %s x%d (variant)" % (name.encode("ascii", "ignore").decode() or "variant", qty))
         rows.append({"file": os.path.relpath(path, OUT), "name": name, "qty": qty, "folder": folder,
                      "size_mm": [round(b[3] - b[0], 2), round(b[4] - b[1], 2), round(b[5] - b[2], 2)],
                      "volume_cm3": round(solid.volume() / 1000.0, 2), "mass_g_solid_petg": round(solid.volume() / 1000.0 * 1.27, 1),
-                     "material": material, "note": note, "ids": [], "name_ko": name.replace("_", " "), "variant": True})
+                     "material": material, "note": note, "ids": [], "name_ko": name.replace("_", " "), "variant": True,
+                     "extra": folder.startswith(EXTRA)})
     # printed assembly tools of the key-action design (DESIGN 10.1 / 15): copied from key-action-v4/printables/tools
     import shutil
     tools = os.path.normpath(os.path.join(HERE, "..", "..", "key-action-v4", "printables", "tools", "stl"))
@@ -160,7 +174,33 @@ def write_print(parts):
                      "volume_cm3": 0, "mass_g_solid_petg": g, "material": "PETG",
                      "note": "건반 액션 설계의 출력 공구(DESIGN 10.1, key-action-v4/printables/tools/tools.md): 악기당 1벌, 서포트 없음; "
                              "T2·T3는 채움 100 %·층 0.1", "ids": [], "name_ko": nm.replace("_", " "), "variant": True})
+    # spare keys (optional) -> stl/print_extra/예비_건반: same STL as the 01 file, count = spares only
+    for r in [r for r in rows if r["folder"] == "01_건반"]:
+        spare = SPARE_KEYS.get(r["name"], 1 if r["name"].startswith("백건") else 0)
+        if not spare:
+            continue
+        dst = print_path(EXTRA + "예비_건반", "%s__%d개.stl" % (safe(r["name"]), spare))
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copyfile(os.path.join(OUT, r["file"]), dst)
+        rows.append(dict(r, file=os.path.relpath(dst, OUT), qty=spare, folder=EXTRA + "예비_건반", ids=[], variant=True, extra=True,
+                         note="선택: 예비 건반 (부품표 parts_list.json의 예비 수). 01_건반의 같은 파일과 모양이 같음 - 부러진 건반 하나만 바꿀 때 씀. "
+                              "본체에 보관 칸이 없으니(R29) 따로 상자에 보관. 출력 방법은 01_건반과 같음"))
     return rows
+
+
+def write_print_zip():
+    """one-file download of stl/print (everything to print for one instrument)."""
+    zp = os.path.join(OUT, "Toccata_출력STL_전체.zip")
+    if os.path.exists(zp):
+        os.remove(zp)
+    with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
+        base = os.path.join(OUT, "stl")
+        for root, _dirs, fns in os.walk(os.path.join(base, "print")):
+            for fn in sorted(fns):
+                if fn.endswith(".stl"):
+                    full = os.path.join(root, fn)
+                    z.write(full, os.path.relpath(full, base))
+    return zp
 
 
 # ------------------------------------------------------------------ assembly files
@@ -244,9 +284,10 @@ def main():
     import shutil
     anno = "--no-anno" not in sys.argv
     parts = collect()
-    for d in ("print", "assembly", "annotated"):
+    for d in ("print", "print_extra", "assembly", "annotated"):
         shutil.rmtree(os.path.join(OUT, "stl", d), ignore_errors=True)
     rows = write_print(parts)
+    write_print_zip()
     files = write_assembly(parts)
     ondesk = [p for p in parts if p.note not in ("offdesk", "altview")]      # pedal on the floor / folded-screen view
     write_3mf(ondesk, os.path.join(OUT, "Toccata_전체조립.3mf"))

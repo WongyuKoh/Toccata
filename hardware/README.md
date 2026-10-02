@@ -13,7 +13,7 @@ Toccata 하드웨어 설계 자료입니다. 현재 기준은 **v4**(2026-09-29)
 | [`mechanical/sound-requirements.md`](mechanical/sound-requirements.md) | 요구사항 R1~R32, D1~D24. 모든 설계의 기준 (R31 터치스크린, R32 L2 한 몸 뒷바 · 스피커 앞판 40°) |
 | [`mechanical/key-action-v4/`](mechanical/key-action-v4/) | **건반 액션 v4 (W1+).** 설계 문서, 좌표·물리 모델, 도면 15장, 출력 공구와 단계 0 시편 STL(`printables/`), 구조안 5개 비교, 검증 기록, 보고서 |
 | [`mechanical/touchscreen/`](mechanical/touchscreen/) | **R31 터치스크린 수정 3판 (10/1 사용자 승인).** Waveshare 7-DSI-TOUCH-C(7인치 가로 DSI)를 L2 가운데 화면 뚜껑에 25° 기울여 세우고, 접으면 z78~95로 화면 뚜껑 위(뚜껑 윗면 z72.85, 뚜껑 평면 안)에 눕힘. `rev3/`에 CAD 넘김 사양(CAD_SPEC_rev3.md), 치수 도면 t01~t06, 3D 미리보기, 검수 페이지. 조합 비교 13가지는 `compare/`. 2판(공식 TD2, L1) 기록은 `rev2_td2/`. CAD는 통합본 v15 |
-| [`mechanical/cad/`](mechanical/cad/) | **CAD (L2 한 몸 뒷바 + 건반 액션 r4.5 + 터치스크린 3판).** 출력 STL 84파일(`stl/print/`: 악기 부품 74파일·290개 + PORON 5T용 패드 바 6파일 + 출력 공구 4파일), 도면 D01~D06(`drawings/`), 렌더(`renders/`), 전체 조립 3MF·GLB, 사양(`spec/body_L2.json`), 생성기 `src/build_all.py`. 출력·조립 안내는 `README.md` |
+| [`mechanical/cad/`](mechanical/cad/) | **CAD (L2 한 몸 뒷바 + 건반 액션 r4.5 + 터치스크린 3판).** 출력 STL — `stl/print/`는 전부 뽑으면 되는 77파일(악기 73파일·289개 + 출력 공구 4파일, 패드 바는 구매한 PORON 5T용; 묶음 `Toccata_출력STL_전체.zip`), `stl/print_extra/`는 선택·대안·예비(화면 덮개, PORON 6T용 패드 바, 예비 건반), 도면 D01~D06(`drawings/`), 렌더(`renders/`), 전체 조립 3MF·GLB, 사양(`spec/body_L2.json`), 생성기 `src/build_all.py`. 출력·조립 안내는 `README.md` |
 | [`mechanical/before/`](mechanical/before/) | 이전 설계 보관: v2.0 일체형, v3 CAD·STL·렌더, 88건반 STEP |
 | [`pcb/`](pcb/) | 전자부 회로도 9장, 기판 배치, 넷리스트, 부품표. 회로 세션이 관리합니다 |
 | [`bom/`](bom/) | 구매 목록 엑셀(v4), 핵심 부품 목록 생성기, 판매처 조사(USB-C 케이블 포함), 절감 선택기 |

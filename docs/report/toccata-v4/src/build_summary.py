@@ -133,7 +133,7 @@ next_html = "".join(f'<li><span class="when">{E(w)}</span><b>{E(t)}</b><span cla
 CHECK = ["화면 뒤 DSI 커넥터 방향(반대면 받침을 좌우로 뒤집고 A형 리본을 씀)과 M2.5 구멍 깊이",
          "보조배터리 USB-C 포트 중심이 바닥에서 15.5 mm 이상인지(NC888 꺾인 머리)",
          "허브 DC 플러그가 잭 면에서 32 mm 안인지(넘으면 ㄱ자 플러그를 따로 삼)",
-         "업스톱 패드 PORON: 목록은 5T, 설계는 6T — 5T면 패드 바 쐐기를 1.0 mm 두껍게 다시 출력",
+         "업스톱 패드 PORON 두께: 목록대로 5T면 stl/print 그대로(패드 바가 5T용), 6T를 사면 stl/print_extra의 6T용 패드 바로 바꿔 뽑음",
          "스피커 결합 인서트 구멍은 자투리 판에 Ø5.8부터 시험(헐거우면 Ø5.5)"]
 check_html = "".join(f"<li>{E(x)}</li>" for x in CHECK)
 

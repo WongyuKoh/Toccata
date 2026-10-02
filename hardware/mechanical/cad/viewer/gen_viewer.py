@@ -132,8 +132,8 @@ def main():
     json.dump(data, open(os.path.join(HERE, "parts.json"), "w"), ensure_ascii=False, separators=(",", ":"))
 
     # ---------------- static section
-    pr = man["print"]
-    n_print = sum(r["qty"] for r in pr)
+    pr = [r for r in man["print"] if not r.get("extra")] + [r for r in man["print"] if r.get("extra")]
+    n_print = sum(r["qty"] for r in pr if not r.get("extra") and not r["folder"].startswith("06"))       # instrument parts in stl/print
     kinds = collections.Counter(p["kind"] for p in man["parts"] if p.get("note") not in ("offdesk", "altview"))
     H = []
     a = H.append
@@ -150,7 +150,7 @@ def main():
       % (f(fg["depth"]), f(fg["area_pct"], 1).replace("-", "−"), f(fg["centre_top"]), f(fg["angle"], 1), f(fg["top"]),
          f(fg["duct_y"][0], 0), f(fg["duct_y"][1], 0), f(fg["duct_z"][1], 0)))
     a('<div class="kfs">')
-    for b, s in [("%d" % sum(kinds.values()), "조립 부품 (페달·접은 화면 제외)"), ("%d종" % len(pr), "출력 STL 파일"),
+    for b, s in [("%d" % sum(kinds.values()), "조립 부품 (페달·접은 화면 제외)"), ("%d종" % len([r for r in pr if not r.get("extra")]), "출력 STL 파일 (stl/print, 전부 뽑음)"),
                  ("%d개" % n_print, "출력할 부품 수"), ("1254 × %s" % f(fg["depth"]), "전체 mm (L2 뒷바)"),
                  ("z%s · %s°" % (f(fg["top"]), f(fg["angle"], 1)), "스피커 윗면 · 앞판 각도"),
                  ("%d" % kinds.get("electronics", 0), "전자 부품 외곽"), ("%d" % kinds.get("plywood", 0), "오꾸메 합판 조각")]:
@@ -185,7 +185,7 @@ def main():
       '<div class="glist"></div></details></div></div>' % len(groups))
 
     # print list
-    a('<h3>출력 목록 (%d종 · %d개)</h3>' % (len(pr), n_print))
+    a('<h3>출력 목록 (stl/print %d종 · 악기 부품 %d개 + 공구 1벌)</h3>' % (len([r for r in pr if not r.get("extra")]), n_print))
     a('<p class="small muted">파일은 <code>hardware/mechanical/cad/stl/print/</code>에 있습니다. 파일 이름 끝이 출력 개수이고, 부품은 이미 베드 위 방향으로 놓여 있습니다. '
       '같은 이름으로 <code>stl/annotated/</code>에 치수선과 숫자를 붙인 보기용 STL이 있습니다(출력 금지). 질량은 속을 꽉 채운 PETG 기준입니다.</p>')
     by = collections.OrderedDict()
@@ -193,7 +193,8 @@ def main():
         by.setdefault(r["folder"], []).append(r)
     for folder, rs in by.items():
         a('<h4 class="sub4">%s</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th>'
-          '<th class="r">g</th><th>재료</th></tr></thead><tbody>' % esc(folder))
+          '<th class="r">g</th><th>재료</th></tr></thead><tbody>'
+          % esc(folder.replace("@extra/", "꼭 뽑지 않아도 됨 (stl/print_extra) · ") if folder.startswith("@extra/") else folder))
         notes = collections.OrderedDict()
         for r in rs:
             a('<tr><td>%s</td><td class="num">%d</td><td class="num">%s</td><td class="num">%.1f</td><td>%s</td></tr>'
@@ -226,7 +227,7 @@ def main():
         a('<li><b>%s</b> — %s%s</li>' % (esc(name), esc(txt), esc(" (같은 부품 %d개, 자리만 다름)" % cnt) if nvar > 1 else ""))
     a('</ul>')
     a('<h3>파일</h3><div class="tbl files"><table><tbody>')
-    for k, v in [("stl/print/", "출력용 STL (폴더 01~07; 04b는 PORON 5T를 쓸 때 04 대신, 07은 터치스크린 3판)"), ("stl/annotated/", "치수를 붙인 보기용 STL (08_합판재단은 합판 조각)"),
+    for k, v in [("stl/print/", "출력용 STL — 전부 이름 끝 개수만큼 뽑으면 악기 1대 + 공구 1벌 (01~07, 04 패드 바는 구매한 PORON 5T용). 한 파일 묶음: Toccata_출력STL_전체.zip"), ("stl/print_extra/", "꼭 뽑지 않아도 되는 것: 선택 화면 덮개, PORON 6T용 패드 바(대안), 예비 건반"), ("stl/annotated/", "치수를 붙인 보기용 STL (08_합판재단은 합판 조각)"),
                  ("stl/assembly/", "그룹별 조립 STL과 Toccata_전체조립.stl"), ("Toccata_전체조립.3mf / .glb", "색·이름이 붙은 전체 조립"),
                  ("manifest.json", "부품마다 id·이름·종류·그룹·외곽·출력 파일"), ("spec/", "문서에서 뽑은 세부 사양(출처 포함)"),
                  ("viewer/", "이 탭의 원본 (gen_viewer.py가 만듦)"),

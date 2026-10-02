@@ -207,19 +207,23 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
         ranges = [(min(a for a, b in xs), max(b for a, b in xs))]
         names = ["패드바_끝부속_" + {"left": "왼쪽", "right": "오른쪽"}[side]]
     inst = padbar_solids(fx, ranges, names, free=False)
+    # the purchase list buys PORON 5T (i124): the print file in stl/print is the 5T pad bar (wedge 1.0 thicker along the pad
+    # normal, same pad face as the design 6T); the design-6T pad bar goes to stl/print_extra as the alternative
+    free5 = padbar_solids(fx, ranges, names, free=True, wedge_extra=1.0)
     for nm, m in padbar_solids(fx, ranges, names, free=True).items():
         out.append(Part(id="%s-PADBAR-%s" % (tag, nm.split("_")[-1]), name_ko=nm.replace("_", " "), name_en="pad bar",
                         kind="print", group="%s 프레임" % label, solid=T(inst[nm]), color=COLORS["padbar"], material="PETG",
-                        print_name=nm, print_folder="04_센서바·패드바·가림판·마개", print_solid=bed(m, R_PAD),
+                        print_name=nm, print_folder="04_센서바·패드바·가림판·마개", print_solid=bed(free5[nm], R_PAD),
                         print_note="윗면을 베드에(쐐기가 위). 뒤 계단(y167~185)은 베드에서 1.5 떠 있으니 그 밑과 잎 혀 밑에 서포트"
                                    "(윗 틈 0.2, 인터페이스 1층; 이 면은 윗판 자리 z67.35라 매끈하게). 잎 혀는 자유 상태(설치 때 0.3 눌림)로 "
-                                   "출력, 둘레 틈 0.6. 칸 이름은 윗면에 0.4 새김 (P13, DESIGN 15). 쐐기는 설계 패드 PORON 6T + 펠트 1T 기준",
+                                   "출력, 둘레 틈 0.6. 칸 이름은 윗면에 0.4 새김 (P13, DESIGN 15). 쐐기는 구매 목록의 PORON 5T(i124) + 펠트 1T 기준 "
+                                   "(설계 6T보다 쐐기를 패드 면 법선으로 1.0 두껍게 - 패드 면은 같음; 조립 모델은 설계 6T로 그림)",
                         source=SRC))
     if tag in ("O1", "EL", "ER"):
-        for nm, m in padbar_solids(fx, ranges, names, free=True, wedge_extra=1.0).items():
-            EXTRA_PRINTS.append(("04b_패드바_PORON5T용", nm + "_PORON5T용", bed(m, R_PAD), 7 if side is None else 1, "PETG",
-                                 "구매 목록의 PORON 5T(i124)를 쓸 때의 패드 바: 쐐기를 패드 면 법선으로 1.0 두껍게(설계 6T와 같은 패드 면). "
-                                 "6T를 사면 04 폴더 파일을 씀. 출력 방법은 04 패드 바와 같음"))
+        for nm, m in padbar_solids(fx, ranges, names, free=True).items():
+            EXTRA_PRINTS.append(("@extra/대안_패드바_PORON6T용", nm + "_PORON6T용", bed(m, R_PAD), 7 if side is None else 1, "PETG",
+                                 "대안: PORON 6T(설계값)를 사면 stl/print/04의 패드 바 6종 대신 이것을 뽑음 (쐐기가 1.0 얇음, 패드 면은 같음). "
+                                 "구매 목록대로 5T를 쓰면 뽑지 않음. 출력 방법은 04 패드 바와 같음"))
 
     # ---- bought / consumable prisms from the model
     for p in fx.get("bought", []):

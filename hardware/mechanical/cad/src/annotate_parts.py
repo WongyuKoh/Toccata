@@ -242,7 +242,7 @@ def write_all(parts, rows, out):
                  "출력 크기 %.1f × %.1f × %.1f mm (베드 위 방향)" % tuple(r["size_mm"]),
                  "단위 mm · 조립 방향으로 표시 · 이 파일은 보기용 (출력 금지)"]
         a = annotated(p.solid, r["name"], dims_extra=p.dims, title=stem, extra_lines=lines)
-        path = os.path.join(out, "stl", "annotated", r["folder"], stem + "_치수.stl")
+        path = os.path.join(out, "stl", "annotated", r["folder"].replace("@extra/", "선택·대안·예비_"), stem + "_치수.stl")
         write_stl(a, path, "Toccata %s dimensioned (view only)" % p.id)
 
 

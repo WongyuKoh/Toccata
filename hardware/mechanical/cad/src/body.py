@@ -1577,7 +1577,7 @@ def touch_parts(out):
             COLORS["printed_body"], "PETG",
             source=TS.SRC_SPEC + " E-3 (선택: 화면 덮개 173×108×3, 접은 화면 위, 받침 테두리에 얹힘); 자리 x%.1f~%.1f y%.2f~%.2f z%.2f~%.2f "
                    "(접은 받침 테두리 z%.2f 위, 가운데 맞춤)" % (TS.XC - sx / 2, TS.XC + sx / 2, fyc - sy_ / 2, fyc + sy_ / 2, ztop, ztop + st, ztop),
-            note=ALT, print_name="화면덮개_선택", R=R_NONE, folder=FOLDER_TS,
+            note=ALT, print_name="화면덮개_선택", R=R_NONE, folder="@extra/선택_화면덮개",
             print_note="선택 부품(접은 화면을 덮을 때만). 평판을 베드에. 약 70 g. 사용 상태 조립에는 없음(접은 상태 보기에만 있음)",
             dims=[("x", TS.XC - sx / 2, TS.XC + sx / 2, "173", 0), ("y", fyc - sy_ / 2, fyc + sy_ / 2, "108", 0), ("z", ztop, ztop + st, "3", 0)])
 

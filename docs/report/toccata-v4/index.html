@@ -413,7 +413,7 @@ nav.tabs{z-index:30}
 <ol class="next"><li><span class="when">지금</span><b>주문</b><span class="what">최종 재료 목록대로 주문합니다. 해외에서 오는 화면(10/15~22 도착 예상)과 10/26에 출하되는 스피커 결합 인서트(반품 불가)를 먼저 넣습니다.</span></li><li><span class="when">10월</span><b>단계 0 시험</b><span class="what">시편 34개와 공구 4개를 먼저 출력합니다. 시험 순서는 1(패드 반발) → 3a(윗판 굽힘) → 20(접착)·21(첫 모듈 정하중)·8(스프링 토크)입니다.</span></li><li><span class="when">10~11월</span><b>출력·조립</b><span class="what">건반 액션 7 모듈과 뒷바·스피커·화면 출력물을 뽑고 모듈부터 조립합니다. 출력용 STL은 hardware/mechanical/cad/stl/print에 있습니다.</span></li><li><span class="when">11/16~12/14</span><b>통합·시연</b><span class="what">본체·전자부·소리·터치 메뉴를 합치고 리듬게임 MVP를 Pi 5로 옮깁니다. 시연은 12/14 주입니다.</span></li></ol>
 
 <h3 class="sec">부품을 받으면 먼저 확인할 것</h3>
-<ul class="checks"><li>화면 뒤 DSI 커넥터 방향(반대면 받침을 좌우로 뒤집고 A형 리본을 씀)과 M2.5 구멍 깊이</li><li>보조배터리 USB-C 포트 중심이 바닥에서 15.5 mm 이상인지(NC888 꺾인 머리)</li><li>허브 DC 플러그가 잭 면에서 32 mm 안인지(넘으면 ㄱ자 플러그를 따로 삼)</li><li>업스톱 패드 PORON: 목록은 5T, 설계는 6T — 5T면 패드 바 쐐기를 1.0 mm 두껍게 다시 출력</li><li>스피커 결합 인서트 구멍은 자투리 판에 Ø5.8부터 시험(헐거우면 Ø5.5)</li></ul>
+<ul class="checks"><li>화면 뒤 DSI 커넥터 방향(반대면 받침을 좌우로 뒤집고 A형 리본을 씀)과 M2.5 구멍 깊이</li><li>보조배터리 USB-C 포트 중심이 바닥에서 15.5 mm 이상인지(NC888 꺾인 머리)</li><li>허브 DC 플러그가 잭 면에서 32 mm 안인지(넘으면 ㄱ자 플러그를 따로 삼)</li><li>업스톱 패드 PORON 두께: 목록대로 5T면 stl/print 그대로(패드 바가 5T용), 6T를 사면 stl/print_extra의 6T용 패드 바로 바꿔 뽑음</li><li>스피커 결합 인서트 구멍은 자투리 판에 Ø5.8부터 시험(헐거우면 Ø5.5)</li></ul>
 
 <p class="src">원본: 설계서 docs/01-hardware-design.md (v4 확정본) · 설계 기준 hardware/mechanical/sound-requirements.md (R1~R32, D1~D24) · 건반 액션 hardware/mechanical/key-action-v4 (r4.5) · 본체·스피커 hardware/mechanical/cad/spec/body_L2.json · 터치스크린 hardware/mechanical/touchscreen/rev3 · 회로 hardware/pcb (개정 C) · 재료 hardware/bom (최종 재료 페이지 = 실제 구매). 좌표는 mm, x 가로(0 = A0 왼쪽 끝), y 흰건반 앞 끝에서 뒤로, z 책상에서 위로.</p>
 </section><section class="page" id="p-design" hidden>
@@ -541,8 +541,8 @@ nav.tabs{z-index:30}
 <p class="lede">건반 액션 r4.5(geometry.json)와 L2 한 몸 뒷바(spec/body_L2.json, 2026-10-01 사용자 요청, W1 음향 확인 통과)를 수치 그대로 입체로 만든 결과입니다. 출력 부품은 베드에 놓인 STL로, 나머지는 조립 위치에 둔 구매품·합판·전자 부품 외곽으로 들어 있습니다. 만능기판은 사각형만, 그 위에는 RP2040-Zero·먹스 모듈처럼 부피 있는 부품만 두었습니다. 뒷바는 건반 뒤 2 mm에서 시작해 전체 깊이 342.5 (L1 447, 건반 뒤 면적 −44.5 %)입니다: 가운데 뚜껑 윗면이 건반 윗면과 같은 z72.85, 스피커는 수평에서 40° 눕힌 앞판에 윗면 z144.65, 모듈 USB 선은 뒷바 밑 닫힌 통로(y212~241, z0~27) 안이라 밖에서 거의 보이지 않습니다(배기 홈 아래와 건반 뒤 2 mm 틈으로만 조금). 터치스크린은 R31 3판(Waveshare 7-DSI-TOUCH-C, W1 3a)으로 가운데 화면 뚜껑의 경첩에 25°로 서 있고, 접은 상태는 <code>stl/assembly/</code>의 별도 그룹입니다. 저장소 <code>hardware/mechanical/cad/</code>에서 <code>python3 src/build_all.py</code> 한 번으로 모두 다시 만들어집니다(약 10~20초).</p>
 <div class="kfs">
 <div class="kf"><b>1459</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
-<div class="kf"><b>84종</b><span>출력 STL 파일</span></div>
-<div class="kf"><b>324개</b><span>출력할 부품 수</span></div>
+<div class="kf"><b>77종</b><span>출력 STL 파일 (stl/print, 전부 뽑음)</span></div>
+<div class="kf"><b>289개</b><span>출력할 부품 수</span></div>
 <div class="kf"><b>1254 × 342.5</b><span>전체 mm (L2 뒷바)</span></div>
 <div class="kf"><b>z144.65 · 40°</b><span>스피커 윗면 · 앞판 각도</span></div>
 <div class="kf"><b>91</b><span>전자 부품 외곽</span></div>
@@ -561,7 +561,7 @@ nav.tabs{z-index:30}
 <div class="secbar"><label><input type="checkbox" id="cadSecOn"> 단면 (x보다 오른쪽을 잘라냄)</label><input type="range" id="cadSec" min="-16" max="1238" step="0.25" value="575.75" aria-label="단면 x 위치"><output id="cadSecOut">끔</output></div>
 </div><div class="side"><div class="info"><p class="empty">부품을 누르면 이름·크기·출력 파일이 여기에 나옵니다.</p></div>
 <details class="grp" open><summary>그룹 (64)</summary><div class="gtools"><button type="button" data-gall>모두 보기</button><button type="button" data-gnone>모두 숨기기</button><button type="button" data-gshow>숨긴 부품 다시</button></div><div class="glist"></div></details></div></div>
-<h3>출력 목록 (84종 · 324개)</h3>
+<h3>출력 목록 (stl/print 77종 · 악기 부품 289개 + 공구 1벌)</h3>
 <p class="small muted">파일은 <code>hardware/mechanical/cad/stl/print/</code>에 있습니다. 파일 이름 끝이 출력 개수이고, 부품은 이미 베드 위 방향으로 놓여 있습니다. 같은 이름으로 <code>stl/annotated/</code>에 치수선과 숫자를 붙인 보기용 STL이 있습니다(출력 금지). 질량은 속을 꽉 채운 PETG 기준입니다.</p>
 <h4 class="sub4">01_건반</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
 <tr><td>백건_C__7개.stl</td><td class="num">7</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.6</td><td>PETG 흰색</td></tr>
@@ -617,22 +617,22 @@ nav.tabs{z-index:30}
 <tr><td>센서바__7개.stl</td><td class="num">7</td><td class="num">162.4 × 18.5 × 5.0</td><td class="num">14.6</td><td>PETG 회색</td></tr>
 <tr><td>가림판띠__7개.stl</td><td class="num">7</td><td class="num">164.1 × 27.4 × 3.7</td><td class="num">6.1</td><td>PETG 검정</td></tr>
 <tr><td>레버봉끝마개__9개.stl</td><td class="num">9</td><td class="num">4.0 × 4.0 × 1.2</td><td class="num">0.0</td><td>PETG</td></tr>
-<tr><td>패드바_칸1__7개.stl</td><td class="num">7</td><td class="num">36.4 × 38.5 × 6.5</td><td class="num">3.3</td><td>PETG</td></tr>
-<tr><td>패드바_칸2__7개.stl</td><td class="num">7</td><td class="num">37.3 × 38.5 × 6.5</td><td class="num">3.4</td><td>PETG</td></tr>
-<tr><td>패드바_칸3__7개.stl</td><td class="num">7</td><td class="num">36.2 × 38.5 × 6.5</td><td class="num">3.4</td><td>PETG</td></tr>
-<tr><td>패드바_칸4__7개.stl</td><td class="num">7</td><td class="num">35.3 × 38.5 × 6.5</td><td class="num">3.2</td><td>PETG</td></tr>
+<tr><td>패드바_칸1__7개.stl</td><td class="num">7</td><td class="num">36.4 × 38.5 × 7.5</td><td class="num">3.6</td><td>PETG</td></tr>
+<tr><td>패드바_칸2__7개.stl</td><td class="num">7</td><td class="num">37.3 × 38.5 × 7.5</td><td class="num">3.6</td><td>PETG</td></tr>
+<tr><td>패드바_칸3__7개.stl</td><td class="num">7</td><td class="num">36.2 × 38.5 × 7.5</td><td class="num">3.6</td><td>PETG</td></tr>
+<tr><td>패드바_칸4__7개.stl</td><td class="num">7</td><td class="num">35.3 × 38.5 × 7.5</td><td class="num">3.5</td><td>PETG</td></tr>
 <tr><td>센서바_왼쪽__1개.stl</td><td class="num">1</td><td class="num">46.0 × 18.5 × 5.0</td><td class="num">4.4</td><td>PETG 회색</td></tr>
 <tr><td>가림판띠_왼쪽__1개.stl</td><td class="num">1</td><td class="num">46.6 × 27.4 × 3.7</td><td class="num">1.8</td><td>PETG 검정</td></tr>
-<tr><td>패드바_끝부속_왼쪽__1개.stl</td><td class="num">1</td><td class="num">42.8 × 38.5 × 6.5</td><td class="num">3.8</td><td>PETG</td></tr>
+<tr><td>패드바_끝부속_왼쪽__1개.stl</td><td class="num">1</td><td class="num">42.8 × 38.5 × 7.5</td><td class="num">4.1</td><td>PETG</td></tr>
 <tr><td>센서바_오른쪽__1개.stl</td><td class="num">1</td><td class="num">22.5 × 18.5 × 5.0</td><td class="num">2.5</td><td>PETG 회색</td></tr>
 <tr><td>가림판띠_오른쪽__1개.stl</td><td class="num">1</td><td class="num">23.1 × 27.4 × 3.7</td><td class="num">1.0</td><td>PETG 검정</td></tr>
-<tr><td>패드바_끝부속_오른쪽__1개.stl</td><td class="num">1</td><td class="num">19.1 × 38.5 × 5.7</td><td class="num">1.6</td><td>PETG</td></tr>
+<tr><td>패드바_끝부속_오른쪽__1개.stl</td><td class="num">1</td><td class="num">19.1 × 38.5 × 6.7</td><td class="num">1.7</td><td>PETG</td></tr>
 </tbody></table></div>
 <details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
 <li><b>센서바, 센서바_왼쪽, 센서바_오른쪽</b>: v3 방향(포켓이 위). 홀센서 DRV5055 LPG를 포켓에 눕혀 넣고 왼쪽 끝을 M3×10(i058) 2개로 받침 기둥에 자가 탭</li>
 <li><b>가림판띠, 가림판띠_왼쪽, 가림판띠_오른쪽</b>: 넓은 면을 베드에, 걸이 립은 위로 (DESIGN 15)</li>
 <li><b>레버봉끝마개</b>: 끝면을 베드에 (원판 Ø4.0 × 1.2). 이음 쪽 핀 보스 구멍에 핀 면과 같게 눌러 끼움 (D18)</li>
-<li><b>패드바_칸1, 패드바_칸2, 패드바_칸3, 패드바_칸4, 패드바_끝부속_왼쪽, 패드바_끝부속_오른쪽</b>: 윗면을 베드에(쐐기가 위). 뒤 계단(y167~185)은 베드에서 1.5 떠 있으니 그 밑과 잎 혀 밑에 서포트(윗 틈 0.2, 인터페이스 1층; 이 면은 윗판 자리 z67.35라 매끈하게). 잎 혀는 자유 상태(설치 때 0.3 눌림)로 출력, 둘레 틈 0.6. 칸 이름은 윗면에 0.4 새김 (P13, DESIGN 15). 쐐기는 설계 패드 PORON 6T + 펠트 1T 기준</li>
+<li><b>패드바_칸1, 패드바_칸2, 패드바_칸3, 패드바_칸4, 패드바_끝부속_왼쪽, 패드바_끝부속_오른쪽</b>: 윗면을 베드에(쐐기가 위). 뒤 계단(y167~185)은 베드에서 1.5 떠 있으니 그 밑과 잎 혀 밑에 서포트(윗 틈 0.2, 인터페이스 1층; 이 면은 윗판 자리 z67.35라 매끈하게). 잎 혀는 자유 상태(설치 때 0.3 눌림)로 출력, 둘레 틈 0.6. 칸 이름은 윗면에 0.4 새김 (P13, DESIGN 15). 쐐기는 구매 목록의 PORON 5T(i124) + 펠트 1T 기준 (설계 6T보다 쐐기를 패드 면 법선으로 1.0 두껍게 - 패드 면은 같음; 조립 모델은 설계 6T로 그림)</li>
 </ul></details>
 <h4 class="sub4">05_본체출력물</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
 <tr><td>스피커앞판_경사배플_L__1개.stl</td><td class="num">1</td><td class="num">250.0 × 126.5 × 11.5</td><td class="num">323.1</td><td>PETG (검정 또는 회색)</td></tr>
@@ -681,25 +681,12 @@ nav.tabs{z-index:30}
 <tr><td>받침다리__1개.stl</td><td class="num">1</td><td class="num">10.0 × 73.0 × 6.0</td><td class="num">5.3</td><td>PETG</td></tr>
 <tr><td>점검창덮개__1개.stl</td><td class="num">1</td><td class="num">32.5 × 39.0 × 5.9</td><td class="num">5.8</td><td>PETG</td></tr>
 <tr><td>리본클립__1개.stl</td><td class="num">1</td><td class="num">30.0 × 12.0 × 7.5</td><td class="num">1.4</td><td>PETG</td></tr>
-<tr><td>화면덮개_선택__1개.stl</td><td class="num">1</td><td class="num">173.0 × 108.0 × 3.0</td><td class="num">71.2</td><td>PETG</td></tr>
 </tbody></table></div>
 <details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
 <li><b>화면받침_크래들</b>: 윗변(u103.5 면)을 베드에 세워 출력, 귀가 위 (높이 119.76, 사양 119.76). 귀 축·다리 걸이 구멍(x 방향)과 보스 구멍(w 방향)은 물방울(꼭짓점 위)로 뽑고 드릴로 다듬음(귀·가까운 볼 Ø3.3, 먼 볼 Ø2.5, 보스 Ø2.8; 보스 자리파기 Ø5.5는 물방울 위를 평평하게 자른 모양, 1.58 브리지). 다리 걸이 볼(밑면 45°, 뒷판에서 u38.87)·다리 클립·뒤 패드는 45° 면이라 서포트 없음; 가로 갈비·창 둘레 갈비·보스는 3 mm 이하 짧은 내민 면. 아래 벽(u−2.5~0)의 앞 턱 w−1~10.5(유리가 얹히는 면)는 출력 때 지붕이 되므로 그 밑(유리 주머니 안, 앞이 트여 떼기 쉬움)에만 트리 서포트. 약 86 g, 약 3.7시간(W1 추정)</li>
 <li><b>받침다리</b>: 넓은 면(73 × 10)을 베드에 눕혀 출력(높이 6). 축 구멍 Ø3.3은 물방울(꼭짓점 위)로 뽑고 드릴 Ø3.3로 다듬음. 벽 4줄 이상(속 거의 꽉). 약 5 g, 약 20분</li>
 <li><b>점검창덮개</b>: 끼움부 면(w10.5, 볼록 자리 속이 열린 면)을 베드에, 턱·볼록 자리가 위. 턱은 끼움부보다 1.7 내밀어 짧은 내민 면, 볼록 자리 천장은 13.7 브리지, 걸쇠 보 위 턱은 2 × 7 브리지 - 서포트 없음. 걸쇠 보는 벽 2줄(0.42) 이상으로 꽉 채움. 약 6 g</li>
 <li><b>리본클립</b>: 넓은 면(30 × 12)을 베드에, 핀·전원선 홈이 위. 서포트 없음. 약 1 g</li>
-<li><b>화면덮개_선택</b>: 선택 부품(접은 화면을 덮을 때만). 평판을 베드에. 약 70 g. 사용 상태 조립에는 없음(접은 상태 보기에만 있음)</li>
-</ul></details>
-<h4 class="sub4">04b_패드바_PORON5T용</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
-<tr><td>패드바_칸1_PORON5T용__7개.stl</td><td class="num">7</td><td class="num">36.4 × 38.5 × 7.5</td><td class="num">3.6</td><td>PETG</td></tr>
-<tr><td>패드바_칸2_PORON5T용__7개.stl</td><td class="num">7</td><td class="num">37.3 × 38.5 × 7.5</td><td class="num">3.6</td><td>PETG</td></tr>
-<tr><td>패드바_칸3_PORON5T용__7개.stl</td><td class="num">7</td><td class="num">36.2 × 38.5 × 7.5</td><td class="num">3.6</td><td>PETG</td></tr>
-<tr><td>패드바_칸4_PORON5T용__7개.stl</td><td class="num">7</td><td class="num">35.3 × 38.5 × 7.5</td><td class="num">3.5</td><td>PETG</td></tr>
-<tr><td>패드바_끝부속_왼쪽_PORON5T용__1개.stl</td><td class="num">1</td><td class="num">42.8 × 38.5 × 7.5</td><td class="num">4.1</td><td>PETG</td></tr>
-<tr><td>패드바_끝부속_오른쪽_PORON5T용__1개.stl</td><td class="num">1</td><td class="num">19.1 × 38.5 × 6.7</td><td class="num">1.7</td><td>PETG</td></tr>
-</tbody></table></div>
-<details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
-<li><b>패드바_칸1_PORON5T용, 패드바_칸2_PORON5T용, 패드바_칸3_PORON5T용, 패드바_칸4_PORON5T용, 패드바_끝부속_왼쪽_PORON5T용, 패드바_끝부속_오른쪽_PORON5T용</b>: 구매 목록의 PORON 5T(i124)를 쓸 때의 패드 바: 쐐기를 패드 면 법선으로 1.0 두껍게(설계 6T와 같은 패드 면). 6T를 사면 04 폴더 파일을 씀. 출력 방법은 04 패드 바와 같음</li>
 </ul></details>
 <h4 class="sub4">06_출력공구</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
 <tr><td>공구_벤치지그받침_T1a__1개.stl</td><td class="num">1</td><td class="num">72.0 × 222.0 × 62.5</td><td class="num">38.4</td><td>PETG</td></tr>
@@ -709,6 +696,42 @@ nav.tabs{z-index:30}
 </tbody></table></div>
 <details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
 <li><b>공구_벤치지그받침_T1a, 공구_높이블록_T1b, 공구_캡스턴벤치게이지_T2, 공구_밸런스핀높이게이지_T3</b>: 건반 액션 설계의 출력 공구(DESIGN 10.1, key-action-v4/printables/tools/tools.md): 악기당 1벌, 서포트 없음; T2·T3는 채움 100 %·층 0.1</li>
+</ul></details>
+<h4 class="sub4">꼭 뽑지 않아도 됨 (stl/print_extra) · 선택_화면덮개</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
+<tr><td>화면덮개_선택__1개.stl</td><td class="num">1</td><td class="num">173.0 × 108.0 × 3.0</td><td class="num">71.2</td><td>PETG</td></tr>
+</tbody></table></div>
+<details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
+<li><b>화면덮개_선택</b>: 선택 부품(접은 화면을 덮을 때만). 평판을 베드에. 약 70 g. 사용 상태 조립에는 없음(접은 상태 보기에만 있음)</li>
+</ul></details>
+<h4 class="sub4">꼭 뽑지 않아도 됨 (stl/print_extra) · 대안_패드바_PORON6T용</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
+<tr><td>패드바_칸1_PORON6T용__7개.stl</td><td class="num">7</td><td class="num">36.4 × 38.5 × 6.5</td><td class="num">3.3</td><td>PETG</td></tr>
+<tr><td>패드바_칸2_PORON6T용__7개.stl</td><td class="num">7</td><td class="num">37.3 × 38.5 × 6.5</td><td class="num">3.4</td><td>PETG</td></tr>
+<tr><td>패드바_칸3_PORON6T용__7개.stl</td><td class="num">7</td><td class="num">36.2 × 38.5 × 6.5</td><td class="num">3.4</td><td>PETG</td></tr>
+<tr><td>패드바_칸4_PORON6T용__7개.stl</td><td class="num">7</td><td class="num">35.3 × 38.5 × 6.5</td><td class="num">3.2</td><td>PETG</td></tr>
+<tr><td>패드바_끝부속_왼쪽_PORON6T용__1개.stl</td><td class="num">1</td><td class="num">42.8 × 38.5 × 6.5</td><td class="num">3.8</td><td>PETG</td></tr>
+<tr><td>패드바_끝부속_오른쪽_PORON6T용__1개.stl</td><td class="num">1</td><td class="num">19.1 × 38.5 × 5.7</td><td class="num">1.6</td><td>PETG</td></tr>
+</tbody></table></div>
+<details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
+<li><b>패드바_칸1_PORON6T용, 패드바_칸2_PORON6T용, 패드바_칸3_PORON6T용, 패드바_칸4_PORON6T용, 패드바_끝부속_왼쪽_PORON6T용, 패드바_끝부속_오른쪽_PORON6T용</b>: 대안: PORON 6T(설계값)를 사면 stl/print/04의 패드 바 6종 대신 이것을 뽑음 (쐐기가 1.0 얇음, 패드 면은 같음). 구매 목록대로 5T를 쓰면 뽑지 않음. 출력 방법은 04 패드 바와 같음</li>
+</ul></details>
+<h4 class="sub4">꼭 뽑지 않아도 됨 (stl/print_extra) · 예비_건반</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
+<tr><td>백건_C__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.6</td><td>PETG 흰색</td></tr>
+<tr><td>흑건_C#·D#__2개.stl</td><td class="num">2</td><td class="num">10.4 × 144.8 × 34.8</td><td class="num">17.9</td><td>PETG 검정</td></tr>
+<tr><td>백건_D__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.9</td><td>PETG 흰색</td></tr>
+<tr><td>백건_E__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.6</td><td>PETG 흰색</td></tr>
+<tr><td>백건_F__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.1</td><td>PETG 흰색</td></tr>
+<tr><td>흑건_F#__1개.stl</td><td class="num">1</td><td class="num">10.6 × 144.8 × 34.8</td><td class="num">17.9</td><td>PETG 검정</td></tr>
+<tr><td>백건_G__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.5</td><td>PETG 흰색</td></tr>
+<tr><td>흑건_G#__1개.stl</td><td class="num">1</td><td class="num">11.4 × 144.8 × 34.8</td><td class="num">17.9</td><td>PETG 검정</td></tr>
+<tr><td>백건_A__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.5</td><td>PETG 흰색</td></tr>
+<tr><td>흑건_A#·A#0__2개.stl</td><td class="num">2</td><td class="num">10.8 × 144.8 × 34.8</td><td class="num">17.9</td><td>PETG 검정</td></tr>
+<tr><td>백건_B__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.1</td><td>PETG 흰색</td></tr>
+<tr><td>백건_A0__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">24.9</td><td>PETG 흰색</td></tr>
+<tr><td>백건_B0__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.1</td><td>PETG 흰색</td></tr>
+<tr><td>백건_C8__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">25.5</td><td>PETG 흰색</td></tr>
+</tbody></table></div>
+<details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
+<li><b>백건_C, 흑건_C#·D#, 백건_D, 백건_E, 백건_F, 흑건_F# 외 8</b>: 선택: 예비 건반 (부품표 parts_list.json의 예비 수). 01_건반의 같은 파일과 모양이 같음 - 부러진 건반 하나만 바꿀 때 씀. 본체에 보관 칸이 없으니(R29) 따로 상자에 보관. 출력 방법은 01_건반과 같음</li>
 </ul></details>
 <h3>설계 모델에서 CAD로 옮기며 고친 점</h3>
 <div class="tbl adj"><table><thead><tr><th>번호</th><th>어디</th><th>무엇을 왜</th></tr></thead><tbody>
@@ -876,7 +899,8 @@ nav.tabs{z-index:30}
 <li><b>화면 전원선 검정 GND</b> — 선 Ø1.1, 두 가닥 간격 1.3 (화면 안·클립 홈 안에서 나란히), 화면 쪽 끝은 MX1.25 안 2 mm, Pi 쪽 F 점퍼 하우징 2.5 × 2.5 × 14가 핀 6에 (헤더 받침 위 z26.6~40.6 - 헤더 상자는 핀 끝까지 한 덩어리라 겹침); 길이 모델 321.8 (하우징 윗면 아래 1까지) + 하우징·핀 9 + 꽂는 여유 15 ≈ 346 / W1 계산 344.95 / 있는 길이 500~550 (점퍼 20 cm × 2 + Waveshare 3핀 선 약 100~150)</li>
 </ul>
 <h3>파일</h3><div class="tbl files"><table><tbody>
-<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL (폴더 01~07; 04b는 PORON 5T를 쓸 때 04 대신, 07은 터치스크린 3판)</td></tr>
+<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL — 전부 이름 끝 개수만큼 뽑으면 악기 1대 + 공구 1벌 (01~07, 04 패드 바는 구매한 PORON 5T용). 한 파일 묶음: Toccata_출력STL_전체.zip</td></tr>
+<tr><td><code>hardware/mechanical/cad/stl/print_extra/</code></td><td>꼭 뽑지 않아도 되는 것: 선택 화면 덮개, PORON 6T용 패드 바(대안), 예비 건반</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/annotated/</code></td><td>치수를 붙인 보기용 STL (08_합판재단은 합판 조각)</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/assembly/</code></td><td>그룹별 조립 STL과 Toccata_전체조립.stl</td></tr>
 <tr><td><code>hardware/mechanical/cad/Toccata_전체조립.3mf / .glb</code></td><td>색·이름이 붙은 전체 조립</td></tr>

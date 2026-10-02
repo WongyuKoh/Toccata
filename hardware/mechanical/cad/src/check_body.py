@@ -280,7 +280,8 @@ def main():
                 probs.append("%s: print mesh not watertight" % p.id)
             if not p.dims:
                 probs.append("%s: no dims" % p.id)
-            if not p.print_name or p.print_folder != ("07_터치스크린" if p.id.startswith("TS-") else "05_본체출력물") or not p.print_note:
+            want = ("@extra/선택_화면덮개" if p.id == "TS-SCREENCOVER" else "07_터치스크린" if p.id.startswith("TS-") else "05_본체출력물")
+            if not p.print_name or p.print_folder != want or not p.print_note:
                 probs.append("%s: print name / folder / note" % p.id)
         print(line)
     kinds = {}
@@ -1461,8 +1462,8 @@ def run_checks_r31(P, by, K, C, E=None):
     alt = sorted(p.id for p in ts if p.note == "altview")
     chk("F folded state = separate 'altview' parts in group '터치스크린 (접은 상태, 별도 보기)' (excluded from the one-file assembly / 3MF / GLB)",
         (float(alt == ["TS-CRADLE-FOLD", "TS-LEG-FOLD", "TS-SCREENCOVER", "TS-WINCOVER-FOLD"]), float(all(by[i].group == "터치스크린 (접은 상태, 별도 보기)" for i in alt))), (1, 1))
-    chk("G printed touchscreen parts in 07_터치스크린 (cradle, leg, cover, clip, screen cover), the lid in 05_본체출력물",
-        (float(all(p.print_folder == "07_터치스크린" for p in ts if p.kind == "print")), float(by["CU-SCREENLID"].print_folder == "05_본체출력물"),
+    chk("G printed touchscreen parts in 07_터치스크린 (cradle, leg, window cover, clip; the optional screen cover in stl/print_extra), the lid in 05_본체출력물",
+        (float(all(p.print_folder == ("@extra/선택_화면덮개" if p.id == "TS-SCREENCOVER" else "07_터치스크린") for p in ts if p.kind == "print")), float(by["CU-SCREENLID"].print_folder == "05_본체출력물"),
          sum(1 for p in ts if p.kind == "print" and p.print_solid is not None)), (1, 1, 5))
     use = [p for p in ts if p.note != "altview"]
     kv = sum(vol(p.solid, keep) for p in use)
