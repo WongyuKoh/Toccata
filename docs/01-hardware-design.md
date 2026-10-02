@@ -248,7 +248,7 @@ Pi 5 USB-A → ㄱ자 젠더 → Apple USB-C 3.5 mm 동글 → 헤드폰 잭(노
 
 ### 5.7 합판
 
-오꾸메 11.5T **400 × 1200 한 장**에서 16조각을 뽑습니다(배치는 [D06](../hardware/mechanical/cad/drawings/D06_plywood_cuts.svg)). 스피커 안쪽 옆판과 가운데 끝벽은 L과 R의 구멍 자리가 달라 D06에 따로(P4L·P4R, P5L·P5R) 그렸습니다. 막힌 구멍(인서트 Ø5.8 × 8, 뚜껑 자석 Ø8 × 3.2)과 끝벽·뒤판 윗모서리 자석 자리 Ø8 × 3.2는 판을 붙이기 전에 뚫습니다. 판매처가 이 배치대로 자르지 못하면 600 × 1200을 삽니다(+22,520원). 폭 4 mm 홈 38개는 직소 날이 들어가지 않아 Ø4 구멍을 이어 뚫고 줄로 다듬습니다.
+오꾸메 11.5T **400 × 1200 한 장**에서 16조각을 뽑습니다(배치는 [D06](../hardware/mechanical/cad/drawings/D06_plywood_cuts.svg)). 스피커 안쪽 옆판과 가운데 끝벽은 L과 R의 구멍 자리가 달라 D06에 따로(P4L·P4R, P5L·P5R) 그렸습니다. 막힌 구멍(인서트 Ø5.8 × 8, 뚜껑 자석 Ø8 × 3.2)과 끝벽·뒤판 윗모서리 자석 자리 Ø8 × 3.2는 판을 붙이기 전에 뚫습니다. 판매처가 이 배치대로 자르지 못하면 600 × 1200을 삽니다(+22,520원). 구멍·홈·자석 자리는 출력 지그 24개(`stl/print/08_합판지그`, 쓰는 법 [cad/jigs/README.md](../hardware/mechanical/cad/jigs/README.md))를 대고 가진 전동 드릴로 뚫습니다 — 공구는 새로 사지 않습니다. 폭 4 mm 홈 38개는 직소 날이 들어가지 않아 J-d 지그(틀 + 슬라이더 + 심)로 Ø4 구멍을 네 번에 나눠 촘촘히 뚫습니다(줄질 필요 없음; 홈 사이 나무 4 mm, 가운데 아랫판 Pi 아래 8개만 6.29 mm). 모서리 자석 자리는 포스트너 비트 대신 J-b 새들 + Ø8 트위스트 드릴로 팝니다. J-b는 틈 11.3 · 11.6 · 11.9 · 12.2 네 개를 **모두 뽑아** 실제 판 두께에 맞는 하나를 씁니다.
 
 ### 5.8 예비 건반 보관 칸 (R29) — 뺐음
 
@@ -368,12 +368,13 @@ Pi 5 USB-A → ㄱ자 젠더 → Apple USB-C 3.5 mm 동글 → 헤드폰 잭(노
 | `07_터치스크린` | 4 | 4 | PETG (받침·받침다리·점검창 덮개·리본 클립) |
 | **악기 합계** | **73** | **289** | |
 | `06_출력공구` | 4 | 4 | 악기당 1벌 (벤치 지그·높이 블록·캡스턴 게이지·핀 게이지) |
-| **`stl/print` 전체 = 전부 뽑을 것** | **77** | | 한 파일 묶음 `Toccata_출력STL_전체.zip` |
+| `08_합판지그` | 24 | 24 | PETG, 악기당 1벌 — 합판 구멍·홈·자석 자리 지그 J-a~J-e (쓰는 법 [cad/jigs/README.md](../hardware/mechanical/cad/jigs/README.md)). J-b 새들 4개(틈 11.3 · 11.6 · 11.9 · 12.2)는 모두 뽑음 |
+| **`stl/print` 전체 = 전부 뽑을 것** | **101** | | 한 파일 묶음 `Toccata_출력STL_전체.zip` (101파일 모두) |
 
-`04`의 패드 바는 구매한 PORON 5T용입니다. 꼭 뽑지 않아도 되는 것은 `stl/print_extra/`에 따로 있습니다: 대안 `대안_패드바_PORON6T용`(6T를 살 때 04의 패드 바 6종 대신), 선택 `선택_화면덮개`, 예비 `예비_건반`(14파일, 16개).
+`04`의 패드 바는 구매한 PORON 5T용입니다. 꼭 뽑지 않아도 되는 것은 `stl/print_extra/`에 따로 있습니다: 대안 `대안_패드바_PORON6T용`(6T를 살 때 04의 패드 바 6종 대신), 선택 `선택_화면덮개`, 선택 `선택_합판지그`(J-f 4 mm 홈 사포 막대), 예비 `예비_건반`(14파일, 16개).
 
 - 예비: 흰건반 파일마다 +1(10개), 검은건반 +6개 — `stl/print_extra/예비_건반`. 레버 캐리어와 패드 바는 필요할 때 `stl/print`의 위치별 파일로 뽑습니다.
-- 질량: 속을 100 % 채운 기준으로 7.30 kg이라 실제보다 큽니다. 실제 예상은 건반 액션 6.55 kg(서포트 포함, 436시간) + 뒷바 출력물 약 1.1 kg + 터치스크린 약 98 g입니다. 구매 목록 PETG는 8 kg(흰 2, 검정 5, 추가 1)입니다. 출력 공구 68 g과 단계 0 키트 약 430 g까지 더하면 약 8.3 kg으로 8 kg을 조금 넘습니다(DESIGN 15장). 모자라면 1 kg 스풀(16,150원)을 더 삽니다(구매 목록 CT2+ 메모).
+- 질량: 속을 100 % 채운 기준으로 7.30 kg이라 실제보다 큽니다. 실제 예상은 건반 액션 6.55 kg(서포트 포함, 436시간) + 뒷바 출력물 약 1.1 kg + 터치스크린 약 98 g입니다. 구매 목록 PETG는 8 kg(흰 2, 검정 5, 추가 1)입니다. 출력 공구 68 g과 단계 0 키트 약 430 g까지 더하면 약 8.3 kg으로 8 kg을 조금 넘습니다(DESIGN 15장). 합판 지그 24개는 벽 3줄 + 채움 15 %로 약 0.5 kg이 더 듭니다 — 구매 목록(i090)은 8 kg을 설계 필요량 약 7.0 kg + 실패 여유 약 1 kg으로 보므로 지그가 그 여유의 절반을 씁니다. 모자라면 1 kg 스풀(16,150원)을 더 삽니다(구매 목록 CT2+ 메모).
 - 베드: 건반 액션 부품은 220 × 220에 들어갑니다. 스피커 앞판(250 × 126.5)과 높이 250으로 세워 뽑는 스피커 통로 틀 때문에 **256 × 256 베드**(브림 필수: 첫 층 둘레에 넓게 까는 테두리로 휨을 막음)가 필요합니다.
 - 채움: 건반·레버·패드 바·가림판은 벽 3줄 + 25~40 %. 끝 부속 볼·스피커 앞판·통로 틀은 벽 3~4줄 + 15~40 %. 보드 받침 기둥과 게이지 T2·T3만 100 %.
 - 보기용 치수 STL은 `stl/annotated/`(출력 금지), 조립 위치 파일은 `stl/assembly/`, 전체 조립은 `Toccata_전체조립.3mf`·`.glb`입니다.
@@ -389,7 +390,7 @@ Pi 5 USB-A → ㄱ자 젠더 → Apple USB-C 3.5 mm 동글 → 헤드폰 잭(노
    - 검은건반 5개를 먼저, 그다음 흰건반 7개를 넣습니다.
 3. **뒷바 L2** (CAD README '조립 순서').
    1. 고무발 14개 (13 mm 나사).
-   2. 안쪽 옆판의 인서트 구멍 Ø5.8 × 8은 **상자를 붙이기 전에** 판에서 깊이 멈춤으로 뚫습니다(밑에 1.5 mm 이상 남김 — 밀폐). 그다음 스피커 상자를 책상 밖에서 짜고 앞판을 MS 폴리머로 붙인 뒤 새는 곳을 봅니다. 나사산 인서트를 넣고 흡음솜을 채웁니다.
+   2. 안쪽 옆판의 인서트 구멍 Ø5.8 × 8은 **상자를 붙이기 전에** 판에서 깊이 멈춤으로 뚫습니다(밑에 1.5 mm 이상 남김 — 밀폐; 합판 지그 J-a1·J-a2 + J-e 깊이 게이지로 척 멈춤, [cad/jigs/README.md](../hardware/mechanical/cad/jigs/README.md)). 그다음 스피커 상자를 책상 밖에서 짜고 앞판을 MS 폴리머로 붙인 뒤 새는 곳을 봅니다. 나사산 인서트를 넣고 흡음솜을 채웁니다.
    3. 끝벽·뒤판 윗모서리 자석 자리(Ø8 × 3.2)를 판을 붙이기 전에 뚫고, 가운데 유닛을 짜고 뒤판 출력물·이음 레일·보드를 답니다.
    4. 책상에서 모듈과 끝 부속을 도브테일로 잇고, 볼 뒤에 방진 브래킷을 조입니다. 모듈 USB 선을 통로 자리에 눕힙니다.
    5. 가운데 유닛을 2 mm 틈을 두고 놓습니다.
@@ -442,6 +443,7 @@ Pi 5 USB-A → ㄱ자 젠더 → Apple USB-C 3.5 mm 동글 → 헤드폰 잭(노
 | 출력 공구 · 단계 0 키트 | [printables/tools/](../hardware/mechanical/key-action-v4/printables/tools/) · [printables/stage0/](../hardware/mechanical/key-action-v4/printables/stage0/) |
 | 회로도 9장 (SCH-01~07, BRD-01·02) · 넷리스트 | [hardware/pcb/schematic/](../hardware/pcb/schematic/) · [board/](../hardware/pcb/board/) · [netlist/](../hardware/pcb/netlist/) · [README](../hardware/pcb/README.md) |
 | CAD 안내서 (출력·조립·추정값) | [hardware/mechanical/cad/README.md](../hardware/mechanical/cad/README.md) |
+| 합판 지그 (구멍·홈·자석 자리, 공구 새로 안 삼) | 사용법 [cad/jigs/README.md](../hardware/mechanical/cad/jigs/README.md) · STL [stl/print/08_합판지그/](../hardware/mechanical/cad/stl/print/08_합판지그/) · 생성 `cad/src/plywood_jigs.py` · 확인 `cad/src/check_plywood_jigs.py` |
 | CAD 생성기 · 사양 · 부품 외곽 | [cad/src/](../hardware/mechanical/cad/src/) (`python3 src/build_all.py`) · [cad/spec/](../hardware/mechanical/cad/spec/) · [cad/manifest.json](../hardware/mechanical/cad/manifest.json) |
 | 전체 조립 3D | [Toccata_전체조립.3mf](../hardware/mechanical/cad/Toccata_전체조립.3mf) · [.glb](../hardware/mechanical/cad/Toccata_전체조립.glb) · [stl/assembly/](../hardware/mechanical/cad/stl/assembly/) |
 | 터치스크린 3판 | [touchscreen/rev3/](../hardware/mechanical/touchscreen/rev3/) (사양·도면 t01~t06·3D), 13조합 비교 [compare/](../hardware/mechanical/touchscreen/compare/) |
@@ -460,7 +462,7 @@ Pi 5 USB-A → ㄱ자 젠더 → Apple USB-C 3.5 mm 동글 → 헤드폰 잭(노
 | 솜 넣은 Qtc | CAD README·`body_L2.json` 1.08 (W1 방식) · W1 전달 값 약 1.09 | 1.08 |
 | R31 화면 뚜껑 뒤끝·접은 여유 | sound-requirements R31·CAD_SPEC_rev3 자리 블록은 43° 값 (y341.5, 2.45 mm, 스피커 z148.06) | CAD 40° 값 y342.5, 3.45 mm, z144.65 |
 | 합판 넓이 | 0.343 m² (사양 비교 표) · 0.369 m² (사각 재단 넓이) | 둘 다 같은 400 × 1200 한 장 |
-| 출력 파일 수 | 10/2 정리: `stl/print`에는 뽑을 것만 (악기 73파일 289개 + 공구 4), 선택·대안·예비는 `stl/print_extra` | 전체 77파일 (이전 84파일 = 04b 6파일·화면 덮개 포함) |
+| 출력 파일 수 | 10/2 정리: `stl/print`에는 뽑을 것만 (악기 73파일 289개 + 공구 4 + 10/2 추가 합판 지그 24), 선택·대안·예비는 `stl/print_extra` | 전체 101파일 (지그 전 77파일, 그 전 84파일 = 04b 6파일·화면 덮개 포함) |
 | 단계 0 먼저 볼 시험 | DESIGN 17장은 1번(패드 반발)이 '가장 먼저', 18장은 패드 재료값이 '가장 큰 위험' · 이전 hardware README는 20·21·8만 꼽음 (10/2 고침) | 1번 먼저(가장 큰 위험) → 3a → r4.4~r4.5 변경 확인 20·21·8 |
 | 프레임 등 색 | CAD 출력 표는 'PETG 회색' · 구매 목록 PETG는 흰색·검정만 | 색은 구매 때 정함 (구조와 무관) |
 | 모듈 USB 선 길이 | CAD README는 1 m ×2 · 0.5 m ×4 · 0.3 m ×2 권장 · 구매 목록 메모는 1 m ×8 그대로 사고 짧은 세트는 선택 | 돈은 구매 목록 기준 (1 m ×8) |

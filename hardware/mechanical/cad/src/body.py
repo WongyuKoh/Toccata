@@ -36,6 +36,8 @@ wall); new printed parts in 07_터치스크린: cradle (built in its xr/u/w fram
 optional screen cover; bought M3x20 axles and M2.5x6 screen screws. The folded state (90 deg) is a separate view group ('altview', not in
 the one-file assembly / 3MF / GLB). The Waveshare display, the DSI FFC and the GPIO power lead are in electronics.py.
 Not modelled: glue, foot screws, plywood screws, grille / driver / board screws, polyester fill (note on the pod back panels).
+wood_screws() lists every screw / insert pilot into a plywood panel (feet, power-bank holder ears, back-plate tabs, hub shelf, L73)
+for check_body.py (tip >= 1.0 from the opposite face, opposite-face pairs >= 4 thread to thread).
 Cable clips (spec printed list 'CABLE-CLIPS' 8, no positions): 6 under the pod duct roofs (empty in the model) + 2 on the left end
 wall holding C-SPK-L; one print file.
 Every printed part: kind='print', one body, lies on the bed via to_bed(orient(...)), print folder 05_본체출력물.
@@ -887,6 +889,12 @@ def joints(out):
 
 FOOT_MOVE = {-2.0: 6.0, 1224.0: 1216.0}          # outer pod feet: spec x-2 / 1224 -> x6 / 1216 (screw 10.5 from the bottom-ply end, not 2.5)
 FOOT_SCREW = (4.2, 13.0)                          # 8호 thread D, length (13 mm or shorter: the tip stays 1.5 under the ply top)
+FOOT_SEAT = (9.0, 2.0)                            # head seat in the 5 mm foot: D, depth from the foot bottom (head bears at z2 -> tip z15)
+
+
+def _n(v):
+    """short number for notes: 278 / 247.5"""
+    return ("%.1f" % v).rstrip("0").rstrip(".")
 
 
 def foot_positions():
@@ -898,7 +906,9 @@ def foot_positions():
 
 def feet(out):
     h = L2["feet"]["h"]
-    foot0 = diff(cyl_z(0, 0, 0.0, h, 28.0), [cyl_z(0, 0, -0.01, h + 0.01, 4.5), cyl_z(0, 0, -0.01, 2.0, 9.0)])
+    foot0 = diff(cyl_z(0, 0, 0.0, h, 28.0), [cyl_z(0, 0, -0.01, h + 0.01, 4.5), cyl_z(0, 0, -0.01, FOOT_SEAT[1], FOOT_SEAT[0])])
+    tip = FOOT_SEAT[1] + FOOT_SCREW[1]
+    above = [s for s in wood_screws() if s["ply"] == "CU-PLY-BOTTOM" and s["dir"] < 0]      # csk screws from above (holder ears, back-plate tabs)
     for i, (grp, (x, y), (sx, sy)) in enumerate(foot_positions()):
         moved = abs(x - sx) > 1e-9
         pod = grp.startswith("스피커")
@@ -910,10 +920,16 @@ def feet(out):
         else:
             txt = "사양 그대로: (x%.0f, y%.0f); " % (x, y)
         seal = (" 스피커 아랫판은 밀폐 상자 바닥이므로 나사 구멍에 MS 폴리머를 한 방울 넣고 조임 (16 mm 이상이면 상자 안으로 뚫림)" if pod else "")
+        if not pod and above:
+            near = min(above, key=lambda s: math.dist((x, y), s["at"]))
+            seal = (" 위에서 오는 나사 중 가장 가까운 것: %s (%s, %s), 끝 z%.1f - 축 사이 %.1f, 나사산 사이 나무 %.1f (check_body: 반대 면 나사 "
+                    "≥ 4)" % (near["label"], _n(near["at"][0]), _n(near["at"][1]), near["tip"], math.dist((x, y), near["at"]),
+                              math.dist((x, y), near["at"]) - (FOOT_SCREW[0] + near["d"]) / 2.0))
         out.add("FOOT-%02d" % (i + 1), "피스고무발 28×5 (i039 화성고무, %s)" % grp, "rubber foot 28x5 (i039)", "bought", G_JOIN,
                 foot0.translate((x, y, 0.0)), COLORS["rubber"], "고무",
                 source=SRC + " feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-                note=txt + "추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래." + seal)
+                note=txt + "추정: 머리 자리 Ø%.0f 깊이 %.0f로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z%.1f, 판 윗면보다 %.1f 아래."
+                % (FOOT_SEAT[0], FOOT_SEAT[1], tip, Z_BOT - tip) + seal)
 
 
 # ------------------------------------------------------------------ centre unit plywood + lid magnets
@@ -1627,6 +1643,7 @@ BP_LOUV = [(z, z + 3.0) for z in (18.0, 23.0, 28.0, 33.0, 38.0, 43.0)]   # louvr
 BP_LOUV_X = (480.0, 534.0)
 BP_TABS = [(400.0, 414.0, 407.0, 322.0), (452.0, 474.0, 466.0, 311.5)]   # bottom tabs x0, x1, screw x, screw y (y316..skin, z16.5..20.5)
 BP_TAB_Y0 = 316.0                                               # tab front y (left screw y322: 9 from the floor's back edge y331 at 40)
+BP_TAB_TOP = 20.5                                               # tab top = csk head face (4 thick: 8호 13 tip z7.5, 2.5 over the ply underside)
 # right tab: the J501 ledge (x449..476.5 y315.5..339.5 z30..36.4, same print) covers the whole tab x452..474, so a screw there cannot
 # be driven (review 2026-10-01: first material 9.5 over the head). A tongue x459.5..472.5 runs forward to y304 and carries the screw
 # at y311.5: its D6 driver path (y308.5..314.5) passes 1.0 in front of the ledge / J501 board; the tongue stays 6.5 off the fuse
@@ -1655,10 +1672,10 @@ def back_plate(out):
            box(jb[0] - 1.0, jb[1] + 1.5, jb[2], ys + 0.01, 30.0, jb[4]),                  # J501 board ledge (top = board underside)
            ]
     for gx in BP_WEBS:                                  # ledge webs: rise straight from the skin in print (no overhang), tie ledge <-> tab
-        add.append(box(gx, gx + 2.0, 320.0, ys + 0.01, 20.5 - 0.01, 30.01))
+        add.append(box(gx, gx + 2.0, 320.0, ys + 0.01, BP_TAB_TOP - 0.01, 30.01))
     for (a, b, sx, sy) in BP_TABS:
-        add.append(box(a, b, BP_TAB_Y0, ys + 0.01, z0, 20.5))
-    add.append(box(BP_TONGUE[0], BP_TONGUE[1], BP_TONGUE[2], BP_TAB_Y0 + 0.01, z0, 20.5))   # right-tab tongue (screw out of the ledge shadow)
+        add.append(box(a, b, BP_TAB_Y0, ys + 0.01, z0, BP_TAB_TOP))
+    add.append(box(BP_TONGUE[0], BP_TONGUE[1], BP_TONGUE[2], BP_TAB_Y0 + 0.01, z0, BP_TAB_TOP))   # right-tab tongue (screw out of the ledge shadow)
     plate = union(add)
     cuts = [cyl_y(pcx, pcz, YBI - 0.01, YB + 0.01, 12.0)]
     cuts += [stadium_y(ux, uz, 13.0, 7.5, ys - 0.01, YB + 0.01),
@@ -1668,7 +1685,7 @@ def back_plate(out):
     cuts.append(cyl_y(jx, jz, ys - 0.01, YB + 0.01, 6.3))
     cuts += [box(BP_LOUV_X[0], BP_LOUV_X[1], ys - 0.01, YB + 0.01, za, zb) for (za, zb) in BP_LOUV]
     for (a, b, sx, sy) in BP_TABS:
-        cuts.append(csk_z(sx, sy, 20.5, z0 - 0.01))
+        cuts.append(csk_z(sx, sy, BP_TAB_TOP, z0 - 0.01))
     plate = diff(plate, cuts)
     out.add("PR-BACKPLATE", "뒤판 출력물 (I/O·루버 판)", "printed back plate (I/O + louvres)", "print", G_CUP, plate, COLORS["printed_body"], PETG,
             source=SRC + " centre.back_plate_io (x397.5~538 y%.0f~%.1f z16.5~61.35; 구멍 x/z: 케이블 통과 Ø12 (405, 38), USB-C PD 입력 (421, 38), "
@@ -1685,7 +1702,9 @@ def back_plate(out):
                  "1.0 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인) - 창 옆은 틈 없이 끼움"
                  % (pd[0] - 0.2, pd[1] + 0.2, pd[4] - 0.2, pd[5] + 0.2, jb[0] - 1.0, jb[1] + 1.5, jb[2], ys, jb[4],
                     "/".join("%.0f~%.0f" % (g, g + 2) for g in BP_WEBS), ys, BP_LOUV_X[0], BP_LOUV_X[1], BP_TAB_Y0, ys,
-                    BP_TABS[0][2], BP_TABS[0][3], YBI, YBI - BP_TABS[0][3], BP_TONGUE[0], BP_TONGUE[1], BP_TONGUE[2], BP_TABS[1][2], BP_TABS[1][3]),
+                    BP_TABS[0][2], BP_TABS[0][3], YBI, YBI - BP_TABS[0][3], BP_TONGUE[0], BP_TONGUE[1], BP_TONGUE[2], BP_TABS[1][2], BP_TABS[1][3])
+                 + "; 탭 나사 끝 z%.1f = 아랫판 밑면 z%.0f 위 %.1f (check_body: 끝 ≥ 1.0, 반대 면 나사와 나사산 사이 ≥ 4)"
+                 % (BP_TAB_TOP - CSK_SCREW[1], ZB, BP_TAB_TOP - CSK_SCREW[1] - ZB),
             print_name="뒤판출력물_IO", R=R_YMAX,
             print_note="바깥면(y%.1f)을 베드에. 구멍·루버는 수직, 스위치 테두리 자리 2 mm는 베드 쪽 오목(작은 브리지). 잭 받침·탭·오른쪽 탭의 "
                        "혀(탭보다 좁음)는 위로 섬 - 서포트 없음. 벽 3줄 + 채움 25 %%" % YB,
@@ -1700,6 +1719,8 @@ def back_plate(out):
 
 AMP_HOLES = [(745.5, 286.5), (792.5, 286.5), (745.5, 325.5), (792.5, 325.5)]   # XH-A232 54 x 46, holes 3.5 in (v3 amp_bosses)
 SHELF_SCREW_Z = 46.0                     # bracket screw axis (D3 x 12~13 pan head, head D6 or less, seat D6.5 x 4)
+SHELF_SEAT = (6.5, 4.0)                  # head seat D, depth from the bracket front (head bears at bracket y + 4)
+SHELF_SCREW = (3.0, 13.0)               # L78 tapping screw D, longest length used (12~13 under the head): tip y339, 3.5 under the back face
 SHELF_GROOVE = (7.0, 0.8)                # relief groove in the shelf top in front of each bracket: width, depth (floor 1.2 left)
 
 
@@ -1714,7 +1735,7 @@ def hub_shelf(out):
     cuts = [cyl_z(x, y, sh[4] - 0.01, zt + 2.01, 2.7) for (x, y) in AMP_HOLES]
     for b in (b1, b2):
         cx = (b[0] + b[1]) / 2.0
-        cb_ = diff(hole("y", cx, SHELF_SCREW_Z, b[2] - 0.01, b[2] + 4.0, 6.5, apex=(0, 1)),
+        cb_ = diff(hole("y", cx, SHELF_SCREW_Z, b[2] - 0.01, b[2] + SHELF_SEAT[1], SHELF_SEAT[0], apex=(0, 1)),
                    [box(cx - 5.0, cx + 5.0, b[2] - 1.0, b[2] + 5.0, b[5] - 0.8, b[5] + 2.0)])
         cuts += [hole("y", cx, SHELF_SCREW_Z, b[2] - 0.01, YBI + 0.01, 3.4, apex=(0, 1)), cb_]      # head seat capped 0.8 under the top z50
         # head / driver relief groove in the shelf top in front of the bracket (review 2026-10-01: the D6 head on the z46 axis reaches
@@ -1727,10 +1748,13 @@ def hub_shelf(out):
                          "z41.5~50, 뒤판에 나사) + CU-E-AMP (앰프 2 mm 받침 위 z45.5) + printed_parts PR-HUBSHELF",
             note="추정: 선반 뒤 %.0f mm(y%.0f~%.0f)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, "
                  "받은 앰프로 재서 옮김) - 사양 STANDOFFS의 '앰프 2 mm 받침'을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; "
-                 "x%s z%.0f, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 약 9); 머리(아래 끝 z%.1f)가 선반 "
+                 "x%s z%.0f, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 %.0f (M3 × 12, L78) / %.0f (13 mm), "
+                 "끝에서 뒤판 바깥면까지 %.1f / %.1f); 머리(아래 끝 z%.1f)가 선반 "
                  "윗면 z%.1f보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 %.0f × %.1f (y%.0f~%.0f, 바닥 %.1f 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. "
                  "8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)"
-                 % (YBI - sh[3], sh[3], YBI, "/".join("%.0f" % ((b[0] + b[1]) / 2) for b in (b1, b2)), SHELF_SCREW_Z, SHELF_SCREW_Z - 3.0, zt,
+                 % (YBI - sh[3], sh[3], YBI, "/".join("%.0f" % ((b[0] + b[1]) / 2) for b in (b1, b2)), SHELF_SCREW_Z,
+                    b1[2] + SHELF_SEAT[1] + 12.0 - YBI, b1[2] + SHELF_SEAT[1] + 13.0 - YBI,
+                    YB - (b1[2] + SHELF_SEAT[1] + 12.0), YB - (b1[2] + SHELF_SEAT[1] + 13.0), SHELF_SCREW_Z - 3.0, zt,
                     SHELF_GROOVE[0], SHELF_GROOVE[1], sh[2], b1[2], zt - sh[4] - SHELF_GROOVE[1]),
             print_name="허브선반", R=R_NONE,
             print_note="선반 밑면(z41.5)을 베드에, 받침·앰프 받침이 위. 서포트 없음 (뒤판 나사 구멍은 눈물방울, 머리 길 홈은 윗면)",
@@ -1739,8 +1763,22 @@ def hub_shelf(out):
                   ("z", sh[4], b1[5], "z41.5~50", 0), ("z", sh[4], zt, "선반 2", 1), ("z", zt, zt + 2.0, "앰프 받침 2", 2)])
 
 
-PB_SCREWS = [(289.0, 272.0), (388.0, 272.0), (289.0, 307.0), (388.0, 307.0)]   # csk 8호 13 into the floor: >= 10 from the foot screws
-PB_FLOOR = 2.0                                                                  # holder floor (screw heads flush with its top)
+CSK_SCREW = (4.2, 13.0)          # L77 스텐 접시머리 직결피스 8호 13 (holder + back-plate tabs): thread D, length incl. the head; the
+                                 # 굿나잇몰 listing (11번가 4350230243) starts at 13 mm, so no shorter csk 8호 from the same order
+PB_FLOOR = 2.0                   # holder floor under the bank (z16.5..18.5)
+PB_EAR_T = 4.0                   # screw ears outside the walls, 4 thick like the back-plate tabs: head flush z20.5 -> tip z7.5
+PB_HEAD_Z = Z_BOT + PB_EAR_T     # 20.5
+# W1 item 7 (2026-10-02): the first holder had the 4 csk heads flush with the 2 mm floor (z18.5) at PB_SCREWS_V1, so a 13 mm screw
+# ended at z5.5 = 0.5 over the ply underside (0.3 with an 11.3 ply, 0 = through with 11.0) and the two x289 tips sat inside the D28 pads of
+# the feet (292, 262) / (292, 320), 10.4 / 13.3 from their screw axes (wood between the threads 6.2 / 9.1, depths overlapping 9.5).
+# The bank fills the floor (0.5 gap) - a thicker floor or bosses lift it - and there is no shorter L77 -> 4 ears outside the walls.
+PB_SCREWS_V1 = [(289.0, 272.0), (388.0, 272.0), (289.0, 307.0), (388.0, 307.0)]
+PB_EARS = [((278.0, 257.0), (272.0, 284.0, 251.0, 263.0)),      # left wall, front: driver path 1.5 behind the XT30 clip, 2.0 before cable clip E1
+           ((278.0, 325.0), (272.0, 284.0, 319.0, 330.5)),      # left wall, back: path 2.0 behind thumb screw L2 (y320); 0.5 off the back ply
+           ((308.0, 247.5), (302.0, 314.0, 242.5, 252.0)),      # front wall, left of the strap slot (x327.5..349.5 stays free)
+           ((385.0, 247.5), (379.0, 391.0, 242.5, 252.0))]      # front wall, right (front 1.5 of the ear over the ply's R3 round: <= 0.4 air)
+PB_SCREWS = [s for s, _ in PB_EARS]                             # (x, y) csk 8호 13 into the centre bottom ply
+CSK_HEAD_D = 8.6                                                # csk_z head seat D
 
 
 def pb_holder(out):
@@ -1748,26 +1786,80 @@ def pb_holder(out):
     w, fl = 1.5, PB_FLOOR
     add = [box(x0, x1, y0, y1, z0, z0 + fl), box(x0, x0 + w, y0, y1, z0, z1), box(x1 - w, x1, y0, y1, z0, z1),
            box(x0, x1, y0, y0 + w, z0, z1), box(x0, x1, y1 - w, y1, z0, z1)]
+    for _, (a, b, c, d) in PB_EARS:                       # ears merge 0.01 into the wall they stand against
+        add.append(box(a, b + (0.01 if b == x0 else 0.0), c, d + (0.01 if d == y0 else 0.0), z0, PB_HEAD_Z))
     m = union(add)
     xm = (x0 + x1) / 2.0
     pz = CC["Z-BANK-PLUG"]
     cuts = [box(pz[0] - 0.5, x1 + 0.01, pz[2] - 2.0, y1 + 0.01, pz[4] - 0.5, z1 + 0.01),               # plug / cable notch in the +x corner
             box(xm - 11.0, xm + 11.0, y0 - 0.01, y0 + w + 0.01, z0 + fl, z0 + fl + 3.0),           # strap slots 22 x 3
             box(xm - 11.0, xm + 11.0, y1 - w - 0.01, y1 + 0.01, z0 + fl, z0 + fl + 3.0)]
-    cuts += [csk_z(x, y, z0 + fl, z0 - 0.01) for (x, y) in PB_SCREWS]
+    cuts += [csk_z(x, y, PB_HEAD_Z, z0 - 0.01, d_head=CSK_HEAD_D) for (x, y) in PB_SCREWS]
     m = diff(m, cuts)
     bank = CC["PB-E-BANK"]
-    out.add("CU-PBHOLDER", "보조배터리 받침 (바닥 2, 벽 1.5 × 14, 끈 구멍)", "power-bank holder (printed tray)", "print", G_CUP, m,
-            COLORS["printed_body"], PETG,
+    tip = PB_HEAD_Z - CSK_SCREW[1]
+    feet_c = [xy for g, xy, _ in foot_positions() if g == "가운데 유닛"]
+    near = [min(math.dist(s, f) for f in feet_c) for s in PB_SCREWS]
+    near_v1 = [min(math.dist(s, f) for f in feet_c) for s in PB_SCREWS_V1]
+    out.add("CU-PBHOLDER", "보조배터리 받침 (바닥 2, 벽 1.5 × 14, 끈 구멍, 나사 귀 4)", "power-bank holder (printed tray, 4 screw ears)", "print", G_CUP,
+            m, COLORS["printed_body"], PETG,
             source=SRC + " centre_contents CU-PBHOLDER (x284~393 y252~327 z16.5~30.5, 바닥 2, 벽 1.5 × 14, 끈 구멍) + PB-E-BANK (Morui MT-65 "
                          "105×71×32, 선택 O07, USB-C 끝 +x) + Z-BANK-PLUG",
-            note="추정: 배터리 둘레 0.5 틈 (배터리 x%.0f~%.0f y%.0f~%.0f), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG "
-                 "z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - BOM에 없음), 바닥 접시 8호 13 mm 4곳 %s "
-                 "(모서리 y257/322가 아님: 가운데 아랫판의 고무발 나사 (292, 262)·(292, 320)와 축 사이 10 이상)"
-                 % (bank[0], bank[1], bank[2], bank[3], " · ".join("(%.0f, %.0f)" % q for q in PB_SCREWS)),
-            print_name="보조배터리받침", R=R_NONE, print_note="바닥을 베드에. 끈 구멍은 브리지 22. 서포트 없음",
-            dims=[("x", x0, x1, "109", 0), ("x", bank[0], bank[1], "배터리 105", 1), ("y", y0, y1, "75", 0), ("y", bank[2], bank[3], "배터리 71", 1),
-                  ("z", z0, z1, "14", 0), ("z", z0, z0 + fl, "바닥 2", 1)])
+            note=("사양과 다름(작은 고침, W1 7번 2026-10-02): 사양 상자 밖에 나사 귀 4개 (두께 %.0f, z%.1f~%.1f, 뒤판 탭과 같은 두께) - 바닥 2 위 접시 "
+                  "8호 13이면 끝이 z%.1f로 아랫판 밑면(z%.0f) 위 %.1f뿐 (11.3 합판이면 %.1f, 11.0이면 0 = 뚫림), 그리고 옛 자리 %s 중 x289 두 개는 "
+                  "고무발 (292, 262)·(292, 320)의 Ø28 위 (축 사이 %s, 나사산 사이 나무 %s). 배터리가 바닥을 0.5 틈으로 꽉 채워 바닥을 두껍게 하면 배터리가 "
+                  "뜨고, 굿나잇몰 L77은 13 mm부터라 짧은 나사 대신 귀를 냄 → 접시 8호 13 4곳 %s, 머리 z%.1f, 끝 z%.1f = 밑면 위 %.1f "
+                  "(11.3 합판이면 %.1f), 가운데 고무발 나사 축까지 %s (모두 Ø28 패드 밖), 나사산 사이 나무 %.1f 이상, 판 모서리 5 이상, "
+                  "다른 나사 축 8 이상, 나사 수·길이는 그대로 (L77 6개 = 받침 4 + 뒤판 탭 2); 귀: 왼쪽 벽 밖 x%.0f~%.0f (끝벽 안면 x%.1f과 0.5) "
+                  "y%.0f~%.0f · y%.0f~%.1f, 앞 벽 밖 y%.1f~%.0f x%.0f~%.0f · x%.0f~%.0f (끈 구멍 x%.1f~%.1f 앞은 비움; 앞 1.5는 아랫판 앞 R3 위로 "
+                  "0.4 이하 뜸); 드라이버 Ø6 길: 왼쪽 앞은 XT30 집게 뒤 1.5·케이블 집게 E1 앞 2.0, 왼쪽 뒤는 나비나사 L2 뒤 2.0 (check_body가 "
+                  "Ø6 × 80으로 확인); 추정: "
+                  % (PB_EAR_T, z0, PB_HEAD_Z, z0 + fl - CSK_SCREW[1], ZB, z0 + fl - CSK_SCREW[1] - ZB, z0 + fl - CSK_SCREW[1] - (Z_BOT - 11.3),
+                     " · ".join("(%.0f, %.0f)" % q for q in PB_SCREWS_V1), "/".join("%.1f" % v for v in near_v1 if v < 14.0),
+                     "/".join("%.1f" % (v - CSK_SCREW[0]) for v in near_v1 if v < 14.0), " · ".join("(%s, %s)" % (_n(a), _n(b)) for (a, b) in PB_SCREWS),
+                     PB_HEAD_Z, tip, tip - ZB, tip - (Z_BOT - 11.3), "/".join("%.1f" % v for v in near), min(near) - CSK_SCREW[0],
+                     PB_EARS[0][1][0], x0, CU_IX[0], PB_EARS[0][1][2], PB_EARS[0][1][3], PB_EARS[1][1][2], PB_EARS[1][1][3],
+                     PB_EARS[2][1][2], y0, PB_EARS[2][1][0], PB_EARS[2][1][1], PB_EARS[3][1][0], PB_EARS[3][1][1], xm - 11.0, xm + 11.0))
+                 + "배터리 둘레 0.5 틈 (배터리 x%.0f~%.0f y%.0f~%.0f), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG "
+                   "z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - 구매 목록 v4 L79 = 최종 재료 i221 벨크로 링벨트 20 mm × 30 cm)"
+                 % (bank[0], bank[1], bank[2], bank[3]),
+            print_name="보조배터리받침", R=R_NONE, print_note="바닥과 나사 귀 4개를 베드에. 끈 구멍은 브리지 22. 서포트 없음",
+            dims=[("x", x0, x1, "109", 0), ("x", bank[0], bank[1], "배터리 105", 1), ("x", PB_EARS[0][1][0], x0, "왼쪽 귀 12", 2),
+                  ("y", y0, y1, "75", 0), ("y", bank[2], bank[3], "배터리 71", 1), ("y", PB_EARS[2][1][2], y0, "앞 귀 %.1f" % (y0 - PB_EARS[2][1][2]), 2),
+                  ("z", z0, z1, "14", 0), ("z", z0, z0 + fl, "바닥 2", 1), ("z", z0, PB_HEAD_Z, "귀 %.0f (접시 머리 면)" % PB_EAR_T, 2)])
+
+
+def wood_screws():
+    """Every screw / insert pilot that goes into a plywood panel, from this module's numbers (check_body.py measures the panel faces
+    and the seats on the solids). One dict per screw: label, kind, ply (panel part id), axis ('x' / 'y' / 'z'), at (the 2 coordinates
+    across the axis: x->(y, z), y->(x, z), z->(x, y)), face (panel face it enters), dir (+1 / -1 along the axis into the panel),
+    head (axis coordinate where the head bears / the csk head top), tip (screw tip or blind-hole bottom), d (thread or hole D),
+    part (the part whose seat holds the head, or None)."""
+    rows = []
+    plies = {"스피커 L": "SPKL-PLY-BOTTOM", "가운데 유닛": "CU-PLY-BOTTOM", "스피커 R": "SPKR-PLY-BOTTOM"}
+    for i, (g, (x, y), _) in enumerate(foot_positions()):
+        rows.append(dict(label="고무발 FOOT-%02d 8호 13 (아래에서)" % (i + 1), kind="foot", ply=plies[g], axis="z", at=(x, y), face=ZB, dir=1.0,
+                         head=FOOT_SEAT[1], tip=FOOT_SEAT[1] + FOOT_SCREW[1], d=FOOT_SCREW[0], part="FOOT-%02d" % (i + 1)))
+    for (x, y) in PB_SCREWS:
+        rows.append(dict(label="보조배터리 받침 귀 접시 8호 13", kind="csk", ply="CU-PLY-BOTTOM", axis="z", at=(x, y), face=Z_BOT, dir=-1.0,
+                         head=PB_HEAD_Z, tip=PB_HEAD_Z - CSK_SCREW[1], d=CSK_SCREW[0], part="CU-PBHOLDER"))
+    for (_, _, x, y) in BP_TABS:
+        rows.append(dict(label="뒤판 탭 접시 8호 13", kind="csk", ply="CU-PLY-BOTTOM", axis="z", at=(x, y), face=Z_BOT, dir=-1.0,
+                         head=BP_TAB_TOP, tip=BP_TAB_TOP - CSK_SCREW[1], d=CSK_SCREW[0], part="PR-BACKPLATE"))
+    for k in (1, 2):
+        b = CC["PR-SHELFBRK-%d" % k]
+        seat = b[2] + SHELF_SEAT[1]
+        rows.append(dict(label="허브 선반 받침 %d Ø3 × 12~13 (뒤판 안면에서)" % k, kind="pan", ply="CU-PLY-BACK", axis="y",
+                         at=((b[0] + b[1]) / 2.0, SHELF_SCREW_Z), face=YBI, dir=1.0, head=seat, tip=seat + SHELF_SCREW[1], d=SHELF_SCREW[0],
+                         part="PR-HUBSHELF"))
+    for s in "LR":
+        face = SPK_X["L"][1] if s == "L" else SPK_X["R"][0]
+        sg = -1.0 if s == "L" else 1.0
+        for k, (y, z) in enumerate(TS_YZ[s]):
+            rows.append(dict(label="L73 인서트 구멍 %s%d Ø%.1f × %.0f (이음 면에서, 막힘)" % (s, k + 1, QS_HOLE[0], QS_HOLE[1]), kind="insert",
+                             ply="SPK%s-PLY-SIDEIN" % s, axis="x", at=(y, z), face=face, dir=sg, head=face, tip=face + sg * QS_HOLE[1],
+                             d=QS_HOLE[0], part=None))
+    return rows
 
 
 def xt30_clips(out):

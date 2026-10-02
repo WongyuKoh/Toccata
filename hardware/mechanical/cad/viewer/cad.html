@@ -3,7 +3,7 @@
 <p class="lede">건반 액션 r4.5(geometry.json)와 L2 한 몸 뒷바(spec/body_L2.json, 2026-10-01 사용자 요청, W1 음향 확인 통과)를 수치 그대로 입체로 만든 결과입니다. 출력 부품은 베드에 놓인 STL로, 나머지는 조립 위치에 둔 구매품·합판·전자 부품 외곽으로 들어 있습니다. 만능기판은 사각형만, 그 위에는 RP2040-Zero·먹스 모듈처럼 부피 있는 부품만 두었습니다. 뒷바는 건반 뒤 2 mm에서 시작해 전체 깊이 342.5 (L1 447, 건반 뒤 면적 −44.5 %)입니다: 가운데 뚜껑 윗면이 건반 윗면과 같은 z72.85, 스피커는 수평에서 40° 눕힌 앞판에 윗면 z144.65, 모듈 USB 선은 뒷바 밑 닫힌 통로(y212~241, z0~27) 안이라 밖에서 거의 보이지 않습니다(배기 홈 아래와 건반 뒤 2 mm 틈으로만 조금). 터치스크린은 R31 3판(Waveshare 7-DSI-TOUCH-C, W1 3a)으로 가운데 화면 뚜껑의 경첩에 25°로 서 있고, 접은 상태는 <code>stl/assembly/</code>의 별도 그룹입니다. 저장소 <code>hardware/mechanical/cad/</code>에서 <code>python3 src/build_all.py</code> 한 번으로 모두 다시 만들어집니다(약 10~20초).</p>
 <div class="kfs">
 <div class="kf"><b>1459</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
-<div class="kf"><b>77종</b><span>출력 STL 파일 (stl/print, 전부 뽑음)</span></div>
+<div class="kf"><b>101종</b><span>출력 STL 파일 (stl/print, 전부 뽑음)</span></div>
 <div class="kf"><b>289개</b><span>출력할 부품 수</span></div>
 <div class="kf"><b>1254 × 342.5</b><span>전체 mm (L2 뒷바)</span></div>
 <div class="kf"><b>z144.65 · 40°</b><span>스피커 윗면 · 앞판 각도</span></div>
@@ -23,8 +23,8 @@
 <div class="secbar"><label><input type="checkbox" id="cadSecOn"> 단면 (x보다 오른쪽을 잘라냄)</label><input type="range" id="cadSec" min="-16" max="1238" step="0.25" value="575.75" aria-label="단면 x 위치"><output id="cadSecOut">끔</output></div>
 </div><div class="side"><div class="info"><p class="empty">부품을 누르면 이름·크기·출력 파일이 여기에 나옵니다.</p></div>
 <details class="grp" open><summary>그룹 (64)</summary><div class="gtools"><button type="button" data-gall>모두 보기</button><button type="button" data-gnone>모두 숨기기</button><button type="button" data-gshow>숨긴 부품 다시</button></div><div class="glist"></div></details></div></div>
-<h3>출력 목록 (stl/print 77종 · 악기 부품 289개 + 공구 1벌)</h3>
-<p class="small muted">파일은 <code>hardware/mechanical/cad/stl/print/</code>에 있습니다. 파일 이름 끝이 출력 개수이고, 부품은 이미 베드 위 방향으로 놓여 있습니다. 같은 이름으로 <code>stl/annotated/</code>에 치수선과 숫자를 붙인 보기용 STL이 있습니다(출력 금지). 질량은 속을 꽉 채운 PETG 기준입니다.</p>
+<h3>출력 목록 (stl/print 101종 · 악기 부품 289개 + 공구 1벌 + 합판 지그 1벌)</h3>
+<p class="small muted">파일은 <code>hardware/mechanical/cad/stl/print/</code>에 있습니다. 파일 이름 끝이 출력 개수이고, 부품은 이미 베드 위 방향으로 놓여 있습니다. 같은 이름으로 <code>stl/annotated/</code>에 치수선과 숫자를 붙인 보기용 STL이 있습니다(출력 금지). 질량은 속을 꽉 채운 PETG 기준입니다. <code>08_합판지그</code>는 합판 구멍·홈·자석 자리를 뚫는 지그 1벌이고(J-b 새들 4개는 판 두께에 맞는 것을 고르려고 모두 뽑음), 쓰는 법은 <code>hardware/mechanical/cad/jigs/README.md</code>입니다.</p>
 <h4 class="sub4">01_건반</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
 <tr><td>백건_C__7개.stl</td><td class="num">7</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.6</td><td>PETG 흰색</td></tr>
 <tr><td>흑건_C#·D#__14개.stl</td><td class="num">14</td><td class="num">10.4 × 144.8 × 34.8</td><td class="num">17.9</td><td>PETG 검정</td></tr>
@@ -111,7 +111,7 @@
 <tr><td>뚜껑이음레일기둥_2__1개.stl</td><td class="num">1</td><td class="num">20.0 × 117.0 × 44.9</td><td class="num">22.6</td><td>PETG 회색</td></tr>
 <tr><td>뒤판출력물_IO__1개.stl</td><td class="num">1</td><td class="num">140.5 × 44.9 × 38.5</td><td class="num">36.2</td><td>PETG 회색</td></tr>
 <tr><td>허브선반__1개.stl</td><td class="num">1</td><td class="num">224.0 × 49.0 × 8.5</td><td class="num">28.6</td><td>PETG 회색</td></tr>
-<tr><td>보조배터리받침__1개.stl</td><td class="num">1</td><td class="num">109.0 × 75.0 × 14.0</td><td class="num">27.9</td><td>PETG 회색</td></tr>
+<tr><td>보조배터리받침__1개.stl</td><td class="num">1</td><td class="num">121.0 × 88.0 × 14.0</td><td class="num">30.4</td><td>PETG 회색</td></tr>
 <tr><td>XT30집게_L__1개.stl</td><td class="num">1</td><td class="num">26.0 × 19.0 × 15.5</td><td class="num">2.3</td><td>PETG 회색</td></tr>
 <tr><td>XT30집게_R__1개.stl</td><td class="num">1</td><td class="num">20.0 × 19.0 × 15.5</td><td class="num">1.7</td><td>PETG 회색</td></tr>
 <tr><td>보드받침기둥_Pi_Ø6_6mm__4개.stl</td><td class="num">4</td><td class="num">6.0 × 6.0 × 6.0</td><td class="num">0.2</td><td>PETG 회색</td></tr>
@@ -132,7 +132,7 @@
 <li><b>뚜껑이음레일기둥_1, 뚜껑이음레일기둥_2</b>: 레일 윗면(z61.35)을 베드에, 기둥이 위로 서도록 출력(서포트 없음). 인서트는 베드 쪽 면(= 윗면)에서 인두로 넣음</li>
 <li><b>뒤판출력물_IO</b>: 바깥면(y342.5)을 베드에. 구멍·루버는 수직, 스위치 테두리 자리 2 mm는 베드 쪽 오목(작은 브리지). 잭 받침·탭·오른쪽 탭의 혀(탭보다 좁음)는 위로 섬 - 서포트 없음. 벽 3줄 + 채움 25 %</li>
 <li><b>허브선반</b>: 선반 밑면(z41.5)을 베드에, 받침·앰프 받침이 위. 서포트 없음 (뒤판 나사 구멍은 눈물방울, 머리 길 홈은 윗면)</li>
-<li><b>보조배터리받침</b>: 바닥을 베드에. 끈 구멍은 브리지 22. 서포트 없음</li>
+<li><b>보조배터리받침</b>: 바닥과 나사 귀 4개를 베드에. 끈 구멍은 브리지 22. 서포트 없음</li>
 <li><b>XT30집게_L, XT30집게_R</b>: 끝벽에 붙는 판을 베드에, 홈이 위로 서도록 출력(서포트 없음)</li>
 <li><b>보드받침기둥_Pi_Ø6_6mm, 보드받침기둥_나사_Ø7_5mm, 보드받침기둥_PED_Ø6_5mm, 보드받침기둥_PED_Ø6_5mm_핀</b>: 밑면을 베드에 세워 출력, 채움 100 %. 서포트 없음</li>
 <li><b>퓨즈홀더받침</b>: 밑면을 베드에. 서포트 없음</li>
@@ -159,6 +159,58 @@
 <details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
 <li><b>공구_벤치지그받침_T1a, 공구_높이블록_T1b, 공구_캡스턴벤치게이지_T2, 공구_밸런스핀높이게이지_T3</b>: 건반 액션 설계의 출력 공구(DESIGN 10.1, key-action-v4/printables/tools/tools.md): 악기당 1벌, 서포트 없음; T2·T3는 채움 100 %·층 0.1</li>
 </ul></details>
+<h4 class="sub4">08_합판지그</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
+<tr><td>J-a1_스피커안쪽옆판_L__1개.stl</td><td class="num">1</td><td class="num">122.0 × 60.0 × 21.0</td><td class="num">51.7</td><td>PETG</td></tr>
+<tr><td>J-a2_스피커안쪽옆판_R__1개.stl</td><td class="num">1</td><td class="num">122.0 × 60.0 × 21.0</td><td class="num">55.4</td><td>PETG</td></tr>
+<tr><td>J-a3_끝벽_L__1개.stl</td><td class="num">1</td><td class="num">122.0 × 65.3 × 21.0</td><td class="num">58.2</td><td>PETG</td></tr>
+<tr><td>J-a4_끝벽_R__1개.stl</td><td class="num">1</td><td class="num">122.0 × 65.3 × 21.0</td><td class="num">61.3</td><td>PETG</td></tr>
+<tr><td>J-a5_XT30_Ø14_표시원판__1개.stl</td><td class="num">1</td><td class="num">14.0 × 14.0 × 7.5</td><td class="num">0.6</td><td>PETG</td></tr>
+<tr><td>J-b_모서리자석새들_틈11.3__1개.stl</td><td class="num">1</td><td class="num">30.0 × 20.3 × 24.0</td><td class="num">13.2</td><td>PETG</td></tr>
+<tr><td>J-b_모서리자석새들_틈11.6__1개.stl</td><td class="num">1</td><td class="num">30.0 × 20.6 × 24.0</td><td class="num">13.3</td><td>PETG</td></tr>
+<tr><td>J-b_모서리자석새들_틈11.9__1개.stl</td><td class="num">1</td><td class="num">30.0 × 20.9 × 24.0</td><td class="num">13.5</td><td>PETG</td></tr>
+<tr><td>J-b_모서리자석새들_틈12.2__1개.stl</td><td class="num">1</td><td class="num">30.0 × 21.2 × 24.0</td><td class="num">13.7</td><td>PETG</td></tr>
+<tr><td>J-c1_뚜껑L_밑면자석__1개.stl</td><td class="num">1</td><td class="num">232.0 × 79.6 × 21.0</td><td class="num">65.6</td><td>PETG</td></tr>
+<tr><td>J-c2_뚜껑R_밑면자석__1개.stl</td><td class="num">1</td><td class="num">241.1 × 79.6 × 21.0</td><td class="num">67.3</td><td>PETG</td></tr>
+<tr><td>J-d1a_뚜껑L_홈틀__1개.stl</td><td class="num">1</td><td class="num">56.7 × 84.2 × 12.0</td><td class="num">21.0</td><td>PETG</td></tr>
+<tr><td>J-d1b_뚜껑L_홈슬라이더__1개.stl</td><td class="num">1</td><td class="num">30.0 × 62.2 × 14.0</td><td class="num">23.3</td><td>PETG</td></tr>
+<tr><td>J-d1c_뚜껑L_홈심_1.73__1개.stl</td><td class="num">1</td><td class="num">9.7 × 24.0 × 8.0</td><td class="num">1.1</td><td>PETG</td></tr>
+<tr><td>J-d2a_뚜껑R_홈틀__1개.stl</td><td class="num">1</td><td class="num">124.8 × 69.2 × 12.0</td><td class="num">34.2</td><td>PETG</td></tr>
+<tr><td>J-d2b_뚜껑R_홈슬라이더__1개.stl</td><td class="num">1</td><td class="num">94.2 × 39.5 × 14.0</td><td class="num">48.8</td><td>PETG</td></tr>
+<tr><td>J-d2c_뚜껑R_홈심_1.89__1개.stl</td><td class="num">1</td><td class="num">9.9 × 24.0 × 8.0</td><td class="num">1.2</td><td>PETG</td></tr>
+<tr><td>J-d3a_뒤판_홈틀__1개.stl</td><td class="num">1</td><td class="num">242.8 × 34.0 × 12.0</td><td class="num">40.0</td><td>PETG</td></tr>
+<tr><td>J-d3b_뒤판_홈슬라이더__1개.stl</td><td class="num">1</td><td class="num">78.2 × 15.5 × 14.0</td><td class="num">15.3</td><td>PETG</td></tr>
+<tr><td>J-d3c_뒤판_홈심_1.57__1개.stl</td><td class="num">1</td><td class="num">9.6 × 24.0 × 8.0</td><td class="num">1.1</td><td>PETG</td></tr>
+<tr><td>J-d4a_아랫판_홈틀__1개.stl</td><td class="num">1</td><td class="num">172.2 × 72.7 × 12.0</td><td class="num">28.4</td><td>PETG</td></tr>
+<tr><td>J-d4b_아랫판_홈슬라이더__1개.stl</td><td class="num">1</td><td class="num">154.2 × 52.2 × 14.0</td><td class="num">84.8</td><td>PETG</td></tr>
+<tr><td>J-d4c_아랫판_홈심_2.00__1개.stl</td><td class="num">1</td><td class="num">10.0 × 24.0 × 8.0</td><td class="num">1.2</td><td>PETG</td></tr>
+<tr><td>J-e_깊이게이지·시험블록__1개.stl</td><td class="num">1</td><td class="num">134.0 × 24.0 × 26.0</td><td class="num">75.8</td><td>PETG</td></tr>
+</tbody></table></div>
+<details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
+<li><b>J-a1_스피커안쪽옆판_L</b>: 옆판 L 이음면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-a2_스피커안쪽옆판_R</b>: 옆판 R 이음면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-a3_끝벽_L</b>: 끝벽 L 안쪽 면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-a4_끝벽_R</b>: 끝벽 R 안쪽 면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-a5_XT30_Ø14_표시원판</b>: XT30 Ø14 원 그리기: 핀을 끝벽 Ø4 안내 구멍에 꽂고 연필로 원. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-b_모서리자석새들_틈11.3</b>: 모서리 자석 새들 (틈 11.3): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e &#x27;얇5.8&#x27;). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-b_모서리자석새들_틈11.6</b>: 모서리 자석 새들 (틈 11.6): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e &#x27;얇5.8&#x27;). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-b_모서리자석새들_틈11.9</b>: 모서리 자석 새들 (틈 11.9): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e &#x27;얇5.8&#x27;). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-b_모서리자석새들_틈12.2</b>: 모서리 자석 새들 (틈 12.2): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e &#x27;얇5.8&#x27;). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-c1_뚜껑L_밑면자석</b>: 뚜껑 L 밑면 자석: J-d로 배기 홈을 먼저 뚫고, 혀를 홈에 넣어 댐. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-c2_뚜껑R_밑면자석</b>: 뚜껑 R 밑면 자석: J-d로 배기 홈을 먼저 뚫고, 혀를 홈에 넣어 댐. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d1a_뚜껑L_홈틀</b>: 뚜껑 L 배기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d1b_뚜껑L_홈슬라이더</b>: 뚜껑 L 배기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d1c_뚜껑L_홈심_1.73</b>: 뚜껑 L 배기 홈 심 1.73: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d2a_뚜껑R_홈틀</b>: 뚜껑 R 배기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d2b_뚜껑R_홈슬라이더</b>: 뚜껑 R 배기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d2c_뚜껑R_홈심_1.89</b>: 뚜껑 R 배기 홈 심 1.89: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d3a_뒤판_홈틀</b>: 가운데 뒤판 환기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d3b_뒤판_홈슬라이더</b>: 가운데 뒤판 환기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d3c_뒤판_홈심_1.57</b>: 가운데 뒤판 환기 홈 심 1.57: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d4a_아랫판_홈틀</b>: 가운데 아랫판 흡기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d4b_아랫판_홈슬라이더</b>: 가운데 아랫판 흡기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-d4c_아랫판_홈심_2.00</b>: 가운데 아랫판 흡기 홈 심 2.00: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+<li><b>J-e_깊이게이지·시험블록</b>: 깊이 게이지(척을 멈춤으로 쓰는 날 길이 맞추기) + 자투리 시험 구멍 — 가장 먼저 뽑음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
+</ul></details>
 <h4 class="sub4">꼭 뽑지 않아도 됨 (stl/print_extra) · 선택_화면덮개</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
 <tr><td>화면덮개_선택__1개.stl</td><td class="num">1</td><td class="num">173.0 × 108.0 × 3.0</td><td class="num">71.2</td><td>PETG</td></tr>
 </tbody></table></div>
@@ -175,6 +227,12 @@
 </tbody></table></div>
 <details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
 <li><b>패드바_칸1_PORON6T용, 패드바_칸2_PORON6T용, 패드바_칸3_PORON6T용, 패드바_칸4_PORON6T용, 패드바_끝부속_왼쪽_PORON6T용, 패드바_끝부속_오른쪽_PORON6T용</b>: 대안: PORON 6T(설계값)를 사면 stl/print/04의 패드 바 6종 대신 이것을 뽑음 (쐐기가 1.0 얇음, 패드 면은 같음). 구매 목록대로 5T를 쓰면 뽑지 않음. 출력 방법은 04 패드 바와 같음</li>
+</ul></details>
+<h4 class="sub4">꼭 뽑지 않아도 됨 (stl/print_extra) · 선택_합판지그</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
+<tr><td>J-f_홈다듬기_사포막대__1개.stl</td><td class="num">1</td><td class="num">180.0 × 20.0 × 8.0</td><td class="num">15.2</td><td>PETG</td></tr>
+</tbody></table></div>
+<details class="spec"><summary>출력 방향·후가공</summary><ul class="small">
+<li><b>J-f_홈다듬기_사포막대</b>: 4 mm 홈 사포 막대 (선택). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)</li>
 </ul></details>
 <h4 class="sub4">꼭 뽑지 않아도 됨 (stl/print_extra) · 예비_건반</h4><div class="tbl ptbl"><table><thead><tr><th>파일</th><th class="r">개수</th><th>크기 (베드 위)</th><th class="r">g</th><th>재료</th></tr></thead><tbody>
 <tr><td>백건_C__1개.stl</td><td class="num">1</td><td class="num">22.0 × 199.0 × 22.8</td><td class="num">22.6</td><td>PETG 흰색</td></tr>
@@ -251,16 +309,16 @@
 <li><b>CU 화면 뚜껑</b> — 터치스크린 3판(A장)을 더함: 리본·전원선 구멍 22 × 6 (x635.35~657.35 y228.55~234.55, 사양 dsi 권장 자리 x580~602 대신 - 화면 커넥터가 +x 쪽), 배기 홈 8 × (34 × 4) y300~325 (centre.vents.exhaust의 4 × 34 y292~326 대신 W1 3판 값), 갈비는 덩어리에 합침 (부록 A10)</li>
 <li><b>스피커 앞판·그릴</b> — 유닛 나사 인서트는 구매 목록 L69 (ShenzenAV M4x4x6: 바깥 Ø6 × 길이 4)를 구멍 Ø5.6 × 6.5에 인두로 면까지 (지름 0.4 물림, 모델에 있음). M4×12(L70)는 플랜지 4 + 가스켓 3을 지나 5 들어가 인서트를 지나 1 더, 끝은 구멍 바닥 1.5 위. 그릴 판 아래 끝과 잘린 윗끝에 막힌 띠 2 mm, 가장자리 칸은 Ø3 원이 들어가는 것만 뚫음 (W1 조건)</li>
 <li><b>케이블 집게 (사양 CABLE-CLIPS 8)</b> — 사양에 자리가 없어 정함: 스피커 통로 지붕 밑 3개씩 (z19~27 y226~236, 묶음 위라 모델에서는 비어 있음) + 끝벽 L 안면 2개 (스피커선 C-SPK-L을 잡음, 선을 x275.1로 옮김). 출력 파일 하나 `케이블집게__8개`</li>
-<li><b>허브 선반 받침 나사</b> — 8호 13 mm 대신 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하) — 사양 받침 10 × 8에는 8호(Ø4.2, 머리 Ø8)가 들어가지 않음. 머리 자리 눈물방울 꼭지를 받침 윗면 0.8 아래에서 자름. 나사 축 z46의 머리(아래 끝 z43)가 선반 윗면 z43.5보다 낮아, 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (선반 앞끝 y282 → 받침 y322, 바닥 1.2 남음)</li>
+<li><b>허브 선반 받침 나사</b> — 8호 13 mm 대신 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; 구매 목록 v4 L78 = 스텐 트러스 태핑 피스 M3 × 12) — 사양 받침 10 × 8에는 8호(Ø4.2, 머리 Ø8)가 들어가지 않음. 머리 자리 Ø6.5 × 4(받침 앞면 y322부터)를 지나 뒤판(y331~)에 물림 7 (M3 × 12) / 8 (13 mm), 뒤판 바깥면까지 4.5 / 3.5 남음. 머리 자리 눈물방울 꼭지를 받침 윗면 0.8 아래에서 자름. 나사 축 z46의 머리(아래 끝 z43)가 선반 윗면 z43.5보다 낮아, 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (선반 앞끝 y282 → 받침 y322, 바닥 1.2 남음)</li>
 <li><b>보드 받침 기둥 (5 mm)</b> — 나사 구멍 깊이 4.5 → 4.0 (바닥 1.0), 나사 길이 M3×5 (Pi M2.5×6) — 6 mm 이상은 바닥을 뚫고 붙인 기둥을 밀어 올림</li>
 <li><b>뒤판 출력물 바닥 탭</b> — 왼쪽 나사 (407, 325) → (407, 322) (가운데 아랫판 뒤 모서리 y331에서 9), 탭을 y316까지 앞으로. 오른쪽 나사 (463, 325) → (466, 311.5): J501 받침(같은 출력물, z30~36.4)이 오른쪽 탭 전체를 덮어 머리 위로 9.5만 비어 드라이버가 닿지 않았음 → 탭에서 앞으로 낸 혀 x459.5~472.5 y304~316에 나사를 둠 (드라이버 Ø6 길이 받침·J501 기판 앞 1.0, 퓨즈 받침과 6.5; 받침에 구멍을 뚫으면 받침 앞끝이 2 mm만 남고 붙인 J501 기판 밑이 되어 뺄 수 없음). J501 받침 밑 삼각 받침 2개 → 바깥 판에서 곧게 오른 받침벽 2개 (x452~454/472~474, 탭에 이음; 출력 때 공중에 뜨지 않음)</li>
-<li><b>합판 환기 홈</b> — 뚜껑 L 홈 6개 y284~328, 뒤판 앰프 뒤 홈 8개 x745~805 — 간격 6.5 → 8 (홈 사이 나무 2.5 → 4)</li>
+<li><b>합판 환기 홈</b> — 뚜껑 L 홈 6개 y284~328, 뒤판 앰프 뒤 홈 8개 x745~805 — 간격 6.5 → 8 (홈 사이 나무 2.5 → 4). 가운데 아랫판 Pi 아래 흡기 홈 8개는 사양 x546~622 그대로 간격 10.29 (홈 사이 나무 6.29)</li>
 <li><b>전자부 단자 자리 (가정)</b> — 강압 입력 −x 끝(y306)·출력 앞면(x529.5); 앰프 전원 y313·스피커 L y318(−x 끝), 스피커 R y293(+x 끝); 허브는 W1 10/1 제품 사진대로 업스트림 USB 3.0 B 포트(y319)와 DC 잭(y293, ㄱ자 플러그)이 같은 −x 끝면 (사양: 업스트림 −x · DC +x). 끝면 안 자리는 받은 허브로 확인</li>
 <li><b>스피커 꼬리선</b> — 스피커 밖 54 mm (꼬리 150 중): 여유 약 35 mm를 끝벽 Ø14 터널 안에 1.5바퀴 느슨하게 감아 둠 — 스피커를 10 mm 들고 15 mm 바깥으로 밀어도 XT30U-F가 집게에 남고, 그다음 F를 터널로 빼냄 (check_body.py가 확인). 두 가닥을 Ø2 한 줄로 표시</li>
 <li><b>홀 센서 높이 (D14)</b> — D14 거리를 사양의 z8이 아니라 홀 소자 높이 z12.9 (포켓 바닥 12.19 + 0.75)까지 잼 → 사양 229.6 / 161.5보다 1~2 mm 짧음 (≥100은 그대로)</li>
 <li><b>XT30U-M 수 꼬리</b> — 사양 C-XT30 상자보다 0.1 나옴 (집게 홈 + 밖에 보이는 8.1)</li>
 </ul>
-<h3>문서에 치수가 없어 정한 값 (97)</h3>
+<h3>문서에 치수가 없어 정한 값 (98)</h3>
 <p class="small muted">받은 부품을 재 보고 맞지 않으면 <code>spec/*.json</code>이나 생성기의 값을 바꾼 뒤 다시 만듭니다.</p><ul class="small">
 <li><b>스피커 앞판(배플, 40° 경사) L</b> — M4 열압입 인서트 구멍 Ø5.6 × 6.5 (그대로) - 구매 목록 L69 (ShenzenAV M4x4x6: 바깥 Ø6 × 길이 4)를 인두로 면까지 (지름 0.4 물림, 보통 범위), 유닛은 M4×12(L70)로 플랜지 4 + 가스켓 3을 지나 앞판에 5 들어감 → 인서트 4를 다 물고 1 더 나감, 끝은 구멍 바닥 1.5 위 (구멍 안); 8.1 긴 인서트는 아래 구멍이 밑면 z65.42에 너무 가까움; 아래 인서트 구멍 바닥과 상자 안 사이 2.78 - 인서트를 더 밀어 넣거나 M4×12보다 긴 나사를 쓰면 밀폐가 뚫림), 그릴 파일럿 Ø3.4 × 9 (x ±64, 경사 ±40 = 그릴 옆벽 가운데, 8호 19 mm 이하 - 아래 파일럿 끝과 상자 안 사이 2.15); 선 구멍은 L2에서 앞판이 아닌 안쪽 옆판에 있음</li>
 <li><b>M4 열압입 인서트 L69</b> — 바깥 Ø6 × 길이 4를 앞판의 구멍 Ø5.6 × 6.5에 인두로 면까지 넣음 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음), 나사산 안지름 Ø3.3로 모델; M4×12(L70, 모델에 없음)는 유닛 플랜지 4 + EVA 가스켓 3을 지나 5 들어가 인서트 4를 지나 1 더 나감 - 끝은 구멍 바닥 1.5 위라 구멍 안 (가스켓 3이 약 2로 눌리면 약 6 들어가 바닥까지 약 0.5 - M4×12 이하만 씀; M4×14면 7 들어가 구멍 깊이 6.5를 넘어 밀폐면 2.78을 뚫음)</li>
@@ -277,7 +335,8 @@
 <li><b>M4×20 손잡이볼트 L72</b> — 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, L73 인서트(길이 6)에 4.0 물림; M4×22면 6.0 물림, 끝이 구멍 바닥 2.0 위; 길이 24면 끝이 구멍 바닥(지름 부분 8 깊이)에 닿고 그보다 길면 밑 3.5 mm 밀폐 판을 누름 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)</li>
 <li><b>고무 슬리브 OD8 ID4.2</b> — 고무 호스 OD8 ID4.2를 13.0 길이로 잘라 끝벽 Ø8 구멍에 끼움 (바깥면과 같은 높이) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남</li>
 <li><b>피스고무발 28×5</b> — 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 스피커 아랫판은 밀폐 상자 바닥이므로 나사 구멍에 MS 폴리머를 한 방울 넣고 조임 (16 mm 이상이면 상자 안으로 뚫림)</li>
-<li><b>피스고무발 28×5</b> — 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래.</li>
+<li><b>피스고무발 28×5</b> — 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 보조배터리 받침 귀 접시 8호 13 (278, 257), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4) (같은 부품 2개, 자리만 다름)</li>
+<li><b>피스고무발 28×5</b> — 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 153.2, 나사산 사이 나무 149.0 (check_body: 반대 면 나사 ≥ 4) (같은 부품 4개, 자리만 다름)</li>
 <li><b>가운데 유닛 아랫판</b> — 흡기 홈 4×34 강압 아래 x486~530 (사양 x482~534에서 보드 기둥 Ø7 자리를 피해 양끝 4 mm씩 안쪽) y292~326 6개, Pi 아래 x546~622 y273~307 8개 (합 1904 mm²); 앞 윗모서리 R3은 뚜껑 이음 기둥 자리(x500~512, 710~722)만 빼고 (케이블이 넘어가는 곳)</li>
 <li><b>가운데 유닛 끝벽 L</b> — 자석 자리 Ø8 × 3.2 윗모서리 (x265.75 y275) (같은 부품 2개, 자리만 다름)</li>
 <li><b>가운데 유닛 뒤판</b> — 환기 홈 8개 4×15 x745~805.0 z42~57 (간격 8, 홈 사이 나무 4; 앰프 x742~796 뒤, 윗모서리까지 4.35 남김), 자석 자리 Ø8 × 3.2 윗모서리 x290/380/733/935 (L은 창 왼쪽)</li>
@@ -290,9 +349,9 @@
 <li><b>M3 열압입 인서트 L71</b> — 바깥 Ø4.5 × 높이 4를 레일 구멍 Ø4.0 × 4.5에 인두로 면까지 (지름 0.5 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 6개 사서 4개 쓰고 2개 예비</li>
 <li><b>M3×10 둥근머리 렌치볼트</b> — 머리 Ø5.7 × 1.65 (ISO 7380), 자리파기 바닥 z67.35, 몸통 z57.35~67.35 → 인서트에 4.0 물림</li>
 <li><b>M2.5×6 둥근머리 나사</b> — 머리 Ø4.5 × 1.8; 몸통 w5~11 → 화면 구멍(w8부터)에 3 물림; 구멍 깊이는 받은 화면에서 잼 (사양 G-2: 물림 = min(깊이 − 0.5, 4), 얕으면 와셔); xr-77 u6.5 (같은 부품 4개, 자리만 다름)</li>
-<li><b>뒤판 출력물</b> — 바깥 판 2 (y340.5~342.5) + 테 (위 4 · 아래 1.5 · 옆 2) - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 테두리(15.4×21.4)는 바깥면과 같은 높이; USB-C 입구 13 × 7.5 (바깥 판), HUSB238 주머니 x415.8~426.2 z35.6~40.4 (입구가 바깥면에서 2 안); J501 기판 받침 x449~476.5 y316.5~340.5 윗면 z36.4 (기판 밑) + 세운 받침벽 2 (x452~454/472~474, 2 두께, y320~340.5 z20.5~30: 바깥 판에서 곧게 올라 받침과 뒤 탭을 이음 - 출력 때 내민 면 없음); 루버 x480~534 (사양 536 → 옆 테 2를 남김) z18~46 3×6; 바닥 탭 2개 (x400~414, 452~474, y316~340.5, z16.5~20.5)에 접시 8호 13 mm를 아랫판으로: 왼쪽 (407, 322) (아랫판 뒤 모서리 y331에서 9), 오른쪽은 J501 받침이 탭 전체를 덮어 드라이버가 닿지 않으므로 탭에서 앞으로 낸 혀 x459.5~472.5 y304~316의 (466, 311.5) - 드라이버 Ø6 길이 받침·J501 기판 앞 1.0 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인) - 창 옆은 틈 없이 끼움</li>
-<li><b>허브 위 선반 + 뒤판 받침 2 + 앰프 받침 4</b> — 선반 뒤 2 mm(y329~331)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, 받은 앰프로 재서 옮김) - 사양 STANDOFFS의 &#x27;앰프 2 mm 받침&#x27;을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; x693/907 z46, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 약 9); 머리(아래 끝 z43.0)가 선반 윗면 z43.5보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (y282~322, 바닥 1.2 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. 8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)</li>
-<li><b>보조배터리 받침</b> — 배터리 둘레 0.5 틈 (배터리 x286~391 y254~325), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - BOM에 없음), 바닥 접시 8호 13 mm 4곳 (289, 272) · (388, 272) · (289, 307) · (388, 307) (모서리 y257/322가 아님: 가운데 아랫판의 고무발 나사 (292, 262)·(292, 320)와 축 사이 10 이상)</li>
+<li><b>뒤판 출력물</b> — 바깥 판 2 (y340.5~342.5) + 테 (위 4 · 아래 1.5 · 옆 2) - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 테두리(15.4×21.4)는 바깥면과 같은 높이; USB-C 입구 13 × 7.5 (바깥 판), HUSB238 주머니 x415.8~426.2 z35.6~40.4 (입구가 바깥면에서 2 안); J501 기판 받침 x449~476.5 y316.5~340.5 윗면 z36.4 (기판 밑) + 세운 받침벽 2 (x452~454/472~474, 2 두께, y320~340.5 z20.5~30: 바깥 판에서 곧게 올라 받침과 뒤 탭을 이음 - 출력 때 내민 면 없음); 루버 x480~534 (사양 536 → 옆 테 2를 남김) z18~46 3×6; 바닥 탭 2개 (x400~414, 452~474, y316~340.5, z16.5~20.5)에 접시 8호 13 mm를 아랫판으로: 왼쪽 (407, 322) (아랫판 뒤 모서리 y331에서 9), 오른쪽은 J501 받침이 탭 전체를 덮어 드라이버가 닿지 않으므로 탭에서 앞으로 낸 혀 x459.5~472.5 y304~316의 (466, 311.5) - 드라이버 Ø6 길이 받침·J501 기판 앞 1.0 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인) - 창 옆은 틈 없이 끼움; 탭 나사 끝 z7.5 = 아랫판 밑면 z5 위 2.5 (check_body: 끝 ≥ 1.0, 반대 면 나사와 나사산 사이 ≥ 4)</li>
+<li><b>허브 위 선반 + 뒤판 받침 2 + 앰프 받침 4</b> — 선반 뒤 2 mm(y329~331)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, 받은 앰프로 재서 옮김) - 사양 STANDOFFS의 &#x27;앰프 2 mm 받침&#x27;을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; x693/907 z46, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 7 (M3 × 12, L78) / 8 (13 mm), 끝에서 뒤판 바깥면까지 4.5 / 3.5); 머리(아래 끝 z43.0)가 선반 윗면 z43.5보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (y282~322, 바닥 1.2 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. 8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)</li>
+<li><b>보조배터리 받침</b> — 배터리 둘레 0.5 틈 (배터리 x286~391 y254~325), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - 구매 목록 v4 L79 = 최종 재료 i221 벨크로 링벨트 20 mm × 30 cm)</li>
 <li><b>XT30 짝 집게 L</b> — XT30U-F 홈 10.6 × 5.6 × 12.4 (x274.6~287.0, 10.2 × 5.2 × 12.4 + 0.2씩), 입구 +x(가운데 쪽)으로 앰프 선 XT30U-M이 꽂힘, 홈 위 걸림 턱 1 × 1.2 (위에서 눌러 끼움); 홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 스피커를 뗄 때 F가 터널로 빠짐, 그래서 홈 안의 F에 M을 대고 밀면 F가 터널로 밀려 들어감 → 짝 꽂기: F를 홈 입구로 가운데 쪽에 당겨 꺼내 (꼬리 여유 약 35 mm) 손으로 M을 끝까지 꽂고, 짝을 다시 가져와 F 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움; 뽑기는 거꾸로 (짝을 입구로 꺼낸 뒤 손으로 뽑음); 옆벽 밑에 45° 받침 2개를 판의 구멍 아래 부분까지 (출력 때 옆벽·바닥이 구멍 위에 뜨지 않게); 끝벽에 붙는 판 x271.5~274.5 y233.5~252.5 z28.0~54.0 (구멍 둘레 2.5~3), MS 폴리머로 붙임; 스피커 꼬리의 여유 약 35 mm는 터널 안에 느슨하게 1.5바퀴 감김 (C-SPKPIG, 스피커 밖 꼬리 약 54 mm)</li>
 <li><b>XT30 짝 집게 R</b> — XT30U-F 홈 10.6 × 5.6 × 12.4 (x935.0~947.4, 10.2 × 5.2 × 12.4 + 0.2씩), 입구 −x(가운데 쪽)으로 앰프 선 XT30U-M이 꽂힘, 홈 위 걸림 턱 1 × 1.2 (위에서 눌러 끼움); 홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 스피커를 뗄 때 F가 터널로 빠짐, 그래서 홈 안의 F에 M을 대고 밀면 F가 터널로 밀려 들어감 → 짝 꽂기: F를 홈 입구로 가운데 쪽에 당겨 꺼내 (꼬리 여유 약 35 mm) 손으로 M을 끝까지 꽂고, 짝을 다시 가져와 F 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움; 뽑기는 거꾸로 (짝을 입구로 꺼낸 뒤 손으로 뽑음); 옆벽 밑에 45° 받침 2개를 판의 구멍 아래 부분까지 (출력 때 옆벽·바닥이 구멍 위에 뜨지 않게); 끝벽에 붙는 판 x947.5~950.5 y280.5~299.5 z39.5~59.5 (구멍 둘레 2.5~3), MS 폴리머로 붙임; 스피커 꼬리의 여유 약 35 mm는 터널 안에 느슨하게 1.5바퀴 감김 (C-SPKPIG, 스피커 밖 꼬리 약 54 mm)</li>
 <li><b>보드 받침 기둥</b> — 기둥 Ø6 × 6 (x545.5 y265.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 &#x27;받침 판&#x27;(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음 (같은 부품 4개, 자리만 다름)</li>
@@ -361,14 +420,15 @@
 <li><b>화면 전원선 검정 GND</b> — 선 Ø1.1, 두 가닥 간격 1.3 (화면 안·클립 홈 안에서 나란히), 화면 쪽 끝은 MX1.25 안 2 mm, Pi 쪽 F 점퍼 하우징 2.5 × 2.5 × 14가 핀 6에 (헤더 받침 위 z26.6~40.6 - 헤더 상자는 핀 끝까지 한 덩어리라 겹침); 길이 모델 321.8 (하우징 윗면 아래 1까지) + 하우징·핀 9 + 꽂는 여유 15 ≈ 346 / W1 계산 344.95 / 있는 길이 500~550 (점퍼 20 cm × 2 + Waveshare 3핀 선 약 100~150)</li>
 </ul>
 <h3>파일</h3><div class="tbl files"><table><tbody>
-<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL — 전부 이름 끝 개수만큼 뽑으면 악기 1대 + 공구 1벌 (01~07, 04 패드 바는 구매한 PORON 5T용). 한 파일 묶음: Toccata_출력STL_전체.zip</td></tr>
-<tr><td><code>hardware/mechanical/cad/stl/print_extra/</code></td><td>꼭 뽑지 않아도 되는 것: 선택 화면 덮개, PORON 6T용 패드 바(대안), 예비 건반</td></tr>
+<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL — 전부 이름 끝 개수만큼 뽑으면 악기 1대 + 공구 1벌(06) + 합판 지그 1벌(08) (01~08, 04 패드 바는 구매한 PORON 5T용). 한 파일 묶음: Toccata_출력STL_전체.zip</td></tr>
+<tr><td><code>hardware/mechanical/cad/stl/print_extra/</code></td><td>꼭 뽑지 않아도 되는 것: 선택 화면 덮개, 선택 합판 지그(J-f 사포 막대), PORON 6T용 패드 바(대안), 예비 건반</td></tr>
+<tr><td><code>hardware/mechanical/cad/jigs/</code></td><td>합판 지그 사용 설명서 README.md (지그 STL은 stl/print/08_합판지그, 생성 src/plywood_jigs.py, 확인 src/check_plywood_jigs.py)</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/annotated/</code></td><td>치수를 붙인 보기용 STL (08_합판재단은 합판 조각)</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/assembly/</code></td><td>그룹별 조립 STL과 Toccata_전체조립.stl</td></tr>
 <tr><td><code>hardware/mechanical/cad/Toccata_전체조립.3mf / .glb</code></td><td>색·이름이 붙은 전체 조립</td></tr>
 <tr><td><code>hardware/mechanical/cad/manifest.json</code></td><td>부품마다 id·이름·종류·그룹·외곽·출력 파일</td></tr>
 <tr><td><code>hardware/mechanical/cad/spec/</code></td><td>문서에서 뽑은 세부 사양(출처 포함)</td></tr>
 <tr><td><code>hardware/mechanical/cad/viewer/</code></td><td>이 탭의 원본 (gen_viewer.py가 만듦)</td></tr>
-<tr><td><code>hardware/mechanical/cad/src/</code></td><td>생성기 (build_all.py 한 번으로 STL·manifest·README·이 탭 데이터까지; keyaction*.py, body.py (L2), electronics.py; L1은 body_L1.py·electronics_L1.py로 보관)</td></tr>
+<tr><td><code>hardware/mechanical/cad/src/</code></td><td>생성기 (build_all.py 한 번으로 STL·manifest·README·이 탭 데이터까지; keyaction*.py, body.py (L2), electronics.py, plywood_jigs.py; L1은 body_L1.py·electronics_L1.py로 보관)</td></tr>
 </tbody></table></div>
 </section>

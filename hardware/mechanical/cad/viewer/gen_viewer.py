@@ -133,7 +133,7 @@ def main():
 
     # ---------------- static section
     pr = [r for r in man["print"] if not r.get("extra")] + [r for r in man["print"] if r.get("extra")]
-    n_print = sum(r["qty"] for r in pr if not r.get("extra") and not r["folder"].startswith("06"))       # instrument parts in stl/print
+    n_print = sum(r["qty"] for r in pr if not r.get("extra") and not r["folder"].startswith(("06", "08")))   # instrument parts (no tools / jigs)
     kinds = collections.Counter(p["kind"] for p in man["parts"] if p.get("note") not in ("offdesk", "altview"))
     H = []
     a = H.append
@@ -185,9 +185,11 @@ def main():
       '<div class="glist"></div></details></div></div>' % len(groups))
 
     # print list
-    a('<h3>출력 목록 (stl/print %d종 · 악기 부품 %d개 + 공구 1벌)</h3>' % (len([r for r in pr if not r.get("extra")]), n_print))
+    a('<h3>출력 목록 (stl/print %d종 · 악기 부품 %d개 + 공구 1벌 + 합판 지그 1벌)</h3>' % (len([r for r in pr if not r.get("extra")]), n_print))
     a('<p class="small muted">파일은 <code>hardware/mechanical/cad/stl/print/</code>에 있습니다. 파일 이름 끝이 출력 개수이고, 부품은 이미 베드 위 방향으로 놓여 있습니다. '
-      '같은 이름으로 <code>stl/annotated/</code>에 치수선과 숫자를 붙인 보기용 STL이 있습니다(출력 금지). 질량은 속을 꽉 채운 PETG 기준입니다.</p>')
+      '같은 이름으로 <code>stl/annotated/</code>에 치수선과 숫자를 붙인 보기용 STL이 있습니다(출력 금지). 질량은 속을 꽉 채운 PETG 기준입니다. '
+      '<code>08_합판지그</code>는 합판 구멍·홈·자석 자리를 뚫는 지그 1벌이고(J-b 새들 4개는 판 두께에 맞는 것을 고르려고 모두 뽑음), 쓰는 법은 '
+      '<code>hardware/mechanical/cad/jigs/README.md</code>입니다.</p>')
     by = collections.OrderedDict()
     for r in pr:
         by.setdefault(r["folder"], []).append(r)
@@ -227,11 +229,12 @@ def main():
         a('<li><b>%s</b> — %s%s</li>' % (esc(name), esc(txt), esc(" (같은 부품 %d개, 자리만 다름)" % cnt) if nvar > 1 else ""))
     a('</ul>')
     a('<h3>파일</h3><div class="tbl files"><table><tbody>')
-    for k, v in [("stl/print/", "출력용 STL — 전부 이름 끝 개수만큼 뽑으면 악기 1대 + 공구 1벌 (01~07, 04 패드 바는 구매한 PORON 5T용). 한 파일 묶음: Toccata_출력STL_전체.zip"), ("stl/print_extra/", "꼭 뽑지 않아도 되는 것: 선택 화면 덮개, PORON 6T용 패드 바(대안), 예비 건반"), ("stl/annotated/", "치수를 붙인 보기용 STL (08_합판재단은 합판 조각)"),
+    for k, v in [("stl/print/", "출력용 STL — 전부 이름 끝 개수만큼 뽑으면 악기 1대 + 공구 1벌(06) + 합판 지그 1벌(08) (01~08, 04 패드 바는 구매한 PORON 5T용). 한 파일 묶음: Toccata_출력STL_전체.zip"), ("stl/print_extra/", "꼭 뽑지 않아도 되는 것: 선택 화면 덮개, 선택 합판 지그(J-f 사포 막대), PORON 6T용 패드 바(대안), 예비 건반"),
+                 ("jigs/", "합판 지그 사용 설명서 README.md (지그 STL은 stl/print/08_합판지그, 생성 src/plywood_jigs.py, 확인 src/check_plywood_jigs.py)"), ("stl/annotated/", "치수를 붙인 보기용 STL (08_합판재단은 합판 조각)"),
                  ("stl/assembly/", "그룹별 조립 STL과 Toccata_전체조립.stl"), ("Toccata_전체조립.3mf / .glb", "색·이름이 붙은 전체 조립"),
                  ("manifest.json", "부품마다 id·이름·종류·그룹·외곽·출력 파일"), ("spec/", "문서에서 뽑은 세부 사양(출처 포함)"),
                  ("viewer/", "이 탭의 원본 (gen_viewer.py가 만듦)"),
-                 ("src/", "생성기 (build_all.py 한 번으로 STL·manifest·README·이 탭 데이터까지; keyaction*.py, body.py (L2), electronics.py; "
+                 ("src/", "생성기 (build_all.py 한 번으로 STL·manifest·README·이 탭 데이터까지; keyaction*.py, body.py (L2), electronics.py, plywood_jigs.py; "
                           "L1은 body_L1.py·electronics_L1.py로 보관)")]:
         a('<tr><td><code>hardware/mechanical/cad/%s</code></td><td>%s</td></tr>' % (esc(k), esc(v)))
     a('</tbody></table></div>')

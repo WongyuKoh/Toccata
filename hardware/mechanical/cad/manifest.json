@@ -1507,14 +1507,14 @@
    "qty": 1,
    "folder": "05_본체출력물",
    "size_mm": [
-    109.0,
-    75.0,
+    121.0,
+    88.0,
     14.0
    ],
-   "volume_cm3": 21.96,
-   "mass_g_solid_petg": 27.9,
+   "volume_cm3": 23.91,
+   "mass_g_solid_petg": 30.4,
    "material": "PETG 회색",
-   "note": "바닥을 베드에. 끈 구멍은 브리지 22. 서포트 없음",
+   "note": "바닥과 나사 귀 4개를 베드에. 끈 구멍은 브리지 22. 서포트 없음",
    "ids": [
     "CU-PBHOLDER"
    ],
@@ -1883,6 +1883,556 @@
    "ids": [],
    "name_ko": "공구 밸런스핀높이게이지 T3",
    "variant": true
+  },
+  {
+   "file": "stl/print/08_합판지그/J-a1_스피커안쪽옆판_L__1개.stl",
+   "name": "J-a1_스피커안쪽옆판_L",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    122.0,
+    60.0,
+    21.0
+   ],
+   "volume_cm3": 40.74,
+   "mass_g_solid_petg": 51.7,
+   "material": "PETG",
+   "note": "옆판 L 이음면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-a1 스피커안쪽옆판 L",
+   "variant": true,
+   "extra": false,
+   "jig": "J-a1",
+   "mass_g_print_est": 34.8,
+   "print_min_est": 58.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-a2_스피커안쪽옆판_R__1개.stl",
+   "name": "J-a2_스피커안쪽옆판_R",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    122.0,
+    60.0,
+    21.0
+   ],
+   "volume_cm3": 43.65,
+   "mass_g_solid_petg": 55.4,
+   "material": "PETG",
+   "note": "옆판 R 이음면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-a2 스피커안쪽옆판 R",
+   "variant": true,
+   "extra": false,
+   "jig": "J-a2",
+   "mass_g_print_est": 36.9,
+   "print_min_est": 61.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-a3_끝벽_L__1개.stl",
+   "name": "J-a3_끝벽_L",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    122.0,
+    65.35,
+    21.0
+   ],
+   "volume_cm3": 45.8,
+   "mass_g_solid_petg": 58.2,
+   "material": "PETG",
+   "note": "끝벽 L 안쪽 면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-a3 끝벽 L",
+   "variant": true,
+   "extra": false,
+   "jig": "J-a3",
+   "mass_g_print_est": 39.0,
+   "print_min_est": 64.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-a4_끝벽_R__1개.stl",
+   "name": "J-a4_끝벽_R",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    122.0,
+    65.35,
+    21.0
+   ],
+   "volume_cm3": 48.24,
+   "mass_g_solid_petg": 61.3,
+   "material": "PETG",
+   "note": "끝벽 R 안쪽 면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-a4 끝벽 R",
+   "variant": true,
+   "extra": false,
+   "jig": "J-a4",
+   "mass_g_print_est": 40.7,
+   "print_min_est": 67.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-a5_XT30_Ø14_표시원판__1개.stl",
+   "name": "J-a5_XT30_Ø14_표시원판",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    14.0,
+    14.0,
+    7.5
+   ],
+   "volume_cm3": 0.44,
+   "mass_g_solid_petg": 0.6,
+   "material": "PETG",
+   "note": "XT30 Ø14 원 그리기: 핀을 끝벽 Ø4 안내 구멍에 꽂고 연필로 원. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-a5 XT30 Ø14 표시원판",
+   "variant": true,
+   "extra": false,
+   "jig": "J-a5",
+   "mass_g_print_est": 0.6,
+   "print_min_est": 5.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈11.3__1개.stl",
+   "name": "J-b_모서리자석새들_틈11.3",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    30.0,
+    20.3,
+    24.0
+   ],
+   "volume_cm3": 10.38,
+   "mass_g_solid_petg": 13.2,
+   "material": "PETG",
+   "note": "모서리 자석 새들 (틈 11.3): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-b 모서리자석새들 틈11.3",
+   "variant": true,
+   "extra": false,
+   "jig": "J-b11.3",
+   "mass_g_print_est": 7.2,
+   "print_min_est": 18.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈11.6__1개.stl",
+   "name": "J-b_모서리자석새들_틈11.6",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    30.0,
+    20.6,
+    24.0
+   ],
+   "volume_cm3": 10.51,
+   "mass_g_solid_petg": 13.3,
+   "material": "PETG",
+   "note": "모서리 자석 새들 (틈 11.6): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-b 모서리자석새들 틈11.6",
+   "variant": true,
+   "extra": false,
+   "jig": "J-b11.6",
+   "mass_g_print_est": 7.2,
+   "print_min_est": 19.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈11.9__1개.stl",
+   "name": "J-b_모서리자석새들_틈11.9",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    30.0,
+    20.9,
+    24.0
+   ],
+   "volume_cm3": 10.64,
+   "mass_g_solid_petg": 13.5,
+   "material": "PETG",
+   "note": "모서리 자석 새들 (틈 11.9): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-b 모서리자석새들 틈11.9",
+   "variant": true,
+   "extra": false,
+   "jig": "J-b11.9",
+   "mass_g_print_est": 7.4,
+   "print_min_est": 19.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈12.2__1개.stl",
+   "name": "J-b_모서리자석새들_틈12.2",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    30.0,
+    21.2,
+    24.0
+   ],
+   "volume_cm3": 10.76,
+   "mass_g_solid_petg": 13.7,
+   "material": "PETG",
+   "note": "모서리 자석 새들 (틈 12.2): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-b 모서리자석새들 틈12.2",
+   "variant": true,
+   "extra": false,
+   "jig": "J-b12.2",
+   "mass_g_print_est": 7.4,
+   "print_min_est": 19.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-c1_뚜껑L_밑면자석__1개.stl",
+   "name": "J-c1_뚜껑L_밑면자석",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    232.0,
+    79.6,
+    21.0
+   ],
+   "volume_cm3": 51.65,
+   "mass_g_solid_petg": 65.6,
+   "material": "PETG",
+   "note": "뚜껑 L 밑면 자석: J-d로 배기 홈을 먼저 뚫고, 혀를 홈에 넣어 댐. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-c1 뚜껑L 밑면자석",
+   "variant": true,
+   "extra": false,
+   "jig": "J-c1",
+   "mass_g_print_est": 45.1,
+   "print_min_est": 73.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-c2_뚜껑R_밑면자석__1개.stl",
+   "name": "J-c2_뚜껑R_밑면자석",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    241.1,
+    79.6,
+    21.0
+   ],
+   "volume_cm3": 52.97,
+   "mass_g_solid_petg": 67.3,
+   "material": "PETG",
+   "note": "뚜껑 R 밑면 자석: J-d로 배기 홈을 먼저 뚫고, 혀를 홈에 넣어 댐. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-c2 뚜껑R 밑면자석",
+   "variant": true,
+   "extra": false,
+   "jig": "J-c2",
+   "mass_g_print_est": 46.2,
+   "print_min_est": 75.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d1a_뚜껑L_홈틀__1개.stl",
+   "name": "J-d1a_뚜껑L_홈틀",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    56.7,
+    84.25,
+    12.0
+   ],
+   "volume_cm3": 16.53,
+   "mass_g_solid_petg": 21.0,
+   "material": "PETG",
+   "note": "뚜껑 L 배기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d1a 뚜껑L 홈틀",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d1a",
+   "mass_g_print_est": 14.6,
+   "print_min_est": 27.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d1b_뚜껑L_홈슬라이더__1개.stl",
+   "name": "J-d1b_뚜껑L_홈슬라이더",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    30.0,
+    62.2,
+    14.0
+   ],
+   "volume_cm3": 18.33,
+   "mass_g_solid_petg": 23.3,
+   "material": "PETG",
+   "note": "뚜껑 L 배기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d1b 뚜껑L 홈슬라이더",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d1b",
+   "mass_g_print_est": 15.2,
+   "print_min_est": 28.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d1c_뚜껑L_홈심_1.73__1개.stl",
+   "name": "J-d1c_뚜껑L_홈심_1.73",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    9.73,
+    24.0,
+    8.0
+   ],
+   "volume_cm3": 0.9,
+   "mass_g_solid_petg": 1.1,
+   "material": "PETG",
+   "note": "뚜껑 L 배기 홈 심 1.73: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d1c 뚜껑L 홈심 1.73",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d1c",
+   "mass_g_print_est": 1.1,
+   "print_min_est": 6.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d2a_뚜껑R_홈틀__1개.stl",
+   "name": "J-d2a_뚜껑R_홈틀",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    124.75,
+    69.2,
+    12.0
+   ],
+   "volume_cm3": 26.91,
+   "mass_g_solid_petg": 34.2,
+   "material": "PETG",
+   "note": "뚜껑 R 배기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d2a 뚜껑R 홈틀",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d2a",
+   "mass_g_print_est": 22.8,
+   "print_min_est": 39.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d2b_뚜껑R_홈슬라이더__1개.stl",
+   "name": "J-d2b_뚜껑R_홈슬라이더",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    94.2,
+    39.52,
+    14.0
+   ],
+   "volume_cm3": 38.4,
+   "mass_g_solid_petg": 48.8,
+   "material": "PETG",
+   "note": "뚜껑 R 배기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d2b 뚜껑R 홈슬라이더",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d2b",
+   "mass_g_print_est": 29.7,
+   "print_min_est": 49.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d2c_뚜껑R_홈심_1.89__1개.stl",
+   "name": "J-d2c_뚜껑R_홈심_1.89",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    9.89,
+    24.0,
+    8.0
+   ],
+   "volume_cm3": 0.93,
+   "mass_g_solid_petg": 1.2,
+   "material": "PETG",
+   "note": "뚜껑 R 배기 홈 심 1.89: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d2c 뚜껑R 홈심 1.89",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d2c",
+   "mass_g_print_est": 1.2,
+   "print_min_est": 6.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d3a_뒤판_홈틀__1개.stl",
+   "name": "J-d3a_뒤판_홈틀",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    242.75,
+    34.05,
+    12.0
+   ],
+   "volume_cm3": 31.52,
+   "mass_g_solid_petg": 40.0,
+   "material": "PETG",
+   "note": "가운데 뒤판 환기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d3a 뒤판 홈틀",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d3a",
+   "mass_g_print_est": 28.6,
+   "print_min_est": 47.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d3b_뒤판_홈슬라이더__1개.stl",
+   "name": "J-d3b_뒤판_홈슬라이더",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    78.2,
+    15.49,
+    14.0
+   ],
+   "volume_cm3": 12.04,
+   "mass_g_solid_petg": 15.3,
+   "material": "PETG",
+   "note": "가운데 뒤판 환기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d3b 뒤판 홈슬라이더",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d3b",
+   "mass_g_print_est": 11.0,
+   "print_min_est": 22.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d3c_뒤판_홈심_1.57__1개.stl",
+   "name": "J-d3c_뒤판_홈심_1.57",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    9.57,
+    24.0,
+    8.0
+   ],
+   "volume_cm3": 0.87,
+   "mass_g_solid_petg": 1.1,
+   "material": "PETG",
+   "note": "가운데 뒤판 환기 홈 심 1.57: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d3c 뒤판 홈심 1.57",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d3c",
+   "mass_g_print_est": 1.1,
+   "print_min_est": 6.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d4a_아랫판_홈틀__1개.stl",
+   "name": "J-d4a_아랫판_홈틀",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    172.25,
+    72.7,
+    12.0
+   ],
+   "volume_cm3": 22.37,
+   "mass_g_solid_petg": 28.4,
+   "material": "PETG",
+   "note": "가운데 아랫판 흡기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d4a 아랫판 홈틀",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d4a",
+   "mass_g_print_est": 21.2,
+   "print_min_est": 36.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d4b_아랫판_홈슬라이더__1개.stl",
+   "name": "J-d4b_아랫판_홈슬라이더",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    154.2,
+    52.2,
+    14.0
+   ],
+   "volume_cm3": 66.79,
+   "mass_g_solid_petg": 84.8,
+   "material": "PETG",
+   "note": "가운데 아랫판 흡기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d4b 아랫판 홈슬라이더",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d4b",
+   "mass_g_print_est": 49.1,
+   "print_min_est": 77.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-d4c_아랫판_홈심_2.00__1개.stl",
+   "name": "J-d4c_아랫판_홈심_2.00",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    10.0,
+    24.0,
+    8.0
+   ],
+   "volume_cm3": 0.95,
+   "mass_g_solid_petg": 1.2,
+   "material": "PETG",
+   "note": "가운데 아랫판 흡기 홈 심 2.00: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-d4c 아랫판 홈심 2.00",
+   "variant": true,
+   "extra": false,
+   "jig": "J-d4c",
+   "mass_g_print_est": 1.2,
+   "print_min_est": 6.0
+  },
+  {
+   "file": "stl/print/08_합판지그/J-e_깊이게이지·시험블록__1개.stl",
+   "name": "J-e_깊이게이지·시험블록",
+   "qty": 1,
+   "folder": "08_합판지그",
+   "size_mm": [
+    134.0,
+    24.0,
+    26.0
+   ],
+   "volume_cm3": 59.67,
+   "mass_g_solid_petg": 75.8,
+   "material": "PETG",
+   "note": "깊이 게이지(척을 멈춤으로 쓰는 날 길이 맞추기) + 자투리 시험 구멍 — 가장 먼저 뽑음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-e 깊이게이지·시험블록",
+   "variant": true,
+   "extra": false,
+   "jig": "J-e",
+   "mass_g_print_est": 30.4,
+   "print_min_est": 53.0
+  },
+  {
+   "file": "stl/print_extra/선택_합판지그/J-f_홈다듬기_사포막대__1개.stl",
+   "name": "J-f_홈다듬기_사포막대",
+   "qty": 1,
+   "folder": "@extra/선택_합판지그",
+   "size_mm": [
+    180.0,
+    20.0,
+    8.0
+   ],
+   "volume_cm3": 11.99,
+   "mass_g_solid_petg": 15.2,
+   "material": "PETG",
+   "note": "4 mm 홈 사포 막대 (선택). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "ids": [],
+   "name_ko": "J-f 홈다듬기 사포막대",
+   "variant": true,
+   "extra": true,
+   "jig": "J-f",
+   "mass_g_print_est": 10.1,
+   "print_min_est": 19.0
   },
   {
    "file": "stl/print_extra/예비_건반/백건_C__1개.stl",
@@ -28038,7 +28588,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x292, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래."
+   "note": "사양 그대로: (x292, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 보조배터리 받침 귀 접시 8호 13 (278, 257), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-06",
@@ -28058,7 +28608,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x611, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래."
+   "note": "사양 그대로: (x611, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 153.2, 나사산 사이 나무 149.0 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-07",
@@ -28078,7 +28628,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x930, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래."
+   "note": "사양 그대로: (x930, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 466.6, 나사산 사이 나무 462.4 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-08",
@@ -28098,7 +28648,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x292, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래."
+   "note": "사양 그대로: (x292, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 보조배터리 받침 귀 접시 8호 13 (278, 325), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-09",
@@ -28118,7 +28668,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x611, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래."
+   "note": "사양 그대로: (x611, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 145.2, 나사산 사이 나무 141.0 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-10",
@@ -28138,7 +28688,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x930, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래."
+   "note": "사양 그대로: (x930, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 464.1, 나사산 사이 나무 459.9 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-11",
@@ -29118,7 +29668,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/뒤판출력물_IO__1개.stl",
    "source": "spec/body_L2.json centre.back_plate_io (x397.5~538 y331~342.5 z16.5~61.35; 구멍 x/z: 케이블 통과 Ø12 (405, 38), USB-C PD 입력 (421, 38), KCD1 13.2×19.2 (438.5, 38.5) 2 mm 오목 자리에 테두리 → y342.5와 같은 면, J501 Ø6 (462.5, 40.5); 루버 x480~536 z18~46) + centre_contents CU-E-PDTRIG / CU-E-J501BOARD / CU-E-SWITCH",
-   "note": "사양과 다름(작은 고침): 판에 얹히는 HUSB238·J501 기판·J501·KCD1 자리와 판 주머니·잭 받침을 사양 상자보다 y+1.0 (뒤판이 40° 규칙으로 y341.5 → 342.5로 옮겨 감; 사양 그대로면 USB-C 입구 앞을 판 1.0 mm가 막음); 추정: 바깥 판 2 (y340.5~342.5) + 테 (위 4 · 아래 1.5 · 옆 2) - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 테두리(15.4×21.4)는 바깥면과 같은 높이; USB-C 입구 13 × 7.5 (바깥 판), HUSB238 주머니 x415.8~426.2 z35.6~40.4 (입구가 바깥면에서 2 안); J501 기판 받침 x449~476.5 y316.5~340.5 윗면 z36.4 (기판 밑) + 세운 받침벽 2 (x452~454/472~474, 2 두께, y320~340.5 z20.5~30: 바깥 판에서 곧게 올라 받침과 뒤 탭을 이음 - 출력 때 내민 면 없음); 루버 x480~534 (사양 536 → 옆 테 2를 남김) z18~46 3×6; 바닥 탭 2개 (x400~414, 452~474, y316~340.5, z16.5~20.5)에 접시 8호 13 mm를 아랫판으로: 왼쪽 (407, 322) (아랫판 뒤 모서리 y331에서 9), 오른쪽은 J501 받침이 탭 전체를 덮어 드라이버가 닿지 않으므로 탭에서 앞으로 낸 혀 x459.5~472.5 y304~316의 (466, 311.5) - 드라이버 Ø6 길이 받침·J501 기판 앞 1.0 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인) - 창 옆은 틈 없이 끼움"
+   "note": "사양과 다름(작은 고침): 판에 얹히는 HUSB238·J501 기판·J501·KCD1 자리와 판 주머니·잭 받침을 사양 상자보다 y+1.0 (뒤판이 40° 규칙으로 y341.5 → 342.5로 옮겨 감; 사양 그대로면 USB-C 입구 앞을 판 1.0 mm가 막음); 추정: 바깥 판 2 (y340.5~342.5) + 테 (위 4 · 아래 1.5 · 옆 2) - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 테두리(15.4×21.4)는 바깥면과 같은 높이; USB-C 입구 13 × 7.5 (바깥 판), HUSB238 주머니 x415.8~426.2 z35.6~40.4 (입구가 바깥면에서 2 안); J501 기판 받침 x449~476.5 y316.5~340.5 윗면 z36.4 (기판 밑) + 세운 받침벽 2 (x452~454/472~474, 2 두께, y320~340.5 z20.5~30: 바깥 판에서 곧게 올라 받침과 뒤 탭을 이음 - 출력 때 내민 면 없음); 루버 x480~534 (사양 536 → 옆 테 2를 남김) z18~46 3×6; 바닥 탭 2개 (x400~414, 452~474, y316~340.5, z16.5~20.5)에 접시 8호 13 mm를 아랫판으로: 왼쪽 (407, 322) (아랫판 뒤 모서리 y331에서 9), 오른쪽은 J501 받침이 탭 전체를 덮어 드라이버가 닿지 않으므로 탭에서 앞으로 낸 혀 x459.5~472.5 y304~316의 (466, 311.5) - 드라이버 Ø6 길이 받침·J501 기판 앞 1.0 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인) - 창 옆은 틈 없이 끼움; 탭 나사 끝 z7.5 = 아랫판 밑면 z5 위 2.5 (check_body: 끝 ≥ 1.0, 반대 면 나사와 나사산 사이 ≥ 4)"
   },
   {
    "id": "PR-HUBSHELF",
@@ -29138,27 +29688,27 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/허브선반__1개.stl",
    "source": "spec/body_L2.json centre_contents PR-HUBSHELF (224×47×2, x688~912 y282~329 z41.5~43.5) + PR-SHELFBRK-1/2 (x688~698 / 902~912, y322~330, z41.5~50, 뒤판에 나사) + CU-E-AMP (앰프 2 mm 받침 위 z45.5) + printed_parts PR-HUBSHELF",
-   "note": "추정: 선반 뒤 2 mm(y329~331)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, 받은 앰프로 재서 옮김) - 사양 STANDOFFS의 '앰프 2 mm 받침'을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; x693/907 z46, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 약 9); 머리(아래 끝 z43.0)가 선반 윗면 z43.5보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (y282~322, 바닥 1.2 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. 8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)"
+   "note": "추정: 선반 뒤 2 mm(y329~331)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, 받은 앰프로 재서 옮김) - 사양 STANDOFFS의 '앰프 2 mm 받침'을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; x693/907 z46, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 7 (M3 × 12, L78) / 8 (13 mm), 끝에서 뒤판 바깥면까지 4.5 / 3.5); 머리(아래 끝 z43.0)가 선반 윗면 z43.5보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (y282~322, 바닥 1.2 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. 8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)"
   },
   {
    "id": "CU-PBHOLDER",
-   "name_ko": "보조배터리 받침 (바닥 2, 벽 1.5 × 14, 끈 구멍)",
-   "name_en": "power-bank holder (printed tray)",
+   "name_ko": "보조배터리 받침 (바닥 2, 벽 1.5 × 14, 끈 구멍, 나사 귀 4)",
+   "name_en": "power-bank holder (printed tray, 4 screw ears)",
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
-    284.0,
-    252.0,
+    272.0,
+    242.5,
     16.5,
     393.0,
-    327.0,
+    330.5,
     30.5
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보조배터리받침__1개.stl",
    "source": "spec/body_L2.json centre_contents CU-PBHOLDER (x284~393 y252~327 z16.5~30.5, 바닥 2, 벽 1.5 × 14, 끈 구멍) + PB-E-BANK (Morui MT-65 105×71×32, 선택 O07, USB-C 끝 +x) + Z-BANK-PLUG",
-   "note": "추정: 배터리 둘레 0.5 틈 (배터리 x286~391 y254~325), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - BOM에 없음), 바닥 접시 8호 13 mm 4곳 (289, 272) · (388, 272) · (289, 307) · (388, 307) (모서리 y257/322가 아님: 가운데 아랫판의 고무발 나사 (292, 262)·(292, 320)와 축 사이 10 이상)"
+   "note": "사양과 다름(작은 고침, W1 7번 2026-10-02): 사양 상자 밖에 나사 귀 4개 (두께 4, z16.5~20.5, 뒤판 탭과 같은 두께) - 바닥 2 위 접시 8호 13이면 끝이 z5.5로 아랫판 밑면(z5) 위 0.5뿐 (11.3 합판이면 0.3, 11.0이면 0 = 뚫림), 그리고 옛 자리 (289, 272) · (388, 272) · (289, 307) · (388, 307) 중 x289 두 개는 고무발 (292, 262)·(292, 320)의 Ø28 위 (축 사이 10.4/13.3, 나사산 사이 나무 6.2/9.1). 배터리가 바닥을 0.5 틈으로 꽉 채워 바닥을 두껍게 하면 배터리가 뜨고, 굿나잇몰 L77은 13 mm부터라 짧은 나사 대신 귀를 냄 → 접시 8호 13 4곳 (278, 257) · (278, 325) · (308, 247.5) · (385, 247.5), 머리 z20.5, 끝 z7.5 = 밑면 위 2.5 (11.3 합판이면 2.3), 가운데 고무발 나사 축까지 14.9/14.9/21.6/94.1 (모두 Ø28 패드 밖), 나사산 사이 나무 10.7 이상, 판 모서리 5 이상, 다른 나사 축 8 이상, 나사 수·길이는 그대로 (L77 6개 = 받침 4 + 뒤판 탭 2); 귀: 왼쪽 벽 밖 x272~284 (끝벽 안면 x271.5과 0.5) y251~263 · y319~330.5, 앞 벽 밖 y242.5~252 x302~314 · x379~391 (끈 구멍 x327.5~349.5 앞은 비움; 앞 1.5는 아랫판 앞 R3 위로 0.4 이하 뜸); 드라이버 Ø6 길: 왼쪽 앞은 XT30 집게 뒤 1.5·케이블 집게 E1 앞 2.0, 왼쪽 뒤는 나비나사 L2 뒤 2.0 (check_body가 Ø6 × 80으로 확인); 추정: 배터리 둘레 0.5 틈 (배터리 x286~391 y254~325), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - 구매 목록 v4 L79 = 최종 재료 i221 벨크로 링벨트 20 mm × 30 cm)"
   },
   {
    "id": "XT30-CLIP-L",

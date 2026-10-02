@@ -17,7 +17,9 @@ spec/body_L2.json (stated on the sheets).
 
 Outputs: ../drawings/D01_plan.svg (전체 평면), D02_speaker_section.svg (스피커 단면), D03_centre_sections.svg (가운데 유닛 단면 2개),
 D04_rear_elevation.svg (뒷면 입면 - I/O 판), D05_touchscreen.svg (터치스크린: 사용 25° / 뒤꿈치 22° / 접은 상태),
-D06_plywood_cuts.svg (합판 재단도, 400 x 1200 한 장) + the same names .png; ../renders/R01_front.png, R02_rear_left.png, R03_folded.png.
+D06_plywood_cuts.svg (합판 재단도, 400 x 1200 한 장; each piece drawing says which face is up and draws the datum edges u·v are
+measured from, the printed drilling jig per face (plywood_jigs.py placements) and the screw spots - countersunk, hub shelf, rubber
+feet - found from the parts the screws pass through) + the same names .png; ../renders/R01_front.png, R02_rear_left.png, R03_folded.png.
 Sheets are A2 landscape (594 x 420 mm); the view scales on each sheet are true when printed on A2. PNG = 4 px per sheet mm.
 build_all.py calls main(parts) at the end of a build (a failure - e.g. a DrawingCheckError self check - makes build_all exit 2 after the other outputs are written).
 """
@@ -160,6 +162,9 @@ CSS = """
 .box{fill:#fbfbfc;stroke:#c3c9d3;stroke-width:.2}
 .sheetply{fill:#fbf6ee;stroke:#1d2433;stroke-width:.35}
 .zone{fill:#f4f6f9;stroke:#8a96ab;stroke-width:.2}
+.datum{fill:none;stroke:#15803d;stroke-width:.9;stroke-linecap:round;stroke-opacity:.9}
+.spot{fill:none;stroke:#c2410c;stroke-width:.32}
+.spoth{fill:none;stroke:#c2410c;stroke-width:.32;stroke-dasharray:.45 .3}
 """ % {"font": FONT}
 
 DEFS = """
@@ -440,6 +445,12 @@ class Sheet:
     def circle(self, x, y, r, cls="thin", layer="over"):
         self.add(layer, '<circle class="%s" cx="%.3f" cy="%.3f" r="%.3f"/>' % (cls, x, y, r))
 
+    def spot(self, x, y, cls="spot", r=1.0):
+        """screw spot mark (D06): circle + cross, fixed sheet size (cls 'spoth' = dashed: on the face away from the viewer)."""
+        self.circle(x, y, r, cls)
+        self.line([(x - 1.6 * r, y), (x + 1.6 * r, y)], "spot")
+        self.line([(x, y - 1.6 * r), (x, y + 1.6 * r)], "spot")
+
     def arrow(self, tip, frm, size=2.2, layer="dim", cls="ah"):
         dx, dy = tip[0] - frm[0], tip[1] - frm[1]
         L = math.hypot(dx, dy) or 1.0
@@ -522,12 +533,14 @@ class Sheet:
                  % (m[0], m[1], size, ang, m[0], m[1], esc(text)))
 
     def ordinates_h(self, items, y_base, side=1, size=T_DIM, lo=0.0, hi=None, title=None, title_x=None, minsep=None):
-        """items: [(x, y_feature, label)]; ticks from the feature to the base line y_base, labels rotated past it."""
+        """items: [(x, y_feature, label[, label class])]; ticks from the feature to the base line y_base, labels rotated past it."""
         hi = self.w if hi is None else hi
         items = sorted(items, key=lambda t: t[0])
         half = [size * 0.55] * len(items)
         slots = pack_1d([t[0] for t in items], half, lo, hi, minsep if minsep is not None else size * 0.12)
-        for (x, yf, lab), sx in zip(items, slots):
+        for it, sx in zip(items, slots):
+            x, yf, lab = it[:3]
+            lc = it[3] if len(it) > 3 else "td"
             if yf is not None:
                 sg = 1 if y_base > yf else -1
                 self.line([(x, yf + sg * 0.8), (x, y_base)], "ex", "dim")
@@ -535,18 +548,20 @@ class Sheet:
             y2 = y_base + side * 4.5
             self.line([(x, y_base), (x, y1), (sx, y2), (sx, y2 + side * 1.0)], "dm", "dim")
             self.circle(x, y_base, 0.35, "ah", "dim")
-            self.text(sx + 0.28 * size, y2 + side * 1.6, lab, size, "end" if side > 0 else "start", rot=-90, cls="td")
+            self.text(sx + 0.28 * size, y2 + side * 1.6, lab, size, "end" if side > 0 else "start", rot=-90, cls=lc)
         if title:
             tx = title_x if title_x is not None else lo
             self.text(tx, y_base - side * 1.2 + (size if side < 0 else 0) * 0, title, T_SMALL, "start", cls="tm")
 
     def ordinates_v(self, items, x_base, side=1, size=T_DIM, lo=0.0, hi=None, minsep=None):
-        """items: [(y, x_feature, label)]; horizontal labels beside the base line x_base (side +1 = right)."""
+        """items: [(y, x_feature, label[, label class])]; horizontal labels beside the base line x_base (side +1 = right)."""
         hi = self.h if hi is None else hi
         items = sorted(items, key=lambda t: t[0])
         half = [size * 0.58] * len(items)
         slots = pack_1d([t[0] for t in items], half, lo, hi, minsep if minsep is not None else size * 0.15)
-        for (y, xf, lab), sy in zip(items, slots):
+        for it, sy in zip(items, slots):
+            y, xf, lab = it[:3]
+            lc = it[3] if len(it) > 3 else "td"
             if xf is not None:
                 sg = 1 if x_base > xf else -1
                 self.line([(xf + sg * 0.8, y), (x_base, y)], "ex", "dim")
@@ -554,7 +569,7 @@ class Sheet:
             x2 = x_base + side * 4.5
             self.line([(x_base, y), (x1, y), (x2, sy), (x2 + side * 1.0, sy)], "dm", "dim")
             self.circle(x_base, y, 0.35, "ah", "dim")
-            self.text(x2 + side * 1.6, sy + 0.33 * size, lab, size, "start" if side > 0 else "end", cls="td")
+            self.text(x2 + side * 1.6, sy + 0.33 * size, lab, size, "start" if side > 0 else "end", cls=lc)
 
     def callouts_v(self, items, x_lane, side, lo, hi, size=T_LAB, lh=1.3, gap=1.0):
         """items: [(ax, ay, text)] -> labels stacked in a vertical lane at x_lane (side +1: labels to the right of the lane)."""
@@ -626,6 +641,8 @@ class Sheet:
             cy = y + (i % per) * 5.0
             if cls.startswith("S-") or cls in ("air", "zone", "sheetply"):
                 self.rect(cx, cy, cx + 8, cy + 3.6, cls, "over")
+            elif cls in ("spot", "spoth"):
+                self.spot(cx + 4, cy + 1.8, cls)
             else:
                 self.line([(cx, cy + 1.8), (cx + 8, cy + 1.8)], cls, "over")
             self.text(cx + 10, cy + 2.9, txt, size, halo=False)
@@ -1825,14 +1842,183 @@ def _face_plane(M, fp, fi, d):
     return b[i] + d if fi == 0 else b[i + 3] - d
 
 
-def face_name(M, fp, fi):
+def face_name(M, fp, fi, short_=False):
+    """what the face IS on the instrument (not 'front / back of the board'): z-thick 윗면 / 밑면, y-thick (back plies) 안쪽 면 /
+    바깥면, x-thick: the face toward the middle of the piece's own box = 안쪽 면, the other = 이음면 (pod inner side panel),
+    바깥면 (end wall: speaker side; pod outer side panel: the visible outside)."""
     import body
     b = M.bb(fp["p"])
     i = "xyz".index(fp["ax"])
-    if fp["ax"] == "x":
-        near, far = (b[i], b[i + 3]) if fi == 0 else (b[i + 3], b[i])
-        return "가운데(x%s) 쪽 면" % fnum(body.MIRROR_X) if abs(near - body.MIRROR_X) < abs(far - body.MIRROR_X) else "바깥쪽 면"
-    return {"y": ("앞면", "뒷면"), "z": ("밑면", "윗면")}[fp["ax"]][fi]
+    pid = fp["p"].id
+    if fp["ax"] == "z":
+        return ("밑면", "윗면")[fi]
+    if fp["ax"] == "y":
+        return ("안쪽 면", "바깥면")[fi] if short_ else ("안쪽 면 (앞)", "바깥면 (뒤)")[fi]
+    pod = pid.startswith("SPK")
+    cx = (sum(body.SPK_X["L" if pid.startswith("SPKL") else "R"]) / 2.0) if pod else body.MIRROR_X
+    near, far = (b[i], b[i + 3]) if fi == 0 else (b[i + 3], b[i])
+    if abs(near - cx) < abs(far - cx):
+        return "안쪽 면" if short_ else ("안쪽 면 (스피커 상자 안)" if pod else "안쪽 면 (가운데 유닛 안)")
+    if "SIDEIN" in pid:
+        return "이음면" if short_ else "이음면 (가운데 쪽)"
+    if "-END-" in pid:
+        return "바깥면" if short_ else "바깥면 (스피커 쪽)"
+    return "바깥면" if short_ else "바깥면 (겉)"
+
+
+DRAWN_FACE = {"x": 1, "y": 0, "z": 1}          # face index the piece drawings show (+x side / front / top)
+
+
+def piece_uv(fp, P):
+    """world point -> (u, v) piece coordinates (the drawing's)."""
+    a = {"x": (1, 2), "y": (0, 2), "z": (0, 1)}[fp["ax"]]
+    return (P[a[0]] - fp["org"][0], P[a[1]] - fp["org"][1])
+
+
+def _piece_on_face(M, fps, P, i=None, fi=None, tol=0.05):
+    """plywood piece holding world point P (on face fi of a piece whose thickness axis is i, when given)."""
+    for fp in fps:
+        b = M.bb(fp["p"])
+        if i is not None and ("xyz".index(fp["ax"]) != i or abs(b[i + 3 * fi] - P[i]) > tol):
+            continue
+        if all(b[k] - tol <= P[k] <= b[k + 3] + tol for k in range(3)):
+            return fp
+    return None
+
+
+def ply_spots(M, fps):
+    """screw spots on the plywood - the screws are not modelled and the boards have no hole for them, so they are found from the
+    parts that the screws pass through (built solids):
+      * 접시 8호 13 x6: the D4.5 seats of the countersunk holes in the power-bank tray floor (CU-PBHOLDER) and the back-plate tabs
+        (PR-BACKPLATE), sliced 0.3 above the bottom-ply top -> centre bottom ply, top face
+      * 둥근머리 D3 x2: the D3.4 bracket holes of PR-HUBSHELF (teardrop, roof up: centre = lowest point + d/2), sliced 0.3 in front
+        of the back ply -> centre back ply, inner face
+      * 고무발 8호 13 x14: the FOOT-xx centres -> the bottom plies, underside
+    -> {ply id: [dict(kind, what, u, v, fi)]}"""
+    import body
+    out = collections.defaultdict(list)
+    found = collections.Counter()
+
+    def put(kind, what, P, i, fi):
+        fp = _piece_on_face(M, fps, P, i, fi)
+        if fp is None:
+            raise DrawingCheckError("D06: screw spot %s at (%.1f, %.1f, %.1f) is on no plywood face" % (kind, P[0], P[1], P[2]))
+        u, v = piece_uv(fp, P)
+        if not point_in(fp["proj"], u, v, 1.0):
+            raise DrawingCheckError("D06: screw spot %s at (%.1f, %.1f) of %s is not on wood" % (kind, u, v, fp["p"].id))
+        out[fp["p"].id].append(dict(kind=kind, what=what, u=u, v=v, fi=fi))
+        found[kind] += 1
+
+    for pid, what in (("CU-PBHOLDER", "보조배터리 받침"), ("PR-BACKPLATE", "뒤판 출력물 탭")):
+        for h in hole_list(sec(M.by[pid].solid, "z", body.Z_BOT + 0.3)):
+            if h["round"] and h["d"] < 6.5:
+                put("csk", what, (h["cu"], h["cv"], body.Z_BOT), 2, 1)
+    for h in hole_list(sec(M.by["PR-HUBSHELF"].solid, "y", body.YBI - 0.3)):
+        put("shelf", "허브 선반 받침", (h["cu"], body.YBI, h["v0"] + h["w"] / 2.0), 1, 0)
+    for p in M.rear:
+        if p.id.startswith("FOOT-"):
+            b = M.bb(p)
+            put("foot", "고무발", ((b[0] + b[3]) / 2.0, (b[1] + b[4]) / 2.0, b[5]), 2, 0)
+    want = {"csk": 6, "shelf": 2, "foot": 14}
+    if dict(found) != want:
+        raise DrawingCheckError("D06: screw spots %s, expected %s" % (dict(found), want))
+    return out
+
+
+SPOT_KIND = collections.OrderedDict([("csk", "접시머리 8호 13"), ("shelf", "둥근머리 Ø3 × 12~13"), ("foot", "8호 13")])
+
+
+def ply_jigs(M, fps):
+    """which printed drilling jig (plywood_jigs.py, how to use: cad/jigs/README.md) works on which plywood piece and face, from the
+    jigs' own placements in the model (J-a / J-c bore points, J-b saddle origins on the edges, J-d slot-template boards) - not typed
+    here. -> {ply id: [dict(key, fi (face index) or edge (EDGE_KO index), n)]}"""
+    import plywood_jigs as PJ
+    out = collections.defaultdict(list)
+
+    def add(fp, key, fi=None, edge=None):
+        if fp is None:
+            raise DrawingCheckError("D06: jig %s placed on no plywood piece" % key)
+        for e in out[fp["p"].id]:
+            if e["key"] == key and e["fi"] == fi and e["edge"] == edge:
+                e["n"] += 1
+                return
+        out[fp["p"].id].append(dict(key=key, fi=fi, edge=edge, n=1))
+
+    for j in PJ.make_jigs():
+        if j.key.startswith("J-b"):
+            if j.meta.get("gap") != PJ.SADDLE_GAPS[0]:                 # the 4 gap sizes sit on the same spots
+                continue
+            for _, (R, o) in j.placements.items():
+                w = np.asarray(R, float)[:, 2]
+                i = int(np.argmax(np.abs(w)))
+                fp = None
+                for f in fps:                                           # edge = end face along w of a board not w-thick,
+                    t = "xyz".index(f["ax"])                            # saddle centred in the board thickness
+                    b = M.bb(f["p"])
+                    if t != i and abs(b[i + (3 if w[i] > 0 else 0)] - o[i]) < 0.05 and abs((b[t] + b[t + 3]) / 2.0 - o[t]) < 0.05 \
+                            and all(b[q] - 0.05 <= o[q] <= b[q + 3] + 0.05 for q in range(3)):
+                        fp = f
+                        break
+                if fp is None:
+                    raise DrawingCheckError("D06: J-b saddle at (%.1f, %.1f, %.1f) on no plywood piece" % tuple(o))
+                u, v = piece_uv(fp, o)
+                e = min([(abs(u), 0), (abs(fp["W"] - u), 1), (abs(v), 2), (abs(fp["H"] - v), 3)])[1]
+                add(fp, "J-b", edge=e)
+        elif j.bores and "use" in j.placements and all(bo.get("world") is not None for bo in j.bores):
+            w = np.asarray(j.placements["use"][0], float)[:, 2]               # out of the drilled face, toward the drill
+            i = int(np.argmax(np.abs(w)))
+            fi = 1 if w[i] > 0 else 0
+            for bo in j.bores:
+                fp = _piece_on_face(M, fps, bo["world"], i, fi)
+                add(fp, j.key, fi=fi)
+                if bo["name"] == "xt30":
+                    add(fp, "J-a5", fi=fi)
+    for gr in PJ.slot_groups():
+        fp = next((f for f in fps if re.search(r"(^|-)" + re.escape(gr["board"]) + "$", f["p"].id)), None)
+        w = np.asarray(gr["R"], float)[:, 2]
+        i = int(np.argmax(np.abs(w)))
+        add(fp, gr["key"], fi=1 if w[i] > 0 else 0)
+    return out
+
+
+def gauge_names(d, depth):
+    """J-e depth-gauge hole for a blind hole D d x depth (plywood_jigs.GAUGES: (name, short, bit, depth)) + the thin-board one."""
+    import plywood_jigs as PJ
+    hit = [g for g in PJ.GAUGES if abs(g[2] - d) < 0.15 and abs(g[3] - depth) < 0.15]
+    if not hit:
+        return None
+    alt = [g for g in PJ.GAUGES if abs(g[2] - d) < 0.15 and g[3] < hit[0][3] - 0.05]
+    return hit[0][1] + ("(판 ≤%s: %s)" % (fnum(PJ.SADDLE_GAPS[0], 1), "·".join(g[1] for g in alt)) if alt else "")
+
+
+JIG_ORDER = ("J-a", "J-b", "J-d", "J-c", "J-e")
+
+
+def jig_line(M, fp, jigs, info):
+    """'지그 J-a1 → 이음면 (이 면) · ...' for one piece; '' when no jig works on it."""
+    drawn = DRAWN_FACE[fp["ax"]]
+    items = []
+    for e in jigs:
+        k = e["key"]
+        if k == "J-a5":
+            t = "J-a5 Ø14 원"
+        elif e["edge"] is not None:
+            t = "%s → %s 모서리 ×%d%s" % (k, EDGE_KO[fp["ax"]][e["edge"]], e["n"], " (새들 4종 다 뽑아 맞는 것)" if k == "J-b" else "")
+        else:
+            t = "%s → %s%s" % (k, face_name(M, fp, e["fi"], True), " (이 면)" if e["fi"] == drawn else " (뒤집어서)")
+        items.append((JIG_ORDER.index(k[:3]) if k[:3] in JIG_ORDER else 9, k, t))
+    gs = collections.OrderedDict()
+    for h in info["blind"]:
+        g = gauge_names(h["d"] if h["round"] else h["w"], h["depth"])
+        if g:
+            gs[g] = 1
+    for pk in info["pockets"]:
+        g = gauge_names(pk["w"], pk["depth"])
+        if g:
+            gs[g] = 1
+    if gs:
+        items.append((JIG_ORDER.index("J-e"), "J-e", "J-e " + " · ".join(gs)))
+    return " · ".join(t for _, _, t in sorted(items))
 
 
 def blind_depth(M, fp, h, fi):
@@ -2012,7 +2198,7 @@ def piece_memo(fp, M):
             ax_l = "u" if e in (2, 3) else "v"
             what = "자석 자리" if mg else "구멍"
             memo.append("%s 모서리 %s Ø%s × %s ×%d" % (edge_ko[e], what, fnum(w_, 1), fnum(dp, 1), len(g)))
-            notes.append("%s 모서리 %s: 모서리 안으로 Ø%s × 깊이 %s ×%d (판 두께 가운데, 양쪽 벽 %s; 중심 %s%s) — 판을 붙이기 전에 포스트너 비트로"
+            notes.append("%s 모서리 %s: 모서리 안으로 Ø%s × 깊이 %s ×%d (판 두께 가운데, 양쪽 벽 %s; 중심 %s%s) — 판을 붙이기 전에 J-b 새들 + 트위스트 드릴로"
                          % (edge_ko[e], what, fnum(w_, 1), fnum(dp, 1), len(g), fnum((fp["T"] - w_) / 2, 2), ax_l,
                             "·".join(fnum(pk["c"], 2) for pk in g)))
     return dict(outer=outer, thru=thru, blind=blind, memo=memo, bevel=bevel, pockets=pockets, notes=notes)
@@ -2029,6 +2215,7 @@ def hole_sig(fp, info, mirror=False):
     s += [("b", round(h["w"], 1), round(h["h"], 1), round(h["depth"], 1), U(h["cu"]), round(h["cv"], 1)) for h in info["blind"]]
     s += [("p", pk["edge"] if not flip or pk["edge"] in (2, 3) else 1 - pk["edge"], round(pk["w"], 1), round(pk["depth"], 1),
            U(pk["c"]) if pk["edge"] in (2, 3) else round(pk["c"], 1)) for pk in info["pockets"]]
+    s += [("s", sp["kind"], sp["fi"], U(sp["u"]), round(sp["v"], 1)) for sp in info.get("spots", [])]
     return sorted(s)
 
 
@@ -2098,6 +2285,11 @@ def sheet_D06(M):
     used_w = max(a["x"] + a["W"] for a in placed)
     used_h = max(a["y"] + a["H"] for a in placed)
     info = {id(a): piece_memo(a["fp"], M) for a in placed}
+    fps_all = [a["fp"] for a in placed]
+    spots = ply_spots(M, fps_all)                        # screw spots (no jig): countersunk 6, hub shelf 2, rubber feet 14
+    jigmap = ply_jigs(M, fps_all)                        # printed drilling jigs (plywood_jigs.py) per piece and face
+    for a in placed:
+        info[id(a)]["spots"] = spots.get(a["fp"]["p"].id, [])
     types = collections.OrderedDict()
     for a in placed:
         key = re.sub(r"-END-[LR]$", "-END", re.sub(r"^SPK[LR]-", "SPK-", a["fp"]["p"].id))
@@ -2107,8 +2299,9 @@ def sheet_D06(M):
         pid = a["fp"]["p"].id
         return "R" if re.search(r"^SPKR-|-R$", pid) else ("L" if re.search(r"^SPKL-|-L$", pid) else "")
 
-    # one drawing per type; an L·R type is split into its own L and R drawings when the hole / pocket positions are
-    # not mirror-equal (e.g. the R inner side panel and the R end wall have their holes elsewhere: XT30-CLIP-R, JOIN-*-R2)
+    # one drawing per type; an L·R type is split into its own L and R drawings when the hole / pocket / screw-spot positions
+    # are not mirror-equal (e.g. the R inner side panel and the R end wall have their holes elsewhere: XT30-CLIP-R, JOIN-*-R2).
+    # A drawn L·R pair always shows the L piece.
     groups = collections.OrderedDict()
     lab_of = {}
     split = []
@@ -2129,14 +2322,18 @@ def sheet_D06(M):
                     lab_of[id(a)] = lab
         else:
             lab = "P%d" % n_
-            groups[lab] = dict(n=n_, lst=lst, side="", pair=bool(Ls and Rs))
+            groups[lab] = dict(n=n_, lst=(Ls + Rs + [a for a in lst if a not in Ls and a not in Rs]) if Ls else lst,
+                               side="", pair=bool(Ls and Rs))
             for a in lst:
                 lab_of[id(a)] = lab
-    # ---- nesting view (1:3)
-    k = 1 / 3.0
-    v = View(sh, k, (0.0, SW, 0.0, SH_), (48.0, 44.0))
+    # ---- nesting view
+    KN = 4.0
+    k = 1 / KN
+    sh.scale_txt = "재단 1:%s · 부품 1:4 / 1:5" % fnum(KN)
+    v = View(sh, k, (0.0, SW, 0.0, SH_), (48.0, 40.0))
     x0, y0, x1, y1 = v.rect
-    sh.heading(16, 24, "합판 재단도 — 오꾸메 11.5T, 400 × 1200 한 장", "1:3 · 톱날 %s · P 번호 = 아래 조각도 · 연한 색 = 남는 조각" % fnum(kerf))
+    sh.heading(16, 24, "합판 재단도 — 오꾸메 11.5T, 400 × 1200 한 장", "1:%s · 톱날 %s · P 번호 = 아래 조각도 · 연한 색 = 남는 조각"
+               % (fnum(KN), fnum(kerf)))
     v.area([np.array([(0, 0), (SW, 0), (SW, SH_), (0, SH_)])], "sheetply")
     sh.used.add("wood")
     for a in placed:
@@ -2153,37 +2350,84 @@ def sheet_D06(M):
     plyA = sum(a["fp"]["proj"].area() for a in placed) / 1e6
     mv = max(moved.values()) if moved else 0.0
     if split:
-        lr = "%s = 구멍 자리가 L과 R에서 달라 L·R을 따로 그림 (R은 L의 거울이 아님). 나머지 L·R 짝은 구멍까지 거울로 같음" \
-             % ", ".join("P%dL·P%dR" % (s_, s_) for s_ in split)
+        lr = "%s = 구멍 자리가 L과 R에서 달라 L·R을 따로 그림 (R은 L의 거울이 아님). 나머지 L·R 짝은 구멍·나사 자리까지 거울로 같음 " \
+             "(그림 = L 조각)" % ", ".join("P%dL·P%dR" % (s_, s_) for s_ in split)
     else:
-        lr = "L·R 짝은 구멍까지 거울로 같음"
+        lr = "L·R 짝은 구멍·나사 자리까지 거울로 같음 (그림 = L 조각)"
     info_l = ["조각 %d개, 넓이 %s m² (구멍 뺌) / 판 %s m² = %s %%" % (len(placed), fnum(plyA, 3), fnum(SW * SH_ / 1e6, 2), fnum(100 * plyA / (SW * SH_ / 1e6), 0)),
               "조각 사이 가장 좁은 틈 %s (톱날 %s)" % (fnum(min(gaps), 2), fnum(kerf)),
               "배치 = 사양 nesting_400x1200 순서; 실제 조각 크기로 %d개를 최대 %s 옮김" % (len(moved), fnum(mv, 2)) if moved else "배치 = 사양 nesting_400x1200 그대로",
               "(90°) = 돌려 놓은 조각 · " + lr,
-              "가게: 직사각형으로만 자름. 경사·턱·홈·창·구멍·모서리 자석 자리는 아래 조각도와 오른쪽 글대로 집에서 (톱·드릴·포스트너 비트)"]
+              "가게: 직사각형으로만 자름. 경사·턱·홈·창·구멍·자석 자리는 집에서 — 톱 + 전동 드릴 + 출력 지그 (조각 그림의 '지그' 줄, "
+              "cad/jigs/README.md). 자르자마자 조각마다 이름·'L 끝'(옆판·끝벽은 '앞')·'윗면/안쪽'을 연필로 씀"]
     yy = sh.textblock(x1 + 14, y0 + 2, sum([sh.wrap(t, 582 - x1 - 16, T_SMALL) for t in info_l], []), T_SMALL)
     if issues or left:
         sh.text(x0, y1 + 14, "확인 필요: " + "; ".join(issues + left), T_SMALL, cls="tr")
-    sh.legend(x1 + 14, yy + 6, {"wood"}, extra=[("sheetply", "남는 조각"), ("hid", "막힘 구멍 · 모서리 자석 자리 (점선)")])
+    yl = sh.legend(x1 + 14, yy + 5, {"wood"}, cols=2, colw=110.0,
+                   extra=[("sheetply", "남는 조각"), ("hid", "막힘 구멍 · 모서리 자석 자리 (점선)"),
+                          ("datum", "기준 모서리 — u·v를 재는 곳 (조각에 연필로 표시)"),
+                          ("spot", "나사 자리, 그림에 보이는 면 · 주황 숫자 = 좌표"), ("spoth", "나사 자리, 반대 면 (밑면에서 박음)")])
+    # ---- the two rules every piece drawing follows: which face is up / where u·v start, and which jig
+    import plywood_jigs as PJ
+    Y0 = y1 + 18.0
+    n_req = sum(1 for j in PJ.make_jigs() if j.key not in PJ.OPTIONAL)
+    face_rule = ["조각 그림 = 제목 밑 '이 면이 위'의 면을 위로 놓고 본 모습: x 두께(옆판·끝벽)는 +x 쪽(오른쪽 끝)에서, y 두께(뒤판)는 앞(안쪽 면)에서, "
+                 "z 두께(아랫판·윗판·뚜껑)는 위에서. u·v = 초록 굵은 선(기준 모서리)에서 잰 거리 — u는 왼쪽 기준(L 끝; 옆판·끝벽은 앞 모서리), "
+                 "v는 아래 기준(아래 모서리; z 두께는 앞 모서리).",
+                 "양면이 같지 않음: 판을 뒤집어 반대 면에 금을 그으면 그림이 좌우 거울로 보임 → 보이는 왼쪽 끝이 아니라 연필로 쓴 기준 끝(L 끝)에서 잼. "
+                 "뒤판·아랫판·뚜껑은 생김새로 L 끝을 알 수 없으므로 자르자마자 'L 끝'과 '윗면/안쪽'을 연필로 씀. L·R 짝은 제목 밑에 R을 어떻게 "
+                 "보는지 씀 (옆판 = 같은 그림·반대 면이 위, 뒤판·아랫판·윗판 = 좌우 거울)."]
+    jig_rule = ["cad/jigs/README.md · stl/print/%s (꼭 뽑을 것 %d개): 조각 제목 밑 '지그' 줄대로, 지그 울타리는 README의 모서리에 댐. "
+                "J-e = 막힌 구멍 깊이 게이지 (척 멈춤). 나사 자리 ⊕는 지그 없음 — 송곳으로 찍고 나사 (README 8번)." % (PJ.PRINT_SUB, n_req),
+                "J-b 모서리 자석 새들은 틈 %s 네 개 모두 필수 — 4개를 다 뽑아, 실제 판 두께에 손으로 밀어 끼워지는 가장 좁은 것 하나를 씀 "
+                "(%s이 끼면 얇은 판 → 인서트 깊이는 J-e '얇5.8')." % (" · ".join(fnum(g_, 1) for g_ in PJ.SADDLE_GAPS), fnum(PJ.SADDLE_GAPS[0], 1))]
+    yr = notes_box(sh, x1 + 14, yl + 5.0, 582 - x1 - 14, "보는 면 · 기준 모서리", face_rule, size=T_SMALL - 0.2)
+    yr = notes_box(sh, x1 + 14, yr + 5.5, 582 - x1 - 14, "합판 지그", jig_rule, size=T_SMALL - 0.2)
+    if yr > Y0 - 5.0:
+        raise DrawingCheckError("D06: notes beside the nesting view run into the piece drawings (%.1f > %.1f)" % (yr, Y0 - 5.0))
     # ---- piece drawings (one per group), flow layout in the lower-left area
     pk = {"CU-PLY-BACK": 0.2, "CU-PLY-BOTTOM": 0.2}
-    X0, X1, Y0 = 16.0, 386.0, y1 + 20.0
+    T_HDR = T_SMALL - 0.45
+    X0, X1 = 16.0, 386.0
     xcur, ycur, rowh = X0, Y0, 0.0
     rows_tbl = []
-    notes = ["보는 방향: x 두께 조각(옆판·끝벽)은 +x 쪽(오른쪽 끝)에서, y 두께(뒤판)는 앞에서, z 두께(아랫판·윗판·뚜껑)는 위에서 본 그림. "
-             "u = 왼쪽 끝(옆판·끝벽은 앞 모서리)에서, v = 아래 모서리(z 두께는 앞 모서리)에서 잰 거리 — 어느 면에 금을 그어도 같음"]
+    notes = []
     for lab, g in groups.items():
         a0 = g["lst"][0]
         fp = a0["fp"]
         inf = info[id(a0)]
-        outer, thru, blind = inf["outer"], inf["thru"], inf["blind"]
-        kk = pk.get(fp["p"].id, 0.25)
+        pid = fp["p"].id
+        outer, thru, blind, sps = inf["outer"], inf["thru"], inf["blind"], inf["spots"]
+        drawn = DRAWN_FACE[fp["ax"]]
+        kk = pk.get(pid, 0.25)
         bw, bh = fp["W"] * kk, fp["H"] * kk
         us = sorted(set(round(float(q[0]), 2) for q in outer) - {0.0, round(fp["W"], 2)})
         vs = sorted(set(round(float(q[1]), 2) for q in outer) - {0.0, round(fp["H"], 2)})
-        top = 21.0 if us else 7.0
-        bwid = 11.0 + bw + (17.0 if vs else 4.0)
+        su = sorted(set(round(sp["u"], 2) for sp in sps) - set(us))
+        sv = sorted(set(round(sp["v"], 2) for sp in sps) - set(vs))
+        bwid = 11.0 + bw + (17.0 if (vs or sv) else 4.0)
+        # header: face up + datum edges (+ mirror rule of the pair), jigs
+        if fp["ax"] == "x":
+            datum = "앞 + 아래 모서리"
+            if g["pair"]:
+                fR = next(a for a in g["lst"] if side_of(a) == "R")["fp"]
+                face_t = "이 면이 위: L은 %s, R은 %s — 같은 그림" % (face_name(M, fp, drawn), face_name(M, fR, drawn))
+            else:
+                face_t = "이 면이 위: %s" % face_name(M, fp, drawn)
+        else:
+            v_e = "앞 모서리" if fp["ax"] == "z" else "아래 모서리"
+            face_t = "이 면이 위: %s" % face_name(M, fp, drawn)
+            datum = ("바깥 끝(L 조각의 L 끝) + %s · R 조각 = 좌우 거울 (R 끝에서 잼)" % v_e) if g["pair"] else ("L 끝 + %s" % v_e)
+        hdr_txt = [face_t + " · 기준: " + datum]
+        jt = jig_line(M, fp, jigmap.get(pid, []), inf)
+        if sps:
+            jt = (jt + " · 나사 자리 ⊕ %d는 지그 없이 송곳" % len(sps)) if jt else ("없음 — 나사 자리 ⊕ %d는 송곳" % len(sps))
+        if jt:
+            hdr_txt.append("지그: " + jt)
+        hdr_lines = sum([sh.wrap(t, bwid + 2.0, T_HDR) for t in hdr_txt], [])
+        hdr = 3.6 + 0.6 + len(hdr_lines) * T_HDR * 1.3
+        top_lab = [fnum(u) for u in us] + [fnum(u, 1) for u in su]
+        top = hdr + ((1.2 + 6.6 + max(text_w(t_, T_SMALL - 0.2) for t_ in top_lab)) if top_lab else 3.4)
         bhei = top + bh + 11.0
         if xcur + bwid > X1 and xcur > X0:
             xcur, ycur, rowh = X0, ycur + rowh + 3.0, 0.0
@@ -2198,6 +2442,14 @@ def sheet_D06(M):
             vp.outline([q], "hid")
         for pk_ in inf["pockets"]:
             vp.outline([np.array([(pk_["u0"], pk_["v0"]), (pk_["u1"], pk_["v0"]), (pk_["u1"], pk_["v1"]), (pk_["u0"], pk_["v1"])])], "hid")
+        # datum edges: the outline segments lying on u = 0 and on v = 0 (green, unclipped so the full stroke shows)
+        n_o = len(outer)
+        for j_ in range(n_o):
+            pa, pb = outer[j_], outer[(j_ + 1) % n_o]
+            if (abs(pa[0]) < 0.01 and abs(pb[0]) < 0.01) or (abs(pa[1]) < 0.01 and abs(pb[1]) < 0.01):
+                sh.line([vp.P(*pa), vp.P(*pb)], "datum", "over")
+        for sp in sps:
+            sh.spot(*vp.P(sp["u"], sp["v"]), cls="spot" if sp["fi"] == drawn else "spoth", r=0.8)
         base = short(fp["p"].name_ko).replace("스피커 파트 L ", "스피커 ").replace("스피커 파트 R ", "스피커 ")
         if g["side"]:
             nm = _SIDE.sub("", base).strip() + " " + g["side"]
@@ -2208,37 +2460,60 @@ def sheet_D06(M):
         nm = re.sub(r"\s+", " ", nm)
         qty = len(g["lst"])
         sh.text(xcur, ycur + 3.6, "%s %s ×%d  (1:%s)" % (lab, nm, qty, fnum(1 / kk)), T_SMALL + 0.2, bold=True)
+        for i_, t_ in enumerate(hdr_lines):
+            sh.text(xcur, ycur + 3.6 + 0.6 + (i_ + 1) * T_HDR * 1.3, t_, T_HDR)
         sh.dim_h(px0, px1, py1 + 5.0, fnum(fp["W"], 2), ext=[(px0, py1), (px1, py1)])
         sh.dim_v(py0, py1, px0 - 5.0, fnum(fp["H"], 2), ext=[(px0, py0), (px0, py1)], out_side="down")
-        if us:
-            sh.ordinates_h([(vp.Px(u), None, fnum(u)) for u in us], py0 - 0.5, -1, lo=px0 - 4, hi=px1 + 6, size=T_SMALL - 0.2)
-        if vs:
-            sh.ordinates_v([(vp.Py(vv), None, fnum(vv)) for vv in vs], px1 + 0.5, 1, lo=py0 - 2, hi=py1 + 2, size=T_SMALL - 0.2)
+        if us or su:
+            sh.ordinates_h([(vp.Px(u), None, fnum(u)) for u in us] + [(vp.Px(u), None, fnum(u, 1), "tr") for u in su],
+                           py0 - 0.5, -1, lo=px0 - 4, hi=px1 + 6, size=T_SMALL - 0.2)
+        if vs or sv:
+            sh.ordinates_v([(vp.Py(vv), None, fnum(vv)) for vv in vs] + [(vp.Py(vv), None, fnum(vv, 1), "tr") for vv in sv],
+                           px1 + 0.5, 1, lo=py0 - 2, hi=py1 + 2, size=T_SMALL - 0.2)
         ax_ko = {"x": "y·z", "y": "x·z", "z": "x·y"}[fp["ax"]]
         parts_ = ["관통 " + t for t in pattern_text(thru)]
         bl = collections.OrderedDict()
         for h in blind:
             bl.setdefault((h["face"], round(h["depth"], 1)), []).append(h)
         for (fi, dp), hs in bl.items():
-            seal = " — 밀폐 상자 판: 깊이 멈춤으로 (드릴 끝까지 1.5 이상 남김)" if fp["p"].id.startswith("SPK") else ""
+            seal = " — 밀폐 상자 판: 깊이 멈춤으로 (드릴 끝까지 1.5 이상 남김)" if pid.startswith("SPK") else ""
             for t in pattern_text(hs):
                 parts_.append("막힘(점선) %s에서 깊이 %s, 남는 판 %s%s: %s" % (face_name(M, fp, fi), fnum(dp, 1), fnum(fp["T"] - dp, 1), seal, t))
         parts_ += inf["notes"]
-        notes.append("%s %s — 원점 = 왼쪽 아래 = 입체 (%s, %s) %s 면" % (lab, nm, fnum(fp["org"][0], 2), fnum(fp["org"][1], 2), ax_ko)
+        by_s = collections.OrderedDict()
+        for sp in sps:
+            by_s.setdefault((sp["kind"], sp["what"], sp["fi"]), []).append(sp)
+        for (kind, what, fi), ss in by_s.items():
+            U_ = sorted(set(round(sp["u"], 2) for sp in ss))
+            V_ = sorted(set(round(sp["v"], 2) for sp in ss))
+            if len(U_) * len(V_) == len(ss) and len(ss) > 1:
+                where = "u %s × v %s" % ("·".join(fnum(x_, 1) for x_ in U_), "·".join(fnum(y_, 1) for y_ in V_))
+            else:
+                where = " · ".join("(%s, %s)" % (fnum(sp["u"], 1), fnum(sp["v"], 1)) for sp in sorted(ss, key=lambda t_: (t_["u"], t_["v"])))
+            flip = (" — 그 면에서 보면 기준 끝이 오른쪽 (좌우 거울)" if fi != drawn else "")
+            seal = " — 밀폐 상자 바닥: %s 이하, 구멍에 MS 폴리머 한 방울" % SPOT_KIND[kind] if (kind == "foot" and pid.startswith("SPK")) else ""
+            parts_.append("나사 자리 ⊕ %s %s ×%d, %s에서 박음, 지그 없음 (송곳)%s%s: %s" % (what, SPOT_KIND[kind], len(ss), face_name(M, fp, fi),
+                                                                                  flip, seal, where))
+        notes.append("%s %s — 원점 (u 0, v 0) = 입체 (%s, %s) %s 면" % (lab, nm, fnum(fp["org"][0], 2), fnum(fp["org"][1], 2), ax_ko)
                      + "".join("; " + t for t in parts_))
-        mir = "R은 L의 거울 (구멍 포함)" if g["pair"] else ""
+        if g["pair"]:
+            mir = "R = 같은 그림, 반대 면이 위" if fp["ax"] == "x" else "R = 좌우 거울 (구멍·나사 자리까지)"
+        else:
+            mir = ""
         rows_tbl.append([lab, nm, "%s × %s" % (fnum(fp["W"], 2), fnum(fp["H"], 2)), str(qty), " · ".join(inf["memo"] + ([mir] if mir else [])) or "직사각형"])
         xcur += bwid + 5.0
         rowh = max(rowh, bhei)
     if ycur + rowh > 408:
         raise DrawingCheckError("D06: piece drawings overflow the sheet (%.1f > 408)" % (ycur + rowh))
     # table + notes (right column)
-    tx, ty = 392.0, y1 + 22.0
+    tx, ty = 392.0, Y0 + 2.0
     sh.text(tx, ty - 3.0, "조각 목록 (입체에서 잰 크기, 두께 %s)" % fnum(body.T), T_NOTE + 0.2, bold=True, halo=False)
     yb = sh.table(tx, ty, [("번호", 9.0, "middle"), ("조각", 48.0, "start"), ("크기", 27.0, "start"), ("수량", 8.0, "middle"),
                            ("자르기·모서리 (윤곽에서)", 98.0, "start")], rows_tbl + [["", "합계", "", str(len(placed)), ""]], size=T_SMALL - 0.45, rh=3.6)
-    notes_box(sh, tx, yb + 6.0, 190, "구멍·홈 (조각 좌표, 단위 mm)", notes, size=T_SMALL - 0.45)
-    sh.title_block()
+    yn = notes_box(sh, tx, yb + 6.0, 190, "구멍·홈·나사 자리 (조각 좌표 u·v, 단위 mm)", notes, size=T_SMALL - 0.45)
+    tb = sh.title_block()
+    if yn > tb[1] - 1.0:
+        raise DrawingCheckError("D06: notes run into the title block (%.1f > %.1f)" % (yn, tb[1] - 1.0))
     return sh
 
 

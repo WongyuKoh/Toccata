@@ -123,7 +123,14 @@ TAG_RX = re.compile(r"(?:^|;\s*)(사양 그대로|사양과 다름\(작은 고�
 def note_segments(note):
     """[(tag, text)] of a part note written as 'tag: text; tag: text'."""
     parts = TAG_RX.split(note or "")
-    return [(parts[i], parts[i + 1].strip(" ;")) for i in range(1, len(parts) - 1, 2)]
+    return [(parts[i], _fix_note(parts[i + 1].strip(" ;"))) for i in range(1, len(parts) - 1, 2)]
+
+
+def _fix_note(txt):
+    """README-side corrections of part-note text that the model numbers contradict (the notes are written in body.py).
+    W1 review 2026-10-02: the PR-HUBSHELF note says the bracket screw bites 'about 9' into the back ply; the model gives
+    bracket front y + head seat 4 + screw length - back-ply inner face = 7 (M3 x 12, L78) / 8 (13 mm)."""
+    return re.sub(r"합판 물림 약 [\d.]+", lambda m_: "합판 물림 %s (M3 × 12, L78) / %s (13 mm)" % (f(shelf_engage(12.0), 1), f(shelf_engage(13.0), 1)), txt)
 
 
 def _base_name(n):
@@ -167,7 +174,8 @@ def quickserts_line():
     return ("구매 목록 v4 L72·L73·L74 (스피커 ↔ 가운데 결합): 손잡이볼트 M4×20 (L72, 머리 Ø8 × 6) 4 — 슬리브 끝에서 이음면까지 %s라 인서트에 %s 물림 "
             "(M4×22면 %s = 인서트 길이, 끝이 구멍 바닥 %s 위; %s 이상은 끝이 구멍 바닥에 닿고 더 길면 밑 밀폐 판을 누름 → **최대 M4×22**) + 실리콘 튜브 슬리브 "
             "(L74, 13 mm로 4개) + 나사산 인서트 **L73 = Norelem 07653-04** (셀프 태핑, 스틸, 컷팅 보어형, M4, 겉 Ø%s, 피치 0.8, 길이 %s, 최소 구멍 깊이 %s) 4. "
-            "구멍은 **Ø%s × %s** (막힘, 깊이 멈춤: 드릴에 테이프 %s mm) — 오꾸메 자투리에 Ø%s로 먼저 시험, 헐거우면 Ø5.5 (나무는 눌림). "
+            "구멍은 **Ø%s × %s** (막힘, 지름 부분 깊이 %s — 지그 J-a1·J-a2 + J-e 깊이 게이지 '인5.8'로 척 멈춤, `jigs/README.md`) — 오꾸메 자투리에 "
+            "Ø%s로 먼저 시험(J-e 시험 블록), 헐거우면 Ø5.5 (나무는 눌림). "
             "안쪽 옆판(오꾸메 %s) 밑에 지름 부분 %s, 드릴 끝 밑 %s 이상 남아 상자가 밀폐됨. 인서트는 면까지만 (밑 %s mm는 나사 끝 자리)"
             % (f(reach, 0), f(B.TS_LEN - reach, 0), f(22.0 - reach, 0), f(B.QS_HOLE[1] - (22.0 - reach), 0), "M4×%s" % f(reach + B.QS_HOLE[1], 0),
                f(B.INS[0], 1), f(B.INS[2], 0), f(B.QS_MIN_DEPTH, 0), f(B.QS_HOLE[0], 1), f(B.QS_HOLE[1], 0), f(B.QS_HOLE[1], 0), f(B.QS_HOLE[0], 1),
@@ -228,10 +236,13 @@ def extra_deviations(man):
             f(B.DRV_SCREW[2], 0), f(B.DRV_SCREW_IN, 0), f(B.DRV_SCREW_IN - B.DRV_INS[2], 0), f(B.DRV_INSERT[1] - B.DRV_SCREW_IN, 1))),
         ("케이블 집게 (사양 CABLE-CLIPS 8)", "사양에 자리가 없어 정함: 스피커 통로 지붕 밑 3개씩 (z19~27 y226~236, 묶음 위라 모델에서는 비어 있음) + 끝벽 L 안면 2개 "
          "(스피커선 C-SPK-L을 잡음, 선을 x275.1로 옮김). 출력 파일 하나 `케이블집게__8개`"),
-        ("허브 선반 받침 나사", "8호 13 mm 대신 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하) — 사양 받침 10 × 8에는 8호(Ø4.2, 머리 Ø8)가 들어가지 않음. "
-         "머리 자리 눈물방울 꼭지를 받침 윗면 0.8 아래에서 자름. 나사 축 z%s의 머리(아래 끝 z%s)가 선반 윗면 z%s보다 낮아, 받침 앞 선반 윗면에 머리·드라이버 "
-         "길 홈 %s × %s (선반 앞끝 y%s → 받침 y%s, 바닥 %s 남음)"
-         % (f(B.SHELF_SCREW_Z, 0), f(B.SHELF_SCREW_Z - 3.0, 1), f(B.CC["PR-HUBSHELF"][5], 1), f(B.SHELF_GROOVE[0], 0), f(B.SHELF_GROOVE[1], 1),
+        ("허브 선반 받침 나사", "8호 13 mm 대신 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; 구매 목록 v4 L78 = 스텐 트러스 태핑 피스 M3 × 12) — 사양 받침 "
+         "10 × 8에는 8호(Ø4.2, 머리 Ø8)가 들어가지 않음. 머리 자리 Ø%s × %s(받침 앞면 y%s부터)를 지나 뒤판(y%s~)에 물림 %s (M3 × 12) / %s (13 mm), 뒤판 "
+         "바깥면까지 %s / %s 남음. 머리 자리 눈물방울 꼭지를 받침 윗면 0.8 아래에서 자름. 나사 축 z%s의 머리(아래 끝 z%s)가 선반 윗면 z%s보다 낮아, "
+         "받침 앞 선반 윗면에 머리·드라이버 길 홈 %s × %s (선반 앞끝 y%s → 받침 y%s, 바닥 %s 남음)"
+         % (f(SHELF_SEAT[0], 1), f(SHELF_SEAT[1], 0), f(B.CC["PR-SHELFBRK-1"][2], 0), f(B.YBI, 0), f(shelf_engage(12.0), 1), f(shelf_engage(13.0), 1),
+            f(B.T - shelf_engage(12.0), 1), f(B.T - shelf_engage(13.0), 1),
+            f(B.SHELF_SCREW_Z, 0), f(B.SHELF_SCREW_Z - 3.0, 1), f(B.CC["PR-HUBSHELF"][5], 1), f(B.SHELF_GROOVE[0], 0), f(B.SHELF_GROOVE[1], 1),
             f(B.CC["PR-HUBSHELF"][2], 0), f(B.CC["PR-SHELFBRK-1"][2], 0), f(B.CC["PR-HUBSHELF"][5] - B.CC["PR-HUBSHELF"][4] - B.SHELF_GROOVE[1], 1))),
         ("보드 받침 기둥 (5 mm)", "나사 구멍 깊이 4.5 → 4.0 (바닥 1.0), 나사 길이 M3×5 (Pi M2.5×6) — 6 mm 이상은 바닥을 뚫고 붙인 기둥을 밀어 올림"),
         ("뒤판 출력물 바닥 탭", "왼쪽 나사 (%s, 325) → (%s, %s) (가운데 아랫판 뒤 모서리 y%s에서 %s), 탭을 y%s까지 앞으로. 오른쪽 나사 (463, 325) → (%s, %s): "
@@ -241,8 +252,10 @@ def extra_deviations(man):
          % (f(B.BP_TABS[0][2], 0), f(B.BP_TABS[0][2], 0), f(B.BP_TABS[0][3], 0), f(B.YBI, 0), f(B.YBI - B.BP_TABS[0][3], 0), f(B.BP_TAB_Y0, 0), f(B.BP_TABS[1][2], 0), f(B.BP_TABS[1][3], 1),
             f(B.BP_TONGUE[0], 1), f(B.BP_TONGUE[1], 1), f(B.BP_TONGUE[2], 0), f(B.BP_TAB_Y0, 0),
             "/".join("%s~%s" % (f(g, 0), f(g + 2, 0)) for g in B.BP_WEBS))),
-        ("합판 환기 홈", "뚜껑 L 홈 6개 y%s~%s, 뒤판 앰프 뒤 홈 8개 x%s~%s — 간격 6.5 → 8 (홈 사이 나무 2.5 → 4)"
-         % (f(B.LIDL_SLOTS[0][2], 0), f(B.LIDL_SLOTS[-1][2] + 4, 0), f(B.BACK_SLOTS[0][0], 0), f(B.BACK_SLOTS[-1][0] + 4, 0))),
+        ("합판 환기 홈", "뚜껑 L 홈 6개 y%s~%s, 뒤판 앰프 뒤 홈 8개 x%s~%s — 간격 6.5 → 8 (홈 사이 나무 2.5 → 4). 가운데 아랫판 Pi 아래 흡기 홈 8개는 "
+         "사양 x546~622 그대로 간격 %s (홈 사이 나무 %s)"
+         % (f(B.LIDL_SLOTS[0][2], 0), f(B.LIDL_SLOTS[-1][2] + 4, 0), f(B.BACK_SLOTS[0][0], 0), f(B.BACK_SLOTS[-1][0] + 4, 0),
+            f(slot_pitches()["pi"]), f(slot_pitches()["pi"] - SLOT_W))),
         ("전자부 단자 자리 (가정)", "강압 입력 −x 끝(y306)·출력 앞면(x529.5); 앰프 전원 y313·스피커 L y318(−x 끝), 스피커 R y293(+x 끝); 허브는 W1 10/1 "
          "제품 사진대로 업스트림 USB 3.0 B 포트(y%s)와 DC 잭(y%s, ㄱ자 플러그)이 같은 −x 끝면 (사양: 업스트림 −x · DC +x). 끝면 안 자리는 받은 허브로 확인"
          % (f(E_.C25_B_PORT[0], 0), f(E_.HUB_DC_YZ[0], 0))),
@@ -294,6 +307,55 @@ def _uv(yz):
     return "(u%s, v%s)" % (f(yz[0] - body.Y0, 1), f(yz[1] - body.ZB, 1))
 
 
+SHELF_SEAT = (6.5, 4.0)        # body.hub_shelf: head seat D6.5 x 4 from the bracket front face (b[2] .. b[2] + 4)
+BP_TAB_TOP = 20.5              # body.back_plate: bottom tabs z16.5..20.5, countersink in the tab top
+CSK_LEN = 13.0                 # L77 countersunk 8호 13 mm (overall length = head flush with the printed face)
+SLOT_W = 4.0                   # every okoume vent slot is 4 wide
+
+
+def shelf_engage(screw_len):
+    """hub-shelf bracket screw: thread in the centre back ply (mm) = bracket front + head seat + screw length - back-ply inner face."""
+    return body.CC["PR-SHELFBRK-1"][2] + SHELF_SEAT[1] + screw_len - body.YBI
+
+
+def slot_pitches():
+    """slot pitch of each okoume slot row (one value per row, from body.py), None if a row is not evenly spaced."""
+    B = body
+
+    def p(rows, i):
+        d = sorted(set(round(rows[k + 1][i] - rows[k][i], 3) for k in range(len(rows) - 1)))
+        return d[0] if len(d) == 1 else None
+    return collections.OrderedDict([("lidL", p(B.LIDL_SLOTS, 2)), ("lidR", p(B.LIDR_SLOTS, 0)), ("back", p(B.BACK_SLOTS, 0)),
+                                    ("buck", p(B.BOT_SLOTS_BUCK, 0)), ("pi", p(B.BOT_SLOTS_PI, 0))])
+
+
+def slat_text():
+    """'홈 사이 나무' sentence: rows grouped by slat width (pitch - 4)."""
+    nm = {"lidL": "뚜껑 L", "lidR": "뚜껑 R", "back": "뒤판", "buck": "아랫판 강압 아래", "pi": "아랫판 Pi 아래"}
+    by = collections.OrderedDict()
+    for k, pt in slot_pitches().items():
+        by.setdefault(pt, []).append(nm[k])
+    return ", ".join("%s %s mm (간격 %s)" % ("·".join(v), f(pt - SLOT_W) if pt else "?", f(pt) if pt else "?") for pt, v in by.items())
+
+
+def csk_spots():
+    """[(what, (x, y), tip above the ply bottom face)] of the L77 countersunk 8호 13 screws driven from above into the centre bottom ply.
+    body.wood_screws() (the model's screw table, if this body.py has one) is used first; otherwise the back-plate tabs + holder screws."""
+    B = body
+    ws = getattr(B, "wood_screws", None)
+    if callable(ws):
+        try:
+            out = [(re.sub(r"[\s_-]*\d+$", "", str(s.get("label", "접시 8호 13"))), (float(s["at"][0]), float(s["at"][1])), float(s["tip"]) - B.ZB)
+                   for s in ws() if s.get("ply") == "CU-PLY-BOTTOM" and s.get("dir", 0) < 0]
+            if out:
+                return out
+        except Exception:                                       # body.py mid-edit / other schema: fall back to the constants
+            pass
+    tab = [("뒤판 출력물 탭", (sx, sy), BP_TAB_TOP - CSK_LEN - B.ZB) for (_, _, sx, sy) in B.BP_TABS]
+    pbz = B.CC["CU-PBHOLDER"][4] + getattr(B, "PB_FLOOR", 2.0)
+    return tab + [("보조배터리 받침", xy, pbz - CSK_LEN - B.ZB) for xy in getattr(B, "PB_SCREWS", [])]
+
+
 def ply_work(piece):
     """what to cut by hand on each cut-list piece (u = back from the front edge, v = up from the bottom edge, x from the left end)."""
     B = body
@@ -302,7 +364,7 @@ def ply_work(piece):
         return ("사각으로 받은 뒤 직접 자름 (앞 모서리에서 뒤로 u, 아래 모서리에서 위로 v): ① 앞 아래 통로 홈 %s × %s 따냄 "
                 "② 앞 모서리는 v%s까지 두고, 거기서 수평으로 %s 들어간 점 (u%s, v%s)부터 윗변 u%s까지 %s° 사선 (사선 길이 %s, 윗변에 남는 길이 %s). "
                 "안쪽 옆판만: M4 나사산 인서트(L73) 구멍 Ø%s × %s (가운데 쪽 면에서, 막힘 — 깊이 멈춤으로 %s까지만: 판 %s 중 지름 부분 밑 %s, 드릴 끝 밑 %s 이상 남아야 "
-                "밀폐) L %s / R %s, 스피커선 구멍 Ø6 관통 L %s / R %s"
+                "밀폐) L %s / R %s, 스피커선 구멍 Ø6 관통 L %s / R %s — 지그 J-a1 (L) / J-a2 (R), 깊이는 J-e 게이지로 척 멈춤"
                 % (f(un, 1), f(vn, 1), f(B.Z_FB - B.ZB), f(B.SL_A[0] - B.Y0), f(B.SL_A[0] - B.Y0), f(B.Z_FB - B.ZB), f(B.SL_B[0] - B.Y0),
                    f(B.ANGLE, 1), f(B.SL_LEN), f(B.YB - B.SL_B[0]), f(B.QS_HOLE[0], 1), f(B.QS_HOLE[1], 0), f(B.QS_HOLE[1], 0), f(B.T, 1),
                    f(B.T - B.QS_HOLE[1], 1), f(B.QS_MIN_PLY, 1),
@@ -315,7 +377,7 @@ def ply_work(piece):
         fl = [xy for g, xy, _ in B.foot_positions() if g == "스피커 L"]
         xs = sorted(set(round(x - B.SX0, 1) for x, y in fl))          # from the outer (-x) end of the L bottom; R is the mirror
         ys = sorted(set(round(y - B.RISER[0], 1) for x, y in fl))
-        return ("없음. 고무발 나사 자리 4 (8호 13 mm 이하): 바깥 끝에서 %s, 앞 모서리에서 %s (발 Ø28이 옆판 밑까지 나옴; 사양 2.5는 나사가 끝면에 "
+        return ("없음. 밑면 고무발 나사 자리 4 (8호 13 mm 이하, L49): 바깥 끝에서 %s, 앞 모서리에서 %s (발 Ø28이 옆판 밑까지 나옴; 사양 2.5는 나사가 끝면에 "
                 "너무 가까워 옮김). 밀폐 상자 바닥이라 구멍에 MS 폴리머 한 방울"
                 % ("·".join(f(v, 1) for v in xs), "·".join(f(v, 1) for v in ys)))
     if piece == "PLY-CU-END":
@@ -323,42 +385,57 @@ def ply_work(piece):
         pkz = {s_: (B.XT30_POCKET[s_][4] + B.XT30_POCKET[s_][5]) / 2.0 for s_ in "LR"}
         return ("ㄴ자: 앞 아래 통로 홈 %s × %s 따냄. 구멍 관통: XT30 선 Ø%s L %s / R %s (L은 XT30 집게 홈과 같은 축, R은 홈 축보다 %s 아래 — "
                 "스피커 옆판 선 구멍보다 L %s · R %s 위), "
-                "고무 슬리브 Ø8 ×2 L %s / R %s; 윗모서리 자석 자리 Ø8 × 3.2 (u%s, 두께 가운데 — 두 판을 붙이기 전에 포스트너 비트로)"
+                "고무 슬리브 Ø8 ×2 L %s / R %s — 지그 J-a3 (L) / J-a4 (R), XT30은 Ø4 안내 구멍을 뚫고 J-a5로 Ø14 원을 그려 넓힘; "
+                "윗모서리 자석 자리 Ø8 × 3.2 (u%s, 두께 가운데 — 두 판을 붙이기 전에 J-b 새들 + Ø8 트위스트 드릴)"
                 % (f(un, 1), f(vn, 1), f(B.END_HOLE_D, 0), _uv(B.END_HOLE_YZ["L"]), _uv(B.END_HOLE_YZ["R"]), f(pkz["R"] - B.END_HOLE_YZ["R"][1], 1),
                    f(B.END_HOLE_YZ["L"][1] - B.WIRE_YZ["L"][1], 1), f(B.END_HOLE_YZ["R"][1] - B.WIRE_YZ["R"][1], 1),
                    "·".join(_uv(p) for p in B.TS_YZ["L"]), "·".join(_uv(p) for p in B.TS_YZ["R"]), f(mz, 1)))
     if piece == "PLY-CU-BACK":
         x0 = B.CU_X[0]
         s0, s1 = B.BACK_SLOTS[0], B.BACK_SLOTS[-1]
+        shelf = [((b[0] + b[1]) / 2.0, B.SHELF_SCREW_Z) for b in (B.CC["PR-SHELFBRK-1"], B.CC["PR-SHELFBRK-2"])]
         return ("뒤판 출력물 창: 왼쪽 끝에서 %s~%s (폭 %s), 아래 모서리에서 %s 위부터 윗변까지 (위가 열림) — 톱으로 두 번 세로 자르고 가로로 따냄; "
-                "앰프 뒤 환기 홈 %d개 4 × %s (왼쪽 끝에서 %s~%s, 아래에서 %s~%s); 윗모서리 자석 자리 Ø8 × 3.2 4곳 (왼쪽 끝에서 %s)"
+                "앰프 뒤 환기 홈 %d개 4 × %s (왼쪽 끝에서 %s~%s, 간격 %s, 아래에서 %s~%s — 지그 J-d3); 윗모서리 자석 자리 Ø8 × 3.2 4곳 (왼쪽 끝에서 %s — J-b 새들); "
+                "안쪽 면 허브 선반 받침 나사 자리 %d (L78 M3 × 12 트러스 태핑: 왼쪽 끝에서 %s, 아래 모서리에서 %s — 받침을 대고 받침 구멍 Ø3.4로 조임, "
+                "합판 물림 %s, 바깥면까지 %s 남음)"
                 % (f(B.BP_X[0] - x0), f(B.BP_X[1] - x0), f(B.BP_X[1] - B.BP_X[0]), f(B.Z_BOT - B.ZB), len(B.BACK_SLOTS), f(s0[2] - s0[1]),
-                   f(s0[0] - x0), f(s1[0] + 4.0 - x0), f(s0[1] - B.ZB), f(s0[2] - B.ZB),
-                   "·".join(f(x - x0) for s in "LR" for x in B.MAG_BACK_X[s])))
+                   f(s0[0] - x0), f(s1[0] + 4.0 - x0), f(slot_pitches()["back"]), f(s0[1] - B.ZB), f(s0[2] - B.ZB),
+                   "·".join(f(x - x0) for s in "LR" for x in B.MAG_BACK_X[s]),
+                   len(shelf), "·".join(f(x - x0) for x, z in shelf), "·".join(sorted(set(f(z - B.ZB) for x, z in shelf))),
+                   f(shelf_engage(12.0), 1), f(B.T - shelf_engage(12.0), 1)))
     if piece == "PLY-CU-BOTTOM":
         x0 = B.CU_IX[0]
         bk, pi = B.BOT_SLOTS_BUCK, B.BOT_SLOTS_PI
-        fl = L2["feet"]["positions_xy"]["centre"]
-        return ("앞 윗모서리 R3 (이음 기둥 자리 왼쪽 끝에서 %s는 빼고); 흡기 홈 4 × 34: 강압 아래 %d개 (왼쪽 끝에서 %s~%s, 앞 모서리에서 %s~%s), "
-                "Pi 아래 %d개 (%s~%s, %s~%s); 고무발 나사 자리 6 (8호 13 mm): 왼쪽 끝에서 %s, 앞 모서리에서 %s"
+        fl = [xy for g, xy, _ in B.foot_positions() if g == "가운데 유닛"]
+        sp = slot_pitches()
+        cs = csk_spots()
+        by_w = collections.OrderedDict()
+        for (w, xy, tip) in cs:
+            by_w.setdefault(w, []).append((xy, tip))
+        csk = ", ".join("%s %d (%s; 끝은 판 밑면 %s 위)" % (w, len(v), " · ".join("%s/%s" % (f(x - x0), f(y - B.RISER[0])) for (x, y), _ in v),
+                                                       "/".join(sorted(set(f(t_, 1) for _, t_ in v)))) for w, v in by_w.items())
+        return ("앞 윗모서리 R3 (이음 기둥 자리 왼쪽 끝에서 %s는 빼고); 흡기 홈 4 × 34 (지그 J-d4): 강압 아래 %d개 (왼쪽 끝에서 %s~%s, 간격 %s, 앞 모서리에서 %s~%s), "
+                "Pi 아래 %d개 (%s~%s, 간격 %s = 홈 사이 나무 %s, %s~%s); 윗면 접시머리 8호 13 mm (L77) 나사 자리 %d (왼쪽 끝·앞 모서리에서): %s — 출력물을 "
+                "제자리에 놓고 그 접시 구멍으로 조임; 밑면 고무발 나사 자리 %d (8호 13 mm, L49): 왼쪽 끝에서 %s, 앞 모서리에서 %s"
                 % (" · ".join("%s~%s" % (f(a - x0), f(b - x0)) for a, b in B.FILLET_SKIP), len(bk), f(bk[0][0] - x0), f(bk[-1][0] + 4 - x0),
-                   f(bk[0][1] - B.RISER[0]), f(bk[0][2] - B.RISER[0]), len(pi), f(pi[0][0] - x0), f(pi[-1][0] + 4 - x0),
-                   f(pi[0][1] - B.RISER[0]), f(pi[0][2] - B.RISER[0]),
+                   f(sp["buck"]), f(bk[0][1] - B.RISER[0]), f(bk[0][2] - B.RISER[0]), len(pi), f(pi[0][0] - x0), f(pi[-1][0] + 4 - x0),
+                   f(sp["pi"]), f(sp["pi"] - SLOT_W), f(pi[0][1] - B.RISER[0]), f(pi[0][2] - B.RISER[0]), len(cs), csk, len(fl),
                    "·".join(f(v) for v in sorted(set(x - x0 for x, y in fl))), "·".join(f(v) for v in sorted(set(y - B.RISER[0] for x, y in fl)))))
     if piece in ("PLY-CU-LID-L", "PLY-CU-LID-R"):
         s = piece[-1]
         x0 = B.LIDS["LID-" + s][0]
         if s == "L":
             sl = B.LIDL_SLOTS
-            slots = "배기 홈 %d개 30 × 4 (왼쪽 끝에서 %s~%s, 앞 모서리에서 %s~%s)" % (len(sl), f(sl[0][0] - x0), f(sl[0][1] - x0),
-                                                                          f(sl[0][2] - B.Y0), f(sl[-1][2] + 4 - B.Y0))
+            slots = "배기 홈 %d개 30 × 4 (왼쪽 끝에서 %s~%s, 앞 모서리에서 %s~%s, 간격 %s — 지그 J-d1)" % (
+                len(sl), f(sl[0][0] - x0), f(sl[0][1] - x0), f(sl[0][2] - B.Y0), f(sl[-1][2] + 4 - B.Y0), f(slot_pitches()["lidL"]))
         else:
             sl = B.LIDR_SLOTS
-            slots = "배기 홈 %d개 4 × 40 (왼쪽 끝에서 %s~%s, 앞 모서리에서 %s~%s)" % (len(sl), f(sl[0][0] - x0), f(sl[-1][0] + 4 - x0),
-                                                                          f(sl[0][1] - B.Y0), f(sl[0][2] - B.Y0))
+            slots = "배기 홈 %d개 4 × 40 (왼쪽 끝에서 %s~%s, 간격 %s, 앞 모서리에서 %s~%s — 지그 J-d2)" % (
+                len(sl), f(sl[0][0] - x0), f(sl[-1][0] + 4 - x0), f(slot_pitches()["lidR"]), f(sl[0][1] - B.Y0), f(sl[0][2] - B.Y0))
         mags = [(x, (B.YBI + B.YB) / 2.0) for x in B.MAG_BACK_X[s]] + [B.MAG_END[s]]
-        return ("앞 윗모서리 1×45° 모따기 (건반과 사이의 틈이 그림자 선으로 보이게); %s; 밑면 자석 자리 Ø8 × 3.2 3곳 (왼쪽 끝·앞 모서리에서 %s)"
-                % (slots, " · ".join("%s/%s" % (f(x - x0), f(y - B.Y0)) for x, y in mags)))
+        return ("앞 윗모서리 1×45° 모따기 (건반과 사이의 틈이 그림자 선으로 보이게); %s; 밑면 자석 자리 Ø8 × 3.2 3곳 (왼쪽 끝·앞 모서리에서 %s — "
+                "지그 J-c%s, 홈을 먼저 뚫은 뒤)"
+                % (slots, " · ".join("%s/%s" % (f(x - x0), f(y - B.Y0)) for x, y in mags), "1" if s == "L" else "2"))
     return ""
 
 
@@ -419,8 +496,13 @@ def nesting_check(rows):
 NOT_MODELLED = [
     ("홀센서 DRV5055A2QLPG, 저항·커패시터, 핀 헤더, 납땜 패드", "88 + α", "회로 부품 (요청대로 생략). 센서 자리는 센서 바 포켓으로 표시"),
     ("스텐 직결피스 8호 13 mm 둥근머리 (L49)", "14", "고무발 14 (L2). 고무발은 25 mm가 아니라 13 mm 이하 — 16 mm 이상은 스피커 밀폐 바닥을 뚫음"),
-    ("Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하)", "2", "허브 선반 받침 2개를 뒤판에 (받침 10 × 8에 8호가 들어가지 않음). 구멍 Ø3.4·머리 자리는 모델에 있음. 구매 목록에 없음"),
-    ("스텐 직결피스 8호 13 mm 접시머리", "6", "뒤판 출력물 바닥 탭 2 + 보조배터리 받침 4. 구멍(접시 자리)은 모델에 있음. 구매 목록에 없음"),
+    ("스텐 트러스 태핑 피스 M3 × 12 (L78; 모델은 Ø3 × 12~13 둥근머리, 머리 Ø6 이하)", "2",
+     "허브 선반 받침 2개를 뒤판에 (받침 10 × 8에 8호가 들어가지 않음). 구멍 Ø3.4·머리 자리 Ø%s × %s는 모델에 있음. 뒤판에 %s 물림 (13 mm면 %s). "
+     "구매 목록 v4 L78 (최종 재료 i220, 2 + 예비 2) — 트러스 머리 약 Ø6이라 받으면 머리 자리에 들어가는지 확인"
+     % (f(SHELF_SEAT[0], 1), f(SHELF_SEAT[1], 0), f(shelf_engage(12.0), 1), f(shelf_engage(13.0), 1))),
+    ("스텐 직결피스 8호 13 mm 접시머리 (L77)", "%d" % len(csk_spots()),
+     "%s → 가운데 아랫판. 구멍(접시 자리)은 모델에 있음. 구매 목록 v4 L77 (최종 재료 i219, 6 + 예비 2)"
+     % " + ".join("%s %d" % (w, n) for w, n in collections.Counter(w for w, _, _ in csk_spots()).items())),
     ("스텐 직결피스 8호 19 mm (L49)", "8", "그릴 4 × 2 (W1: 떨리지 않게 4개 모두). 25 mm는 앞판 아래 파일럿 끝 2.15 밑 밀폐면을 뚫음 — 19 mm 이하"),
     ("M4×12 유두 렌치볼트 (L70)", "8", "스피커 유닛을 출력 앞판의 L69 인서트(모델에 있음)에. 플랜지 4 + 가스켓 3을 지나 5 들어가 인서트 4를 지나 1 더, "
      "끝은 구멍 Ø5.6 × 6.5 바닥 1.5 위. 인서트는 면까지만 넣고 나사는 M4×12 이하 — 아래 구멍 밑 밀폐면이 2.78"),
@@ -435,9 +517,7 @@ NOT_MODELLED = [
 
 BUY_GAPS = [
     "M3×16 버튼헤드 ISO 7380 볼트 4개 + M4 와셔 (방진 브래킷 BRK2): M3×10은 볼 속 너트에 닿지 않음 (L1 그대로)",
-    "직결피스 8호 13 mm 접시머리 6개 (뒤판 출력물 바닥 탭 2, 보조배터리 받침 4): L49는 둥근머리",
     "QUICKSERT",
-    "Ø3 × 12~13 둥근머리 목재 나사 2개 (머리 Ø6 이하): 허브 선반 받침 → 뒤판",
     "구매 목록 v4에 있음 — L69 M4 열압입 인서트 (ShenzenAV M4x4x6, 바깥 Ø6 × 4) 8 + 예비 2와 L70 M4×12 8 + 예비 2: 스피커 유닛을 출력 앞판에 "
     "(L1의 직결피스 8호 16 mm 대신). 모델 인서트도 Ø6 × 4 (구멍 Ø5.6 × 6.5 그대로, 지름 0.4 물림)",
     "구매 목록 v4에 있음 — L71 M3 열압입 인서트 (ShenzenAV M3x4x4.5, 바깥 Ø4.5 × 높이 4) 6개 = 화면 뚜껑 이음 레일 4 + 예비 2. 모델 인서트 Ø4.5 × 4 "
@@ -453,7 +533,8 @@ BUY_GAPS = [
     "UPSTREAM",
     "PIPOWER",
     "흡음솜 (폴리에스터): 스피커 상자마다 약 35 g을 상자 전체에 느슨하게 (W1). 기존 줄 양으로 되는지 확인",
-    "보조배터리 고정 끈 (벨크로 20 mm): 받침에 끈 구멍만 있음",
+    "구매 목록 v4에 있음 — L79 (최종 재료 i221) 벨크로 링벨트 20 mm × 30 cm 1개: 보조배터리를 받침 앞·뒤 벽 바닥의 끈 구멍 22 × 3으로 "
+    "밑·위를 감아 묶음 (보조배터리를 쓰지 않으면 빼도 됨)",
     "센서 바 나사는 버튼헤드(머리 1.65)로: 캡볼트면 눌린 C·A0·C8 건반 밑과 0.48",
 ]
 
@@ -512,11 +593,11 @@ def assembly_order(F):
         "통로 지붕 밑(z27)에 핀 소켓 블록 (%s)과 케이블 집게 3개, 바깥 옆판 홈에 통로 옆 마개. 스피커 꼬리선(XT30U-F 150)을 안쪽 옆판 Ø6 구멍으로 약 %s mm "
         "빼고 본드로 밀봉. Ø94 구멍으로 흡음솜을 상자 전체에 느슨하게 넣고(유닛 뒤 10 mm·폴 벤트 축 10 mm는 비움), 유닛(가스켓 3T + M4×12 × 4 → 앞판 "
         "인서트; 더 긴 나사 금지), 그릴(8호 19 mm × 4; 25 mm 금지)." % (f(B.ANGLE, 0), pin, f(_PIG_OUT[0], 0)),
-        "**가운데 유닛** — 아랫판 + 끝벽 2 + 뒤판을 목공본드로 (끝벽 Ø8 구멍에 고무 슬리브). 뒤판 창에 뒤판 출력물을 끼우고 바닥 탭 2개를 접시 8호 13 mm로: "
+        "**가운데 유닛** — 아랫판 + 끝벽 2 + 뒤판을 목공본드로 (끝벽 Ø8 구멍에 고무 슬리브). 뒤판 창에 뒤판 출력물을 끼우고 바닥 탭 2개를 접시 8호 13 mm(L77)로: "
         "왼쪽 (%s, %s), 오른쪽은 J501 받침 앞으로 나온 혀의 (%s, %s) — J501 받침 바로 밑(탭 뒤쪽)에는 드라이버가 닿지 않으므로 혀의 구멍을 씀. "
         "J501 기판은 그 뒤 받침 위에 MS 폴리머. 이음 레일·기둥 2개(M3 인서트를 먼저 인두로)를 뒤판 안면·아랫판에 MS 폴리머로. 보드는 받침 기둥에 먼저 나사(M3×5, Pi M2.5×6)로 단 뒤 기둥 밑을 "
         "아랫판에 MS 폴리머 (스스로 자리 잡음). 퓨즈 받침, 보조배터리 받침(접시 8호 13 × 4), 허브를 뒤판에 붙여 바닥에 놓고 허브 선반(받침 2를 뒤판에 "
-        "Ø3 × 12 둥근머리 목재 나사 — 드라이버는 선반 윗면의 머리 길 홈을 따라 앞에서), 앰프를 선반 받침에(M3×6). 이 나사들은 모두 곧은 드라이버(Ø6 × 80)로 "
+        "M3 × 12 트러스 태핑 피스 L78 — 드라이버는 선반 윗면의 머리 길 홈을 따라 앞에서), 앰프를 선반 받침에(M3×6). 이 나사들은 모두 곧은 드라이버(Ø6 × 80)로 "
         "닿음 (check_body.py). XT30 집게 2개를 끝벽 안쪽 Ø14 구멍에 맞춰 MS 폴리머 (판 구멍과 끝벽 구멍이 같은 축), "
         "끝벽 L 안면에 케이블 집게 2개(y262~282·286~306, z48~58). 뚜껑 자석 12개(극이 서로 당기게). 전원선·5.1 V선·스피커선 배선 (스피커선 L은 끝벽 "
         "집게에 끼우고 y%s에서 끝벽을 떠나 보조배터리 앞을 건넘)." % (f(B.BP_TABS[0][2], 0), f(B.BP_TABS[0][3], 0), f(B.BP_TABS[1][2], 0),
@@ -899,6 +980,34 @@ def touch_section(man):
     a("")
     return L
 
+def jig_section(rs, extra):
+    """text under the 08_합판지그 table (W1 plywood jigs 2026-10-02, src/plywood_jigs.py, guide cad/jigs/README.md)."""
+    L = []
+    a = L.append
+    gaps = [m_.group(1) for m_ in (re.search(r"틈([\d.]+)", r["name"]) for r in rs) if m_]
+    g_req = sum(r.get("mass_g_print_est") or 0.0 for r in rs)
+    g_opt = sum(r.get("mass_g_print_est") or 0.0 for r in extra)
+    hours = sum(r.get("print_min_est") or 0.0 for r in rs) / 60.0
+    n_d = sum(1 for r in rs if (r.get("jig") or "").startswith("J-d"))
+    a("08 폴더는 합판 가공용 출력 지그 %d개(악기당 1벌)입니다. 공구를 새로 사지 않고 가진 전동 드릴과 날로 오꾸메 조각의 구멍·홈·자석 자리를 모델(`src/body.py`) "
+      "자리에 뚫기 위한 것이고, 쓰는 법은 **[`jigs/README.md`](jigs/README.md)**에 있습니다: J-a1~a4 스피커 안쪽 옆판·끝벽 구멍, J-a5 XT30 Ø14 표시 원판, "
+      "J-b 모서리 자석 새들, J-c1·c2 뚜껑 밑면 자석, J-d1~d4 폭 4 mm 홈(틀·슬라이더·심 3개씩 = %d개), J-e 깊이 게이지·시험 블록. "
+      "모두 PETG 0.2 mm 층, 서포트 없음, **STL 방향 그대로**(돌리지 않음). J-e를 가장 먼저 뽑아 자투리에 시험합니다." % (len(rs), n_d))
+    a("")
+    if gaps:
+        a("**J-b 새들 %d개(틈 %s)는 모두 뽑습니다.** 쓰는 것은 하나지만 합판 실제 두께가 판마다 조금씩 달라 미리 알 수 없으므로, %d개를 다 뽑아 판 모서리에 "
+          "손으로 밀어 끼워지는 것 중 가장 좁은 하나를 씁니다(출력하면 틈이 0.1~0.2 좁아져 보통 11.6이나 11.9). 11.3이 끼면 판이 11.3 이하라 인서트 구멍 깊이를 "
+          "J-e '얇5.8'로 맞춥니다." % (len(gaps), " · ".join(gaps), len(gaps)))
+        a("")
+    a("**필라멘트:** 지그 %d개는 벽 3줄 + 채움 15 %% 기준 %s입니다(%s`plywood_jigs.est_print` 어림, 슬라이서 값이 기준). "
+      "구매 목록 PETG 8 kg은 악기 출력 약 7.0 kg + 실패 여유 약 1 kg(i090)으로 잡혀 있어 지그가 이 여유의 절반쯤을 씁니다 — 악기 출력에서 실패가 많으면 "
+      "1 kg 스풀(16,150원)을 더 삽니다. 지그 색은 아무거나. 레이저로 합판을 자르면 막힌 구멍용(J-a1·a2, J-b, J-c, J-e)만 있으면 됩니다."
+      % (len(rs), ("약 %s g, 약 %s시간" % (f(round(g_req, -1), 0), f(round(hours), 0))) if g_req else "약 0.5 kg",
+         ("선택 J-f %s g 별도; " % f(round(g_opt), 0)) if g_opt else ""))
+    a("")
+    return L
+
+
 def main():
     man = json.load(open(os.path.join(OUT, "manifest.json")))
     _PIG_OUT[0] = _pig_out(man)
@@ -1000,9 +1109,13 @@ def main():
     a("")
     a("| 경로 | 내용 |")
     a("|---|---|")
-    a("| `stl/print/` | **출력용 — 이 폴더는 전부 뽑으면 됩니다.** 악기 1대 부품과 조립 공구 1벌(06)만 들어 있고, 파일 이름 끝 개수(`__7개`)만큼 뽑습니다. "
+    a("| `stl/print/` | **출력용 — 이 폴더는 전부 뽑으면 됩니다.** 악기 1대 부품, 조립 공구 1벌(06), 합판 가공 지그 1벌(08, 사용법 "
+      "[`jigs/README.md`](jigs/README.md))만 들어 있고, 파일 이름 끝 개수(`__7개`)만큼 뽑습니다. "
       "베드 위 방향으로 놓여 있습니다. 같은 내용을 한 파일로 묶은 것이 `Toccata_출력STL_전체.zip`입니다 |")
-    a("| `stl/print_extra/` | **꼭 뽑지 않아도 되는 것.** 선택 부품(화면 덮개), 대안(PORON 6T를 살 때의 패드 바), 예비 건반 — 아래 '선택·대안·예비' 표 |")
+    a("| `stl/print_extra/` | **꼭 뽑지 않아도 되는 것.** 선택 부품(화면 덮개, 합판 지그 J-f 사포 막대), 대안(PORON 6T를 살 때의 패드 바), 예비 건반 — "
+      "아래 '선택·대안·예비' 표 |")
+    a("| [`jigs/`](jigs/README.md) | 합판 지그 사용 설명서 `README.md` (손으로 쓴 안내서 — 지그 STL은 빌드가 `stl/print/08_합판지그/`에 씀; 생성 "
+      "`src/plywood_jigs.py`, 확인 `src/check_plywood_jigs.py`) |")
     a("| `stl/annotated/` | **보기용(출력 금지).** 부품 옆에 치수선과 숫자를 입체로 붙였습니다. 조립 방향으로 놓여 있습니다. `08_합판재단/`은 합판 조각(재단·구멍 자리) |")
     a("| `stl/assembly/` | 모든 부품을 조립 위치 그대로 둔 파일입니다. 그룹별 STL을 한꺼번에 열면 전체가 맞춰집니다 (단 `터치스크린_(접은_상태,_별도_보기).stl`은 접은 자세라 같이 열면 사용 상태 화면과 겹침; "
       "`댐퍼_페달_(바닥)`은 바닥 위치). `Toccata_전체조립.stl`은 한 파일에 전부 들어 있습니다 (접은 화면·페달 빼고) |")
@@ -1012,14 +1125,15 @@ def main():
     a("| `spec/` | 문서에서 뽑은 세부 사양(출처 포함). 뒷바는 `body_L2.json` |")
     a("| `viewer/` | 통합 아티팩트 09 CAD 탭 원본(cad.html·css·js, parts.json) |")
     a("| `src/` | 생성기. `python3 src/build_all.py` 한 번으로 STL·3MF·GLB·manifest·README·뷰어 데이터를 모두 다시 만듭니다(약 10~20초). "
-      "검사: `check_interf.py`(건반 액션), `check_body.py`, `check_electronics.py` |")
+      "검사: `check_interf.py`(건반 액션), `check_body.py`, `check_electronics.py`, `check_plywood_jigs.py`(합판 지그) |")
     a("")
     # ---------------- print list
     a("## 출력 목록")
     a("")
-    a("`stl/print/`의 파일을 **모두, 이름 끝 개수만큼** 뽑으면 악기 1대와 조립 공구 1벌이 됩니다. 꼭 뽑지 않아도 되는 것(선택·대안·예비)은 "
+    a("`stl/print/`의 파일을 **모두, 이름 끝 개수만큼** 뽑으면 악기 1대, 조립 공구 1벌(06), 합판 지그 1벌(08)이 됩니다. 꼭 뽑지 않아도 되는 것(선택·대안·예비)은 "
       "`stl/print_extra/`에 따로 두었습니다(이 목록 아래 표). 순서: 단계 0 시편(`key-action-v4/printables/stage0`)으로 시험 → 건반 액션 모듈 1개 → "
-      "시험 21 통과 뒤 나머지. 화면 받침(07)은 화면 실물로 뒤 커넥터 방향을, 보조배터리 받침(05)은 배터리 포트 높이를 확인한 뒤 뽑습니다.")
+      "시험 21 통과 뒤 나머지. 화면 받침(07)은 화면 실물로 뒤 커넥터 방향을, 보조배터리 받침(05)은 배터리 포트 높이를 확인한 뒤 뽑습니다. "
+      "합판 지그(08)는 합판에 구멍·홈을 내기 전에 뽑습니다(J-e를 가장 먼저 — 자투리 시험용).")
     a("")
     by = collections.OrderedDict()
     by_extra = collections.OrderedDict()
@@ -1028,7 +1142,7 @@ def main():
     tot_q = 0
     tot_g = 0.0
     for folder, rs in by.items():
-        a("### %s%s" % (folder, " (악기당 1벌)" if folder.startswith("06") else ""))
+        a("### %s%s" % (folder, " (악기당 1벌)" if folder.startswith("06") else " (악기당 1벌, 합판 가공용 지그)" if folder.startswith("08") else ""))
         a("")
         notes = collections.OrderedDict()
         for r in rs:
@@ -1061,10 +1175,14 @@ def main():
               "트리 서포트가 필요합니다. 선택 부품인 화면 덮개는 `stl/print_extra/선택_화면덮개`에 있습니다. 출력 전에 부록 A10의 '받은 부품으로 확인할 것'을 먼저 봅니다."
               % f(TS.CR["print_height"]))
             a("")
+        if folder.startswith("08"):
+            L.extend(jig_section(rs, [r for r in rows if r.get("jig") and r.get("extra")]))
     n_main = sum(len(v) for v in by.values())
     n_tool = len(by.get("06_출력공구", []))
-    a("`stl/print`는 모두 %d종(악기 %d종 + 공구 %d종)이고, 06 공구를 뺀 악기 출력 부품은 모두 %d개입니다. 질량은 속을 100%% 채운 PETG(1.27 g/cm³) 기준이라 "
-      "실제(슬라이서 채움 %%)보다 큽니다. 모두 합하면 %.2f kg입니다." % (n_main, n_main - n_tool, n_tool, tot_q, tot_g / 1000))
+    n_jig = sum(len(v) for k_, v in by.items() if k_.startswith("08"))
+    a("`stl/print`는 모두 %d종(악기 %d종 + 공구 %d종%s)이고, 06 공구%s를 뺀 악기 출력 부품은 모두 %d개입니다. 질량은 속을 100%% 채운 PETG(1.27 g/cm³) 기준이라 "
+      "실제(슬라이서 채움 %%)보다 큽니다. 악기 출력 부품만 모두 합하면 %.2f kg입니다. 한 파일 묶음 `Toccata_출력STL_전체.zip`에는 `stl/print` 전체(%d종)가 들어 있습니다."
+      % (n_main, n_main - n_tool - n_jig, n_tool, " + 합판 지그 %d종" % n_jig if n_jig else "", "와 08 합판 지그" if n_jig else "", tot_q, tot_g / 1000, n_main))
     a("")
     a("예비 건반은 부품표(parts_list.json)대로 `stl/print_extra/예비_건반`에 있습니다(백건 파일마다 +1 = 10개, 흑건 C#·D# +2, F# +1, G# +1, A#·A#0 +2 = 6개). "
       "레버 캐리어와 패드 바는 예비 없이 필요할 때 `stl/print`의 위치별 파일로 뽑습니다.")
@@ -1097,12 +1215,17 @@ def main():
         n_ply = sum(q for (_, _, q, _, _, _) in prow) + len(other)
         area = sum(q * mb[0] * mb[1] for (_, _, q, mb, _, _) in prow) / 1e6
         a("L2 합판 조각은 %d개, 사각 재단 넓이 %s m²입니다 (L1 %s m²). 판매처 무료 재단은 사각 재단만 해 주므로 아래 크기로 받고, '직접 가공'만 톱·드릴로 합니다"
-          "(톱날 3 mm는 판매처 재단에서 빠짐). 치수는 이 모델에서 잰 값이고, 사양 표와 다르면 괄호에 사양 값을 적었습니다." % (n_ply, f(area, 3), f(pc["L1_area_m2"], 3)))
+          "(톱날 3 mm는 판매처 재단에서 빠짐). 구멍·홈·자석 자리는 출력 지그 `stl/print/08_합판지그`(쓰는 법 [`jigs/README.md`](jigs/README.md))를 대고 "
+          "가진 전동 드릴로 뚫습니다 — 공구는 새로 사지 않습니다. 치수는 이 모델에서 잰 값이고, 사양 표와 다르면 괄호에 사양 값을 적었습니다."
+          % (n_ply, f(area, 3), f(pc["L1_area_m2"], 3)))
         a("")
-        a("**폭 4 mm 홈(뚜껑 L·R 배기 홈, 뒤판 환기 홈, 가운데 아랫판 흡기 홈, 모두 %d개)은 직소 날(약 7 mm)이 들어가지 않습니다.** Ø4 구멍을 한 줄로 "
-          "뚫어 잇고 줄로 다듬거나, 트리머에 4 mm 일자 비트를 씁니다. 홈 사이 나무는 4 mm입니다. **자석 자리 Ø8 × 3.2**(끝벽·뒤판 윗모서리 11.5 두께 가운데 → "
-          "벽 1.75)는 판을 붙이기 전에 자투리 판 두 장 사이에 물려 포스트너 비트로 뚫습니다."
-          % (len(body.LIDL_SLOTS) + len(body.LIDR_SLOTS) + len(body.BACK_SLOTS) + len(body.BOT_SLOTS_BUCK) + len(body.BOT_SLOTS_PI)))
+        a("**폭 4 mm 홈(뚜껑 L·R 배기 홈, 뒤판 환기 홈, 가운데 아랫판 흡기 홈, 모두 %d개)은 직소 날(약 7 mm)이 들어가지 않습니다.** 지그 J-d(틀 + 슬라이더 + 심)를 "
+          "판에 한 번 붙여 두고 Ø4 구멍을 A·B·C·D 네 번에 나눠 뚫으면 구멍 간격이 약 2 mm 이하로 이어져 홈 벽 물결이 0.3 mm 이하라 줄질이 필요 없습니다 "
+          "([`jigs/README.md`](jigs/README.md) 'J-d', 약 2~3시간). 홈 사이 나무는 %s입니다. "
+          "**자석 자리 Ø8 × 3.2**(끝벽·뒤판 윗모서리 11.5 두께 가운데 → 벽 1.75)는 판을 붙이기 전에 **J-b 모서리 새들 + Ø8 트위스트 드릴**로 팝니다 "
+          "(깊이는 J-e 게이지로 척 멈춤; 포스트너 비트는 출력 안내 구멍을 깎아 쓰지 않음). 뚜껑 밑면 자석은 J-c, 인서트·슬리브·XT30 구멍은 J-a입니다. "
+          "아래 표의 '직접 가공'에 조각마다 쓰는 지그를 적었습니다."
+          % (len(body.LIDL_SLOTS) + len(body.LIDR_SLOTS) + len(body.BACK_SLOTS) + len(body.BOT_SLOTS_BUCK) + len(body.BOT_SLOTS_PI), slat_text()))
         a("")
         a("| 조각 | 개수 | 사각 재단 (mm) | 직접 가공 |")
         a("|---|---|---|---|")
@@ -1117,6 +1240,15 @@ def main():
         for p in other:
             b = p["bbox"]
             a("| %s `%s` | 1 | %s | |" % (p["name_ko"], p["id"], " × ".join(f(v) for v in sorted([b[3] - b[0], b[4] - b[1], b[5] - b[2]], reverse=True)[:2])))
+        a("")
+        feet = body.foot_positions()
+        nf = collections.Counter(g for g, _, _ in feet)
+        a("**나사 자리 (위 표에 조각마다 적음):** 고무발 나사 %d개 (L49 8호 13 mm — 스피커 아랫판 %d × 2 + 가운데 아랫판 %d, 밑면), 접시머리 나사 %d개 "
+          "(L77 8호 13 mm — 가운데 아랫판 윗면: %s), 허브 선반 받침 나사 %d개 (L78 M3 × 12 — 가운데 뒤판 안쪽 면). "
+          "나사는 모두 출력물·고무발 구멍을 대고 바로 조입니다(직결피스·태핑 피스)."
+          % (len(feet), nf.get("스피커 L", 0), nf.get("가운데 유닛", 0), len(csk_spots()),
+             " + ".join("%s %d" % (w, n) for w, n in collections.Counter(w for w, _, _ in csk_spots()).items()),
+             sum(1 for k_ in body.CC if k_.startswith("PR-SHELFBRK"))))
         a("")
         ok, uw, uh = nesting_check(prow)
         nest = pc["nesting_400x1200"]
@@ -1180,7 +1312,8 @@ def main():
     a("## 구매 목록에 없는 것 (따로 사거나 확인)")
     a("")
     a("10/1 구매 목록 v4(`hardware/bom/toccata-purchase-list-v4.xlsx`)에 L69~L79·C22·C24·C25가 들어갔습니다. '구매 목록 v4 …' 줄은 CAD를 그 상품에 맞춘 것이고 "
-      "(L73은 Norelem 07653-04 나사산 인서트로 바뀜), 나머지 줄은 v4에서 다시 확인할 것입니다.")
+      "(L73은 Norelem 07653-04 나사산 인서트로 바뀜), 나머지 줄은 v4에서 다시 확인할 것입니다. 접시머리 8호 13 mm(L77, 최종 재료 i219)와 허브 선반 "
+      "받침 나사 M3 × 12 트러스 태핑(L78, i220)도 v4에 들어가 이제 삽니다 — 위 '모델에 넣지 않은 것' 표.")
     a("")
     for t_ in BUY_GAPS:
         a("- " + {"USB_CABLES": lambda: usb_cable_line(man), "TOUCH_PETG": lambda: touch_petg_line(man), "QUICKSERT": quickserts_line,

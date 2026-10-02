@@ -13,7 +13,9 @@
     clearances (driver model of electronics.py / electronics_L1.py) incl. the pole vent >= 10 mm along the axis, normal depth,
     slant length, D14, 27 deg sound path band (>= 3.0 vertical under the path for the key action and every rear-unit solid;
     grille plate lower edge = spec exception), grille W1 (open area >= 40 %, holes >= D3, plate <= 2, 4 screws), R18 (nothing of
-    the rear unit at y<214 below z75, modules lift out), cable duct, centre unit, joints, feet, BRK2 pins, pods lift off,
+    the rear unit at y<214 below z75, modules lift out), cable duct, centre unit, joints, feet, wood screws (body.wood_screws: tip
+    >= 1.0 from the panel's opposite face, screws from opposite faces with overlapping depths >= 4 thread to thread, seats measured;
+    W1 item 7 power-bank holder ears), BRK2 pins, pods lift off,
     spec centre_contents boxes vs the body solids, pareto_by_angle reproduced by body.PodGeom
 (4) R31 touchscreen rev 3 (touchscreen/rev3/design/CAD_SPEC_rev3.md A..G, numbers.json points / checks): screen lid additions + rib rule,
     cradle, hinge sweep 22..90 deg against the lid, Pi, cables, pods, key modules (nothing over the modules at y<=215), heel contact /
@@ -363,6 +365,93 @@ def main():
         if not g:
             print("   FAILED:", lab)
     return 0 if n_ok == len(C.res) else 1
+
+
+SCREW_TIP_MIN = 1.0       # every screw tip / blind-hole bottom >= 1.0 from the panel's opposite face
+SCREW_OPP_GAP = 4.0       # two screws entering one panel from opposite faces with overlapping depths: >= 4 of wood thread to thread
+
+
+def _ax(axis, at, a0, a1, d):
+    """cylinder D d along axis from a0 to a1 at the cross coordinates at (x: (y, z), y: (x, z), z: (x, y))."""
+    lo, hi = min(a0, a1), max(a0, a1)
+    return {"x": cyl_x, "y": cyl_y, "z": cyl_z}[axis](at[0], at[1], lo, hi, d)
+
+
+def _ring(axis, at, a0, a1, d0, d1):
+    return diff(_ax(axis, at, a0, a1, d1), [_ax(axis, at, min(a0, a1) - 0.01, max(a0, a1) + 0.01, d0)])
+
+
+def check_wood_screws(by, C):
+    """W1 item 7 (2026-10-02, power-bank holder csk screws 0.5 over the ply underside, 2 over rubber feet): body.wood_screws() lists
+    every screw / insert pilot into a plywood panel. Measured on the solids: the panel faces at each screw (ring D+2..D+5 round the
+    axis), the head seat in the part that holds the head (open over the head, material under / round it, bore open). Then
+    (a) every tip >= SCREW_TIP_MIN from the panel's opposite face, (b) two screws entering one panel from opposite faces whose depths
+    overlap stay >= SCREW_OPP_GAP apart thread to thread (axis distance - (D1 + D2) / 2)."""
+    chk, true = C.chk, C.true
+    print("   --  wood screws (body.wood_screws): tip >= %.1f from the opposite face; opposite-face pairs with overlapping depths >= %.0f "
+          "thread to thread" % (SCREW_TIP_MIN, SCREW_OPP_GAP))
+    rows = body.wood_screws()
+    idx = {"x": 0, "y": 1, "z": 2}
+    bad_face, bad_seat, tips = [], [], []
+    for r in rows:
+        ax, i, at, sg = r["axis"], idx[r["axis"]], r["at"], r["dir"]
+        pb = (by[r["ply"]].solid ^ _ring(ax, at, r["face"] - 40.0, r["face"] + 40.0, r["d"] + 2.0, r["d"] + 5.0)).bounding_box()
+        lo, hi = pb[i], pb[i + 3]
+        entry, opp = (lo, hi) if sg > 0 else (hi, lo)
+        r["seg"] = (min(entry, r["tip"]), max(entry, r["tip"]))
+        bite, gap = (r["tip"] - entry) * sg, (opp - r["tip"]) * sg
+        r["gap"], r["bite"] = gap, bite
+        if abs(entry - r["face"]) > 0.01:
+            bad_face.append("%s %s: entry face %.2f, wood_screws says %.2f" % (r["label"], at, entry, r["face"]))
+        tips.append((gap, r))
+        part = by[r["part"]].solid if r["part"] else None
+        h = r["head"]
+        if r["kind"] == "csk":                       # countersunk from above: head top flush at h, cone D8.6 -> 4.5 over 2.05
+            hd = body.CSK_HEAD_D
+            ok = (vol(part, _ax("z", at, h - 0.3, h + 3.0, hd - 0.7)) < TOL and vol(part, _ax("z", at, r["face"], h - 2.1, r["d"] - 0.3)) < TOL
+                  and vol(part, _ring("z", at, h - 0.5, h - 0.01, hd + 0.2, hd + 1.0)) > 1.0
+                  and abs((part ^ _ring("z", at, r["face"] - 1.0, h, hd + 0.2, hd + 1.0)).bounding_box()[2] - r["face"]) < 0.01)
+        elif r["kind"] == "foot":                    # head in the foot's seat D9 x 2 from below, through hole D4.5
+            fs = body.FOOT_SEAT
+            ok = (vol(part, _ax("z", at, 0.01, h - 0.01, fs[0] - 0.2)) < TOL and vol(part, _ax("z", at, h, r["face"], 4.3)) < TOL
+                  and vol(part, _ring("z", at, h + 0.01, h + 1.0, 5.0, fs[0] - 0.5)) > 1.0
+                  and abs(part.bounding_box()[5] - r["face"]) < 0.01)
+        elif r["kind"] == "pan":                     # hub-shelf bracket: seat D6.5 x 4 from the bracket front, bore D3.4 to the back ply
+            ss = body.SHELF_SEAT
+            ok = (vol(part, _ax("y", at, h - ss[1] + 0.01, h - 0.01, 6.0)) < TOL and vol(part, _ax("y", at, h, r["face"], 3.2)) < TOL
+                  and vol(part, _ring("y", at, h + 0.01, h + 1.0, 3.6, 6.0)) > 1.0)
+        else:                                        # insert pilot: the blind hole is in the panel, full D down to the tip
+            ok = (vol(by[r["ply"]].solid, _ax(ax, at, r["face"], r["tip"] - 0.01 * sg, r["d"] - 0.2)) < TOL
+                  and vol(by[r["ply"]].solid, _ax(ax, at, r["tip"] + 0.3 * sg, r["tip"] + 0.8 * sg, 1.0)) > 0.1)
+        if not ok:
+            bad_seat.append("%s %s" % (r["label"], at))
+        print("       %-40s %-16s %s%-14s face %6.1f  tip %6.1f  bite %4.1f  to the opposite face %4.1f" % (
+            r["label"], r["ply"], ax, "(%.1f, %.1f)" % at, r["face"], r["tip"], bite, gap))
+    true("wood screws: %d (feet 14, holder 4, back-plate tabs 2, hub shelf 2, L73 pilots 4); entry faces measured on the panels = "
+         "wood_screws" % len(rows), not bad_face and len(rows) == 26, "; ".join(bad_face) or "all")
+    true("wood screws: every head seat on its solid (csk cone open, ear / tab round the head, flush top on the panel; foot seat D9 x 2; "
+         "shelf seat D6.5 x 4; pilot depth)", not bad_seat, "; ".join(bad_seat) or "all")
+    gmin, rmin = min(tips, key=lambda t: t[0])
+    true("every wood screw tip / blind-hole bottom >= %.1f from the panel's opposite face and inside the panel (min %.2f: %s %s)"
+         % (SCREW_TIP_MIN, gmin, rmin["label"], rmin["at"]), gmin >= SCREW_TIP_MIN and all(r["bite"] > 0 for r in rows))
+    pairs = []
+    for a_, b_ in itertools.combinations(rows, 2):
+        if a_["ply"] != b_["ply"] or a_["dir"] == b_["dir"]:
+            continue
+        ov = min(a_["seg"][1], b_["seg"][1]) - max(a_["seg"][0], b_["seg"][0])
+        if ov > 0:
+            pairs.append((math.dist(a_["at"], b_["at"]) - (a_["d"] + b_["d"]) / 2.0, ov, a_, b_))
+    if pairs:
+        g_, ov_, a_, b_ = min(pairs, key=lambda t: t[0])
+        info = "%d pairs, min %.1f: %s (%.1f, %.1f) / %s (%.1f, %.1f), depths overlap %.1f" % (
+            len(pairs), g_, a_["label"], a_["at"][0], a_["at"][1], b_["label"], b_["at"][0], b_["at"][1], ov_)
+    true("no two screws from opposite faces of one panel within %.0f thread to thread where their depths overlap" % SCREW_OPP_GAP,
+         all(p_[0] >= SCREW_OPP_GAP for p_ in pairs), info if pairs else "no overlapping pairs")
+    feet_c = [r["at"] for r in rows if r["kind"] == "foot" and r["ply"] == "CU-PLY-BOTTOM"]
+    dpb = min(math.dist(s, f) for s in body.PB_SCREWS for f in feet_c)
+    true("power-bank holder screws (W1 item 7): ear head z%.1f, tip z%.1f = %.1f over the ply underside, every axis off the D28 foot pads "
+         "(nearest foot axis %.1f > 14)" % (body.PB_HEAD_Z, body.PB_HEAD_Z - body.CSK_SCREW[1], body.PB_HEAD_Z - body.CSK_SCREW[1] - body.ZB, dpb),
+         dpb > 14.0 and body.PB_HEAD_Z - body.CSK_SCREW[1] - body.ZB >= SCREW_TIP_MIN)
 
 
 def run_checks(P, by, K, C, E=None):
@@ -795,9 +884,19 @@ def run_checks(P, by, K, C, E=None):
         exp[l["id"]] = (l["x"][0], 214.0, zlu, l["x"][1], YB, zlt)
     exp["CU-SCREENLID"] = (body.SLID_X[0], 214.0, zlu, body.SLID_X[1], YB, TS.AX_Z + TS.KNUCKLE["R"])   # 0.5 seam play; top = rev 3 hinge cheeks
     cc = dict(CC_B)                                                     # spec boxes; back-plate items moved with the back face
-    for k in ("CU-PBHOLDER",):
-        v = cc[k]
-        exp[k] = (v[0], v[2], v[4], v[1], v[3], v[5])
+    # power-bank holder (W1 item 7, 2026-10-02): spec box + 4 screw ears <= z16.5 + PB_EAR_T outside it -> the box above the ears = spec,
+    # whole bbox = spec box grown to the ears, nothing outside the spec box above the ear tops
+    v = cc["CU-PBHOLDER"]
+    hb = by["CU-PBHOLDER"].solid
+    ez = body.PB_HEAD_Z
+    chk("CU-PBHOLDER above the ears (z>%.1f) bbox = spec" % ez, (hb ^ B_(200, 450, 200, 400, ez + 0.01, 100)).bounding_box(),
+        (v[0], v[2], ez + 0.01, v[1], v[3], v[5]))
+    ears_bb = (min([v[0]] + [e[0] for _, e in body.PB_EARS]), min([v[2]] + [e[2] for _, e in body.PB_EARS]), v[4],
+               max([v[1]] + [e[1] for _, e in body.PB_EARS]), max([v[3]] + [e[3] for _, e in body.PB_EARS]), v[5])
+    chk("CU-PBHOLDER bbox = spec box + 4 screw ears (z%.1f..%.1f)" % (v[4], ez), hb.bounding_box(), ears_bb)
+    out_spec = hb - B_(v[0], v[1], v[2], v[3], v[4] - 1, v[5] + 1)
+    true("CU-PBHOLDER outside the spec box = only the 4 ears (top z%.1f, %.0f cm3)" % (ez, out_spec.volume() / 1000.0),
+         len(out_spec.decompose()) == 4 and out_spec.bounding_box()[5] <= ez + 1e-6)
     sh, b1 = cc["PR-HUBSHELF"], cc["PR-SHELFBRK-1"]
     exp["PR-HUBSHELF"] = (sh[0], sh[2], sh[4], sh[1], YBI, b1[5])     # shelf back strip + brackets reach the back ply (spec boxes: to y330 at 43 deg)
     for i in (1, 2):
@@ -967,6 +1066,7 @@ def run_checks(P, by, K, C, E=None):
         pb_ = by[pid].solid.bounding_box()
         emin = min(min(x - pb_[0], pb_[3] - x, y - pb_[1], pb_[4] - y) for (x, y) in pts)
         true("%s: %d screw axes >= 8 apart (min %.1f) and >= 5 from the ply edges (min %.1f)" % (pid, len(pts), dmin, emin), dmin >= 8.0 and emin >= 5.0)
+    check_wood_screws(by, C)
     # screw access (review 2026-10-01: the right back-plate tab screw sat under the J501 ledge, 9.5 free over its head): a straight
     # driver D6 x 80 along each screw axis from the head must not touch a solid. Assembly / service state: lids off; cables pushed aside
     # and the power bank out (not in the test); boards, hub, amp and every other rigid item in place. BRK2 bolts: before the pods go on.
@@ -984,8 +1084,8 @@ def run_checks(P, by, K, C, E=None):
     sh_ = cc["PR-HUBSHELF"]
     screw_groups = [
         ("back-plate tab screws (csk 8호 13, head flush z20.5)", [((sx, sy, 20.5), ("z", 1)) for (_, _, sx, sy) in body.BP_TABS], centre_set),
-        ("power-bank holder screws (csk 8호 13, head flush z%.1f)" % (cc["CU-PBHOLDER"][4] + body.PB_FLOOR),
-         [((x, y, cc["CU-PBHOLDER"][4] + body.PB_FLOOR), ("z", 1)) for (x, y) in body.PB_SCREWS], centre_set),
+        ("power-bank holder ear screws (csk 8호 13, head flush z%.1f)" % body.PB_HEAD_Z,
+         [((x, y, body.PB_HEAD_Z), ("z", 1)) for (x, y) in body.PB_SCREWS], centre_set),
         ("hub-shelf bracket screws (D3 pan head D6 in the D6.5 seat, head top 2.1 in front of the seat bottom)",
          [(((b_[0] + b_[1]) / 2.0, b_[2] + 4.0 - 2.1, body.SHELF_SCREW_Z), ("y", -1)) for b_ in (cc["PR-SHELFBRK-1"], cc["PR-SHELFBRK-2"])], centre_set),
         ("BRK2 M3x16 bolts (hex key from +y, before the pods)",

@@ -7,6 +7,9 @@
 
 Outputs (../):
   stl/print/<NN_폴더>/<부품이름>__<수량>개.stl   print-ready, lying on the bed, one file per distinct shape
+                                                 (06_출력공구 = key-action tools, 08_합판지그 = plywood drilling jigs from
+                                                 src/plywood_jigs.py, guide cad/jigs/README.md; optional prints -> stl/print_extra/)
+  Toccata_출력STL_전체.zip                        everything in stl/print in one file
   stl/assembly/<그룹>.stl                        every part in world coordinates (open them together)
   stl/assembly/Toccata_전체조립.stl               the whole instrument in one file
   stl/annotated/<폴더>/<부품이름>_치수.stl         part + dimension lines + numbers (for looking, not printing)
@@ -174,6 +177,10 @@ def write_print(parts):
                      "volume_cm3": 0, "mass_g_solid_petg": g, "material": "PETG",
                      "note": "건반 액션 설계의 출력 공구(DESIGN 10.1, key-action-v4/printables/tools/tools.md): 악기당 1벌, 서포트 없음; "
                              "T2·T3는 채움 100 %·층 0.1", "ids": [], "name_ko": nm.replace("_", " "), "variant": True})
+    # printed plywood drilling jigs (W1 2026-10-02, src/plywood_jigs.py, how to use: cad/jigs/README.md): required -> stl/print/08_합판지그
+    # (one set per instrument, all four J-b saddle gaps included), optional J-f -> stl/print_extra/선택_합판지그. Tools, not instrument parts
+    # (variant True). A failure here only drops the jigs (warning), the rest of the build goes on.
+    rows += write_jigs()
     # spare keys (optional) -> stl/print_extra/예비_건반: same STL as the 01 file, count = spares only
     for r in [r for r in rows if r["folder"] == "01_건반"]:
         spare = SPARE_KEYS.get(r["name"], 1 if r["name"].startswith("백건") else 0)
@@ -185,6 +192,36 @@ def write_print(parts):
         rows.append(dict(r, file=os.path.relpath(dst, OUT), qty=spare, folder=EXTRA + "예비_건반", ids=[], variant=True, extra=True,
                          note="선택: 예비 건반 (부품표 parts_list.json의 예비 수). 01_건반의 같은 파일과 모양이 같음 - 부러진 건반 하나만 바꿀 때 씀. "
                               "본체에 보관 칸이 없으니(R29) 따로 상자에 보관. 출력 방법은 01_건반과 같음"))
+    return rows
+
+
+def write_jigs():
+    """plywood_jigs.build() -> STL files + print rows (tools: variant True; J-f optional -> print_extra). [] + a warning on failure."""
+    try:
+        import plywood_jigs
+        jigs = plywood_jigs.build()
+    except Exception as ex:  # noqa: BLE001
+        print("WARNING: plywood_jigs failed (%s: %s) - no 08_합판지그 jigs in this build; run src/check_plywood_jigs.py" % (type(ex).__name__, ex))
+        return []
+    req_folder = getattr(plywood_jigs, "PRINT_SUB", "08_합판지그")
+    opt_folder = EXTRA + getattr(plywood_jigs, "EXTRA_SUB", "선택_합판지그")
+    est = getattr(plywood_jigs, "est_print", None)
+    rows = []
+    for j in jigs:
+        solid, qty = j["solid"], int(j.get("qty", 1))
+        folder = req_folder if j.get("required", True) else opt_folder
+        path = print_path(folder, "%s__%d개.stl" % (safe(j["name"]), qty))
+        b = solid.bounding_box()
+        write_stl(solid, path, "Toccata %s x%d plywood jig  %.1fx%.1fx%.1f mm" % (j.get("key", "jig"), qty, b[3] - b[0], b[4] - b[1], b[5] - b[2]))
+        row = {"file": os.path.relpath(path, OUT), "name": j["name"], "qty": qty, "folder": folder,
+               "size_mm": [round(b[3] - b[0], 2), round(b[4] - b[1], 2), round(b[5] - b[2], 2)],
+               "volume_cm3": round(solid.volume() / 1000.0, 2), "mass_g_solid_petg": round(solid.volume() / 1000.0 * 1.27, 1),
+               "material": "PETG", "note": j.get("note", ""), "ids": [], "name_ko": j["name"].replace("_", " "),
+               "variant": True, "extra": folder.startswith(EXTRA), "jig": j.get("key")}
+        if est:
+            g, minutes = est(solid)                       # 3 walls + 15 % infill estimate (plywood_jigs.est_print, P2S)
+            row["mass_g_print_est"], row["print_min_est"] = round(g, 1), round(minutes, 0)
+        rows.append(row)
     return rows
 
 
