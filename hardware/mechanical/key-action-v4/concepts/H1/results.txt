@@ -1,0 +1,315 @@
+
+====================================================================================================
+0. DESIGN PARAMETERS (input) AND SOLVED GEOMETRY
+====================================================================================================
+  pk             = (171.0, 40.0)
+  rod_d          = 3.0
+  y_cb           = 96.0
+  y_cw           = 108.0
+  z_pc           = 20.0
+  alpha_deg      = 14.0
+  R_lug          = 3.0
+  t_pad          = 1.0
+  z_ph           = 15.0
+  blk_w          = 9.0
+  blk_L          = 25.0
+  y_w0           = 182.0
+  ledge_face     = 15.7
+  rest_gap       = 0.8
+  cover_top      = 66.0
+  cover_t        = 2.5
+  rail_t         = 5.0
+  stop_felt_t    = 3.0
+  stop_gap       = 0.5
+  stop_dff       = 1.4
+  mu_pin         = 0.25
+  mu_pad         = 0.15
+  guide_drag_g   = 0.6
+  solved: hammer rod y_ph = 127.55 (white & black turn the hammer by the same angle), z_ph = 15.0
+  solved: key bottom angle white 0.05848 rad (3.351 deg), black 0.07984 rad (4.574 deg)
+  solved: hammer angle at key bottom 0.1821 rad (10.43 deg) for BOTH colours
+  solved: weight block height (cut length of 9x25 flat bar) white 24.0 mm, black 22.0 mm on a 2.0 mm PETG shim
+  stop-rail felt face z 55.50 (cover top 66.0 - cover 2.5 - rail 5.0 - felt 3.0); lever of the stop r = 61.2 mm
+
+====================================================================================================
+1. MASSES AND INERTIAS (explicit polygons x thickness; I about own pivot incl. parallel-axis terms)
+====================================================================================================
+  white key : m = 21.93 g, COM (y 78.5, z 36.0), I_pivot = 239538 g mm^2 (radius of gyration 104.5 mm)
+      top head                 3.66 g  at y   25.0
+      top tail                 4.96 g  at y  106.5
+      front wall               0.52 g  at y    0.6
+      walls head               2.55 g  at y   25.6
+      step wall y50            0.23 g  at y   50.6
+      walls tail               5.84 g  at y  107.1
+      rear wall                0.07 g  at y  162.4
+      front floor plate        0.24 g  at y    6.6
+      guide ribs               0.78 g  at y   87.5
+      crossbar                 0.12 g  at y   87.5
+      magnet boss              0.99 g  at y   65.8
+      lug post                 0.88 g  at y  108.7
+      lug nose                 0.11 g  at y  108.7
+      tongue                   0.68 g  at y  168.8
+      magnet                   0.29 g  at y   65.8
+  white hammer: m = 49.04 g (steel 42.39 g), COM (y 188.7, z 27.3), I_pivot = 213766 g mm^2
+      nose pad                 0.98 g  at y  103.2  (x width 8.0)
+      front arm                0.43 g  at y  116.5  (x width 8.0)
+      boss                     1.09 g  at y  127.5  (x width 8.0)
+      rear arm                 2.35 g  at y  158.0  (x width 6.0)
+      ring front               0.35 g  at y  181.3  (x width 10.6)
+      ring sides               1.20 g  at y  194.5  (x width 1.6)
+      ring back                0.25 g  at y  207.4  (x width 10.6)
+      steel block             42.39 g  at y  194.5  (x width 9.0)
+  black key : m = 15.80 g, COM (y 105.4, z 40.2), I_pivot = 87889 g mm^2 (radius of gyration 74.6 mm)
+      top skin                 2.29 g  at y   97.2
+      front wall               0.39 g  at y   53.1
+      walls                    8.31 g  at y   99.9
+      step down y142-146       0.66 g  at y  144.0
+      rear top skin            0.47 g  at y  154.5
+      rear walls               0.92 g  at y  154.5
+      rear wall                0.06 g  at y  162.4
+      front floor plate        0.08 g  at y   55.9
+      crossbar                 0.12 g  at y   87.5
+      magnet boss              0.45 g  at y   64.2
+      magnet web               0.28 g  at y   64.2
+      lug web                  0.42 g  at y   96.7
+      lug post                 0.25 g  at y   96.7
+      lug nose                 0.11 g  at y   96.7
+      tongue                   0.68 g  at y  168.8
+      magnet                   0.29 g  at y   64.2
+  black hammer: m = 46.07 g (steel 38.86 g), COM (y 188.4, z 27.9), I_pivot = 200277 g mm^2
+      nose pad                 0.98 g  at y  103.2  (x width 8.0)
+      front arm                0.43 g  at y  116.5  (x width 8.0)
+      boss                     1.09 g  at y  127.5  (x width 8.0)
+      rear arm                 2.35 g  at y  158.0  (x width 6.0)
+      ring front               0.35 g  at y  181.3  (x width 10.6)
+      ring sides               1.20 g  at y  194.5  (x width 1.6)
+      ring back                0.25 g  at y  207.4  (x width 10.6)
+      steel block             38.86 g  at y  194.5  (x width 9.0)
+      black shim               0.56 g  at y  194.5  (x width 9.0)
+
+====================================================================================================
+2. KINEMATICS
+====================================================================================================
+  white: finger point y13.0 travel 9.24 mm; steel COM rises 11.90 mm -> displacement ratio R = 1.29; hammer/key angular ratio 2.86 (rest) .. 3.38 (bottom)
+      lug contact point rest (108.00, 17.01) -> bottom (109.82, 13.32); pad sliding per stroke 1.50 mm
+      lug/pad normal force (hammer preload on the key) rest 1.51 N, bottom 1.58 N
+      horizontal pad force on the key (+ = pushes key onto its rod slot) rest/mid/bottom: 0.366, 0.244, 0.099 N
+  black: finger point y62.5 travel 8.70 mm; steel COM rises 11.88 mm -> displacement ratio R = 1.37; hammer/key angular ratio 2.14 (rest) .. 2.43 (bottom)
+      lug contact point rest (96.00, 20.00) -> bottom (98.14, 14.05); pad sliding per stroke 2.23 mm
+      lug/pad normal force (hammer preload on the key) rest 0.86 N, bottom 0.89 N
+      horizontal pad force on the key (+ = pushes key onto its rod slot) rest/mid/bottom: 0.209, 0.137, 0.055 N
+
+====================================================================================================
+3. STATIC FORCES AT THE KEY (gf).  BW = frictionless balance, DW = start moving down, UW = rising slowly
+====================================================================================================
+  white at y0.0  : BW 38.3  DW 44.1  UW 32.9  friction (DW-UW)/2 = 5.6
+  white at y13.0 : BW 41.4  DW 47.7  UW 35.6  friction (DW-UW)/2 = 6.1
+  white at y90.0 : BW 80.8  DW 92.9  UW 69.5  friction (DW-UW)/2 = 11.7
+  white balance force over the stroke (0/25/50/75/100 %): 41.4 43.3 45.0 46.6 48.0
+      friction share key+hammer pins (mu 0.25)      1.63 g
+      friction share lug/pad sliding (mu 0.15)      4.24 g
+      friction share guide bushing (0.6 g drag)     0.32 g
+      sensitivity mu_pad 0.10: DW 46.3 UW 37.1
+      sensitivity mu_pad 0.25: DW 50.5 UW 32.6
+      sensitivity mu_pad 0.35: DW 53.3 UW 29.5
+  black at y52.5 : BW 41.7  DW 46.7  UW 37.0  friction (DW-UW)/2 = 4.9
+  black at y62.5 : BW 45.6  DW 51.0  UW 40.4  friction (DW-UW)/2 = 5.3
+  black balance force over the stroke (0/25/50/75/100 %): 45.6 46.8 47.8 48.7 49.3
+      friction share key+hammer pins (mu 0.25)      1.11 g
+      friction share lug/pad sliding (mu 0.15)      3.80 g
+      friction share guide bushing (0.6 g drag)     0.46 g
+      sensitivity mu_pad 0.10: DW 49.7 UW 41.7
+      sensitivity mu_pad 0.25: DW 53.5 UW 37.7
+      sensitivity mu_pad 0.35: DW 56.0 UW 35.1
+  front/back ratio F(y90)/F(y13) (DW) = 1.95   (lever ratio (171-13)/(171-90) = 1.95)
+
+====================================================================================================
+4. EFFECTIVE (INERTIAL) MASS AT THE KEY  m_eff = (I_key + I_hammer * (dth_h/dth_k)^2) / lever^2
+====================================================================================================
+  white at y0.0  : rest 67.9 g, mid 79.0 g, bottom 91.7 g
+  white at y13.0 : rest 79.5 g, mid 92.5 g, bottom 107.4 g
+      key alone contributes 9.6 g at y13.0
+  black at y52.5 : rest 71.3 g, mid 79.7 g, bottom 89.0 g
+  black at y62.5 : rest 85.0 g, mid 95.0 g, bottom 106.0 g
+      key alone contributes 7.5 g at y62.5
+
+====================================================================================================
+5. DYNAMICS (2 bodies, unilateral felt contacts, Coulomb friction, dt = 2 us)
+====================================================================================================
+  felt: E0 = 0.50 MPa (v3 S17 back-calculation), x5 stiffer at 50 % strain, damping ratio 0.35
+  white contact stiffness k1 (N/mm): front 33.3, hook 4.0, pad 10.5, nose 37.5, ledge 112.5
+  white static rest: key -0.00198 rad (hook felt 0.17 mm), hammer -0.01195 rad
+  white release from bottom, no spring    : 40 % re-trigger 41.3 ms, full return 63.6 ms, top speed 313 mm/s, hook impact 3.89 mJ, rebound 0.67 mm, max lug/pad gap 0.000 mm
+  white release from bottom, assist spring: 40 % re-trigger 35.5 ms, full return 56.4 ms, top speed 327 mm/s, hook impact 4.24 mJ, rebound 0.77 mm, max lug/pad gap 0.000 mm
+  white repetition (release at felt, re-press at 40 % rise with constant finger force 1.0/1.5/2.0/3.0 N), no spring    : 8.6 / 12.0 / 14.4 / 18.5 Hz
+  white repetition (release at felt, re-press at 40 % rise with constant finger force 1.0/1.5/2.0/3.0 N), assist spring: 8.5 / 12.0 / 14.5 / 18.6 Hz
+  white strike, finger  1.0 N: key speed at felt 0.29 m/s | front felt 0.10 mm / 4 N | weight stop felt 0.26 mm / 13 N | lug-pad separation 0.21 mm | weight top peak z 55.54 (rail PETG at 58.50)
+  white strike, finger  3.0 N: key speed at felt 0.61 m/s | front felt 0.22 mm / 9 N | weight stop felt 0.61 mm / 32 N | lug-pad separation 0.28 mm | weight top peak z 55.95 (rail PETG at 58.50)
+  white strike, finger  6.0 N: key speed at felt 0.97 m/s | front felt 0.35 mm / 15 N | weight stop felt 0.87 mm / 50 N | lug-pad separation 0.33 mm | weight top peak z 56.26 (rail PETG at 58.50)
+  white strike, finger 10.0 N: key speed at felt 1.34 m/s | front felt 0.50 mm / 22 N | weight stop felt 1.10 mm / 70 N | lug-pad separation 0.36 mm | weight top peak z 56.54 (rail PETG at 58.50)
+  black contact stiffness k1 (N/mm): front 13.7, hook 4.0, pad 10.5, nose 37.5, ledge 112.5
+  black static rest: key -0.00172 rad (hook felt 0.14 mm), hammer -0.00618 rad
+  black release from bottom, no spring    : 40 % re-trigger 39.3 ms, full return 60.8 ms, top speed 304 mm/s, hook impact 3.92 mJ, rebound 0.68 mm, max lug/pad gap 0.000 mm
+  black release from bottom, assist spring: 40 % re-trigger 33.6 ms, full return 53.8 ms, top speed 317 mm/s, hook impact 4.27 mJ, rebound 0.77 mm, max lug/pad gap 0.003 mm
+  black repetition (release at felt, re-press at 40 % rise with constant finger force 1.0/1.5/2.0/3.0 N), no spring    : 8.6 / 12.4 / 15.2 / 19.3 Hz
+  black repetition (release at felt, re-press at 40 % rise with constant finger force 1.0/1.5/2.0/3.0 N), assist spring: 8.4 / 12.3 / 15.1 / 19.3 Hz
+  black strike, finger  1.0 N: key speed at felt 0.27 m/s | front felt 0.15 mm / 2 N | weight stop felt 0.26 mm / 13 N | lug-pad separation 0.33 mm | weight top peak z 55.54 (rail PETG at 58.50)
+  black strike, finger  3.0 N: key speed at felt 0.61 m/s | front felt 0.36 mm / 6 N | weight stop felt 0.61 mm / 32 N | lug-pad separation 0.42 mm | weight top peak z 55.95 (rail PETG at 58.50)
+  black strike, finger  6.0 N: key speed at felt 0.90 m/s | front felt 0.56 mm / 9 N | weight stop felt 0.89 mm / 51 N | lug-pad separation 0.42 mm | weight top peak z 56.28 (rail PETG at 58.50)
+  black strike, finger 10.0 N: key speed at felt 1.17 m/s | front felt 0.77 mm / 14 N | weight stop felt 1.13 mm / 74 N | lug-pad separation 0.40 mm | weight top peak z 56.58 (rail PETG at 58.50)
+  assist spring (option): SUS d 0.25 / OD 4.0 / 18 coils / L0 12.5 / solid 5.0 -> k 0.0355 N/mm, in a Ø5 pocket through the stop rail (spring top z63.0 <= rail top z63.5); tip 5.0 mm below the stop felt, touches the block only after 60 % of the hammer stroke (zero load at rest); max compression 6.36 mm at ff (< L0 - solid 7.50)
+      white: balance force at full dip 48.0 g without, 69.1 g with the spring
+      black: balance force at full dip 49.3 g without, 71.3 g with the spring
+  v2.0 claim check: an ideal massless-key seesaw with R = 1 accelerates at g/R -> 10 mm full return 45.2 ms, 40 % rise 28.6 ms.  True: the full-return time is set by R (and friction), not by the mass; but the re-trigger needs only the 40 % rise, and here the simulated 40 % rise is 41.3 ms (white).
+
+====================================================================================================
+6. SENSOR (v3 sensor bar, element row y67, key magnet Ø5x2 on the key underside)
+====================================================================================================
+  white: magnet face -> element rest 10.82, bottom 4.70 mm; magnet travel 6.12 mm (shifts +1.14 in y); bottom gap boss/sensor top 3.45 mm, key underside/bar 3.38 mm
+      v3 for comparison: rest 10.82, bottom 4.70 (S45/S46) -> unchanged because the key rod sits on v3's instantaneous centre
+  black: magnet face -> element rest 13.35, bottom 4.89 mm; magnet travel 8.46 mm (shifts +1.66 in y); bottom gap boss/sensor top 3.56 mm, key underside/bar 3.12 mm
+      v3 for comparison: rest 13.35, bottom 4.90 (S45/S46) -> unchanged because the key rod sits on v3's instantaneous centre
+
+====================================================================================================
+7. CLEARANCES OVER THE STROKE (rest -> full dip + 1.4 mm ff felt compression at the stop)
+====================================================================================================
+  white floor        1.77 mm
+  white key_ceiling  18.13 mm
+  white tongue       1.90 mm
+  white fins         1.49 mm
+  white stop_rail    1.60 mm
+  white rear_wall    1.06 mm
+  white tab          2.19 mm
+  black floor        1.77 mm
+  black key_ceiling  29.87 mm
+  black tongue       1.98 mm
+  black fins         1.49 mm
+  black stop_rail    1.60 mm
+  black rear_wall    1.09 mm
+  black tab          2.19 mm
+  lateral: hammer yaw play +/-0.0125 rad -> +/-0.84 mm at the block; worst gap between neighbouring rings 13.21 - 10.60 - 2 x 0.84 = 0.94 mm
+
+====================================================================================================
+8. COORDINATE TABLE (y, z) mm - design rest (felts just touching) and full dip (front felt first contact)
+====================================================================================================
+  WHITE (D)   (key angle bottom 0.05848 rad, hammer 0.18209 rad)
+  point                          rest (y, z)        full dip (y, z)    note
+  key rod centre (fixed)         ( 171.00,  40.00)  ( 171.00,  40.00)  Ø3 SUS304 through 24 fins
+  hammer rod centre (fixed)      ( 127.55,  15.00)  ( 127.55,  15.00)  Ø3 SUS304 through 24 fins
+  key top front edge             (   0.00,  43.50)  (   0.09,  33.50)  dip 10.0
+  finger point (DW)              (  13.00,  43.50)  (  13.07,  34.26)  
+  front down-stop contact        (   6.60,  23.50)  (   7.85,  13.92)  felt 3T on v3 rail
+  crossbar top = hook contact    (  87.50,  25.10)  (  88.51,  20.25)  felt 3T under hook z25.1-28.1
+  magnet face centre             (  65.80,  23.50)  (  66.94,  17.38)  sensor element y67
+  lug centre (R3)                ( 108.73,  19.92)  ( 110.01,  16.31)  lug hangs from the key
+  key COM                        (  78.53,  36.02)  (  78.93,  30.62)  21.9 g
+  hammer COM                     ( 188.74,  27.27)  ( 185.51,  38.15)  49.0 g
+  steel block centroid           ( 194.50,  28.50)  ( 190.95,  40.40)  42.4 g
+  steel block bottom-front       ( 182.00,  16.50)  ( 180.83,  26.34)  
+  steel block top-front          ( 182.00,  40.50)  ( 176.48,  49.94)  
+  steel block top-rear           ( 207.00,  40.50)  ( 201.07,  54.47)  highest point
+  steel block bottom-rear        ( 207.00,  16.50)  ( 205.41,  30.86)  
+  lug/pad contact point          ( 108.00,  17.01)  ( 109.82,  13.32)  pad = felt 1T on the hammer nose
+  BLACK (C#)   (key angle bottom 0.07984 rad, hammer 0.18209 rad)
+  point                          rest (y, z)        full dip (y, z)    note
+  key rod centre (fixed)         ( 171.00,  40.00)  ( 171.00,  40.00)  Ø3 SUS304 through 24 fins
+  hammer rod centre (fixed)      ( 127.55,  15.00)  ( 127.55,  15.00)  Ø3 SUS304 through 24 fins
+  key top front edge             (  52.50,  55.50)  (  51.64,  46.00)  dip 9.5
+  finger point (DW)              (  62.50,  55.50)  (  61.61,  46.80)  
+  front down-stop contact        (  55.85,  23.50)  (  57.53,  14.37)  felt 3T on v3 rail
+  crossbar top = hook contact    (  87.50,  25.10)  (  88.95,  18.49)  felt 3T under hook z25.1-28.1
+  magnet face centre             (  64.20,  23.50)  (  65.86,  15.04)  sensor element y67
+  lug centre (R3)                (  96.73,  22.91)  (  98.33,  17.04)  lug hangs from the key
+  key COM                        ( 105.40,  40.19)  ( 105.59,  34.95)  15.8 g
+  hammer COM                     ( 188.37,  27.90)  ( 185.03,  38.70)  46.1 g
+  steel block centroid           ( 194.50,  29.50)  ( 190.77,  41.38)  38.9 g
+  steel block bottom-front       ( 182.00,  18.50)  ( 180.47,  28.30)  
+  steel block top-front          ( 182.00,  40.50)  ( 176.48,  49.94)  
+  steel block top-rear           ( 207.00,  40.50)  ( 201.07,  54.47)  highest point
+  steel block bottom-rear        ( 207.00,  18.50)  ( 205.05,  32.83)  
+  lug/pad contact point          (  96.00,  20.00)  (  98.14,  14.05)  pad = felt 1T on the hammer nose
+  fixed: stop-rail felt face z55.50 (y178.0-209), ledge felt face z15.70 (y180.4-209), hook underside z28.1 (y84-91), floor z5.0, cover z63.5-66.0
+  hammer outline at rest (world y, z):
+    nose pad     w 8.0: (93.5,14.6) (113.0,9.7) (113.0,14.7) (93.5,19.6)
+    front arm    w 8.0: (113.0,9.7) (119.5,11.0) (119.5,19.0) (113.0,14.7)
+    boss         w 8.0: (119.5,11.0) (135.5,11.0) (135.5,19.0) (119.5,19.0)
+    rear arm     w 6.0: (135.5,11.5) (180.4,17.5) (180.4,24.5) (135.5,18.5)
+    ring front   w10.6: (180.4,16.5) (182.0,16.5) (182.0,40.5) (180.4,25.5)
+    ring sides   w 1.6: (182.0,16.5) (207.0,16.5) (207.0,40.5) (182.0,40.5)
+    ring back    w10.6: (207.0,16.5) (207.8,16.5) (207.8,40.5) (207.0,40.5)
+    steel block  w 9.0: (182.0,16.5) (207.0,16.5) (207.0,40.5) (182.0,40.5)
+
+====================================================================================================
+9. STRESS IN PLASTIC AT REST (MPa) - target < 2
+====================================================================================================
+  white key body (U channel), max |M| 16.6 N mm                  0.0748
+  white hook force on tab (N)                                    0.7688
+  white lug post (horizontal pad force x 21.0 mm)                0.1829
+  white key tongue (rod reaction 0.92 N)                         0.3459
+  white frame guide tab/hook                                     0.2196
+  white hammer rear-arm root (6 x 7)                             0.5317
+  white hammer front-arm root (8 x 8)                            0.2047
+  white block epoxy shear (MPa)                                  0.0003
+  black key body (U channel), max |M| 4.6 N mm                   0.0089
+  black hook force on tab (N)                                    0.5809
+  black lug post (horizontal pad force x 30.6 mm)                0.1522
+  black key tongue (rod reaction 0.32 N)                         0.1182
+  black frame guide tab/hook                                     0.1660
+  black hammer rear-arm root (6 x 7)                             0.4967
+  black hammer front-arm root (8 x 8)                            0.2383
+  black block epoxy shear (MPa)                                  0.0003
+  -> max 0.53 MPa.  No part is preloaded: pivots are steel rods, the rest position is the hook felt, held by gravity.
+  transient: stop rail (t 5.0, effective width 40 mm, lever 20.2 mm) at finger 6 N -> 50 N -> 6.1 MPa
+  transient: stop rail (t 5.0, effective width 40 mm, lever 20.2 mm) at finger 10 N -> 70 N -> 8.6 MPa
+
+====================================================================================================
+10. ENVELOPE
+====================================================================================================
+  depth used y0 - y207.8 (hammer ring rear), rear wall y209-212 -> frame 212 (unchanged), instrument 212 + 3 + 195 = 410
+  white key top z43.5, black z55.5 (unchanged); highest moving point z56.90 (weight at ff), lowest z6.77 (hammer nose)
+  rear cover top z66.0 (v3 z59.0, +7.0 mm) - needed for the weight stroke + stop rail, see section 13
+
+====================================================================================================
+11. MASS, FILAMENT, PRINT TIME (15 g/h), BED 220 x 220
+====================================================================================================
+  per key: white key 21.6 g, black key 15.5 g, hammer (PETG) 6.6 g, black shim 0.56 g
+  per module: frame 178 (v3 175 - 27 + combs/ledge 30), ledge plate 9, stop rail 21, cover 48, sensor bar 17, keys 229, hammers 83 -> 584 g, 39.0 h
+  88 keys (7 modules + end parts scaled as in v3, +10 % waste): 4.81 kg, 321 h   (v3 C20: 5.0 kg / 332 h incl. rear bar; keyboard only 4.13 kg / 275 h; method D 7.6 kg / 304 h)
+  steel per octave: blocks 7 x 42.4 + 5 x 38.9 + rods 18.2 = 509 g; 88 keys 3.74 kg
+  bed fit: frame 168.5 x 212 (v3 layout); 7 white keys side by side 164.5 x 174.5; 5 black keys 55 x 122; hammers printed on their side, 114 x 34 each -> 6 per plate (204 x 114); stop rail 164.5 x 31; all <= 220 x 220
+
+====================================================================================================
+12. PARTS AND COST
+====================================================================================================
+  printed per octave: frame 1, ledge plate 1, stop rail 1, cover 1, sensor bar 1, white keys 7, black keys 5, hammers 12, black shims 5 = 34
+  bought per octave (action): Ø3 rods 2, steel blocks 12, M3x10 5 = 19; felt cut from v3 stock: pad 1T x 12, stop strip 3T 25 x 164, ledge strip 1T; v3 carry-over: magnets 12, hook felts 12, front felts
+  + SUS304 연마봉 Ø3 × 1 m                건반 축·해머 축 (모듈 2 × 164 mm ×7 + 끝 부속 4개)                         3 x   9600 =   28800  [verified 2026-09-27]
+  + 착불 배송비 (환봉)                        택배                                                             1 x   4000 =    4000  [estimate]
+  + 평철 SS400 9 × 25, 1 m               무게추 블록: 백건 24 mm × 52 + 흑건 22 mm × 36 + 톱날 1.5 mm              3 x   6000 =   18000  [estimate]
+  + 평철 배송비                             택배                                                             1 x   4000 =    4000  [estimate]
+  + 5분 에폭시 (2액형, 소형)                   무게추 블록을 링에 고정                                                  1 x   3500 =    3500  [estimate]
+  + 흑연 가루 (건식 윤활제, 소형)                 러그-패드 펠트 마찰 μ 0.25 → 0.15                                      1 x   3000 =    3000  [estimate]
+  + 스텐 유두 렌치볼트 M3 × 10 (추가)            스톱 레일 3 + 선반 판 2 / 모듈, 끝 부속 포함 40개                            40 x     60 =    2400  [v3 BOM unit price]
+  - 스텐 유두 렌치볼트 M3 × 40 (클램프)                      34 x    130 =    4420  (척추 클램프 없음)
+  - 스텐 무두 렌치볼트 M3 × 10 (세트스크루)                    40 x     60 =    2400  (척추 세트스크루 없음)
+  - 황동 라운드 디스크 Ø8×1 (10개 팩)                        4 x   2669 =   10676  (세트스크루 받침 없음)
+  - 스텐 와셔 M4×9×0.5 (클램프용 32개분)                    32 x     10 =     320  (고무발용 14개만 남김)
+  - M3 육각너트 (레일 클램프 + 세트스크루 63개분)                 63 x     11 =     693  (스톱 레일·선반 판 나사는 PETG에 직결 탭, 스피커 브래킷 4개분만 남김)
+  delta vs v3 base BOM: +63700 - 18509 = +45191 KRW  -> base 628410 KRW (cap 1,000,000)
+  tools: hacksaw + file for 88 cuts of 9x25 bar (or order cut pieces) ; 1.5 mm hex key no longer needed
+
+====================================================================================================
+13. WHY THE REAR COVER GOES UP; TRADE-OFF; ALTERNATIVE CLOSER TO z59
+====================================================================================================
+  this geometry, cover z59: block 17.0 mm, DW white 30.4 g (target >= 47), m_eff 67.4 g
+  this geometry, cover z62: block 20.0 mm, DW white 37.8 g (target >= 47), m_eff 78.0 g
+  this geometry, cover z66: block 24.0 mm, DW white 47.7 g (target >= 47), m_eff 92.5 g
+  energy view: finger work BW x travel + key PE must equal the weight's PE gain m*g*dz; with a rectangular block of 9 x 25 the best height split gives PE_max ~ rho w L (B/2)^2, so the vertical room B from the ledge (z16.5) to the stop felt sets the achievable BW; the control board under the weights costs 7.5 mm of B.
+  trade-off (key rod y171): lowest cover (0.5 steps) giving white DW >= 47.5 g, then m_eff / full return / rate @1.5 N:
+    lug y106: cover z64.5, block 20.0 mm (35.3 g), m_eff 109.0 g, 40 % rise 44.4 ms, full 68.3 ms, 11.2 Hz
+    lug y108: cover z66.0, block 24.0 mm (42.4 g), m_eff 92.5 g, 40 % rise 41.3 ms, full 63.6 ms, 12.0 Hz
+    lug y110: cover z68.0, block 28.0 mm (49.5 g), m_eff 81.6 g, 40 % rise 39.0 ms, full 60.3 ms, 12.6 Hz
+    lug y112: cover z71.0, block 32.5 mm (57.4 g), m_eff 75.2 g, 40 % rise 37.3 ms, full 57.7 ms, 12.9 Hz
+  ALT key rod y164 + 9x32 bar (L32), lug y107, cover z60: block 16.0, DW 43.6, m_eff 91.3, full return 65.7 ms, F90/F13 2.04, magnet travel 5.95, min clearance 1.10
+  ALT key rod y164 + 9x32 bar (L32), lug y107, cover z61: block 17.0, DW 47.0, m_eff 96.6, full return 65.1 ms, F90/F13 2.04, magnet travel 5.95, min clearance 1.09
+  ALT key rod y164 + 9x32 bar (L32), lug y108, cover z61: block 18.5, DW 46.9, m_eff 89.3, full return 62.9 ms, F90/F13 2.04, magnet travel 5.95, min clearance 1.09

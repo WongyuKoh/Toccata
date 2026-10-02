@@ -1,0 +1,1476 @@
+{
+  "summary": "Continue W1+ r4.4 after network drops: fix 2b (re-verification findings) + r4.5 MISUMI spring, verify fixes and spring, full drawing update (incl. new 14–15), audit",
+  "agentCount": 7,
+  "logs": [
+    "carried over: 6 critical/major findings from the re-verification",
+    "fix-2 check: 1 critical/major left (reported as open issues, no further round)",
+    "audit: 5 major / 14 total",
+    "[stall] agent \"drawings:r44_fix\" stalled (no progress) after 909s — retrying (1/5)"
+  ],
+  "result": {
+    "model": {
+      "summary_ko": "r4.5 (비틀림 스프링 → 미스미 C-UA90R5-3-0.5) 반영을 끝냈다. 먼저 r4.4 상태를 final_r4_4/에 백업했다(work*, __pycache__ 제외).\n\n**1. 스프링 값을 따로 다시 유도했고 요청서와 같다.**\n- 카탈로그 k 0.1368 / 0.1409 / 0.1454 N·mm/°를 n = 3 + (180 − 암 각)/360으로 풀면 E가 186,048 / 185,941 / 186,014 MPa로 한 값에 모인다. 그래서 E = 186 GPa를 썼다.\n- 다리를 긴 22.3(접점에서 22.13), 짧은 2.5로 자르면 N_e 3.725, k_t 8.866 N·mm/rad(0.1547/°)이다. 같은 식에 카탈로그 다리 25/25를 넣으면 0.1368/°가 나와 카탈로그와 맞는다.\n- b = 0 토크 4.189를 지키는 자유각은 −27.07°다.\n- 응력(K_i 1.073): 쉼 366, 바닥 537, 서비스 583, 손 들기 25°에서 704 MPa(Su의 33 %).\n- 손 들기 감긴 각 52.1°는 카탈로그 최대 55° 안이다. 다만 토크 8.06은 카탈로그 55° 토크 7.52의 107 %다. 빼기 절차의 들어올림 15.5°는 한계 각 21.5° 아래다.\n- 고침 2·2b가 바꾼 칼라·옆벽·보스·질량·접착은 주머니 구간과 스프링 식에 닿지 않는다. 그래서 요청서 파라미터 표에서 바꿀 값은 없었다.\n\n**2. 모델(model_v4.py)에 넣은 것.**\n- 스프링 파라미터: spring_E, spring_swept_free 1170, spring_T0를 넣고 k_t와 자유각은 모델이 계산하게 했다.\n- 주머니 Ø6.6, 슬롯 ±3.25.\n- 뒷벽 홈: 2.4 × 3.2, 바닥 y211.0, 뒷벽 1.0 남음. 보스 4.4.\n- 새 짧은 다리 홈: 접점 230.36°, 띠 1.70~3.00, 바깥 면이 받는 면이다. 허브 벽을 뚫고 웹 밑면을 1.21 깎는다. 그래서 주머니 구간이 A·B 두 조각이 됐다.\n- 새 함수: spring_short_leg_lf, spring_notch_geo, spring_insert_check, hub_notch_stress, pocket_section_removed, spring_mass.\n- 넣기 검사(선 외곽, 0.02 mm 걸음): 짧은 다리 틈 0.53, 공차 뒤 0.23. 요청서의 '0.5면 막힘'은 중심선 판정이라 보수적이다. 선 외곽으로 재면 0.5에서 0.25로 지나가지만, 공차를 넣으면 모자라 0.8을 그대로 둔다.\n- 긴 다리는 코일 +x 끝에 와야 한다. 오른쪽 감기이기 때문이고, 뒤집으면 짧은 다리가 105°에 와서 홈에 맞지 않는다.\n- 허브·웹 강도(ABUSE): 층 안 3.97 MPa, Kt 2를 곱해 7.95(한계 25). 조각 B 층간 0.17. 봉 지압은 양옆 허브만으로 1.45.\n- 레버 질량 57.05 → 56.97 g. 주머니 구간에서 빠진 것 전체를 빼도록 고쳤고, 스프링은 0.126 g이다.\n\n**3. run_all 전체를 다시 돌렸다(1079 s). 판정 42개 모두 통과.**\n- DW·UW는 같다(51.92 / 51.01).\n- 행정 중 DW 최대 54.36 → 54.76, 바닥 UW 34.50 → 34.89.\n- 연타 16.23 → 16.30 Hz, 마찰 2배 15.19 → 15.26 Hz.\n- 스윕 최소 1.31(공차 뒤 1.01)로 그대로, 겹침 0.\n- 비용 +43,400 → +69,400원: 스프링 100 × 310 = 31,000원, 경선 니퍼 15,000원(추정).\n- DESIGN.md r4.5: 새 1f장, D05·P18, 2.2, 16, 18장 문장·위험 추가.\n\n**4. 단계 0과 공구.**\n- C06a 홈을 2.4 × 3.2로, C06b를 모델 주머니·슬롯·짧은 다리 홈 복제로 바꿨다.\n- 시험 8 합격 숫자: 쉼 4.19 / 바닥 6.14 N·mm ±15 %.\n- 시험 13은 짧은 다리 홈에 넣기 시험으로 바꿨다(C16a 3개).\n- 가짜 레버 캡스턴 힘은 1.530 N으로 실제 1.499 N과 +2 % 차이다. 이는 r4.4와 같고, 앞 높이 차 0.004 mm라 고칠 필요 없음.\n- 회로 인터페이스는 그대로다.",
+      "files": [
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/model_v4.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/run_all.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/export_geo.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/make_design_md.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/DESIGN.md",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/geometry.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/metrics.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/results.txt",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/parts_list.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/geometry.r4_4.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/stage0/make_stage0.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/stage0/stage0_geometry.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/stage0/stage0_procedure.md",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/stage0/stl/C06a.stl",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/stage0/stl/C06b.stl",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/stage0/stl/C16a.stl",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/tools/tools_geometry.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/tools/tools.md",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_r45/spring_derive.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_r45/spring_derive.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_r45/check_pocket.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_r45/run_r45.log",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_r45/metrics.r4_4.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_r45/requester/W1_REQUEST.md",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_r45/reexport.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final_r4_4"
+      ],
+      "metrics": {
+        "cover_top_z_mm": 72.85,
+        "dw_black_g": 51.0132,
+        "dw_white_g": 51.919,
+        "filament_kg": 6.5464,
+        "full_return_white_ms": 45.28,
+        "key_lift_play_mm": 0.1623,
+        "m_eff_black_g": 46.5394,
+        "m_eff_white_g": 55.2339,
+        "max_rest_stress_mpa": 0.5018,
+        "min_clearance_after_tol_mm": 1.007,
+        "min_clearance_mm": 1.307,
+        "min_sensor_gap_mm": 4.7566,
+        "module_mass_kg": 1.374,
+        "parts_per_module_bought": 88,
+        "parts_per_module_printed": 32,
+        "print_h": 436.4234,
+        "rep_hz_black": 18.8765,
+        "rep_hz_white": 16.2973,
+        "rep_hz_white_2x_friction": 15.2569,
+        "uw_black_g": 40.8009,
+        "uw_white_g": 42.7807
+      },
+      "resolved": [
+        {
+          "item": "1. Spring numbers re-derived independently and checked against the requester's table and the current (fix 2b) model",
+          "resolution": "work_r45/spring_derive.py re-derives them without the requester's script, and model_v4.spring_rate() now computes k_t and the free angle from the inputs. Every value in the requester's table matches. The r4.4 fix 2 and fix 2b changes (collars, 0.7 side walls, fin bosses +0.02, lever mass +0.03 g, bonded steel) do not touch the pocket section (x +-1.5), the rear-wall groove or the spring formulas, so no value had to change.",
+          "numbers": "E back-solved 186048 / 185941 / 186014 -> 186000 MPa; N_e 3.25 + (22.13 + 2.5) / (3 pi 5.5) = 3.725; k_t 8.866 N mm/rad (0.1547 /deg; catalogue legs 25/25 -> 0.1368 = catalogue); free -27.07 deg for T0 4.189; K_i 1.073 (C 11): rest 366, bottom 537, service 583, hand 25 deg 704 MPa (33 % Su); hand lift wound 52.1 deg < 55; torque 8.06 = 107 % of the catalogue 55-deg torque 7.52"
+        },
+        {
+          "item": "2. Model implementation: pocket, slot, rear-wall groove, boss, short-leg groove, spring_geometry, hub_pocket_poly, insertion path check",
+          "resolution": "Spring parameters are in P, and k_t / free angle are computed. Pocket (6.6, 3.0), slot (35, 3.25, 3.25), groove (207.8, 47, 58, 2.4, 3.2): floor y211.0, 1.0 of rear wall left. Boss 4.4. The short leg follows alpha_s = phiQ - ((1170 - free) mod 360), dl = 0, and lies straight in a new groove band. The band runs 1.70..3.00 from the axis along 230.36 deg; along the leg it runs from -0.5 out through the hub (to ss 3.95). The requester's 2.8 is the insertion-check band: stopping the groove there would leave a 0.20 skin, so it is cut through at the requester's exit points. The groove cuts the web underside 1.21 over x +-1.5. hub_pocket_poly now returns two pieces: A (web side) and B (lower ring). spring_insert_check slides the free spring along the 35 deg axis and measures the wire outlines against pieces A and B. The long leg must sit at the coil's +x end (right-hand wind).",
+          "numbers": "short leg tangent y201.50 z31.38, tip y199.57 z32.98 (r 3.72); bears 1.13 on the outer face, tip 0.58 inside its end; insertion clear: short leg to piece A min 0.53 (0.23 after FDM; 0.5 clearance -> 0.25, 0.3 -> 0.04), coil to slot 0.25; long leg in slot -31.3..18 deg margin 0.63"
+        },
+        {
+          "item": "2b. Web cut: hub / web strength, lever mass, clearances",
+          "resolution": "hub_notch_stress checks vertical sections through the groove exit. Bending in the (y, z) plane is in-layer, because the carrier prints on its side. Piece B hangs on the full hub through interlayer shear. The rod bears on the two full hub segments only. The mass model now removes the whole pocket section and uses the real spring mass. Module sweep, end-part sweeps and the fixed-part fit were all re-run.",
+          "numbers": "ABUSE 3.97 MPa in layer (x Kt 2 = 7.95 < 25; r4.4 section 3.41), shear 1.02; PLAY 4.93 (Kt); piece B 0.173 MPa across layers; bearing 1.45 MPa; lever 57.05 -> 56.97 g, carrier 2.92 -> 2.86 g; sweep min 1.307 (1.007 after tol) unchanged, 0 < 1.3 of 1428; end parts 1.31 / 1.31; fit overlaps 0"
+        },
+        {
+          "item": "3. Full run_all, outputs, parts list, DESIGN.md r4.5",
+          "resolution": "The full run took 1079 s with exit 0, and all 42 checks pass (3 new r4.5 checks). geometry.json, metrics.json, results.txt and parts_list.json are regenerated. Parts list: MISUMI C-UA90R5-3-0.5, legs cut 22.3 / 2.5, 100 = 88 + 4 stage-0 + 8 spares; a hard-wire cutter is added as a tool. DESIGN.md title is r4.5 with a new section 1f (why; parameter table old -> new -> requester; groove; insertion; strength; mass; results old -> new vs requester base -> MISUMI; requester vs mine). Also updated: D05, P18, section 2.2, section 16 (100 x 310 = 31,000 KRW, VAT incl.), and section 18 (the '주문 제작' sentence now reads 미스미 기성품, 두 다리를 잘라 씀, and the hand-lift torque risk is added). Historical 1a/1c rows are frozen to the r4.4 D05 values.",
+          "numbers": "DW 51.92 / 51.01 unchanged; DW max stroke 54.36 -> 54.76 (<= 55); UW bottom 34.50 -> 34.89; rep 16.23 -> 16.30 Hz, 2x friction 15.19 -> 15.26; bottom torque 5.95 -> 6.14; keeper min 0.517 -> 0.513; cost delta +43,400 -> +69,400 KRW"
+        },
+        {
+          "item": "4. Stage-0 kit and tools",
+          "resolution": "C06a groove is now 2.4 wide centred on the coil, bottom y211.0, boss 4.4. C06b replicates pocket D6.6, slot 6.5 and the short-leg groove from model_v4 (mirrored for print). Test 8 pass numbers now come from the model. Test 13 is now the insertion into the short-leg groove (C16a x3, which carry the groove through lever_prisms). make_stage0.py and make_tools.py were re-run with MODEL_DIR=final. The dummy-lever moment still matches the real lever including the spring at b = 0 (same +2 % as in r4.4), so no fix was needed.",
+          "numbers": "test 8: k_t 7.54~10.20, free -32~-22 deg, rest 3.56~4.82, bottom 5.22~7.07 N mm; dummy capstan force 1.530 vs real 1.499 N white (r4.4 1.500), 0.995 vs 0.976 black; front error 0.004 / 0.001 mm"
+        }
+      ],
+      "changes_this_round": [
+        {
+          "part": "torsion assist spring (bought, 100 = 88 + 4 stage-0 tests + 8 spares): custom D05 -> catalogue part",
+          "dim_id": "D05, parts list, cost",
+          "old": "custom wound SUS304-WPB d0.5 ID 4.5 4.2 turns, short leg 2.5 bent 5.7 deg onto the slot face, long leg 22.3; k_t 8.0 N mm/rad, free -30.0 deg; 100 x 200 KRW (estimate)",
+          "new": "MISUMI Korea C-UA90R5-3-0.5 (SUS304-WPB d0.5 ID 5.0, 3 turns = 3.25 body turns, arm angle 90 deg right-hand, arms 50/50), both arms cut: long 22.3 (axis -> tip; 22.13 from the tangent point), short 2.5 straight; k_t 8.866 N mm/rad (catalogue E 186000, N_e 3.725), free -27.07 deg (same b = 0 torque 4.19 N mm); long leg at the coil's +x end; 100 x 310 KRW (282 + VAT)",
+          "why": "[r4.4 -> r4.5] user decision 2026-09-28: buy a stock spring instead of having one wound; rest torque kept (DW / UW unchanged), bottom torque +3 %, hand-lift 25 deg torque 107 % of the catalogue's 55-deg torque (DESIGN 18)"
+        },
+        {
+          "part": "lever carrier (all 16 positions, module + end parts): hub spring pocket and coil / long-leg slot",
+          "dim_id": "P18",
+          "old": "pocket D6.1 x 3.0; slot 35 deg, faces +3.00 / -3.00 (6.0 wide), short leg on its upper face",
+          "new": "pocket D6.6 x 3.0; slot 35 deg, faces +3.25 / -3.25 (6.5 wide: the free coil OD 6.0 passes with 0.25 per side); long leg in the slot over -31.3..18.0 deg with >= 0.63 to the faces",
+          "why": "[r4.4 -> r4.5] MISUMI coil OD 6.0 (ID 5 + 2 x 0.5): pocket radial clearance 0.30, the coil drops in through the slot"
+        },
+        {
+          "part": "lever carrier (all 16 positions): NEW short-leg groove through the hub wall of the pocket section (x +-1.5)",
+          "dim_id": "P18",
+          "old": "none (the short leg lay on the slot's upper face, bent 5.7 deg)",
+          "new": "band 1.70..3.00 from the axis along 230.36 deg (lever frame), from ss -0.5 along the leg direction 140.36 deg out through the hub (inner face leaves it at y199.12 z34.71, bearing face at y198.96 z33.16); bearing face = outer (rm + d/2 = 3.00); web underside cut 1.21 deep over the pocket width; the pocket section is two pieces (A web side, B lower ring)",
+          "why": "[r4.4 -> r4.5] the catalogue part's swept angle (1170 deg) puts its short leg at 230.36 deg, 105 deg from the r4.4 short-leg seat (slot + 90 deg): it cannot leave through the slot; the leg is straight (tip y199.57 z32.98, r 3.72) and bears 1.13 on the face, tip 0.58 inside its end; slid in along the slot axis the leg drops into the groove (short leg to the web side min 0.53, 0.23 after FDM; inner clearance 0.5 would leave 0.25); ABUSE hub / web at the groove 7.95 MPa in layer (x Kt 2), piece B 0.17 MPa across layers"
+        },
+        {
+          "part": "frame (module 12, end parts 3 + 1): torsion-spring groove and boss on the rear wall",
+          "dim_id": "P18, S28",
+          "old": "boss 3.2 wide; groove 1.2 wide x 2.0 deep from the boss face (bottom y209.8), z47~58",
+          "new": "boss 4.4 wide; groove 2.4 wide x 3.2 deep (bottom y211.0: 2.0 into the rear wall, 1.0 of wall left behind it), z47~58",
+          "why": "[r4.4 -> r4.5] the long leg leaves the coil end at x +0.8 (coil 2.13 long in the 3.0 pocket) and rises straight into the groove (r4.4: kinked from the coil end to a 1.2 groove); 3.2 deep keeps a keyless lever's unloaded leg 1.37 inside the mouth (r4.4 1.25)"
+        },
+        {
+          "part": "stage-0 kit C06a / C06b (test 8 spring rig) and test 13",
+          "dim_id": "stage0_geometry.json",
+          "old": "C06a groove 1.2 x to y209.8 (one-sided ledge at the leg plane), C06b hub replica: pocket D6.1, slot 6.0, short leg on the slot face",
+          "new": "C06a groove 2.4 wide centred on the coil, bottom y211.0 (boss 4.4); C06b hub replica from model_v4.hub_pocket_poly: pocket D6.6, slot 6.5, short-leg groove; test 8 pass rest 4.19 / bottom 6.14 N mm +-15 %, test 13 = the insertion into the short-leg groove",
+          "why": "[r4.4 -> r4.5] the rig must reproduce the new pocket, slot, short-leg groove and rear-wall groove"
+        },
+        {
+          "part": "solved values (consequence, all modules / end parts): capstans, pad faces, pad-bar seat, top plate, printed wedges",
+          "dim_id": "S08, S15, P17, S16, S19, A06, A07",
+          "old": "lever 57.05 g; capstan y white 188.34 / black 180.31; pad face white z58.642~56.231, black z57.448~55.413; pad-bar seat z67.35, top plate z72.85 (module top); wedges white 0.346~2.756, black 1.500~3.536; end-part wedges A0 0.289~2.719, A#0 1.500~3.536, B0 0.358~2.764, C8 0.257~2.698",
+          "new": "lever 56.97 g; capstan y white 188.34 / black 180.31; pad face white z58.638~56.228, black z57.447~55.412; pad-bar seat z67.35, top plate z72.85 (module top); wedges white 0.349~2.759, black 1.502~3.537; end-part wedges A0 0.293~2.721, A#0 1.502~3.537, B0 0.361~2.767, C8 0.261~2.700",
+          "why": "[r4.4 -> r4.5] r4.5 consequence: the lever is 0.081 g lighter (the pocket-section removal - pocket D6.6, slot 6.5, short-leg groove, web cut - is now counted whole: r4.4 counted the pocket cylinder only; spring 0.126 g instead of 0.15) and the spring rate is 11 % higher (k_t 8.866, same b = 0 torque), so the capstans / settled bottom / pad faces / wedges move by the amounts shown"
+        },
+        {
+          "part": "frame (module): floor under the control board",
+          "dim_id": "P35, frame",
+          "old": "solid floor z3-5 (the board sat on 4 floor stand-offs D6 x z5-9)",
+          "new": "hatch x46.25-118.25 y144.5-196.5 (1.0 around the board) + notch x78.53-89.47 to y197.8 (1.0 behind the USB-C receptacle); the frame is 8.2 g lighter",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier geometry CRITICAL: the board could not be put into the one-piece frame (F|F# foot floor-to-plate through its front-open slot, the fin hung over its solid strip, the plate over it, 1.3 behind it); now it rises straight up from below: closest frame part along the path 0.60 (fin), stops = the four hung bosses"
+        },
+        {
+          "part": "frame (module): F|F# fin foot",
+          "dim_id": "P12, D18",
+          "old": "foot y152-170.7 standing on the floor (z5), grounded there",
+          "new": "foot down to z3 in the hatch + keel y144.5-152 z3-18 (the fin plate continued forward inside the board slot) joined to the balance rail's rear face",
+          "why": "[r4.4 fix 2 -> fix 2b] the floor under the foot is gone; plate FE with the keel clamped at the rail: 6-key chord seat 494 N/mm (fix 2: 491.9 with a rigid floor), F / F# single seats 2406 / 2427 N/mm; keel bending 2.57 / 10.18 / 13.82 MPa (single PLAY / chord PLAY / ABUSE chord)"
+        },
+        {
+          "part": "frame (module): 4 control-board stand-offs -> 4 bosses hung above the board",
+          "dim_id": "P35",
+          "old": "D6 x z5-9 on the floor at (50,149) screw, (114.5,149) pin, (50,192.5) pin, (114.5,192.5) screw; M3x6 from above (head on the board top); pins D2.8 up to z11.8",
+          "new": "same 4 points: D6 bosses above the board (z10.6 up), front two on brackets from the balance rail's rear face (to z17.0), rear two on brackets from the shelf ribs x50 / x116 and the shelf underside (to z18.05); M3x6 from BELOW (head under the board z7.35-9.0) into D2.5 blind bores to z15.4; pins D2.8 hanging down through the board to z7.8",
+          "why": "[r4.4 fix 2 -> fix 2b] a board coming from below cannot pass stand-offs under it; bosses: closest BRD-01 part 1.93, head to the rail 1.65 / ribs 1.54 (unchanged plan points), board ring 1.15"
+        },
+        {
+          "part": "lever carrier (all 16 positions): side walls and top snap lips",
+          "dim_id": "P11, D07",
+          "old": "side walls 0.8 (pocket 9.0 = the steel: zero bond line), top lips 0.8 wide",
+          "new": "side walls 0.7 (pocket 9.2: bond line 0.10 each side), top lips 0.9 wide (inner edge x +-3.7 and outside width 10.6 unchanged); front / rear walls 0.8",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier physics major 2: the bond had no gap to go into (10.6 - 2 x 0.8 = 9.0 = steel) and DESIGN 10 had no bonding step"
+        },
+        {
+          "part": "steel block bond (all 90)",
+          "dim_id": "D07, parts list, 10 step 3",
+          "old": "2-part 5-min epoxy after snapping in (thermal edge shear 2.24 MPa at dT 15 K, line 0.10 - above its 2.0 MPa strength)",
+          "new": "MS-polymer (hybrid) flexible adhesive buttered on both steel faces, then snapped in; per note 0.067 + thermal 0.189 = 0.256 MPa, rare 0.099 + 0.379 = 0.478 (allowed 0.375 / 0.750); slip at the pad peak 0.0016 mm",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier physics major 1: thermal-mismatch shear of a rigid bond on 0.8 PETG walls over 40 mm; stage-0 test 20 now cycles 5-45 C before the push / drop"
+        },
+        {
+          "part": "key F: beam / thin-tail underside",
+          "dim_id": "KF",
+          "old": "z21.90 over y184.0~195.8",
+          "new": "z21.95 over y176.0~195.8 (in front of the rest felt)",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier geometry major: with the worst material set's PLAY return overshoot in the sweep the E / G thin tails and the F beam / tail came 1.27-1.30 from the control board's component envelope (<= z20, circuit interface, unchanged); now >= 1.30"
+        },
+        {
+          "part": "key E: beam / thin-tail underside",
+          "dim_id": "KE",
+          "old": "z21.8",
+          "new": "z21.90 over y184.0~195.8 (in front of the rest felt)",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier geometry major: with the worst material set's PLAY return overshoot in the sweep the E / G thin tails and the F beam / tail came 1.27-1.30 from the control board's component envelope (<= z20, circuit interface, unchanged); now >= 1.30"
+        },
+        {
+          "part": "key G: beam / thin-tail underside",
+          "dim_id": "KG",
+          "old": "z21.8",
+          "new": "z21.90 over y184.0~195.8 (in front of the rest felt)",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier geometry major: with the worst material set's PLAY return overshoot in the sweep the E / G thin tails and the F beam / tail came 1.27-1.30 from the control board's component envelope (<= z20, circuit interface, unchanged); now >= 1.30"
+        },
+        {
+          "part": "sweep poses (all keys / levers): return overshoot and ff",
+          "dim_id": "S24, S25",
+          "old": "nominal + pass line: white key -0.415 / lever -2.85, black -0.324 / -1.81 deg; F -0.510 / -3.20",
+          "new": "+ the worst material set (PLAY): white key -0.460 / lever -3.04, black -0.351 / -1.82 deg; F -0.533 / -3.31, F# -0.474 / -2.00",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier geometry major: the case grid's worst materials were computed but not swept"
+        },
+        {
+          "part": "printed tool T2 (capstan bench gauge): dummy-lever floor and jig zero pads",
+          "dim_id": "S08, T-dims (tools_geometry.json)",
+          "old": "floor plane / calibration-rod top z31.0 (the key-frame crown)",
+          "new": "z30.90 = the crown at the settled rest (white 30.892, black 30.912): the key on the jig sinks on its notch cloth / rest felt as in the frame",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier printables major: z31.0 turned every capstan out 0.108 (white) / 0.088 (black) mm = 1.73 / 1.41 eighth-turns (up-stop gap -0.40 -> about -0.73)"
+        },
+        {
+          "part": "stage-0 test 20 (C16a / C16b): procedure",
+          "dim_id": "stage0_procedure.md",
+          "old": "epoxy, room temperature only",
+          "new": "MS polymer; 3 cycles 5 C (fridge / freezer) <-> 45 C (warm water in a bag / car) before the 116 N push and the 1 m drop",
+          "why": "[r4.4 fix 2 -> fix 2b] verifier physics major 1 (thermal mismatch)"
+        },
+        {
+          "part": "solved values (consequence, all modules / end parts): capstans, pad faces, pad-bar seat, top plate, printed wedges",
+          "dim_id": "S08, S15, P17, S16, S19, A06, A07",
+          "old": "lever 57.02 g; capstan y white 188.34 / black 180.31; pad face white z58.642~56.231, black z57.448~55.413; pad-bar seat z67.35, top plate z72.85 (module top); wedges white 0.345~2.756, black 1.500~3.536; end-part wedges A0 0.282~2.715, A#0 1.500~3.536, B0 0.351~2.760, C8 0.257~2.698",
+          "new": "lever 57.05 g; capstan y white 188.34 / black 180.31; pad face white z58.642~56.231, black z57.448~55.413; pad-bar seat z67.35, top plate z72.85 (module top); wedges white 0.346~2.756, black 1.500~3.536; end-part wedges A0 0.289~2.719, A#0 1.500~3.536, B0 0.358~2.764, C8 0.257~2.698",
+          "why": "[r4.4 fix 2 -> fix 2b] fix 2b consequence: the lever is 0.028 g heavier (side walls 0.1 thinner, MS-polymer film in the two bond lines), so the capstans / settled bottom / pad faces / wedges move by the amounts shown"
+        },
+        {
+          "part": "lever carrier (all 16 positions, module + end parts): side walls in the pad zone",
+          "dim_id": "D07, S13",
+          "old": "side-wall top z52.0 (= the steel top) over y163~184 (between the top-lip segments)",
+          "new": "side-wall top z49.4 over y163~184 (2.6 below the steel top: the wall passes under the pad face)",
+          "why": "[r4.4 fix 1 -> fix 2] verifier geometry major 4a: with the lever's axial float (up to 0.41) and the pad bar's +-0.3 the wall stood 0.73 beside its own pad (fix-1 wall, same play); now 1.44"
+        },
+        {
+          "part": "lever carrier + steel block (all 90): retention",
+          "dim_id": "D07, parts list",
+          "old": "steel snapped past the bottom lips only (the lips carry the carrier-steel load)",
+          "new": "steel snapped in, then its two 19 x 40 side faces bonded to the side walls with 2-part epoxy (1411 mm2); the lips only hold it while the glue cures",
+          "why": "[r4.4 fix 1 -> fix 2] verifier physics majors 1-2 + side-wall plate model: the snap alone opens 1.11-1.70 at PLAY 1.5 m/s (overhang 1.0) and bends the wall at the lip root to 23.5 MPa (in-layer limit 12), bottom lip 6.8 MPa across layers (limit 5); bonded: shear 0.067 MPa every note, 0.099 ABUSE (allowed 0.50 / 1.00)"
+        },
+        {
+          "part": "lever carriers G/G#/A/A#/B: hub collars (module); end parts A#0 2.62/0.70 -> 2.62/0.76, B0 0.70/0.00 -> 0.76/0.00",
+          "dim_id": "P14, K*",
+          "old": "G 1.16/0.75; G# 0.75/0.00; A 0.00/0.74; A# 0.74/0.70; B 0.70/0.00",
+          "new": "G 1.16/0.76; G# 0.76/0.00; A 0.00/0.76; A# 0.76/0.76; B 0.76/0.00",
+          "why": "[r4.4 fix 1 -> fix 2] verifier geometry major 4b: a lever-lever pair's collars sum to >= 1.52 (A#|B was 1.40); with the pair's free gap closed and both levers yawed the carriers keep 1.32"
+        },
+        {
+          "part": "frame (module + end parts): fin bosses on the lever rod",
+          "dim_id": "D06, P22, D18",
+          "old": "0.00/1.35; 1.35/1.35; 1.35/1.35; 1.35/1.35; 1.35/0.00",
+          "new": "0.00/1.37; 1.37/1.37; 1.37/1.37; 1.37/1.37; 1.37/0.00",
+          "why": "[r4.4 fix 1 -> fix 2] verifier geometry major 4 (axial float): a lever floated onto its boss and yawed was 1.30 from the fin's full-thickness front (y176); every boss +0.02 -> lever-fin 1.32; bay play 0.46 / 0.46 / 0.43 / 0.30"
+        },
+        {
+          "part": "frame (module + end parts): balance rail under every white-key block",
+          "dim_id": "P20",
+          "old": "top z19.0 over the whole block zone",
+          "new": "pocket top z18.90 behind y137.4 (block x +-4.0 + the key-play margin; the pin row y135.3 stays z19.0)",
+          "why": "[r4.4 fix 1 -> fix 2] verifier geometry major 3: with the notch seated / sinking on the rod the block's lip region comes to z20.258 (ff); pocket -> block-to-rail 1.31"
+        },
+        {
+          "part": "frame (module + end parts): balance rail under every black-key block",
+          "dim_id": "P20",
+          "old": "top z19.0 over the whole block zone",
+          "new": "pocket top z18.80 behind y137.2 (block x +-4.0 + the key-play margin; the pin row y135.3 stays z19.0)",
+          "why": "[r4.4 fix 1 -> fix 2] verifier geometry major 3: with the notch seated / sinking on the rod the block's lip region comes to z20.165 (ff); pocket -> block-to-rail 1.31"
+        },
+        {
+          "part": "key F: beam / thin-tail underside",
+          "dim_id": "KF",
+          "old": "z21.8",
+          "new": "z21.9 over y184.0~195.8 (in front of the rest felt)",
+          "why": "[r4.4 fix 1 -> fix 2] the notch seating on the rod (now in the sweep) brought the F tail at its own return overshoot to 1.24-1.25 of the control board's component envelope (<= z20, circuit interface, unchanged); now >= 1.30"
+        },
+        {
+          "part": "key F#: beam / thin-tail underside",
+          "dim_id": "KF#",
+          "old": "z21.8",
+          "new": "z21.9 over y184.0~195.8 (in front of the rest felt)",
+          "why": "[r4.4 fix 1 -> fix 2] the notch seating on the rod (now in the sweep) brought the F# tail at its own return overshoot to 1.24-1.25 of the control board's component envelope (<= z20, circuit interface, unchanged); now >= 1.30"
+        },
+        {
+          "part": "geometry.json key poses (all keys, module + end parts)",
+          "dim_id": "S24",
+          "old": "side_dip_rigid / side_ff / side_over = rotation about K only",
+          "new": "rotation about K + the notch translation on the rod as swept (r44.key_shift; side_dip was already the exact planar state)",
+          "why": "[r4.4 fix 1 -> fix 2] verifier geometry major 3: the exported dip had the notch sink but the sweep did not; now the sweep and the export use the same poses"
+        },
+        {
+          "part": "printed tool T3 (balance-pin gauge): rear foot",
+          "dim_id": "T24 (tools_geometry.json)",
+          "old": "land y136.75~138.0",
+          "new": "land y136.75~137.10, the body behind it 0.3 above the rail (the foot stays on the z19.0 surface in front of the rail pockets)",
+          "why": "[r4.4 fix 1 -> fix 2] verifier geometry major 3 / printables: the rail pockets start at y137.2 (black) / y137.4 (white)"
+        },
+        {
+          "part": "stage-0 coupons C03a / C03b / C03c (plate-modulus strip)",
+          "dim_id": "stage0_geometry.json",
+          "old": "strip 80 x 12 x 5.5 on a 60 span, dial on the nose plate",
+          "new": "strip 120 x 12 x 5.5 on a 100 span (C03b base 30 x 120), C03c nose with a D4 hole at mid-span so the dial reads the strip top directly",
+          "why": "[r4.4 fix 1 -> fix 2] verifier printables major: the 6.5 % chord-seat decision rested on 0.018 mm of dial reading through three line contacts; now ~1.2 mm of signal"
+        },
+        {
+          "part": "stage-0 kit: carrier C16a (production carrier C, 3) + base C16b (new, test 20)",
+          "dim_id": "stage0_geometry.json",
+          "old": "no test 20 in the kit",
+          "new": "C16a from model_v4.lever_prisms (bore / cavity cut in 2-D), C16b slotted base 40 x 46 x 8 (slot 9.6)",
+          "why": "[r4.4 fix 1 -> fix 2] verifier printables major: test 20 (steel retention) now in the kit"
+        },
+        {
+          "part": "solved values (consequence, all modules / end parts): capstans, pad faces, pad-bar seat, top plate, printed wedges",
+          "dim_id": "S08, S15, P17, S16, S19, A06, A07",
+          "old": "lever 57.13 g; capstan y white 188.33 / black 180.29; pad face white z58.635~56.226, black z57.440~55.407; pad-bar seat z67.30, top plate z72.80 (module top); wedges white 0.302~2.711, black 1.459~3.491; end-part wedges A0 0.246~2.673, A#0 1.459~3.491, B0 0.315~2.719, C8 0.220~2.657",
+          "new": "lever 57.02 g; capstan y white 188.34 / black 180.31; pad face white z58.642~56.231, black z57.448~55.413; pad-bar seat z67.35, top plate z72.85 (module top); wedges white 0.345~2.756, black 1.500~3.536; end-part wedges A0 0.282~2.715, A#0 1.500~3.536, B0 0.351~2.760, C8 0.257~2.698",
+          "why": "[r4.4 fix 1 -> fix 2] fix 2 consequence: the carrier side walls are 2.6 lower over the pad zone (0.11 g lighter lever), so the settled 1 N bottom and the pad faces move up 0.006-0.008; the pad-bar seat is rounded up to the next 0.05 (wedge >= 0.3 over the thickest-backed pad), so the seat and the whole top plate go up 0.05 and every wedge is 0.04 thicker"
+        },
+        {
+          "part": "lever carrier (all 16 positions, module + end parts): top snap lip, front segment",
+          "dim_id": "D07, S13",
+          "old": "lip 0.8 x 1.0 over y150~168 (lever frame), side-wall top z53 to y168",
+          "new": "lip 0.8 x 1.0 over y150~163, side-wall top z53 to y163 (z52 behind it to y184)",
+          "why": "[r4.3 -> r4.4] R44 issue 1: at the settled 1 N bottom and at ff the lip's rear end (y168) swung to world y172-173 z59-60 beside the pad: 0.64 (x gap 0.64 after the lever yaw), 0.34 after FDM; now lip to pad 2.15, to the pad bars / rails 1.81"
+        },
+        {
+          "part": "lever carrier (all): top snap lip, rear segment",
+          "dim_id": "D07, S13",
+          "old": "lip 0.8 x 1.0 over y184~186, side-wall top z52 over y186~190",
+          "new": "lip 0.8 x 1.0 over y184~190 (to the steel's rear end / rear wall), side-wall top z53 over it",
+          "why": "[r4.3 -> r4.4] R44 issue 1 retention: the capstan pushes the steel's rear end up into these lips on every note (19.1 N peak PLAY): root bending across the layers 13.1 MPa with 2 mm (limit 5), 3.8 MPa with 6 mm"
+        },
+        {
+          "part": "keys F and F#: rest felt (cut piece)",
+          "dim_id": "P28, D10",
+          "old": "F x71.69~79.69, F# x86.94~94.94 (8.0 centred; 59 / 42 % on the shelf, the rest over the USB slot)",
+          "new": "F x71.69~76.45 (4.76 wide, cut at the slot edge), F# x91.55~95.94 (4.39 wide, cut at the slot edge and run to the black thin tail's edge): 59 / 55 % land, nothing over the slot",
+          "why": "[r4.3 -> r4.4] R44 issue 2: the r4.3 felts overshot on the return into the USB plug envelope and (F#) its own lever: 4 pairs < 1.3 (min 1.14) at the F / F# overshoot (key -0.510 / -0.513, lever -3.20 / -2.09 deg); now none (the F felt no longer hangs over the plug; F# lands stiffer). No key or frame part changes; circuit interface untouched (slot x76.45~91.55, plug, board envelope)"
+        },
+        {
+          "part": "frame (module, end parts): pad-bar rail webs (8 per module, 2 per end part)",
+          "dim_id": "P13",
+          "old": "web front end y160.0 square (front-bottom corner y160.0 z64.75)",
+          "new": "45 deg chamfer 1.0 x 1.0 on the web's front-bottom corner (y160.0~161.0, z64.75~65.75)",
+          "why": "[r4.3 -> r4.4] the bay-edge carrier side walls pass that corner at ff with 1.30 (r4.3 1.32): the r4.4 lever lost 0.08 g of lip mass the r4.3 mass model double-counted and swings 0.02 deg higher; now lever-rail 1.54. The pad bar never touches that corner (it runs above z65.75)"
+        },
+        {
+          "part": "frame (module, end parts): lever-rod fin-boss bores, rod, rod-end plug",
+          "dim_id": "D18 (new), P22, D06",
+          "old": "text only ('printed D3.9 bores drilled D4.0', 'plug 1.2', 'blind wall 1.2'); not in geometry.json",
+          "new": "fixed prisms 'lever rod D4 SUS304' x1.5~162.9, 'fin boss bore D4.0' per fin (right end fin blind to x163.1), 'lever rod end plug' x0.2~1.4 flush with the end-fin face; end parts: plug at the seam fin, cheek-side fin blind",
+          "why": "[r4.3 -> r4.4] R44 issue 1 (drafter): exported and swept so this class of miss cannot recur; closest moving part 1.77"
+        },
+        {
+          "part": "geometry.json key poses (all keys)",
+          "dim_id": "S24",
+          "old": "key side_dip = max(settled, rigid) = the rigid kinematic bottom (white 4.04, black 6.22 deg)",
+          "new": "key side_dip = the truly settled 1 N bottom with the pad as the full planar key state (white 3.98, black 5.99 deg + the notch settling on the rod = front point 4.05 / 6.08 deg about K); side_dip_rigid added; the sweep checks both",
+          "why": "[r4.3 -> r4.4] R44 issue 3: same pose as the levers' side_dip (settled with the pad); no part changes"
+        },
+        {
+          "part": "geometry.json overshoot poses of keys / levers F and F#",
+          "dim_id": "S24, S25",
+          "old": "F / F# swept at their colour's overshoot (white key -0.415 / lever -2.85 deg, black -0.324 / -1.81)",
+          "new": "F key -0.533 / lever -3.31 deg, F# -0.474 / -2.00 from their own landing runs (PLAY on the 6-key chord seat + ABUSE single key, nominal + pass line); the colours keep white -0.460 / -3.04, black -0.351 / -1.82 (the added PLAY chord seats, grids and pass line are not deeper). ABUSE 6-key chord / 2.5 m/s on the chord seat: checked for no contact (min 1.27)",
+          "why": "[r4.3 -> r4.4] R44 issue 2: the return-overshoot pose sweep of F / F#; no part changes"
+        },
+        {
+          "part": "solved values (consequence, all keys / levers / pad bars): capstans, pad faces, printed wedges",
+          "dim_id": "S08, S15, P17, S25, A07",
+          "old": "lever 57.21 g; capstan y white 188.31 / black 180.28; pad face white z58.621~56.217 (tilt 11.33 deg), black z57.435~55.404; wedges white 0.315~2.719, black 1.463~3.494; end-part wedges A0 0.253~2.678, A#0 1.463~3.494, B0 0.321~2.723, C8 0.227~2.661; rigid lever bottom white 12.60 deg",
+          "new": "lever 57.05 g; capstan y white 188.34 / black 180.31; pad face white z58.642~56.231 (tilt 11.36 deg), black z57.448~55.413; wedges white 0.346~2.756, black 1.500~3.536; end-part wedges A0 0.289~2.719, A#0 1.500~3.536, B0 0.358~2.764, C8 0.257~2.698; rigid lever bottom white 12.64 deg",
+          "why": "[r4.3 -> r4.4] the lever mass model counted the top lips over y150-186 and the side-wall top at z53 over the whole carrier (0.08 g too heavy); corrected with the r4.4 lips. Every change is <= 0.02 mm (below FDM resolution) but the drawings print these numbers"
+        },
+        {
+          "part": "control-board parts (circuit BRD-01 on the Zero's 2.54 lattice)",
+          "dim_id": "P27",
+          "old": "Zero x75.0~93.0; receptacle y188.2~195.5; 4067 x53.3~71.1 y152.4~193.0; J301 x61.59~79.37 y148.59/151.13 on top, 16-core ribbon on top (z13) centred x70.48; J302 x95.25~107.95 y193.04",
+          "new": "Zero x75.14~93.14; receptacle y189.5~196.8 (1.3 proud of the edge); 4067 x54.93~72.71 y152.0~192.64; J301 x61.28~79.06 y148.19/150.73 soldered from the underside (top joints <= z12.0); ribbon under the board z5~9 x60.01~80.64 (centred x70.48 in the lane, last 6 mm -0.31 to J301); J302 x94.30~107.00 y193.91",
+          "why": "[r4.3 -> r4.4] circuit 1 (delta 15): receptacle centred on the shelf slot (x84.00); J301 on the underside so the ribbon never folds within 1.0 of the rail (verify round-1 geometry 3). Named parts to the frame >= 1.30; ribbon lane margins 1.32 / 1.36; ribbon under the board to the F|F# fin foot 1.88"
+        },
+        {
+          "part": "USB-C plug envelope (purchased cable)",
+          "dim_id": "P24",
+          "old": "face y195.5, overmould y195.5~220.5",
+          "new": "face y196.8, overmould y196.8~221.8 (x, z unchanged)",
+          "why": "[r4.3 -> r4.4] circuit 2: the receptacle stands 1.0~1.5 past the Zero's edge. Slot 1.30 / 1.30 over the whole shelf, rear-wall opening x 3.75 / top 2.70, cable passage 11.2 spare after a 25 bend"
+        },
+        {
+          "part": "frame (module): 4 control-board stand-offs",
+          "dim_id": "P35 (new)",
+          "old": "none in geometry (v3 P114 spots (49.75,148)(114.75,148)(49.75,193)(114.75,193) in text only)",
+          "new": "D6 x z5~9 at (50.0,149.0) screw, (114.5,149.0) pin, (50.0,192.5) pin, (114.5,192.5) screw; screw bosses bore D2.5 to z4.2 + M3x6 (v3.2 L35 ISO 7380 button head; head envelope D5.7 x 3.0); locating pins D2.8 to z11.8",
+          "why": "[r4.3 -> r4.4] circuit 3 (delta 14): head (L35 D5.7) to the rail's rear face 1.65, to the shelf ribs 1.54 (1.45 on the rib axis; v3 spots with D5.5: 0.75 / 1.05); nearest BRD-01 part 1.93"
+        },
+        {
+          "part": "frame (module): v3 sensor-board support + the sensor board (now in the model)",
+          "dim_id": "P36 (new)",
+          "old": "not in geometry (v3 P111 post, P113 ribs, rear-rib gap x60~82)",
+          "new": "post x0.5~6.0, front rib y61.0~62.8 / rear rib y73.2~75.5 over x6.0~158.5, top z7.0; rear-rib gap x59~82; SB x1.0~162.9 y60.65~75.89 z7.0~8.6",
+          "why": "[r4.3 -> r4.4] circuit 5: the 16-core ribbon x60.32~80.64 had 0.32 on the left in the v3 gap; now 1.32 / 1.36 (= the lane)"
+        },
+        {
+          "part": "end part left: sensor-board support, lead lane, rear-wall notch",
+          "dim_id": "A02",
+          "old": "sensor bar only; no board support, no rear-rib gap, no way out for W401",
+          "new": "EL board x1.0~46.5; post x0.5~6.0 + ribs x6.0~45.0, rear-rib gap x15~38; balance rail lane x13.53~22.48 z5~10; rear-wall notch x13.53~22.48 z5~12",
+          "why": "[r4.3 -> r4.4] circuit 4: lead pads 2.51 / 8.53 and underside wires 1.69 / 2.03 inside the gap; 5-core lead 6.35 + 1.3 each side, fanned in by y77.39; lead path to floor parts >= 1.30; passes the A#0 tab base with 1.75; board inside the bar"
+        },
+        {
+          "part": "end part right: sensor-board support, lead lane, rear-wall notch",
+          "dim_id": "A03",
+          "old": "sensor bar only; no board support, no rear-rib gap, no way out for W411",
+          "new": "ER board x1.0~23.0; post x0.5~6.0 + ribs x6.0~21.5, rear-rib gap x6~16; balance rail lane x7.59~14.00 z5~10; rear-wall notch x7.59~14.00 z5~12",
+          "why": "[r4.3 -> r4.4] circuit 4: lead pads 1.35 / 1.77 and underside wires 2.25 / 2.37 inside the gap; 3-core lead 3.81 + 1.3 each side, fanned in by y77.39; lead path to floor parts >= 1.30; C8 pin has 1.3 of rail under it; board inside the bar"
+        },
+        {
+          "part": "control board keep-out (text)",
+          "dim_id": "P23",
+          "old": "keep-out x81.22~85.42 y145.5~173.2; the Zero overhang not stated",
+          "new": "keep-out unchanged (stripboard pins / pads / traces); P23 records the RP2040-Zero PCB overhang x81.22~85.42 y172.0~173.2 (z11.9~12.9, no pins / pads / traces)",
+          "why": "[r4.3 -> r4.4] circuit 6: Zero front edge to the fin foot 1.30, its top parts to the hung fin 5.20"
+        }
+      ],
+      "interface_changed": false,
+      "interface_note": "No circuit-interface number changed. The USB-C plug envelope, the shelf slot x76.45-91.55, the component envelope z20 / z16.7, the shelf underside z18.05, the wall opening, the keep-out and every BRD-01 part are unchanged. The spring change touches only the lever hub pocket section, the rear-wall spring bosses and grooves (z47-58, above the USB wall opening z5-21), and the spring itself.",
+      "open_issues": [
+        "Drawings 7 (lever carrier) and 9 (spring / rear-wall groove) still show D05. The drafter must redraw them from the new geometry.json: two pocket-section pieces A/B, the short-leg groove, groove 2.4 x 3.2, boss 4.4, spring parts at x +-1.06. Drawing 15 (stage-0 C06a/b) also needs a redraw.",
+        "Hand-lift risk (DESIGN 18): at 25 deg the spring is wound 52.1 deg (< 55) but carries 8.06 N mm, 107 % of the catalogue's 55-deg torque (704 vs 658 MPa). The removal lift 15.5 deg is below the limit angle 21.5 deg. Stage-0 test 8 adds a 1 h hold at 25 deg with a free-angle drift <= 2 deg pass line.",
+        "The preload depends on the printed position of the short-leg bearing face. A face printed 0.1 mm inward adds about 0.35 N mm of rest torque (about 0.9 g DW); the capstans absorb it (same sensitivity as the r4.4 slot-face seat).",
+        "Only 1.0 of rear wall remains behind the deeper groove (0.7 after FDM). It is non-structural (leg force <= 0.36 N) but thin.",
+        "The short-leg insertion path clears by 0.53 nominal (0.23 after FDM). The requester's 'blocked at 0.5' comes from a conservative centre-point test: my wire-outline test passes 0.5 with 0.25 and blocks only below about 0.26. Stage-0 test 13 confirms on printed C16a carriers.",
+        "Assembly orientation: the long leg must be at the coil's +x end (right-hand wind). A flipped spring puts the short leg at 105 deg and cannot be seated. This is stated in D05, the parts list, DESIGN 10 and tests 8/13.",
+        "The hard-wire cutter price (15,000 KRW) is an estimate. The MISUMI price 282 KRW + VAT is the requester's 9/28 quote.",
+        "Outside this role (listed in the requester's asks): the purchase list v4 and selector tab-07 spring card still need updating, and the key-action-v4 repo is still at r4.3.",
+        "Text-only edits after the run were applied identically to the source and the outputs, with no numbers changed. They are: the check string '(홈 없던 단면 3.41)', the spring note '88 + 단계 0 시험 4 + 예비 8', and the spring change-row title. geometry.json was re-exported from work_r45/ckpt_r45.pkl for one computed 'why' angle (105 deg).",
+        "The historical r4.4 paragraphs in DESIGN 1e still quote live values, as in earlier rounds. After the spring change these moved by at most about 0.001 mm or deg (e.g. F overshoot -0.533 -> -0.534). The 1a/1c spring rows are frozen to their r4.4 D05 values."
+      ]
+    },
+    "verify": [
+      {
+        "lens": "physics (r4.4 after the circuit step): issue 2 F/F# landing dynamics at the 492 N/mm chord seat and the 460 N/mm stage-0 pass line; issue 1 steel-block retention (carrier-to-steel forces, bond, transport); issue 3 settled 1 N black-key bottom export; headline metrics the fixes touch. I re-ran the CURRENT model_v4.py (12:00 copy) with my own drivers in verify44/physics/r2: 222 dynamic cases in 371 s, plus independent V/M, dip-fit and thermal-bond scripts.",
+        "errors": [
+          {
+            "severity": "major",
+            "issue": "The steel is now held in by the epoxy bond, but thermal-mismatch shear in that bond is never checked. The design's own plate model says the snap lips alone open 0.79-1.20 mm against a 1.0 mm overhang on every note, so if the bond lets go, the steel can drop out. The bond is 5-minute epoxy (rigid, and it softens at about 40-50 C) joining 0.8 mm PETG walls (CTE about 60e-6/K) to SS400 (11.7e-6/K) along 40 mm. The Volkersen end shear from that mismatch is far above both the 1.0 MPa allowable for rare loads and the 2.0 MPa design strength, and it happens on every temperature swing, not just on rare events. Stage-0 test 20 is run at room temperature only, so it would not find this.",
+            "evidence": "v_bond_thermal.txt uses tau_max = sqrt(Ga*E_w*t_w/ta)*dAlpha*dT with E_w*t_w = 2000*0.8 and a shear-lag length of 0.3-0.5 mm, so the 40 mm faces act as infinitely long. For 5-min epoxy (G about 700 MPa) with a bond line ta of 0.1 mm, which is what 0.15 mL over 1411 mm2 gives: 1.62 / 3.23 / 4.85 MPa at dT 10 / 20 / 30 K. With ta 0.05: 2.29 / 4.57 / 6.86 MPa. With ta 0.02: 3.6 / 7.2 / 10.8 MPa. By comparison the model's per-note mechanical shear is 0.067 MPa and ABUSE is 0.099 MPa, against allowables of 0.50 and 1.00 (P bond_tau 2.0, sf 4 / 2). §18 itself says that if the bond fails the steel falls onto the key beam, and that note stops working.",
+            "fix": "This adds no parts. (1) Specify a flexible adhesive such as an MS-polymer or hybrid sealant-adhesive, or an RTV with primer (G about 1 MPa). With ta 0.05-0.1 the thermal edge shear is then 0.11-0.25 MPa even at dT 30 K. Mechanical shear stays 0.067 / 0.099 MPa, and the steel-to-carrier slip under a 90 N pad hit is about 0.007 mm, which is negligible. Alternatively, use a toughened flexible epoxy (G of 50 MPa or less) with a bond line of at least 0.1. (2) Add a dT term (for example +/-25 K) to steel_bond() and add it to the 0.2 row. (3) In test 20, run 3 cycles of 5 C to 45 C (freezer / warm water bath or a car) before the 116 N push and the drop."
+          },
+          {
+            "severity": "major",
+            "issue": "As written, the bond that retention now depends on cannot be made as the model assumes. The steel pocket has zero nominal clearance: in geometry.json, steel x29.535-38.535 equals the inner faces of the carrier walls, since 10.6 - 2 x 0.8 = 9.0 = steel_w. Yet parts_list.json / DESIGN §4 and the §16 consumable row say to bond the 19x40 faces 'after snapping in' (스냅으로 끼운 뒤), and 5-min epoxy cannot wick into a zero gap. The assembly sequence in DESIGN §10, step 3, only says to snap the steel in from below and has no bonding step at all. Only stage0_procedure.md test 20, step 3, applies epoxy to the faces first and then snaps. The modelled 1411 mm2 over a 0.1 mm film therefore exists only if the stage-0 method is followed. The far wall is also printed over a support with a 0.2 z gap, so the width of the bond line is set by FDM tolerance and by the few-tenths-of-a-mm thickness tolerance of hot-rolled flat bar.",
+            "evidence": "geometry.json lever D: 'carrier side wall L' x[28.735, 29.535], 'carrier side wall R' x[38.535, 39.335], 'steel block' x[29.535, 38.535]. DESIGN §10 step 3: '강철 9×19×40을 밑에서 끼우고(스냅), 펠트 띠 2T(흑연)를 붙이고…' with no epoxy. The parts-list spec reads '캐리어에 스냅으로 끼운 뒤 두 19×40 옆면을 에폭시로 접착'. The stage-0 procedure test 20.3 reads '옆면에 … 얇게 바르고 스냅으로 끼운다'.",
+            "fix": "Put the stage-0 method into §10 step 3 and into the parts-list and §16 wording: sand, clean, butter both steel faces thinly, snap in from below, wipe the lip and felt zones, and cure 24 h before step 4. Better still, give the bond line a real gap by printing the pocket at 9.2 (walls 0.7, or lever_w 10.8 if the bay play allows). Record in steel_bond() the bond-line thickness the thermal check uses."
+          },
+          {
+            "severity": "minor",
+            "issue": "The swept F return-overshoot pose comes from nominal and pass-line materials only (key -0.510 deg, notch sink kz_over about -0.105). With worst materials, PLAY alone at the chord seat reaches key -0.533 deg with kz_over -0.125; at the 460 N/mm pass line, nominal material reaches -0.514. Neither extra is swept. It lowers the F thin tail by roughly 0.02 + 0.02 = 0.04 mm, so the tightest F pair (thin tail to the z20 board envelope, 1.32 in the circuit sweep) becomes about 1.28 with worst materials.",
+            "evidence": "an_land.txt, F worst k492: PLAY over key -0.533, lever -3.06, kz_over -0.125. F passline k492: -0.479 / -2.79 / -0.105. F nom k460: -0.514 / -2.90. metrics r44.over_key F = [-0.510, -3.203].",
+            "fix": "Either take over_key[F/F#] as the minimum over the worst set as well, or state in §9 that the worst-material PLAY overshoot takes the F tail to about 1.28 from the board envelope (no contact)."
+          },
+          {
+            "severity": "minor",
+            "issue": "The thin-tail stress row (PLAY 9.7 MPa for black, limit 12 for every note) covers only the generic C#/D tails. F#'s tail is 0.1 thinner because of the fix-2 relief, and its rest reaction sits +2.80 mm off the tail centre, which adds torsion. Neither effect is computed.",
+            "evidence": "Hand calculation: t_tail 3.1 -> 3.0 gives (3.1/3.0)^2 = 1.068, so F# bending is 9.7 x 1.068 x (11.6/11.7 N own rest peak) = 10.3 MPa. Torsion is T = 11.6 N x 2.80 mm = 32 N mm on a 10 x 3.0 section, tau of about 1.3 MPa. The von Mises equivalent is about 10.6 MPa, which still passes. For F: about 5.8 MPa plus 1.1 MPa of shear.",
+            "fix": "Compute tail_c per key for F and F#, using the own rest-felt peak from the E4 runs, t_tail minus the relief, and the dx torsion. Report it in §8.3 and the 0.2 row."
+          },
+          {
+            "severity": "minor",
+            "issue": "Issue 3 is fixed in parts[].side_dip, but in geometry.json key_points the fields 'a_dip' / 'b_dip' still hold the RIGID angles. Black is a_dip 0.109 rad = 6.25 deg and b_dip 0.179 rad = 10.26 deg, where the settled values are 5.99 deg and 8.97 deg. Everywhere else in the file 'dip' now means the settled 1 N bottom with the pad.",
+            "evidence": "geometry.json key_points['black C#']: a_dip 0.109, b_dip 0.179 (white 0.071 / 0.221 = 4.07 / 12.66 deg). The points list does correctly carry both dip_rigid [52.02, 46.0] and bottom_held_1N [52.1, 46.21].",
+            "fix": "Rename these fields a_dip_rigid / b_dip_rigid and add the settled a_dip / b_dip (plus the K shift), so a drafter cannot pick up the rigid angle by its name."
+          },
+          {
+            "severity": "minor",
+            "issue": "The numbers in the lead designer's report are older than the files. Its changes_this_round gives lever 57.13 g and capstans 188.33 / 180.29, and its metrics give m_eff_black 46.48, dw_white 51.93, uw_white 42.79 and rep_white 16.24. The published files agree with each other and say lever 57.02 g, capstans 188.34 / 180.31, m_eff_black 46.52, DW 51.89, UW 42.76 and 16.23 Hz. The tool designer's summary also still quotes the zero stand at y188.31 / 180.28, while tools.md and tools_geometry.json correctly use 188.34 / 180.31.",
+            "evidence": "results.txt B and metrics.json 'metrics' against the report JSON. DESIGN §1b row 154 already shows the fix1 -> fix2 change 57.13 -> 57.02.",
+            "fix": "Regenerate the report summary from metrics.json. No file change is needed."
+          }
+        ],
+        "confirmed": [
+          "Issue 2, reproduced independently on the current model (own driver, 222 cases). F (59 %) and F# (55 %) at chord seat 492, PLAY 0.5/1.0/1.5 x let go / 0.45 / 1 / 2 N. Nominal: F lift 0.103, keeper 0.40; F# 0.056 / 1.11. Pass line: 0.130 / 0.37 and 0.074 / 1.12. Worst: 0.188 / 0.19 and 0.187 / 1.06. All of these match E4 exactly, and all are within the 0.20 lift limit with no keeper contact.",
+          "Issue 2 repetition and full return at the chord seat (friction x1 / x2): F 16.3 / 15.3 Hz and 45.3 / 48.3 ms; F# 18.9 / 17.7 Hz and 39.8 / 42.4 ms. All at least 13.3 Hz and under 60 ms.",
+          "Issue 2 ghosts: every case that re-arms mechanically is dropped by the U6 filter. Examples: F nom 1.5 m/s at 0.45 N reaches 100 % with a descent of 0.031 m/s, about 0.02 x v; F# nom reaches 83 % with a descent of 0.01. Not dropped: 0.",
+          "Issue 2 ABUSE: lift at most 0.353 (F# pass line, 2.5 m/s at the chord seat), under the 0.40 limit. F worst ABUSE 2.5 single touches the keeper felt (-0.04), which is allowed under ABUSE and matches the model.",
+          "Issue 2 overshoot poses for nominal and pass-line materials match metrics r44.over_key: F key -0.479 / lever -2.79 (+0.25 margin = -3.20); F# -0.374 / -1.46 at PLAY, -0.471 / -1.80 incl. ABUSE single; the ABUSE chord-seat brief F -0.606, which also matches.",
+          "At the stage-0 pass line of 460 N/mm, PLAY targets still hold. F nom: lift 0.145, keeper 0.27. D nom: 0.171 / 0.41. C# nom: 0.062 / 1.18. F# nom: 0.057 / 1.11. Ghosts are all filtered. So the 460 N/mm pass line in the stage-0 kit is a valid criterion.",
+          "Treating the shelf strip beside the USB slot as rigid is justified. The 2.0 x 13.2 strip over its span of about 8.4 mm is about 1400 N/mm stiff, against a rest-felt contact stiffness of about 24 N/mm at a 13 N peak.",
+          "Issue 3: re-solving held_bottom at 1 N with the pad (seat 1490) gives white th 3.984 deg, lever 10.752 deg, K shift (-0.020, -0.154), front z33.497. Black gives th 5.993 deg, lever 8.972 deg, K shift (-0.014, -0.143), front z46.213 (rigid 6.222 deg, front z46.000). A rigid-transform fit of the exported side_rest -> side_dip polygons gives 5.991-5.995 deg with the K image shifted (-0.014, -0.143) and front z46.21. The lever export gives 8.974 / 10.750 deg, and side_dip_rigid gives 6.221-6.224 deg. The export is the settled 1 N bottom, and at seat 492 it barely moves (5.995 / 8.975).",
+          "Issue 1 forces: from the recorded lever motion and contact forces I recomputed the carrier-to-steel V and M with finite-difference acceleration. They match the model within 1 %: white PLAY 1.5 V +22.0 / M +471 against +22.1 / +476; ABUSE 2.5 +35.1 / +736 against +35.2 / +740; black +20.3 / +458 and +33.5 / +747. The bottom-zone peaks of 49.4 / 77.6 N (white) and 46.9 / 76.7 N (black) agree with the 51.6 / 77.6 N in the table. A hand check at pad impact gives the same order: 89 N pad against about 57 N of steel inertia at a 34 mm arm.",
+          "Issue 1 mechanical bond shear and transport are arithmetically correct. The four rectangles give 1411 mm2 (2 x (13x19 + 21x16.4 + 6x19)). The bond reaches the 1.0 MPa rare limit at 2679 g (1.0 x 1411 / 0.527 N). The snap-only figures (upside-down 0.26 N, 218 g down) also check out.",
+          "Lever mass and m_eff: steel 9x19x40 x 7.85 = 53.69 g. A hand estimate of the lever m_eff, I_L 75492 x (47.34 / 14.91 / 128)^2, gives 46.44 g against the model's 46.45."
+        ],
+        "recomputed": [
+          {
+            "metric": "F chord-seat 492 PLAY lift / keeper (nom, pass line, worst)",
+            "model": "0.103/0.40, 0.130/0.37, 0.188/0.19",
+            "mine": "0.103/0.40, 0.130/0.37, 0.188/0.19",
+            "ok": true
+          },
+          {
+            "metric": "F# chord-seat 492 PLAY lift / keeper (nom, pass line, worst)",
+            "model": "0.056/1.11, 0.074/1.12, 0.187/1.06",
+            "mine": "0.056/1.11, 0.074/1.12, 0.187/1.06",
+            "ok": true
+          },
+          {
+            "metric": "F / F# rep Hz (x1 / x2 friction), full return ms",
+            "model": "16.3/15.3, 45.3/48.3 | 18.9/17.7, 39.8/42.4",
+            "mine": "16.3/15.3, 45.3/48.3 | 18.9/17.7, 39.8/42.4",
+            "ok": true
+          },
+          {
+            "metric": "ABUSE lift max F / F# (all materials)",
+            "model": "0.243 / 0.353",
+            "mine": "0.243 / 0.353",
+            "ok": true
+          },
+          {
+            "metric": "ghost re-arms not dropped (F/F#, all mats, 492)",
+            "model": "0",
+            "mine": "0",
+            "ok": true
+          },
+          {
+            "metric": "F / F# over pose key / lever deg (nom+pass line, incl. ABUSE single)",
+            "model": "F -0.510 / -3.20 (with 0.25 lever margin); F# -0.471 / -2.00",
+            "mine": "F pass line PLAY -0.479 / -2.79 (+0.25 = -3.04), incl. ABUSE single -0.510; F# -0.471 / -1.80 (+0.25 = -2.05); worst PLAY F -0.533 (not swept)",
+            "ok": true
+          },
+          {
+            "metric": "PLAY at the 460 N/mm stage-0 pass line (lift / keeper, nominal)",
+            "model": "assumed to pass (r4.0 value)",
+            "mine": "F 0.145/0.27, D 0.171/0.41, F# 0.057/1.11, C# 0.062/1.18",
+            "ok": true
+          },
+          {
+            "metric": "black key settled 1 N bottom with the pad (key rotation, K shift, front z)",
+            "model": "5.99 deg, (-0.014, -0.143), z46.21",
+            "mine": "5.993 deg, (-0.014, -0.143), z46.213; export fit 5.991-5.995 deg",
+            "ok": true
+          },
+          {
+            "metric": "white key settled 1 N bottom with the pad",
+            "model": "3.98 deg, (-0.020, -0.154), z33.50",
+            "mine": "3.984 deg, (-0.020, -0.154), z33.497",
+            "ok": true
+          },
+          {
+            "metric": "lever settled dip white / black",
+            "model": "10.75 / 8.97 deg",
+            "mine": "10.752 / 8.972 deg",
+            "ok": true
+          },
+          {
+            "metric": "carrier -> steel V / M, white PLAY 1.5 and ABUSE 2.5",
+            "model": "22.1 N / 476 N mm; 35.2 / 740",
+            "mine": "22.0 / 471; 35.1 / 736",
+            "ok": true
+          },
+          {
+            "metric": "bottom-zone force PLAY / ABUSE (white)",
+            "model": "51.6 / 77.6 N (max over the grid)",
+            "mine": "49.4 / 77.6 N (PLAY 1.5 and ABUSE 2.5 let go, nominal)",
+            "ok": true
+          },
+          {
+            "metric": "bond area / transport shock limit",
+            "model": "1411 mm2 / 2679 g",
+            "mine": "1411 mm2 / 2679 g",
+            "ok": true
+          },
+          {
+            "metric": "bond thermal end shear at dT 10 / 20 K (5-min epoxy, 0.1 line)",
+            "model": "not computed",
+            "mine": "1.62 / 3.23 MPa (0.05 line: 2.29 / 4.57) vs allowables 0.5 / 1.0 and strength 2.0",
+            "ok": false
+          },
+          {
+            "metric": "F# thin-tail bending + torsion (PLAY)",
+            "model": "9.7 MPa (generic black)",
+            "mine": "about 10.3 bending + 1.3 shear, about 10.6 equivalent (limit 12)",
+            "ok": true
+          },
+          {
+            "metric": "lever m_eff white",
+            "model": "46.45 g",
+            "mine": "46.44 g (hand)",
+            "ok": true
+          }
+        ],
+        "files": [
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/v_land.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/land_rows.json",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/an_land.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/an_land.txt",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/v_dip.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/dip_check.json",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/v_steel.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/v_steel.txt",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/v_bond_thermal.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/physics/r2/v_bond_thermal.txt"
+        ]
+      },
+      {
+        "lens": "GEOMETRY (r4.4 adversarial check). I rebuilt the checks with my own polygon and prism distance code in verify44/geometry and worked from geometry.json only (model_v4 was used just to read parameters). Checked: top snap lips, bores, rod plugs, dip-export consistency, the circuit bodies, the frozen interface numbers, diffs against r4.3 and r4.4a, and the F/F# overshoot. Main result: the lip, dip-export and interface work is correct, but the control board cannot be put into the one-piece frame at all, and the worst-material case takes the key-tail-to-board clearance below the rule.",
+        "errors": [
+          {
+            "severity": "critical",
+            "issue": "The control board cannot be installed in the one-piece module frame. The board's fin slot is open at the FRONT edge (x81.918-84.718, y145.5 to 172.0) and the board stays solid behind it ('control board (behind the fin slot)' x81.918-84.718, y172.0-195.5). The F|F# fin foot (x82.518-84.118, y152.0-170.7) runs full height from z5 up to the top plate (z67.35-68.85). Behind it the fin hangs from z21.5 back to the rear wall. So the fin sits across the board's solid strip, above it (z21.5) and in front of it (foot to y170.7). The frame, fins and top plate are one print (parts_list: 1 frame per module), and the plate covers y146.5-209 at z60.85-68.85, so the board cannot come down from above. A board with a front-open slot can only take the foot by sliding FORWARD from 25.2 mm behind its seat (foot rear y170.7 minus board front y145.5). The space behind the seat is 1.3 mm: shelf ribs at y196.8 (z5-18.05) across the board's width (x49.4 to 116.6), then the rear wall y209-212. Sideways movement is limited to +-0.6 by the foot inside the slot. The RP2040-Zero (x75.14-93.14, y172-195.5) also sits across the fin line under the hung fin, so reversing the slot alone does not work either. The r4.4 locating pins (tops at z11.8, 1.2 above the board top) add a further step: the board must drop straight down at its seat at the end. The two M3 screws (at x,y = 50,149 and 114.5,192.5) must be driven under the plate: the rear one has 47 mm of height up to the z60.85 plate and 8.5 mm to the x123 fin. §10 (assembly order) has no board step at all; step 4 already assumes the board is in place. This is not new in r4.4 (the hung fin was already there in r4.2 and r4.3), but no round has checked how the board gets in. The lead's claim that nothing overlaps the frame only checks the parts at rest.",
+            "fix": "Choose one and add an insertion-path check to the model (a swept board pose, like the lever C-space check). (a) Recommended, and it also solves screw access: open the floor under the board (x~46-118, y~145-196) and print the 4 stand-offs on a floor tray. The board is screwed to the tray on the bench and pushed up from below: the slot takes the foot and the solid strip passes under the hung fin. The foot then bears on the tray (check that the chord-seat stiffness stays at 492 N/mm). The screws are driven from below. Cost: 1 printed part per module plus the 2 existing screws; say so in parts_list. (b) Without new parts but with a circuit-interface change (must be flagged to hardware/pcb): open the slot to the REAR edge and move the Zero and the receptacle off the fin line (x~82.4-84.2), then slide the board in rearward over the balance rail and lower it. (c) Print the F|F# fin foot plus hung fin as a separate insert that slides in after the board (1 part per module)."
+          },
+          {
+            "severity": "major",
+            "issue": "The clearance-sweep poses are built only from nominal materials: poses_for and finish_geo use DYN['main'], and the F/F# own poses use only nominal plus pass-line. The worst material set, which is in the brief's case grid and already computed in metrics r41.single_grid.*_worst, overshoots further on release. White worst PLAY 1.5 m/s release: key -0.458 deg (rod dz -0.094), against the pose -0.414. Recomputed on the exported polygons (rotation about K plus the rod shift): key E and key G thin tail to 'board components (<= z20)' go from 1.308 to 1.279, which is 0.979 after tolerance, below 1.0. PLAY 1.0 m/s release gives 1.291 (0.991). Key F at its own worst PLAY-only overshoot (-0.533 deg): its beam at y184 (still at z21.8) comes to 1.295 from the CD74HC4067 envelope (0.995 after tolerance). The binding pair (tail to board envelope) had no spare margin: it was 1.31 at nominal because fix 2 brought the rod shift into the sweep (r4.3: 1.41). Black keys are fine (worst overshoot is smaller than nominal).",
+            "fix": "No new parts. (1) In poses_for / key_pose_shifts, take the key and lever 'over' (and 'ff') extremes over the worst set as well (the r41 single-grid worst runs already exist), then re-sweep. (2) Apply the fix-2 F/F# underside raise (z21.8 to z21.9) to the E and G keys over y184.0-195.8, where the closest point is the tail at the envelope's rear corner y194.5. For F, start the raise at about y176 instead of y184 (at -0.533 deg: 1.37 instead of 1.295). The circuit envelope stays as it is."
+          },
+          {
+            "severity": "minor",
+            "issue": "Sensor gap: min_sensor_gap_mm 4.76 (black) / 5.24 (white) comes from A.mag_travel(a_ff), which is rotation about K only. Fix 2 made the exported ff pose include the notch shift on the rod (black 0, -0.215; white 0, -0.25). In the exported ff pose the magnet face is at z14.692 (black), so the gap is 4.55 (white 4.99). The 3.0 criterion still holds, but the metric is about 5 % optimistic and does not match the geometry export.",
+            "fix": "Compute the sensor gap with the same ff state (rotation plus kz_ff), for example with key_point_world on the extreme state, or subtract the shift. Update the results D line and metrics."
+          },
+          {
+            "severity": "minor",
+            "issue": "The clearance rule is applied differently to F/F# than to the other keys. For the other keys, the over envelope includes ABUSE 2.5 m/s and chord20 (chord seat at 1490 N/mm), so the 1.3 rule is enforced there. For F/F#, 'ABUSE chord 2.0 / 2.5 at the chord seat' (key -0.606 deg) is taken out of the pose and judged only as 'no contact': key F thin tail to board components is 1.229 (0.929 after tolerance). I reproduced this: 1.229, and 1.223 with worst materials. F# at worst PLAY-chord plus ABUSE-single is 1.256.",
+            "fix": "Either state in §9 / §0 that ABUSE poses only need 'no contact' (and treat the other keys the same way), or include the chord-seat ABUSE overshoot in the F/F# over pose and extend the F/F# tail raise until it reaches 1.3 or more."
+          },
+          {
+            "severity": "minor",
+            "issue": "Stale or inconsistent numbers after fix 2. (1) In the DESIGN §problem-1 table, the row '옆벽 윗단 z53 | 립과 같은 구간만 (그 사이 z52)' and the text '레버가 0.19 g 가벼워져' predate fix 2: geometry has the side-wall top at z49.4 over y163-184 (wall_drop_pad 2.6), and the change log says 0.08 g then 0.11 g. (2) The lead's changes_this_round still gives capstans 188.33 / 180.29, wedges 0.302-2.711 / 1.459-3.491 and 'z52 over y163-184'. geometry.json and DESIGN S08 give 188.34 / 180.31, wedges 0.345-2.756 / 1.500-3.536, and the top plate moved up 0.05 to z72.85 (the whole top assembly +0.05 compared with geometry.r4_4a). (3) The lead gives plug to nearest moving part as 1.67; results.txt (named) gives 1.56 (key F# rest felt, over). (4) The tool designer's summary still has the zero seat at y188.31 / 180.28 and the pin-gauge rear foot at y136.75-138.0. The regenerated tools_geometry.json, tools.md and STLs (12:39) correctly use 188.34 / 180.31 and y136.75-137.10.",
+            "fix": "Regenerate the §problem-1 table from P (lip_segs, wall_drop_pad) and the lever mass. Refresh the lead's and tool designer's summaries from the final files. Quote one plug-clearance value (1.56)."
+          },
+          {
+            "severity": "minor",
+            "issue": "results.txt section G still lists the lever drops with the generic z20 envelope (E, F, G 13.0 deg; F# 13.5 deg onto 'board components (<= z20)'). §11 and the lead now give actual values (D#, F#, G, G# 24.0 / 24.0 / 23.5 / 24.0 deg onto the board top; E / F 13.2 deg onto the 4067). Lever D# and G# do not appear in the results list, so the drafter could take the wrong numbers for drawing 12.",
+            "fix": "Print the actual=True lever_drop values (all 12 positions, including the R301 case for O1/O7 G) in results G, and remove or label the envelope lines."
+          }
+        ],
+        "confirmed": [
+          "Top snap lips (y150-163 and y184-190 in the lever frame, 0.8 x 1.0) are exported as lever parts for every module lever and end-part lever (12 left, 4 right) in all poses (rest / dip / dip_rigid / ff / over / service / rigid0). Rebuilt independently with lever float, yaw and pad bar +-0.3: lip to own pad min 2.152 (lever A/C, ff); to wedge 5.00; to the pad-bar rails and bars min 1.68 (my conservative float 0.425 for A/B; the model's 1.87 uses the real floats); to the top plate 4.04. All are 1.3 or more after play, so R44 issue 1 is fixed. The only pose under 1.3 is the service pose (15 deg, pad bar out) against the rail lip, at 0.40, which is the designed service-swing stop.",
+          "Fin-boss bores (5 per module, right end blind to x163.1), lever rod x1.5-162.9 and the end plug x0.2-1.4 are fixed prisms in the module and in both end parts (plug at the seam fin). Nearest moving part 1.77 (lever C hub side, x).",
+          "Black dip export is consistent between key and lever. Fitted from the polygons: key 5.993 deg plus shift (-0.014, -0.143), lever 8.973 deg. Capstan-to-felt compression at dip 0.227 against 0.223 at rest, so it is one physical state. White: 3.984 deg plus (-0.020, -0.155), lever 10.751 deg, compression 0.275 against 0.282. dip_rigid (6.223 / 4.045 deg) is kept as its own field. key_points keeps both dip_rigid and bottom_held_1N columns. R44 issue 3 is fixed.",
+          "Circuit bodies are in geometry.json at the stated places: Zero x75.14-93.14 y172-195.5 z<=16.3; receptacle x79.53-88.47 y189.5-196.8 z12.9-16.1; 4067 x54.93-72.71 y152-192.64; J301 pads and ribbon under the board z5-9 x60.01-80.64 y144.5-151.63; J302 x93.4-107.9; stand-offs D6 z5-9 at (50,149), (114.5,149), (50,192.5), (114.5,192.5); screw-head envelopes D5.7 x 3.0 at z10.6-13.6; pins D2.8 to z11.8; SB x1.0-162.9 z7-8.6 with the rear-rib gap x59-82; ribbon lane under the rail x59-82 (rail bottom z10); EL lane / notch x13.525-22.475, ER x7.585-13.995 (half-up gives 13.53-22.48 and 7.59-14.00, matching the text).",
+          "Nearest moving part to each new circuit body, with key yaw and lever float: board components 1.307 (E/G tail, over); 4067 1.310 (F beam, over); plug 1.61 on my estimate (the model's 1.56 is more conservative); screw heads 6.12 / 7.25; SB 5.29; stand-offs and pins 8.2 or more. All are 1.0 or more after tolerance at nominal poses.",
+          "Interface numbers from R44_BRIEF item 4 are unchanged in geometry.json: plug 12.5 x 7.6 x 25 at z10.7-18.3; shelf slot x76.45-91.55, so 1.30 / 1.30 to the plug; Zero top z16.3; rear strip y194.5-195.5 at z16.7 or less; shelf underside z18.05; rear-wall opening x74-94 z5-21 (plug margins 3.75 / 3.75, top 2.70); keep-out x81.218-85.418 from y173.2.",
+          "F/F# felts are cut as stated (F x71.693-76.45, F# x91.55-95.943, 59 / 55 %, none over the slot). The fix-2 underside raise to z21.9 over y184-195.8 is present on keys F and F# only. The F own-overshoot pose (-0.511 deg, shift -0.105) matches my rebuild within 0.005 mm, and the F ABUSE-chord value 1.229 reproduces.",
+          "No unannounced fixed-part regressions between r4.4a and final: only the balance-rail pockets (fix 2), the fin-boss +0.02 and the +0.05 raise of the top assembly. The named clearances all stay at 1.31 or more. Neighbour seams, curtain (1.63 / 1.70), sensor bar (1.70) and end-part seams (1.31 moving, 1.32 fixed) all pass."
+        ],
+        "recomputed": [
+          {
+            "metric": "lip to own up-stop pad, min over poses with play (mm)",
+            "model": "2.155",
+            "mine": "2.152",
+            "ok": true
+          },
+          {
+            "metric": "lip to pad-bar rail, min (mm)",
+            "model": "1.867",
+            "mine": "1.678 (conservative float 0.425 for A/B)",
+            "ok": true
+          },
+          {
+            "metric": "black dip key angle / lever angle (deg)",
+            "model": "5.99 (+notch) / 8.97",
+            "mine": "5.993 + (-0.014,-0.143) / 8.973",
+            "ok": true
+          },
+          {
+            "metric": "capstan-to-felt compression at dip vs rest, black (mm)",
+            "model": "consistent state claimed",
+            "mine": "0.227 vs 0.223",
+            "ok": true
+          },
+          {
+            "metric": "key E/G thin tail to board components, nominal over (mm)",
+            "model": "1.31",
+            "mine": "1.308",
+            "ok": true
+          },
+          {
+            "metric": "key E/G thin tail to board components, worst-material PLAY 1.5 release (mm)",
+            "model": "not computed",
+            "mine": "1.279 (0.979 after tol)",
+            "ok": false
+          },
+          {
+            "metric": "key F beam to 4067, worst PLAY-only overshoot -0.533 deg (mm)",
+            "model": "not computed",
+            "mine": "1.295 (0.995 after tol)",
+            "ok": false
+          },
+          {
+            "metric": "key F thin tail to board components, ABUSE chord overshoot (mm)",
+            "model": "1.229",
+            "mine": "1.229",
+            "ok": true
+          },
+          {
+            "metric": "min sensor gap, black ff (mm)",
+            "model": "4.76",
+            "mine": "4.55 (exported ff pose including notch shift)",
+            "ok": false
+          },
+          {
+            "metric": "board rearward travel available vs needed to take the fin foot (mm)",
+            "model": "not checked",
+            "mine": "1.3 available vs 25.2 needed",
+            "ok": false
+          },
+          {
+            "metric": "USB plug to nearest moving part (mm)",
+            "model": "1.56 (results) / 1.67 (lead)",
+            "mine": "1.61 (my key-yaw estimate)",
+            "ok": false
+          }
+        ],
+        "files": [
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/geo_lib.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/c1_lips.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/c2_dip.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/c2b_pen.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/c3_circuit.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/c4_fover.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/c4b_worst.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/geometry/c5_diff.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/geometry.json",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/model_v4.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/run_all.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/results.txt",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/DESIGN.md"
+        ]
+      },
+      {
+        "lens": "PRINTABLES (r4.4): printed tools T1a/T1b/T2/T3 (final/tools) and stage-0 kit C01a-C16b (final/stage0). I re-ran both generators with MODEL_DIR=final into verify44/printables and got byte-identical STLs and identical tools_geometry. I traced each tool stack-up from the STL back to model coordinates, checked every STL (watertight, 256 bed, downward faces), and re-derived the procedure numbers against model_v4 (settled Dyn state, held_bottom, statics, cap_dz). Elapsed about 18 min.",
+        "errors": [
+          {
+            "severity": "major",
+            "issue": "The capstan bench gauge (T2 dummy lever + jig ledge) sets the capstan to the wrong height. It puts the crown top at z31.0 in the world with the key settled under service load (flush = dummy at b=0 = crown top 31.0). In the model's settled rest state the crown top is lower: 30.892 (white D) and 30.912 (black C#). The notch cloth lets the key sink 0.081 at K and turn -0.033 deg, while the front stays at 43.50. The pads, 1 N bottom, wedges and dynamics were all solved with the model crown (cap_dz = 0). So the gauge turns every capstan out by +0.108 mm white (1.73 eighth-turns) and +0.088 mm black (1.41 eighth-turns). Model result with that cap_dz: lever rest -1.09 -> -0.68 deg (white), -0.55 -> -0.33 deg (black); 1 N bottom lever 11.36 -> 11.77 deg and 9.63 -> 9.84 deg; held up-stop cap +0.331 / +0.173 mm, which takes the up-stop gap from -0.40 to about -0.73 (white) and from -0.45 to about -0.62 (black). Both are well outside the paper-strip acceptance band of +-0.1. DW goes up +0.33 / +0.14 g. PET shims cannot fix this: the design fits no shim by default, so there is none to remove, and the bench gauge would say 'flush = correct' again. The tools.md sentence '모델의 캡스턴 꼭대기 z31.0는 기하 값이므로 이것이 맞는 기준이다' is the root cause. z31.0 is the key-frame (unloaded design-pose) value, and geometry.json side_rest keys are exported at that design pose, not settled (key D capstan head side_rest z27.5-31.0 while lever D sits at b_rest -1.09 deg).",
+            "fix": "No new parts. In make_tools.py take the target from the model's settled state (m.Dyn(A, z_shelf).run(150) -> crown top), not P['z_c']. Give the readout-ledge post three lands: '0' at z65.5 (calibration with the rod on the zero pads, unchanged), 'W' at z64.90 (65.5 - 5.52 x 0.108) and 'B' at z65.20 (65.5 - 3.59 x 0.088, 0.05 grid). Read white keys against W and black keys against B. Alternatively keep one ledge and tell the builder to turn the capstan in 1.73 / 1.41 eighth-turns after flush (less practical). Restate S08 as 'crown top at settled rest 30.89 / 30.91 (key-frame 31.0)'. Regenerate tools.md, DESIGN 10.1 and 12.",
+            "evidence": "verify44/printables/v1_rest.py and v2_capdz.py: D settled crown 30.8920, C# 30.9121. With cap_dz 0.1080 / 0.0879 the crown is back at 31.000 (the gauge condition); held cap +0.331 / +0.173 mm; DW +0.329 / +0.144 g; b_rest -1.091 -> -0.680 deg and -0.552 -> -0.333 deg. gap_us_w/b = -0.40 / -0.45. From the STL: dummy bottom plane z31.000, hub centre (203.26, 33.51), needle top z65.500, jig ledge z65.500, zero-pad floor z27.000."
+          },
+          {
+            "severity": "major",
+            "issue": "The up-stop adjustment rule in DESIGN 12 (paper strip) points the wrong way. The text says '먼저 물리면(틈이 덜 음수) 심을 빼고, 늦게 물리면 심을 넣는다'. The model defines a PET shim under a pad as moving the face 0.1 down, so the lever meets it 0.23 deg earlier and the gap becomes more negative. A more negative gap makes the strip bite at a higher force (-0.30 / -0.40 / -0.50 -> 0.75 / 0.92 / 1.04 N). So an early bite (gap not negative enough) needs a shim added, and a late bite needs one removed. As written, the builder moves the gap away from the target. With no default shim, 'remove' is often impossible anyway. The stage-0 kit's own mapping (test T: thicker pad -> remove shims; test 1 alternative 1: -0.60 = two more shims) agrees with the model, so DESIGN 12 contradicts the kit.",
+            "fix": "make_design_md.py line 1333: change to '먼저 물리면(틈이 덜 음수) 심을 넣고, 늦게 물리면(틈이 더 음수) 심을 뺀다'. To allow adjustment both ways without new part types, you can print the pad-bar wedges 0.1 thinner and fit one PET shim (already a listed consumable) under every pad by default.",
+            "evidence": "run_all.py 1532-1534: PadTable(A, held_b, gap_us - 0.1) '-> the lever meets it earlier'. DESIGN 12 table: shim in -> lever 0.23 / 0.24 deg earlier. DESIGN line 980 gap -> bite-force list."
+          },
+          {
+            "severity": "minor",
+            "issue": "The C07b pin-protrusion gauge (test P) cannot hold the P32 tolerance. Its 4.30-deep blind hole opens on the bed and prints at 0.2 layers, so the hole roof is a bridge at z4.2 or z4.4. That is +-0.1, the whole +-0.1 tolerance, before bridge sag. Test P would then reject good hole diameters on a protrusion reading of 4.2 or 4.4. The correct tool already exists: T3 prints the stop as an upward floor on a 0.1 grid (STL: stop z23.30, GO 23.40, NO-GO 23.20).",
+            "fix": "Use T3 for test P and drop C07b. Or print C07b upside down at 0.1 layers so the stop is a top surface, as T3 is."
+          },
+          {
+            "severity": "minor",
+            "issue": "The C03a bend strip is 12 wide, so its two full-depth perimeter walls (about 1.3 mm each) take up about 21 % of the width. When the frame's top plate is printed below 100 % infill, the strip reads a higher E_eff than the wide plate: about +5 % at 40 % gyroid with 5 skins (plate r about 0.79, strip about 0.835). The effective pass line moves from r 0.935 to about 0.918, i.e. chord seat about 452 instead of 460 N/mm. Section 15 does not state the frame infill.",
+            "fix": "Widen C03a to 36 mm or more (k about 46 N/mm; dial 0.01 still resolves it), or trim 3 mm off both long edges before testing, or state that the top plate is printed at 100 % infill."
+          },
+          {
+            "severity": "minor",
+            "issue": "Black-key height lands are centred on 55.5, but the model's settled black front is 55.446 (the shelf is calibrated on white D; C#, D#, F#, G# and A# all read 55.446). The design state sits only 0.096 above the B- land and 0.204 below B+. White keys are at 43.499-43.501, centred.",
+            "fix": "Put the B lands at the model's settled black front ± 0.15 (55.60 / 55.30), or note that 55.45 is the design value."
+          },
+          {
+            "severity": "minor",
+            "issue": "Stale text. (a) The F/F# note in tools.md says the frame F/F# rest felt lands partly and sits about 0.1 high, 'not reproduced by the jig'. Since r4.4 the felt is cut to land fully (F x71.69-76.45, F# x91.55-95.94), so frame and jig now match. (b) DESIGN 10.1 says '공구는 r4.3 모델(final_r4_3)로 만들었다 … MODEL_DIR=final로 다시 만들면 맞춰진다', but the tools are already built from final: my re-run is byte-identical. (c) The tool-designer summary quotes 22.41 N·mm, CAL y188.31 / 180.28, amp 5.51 / 3.58 and +0.32; the outputs say 22.35, 188.34 / 180.31, 5.52 / 3.59 and +0.33. (d) The stage-0 summary quotes 'C03a 80×12×5.5, 경간 60, k 70.1' and 'model_v4(final_r4_3)'; the outputs have span 100, k 15.4 and model final r4.4.",
+            "fix": "Regenerate the notes from the current model and drop the r4.3 provenance sentence in make_design_md 10.1."
+          },
+          {
+            "severity": "minor",
+            "issue": "The T3 rear foot land is only 0.35 wide (y136.75-137.10) and 0.3 tall, narrower than one 0.4-nozzle line, so a slicer may drop it. The impact is small: the press block (u±3) and the front foot also bear on the rail top.",
+            "fix": "Tell users to enable thin-wall detection / Arachne, or remove the rear ridge and rely on the front foot plus the press block."
+          }
+        ],
+        "confirmed": [
+          "Both generators re-run with MODEL_DIR=final into verify44/printables. All 4 tool STLs and 33 stage-0 STLs are byte-identical to the published files; tools_geometry.json and tools.md are identical; stage0_geometry differs only in the 'created' time.",
+          "All 37 STLs are closed and consistently oriented (every edge shared by exactly 2 faces), and all fit 256×256×256. The largest tool is the jig at 72×222×62.5; the tallest stage-0 part is C15a at 151.8.",
+          "Tools print without supports. The jig and the pin-gauge body have no downward faces; the dummy has only its 0.4 snap lips (29 mm²) and the height block only its deboss text. The stage-0 flat ceilings are the stated bridges: C08a nut slots, C09a/b, C11a (the bridge test itself) and C16a (production carrier with its one internal support). C12a has a 47° shoulder (281 mm²), which prints fine.",
+          "Jig stack-up from the STL: shelf top z20.054; K bore printed Ø3.9 with bottom at z19.55, which becomes 19.50 = cradle bottom (rod centre K 21.5) after the Ø4.0 drill; zero-pad groove floor z27.0 (Ø4 rod top 31.0); ledge top z65.5; dummy bottom plane z31.0; hub centre (203.26, 33.51); needle top z65.5.",
+          "Pin gauge from the STL: feet z19.0, press stop z23.30, GO z23.40, NO-GO z23.20, all printed as upward floors on the 0.1 grid. Neighbour-pin pitch is at least 13.05 and never hits the NO-GO zone during press or check.",
+          "Key-front target: the model's settled white front is 43.499-43.501 with the lever load, so the height-block W lands 43.65 / 43.35 bracket the model value. One punching = 0.247 at the front, and the ±0.15 window is wider than one step.",
+          "Dummy load: moment 22.79 N·mm against service 22.35 gives capstan force 1.53 / 0.99 N against 1.50 / 0.98; front-height effect ≤0.004 mm. Magnification (L - y_needle)/(L - y_cap) = 5.516 / 3.585.",
+          "3-point bend k with shear: 15.43 N/mm (span 100, 12×5.5, E 1950) against 15.4 stated.",
+          "Drop tube: h = v²/2g = 114.7 / 51.0 mm; Ø19.05 ball = 28.4 g; e = 0.20 rebound 4.59 mm.",
+          "Pendulum e formula with Coulomb friction (f = Δ/2 per half swing, energy terms f·θ) is right. Impact speed from 150°: 30.4 rad/s, 95 % of PLAY 31.9.",
+          "Interlayer pass 30 MPa × 3.6 mm² = 108 N (11.0 kg).",
+          "Test T mappings agree with the model: rest felt Δ -> front -2.49Δ -> remove Δ/0.1 punchings; thicker pad -> gap more negative -> remove shims; thicker front felt -> add Δ/0.181 shims; capstan felt Δ -> DW +3.06Δ g.",
+          "C16a comes from the current model_v4.lever_prisms (r4.4 lips); C16b pushes the steel through the lower lip, the way the pad load does."
+        ],
+        "recomputed": [
+          {
+            "metric": "capstan crown top at settled rest (white D / black C#)",
+            "model": "31.0 (gauge target, tools T08/T17, DESIGN S08)",
+            "mine": "30.892 / 30.912 (model Dyn settle, cap_dz 0)",
+            "ok": false
+          },
+          {
+            "metric": "capstan screw-out produced by the gauge",
+            "model": "0",
+            "mine": "+0.108 / +0.088 mm = 1.73 / 1.41 eighth-turns",
+            "ok": false
+          },
+          {
+            "metric": "held up-stop cap shift from the gauge error",
+            "model": "0 (gap -0.40 / -0.45)",
+            "mine": "+0.331 / +0.173 mm -> gap about -0.73 / -0.62",
+            "ok": false
+          },
+          {
+            "metric": "lever rest angle with gauge-set capstan",
+            "model": "-1.091 / -0.552 deg",
+            "mine": "-0.680 / -0.333 deg",
+            "ok": false
+          },
+          {
+            "metric": "DW change from the gauge error",
+            "model": "0",
+            "mine": "+0.33 / +0.14 g",
+            "ok": true
+          },
+          {
+            "metric": "needle offset needed to hit the model crown",
+            "model": "0 (flush)",
+            "mine": "0.596 / 0.315 mm below the ledge",
+            "ok": false
+          },
+          {
+            "metric": "magnification needle/capstan",
+            "model": "5.52 / 3.59",
+            "mine": "5.516 / 3.585",
+            "ok": true
+          },
+          {
+            "metric": "dummy capstan force vs service",
+            "model": "1.53 / 0.99 N (service 1.50 / 0.98)",
+            "mine": "M 22.79 vs 22.35 N·mm, i.e. 1.53 / 0.99 N",
+            "ok": true
+          },
+          {
+            "metric": "settled key front (white / black)",
+            "model": "43.5 / 55.5 (height-block centres)",
+            "mine": "43.499 / 55.446",
+            "ok": true
+          },
+          {
+            "metric": "jig shelf top from STL",
+            "model": "z20.054",
+            "mine": "z20.054",
+            "ok": true
+          },
+          {
+            "metric": "K rod bottom after drill",
+            "model": "z19.50",
+            "mine": "printed Ø3.9 bottom z19.55 -> Ø4.0 drill z19.50",
+            "ok": true
+          },
+          {
+            "metric": "pin gauge stop / GO / NO-GO from STL",
+            "model": "23.30 / 23.40 / 23.20",
+            "mine": "23.30 / 23.40 / 23.20",
+            "ok": true
+          },
+          {
+            "metric": "C07b stop depth on a 0.2 layer grid",
+            "model": "4.30",
+            "mine": "4.2 or 4.4 (roof bridge)",
+            "ok": false
+          },
+          {
+            "metric": "3-point bend strip k",
+            "model": "15.4 N/mm",
+            "mine": "15.43 N/mm",
+            "ok": true
+          },
+          {
+            "metric": "C03a E_eff bias vs wide plate (40 % gyroid, 3 walls)",
+            "model": "none assumed",
+            "mine": "about +5 % (pass line r 0.935 -> about 0.918)",
+            "ok": false
+          },
+          {
+            "metric": "pendulum impact speed at 150 deg",
+            "model": "30.4 rad/s (96 %)",
+            "mine": "30.4 rad/s (95.4 %)",
+            "ok": true
+          },
+          {
+            "metric": "drop heights 1.5 / 1.0 m/s",
+            "model": "114.7 / 51.0 mm",
+            "mine": "114.7 / 51.0 mm",
+            "ok": true
+          },
+          {
+            "metric": "STL watertight / bed fit",
+            "model": "all",
+            "mine": "37/37 closed and oriented, all within 256",
+            "ok": true
+          }
+        ],
+        "files": [
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/printables/v1_rest.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/printables/v2_capdz.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/printables/v3_stl.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/printables/v5_stack.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/printables/v6_pin.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/printables/tools/run.log",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/printables/stage0/run.log",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/tools/make_tools.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/make_design_md.py",
+          "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/stage0/make_stage0.py"
+        ]
+      }
+    ],
+    "docs": {
+      "summary_ko": "다시 시도한 결과입니다. 앞선 문서 작업의 대부분은 이미 DESIGN.md에 들어가 있었습니다. 그런데 그 뒤 ‘고침 2’로 모델 값이 바뀌어 글 일부가 낡아 있었고, 이번에 그것을 맞췄습니다. 모델 수치는 바꾸지 않았습니다. metrics.json, geometry.json, parts_list.json, results.txt는 손대지 않았습니다(12:39~12:43 파일 그대로). 고친 파일은 make_design_md.py, 그리고 export_geo.py의 반올림 도우미뿐입니다. DESIGN.md(1133줄)는 다시 만들었고 처음부터 끝까지 한 번 읽었습니다.\n\n가장 중요한 발견: 단계 0 키트의 ‘윗판을 두껍게’ 대안이 적은 z_top 73.4 / 74.0은 고침 2 전 값(z_top 72.80)입니다. 지금 모델로는 73.45 / 74.05입니다. 그래서 +1.2는 높이 목표 z74를 0.05 넘고, +1.15까지만 쓸 수 있습니다. 17.1장 표와 18장에 고쳐 적었습니다. 키트 파일 자체는 제 권한 밖이라 그대로입니다.\n\n1) 반올림: 규칙은 하나입니다. Decimal로 먼저 소수 6자리에서 이진 오차를 없애고, 보이는 자리에서 딱 절반이면 0에서 먼 쪽으로 올립니다(export_geo.hu / pf). 바뀐 칸 목록은 지금 모델로 다시 뽑았습니다. 모델에서 치수표를 다시 만들어 옛 서식과 비교했고, 문서도 옛 서식으로 다시 그려 비교했습니다. 결과는 치수 35칸, 글 22칸입니다(예: 0.955 → 0.96, 21.215 → 21.22, 축 놀음 0.295 → 0.30, 1.425 → 1.43). pf도 고쳤습니다. 이제 %s로 찍는 목록 안의 실수도 줄입니다. 그래서 geometry.json A03 비고의 6.319999999999999는 다음 run_all에서 없어집니다. 문서 표에는 지금도 6.32로 나옵니다.\n\n2) 13·15장과 부품표·metrics를 맞췄습니다.\n- 15장 캐리어 행의 ‘칼라 14종: 모듈 12 + 끝 3’은 틀린 계산이었습니다. ‘14종 — G#·B·B0는 칼라가 같음’으로 고쳤습니다.\n- 프레임 행의 ‘레일(도브테일)’은 L 레일(웹 + 립)로 고쳤습니다.\n- 키트 무게·시간은 옛 숫자 470 g / 31시간이었습니다. 추정 약 420 g / 약 28시간(속을 꽉 채우면 654 g)으로 바꿨습니다.\n- 16장 스프링 다리 3 → 2.5로 고치고, 비용 변화에 소모품 36,000원이 빠져 있다는 것을 적었습니다.\n- 1e장 레버 질량 문장은 고침 1과 2를 섞어 0.19 g으로 적고 있었습니다. 57.21 → 57.13 → 57.02 g으로 나눠 적었습니다.\n\n3) 10.1장 출력 공구: ‘r4.3 모델로 만들었다’는 문장이 낡아 있었습니다. 실제로는 지금 모델(final)로 만들었고, 캡스턴 y 차이는 0입니다. 핀 게이지 틈 값(1.2, 0.44)은 tools_geometry.json에서 읽게 했습니다. 4장 ‘출력 공구’ 행은 10.1장을 가리킵니다.\n\n4) 17.1장 키트:\n- 모델 출처를 r4.4로 고쳤습니다.\n- 시험 수는 19개 → 20개, 시편은 33종 35개(C16a가 3개)입니다.\n- E 합격선은 1824 → 1823 MPa로 키트 절차와 맞췄습니다(r 0.935).\n- FE 587 → 586 N/mm, θ0 150°의 96 %, 들림 0.095, 빠짐 힘 1.33 N은 이제 stage0_geometry.json에서 읽습니다.\n\n5) 1d-3장 USB-C 케이블은 이미 한계, 권장 선(CVILUX DH-20M50052, 치수 출처), 대안(NETmate, 인터페이스를 완화할 때)을 담고 있었습니다. 17장 시험 19 칸의 옛 ‘폭 ≤ 11’ 출처를 바로잡았습니다.\n\n6) 18장에는 위험 1줄(공구·키트는 아직 출력해 본 적 없음, 무게·시간은 추정)을 더하고 화음 자리 여유 문단을 고쳤습니다. 19장은 stage0 C01a~C16b, work_doc44/r3 기록, 도면 14·15로 고쳤습니다. 도면 14·15는 아직 ../drawings 폴더에 없다고 적었습니다.",
+      "sections_changed": [
+        "머리글 ‘r4.4 남은 문제 4~7’ (시편 33종 35개)",
+        "1e장 문제 1 (레버 질량 문장: 고침 1·2 분리)",
+        "5장 머리 (반올림 규칙 문단 새로 씀, ‘규칙 밖에 남은 글’, 지금 모델로 바뀐 칸 목록)",
+        "5장 치수표 A03 행 (이진 잡음 6.319999999999999 → 6.32 표시)",
+        "10.1장 ‘틈과 주의’ (공구 모델 출처, 핀 게이지 틈을 json에서)",
+        "15장 (캐리어 칼라 14종 문구, 프레임 L 레일, 단계 0 키트 무게·시간)",
+        "16장 (스프링 다리 2.5/22.3, 소모품 제외 명시)",
+        "17.1장 (모델 출처, 20개 시험, 33종 35개, 무게·부피, E 1823, FE·들림·빠짐 힘을 json에서, 시험 3 z_top 다시 씀, 시험 19 칸)",
+        "18장 (화음 자리 여유 문단: E 1823, FE 552/586, z_top 73.45/74.05, +1.15까지; 새 위험 ‘공구·키트 미출력·추정’)",
+        "19장 (stage0 C01a~C16b 33개 파일, 도면 14·15 상태, work_doc44/r3 기록)"
+      ],
+      "inconsistencies_fixed": [
+        "10.1장: ‘공구는 r4.3 모델(final_r4_3)로 만들었다’ → 지금 모델 final(r4.4, tools_geometry.json meta), 캡스턴 y 차이 +0.00 / +0.00",
+        "17.1장: ‘모델(r4.3 final_r4_3)’ → final r4.4 (stage0_geometry.json model_dir)",
+        "17.1장: ‘위 19개 시험’ → 20개 (시험 20 강철 유지 포함)",
+        "19장: stage0 ‘stl/ C01a~C15a 31개’ → C01a~C16b 33개 파일(C16a는 3개); 머리글·17.1장 ‘33개’ → 33종 35개",
+        "15·17.1장: 단계 0 키트 ‘PETG 약 470 g, 약 31시간’(C16·새 C03a 전 값) → 추정 약 420 g, 약 28시간(채움 계수 0.62), 속 꽉 654 g; 17.1장 ‘517 cm³ = 654 g’(수량 무시한 부피) → 523 cm³",
+        "17.1·18장: E 합격선 1824 MPa(본문) ↔ 1823 MPa(표·키트 절차) → 둘 다 1823 (r = 0.935)",
+        "18장: FE 화음 자리 ‘552 / 587’ → 552 / 586 (stage0 analysis 586.1)",
+        "17.1장 표 시험 3·18장: ‘z_top 73.4 / 74.0 = 높이 목표 끝’(고침 2 전 z_top 72.80) → 73.45 / 74.05, +1.2는 z74를 0.05 넘음 → +1.15까지",
+        "15장: ‘칼라 14종: 모듈 12 + 끝 부속 3’(합 15) → ‘14종 — G#·B·B0는 칼라가 같음’",
+        "15장 프레임 행: ‘패드 바 레일(도브테일)’ → ‘패드 바 L 레일(웹 + 립, P13)’ (r4.2 형상)",
+        "16장: 스프링 ‘다리 3/22.3’ → 2.5/22.3 (부품표·P18·D05와 같게); 기본 구성 변화가 소모품 36,000원을 뺀 값임을 적음",
+        "1e장 문제 1: ‘레버가 0.19 g 가벼워져’(고침 1+2 합) → 57.21 → 57.13 g(고침 1), 지금 57.02 g(고침 2 포함); ‘1b장 마지막 행’ → ‘solved values 두 행’",
+        "5장 머리: metrics.json ‘소수 4자리 저장’과 3.492↔3.491 등 옛 예시(고침 2에서 6자리로 바뀌어 사라짐) 삭제; 바뀐 칸 목록을 지금 모델로 다시 뽑음(치수 35칸, 글 22칸)",
+        "5장 A03 행: geometry.json 비고의 6.319999999999999 → 표에서 6.32 (규칙대로), export_geo.pf가 %s 목록 안 실수도 줄이게 고침",
+        "17.1장 표 시험 19: ‘키트 절차의 폭 ≤ 11 케이블’ → 실제 출처 stage0_geometry.json 시험 19 outcomes",
+        "19장: 도면 14·15가 아직 ../drawings에 없음을 적음; 문서 작업 기록 work_doc44/r3 추가"
+      ],
+      "inconsistencies_left": [
+        "run_all.py가 직접 쓰는 글(results.txt, metrics.json checks 결과 글, parts_list.json 사양 글 대부분)은 아직 옛 % 서식: 0.2장 ‘패드 쐐기’ run_all 글 1.42(문서는 규칙대로 1.43으로 다시 씀), results.txt 레버 떨어짐 30.2° · 13.2°(문서 30.3° · 13.3°). run_all.py는 이 역할의 수정 범위 밖",
+        "geometry.json A03 비고에 6.319999999999999가 남아 있음 — 새 export_geo.pf로 다음 run_all.py에서 없어짐(지금 geometry.json은 검증자가 읽는 중이라 다시 내보내지 않음)",
+        "stage0/stage0_procedure.md·stage0_geometry.json의 ‘plate_t +0.6 (z_top 73.4)’, ‘+1.2 (z_top 74.0 = 높이 목표 끝)’는 고침 2 전 값(지금 73.45 / 74.05, +1.2는 z74 초과) — 키트 생성기(make_stage0.py 1143~1144줄의 하드코딩)를 고쳐야 함; DESIGN.md에서는 고쳐 적음",
+        "stage0_geometry.json 시험 19 outcome ‘몰드 폭 ≤ 11 케이블로’ — 1d-3장 권장 선(CVILUX DH-20M50052)으로 바꿔야 함(키트 세션)",
+        "단계 0 키트 무게·시간(약 420 g, 약 28시간)은 채움 계수 0.62를 쓴 추정; 키트 파일에는 출력 질량 추정이 없음",
+        "도면 14·15가 ../drawings에 아직 없음(d01~d13만 있음) — 도면 세션 결과가 나오면 19장 글이 파일 이름을 자동으로 적음",
+        "geometry.json P24 기준 글 ‘v3 S37 (폭 12.5 · 높이 7.5 · 길이 25 이하)’는 v3 값 표시라 동결 한계 7.6(z10.7~18.3)과 숫자가 다름(export_geo 글, 다음 run_all 때 고칠 것)"
+      ],
+      "rounding_rule": "보인 자리에서 반올림하고, 딱 절반(5)이면 0에서 먼 쪽으로 올린다(0.955 → 0.96, 13.525 → 13.53, −0.955 → −0.96). 도우미는 export_geo.hu 하나다: Decimal(repr(v))를 먼저 소수 6자리에서 ROUND_HALF_UP으로 이진 오차를 없앤 뒤 보인 자리에서 다시 ROUND_HALF_UP으로 자른다. export_geo.pf는 모든 %.Nf 서식을 hu로 거치고, 이번에 %s/%r로 찍는 실수(목록·튜플·딕트 안 포함)도 hu(v, 6)으로 줄이게 했다. make_design_md.py와 export_geo.py의 모든 숫자 서식이 pf/hu를 쓰고, metrics.json은 소수 6자리로 저장된다(run_all clean).",
+      "files": [
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/DESIGN.md",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/make_design_md.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/export_geo.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/round_cells.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/dims_cmp.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/dims_cells.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/run_md_old.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/build_round_cells.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/patch_doc44_r3.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/patch_doc44_r3b.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/patch_export_r3.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/make_design_md.start.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/export_geo.start.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/final/work_doc44/r3/DESIGN.start.md"
+      ]
+    },
+    "checkV": {
+      "lens": "Fix-2 verifier (quick), run on the current final/ files (r4.5 on top of fix 2b). I checked the 6 findings against geometry.json, model_v4.py, run_all/results.txt, DESIGN.md, the tools and stage 0. Independent checks are in verify44/fixes/f2/: a straight-up board insertion path over every fixed prism in geometry.json; key-tail distances to the BRD-01 envelope at the exported over/ff/dip poses plus worst-overshoot sensitivity; BRD-01 wiring pads against the new boss keep-outs; a patched plate_fe copy with a finite rail stiffness at the keel end. I also recomputed the bond shear by hand. All 6 findings are fixed and the headline numbers reproduce. I found 3 minor issues and no new critical or major one.",
+      "errors": [
+        {
+          "severity": "minor",
+          "issue": "New load path that neither the model nor any test checks. The 6-key chord seat of 494 N/mm (pass line 460, 7 % margin) assumes the F|F# keel is rigidly clamped to the balance rail's rear face. That face is now a free edge at the front of the floor hatch. The rail between the fin lines (about 82 mm span, and only 9 mm deep over the ribbon lane x59-82) is not a rigid ground. DESIGN 1e says the stage-0 460 N/mm pass line covers this ('레일 자체의 휨 ... 단계 0 시험의 화음 자리 합격선 460 N/mm로 본다'). It does not: stage-0 test 3 only measures E_eff of printed strips (r = E_eff/1950 >= 0.931), so it cannot see keel or rail compliance.",
+          "evidence": "verify44/fixes/f2/rail.py reruns a copy of plate_fe with vertical (kv) and rotational (kr) springs at the rail end of the keel, PLAY pads 89/76 N. Clamped gives 494 N/mm (C-C#-D-D#-E-F), the same as the model. kv 2000 / kr 3e5 gives 492. kv 1000 / kr 1.4e5 gives 477 (now the D#-E-F-F#-G-G# chord). kv 500 gives 397, below 460. kv 200 gives 302, and the single-seat minimum drops to 1219. Rough rail bending stiffness at x83.3 between the fin lines x41.7 and x123.9: about 300-1400 N/mm (simply supported to fixed-fixed, I about 740-2800 mm4). Note: the keel V and sigma printed in the spring runs are not valid, because keel stress is computed with the rail end assumed fixed.",
+          "fix": "No new parts. (1) In plate_fe, replace the keel clamp with a spring that includes the rail and floor strip, modelled as a beam between the D|D# and G#|A fin lines. If kv comes out below about 900 N/mm, stiffen the keel root without adding a part: widen the keel into a T or flange where it meets the rail, or continue it along the rail's rear face to the floor strips at x<46.25 / x>118.25. (2) Correct the DESIGN 1e/8.1 sentence: stage-0 test 3 does not cover this. Add a check on the first printed module: dial deflection of the E/F pad seats under a 6-pad dead load (about 6 x 60 N), which must be <= 0.13 mm."
+        },
+        {
+          "severity": "minor",
+          "issue": "Stale text left by fix 2b and the step renumbering. (a) The DESIGN 10.1 T2 table row still says '캡스턴 꼭대기 z31.0을 부리 끝 바늘로 확대해 읽는다', and the parts_list capstan row says '벤치 게이지로 높이 z31.0'. The printed gauge itself is correct (floor and zero-pad rod top z30.90; S08, tools.md and T17 are right). (b) Bonding is now step 4 of 10장, because the board step was inserted as step 1. But stage0_procedure test 20.3 ('DESIGN 10장 3단계'), the DESIGN steel-block parts row ('10장 3단계') and the fix-2b change row ('10 step 3') still point to step 3, which is now the bench/T2 step. (c) The fix-2b table row (DESIGN 1e, 물리 major 2) says 'lever 57.02 → 56.97 g', but the change table says fix 2b made the lever 57.05 g; 56.97 is the r4.5 value. (d) stage0_procedure line 28 says '설계 492'; the model now gives 494.2, and test 3's own pass line already uses 494.2.",
+          "fix": "make_design_md.py and make_tools.py: write the T2 row from Z_C (30.90, 'settled rest; key frame 31.0'), and write the capstan parts-list spec the same way. Change the three '10장 3단계 / 10 step 3' references to 4단계 / step 4. Change the fix-2b lever mass to 57.02 -> 57.05 (r4.5: 56.97). Change stage0 line 28 to 494."
+        },
+        {
+          "severity": "minor",
+          "issue": "The DESIGN 12 fallback 'if there is no shim to remove, reprint that bay's pad-bar wedge 0.1 thinner' ('뺄 심이 없으면 그 칸 패드 바를 쐐기 0.1 얇게 다시 출력') cannot be done for the thinnest white wedge. 0.349 - 0.1 = 0.249 is below the 0.3 print minimum, and that is the lead's own reason for rejecting a default shim (DESIGN 1e fix-2b row 출력물 major 2). The rest of the shim-direction fix is correct.",
+          "fix": "No new parts. For a wedge below 0.40, say to reprint the bar with that wedge unchanged and 0.1 added to the other side of the pad (the felt side), or to replace the pad's 1T felt with a thinner cut. Alternatively, have make_design_md compute which wedges cannot take -0.1 and name them in the text."
+        },
+        {
+          "severity": "major",
+          "issue": "Coil float on the rod is not modelled. It removes about 41 % of the rest torque, and three PLAY targets then fail. The coil ID (5.0) sits on the Ø4 rod with 0.44 radial clearance at rest after wind-up (0.41 at the bottom); r4.4 had 0.20. The short leg pushes on its bearing face with 1.68 N at a 2.5 mm arm, and the long leg pushes with only 0.20 N. The net 1.56 N pushes the coil toward 56°. That direction is inside the 35° slot opening, which spans -45° to 115° at r3.3, so no pocket wall stops the coil; only the rod does. The shifted coil OD stays 0.16 from piece A and 0.48 from piece B. The short leg moves 0.44 off the bearing face, and the spring unwinds 11.4° until the leg tip touches the face again. The long leg's re-tangent angle changes by 0.4°, so the net loss is 11.0°. Rest torque drops from 4.19 to 2.49 N·mm; bottom torque drops from 6.14 to 4.57. The spring then behaves like k_eff 9.45 N·mm/rad with free angle -15.1°. The coil is also pressed onto the rod with about 1.6–2.3 N, which adds coil/rod friction hysteresis that the model does not include. Side effect: a keyless lever now unloads its long leg from b ≈ -15°, not -27°, so at -31.3° the leg tip is about 3 mm outside the groove mouth at nominal. The model says 1.37 inside.",
+          "fix": "No added parts. (1) Add the float equilibrium to the model: coil against the rod along the net leg force, then the short leg rotated until it touches the face again. Feed the resulting T(b) into spring_T, the test-8 numbers and the keyless-leg check. (2) Put the installed torque back by rotating the short-leg notch about 11° clockwise (α_s 230.4° → about 219.4°, same swept angle), then rerun the insertion, hub-strength and sweep checks. Two alternatives: lengthen the short leg (the loss scales as float ÷ contact arm, so a 5 mm leg roughly halves it), or move the bearing contact so the leg force pushes the coil into an existing pocket wall. (3) In test 8, say that the bench measures this effect (it uses the real Ø4 rod). Moving the groove bottom cannot make up an 11° shortfall: 11° × 0.367 mm/° is about 4 mm, and only 1.0 mm of rear wall is left.",
+          "evidence": "verify45/v2_float.py: rest wound 27.07°, clearance 0.438, shift toward 56° → leg unwinds 11.42°, dQ 0.42°, net 11.0° → T 2.487 N·mm; bottom net 10.17° → 4.572. verify45/v3_dw.py (model Action, spring kt 9.451, free -15.08°): D DW 51.92 → 47.37; D DW at the lip y0 47.12 → 42.98 (target ≥ 47, FAIL); UW 42.78 → 38.73; C# DW 51.01 → 46.77 and F# 51.00 → 46.76 (target 47–55, FAIL); C# UW at the bottom with 2x friction 21.46 → 19.41 and F# 21.44 → 19.39 (target ≥ 20, FAIL). verify45/v5_rep.log: repetition still passes, 15.69 / 18.20 Hz and 14.62 / 16.98 Hz at 2x friction; full return 47.3 / 41.5 ms (50.7 / 44.2 ms at 2x friction)."
+        },
+        {
+          "severity": "minor",
+          "issue": "Re-seating the long leg after a key is removed has almost no x margin. The rear-wall groove (2.4 wide) is centred on the lever centre, but the long leg leaves the coil at x +0.8. The coil can slide ±0.44 axially in the 3.0 pocket (coil is 2.13 long) once the spring is unloaded, and the lever itself can float axially up to 0.405. The worst leg centre is then x 1.65. What the groove can catch is 1.2 + 0.5 lead-in − 0.25 wire = 1.45. Once the leg is outside the mouth (the free +5° corner as modelled, or nominal once the float above is counted), reinstalling the key can land the leg on the boss face beside the groove. The spring then sits about 8° under-wound until the leg slips in.",
+          "fix": "Centre the groove (and C06a) on the leg at x +0.8 instead of the lever centre, or give it a 0.8 lead-in on the +x side. Both stay inside the 4.4 boss and add no parts. Rerun the keyless-leg check with the coil's axial float and the lever float included.",
+          "evidence": "model spring_bosses(): the boss and groove are at xl ± bw/2. results.txt: C_+5 tip -0.53 inside the mouth. metrics lever float max 0.405; coil (n+1)d = 2.13 in the 3.0 pocket."
+        },
+        {
+          "severity": "minor",
+          "issue": "The test-8 fallback cannot be carried out in the more-wind direction. 'If the free angle is off by more than ±5°, move the groove bottom 0.367 mm/°' needs the groove deeper, but only 1.0 of the rear wall is left behind y211.0. Allowing about 0.6 deeper (keeping a 0.4 skin) gives at most about 1.6° more wind.",
+          "fix": "In the test-8 outcome list, state the one-sided limit (deeper ≤ 0.6 mm, about +1.6°). Name notch rotation (or re-cutting the short leg) as the remedy for a larger shortfall.",
+          "evidence": "P rear_wall (209, 212), spring_groove (207.8, 47, 58, 2.4, 3.2) → bottom y211.0, wall left 1.0. stage0_procedure.md test 8: '±5° 넘으면 홈 바닥 y를 0.367 mm/° 옮기거나'."
+        }
+      ],
+      "confirmed": [
+        "Physics major 1 (thermal-mismatch shear in the bond) is FIXED. P now uses bond_adhesive MS polymer, bond_G 1.0, bond_t 0.10, bond_t_min 0.02, bond_dT (15, 30), CTE 60e-6 / 11.7e-6. bond_thermal() is added and run_all adds the thermal term to the steel-bond row at the thinnest line. Hand recompute: day 0.02 line 48.3e-6 x 15 x sqrt(1 x 1950 x 0.7 / 0.02) = 0.189 MPa; rare 0.379; 5-min epoxy at the 0.10 line 2.24. Mechanical 22.4/1411 + 528 x 22.7/234967 = 0.067, total 0.256 <= 0.375; ABUSE 0.099 + 0.379 = 0.478 <= 0.75. Stage-0 test 20 now does 3 cycles of <=5 C <-> 45 C before the 117 N push and the 1 m drop, with MS polymer; the rigid-epoxy fallback is explicitly excluded.",
+        "Physics major 2 (zero bond gap, no bonding step) is FIXED. In geometry.json, lever D side walls are x28.735-29.435 / 38.635-39.335 (0.7), pocket 29.435-38.635 = 9.2, steel 29.535-38.535, so the bond line is 0.10 per side. Top lips are 0.9 (inner edge x+-3.7 unchanged) and the outer width is still 10.6. DESIGN 10 step 4, parts_list, the section 16 consumable row and test 20 all use the same sequence: sand, alcohol, butter both faces, snap in from below, wipe, 24 h. Side note, not a failure: the 1.0 bottom lips (y165-176.5) will wipe the film off about 31 % of each face during the snap. The check still passes with that area gone (mechanical 0.067 -> about 0.097, total about 0.286 <= 0.375), and test 20 uses the same process, so it covers this.",
+        "Geometry critical (the board could not be installed) is FIXED. Floor hatch x46.25-118.25 y144.5-196.5 plus notch x78.53-89.47 to y197.8; keel x82.518-84.118 y144.5-152 z3-18; F|F# foot y152-170.7 z3-21.5; 4 bosses hung above the board, M3 from below. My independent straight-up path check on geometry.json (board, BRD-01 bodies and receptacle against all frame prisms): minimum 0.600 (slot sides vs foot/keel), then 1.000 (hatch edges, rail), and the only stops are the boss bottoms at z10.6. This matches board_insert_check. None of the 76 BRD-01 wiring pads falls in the new boss keep-outs (x47.25-54.3 / x110.2-117.25 corners, the y194.5-195.5 strip ends). The closest is R301.2 at (109.54, 153.27), 2.3 from the front-right boss. The circuit-note change is flagged to the circuit session (BRD-01 note 8). 10장 step 1 now describes the board insertion.",
+        "Geometry major (worst-material overshoot not in the poses) is FIXED. The sweep now reports its over poses as nominal + pass line + worst: white key -0.461 deg (verifier -0.458), black -0.351. F uses its own -0.534 deg. geometry.json has the tail relief: E and G undersides z21.9 over y184-195.8, F z21.95 over y176-195.8, F# z21.9. The rest-felt zone y196.3-199 is unchanged at z21.8. My distances from the exported side_over to the board envelope: E 1.35, F 1.345, G 1.35, F# 1.31, D# 1.338, G# 1.376. Sensitivity beyond the export: E/G at -0.50 deg with rod dz -0.10 give 1.325; F at -0.55 gives 1.336. Everything is >= 1.30 (1.0 after tolerance).",
+        "Printables major 1 (T2 gauge set 0.108 / 0.088 high) is FIXED. make_tools.py takes the target from the settled 4-DOF rest (Dyn.run(300)). tools_geometry gives crown_settled 30.8922 / 30.9121 after r4.5, the same as the verifier's 30.8920 / 30.9121. Z_C = 30.90 (error +0.008 / -0.012, i.e. 0.12 / 0.19 of an eighth-turn). The regenerated capstan_gauge.scad has the floor polygon at z30.9, needle and ledge at 65.5, and 'CAP 30.90' embossed. The jig's zero-pad groove floor is z26.9, so the D4 rod top is at 30.9. S08 is restated as key frame 31.0 = settled 30.892 / 30.912. STL/SCAD timestamps are 17:37 (after r4.5).",
+        "Printables major 2 (shim direction) is FIXED. DESIGN 12 now says: bites early (gap less negative) -> add a shim; bites late -> remove one. This matches the model (shim = pad face 0.1 lower, lever 0.23 deg earlier, gap more negative, bite force -0.30/-0.40/-0.50 -> 0.75/0.92/1.05 N) and stage-0 tests T and 1.",
+        "No regression found from r4.5 on these fixes. The keel, hatch and bond do not touch the hub pocket section. The dummy-lever capstan force is 1.530 vs the real 1.499 N (+2 %), with a front error of 0.004 mm. The keel stresses the model gives (PLAY chord 10.18 MPa bending, 8.83 MPa shear) are within the design's own treatment of the 6-key PLAY chord as a rare load (the fin-top check uses the same rule). Per the brief, I did not flag the load criteria themselves."
+      ],
+      "recomputed": [
+        {
+          "metric": "6-key chord-seat stiffness, keel clamped (PLAY 89/76 N)",
+          "model": "494 N/mm (C-C#-D-D#-E-F)",
+          "mine": "494 N/mm (same chord)",
+          "ok": true
+        },
+        {
+          "metric": "chord-seat stiffness with a finite rail at the keel end (sensitivity)",
+          "model": "not modelled (rigid clamp)",
+          "mine": "kv 2000: 492; kv 1000: 477; kv 500: 397; kv 200: 302 N/mm",
+          "ok": false
+        },
+        {
+          "metric": "board insertion straight up, closest frame part on the path",
+          "model": "0.60 (fin / keel), hatch and rail 1.00, stops = 4 bosses at z10.6",
+          "mine": "0.600 (fin / keel), 1.000 (floor hatch / rail), stops at z10.6 only",
+          "ok": true
+        },
+        {
+          "metric": "key tail/beam to the board envelope at the over pose",
+          "model": "module min 1.31 (F# beam over)",
+          "mine": "F# 1.31, E 1.35, F 1.345, G 1.35, D# 1.338, G# 1.376; E/G at -0.50 deg: 1.325",
+          "ok": true
+        },
+        {
+          "metric": "bond thermal edge shear, dT 15 K, line 0.02, MS polymer",
+          "model": "0.189 MPa",
+          "mine": "0.1893 MPa",
+          "ok": true
+        },
+        {
+          "metric": "bond total, PLAY (mechanical + thermal)",
+          "model": "0.067 + 0.189 = 0.256 <= 0.375",
+          "mine": "0.0159 + 0.0510 = 0.067; total 0.256",
+          "ok": true
+        },
+        {
+          "metric": "5-min epoxy thermal, dT 15 K, line 0.10",
+          "model": "2.24 MPa",
+          "mine": "2.24 MPa",
+          "ok": true
+        },
+        {
+          "metric": "steel pocket and bond line (geometry.json, lever D)",
+          "model": "pocket 9.2, line 0.10 per side",
+          "mine": "x29.435-38.635 = 9.20; steel x29.535-38.535 -> 0.100 / 0.100",
+          "ok": true
+        },
+        {
+          "metric": "settled rest crown -> T2 floor / zero-pad plane",
+          "model": "30.892 / 30.912 -> 30.90",
+          "mine": "tools_geometry 30.8922 / 30.9121; scad floor z30.9, zero-pad rod top 26.9 + 4 = 30.9",
+          "ok": true
+        }
+      ],
+      "files": [
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/fixes/f2/board_path.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/fixes/f2/tails.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/fixes/f2/brd_corners.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/fixes/f2/rail.py",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/verify44/fixes/f2/model_v4.py"
+      ]
+    },
+    "drawings": {
+      "drawings": [
+        {
+          "n": 1,
+          "title_ko": "백건 측면 단면 (D)",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d01_white_D_side.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d01_white_D_side.png",
+          "caption_ko": "백건 D를 x35.25(밸런스 핀·자석 중심)에서 자른 측면. 실선 = 정지(레버 정착 쉼 각), 주황 점선 = 1 N으로 끝까지 누른 정착 바닥(패드 눌림 포함; 쉼에서 건반 4.05°, 레버 11.84°; 딥 치수도 이 자세의 앞끝까지, S23 설계 10), 누른 레버는 단면(강철·캐리어 속)만 굵게, 옆벽·위 립은 가는 점선. r4: 업스톱은 윗판 밑 패드 바의 쐐기에 붙인 폼 6T + 펠트 1T 패드가 드러난 강철 윗면을 받음(레일·손나사·커버 없음, 맨 위 z72.85); 허브의 비틀림 스프링(r4.5: 미스미 C-UA90R5-3-0.5, 두 다리를 잘라 씀 — 짧은 다리는 허브의 새 짧은 다리 홈, 긴 다리는 뒷벽 2.4 홈)이 뒷벽 홈을 민다. 오른쪽 z·아래 y 좌표는 모두 geometry.json 값이고 괄호는 치수표 번호. 확대 A 봉·스냅 노치·핀, B 캡스턴·쉼·허브 주머니 Ø6.6·짧은 다리 홈·스프링, C 업스톱(패드·쐐기·패드 바 계단 y165.5/167·윗판·가림판), D 앞 멈춤·키퍼."
+        },
+        {
+          "n": 2,
+          "title_ko": "흑건 측면 단면 (C#)",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d02_black_Csharp_side.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d02_black_Csharp_side.png",
+          "caption_ko": "흑건 C#를 x21.22(밸런스 핀·자석 중심)에서 자른 측면. 실선 = 정지(레버 정착 쉼 각), 주황 점선 = 1 N으로 끝까지 누른 정착 바닥(패드 눌림 포함; 쉼에서 건반 6.08°, 레버 9.52°; 딥 치수도 이 자세의 앞끝까지, S23 설계 9.5), 누른 레버는 단면(강철·캐리어 속)만 굵게, 옆벽·위 립은 가는 점선. r4: 업스톱은 윗판 밑 패드 바의 쐐기에 붙인 폼 6T + 펠트 1T 패드가 드러난 강철 윗면을 받음(레일·손나사·커버 없음, 맨 위 z72.85); 허브의 비틀림 스프링(r4.5: 미스미 C-UA90R5-3-0.5, 두 다리를 잘라 씀 — 짧은 다리는 허브의 새 짧은 다리 홈, 긴 다리는 뒷벽 2.4 홈)이 뒷벽 홈을 민다. 오른쪽 z·아래 y 좌표는 모두 geometry.json 값이고 괄호는 치수표 번호. 확대 A 봉·스냅 노치·핀, B 캡스턴·쉼·허브 주머니 Ø6.6·짧은 다리 홈·스프링, C 업스톱(패드·쐐기·패드 바 계단 y165.5/167·윗판·가림판), D 앞 멈춤·키퍼. 19 = 단면에 잘린 이웃 백건 C 헤드."
+        },
+        {
+          "n": 3,
+          "title_ko": "옥타브 모듈 평면도",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d03_octave_plan.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d03_octave_plan.png",
+          "caption_ko": "C~B 모듈을 z54(레버 윗면과 업스톱 패드 면 사이)에서 잘라 위에서 본 평면. 건반·레버(캐리어 + 윗 립 사이 강철)·핀·보스·뒷벽(스프링 다리 홈)·가림판 띠는 실선, 윗판·패드 바 4개·업스톱 패드 12개는 보라 가상선(r4: 레일·손나사·위치 핀 없음), 밸런스 레일·봉 받침·센서 바·캡스턴·자석·핀·리브는 파란 숨은선, 제어 기판(F|F# 핀 발 홈)·USB 플러그는 초록 점선. 앞은 피치·헤드 폭·틈, 위는 레버 중심·핀·패드 바 x, 왼쪽은 y 좌표. A·B·C·D는 도면 4의 가로 단면 자리. r4.2~4.3: 강철은 윗 립 두 구간에서만 좁게 보임, 뒷벽 스프링 홈 보스 12, 뒤 선반은 USB 위 홈 x76.45~91.55로 두 토막. r4.4: 윗 립 y150~163·184~190, 쉼 펠트(숨은선) F x71.69~76.45·F# x91.55~95.94는 USB 홈에서 자름(P28), USB 플러그 y196.8~221.8(P24). r4.4 고침 2b: 기판 밑 바닥 구멍 x46.25~118.25 y144.5~196.5 (x78.53~89.47은 y197.8까지, USB 리셉터클 뒤; 기판은 밑에서 넣음), F|F# 핀 킬 y144.5~152, 기판 위에 매달린 보스 Ø6 4곳과 받침(P35, 숨은선). r4.5: 뒷벽 스프링 홈 2.4 폭(보스 4.4), 긴 다리는 코일 +x 끝에서 곧게 홈으로(회색 선)."
+        },
+        {
+          "n": 4,
+          "title_ko": "모듈 가로 단면 (레버 구역)",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d04_module_cross_sections.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d04_module_cross_sections.png",
+          "caption_ko": "레버 구역 x–z 단면 넷. A-A(y203.25 레버 봉): 허브·허브 칼라(P14)·핀 보스(프레임, 황동 없음)·스프링 주머니와 코일·핀·뒤 선반·리브·USB 플러그·윗판, 확대로 핀 둘레 축 놀음; r4.3 선반 USB 홈 x76.45~91.55, 플러그 z10.7~18.3, F|F# 핀은 그 위에 매달림. B-B(y176 패드 가운데): 레버 캐리어·강철·패드(폼 + 펠트)·쐐기·패드 바·L 레일(웹 + 립)·윗판과 누른 레버(점선), 기판 위 RP2040-Zero·4067(초록 점선, P27). C-C(y157.25): 윗판 앞 홈 속의 패드 바 앞부분, 핀 앞 연장, 기판 홈을 지나 바닥 구멍의 z3까지 내려간 F|F# 핀 발(r4.4 고침 2b: 킬로 밸런스 레일 뒷면에 붙음). r4.4: A-A의 레버 봉·핀 보스 구멍 Ø4.0·끝 마개는 geometry 부품(D18: 봉 x1.5~162.9, 마개 x0.2~1.4, 오른쪽 막힌 구멍 x163.1까지), B-B의 기판 부품은 BRD-01 2.54 격자 자리(P27), D-D(y149, r4.4 고침 2b): 기판 밑 바닥 구멍, 기판 위에 매달린 보스 Ø6 두 곳(밸런스 레일 뒷면 받침; 밑에서 넣는 M3×6·막힌 구멍, 아래로 내려온 위치 핀, P35), 기판 홈 속 F|F# 핀 킬(P12), 기판 밑 16심 리본 z5~9(P27). r4.5: A-A의 스프링 주머니 Ø6.6와 미스미 C-UA90R5-3-0.5 코일(몸통 3.25권, 길이 2.13)."
+        },
+        {
+          "n": 5,
+          "title_ko": "백건 부품도",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d05_white_key_part.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d05_white_key_part.png",
+          "caption_ko": "백건 D를 기준으로 한 부품도: 맨 위 전체 측면(축소, 전체 길이 199), 측면 단면(앞·뒤 두 토막, 모든 z·y 좌표; 블록 뒤 옆벽 도려냄 S06은 숨은선), 윗판을 투명하게 본 평면 투영(벽·리브·블록·빔 x), y 위치별 가로 단면 6개, 아래 표에 백건 7종의 x 범위. y·z 치수는 모든 백건에서 같다 (r4.4 고침 2·2b: 빔·얇은 꼬리 밑면을 쉼 펠트 앞에서 올린 건반은 표 끝 열 — E z21.9 y184~195.8, F z21.95 y176~195.8, G z21.9 y184~195.8; 최악 재료 복귀 넘침에서 기판 부품 구역과 1.3)."
+        },
+        {
+          "n": 6,
+          "title_ko": "흑건 부품도",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d06_black_key_part.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d06_black_key_part.png",
+          "caption_ko": "흑건 C#를 기준으로 한 부품도: 맨 위 전체 측면(축소, 전체 길이 144.8), 측면 단면(앞·뒤 두 토막, 모든 z·y 좌표; 블록 뒤 옆벽 도려냄 S06은 숨은선), 윗판을 투명하게 본 평면 투영(벽·리브·블록·빔 x), y 위치별 가로 단면 6개, 아래 표에 흑건 5종의 x 범위. y·z 치수는 모든 흑건에서 같다 (r4.4 고침 2·2b: 빔·얇은 꼬리 밑면을 쉼 펠트 앞에서 올린 건반은 표 끝 열 — F# z21.9 y184~195.8; 최악 재료 복귀 넘침에서 기판 부품 구역과 1.3). r4: 추 칸·납·출력 뚜껑을 없앴다(노치 들림은 패드·펠트로 지킴, DESIGN 2.2), 가이드 탭 폭 6.9 (P31)."
+        },
+        {
+          "n": 7,
+          "title_ko": "레버 캐리어 + 강철 블록 부품도",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d07_lever_carrier_steel.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d07_lever_carrier_steel.png",
+          "caption_ko": "레버(백·흑 공통 1종)를 0°로 놓은 부품도. 위: 캐리어 중심 측면 단면(모든 z·y 좌표; 손톱 턱, 앞 R3 모서리, 드러난 강철 윗면 = 업스톱 접점, 립·펠트·허브 R4.3·구멍 Ø3.9 출력 → Ø4 드릴·스프링 주머니). 가운데: 위·밑에서 본 평면(윗 립 사이 강철 폭, 허브 칼라, 아래 립·펠트 띠)과 강철 블록 부품 9×19×40(모따기 없음). 아래: y 위치별 가로 단면 7개와 확대 E·F(E: 위 립 0.9×1를 앞 립이 있는 y160에서, F: 아래 립 1×1를 y170에서; y170 단면은 아래 립만). 위 립은 y150~163·184~190 두 구간(r4.4: 앞 립을 y163에서 끊어 패드 옆 y163~184는 립 없이 강철 전폭·옆벽 윗단 z49.4(고침 2: 강철 윗면보다 2.6 낮음), 뒤 립은 강철 뒤끝 y190까지); 강철은 두 19×40 옆면에 MS 폴리머를 바르고 밑에서 스냅으로 끼워 접착 (접착층 한쪽 0.10, 접착 면 1411 mm²)(립은 굳는 동안만); 립 ↔ 패드 2.16·레일 1.81, 뒤 립 뿌리 3.84 MPa. r4.4 고침 2b: 옆벽 0.7(주머니 9.2, 접착층 0.1), 위 립 0.9×1, MS 폴리머 접착. r4.5: 허브 스프링 주머니 Ø6.6, 코일·긴 다리 홈 6.5 폭, 새 짧은 다리 홈과 웹 밑면 깎음 — 주머니 구간은 두 조각 A·B (확대 G, P18), 뒷벽 홈 2.4×3.2·보스 4.4와 긴 다리 (확대 H), 미스미 C-UA90R5-3-0.5 스프링."
+        },
+        {
+          "n": 8,
+          "title_ko": "프레임 부품도",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d08_frame.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d08_frame.png",
+          "caption_ko": "모듈 프레임 한 덩어리(r4: 옛 브리지를 앞으로 늘린 윗판 z72.85과 한 몸). 평면(윗판 밑을 위에서 봄: 앞 레일·탭·키퍼 훅·흑 멈춤 레일·밸런스 레일과 봉 받침·핀·보스·선반·리브·뒷벽 스프링 다리 홈·도브테일, 윗판·패드 바 레일은 가상선; 기판 부품·금지 칸·리본 차선·선반 USB 홈), 측면 단면 다섯(핀 2, C# 중심, 패드 바 레일, F|F# 핀과 기판·USB, x50 기판 보스·바닥 구멍·센서 기판 받침), 봉 받침 확대, 가로 단면 여섯(봉 줄 y141, 패드 줄 y176, 레버 봉 줄 y203.25 — 왼쪽 끝 핀 보스에 출력 마개, 오른쪽 끝 핀은 막힌 구멍 (D18), 스프링 홈 줄 y209.4, 기판 앞 보스 줄 y149, 센서 기판 뒤 리브 줄)과 형상 표. r4.4: v3 센서 기판 받침 기둥·리브 (뒤 리브 틈 = 리본 차선, P36), 밸런스 레일 블록 밑 포켓 (P20), 패드 바 레일 웹 앞 아래 1×45° 모따기 (P13), 레버 봉·핀 보스 구멍·끝 마개를 geometry 부품으로 그림 (D18). r4.4 고침 2b: 기판 밑 바닥 구멍(기판을 밑에서 넣음), 기판 위에 매달린 보스 Ø6 × 4 (앞 2 = 밸런스 레일 뒷면 받침, 뒤 2 = 선반 리브·선반 밑 받침; M3 막힌 구멍 · 아래로 내려온 위치 핀, P35), F|F# 핀 킬 (P12). r4.5: 뒷벽 스프링 홈 2.4×3.2 + 보스 4.4 (P18). 황동 부싱·탭 띠·손나사 구멍은 없다."
+        },
+        {
+          "n": 9,
+          "title_ko": "패드 바 + 업스톱 패드 + 가림판 띠 + 비틀림 스프링",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d09_pad_bar_curtain_spring.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d09_pad_bar_curtain_spring.png",
+          "caption_ko": "r4에서 새로 생긴 작은 부품: 1 패드 바(핀 칸마다 1개, 계단형 1.5T, 앞 손잡이, 쐐기 3개, 양 가장자리 잎 혀)를 밑에서 본 평면, 2a·2b 백·흑 쐐기 자리의 측면 단면(윗판·패드와 함께), 2c 레일 립 위의 잎 혀 확대, 3 레일 사이 가로 단면, 4 패드(펠트 1T + 폼 6T)와 PET 심 자리, 5a·5b 가림판 띠(흑건 노치, 윗판 앞 턱에 거는 걸이), 6 레버 허브의 비틀림 스프링(r4.5: 미스미 C-UA90R5-3-0.5를 사서 두 다리를 자름 — d0.5 · ID 5 · 3.25권 · k 8.87 N·mm/rad; 짧은 다리 2.5·긴 다리 22.3, 자유각 -27.07°, 허브 짧은 다리 홈·코일 홈·뒷벽 2.4 홈)과 상태 표, 7 쐐기·패드·자리 강성 표. 업스톱 힘은 패드 → 쐐기 → 패드 바 → 윗판으로 누르는 힘으로만 전해진다. r4.2: 패드 바 계단 y165.5/167(윗판 홈 끝 y168보다 앞), 뒤끝 = 윗판 계단 y185, L 레일 립 + 잎 혀(2c). r4.4: 레일 웹 앞 아래 모서리를 1×45° 모따기(P13, 2c에 뒤의 웹으로 보임; 칸 가장자리 캐리어 옆벽이 ff에서 지나감 → 레버 ↔ 레일 1.54)."
+        },
+        {
+          "n": 10,
+          "title_ko": "끝 부속 (왼쪽 A0·A#0·B0, 오른쪽 C8) 평면",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d10_end_parts.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d10_end_parts.png",
+          "caption_ko": "끝 부속 두 개의 평면(모듈과 같은 높이에서 잘라 위에서 봄): 건반·레버(모듈과 같은 캐리어+강철+스프링)·핀·보스·밸런스 레일·가림판 띠·볼(x-16~-0.68 / 24.18~39.5), 윗판·패드 바·레일·패드는 가상선. 위는 레버·핀·패드 바·레일 x, 아래는 폭. 이음 쪽에 도브테일(D09: 왼쪽 수, 오른쪽 암 홈)과 이웃 모듈 끝 핀·보스(가상선). 가운데 줄은 패드 줄 가로 단면(볼·윗판·레일·패드 바·패드), 그 아래 끝 패드 바 두 개를 밑에서 본 그림(전체 폭 42.8 / 19.1, 잎 창·잎 혀·쐐기·레일 립), 아래 표는 건반별 레버 x·캡스턴 y·DW/UW·자기 쐐기. r4: 볼 위 손나사·탭 강철 판·레일 없음. r4.2: 건반마다 자기 쐐기 면, 뒷벽 스프링 다리 홈(왼쪽 3·오른쪽 1)·센서 바(숨은선)를 그림. r4.4 (A02·A03): 센서 기판 EL x1~46.5 / ER x1~23과 받침 기둥·리브(뒤 리브 틈 왼쪽 x15~38, 오른쪽 x6~16), 리드 패드·아랫면 선·바닥 리드 길(굵은 회색), 레일 밑 차선 z5~10과 뒷벽 홈 z5~12(숨은선) — 평면 아래 가로 단면(패드 줄)과 리드 가운데 측면 단면에 치수. 레버 봉·구멍·마개는 geometry 부품(D18). r4.4 고침 2b: 캐리어 옆벽 0.7·위 립 0.9·MS 폴리머 접착, 밸런스 레일 블록 밑 포켓 (모듈과 같음). r4.5: 스프링 홈 2.4×3.2·보스 4.4, 긴 다리는 홈 가운데 +0.81에서 곧게 (미스미 C-UA90R5-3-0.5)."
+        },
+        {
+          "n": 11,
+          "title_ko": "전체 배치 측면",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d11_overall_layout.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d11_overall_layout.png",
+          "caption_ko": "모듈 단면(프레임 212)과 틈 3, 뒷바 195(가운데 유닛 z22~122, 양 끝 스피커 파트 z22~232 윤곽, 아래 케이블 통로)로 전체 깊이 410. 모듈 맨 위(윗판 윗면) z72.85가 뒷바보다 낮음(r3 커버·손나사 머리 없음). 가운데는 1254 × 410 전체 평면(끝 부속 + 모듈 7 + 뒷바 칸), 아래는 예비 건반 보관함의 층 배치. r4.3: USB-C 플러그 z10.7~18.3(RP2040-Zero 핀 헤더 위), 케이블 통로 안; r4.4: 플러그 면 y196.8, 측면에 제어 기판 구역(기판·부품 ≤ z20, 단면 밖)과 기판 밑 16심 리본, 평면의 모듈마다 기판·플러그(초록 점선); r4.4 고침 2b: 기판은 모듈 바닥 구멍으로 밑에서 넣음. 보관함 옆 칸 = parts_list 예비(강철 블록·Ø4 봉·스프링·패드·핀·캡스턴), 캐리어·패드 바는 예비 없이 위치별 출력."
+        },
+        {
+          "n": 12,
+          "title_ko": "건반 하나 빼기 순서",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d12_key_removal.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d12_key_removal.png",
+          "caption_ko": "백건 D 하나를 도구 없이 빼는 다섯 단계: ⓪ 가림판 띠를 들어내고 그 칸 패드 바를 앞으로 뽑은 뒤 손톱 턱으로 레버를 15°로 듦, ① 건반 뒤 윗판 턱을 손톱으로 당겨 노치를 봉 위로, ② 앞으로 3 밀어 크로스바·노치를 뺌, ③ 건반 앞을 2° 들어 탭에서 뺌, ④ 52.8 뽑고 레버를 내려놓음(바닥판 위 0.4 N, L 서비스 블록 없음). ⑤ 기판 위 레버 D#, E, F, F#, G, G#는 건반이 빠지면 기판 윗면·4067 모듈·매달린 보스에 얹힘(각 레버 중심 단면, circuit_r44.drop). 각 단계의 최소 틈과 흑건·넣기 순서는 아래 글."
+        },
+        {
+          "n": 13,
+          "title_ko": "레버 봉 끝 마개 (출력 공구는 도면 14)",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d13_rod_plug_tools.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d13_rod_plug_tools.png",
+          "caption_ko": "레버 봉 Ø4 x1.5~162.9(길이 161.4 ± 0.2)가 핀 5장의 보스 구멍 Ø4을 지나는 전체 단면과 두 끝 확대: 왼쪽 끝 핀은 출력 마개 x0.2~1.4(길이 1.2, 끝 핀 면과 같게 눌러 끼움, 봉과 0.1), 오른쪽 끝 핀은 x163.1까지 막힌 구멍(벽 1.2, 봉과 0.2) — 모두 geometry의 D18 부품. 마개 부품 9개. r4.4: 개략이던 출력 공구 그림을 지우고 도면 14(실제 치수)를 가리키는 표만 남김 — 공구마다 기준 면과 맞추는 높이(K z21.5·쉼 선반 z20.054, 캡스턴 z30.9, 핀 꼭대기 z23.3)."
+        },
+        {
+          "n": 14,
+          "title_ko": "출력 공구 (벤치 지그 · 높이 블록 · 캡스턴 게이지 · 핀 높이 게이지)",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d14_printed_tools.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d14_printed_tools.png",
+          "caption_ko": "출력 공구 4개(T1 벤치 지그 + 높이 블록, T2 캡스턴 벤치 게이지 = 가짜 레버, T3 밸런스 핀 높이 게이지)의 실제 모양과 치수. 지그는 옆·위·단면 셋(A-A K 봉, B-B 영점 받침·교정봉, C-C L 봉): 밑면 z3 = 프레임 밑면이 기준이고, K 봉 중심 (141, 21.5), 쉼 선반 z20.054, L 봉 (203.25, 33.5), 읽기 턱 z65.5을 세운다. 높이 블록 땅 W 43.35~43.65 · B 55.35~55.65. 가짜 레버는 밑면 z30.9으로 캡스턴을 실제 레버 모멘트로 누르고 바늘로 5.52배 확대해 읽는다 (r4.4 고침 2b: 밑면·교정봉 윗면 = 정착 쉼 캡스턴 꼭대기 백 z30.892 · 흑 z30.912의 가운데, 건반 좌표 z31가 아님). 핀 게이지는 레일 윗면 z19에 서서 핀 꼭대기를 z23.3(GO 23.4 / NO-GO 23.2)로 맞춘다. 합계 68.2 g · 483분. 숫자는 모두 tools_geometry.json(T01~T29)."
+        },
+        {
+          "n": 15,
+          "title_ko": "단계 0 시편·지그",
+          "svg_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d15_stage0_coupons.svg",
+          "png_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d15_stage0_coupons.png",
+          "caption_ko": "단계 0 시험 키트의 출력 부품 33개(시험 17가지)를 무엇을 시험하는지에 따라 네 묶음(업스톱 경로 · 건반 · 레버·스프링·강철 접착 · 회로 맞춤)으로 나눠 그린 부품도 (r4.5: C06a 뒷벽 홈 2.4·보스 4.4, C06b 허브 주머니 Ø6.6·슬롯 6.5·짧은 다리 홈, 시험 13 = 짧은 다리 홈에 스프링 넣기; 다 묶음 아래에 C06b 허브 복제(위에서)와 C06a 홈 입구(앞에서)를 크게 그려 치수). 부품마다 출력 자세(z0 = 베드)의 앞·위·오른쪽 3각법 투영(STL에서 보이는 모서리는 실선, 숨은 모서리는 점선)과 외곽 치수 x × y × z, 그 아래 key_dims(구멍·날·간격 등 부품 치수)와 출력 방향 글, 오른쪽 위에 시험 번호·수량·질량·설정 기호. 맨 아래는 시험별 합격 기준과 출력 설정 7종. 숫자는 모두 stage0_geometry.json."
+        }
+      ],
+      "generator": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/render_v4.py (run: ../../venv/bin/python render_v4.py [n ...]; imports render_v4b.py for sheets 7-13, render_v4c.py for 14-15, and kit.py + draw.py). All 15 sheets were regenerated in one run (about 49 s). The state before this retry is in drawings/_r46/pre, and the final sources are copied to drawings/_r46/final_src. All 7 major audit items are fixed and the changed PNGs were checked. (1) d12: the long spring leg no longer follows the lever transform. In steps 0 to 3 its tip is at y210.5~211, z54.5 (the geometry pose). In step 4 it turns only by the 4.27 deg past the free angle, so the tip is at y209.4, z55.0, still inside the groove. (2) d01/d02: side_scene subtracts solved.spring.grooves from the frame union when the cut plane is inside a groove, so d02 now shows the groove void. Where the plane misses the groove (d01), the leg part behind the cut wall is drawn dashed. Fixes 1 and 2 were made by the interrupted earlier attempt; I kept them and checked them. (3) d09 panel 6: the groove is drawn first, and the leg is hatched below the groove mouth and dashed inside the groove up to its tip. The 22.3 dimension is drawn afterwards, so both of its arrowheads show. The axial view moved to u=32, which clears the '자유 (풀린) 긴 다리' and '코일·긴 다리 홈' labels. (4) d14 T2: the beak underside ordinate is now 'z57.5 부리 밑 = 흑건 윗면 + 2 (T20)', read from the beak prism in front of the body; the z53.39 seam label is gone. The y119/y123 extension lines reach the beak and the needle, and the 'z53.4 몸통 윗면' line starts at the body top edge (y191.4). (5) d14 is laid out at 1536 px (it was 1874), with the label margins set in px and the rows regrouped. The smallest text is now 9.37 px at 1600 px wide (it was 7.26 px, and 212 texts were under 8.5 px). Minor items: sections A-A/B-B/C-C, d04 D-D and d08 y149 ordinates now start at the feature edge. The labels for parts outside the section plane were dropped: z19 레일 블록, z20.05 선반, B-B 턱. d08 no longer writes ordinates outside the panel (z68.85/72.85). In d07 G the 35° label moved clear of the lines, the ⓛ bubble moved off the value, and the 6.5 got extension lines from the slot walls. The main-view pocket ordinate now points at the pocket bottom (z30.2), an edge that exists. In d07 H the coil is drawn open at the window edge, and a note explains that the chamfer is not shown. The d09 state table is labelled nominal/rigid and quotes the settled angles. The d01 key angle is 4.05° from clear.dip.front_angle. d03 and d04 use the one F2 rounding helper. T24/T3 now labels the front body (y132) and the rail front face (132.3, T24) separately. The height-block plan got 'v 16 웹' and the u0 label moved off the edge. In d15 C06b the 1.7/3 values are off the centre line, the 1.7 got an extension line from its visible band edge, the 6.5 is measured from the slot-wall ends at the hub circle, and its value sits outside the window. The d03 caption now reads y144.5~196.5 (y197.8 only for x78.53~89.47). In d11 the O1~O7 labels have a white halo and are drawn after the outlines. In d12 ⑤ the notes moved to the empty band below z0. The text-overlap checker finds 0 new overlaps.",
+      "geometry_problems_found": [
+        "tools_geometry.json / final/tools/make_tools.py, T2 capstan gauge: the 'beak (handle)' side prism is [[119,57.5],[148.8,57.5],[148.8,53.39],[156,53.39],[156,65.5],[119,65.5]]. It overlaps the body top z53.4 by 0.01 over y148.8~156, so the beak's bbox minimum z is 53.39, which is not a real feature. The real underside is z57.5 (T20). Suggested fix: start the beak at the body top z53.4, or at z57.5 with a separate web. The drawing now reads the underside from the prism part in front of the body instead of the bbox.",
+        "tools_geometry.json, T24 vs pin_gauge prisms: T24 says '앞 발 y132.3~133.85', but 'front body + land' spans y132.0~133.85 and the fence ends at y132.01. Only y132.3~133.85 rests on the rail (rail_front_y 132.3). Make the T24 text and the prism name agree. The drawing labels y132 as '앞 몸통' and y132.3 as '레일 앞면 = 앞 발 (T24)'.",
+        "tools_geometry.json, T09 vs bench_jig 'readout ledge post': T09 says 'X 12.9~20.9 (윗면), 밑은 X +17까지 버팀', but the side and plan prisms are one block x12.9~29.9 over the full height z5~65.5, with no narrower top. The drawing follows the prism (X 12.9 / 29.9, labelled '밑 버팀 포함'). make_tools.py should either narrow the top of the prism or change T09.",
+        "geometry.json: the r4.5 rear-wall spring-leg grooves exist only as data in solved.spring.grooves and are not exported as frame cut (female) parts, so any plain frame slice misses them. The drawings now subtract them in side_scene (d01/d02/d12), as d08 frame_side already did. Suggestion: export them as 'fem' parts like the fin-boss bores.",
+        "geometry.json: the P18 groove entry chamfer 0.5×45° (at the groove mouth z47 on the boss underside) is not modelled or exported, so it cannot be drawn. d07 detail H is a z52.5 plan section, above the mouth, and its note now says so.",
+        "geometry.json: the spring legs are exported in one pose only (side_rest = side_service). The removal and drop poses of the long leg are not exported. d12 derives them from solved.spring.free_deg: the leg stays put while b >= free and turns only by the angle past free, matching metrics leg_in_groove_drop 1.37. Exporting a 'removal' leg pose would remove this drawing-side derivation."
+      ],
+      "issues_left": [
+        "The P14 axial-play list now goes through F2 and reads '0.46 / 0.46 / 0.43 / 0.3'. The shared fmt_mm helper strips trailing zeros everywhere, so it prints 0.3 where the P14 table note says 0.30. I kept the one-helper rule rather than special-casing this label.",
+        "Partly rejected (d09 state table): I did not add settled-pose torque/stress rows, because the model exports no settled-pose spring states. The rows are labelled '명목 (강체)', and a note under the table gives the settled lever angles (rest -1.09/-0.55°, 1 N bottom 10.75/8.97°, rigid bottom 12.64/10.27° from metrics heights and clear.dip) with T = k_t × (b − 자유각).",
+        "d14 T09 and T24 text conflicts and the beak seam can only be fixed properly in final/tools/make_tools.py, which is outside my folder (see geometry_problems_found). The sheet labels follow the prisms.",
+        "d14 rail block (A-A) and rest shelf (C-C) are in front of their section planes. I dropped their z labels instead of drawing them as hidden lines, as the audit allowed. Their heights are still dimensioned in the T1 side view (z19 T03, z20.05 T06).",
+        "d11: one text-box overlap already existed before this round (0.3 px vertical, '고무발 18 + 받침 4 (A15)' against 'y258~276 · 392~410'). It is not visible, so I left it.",
+        "d14: the T2 plan (cpv, 956 px) now sits alone on its row, which leaves white space. Moving it would push another row past 1536 px or mix tools on one row.",
+        "d07 G: the far end of the 6.5 slot dimension still reaches slightly past the detail frame edge, as in the audited version. It crosses no text."
+      ]
+    },
+    "audit": {
+      "checked_dimensions": 1722,
+      "files": [
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/extract.json",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/nums_out.txt",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/png1600",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d12_940_90.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d12_820_1420.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d02_930_220.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d09_10_2880.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d14_0_1270.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d14_0_940.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d07_0_2030.png",
+        "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/crops/d07_630_2030.png"
+      ],
+      "problems": [
+        {
+          "drawing": "d12_key_removal",
+          "severity": "major",
+          "issue": "The torsion-spring long leg rotates rigidly with the lever, which contradicts the model. In steps 0 to 3 (lever lifted 15 deg) the 'spring' polygon runs from (205.47, 32.35) to (216.15, 51.73). It passes through the rear wall (y209~212) and ends about 4 mm behind the frame's back face. In step 4 (lever dropped about 30 deg) the leg is swung forward to a tip at y198.5 z55.3, about 9 mm out of the groove. geometry.json gives 'spring D' long leg side_service = side_rest = (205.69..210.99, 32.85..54.56), fixed in the groove. results.txt says the unloaded leg of a keyless lever at -31.3 deg stays 1.37 inside the groove mouth.",
+          "fix": "Draw the long leg from the geometry pose (side_service/side_rest, tip y210.75 z54.5 in the groove) for steps 0 to 3. For step 4, rotate it only by the amount past the free angle (b below -27.07 deg, about 4 deg) so it stays at the groove mouth. Stop rotating spring legs with the lever transform in the removal views."
+        },
+        {
+          "drawing": "d02_black_Csharp_side (also d01_white_D_side)",
+          "severity": "major",
+          "issue": "The r4.5 rear-wall groove is missing from the side section. The d02 section at x21.22 lies inside groove C# (x20.015~22.415), but the frame outline runs (208.99,46.99) to (207.79,47.01) to (207.79,60.83), with no void y207.8~211 z47~58. The phantom long leg therefore ends (tip 210.75, 54.5) inside hatched solid wall. d08 panel 2 at the same x21.22 does draw the groove. In d01 the section at x35.25 is 0.015 outside groove D (x32.835~35.235), so the wall there is solid, but the leg (x34.6~35.1, behind the cut face) is drawn as a visible 'spring' part over the hatched boss/wall from z~46.6 to the tip. It should be hidden. geometry.json exports the groove only in solved.spring.grooves, not as a cut, which is why the side scene missed it.",
+          "fix": "In side_scene, subtract solved.spring.grooves from the frame outline when xsec falls inside a groove, as d08 does. When the groove is not cut (d01), draw the leg segment above y207.8 as a hidden (dashed) line."
+        },
+        {
+          "drawing": "d09_pad_bar_curtain_spring",
+          "severity": "major",
+          "issue": "Panel 6 end view: the rear-wall groove is drawn as a white 'void' polygon (4.55..7.75, z+13.5..24.5) AFTER the long leg and the '긴 다리 22.3 (축에서 끝; 접점에서 22.13)' dimension. Its fill paints over the leg from z47 up to the tip (z54.56). It also hides the dimension's far arrowhead (5.906,-21.57) and its extension line. The leg appears to stop at the groove mouth, and the 22.3 dimension has no visible end.",
+          "fix": "Draw the groove void before the leg and dimension, or draw it with fill:none. Show the leg inside the groove (hidden line style) up to its tip at y210.75 z54.5, then place the 22.3 dimension."
+        },
+        {
+          "drawing": "d14_printed_tools",
+          "severity": "major",
+          "issue": "T2 side view labels 'z53.39 부리 밑 (T20)', but T20 in tools_geometry gives the beak as y119.0~156.0, z57.5~65.5. z53.39 is only a 0.01 seam where the beak polygon meets the body top z53.4. The real beak underside, z57.5 over y119~148.8 (the 2.0 clearance over the black key top z55.5 that is T20's basis), is not dimensioned. The z53.39/z53.4 extension lines run left to about y137, into empty space. The '119 부리·바늘 (T20)' and '123' extensions stop about 4 mm below the beak.",
+          "fix": "Add an ordinate 'z57.5 부리 밑 (T20)' on the beak underside and drop the 53.39 label. Better, remove the 53.39/53.4 seam in make_tools.py. Extend the y119/y123 extension lines to the beak/needle."
+        },
+        {
+          "drawing": "d14_printed_tools",
+          "severity": "major",
+          "issue": "Text is too small to read at 1600 px. The sheet is 1874 wide (the others are 1512~1654), so rendered at 1600 px every one of its 239 texts is 7.3~7.7 px high (212 are under 8.5 px). The smallest text on any other sheet is 8.7 px. Stacked z labels (z33.5/30.9/27.9/26.9/26/23.3/21.5/20.05/19) and the rotated y labels are barely readable.",
+          "fix": "Lay out d14 at 1536 wide (for example, stack T1 side/top and put the sections on their own row), or scale the text styles about 1.2x so the text is at least 9 px at 1600."
+        },
+        {
+          "drawing": "d14_printed_tools (same pattern in d04 D-D, d08 y149)",
+          "severity": "minor",
+          "issue": "Floating z-ordinates. In sections A-A/B-B/C-C every z label's extension line is a 2-mm stub ending at X36 (the base-plate end), so z26/z21.5, z30.9/z27.9/z26.9 and z37/z33.5 sit about 20 mm (100~140 px) to the right of the posts, rod and groove they refer to. z19 '레일 블록' (A-A) and z20.05 '선반 (뒤)' (C-C) point at parts in front of the section plane that are not drawn. d04 D-D and d08 p11 (y149) show the same thing: z7.35~z18 labels start at x164.5, 15~84 px from the bosses, pin and keel. d08 p11 also generates z68.85/z72.85 labels outside its viewBox, so they are invisible.",
+          "fix": "Pass the feature X (post, rod or boss edge) as the ordinate feature point so the extension reaches the edge. Draw the rail block and shelf as hidden lines, or drop those labels. Remove the clipped z68.85/72.85 labels from p11."
+        },
+        {
+          "drawing": "d07_lever_carrier_steel",
+          "severity": "minor",
+          "issue": "Detail G: the '35° (+y에서)' text is struck through by the 6.5 slot dimension line, the ⓛ bubble sits on '6.5 (±3.25)', and the 6.5 dimension has no extension lines to the 35° slot walls. Main view: 'z36.8 스프링 주머니 Ø6.6' lands in the slot opening, where no edge is drawn. Detail H: the phantom coil is drawn as a closed 2.13×0.55 rectangle at y205.65~206.2 (the coil OD actually spans y200.25~206.25), which reads as a thin part. The groove entry chamfer 0.5×45° (P18) is not drawn.",
+          "fix": "Move the angle label off the dimension line and the bubble off the value. Add extension lines from the slot walls. Draw the coil as a broken or clipped outline (no closing edge at the window). Add the 0.5×45° entry chamfers or drop them from the note."
+        },
+        {
+          "drawing": "d09_pad_bar_curtain_spring",
+          "severity": "minor",
+          "issue": "The spring state table gives rest b 0.02° and bottom b 12.64° (metrics.spring.states). d01/d02 show the settled rest at -1.09/-0.55° and the settled 1 N bottom at lever 10.75/8.97° (the bottom row is the rigid kinematic bottom). Unlabelled, this contradicts the rest/pressed definition used on the side sheets. Also, '자유 (풀린) 긴 다리 50.36°' and '코일·긴 다리 홈 … (가상선)' are struck through by the side-view long leg and phantom pocket.",
+          "fix": "Label the rows as nominal (b = rigid) or add the settled-pose angles and torques. Move the two labels clear of the side view."
+        },
+        {
+          "drawing": "d01_white_D_side",
+          "severity": "minor",
+          "issue": "The subtitle and caption give '쉼에서 건반 4.04°'. _kang() computes it from key_points rounded to 2 decimals. The model front_angle is 4.046 (4.05 with round-half-away), and DESIGN S24 states 4.05 / 6.08. 4.04 is also the old r4.3 rigid value, which is exactly the confusion issue 3 was meant to remove. d02's 6.08 is consistent.",
+          "fix": "Use r44.dip.white.front_angle (4.05) or metrics.clear.dip, and pass it through the single rounding helper."
+        },
+        {
+          "drawing": "d03_octave_plan / d04_module_cross_sections / d08_frame",
+          "severity": "minor",
+          "issue": "Rounding is inconsistent (issue 5). d03 prints the pin centres as '41.66 / 83.318 / 123.925', mixing 2 and 3 decimals, while d04/d08 print 83.32 / 123.93. d04 A-A prints '축 놀음 0.46 / 0.458 / 0.427 / 0.295 (P14)', while the P14 note says 0.46 / 0.46 / 0.43 / 0.30.",
+          "fix": "Route these labels through the one fmt helper at a fixed precision (2 decimals)."
+        },
+        {
+          "drawing": "d14_printed_tools",
+          "severity": "minor",
+          "issue": "Tool data is inconsistent. T3 labels '132 앞 발 (T24)' (the polygon starts at y132.0), but T24 says front foot y132.3~133.85. T09 says 'X 12.9~20.9 (윗면), 밑은 X +17까지 버팀', but the geometry prism is x12.9~29.9 at full height, and the drawing follows the prism. In the height-block plan, the rotated '건반 옆면에 대는 면 (u 0)' touches the block edge, and the v16 web line has no label.",
+          "fix": "Make T24/T09 text and the side prisms agree in make_tools.py, then relabel. Nudge the u0 label left and add 'v 16'."
+        },
+        {
+          "drawing": "d15_stage0_coupons",
+          "severity": "minor",
+          "issue": "In the C06b enlarged view, the '1.7' and '3' values are split by the vertical centre line, and '코일·긴 다리 홈 6.5 (35°, 거울상)' is struck through by its own dimension line. The 1.7/3/6.5 dimensions have no extension lines to the band edges or slot walls (they end on the extended walls, in empty space). The values themselves match stage0_geometry and the model: 1.7~3, 230.36° mirrored to 129.64°, slot ±3.25.",
+          "fix": "Offset the text from the centre line and dimension line, and add extension lines from the arc edges."
+        },
+        {
+          "drawing": "d03_octave_plan (caption)",
+          "severity": "minor",
+          "issue": "The caption says '기판 밑 바닥 구멍 x46.25~118.25 y144.5~197.8'. geometry, parts_list and DESIGN §15 give y144.5~196.5, with y197.8 only behind the receptacle at x78.53~89.47.",
+          "fix": "Change the caption to 'y144.5~196.5 (x78.53~89.47은 y197.8까지)'."
+        },
+        {
+          "drawing": "d11_overall_layout / d12_key_removal",
+          "severity": "minor",
+          "issue": "Text is struck through by geometry. In d11 the module labels O1~O7 are crossed by the green dashed board/plug outline (25~28 px). In d12 ⑤ G, 'O1·O7 모듈만: 누운 R301 100k에 20.75°' is crossed by the phantom rest-lever outline.",
+          "fix": "Move the labels above the dashed outlines or give them a white halo."
+        }
+      ]
+    }
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Fix 2"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Check"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Audit"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "fix:r44_2",
+      "phaseIndex": 1,
+      "phaseTitle": "Fix 2",
+      "agentId": "aaf1ab80095e4b283",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790576429083,
+      "queuedAt": 1790576429070,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "r4.4 고침 2b 완료. 재검증 지적 6건(기하 critical 1·major 1,…",
+      "promptPreview": "Project: Toccata, a hobbyist 3D-printed 88-key MIDI piano. Read /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/context/R44_BRIEF.md first (this round's issues and rules), then what it points to. Python: /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/venv/bin/py…",
+      "promptFramed": true,
+      "lastProgressAt": 1790581981700,
+      "tokens": 674090,
+      "toolCalls": 151,
+      "durationMs": 5552616,
+      "resultPreview": "{\"summary_ko\":\"r4.4 고침 2b 완료. 재검증 지적 6건(기하 critical 1·major 1, 물리 major 2, 출력물 major 2)을 모델에서 모두 먼저 다시 쟀고, 6건 모두 맞았습니다. 기각한 지적은 없고, 고치는 방법만 두 건 바꿨습니다(1e장 '고침 2b' 표에 숫자와 함께 적음). 부품은 늘지 않았습니다(소모품만 5분 에폭시 → MS 폴리머). 회로 인터페이스 고정값 5가지도 그대로입니다.\\n\\n가장 중요한 것(critical): 한 덩어리 프레임에 제어 기판을 넣을 길이 실제로 없었습니다. 재현 결과, 홈 뒤 기판 띠가 들어갈 자리는 핀 발·매단 핀·리브·바닥으로 사방이 막혀 있고, 기판 뒤 여유는 1.3인데 25.2가 필요합니다.\\n- 고친 것 (1) 기판 밑 바닥을 뚫…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "fix:r45_spring",
+      "phaseIndex": 1,
+      "phaseTitle": "Fix 2",
+      "agentId": "a42787a4cc82846af",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790581984808,
+      "queuedAt": 1790581984801,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "r4.5 (비틀림 스프링 → 미스미 C-UA90R5-3-0.5) 반영을 끝냈다.…",
+      "promptPreview": "Project: Toccata, a hobbyist 3D-printed 88-key MIDI piano. Read /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/context/R44_BRIEF.md first (this round's issues and rules), then what it points to. Python: /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/venv/bin/py…",
+      "promptFramed": true,
+      "lastProgressAt": 1790585285131,
+      "tokens": 583582,
+      "toolCalls": 138,
+      "durationMs": 3300322,
+      "resultPreview": "{\"summary_ko\":\"r4.5 (비틀림 스프링 → 미스미 C-UA90R5-3-0.5) 반영을 끝냈다. 먼저 r4.4 상태를 final_r4_4/에 백업했다(work*, __pycache__ 제외).\\n\\n**1. 스프링 값을 따로 다시 유도했고 요청서와 같다.**\\n- 카탈로그 k 0.1368 / 0.1409 / 0.1454 N·mm/°를 n = 3 + (180 − 암 각)/360으로 풀면 E가 186,048 / 185,941 / 186,014 MPa로 한 값에 모인다. 그래서 E = 186 GPa를 썼다.\\n- 다리를 긴 22.3(접점에서 22.13), 짧은 2.5로 자르면 N_e 3.725, k_t 8.866 N·mm/rad(0.1547/°)이다. 같은 식에 카탈로그 다리 25/25를 넣으면 0.1…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "verify:fixes",
+      "phaseIndex": 2,
+      "phaseTitle": "Check",
+      "agentId": "a43d2f60572c8e310",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790585287590,
+      "queuedAt": 1790585287564,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Fix-2 verifier (quick), run on the current final/ files (r4…",
+      "promptPreview": "Project: Toccata, a hobbyist 3D-printed 88-key MIDI piano. Read /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/context/R44_BRIEF.md first (this round's issues and rules), then what it points to. Python: /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/venv/bin/py…",
+      "promptFramed": true,
+      "lastProgressAt": 1790586218230,
+      "tokens": 272677,
+      "toolCalls": 54,
+      "durationMs": 930637,
+      "resultPreview": "{\"lens\":\"Fix-2 verifier (quick), run on the current final/ files (r4.5 on top of fix 2b). I checked the 6 findings against geometry.json, model_v4.py, run_all/results.txt, DESIGN.md, the tools and stage 0. Independent checks are in verify44/fixes/f2/: a straight-up board insertion path over every fixed prism in geometry.json; key-tail distances to the BRD-01 envelope at the exported over/ff/dip po…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "verify:spring",
+      "phaseIndex": 2,
+      "phaseTitle": "Check",
+      "agentId": "ab20995e0a887af0a",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790585287591,
+      "queuedAt": 1790585287565,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Adversarial verifier, r4.5 spring change (MISUMI C-UA90R5-3…",
+      "promptPreview": "Project: Toccata, a hobbyist 3D-printed 88-key MIDI piano. Read /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/context/R44_BRIEF.md first (this round's issues and rules), then what it points to. Python: /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/venv/bin/py…",
+      "promptFramed": true,
+      "lastProgressAt": 1790586247842,
+      "tokens": 229371,
+      "toolCalls": 31,
+      "durationMs": 958694,
+      "resultPreview": "{\"lens\":\"Adversarial verifier, r4.5 spring change (MISUMI C-UA90R5-3-0.5). I checked with my own code in verify45/: the spring formulas, a coil-float equilibrium using the model's pocket polygons, statics (Action) for D/E/F/C#/F#, 4-DOF releases at friction x1/x2, the insertion path with the full 22.13 long leg, stage-0 test 8/13 numbers, and the parts list/DESIGN text. One major problem found: th…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "drawings:r44_update",
+      "phaseIndex": 2,
+      "phaseTitle": "Check",
+      "agentId": "a5735dffa1458179c",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790585287592,
+      "queuedAt": 1790585287565,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-…",
+      "promptPreview": "Project: Toccata, a hobbyist 3D-printed 88-key MIDI piano. Read /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/context/R44_BRIEF.md first (this round's issues and rules), then what it points to. Python: /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/venv/bin/py…",
+      "promptFramed": true,
+      "lastProgressAt": 1790587700495,
+      "tokens": 546438,
+      "toolCalls": 174,
+      "durationMs": 2412902,
+      "resultPreview": "{\"generator\":\"/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/render_v4.py (render_v4b.py 7-13, render_v4c.py 14-15, kit.py) — run: venv/bin/python render_v4.py [n ...]; reads final/geometry.json (r4.5), metrics.json, parts_list.json, tools/tools_geometry.json, stage0/stage0_geometry.json + stage0 STLs; all 15 sheets re…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "audit:r44",
+      "phaseIndex": 3,
+      "phaseTitle": "Audit",
+      "agentId": "ac3fb49dbc097140e",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790587702252,
+      "queuedAt": 1790587702236,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Project: Toccata, a hobbyist 3D-printed 88-key MIDI piano. Read /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/context/R44_BRIEF.md first (this round's issues and rules), then what it points to. Python: /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/venv/bin/py…",
+      "promptFramed": true,
+      "lastProgressAt": 1790589474299,
+      "tokens": 404712,
+      "toolCalls": 135,
+      "durationMs": 1772047,
+      "resultPreview": "{\"checked_dimensions\":1722,\"files\":[\"/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/extract.json\",\"/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings_audit_r44/nums_out.txt\",\"/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 7,
+      "label": "drawings:r44_fix (retry 1)",
+      "phaseIndex": 3,
+      "phaseTitle": "Audit",
+      "agentId": "aa7e69d05912e177a",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790589476636,
+      "queuedAt": 1790589476632,
+      "attempt": 2,
+      "lastAttemptReason": "stalled",
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-…",
+      "promptPreview": "Project: Toccata, a hobbyist 3D-printed 88-key MIDI piano. Read /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/context/R44_BRIEF.md first (this round's issues and rules), then what it points to. Python: /private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/venv/bin/py…",
+      "promptFramed": true,
+      "lastProgressAt": 1790592181251,
+      "tokens": 486692,
+      "toolCalls": 170,
+      "durationMs": 2704613,
+      "resultPreview": "{\"drawings\":[{\"n\":1,\"title_ko\":\"백건 측면 단면 (D)\",\"svg_file\":\"/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d01_white_D_side.svg\",\"png_file\":\"/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/drawings/d01_white_D_side.png\",\"caption_ko\":\"백건 D를 x35.25(밸런스 핀…"
+    }
+  ],
+  "totalTokens": 3197562,
+  "totalToolCalls": 853
+}

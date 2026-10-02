@@ -1,0 +1,2926 @@
+{
+ "meta": {
+  "unit": "mm",
+  "coords": "x across (0 = A0 left boundary), y from white-key front lip (+ away from player), z from desk",
+  "design_state": "body v3.2 / R26-R29; key storage per v4 W1+ r4.5 DESIGN §13; circuit rev B",
+  "outer_box": "x164..1058 x y215..410 x z22..122 = 894 x 195 x 100 (v3 A16)",
+  "butt_rule": "bottoms (and the printed CU tray) and lids span the full 195 depth; front and back (back_L + I/O plate + back_R) span the full 894 length and stand ON the bottoms; ends and dividers are captured between front and back (172 = 195 - 2x11.5) and between bottom and lid (77 = 100 - 2x11.5). Check: 11.5+77+11.5 = 100; 11.5+172+11.5 = 195; 356+200+338 = 894 (bottom row and back row). Glue only (C21); no screws/drill in plywood-to-plywood joints (v3 조립 12).",
+  "thickness_rule": "if the plywood is not 11.5 thick, heights 77/57 become 100-2t / 80-2t (v3 L63 card)"
+ },
+ "panels": [
+  {
+   "id": "CU-P01",
+   "name": "bottom_L",
+   "name_ko": "바닥 왼쪽",
+   "cut": [
+    356,
+    195
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     164,
+     520
+    ],
+    "y": [
+     215,
+     410
+    ],
+    "z": [
+     22,
+     33.5
+    ]
+   },
+   "normal": "z",
+   "joins": "under end_L, front, back_L, divider (x514.25..520 half); glued (C21 wood glue)",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "L63 card 조각 목록",
+    "docs/report/toccata-build-v3.html A16 (z22)"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P02",
+   "name": "bottom_R",
+   "name_ko": "바닥 오른쪽",
+   "cut": [
+    338,
+    195
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     720,
+     1058
+    ],
+    "y": [
+     215,
+     410
+    ],
+    "z": [
+     22,
+     33.5
+    ]
+   },
+   "normal": "z",
+   "joins": "under front, back_R, end_R, low_divider (x720..725.75 half); glued",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "L63 card"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P03",
+   "name": "lid_L",
+   "name_ko": "뚜껑 왼쪽",
+   "cut": [
+    356,
+    195
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     164,
+     520
+    ],
+    "y": [
+     215,
+     410
+    ],
+    "z": [
+     110.5,
+     122
+    ]
+   },
+   "normal": "z",
+   "joins": "loose, lift-off; rests on top edges of front, back_L, end_L, divider (x514.25..520) and 4 corner supports; 2 magnets (diagonal corners)",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html section 09 가운데 유닛 (뚜껑 3장 위로 들어 여는 방식)",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm) section: 뚜껑 z110.5..122"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P04",
+   "name": "lid_R",
+   "name_ko": "뚜껑 오른쪽",
+   "cut": [
+    338,
+    195
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     720,
+     1058
+    ],
+    "y": [
+     215,
+     410
+    ],
+    "z": [
+     110.5,
+     122
+    ]
+   },
+   "normal": "z",
+   "joins": "loose, lift-off; rests on front, back_R, end_R top edges + 4 corner supports (low divider top z90.5 does NOT support it); 2 magnets",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html section 09"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P05",
+   "name": "front",
+   "name_ko": "앞판",
+   "cut": [
+    894,
+    77
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     164,
+     1058
+    ],
+    "y": [
+     215,
+     226.5
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "normal": "y",
+   "joins": "full length 894; sits ON bottom_L/CU tray/bottom_R (z33.5); lids rest on its top edge (z110.5); ends and dividers butt against its inner face y226.5; unsupported over the tray cable inlet x540..700",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm) section: 앞판 y215..226.5 z33.5..110.5"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P06",
+   "name": "back_L",
+   "name_ko": "뒤판 왼쪽",
+   "cut": [
+    356,
+    77
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     164,
+     520
+    ],
+    "y": [
+     398.5,
+     410
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "normal": "y",
+   "joins": "sits on bottom_L; end_L and divider (x514.25..520 only) butt against its inner face y398.5; right end face x520 meets I/O plate",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm) plan: I/O 판 x520..720 y398.5..410"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P07",
+   "name": "back_R",
+   "name_ko": "뒤판 오른쪽",
+   "cut": [
+    338,
+    77
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     720,
+     1058
+    ],
+    "y": [
+     398.5,
+     410
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "normal": "y",
+   "joins": "sits on bottom_R; low_divider (x720..725.75) and end_R butt against inner face; left end face x720 meets I/O plate",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm)"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P08",
+   "name": "end_L",
+   "name_ko": "끝판 왼쪽",
+   "cut": [
+    172,
+    77
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     164,
+     175.5
+    ],
+    "y": [
+     226.5,
+     398.5
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "normal": "x",
+   "joins": "captured between front/back_L (172 = 195-2x11.5) and bottom_L/lid (77 = 100-2x11.5); outer face x164 carries dovetail blocks + toggle latch to left speaker part",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm) plan: ks inner starts x175.5"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P09",
+   "name": "end_R",
+   "name_ko": "끝판 오른쪽",
+   "cut": [
+    172,
+    77
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     1046.5,
+     1058
+    ],
+    "y": [
+     226.5,
+     398.5
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "normal": "x",
+   "joins": "same as end_L; outer face x1058 carries dovetail blocks + latch to right speaker part",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm) plan: pb inner ends x1046.5"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P10",
+   "name": "divider",
+   "name_ko": "칸막이(건반 보관함 ↔ CU 칸)",
+   "cut": [
+    172,
+    77
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     514.25,
+     525.75
+    ],
+    "y": [
+     226.5,
+     398.5
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "normal": "x",
+   "joins": "centred on x520 (the bottom_L / CU-tray joint and back_L / I/O-plate joint): bottom edge half on bottom_L (x514.25..520, glued) half on CU tray ledge (x520..525.75); rear end half on back_L, half on I/O plate; CU tray and I/O plate screw into its x525.75 face",
+   "src": [
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm) plan: ks x..514.26, cu x525.74..",
+    "docs/report/toccata-build-v3.html A07 CU 칸 x520~720 / 안폭 188.5"
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  },
+  {
+   "id": "CU-P11",
+   "name": "low_divider",
+   "name_ko": "낮은 칸막이(CU 칸 ↔ 보조배터리 칸)",
+   "cut": [
+    172,
+    57
+   ],
+   "t": 11.5,
+   "box": {
+    "x": [
+     714.25,
+     725.75
+    ],
+    "y": [
+     226.5,
+     398.5
+    ],
+    "z": [
+     33.5,
+     90.5
+    ]
+   },
+   "normal": "x",
+   "joins": "centred on x720; bottom half on CU tray ledge (x714.25..720) half on bottom_R (glued); top z90.5 leaves 20 mm gap under lids for USB x8, hub and power-bank cables; CU tray and I/O plate screw into its x714.25 face",
+   "src": [
+    "docs/report/toccata-build-v3.html A21 (172x57, 20 mm 낮게)",
+    "docs/report/toccata-build-v3.html drawing 11 (okoume 600x1200 cut list)",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm) plan: cu ..714.26, pb 725.74.."
+   ],
+   "material": "okoume plywood 11.5T (L63, 600x1200 sheet)"
+  }
+ ],
+ "bays": [
+  {
+   "id": "BAY-KS",
+   "name": "key_storage",
+   "name_ko": "① 건반 보관함 (R29)",
+   "inner": {
+    "x": [
+     175.5,
+     514.25
+    ],
+    "y": [
+     226.5,
+     398.5
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "size": [
+    338.75,
+    172,
+    77
+   ],
+   "doc_size": "338.8 x 172 x 77",
+   "sub": [
+    {
+     "name": "key_bay",
+     "name_ko": "건반 칸",
+     "x": [
+      175.5,
+      376.8
+     ],
+     "w": 201.3,
+     "note": "1.0 + key 199.3 + 1.0; keys lie along x; layer 1 = 7 white keys 160.3 wide x 23.4 high (y232.35..392.65, z33.5..56.9), layer 2 = 5 black + A#0 + A0/B0/C8 139.8 x 35.4 (z56.9..92.3); stack 58.8/77, y margin 5.85 each side"
+    },
+    {
+     "name": "insert_wall",
+     "name_ko": "보관함 칸막이(출력)",
+     "x": [
+      376.8,
+      378.0
+     ],
+     "w": 1.2
+    },
+    {
+     "name": "side_bay",
+     "name_ko": "옆 칸",
+     "x": [
+      378.0,
+      514.25
+     ],
+     "w": 136.25,
+     "note": "DESIGN 136.3: steel blocks 2, rods 161.4 x2 along y, upstop pads 12, torsion springs 8, small-parts box, tools (height block, fake lever, pin gauge; largest 88.9 x 36.6)"
+    }
+   ],
+   "src": [
+    "key-action-v4/DESIGN.md §13; geometry.json dims[94] (A08)",
+    "docs/report/toccata-build-v3.html A17",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm)"
+   ]
+  },
+  {
+   "id": "BAY-CU",
+   "name": "cu_bay",
+   "name_ko": "② CU 칸",
+   "nominal_x": [
+    520,
+    720
+   ],
+   "inner": {
+    "x": [
+     525.75,
+     714.25
+    ],
+    "y": [
+     226.5,
+     398.5
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "size": [
+    188.5,
+    172,
+    77
+   ],
+   "note": "floor = printed CU tray top (z33.5), rear wall = printed I/O plate, lid = printed CU lid",
+   "src": [
+    "docs/report/toccata-build-v3.html A07",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm)"
+   ]
+  },
+  {
+   "id": "BAY-PB",
+   "name": "power_bank_bay",
+   "name_ko": "③ 보조배터리 칸 (R28)",
+   "inner": {
+    "x": [
+     725.75,
+     1046.5
+    ],
+    "y": [
+     226.5,
+     398.5
+    ],
+    "z": [
+     33.5,
+     110.5
+    ]
+   },
+   "size": [
+    320.75,
+    172,
+    77
+   ],
+   "doc_size": "320.8 x 172 x 77",
+   "note": "front: power-bank holder (battery max 170x85x35); rear wall: USB hub 710U3 228x48x24 on double-sided tape at x750..978, y344.5..392.5 (drawing 10) -> set against back_R: y374.5..398.5 if lying on its 24 side, see printed notes",
+   "src": [
+    "docs/report/toccata-build-v3.html A18",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm)"
+   ]
+  },
+  {
+   "id": "ZONE-CH",
+   "name": "cable_channel",
+   "name_ko": "케이블 통로",
+   "box": {
+    "x": [
+     -16,
+     1238
+    ],
+    "y": [
+     215,
+     258
+    ],
+    "z": [
+     0,
+     22
+    ]
+   },
+   "note": "under the rear bar front; module USB-C plugs (y212..220.5, z9.5..17) enter here; CU tray inlet opens above it",
+   "src": [
+    "docs/report/toccata-build-v3.html A13",
+    "docs/report/toccata-build-v3.html drawing 10 (rear-bar plan + CU side section; SVG polygon coords converted: plan 0.74 px/mm, section 1.25 px/mm)"
+   ]
+  }
+ ],
+ "printed": [
+  {
+   "id": "PR-CU-TRAY",
+   "name": "cu_tray",
+   "name_ko": "CU 트레이",
+   "material": "PETG (grey/black)",
+   "qty": 1,
+   "box": {
+    "x": [
+     520,
+     720
+    ],
+    "y": [
+     215,
+     410
+    ],
+    "z": [
+     22,
+     33.5
+    ]
+   },
+   "print_size": [
+    199.6,
+    195,
+    11.5
+   ],
+   "src": [
+    "toccata-build-v3.html A07 (CU 트레이 200x195)",
+    "toccata-build-v3.html drawing 10 section: CU 트레이 z22..33.5 (flush with plywood bottoms)",
+    "toccata-build-v3.html print table: 160 g, 9.0 h"
+   ],
+   "structure": {
+    "top_skin": 3.0,
+    "top_skin_z": [
+     30.5,
+     33.5
+    ],
+    "perimeter_wall": 4.0,
+    "underside_ribs": {
+     "t": 2.0,
+     "pitch": 40,
+     "z": [
+      22,
+      30.5
+     ]
+    },
+    "open_underside": true,
+    "assumed": true,
+    "why": "v3 gives only outline + 160 g; ribbed 11.5 shell matches that mass and keeps the plywood-flush top/bottom"
+   },
+   "fit": {
+    "clearance_each_side_x": 0.2,
+    "note": "drops between bottom_L end face x520 and bottom_R end face x720; the divider (x520..525.75) and low divider (x714.25..720) bottom halves, the front panel (y215..226.5) and the I/O plate (y398.5..410) stand on its top face z33.5",
+    "assumed": true,
+    "why": "0.2 mm per side so a straight-cut plywood gap of 200 +/-0.5 still accepts it"
+   },
+   "features": [
+    {
+     "name": "cable_inlet",
+     "name_ko": "케이블 입구",
+     "type": "through slot",
+     "box": {
+      "x": [
+       540,
+       700
+      ],
+      "y": [
+       217,
+       237
+      ],
+      "z": [
+       22,
+       33.5
+      ]
+     },
+     "chamfer": 1.0,
+     "note": "from drawing 10 plan (x540..700, y217..237) and section (y217..237 through the tray). y217..226.5 lies under the front panel, so the opening into the bay is y226.5..237 (10.5); USB-C moulds (12.5 x 7.6) pass with their 7.6 side along y. Keep the bay floor y226.5..240 clear.",
+     "src": [
+      "toccata-build-v3.html drawing 10"
+     ]
+    },
+    {
+     "name": "cable_tie_anchors",
+     "name_ko": "케이블 타이 고리",
+     "type": "2-slot bridges on tray top",
+     "slot": [
+      2.8,
+      1.6
+     ],
+     "at": [
+      [
+       550,
+       243
+      ],
+      [
+       620,
+       243
+      ],
+      [
+       690,
+       243
+      ]
+     ],
+     "note": "C12 ties (2.5 wide) bundle the 7 USB + EXT + speaker/audio leads rising from the inlet",
+     "assumed": true,
+     "why": "not in v3; needed to strain-relieve the inlet bundle"
+    },
+    {
+     "name": "divider_screw_tabs",
+     "name_ko": "칸막이 고정 탭",
+     "type": "upstand tabs",
+     "qty": 4,
+     "size": [
+      3.0,
+      20,
+      15
+     ],
+     "tabs": [
+      {
+       "side": "left",
+       "box": {
+        "x": [
+         525.75,
+         528.75
+        ],
+        "y": [
+         240,
+         260
+        ],
+        "z": [
+         33.5,
+         48.5
+        ]
+       },
+       "hole_center": [
+        527.25,
+        250,
+        41
+       ]
+      },
+      {
+       "side": "left",
+       "box": {
+        "x": [
+         525.75,
+         528.75
+        ],
+        "y": [
+         308,
+         328
+        ],
+        "z": [
+         33.5,
+         48.5
+        ]
+       },
+       "hole_center": [
+        527.25,
+        318,
+        41
+       ]
+      },
+      {
+       "side": "right",
+       "box": {
+        "x": [
+         711.25,
+         714.25
+        ],
+        "y": [
+         240,
+         260
+        ],
+        "z": [
+         33.5,
+         48.5
+        ]
+       },
+       "hole_center": [
+        712.75,
+        250,
+        41
+       ]
+      },
+      {
+       "side": "right",
+       "box": {
+        "x": [
+         711.25,
+         714.25
+        ],
+        "y": [
+         308,
+         328
+        ],
+        "z": [
+         33.5,
+         48.5
+        ]
+       },
+       "hole_center": [
+        712.75,
+        318,
+        41
+       ]
+      }
+     ],
+     "hole": "Ø4.5 through along x (L49 card: 출력 부품 관통 구멍 Ø4.5)",
+     "src": [
+      "toccata-build-v3.html 조립 12 (트레이·I/O 판을 13 mm 피스로 칸막이에 고정)",
+      "final-bom L49 13mm (CU 트레이 4)"
+     ],
+     "assumed": true,
+     "why": "tab size/positions not drawn; 3 mm tab + 13 mm screw = 10 mm into the 11.5 divider"
+    },
+    {
+     "name": "foot_screw_bosses",
+     "name_ko": "고무발 나사 보스",
+     "qty": 2,
+     "at": [
+      [
+       620,
+       299
+      ],
+      [
+       620,
+       379
+      ]
+     ],
+     "d": 10,
+     "z": [
+      22,
+      38.0
+     ],
+     "pilot": 3.4,
+     "note": "centre-unit rubber feet 3 and 4 of 6 lie under the tray (drawing 10 circles, r14 = L14 Ø28). 25 mm 8-ho screw + M4 washer through foot and 4 mm printed spacer; solid column 16 high gives ~15 mm bite. Top z38.0 stays 1.5 below the Pi 5 underside (z39.5).",
+     "src": [
+      "toccata-build-v3.html drawing 10 plan circles (620,299),(620,379)",
+      "final-bom L14/L49 25mm/L36"
+     ],
+     "pilot_src": "v3 L49 card: PETG pilot Ø3.4",
+     "underside_pad": "solid Ø22 pad flush with z22 under each boss (spacer Ø20 bears on it)"
+    },
+    {
+     "name": "pi5_bosses",
+     "name_ko": "Pi 5 보스",
+     "qty": 4,
+     "od": 6.0,
+     "h": 6.0,
+     "z": [
+      33.5,
+      39.5
+     ],
+     "tap": 2.2,
+     "tap_depth": 8,
+     "at": [
+      [
+       534.5,
+       339.5
+      ],
+      [
+       592.5,
+       339.5
+      ],
+      [
+       534.5,
+       388.5
+      ],
+      [
+       592.5,
+       388.5
+      ]
+     ],
+     "note": "Pi 5 85x56 at x531..616, y336..392, board z39.5..41.1; RPi hole pattern 58 x 49, 3.5 from edges; USB/Ethernet end at x616 faces +x (45 mm free to the amp at x664 for the hub upstream plug W209 and the L52 gender + L51 dongle); USB-C power + micro-HDMI edge at y336 faces -y (plug zone x531..580, y300..336 kept clear)",
+     "src": [
+      "final-bom L47 (Ø2.2 탭, 약 4 mm 물림)",
+      "toccata-build-v3.html CP7/L47 card (보스 외경 6, 높이 6)",
+      "toccata-build-v3.html drawing 10 section: Pi 5 z39.5..59.5"
+     ],
+     "assumed": true,
+     "why": "drawing 10 plan is schematic and puts the XH-A232 9 mm from the Pi 5 USB-A ports (no room for the hub upstream plug / dongle gender); component positions re-laid inside the same bay keeping the drawing sizes, tray z levels and foot positions"
+    },
+    {
+     "name": "amp_bosses",
+     "name_ko": "앰프(XH-A232) 보스",
+     "qty": 4,
+     "od": 7.0,
+     "h": 5.0,
+     "z": [
+      33.5,
+      38.5
+     ],
+     "pilot": 2.7,
+     "pilot_depth": 10,
+     "at": [
+      [
+       667.5,
+       337.5
+      ],
+      [
+       706.5,
+       337.5
+      ],
+      [
+       667.5,
+       384.5
+      ],
+      [
+       706.5,
+       384.5
+      ]
+     ],
+     "note": "XH-A232 ~54 x 46 x 14 (final-bom L53) turned 46 along x: x664..710, y334..388, board top ~z40, parts to ~z52.5; hole inset 3.5 assumed - measure the received board and move bosses",
+     "src": [
+      "final-bom L53, L34 (앰프 4)",
+      "toccata-build-v3.html L34 note Ø2.7~2.8 pilot"
+     ],
+     "assumed": true,
+     "why": "drawing 10 plan is schematic and puts the XH-A232 9 mm from the Pi 5 USB-A ports (no room for the hub upstream plug / dongle gender); component positions re-laid inside the same bay keeping the drawing sizes, tray z levels and foot positions; hole pattern not published"
+    },
+    {
+     "name": "buck_bosses",
+     "name_ko": "5.1 V 강압 모듈(XL4016) 보스",
+     "qty": 4,
+     "od": 7.0,
+     "h": 5.0,
+     "z": [
+      33.5,
+      38.5
+     ],
+     "pilot": 2.7,
+     "pilot_depth": 10,
+     "at": [
+      [
+       611.2,
+       249.2
+      ],
+      [
+       665.6,
+       249.2
+      ],
+      [
+       611.2,
+       283.1
+      ],
+      [
+       665.6,
+       283.1
+      ]
+     ],
+     "note": "XL4016 60.8 x 40.3 x 29 (final-bom L58) at x608..668.8, y246..286.3, top ~z67.5; 5 mm boss clears THT pins; hole inset 3.2 assumed - measure",
+     "src": [
+      "final-bom L58 (모서리 구멍 4개), L34 (강압 4)"
+     ],
+     "assumed": true,
+     "why": "drawing 10 plan is schematic and puts the XH-A232 9 mm from the Pi 5 USB-A ports (no room for the hub upstream plug / dongle gender); component positions re-laid inside the same bay keeping the drawing sizes, tray z levels and foot positions; hole pattern not published"
+    },
+    {
+     "name": "amp_input_jack_board_bosses",
+     "name_ko": "앰프 입력 잭 기판(J702) 보스",
+     "qty": 2,
+     "od": 7.0,
+     "h": 5.0,
+     "z": [
+      33.5,
+      38.5
+     ],
+     "pilot": 2.7,
+     "at": [
+      [
+       679,
+       249
+      ],
+      [
+       703,
+       268
+      ]
+     ],
+     "board": {
+      "x": [
+       676,
+       706
+      ],
+      "y": [
+       246,
+       271
+      ],
+      "z": [
+       38.5,
+       40.1
+      ]
+     },
+     "note": "perfboard scrap 30 x 25 with PJ-313 J702 + C701-C704 + R701-R702; jack on the rear edge (y271) at x691 facing +y so the plug of cable ② goes in from y271..311 (clear lane)",
+     "src": [
+      "final-bom L34 (앰프 입력 잭 기판 2)",
+      "pcb bom.csv SCH-07 J702"
+     ],
+     "assumed": true,
+     "why": "scrap size not specified; sized for 1 jack + 4 caps + 2 resistors"
+    },
+    {
+     "name": "ped_board_standoffs",
+     "name_ko": "페달 보드(PB) 스탠드오프",
+     "qty": 4,
+     "od": 6.0,
+     "h": 5.0,
+     "z": [
+      33.5,
+      38.5
+     ],
+     "board": "5x7 perfboard 70 x 50 at x531..601, y244..294 (board z38.5..40.1; RP2040-Zero on headers to ~z53)",
+     "screw_at": [
+      [
+       535,
+       248
+      ],
+      [
+       597,
+       290
+      ]
+     ],
+     "screw": "M3x6 (L35), blind Ø2.5 hole 5 deep",
+     "pin_at": [
+      [
+       597,
+       248
+      ],
+      [
+       535,
+       290
+      ]
+     ],
+     "pin": "Ø2.8 x 2.5 locating pin on top (board hole Ø3.0)",
+     "src": [
+      "final-bom L35 (CU 트레이의 페달 보드도 같은 방식으로 2개), SE8 (M3 Ø3.2 x2, 핀 Ø3.0 x2)"
+     ],
+     "assumed": true,
+     "why": "drawing 10 plan is schematic and puts the XH-A232 9 mm from the Pi 5 USB-A ports (no room for the hub upstream plug / dongle gender); component positions re-laid inside the same bay keeping the drawing sizes, tray z levels and foot positions; hole inset 4 from corners"
+    },
+    {
+     "name": "fuse_holder_cradle",
+     "name_ko": "퓨즈 홀더 받침",
+     "type": "U cradle + 2 tie slots",
+     "box": {
+      "x": [
+       630,
+       680
+      ],
+      "y": [
+       304,
+       318
+      ],
+      "z": [
+       33.5,
+       43.5
+      ]
+     },
+     "inner_d": 10.5,
+     "note": "BU914 inline 5x20 holder has no mounting holes (pcb research/power.md §4); cradle + 2 x C12 cable ties replaces the old \"퓨즈 홀더 M3 2\"",
+     "src": [
+      "pcb bom.csv F601-HLD (inline)",
+      "final-bom L34 note (PD 트리거 2·퓨즈 홀더 2 dropped from count)"
+     ],
+     "assumed": true,
+     "why": "holder body diameter unpublished; measure and adjust inner_d"
+    }
+   ],
+   "keep_out": [
+    {
+     "name": "inlet_rise",
+     "box": {
+      "x": [
+       540,
+       700
+      ],
+      "y": [
+       226.5,
+       240
+      ],
+      "z": [
+       33.5,
+       90.0
+      ]
+     },
+     "note": "cables rise here, then run back and cross the low divider in the middle (y244.5..380.5, z90.5..98.5) between the lid corner supports"
+    },
+    {
+     "name": "pi_usb_plugs",
+     "box": {
+      "x": [
+       616,
+       662
+      ],
+      "y": [
+       336,
+       392
+      ],
+      "z": [
+       39.5,
+       75
+      ]
+     }
+    },
+    {
+     "name": "pi_power_hdmi_plugs",
+     "box": {
+      "x": [
+       531,
+       580
+      ],
+      "y": [
+       300,
+       336
+      ],
+      "z": [
+       39.5,
+       70
+      ]
+     }
+    },
+    {
+     "name": "j702_plug",
+     "box": {
+      "x": [
+       683,
+       699
+      ],
+      "y": [
+       271,
+       311
+      ],
+      "z": [
+       38.5,
+       50
+      ]
+     }
+    }
+   ],
+   "mass_g": 160,
+   "print_h": 9.0,
+   "print_orient": "underside (rib side) on the bed, bosses up; top skin bridges the 40 mm rib cells (use 25 mm pitch if bridging sags); 199.6 x 195 fits the 220 bed",
+   "components": [
+    {
+     "name": "Raspberry Pi 5 (L01)",
+     "name_ko": "라즈베리파이 5",
+     "box": {
+      "x": [
+       531,
+       616
+      ],
+      "y": [
+       336,
+       392
+      ],
+      "z": [
+       39.5,
+       57.5
+      ]
+     },
+     "note": "board 85x56 z39.5..41.1, ports to ~z57.5; USB/Eth end +x"
+    },
+    {
+     "name": "XH-A232 amp (L53)",
+     "name_ko": "앰프 보드",
+     "box": {
+      "x": [
+       664,
+       710
+      ],
+      "y": [
+       334,
+       388
+      ],
+      "z": [
+       38.5,
+       52.5
+      ]
+     }
+    },
+    {
+     "name": "XL4016 buck (L58)",
+     "name_ko": "5.1 V 강압 모듈",
+     "box": {
+      "x": [
+       608,
+       668.8
+      ],
+      "y": [
+       246,
+       286.3
+      ],
+      "z": [
+       38.5,
+       67.5
+      ]
+     }
+    },
+    {
+     "name": "PED board 5x7 + RP2040-Zero (SE8, SEV2)",
+     "name_ko": "페달 보드",
+     "box": {
+      "x": [
+       531,
+       601
+      ],
+      "y": [
+       244,
+       294
+      ],
+      "z": [
+       38.5,
+       53.5
+      ]
+     }
+    },
+    {
+     "name": "amp input jack board J702 (L15 ③ + RC)",
+     "name_ko": "앰프 입력 잭 기판",
+     "box": {
+      "x": [
+       676,
+       706
+      ],
+      "y": [
+       246,
+       271
+      ],
+      "z": [
+       38.5,
+       46.5
+      ]
+     }
+    },
+    {
+     "name": "fuse holder BU914 (L60)",
+     "name_ko": "퓨즈 홀더",
+     "box": {
+      "x": [
+       632,
+       678
+      ],
+      "y": [
+       306,
+       316
+      ],
+      "z": [
+       35.5,
+       45.5
+      ]
+     }
+    },
+    {
+     "name": "USB dongle L51 + gender L52 on Pi USB-A",
+     "name_ko": "USB 동글 + 젠더",
+     "box": {
+      "x": [
+       616,
+       645
+      ],
+      "y": [
+       340,
+       360
+      ],
+      "z": [
+       41,
+       56
+      ]
+     },
+     "note": "floating on its cable"
+    },
+    {
+     "name": "PD trigger L57 (in I/O plate pocket)",
+     "name_ko": "PD 트리거",
+     "box": {
+      "x": [
+       655,
+       665
+      ],
+      "y": [
+       391.6,
+       408
+      ],
+      "z": [
+       89.8,
+       94.2
+      ]
+     }
+    },
+    {
+     "name": "KCD1-101A switch body L59",
+     "name_ko": "전원 스위치",
+     "box": {
+      "x": [
+       603.4,
+       616.6
+      ],
+      "y": [
+       378,
+       410
+      ],
+      "z": [
+       82.4,
+       101.6
+      ]
+     }
+    },
+    {
+     "name": "PJ-313 pedal jack J501 on scrap",
+     "name_ko": "페달 잭",
+     "box": {
+      "x": [
+       547.5,
+       572.5
+      ],
+      "y": [
+       384,
+       408
+      ],
+      "z": [
+       87.5,
+       95.5
+      ]
+     }
+    },
+    {
+     "name": "USB hub 710U3 L17 (power-bank bay)",
+     "name_ko": "USB 허브",
+     "box": {
+      "x": [
+       750,
+       978
+      ],
+      "y": [
+       344.5,
+       392.5
+      ],
+      "z": [
+       33.5,
+       57.5
+      ]
+     },
+     "src": "drawing 10 plan; 24 high lying flat"
+    },
+    {
+     "name": "power bank max envelope",
+     "name_ko": "보조배터리(최대)",
+     "box": {
+      "x": [
+       741,
+       911
+      ],
+      "y": [
+       231.5,
+       316.5
+      ],
+      "z": [
+       35.5,
+       70.5
+      ]
+     }
+    }
+   ],
+   "components_src": "sizes: final-bom specs (L01 85x56, L53 54x46x14, L58 60.8x40.3x29, L57 16.4x10x4.4, L17 48x228x24, SE8 50x70); positions: this spec (assumed re-layout, see features)"
+  },
+  {
+   "id": "PR-CU-LID",
+   "name": "cu_lid",
+   "name_ko": "CU 뚜껑(출력)",
+   "material": "PETG",
+   "qty": 1,
+   "box": {
+    "x": [
+     520.5,
+     719.5
+    ],
+    "y": [
+     215,
+     410
+    ],
+    "z": [
+     110.5,
+     122
+    ]
+   },
+   "print_size": [
+    199,
+    195,
+    11.5
+   ],
+   "src": [
+    "toccata-build-v3.html drawing 11 caption (CU 칸 바닥·뚜껑과 I/O 판은 PETG 출력)",
+    "toccata-build-v3.html section 09 (뚜껑 3장 위로 들어 여는 방식)",
+    "toccata-build-v3.html drawing 10 section: 뚜껑 z110.5..122"
+   ],
+   "structure": {
+    "top_skin": 2.5,
+    "top_skin_z": [
+     119.5,
+     122
+    ],
+    "perimeter_wall": 3.0,
+    "underside_ribs": {
+     "t": 2.0,
+     "pitch": 40,
+     "z": [
+      110.5,
+      119.5
+     ]
+    },
+    "assumed": true,
+    "why": "v3 gives outline only; same shell style as the tray, flush with the 11.5 plywood lids"
+   },
+   "fit": {
+    "gap_each_side_x": 0.5,
+    "note": "rests on front panel top (y215..226.5), I/O plate top (y398.5..410) and divider top (x520.5..525.75); its right edge over the 57-high low divider is carried by the 2 CU corner supports at x696.25..714.25",
+    "assumed": true,
+    "why": "0.5 gap so the three lids lift independently; gaps double as finger grips (v3 risk 18)"
+   },
+   "features": [
+    {
+     "name": "vent_slots",
+     "name_ko": "통풍 슬롯",
+     "count": 15,
+     "slot": [
+      4,
+      100
+     ],
+     "x_first": 560,
+     "pitch_x": 8,
+     "y": [
+      260,
+      360
+     ],
+     "note": "above buck/amp/Pi (~12 W average in the closed bay)",
+     "assumed": true,
+     "why": "v3 lists the CU lid as printed because it needs holes; slot pattern not drawn"
+    },
+    {
+     "name": "magnet_face",
+     "name_ko": "자석 자리",
+     "note": "lid-side Ø8x3 magnets are glued flat on the underside at (534.75,235.5) and (705.25,389.5) by the self-aligning method (see corner supports); no pocket needed"
+    }
+   ],
+   "mass_g": 110,
+   "assumed": true,
+   "why": "mass not in v3 print table (CU lid missing there); estimate"
+  },
+  {
+   "id": "PR-IO-PLATE",
+   "name": "io_plate",
+   "name_ko": "I/O 판",
+   "material": "PETG",
+   "qty": 1,
+   "box": {
+    "x": [
+     520.2,
+     719.8
+    ],
+    "y": [
+     398.5,
+     410
+    ],
+    "z": [
+     33.5,
+     110.3
+    ]
+   },
+   "print_size": [
+    199.6,
+    11.5,
+    76.8
+   ],
+   "src": [
+    "toccata-build-v3.html A19 (200 x 77, CU 칸 뒤판)",
+    "toccata-build-v3.html drawing 10 plan x520..720 y398.5..410; section z33.5..110.5",
+    "toccata-build-v3.html print table 60 g 3.5 h"
+   ],
+   "structure": {
+    "outer_skin": 2.0,
+    "outer_skin_y": [
+     408,
+     410
+    ],
+    "perimeter_frame": {
+     "w": 4.0,
+     "depth": 11.5
+    },
+    "ribs": {
+     "t": 2.0,
+     "depth": 9.5
+    },
+    "note": "hollow from inside so the snap-in switch, threadless PCB jack and USB-C plug see a 2.0 panel (KCD1 clips and a 3.5 plug cannot reach through 11.5)",
+    "assumed": true,
+    "why": "panel thickness for the switch/jack/USB-C not specified; 2.0 is the working range of KCD1 snap clips"
+   },
+   "fit": {
+    "note": "stands on the CU tray top z33.5 between back_L end face x520 and back_R end face x720; inner face y398.5 touches the rear end edges of divider (x520..525.75) and low divider (x714.25..720, up to z90.5)",
+    "clearance": "0.2 each side in x, 0.2 under the lid",
+    "assumed": true,
+    "why": "fit clearance"
+   },
+   "features": [
+    {
+     "name": "pedal_jack_hole",
+     "name_ko": "페달 잭 구멍(J501)",
+     "type": "round",
+     "d": 6.5,
+     "center_xz": [
+      560,
+      92
+     ],
+     "mount": {
+      "name": "jack_ledge",
+      "box": {
+       "x": [
+        547.5,
+        572.5
+       ],
+       "y": [
+        384,
+        408
+       ],
+       "z": [
+        79.5,
+        87.5
+       ]
+      },
+      "holes": "2 x Ø2.7 blind 7 deep at (551,392) and (569,402) for M3x10",
+      "board": "perfboard scrap 25 x 24 lying flat on the ledge (z87.5..89.1), PJ-313 at its +y edge, axis z~92 through the hole"
+     },
+     "src": [
+      "pcb cables.csv W501 → J501 (I/O 판), W502 잭 → PB 10 cm",
+      "final-bom L15 ②, L50"
+     ],
+     "assumed": true,
+     "why": "hole/ledge sizes set for BSUN PJ-313 (threadless PCB jack) - check the received jack height and adjust ledge z"
+    },
+    {
+     "name": "power_switch_hole",
+     "name_ko": "전원 스위치 구멍(KCD1-101A)",
+     "type": "rect",
+     "size_xz": [
+      13.2,
+      19.2
+     ],
+     "center_xz": [
+      610,
+      92
+     ],
+     "panel_t": 2.0,
+     "note": "rocker long side vertical; bezel 21 x 15 covers the cut; body ~20 deep behind (y378..398.5, z82..102) stays above the Pi",
+     "src": [
+      "final-bom L59 패널 구멍 약 19x13 (연구 노트 19.2x13.2, 테두리 21x15)"
+     ],
+     "assumed": true,
+     "why": "orientation and position"
+    },
+    {
+     "name": "usb_c_input",
+     "name_ko": "USB-C 전원 입력(PD 트리거 L57)",
+     "type": "stadium opening",
+     "size_xz": [
+      13.5,
+      8.0
+     ],
+     "center_xz": [
+      660,
+      92
+     ],
+     "pocket": {
+      "module": "HUSB238 trigger 16.4 x 10 x 4.4, 16.4 along y, receptacle mouth flush with skin inner face y408",
+      "block": {
+       "x": [
+        653,
+        667
+       ],
+       "y": [
+        389,
+        408
+       ],
+       "z": [
+        87,
+        97
+       ]
+      },
+      "cavity": {
+       "x": [
+        654.8,
+        665.2
+       ],
+       "y": [
+        391.2,
+        408
+       ],
+       "z": [
+        89.6,
+        94.4
+       ]
+      },
+      "open_end": "-y (insert module and wires from inside); retain with a drop of hot-melt"
+     },
+     "note": "opening admits the plug overmould 2 mm so the 6.6 mm contact engages through the 2.0 skin",
+     "src": [
+      "final-bom L57 크기 16.4x10x4.4, I/O 판 안쪽 포켓",
+      "toccata-build-v3.html L57 card (USB-C 구멍이 밖을 향함)"
+     ],
+     "assumed": true,
+     "why": "opening/pocket dims; measure module and cable overmould (C22/C23)"
+    },
+    {
+     "name": "cable_pass_hole",
+     "name_ko": "선 통과 구멍",
+     "type": "stadium",
+     "size_xz": [
+      18,
+      11
+     ],
+     "center_xz": [
+      700,
+      92
+     ],
+     "note": "power-bank lead C22 (0.6 m C-C): bank → over low divider → CU bay → out here → loops 40 mm → USB-C input at x660",
+     "src": [
+      "toccata-build-v3.html section 09 / R28 (선 통과 구멍)",
+      "final-bom C22"
+     ],
+     "assumed": true,
+     "why": "size/position; passes a 12.5 x 7.6 plug"
+    },
+    {
+     "name": "divider_screw_tabs",
+     "name_ko": "칸막이 고정 탭",
+     "qty": 4,
+     "size": [
+      3.0,
+      20,
+      12
+     ],
+     "tabs": [
+      {
+       "side": "left",
+       "box": {
+        "x": [
+         525.75,
+         528.75
+        ],
+        "y": [
+         378.5,
+         398.5
+        ],
+        "z": [
+         44,
+         56
+        ]
+       },
+       "hole_center": [
+        527.25,
+        388.5,
+        50
+       ]
+      },
+      {
+       "side": "left",
+       "box": {
+        "x": [
+         525.75,
+         528.75
+        ],
+        "y": [
+         378.5,
+         398.5
+        ],
+        "z": [
+         72,
+         84
+        ]
+       },
+       "hole_center": [
+        527.25,
+        388.5,
+        78
+       ]
+      },
+      {
+       "side": "right",
+       "box": {
+        "x": [
+         711.25,
+         714.25
+        ],
+        "y": [
+         378.5,
+         398.5
+        ],
+        "z": [
+         44,
+         56
+        ]
+       },
+       "hole_center": [
+        712.75,
+        388.5,
+        50
+       ]
+      },
+      {
+       "side": "right",
+       "box": {
+        "x": [
+         711.25,
+         714.25
+        ],
+        "y": [
+         378.5,
+         398.5
+        ],
+        "z": [
+         72,
+         84
+        ]
+       },
+       "hole_center": [
+        712.75,
+        388.5,
+        78
+       ]
+      }
+     ],
+     "hole": "Ø4.5 along x",
+     "note": "right tabs stay below the low-divider top z90.5; left tabs x<=528.75 clear the Pi (x>=531)",
+     "src": [
+      "toccata-build-v3.html 조립 12",
+      "final-bom L49 13mm (I/O 판 4)"
+     ],
+     "assumed": true,
+     "why": "tab geometry"
+    }
+   ],
+   "mass_g": 60,
+   "print_orient": "outer face (y410) on the bed; 199.6 x 76.8 footprint"
+  },
+  {
+   "id": "PR-LID-SUP",
+   "name": "lid_corner_support",
+   "name_ko": "뚜껑 모서리 받침(자석 자리)",
+   "material": "PETG",
+   "qty": 12,
+   "part": {
+    "size": [
+     18,
+     18,
+     12
+    ],
+    "magnet_pocket": {
+     "d": 8.2,
+     "depth": 6.2,
+     "from_top": true
+    },
+    "top_z": 110.5,
+    "note": "one STL printed 12x; all get the pocket, 6 get a magnet"
+   },
+   "instances": [
+    {
+     "tag": "KS-FL",
+     "bay": "key_storage",
+     "box": {
+      "x": [
+       175.5,
+       193.5
+      ],
+      "y": [
+       226.5,
+       244.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      184.5,
+      235.5
+     ],
+     "magnet": true
+    },
+    {
+     "tag": "KS-FR",
+     "bay": "key_storage",
+     "box": {
+      "x": [
+       496.25,
+       514.25
+      ],
+      "y": [
+       226.5,
+       244.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      505.25,
+      235.5
+     ],
+     "magnet": false
+    },
+    {
+     "tag": "KS-RL",
+     "bay": "key_storage",
+     "box": {
+      "x": [
+       175.5,
+       193.5
+      ],
+      "y": [
+       380.5,
+       398.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      184.5,
+      389.5
+     ],
+     "magnet": false
+    },
+    {
+     "tag": "KS-RR",
+     "bay": "key_storage",
+     "box": {
+      "x": [
+       496.25,
+       514.25
+      ],
+      "y": [
+       380.5,
+       398.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      505.25,
+      389.5
+     ],
+     "magnet": true
+    },
+    {
+     "tag": "CU-FL",
+     "bay": "cu_bay",
+     "box": {
+      "x": [
+       525.75,
+       543.75
+      ],
+      "y": [
+       226.5,
+       244.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      534.75,
+      235.5
+     ],
+     "magnet": true
+    },
+    {
+     "tag": "CU-FR",
+     "bay": "cu_bay",
+     "box": {
+      "x": [
+       696.25,
+       714.25
+      ],
+      "y": [
+       226.5,
+       244.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      705.25,
+      235.5
+     ],
+     "magnet": false
+    },
+    {
+     "tag": "CU-RL",
+     "bay": "cu_bay",
+     "box": {
+      "x": [
+       525.75,
+       543.75
+      ],
+      "y": [
+       380.5,
+       398.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      534.75,
+      389.5
+     ],
+     "magnet": false
+    },
+    {
+     "tag": "CU-RR",
+     "bay": "cu_bay",
+     "box": {
+      "x": [
+       696.25,
+       714.25
+      ],
+      "y": [
+       380.5,
+       398.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      705.25,
+      389.5
+     ],
+     "magnet": true
+    },
+    {
+     "tag": "PB-FL",
+     "bay": "power_bank_bay",
+     "box": {
+      "x": [
+       725.75,
+       743.75
+      ],
+      "y": [
+       226.5,
+       244.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      734.75,
+      235.5
+     ],
+     "magnet": true
+    },
+    {
+     "tag": "PB-FR",
+     "bay": "power_bank_bay",
+     "box": {
+      "x": [
+       1028.5,
+       1046.5
+      ],
+      "y": [
+       226.5,
+       244.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      1037.5,
+      235.5
+     ],
+     "magnet": false
+    },
+    {
+     "tag": "PB-RL",
+     "bay": "power_bank_bay",
+     "box": {
+      "x": [
+       725.75,
+       743.75
+      ],
+      "y": [
+       380.5,
+       398.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      734.75,
+      389.5
+     ],
+     "magnet": false
+    },
+    {
+     "tag": "PB-RR",
+     "bay": "power_bank_bay",
+     "box": {
+      "x": [
+       1028.5,
+       1046.5
+      ],
+      "y": [
+       380.5,
+       398.5
+      ],
+      "z": [
+       98.5,
+       110.5
+      ]
+     },
+     "pocket_center": [
+      1037.5,
+      389.5
+     ],
+     "magnet": true
+    }
+   ],
+   "magnet_method": "support magnet (Ø8x3, L65) CA-glued at the pocket bottom z104.3..107.3; put the lid-side magnet on top of it (attracting), CA on its upper face, lower the lid: it bonds to the plywood underside exactly in line and afterwards drops 3.0 into the pocket top (z107.5..110.5) as a locating pin with 0.2 air gap -> no drilling of the plywood lids",
+   "src": [
+    "toccata-build-v3.html print table (뚜껑 받침(모서리) + 자석 자리 x12, 2 g)",
+    "final-bom L65 (뚜껑 3장 x 대각선 2곳 x 한 쌍 = 12, Ø8.2 포켓, 순간접착제)",
+    "toccata-build-v3.html L63 card (합판 드릴 없음)"
+   ],
+   "fix": "glued to the two plywood faces of the corner (C21 wood glue); no screws in v3 fastener list",
+   "notes": "top flush with wall tops (z110.5) so it also carries lid corners where the lid edge has no wall (lid_R and CU lid over the 57-high low divider). Supports sit above the key stack (z92.3) and above the I/O plate hardware (z<=102 is at x>=547, clear).",
+   "assumed": true,
+   "why": "block size 18x18x12 and pocket depth; v3 fixes only count, 2 g mass, Ø8.2 pocket, diagonal magnet pairs"
+  },
+  {
+   "id": "PR-PB-HOLDER",
+   "name": "power_bank_holder",
+   "name_ko": "보조배터리 받침 + 끈 고리",
+   "material": "PETG",
+   "qty": 1,
+   "box": {
+    "x": [
+     731,
+     921
+    ],
+    "y": [
+     227.5,
+     327.5
+    ],
+    "z": [
+     33.5,
+     50.5
+    ]
+   },
+   "src": [
+    "toccata-build-v3.html print table (보조배터리 받침 + 끈 고리, R28, 40 g)",
+    "toccata-build-v3.html drawing 10 plan: 받침(최대 170x85x35) x740..910 y232.5..317.5",
+    "toccata-build-v3.html A18"
+   ],
+   "geometry": {
+    "base": {
+     "box": {
+      "x": [
+       731,
+       921
+      ],
+      "y": [
+       227.5,
+       327.5
+      ],
+      "z": [
+       33.5,
+       35.5
+      ]
+     },
+     "t": 2.0
+    },
+    "battery_pocket": {
+     "x": [
+      741,
+      911
+     ],
+     "y": [
+      231.5,
+      316.5
+     ],
+     "z": [
+      35.5,
+      70.5
+     ]
+    },
+    "left_stop_wall": {
+     "x": [
+      737,
+      741
+     ],
+     "y": [
+      231.5,
+      316.5
+     ],
+     "z": [
+      35.5,
+      50.5
+     ]
+    },
+    "front_stop_wall": {
+     "x": [
+      737,
+      911
+     ],
+     "y": [
+      227.5,
+      231.5
+     ],
+     "z": [
+      35.5,
+      50.5
+     ]
+    },
+    "screw_pads": {
+     "d": 10,
+     "t": 3.0,
+     "z": [
+      33.5,
+      36.5
+     ],
+     "hole": 4.5,
+     "at": [
+      [
+       752,
+       322
+      ],
+      [
+       826,
+       322
+      ],
+      [
+       900,
+       322
+      ],
+      [
+       916,
+       252
+      ]
+     ]
+    },
+    "strap": {
+     "type": "20 mm hook-and-loop strap across the battery along x",
+     "left_slot": {
+      "through": "left_stop_wall",
+      "size_yz": [
+       22,
+       3
+      ],
+      "center": [
+       739,
+       274,
+       37.5
+      ]
+     },
+     "right_hook": {
+      "box": {
+       "x": [
+        913,
+        919
+       ],
+       "y": [
+        263,
+        285
+       ],
+       "z": [
+        35.5,
+        55.5
+       ]
+      },
+      "slot_yz": [
+       22,
+       4
+      ],
+      "slot_z": [
+       37.5,
+       41.5
+      ]
+     }
+    }
+   },
+   "notes": "battery pushed into the front-left corner stop; smaller banks (e.g. MT-65 105x71) are held by the strap alone; hub 710U3 lies behind at y344.5..392.5 (drawing 10). Strap is not in the BOM (buy 20 x 400 velcro or use 2 C12 ties).",
+   "mass_g": 45,
+   "assumed": true,
+   "why": "v3 gives only the envelope 170x85x35 and 4 screws; walls/slots/pads chosen so 13 mm screws bite 10 mm into bottom_R"
+  },
+  {
+   "id": "PR-KS-INSERT",
+   "name": "spare_key_storage_insert",
+   "name_ko": "예비 건반 보관함 칸막이(출력)",
+   "material": "PETG",
+   "qty": 1,
+   "box": {
+    "x": [
+     376.8,
+     398.0
+    ],
+    "y": [
+     226.7,
+     398.3
+    ],
+    "z": [
+     33.5,
+     107.5
+    ]
+   },
+   "geometry": {
+    "wall": {
+     "x": [
+      376.8,
+      378.0
+     ],
+     "y": [
+      226.7,
+      398.3
+     ],
+     "z": [
+      33.5,
+      107.5
+     ]
+    },
+    "flange": {
+     "x": [
+      378.0,
+      398.0
+     ],
+     "y": [
+      226.7,
+      398.3
+     ],
+     "z": [
+      33.5,
+      36.5
+     ]
+    },
+    "gussets": {
+     "t": 1.2,
+     "size_xz": [
+      18,
+      30
+     ],
+     "y": [
+      250,
+      312,
+      374
+     ]
+    },
+    "screw_holes": {
+     "d": 4.5,
+     "at": [
+      [
+       394,
+       236
+      ],
+      [
+       394,
+       290
+      ],
+      [
+       394,
+       344
+      ],
+      [
+       394,
+       389
+      ]
+     ]
+    }
+   },
+   "layout": {
+    "key_bay": {
+     "x": [
+      175.5,
+      376.8
+     ],
+     "y": [
+      226.5,
+      398.5
+     ],
+     "z": [
+      33.5,
+      110.5
+     ]
+    },
+    "layer1": "7 white keys (module C..B) side by side, length along x (199.3, x176.5..375.8), 160.3 wide y232.35..392.65, z33.5..56.9",
+    "layer2": "5 black + A#0 + A0/B0/C8 = 139.8 wide y242.6..382.4, z56.9..92.3",
+    "side_bay": {
+     "x": [
+      378.0,
+      514.25
+     ],
+     "y": [
+      226.5,
+      398.5
+     ],
+     "z": [
+      36.5,
+      110.5
+     ]
+    },
+    "side_bay_contents": "2 rods Ø4 x161.4 along y lying on the flange at x381 / x386 (y232..394); steel blocks 2 (9x19x40), upstop pads 12, torsion springs 8, small-parts box, tools (height block, fake lever, pin gauge)"
+   },
+   "src": [
+    "key-action-v4/DESIGN.md §13 (201.3 + 1.2 + 136.3 = 338.8 x 172 x 77, stack 58.8)",
+    "geometry.json dims[94] A08",
+    "toccata-build-v3.html A17",
+    "final-bom L49 (콤 받침 4 x 13 mm -> reused here)"
+   ],
+   "notes": "replaces the v3 comb holder + 3 small-part trays (v4 stores loose spare keys, not combs); wall top 3 below the lid; 0.2 y clearance to front/back panels",
+   "print_orient": "flange on the bed, wall standing (172 x 21.2 footprint, 74 high)",
+   "mass_g": 36,
+   "assumed": true,
+   "why": "DESIGN §13 fixes only the 1.2 wall position; flange, gussets and screw pattern added so it stands and uses the 4 x 13 mm screws v3 gave the comb holder"
+  },
+  {
+   "id": "PR-SMALL-BOX",
+   "name": "small_parts_box",
+   "name_ko": "작은 부품 통",
+   "material": "PETG",
+   "qty": 1,
+   "box": {
+    "x": [
+     410,
+     490
+    ],
+    "y": [
+     333,
+     393
+    ],
+    "z": [
+     36.5,
+     66.5
+    ]
+   },
+   "geometry": {
+    "outer": [
+     80,
+     60,
+     30
+    ],
+    "wall": 1.6,
+    "floor": 1.2,
+    "cells": "3 x 2",
+    "lid": "slip-on 1.6 top, 3 mm skirt"
+   },
+   "contents": "balance pins 4, capstan screw/nut 4 sets, sensor magnets 4, PET shims (DESIGN §13)",
+   "src": [
+    "key-action-v4/DESIGN.md §13 (작은 부품 통)"
+   ],
+   "assumed": true,
+   "why": "optional; DESIGN names the box but gives no size. A bought pill box works too"
+  },
+  {
+   "id": "PR-FOOT-SPACER",
+   "name": "rubber_foot_spacer",
+   "name_ko": "고무발 받침(4 mm)",
+   "material": "PETG",
+   "qty": 6,
+   "part": {
+    "d": 20,
+    "t": 4,
+    "hole": 4.5
+   },
+   "instances": [
+    [
+     200,
+     299
+    ],
+    [
+     200,
+     379
+    ],
+    [
+     620,
+     299
+    ],
+    [
+     620,
+     379
+    ],
+    [
+     1022,
+     299
+    ],
+    [
+     1022,
+     379
+    ]
+   ],
+   "z": [
+    18,
+    22
+   ],
+   "foot": "L14 RUB-E2 Ø28 x 18 under each spacer (z0..18)",
+   "src": [
+    "toccata-build-v3.html drawing 10 plan circles r14 at x200/620/1022, y299/379; section: 고무발 z0..18, 받침 z18..22 (20 wide)",
+    "final-bom L14 (가운데 유닛 6)",
+    "toccata-build-v3.html print table (뒷바 고무발 받침 4 mm x14)"
+   ],
+   "notes": "x620 pair screws into the CU-tray foot bosses; x200/x1022 pairs into the 11.5 plywood bottoms - check the 25 mm screw does not break through (bite = 25 - washer 0.5 - rubber seat - 4); shorten to 19 mm if it does"
+  },
+  {
+   "id": "IF-SPEAKER-JOINTS",
+   "name": "centre_unit_to_speaker_joints",
+   "name_ko": "가운데 유닛 ↔ 스피커 파트 결합(참고)",
+   "items": [
+    {
+     "what": "dovetail block",
+     "count": 4,
+     "at": [
+      {
+       "x": [
+        160,
+        168
+       ],
+       "y": [
+        275,
+        293
+       ]
+      },
+      {
+       "x": [
+        160,
+        168
+       ],
+       "y": [
+        360,
+        378
+       ]
+      },
+      {
+       "x": [
+        1054,
+        1062
+       ],
+       "y": [
+        275,
+        293
+       ]
+      },
+      {
+       "x": [
+        1054,
+        1062
+       ],
+       "y": [
+        360,
+        378
+       ]
+      }
+     ],
+     "fix": "4 x 13 mm each into end panels (16)"
+    },
+    {
+     "what": "toggle latch (L64) on printed seat",
+     "count": 2,
+     "at": [
+      {
+       "x": [
+        152,
+        176
+       ],
+       "y": [
+        407,
+        413
+       ]
+      },
+      {
+       "x": [
+        1046,
+        1070
+       ],
+       "y": [
+        407,
+        413
+       ]
+      }
+     ],
+     "fix": "M3x10 x4 each (L34)"
+    },
+    {
+     "what": "EVA 3T strip on mating faces x164 / x1058"
+    }
+   ],
+   "src": [
+    "toccata-build-v3.html drawing 10 plan",
+    "toccata-build-v3.html section 09 결합(R26)"
+   ],
+   "note": "geometry belongs to the rear-bar/speaker spec; listed so the end panels keep these zones clear"
+  }
+ ],
+ "fasteners": [
+  {
+   "id": "F01",
+   "what": "L49 스텐 둥근머리 직결피스 8호(Ø4.2) 13 mm",
+   "qty": 4,
+   "joins": "CU tray tabs → divider / low divider faces",
+   "at": [
+    [
+     527.25,
+     250,
+     41
+    ],
+    [
+     527.25,
+     318,
+     41
+    ],
+    [
+     712.75,
+     250,
+     41
+    ],
+    [
+     712.75,
+     318,
+     41
+    ]
+   ],
+   "dir": "left pair driven -x, right pair +x",
+   "bite": "13 - 3 tab = 10 into 11.5 divider",
+   "hole_printed": "Ø4.5 through",
+   "hole_wood": "awl mark only",
+   "src": [
+    "final-bom L49 13mm (CU 트레이 4)",
+    "toccata-build-v3.html 조립 12"
+   ]
+  },
+  {
+   "id": "F02",
+   "what": "L49 스텐 둥근머리 직결피스 8호(Ø4.2) 13 mm",
+   "qty": 4,
+   "joins": "I/O plate tabs → divider / low divider faces",
+   "at": [
+    [
+     527.25,
+     388.5,
+     50
+    ],
+    [
+     527.25,
+     388.5,
+     78
+    ],
+    [
+     712.75,
+     388.5,
+     50
+    ],
+    [
+     712.75,
+     388.5,
+     78
+    ]
+   ],
+   "dir": "-x / +x",
+   "bite": "10",
+   "hole_printed": "Ø4.5 through",
+   "src": [
+    "final-bom L49 13mm (I/O 판 4)",
+    "toccata-build-v3.html 조립 12"
+   ]
+  },
+  {
+   "id": "F03",
+   "what": "L49 스텐 둥근머리 직결피스 8호(Ø4.2) 13 mm",
+   "qty": 4,
+   "joins": "power-bank holder pads → bottom_R",
+   "at": [
+    [
+     752,
+     322,
+     36.5
+    ],
+    [
+     826,
+     322,
+     36.5
+    ],
+    [
+     900,
+     322,
+     36.5
+    ],
+    [
+     916,
+     252,
+     36.5
+    ]
+   ],
+   "dir": "-z",
+   "bite": "13 - 3 pad = 10 into 11.5 (tip 1.5 above underside z22)",
+   "hole_printed": "Ø4.5 through",
+   "src": [
+    "final-bom L49 13mm (보조배터리 받침 4)"
+   ]
+  },
+  {
+   "id": "F04",
+   "what": "L49 스텐 둥근머리 직결피스 8호(Ø4.2) 13 mm",
+   "qty": 4,
+   "joins": "spare-key storage insert flange → bottom_L",
+   "at": [
+    [
+     394,
+     236,
+     36.5
+    ],
+    [
+     394,
+     290,
+     36.5
+    ],
+    [
+     394,
+     344,
+     36.5
+    ],
+    [
+     394,
+     389,
+     36.5
+    ]
+   ],
+   "dir": "-z",
+   "bite": "10",
+   "hole_printed": "Ø4.5 through",
+   "src": [
+    "final-bom L49 13mm (콤 받침(보관함) 4 → 보관함 칸막이)"
+   ],
+   "assumed": true,
+   "why": "v3 comb holder screws reused for the v4 insert"
+  },
+  {
+   "id": "F05",
+   "what": "L47 M2.5x6 socket cap (유두 렌치볼트)",
+   "qty": 4,
+   "joins": "Pi 5 → CU tray bosses",
+   "at": [
+    [
+     534.5,
+     339.5,
+     41.1
+    ],
+    [
+     592.5,
+     339.5,
+     41.1
+    ],
+    [
+     534.5,
+     388.5,
+     41.1
+    ],
+    [
+     592.5,
+     388.5,
+     41.1
+    ]
+   ],
+   "dir": "-z",
+   "boss": "Ø6 x 6, tap Ø2.2",
+   "bite": "6 - 1.6 board = ~4.4",
+   "src": [
+    "final-bom L47",
+    "toccata-build-v3.html CP7"
+   ]
+  },
+  {
+   "id": "F06",
+   "what": "L34 M3x10 socket cap",
+   "qty": 4,
+   "joins": "XH-A232 amp → tray bosses",
+   "at": [
+    [
+     667.5,
+     337.5,
+     40.1
+    ],
+    [
+     706.5,
+     337.5,
+     40.1
+    ],
+    [
+     667.5,
+     384.5,
+     40.1
+    ],
+    [
+     706.5,
+     384.5,
+     40.1
+    ]
+   ],
+   "dir": "-z",
+   "boss": "Ø7 x 5, pilot Ø2.7 x 10 deep (into boss + tray skin/rib pad)",
+   "bite": "~8.4",
+   "src": [
+    "final-bom L34 (앰프 4)",
+    "toccata-build-v3.html L34 (Ø2.7~2.8 pilot)"
+   ]
+  },
+  {
+   "id": "F07",
+   "what": "L34 M3x10 socket cap",
+   "qty": 4,
+   "joins": "XL4016 buck → tray bosses",
+   "at": [
+    [
+     611.2,
+     249.2,
+     40.1
+    ],
+    [
+     665.6,
+     249.2,
+     40.1
+    ],
+    [
+     611.2,
+     283.1,
+     40.1
+    ],
+    [
+     665.6,
+     283.1,
+     40.1
+    ]
+   ],
+   "dir": "-z",
+   "boss": "Ø7 x 5, pilot Ø2.7 x 10",
+   "src": [
+    "final-bom L34 (강압 4), L58"
+   ]
+  },
+  {
+   "id": "F08",
+   "what": "L34 M3x10 socket cap",
+   "qty": 2,
+   "joins": "amp input jack board J702 → tray bosses",
+   "at": [
+    [
+     679,
+     249,
+     40.1
+    ],
+    [
+     703,
+     268,
+     40.1
+    ]
+   ],
+   "dir": "-z",
+   "boss": "Ø7 x 5, pilot Ø2.7",
+   "src": [
+    "final-bom L34 (앰프 입력 잭 기판 2)"
+   ]
+  },
+  {
+   "id": "F09",
+   "what": "L35 M3x6 socket cap (ISO 7380 in v4 lot)",
+   "qty": 2,
+   "joins": "PED board → tray standoffs (other 2 corners = printed pins)",
+   "at": [
+    [
+     535,
+     248,
+     40.1
+    ],
+    [
+     597,
+     290,
+     40.1
+    ]
+   ],
+   "dir": "-z",
+   "boss": "Ø6 x 5, blind Ø2.5 x 5",
+   "src": [
+    "final-bom L35 (CU 트레이의 페달 보드 2)"
+   ]
+  },
+  {
+   "id": "F10",
+   "what": "L34 M3x10 socket cap (from the 14 spares)",
+   "qty": 2,
+   "joins": "pedal jack J501 scrap board → I/O plate ledge",
+   "at": [
+    [
+     551,
+     392,
+     89.1
+    ],
+    [
+     569,
+     402,
+     89.1
+    ]
+   ],
+   "dir": "-z",
+   "boss": "ledge 8 thick, pilot Ø2.7 x 7",
+   "src": [
+    "pcb cables.csv W502"
+   ],
+   "assumed": true,
+   "why": "J501 board mounting not specified; L34 bought 50, 36 used"
+  },
+  {
+   "id": "F11",
+   "what": "L49 8-ho 25 mm + L36 M4 washer",
+   "qty": 6,
+   "joins": "rubber foot L14 + 4 mm printed spacer → bottom_L (x200), CU tray foot bosses (x620), bottom_R (x1022)",
+   "at": [
+    [
+     200,
+     299,
+     0
+    ],
+    [
+     200,
+     379,
+     0
+    ],
+    [
+     620,
+     299,
+     0
+    ],
+    [
+     620,
+     379,
+     0
+    ],
+    [
+     1022,
+     299,
+     0
+    ],
+    [
+     1022,
+     379,
+     0
+    ]
+   ],
+   "dir": "+z from below",
+   "src": [
+    "final-bom L14/L49 25mm/L36 (가운데 유닛 6)",
+    "toccata-build-v3.html drawing 10 plan circles"
+   ],
+   "note": "into plywood the bite may exceed 11.5 - check, use 19 mm (L49 option) if the tip shows"
+  },
+  {
+   "id": "F12",
+   "what": "L65 Ø8x3 N35 magnet + ME8 CA",
+   "qty": 12,
+   "joins": "6 in corner-support pockets (bottom), 6 on lid undersides (self-aligned)",
+   "at": [
+    [
+     184.5,
+     235.5
+    ],
+    [
+     505.25,
+     389.5
+    ],
+    [
+     534.75,
+     235.5
+    ],
+    [
+     705.25,
+     389.5
+    ],
+    [
+     734.75,
+     235.5
+    ],
+    [
+     1037.5,
+     389.5
+    ]
+   ],
+   "src": [
+    "final-bom L65, ME8"
+   ]
+  },
+  {
+   "id": "F13",
+   "what": "C21 wood glue",
+   "joins": "all plywood-to-plywood joints (bottoms, front, backs, ends, dividers) + 12 corner supports to plywood faces; masking-tape clamp 1 day",
+   "src": [
+    "toccata-build-v3.html 조립 12 (피스·드릴 없음)"
+   ]
+  },
+  {
+   "id": "F14",
+   "what": "C12 cable ties 2.5 x 100",
+   "qty": 5,
+   "joins": "fuse holder cradle (2) + inlet anchors (3)",
+   "src": [
+    "final-bom C12"
+   ],
+   "assumed": true,
+   "why": "tie use in CU bay beyond \"PED USB 짧게 묶음\" not specified"
+  },
+  {
+   "id": "F15",
+   "what": "ME9 paper double-sided tape 48 mm",
+   "joins": "USB hub 710U3 in the power-bank bay (drawing 10: x750..978, y344.5..392.5)",
+   "src": [
+    "final-bom ME9, L17"
+   ]
+  },
+  {
+   "id": "F16",
+   "what": "hot-melt / CA drop",
+   "joins": "PD trigger module in the I/O plate pocket (friction fit)",
+   "assumed": true,
+   "why": "v3 says only \"끼운다\""
+  },
+  {
+   "id": "F17",
+   "what": "snap-in",
+   "joins": "KCD1-101A rocker in the 13.2 x 19.2 hole of the 2.0 skin",
+   "src": [
+    "final-bom L59"
+   ]
+  }
+ ],
+ "names_ko": {
+  "bottom_L": "바닥 왼쪽",
+  "bottom_R": "바닥 오른쪽",
+  "lid_L": "뚜껑 왼쪽",
+  "lid_R": "뚜껑 오른쪽",
+  "front": "앞판",
+  "back_L": "뒤판 왼쪽",
+  "back_R": "뒤판 오른쪽",
+  "end_L": "끝판 왼쪽",
+  "end_R": "끝판 오른쪽",
+  "divider": "칸막이(건반 보관함 ↔ CU 칸)",
+  "low_divider": "낮은 칸막이(CU 칸 ↔ 보조배터리 칸)",
+  "key_storage": "① 건반 보관함 (R29)",
+  "cu_bay": "② CU 칸",
+  "power_bank_bay": "③ 보조배터리 칸 (R28)",
+  "cable_channel": "케이블 통로",
+  "cu_tray": "CU 트레이",
+  "cu_tray.cable_inlet": "케이블 입구",
+  "cu_tray.cable_tie_anchors": "케이블 타이 고리",
+  "cu_tray.divider_screw_tabs": "칸막이 고정 탭",
+  "cu_tray.foot_screw_bosses": "고무발 나사 보스",
+  "cu_tray.pi5_bosses": "Pi 5 보스",
+  "cu_tray.amp_bosses": "앰프(XH-A232) 보스",
+  "cu_tray.buck_bosses": "5.1 V 강압 모듈(XL4016) 보스",
+  "cu_tray.amp_input_jack_board_bosses": "앰프 입력 잭 기판(J702) 보스",
+  "cu_tray.ped_board_standoffs": "페달 보드(PB) 스탠드오프",
+  "cu_tray.fuse_holder_cradle": "퓨즈 홀더 받침",
+  "cu_lid": "CU 뚜껑(출력)",
+  "cu_lid.vent_slots": "통풍 슬롯",
+  "cu_lid.magnet_face": "자석 자리",
+  "io_plate": "I/O 판",
+  "io_plate.pedal_jack_hole": "페달 잭 구멍(J501)",
+  "io_plate.power_switch_hole": "전원 스위치 구멍(KCD1-101A)",
+  "io_plate.usb_c_input": "USB-C 전원 입력(PD 트리거 L57)",
+  "io_plate.cable_pass_hole": "선 통과 구멍",
+  "io_plate.divider_screw_tabs": "칸막이 고정 탭",
+  "lid_corner_support": "뚜껑 모서리 받침(자석 자리)",
+  "power_bank_holder": "보조배터리 받침 + 끈 고리",
+  "spare_key_storage_insert": "예비 건반 보관함 칸막이(출력)",
+  "small_parts_box": "작은 부품 통",
+  "rubber_foot_spacer": "고무발 받침(4 mm)",
+  "centre_unit_to_speaker_joints": "가운데 유닛 ↔ 스피커 파트 결합(참고)",
+  "key_bay": "건반 칸",
+  "side_bay": "옆 칸",
+  "insert_wall": "보관함 칸막이"
+ },
+ "fastener_totals": {
+  "L49 13 mm in this unit": 16,
+  "L49 13 mm dovetail blocks (end panels, see IF-SPEAKER-JOINTS)": 16,
+  "L49 13 mm XT30 seats (speaker spec)": 4,
+  "L49 13 mm total vs final-bom 36 used": "16+16+4 = 36 OK",
+  "L34 M3x10 in this unit": 12,
+  "L47 M2.5x6": 4,
+  "L35 M3x6": 2,
+  "L49 25 mm": 6,
+  "L65 magnets": 12
+ },
+ "summary": {
+  "n_panels": 11,
+  "n_printed_part_types": 8,
+  "drawing_conflicts": [
+   "drawing 10 plan puts the XH-A232 9 mm from the Pi 5 USB-A end (no room for the hub upstream plug / dongle gender) -> CU components re-laid (assumed)",
+   "drawing 10 plan cable inlet y217..237 partly lies under the front panel (y215..226.5): effective opening into the bay y226.5..237",
+   "v3 text: \"PD 트리거 2·퓨즈 홀더 2\" M3 screws on the tray (L34 card) vs R28/final-bom: PD trigger sits in the I/O plate pocket and BU914 is an inline holder -> no tray bosses for them (cradle + ties for the fuse)",
+   "v3 \"뚜껑의 Ø8.2 포켓\" would need drilling the plywood lids, which v3 also forbids -> self-aligned surface-glued lid magnets dropping into 6.2-deep support pockets",
+   "v3 R29 key storage held spare combs + 3 small-part trays; v4 DESIGN §13 stores loose keys (201.3 | 1.2 | 136.3) -> comb holder/trays dropped, printed 1.2 insert wall added",
+   "v3 print table has no CU lid entry although drawing 11 says the CU lid is printed"
+  ],
+  "lid_fit": "three lids 356 + 199 (printed, 0.5 gaps) + 338"
+ }
+}

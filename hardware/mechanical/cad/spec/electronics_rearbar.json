@@ -1,0 +1,2056 @@
+{
+ "meta": {
+  "task": "c2 electronics + bought parts in rear bar / body",
+  "units": "mm",
+  "coords": "world: x across (0 = A0 left boundary), y from white-key front lip (+ away from player), z from desk top",
+  "conventions": "boxes = axis-aligned {x:[min,max],y:[..],z:[..]}; cylinders = {axis, center (the two other coords in x,y,z order without the axis), d, range along axis}; show=false = reference/cut-out only",
+  "status": "complete",
+  "sources_root": "/Users/kwg/Desktop/mydrive/project/Toccata",
+  "current_revisions": "key action v4 r4.5, body v3.2 R26-R29, circuit W1 rev B"
+ },
+ "rearbar_items": [
+  {
+   "id": "ref_cu_bay",
+   "name_ko": "CU 칸 안쪽 공간(참조)",
+   "name_en": "CU bay inner volume (reference only)",
+   "bom_id": null,
+   "boxes": [
+    {
+     "name": "CU bay inner",
+     "x": [
+      525.74,
+      714.26
+     ],
+     "y": [
+      226.5,
+      398.5
+     ],
+     "z": [
+      33.5,
+      110.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) cu polygon + docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25) (tray z22-33.5, lid z110.5-122); v3 A07 x520~720 inner 188.5",
+     "assumed": false,
+     "show": false
+    },
+    {
+     "name": "CU tray cable entry slot",
+     "x": [
+      540,
+      700
+     ],
+     "y": [
+      217,
+      237
+     ],
+     "z": [
+      22,
+      33.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) flexb2 CU 트레이 케이블 입구 + docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25)",
+     "assumed": false,
+     "show": false
+    },
+    {
+     "name": "power-bank bay inner",
+     "x": [
+      725.74,
+      1046.5
+     ],
+     "y": [
+      226.5,
+      398.5
+     ],
+     "z": [
+      33.5,
+      110.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) pb polygon; v3 text 안치수 320.8 × 172 × 77",
+     "assumed": false,
+     "show": false
+    },
+    {
+     "name": "low divider CU|PB bay (top z90.5)",
+     "x": [
+      714.26,
+      725.74
+     ],
+     "y": [
+      226.5,
+      398.5
+     ],
+     "z": [
+      33.5,
+      90.5
+     ],
+     "source": "v3 table A (칸막이 172×57, 위 20 mm 틈) ; x from docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74)",
+     "assumed": false,
+     "show": false
+    },
+    {
+     "name": "cable channel",
+     "x": [
+      -16,
+      1238
+     ],
+     "y": [
+      215,
+      258
+     ],
+     "z": [
+      0,
+      22
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) 케이블 통로 + docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25)",
+     "assumed": false,
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "v3 drawing 10",
+   "assumed": false
+  },
+  {
+   "id": "pi5",
+   "name_ko": "라즈베리파이 5 2GB",
+   "name_en": "Raspberry Pi 5 2GB",
+   "bom_id": "L01",
+   "boxes": [
+    {
+     "name": "PCB 85x56x1.6",
+     "x": [
+      531.74,
+      616.76
+     ],
+     "y": [
+      334.5,
+      390.5
+     ],
+     "z": [
+      39.5,
+      41.1
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) \"Pi 5 85×56\"; z from docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25) (Pi 5 z39.5-59.5); thickness 1.6 per task/Pi mechanical drawing",
+     "assumed": false
+    },
+    {
+     "name": "top components envelope (SoC, heatsinks L02, headers)",
+     "x": [
+      531.74,
+      595.76
+     ],
+     "y": [
+      334.5,
+      390.5
+     ],
+     "z": [
+      41.1,
+      51.1
+     ],
+     "source": "Raspberry Pi 5 mechanical drawing (typ. <=10 above PCB away from the port block); L02 passive heatsinks height not stated",
+     "assumed": true,
+     "note": "L02 heatsink set is fanless low-profile; no Active Cooler in the BOM (v3 text has no 쿨러)"
+    },
+    {
+     "name": "USB-A x2 stacks + RJ45 block (tallest 16.5 above PCB, overhang 2.5)",
+     "x": [
+      595.76,
+      619.26
+     ],
+     "y": [
+      335.5,
+      389.5
+     ],
+     "z": [
+      41.1,
+      57.6
+     ],
+     "source": "task note (tallest parts ~16.5 incl. USB/RJ45); Pi 4/5 drawing overhang ~2.5",
+     "assumed": true,
+     "note": "orientation assumed: USB/RJ45 short edge faces +x, GPIO header edge faces +y (I/O plate), USB-C power + 2 micro-HDMI on the -y edge"
+    },
+    {
+     "name": "overall envelope per v3 side section",
+     "x": [
+      531.74,
+      619.26
+     ],
+     "y": [
+      334.5,
+      390.5
+     ],
+     "z": [
+      39.5,
+      59.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25) Pi 5 z39.5-59.5",
+     "assumed": false,
+     "show": false
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "printed tray boss (reference, part of CU tray)",
+     "axis": "z",
+     "center": [
+      535.24,
+      338.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      39.5
+     ],
+     "source": "v3 L47 card: CU 트레이 출력 보스 Ø2.2 탭 구멍, M2.5×6; boss height = 39.5-33.5 from docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25); hole pattern 58×49, 3.5 from the non-port edge (Pi mechanical drawing)",
+     "assumed": true,
+     "note": "boss OD 6 assumed"
+    },
+    {
+     "name": "printed tray boss (reference, part of CU tray)",
+     "axis": "z",
+     "center": [
+      535.24,
+      387.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      39.5
+     ],
+     "source": "v3 L47 card: CU 트레이 출력 보스 Ø2.2 탭 구멍, M2.5×6; boss height = 39.5-33.5 from docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25); hole pattern 58×49, 3.5 from the non-port edge (Pi mechanical drawing)",
+     "assumed": true,
+     "note": "boss OD 6 assumed"
+    },
+    {
+     "name": "printed tray boss (reference, part of CU tray)",
+     "axis": "z",
+     "center": [
+      593.24,
+      338.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      39.5
+     ],
+     "source": "v3 L47 card: CU 트레이 출력 보스 Ø2.2 탭 구멍, M2.5×6; boss height = 39.5-33.5 from docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25); hole pattern 58×49, 3.5 from the non-port edge (Pi mechanical drawing)",
+     "assumed": true,
+     "note": "boss OD 6 assumed"
+    },
+    {
+     "name": "printed tray boss (reference, part of CU tray)",
+     "axis": "z",
+     "center": [
+      593.24,
+      387.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      39.5
+     ],
+     "source": "v3 L47 card: CU 트레이 출력 보스 Ø2.2 탭 구멍, M2.5×6; boss height = 39.5-33.5 from docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25); hole pattern 58×49, 3.5 from the non-port edge (Pi mechanical drawing)",
+     "assumed": true,
+     "note": "boss OD 6 assumed"
+    }
+   ],
+   "mount": "4× M2.5×6 SUS socket (L47) into Ø2.2 tapped printed bosses",
+   "show": true,
+   "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) + docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25) + BOM L01 (기판 85 × 56)",
+   "assumed": false
+  },
+  {
+   "id": "usb_dongle",
+   "name_ko": "Apple USB-C → 3.5 mm 어댑터 + IH190 ㄱ자 젠더",
+   "name_en": "Apple USB-C to 3.5 mm adapter (MW2Q3KH/A) on Coms IH190 USB-C(F)→USB-A(M) left-angle gender",
+   "bom_id": "L51 + L52",
+   "boxes": [
+    {
+     "name": "IH190 gender (USB-A plug in Pi port, body turns -y)",
+     "x": [
+      619.26,
+      637.26
+     ],
+     "y": [
+      372,
+      388
+     ],
+     "z": [
+      50.6,
+      57.1
+     ],
+     "source": "BOM L52 (좌향 꺾임); size not published",
+     "assumed": true,
+     "note": "plugged into the upper USB-A of the stack nearest +y"
+    },
+    {
+     "name": "dongle USB-C head",
+     "x": [
+      622.26,
+      630.76
+     ],
+     "y": [
+      348,
+      372
+     ],
+     "z": [
+      51.0,
+      57.0
+     ],
+     "source": "Apple MW2Q3 (not dimensioned in repo); typical head 8.3×5.5×24 incl. plug",
+     "assumed": true
+    },
+    {
+     "name": "dongle cable (loop, envelope)",
+     "x": [
+      622.26,
+      630.76
+     ],
+     "y": [
+      300,
+      348
+     ],
+     "z": [
+      51.0,
+      63.0
+     ],
+     "source": "Apple MW2Q3 cable ~ 7 cm",
+     "assumed": true
+    },
+    {
+     "name": "dongle 3.5 mm socket head",
+     "x": [
+      621.26,
+      631.76
+     ],
+     "y": [
+      275,
+      300
+     ],
+     "z": [
+      51.0,
+      61.5
+     ],
+     "source": "Apple MW2Q3 jack head ~ Ø9 × 25",
+     "assumed": true,
+     "note": "cable ① (C14 1.5 m, W701) plugs in here and runs to the left-cheek headphone jack"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "SCH-07 A701, BOM L51/L52 (Pi 5 USB 포트 1, 젠더 L52로 직결)",
+   "assumed": true,
+   "note": "position assumed: gender in the upper USB-A port on the +x edge, dongle lying on top of the XH-A232 (amp top z50.5); only works because the upper port is above the amp - see conflicts for the clearance problem"
+  },
+  {
+   "id": "amp_xh_a232",
+   "name_ko": "XH-A232 (HW-404) TPA3110 2×15 W 앰프 보드",
+   "name_en": "XH-A232 (HW-404) TPA3110D2 class-D amplifier board",
+   "bom_id": "L53",
+   "boxes": [
+    {
+     "name": "board + parts envelope 54×46×14",
+     "x": [
+      623.74,
+      677.74
+     ],
+     "y": [
+      331.5,
+      377.5
+     ],
+     "z": [
+      36.5,
+      50.5
+     ],
+     "source": "BOM L53 / audio.md §1 (약 54 × 46 × 14, 4 corner holes); centre = docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) XH-A232 box x625.74-675.74 y334.5-374.5 (drawn 50×40)",
+     "assumed": true,
+     "note": "board bottom z36.5 = tray 33.5 + 3 mm printed boss (assumed); 14 = overall height incl. 220 µF caps"
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      626.74,
+      334.5
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      36.5
+     ],
+     "source": "BOM L34 (앰프를 CU 트레이 보스에 M3×10)",
+     "assumed": true,
+     "note": "hole inset 3.0 from corners assumed; measure"
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      626.74,
+      374.5
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      36.5
+     ],
+     "source": "BOM L34 (앰프를 CU 트레이 보스에 M3×10)",
+     "assumed": true,
+     "note": "hole inset 3.0 from corners assumed; measure"
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      674.74,
+      334.5
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      36.5
+     ],
+     "source": "BOM L34 (앰프를 CU 트레이 보스에 M3×10)",
+     "assumed": true,
+     "note": "hole inset 3.0 from corners assumed; measure"
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      674.74,
+      374.5
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      36.5
+     ],
+     "source": "BOM L34 (앰프를 CU 트레이 보스에 M3×10)",
+     "assumed": true,
+     "note": "hole inset 3.0 from corners assumed; measure"
+    }
+   ],
+   "mount": "4× M3×10 SUS (L34) self-tapping into printed bosses",
+   "show": true,
+   "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) + BOM L53",
+   "assumed": false
+  },
+  {
+   "id": "buck_xl4016",
+   "name_ko": "XL4016 강압 모듈 XH-M401 (20 V → 5.1 V)",
+   "name_en": "XL4016 buck module XH-M401 (CV only), 20 V -> 5.1 V",
+   "bom_id": "L58",
+   "boxes": [
+    {
+     "name": "module envelope 60.8×40.3×29 (2 heatsinks, pot)",
+     "x": [
+      635.84,
+      696.64
+     ],
+     "y": [
+      265.85,
+      306.15
+     ],
+     "z": [
+      35.5,
+      64.5
+     ],
+     "source": "BOM L58 / power.md §3 (60.8 × 40.3 × 29, 4 corner holes); centre = docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) \"5.1 V 강압 61×40\" x635.74-696.74 y266-306; bottom z35.5 = docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25) (강압 z35.5-62.5)",
+     "assumed": false,
+     "note": "side section draws 27 tall; real 29 used"
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      638.84,
+      268.85
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      35.5
+     ],
+     "source": "BOM L34 (강압 모듈 CU 트레이 보스, M3×10)",
+     "assumed": true,
+     "note": "hole positions ~3 from corners; M3 not stated (power.md: measure)"
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      638.84,
+      303.15
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      35.5
+     ],
+     "source": "BOM L34 (강압 모듈 CU 트레이 보스, M3×10)",
+     "assumed": true,
+     "note": "hole positions ~3 from corners; M3 not stated (power.md: measure)"
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      693.64,
+      268.85
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      35.5
+     ],
+     "source": "BOM L34 (강압 모듈 CU 트레이 보스, M3×10)",
+     "assumed": true,
+     "note": "hole positions ~3 from corners; M3 not stated (power.md: measure)"
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      693.64,
+      303.15
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      35.5
+     ],
+     "source": "BOM L34 (강압 모듈 CU 트레이 보스, M3×10)",
+     "assumed": true,
+     "note": "hole positions ~3 from corners; M3 not stated (power.md: measure)"
+    }
+   ],
+   "show": true,
+   "source": "BOM L58 + drawing 10",
+   "assumed": false
+  },
+  {
+   "id": "pd_trigger_husb238",
+   "name_ko": "HUSB238 PD 트리거 (20 V, I/O 판 포켓)",
+   "name_en": "HUSB238 USB-C PD trigger board (HAM6113), 20 V, in I/O-plate pocket",
+   "bom_id": "L57",
+   "boxes": [
+    {
+     "name": "board 10×16.4×4.4 incl. USB-C receptacle (receptacle face at y409.0)",
+     "x": [
+      635.74,
+      645.74
+     ],
+     "y": [
+      392.6,
+      409.0
+     ],
+     "z": [
+      57.8,
+      62.2
+     ],
+     "source": "BOM L57 / power.md §1 (16.4 × 10 × 4.4); x centre = docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) PD box x625.74-655.74; SCH-06 \"I/O 판 포켓 (L57)\"",
+     "assumed": true,
+     "note": "receptacle faces +y, 1.0 recess behind the plate outer face y410 so a plug seats fully; z centre 60 assumed"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "SCH-06 + BOM L57 + drawing 10",
+   "assumed": true
+  },
+  {
+   "id": "usb_c_panel_input",
+   "name_ko": "USB-C 전원 입력 구멍 (I/O 판)",
+   "name_en": "USB-C power input opening in the I/O plate (to the PD trigger receptacle)",
+   "bom_id": "L57 (opening only)",
+   "boxes": [
+    {
+     "name": "plug-overmold clearance cutout 14×8.5 through the plate",
+     "x": [
+      633.74,
+      647.74
+     ],
+     "y": [
+      409.0,
+      410.0
+     ],
+     "z": [
+      55.75,
+      64.25
+     ],
+     "source": "USB-C plug overmold ~12.4×6.5 (C22/C23 cables) + 0.8 clearance each side",
+     "assumed": true,
+     "note": "cut from the plate rear face to the receptacle face; the rest of the plate thickness is the trigger pocket",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "v3 A19 I/O 판 200×77 (USB-C 입력·스위치·페달 잭)",
+   "assumed": true
+  },
+  {
+   "id": "fuse_holder_bu914",
+   "name_ko": "BU914 인라인 퓨즈 홀더 + 5 A T 퓨즈",
+   "name_en": "Coms BU914 inline 5×20 fuse holder + Littelfuse 0218005.MXP",
+   "bom_id": "L60",
+   "cylinders": [
+    {
+     "name": "holder body Ø12 × 45 (axis x)",
+     "axis": "x",
+     "center": [
+      386.0,
+      39.5
+     ],
+     "d": 12.0,
+     "range": [
+      650.0,
+      695.0
+     ],
+     "source": "BOM L60 (5×20 mm 유리관용 인라인 원형 홀더, 선 약 30 cm; size not published)",
+     "assumed": true,
+     "note": "lies on the tray between PD trigger and switch, strapped to a tray boss (L34)"
+    }
+   ],
+   "boxes": [],
+   "show": true,
+   "source": "SCH-06 F601, BOM L60, power.md §4",
+   "assumed": true
+  },
+  {
+   "id": "power_switch_kcd1",
+   "name_ko": "KCD1-101A 로커 스위치 (I/O 판)",
+   "name_en": "KCD1-101A rocker switch SPST in the I/O plate",
+   "bom_id": "L59",
+   "boxes": [
+    {
+     "name": "bezel 15×21 outside the plate",
+     "x": [
+      682.5,
+      697.5
+     ],
+     "y": [
+      410.0,
+      412.0
+     ],
+     "z": [
+      61.5,
+      82.5
+     ],
+     "source": "power.md §5 / BOM L59 (bezel 21 × 15, cut-out 19.2 × 13.2)",
+     "assumed": true,
+     "note": "rocker vertical (21 along z); x/z position on plate assumed"
+    },
+    {
+     "name": "body 13.2×19.2 + 4.8 mm lugs behind the bezel",
+     "x": [
+      683.4,
+      696.6
+     ],
+     "y": [
+      389.0,
+      410.0
+     ],
+     "z": [
+      62.4,
+      81.6
+     ],
+     "source": "KCD1 typical body depth ~13 + lugs 8",
+     "assumed": true,
+     "note": "snap-in needs a ~2 mm thick panel: pocket the 11.5 mm I/O plate down to 2 mm around the cut-out"
+    },
+    {
+     "name": "panel cut-out 13.2×19.2",
+     "x": [
+      683.4,
+      696.6
+     ],
+     "y": [
+      398.5,
+      410.0
+     ],
+     "z": [
+      62.4,
+      81.6
+     ],
+     "source": "power.md §5 (panel cut-out ≈ 19.2 × 13.2)",
+     "assumed": false,
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "SCH-06 SW601, BOM L59",
+   "assumed": true
+  },
+  {
+   "id": "pedal_jack_j501",
+   "name_ko": "페달 잭 PJ-313 (I/O 판)",
+   "name_en": "Pedal jack BSUN PJ-313 (J501) in the I/O plate",
+   "bom_id": "L15",
+   "boxes": [
+    {
+     "name": "pedal jack PJ-313 body 11×12×5.2 (pads on 2 sides)",
+     "x": [
+      554.5,
+      565.5
+     ],
+     "y": [
+      396.0,
+      408.0
+     ],
+     "z": [
+      69.4,
+      74.6
+     ],
+     "source": "SCH-05 J501 \"I/O 판 — 페달 잭\", BOM L15",
+     "assumed": true,
+     "note": "BSUN PJ-313 has no published drawing (audio.md §2); envelope typical of 5-pin PJ-313, measure on receipt"
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "pedal jack PJ-313 nose Ø6×2 (3.5 mm bore)",
+     "axis": "y",
+     "center": [
+      560.0,
+      72.0
+     ],
+     "d": 6.0,
+     "range": [
+      408.0,
+      410.0
+     ],
+     "source": "SCH-05 J501 \"I/O 판 — 페달 잭\", BOM L15",
+     "assumed": true
+    }
+   ],
+   "show": true,
+   "source": "SCH-05 + v3 A19",
+   "assumed": true,
+   "note": "x/z on plate assumed; plate needs a Ø6.5 bore + body pocket; wired to the PED board"
+  },
+  {
+   "id": "ped_board",
+   "name_ko": "PED 페달 보드 (5×7 cm 만능기판 + RP2040-Zero)",
+   "name_en": "PED pedal board PB (5×7 cm perfboard, RP2040-Zero)",
+   "bom_id": "L23 (HBM1016) + SEV2",
+   "boxes": [
+    {
+     "name": "perfboard 50×70×1.6",
+     "x": [
+      536.74,
+      586.74
+     ],
+     "y": [
+      253.5,
+      323.5
+     ],
+     "z": [
+      38.5,
+      40.1
+     ],
+     "source": "SCH-05 \"PB — 페달 보드 5 × 7 cm (CU 칸 안)\"; centre = docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) PED box x531.74-591.74 y266-311",
+     "assumed": true,
+     "note": "drawn 60×45 in v3; real 5×7 cm board rotated 70 along y to fit between cable entry (y237) and Pi (y334.5); standoff top z38.5 (5 mm) assumed"
+    },
+    {
+     "name": "parts envelope (RP2040-Zero on headers, R/C)",
+     "x": [
+      536.74,
+      586.74
+     ],
+     "y": [
+      253.5,
+      323.5
+     ],
+     "z": [
+      40.1,
+      49.0
+     ],
+     "source": "MB analogue: v4 geometry P27 (Zero on pin headers top parts <=+4.4 above its PCB)",
+     "assumed": true
+    },
+    {
+     "name": "RP2040-Zero USB-C plug envelope 12.5×7.5×25 (toward -y / cable entry)",
+     "x": [
+      555.49,
+      567.99
+     ],
+     "y": [
+      228.5,
+      253.5
+     ],
+     "z": [
+      43.0,
+      50.5
+     ],
+     "source": "v4 P24 plug limit (폭 12.5 · 높이 7.5 · 길이 25)",
+     "assumed": true,
+     "note": "USB to hub over the low divider (USB 8가닥 = 모듈 7 + PED 1)"
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "printed tray standoff (reference)",
+     "axis": "z",
+     "center": [
+      539.24,
+      256.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      38.5
+     ],
+     "source": "BOM L35 (페달 보드 4, M3×6 into printed standoffs)",
+     "assumed": true,
+     "note": "hole positions 2.5 from corners assumed"
+    },
+    {
+     "name": "printed tray standoff (reference)",
+     "axis": "z",
+     "center": [
+      539.24,
+      321.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      38.5
+     ],
+     "source": "BOM L35 (페달 보드 4, M3×6 into printed standoffs)",
+     "assumed": true,
+     "note": "hole positions 2.5 from corners assumed"
+    },
+    {
+     "name": "printed tray standoff (reference)",
+     "axis": "z",
+     "center": [
+      584.24,
+      256.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      38.5
+     ],
+     "source": "BOM L35 (페달 보드 4, M3×6 into printed standoffs)",
+     "assumed": true,
+     "note": "hole positions 2.5 from corners assumed"
+    },
+    {
+     "name": "printed tray standoff (reference)",
+     "axis": "z",
+     "center": [
+      584.24,
+      321.0
+     ],
+     "d": 6.0,
+     "range": [
+      33.5,
+      38.5
+     ],
+     "source": "BOM L35 (페달 보드 4, M3×6 into printed standoffs)",
+     "assumed": true,
+     "note": "hole positions 2.5 from corners assumed"
+    }
+   ],
+   "show": true,
+   "source": "SCH-05 PB, BOM L35, drawing 10",
+   "assumed": true
+  },
+  {
+   "id": "amp_input_jack_board",
+   "name_ko": "앰프 입력 잭 기판 (PJ-313 J702 + 80 Hz RC)",
+   "name_en": "Amp input jack board (PJ-313 J702 + 2 µF/1 kΩ HPF) on perfboard scrap",
+   "bom_id": "L15 + L56 + L29 + L22 scrap",
+   "boxes": [
+    {
+     "name": "perfboard scrap 30×20×1.6",
+     "x": [
+      596.0,
+      626.0
+     ],
+     "y": [
+      278.5,
+      298.5
+     ],
+     "z": [
+      36.5,
+      38.1
+     ],
+     "source": "SCH-07 \"CU 트레이 — 앰프 입력 잭 + 저음 차단 RC\"; BOM L34 (앰프 입력 잭 기판 → CU 트레이 보스); drawn inside the \"PED 보드·앰프 입력 잭\" box of drawing 10",
+     "assumed": true,
+     "note": "placed between PED board and buck; opening faces -y (cable ② comes up the tray entry)"
+    },
+    {
+     "name": "RC parts envelope (4× 1 µF disc, 2× 1 kΩ)",
+     "x": [
+      596.0,
+      626.0
+     ],
+     "y": [
+      278.5,
+      298.5
+     ],
+     "z": [
+      38.1,
+      46.0
+     ],
+     "source": "BOM L56/L29",
+     "assumed": true
+    },
+    {
+     "name": "amp input jack PJ-313 body 11×12×5.2 (pads on 2 sides)",
+     "x": [
+      605.5,
+      616.5
+     ],
+     "y": [
+      280.5,
+      292.5
+     ],
+     "z": [
+      38.1,
+      43.3
+     ],
+     "source": "SCH-07 J702, BOM L15",
+     "assumed": true,
+     "note": "BSUN PJ-313 has no published drawing (audio.md §2); envelope typical of 5-pin PJ-313, measure on receipt"
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "amp input jack PJ-313 nose Ø6×2 (3.5 mm bore)",
+     "axis": "y",
+     "center": [
+      611.0,
+      40.7
+     ],
+     "d": 6.0,
+     "range": [
+      278.5,
+      280.5
+     ],
+     "source": "SCH-07 J702, BOM L15",
+     "assumed": true
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      599.0,
+      288.5
+     ],
+     "d": 5.0,
+     "range": [
+      33.5,
+      36.5
+     ],
+     "source": "BOM L34",
+     "assumed": true
+    },
+    {
+     "name": "printed tray boss (reference)",
+     "axis": "z",
+     "center": [
+      623.0,
+      288.5
+     ],
+     "d": 5.0,
+     "range": [
+      33.5,
+      36.5
+     ],
+     "source": "BOM L34",
+     "assumed": true
+    }
+   ],
+   "show": true,
+   "source": "SCH-07 + BOM",
+   "assumed": true
+  },
+  {
+   "id": "usb_hub_710u3",
+   "name_ko": "NEXTU 710U3 10포트 유전원 USB 허브",
+   "name_en": "NEXTU 710U3 10-port powered USB 3.0 hub",
+   "bom_id": "L17",
+   "boxes": [
+    {
+     "name": "hub body 228×48×24 (flat on the bay floor, along the back wall)",
+     "x": [
+      750,
+      978
+     ],
+     "y": [
+      344.5,
+      392.5
+     ],
+     "z": [
+      33.5,
+      57.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) \"USB 허브 228×48(710U3)\"; height 24 from BOM L17 (48 × 228 × 24 mm, 130 g); floor = plywood bottom top z33.5 (box z22-122)",
+     "assumed": false,
+     "note": "v3 assembly text says it is taped to the back wall: alternative y350.5-398.5 (touching the wall)"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "drawing 10 + BOM L17",
+   "assumed": false
+  },
+  {
+   "id": "power_bank_mt65",
+   "name_ko": "모루이 MT-65 보조배터리 (20000 mAh, 65 W)",
+   "name_en": "Morui MT-65 65 W 20000 mAh power bank (optional O07)",
+   "bom_id": "O07",
+   "boxes": [
+    {
+     "name": "power bank 105×71×32",
+     "x": [
+      750,
+      855
+     ],
+     "y": [
+      238.5,
+      309.5
+     ],
+     "z": [
+      35.5,
+      67.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) \"보조배터리 예 105×71(MT-65)\"; thickness 32 from v3 O07 card (105 × 71 × 32 mm, 335 g)",
+     "assumed": false,
+     "note": "sits on a 2 mm holder floor (assumed) z33.5-35.5, strapped"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "drawing 10 + v3 O07",
+   "assumed": false
+  },
+  {
+   "id": "power_bank_holder_envelope",
+   "name_ko": "보조배터리 받침 최대 수용 치수",
+   "name_en": "Power-bank holder max accepted envelope 170×85×35 (printed holder is a body part)",
+   "bom_id": null,
+   "boxes": [
+    {
+     "name": "max battery envelope 170×85×35",
+     "x": [
+      740,
+      910
+     ],
+     "y": [
+      232.5,
+      317.5
+     ],
+     "z": [
+      35.5,
+      70.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) ghostfill \"받침(최대 170×85×35)\"",
+     "assumed": false,
+     "note": "z base = holder floor 2 mm assumed",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "drawing 10",
+   "assumed": false
+  },
+  {
+   "id": "xt30_pair_L",
+   "name_ko": "XT30U 수·암 한 쌍 (스피커선, 통로 안) L",
+   "name_en": "AMASS XT30U-M + XT30U-F mated pair (speaker line) in the cable channel, L",
+   "bom_id": "L61",
+   "boxes": [
+    {
+     "name": "mated pair 20.5 long (13.7 M + 12.4 F − 5.6 engaged), face 10.2×5.2",
+     "x": [
+      168.75,
+      189.25
+     ],
+     "y": [
+      222.9,
+      233.1
+     ],
+     "z": [
+      2.0,
+      7.2
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) XT30 box x172-186 y223-233 (centre 179,228); face/lengths from BOM L61 / audio.md §4",
+     "assumed": true,
+     "note": "engagement 5.6 and z (lying 2 mm above the desk) assumed"
+    },
+    {
+     "name": "18 AWG leads 10 cm each side (bundle)",
+     "x": [
+      128.75,
+      229.25
+     ],
+     "y": [
+      226.0,
+      230.0
+     ],
+     "z": [
+      3.0,
+      6.2
+     ],
+     "source": "BOM L61 (18 AWG 10 cm)",
+     "assumed": true,
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "drawing 10 + BOM L61",
+   "assumed": false
+  },
+  {
+   "id": "xt30_pair_R",
+   "name_ko": "XT30U 수·암 한 쌍 (스피커선, 통로 안) R",
+   "name_en": "AMASS XT30U-M + XT30U-F mated pair (speaker line) in the cable channel, R",
+   "bom_id": "L61",
+   "boxes": [
+    {
+     "name": "mated pair 20.5 long (13.7 M + 12.4 F − 5.6 engaged), face 10.2×5.2",
+     "x": [
+      1032.75,
+      1053.25
+     ],
+     "y": [
+      222.9,
+      233.1
+     ],
+     "z": [
+      2.0,
+      7.2
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 10 top view (뒷바 속 배치; px->mm: x=(px-50.36)/0.74-16, y=215+(273.18-py)/0.74) XT30 box x1036-1050 y223-233 (centre 1043,228); face/lengths from BOM L61 / audio.md §4",
+     "assumed": true,
+     "note": "engagement 5.6 and z (lying 2 mm above the desk) assumed"
+    },
+    {
+     "name": "18 AWG leads 10 cm each side (bundle)",
+     "x": [
+      992.75,
+      1093.25
+     ],
+     "y": [
+      226.0,
+      230.0
+     ],
+     "z": [
+      3.0,
+      6.2
+     ],
+     "source": "BOM L61 (18 AWG 10 cm)",
+     "assumed": true,
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "drawing 10 + BOM L61",
+   "assumed": false
+  },
+  {
+   "id": "headphone_jack_j701",
+   "name_ko": "헤드폰 잭 PJ-313 (왼쪽 볼 앞면)",
+   "name_en": "Headphone jack BSUN PJ-313 (J701) in the left cheek front face",
+   "bom_id": "L15",
+   "boxes": [
+    {
+     "name": "headphone jack PJ-313 body 11×12×5.2 (pads on 2 sides)",
+     "x": [
+      -13.84,
+      -2.84
+     ],
+     "y": [
+      2.0,
+      14.0
+     ],
+     "z": [
+      27.4,
+      32.6
+     ],
+     "source": "v3 text (끝 부속 왼쪽: 볼 앞면에 PJ-313 헤드폰 잭); cheek x-16..-0.68 y0..212 z3..72.85 = key-action-v4 geometry.json end_parts.left.cheek",
+     "assumed": true,
+     "note": "BSUN PJ-313 has no published drawing (audio.md §2); envelope typical of 5-pin PJ-313, measure on receipt"
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "headphone jack PJ-313 nose Ø6×2 (3.5 mm bore)",
+     "axis": "y",
+     "center": [
+      -8.34,
+      30.0
+     ],
+     "d": 6.0,
+     "range": [
+      0.0,
+      2.0
+     ],
+     "source": "v3 text (끝 부속 왼쪽: 볼 앞면에 PJ-313 헤드폰 잭); cheek x-16..-0.68 y0..212 z3..72.85 = key-action-v4 geometry.json end_parts.left.cheek",
+     "assumed": true
+    }
+   ],
+   "show": true,
+   "source": "SCH-07 J701 + v3 end-part text + v4 geometry cheek",
+   "assumed": true,
+   "note": "opening on the cheek front face y=0, centred in the cheek width x-8.34; z30 assumed (below key top z43.5, above floor z3); sits in a removable printed pocket (v3 maintenance row 15); cable ①/② exit toward +y inside the cheek to the channel"
+  },
+  {
+   "id": "cables_simple",
+   "name_ko": "케이블 단순 경로(표시용)",
+   "name_en": "Cables, simple polyline paths (display only)",
+   "bom_id": "C04 ×7(+1), C14, L50, C13",
+   "boxes": [],
+   "cylinders": [],
+   "paths": [
+    {
+     "name": "O1 USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       131.0,
+       221.8,
+       14.5
+      ],
+      [
+       131.0,
+       232.0,
+       8.0
+      ],
+      [
+       548.0,
+       232.0,
+       8.0
+      ],
+      [
+       548.0,
+       227.0,
+       30.0
+      ],
+      [
+       548.0,
+       320.0,
+       70.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       760.0,
+       330.0,
+       70.0
+      ],
+      [
+       760.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "O2 USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       295.5,
+       221.8,
+       14.5
+      ],
+      [
+       295.5,
+       232.0,
+       8.0
+      ],
+      [
+       548.0,
+       232.0,
+       8.0
+      ],
+      [
+       548.0,
+       227.0,
+       30.0
+      ],
+      [
+       548.0,
+       320.0,
+       70.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       782.0,
+       330.0,
+       70.0
+      ],
+      [
+       782.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "O3 USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       460.0,
+       221.8,
+       14.5
+      ],
+      [
+       460.0,
+       232.0,
+       8.0
+      ],
+      [
+       548.0,
+       232.0,
+       8.0
+      ],
+      [
+       548.0,
+       227.0,
+       30.0
+      ],
+      [
+       548.0,
+       320.0,
+       70.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       804.0,
+       330.0,
+       70.0
+      ],
+      [
+       804.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "O4 USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       624.5,
+       221.8,
+       14.5
+      ],
+      [
+       624.5,
+       232.0,
+       8.0
+      ],
+      [
+       624.5,
+       232.0,
+       8.0
+      ],
+      [
+       624.5,
+       227.0,
+       30.0
+      ],
+      [
+       624.5,
+       320.0,
+       70.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       826.0,
+       330.0,
+       70.0
+      ],
+      [
+       826.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "O5 USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       789.0,
+       221.8,
+       14.5
+      ],
+      [
+       789.0,
+       232.0,
+       8.0
+      ],
+      [
+       692.0,
+       232.0,
+       8.0
+      ],
+      [
+       692.0,
+       227.0,
+       30.0
+      ],
+      [
+       692.0,
+       320.0,
+       70.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       848.0,
+       330.0,
+       70.0
+      ],
+      [
+       848.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "O6 USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       953.5,
+       221.8,
+       14.5
+      ],
+      [
+       953.5,
+       232.0,
+       8.0
+      ],
+      [
+       692.0,
+       232.0,
+       8.0
+      ],
+      [
+       692.0,
+       227.0,
+       30.0
+      ],
+      [
+       692.0,
+       320.0,
+       70.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       870.0,
+       330.0,
+       70.0
+      ],
+      [
+       870.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "O7 USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       1118.0,
+       221.8,
+       14.5
+      ],
+      [
+       1118.0,
+       232.0,
+       8.0
+      ],
+      [
+       692.0,
+       232.0,
+       8.0
+      ],
+      [
+       692.0,
+       227.0,
+       30.0
+      ],
+      [
+       692.0,
+       320.0,
+       70.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       892.0,
+       330.0,
+       70.0
+      ],
+      [
+       892.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "PED USB-C → hub",
+     "d": 4.0,
+     "points": [
+      [
+       561.74,
+       228.5,
+       46.75
+      ],
+      [
+       561.74,
+       240.0,
+       80.0
+      ],
+      [
+       720.0,
+       320.0,
+       95.0
+      ],
+      [
+       914.0,
+       330.0,
+       70.0
+      ],
+      [
+       914.0,
+       344.5,
+       50.0
+      ]
+     ]
+    },
+    {
+     "name": "hub upstream → Pi USB-A",
+     "d": 4.0,
+     "points": [
+      [
+       978.0,
+       368.5,
+       50.0
+      ],
+      [
+       990.0,
+       368.5,
+       75.0
+      ],
+      [
+       720.0,
+       395.0,
+       95.0
+      ],
+      [
+       630.0,
+       395.0,
+       70.0
+      ],
+      [
+       619.3,
+       383.0,
+       53.0
+      ]
+     ]
+    },
+    {
+     "name": "cable ① dongle → headphone jack / cable ② jack → amp input jack (pair)",
+     "d": 4.5,
+     "points": [
+      [
+       626.26,
+       275.0,
+       48.0
+      ],
+      [
+       600.0,
+       232.0,
+       40.0
+      ],
+      [
+       600.0,
+       232.0,
+       8.0
+      ],
+      [
+       -8.34,
+       232.0,
+       8.0
+      ],
+      [
+       -8.34,
+       212.0,
+       20.0
+      ],
+      [
+       -8.34,
+       14.0,
+       30.0
+      ]
+     ]
+    },
+    {
+     "name": "speaker line L amp → XT30 L → baffle hole (x6,z38)",
+     "d": 5.0,
+     "points": [
+      [
+       650.0,
+       331.0,
+       45.0
+      ],
+      [
+       620.0,
+       235.0,
+       40.0
+      ],
+      [
+       620.0,
+       235.0,
+       6.0
+      ],
+      [
+       179.0,
+       228.0,
+       4.6
+      ],
+      [
+       6.0,
+       228.0,
+       4.6
+      ],
+      [
+       6.0,
+       215.0,
+       38.0
+      ]
+     ]
+    },
+    {
+     "name": "speaker line R amp → XT30 R → baffle hole (x1216,z38)",
+     "d": 5.0,
+     "points": [
+      [
+       678.0,
+       331.0,
+       45.0
+      ],
+      [
+       690.0,
+       235.0,
+       40.0
+      ],
+      [
+       690.0,
+       235.0,
+       6.0
+      ],
+      [
+       1043.0,
+       228.0,
+       4.6
+      ],
+      [
+       1216.0,
+       228.0,
+       4.6
+      ],
+      [
+       1216.0,
+       215.0,
+       38.0
+      ]
+     ]
+    }
+   ],
+   "show": true,
+   "assumed": true,
+   "source": "module plug envelope x77.75-90.25 y196.8-221.8 z10.7-18.3 (module-local, v4 P24) → world x=47+164.5(k-1)+84; route per docs/report/toccata-build-v3.html drawing 10 side section (옆 단면 CU 칸; y=(px-62.5)/1.25, z=(342.5-py)/1.25) (USB-C 케이블 y220.5-228.5, 통로 → CU 트레이 입구 → 낮은 칸막이 위 → 허브)",
+   "note": "render as swept tubes of diameter d through the points; purely indicative"
+  }
+ ],
+ "speakers": [
+  {
+   "id": "speaker_L",
+   "name_ko": "삼미 CW-100B25 4인치 풀레인지 8 Ω L",
+   "name_en": "SAMMI (SAAT) CW-100B25 4\" full-range 8 Ω driver, L",
+   "bom_id": "L07",
+   "axis": "-y (faces the player)",
+   "center_xz": [
+    74.0,
+    142.0
+   ],
+   "boxes": [
+    {
+     "name": "frame flange 105×105×4 (front at y208)",
+     "x": [
+      21.5,
+      126.5
+     ],
+     "y": [
+      208.0,
+      212.0
+     ],
+     "z": [
+      89.5,
+      194.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) section: 유닛 플랜지 y208-212, 프레임 105×105; BOM L07 (깊이 57 + 플랜지 4)",
+     "assumed": false
+    },
+    {
+     "name": "EVA gasket 3T (ring, reference)",
+     "x": [
+      21.5,
+      126.5
+     ],
+     "y": [
+      212.0,
+      215.0
+     ],
+     "z": [
+      89.5,
+      194.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) EVA 가스켓 3T y212-215",
+     "assumed": false,
+     "note": "annular gasket, inner Ø94",
+     "show": false
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "basket + cone Ø94 behind the baffle front",
+     "axis": "y",
+     "center": [
+      74.0,
+      142.0
+     ],
+     "d": 94.0,
+     "range": [
+      215.0,
+      252.0
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) 유닛 바스켓·콘 y215-252, Ø94 (= cut-out)",
+     "assumed": false
+    },
+    {
+     "name": "magnet Ø85 × 17 (280 g ferrite)",
+     "axis": "y",
+     "center": [
+      74.0,
+      142.0
+     ],
+     "d": 85.0,
+     "range": [
+      252.0,
+      269.0
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) 자석 280 g y252-269, z99.5-184.5 → Ø85; BOM L07 (자석 280 g)",
+     "assumed": false,
+     "note": "overall depth 61 = 208..269"
+    },
+    {
+     "name": "dust cap / cone mouth (visual)",
+     "axis": "y",
+     "center": [
+      74.0,
+      142.0
+     ],
+     "d": 70.0,
+     "range": [
+      212.0,
+      222.0
+     ],
+     "source": "visual only",
+     "assumed": true
+    }
+   ],
+   "mount_holes": {
+    "type": "4 slots Ø4.8×6.8 on PCD Ø115 at 45°",
+    "centers_xz": [
+     [
+      33.34,
+      101.34
+     ],
+     [
+      33.34,
+      182.66
+     ],
+     [
+      114.66,
+      101.34
+     ],
+     [
+      114.66,
+      182.66
+     ]
+    ],
+    "screw": "8호 직결피스 16 mm ×4",
+    "source": "v3 table A08 + docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm)"
+   },
+   "baffle_cutout": {
+    "d": 94.0,
+    "center_xz": [
+     74.0,
+     142.0
+    ],
+    "source": "v3 A08 (컷아웃 94, 배플 중심 x74/x1148, 상자 바닥에서 120 = z142)"
+   },
+   "grille": {
+    "size": "PETG hex grille 130×130, face y203-205, spacer ring y205-215 wall 12, 4 screws 8호×19 at (±57,±57)",
+    "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm)",
+    "note": "printed body part, listed for reference"
+   },
+   "wire_hole": {
+    "center_xz": [
+     6.0,
+     38.0
+    ],
+    "d": 6.0,
+    "in": "baffle, down to the channel XT30",
+    "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) front view hole at px(298.8,338) → x6 z38 Ø6",
+    "assumed": false
+   },
+   "weight_g": 740,
+   "show": true,
+   "source": "v3 drawing 8 + table A08 + BOM L07 + audio.md §5",
+   "assumed": false
+  },
+  {
+   "id": "speaker_R",
+   "name_ko": "삼미 CW-100B25 4인치 풀레인지 8 Ω R",
+   "name_en": "SAMMI (SAAT) CW-100B25 4\" full-range 8 Ω driver, R",
+   "bom_id": "L07",
+   "axis": "-y (faces the player)",
+   "center_xz": [
+    1148.0,
+    142.0
+   ],
+   "boxes": [
+    {
+     "name": "frame flange 105×105×4 (front at y208)",
+     "x": [
+      1095.5,
+      1200.5
+     ],
+     "y": [
+      208.0,
+      212.0
+     ],
+     "z": [
+      89.5,
+      194.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) section: 유닛 플랜지 y208-212, 프레임 105×105; BOM L07 (깊이 57 + 플랜지 4)",
+     "assumed": false
+    },
+    {
+     "name": "EVA gasket 3T (ring, reference)",
+     "x": [
+      1095.5,
+      1200.5
+     ],
+     "y": [
+      212.0,
+      215.0
+     ],
+     "z": [
+      89.5,
+      194.5
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) EVA 가스켓 3T y212-215",
+     "assumed": false,
+     "note": "annular gasket, inner Ø94",
+     "show": false
+    }
+   ],
+   "cylinders": [
+    {
+     "name": "basket + cone Ø94 behind the baffle front",
+     "axis": "y",
+     "center": [
+      1148.0,
+      142.0
+     ],
+     "d": 94.0,
+     "range": [
+      215.0,
+      252.0
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) 유닛 바스켓·콘 y215-252, Ø94 (= cut-out)",
+     "assumed": false
+    },
+    {
+     "name": "magnet Ø85 × 17 (280 g ferrite)",
+     "axis": "y",
+     "center": [
+      1148.0,
+      142.0
+     ],
+     "d": 85.0,
+     "range": [
+      252.0,
+      269.0
+     ],
+     "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) 자석 280 g y252-269, z99.5-184.5 → Ø85; BOM L07 (자석 280 g)",
+     "assumed": false,
+     "note": "overall depth 61 = 208..269"
+    },
+    {
+     "name": "dust cap / cone mouth (visual)",
+     "axis": "y",
+     "center": [
+      1148.0,
+      142.0
+     ],
+     "d": 70.0,
+     "range": [
+      212.0,
+      222.0
+     ],
+     "source": "visual only",
+     "assumed": true
+    }
+   ],
+   "mount_holes": {
+    "type": "4 slots Ø4.8×6.8 on PCD Ø115 at 45°",
+    "centers_xz": [
+     [
+      1107.34,
+      101.34
+     ],
+     [
+      1107.34,
+      182.66
+     ],
+     [
+      1188.66,
+      101.34
+     ],
+     [
+      1188.66,
+      182.66
+     ]
+    ],
+    "screw": "8호 직결피스 16 mm ×4",
+    "source": "v3 table A08 + docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm)"
+   },
+   "baffle_cutout": {
+    "d": 94.0,
+    "center_xz": [
+     1148.0,
+     142.0
+    ],
+    "source": "v3 A08 (컷아웃 94, 배플 중심 x74/x1148, 상자 바닥에서 120 = z142)"
+   },
+   "grille": {
+    "size": "PETG hex grille 130×130, face y203-205, spacer ring y205-215 wall 12, 4 screws 8호×19 at (±57,±57)",
+    "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm)",
+    "note": "printed body part, listed for reference"
+   },
+   "wire_hole": {
+    "center_xz": [
+     1216.0,
+     38.0
+    ],
+    "d": 6.0,
+    "in": "baffle, down to the channel XT30",
+    "source": "docs/report/toccata-build-v3.html drawing 8 (스피커 파트 정면·단면 R26; 1.4 px/mm) front view hole at px(298.8,338) → x6 z38 Ø6; right side mirrored about x1148 (assumed)",
+    "assumed": true
+   },
+   "weight_g": 740,
+   "show": true,
+   "source": "v3 drawing 8 + table A08 + BOM L07 + audio.md §5",
+   "assumed": false
+  }
+ ],
+ "pedal": {
+  "id": "damper_pedal",
+  "name_ko": "댐퍼 페달 1개 (듀로 스위치형 → 홀센서 연속형 개조)",
+  "name_en": "Damper pedal (Duro switch-type sustain pedal modified with DRV5055 hall sensor)",
+  "bom_id": "L43",
+  "boxes": [
+   {
+    "name": "pedal envelope 76 × 240 × 65 (on the floor in front of the desk)",
+    "x": [
+     640.0,
+     716.0
+    ],
+    "y": [
+     -400.0,
+     -160.0
+    ],
+    "z": [
+     -720.0,
+     -655.0
+    ],
+    "source": "docs/report/toccata-build-v3.html drawing 7 (전체 배치 평면 R27; 0.62 px/mm) \"댐퍼 페달 1개(바닥, 책상 앞)\" px x481.60-528.72 y476.40-625.20 → x640-716, y-400..-160; height 65 from BOM L43 (약 76 × 65 × 240 mm, 348 g)",
+    "assumed": true,
+    "note": "z assumes a 720 mm desk (floor = z-720); plan position from drawing 7"
+   }
+  ],
+  "cylinders": [],
+  "cable": "L50 Coms BC256 3 m 3.5 mm TRS (tip OUT, ring 3V3, sleeve GND) → I/O-plate pedal jack J501",
+  "weight_g": 348,
+  "show": true,
+  "source": "v3 drawing 7 + BOM L43/L50 + SCH-05",
+  "assumed": true
+ },
+ "conflicts": [
+  "Pi 5 ports vs drawing 10: the Pi short edges have only 6 mm (−x, to the key-storage divider x525.74) and 9 mm (+x, to the XH-A232 drawn at x625.74) of room; a USB-A plug + IH190 angled gender + dongle needs ~35 mm. Its long edges have 8 mm (+y, I/O plate y398.5) and ~11 mm (−y, PED board) for the USB-C power plug (C24, ~25 mm). Suggest moving the XH-A232 to the right wall (x660.26-714.26, y334.5-380.5) and the PED board toward the cable entry, or rotate the Pi. Positions here follow drawing 10.",
+  "Drawing 10 board boxes are smaller than the purchased parts: XH-A232 drawn 50×40 vs 54×46×14 (BOM L53); buck drawn 61×40 ×27 tall vs 60.8×40.3×29 (power.md); PED board drawn 60×45 vs 5×7 cm (SCH-05); PD trigger drawn 30×16 in front of the plate vs 16.4×10×4.4 in an I/O-plate pocket (SCH-06). This file uses the real sizes centred on the drawn boxes.",
+  "KCD1-101A is a snap-in switch for thin panels but the I/O plate is 11.5 thick (drawing 10 side section y398.5-410): the plate needs a ~2 mm web around the 19.2×13.2 cut-out.",
+  "USB hub: v3 assembly text says it is taped to the power-bank bay back wall, but drawing 10 shows it lying 6 mm in front of the wall (y344.5-392.5, 228×48 footprint). Drawing position used; alternative y350.5-398.5.",
+  "Speaker flange/grille protrude forward of the speaker part front y215 (flange y208, grille face y203) over the end-part rear (key module depth y0..212); fine only because they are above z77 (end-part top ~z59-73)."
+ ]
+}

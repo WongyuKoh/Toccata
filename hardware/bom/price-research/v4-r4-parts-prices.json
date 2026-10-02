@@ -1,0 +1,1079 @@
+{
+ "parts": [
+  {
+   "part_id": "weight",
+   "name_ko": "강철 블록 SS400 9T×19×40 (53.7 g, 모따기 없음)",
+   "role_ko": "레버 캐리어에 밑에서 스냅으로 끼우는 강철 추. 비틀림 스프링과 함께 건반을 되돌리고(DW 51.9 g 중 스프링 11.2 g, 끝까지 복귀 45.4 / 39.8 ms), 드러난 윗면(y153~186)이 업스톱 패드 접점이다. r3의 9×50×21.5(75.8 g)보다 가벼워 m_eff 68.9 → 55.1 g.",
+   "spec_required": "SS400(SS275) 9 × 19 × 40 mm, 53.7 g, 모따기 없음. 9는 캐리어 폭, 19는 높이(z33~52), 40은 길이(y150~190). 무게는 강철 앞 윗면 텅스텐 퍼티(v3 C20)로 건반마다 맞춘다(1 g = DW +1.22 g).",
+   "qty_needed": "90개 (88 + 예비 2), 강철 약 4.8 kg. 톱날 두께 포함 90 × 41.3 mm ≈ 3.72 m",
+   "current": {
+    "title_ko": "올스틸샵 9T 19×1000 띠 4장 → 40 mm 간격 직접 톱질 (96개분)",
+    "items": [
+     {
+      "name": "사각철판 9T (SS275) 19×1000 맞춤 재단",
+      "spec": "9T × 19 × 1000 mm, 1장 1.342 kg, 개당 8,610원",
+      "qty": 4,
+      "unit_krw": 8610,
+      "shipping_krw": 3500,
+      "store": "올스틸샵 (allsteelshop.com)",
+      "url": "https://www.allsteelshop.com/product/squareplate/9t",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지의 가격 변수(LOG_3STEP: kg당 8,800→4,400원, 기준 5 kg, 10원 올림, 최소금액 = 9T 100×100 값 5,080원, 폭 10~1500·길이 ~3000 mm, 재질 SS275)로 다시 계산했다. 배송비는 /api/delivery-fee가 판(PLATE) 상품에 길이 0을 넘겨 0~10 kg 3,500원(10~30 kg 6,600원)이다. VAT 포함, 맞춤 절단은 반품 불가, 안내문 기준 결제 후 3~7영업일 출고. 표준 평철에는 9×19가 없다(부현철강 규격표: 9T는 폭 25부터, 원자재닷컴 폭 19는 3T·6T만) → 판을 19 폭 띠로 재단받는다. 1 m 띠 한 장에서 41.3 mm 간격(톱날 1.3)으로 24개, 4장 96개(예비 6). 설계 비용표의 \"1 m 4개\"와 같은 구성.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4w_allsteel_9t.jpg"
+     }
+    ],
+    "total_krw": 37940,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "정확한 소재 중 가장 흔한 방식이다. 두께 9는 압연면, 폭 19는 재단면이라 톱으로 맞출 치수는 40 하나다. 1 m 띠라 택배·바이스 작업이 편하고 6개가 남는다. 톱이 지나가는 단면이 9×19 = 171 mm²로 r3(9×50)의 38 %다.",
+    "cons_ko": "90번 톱질과 버 제거를 직접 한다(쇠톱·줄·바이스는 cuttools 카드). 폭 19 재단면의 공차가 페이지에 없다.",
+    "extra_labor_ko": "41.3 mm 간격 금긋기 → 쇠톱 90컷(컷당 약 1.5분) → 버 제거(모따기 없음) → 0.1 g 저울로 선별. 약 3~4시간(설계서 추정 4시간).",
+    "risk_ko": "폭 19 ±0.3 mm면 무게 ±0.85 g, 길이 40 ±0.3이면 ±0.4 g — 퍼티 조정 범위 안이다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "올스틸샵 9T 19×1300 띠 3장 (93개분)",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 19×1300 맞춤 재단",
+       "spec": "9T × 19 × 1300 mm, 1장 1.745 kg, 개당 10,550원",
+       "qty": 3,
+       "unit_krw": 10550,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지의 가격 변수(LOG_3STEP: kg당 8,800→4,400원, 기준 5 kg, 10원 올림, 최소금액 = 9T 100×100 값 5,080원, 폭 10~1500·길이 ~3000 mm, 재질 SS275)로 다시 계산했다. 배송비는 /api/delivery-fee가 판(PLATE) 상품에 길이 0을 넘겨 0~10 kg 3,500원(10~30 kg 6,600원)이다. VAT 포함, 맞춤 절단은 반품 불가, 안내문 기준 결제 후 3~7영업일 출고. 표준 평철에는 9×19가 없다(부현철강 규격표: 9T는 폭 25부터, 원자재닷컴 폭 19는 3T·6T만) → 판을 19 폭 띠로 재단받는다. 1.3 m 띠 한 장에서 31개, 3장 93개(예비 3).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4w_allsteel_9t.jpg"
+      }
+     ],
+     "total_krw": 35150,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "현재 안보다 2,790원 싸다. 자르는 일은 같다.",
+     "cons_ko": "예비가 3개뿐이다(톱질 실수 여유 적음). 1.3 m라 바이스에 물리고 다루기가 조금 번거롭다.",
+     "extra_labor_ko": "현재 안과 같음(90컷).",
+     "risk_ko": "사이트 계산기는 판 상품에 길이 요금을 붙이지 않지만(3,500원) 1 m를 넘는 형강에는 1~2 m 11,000원 요금표가 있어, 출고 때 추가 운임 연락이 올 수 있다."
+    },
+    {
+     "title_ko": "올스틸샵 9T 19×1950 띠 2장 (94개분)",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 19×1950 맞춤 재단",
+       "spec": "9T × 19 × 1950 mm, 1장 2.618 kg, 개당 14,250원",
+       "qty": 2,
+       "unit_krw": 14250,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지의 가격 변수(LOG_3STEP: kg당 8,800→4,400원, 기준 5 kg, 10원 올림, 최소금액 = 9T 100×100 값 5,080원, 폭 10~1500·길이 ~3000 mm, 재질 SS275)로 다시 계산했다. 배송비는 /api/delivery-fee가 판(PLATE) 상품에 길이 0을 넘겨 0~10 kg 3,500원(10~30 kg 6,600원)이다. VAT 포함, 맞춤 절단은 반품 불가, 안내문 기준 결제 후 3~7영업일 출고. 표준 평철에는 9×19가 없다(부현철강 규격표: 9T는 폭 25부터, 원자재닷컴 폭 19는 3T·6T만) → 판을 19 폭 띠로 재단받는다. 1.95 m 띠 한 장에서 47개, 2장 94개.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4w_allsteel_9t.jpg"
+      }
+     ],
+     "total_krw": 32000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "현재 안보다 5,940원 싸다(가장 싼 정확한 소재).",
+     "cons_ko": "2 m 가까운 띠라 택배 규격을 넘을 수 있고, 집에서 톱질할 때 받침이 필요하다.",
+     "extra_labor_ko": "현재 안과 같음(90컷).",
+     "risk_ko": "배송 안내문에 \"대형 제품은 화물 배송\"이 있어 운임이 바뀔 수 있다."
+    },
+    {
+     "title_ko": "올스틸샵 띠 + 동네 철공소에 90컷 절단 맡김",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 19×1000 맞춤 재단",
+       "spec": "9T × 19 × 1000 mm, 1장 1.342 kg, 개당 8,610원",
+       "qty": 4,
+       "unit_krw": 8610,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지의 가격 변수(LOG_3STEP: kg당 8,800→4,400원, 기준 5 kg, 10원 올림, 최소금액 = 9T 100×100 값 5,080원, 폭 10~1500·길이 ~3000 mm, 재질 SS275)로 다시 계산했다. 배송비는 /api/delivery-fee가 판(PLATE) 상품에 길이 0을 넘겨 0~10 kg 3,500원(10~30 kg 6,600원)이다. VAT 포함, 맞춤 절단은 반품 불가, 안내문 기준 결제 후 3~7영업일 출고. 표준 평철에는 9×19가 없다(부현철강 규격표: 9T는 폭 25부터, 원자재닷컴 폭 19는 3T·6T만) → 판을 19 폭 띠로 재단받는다. 현재 안과 같은 소재.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4w_allsteel_9t.jpg"
+      },
+      {
+       "name": "철공소 절단 90컷 (40 ± 0.3 mm, 모따기 없음)",
+       "spec": "밴드쏘 절단, 설계서 추정 1개 350원",
+       "qty": 90,
+       "unit_krw": 350,
+       "shipping_krw": 0,
+       "store": "동네 철공소 (견적 필요)",
+       "url": "",
+       "verified": false,
+       "note_ko": "확인 안 됨: 온라인 가격이 없는 서비스라 설계서(DESIGN.md 16장 \"선택\")의 추정 단가 350원을 옮겼다. 맡길 때 길이 공차 ±0.3을 따로 요구해야 한다."
+      }
+     ],
+     "total_krw": 69440,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "손 톱질이 없어 쇠톱·바이스를 살 필요가 없다(봉 약 20컷은 남음).",
+     "cons_ko": "방문·운반이 필요하고 값·공차가 업체마다 다르다. 현재 안보다 약 3만 원 비싸다.",
+     "extra_labor_ko": "방문 1~2회, 버 제거·선별 약 1시간.",
+     "risk_ko": "밴드쏘 ±1 mm면 무게 ±1.3 g — 퍼티로 맞출 수 있지만 선별이 늘어난다."
+    },
+    {
+     "title_ko": "올스틸샵 9T 19×40 개별 재단 90개 (톱질 없음)",
+     "items": [
+      {
+       "name": "사각철판 9T (SS275) 19×40 맞춤 재단",
+       "spec": "9T × 19 × 40 mm, 0.054 kg, 작은 조각이라 최소금액 5,080원(= 9T 100×100 값) 적용",
+       "qty": 90,
+       "unit_krw": 5080,
+       "shipping_krw": 3500,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지의 가격 변수(LOG_3STEP: kg당 8,800→4,400원, 기준 5 kg, 10원 올림, 최소금액 = 9T 100×100 값 5,080원, 폭 10~1500·길이 ~3000 mm, 재질 SS275)로 다시 계산했다. 배송비는 /api/delivery-fee가 판(PLATE) 상품에 길이 0을 넘겨 0~10 kg 3,500원(10~30 kg 6,600원)이다. VAT 포함, 맞춤 절단은 반품 불가, 안내문 기준 결제 후 3~7영업일 출고. 표준 평철에는 9×19가 없다(부현철강 규격표: 9T는 폭 25부터, 원자재닷컴 폭 19는 3T·6T만) → 판을 19 폭 띠로 재단받는다. 90개 × 5,080원, 합 4.83 kg이라 배송 3,500원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4w_allsteel_9t.jpg"
+      }
+     ],
+     "total_krw": 460700,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "톱질이 전혀 없고 치수가 고르다. 강철 자르기 공구가 필요 없다.",
+     "cons_ko": "최소금액 때문에 45만 원이 넘는다. 비교용.",
+     "extra_labor_ko": "선별만(약 30분).",
+     "risk_ko": "수량이 늘어도 단가가 내려가지 않는다."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다. 강철 무게와 비틀림 스프링이 건반을 되돌리는 힘이고 윗면이 업스톱 접점이다. 9T 강판 자투리나 9×19 강재를 이미 가지고 있을 때만 사용 안함으로 둔다.",
+   "r4_note_ko": "r3 카드(9×50×21.5, 92개, 앞 모서리 2×45° 모따기)를 대체한다. 모따기가 없어졌고(패드가 드러난 윗면에 닿음) 개수는 90개(88 + 예비 2)."
+  },
+  {
+   "part_id": "levershaft",
+   "name_ko": "레버 봉 SUS304 Ø4 × 161.4 (h9) — 건반 봉과 같은 봉",
+   "role_ko": "무게 레버 12개가 매달리는 피벗 축(L = (203.25, 33.5)). 핀 5장의 출력 보스(Ø3.9 → Ø4.0 드릴)·레버 허브·비틀림 스프링 코일을 꿴다. r4 하중에서 6건반 화음 63 MPa, ABUSE 86 MPa로 풀림재 항복 205 MPa 아래라 경화 샤프트·황동 부싱·리머가 필요 없다(레버 봉 마찰 1.19 g).",
+   "spec_required": "SUS304 Ø4 h9(3.970~4.000), 길이 161.4 ± 0.2 (모듈 7) + 끝 부속 왼쪽 약 45 / 오른쪽 약 21 + 보관함 예비 161.4 1개. 곧아야 한다(보스 5개·허브 12개를 지남).",
+   "qty_needed": "10토막(모듈 7 + 끝 부속 2 + 예비 1), 합 약 1.36 m → 1 m 봉 2개 (건반 봉 2 m와 합쳐 설계서의 \"4 m 봉\")",
+   "current": {
+    "title_ko": "11번가 onezaze SUS 환봉 Ø4 1 m 2개 (건반 봉과 같은 주문) → 직접 자르기",
+    "items": [
+     {
+      "name": "[onezaze] 스텐환봉 절단판매 1M (4mm)",
+      "spec": "SUS 환봉 Ø4 × 1000 mm",
+      "qty": 2,
+      "unit_krw": 1500,
+      "shipping_krw": 3500,
+      "store": "11번가 onezaze (원자재닷컴)",
+      "url": "https://www.11st.co.kr/products/1304631510",
+      "verified": true,
+      "note_ko": "9/27 11번가 상품 페이지에서 1,500원(옵션 없음), 배송비 3,500원(한진택배, 9/29 도착 예정)을 확인했다. 건반 봉 카드(keyrod)의 현재 안과 같은 상품·가게라 한 주문으로 묶으면 배송비 3,500원이 한 번만 든다. 페이지에 공차(h9) 표기는 없다 — 받은 뒤 마이크로미터로 3.97~4.00 확인.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_1304631510.jpg"
+     }
+    ],
+    "total_krw": 6500,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "가장 싸고 건반 봉과 같은 가게라 배송비가 추가로 들지 않는다(추가 3,000원). 봉 1개에서 161.4 × 5 + 끝 부속 토막이 나온다.",
+    "cons_ko": "h9 공차가 페이지에 적혀 있지 않다. 1 m 봉이 휘어서 올 수 있다.",
+    "extra_labor_ko": "쇠톱으로 약 10컷 + 끝 버 제거(줄). 약 30분.",
+    "risk_ko": "지름이 4.00을 넘으면 Ø4.0 드릴 구멍에 빡빡하다 — 받자마자 재고, 크면 사포로 끝만 다듬거나 구멍을 4.1로."
+   },
+   "alternatives": [
+    {
+     "title_ko": "건반 봉 주문에 1 m만 더 (Ø4 합 3 m로 두 봉 모두)",
+     "items": [
+      {
+       "name": "[onezaze] 스텐환봉 절단판매 1M (4mm)",
+       "spec": "SUS 환봉 Ø4 × 1000 mm, 건반 봉 카드의 2 m와 합쳐 3 m",
+       "qty": 1,
+       "unit_krw": 1500,
+       "shipping_krw": 3500,
+       "store": "11번가 onezaze (원자재닷컴)",
+       "url": "https://www.11st.co.kr/products/1304631510",
+       "verified": true,
+       "note_ko": "9/27 11번가 상품 페이지에서 1,500원(옵션 없음), 배송비 3,500원(한진택배, 9/29 도착 예정)을 확인했다. 건반 봉 카드(keyrod)의 현재 안과 같은 상품·가게라 한 주문으로 묶으면 배송비 3,500원이 한 번만 든다. 페이지에 공차(h9) 표기는 없다 — 받은 뒤 마이크로미터로 3.97~4.00 확인. 3 m에서 161.4 × 16(건반·레버 모듈 14 + 예비 2) + 끝 부속 4토막 ≈ 2.79 m(톱날 1.3 포함)가 나온다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_1304631510.jpg"
+      }
+     ],
+     "total_krw": 5000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "현재 안보다 1,500원 싸다.",
+     "cons_ko": "봉 3개 모두에서 161.4를 6개씩 잘라야 해 여유가 약 20 mm뿐이다. 한 컷이라도 틀리면 1 m를 다시 사야 한다.",
+     "extra_labor_ko": "현재 안과 같음(자르는 순서를 미리 그려야 함).",
+     "risk_ko": "휜 봉이 오면 대체할 여유가 없다."
+    },
+    {
+     "title_ko": "11번가 에이제트툴 Ø4 1 m 2개",
+     "items": [
+      {
+       "name": "스텐 환봉 4mm 1M SUS",
+       "spec": "SUS 환봉 Ø4 × 1000 mm",
+       "qty": 2,
+       "unit_krw": 1960,
+       "shipping_krw": 3500,
+       "store": "11번가 에이제트툴",
+       "url": "https://www.11st.co.kr/products/9536791872",
+       "verified": true,
+       "note_ko": "9/27 11번가 페이지에서 1,960원, 배송비 3,500원(CJ대한통운, 10/1 이내 도착 예정) 확인. 같은 가게에 Ø2(밸런스 핀 직접 자르기 안)도 있다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9536791872.webp"
+      }
+     ],
+     "total_krw": 7420,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "밸런스 핀을 Ø2 봉으로 직접 자르는 안과 배송비를 나눌 수 있다.",
+     "cons_ko": "onezaze보다 920원 + 배송비 3,500원이 더 든다(건반 봉과 가게가 다름)."
+    },
+    {
+     "title_ko": "11번가 요기가최저가 SUS304 Ø4 1 m 2개",
+     "items": [
+      {
+       "name": "스텐레스 환봉 SUS304 1M, 외경 4MM",
+       "spec": "옵션 \"스텐레스 환봉 1M / 4MM\" 1,000 + 1,000원, 재고 20",
+       "qty": 2,
+       "unit_krw": 2000,
+       "shipping_krw": 4000,
+       "store": "11번가 요기가최저가",
+       "url": "https://www.11st.co.kr/products/8661208614",
+       "verified": true,
+       "note_ko": "9/27 옵션 API에서 4MM +1,000원(재고 20), 배송비 4,000원(CJ대한통운, 9/30 이내 도착 예정) 확인. 상품명에 SUS304가 적혀 있다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_8661208614.webp"
+      }
+     ],
+     "total_krw": 8000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "재질 SUS304가 상품명에 명시돼 있다.",
+     "cons_ko": "가장 비싼 1 m 봉 안이다(8,000원)."
+    },
+    {
+     "title_ko": "원자재닷컴 Ø4 1 m 2개 + 업체 절단 10컷",
+     "items": [
+      {
+       "name": "국내최초 스텐환봉 절단판매 1M, 지름 4ø",
+       "spec": "SUS 환봉 Ø4 × 1000 mm, 판매가 1,200원(4ø 추가금 0)",
+       "qty": 2,
+       "unit_krw": 1200,
+       "shipping_krw": 4000,
+       "store": "원자재닷컴 (onezaze.com)",
+       "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=1350",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지에서 판매가 1,200원, 4ø 옵션 추가금 0을 확인. 배송은 \"상품수령시결제(착불)\"라 금액이 페이지에 없다 — 4,000원으로 가정.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4r_onezaze_1350.jpg"
+      },
+      {
+       "name": "환봉절단 추가상품 (4~12ø, 컷당)",
+       "spec": "추가상품 \"환봉절단 (절단(컷당) 4~12ø / +500원)\"",
+       "qty": 10,
+       "unit_krw": 500,
+       "shipping_krw": 0,
+       "store": "원자재닷컴 (onezaze.com)",
+       "url": "https://www.onezaze.com/goods/goods_view.php?goodsNo=1350",
+       "verified": true,
+       "note_ko": "같은 페이지 추가상품 목록에서 확인. 절단 공차는 적혀 있지 않다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4r_onezaze_1350.jpg"
+      }
+     ],
+     "total_krw": 11400,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "톱질이 없다.",
+     "cons_ko": "11,400원으로 가장 비싸고 배송이 착불이다. 절단 길이 공차(±0.2 필요)를 따로 적어 주문해야 한다.",
+     "risk_ko": "업체 톱 절단이 ±0.5 이상이면 끝 버를 줄로 맞춰야 한다."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다(레버 12개의 피벗). 건반 봉 카드에서 Ø4 봉을 넉넉히 샀거나 가진 SUS Ø4 봉이 있으면 사용 안함으로 둔다.",
+   "r4_note_ko": "r3 카드(Ø3 SUJ2 경화 h6 + 황동 부싱 + H7 리머)를 대체한다. 황동·리머 카드는 삭제(removed_ids)."
+  },
+  {
+   "part_id": "pins",
+   "name_ko": "밸런스 핀 ISO 2338 Ø2×12 SUS (위치 핀 없음)",
+   "role_ko": "밸런스 레일(y135.3)에 출력 높이 게이지로 압입해 꼭대기를 z23.30에 맞추고, 건반 블록 밑 홈(y134.0~138.0, 천 0.5T)을 물어 건반 뒤쪽 x를 잡는다. r4에서 커버·레일 위치 핀 Ø3×14는 없어졌다.",
+   "spec_required": "ISO 2338 평행 핀 Ø2 × 12, SUS(스테인리스). 핀 ↔ 입술 벽 1.39 mm, 홈 뒤끝 1.63 mm.",
+   "qty_needed": "92개 (88 + 예비 4) → 100개 한 봉",
+   "current": {
+    "title_ko": "나사코리아 다올핀 M2×12 STS304 GB119.1(ISO2338) 100개",
+    "items": [
+     {
+      "name": "다올핀 M2*6~20 STS304 GB119.1(ISO2338) — 옵션 2*12/100개/스텐STS304",
+      "spec": "SUS304 평행 핀 Ø2 × 12, 100개 (판매가 100 + 옵션 16,500원)",
+      "qty": 1,
+      "unit_krw": 16600,
+      "shipping_krw": 3300,
+      "store": "나사코리아 nasakorea.com (goodsNo 6009)",
+      "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=6009",
+      "verified": true,
+      "note_ko": "9/27 상품 페이지 옵션 목록에서 \"2*12/100개/스텐STS304 : +16,500원\"(품절 표시 없음)과 판매가 100원을 확인했다. 배송비 3,300원, 판매가+옵션가 10만 원 이상 무료. 10개 봉은 2,850원이라 10봉(28,500원)보다 100개 봉이 싸다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4p_nasa_6009.gif"
+     }
+    ],
+    "total_krw": 19900,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "규격(ISO 2338)과 재질(STS304)이 정확히 맞는 국내 재고품이다. 캡스턴 카드의 나사코리아 대안과 배송비를 나눌 수 있다.",
+    "cons_ko": "11번가 베어링강 핀보다 7,300원 비싸다."
+   },
+   "alternatives": [
+    {
+     "title_ko": "11번가 에브로se 베어링강 Ø2×12 100개 (SUS 아님)",
+     "items": [
+      {
+       "name": "호환 100pcs 2mm 베어링 강철 원통형 핀 (길이 12mm)",
+       "spec": "옵션 \"08 12mm\" / \"01 2MM\" (+2,700원), Ø2 × 12, 100개, 재고 988",
+       "qty": 1,
+       "unit_krw": 12600,
+       "shipping_krw": 0,
+       "store": "11번가 에브로se",
+       "url": "https://www.11st.co.kr/products/9480290583",
+       "verified": true,
+       "note_ko": "9/27 옵션 API에서 기본 9,900 + 2,700원 = 12,600원, 무료배송, 9/29 도착 예정을 확인. 재질은 베어링강(상품명).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9480290583.jpg"
+      }
+     ],
+     "total_krw": 12600,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가장 싸고 무료배송이다(r3 카드의 현재 안).",
+     "cons_ko": "사양(SUS)이 아니다. 습기에서 녹이 슬 수 있고 녹이 천(0.5T)에 번질 수 있다. 기능(지름·길이)은 같다.",
+     "risk_ko": "녹 방지로 기름을 얇게 바르면 쓸 수 있다."
+    },
+    {
+     "title_ko": "11번가 s8xx8s22 GB119 SUS304 Ø2×12 200개",
+     "items": [
+      {
+       "name": "M2 GB119 SUS304 맞춤 핀 평행 핀 (12mm 200pcs)",
+       "spec": "옵션 \"M2\" / \"12mm 200pcs\" (+1,600원), 재고 999",
+       "qty": 1,
+       "unit_krw": 28390,
+       "shipping_krw": 0,
+       "store": "11번가 s8xx8s22",
+       "url": "https://www.11st.co.kr/products/9548598715",
+       "verified": true,
+       "note_ko": "9/27 옵션 API에서 26,790 + 1,600원 = 28,390원, 무료배송을 확인. \"지금 주문 시 10/12(월) 발송\" — 해외 발송이라 늦다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9548598715.jpg"
+      }
+     ],
+     "total_krw": 28390,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "SUS304이고 200개라 여유가 많다.",
+     "cons_ko": "8,490원 더 비싸고 10/12 발송이다."
+    },
+    {
+     "title_ko": "SUS Ø2 봉을 12 mm로 직접 자르기 (에이제트툴 1 m 2개)",
+     "items": [
+      {
+       "name": "스텐 환봉 2mm 1M SUS",
+       "spec": "Ø2 × 1000 mm; 톱날 포함 13.3 mm 간격으로 1 m당 약 75개",
+       "qty": 2,
+       "unit_krw": 1080,
+       "shipping_krw": 3500,
+       "store": "11번가 에이제트툴",
+       "url": "https://www.11st.co.kr/products/9536791834",
+       "verified": true,
+       "note_ko": "9/27 11번가 페이지에서 1,080원, 배송비 3,500원(10/1 이내 도착 예정) 확인. 레버 봉 에이제트툴 대안과 배송비를 나눌 수 있다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9536791834.webp"
+      }
+     ],
+     "total_krw": 5660,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "가장 싸다(5,660원). 재질 SUS.",
+     "cons_ko": "92번 자르고 양 끝 버를 다듬어야 한다. 끝이 거칠면 압입 구멍을 긁는다.",
+     "extra_labor_ko": "쇠톱·니퍼로 92컷 + 끝 줄질, 약 2시간. 길이는 높이 게이지로 맞추므로 ±0.3이면 된다.",
+     "risk_ko": "끝 버가 남으면 핀 홈의 천을 찢을 수 있다."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다(건반 뒤쪽 좌우 위치를 잡는 유일한 부품). Ø2 SUS 핀이나 봉 자투리가 있으면 사용 안함으로 둔다.",
+   "r4_note_ko": "r3 카드는 위치 핀 Ø3×14 20개를 함께 샀다. r4에서 커버·레일이 없어져 밸런스 핀만 남는다."
+  },
+  {
+   "part_id": "tspring",
+   "name_ko": "비틀림 보조 스프링 SUS304 d0.5 · ID4.5 · 4.2권 (다리 3 / 22.3)",
+   "role_ko": "레버 봉 위 허브 주머니(Ø6.1×3.0)에 코일을 넣고 짧은 다리는 허브 구멍, 긴 다리는 뒷벽 홈(y209 z50~58)에 30° 감아 끼운다. 강철을 아래로 밀어 DW 51.9 g 중 11.2 g을 내고, 가벼운 레버로도 연타 16.3 / 18.9 Hz(마찰 2배 15.2 / 17.7)를 만든다.",
+   "spec_required": "SUS304-WPB d0.50, 안지름 4.5(바닥에서 4.38, 봉 Ø4와 반지름 여유 0.19), 4.2권, 다리 3 / 22.3, k_t 8 N·mm/rad(코일 9.0), 30° 감아 설치: 쉼 4.19, 바닥 5.95 N·mm (± 15 %, 단계 0 시험 8). 최대 응력 676 MPa(Su의 31 %).",
+   "qty_needed": "100개 (88 + 예비 12)",
+   "current": {
+    "title_ko": "SUS304 스프링 강선 d0.5를 사서 직접 감기 (Ø4 심봉)",
+    "items": [
+     {
+      "name": "스텐강선 0.3mm∼0.5mm (200미터) SUS304H(FH) 스프링용강선 — 옵션 0.5mm",
+      "spec": "SUS304 경인발 스프링용 강선 d0.5 × 200 m (기본 12,000 + 0.5mm 옵션 6,000원), 재고 1000",
+      "qty": 1,
+      "unit_krw": 18000,
+      "shipping_krw": 5000,
+      "store": "11번가 강선대리점",
+      "url": "https://www.11st.co.kr/products/9030046679",
+      "verified": true,
+      "note_ko": "9/27 11번가 페이지 옵션 목록에서 0.5mm +6,000원(재고 1000), 배송비 5,000원(한진택배, 9/29 도착 예정), 판매자 주소 대구를 확인했다. 스프링 하나에 선 약 9 cm(코일 4.2권 ≈ 66 mm + 다리 25 mm) → 100개에 약 10 m면 되고 나머지는 남는다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9030046679.webp"
+     }
+    ],
+    "total_krw": 23000,
+    "bucket": "base",
+    "fits_design": true,
+    "pros_ko": "확인된 값으로 사양(d0.5 SUS304 스프링 선, 4.2권, 다리 3 / 22.3)을 그대로 만들 수 있는 유일한 안이다. 다리 길이·각도를 홈 위치에 맞춰 자유롭게 정한다.",
+    "cons_ko": "100개를 손으로 감아야 한다. 권수·다리 각이 들쭉날쭉하면 k_t가 흩어진다(권수 4.0이면 +5 %).",
+    "extra_labor_ko": "Ø4 심봉(레버 봉 토막 또는 Ø4 드릴 생크)과 선 끝을 바이스에 함께 물리고 손으로 4.2권 감기 → 다리 22.3·3으로 자르기 → 출력 지그로 다리 각 굽히기. 1개 2~3분, 100개 약 3~5시간. 처음 5개로 단계 0 시험 8(쉼 4.2, 바닥 5.9 N·mm ± 15 %)을 먼저 통과시킨다.",
+    "risk_ko": "되튐 때문에 안지름이 심봉보다 커진다 — 감은 뒤 안지름이 4.3 미만이면 Ø4.2 심봉(드릴 생크), 4.7 초과면 Ø3.8 심봉으로 바꾼다. 선 재질이 SUS304-WPB가 아니라 SUS304H(FH) 표기라 인장 강도 등급은 받은 뒤 확인(설계 응력은 Su의 31 %라 여유가 크다)."
+   },
+   "alternatives": [
+    {
+     "title_ko": "스프링 제작소에 주문 제작 100개 (설계서 추정)",
+     "items": [
+      {
+       "name": "SUS304-WPB 비틀림 스프링 주문 제작 d0.5 × ID4.5 × 4.2권, 다리 3 / 22.3",
+       "spec": "D05 사양 도면으로 견적",
+       "qty": 100,
+       "unit_krw": 200,
+       "shipping_krw": 0,
+       "store": "스프링 제작소 (견적 필요)",
+       "url": "",
+       "verified": false,
+       "note_ko": "확인 안 됨: 온라인 단가표가 있는 국내 토션 스프링 제작소를 찾지 못했다(케이원텍·레이원텍 등은 문의형). 값은 설계서 16장 추정 1개 200원이다. 한국미스미 토션 스프링은 9/27~9/28 서버 점검으로 열리지 않아 확인하지 못했다."
+      }
+     ],
+     "total_krw": 20000,
+     "bucket": "base",
+     "fits_design": true,
+     "pros_ko": "사양 그대로 고르게 나온다. 손으로 감는 일이 없다.",
+     "cons_ko": "값·납기·최소 주문 금액을 모른다. 도면을 그려 견적을 받아야 한다.",
+     "extra_labor_ko": "도면 1장 작성, 견적 문의.",
+     "risk_ko": "최소 주문 금액이 붙으면 추정보다 훨씬 비싸질 수 있다."
+    },
+    {
+     "title_ko": "기성품 SUS304 V형 토션 스프링 d0.5 · 외경 5.5 · 3권 10개 × 10봉",
+     "items": [
+      {
+       "name": "토션 스프링 10 Pcs 304SUS 0.5mm 와이어 직경 V 자형 랩 3/6/9",
+       "spec": "옵션 \"1.5mm(3 Laps)\" / \"0.5mm(180 Degrees)\" / \"5.5mm(10Pcs)\" (+0원), 재고 2997",
+       "qty": 10,
+       "unit_krw": 8300,
+       "shipping_krw": 0,
+       "store": "11번가 포리식스코퍼레이션",
+       "url": "https://www.11st.co.kr/products/9585456926",
+       "verified": true,
+       "note_ko": "9/27 옵션 API에서 10개 8,300원(추가금 0), 무료배송, 9/29 도착 예정을 확인. 상세 이미지(JGCHEN)의 치수표에 다리 길이는 없다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9585456926.jpg"
+      }
+     ],
+     "total_krw": 83000,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "감을 필요가 없고 외경 5.5(안지름 4.5)·선경 0.5가 사양과 같다.",
+     "cons_ko": "3권이라 k_t가 약 10.7 N·mm/rad(설계 8)로 33 % 세다 → 쉼 토크 4.19를 지키려면 감는 각을 30°에서 약 22.5°로 줄이도록 뒷벽 홈 위치를 다시 출력해야 하고, 바닥 토크는 약 6.55 N·mm(+10 %, 시험 8의 ±15 % 안)가 된다. 다리 길이가 표기되지 않아 긴 다리 22.3에 못 미칠 수 있다. 가장 비싸다(83,000원).",
+     "extra_labor_ko": "다리 각을 펜치로 다시 굽히고 짧은 다리를 3 mm로 자른다(1개 약 1분).",
+     "risk_ko": "다리가 22.3보다 짧으면 쓸 수 없다 — 1봉만 먼저 사서 확인."
+    }
+   ],
+   "if_unused_ko": "빼면 안 된다: 스프링이 없으면 DW가 51.9 → 약 40.7 g으로 47 g 목표에 못 미치고, 가벼운 레버만으로는 연타(마찰 2배) 13.46 / 12.50 Hz로 13.3 Hz 목표를 지키지 못한다(r4 탐색, 흑건 불합격).",
+   "r4_note_ko": "r3의 선택품 압축 스프링(spring 카드, d0.25·OD4.0)을 대체하는 기본 부품이다. spring 카드는 삭제."
+  },
+  {
+   "part_id": "pu",
+   "name_ko": "업스톱 패드 폼 6T (미세셀 우레탄, 25 % 압축 0.36 MPa) + 앞 펠트 밑 PU 1T",
+   "role_ko": "업스톱 패드(폼 6T + 펠트 1T, 6×12, 패드 바 쐐기에 붙임): 레버 강철 윗면이 먼저 닿아(백 -0.40, 흑 -0.45 mm) 튀지 않게 멈춘다. 앞 펠트 밑 PU 1T(S21·S22): 건반 바닥 반발(e ≈ 0.20)을 줄인다. 단계 0 합격선: 패드 실효 e ≤ 0.07, 25 % 압축 0.36 MPa ± 30 %(E 0.7~1.4 MPa), 앞 펠트 e ≤ 0.22.",
+   "spec_required": "미세셀 우레탄 폼(PORON 계열) 6T, 25 % 압축 0.36 MPa: 6×12 패드 100개 = 72 cm²(재단 여유 포함 100×100 한 장). 저반발 PU 1T: 약 160 cm²(띠 백 8.3 · 흑 4.5 mm × 약 1,235 mm). 패드는 PET 심을 넣고 뺄 수 있게 붙인다(점착 폼이면 떼었다 다시 붙임).",
+   "qty_needed": "6T 100×100 1장 + 1T 약 170×245 1장",
+   "current": {
+    "title_ko": "나비엠알오: WAKI PORON 5T 점착 100×100 1장 + 하네나이트 1T 170×245 1장 (쐐기 +1.0 mm 출력)",
+    "items": [
+     {
+      "name": "[와키(WAKI)] PORON 스폰지 접착 부착 PON-02 (100×100×5, 검정, 아크릴 점착)",
+      "spec": "INOAC PORON 미세셀 우레탄 5T, 100 × 100, 한 면 점착 — 6×12 패드 128개분",
+      "qty": 1,
+      "unit_krw": 3399,
+      "shipping_krw": 3300,
+      "store": "나비엠알오 (navimro.com)",
+      "url": "https://www.navimro.com/g/1028764/",
+      "verified": true,
+      "note_ko": "9/27 나비엠알오 규격표에서 PON-02(K41576125) 3,090원(VAT 포함 3,399원), 10/12 출하 예정, 해외직수입·반품 불가·관부가세 없음을 확인. 등급(경도·압축 하중)은 페이지에 없다. 나비엠알오 기본 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료. 드릴·공구 카드의 나비엠알오 안과 배송비를 나눈다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41576114.jpg"
+     },
+     {
+      "name": "[와키(WAKI)] 충격흡수재 하네나이트 HNT002 (170×245×1, 검정)",
+      "spec": "저반발 제진 고무 1T(나비 표기 재질 NBR), 170 × 245 — 앞 펠트 밑 띠(백 8.3 · 흑 4.5 × 약 1,235 mm)",
+      "qty": 1,
+      "unit_krw": 16489,
+      "shipping_krw": 3300,
+      "store": "나비엠알오 (navimro.com)",
+      "url": "https://www.navimro.com/g/1029233/",
+      "verified": true,
+      "note_ko": "9/27 규격표에서 HNT002(K41587651) 14,990원(VAT 포함 16,489원), 10/07 출하 예정, 해외직수입·반품 불가 확인. 제조사(내외고무) 자료: 상온 반발 탄성 10 % 미만. 나비엠알오 기본 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료. 드릴·공구 카드의 나비엠알오 안과 배송비를 나눈다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41587651.jpg"
+     }
+    ],
+    "total_krw": 23188,
+    "bucket": "base",
+    "fits_design": false,
+    "pros_ko": "확인된 국내 재고 중 사양 재료(INOAC PORON 미세셀 우레탄)에 가장 가깝고 점착면이 있어 패드 재단·부착이 쉽다. 한 가게(나비엠알오)에서 두 가지를 같이 받는다.",
+    "cons_ko": "두께가 5T라 패드 바 쐐기를 1.0 mm 두껍게 출력해야 하고(같은 E면 패드 강성 +20 %, 눌림 여유 -17 %), 등급이 표기되지 않아 0.36 MPa에 맞는지 모른다 — WAKI 소매용은 H-48·HH-48이 아닐 가능성이 커 더 무를 수 있다. 앞 펠트 밑은 PU가 아니라 저반발 고무다.",
+    "extra_labor_ko": "패드 100개 재단(6×12, 커터·자) + 펠트 1T 겹쳐 붙이기, 약 1.5시간. 앞 펠트 밑 띠 재단 약 20분.",
+    "risk_ko": "INOAC 공식 표(poron.jp 스탠더드 시리즈)의 25 % 압축 하중: LE-20 0.02, L-24 0.046, H-24 0.071, L-32 0.076, H-32 0.132, H-48 0.25, HH-48 0.51 MPa — 설계값 0.36 MPa(±30 %: 0.25~0.47)에 드는 등급은 H-48(최대 4 mm)과 HH-48(0.8~6 mm) 사이뿐이다. 단계 0 시험 1·2(e ≤ 0.07, 0.36 MPa ± 30 %)에서 떨어지면 대안(하네나이트 3T 두 겹) 또는 Rogers PORON 4701-60(20 lb, 25 % 압축 약 0.43 MPa)·INOAC HH-48 6T를 수입 견적으로 구해야 한다(국내 소량 판매처 미확인)."
+   },
+   "alternatives": [
+    {
+     "title_ko": "나비엠알오: 하네나이트 3T 85×120 2장(겹쳐 6T) + 하네나이트 1T",
+     "items": [
+      {
+       "name": "[와키(WAKI)] 충격흡수재 하네나이트 HNT004 (85×120×3, 검정)",
+       "spec": "저반발 제진 고무 3T, 85 × 120 한 장에서 6×12 패드 140개 — 두 장을 겹쳐 6T",
+       "qty": 2,
+       "unit_krw": 10769,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (navimro.com)",
+       "url": "https://www.navimro.com/g/1029233/",
+       "verified": true,
+       "note_ko": "9/27 규격표에서 HNT004(K41587673) 9,790원(VAT 포함 10,769원), 10/12 출하 예정 확인. 나비엠알오 기본 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료. 드릴·공구 카드의 나비엠알오 안과 배송비를 나눈다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41587673.jpg"
+      },
+      {
+       "name": "[와키(WAKI)] 충격흡수재 하네나이트 HNT002 (170×245×1, 검정)",
+       "spec": "저반발 제진 고무 1T(나비 표기 재질 NBR), 170 × 245 — 앞 펠트 밑 띠(백 8.3 · 흑 4.5 × 약 1,235 mm)",
+       "qty": 1,
+       "unit_krw": 16489,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (navimro.com)",
+       "url": "https://www.navimro.com/g/1029233/",
+       "verified": true,
+       "note_ko": "9/27 규격표에서 HNT002(K41587651) 14,990원(VAT 포함 16,489원), 10/07 출하 예정, 해외직수입·반품 불가 확인. 제조사(내외고무) 자료: 상온 반발 탄성 10 % 미만. 나비엠알오 기본 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료. 드릴·공구 카드의 나비엠알오 안과 배송비를 나눈다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41587651.jpg"
+      }
+     ],
+     "total_krw": 41327,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "반발 탄성 10 % 미만(내외고무 자료)이라 튀지 않는 성질은 가장 확실하다. 고체 고무라 같은 두께에서 PORON 소매품보다 단단할 가능성이 높다(쇼어 A 35급이면 0.36 MPa 근처로 추정, 미측정).",
+     "cons_ko": "폼이 아니라 고체 고무라 눌리면 옆으로 부푼다: 20 % 눌림에서 폭 6 → 약 6.7, 캐리어 윗 립과의 x 틈 0.7이 약 0.35로 준다. 두 장을 붙여야 하고 비용이 약 1.8배다. 압축 영구 변형이 크다(70 °C 22 h 52 %, 제조사 자료).",
+     "extra_labor_ko": "두 장 접착(얇은 양면테이프·v3 순간접착제) 후 6×12 재단, 약 2시간.",
+     "risk_ko": "압축 강성·e는 단계 0 시험 1·2로 확인해야 한다."
+    },
+    {
+     "title_ko": "스웨그키 PORON LE-20 3T 1장을 두 겹으로 (가장 싼 6T)",
+     "items": [
+      {
+       "name": "포론 하부 흡음재 — 옵션 3 (mm)",
+       "spec": "INOAC PORON LE-20 3 mm, 425 × 122 (옵션 목록에 3mm만 판매 중)",
+       "qty": 1,
+       "unit_krw": 5000,
+       "shipping_krw": 3000,
+       "store": "스웨그키 (swagkey.kr, idx=253)",
+       "url": "https://www.swagkey.kr/24/?idx=253",
+       "verified": true,
+       "note_ko": "9/27 상품 페이지와 옵션 API(/shop/load_option.cm)에서 3mm 5,000원(기본 4,000 + 1,000)만 판매 중임을 확인. 배송 3,000원, 10만 원 이상 무료. 1.5·2.5·2.7mm는 옵션에서 빠져 있다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_swagkey_253.jpg"
+      }
+     ],
+     "total_krw": 8000,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가장 싸고 한 장으로 6T 패드 100개가 넉넉히 나온다(두 겹).",
+     "cons_ko": "LE-20은 INOAC 표에서 25 % 압축 0.02 MPa로 사양(0.36)의 약 1/18이라 너무 무르다 — 패드가 바닥까지 눌려 업스톱 시점·노치 들림 계산이 맞지 않는다. 앞 펠트 밑 1T가 없다(펠트 1T로 대체).",
+     "extra_labor_ko": "두 겹 접착 + 재단 약 2시간.",
+     "risk_ko": "단계 0 시험 2에서 거의 확실히 불합격. 비교용 쿠폰으로만 권한다."
+    },
+    {
+     "title_ko": "나비엠알오 WAKI PORON 5T 1장만 (앞 펠트 밑은 펠트 1T로)",
+     "items": [
+      {
+       "name": "[와키(WAKI)] PORON 스폰지 접착 부착 PON-02 (100×100×5, 검정, 아크릴 점착)",
+       "spec": "INOAC PORON 미세셀 우레탄 5T, 100 × 100, 한 면 점착 — 6×12 패드 128개분",
+       "qty": 1,
+       "unit_krw": 3399,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (navimro.com)",
+       "url": "https://www.navimro.com/g/1028764/",
+       "verified": true,
+       "note_ko": "9/27 나비엠알오 규격표에서 PON-02(K41576125) 3,090원(VAT 포함 3,399원), 10/12 출하 예정, 해외직수입·반품 불가·관부가세 없음을 확인. 등급(경도·압축 하중)은 페이지에 없다. 나비엠알오 기본 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료. 드릴·공구 카드의 나비엠알오 안과 배송비를 나눈다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41576114.jpg"
+      }
+     ],
+     "total_krw": 6699,
+     "bucket": "base",
+     "fits_design": false,
+     "pros_ko": "가장 싼 PORON 안(6,699원)이다. 펠트 1T는 felt2 카드의 메리노 1T 자투리를 쓴다.",
+     "cons_ko": "현재 안의 5T·등급 문제에 더해 앞 펠트 밑이 PU 대신 펠트라 건반 바닥 반발(e)이 커질 수 있다(단계 0 시험 4: e ≤ 0.22).",
+     "extra_labor_ko": "현재 안과 같음(앞 펠트 밑 띠는 펠트에서 재단).",
+     "risk_ko": "앞 펠트 e가 0.22를 넘으면 하네나이트 1T를 추가로 사야 한다."
+    }
+   ],
+   "if_unused_ko": "뺄 수 없다. 패드가 없으면 레버 강철이 패드 바(PETG)에 직접 부딪혀 소리·반발이 커지고, 연타·노치 들림·유령 계산이 모두 패드 e ≤ 0.07을 전제로 한다. 사양에 맞는 폼을 이미 가지고 있을 때만 사용 안함.",
+   "r4_note_ko": "r3 카드(백 3T·흑 2T 패드 + 1T, 스웨그키·11번가·알리)를 대체한다. r4 패드는 백·흑 모두 6T(폼) + 펠트 1T이고, 두께는 쐐기 출력으로 맞춘다."
+  },
+  {
+   "part_id": "shim",
+   "name_ko": "PET 심 0.1 mm (OHP 필름 6×12) — 업스톱 시점 조정",
+   "role_ko": "패드 바를 앞으로 빼서 패드와 쐐기 사이에 넣고 빼는 조정 심. 한 장 = 레버가 0.23° / 0.24° 일찍 닿음 = 건반 앞 0.18 / 0.22 mm. 1 N 추로 바닥을 확인하며 건반마다 맞춘다.",
+   "spec_required": "PET(OHP 필름) 0.1 mm, 6 × 12로 잘라 씀.",
+   "qty_needed": "필요한 만큼 약 50장 = 36 cm² → A4 한 장이면 충분",
+   "current": {
+    "title_ko": "11번가 핑블샵 A4 OHP 필름 100㎛ 20매",
+    "items": [
+     {
+      "name": "A4 레이져프린터 전용 고투명 OHP필름 20매 (copierland)",
+      "spec": "A4 OHP 필름, 포장 표기 100 mic(0.1 mm) · 20매 · 투명",
+      "qty": 1,
+      "unit_krw": 5980,
+      "shipping_krw": 0,
+      "store": "11번가 핑블샵",
+      "url": "https://www.11st.co.kr/products/9367896435",
+      "verified": true,
+      "note_ko": "9/27 11번가 페이지에서 5,980원, 무료배송, 9/29 도착 예정을 확인. 두께 100 mic은 상품 사진의 포장 표기에서 읽었다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9367896435.webp"
+     }
+    ],
+    "total_krw": 5980,
+    "bucket": "consumable",
+    "fits_design": true,
+    "pros_ko": "두께 0.1 mm가 포장에 표기된 PET OHP 필름이고 무료배송이다.",
+    "cons_ko": "한 장만 쓰고 19장이 남는다.",
+    "extra_labor_ko": "가위로 6×12 재단, 필요할 때마다 몇 장."
+   },
+   "alternatives": [
+    {
+     "title_ko": "다이소 A4 손코팅 필름 6매 (매장)",
+     "items": [
+      {
+       "name": "A4 손코팅 필름 6매",
+       "spec": "손코팅(점착) 필름 A4 6매, 두께 표기 없음",
+       "qty": 1,
+       "unit_krw": 1000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (매장 재고, 온라인 표시가)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1018434",
+       "verified": true,
+       "note_ko": "9/27 다이소몰 검색 API에서 1,000원, 온라인 재고 102, 품절 아님을 확인. 두께는 페이지에 없다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4h_daiso_1018434.jpg"
+      }
+     ],
+     "total_krw": 1000,
+     "bucket": "consumable",
+     "fits_design": false,
+     "pros_ko": "1,000원으로 가장 싸고 점착면이 있어 심이 쐐기에 붙어 있다.",
+     "cons_ko": "두께가 표기되지 않고 점착층이 눌리면 두께가 변한다. 떼었다 붙이기가 어렵다.",
+     "extra_labor_ko": "매장 방문, 캘리퍼스로 두께 확인."
+    },
+    {
+     "title_ko": "복사지 0.1 mm (가진 것)",
+     "items": [
+      {
+       "name": "복사용지 80 g/m² (약 0.1 mm)",
+       "spec": "가진 A4 복사지",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "(구매 없음)",
+       "url": "",
+       "verified": true,
+       "note_ko": "구매 없음. 종이 펀칭(쉼 펠트 밑)도 같은 종이를 쓴다."
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "consumable",
+     "fits_design": false,
+     "pros_ko": "돈이 들지 않는다.",
+     "cons_ko": "습기에 두께가 변하고 폼 밑에서 눌려 얇아진다. 사양(PET)이 아니다."
+    }
+   ],
+   "if_unused_ko": "1 N 바닥 확인에서 모든 건반이 설계 틈(-0.40 / -0.45) 안이면 필요 없다. 복사지로 임시 대체할 수 있다.",
+   "r4_note_ko": "r4 새 소모품(r3는 손나사 조임으로 조정). 설계서 16장 추정 1,000원."
+  },
+  {
+   "part_id": "drill4",
+   "name_ko": "Ø4.0 HSS 드릴 — 레버 허브·핀 보스 구멍 다듬기",
+   "role_ko": "출력한 Ø3.9 구멍(레버 캐리어 허브 90개, 핀 보스 모듈 5 × 7 + 끝 부속)을 Ø4.0으로 다듬어 SUS304 Ø4 레버 봉이 부드럽게 돈다(레버 봉 마찰 1.19 g). r3의 Ø3 H7 리머·M3 탭을 대신하는 유일한 공구.",
+   "spec_required": "HSS 스트레이트 드릴 Ø4.0 (전동 드릴 또는 손으로 돌림). PETG라 1개면 충분.",
+   "qty_needed": "1개 (약 130구멍)",
+   "current": {
+    "title_ko": "나비엠알오 스트레이트 드릴 SD 4.0 1개",
+    "items": [
+     {
+      "name": "[나비엠알오] 스트레이트 드릴 SD 4.0",
+      "spec": "HSS(M2) Ø4.0, 날장 55, 전장 84, 1EA, 중국산",
+      "qty": 1,
+      "unit_krw": 990,
+      "shipping_krw": 3300,
+      "store": "나비엠알오 (navimro.com)",
+      "url": "https://www.navimro.com/g/171100/",
+      "verified": true,
+      "note_ko": "9/27 규격표에서 SD 4.0 1EA(K11176355) 900원(VAT 포함 990원), 9/28 출하 예정 확인(10개 팩은 5,049원). 나비엠알오 기본 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료. 드릴·공구 카드의 나비엠알오 안과 배송비를 나눈다.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4d_navi_K06128094.jpg"
+     }
+    ],
+    "total_krw": 4290,
+    "bucket": "tool",
+    "fits_design": true,
+    "pros_ko": "가장 싸다. PORON 폼·공구를 나비엠알오에서 같이 사면 배송비가 추가되지 않는다.",
+    "cons_ko": "나비엠알오에서 이것만 사면 배송비 3,300원이 드릴값보다 크다.",
+    "extra_labor_ko": "구멍 약 130개 × 10초, 약 30분. PETG가 녹지 않게 저속으로."
+   },
+   "alternatives": [
+    {
+     "title_ko": "11번가 다유몰 보쉬 HSS-G 4 mm (육각 생크)",
+     "items": [
+      {
+       "name": "보쉬 임팩트 철공드릴 HSS-G 4MM 2608577570",
+       "spec": "HSS-G Ø4, 육각 생크(임팩 드라이버용)",
+       "qty": 1,
+       "unit_krw": 4380,
+       "shipping_krw": 3000,
+       "store": "11번가 다유몰",
+       "url": "https://www.11st.co.kr/products/9548031056",
+       "verified": true,
+       "note_ko": "9/27 11번가 페이지에서 4,380원, 배송비 3,000원(50만 원 이상 무료), 9/29 도착 예정 확인.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9548031056.webp"
+      }
+     ],
+     "total_krw": 7380,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "육각 생크라 충전 드라이버에 바로 끼운다.",
+     "cons_ko": "7,380원으로 비싸다."
+    },
+    {
+     "title_ko": "가진 Ø4 드릴 사용",
+     "items": [
+      {
+       "name": "Ø4.0 드릴 (보유품)",
+       "spec": "가진 철공·목공 드릴 Ø4.0",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "(구매 없음)",
+       "url": "",
+       "verified": true,
+       "note_ko": "구매 없음."
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "돈이 들지 않는다.",
+     "cons_ko": "목공용 끝(센터 핀)이면 구멍이 커질 수 있다 — 철공용이 좋다."
+    }
+   ],
+   "if_unused_ko": "Ø4.0 드릴이 이미 있으면 사용 안함. 드릴 없이 출력 Ø3.9 구멍을 그대로 두면 봉이 안 들어가거나 빡빡해 레버 마찰·DW가 커진다.",
+   "r4_note_ko": "r3의 reamer(Ø3 H7 리머 + 탭 핸들)·tap(M3 탭 + Ø2.5 드릴) 카드를 대체한다. 두 카드는 삭제."
+  },
+  {
+   "part_id": "cuttools",
+   "name_ko": "강철 자르기 공구 (쇠톱·바이메탈 날·평줄·고정 공구)",
+   "role_ko": "9T×19 띠를 40 mm 간격으로 90번(단면 9×19 = 171 mm², r3 9×50의 38 %), SUS304 Ø4 봉(건반·레버) 약 20번 직접 자르고 버를 줄로 다듬는다. 레일·탭 띠 톱질은 r4에서 없어졌다.",
+   "spec_required": "12인치(300 mm) 프레임 쇠톱, 바이메탈 18~24 TPI 날 2장(r3 9×50 기준 날 1장 약 30~40컷 = 13,500~18,000 mm² → r4 약 15,600 mm²), 철공용 평줄 200 mm 안팎, 9T 띠를 붙잡는 바이스 또는 C클램프.",
+   "qty_needed": "쇠톱 1, 날 2, 평줄 1, 고정 공구 1 (공구라 88건반 수량과 무관)",
+   "current": {
+    "title_ko": "엘레파츠 세트 (날 2장)",
+    "items": [
+     {
+      "name": "[CK6930] 코텍스 쇠톱(대) 300mm K-9301",
+      "spec": "프레임 쇠톱, 300 mm 날",
+      "qty": 1,
+      "unit_krw": 6500,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (eleparts.co.kr)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=9100747",
+      "verified": true,
+      "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다. 6,500원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_9100747.jpg"
+     },
+     {
+      "name": "[LENOX] 쇠톱날(USA) 12인치 T2355",
+      "spec": "12인치 쇠톱날(TPI 표기 없음)",
+      "qty": 2,
+      "unit_krw": 2200,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (eleparts.co.kr)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=4101973",
+      "verified": true,
+      "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다. 2,200원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_4101973.jpg"
+     },
+     {
+      "name": "[BD079] Coms 연마봉 평줄 야스리",
+      "spec": "철공용 평줄(합금)",
+      "qty": 1,
+      "unit_krw": 6800,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (eleparts.co.kr)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=12185326",
+      "verified": true,
+      "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다. 6,800원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_12185326.jpg"
+     },
+     {
+      "name": "[PD-374] Prokit 공작물 고정 바이스 / 탁상 바이스",
+      "spec": "책상 모서리에 조이는 소형 바이스",
+      "qty": 1,
+      "unit_krw": 20000,
+      "shipping_krw": 0,
+      "store": "엘레파츠 (eleparts.co.kr)",
+      "url": "https://www.eleparts.co.kr/goods/view?no=2923219",
+      "verified": true,
+      "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다. 20,000원.",
+      "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_2923219.jpg"
+     }
+    ],
+    "total_krw": 37700,
+    "bucket": "tool",
+    "fits_design": true,
+    "pros_ko": "v3 목록의 엘레파츠 주문과 한 번에 받는다. 탁상 바이스라 90컷이 편하다.",
+    "cons_ko": "바이스가 20,000원으로 가장 비싸다. LENOX 날의 TPI가 페이지에 없다.",
+    "extra_labor_ko": "9×19 90컷(컷당 약 1.5분) + 봉 20컷 + 버 제거, 약 3~4시간."
+   },
+   "alternatives": [
+    {
+     "title_ko": "엘레파츠 그대로, 바이스만 락킹 바이스 플라이어로",
+     "items": [
+      {
+       "name": "[CK6930] 코텍스 쇠톱(대) 300mm K-9301",
+       "spec": "프레임 쇠톱",
+       "qty": 1,
+       "unit_krw": 6500,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (eleparts.co.kr)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=9100747",
+       "verified": true,
+       "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_9100747.jpg"
+      },
+      {
+       "name": "[LENOX] 쇠톱날(USA) 12인치 T2355",
+       "spec": "12인치 쇠톱날",
+       "qty": 2,
+       "unit_krw": 2200,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (eleparts.co.kr)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=4101973",
+       "verified": true,
+       "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_4101973.jpg"
+      },
+      {
+       "name": "[BD079] Coms 연마봉 평줄 야스리",
+       "spec": "철공용 평줄",
+       "qty": 1,
+       "unit_krw": 6800,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (eleparts.co.kr)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=12185326",
+       "verified": true,
+       "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_12185326.jpg"
+      },
+      {
+       "name": "[ID874] Coms 락킹 바이스 플라이어",
+       "spec": "락킹 바이스그립",
+       "qty": 1,
+       "unit_krw": 5100,
+       "shipping_krw": 0,
+       "store": "엘레파츠 (eleparts.co.kr)",
+       "url": "https://www.eleparts.co.kr/goods/view?no=8153032",
+       "verified": true,
+       "note_ko": "9/27 엘레파츠 상품 페이지에서 VAT 포함가를 확인했다. 배송 3,000원(공급가 6만 원 이상 무료) — v3 구매 목록의 엘레파츠 주문과 합배송이라 0원으로 둔다. 5,100원.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_8153032.jpg"
+      }
+     ],
+     "total_krw": 22800,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "14,900원 싸다. 19 폭 띠는 바이스그립으로도 충분히 잡힌다.",
+     "cons_ko": "책상에 고정되지 않아 한 손으로 눌러야 한다.",
+     "extra_labor_ko": "현재 안과 같음."
+    },
+    {
+     "title_ko": "나비엠알오 세트 (바이메탈 18T 명시, C클램프 2개)",
+     "items": [
+      {
+       "name": "[나비엠알오] 손톱날 톱대 (610702)",
+       "spec": "12인치(300) 프레임 쇠톱, 전장 420, 354 g",
+       "qty": 1,
+       "unit_krw": 5269,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (navimro.com)",
+       "url": "https://www.navimro.com/g/179334/",
+       "verified": true,
+       "note_ko": "9/27 규격표에서 4,790원(VAT 포함 5,269원), 9/28 출하 확인. 나비엠알오 기본 배송비 3,300원(VAT 포함), 5만 원(VAT 별도) 이상 무료. 드릴·공구 카드의 나비엠알오 안과 배송비를 나눈다.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K06564945.jpg"
+      },
+      {
+       "name": "[나비엠알오] 하이스 손톱날 (N6107) 18T 1EA",
+       "spec": "12인치 300 mm, 18 TPI, Bi-Metal",
+       "qty": 2,
+       "unit_krw": 1199,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (navimro.com)",
+       "url": "https://www.navimro.com/g/183741/",
+       "verified": true,
+       "note_ko": "9/27 규격표에서 N610712 1EA 1,090원(VAT 포함 1,199원), 9/28 출하 확인.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K06700985.jpg"
+      },
+      {
+       "name": "[나비엠알오] 철공용줄 (평형) 200mm 중목",
+       "spec": "8인치(200 mm) 평줄, 중목",
+       "qty": 1,
+       "unit_krw": 4169,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (navimro.com)",
+       "url": "https://www.navimro.com/g/212304/",
+       "verified": true,
+       "note_ko": "9/27 규격표에서 610637 3,790원(VAT 포함 4,169원), 9/28 출하 확인.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K08040468.jpg"
+      },
+      {
+       "name": "[나비엠알오] 만력기 3인치 (600201)",
+       "spec": "C클램프, 입 벌림 90 mm",
+       "qty": 2,
+       "unit_krw": 5489,
+       "shipping_krw": 3300,
+       "store": "나비엠알오 (navimro.com)",
+       "url": "https://www.navimro.com/g/183739/",
+       "verified": true,
+       "note_ko": "9/27 규격표에서 600201 4,990원(VAT 포함 5,489원), 9/28 출하 확인.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K06700929.jpg"
+      }
+     ],
+     "total_krw": 26114,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "날이 바이메탈 18 TPI로 명시돼 있고, PORON 폼·Ø4 드릴과 한 번에 받으면 배송비를 나눈다.",
+     "cons_ko": "C클램프로 띠를 책상에 물려야 한다. 엘레파츠 주문이 없으면 배송비 3,300원이 따로 든다.",
+     "extra_labor_ko": "현재 안과 같음."
+    },
+    {
+     "title_ko": "다이소 세트 (매장, 미니 쇠톱)",
+     "items": [
+      {
+       "name": "미니 타입 쇠톱",
+       "spec": "미니 쇠톱(날 길이 표기 없음)",
+       "qty": 1,
+       "unit_krw": 2000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (매장 재고, 온라인 표시가)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1045580",
+       "verified": true,
+       "note_ko": "9/27 다이소몰 검색 API: 2,000원, 온라인 재고 165.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_1045580.jpg"
+      },
+      {
+       "name": "미니 톱날 4개입",
+       "spec": "미니 쇠톱용 날 4장(TPI·재질 표기 없음)",
+       "qty": 2,
+       "unit_krw": 1000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (매장 재고, 온라인 표시가)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1045582",
+       "verified": true,
+       "note_ko": "9/27 다이소몰 검색 API: 1,000원, 온라인 재고 256.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_1045582.jpg"
+      },
+      {
+       "name": "공구용줄 #120 3개 세트",
+       "spec": "철공 줄 3종(크기 표기 없음)",
+       "qty": 1,
+       "unit_krw": 2000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (매장 재고, 온라인 표시가)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=60759",
+       "verified": true,
+       "note_ko": "9/27 다이소몰 검색 API: 2,000원, 온라인 재고 62.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_60759.jpg"
+      },
+      {
+       "name": "클램프 바이스플라이어 인핸드 약 15 cm",
+       "spec": "C형 락킹 클램프 플라이어",
+       "qty": 1,
+       "unit_krw": 3000,
+       "shipping_krw": 0,
+       "store": "다이소몰 (매장 재고, 온라인 표시가)",
+       "url": "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1023938",
+       "verified": true,
+       "note_ko": "9/27 다이소몰 검색 API: 3,000원, 온라인 재고 31.",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_1023938.jpg"
+      }
+     ],
+     "total_krw": 9000,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "9,000원으로 가장 싸다. r4는 톱질량이 r3의 38 %라 미니 쇠톱으로도 할 만하다.",
+     "cons_ko": "미니 날은 짧고 약해 SUS 봉에서 빨리 무뎌진다. 줄이 작다.",
+     "extra_labor_ko": "미니 쇠톱이라 컷당 약 2~3분, 약 5시간."
+    },
+    {
+     "title_ko": "외주 절단 (강철 카드에서 개별 재단·철공소 안을 고를 때)",
+     "items": [
+      {
+       "name": "공구 구매 없음 — 강철을 재단 주문",
+       "spec": "올스틸샵 9T 19×40 개별 재단 또는 철공소 절단",
+       "qty": 1,
+       "unit_krw": 0,
+       "shipping_krw": 0,
+       "store": "올스틸샵 (allsteelshop.com)",
+       "url": "https://www.allsteelshop.com/product/squareplate/9t",
+       "verified": true,
+       "note_ko": "강철 블록을 개별 재단·외주로 받으면 톱질은 SUS Ø4 봉 약 20컷만 남는다(원자재닷컴 봉 절단 서비스 컷당 500원 또는 가진 공구).",
+       "image_file": "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_outsource_allsteel.jpg"
+      }
+     ],
+     "total_krw": 0,
+     "bucket": "tool",
+     "fits_design": true,
+     "pros_ko": "공구를 사지 않는다.",
+     "cons_ko": "봉 약 20컷은 여전히 잘라야 한다(원자재닷컴 절단 서비스를 쓰거나 가진 쇠톱)."
+    }
+   ],
+   "if_unused_ko": "쇠톱·줄·바이스를 이미 가지고 있으면 사용 안함. 강철을 개별 재단으로 사고 봉을 업체 절단으로 받으면 필요 없다.",
+   "r4_note_ko": "r3 카드(9×50 92컷 + 레일 8컷 + 봉 20컷, 날 3장)를 대체. 톱질 면적이 약 38 %로 줄어 날을 2장으로 줄였다."
+  }
+ ],
+ "unchanged_ids": [
+  "keyrod",
+  "capstan",
+  "felt2",
+  "cloth",
+  "graphite"
+ ],
+ "removed_ids": [
+  "rail",
+  "strip",
+  "thumb",
+  "disc",
+  "brass",
+  "reamer",
+  "tap",
+  "magnet",
+  "lead",
+  "spring",
+  "epoxy"
+ ],
+ "files": [
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/parts.json",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_1304631510.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_8661208614.webp",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9030046679.webp",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9367896435.webp",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9480290583.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9536791834.webp",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9536791872.webp",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9548031056.webp",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9548598715.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4_11st_9585456926.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_1023938.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_1045580.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_1045582.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_daiso_60759.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_12185326.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_2923219.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_4101973.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_8153032.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_ele_9100747.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K06564945.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K06700929.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K06700985.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_navi_K08040468.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4c_outsource_allsteel.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4d_navi_K06128094.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41576114.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41587651.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_navi_K41587673.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4f_swagkey_253.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4h_daiso_1018434.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4p_nasa_6009.gif",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4r_onezaze_1350.jpg",
+  "/private/tmp/claude-501/-Users-kwg-Desktop-mydrive-project-Toccata/2f19e142-4ac2-4c90-bd1e-b3b469f97487/scratchpad/v4/costopt_r4/img/r4w_allsteel_9t.jpg"
+ ]
+}

@@ -1,0 +1,53 @@
+/* ---- CAD 모델 (09) — uses the merged page tokens ---- */
+#p-cad .cadv{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items:start;margin:10px 0 8px}
+@media (max-width:980px){#p-cad .cadv{grid-template-columns:minmax(0,1fr)}}
+#p-cad .cad-main{min-width:0;display:flex;flex-direction:column;gap:8px}
+#p-cad .cad-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+#p-cad .cad-bar .lbl{font-size:12px;color:var(--ink-3)}
+#p-cad .cadchips{display:flex;flex-wrap:wrap;gap:6px}
+#p-cad .cadchip{font:inherit;font-size:12.5px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:99px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+#p-cad .cadchip i{width:10px;height:10px;border-radius:3px;display:inline-block;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent)}
+#p-cad .cadchip[data-kind][aria-pressed="false"]{opacity:.45;text-decoration:line-through}
+#p-cad .cadchip#cadDims[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-cad .cadchip:hover{border-color:var(--blue)}
+#p-cad .stage{position:relative;height:clamp(360px,62vh,640px);border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card);touch-action:none}
+#p-cad .stage canvas{display:block;width:100%;height:100%;cursor:grab}
+#p-cad .stage canvas:active{cursor:grabbing}
+#p-cad .stage svg.dims{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#p-cad .stage svg.dims line{stroke:var(--blue);stroke-width:1.3}
+#p-cad .stage svg.dims line.ext{stroke-width:.8;stroke-dasharray:3 3;opacity:.7}
+#p-cad .stage svg.dims text{font:600 12px var(--mono);fill:var(--blue-ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round}
+#p-cad .load[hidden]{display:none}
+#p-cad .load{position:absolute;inset:0;display:grid;place-items:center;color:var(--ink-2);font-size:14px;text-align:center;padding:20px}
+#p-cad .hint{position:absolute;left:10px;bottom:8px;font-size:11.5px;color:var(--ink-3);background:color-mix(in srgb,var(--card) 85%,transparent);padding:2px 8px;border-radius:6px}
+#p-cad .axes{position:absolute;right:10px;bottom:8px;font:11px var(--mono);color:var(--ink-3);background:color-mix(in srgb,var(--card) 85%,transparent);padding:2px 8px;border-radius:6px}
+#p-cad .secbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px}
+#p-cad .secbar input[type=range]{flex:1 1 220px;min-width:160px;accent-color:var(--blue)}
+#p-cad .secbar output{font-family:var(--mono);font-size:12.5px;min-width:7ch}
+#p-cad .side{display:flex;flex-direction:column;gap:10px;min-width:0}
+#p-cad .info{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;min-height:120px}
+#p-cad .info h4{font-size:15px;line-height:1.35;margin:2px 0 6px;word-break:keep-all}
+#p-cad .info .kd{display:inline-block;font-size:11px;border-radius:99px;padding:1px 8px;border:1px solid var(--rule-2);color:var(--ink-2);margin-right:4px}
+#p-cad .info .kd.print{border-color:var(--blue);color:var(--blue-ink);background:var(--tint-blue)}
+#p-cad .info dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:8px 0 0;font-size:12.5px}
+#p-cad .info dt{color:var(--ink-3);white-space:nowrap}
+#p-cad .info dd{margin:0;min-width:0;word-break:break-word}
+#p-cad .info .mono{font-size:12px}
+#p-cad .info .empty{color:var(--ink-3);font-size:13px;margin:0}
+#p-cad .info ul.dl{margin:6px 0 0;padding-left:1.1em;font-size:12.5px}
+#p-cad .grp{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:6px 10px}
+#p-cad .grp summary{cursor:pointer;font-size:13.5px;font-weight:600;padding:4px 0;list-style:none}
+#p-cad .grp summary::-webkit-details-marker{display:none}
+#p-cad .grp summary::before{content:"＋ ";font-family:var(--mono)}
+#p-cad .grp[open] summary::before{content:"－ "}
+#p-cad .glist{max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:2px;padding:4px 0 6px}
+#p-cad .glist label{display:flex;gap:8px;align-items:center;font-size:12.5px;padding:2px 2px;border-radius:5px;cursor:pointer}
+#p-cad .glist label:hover{background:var(--paper)}
+#p-cad .glist label span{flex:1;min-width:0}
+#p-cad .glist label em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+#p-cad .gtools{display:flex;gap:6px;margin:2px 0 4px}
+#p-cad .gtools button{font:inherit;font-size:12px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:6px;padding:2px 8px;cursor:pointer}
+#p-cad .ptbl td:first-child{font-family:var(--mono);font-size:12.5px;word-break:break-all}
+#p-cad .ptbl td.num{text-align:right}
+#p-cad .adj td:first-child{font-family:var(--mono);font-weight:600;white-space:nowrap}
+#p-cad .files code{word-break:break-all}

@@ -1,0 +1,17 @@
+# macOS / editors / local tool state
+.DS_Store
+__pycache__/
+*.pyc
+~$*
+.claude/
+
+# CAD outputs that build_all.py regenerates in ~20 s (hardware/mechanical/cad/src/build_all.py)
+hardware/mechanical/cad/stl/assembly/
+hardware/mechanical/cad/stl/annotated/
+
+# final-BOM builder backups from before the L2 switch
+hardware/bom/final-bom/*.pre_L2.*
+hardware/bom/final-bom/site_pre_L2/
+
+# one-file download of stl/print (rebuilt from the committed STLs)
+hardware/mechanical/cad/Toccata_출력STL_전체.zip

@@ -1,0 +1,19 @@
+{
+ "checked": "2026-09-30",
+ "recommend": "Raspberry Pi Touch Display 2 7in (SC1635), devicemart 15583929, 95,700 KRW incl. VAT, free shipping",
+ "runner_up": "Raspberry Pi Touch Display 2 5in (SC1975), devicemart 15907263, 68,200 KRW",
+ "mech": {
+  "td2_7": {"outline": [189.32, 120.24], "depth_with_standoffs": 14.92, "active": [154.56, 86.94], "lugs_M2.5": [140, 70.71], "pi_bosses": [58, 49], "corner_R": 8, "lens": 0.7, "drawing": "dims/td2_7_mech.png"},
+  "td2_5": {"outline": [143.4, 91.46], "depth_with_standoffs": 15.9, "active": [110.4, 62.1], "lugs_M2.5": [103.7, 51], "pi_bosses": [58, 49], "corner_R": 5, "drawing": "dims/td2_5_mech.png"},
+  "td2_10": {"outline": [248.10, 166.88], "depth_with_standoffs": 15.55, "active": [216.58, 135.36], "lugs_M2.5": [160, 121.8], "pi_bosses": [58, 49], "corner_R": 5, "drawing": "dims/td2_10_p4.png"},
+  "ws_10_1_dsi_touch_a": {"outline": [239.0, 147.0], "depth": 10.8, "active": [217.18, 135.96], "corner_holes_M2.5": [218.1, 133.0], "pi_bosses": [58, 49]},
+  "ws_8_dsi_touch_a": {"outline": [194.0, 119.0], "depth": 11.6, "active": [172.82, 108.24], "pi_bosses": [58, 49]},
+  "ws_7_dsi_lcd_c": {"outline": [192.96, 110.76], "active": [154.88, 86.72]},
+  "ws_7_hdmi_lcd_c": {"pcb_with_ears": [164.9, 124.27], "ear_holes": [156.9, 114.96], "depth": 8, "active": [154.21, 85.92]}
+ },
+ "accessories_devicemart_vat_incl": {
+  "SC1131 Pi5 DSI cable 22P-15P 200mm (15285289)": 1540,
+  "DFRobot FIT0997 Pi5 DSI cable 300mm (15454634)": 5390,
+  "PI5-CASE-TD2 case for Pi5 + TD2 7in": 17600
+ }
+}

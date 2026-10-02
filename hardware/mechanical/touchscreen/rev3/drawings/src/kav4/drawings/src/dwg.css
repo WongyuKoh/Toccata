@@ -1,0 +1,87 @@
+:root{
+  --d-ink:#1d2433; --d-dim:#1f5fbf; --d-ext:#8a96ab; --d-ph:#6b7690; --d-press:#c2410c;
+  --d-wood:#e9d9bf; --d-wood-h:#b89868; --d-print:#dfe6ef; --d-print-h:#8fa1bb; --d-print2:#cfe3d6;
+  --d-key:#fbfbf8; --d-keyfar:#f1f1ec; --d-key-h:#9aa3b2; --d-black:#2a2d33;
+  --d-steel:#b9c0cc; --d-steel-h:#5d6778; --d-felt:#c74a4a; --d-magN:#c0392b; --d-magS:#2f6fd6;
+  --d-sensor:#222; --d-wire:#e0a526; --d-void:#ffffff; --d-bg:#ffffff; --d-spring:#4a5568;
+  --d-lever:#d3e8d9; --d-cover:#e7e1f2; --d-pu:#a98bd6; --d-cloth:#e39b3c; --d-brass:#d8b45c; --d-lead:#7b808a; --d-pcb:#9fd0ae; --d-pcb-h:#2e7d4f; --d-hid:#7d8aa3; --d-phan:#6f4fb3; --d-sbar:#e4ecf5; --d-bar:#f4e7cc; --d-bar-h:#b8955a; --d-foam:#b9a3e0;
+}
+.dw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.dw svg{display:block;width:100%;height:auto;min-width:720px;background:var(--d-bg)}
+.dwg *{vector-effect:non-scaling-stroke}
+.dwg .ln,.dwg .edge{fill:none;stroke:var(--d-ink);stroke-width:1.1px}
+.dwg .edge{stroke-width:1.6px}
+.dwg .dm{stroke:var(--d-dim);stroke-width:.8px;fill:none}
+.dwg .ex{stroke:var(--d-ext);stroke-width:.6px;fill:none}
+.dwg .ah{fill:var(--d-dim);stroke:none}
+.dwg .dt{fill:var(--d-dim);font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-weight:500}
+.dwg .tx,.dwg .tx-s{fill:var(--d-ink);font-family:"IBM Plex Sans KR","Pretendard",system-ui,sans-serif}
+.dwg .tx-s{fill:var(--d-ph)}
+.dwg .lt{fill:var(--d-ink);font-family:"IBM Plex Sans KR","Pretendard",system-ui,sans-serif}
+.dwg .nt{fill:var(--d-ink);font-family:"IBM Plex Mono",ui-monospace,monospace}
+.dwg .ld{stroke:var(--d-ink);stroke-width:.7px;fill:none}
+.dwg .dot{fill:var(--d-ink)}
+.dwg .cl{stroke:var(--d-ph);stroke-width:.7px;stroke-dasharray:12 3 2 3;fill:none}
+.dwg .ph{stroke-dasharray:5 3;fill-opacity:.35}
+.dwg .ph2{fill:none;stroke:var(--d-ph);stroke-width:1px;stroke-dasharray:6 3}
+.dwg .pressed{fill:none;stroke:var(--d-press);stroke-width:1.2px;stroke-dasharray:7 4}
+.dwg .nostroke{stroke:none}
+.dwg .m-wood{fill:var(--d-wood);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-print{fill:var(--d-print);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-print2{fill:var(--d-print2);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-key{fill:var(--d-key);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-keyfar{fill:var(--d-keyfar);stroke:none}
+.dwg .m-black{fill:var(--d-black);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-steel{fill:var(--d-steel);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-felt{fill:var(--d-felt);stroke:var(--d-ink);stroke-width:.8px;fill-opacity:.85}
+.dwg .m-magN{fill:var(--d-magN);stroke:var(--d-ink);stroke-width:.6px}
+.dwg .m-magS{fill:var(--d-magS);stroke:var(--d-ink);stroke-width:.6px}
+.dwg .m-sensor{fill:var(--d-sensor);stroke:none}
+.dwg .m-wire{fill:var(--d-wire);stroke:var(--d-ink);stroke-width:.5px}
+.dwg .lead{stroke:var(--d-steel-h);stroke-width:1.2px;fill:none}
+.dwg .void{fill:var(--d-void);stroke:var(--d-ink);stroke-width:.8px}
+.dwg .pivot{fill:var(--d-press);stroke:none}
+.dwg .spring{fill:none;stroke:var(--d-spring);stroke-width:1.2px}
+.dwg .hl-wood{stroke:var(--d-wood-h);stroke-width:.6px}
+.dwg .hl-print{stroke:var(--d-print-h);stroke-width:.5px}
+.dwg .hl-key{stroke:var(--d-key-h);stroke-width:.5px}
+.dwg .hl-steel{stroke:var(--d-steel-h);stroke-width:.6px}
+.dwg .bl{fill:var(--d-bg);stroke:var(--d-ink);stroke-width:1px}
+.dwg .bt{fill:var(--d-ink);font-family:"IBM Plex Mono",monospace;font-weight:600}
+.dwg .kw{fill:var(--d-key);stroke:var(--d-ink);stroke-width:1px}
+.dwg .kb{fill:var(--d-black);stroke:var(--d-ink);stroke-width:1px}
+.dwg .kbt{fill:#4a4f59;stroke:none}
+.dwg .kph{fill:none;stroke:var(--d-ph);stroke-width:.8px;stroke-dasharray:4 3}
+.dwg .sens{fill:var(--d-sensor)}
+.dwg .zone{fill:var(--d-press);fill-opacity:.06;stroke:var(--d-press);stroke-width:.8px;stroke-dasharray:6 4}
+.dwg .spk{fill:var(--d-steel);stroke:var(--d-ink);stroke-width:1px}
+.dwg .ot{fill:var(--d-dim);font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+
+.dwg .m-lever{fill:var(--d-lever);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-cover{fill:var(--d-cover);stroke:var(--d-ink);stroke-width:1px}
+.dwg .m-pu{fill:var(--d-pu);stroke:var(--d-ink);stroke-width:.6px}
+.dwg .m-cloth{fill:var(--d-cloth);stroke:none}
+.dwg .m-clothfar{fill:var(--d-cloth);fill-opacity:.32;stroke:var(--d-ink);stroke-width:.8px}
+.dwg .m-brass{fill:var(--d-brass);stroke:var(--d-ink);stroke-width:.8px}
+.dwg .m-lead{fill:var(--d-lead);stroke:var(--d-ink);stroke-width:.8px}
+.dwg .m-pcb{fill:var(--d-pcb);stroke:var(--d-pcb-h);stroke-width:1px}
+.dwg .m-bar{fill:var(--d-bar);stroke:var(--d-ink);stroke-width:1px}
+.dwg .hl-bar{stroke:var(--d-bar-h);stroke-width:.5px}
+.dwg .m-foam{fill:var(--d-foam);stroke:var(--d-ink);stroke-width:.6px}
+.dwg .m-sbar{fill:var(--d-sbar);stroke:var(--d-ink);stroke-width:1px}
+.dwg .fillonly{stroke:none}
+.dwg .env{fill:none;stroke:var(--d-pcb-h);stroke-width:.8px;stroke-dasharray:4 2}
+.dwg .hid{fill:none;stroke:var(--d-hid);stroke-width:.7px;stroke-dasharray:4 2.5}
+.dwg .phan{fill:none;stroke:var(--d-phan);stroke-width:.9px;stroke-dasharray:14 3 2 3}
+.dwg .vis{fill:none;stroke:var(--d-ink);stroke-width:.55px}
+.dwg .out{fill:none;stroke:var(--d-ink);stroke-width:1.3px}
+.dwg .faint{fill:none;stroke:#b3bccb;stroke-width:.8px}
+.dwg .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:.7px}
+.dwg .pressed3{fill:none;stroke:var(--d-press);stroke-width:.6px;stroke-dasharray:2 2.5}
+.dwg .pressed2{fill:none;stroke:var(--d-press);stroke-width:.9px;stroke-dasharray:3 3}
+.dwg .ttl{fill:var(--d-ink);font-family:"IBM Plex Sans KR","Pretendard",system-ui,sans-serif;font-weight:700}
+.dwg .tbl{fill:none;stroke:var(--d-ext);stroke-width:.7px}
+.dwg .tbh{fill:#eef2f7;stroke:var(--d-ext);stroke-width:.7px}
+.dwg .tw{fill:var(--d-key);stroke:none}
+.dwg .inv{fill:#ffffff;font-family:"IBM Plex Sans KR","Pretendard",system-ui,sans-serif;font-weight:600}
+.dwg .ok{fill:#2e7d4f;font-family:"IBM Plex Sans KR","Pretendard",system-ui,sans-serif}

@@ -1,0 +1,315 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="2070" viewBox="0 0 1440 2070" font-family="'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif">
+<rect width="1440" height="2070" fill="#ffffff"/>
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#d23c3c" stroke-width="1.3" opacity="0.5"/></pattern><marker id="arrE" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#b03a8f"/></marker><marker id="arrR" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#d97000"/></marker><clipPath id="clipA"><rect x="40" y="112" width="1370" height="636"/></clipPath><clipPath id="clipI"><rect x="1062" y="146" width="340" height="180"/></clipPath><clipPath id="clipB"><rect x="30" y="826" width="1000" height="590"/></clipPath><clipPath id="clipZ"><rect x="1044" y="826" width="384" height="300"/></clipPath></defs>
+<text x="40.0" y="40.0" font-size="24" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">Toccata R31 — 터치스크린 B1 (Waveshare 7-DSI-TOUCH-C) 설치 개념도 · 수정 3판 3a · L2 뒷바</text>
+<text x="40.0" y="64.0" font-size="13" fill="#7d8796" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">좌표(mm): x = 건반 가로(A0 왼쪽 = 0), y = 흰건반 앞끝에서 뒤로, z = 책상에서 위로. 모든 수치는 numbers.json(수정 3판, 확정 L2 값)에서 읽음</text>
+<text x="40.0" y="100.0" font-size="17" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">A. 옆 단면 — 화면 가운데(x611)를 자른 면. 왼쪽이 연주자. 리본·전원선 길(x635~657)과 Pi는 겹쳐 그림</text>
+<g clip-path="url(#clipA)">
+<line x1="60.0" y1="735.5" x2="1220.0" y2="735.5" stroke="#1d2530" stroke-width="1.5"/>
+<polygon points="176.0,721.0 790.8,721.0 790.8,524.2 176.0,524.2" fill="#e9edf2" stroke="#7d8796" stroke-width="1"/>
+<line x1="176.0" y1="609.3" x2="753.1" y2="609.3" stroke="#1d2530" stroke-width="3"/>
+<line x1="379.0" y1="574.5" x2="753.1" y2="574.5" stroke="#333" stroke-width="6"/>
+<polygon points="524.0,524.2 799.5,524.2 799.5,112.0 524.0,112.0" fill="url(#hatch)" stroke="#d23c3c" stroke-width="1.2" stroke-dasharray="5 3"/>
+<line x1="799.5" y1="524.2" x2="799.5" y2="112.0" stroke="#d23c3c" stroke-width="1.6"/>
+<polygon points="796.6,721.0 1166.3,721.0 1166.3,524.2 796.6,524.2" fill="#e8d3ad" stroke="#9a7a45" stroke-width="1.2" opacity="0.55"/>
+<polygon points="805.3,687.6 1157.6,687.6 1157.6,557.6 805.3,557.6" fill="#fbf7ee" stroke="#9a7a45" stroke-width="0.8"/>
+<polygon points="796.6,532.9 1166.3,532.9 1166.3,524.2 796.6,524.2" fill="#cfe6d4" stroke="#3f8a55" stroke-width="1.5"/>
+<polygon points="854.6,557.6 860.4,557.6 860.4,532.9 854.6,532.9" fill="#cfe6d4" stroke="#3f8a55" stroke-width="0.5"/>
+<polygon points="927.1,557.6 932.9,557.6 932.9,532.9 927.1,532.9" fill="#cfe6d4" stroke="#3f8a55" stroke-width="0.5"/>
+<polygon points="999.6,557.6 1005.4,557.6 1005.4,532.9 999.6,532.9" fill="#cfe6d4" stroke="#3f8a55" stroke-width="0.5"/>
+<polygon points="1072.1,557.6 1077.9,557.6 1077.9,532.9 1072.1,532.9" fill="#cfe6d4" stroke="#3f8a55" stroke-width="0.5"/>
+<polygon points="1144.6,557.6 1150.4,557.6 1150.4,532.9 1144.6,532.9" fill="#cfe6d4" stroke="#3f8a55" stroke-width="0.5"/>
+<polygon points="1046.0,532.9 1057.6,532.9 1057.6,524.2 1046.0,524.2" fill="#ffffff" stroke="#3f8a55" stroke-width="0.6"/>
+<polygon points="1066.3,532.9 1077.9,532.9 1077.9,524.2 1066.3,524.2" fill="#ffffff" stroke="#3f8a55" stroke-width="0.6"/>
+<polygon points="1086.6,532.9 1098.2,532.9 1098.2,524.2 1086.6,524.2" fill="#ffffff" stroke="#3f8a55" stroke-width="0.6"/>
+<polygon points="1106.9,532.9 1118.5,532.9 1118.5,524.2 1106.9,524.2" fill="#ffffff" stroke="#3f8a55" stroke-width="0.6"/>
+<polygon points="838.8,557.6 856.2,557.6 856.2,524.2 838.8,524.2" fill="#fff" stroke="#d97000" stroke-width="1.2"/>
+<polygon points="862.0,557.6 896.8,557.6 896.8,532.9 862.0,532.9" fill="#9fcaa9" stroke="#3f8a55" stroke-width="0.8"/>
+<polygon points="1009.5,557.6 1056.7,557.6 1056.7,524.2 1009.5,524.2" fill="#9fcaa9" stroke="#3f8a55" stroke-width="0.8"/>
+<polygon points="1018.2,524.2 1035.8,534.4 1048.0,534.4 1048.0,524.2" fill="#ffffff" stroke="#7a4bb7" stroke-width="1"/>
+<polygon points="935.8,670.2 1098.2,670.2 1098.2,665.6 935.8,665.6" fill="#2e7d32" stroke="#2e7d32"/>
+<polygon points="976.4,665.6 1025.7,665.6 1025.7,642.4 976.4,642.4" fill="#9bb59c" stroke="#2e7d32" stroke-width="0.6"/>
+<polygon points="938.7,665.6 982.2,665.6 982.2,660.4 938.7,660.4" fill="#6d4c41"/>
+<line x1="1091.7" y1="665.6" x2="1091.7" y2="641.0" stroke="#444" stroke-width="3"/>
+<polygon points="935.8,654.0 988.0,654.0 988.0,557.6 935.8,557.6" fill="none" stroke="#d97000" stroke-width="0.8" stroke-dasharray="2 2"/>
+<line x1="611.0" y1="306.1" x2="1220.0" y2="306.1" stroke="#7d8796" stroke-width="1" stroke-dasharray="3 4"/>
+<polyline points="887.9,356.2 831.1,477.9 831.1,477.9 836.3,482.2 841.2,486.6 845.4,490.9 848.7,495.3 850.9,499.6 852.0,504.0 852.0,508.3 851.0,512.6 849.4,517.0 847.5,521.3 847.5,524.2 847.5,558.0 960.4,558.0 960.4,558.0 960.4,655.9 960.4,655.9 960.4,660.1" fill="none" stroke="#d97000" stroke-width="2.6"/>
+<polyline points="908.8,311.3 832.7,478.6 833.4,477.9 838.6,482.2 843.5,486.6 847.7,490.9 851.0,495.3 853.2,499.6 854.3,504.0 854.3,508.3 853.4,512.6 851.8,517.0 849.8,521.3 849.8,524.2 849.8,561.1 1094.1,561.1 1094.1,561.1 1094.1,641.0" fill="none" stroke="#c2185b" stroke-width="1.4" stroke-dasharray="5 3"/>
+<polygon points="917.1,524.2 963.5,524.2 963.5,508.3 917.1,508.3" fill="#9fcaa9" stroke="#3f8a55" stroke-width="0.8" opacity="0.6"/>
+<polygon points="1062.1,524.2 1108.5,524.2 1108.5,508.3 1062.1,508.3" fill="#9fcaa9" stroke="#3f8a55" stroke-width="0.8" opacity="0.6"/>
+<polygon points="1109.9,508.3 1115.7,508.3 1115.7,502.5 1109.9,502.5" fill="#9fcaa9" stroke="#3f8a55" stroke-width="0.8"/>
+<polygon points="851.8,459.0 1159.2,459.0 1159.2,499.6 851.8,499.6" fill="none" stroke="#5d6b80" stroke-width="1.8" stroke-dasharray="7 4"/>
+<line x1="857.6" y1="508.3" x2="1159.2" y2="508.3" stroke="#5d6b80" stroke-width="1" stroke-dasharray="3 3"/>
+<polygon points="937.4,518.4 1149.1,518.4 1149.1,501.0 937.4,501.0" fill="none" stroke="#7a4bb7" stroke-width="1.2" stroke-dasharray="4 3"/>
+<polygon points="804.2,465.3 934.1,186.7 978.8,207.6 851.3,480.9 843.6,483.7" fill="#dfe9fb" stroke="#1f5fbf" stroke-width="1.8"/>
+<polygon points="809.9,460.0 933.6,194.5 954.7,204.3 830.9,469.8" fill="#9fb6d9" stroke="#0b2a55" stroke-width="0.8"/>
+<line x1="809.9" y1="460.0" x2="933.6" y2="194.5" stroke="#0b2a55" stroke-width="2.5"/>
+<line x1="821.7" y1="434.6" x2="927.6" y2="207.5" stroke="#3d8bff" stroke-width="6"/>
+<line x1="841.0" y1="482.5" x2="970.9" y2="203.9" stroke="#1f5fbf" stroke-width="0.8" stroke-dasharray="2 2"/>
+<polygon points="802.4,466.9 917.6,181.9 963.3,200.4 848.1,485.4" fill="none" stroke="#1f5fbf" stroke-width="0.8" stroke-dasharray="2 3"/>
+<polygon points="806.9,524.2 859.1,524.2 848.9,499.6 817.0,499.6" fill="#9fcaa9" stroke="#3f8a55" stroke-width="1"/>
+<circle cx="833.0" cy="499.6" r="15.95" fill="#9fcaa9" stroke="#3f8a55" stroke-width="1"/>
+<polygon points="806.9,524.2 827.2,524.2 827.2,514.1 806.9,514.1" fill="#6fae80" stroke="#3f8a55" stroke-width="0.8"/>
+<polygon points="812.0,513.0 827.8,476.4 841.0,482.5 844.7,496.3 844.9,497.0 845.1,498.1 845.2,499.1 845.1,500.2 845.1,501.3 844.9,502.3 844.6,503.4 844.2,504.3 843.7,505.3 843.2,506.2 842.6,507.1 841.9,507.9 841.2,508.6 840.3,509.3 839.4,509.9 838.5,510.4 837.6,510.9 836.6,511.2 835.5,511.5 834.5,511.7 833.7,511.7" fill="#1f5fbf" opacity="0.55" stroke="#1f5fbf" stroke-width="1"/>
+<circle cx="833.0" cy="499.6" r="2.2" fill="#1d2530"/>
+<line x1="890.0" y1="401.4" x2="1039.3" y2="525.7" stroke="#7a4bb7" stroke-width="15.659999999999998"/>
+<circle cx="1039.3" cy="525.7" r="8.7" fill="#7a4bb7"/>
+<circle cx="890.0" cy="401.4" r="11.02" fill="#c9b3e6" stroke="#7a4bb7"/>
+<circle cx="890.0" cy="401.4" r="2.2" fill="#1d2530"/>
+<line x1="809.9" y1="460.0" x2="809.9" y2="344.0" stroke="#1d2530" stroke-width="0.8" stroke-dasharray="3 3"/>
+<path d="M809.9,373.0 A87.0,87.0 0 0,1 846.6,381.2" fill="none" stroke="#1d2530" stroke-width="1.2"/>
+<line x1="-839.0" y1="-569.5" x2="874.6" y2="321.1" stroke="#b03a8f" stroke-width="1.6" marker-end="url(#arrE)"/>
+<line x1="-839.0" y1="-569.5" x2="821.7" y2="434.6" stroke="#b03a8f" stroke-width="1" stroke-dasharray="5 4"/>
+<circle cx="790.8" cy="415.9" r="3.2" fill="#b03a8f"/>
+<circle cx="790.8" cy="277.5" r="3.2" fill="#b03a8f"/>
+</g>
+<text x="181.8" y="602.3" font-size="12" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">흰건반 윗면 z43.5</text>
+<text x="384.8" y="565.5" font-size="12" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">흑건 z55.5</text>
+<text x="181.8" y="518.2" font-size="12" fill="#7d8796" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">옥타브 모듈 틀 z72.85 · 뒤끝 y212</text>
+<text x="529.8" y="124.7" font-size="13" fill="#d23c3c" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">모듈 위 금지</text>
+<text x="529.8" y="140.7" font-size="12" fill="#d23c3c" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">y≤215, z≥72.85</text>
+<text x="529.8" y="156.7" font-size="11" fill="#d23c3c" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">(모듈을 위로 뺌)</text>
+<text x="65.8" y="124.7" font-size="12" fill="#b03a8f" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">↖ 연주자 눈(추정) y−350 z450에서 오는 시선</text>
+<text x="65.8" y="142.7" font-size="12" fill="#b03a8f" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">보이는 영역 가운데까지 아래로 27.46° (화면 25°와 2.46° 차이)</text>
+<text x="65.8" y="160.7" font-size="12" fill="#b03a8f" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">거리 666 mm · 눈 범위를 넓혀도 21.86~33.43°</text>
+<text x="65.8" y="178.7" font-size="11" fill="#b03a8f" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">y212에서 시선 높이: 가운데로 z157.93, 보이는 영역 아래 끝으로 z110.19(점선)</text>
+<line x1="934.1" y1="186.7" x2="493.2" y2="163.1" stroke="#1f5fbf" stroke-width="0.8"/>
+<circle cx="934.1" cy="186.7" r="2.4" fill="#1f5fbf"/>
+<text x="489.2" y="167.1" font-size="12" fill="#1f5fbf" text-anchor="end" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">받침 윗끝 y261.41 z189.23</text>
+<line x1="874.6" y1="321.1" x2="493.2" y2="221.1" stroke="#0b2a55" stroke-width="0.8"/>
+<circle cx="874.6" cy="321.1" r="2.4" fill="#0b2a55"/>
+<text x="489.2" y="225.1" font-size="12" fill="#0b2a55" text-anchor="end" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">보이는 영역 가운데 y240.91 z142.91</text>
+<line x1="927.6" y1="207.5" x2="493.2" y2="267.5" stroke="#3d8bff" stroke-width="0.8"/>
+<circle cx="927.6" cy="207.5" r="2.4" fill="#3d8bff"/>
+<text x="489.2" y="271.5" font-size="12" fill="#3d8bff" text-anchor="end" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">보이는 영역 z103.75~182.07 (154.58×86.42)</text>
+<line x1="809.9" y1="460.0" x2="493.2" y2="348.7" stroke="#0b2a55" stroke-width="0.8"/>
+<circle cx="809.9" cy="460.0" r="2.4" fill="#0b2a55"/>
+<text x="489.2" y="352.7" font-size="12" fill="#0b2a55" text-anchor="end" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">유리 아래 y218.57 z95.0</text>
+<line x1="802.4" y1="466.9" x2="493.2" y2="395.1" stroke="#d23c3c" stroke-width="0.8"/>
+<circle cx="802.4" cy="466.9" r="2.4" fill="#d23c3c"/>
+<text x="489.2" y="399.1" font-size="12" fill="#d23c3c" text-anchor="end" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">가장 앞 y216.0 (22°, 금지선 y215보다 1.0 뒤)</text>
+<text x="815.7" y="361.4" font-size="14" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">25°</text>
+<line x1="812.7" y1="514.1" x2="493.2" y2="441.5" stroke="#1f5fbf" stroke-width="0.8"/>
+<circle cx="812.7" cy="514.1" r="2.4" fill="#1f5fbf"/>
+<text x="489.2" y="445.5" font-size="12" fill="#1f5fbf" text-anchor="end" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">뒤꿈치 멈춤 블록 z76.35: 22°에서 닿음 (25°에서 0.37 mm)</text>
+<line x1="833.0" y1="499.6" x2="493.2" y2="482.1" stroke="#3f8a55" stroke-width="0.8"/>
+<circle cx="833.0" cy="499.6" r="2.4" fill="#3f8a55"/>
+<text x="489.2" y="486.1" font-size="12" fill="#3f8a55" text-anchor="end" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">경첩 축 y226.55 z81.35 (M3×20, x539~559 · x663~683)</text>
+<line x1="847.5" y1="530.0" x2="493.2" y2="545.9" stroke="#d97000" stroke-width="0.8"/>
+<circle cx="847.5" cy="530.0" r="2.4" fill="#d97000"/>
+<text x="489.2" y="549.9" font-size="12" fill="#d97000" text-anchor="end" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">리본·전원선 구멍 y228.55~234.55 (x635~657, 22×6)</text>
+<line x1="879.4" y1="557.6" x2="493.2" y2="644.5" stroke="#3f8a55" stroke-width="0.8"/>
+<circle cx="879.4" cy="557.6" r="2.4" fill="#3f8a55"/>
+<text x="489.2" y="648.5" font-size="12" fill="#3f8a55" text-anchor="end" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">리본 클립 덩어리 y236.55~248.55 (핀 Ø3 두 개)</text>
+<line x1="964.7" y1="463.5" x2="989.8" y2="377.7" stroke="#7a4bb7" stroke-width="0.8"/>
+<circle cx="964.7" cy="463.5" r="2.4" fill="#7a4bb7"/>
+<text x="993.8" y="381.7" font-size="12" fill="#7a4bb7" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">받침다리 67 mm (10×6), 받침 뒤 u30에 경첩, 39.78°</text>
+<text x="993.8" y="397.7" font-size="11" fill="#7a4bb7" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">발끝 y297.7 z72.35 → 주머니(경사 y290.43, 뒷벽 y300.7)</text>
+<text x="993.8" y="412.7" font-size="11" fill="#7a4bb7" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">넣고 뺄 때는 화면을 22°(뒤꿈치)에 댐 (25°에서는 뒷벽 모서리 0.66 긁음)</text>
+<text x="1214.2" y="301.1" font-size="11" fill="#7d8796" text-anchor="end" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">스피커 윗면 z148.06 (접은 높이 한계)</text>
+<text x="965.4" y="427.5" font-size="11" fill="#5d6b80" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">접은 화면(앞면 위) z78.35~95.35, y233.05~339.05 (뒤끝까지 2.45)</text>
+<text x="965.4" y="442.5" font-size="11" fill="#5d6b80" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">접은 다리 z74.85~80.85 · 받침 발 16×16×5.5, 뒤 발에 턱</text>
+<text x="1176.1" y="528.2" font-size="12" fill="#3f8a55" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">가운데 뚜껑</text>
+<text x="1176.1" y="543.2" font-size="11" fill="#3f8a55" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">z72.85, 판 3</text>
+<text x="1176.1" y="557.2" font-size="11" fill="#3f8a55" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">리브 밑 z61.35</text>
+<text x="935.8" y="685.2" font-size="11" fill="#2e7d32" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">Pi 5 (L2 y262~318) · CAM/DISP 1 x589 y263~278</text>
+<line x1="960.4" y1="605.0" x2="1042.0" y2="598.1" stroke="#d97000" stroke-width="0.8"/>
+<circle cx="960.4" cy="605.0" r="2.4" fill="#d97000"/>
+<text x="1046.0" y="602.1" font-size="12" fill="#d97000" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">DSI 리본 300 mm (B형), 필요 약 256 mm</text>
+<text x="1046.0" y="617.1" font-size="11" fill="#c2185b" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">뚜껑 밑 +y → 45° 접기 → −x → 기둥 x583 아래 → HDMI 위 → 입구 · 분홍 = 전원선</text>
+<line x1="176.0" y1="735.5" x2="176.0" y2="741.5" stroke="#1d2530"/>
+<text x="176.0" y="755.5" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">y0</text>
+<line x1="790.8" y1="735.5" x2="790.8" y2="741.5" stroke="#1d2530"/>
+<text x="790.8" y="755.5" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">y212</text>
+<line x1="799.5" y1="735.5" x2="799.5" y2="741.5" stroke="#1d2530"/>
+<text x="799.5" y="767.5" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">y215</text>
+<line x1="833.0" y1="735.5" x2="833.0" y2="741.5" stroke="#1d2530"/>
+<text x="833.0" y="755.5" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">y226.55</text>
+<line x1="1166.3" y1="735.5" x2="1166.3" y2="741.5" stroke="#1d2530"/>
+<text x="1166.3" y="755.5" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">y341.5</text>
+<text x="64.0" y="751.5" font-size="12" fill="#7d8796" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">책상 z0</text>
+<rect x="1058" y="122" width="350" height="248" fill="#fafcff" stroke="#7d8796" rx="6"/>
+<text x="1066.0" y="140.0" font-size="13" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">경첩 확대 — 25° (옆에서)</text>
+<g clip-path="url(#clipI)">
+<polygon points="1054.0,298.9 1486.0,298.9 1486.0,316.9 1054.0,316.9" fill="#cfe6d4" stroke="#3f8a55"/>
+<polygon points="960.7,376.0 1080.7,376.0 1080.7,76.0 960.7,76.0" fill="url(#hatch)" stroke="#d23c3c" stroke-dasharray="4 3"/>
+<polygon points="1096.0,298.9 1204.0,298.9 1183.0,247.9 1117.0,247.9" fill="#9fcaa9" stroke="#3f8a55"/>
+<circle cx="1150.0" cy="247.9" r="33.0" fill="#9fcaa9" stroke="#3f8a55"/>
+<polygon points="1096.0,298.9 1138.0,298.9 1138.0,277.9 1096.0,277.9" fill="#6fae80" stroke="#3f8a55"/>
+<polygon points="1090.4,177.1 1166.4,13.9 1258.9,57.0 1187.9,209.3 1171.9,215.1" fill="#dfe9fb" stroke="#1f5fbf" stroke-width="1.5"/>
+<polygon points="1102.1,166.0 1173.1,13.7 1216.6,34.0 1145.6,186.3" fill="#9fb6d9" stroke="#0b2a55"/>
+<polygon points="1106.5,275.7 1139.3,199.9 1166.5,212.6 1174.3,241.1 1174.6,242.6 1175.0,244.8 1175.2,247.0 1175.1,249.2 1175.0,251.4 1174.6,253.6 1174.0,255.7 1173.2,257.7 1172.2,259.7 1171.2,261.6 1169.9,263.4 1168.4,265.1 1166.9,266.6 1165.2,268.0 1163.3,269.3 1161.4,270.4 1159.4,271.2 1157.4,272.0 1155.3,272.5 1153.1,272.9 1151.5,273.0" fill="#1f5fbf" opacity="0.55" stroke="#1f5fbf"/>
+<circle cx="1150.0" cy="247.9" r="9.9" fill="#fff" stroke="#1d2530" stroke-width="1.4"/>
+</g>
+<text x="1196.0" y="213.9" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">축 y226.55 z81.35, 구멍 Ø3.3</text>
+<text x="1196.0" y="227.9" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">볼 R5.5, 귀 축살 R4.2</text>
+<text x="1066.0" y="344.0" font-size="11" fill="#d23c3c" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">금지선 y215 ← 가장 앞 y216.0 (22° 받침 앞 아래 모서리)</text>
+<text x="1066.0" y="360.0" font-size="11" fill="#1f5fbf" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">멈춤 블록 z76.35 (뚜껑+3.5), 뒤꿈치 R8.6</text>
+<text x="40.0" y="800.0" font-size="17" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">B. 위에서 본 평면 — 아래쪽이 연주자. 소리 길 4개, 화면 자리</text>
+<g clip-path="url(#clipB)">
+<rect x="66.8" y="962.0" width="928.7" height="151.2" fill="#e9edf2" stroke="#7d8796"/>
+<rect x="66.8" y="952.1" width="928.7" height="9.9" fill="#e9edf2" stroke="#7d8796"/>
+<rect x="54.6" y="853.7" width="953.0" height="96.9" fill="#e8d3ad" stroke="#9a7a45" opacity="0.8"/>
+<rect x="477.6" y="952.1" width="128.1" height="161.1" fill="none" stroke="#2b6cb0" stroke-width="2"/>
+<text x="480.6" y="1032.6" font-size="12" fill="#2b6cb0" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">O4 모듈</text>
+<text x="74.4" y="999.8" font-size="12" fill="#7d8796" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">건반 88 (x0~1222) · 모듈 뒤끝 y212</text>
+<circle cx="188.8" cy="916.7" r="35.7" fill="#fff" stroke="#9a7a45"/><circle cx="188.8" cy="916.7" r="4" fill="#9a7a45"/>
+<circle cx="873.5" cy="916.7" r="35.7" fill="#fff" stroke="#9a7a45"/><circle cx="873.5" cy="916.7" r="4" fill="#9a7a45"/>
+<text x="56.2" y="847.7" font-size="12" fill="#9a7a45" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">L2 뒷바 y214~341.5 (스피커 양끝, 콘 자리는 추정)</text>
+<rect x="447.6" y="853.7" width="167.2" height="96.9" fill="#cfe6d4" stroke="#3f8a55" stroke-width="1.5"/>
+<rect x="466.3" y="855.5" width="129.7" height="80.6" fill="none" stroke="#5d6b80" stroke-width="1.5" stroke-dasharray="6 4"/>
+<rect x="466.3" y="902.8" width="129.7" height="46.2" fill="#dfe9fb" stroke="#1f5fbf" stroke-width="1.5" opacity="0.9"/>
+<rect x="527.4" y="886.9" width="7.6" height="39.1" fill="#7a4bb7" opacity="0.85"/>
+<text x="447.6" y="847.7" font-size="12" fill="#3f8a55" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">가운데 뚜껑 x501~721</text>
+<line x1="66.8" y1="949.8" x2="995.5" y2="949.8" stroke="#d23c3c" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="629.2" y="963.8" font-size="11" fill="#d23c3c" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">모듈 위 금지선 y215</text>
+<line x1="66.8" y1="1062.3" x2="995.5" y2="1062.3" stroke="#99994d" stroke-dasharray="2 4"/>
+<text x="74.4" y="1076.3" font-size="11" fill="#77772f" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">홀센서 줄 y≈67 → 화면 가장 앞까지 149 mm</text>
+<ellipse cx="531.2" cy="1379.2" rx="53.2" ry="60.8" fill="#f6e3ee" stroke="#b03a8f"/>
+<text x="531.2" y="1384.2" font-size="12" fill="#b03a8f" text-anchor="middle" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">연주자 (x611)</text>
+<line x1="188.8" y1="916.7" x2="474.2" y2="1379.2" stroke="#15907f" stroke-width="1.6" stroke-dasharray="8 4"/>
+<line x1="188.8" y1="916.7" x2="588.2" y2="1379.2" stroke="#15907f" stroke-width="1.6" stroke-dasharray="8 4"/>
+<line x1="873.5" y1="916.7" x2="474.2" y2="1379.2" stroke="#15907f" stroke-width="1.6" stroke-dasharray="8 4"/>
+<line x1="873.5" y1="916.7" x2="588.2" y2="1379.2" stroke="#15907f" stroke-width="1.6" stroke-dasharray="8 4"/>
+<text x="51.6" y="1227.2" font-size="12" fill="#15907f" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">소리 길 4개(콘 → 두 귀): 화면에서 249 mm 이상 떨어짐</text>
+<line x1="540.1" y1="1136.0" x2="540.1" y2="1113.2" stroke="#2b6cb0"/>
+<line x1="531.2" y1="1136.0" x2="531.2" y2="949.0" stroke="#2b6cb0" stroke-dasharray="2 2"/>
+<text x="535.7" y="1143.6" font-size="11" fill="#2b6cb0" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">화면 가운데 x611 ↔ O4 가운데 x622.75: 11.75 mm</text>
+</g>
+<text x="66.8" y="828.0" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">x0</text>
+<text x="447.6" y="828.0" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">x501</text>
+<text x="614.8" y="828.0" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">x721</text>
+<text x="995.5" y="828.0" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">x1222</text>
+<text x="1044.0" y="818.0" font-size="14" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">뚜껑 확대 (위에서)</text>
+<g clip-path="url(#clipZ)">
+<rect x="1059.6" y="844.4" width="352.0" height="204.0" fill="#cfe6d4" stroke="#3f8a55" stroke-width="1.5"/>
+<rect x="1042.0" y="1046.8" width="401.6" height="32.0" fill="url(#hatch)" stroke="#d23c3c" stroke-dasharray="4 3"/>
+<rect x="1160.4" y="904.4" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1256.4" y="904.4" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1160.4" y="893.2" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1256.4" y="893.2" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1160.4" y="882.0" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1256.4" y="882.0" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1160.4" y="870.8" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1256.4" y="870.8" width="54.4" height="6.4" fill="#aad3b4" stroke="none"/>
+<rect x="1189.2" y="942.8" width="28.8" height="28.8" fill="none" stroke="#d97000" stroke-dasharray="2 2"/>
+<rect x="1125.2" y="882.0" width="136.0" height="89.6" fill="none" stroke="#2e7d32" stroke-width="1.2" stroke-dasharray="4 3"/>
+<rect x="1200.4" y="946.0" width="4.8" height="24.0" fill="#6d4c41"/>
+<rect x="1210.8" y="945.7" width="4.5" height="24.8" fill="#a1887f"/>
+<circle cx="1138.6" cy="885.6" r="3" fill="#c2185b"/>
+<circle cx="1146.7" cy="885.6" r="3" fill="#1d2530"/>
+<rect x="1114.0" y="956.3" width="25.6" height="25.6" fill="#9fcaa9" stroke="#3f8a55"/>
+<rect x="1114.0" y="876.3" width="25.6" height="25.6" fill="#9fcaa9" stroke="#3f8a55"/>
+<rect x="1114.0" y="872.3" width="25.6" height="3.2" fill="#3f8a55" stroke="none"/>
+<rect x="1331.6" y="956.3" width="25.6" height="25.6" fill="#9fcaa9" stroke="#3f8a55"/>
+<rect x="1331.6" y="876.3" width="25.6" height="25.6" fill="#9fcaa9" stroke="#3f8a55"/>
+<rect x="1331.6" y="872.3" width="25.6" height="3.2" fill="#3f8a55" stroke="none"/>
+<rect x="1119.8" y="1013.9" width="32.6" height="28.8" fill="#6fae80" stroke="#3f8a55"/>
+<rect x="1318.8" y="1013.9" width="32.6" height="28.8" fill="#6fae80" stroke="#3f8a55"/>
+<rect x="1268.2" y="993.1" width="48.0" height="19.2" fill="none" stroke="#3f8a55" stroke-dasharray="3 2"/>
+<circle cx="1273.0" cy="1002.7" r="2.6" fill="#fff" stroke="#3f8a55"/>
+<circle cx="1311.4" cy="1002.7" r="2.6" fill="#fff" stroke="#3f8a55"/>
+<rect x="1274.6" y="1015.5" width="35.2" height="9.6" fill="#d97000"/>
+<rect x="1224.4" y="909.7" width="22.4" height="16.4" fill="#fff" stroke="#7a4bb7" stroke-width="1.3"/>
+<rect x="1099.0" y="848.3" width="273.1" height="169.6" fill="none" stroke="#5d6b80" stroke-width="1.4" stroke-dasharray="6 4"/>
+<rect x="1099.0" y="947.9" width="273.1" height="97.3" fill="#dfe9fb" stroke="#1f5fbf" stroke-width="1.6" opacity="0.75"/>
+<rect x="1227.6" y="914.5" width="16.0" height="82.4" fill="#7a4bb7" opacity="0.85"/>
+<polyline points="1292.2,1020.3 1292.2,958.0 1190.8,958.0 1190.8,958.0 1194.0,958.0 1200.4,958.0" fill="none" stroke="#d97000" stroke-width="3.4" marker-end="url(#arrR)"/>
+<polyline points="1305.0,1020.3 1305.0,1020.3 1305.0,885.6 1142.7,885.6 1142.7,885.6" fill="none" stroke="#c2185b" stroke-width="1.4" stroke-dasharray="4 3"/>
+<circle cx="1067.6" cy="997.2" r="4" fill="#fff" stroke="#1d2530" stroke-width="1.4"/>
+<circle cx="1067.6" cy="875.6" r="4" fill="#fff" stroke="#1d2530" stroke-width="1.4"/>
+<circle cx="1403.6" cy="997.2" r="4" fill="#fff" stroke="#1d2530" stroke-width="1.4"/>
+<circle cx="1403.6" cy="875.6" r="4" fill="#fff" stroke="#1d2530" stroke-width="1.4"/>
+</g>
+<rect x="1050" y="1132" width="12" height="10" fill="#6fae80"/>
+<text x="1068.0" y="1142.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">경첩 받침 2 + 멈춤 블록</text>
+<rect x="1050" y="1149" width="12" height="10" fill="#d97000"/>
+<text x="1068.0" y="1159.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">구멍 22×6 x635~657</text>
+<rect x="1050" y="1166" width="12" height="10" fill="#9fcaa9"/>
+<text x="1068.0" y="1176.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">받침 발 16×16×5 (뒤 발 턱)</text>
+<rect x="1050" y="1183" width="12" height="10" fill="#7a4bb7"/>
+<text x="1068.0" y="1193.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">다리 주머니 y290~301</text>
+<rect x="1050" y="1200" width="12" height="10" fill="#2e7d32"/>
+<text x="1068.0" y="1210.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">Pi 5 (L2 확정) · DISP1 · GPIO 2/6</text>
+<rect x="1050" y="1217" width="12" height="10" fill="#1f5fbf"/>
+<text x="1068.0" y="1227.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">세운 화면(파랑) · 접은 화면(점선)</text>
+<rect x="1050" y="1234" width="12" height="10" fill="#3f8a55"/>
+<text x="1068.0" y="1244.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">배기 슬롯 · 클립 덩어리(점선) · 뚜껑 나사(흰 원)</text>
+<rect x="1050" y="1251" width="12" height="10" fill="#d97000"/>
+<text x="1068.0" y="1261.0" font-size="11" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">리본 길(주황) · 전원선(분홍) · 리본 기둥(점선)</text>
+<text x="40.0" y="1476.0" font-size="17" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">C. 화면 받침 — 앞에서 투시해 본 모습 (xr = x − 611, u = 유리 아래 끝에서 위로). 화면 뒤 부품 + 받침 뒤 부품을 겹쳐 그림</text>
+<rect x="80.0" y="1539.6" width="580.4" height="360.4" fill="#dfe9fb" stroke="#1f5fbf" stroke-width="2"/>
+<rect x="87.8" y="1548.1" width="564.7" height="343.4" fill="none" stroke="#0b2a55" stroke-width="1.2" stroke-dasharray="5 3"/>
+<rect x="101.3" y="1564.9" width="525.6" height="293.8" fill="#3d8bff" opacity="0.12" stroke="none"/>
+<rect x="177.6" y="1650.1" width="241.4" height="131.9" fill="#c9d3e3" stroke="#7d8796" stroke-dasharray="3 2"/>
+<rect x="429.2" y="1651.8" width="89.1" height="137.0" fill="#eef0f3" stroke="#7d8796"/>
+<rect x="422.9" y="1656.9" width="100.3" height="122.4" fill="none" stroke="#1d2530" stroke-width="1.6"/>
+<rect x="430.9" y="1713.3" width="18.4" height="54.1" fill="#ffffff" stroke="#1e5aa8" stroke-width="1.4"/>
+<rect x="436.0" y="1669.8" width="17.0" height="29.2" fill="#ffffff" stroke="#c2185b" stroke-width="1.4"/>
+<rect x="462.8" y="1722.7" width="39.8" height="39.8" fill="#d97000" opacity="0.35" stroke="#d97000"/>
+<rect x="449.2" y="1722.7" width="13.6" height="39.8" fill="#d97000" opacity="0.6" stroke="none"/>
+<rect x="462.8" y="1762.5" width="39.8" height="137.5" fill="#d97000" opacity="0.6" stroke="none"/>
+<polyline points="453.0,1684.4 512.8,1684.4 512.8,1900.0" fill="none" stroke="#c2185b" stroke-width="2" stroke-dasharray="5 3"/>
+<rect x="457.7" y="1881.3" width="65.3" height="18.7" fill="none" stroke="#d97000" stroke-width="1.6"/>
+<rect x="533.4" y="1891.5" width="61.2" height="8.5" fill="#ffffff" stroke="#d23c3c" stroke-width="1.6"/>
+<rect x="557.2" y="1891.5" width="14.5" height="2.9" fill="#d23c3c" stroke="none"/>
+<rect x="461.1" y="1837.1" width="43.2" height="27.2" fill="none" stroke="#3f8a55" stroke-width="1.2" stroke-dasharray="3 2"/>
+<circle cx="108.4" cy="1869.4" r="13.6" fill="#fff" stroke="#1d2530" stroke-width="1.3"/>
+<circle cx="108.4" cy="1869.4" r="9.3" fill="none" stroke="#7d8796"/>
+<circle cx="108.4" cy="1570.2" r="13.6" fill="#fff" stroke="#1d2530" stroke-width="1.3"/>
+<circle cx="108.4" cy="1570.2" r="9.3" fill="none" stroke="#7d8796"/>
+<circle cx="632.0" cy="1869.4" r="13.6" fill="#fff" stroke="#1d2530" stroke-width="1.3"/>
+<circle cx="632.0" cy="1869.4" r="9.3" fill="none" stroke="#7d8796"/>
+<circle cx="632.0" cy="1570.2" r="13.6" fill="#fff" stroke="#1d2530" stroke-width="1.3"/>
+<circle cx="632.0" cy="1570.2" r="9.3" fill="none" stroke="#7d8796"/>
+<circle cx="305.6" cy="1804.8" r="4.8" fill="#7d8796"/>
+<circle cx="305.6" cy="1638.2" r="4.8" fill="#7d8796"/>
+<circle cx="502.8" cy="1804.8" r="4.8" fill="#7d8796"/>
+<circle cx="502.8" cy="1638.2" r="4.8" fill="#7d8796"/>
+<rect x="111.8" y="1769.1" width="54.4" height="54.4" fill="#9fcaa9" opacity="0.6" stroke="#3f8a55"/>
+<rect x="111.8" y="1599.1" width="54.4" height="54.4" fill="#9fcaa9" opacity="0.6" stroke="#3f8a55"/>
+<rect x="574.2" y="1769.1" width="54.4" height="54.4" fill="#9fcaa9" opacity="0.6" stroke="#3f8a55"/>
+<rect x="574.2" y="1599.1" width="54.4" height="54.4" fill="#9fcaa9" opacity="0.6" stroke="#3f8a55"/>
+<rect x="345.4" y="1539.6" width="6.8" height="262.8" fill="#7a4bb7" opacity="0.25" stroke="none"/>
+<rect x="388.2" y="1539.6" width="6.8" height="262.8" fill="#7a4bb7" opacity="0.25" stroke="none"/>
+<rect x="353.2" y="1551.5" width="34.0" height="248.2" fill="none" stroke="#7a4bb7" stroke-width="1.4" stroke-dasharray="5 3"/>
+<circle cx="370.2" cy="1789.5" r="12.9" fill="#c9b3e6" stroke="#7a4bb7"/>
+<rect x="341.3" y="1575.3" width="10.9" height="20.4" fill="#7a4bb7"/>
+<rect x="388.2" y="1575.3" width="10.9" height="20.4" fill="#7a4bb7"/>
+<rect x="138.3" y="1900.0" width="27.2" height="36.4" fill="#1f5fbf" opacity="0.55" stroke="#1f5fbf"/>
+<rect x="166.2" y="1903.4" width="27.2" height="37.4" fill="#9fcaa9" stroke="#3f8a55" opacity="0.7"/>
+<rect x="124.0" y="1903.4" width="13.6" height="37.4" fill="#9fcaa9" stroke="#3f8a55" opacity="0.7"/>
+<rect x="574.9" y="1900.0" width="27.2" height="36.4" fill="#1f5fbf" opacity="0.55" stroke="#1f5fbf"/>
+<rect x="547.0" y="1903.4" width="27.2" height="37.4" fill="#9fcaa9" stroke="#3f8a55" opacity="0.7"/>
+<rect x="602.8" y="1903.4" width="13.6" height="37.4" fill="#9fcaa9" stroke="#3f8a55" opacity="0.7"/>
+<polyline points="80.0,1809.9 660.4,1809.9" fill="none" stroke="#1f5fbf" stroke-width="1" stroke-dasharray="1 3"/>
+<polyline points="80.0,1619.5 660.4,1619.5" fill="none" stroke="#1f5fbf" stroke-width="1" stroke-dasharray="1 3"/>
+<text x="676.4" y="1520.0" font-size="12" fill="#1f5fbf" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">받침 170.7×106.0×17.0 (x525.65~696.35), 벽 2.0, 유리와 틈 0.3</text>
+<text x="676.4" y="1540.0" font-size="12" fill="#0b2a55" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">유리 166.1×101.0 (점선), 보이는 영역 옅은 파랑</text>
+<text x="676.4" y="1560.0" font-size="12" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">보스 4개 Ø8: xr ±77, u 6.5·94.5 — M2.5×6, 머리 자리 w11, 물림 3</text>
+<text x="676.4" y="1580.0" font-size="12" fill="#1e5aa8" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">DSI ZIF 22핀 0.5 (흰 네모) xr17.85~23.25, u36.5~52.4, 입구 +x</text>
+<text x="676.4" y="1600.0" font-size="12" fill="#c2185b" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">MX1.25 2핀 (분홍 네모) xr19.35~24.35, u56.6~65.2, 입구 +x</text>
+<text x="676.4" y="1620.0" font-size="12" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">점검창(검은 테) xr15.5~45, u33~69 · 화면 뒤 창(회색)</text>
+<text x="676.4" y="1640.0" font-size="12" fill="#d97000" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">리본(주황): +x 4 → 45° R3 접기 → −u로 내려감 → 아래 홈 xr25.75~44.95</text>
+<text x="676.4" y="1660.0" font-size="12" fill="#3f8a55" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">누름 패드(초록 점선) u8~16 · 전원선(분홍 점선) xr40.45~43.45</text>
+<text x="676.4" y="1680.0" font-size="12" fill="#3f8a55" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">뒤 패드 4개 16×16 (초록) · 가운데 볼록판(회색 점선, 높이 약 2.1)</text>
+<text x="676.4" y="1700.0" font-size="12" fill="#7a4bb7" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">받침다리 걸이 u30 (보라 원) · 접은 다리(보라 점선) · 클립 턱 u87~93</text>
+<text x="676.4" y="1720.0" font-size="12" fill="#1f5fbf" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">경첩 귀(파랑) xr-68.2~-60.2 · 60.2~68.2, 볼(초록)</text>
+<text x="676.4" y="1740.0" font-size="12" fill="#1f5fbf" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">가로 리브 u24·u80 (점선, 다리 축 u30 둘레는 비움), 아래 뒤 모서리 C2</text>
+<text x="676.4" y="1760.0" font-size="12" fill="#d23c3c" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">아래 벽 홈(빨간 테) xr48~66 관통: 화면 아래 끝 돌기(빨강) 자리</text>
+<text x="676.4" y="1780.0" font-size="12" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">뒷판 w10.5~13, 리브 w13~16, 축 u-9 w13</text>
+<text x="80.0" y="1531.6" font-size="11" fill="#7d8796" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">−x (연주자 왼쪽)</text>
+<text x="646.4" y="1531.6" font-size="11" fill="#7d8796" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">+x</text>
+<text x="370.2" y="1956.8" font-size="11" fill="#7d8796" text-anchor="middle" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">경첩 축 u-9 (아래)</text>
+<text x="700.0" y="1812.0" font-size="15" fill="#1d2530" text-anchor="start" font-weight="bold" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">D. 리본 종류 정하기 (면이 뒤집히는 곳)</text>
+<text x="700.0" y="1834.0" font-size="12" fill="#d97000" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">① 화면 ZIF에서 +x로 나옴: 접점 면은 화면 쪽(−w)</text>
+<text x="700.0" y="1853.0" font-size="12" fill="#d97000" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">② 받침 안 45° 접기 1번 → 면 뒤집힘</text>
+<text x="700.0" y="1872.0" font-size="12" fill="#d97000" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">③ 경첩 고리·뚜껑 구멍: 굽힘만 (뒤집힘 없음)</text>
+<text x="700.0" y="1891.0" font-size="12" fill="#d97000" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">④ 뚜껑 밑 +y → 45° 접기(뒤집힘) → −x → 아래 → +x로 굽힘 (HDMI 위) → 입구 (U자 아님)</text>
+<text x="700.0" y="1910.0" font-size="12" fill="#d97000" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">⑤ 끝에서 접점 면이 위를 봄, Pi 접점은 아래 → B (reverse)</text>
+<text x="700.0" y="1929.0" font-size="12" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">커넥터가 왼쪽이면(G-1) 약 200 mm, A (same side)</text>
+<text x="700.0" y="1948.0" font-size="12" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">L2 Pi 자리까지 256 mm = 받침~뚜껑 96.8 + 뚜껑 밑 159.5</text>
+<text x="40.0" y="1995.0" font-size="13" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">사용: 25° 뒤로 기울임, 가장 높은 곳 z189.23, 가장 앞 y216.0 (금지선 y215). 접음: 다리를 받침 뒤에 붙이고 눕혀 z95.35 (스피커 윗면 z148.06 아래, 여유 53 mm), 뒤끝 y339.05 (뚜껑 y341.5).</text>
+<text x="40.0" y="2017.0" font-size="13" fill="#1d2530" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">화면 위쪽을 10 N으로 누르면 받침다리 27.22 N 압축 (좌굴 한계 792 N). 앞으로 10 N 당기면 뒤꿈치 150 N, 뚜껑 앞 나사 합계 34 N. 리본 필요 약 256 mm / 300 mm (B형).</text>
+<text x="40.0" y="2039.0" font-size="12" fill="#7d8796" text-anchor="start" font-weight="normal" style="paint-order:stroke;stroke:#ffffff;stroke-width:3.2px;stroke-linejoin:round">커넥터 쪽(창이 오른쪽, 입구 +x)과 모서리 구멍 깊이, 볼록판 높이는 사진·도면 추정 — 화면을 받으면 확인(CAD_SPEC_rev3 G).</text>
+</svg>

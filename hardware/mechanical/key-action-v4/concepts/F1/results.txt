@@ -1,0 +1,201 @@
+Toccata v4 — concept F1: over-tail counter-lever (오버테일 카운터레버).  All values computed by calc.py.
+Units: mm, g (gf for forces), ms.  z = 0 desk, y = 0 white-key lip.
+
+== layout
+  key pivot rod KP = (205.0, 18.0)  (Ø3.0 steel, one per octave, rear comb)   lever rod LP = (151.0, 35.83)
+  dip angle white 2.788°  black 3.545°
+  nose contact y: white 141.0 (pad z 40.90), black 138.0 (pad z 41.42)
+  pad vertical travel at the nose: white 3.14, black 4.19
+
+== WHITE key + lever
+  key mass 20.76 g (PETG 20.45), COM (81.65, 32.79), I_KP 385802 g·mm²  (I_com 65449 + m·d² parallel-axis)
+  lever mass 74.28 g = steel 9x25x40.0 70.65 g + PETG 3.63 g, COM (174.55, 35.18) (ref pose), I_LP 55624 g·mm²
+  lever angle rest -9.14°, bottom 8.68° (sweep 17.83°)
+  box table (key):
+     skin head                            2.812 g  at (  25.00, 42.50)
+     skin tail                            3.446 g  at (  98.00, 42.50)
+     front wall                           0.608 g  at (   2.10, 32.50)
+     head side walls                      2.554 g  at (  26.35, 32.50)
+     notch wall                           0.220 g  at (  49.40, 32.50)
+     tail side walls                      5.184 g  at (  98.00, 32.50)
+     guide ribs                           0.891 g  at (  18.75, 32.50)
+     up-stop crossbar                     0.060 g  at (  12.25, 24.30)
+     down-stop plate                      0.235 g  at (   6.60, 24.10)
+     magnet boss (tube)                   0.544 g  at (  65.80, 32.50)
+     magnet N35 5x2                       0.295 g  at (  65.80, 24.50)
+     transverse ribs                      0.251 g  at (  95.00, 34.50)
+     transverse ribs                      0.251 g  at ( 120.00, 34.50)
+     contact pad cloth                    0.010 g  at ( 141.00, 41.20)
+     keel web in hollow                   0.675 g  at ( 141.00, 32.50)
+     keel under lever rod                 0.270 g  at ( 147.50, 21.52)
+     keel under weights                   0.970 g  at ( 160.50, 13.02)
+     keel under weights                   1.125 g  at ( 184.50, 10.09)
+     keel riser to hook                   0.182 g  at ( 198.50, 14.40)
+     rear C-hook (60 % solid)             0.172 g  at ( 204.25, 18.00)
+  box table (lever, reference pose):
+     nose + arm                           0.203 g  at ( 143.50, 35.83)
+     hub ring (Ø7.2/Ø3.2)                 0.180 g  at ( 151.00, 35.83)
+     carrier floor                        0.668 g  at ( 174.60, 22.23)
+     carrier side plate                   1.749 g  at ( 174.60, 33.83)
+     carrier end walls                    0.297 g  at ( 154.00, 33.83)
+     carrier end walls                    0.297 g  at ( 195.20, 33.83)
+     rear stop tab                        0.240 g  at ( 201.80, 38.33)
+     steel 9T flat bar                   70.650 g  at ( 174.60, 35.33)
+  statics over the stroke (finger at y13.0):
+     key°    lever°   B(g)  fric(g)  DW(g)  UW(g)  m_eff(g) [key/lever]  R(steel/finger)  nose F(N)  keyrod Rz(N)
+    0.000   -9.142  45.80    7.67  53.48  38.13     76.3 [10.5/65.8]    0.799     1.750    -1.097
+    0.279   -7.309  45.60    7.08  52.68  38.52     75.1 [10.5/64.6]    0.796     1.745    -1.094
+    0.558   -5.490  45.38    6.50  51.88  38.87     74.0 [10.4/63.6]    0.793     1.740    -1.091
+    0.836   -3.685  45.14    5.95  51.09  39.19     73.1 [10.4/62.6]    0.789     1.735    -1.088
+    1.115   -1.891  44.88    5.41  50.29  39.47     72.2 [10.4/61.8]    0.786     1.729    -1.085
+    1.394   -0.108  44.60    4.89  49.49  39.71     71.4 [10.4/61.0]    0.782     1.723    -1.081
+    1.673    1.665  44.30    4.75  49.06  39.55     70.7 [10.4/60.3]    0.777     1.716    -1.077
+    1.951    3.430  43.99    5.20  49.19  38.78     70.1 [10.4/59.7]    0.773     1.709    -1.073
+    2.230    5.188  43.65    5.64  49.30  38.01     69.6 [10.4/59.2]    0.768     1.702    -1.069
+    2.509    6.939  43.30    6.07  49.37  37.23     69.1 [10.4/58.8]    0.763     1.694    -1.064
+    2.788    8.684  42.93    6.49  49.42  36.44     68.7 [10.4/58.4]    0.758     1.686    -1.059
+  friction breakdown at rest / mid / bottom (g at the finger): key_pivot 0.17, lever_pivot 2.61, nose_slide 2.95, guide_bushing 1.94 | key_pivot 0.17, lever_pivot 2.48, nose_slide 0.30, guide_bushing 1.94 | key_pivot 0.17, lever_pivot 2.39, nose_slide 2.00, guide_bushing 1.93
+  at the lip y0: B 42.90 g (m_eff 66.9 g)
+  front/back ratio: force at y90 / force at y13.0 = 1.670  (B at y90 76.47 g)
+  magnet: rest gap 10.82, bottom gap 4.04, travel 6.78, y shift -0.10 (face centre at bottom y 65.70, element row y67)
+  clearances (mm): lever_top_z_over 54.64, cover_clear 2.86, keel_clear_rest 1.63, neck_to_carrier_y 1.73, lever_low_z_guard 13.59, rear_clear 2.51, arm_under_skin 1.02, key_end_to_rod 3.50, keel_to_rod 1.55, keel_floor_clear_dip 0.92, board_clear_dip 3.01, fascia_clear_y 3.43
+  constant stresses at rest (MPa): keel y146 0.22, y149 1.46, y172 1.34; lever hub 0.64; nose arm 0.75; up-stop hook lip 0.50 (F_up 0.447 N); rear hook jaw 0.70; key crossbar 0.64; skin/bridge at pad 0.98; bearing: key hook 0.122, lever hub 0.188, fin notch 0.508
+  RETURN from the bottom (finger lifted, lever at rest on the key): re-trigger point = magnet back 40 % of its travel
+     no spring : t40 36.3 ms -> 27.6 Hz, t90 54.6, full (first up-stop contact) 57.6 ms, bounce 0.66 mm at the finger, settled (<0.2 mm) at 100 ms, nose force min 0.109 N (separation False), key-rod Rz range -4.67..0.037 N
+     +6 gf assist spring (option, not in the BOM): t40 33.9 ms (29.5 Hz), full 53.8 ms
+     check of the v2.0 claim: constant-acceleration estimate t = sqrt(2*dip*m_eff/((B-fric)*g)) = 60.6 ms full / 38.3 ms to 40 % — it depends on m_eff/(B-fric), not a fixed 40 ms; the 40 % re-trigger point, not full return, sets the repetition limit
+  KEYSTROKES (finger target moving down at v, press-in 1.5 mm, hold 60 ms after bottom, then lift):
+     v 0.1 m/s: bottom at 94.6 ms, key speed at bottom 0.10 m/s, lever lift-off 0.045 mm, nose lands at 0.019 m/s, lever settled 9.3 ms after bottom, tab overtravel 0.66 mm (upper felt peak 0.7 N, lever top z 54.75), front felt peak 7.3 N, rest-guard peak 3.88 N, after release t40 31.3 / full 52.0 ms, key-rod Rz -4.7..1.27 N
+     v 0.3 m/s: bottom at 28.3 ms, key speed at bottom 0.41 m/s, lever lift-off 0.156 mm, nose lands at 0.071 m/s, lever settled 27.4 ms after bottom, tab overtravel 1.33 mm (upper felt peak 5.8 N, lever top z 55.24), front felt peak 10.6 N, rest-guard peak 3.89 N, after release t40 29.9 / full 50.6 ms, key-rod Rz -7.9..1.69 N
+     v 0.6 m/s: bottom at 16.6 ms, key speed at bottom 0.71 m/s, lever lift-off 0.253 mm, nose lands at 0.157 m/s, lever settled 45.5 ms after bottom, tab overtravel 2.31 mm (upper felt peak 24.0 N, lever top z 55.94), front felt peak 17.6 N, rest-guard peak 3.83 N, after release t40 34.0 / full 55.0 ms, key-rod Rz -14.8..5.62 N
+     v 1.0 m/s: bottom at 11.0 ms, key speed at bottom 0.99 m/s, lever lift-off 0.430 mm, nose lands at 0.268 m/s, lever settled 45.0 ms after bottom, tab overtravel 2.93 mm (upper felt peak 48.8 N, lever top z 56.38), front felt peak 10.8 N, rest-guard peak 3.84 N, after release t40 36.4 / full 57.3 ms, key-rod Rz -23.9..1.36 N
+  REPETITION (press 0.5 m/s, lift at bottom, re-press at the 40 % point): steady interval 26.8 ms = 37.4 Hz
+  coordinates (y, z) rest -> bottom:
+     key pivot rod centre (KP, Ø3)                    ( 205.00, 18.00) -> ( 205.00, 18.00)
+     lever pivot rod centre (LP, Ø3)                  ( 151.00, 35.83) -> ( 151.00, 35.83)
+     key front top edge (dip point)                   (   0.00, 43.50) -> (  -1.00, 33.50)
+     finger point (top)                               (  13.00, 43.50) -> (  11.99, 34.13)
+     up-stop contact (crossbar top / hook felt)       (  12.25, 25.10) -> (  12.13, 15.72)
+     down-stop contact (plate underside / front felt) (   6.60, 23.50) -> (   6.57, 13.84)
+     magnet face centre                               (  65.80, 23.50) -> (  65.70, 16.72)
+     key pad surface at nose (coupling)               ( 141.00, 40.90) -> ( 139.96, 37.76)
+     lever nose centre (R2)                           ( 141.37, 38.90) -> ( 140.89, 35.80)
+     key centre of mass                               (  81.65, 32.79) -> (  81.08, 26.77)
+     lever centre of mass                             ( 174.14, 31.44) -> ( 174.37, 38.74)
+     steel centroid                                   ( 174.22, 31.59) -> ( 174.40, 38.90)
+     lever tab top (upper felt side)                  ( 203.84, 31.88) -> ( 202.52, 48.25)
+     lever tab bottom (guard felt side)               ( 203.21, 27.93) -> ( 203.12, 44.30)
+
+== BLACK key + lever
+  key mass 17.19 g (PETG 16.88), COM (111.13, 36.55), I_KP 187790 g·mm²  (I_com 30427 + m·d² parallel-axis)
+  lever mass 68.94 g = steel 9x25x37.0 65.35 g + PETG 3.59 g, COM (173.04, 35.18) (ref pose), I_LP 45666 g·mm²
+  lever angle rest -9.36°, bottom 8.86° (sweep 18.22°)
+  box table (key):
+     top skin                             2.314 g  at (  99.25, 54.50)
+     side walls                           8.505 g  at (  98.75, 38.50)
+     front wall                           0.387 g  at (  52.10, 38.50)
+     down-stop plate                      0.081 g  at (  55.85, 24.10)
+     up-stop crossbar                     0.060 g  at (  78.25, 24.30)
+     magnet boss (tube)                   0.906 g  at (  64.20, 38.50)
+     magnet N35 5x2                       0.295 g  at (  64.20, 24.50)
+     transverse rib                       0.335 g  at ( 110.00, 40.50)
+     contact bridge (40 % infill)         0.448 g  at ( 139.50, 47.76)
+     contact pad cloth                    0.010 g  at ( 138.00, 41.72)
+     keel web in hollow                   1.125 g  at ( 141.00, 38.50)
+     keel under lever rod                 0.270 g  at ( 147.50, 21.52)
+     keel under weights                   0.970 g  at ( 160.50, 13.02)
+     keel under weights                   1.125 g  at ( 184.50, 10.09)
+     keel riser to hook                   0.182 g  at ( 198.50, 14.40)
+     rear C-hook (60 % solid)             0.172 g  at ( 204.25, 18.00)
+  box table (lever, reference pose):
+     nose + arm                           0.270 g  at ( 142.00, 35.83)
+     hub ring (Ø7.2/Ø3.2)                 0.180 g  at ( 151.00, 35.83)
+     carrier floor                        0.621 g  at ( 173.10, 22.23)
+     carrier side plate                   1.625 g  at ( 173.10, 33.83)
+     carrier end walls                    0.297 g  at ( 154.00, 33.83)
+     carrier end walls                    0.297 g  at ( 192.20, 33.83)
+     rear stop tab                        0.300 g  at ( 200.30, 38.33)
+     steel 9T flat bar                   65.351 g  at ( 173.10, 35.33)
+  statics over the stroke (finger at y62.5):
+     key°    lever°   B(g)  fric(g)  DW(g)  UW(g)  m_eff(g) [key/lever]  R(steel/finger)  nose F(N)  keyrod Rz(N)
+    0.000   -9.356  44.08    5.40  49.48  38.68     72.2 [9.2/63.0]    0.807     1.163    -0.562
+    0.354   -7.488  43.90    4.88  48.78  39.02     71.0 [9.2/61.8]    0.804     1.161    -0.562
+    0.709   -5.633  43.70    4.38  48.08  39.32     70.0 [9.2/60.8]    0.801     1.159    -0.562
+    1.063   -3.790  43.47    3.89  47.36  39.58     69.0 [9.2/59.9]    0.797     1.157    -0.562
+    1.418   -1.958  43.23    4.13  47.36  39.09     68.1 [9.1/59.0]    0.793     1.154    -0.561
+    1.772   -0.136  42.95    4.55  47.51  38.40     67.3 [9.1/58.2]    0.789     1.151    -0.561
+    2.127    1.678  42.66    4.97  47.63  37.69     66.6 [9.1/57.5]    0.785     1.148    -0.560
+    2.481    3.483  42.34    5.37  47.71  36.97     66.0 [9.1/56.9]    0.780     1.144    -0.559
+    2.836    5.281  42.00    5.76  47.76  36.24     65.4 [9.0/56.3]    0.775     1.140    -0.558
+    3.190    7.073  41.64    6.14  47.79  35.50     64.9 [9.0/55.9]    0.769     1.135    -0.557
+    3.545    8.861  41.26    6.52  47.78  34.74     64.4 [9.0/55.4]    0.763     1.130    -0.555
+  friction breakdown at rest / mid / bottom (g at the finger): key_pivot 0.12, lever_pivot 2.09, nose_slide 1.54, guide_bushing 1.65 | key_pivot 0.12, lever_pivot 2.00, nose_slide 0.80, guide_bushing 1.64 | key_pivot 0.12, lever_pivot 1.92, nose_slide 2.85, guide_bushing 1.63
+  at the black front edge y52.5: B 41.19 g (m_eff 63.1 g)
+  front/back ratio: force at y90 / force at y62.5 = 1.239  (B at y90 54.62 g)
+  magnet: rest gap 13.35, bottom gap 4.63, travel 8.72, y shift -0.07 (face centre at bottom y 64.13, element row y67)
+  clearances (mm): lever_top_z_over 54.28, cover_clear 3.22, keel_clear_rest 1.46, neck_to_carrier_y 1.68, lever_low_z_guard 14.00, rear_clear 5.45, arm_under_skin 0.78, key_end_to_rod 3.50, keel_to_rod 1.55, keel_floor_clear_dip 0.82, board_clear_dip 1.39, fascia_clear_y 3.40
+  constant stresses at rest (MPa): keel y146 0.11, y149 0.75, y172 0.69; lever hub 0.55; nose arm 0.73; up-stop hook lip 0.54 (F_up 0.486 N); rear hook jaw 0.36; key crossbar 0.70; skin/bridge at pad 0.05; bearing: key hook 0.062, lever hub 0.139, fin notch 0.377
+  RETURN from the bottom (finger lifted, lever at rest on the key): re-trigger point = magnet back 40 % of its travel
+     no spring : t40 35.1 ms -> 28.5 Hz, t90 52.8, full (first up-stop contact) 55.7 ms, bounce 0.57 mm at the finger, settled (<0.2 mm) at 95 ms, nose force min 0.112 N (separation False), key-rod Rz range -2.68..0.033 N
+     +6 gf assist spring (option, not in the BOM): t40 32.6 ms (30.7 Hz), full 51.7 ms
+     check of the v2.0 claim: constant-acceleration estimate t = sqrt(2*dip*m_eff/((B-fric)*g)) = 59.8 ms full / 37.8 ms to 40 % — it depends on m_eff/(B-fric), not a fixed 40 ms; the 40 % re-trigger point, not full return, sets the repetition limit
+  KEYSTROKES (finger target moving down at v, press-in 1.5 mm, hold 60 ms after bottom, then lift):
+     v 0.1 m/s: bottom at 89.8 ms, key speed at bottom 0.10 m/s, lever lift-off 0.010 mm, nose lands at 0.017 m/s, lever settled 0.0 ms after bottom, tab overtravel 0.70 mm (upper felt peak 1.0 N, lever top z 54.41), front felt peak 5.0 N, rest-guard peak 3.51 N, after release t40 29.1 / full 48.9 ms, key-rod Rz -2.7..0.78 N
+     v 0.3 m/s: bottom at 26.8 ms, key speed at bottom 0.35 m/s, lever lift-off 0.122 mm, nose lands at 0.105 m/s, lever settled 4.1 ms after bottom, tab overtravel 1.26 mm (upper felt peak 5.1 N, lever top z 54.79), front felt peak 6.8 N, rest-guard peak 3.51 N, after release t40 29.1 / full 48.9 ms, key-rod Rz -5.4..0.78 N
+     v 0.6 m/s: bottom at 15.2 ms, key speed at bottom 0.77 m/s, lever lift-off 0.198 mm, nose lands at 0.137 m/s, lever settled 15.7 ms after bottom, tab overtravel 2.19 mm (upper felt peak 20.7 N, lever top z 55.41), front felt peak 12.8 N, rest-guard peak 3.51 N, after release t40 29.1 / full 48.9 ms, key-rod Rz -10.3..3.82 N
+     v 1.0 m/s: bottom at 10.4 ms, key speed at bottom 1.19 m/s, lever lift-off 0.364 mm, nose lands at 0.373 m/s, lever settled 17.7 ms after bottom, tab overtravel 2.99 mm (upper felt peak 51.8 N, lever top z 55.93), front felt peak 8.9 N, rest-guard peak 3.51 N, after release t40 29.1 / full 48.9 ms, key-rod Rz -16.7..2.67 N
+  REPETITION (press 0.5 m/s, lift at bottom, re-press at the 40 % point): steady interval 22.2 ms = 45.1 Hz
+  coordinates (y, z) rest -> bottom:
+     key pivot rod centre (KP, Ø3)                    ( 205.00, 18.00) -> ( 205.00, 18.00)
+     lever pivot rod centre (LP, Ø3)                  ( 151.00, 35.83) -> ( 151.00, 35.83)
+     key front top edge (dip point)                   (  52.50, 55.50) -> (  50.47, 46.00)
+     finger point (top)                               (  62.50, 55.50) -> (  60.45, 46.62)
+     up-stop contact (crossbar top / hook felt)       (  78.25, 25.10) -> (  78.05, 17.25)
+     down-stop contact (plate underside / front felt) (  55.85, 23.50) -> (  55.80, 14.27)
+     magnet face centre                               (  64.20, 23.50) -> (  64.13, 14.78)
+     key pad surface at nose (coupling)               ( 138.00, 41.42) -> ( 136.68, 37.24)
+     lever nose centre (R2)                           ( 138.42, 39.42) -> ( 137.92, 35.31)
+     key centre of mass                               ( 111.13, 36.55) -> ( 110.16, 30.71)
+     lever centre of mass                             ( 172.64, 31.61) -> ( 172.88, 38.58)
+     steel centroid                                   ( 172.72, 31.74) -> ( 172.91, 38.74)
+     lever tab top (upper felt side)                  ( 203.83, 31.69) -> ( 202.48, 48.41)
+     lever tab bottom (guard felt side)               ( 203.18, 27.74) -> ( 203.09, 44.46)
+
+== envelope
+  white key top z 43.5, black top z 55.5; highest moving point: lever at nominal overtravel z 54.64, at the 1.0 m/s keystroke z 56.38; cover underside z 57.5 (top plate thinned to 1.5 over y150-200, cover top z59 unchanged)
+  lowest moving point (keel at full dip) z 5.82 (floor z 5.0)
+  depth used: key y0 -> rear hook y208.5; rear comb y200.0-209.0; frame y0-212 (v3, unchanged); total instrument depth 410
+  black-key front face at full dip vs resting white notch face (lower chamfer 2.5 mm, v3 had 1.5): min clearance 0.37 mm
+  x layout (lever columns between 1.2 mm fin plates; carrier = 9 steel + 1.5 side plate = 10.5):
+     C   x   7.431  fins    0.30 |   14.32  column 12.22  side clearance 0.86
+     Cs  x  21.215  fins   14.32 |   28.23  column 12.71  side clearance 1.10
+     D   x  35.250  fins   28.23 |   42.27  column 12.83  side clearance 1.17
+     Ds  x  49.285  fins   42.27 |   56.18  column 12.71  side clearance 1.10
+     E   x  63.070  fins   56.18 |   70.21  column 12.84  side clearance 1.17
+     F   x  77.359  fins   70.21 |   83.97  column 12.55  side clearance 1.03
+     Fs  x  90.573  fins   83.97 |   97.31  column 12.14  side clearance 0.82
+     G   x 104.037  fins   97.31 |  110.77  column 12.26  side clearance 0.88
+     Gs  x 117.500  fins  110.77 |  124.23  column 12.26  side clearance 0.88
+     A   x 130.964  fins  124.23 |  137.70  column 12.26  side clearance 0.88
+     As  x 144.427  fins  137.70 |  150.68  column 11.79  side clearance 0.64
+     B   x 157.641  fins  150.68 |  164.20  column 11.72  side clearance 0.61
+
+== masses / filament / printing
+  steel per key: white 70.6 g (9x25x40.0), black 65.4 g (9x25x37.0); per octave 821 g; 88 keys 6.03 kg (bar length 3.41 m + kerf)
+  PETG per key: white key 20.5 + lever 3.6 + breakaway rib 1.5 g; black key 16.9 + lever 3.6 + rib 2.0 g
+  frame change: fin plates (13 x 1.2 x 13 x 33, y147-160, lever-rod J-slots): +8.4 g
+  frame change: rear comb block y200-209 x 163.5 x z5-48 minus 12 hook slots + 12 tab pockets: +30.4 g
+  frame change: v3 spine rail y196-209 (removed): -20.9 g
+  frame change: v3 rear second-floor stop rail y138-144 (removed): -9.2 g
+  per octave: action parts 291 g (v3 key combs 267 g), frame delta +8.8 g; module total 535 g (v3 502 g)
+  88 keys: action parts 2.14 kg = 143 h at 15 g/h; whole instrument filament 5.25 kg (v3 5.00) = 350 h at 15 g/h (v3 figure 332 h incl. its own overheads)
+  bed 220x220: 7 white keys side by side 169.5 x 208.5 (upside down, height 43.5-6); 5 black keys 67 x 157.0; 12 levers flat on their side plate, each 71.8 x ~31; all fit.
+
+== purchased items (delta vs v3 base BOM)
+  steel flat bar 평철 SS400 9T x 25            cut pieces: 52 x 40.0 mm (white) + 36 x 37.0 mm (black) = 3.54 m incl. 1.5 mm kerf           qty   4  unit   4500  total   18000 KRW  [online 평철 cut-to-length shop (1 m lots) — estimate]
+  cutting service for the steel pieces       88 cuts (or DIY hacksaw ~3 h -> 0 KRW)                                                       qty  88  unit    300  total   26400 KRW  [estimate]
+  SUS304 polished round bar Ø3 x 1 m         key rods + lever rods: 2.46 m -> 3 bars                                                      qty   3  unit   9600  total   28800 KRW  [baegwan.net 스텐연마봉 SUS304 1M Φ3 (9,600 KRW, checked 2026-09-27)]
+  USB-C extension 15 cm (M-F, low-profile)   relocated control board -> rear wall, one per module                                         qty   7  unit   3500  total   24500 KRW  [estimate]
+  removed: v3 leaf-spine clamp hardware      per module 4x M3x40, 4x M3x10 set screw, 4x brass disc Ø8x1, 4x M4 washer, 8x M3 nut         qty   7  unit  -2500  total  -17500 KRW  [estimate]
+  base BOM delta: +80200 KRW  (v3.2 base 583,219 -> 663,419, cap 1,000,000)
+  consumable: wool felt 3T + bushing cloth 0.6T extra (24 tab pads 5x8 + 12 nose pads 8x4 per octave): 5000 KRW [estimate]

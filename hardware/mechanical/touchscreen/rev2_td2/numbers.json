@@ -1,0 +1,518 @@
+{
+ "rev": 2,
+ "screen": {
+  "model": "Raspberry Pi Touch Display 2 7\" (SC1635)",
+  "glass": [
+   189.32,
+   120.24
+  ],
+  "active": [
+   154.56,
+   86.94
+  ],
+  "x_centre": 656.0,
+  "glass_x": [
+   561.34,
+   750.66
+  ],
+  "active_x": [
+   578.72,
+   733.28
+  ],
+  "dsi": {
+   "x_centre": 638.66,
+   "open_x": 629.7,
+   "opens": "-x",
+   "u": [
+    52.1,
+    68.1
+   ]
+  },
+  "j1": {
+   "x": [
+    647.0,
+    658.0
+   ],
+   "u": [
+    36.5,
+    43.0
+   ]
+  }
+ },
+ "cradle": {
+  "x": [
+   559.04,
+   752.96
+  ],
+  "u": [
+   -2.5,
+   122.74
+  ],
+  "w": [
+   -1.0,
+   16.0
+  ],
+  "size": [
+   193.92,
+   125.24,
+   17.0
+  ]
+ },
+ "hinge": {
+  "axis_yz": [
+   290.0,
+   96.0
+  ],
+  "axis_cradle_uw": [
+   -9.0,
+   16.0
+  ],
+  "tilt_use_deg": 25.0,
+  "heel_contact_deg": 22.0,
+  "cheek_R": 5.5,
+  "cradle_corner_R": 6.5,
+  "heel_contact_yz": [
+   283.0,
+   88.0
+  ],
+  "heel_R": 10.63,
+  "heel_gap_at_25": 0.38,
+  "left": {
+   "x": [
+    616.0,
+    636.4
+   ],
+   "far": [
+    616.0,
+    624.0
+   ],
+   "ear": [
+    624.2,
+    632.2
+   ],
+   "near": [
+    632.4,
+    636.4
+   ],
+   "screw_from": "+x"
+  },
+  "right": {
+   "x": [
+    703.8,
+    724.2
+   ],
+   "far": [
+    703.8,
+    711.8
+   ],
+   "ear": [
+    712.0,
+    720.0
+   ],
+   "near": [
+    720.2,
+    724.2
+   ],
+   "screw_from": "+x"
+  },
+  "knuckle_profile": {
+   "top_R": 5.5,
+   "base_z88_y": [
+    281.0,
+    299.0
+   ],
+   "at_z96_y": [
+    284.5,
+    295.5
+   ]
+  }
+ },
+ "hole": {
+  "x": [
+   592.0,
+   614.0
+  ],
+  "y": [
+   292.0,
+   298.0
+  ]
+ },
+ "points": {
+  "use": {
+   "glass_bottom": [
+    279.3,
+    110.92
+   ],
+   "glass_top": [
+    330.12,
+    219.89
+   ],
+   "glass_centre": [
+    304.71,
+    165.41
+   ],
+   "act_bottom": [
+    286.34,
+    126.01
+   ],
+   "act_top": [
+    323.08,
+    204.8
+   ],
+   "cr_bot_front": [
+    277.34,
+    109.08
+   ],
+   "cr_bot_back": [
+    292.75,
+    101.89
+   ],
+   "cr_top_front": [
+    330.27,
+    222.58
+   ],
+   "cr_top_back": [
+    345.68,
+    215.4
+   ]
+  },
+  "heel": {
+   "glass_bottom": [
+    278.54,
+    110.34
+   ],
+   "glass_top": [
+    323.58,
+    221.82
+   ],
+   "glass_centre": [
+    301.06,
+    166.08
+   ],
+   "act_bottom": [
+    284.77,
+    125.78
+   ],
+   "act_top": [
+    317.34,
+    206.39
+   ],
+   "cr_bot_front": [
+    276.67,
+    108.4
+   ],
+   "cr_bot_back": [
+    292.43,
+    102.03
+   ],
+   "cr_top_front": [
+    323.59,
+    224.52
+   ],
+   "cr_top_back": [
+    339.35,
+    218.15
+   ]
+  },
+  "fold": {
+   "glass_bottom": [
+    299.0,
+    112.0
+   ],
+   "glass_top": [
+    419.24,
+    112.0
+   ],
+   "glass_centre": [
+    359.12,
+    112.0
+   ],
+   "act_bottom": [
+    315.65,
+    112.0
+   ],
+   "act_top": [
+    402.59,
+    112.0
+   ],
+   "cr_bot_front": [
+    296.5,
+    113.0
+   ],
+   "cr_bot_back": [
+    296.5,
+    96.0
+   ],
+   "cr_top_front": [
+    421.74,
+    113.0
+   ],
+   "cr_top_back": [
+    421.74,
+    96.0
+   ]
+  }
+ },
+ "sweep_min_y": 276.67,
+ "sweep_min_z": 96.0,
+ "leg": {
+  "pivot_cradle_uw": [
+   20.0,
+   19.5
+  ],
+  "pivot_yz": [
+   305.43,
+   120.8
+  ],
+  "tip_yz": [
+   394.4,
+   87.5
+  ],
+  "length": 95.0,
+  "x": [
+   651.0,
+   661.0
+  ],
+  "section": [
+   10.0,
+   6.0
+  ],
+  "angle_deg": 20.5,
+  "stow_tip_u": 118.0,
+  "pocket": {
+   "back_wall_y": 397.4,
+   "bottom_z": 84.5,
+   "ramp_front_y": 388.34,
+   "x": [
+    649.0,
+    663.0
+   ]
+  },
+  "fold_leg_z": [
+   89.5,
+   95.5
+  ],
+  "fold_clevis_zmin": 88.7,
+  "fold_leg_y": [
+   316.0,
+   417.0
+  ],
+  "pivot_shift_at_22": 1.53
+ },
+ "eye": {
+  "eye": [
+   -350.0,
+   450.0
+  ],
+  "angle_to_centre": 23.49,
+  "angle_range": [
+   18.4,
+   29.0
+  ],
+  "dist_to_centre": 713.9,
+  "sightline_z_at_y212": 163.9,
+  "px_mm": 0.1207,
+  "arcmin_per_px": 0.58,
+  "arcmin_32px": 18.6
+ },
+ "paths": [
+  {
+   "src": [
+    90.5,
+    282.75
+   ],
+   "ear": [
+    536.0,
+    -350.0
+   ],
+   "x_at_y252": 112.2,
+   "dist_to_screen": 379.6
+  },
+  {
+   "src": [
+    90.5,
+    282.75
+   ],
+   "ear": [
+    686.0,
+    -350.0
+   ],
+   "x_at_y252": 119.4,
+   "dist_to_screen": 337.0
+  },
+  {
+   "src": [
+    1131.5,
+    282.75
+   ],
+   "ear": [
+    536.0,
+    -350.0
+   ],
+   "x_at_y252": 1102.6,
+   "dist_to_screen": 271.5
+  },
+  {
+   "src": [
+    1131.5,
+    282.75
+   ],
+   "ear": [
+    686.0,
+    -350.0
+   ],
+   "x_at_y252": 1109.8,
+   "dist_to_screen": 306.0
+  }
+ ],
+ "screen_rect_plan": [
+  559.04,
+  276.67,
+  752.96,
+  345.68
+ ],
+ "O4": {
+  "offset": 33.2,
+  "scale": 0.94,
+  "two_oct_white_px": 91.4,
+  "two_oct_white_mm": 11.0
+ },
+ "ribbon": {
+  "parts": {
+   "pi_exit_and_rise": 18.8,
+   "pi_run_minus_x_to_fold": 13.9,
+   "pi_fold_45deg": 8.0,
+   "climb_over_usb_bundle": 62.0,
+   "under_lid_to_hole": 22.0,
+   "bend_up_and_through_lid": 23.7,
+   "hinge_loop": 22.0,
+   "in_cradle_rise_to_fold": 62.6,
+   "in_cradle_run_plus_x": 28.7,
+   "in_cradle_depth_jog": 3.0
+  },
+  "total": 264.7,
+  "cable": 300.0,
+  "margin": 35.3,
+  "margin_pct": 11.8,
+  "loop_chord": {
+   "use": 18.5,
+   "fold": 12.6
+  }
+ },
+ "power_wire": {
+  "parts": {
+   "up_from_pins": 17.0,
+   "forward_left_wall": 126.8,
+   "across_to_hole": 16,
+   "rise_through_lid": 28.0,
+   "hinge_loop": 22.0,
+   "in_cradle_bay_to_j1": 98
+  },
+  "total": 307.8
+ },
+ "power": {
+  "rail_W": [
+   10.2,
+   12.7
+  ],
+  "buck_loss": [
+   1.13,
+   1.41
+  ],
+  "screen_at_20V": 2.78,
+  "avg_before": [
+   13.3,
+   17.3
+  ],
+  "avg_after": [
+   16.1,
+   20.1
+  ],
+  "peak_basis": "D19 52 W (SCH-06 rev B says 50 W; the larger one is used)",
+  "peak": [
+   52.0,
+   54.8
+  ],
+  "margin_60W": [
+   8.0,
+   5.2
+  ],
+  "amp_peak": 40.7,
+  "nonamp_in": 11.3,
+  "w45": {
+   "minus1dB_no_screen": 43.6,
+   "minus1dB_screen": 46.4,
+   "minus2dB_screen": 39.8,
+   "minus1dB_screen_off": 43.6
+  },
+  "rail_A": [
+   2.0,
+   2.49
+  ],
+  "pi_usbc_A": 2.09,
+  "in_A_avg_after": [
+   0.81,
+   1.01
+  ],
+  "in_A_peak_after": 2.74,
+  "bank_Wh": 62.9,
+  "life_before": [
+   3.6,
+   4.7
+  ],
+  "life_after": [
+   3.1,
+   3.9
+  ]
+ },
+ "stability": {
+  "F": 10.0,
+  "M_push": 1.126,
+  "leg_arm_mm": 28.6,
+  "leg_force": 39.3,
+  "leg_static": 2.4,
+  "hinge_on_cradle": [
+   27.76,
+   -6.42
+  ],
+  "leg_Pcr": 394.0,
+  "leg_SF": 10.0,
+  "heel_force": 161.0,
+  "lid_screws_total": 78.0,
+  "cu_unit_M_over": 1.29,
+  "cu_unit_M_res": 3.16,
+  "cu_unit_SF": 2.5
+ },
+ "sensor_gap": 209.7,
+ "folded_top": 113.0,
+ "folded_y": [
+  296.5,
+  421.74
+ ],
+ "fold_feet": [
+  [
+   566,
+   582,
+   352,
+   368
+  ],
+  [
+   566,
+   582,
+   398,
+   414
+  ],
+  [
+   730,
+   746,
+   352,
+   368
+  ],
+  [
+   730,
+   746,
+   398,
+   414
+  ]
+ ]
+}

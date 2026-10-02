@@ -1,0 +1,702 @@
+<title>피아노 액션 해부와 단순화</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{--bg:#EFECE6;--sur:#F7F5F1;--ink:#17181A;--ink2:#4A4F57;--mut:#6B7A90;--rule:#CFCAC0;--acc:#1F5FD8;--acc-bg:#1F5FD814;--good:#2E7D4F;--warn:#B08A3E;--crit:#B3261E;--steel:#8A9099;--felt:#C1553F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141517;--sur:#1E2024;--ink:#E8E6E1;--ink2:#B8BCC4;--mut:#9AA3B2;--rule:#33373E;--acc:#6B9BFF;--acc-bg:#6B9BFF1F;--good:#5BB37E;--warn:#D4A653;--crit:#E0625A;--steel:#9AA0A8;--felt:#D9735C}}
+:root[data-theme="dark"]{--bg:#141517;--sur:#1E2024;--ink:#E8E6E1;--ink2:#B8BCC4;--mut:#9AA3B2;--rule:#33373E;--acc:#6B9BFF;--acc-bg:#6B9BFF1F;--good:#5BB37E;--warn:#D4A653;--crit:#E0625A;--steel:#9AA0A8;--felt:#D9735C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:15px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:40px 26px 96px}
+h1,h2,h3,h4{font-family:"IBM Plex Sans KR","Noto Sans KR",sans-serif;text-wrap:balance;line-height:1.24;margin:0}
+h1{font-size:clamp(30px,4.2vw,46px);font-weight:700;letter-spacing:-0.015em}
+h2{font-size:25px;font-weight:600;margin-top:70px;padding-top:24px;border-top:1px solid var(--rule)}
+h3{font-size:17.5px;font-weight:600;margin-top:34px}
+h4{font-size:15px;font-weight:600;margin-top:24px;color:var(--ink2)}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:7px}
+p{max-width:70ch;margin:13px 0}
+.lede{font-size:17px;color:var(--ink2);max-width:68ch}
+.mast{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:22px;border-bottom:2px solid var(--ink)}
+.mast .ver{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--mut);text-align:right;line-height:1.85}
+.mast .ver b{display:block;font-size:15px;color:var(--acc);font-weight:600}
+.spec{display:grid;grid-template-columns:repeat(auto-fit,minmax(142px,1fr));border:1px solid var(--rule);margin:26px 0 0}
+.spec div{padding:12px 14px;border-right:1px solid var(--rule)}
+.spec div:last-child{border-right:0}
+.spec b{display:block;font-family:"IBM Plex Mono",monospace;font-size:21px;font-weight:600;line-height:1.15}
+.spec span{font-size:11.5px;color:var(--mut)}
+.mono,code,td.n,th.n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+code{font-size:13px;background:var(--sur);padding:1px 5px;border-radius:2px}
+pre{background:var(--sur);border:1px solid var(--rule);padding:14px 16px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.5}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:14px 0}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:500;color:var(--mut);font-size:11.5px;letter-spacing:.04em}
+td.n,th.n{text-align:right}
+tr.hi td{background:var(--acc-bg)}
+figure{margin:26px 0;overflow-x:auto}
+figure svg{max-width:100%;height:auto;display:block;color:var(--ink)}
+figcaption{font-size:12.5px;color:var(--mut);margin-top:9px;max-width:84ch}
+.callout{border-left:3px solid var(--acc);background:var(--acc-bg);padding:12px 16px;margin:18px 0;max-width:78ch}
+.callout.crit{border-left-color:var(--crit);background:#B3261E14}
+.callout.good{border-left-color:var(--good);background:#2E7D4F14}
+.callout p{margin:6px 0}
+.chip{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;padding:1px 7px;border-radius:2px;color:#fff;white-space:nowrap}
+.c-good{background:var(--good)}.c-warn{background:var(--warn)}.c-crit{background:var(--crit)}.c-acc{background:var(--acc)}
+.toc{columns:2;column-gap:34px;font-size:14px;margin:22px 0 0;padding:0;list-style:none}
+.toc li{break-inside:avoid;padding:3px 0;border-bottom:1px dotted var(--rule)}
+.toc a{color:var(--ink);text-decoration:none}
+.toc a:hover,.toc a:focus{color:var(--acc)}
+a{color:var(--acc)}
+a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.foot{margin-top:76px;padding-top:18px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--mut)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px}
+.grid2 figure{margin:0}
+.prin{border-top:2px solid var(--acc);padding:12px 0 0}
+.prin b{display:block;font-size:14.5px;margin-bottom:4px;font-family:"IBM Plex Sans KR",sans-serif}
+.prin p{margin:0;font-size:13.5px;color:var(--ink2);max-width:none}
+/* SVG 공통 */
+.s-part{fill:var(--sur);stroke:currentColor;stroke-width:1.4}
+.s-steel{fill:var(--steel);stroke:currentColor;stroke-width:1}
+.s-felt{fill:var(--felt);stroke:none}
+.s-pivot{fill:var(--bg);stroke:var(--crit);stroke-width:1.8}
+.s-lbl{font-family:"IBM Plex Sans KR",sans-serif;font-size:11.5px;fill:var(--ink)}
+.s-num{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:#fff;font-weight:600}
+.s-dim{font-family:"IBM Plex Mono",monospace;font-size:10.5px;fill:var(--mut)}
+.s-arrow{stroke:var(--acc);stroke-width:2;fill:none}
+.s-lead{stroke:var(--mut);stroke-width:.7;fill:none}
+.s-gone{stroke:var(--crit);stroke-width:1.6}
+@media (prefers-reduced-motion:no-preference){a{transition:color .15s}}
+</style>
+<div class="wrap">
+<header class="mast">
+<div><span class="eyebrow">Toccata · 1단계 하드웨어 · 원점 재검토</span>
+<h1>피아노는 어떻게 현을 때리고,<br>그중 무엇을 버려도 되는가</h1></div>
+<div class="ver"><b>조사 보고서</b>10축 조사 · 설계 6안<br>3렌즈 적대 검증 18건<br>2026-09-16</div>
+</header>
+
+<p class="lede" style="margin-top:24px">소리는 라즈베리파이의 소프트신스가 낸다. 그러므로 우리 하드웨어가 할 일은 현을 때리는 것이 아니라 <b>어느 키를, 얼마나 세게, 페달과 함께</b>를 알려주는 것뿐이다. 이 보고서는 그랜드 액션 약 70개 부품을 해부해 그중 몇 개가 정말로 필요한지 세고, 상용 디지털 피아노가 이미 내놓은 답을 확인한 뒤, 설계안 6종을 서로 싸우게 해서 하나를 고른다.</p>
+
+<div class="spec">
+<div><b>70 → 6</b><span>건반당 부품 수</span></div>
+<div><b>242 g</b><span>그랜드 손끝 등가관성</span></div>
+<div><b>5.2 g</b><span>현행 v2.0의 관성</span></div>
+<div><b>0 핀</b><span>Pi GPIO 점유</span></div>
+<div><b>8.07 ms</b><span>키→소리 지연</span></div>
+</div>
+
+<ul class="toc">
+<li><a href="#s1"><span class="mono">01</span> &nbsp;그랜드 액션 해부</a></li>
+<li><a href="#s2"><span class="mono">02</span> &nbsp;디지털 피아노의 답</a></li>
+<li><a href="#s3"><span class="mono">03</span> &nbsp;단순화의 사다리</a></li>
+<li><a href="#s4"><span class="mono">04</span> &nbsp;키·세기·페달 구현</a></li>
+<li><a href="#s5"><span class="mono">05</span> &nbsp;설계안 6종 대결</a></li>
+<li><a href="#s6"><span class="mono">06</span> &nbsp;뒤집힌 수치</a></li>
+<li><a href="#s7"><span class="mono">07</span> &nbsp;라즈베리파이 연결</a></li>
+<li><a href="#s8"><span class="mono">08</span> &nbsp;권고와 반증</a></li>
+<li><a href="#s9"><span class="mono">09</span> &nbsp;결정할 것 3개</a></li>
+</ul>
+
+<section>
+<h2 id="s1"><span class="eyebrow">01 — 해부</span>그랜드 액션은 지렛대 3단 + 클러치 1개다</h2>
+<p>축은 딱 <b>3개</b>뿐이다. 나머지 약 30개 부품은 전부 <b>해머라는 자유비행 질량체를 관리하기 위한 장치</b>다. 이 사실이 이 프로젝트의 출발점이다. 현이 없으면 관리할 자유비행체도 없기 때문이다.</p>
+
+<figure>
+<svg viewBox="0 0 1040 470" role="img" aria-label="그랜드 피아노 액션의 측면 단면과 손가락에서 현까지의 힘 전달 경로">
+<defs>
+<marker id="ar" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--acc)"/></marker>
+<marker id="arx" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--crit)"/></marker>
+</defs>
+<!-- 현 -->
+<line x1="430" y1="52" x2="880" y2="52" stroke-width="3.5" style="stroke:var(--steel)"/>
+<text class="s-lbl" x="890" y="56">현 (string)</text>
+<!-- 해머 -->
+<g transform="rotate(-18 742 232)">
+  <rect class="s-part" x="736" y="110" width="12" height="124" rx="3"/>
+  <ellipse class="s-felt" cx="742" cy="98" rx="23" ry="17"/>
+  <circle class="s-part" cx="742" cy="196" r="9"/>
+</g>
+<circle class="s-pivot" cx="742" cy="232" r="6"/>
+<text class="s-lbl" x="758" y="236">해머 플랜지 (축)</text>
+<text class="s-lbl" x="590" y="104">해머 헤드 4~12 g</text>
+<line class="s-lead" x1="672" y1="100" x2="700" y2="108"/>
+<text class="s-lbl" x="558" y="176">너클 — 축에서 16~17 mm</text>
+<line class="s-lead" x1="676" y1="174" x2="706" y2="182"/>
+<text class="s-dim" x="770" y="120">섕크 R = 110~125 mm</text>
+<!-- 타격거리 -->
+<line x1="700" y1="52" x2="700" y2="86" stroke-width="1" marker-start="url(#arx)" marker-end="url(#arx)" style="stroke:var(--crit)"/>
+<text class="s-dim" x="606" y="74" style="fill:var(--crit)">타격거리 46~48</text>
+<!-- 레귤레이팅 버튼 -->
+<rect class="s-steel" x="596" y="232" width="26" height="9" rx="2"/>
+<text class="s-lbl" x="470" y="240">레귤레이팅 버튼</text>
+<line class="s-lead" x1="560" y1="236" x2="592" y2="237"/>
+<!-- 지터(잭) -->
+<path class="s-part" d="M660,196 L676,196 L676,284 L612,284 L612,268 L660,268 Z"/>
+<text class="s-lbl" x="688" y="268">지터 (잭)</text>
+<!-- 위펜 -->
+<rect class="s-part" x="560" y="288" width="252" height="13" rx="3"/>
+<circle class="s-pivot" cx="800" cy="294" r="6"/>
+<text class="s-lbl" x="812" y="298">위펜 축</text>
+<text class="s-lbl" x="576" y="318">위펜</text>
+<!-- 백체크 -->
+<rect class="s-part" x="690" y="256" width="10" height="34" rx="2"/>
+<rect class="s-felt" x="686" y="250" width="18" height="9" rx="2"/>
+<text class="s-lbl" x="640" y="330">백체크</text>
+<line class="s-lead" x1="686" y1="326" x2="694" y2="292"/>
+<!-- 캡스턴 -->
+<rect class="s-steel" x="578" y="301" width="11" height="26" rx="2"/>
+<text class="s-lbl" x="498" y="348">캡스턴</text>
+<line class="s-lead" x1="548" y1="344" x2="578" y2="322"/>
+<!-- 키 레버 -->
+<rect class="s-part" x="70" y="326" width="540" height="22" rx="3"/>
+<circle class="s-pivot" cx="404" cy="337" r="7"/>
+<text class="s-lbl" x="378" y="374">밸런스핀</text>
+<rect class="s-steel" x="120" y="348" width="7" height="22"/>
+<text class="s-lbl" x="96" y="388">프론트핀</text>
+<rect class="s-felt" x="92" y="370" width="66" height="8" rx="2"/>
+<text class="s-lbl" x="74" y="312">키 앞끝</text>
+<!-- 손가락 화살표 -->
+<line class="s-arrow" x1="110" y1="278" x2="110" y2="318" marker-end="url(#ar)"/>
+<text class="s-dim" x="122" y="292">손가락 46~52 gf</text>
+<line x1="70" y1="360" x2="70" y2="394" stroke-width="1" marker-start="url(#arx)" marker-end="url(#arx)" style="stroke:var(--crit)"/>
+<text class="s-dim" x="8" y="382" style="fill:var(--crit)">딥 10.0</text>
+<!-- 단계 번호 -->
+<g>
+<circle cx="110" cy="337" r="11" style="fill:var(--acc)"/><text class="s-num" x="110" y="341" text-anchor="middle">1</text>
+<circle cx="583" cy="314" r="11" style="fill:var(--acc)"/><text class="s-num" x="583" y="318" text-anchor="middle">2</text>
+<circle cx="700" cy="295" r="11" style="fill:var(--acc)"/><text class="s-num" x="700" y="299" text-anchor="middle">3</text>
+<circle cx="668" cy="232" r="11" style="fill:var(--acc)"/><text class="s-num" x="668" y="236" text-anchor="middle">4</text>
+<circle cx="614" cy="284" r="11" style="fill:var(--crit)"/><text class="s-num" x="614" y="288" text-anchor="middle">5</text>
+<circle cx="742" cy="72" r="11" style="fill:var(--crit)"/><text class="s-num" x="742" y="76" text-anchor="middle">6</text>
+</g>
+<!-- 하단 범례 -->
+<g transform="translate(70,420)">
+<text class="s-lbl" x="0" y="0">① 손가락 → 키</text>
+<text class="s-lbl" x="150" y="0">② 캡스턴 (1:1, 증폭 없음)</text>
+<text class="s-lbl" x="370" y="0">③ 위펜 (1.2~1.4:1)</text>
+<text class="s-lbl" x="540" y="0">④ 지터 → 너클 (4.5~5.5:1)</text>
+<text class="s-lbl" x="0" y="22" style="fill:var(--crit)">⑤ let-off — 지터가 너클 밑에서 빠져나간다. 현까지 1~3 mm 남은 지점</text>
+<text class="s-lbl" x="540" y="22" style="fill:var(--crit)">⑥ 자유비행 → 타현 (0~20 ms)</text>
+</g>
+</svg>
+<figcaption>그랜드 액션 측면 단면. 붉은 원이 회전축이고, 파란 번호가 힘의 전달 순서다. 증폭의 80% 이상이 ④ 한 곳에서 나온다 — 너클은 축에서 겨우 16~17 mm인데 해머 헤드는 110~125 mm에 있다. 이 비대칭 하나가 5배를 만든다.</figcaption>
+</figure>
+
+<div class="tw"><table><thead><tr><th>단</th><th>구간</th><th class="n">비율</th><th>방향</th></tr></thead><tbody>
+<tr><td>키</td><td>앞끝 → 캡스턴</td><td class="n">0.5 ~ 0.65 : 1</td><td>오히려 <b>감속</b></td></tr>
+<tr><td>위펜</td><td>힐 → 지터</td><td class="n">1.2 ~ 1.4 : 1</td><td>소폭 증폭</td></tr>
+<tr class="hi"><td>해머 섕크</td><td>너클 → 헤드</td><td class="n">4.5 ~ 5.5 : 1</td><td><b>증폭의 80% 이상</b></td></tr>
+<tr><td colspan="2"><b>총 액션비</b></td><td class="n"><b>4.9 ~ 5.3 : 1</b></td><td>실측 Goebl 5.3~5.6과 일치</td></tr>
+</tbody></table></div>
+
+<h3>Toccata 설계에 바로 꽂히는 타이밍 실측 3개</h3>
+<div class="tw"><table><thead><tr><th>발견</th><th>수치</th><th>함의</th></tr></thead><tbody>
+<tr><td>손가락 접촉 → 타현</td><td class="mono">20 ms (ff) ~ 200 ms (pp)</td><td>하드웨어가 5 ms를 아끼는 것은 이 자연 변동폭 180 ms 앞에서 미미하다</td></tr>
+<tr class="hi"><td><b>키 바닥 도달이 타현보다 늦을 수 있다</b></td><td class="mono">−4 ms (강타) ~ +35 ms (약타)</td><td><b>바닥 스위치로 노트온을 내면 피아니시모에서 구조적으로 35 ms 지각한다</b></td></tr>
+<tr><td>자유비행 시간</td><td class="mono">0 ms (f) ~ 20 ms (pp)</td><td>음량은 타현 최대 20 ms 전에 이미 확정된다</td></tr>
+</tbody></table></div>
+<div class="callout good"><p><b>이번 조사에서 나온 가장 실행 가능한 단일 규칙:</b> 노트온은 바닥이 아니라 <b>딥의 85~90% 지점</b>에서 내라. 그랜드의 let-off 위치와 같다. 부품 0개, 비용 0원, 펌웨어 상수 한 줄이다.</p></div>
+
+<h3>현을 안 때리면 무엇이 사라지는가</h3>
+<p>이스케이프먼트는 <b>해머가 현에 눌러붙어 방금 만든 진동을 죽이는 것</b>을 막기 위해서만 존재한다. 현이 없으면 존재 이유 자체가 사라진다.</p>
+<div class="tw"><table><thead><tr><th>부품군</th><th>존재 이유</th><th>판정</th><th>대체물</th></tr></thead><tbody>
+<tr><td>키 레버 · 밸런스핀 · 프론트핀 · 상하 펠트</td><td>입력 · 축 · 좌우 구속 · 딥 정의</td><td><span class="chip c-good">유지 필수</span></td><td>—</td></tr>
+<tr><td>캡스턴</td><td>증폭 아님 — 로스트모션 0 조정</td><td><span class="chip c-warn">개념만 계승</span></td><td>조정 나사 1개/키</td></tr>
+<tr><td>위펜 · 위펜 플랜지</td><td>힘 중계</td><td><span class="chip c-crit">삭제</span></td><td>키가 해머를 직접 구동</td></tr>
+<tr><td><b>지터 · 지터 스프링 · 레귤레이팅 버튼/레일/나사</b></td><td>let-off</td><td><span class="chip c-crit">삭제</span></td><td>불필요 (해머가 현을 안 침)</td></tr>
+<tr class="hi"><td><b>레피티션 레버 · 스프링 · 드롭 스크류</b></td><td>부분 복귀 재장전 7→14 Hz</td><td><span class="chip c-crit">삭제</span></td><td><b>펌웨어 히스테리시스 — 비용 0원</b></td></tr>
+<tr><td>너클</td><td>지터 접촉면</td><td><span class="chip c-crit">삭제</span></td><td>—</td></tr>
+<tr><td>해머 섕크 + 헤드</td><td>5배 증폭 + 타격</td><td><span class="chip c-warn">조건부</span></td><td>증폭이 아니라 <b>관성</b>을 위해서만 남길 가치</td></tr>
+<tr><td>백체크 + 와이어 + 펠트</td><td>반발 해머 포획</td><td><span class="chip c-crit">삭제</span></td><td><b>저반발 우레탄(반발 5~20%)으로 재료 대체</b></td></tr>
+<tr><td>댐퍼 계통 7종 + 트랩워크</td><td>현 소거</td><td><span class="chip c-crit">삭제</span></td><td><b>CC64 한 줄</b></td></tr>
+<tr><td>서스테인 페달</td><td>사용자 입력</td><td><span class="chip c-good">유지 필수</span></td><td>—</td></tr>
+</tbody></table></div>
+<p><b>건반당 약 70개 → 필수 잔존 약 6개.</b> 88키 환산으로 약 6,000개가 약 530개가 된다. 삭제되는 것의 성격은 한결같다. 전부 해머라는 자유비행 질량체를 관리하는 장치다.</p>
+<div class="callout crit"><p><b>그러나 공짜로 사라지지 않는 것이 있다.</b> 해머 4~12 g의 관성이 사라지면 "피아노 같은 무게감"의 대부분이 같이 사라진다. 정적 50 gf는 촉감의 일부일 뿐이다. 이것이 3장의 주제이고, 이 프로젝트의 가장 중요한 수치다.</p></div>
+<p class="mono" style="font-size:12.5px;color:var(--mut)">참고 · 그랜드 부품을 그냥 사면: 해머 헤드 $11.50 + 섕크·플랜지 $26.95 = 88키 약 470만원. 사용자 예산의 6~9배다. 그랜드에서 가져올 것은 부품이 아니라 수치와 기능이다.</p>
+</section>
+<section>
+<h2 id="s2"><span class="eyebrow">02 — 상용의 답</span>실제 디지털 피아노는 이미 91%를 버렸다</h2>
+<p>야마하, 롤랜드, 카와이, 카시오, 파타의 특허와 분해 자료를 확인한 결과 상용 업계의 답은 <b>두 계열뿐</b>이다. 그리고 압도적 다수인 컴팩트형은 놀랄 만큼 단순하다. 가동부가 <b>키와 해머 둘</b>뿐이다.</p>
+
+<figure>
+<svg viewBox="0 0 1040 400" role="img" aria-label="컴팩트형 디지털 피아노 해머 액션의 측면 단면">
+<defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--acc)"/></marker>
+<marker id="ar3" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--good)"/></marker></defs>
+<!-- 업스톱 레일 -->
+<rect class="s-steel" x="700" y="66" width="230" height="12" rx="2"/>
+<rect class="s-felt" x="700" y="78" width="230" height="9" rx="2"/>
+<text class="s-lbl" x="700" y="56">업스톱 레일 + 저반발 우레탄</text>
+<text class="s-dim" x="700" y="106">← 현의 자리. 해머는 여기서 멈춘다</text>
+<!-- 해머 -->
+<g transform="rotate(-13 800 236)">
+  <rect class="s-part" x="700" y="222" width="212" height="15" rx="4"/>
+  <rect class="s-steel" x="856" y="204" width="50" height="34" rx="4"/>
+  <text class="s-lbl" x="862" y="196">웨이트 15~35 g</text>
+</g>
+<circle class="s-pivot" cx="800" cy="236" r="7"/>
+<text class="s-lbl" x="792" y="268">해머 피벗</text>
+<text class="s-dim" x="620" y="256">a = 20 mm</text>
+<text class="s-dim" x="836" y="290">b = 110 mm</text>
+<!-- 포크 -->
+<path class="s-part" d="M676,250 L706,250 L706,268 L698,268 L698,258 L684,258 L684,268 L676,268 Z"/>
+<circle class="s-steel" cx="691" cy="244" r="6"/>
+<text class="s-lbl" x="520" y="244">포크 + 원통핀 (캡스턴 아님)</text>
+<line class="s-lead" x1="656" y1="240" x2="682" y2="246"/>
+<!-- 키 -->
+<rect class="s-part" x="90" y="262" width="600" height="22" rx="3"/>
+<circle class="s-pivot" cx="668" cy="273" r="7"/>
+<text class="s-lbl" x="640" y="310">키 힌지 = 뒤끝</text>
+<text class="s-lbl" x="96" y="250">키 스틱 215 × 22.4 × 15 mm (Fatar TP/40 실측)</text>
+<!-- 러버돔 접점 -->
+<rect class="s-part" x="742" y="288" width="86" height="10" rx="2"/>
+<path class="s-felt" d="M756,288 q8,-14 16,0 Z"/><path class="s-felt" d="M792,288 q8,-14 16,0 Z"/>
+<text class="s-lbl" x="846" y="300">러버돔 2~3접점</text>
+<text class="s-dim" x="700" y="322">센서는 키가 아니라 해머가 누른다 · 액추에이터 r = 8 mm</text>
+<!-- 다운스톱 -->
+<rect class="s-felt" x="110" y="284" width="70" height="8" rx="2"/>
+<line class="s-arrow" x1="130" y1="218" x2="130" y2="256" marker-end="url(#ar2)"/>
+<text class="s-dim" x="142" y="232">딥 10.0</text>
+<!-- 복귀 화살표 -->
+<path class="s-arrow" d="M900,180 q34,36 8,64" marker-end="url(#ar3)" style="stroke:var(--good)"/>
+<text class="s-lbl" x="912" y="172" style="fill:var(--good)">복귀 = 웨이트 자중</text>
+<text class="s-lbl" x="912" y="190" style="fill:var(--good)">스프링 0개</text>
+<!-- 하단 정리 -->
+<g transform="translate(90,356)">
+<text class="s-lbl" x="0" y="0" font-weight="600">가동부 2개 · 자유도 2 · 스프링 0개 · 나사 0개(전부 스냅핏) · 건반당 명명 부품 약 6개</text>
+<text class="s-lbl" x="0" y="22" style="fill:var(--mut)">야마하 GHS/GH3 · 롤랜드 PHA-4 · 카시오 SHA II · 파타 TP/40 · TP/100 — 전부 이 구조다</text>
+</g>
+</svg>
+<figcaption>컴팩트형 디지털 피아노 해머 액션. 그랜드와 결정적으로 다른 점 셋. 키가 해머를 직접 민다(위펜·지터 없음), 복귀가 웨이트 자중이다(스프링 0개), 센서를 키가 아니라 해머에 단다(레버비만큼 변위가 증폭되므로).</figcaption>
+</figure>
+
+<h3>상용이 발명한 "싸게 사는 법" 4가지</h3>
+<div class="grid2">
+<div class="prin"><b>① 88키를 해머 1종으로 끝낸다</b><p>카와이 특허: 필요 무게의 절반 이상을 <b>전 키 공통 웨이트</b>가 담당하고, 짧은 조정 웨이트로만 음역 차를 낸다. 우리 적용 — 해머 본체 STL 1개 + 강봉을 88단계 길이로 자르면 끝.</p></div>
+<div class="prin"><b>② 복귀 스프링을 0개로</b><p>야마하·롤랜드·카와이·카시오 <b>4사 특허 모두 복귀 스프링이 없다.</b> 롤랜드 원문: "키를 놓으면 해머의 무게에 의해 초기 위치로 들어올려진다." 유일한 예외가 파타 TP/40이다.</p></div>
+<div class="prin"><b>③ 나사 0개 — 전부 스냅핏</b><p>카와이는 타원 단면 샤프트에 해머의 역U자 베어링을 눌러 끼운다. 베어링 안에 그리스 저장 홈을 판다. FDM으로 재현 가능한 수준이다. 그리고 카와이 특허가 <b>"해머 서포트 1개는 최대 1옥타브"</b>라고 명시한다.</p></div>
+<div class="prin"><b>④ 센서를 키가 아니라 해머에</b><p>야마하·카시오·카와이 3사 특허가 전부 일치한다. 레버비 5~6:1 덕에 <b>해머 쪽 변위가 5~6배 증폭</b>되므로 같은 딥에서 신호가 커진다.</p></div>
+</div>
+
+<div class="callout crit"><p><b>이것이 현행 v2.0 설계에 대한 가장 날카로운 지적이다.</b> 우리는 자석을 y=110(피벗 165에서 55 mm)에 두어 딥 10.8 mm를 <b>3.600 mm로 1/3 축소</b>한다. 그랜드가 5배 증폭하는 것과 <b>정반대 방향</b>이고, 센서가 볼 신호를 스스로 3배 깎는 것이다. 자석을 y=80으로 옮기면 5.564 mm로 <b>1.55배</b> 회복된다. PCB가 y=80~140을 쓰므로 재배치도 필요 없다.</p></div>
+
+<h3>그럼 그냥 사면 얼마인가</h3>
+<div class="tw"><table><thead><tr><th>제품</th><th>사양</th><th class="n">가격</th></tr></thead><tbody>
+<tr><td>야마하 GH3 교체 키베드 (ZV601600)</td><td>플라스틱, 3접점</td><td class="n">약 56만원</td></tr>
+<tr><td>야마하 NWX (ZV601500)</td><td>우드 + 이스케이프먼트</td><td class="n">약 95만원</td></tr>
+<tr><td>Doepfer PK88</td><td>파타 TP/40GH + 컨트롤러 + 케이스</td><td class="n">약 180만원</td></tr>
+<tr class="hi"><td><b>중고 야마하 P-95 (88키 GHS)</b></td><td>중고나라 2026-09 스냅샷</td><td class="n"><b>150,000원</b></td></tr>
+<tr class="hi"><td><b>중고 카와이 CL30</b></td><td>번개장터 실매물</td><td class="n"><b>10,000원</b></td></tr>
+</tbody></table></div>
+</section>
+
+<section>
+<h2 id="s3"><span class="eyebrow">03 — 사다리</span>무엇을 버리면 무엇을 잃는가</h2>
+<p>이 장에 이 보고서의 결론이 들어 있다. 한 줄로 쓰면 이렇다.</p>
+<div class="callout"><p style="font-size:16.5px"><b>정적 힘은 레버비 R의 1승으로 손끝에 반사되지만, 관성은 R의 2승으로 반사된다.</b></p>
+<p class="mono">손끝 정적 힘 = m_h · R [gf] &nbsp;&nbsp;/&nbsp;&nbsp; 손끝 등가질량 = m_h · R² [g] &nbsp;&nbsp;→ 둘의 비가 정확히 R</p>
+<p>이것이 <b>가벼운 정적 무게 + 무거운 다이내믹 무게</b>라는 피아노 특유의 조합이 성립하는 유일한 메커니즘이다. 단순 레버(R≈1)나 앞끝 추(R=1)로는 절대 만들 수 없다.</p></div>
+
+<figure>
+<svg viewBox="0 0 900 340" role="img" aria-label="구조별 손끝 등가관성 막대그래프, v2.0 일체형 5.2그램에서 그랜드 242그램까지">
+<g>
+<line x1="230" y1="30" x2="230" y2="286" style="stroke:var(--rule)"/>
+<line x1="352" y1="30" x2="352" y2="286" style="stroke:var(--rule)"/>
+<line x1="474" y1="30" x2="474" y2="286" style="stroke:var(--rule)"/>
+<line x1="596" y1="30" x2="596" y2="286" style="stroke:var(--rule)"/>
+<line x1="718" y1="30" x2="718" y2="286" style="stroke:var(--rule)"/>
+<line x1="840" y1="30" x2="840" y2="286" style="stroke:var(--rule)"/>
+<g class="s-dim" text-anchor="middle"><text x="230" y="304">0</text><text x="352" y="304">50</text><text x="474" y="304">100</text><text x="596" y="304">150</text><text x="718" y="304">200</text><text x="840" y="304">250</text></g>
+<text class="s-dim" x="535" y="326" text-anchor="middle">손끝 등가관성 (g) — 타건감의 지배 변수</text>
+<!-- 막대: x = 230 + g*2.44 -->
+<g>
+<rect x="230" y="40" width="12.7" height="22" style="fill:var(--crit)"/><text class="s-lbl" x="222" y="56" text-anchor="end">v2.0 일체형 컴플라이언트</text><text class="s-lbl" x="252" y="56" style="fill:var(--crit)">5.2</text>
+<rect x="230" y="72" width="14.6" height="22" style="fill:var(--crit)"/><text class="s-lbl" x="222" y="88" text-anchor="end">v1.5 다부품</text><text class="s-lbl" x="254" y="88" style="fill:var(--crit)">6</text>
+<rect x="230" y="104" width="40.5" height="22" style="fill:var(--warn)"/><text class="s-lbl" x="222" y="120" text-anchor="end">꼬리 카운터웨이트 (키당 153 g)</text><text class="s-lbl" x="280" y="120" style="fill:var(--warn)">16.6</text>
+<rect x="230" y="136" width="251" height="22" style="fill:var(--acc)"/><text class="s-lbl" x="222" y="152" text-anchor="end">자작 회전해머 8 g @ R=3.5</text><text class="s-lbl" x="490" y="152" style="fill:var(--acc)">98~105</text>
+<rect x="230" y="168" width="337" height="22" style="fill:var(--good)"/><text class="s-lbl" x="222" y="184" text-anchor="end">도너 · 신품 키베드</text><text class="s-lbl" x="576" y="184" style="fill:var(--good)">138</text>
+<rect x="230" y="200" width="590" height="22" style="fill:var(--ink2)"/><text class="s-lbl" x="222" y="216" text-anchor="end">그랜드 피아노</text><text class="s-lbl" x="812" y="216" fill="#fff" text-anchor="end" font-weight="600">242</text>
+</g>
+<!-- 주석 -->
+<line x1="242" y1="240" x2="242" y2="258" stroke-width="1" style="stroke:var(--crit)"/>
+<text class="s-lbl" x="248" y="262" style="fill:var(--crit)">현재 설계는 그랜드의 1/45</text>
+</g>
+</svg>
+<figcaption>손끝 등가관성. 꼬리 카운터웨이트가 왜 소용없는지가 여기서 드러난다. 꼬리 45 mm / 앞팔 165 mm이면 R = 0.27, 제곱하면 0.074다. <b>153 g의 납을 달아도 관성은 11 g만 늘고 88키 합계가 13.5 kg이 된다.</b> 카운터웨이트는 정적 무게를 만드는 도구이지 관성을 만드는 도구가 아니다.</figcaption>
+</figure>
+
+<div class="callout crit"><p><b>이전 설계문서의 "그랜드 등가관성 25~30 g"은 틀렸다. 실제는 200~250 g이다.</b> 세 개의 독립 경로가 전부 같은 답을 낸다 — 반사법칙 8 g × 5.5² = 242 g, Ortmann 타건력 역산, Goebl 타건시간 22 ms 실측 일치. <b>약 8~10배 오류</b>이고, 이 수치를 근거로 "카운터웨이트로 충분하다"고 판단했다면 전제가 무너진다.</p></div>
+
+<div class="tw"><table><thead><tr><th></th><th>① 그랜드</th><th>② 업라이트</th><th>③ 컴팩트 디지털</th><th>④ 카운터웨이트</th><th>⑤ 스프링 최소 레버</th></tr></thead><tbody>
+<tr><td>가동부 / 키</td><td class="n">8~10</td><td class="n">6~8</td><td class="n"><b>2</b></td><td class="n">2</td><td class="n"><b>1</b></td></tr>
+<tr><td>스프링 개수</td><td class="n">3</td><td class="n">3 + 끈 1</td><td class="n"><b>0</b></td><td class="n">0</td><td class="n">1~2</td></tr>
+<tr><td>복귀</td><td>중력</td><td>버트 스프링</td><td><b>중력</b></td><td>중력</td><td>스프링</td></tr>
+<tr class="hi"><td><b>손끝 등가관성</b></td><td class="n"><b>242 g</b></td><td class="n">약 200</td><td class="n"><b>98~138</b></td><td class="n">16.6</td><td class="n"><b>5.2</b></td></tr>
+<tr><td>힘 곡선</td><td>let-off로 <b>80% 하강</b></td><td>동</td><td><b>평탄 0.15%</b></td><td>평탄</td><td><b>+20% 상승 (역방향)</b></td></tr>
+<tr><td>pp~ff 타건시간 폭</td><td class="n">98.4 ms</td><td>유사</td><td class="n">71~82</td><td class="n">약 30</td><td class="n"><b>15.9</b></td></tr>
+<tr><td>연타 (부분복귀)</td><td class="n">13~14 Hz</td><td class="n">7~8</td><td class="n">15.5~23</td><td class="n">25+</td><td class="n">40+</td></tr>
+<tr><td>88키 비용</td><td class="n">470만원+</td><td>—</td><td class="n">15~95만원</td><td>—</td><td class="n">약 5만원</td></tr>
+</tbody></table></div>
+
+<p><b>pp~ff 타건시간 폭이 왜 중요한가.</b> 연주자가 타이밍을 제어할 수 있는 정밀도는 5~10 ms다. 그랜드는 98 ms의 폭을 주므로 그 안에서 10~20단계의 셈여림을 몸으로 구분할 수 있다. v2.0은 15.9 ms뿐이라 <b>연주자 정밀도의 1.6~3.2배</b>밖에 안 된다. 타이밍 노이즈가 다이내믹 전체를 덮는다. 이것이 "플라스틱 장난감"이라는 표현의 정량적 내용이다.</p>
+</section>
+<section>
+<h2 id="s4"><span class="eyebrow">04 — 3대 요구</span>키 · 세기 · 페달을 어떻게 만드는가</h2>
+
+<h3>요구 1 — 어느 키를 눌렀는가</h3>
+<div class="tw"><table><thead><tr><th>방식</th><th class="n">배선</th><th>고스팅</th><th class="n">다이오드</th><th>판정</th></tr></thead><tbody>
+<tr><td>매트릭스 8열 × 11행 × 2접점</td><td class="n">GPIO 30</td><td><b>가능</b></td><td class="n">176개 필수</td><td>도너 키베드에는 이미 실장됨</td></tr>
+<tr class="hi"><td><b>점대점 디지털 88라인 → 74HC165 ×11</b></td><td class="n"><b>GPIO 3</b></td><td><b>원리적 불가능</b></td><td class="n"><b>0</b></td><td><span class="chip c-good">권장</span></td></tr>
+<tr><td>점대점 아날로그 88채널 → 먹스</td><td class="n">ADC 1~3 + 제어 6</td><td>불가능</td><td class="n">0</td><td>ADC가 병목</td></tr>
+</tbody></table></div>
+<p>매트릭스 자체가 없어지면 고스팅이 물리적으로 불가능해지고, 다이오드 176개 수작업 실장이 사라진다. 88키 동시 타건에서도 상호작용이 0이다.</p>
+
+<h3>요구 2 — 얼마나 세게: 벨로시티를 얻는 3가지 원리</h3>
+<div class="tw"><table><thead><tr><th></th><th>(가) 두 임계 간 dt</th><th>(나) 아날로그 위치 미분</th><th>(다) 충격 직접측정</th></tr></thead><tbody>
+<tr><td>대표 부품</td><td>러버돔 2접점, 광학 투과형</td><td>SS49E · DRV5055 홀, AS5600</td><td>피에조</td></tr>
+<tr><td>측정 대상</td><td>두 엣지 사이 <b>시간</b></td><td>위치 궤적의 <b>기울기</b></td><td>스톱에 전달된 <b>운동량</b></td></tr>
+<tr><td>ADC</td><td><b>불필요</b></td><td>필수 (88채널)</td><td>필요</td></tr>
+<tr><td>추가 지연</td><td><b>0 ms</b></td><td>스캔 1주기 (42~84 µs)</td><td><b>2~5 ms</b></td></tr>
+<tr><td>접점 바운스</td><td>러버돔 <b>1~5 ms</b> / 광학 <b>0</b></td><td>없음</td><td>—</td></tr>
+<tr><td>88키 부품비</td><td>광학 <b>20,300원</b> / 러버돔 5~10만</td><td>SS49E 35,800 / DRV5055 107,800</td><td>35,000원</td></tr>
+<tr><td>fff 양자화 오차</td><td>광학+50 kHz <b>0.11 스텝</b></td><td>SS49E <b>2.20</b> / DRV5055 0.31</td><td>10~25 스텝</td></tr>
+<tr><td>note-off · 키다운 유지</td><td>가능</td><td>가능</td><td><b>불가능</b></td></tr>
+<tr><td>판정</td><td><span class="chip c-good">채택</span></td><td><span class="chip c-warn">차선 (부품 교체 전제)</span></td><td><span class="chip c-crit">단독 불가</span></td></tr>
+</tbody></table></div>
+
+<div class="callout crit"><p><b>아날로그 경로를 하려면 SS49E를 버려야 한다.</b> 오차는 스캔 주기가 아니라 센서 감도가 결정한다. <span class="mono">σ_t = σ_ADC / 기울기</span>로 계산하면 SS49E는 fff에서 1.04~2.20 MIDI 스텝을 틀린다. DRV5055A1은 감도가 7.1배(100 mV/mT)라 0.31 스텝으로 떨어진다. 88개 95,000원으로 <b>심 작업 6시간과 로트 전수 감도측정 1시간을 사는</b> 거래다.</p></div>
+
+<h3>권장 구현 — 광학 1센서 + 프린트 콤 베인</h3>
+<figure>
+<svg viewBox="0 0 980 360" role="img" aria-label="광학 투과형 센서와 3단 슬릿 콤 베인으로 벨로시티와 재무장 임계를 얻는 구조">
+<defs><marker id="ar4" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--acc)"/></marker></defs>
+<!-- 센서 -->
+<rect class="s-part" x="360" y="120" width="26" height="150" rx="3"/>
+<rect class="s-part" x="470" y="120" width="26" height="150" rx="3"/>
+<text class="s-lbl" x="352" y="292" text-anchor="middle">LED</text>
+<text class="s-lbl" x="504" y="292">포토TR</text>
+<text class="s-lbl" x="360" y="110">ITR9608-F · 슬롯 갭 5.0 mm · 940 nm</text>
+<line x1="392" y1="196" x2="464" y2="196" stroke-width="1.5" stroke-dasharray="4 3" style="stroke:var(--crit)"/>
+<text class="s-dim" x="400" y="188" style="fill:var(--crit)">광로</text>
+<!-- 베인 -->
+<g>
+<rect class="s-part" x="404" y="20" width="48" height="16"/>
+<rect class="s-part" x="404" y="48" width="48" height="16"/>
+<rect class="s-part" x="404" y="76" width="48" height="16"/>
+<rect class="s-part" x="404" y="104" width="48" height="16"/>
+<rect class="s-part" x="404" y="132" width="48" height="26"/>
+</g>
+<text class="s-lbl" x="298" y="32" text-anchor="end">베인 (검정 PETG 1.5T)</text>
+<line class="s-lead" x1="302" y1="28" x2="400" y2="28"/>
+<line class="s-arrow" x1="428" y1="-6" x2="428" y2="18" marker-end="url(#ar4)"/>
+<!-- 임계 표시 -->
+<g>
+<line x1="500" y1="42" x2="700" y2="42" style="stroke:var(--rule)"/>
+<text class="s-lbl" x="708" y="46"><tspan class="mono">E3</tspan> — 딥 88.9% = 9.60 mm → <tspan style="fill:var(--acc)">Note On</tspan></text>
+<line x1="500" y1="70" x2="700" y2="70" style="stroke:var(--rule)"/>
+<text class="s-lbl" x="708" y="74"><tspan class="mono">E2</tspan> — 딥 55.6% = 6.00 mm → <tspan style="fill:var(--good)">재무장</tspan></text>
+<line x1="500" y1="98" x2="700" y2="98" style="stroke:var(--rule)"/>
+<text class="s-lbl" x="708" y="102"><tspan class="mono">E1</tspan> — 딥 22.2% = 2.40 mm → Note Off</text>
+</g>
+<text class="s-dim" x="466" y="60">피치 1.20 mm</text>
+<text class="s-dim" x="466" y="122">= 0.2 레이어 × 6</text>
+<!-- 하단 요약 -->
+<g transform="translate(60,318)">
+<text class="s-lbl" x="0" y="0" font-weight="600">엣지 3개 = 3접점. 슬릿 하나 더 뚫는 데 드는 비용은 부품 0개, 0원.</text>
+<text class="s-lbl" x="0" y="22" style="fill:var(--mut)">dt = E3 − E1 이므로 히스테리시스·열화·온도드리프트가 같은 극성 엣지 쌍에서 공통모드로 상쇄된다</text>
+</g>
+</svg>
+<figcaption>센서 1개에 슬릿 3개. 센서 개수가 176개에서 88개로 절반이 되고, 임계값 산포가 SS49E 로트 편차 1.79배에서 <b>프린트 창 높이 ±0.05 mm = ±0.8 MIDI 스텝</b>으로 바뀐다. 88키 심 작업 6시간이 0시간이 된다.</figcaption>
+</figure>
+
+<div class="callout"><p><b>설계 규칙 2개 (반드시).</b> ① 창 높이와 피치를 <b>레이어 높이의 정수배</b>로 잡아라. 0.2 mm 레이어에서 1.85 mm는 9.25층이라 슬라이서가 반올림해 ±5.4% 계통오차를 만든다. ② 베인은 키와 분리해 세워 출력하고 <b>반드시 카본블랙 검정 필라멘트</b>로 뽑아라. 자연색·백색 PETG는 940 nm 근적외선을 상당히 투과한다. 백건은 흰색이어야 하므로 분리 출력이 강제되고, 마침 콤 피치를 레이어 적층으로 정확히 내려면 세워 출력해야 하므로 분리가 공짜로 정당화된다.</p></div>
+
+<h4>벨로시티 변환은 로그가 아니라 멱법칙이다</h4>
+<p>FluidSynth의 SF2 기본 모듈레이터는 <span class="mono">감쇠 = 40·log10(127/v)</span>, 즉 <b>진폭 ∝ (v/127)² 제곱법칙</b>이다. 현행 설계문서의 로그 매핑을 이 체인에 통과시키면 여린 소리 쪽에서 오차가 폭발한다.</p>
+<div class="tw"><table><thead><tr><th class="n">dt (ms)</th><th class="n">로그법칙 출력</th><th class="n">물리 기대</th><th class="n">오차</th></tr></thead><tbody>
+<tr><td class="n">6.2</td><td class="n">0.0 dB</td><td class="n">0.0 dB</td><td class="n">0</td></tr>
+<tr><td class="n">24.8</td><td class="n">−7.2</td><td class="n">−12.0</td><td class="n">−4.8</td></tr>
+<tr><td class="n">99</td><td class="n">−19.6</td><td class="n">−24.1</td><td class="n">−4.5</td></tr>
+<tr class="hi"><td class="n">369</td><td class="n"><b>−84.2</b> (v≈0, 클램프 없으면 음이 사라짐)</td><td class="n">−35.5</td><td class="n"><b>+48.7</b></td></tr>
+</tbody></table></div>
+<p>권장은 <span class="mono">v = 127 · (dt_min/dt)^p</span>, 128엔트리 LUT 한 장이다. <span class="mono">p = 0.50</span>이면 다이내믹 35.5 dB로 물리와 1:1이고, RP2040에서 부동소수 연산과 로그 호출이 <b>0회</b>다. 흑건 보정도 LUT 두 벌로 끝난다.</p>
+
+<h3>요구 3 — 서스테인 페달</h3>
+<p>부품 추가는 저항 2개뿐이다. TIP과 RING을 각각 10 kΩ 풀업과 100 Ω 직렬을 거쳐 ADC로 받고, 부팅 후 500 ms 동안 전압을 읽는다.</p>
+<div class="tw"><table><thead><tr><th class="n">TIP</th><th class="n">RING</th><th>판정</th><th>해당 제조사</th></tr></thead><tbody>
+<tr><td class="n">&gt; 4000</td><td class="n">&gt; 4000</td><td>미연결 — CC64 송신 안 함</td><td>—</td></tr>
+<tr><td class="n">&lt; 100</td><td class="n">&lt; 100</td><td>TS 플러그 + <b>NC 스위치</b></td><td>야마하, 롤랜드</td></tr>
+<tr><td class="n">&gt; 4000</td><td class="n">&lt; 100</td><td>TS 플러그 + <b>NO 스위치</b></td><td>코르그, 카시오, 파타</td></tr>
+<tr><td colspan="2">300~3800 변동</td><td><b>연속형 (하프댐퍼)</b></td><td>FC3A, DP-10, DS-1H</td></tr>
+</tbody></table></div>
+<p><b>극성·타입·연속형 여부가 전압 하나로 전부 갈린다.</b> 어느 회사 페달을 사도 된다.</p>
+
+<div class="callout crit"><p><b>하프댐퍼는 1단계에서 무의미하다.</b> FluidSynth 소스를 직접 확인한 결과 CC64를 <span class="mono">&gt;= 64</span> 이진으로만 판정한다. 회로만 깔아두고 Pianoteq 전환 때 살려라. 같은 조사에서 나온 것들 — <b>CC66 소스테누토는 정상 동작</b>하므로 가운데 페달을 만들 가치가 있고, <b>CC67 소프트는 소스 어디에서도 참조되지 않으므로</b> 만들 이유가 0이다. <b>채널 애프터터치는 비브라토 LFO를 ±50 cents 흔들어</b> 피아노에서 오작동하므로 절대 보내지 마라.</p></div>
+<p>1단계에서 하드웨어가 만들어야 할 MIDI 메시지는 단 3종이다. Note On, Note Off, CC64. 다만 Note Off를 <span class="mono">0x90 nn 00</span>이 아니라 <b>정식 <span class="mono">0x80 nn rr</span></b>로 보내라. USB-MIDI는 이벤트마다 4바이트 고정 패킷이라 절약분이 정확히 0이고, Pianoteq로 갈아탈 때 릴리즈 벨로시티 경로가 그대로 살아난다.</p>
+</section>
+<section>
+<h2 id="s5"><span class="eyebrow">05 — 대결</span>설계안 6종을 서로 싸우게 했다</h2>
+<p>서로 다른 출발 제약을 받은 설계자 6명이 독립적으로 액션을 설계했고, 각 설계안을 <b>연주감·MIDI / 내구성 / 제작·조달</b> 세 렌즈의 검증자가 반증을 기본값으로 삼아 공격했다. 총 18건의 적대적 검증에서 <b>결함 69건, 수정 제안 193건, 재계산 273건</b>이 나왔다.</p>
+
+<div class="tw"><table><thead><tr><th>설계안</th><th class="n">종합</th><th class="n">연주감</th><th class="n">내구성</th><th class="n">제작</th><th class="n">88키 비용</th><th class="n">기간</th><th>치명 위험</th></tr></thead><tbody>
+<tr class="hi"><td><b>이식 Toccata-G</b><br><span style="color:var(--mut)">도너 키베드 + 자작 15 kHz 스캐너</span></td><td class="n"><b>7.2</b></td><td class="n">6.5</td><td class="n">7</td><td class="n">8</td><td class="n">274,100원</td><td class="n">2~6주</td><td>도너를 열기 전에는 접점 열화를 알 수 없고, 전자부로 절대 못 고친다</td></tr>
+<tr><td><b>그림자 해머</b><br><span style="color:var(--mut)">키 위에 누운 역스윙 관성체</span></td><td class="n">6.2</td><td class="n">6.5</td><td class="n">6</td><td class="n">6</td><td class="n">368,000원</td><td class="n">12~16주</td><td>타건 소음. 운동에너지를 의도적으로 최대화해 88개 우레탄 패드에 전부 버린다</td></tr>
+<tr><td><b>토카타 v3.0 해머포크</b><br><span style="color:var(--mut)">중력복귀 회전해머 + 광학 dt</span></td><td class="n">6.0</td><td class="n">6</td><td class="n">7</td><td class="n">5</td><td class="n">약 330,000원</td><td class="n">12~16주</td><td>포크–너클핀 접촉부 한 곳이 액션비·마찰·로스트모션을 동시에 짊어진다</td></tr>
+<tr><td><b>강철 4절</b><br><span style="color:var(--mut)">핀조인트 해머 액션</span></td><td class="n">5.0</td><td class="n">6</td><td class="n">5</td><td class="n">4</td><td class="n">595,000원</td><td class="n">10~14주</td><td>88개 링크 로드의 길이 개체차가 노트온 깊이를 키마다 다르게 만든다</td></tr>
+<tr><td><b>홑장 액션</b><br><span style="color:var(--mut)">레버 1 · 스프링 1 · 베인 1</span></td><td class="n">4.8</td><td class="n">6</td><td class="n">5.5</td><td class="n">3</td><td class="n">262,000원</td><td class="n">주말~</td><td>정지 갭 2.216 mm를 88키에 재현하는 것 하나가 설계를 죽인다</td></tr>
+<tr><td><b>모노캐스트 v2.1</b><br><span style="color:var(--mut)">캠 앤빌 일체형 컴플라이언트</span></td><td class="n">4.3</td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="n">582,000원</td><td class="n">20~24주</td><td>관성이 없고, 이 아키텍처에서는 고칠 방법이 수학적으로 존재하지 않는다</td></tr>
+</tbody></table></div>
+
+<div class="callout crit"><p><b>현행 v2.0을 방어하도록 배정된 설계자조차 최하위를 받았다.</b> 검증자의 판정은 이렇다. 손끝 등가관성 5.0 g은 그랜드의 1/45이고, 이것은 취향 문제가 아니라 계산 가능한 손실이다. 게다가 이 구조에서는 관성을 늘릴 수학적 경로가 없다 — 관성은 R²로 반사되는데 일체형 컴플라이언트에는 증폭할 R이 아예 없기 때문이다. 별도로 확인된 반증 데이터: <b>PETG 인쇄 스프링의 실측 수명은 최대 약 20,000 사이클이고, 13.3 Hz 연타로 환산하면 연속 25분이다.</b></p></div>
+
+<h3>타건감을 정직하게 한 줄로</h3>
+<div class="tw"><table><tbody>
+<tr><td style="width:26%">모노캐스트 v2.1 · 홑장</td><td><b>플라스틱 장난감.</b> 관성 5~6 g은 그랜드의 1/45. 게다가 힘이 바닥으로 갈수록 20% 무거워져 피아노와 방향이 정반대다(피아노는 let-off로 80% 가벼워진다)</td></tr>
+<tr><td>해머포크 · 그림자 해머</td><td><b>보급형 디지털피아노의 70% 수준.</b> 관성 98~105 g = 그랜드의 41%, v2.0의 19배. 레트오프 없음</td></tr>
+<tr><td>이식 Toccata-G</td><td><b>정확히 롤랜드 FP-30 / 야마하 P-125의 감촉.</b> 그 이상도 이하도 아니다. 그랜드와의 격차는 관성 43%와 레트오프 노치</td></tr>
+</tbody></table></div>
+</section>
+
+<section>
+<h2 id="s6"><span class="eyebrow">06 — 반증</span>재계산으로 뒤집힌 수치</h2>
+<p>검증자들이 직접 다시 계산해서 <b>결론이 바뀐 것</b>만 골랐다. 이 표가 이번 조사에서 가장 값비싼 산출물이다.</p>
+<div class="tw"><table><thead><tr><th style="width:4%">#</th><th style="width:30%">원래 주장</th><th style="width:36%">재계산 결과</th><th>영향</th></tr></thead><tbody>
+<tr class="hi"><td class="n">1</td><td>그랜드 손끝 등가관성 25~30 g</td><td><b>200~250 g</b> — 반사법칙 242 / Ortmann 역산 / Goebl 타건시간 22 ms, 3경로 교차검증</td><td><b>8~10배 오류.</b> 카운터웨이트 판단의 전제가 무너진다</td></tr>
+<tr class="hi"><td class="n">2</td><td>중력 복귀 40 ms = 12 Hz라 카운터웨이트 불가</td><td>그 계산은 <b>전행정 복귀 전제</b>였다. 50% 복귀면 40×√0.5 = <b>28 ms → 17~20 Hz</b></td><td><b>판정이 뒤집힌다.</b> 해머 경로가 다시 열린다</td></tr>
+<tr><td class="n">3</td><td>업라이트 8 Hz 한계라 해머는 연타를 못 낸다</td><td>8 Hz의 절반 이상은 <b>잭 재진입</b>이라는 기계적 조건이다. 광학 센서에는 그 조건이 아예 없다</td><td>재타 임계를 펌웨어 상수로 정하면 소멸. 부품 0개</td></tr>
+<tr class="hi"><td class="n">4</td><td>FluidSynth <span class="mono">-z 64</span>로 저지연</td><td>리눅스 기본 <span class="mono">audio.periods = 16</span>. <span class="mono">-z 64</span> 단독은 64프레임이 아니라 <b>1024프레임 = 20.67 ms</b></td><td><b>15.5배.</b> 반드시 <span class="mono">-z 64 -c 4</span></td></tr>
+<tr class="hi"><td class="n">5</td><td><span class="mono">-z</span>를 키워 언더런 해결</td><td>지터 = P로 <b>N과 무관</b>. 지연은 <span class="mono">-c</span>가, 지터는 <span class="mono">-z</span>가 정한다</td><td><span class="mono">-z</span>를 키우는 건 <b>지연과 지터를 동시에 악화</b>시키는 최악의 수</td></tr>
+<tr><td class="n">6</td><td>만능기판으로 시제품</td><td>반음 피치 13.7083 / 2.54 = <b>5.397 — 정수배가 아니다.</b> 5홀 스냅 시 옥타브 누적 −11.09 mm</td><td><b>PCB는 선택이 아니라 필수.</b> 4키 이상에서 물리적으로 불가능</td></tr>
+<tr><td class="n">7</td><td>현행 딥 10.8 mm</td><td>제조사 규정은 Kawai 10.1~10.3 / Steinway 9.9~10.6 / Yamaha 10.0</td><td>10.8은 상한을 0.2 mm 초과. 10.0~10.3으로</td></tr>
+<tr><td class="n">8</td><td>도너안 케이스 프린팅 24.5 h / 8,000원</td><td>실제 <b>92~191 h / 52,644원 / PETG 2.29 kg.</b> 게다가 1350 mm를 7조각으로 접합하면 <b>±2 mm 누적</b>으로 건반열이 휜다</td><td><b>케이스를 뽑지 말고 도너 섀시를 재사용</b></td></tr>
+<tr><td class="n">9</td><td>ITR9608 지연은 dt에서 공통모드 상쇄</td><td>상쇄는 <b>dt에만</b> 성립하고 절대 지연에는 전혀 성립하지 않는다. RL=47 kΩ에서 약 <b>705 µs</b></td><td>RL을 10 kΩ으로 내리면 150 µs. 0.555 ms 회수</td></tr>
+<tr><td class="n">10</td><td>ADS1115로 홀센서 읽기</td><td>최대 <b>860 SPS.</b> 요구는 12키를 84 µs에 훑는 12 kHz</td><td><b>약 1,000배 부족.</b> 후보에서 제거</td></tr>
+</tbody></table></div>
+<p style="color:var(--mut);font-size:13px">그밖에 확인된 것 — 74HC165·CD74HC4067·MCP23017의 국내 정식 유통은 <b>최소주문수량 2,000~3,000개</b>라 취미 수량으로는 구매 자체가 불가능하다. 네오디뮴 Ø3×2 자석은 엘레파츠 실가격 <b>개당 99원</b>으로 확인됐다.</p>
+
+<h3>프로젝트 사망 원인 순위 — 메이커 사례 전수 조사</h3>
+<div class="tw"><table><thead><tr><th class="n">순위</th><th>원인</th><th>증거</th></tr></thead><tbody>
+<tr class="hi"><td class="n">1</td><td><b>88배 반복 노동과 키 간 공차 편차</b></td><td>5년째 24키 프로토타입에 머문 사례 / 시간·재정·<b>손 경직</b>으로 명시적 포기 / 개조 중단 / "대부분 제작조차 안 함"</td></tr>
+<tr><td class="n">2</td><td>공차와 개체 편차</td><td>공차 최적화에만 약 $1,000 지출 / "리밍이 사실상 불가능" / 트림팟 88개 조정에 20~30분</td></tr>
+<tr><td class="n">3</td><td>내구성과 크리프</td><td>PETG 인쇄 스프링 약 20,000 사이클. 학계 최고 수준 일체형 키보드조차 내구시험 1,000 사이클</td></tr>
+<tr><td class="n">4</td><td>소음</td><td>클릭음·노킹. <b>단 폼테이프·펠트 2겹으로 해결된 전례 2건 — 치명적이지 않다</b></td></tr>
+<tr><td class="n">5</td><td>벨로시티 일관성</td><td>"선형이고 저해상도" — <b>그 상태로도 연주는 됐다. 소프트웨어로 나중에 고치는 문제</b></td></tr>
+</tbody></table></div>
+<div class="callout crit"><p><b>완주한 88키 자작 기구 사례는 사실상 0건이다.</b> 기성 액션이나 키베드를 산 사람을 빼면 그렇다. 반면 도너 경로 완주 사례는 3건이다. 이것이 도너안이 7.2점으로 1위인 이유이고, 동시에 8장이 설명할 책임을 지는 지점이다.</p></div>
+</section>
+<section>
+<h2 id="s7"><span class="eyebrow">07 — 연결</span>라즈베리파이의 40핀을 0개 쓴다</h2>
+
+<figure>
+<svg viewBox="0 0 1000 330" role="img" aria-label="건반부에서 라즈베리파이까지의 신호 경로 블록 다이어그램">
+<defs><marker id="ar5" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto"><path d="M0,0 L7.5,3.2 L0,6.4 Z" style="fill:var(--acc)"/></marker></defs>
+<rect x="24" y="24" width="560" height="196" rx="5" fill="none" stroke-dasharray="5 4" style="stroke:var(--rule)"/>
+<text class="s-dim" x="34" y="44">건반부 — 외부 5V 2A 어댑터 급전, USB는 데이터 전용</text>
+<g>
+<rect class="s-part" x="48" y="72" width="112" height="52" rx="4"/><text class="s-lbl" x="104" y="96" text-anchor="middle">ITR9608</text><text class="s-dim" x="104" y="112" text-anchor="middle">×88 광학</text>
+<rect class="s-part" x="196" y="72" width="104" height="52" rx="4"/><text class="s-lbl" x="248" y="96" text-anchor="middle">74HC14</text><text class="s-dim" x="248" y="112" text-anchor="middle">×16 슈미트</text>
+<rect class="s-part" x="336" y="72" width="112" height="52" rx="4"/><text class="s-lbl" x="392" y="96" text-anchor="middle">74HC165</text><text class="s-dim" x="392" y="112" text-anchor="middle">×11 · 4레인</text>
+<rect class="s-part" x="480" y="60" width="84" height="76" rx="4"/><text class="s-lbl" x="522" y="88" text-anchor="middle">Pico 2</text><text class="s-dim" x="522" y="104" text-anchor="middle">GPIO 7/26</text><text class="s-dim" x="522" y="120" text-anchor="middle">9,000원</text>
+<line class="s-arrow" x1="162" y1="98" x2="192" y2="98" marker-end="url(#ar5)"/>
+<line class="s-arrow" x1="302" y1="98" x2="332" y2="98" marker-end="url(#ar5)"/>
+<line class="s-arrow" x1="450" y1="98" x2="476" y2="98" marker-end="url(#ar5)"/>
+<rect class="s-part" x="336" y="160" width="112" height="40" rx="4"/><text class="s-lbl" x="392" y="185" text-anchor="middle">페달 → ADC26</text>
+<line class="s-arrow" x1="450" y1="180" x2="500" y2="180" marker-end="url(#ar5)"/><line class="s-arrow" x1="500" y1="180" x2="500" y2="140" marker-end="url(#ar5)"/>
+</g>
+<line class="s-arrow" x1="566" y1="98" x2="680" y2="98" marker-end="url(#ar5)" stroke-width="2.6"/>
+<text class="s-lbl" x="576" y="88" style="fill:var(--acc)">USB-MIDI</text>
+<text class="s-dim" x="576" y="118">class-compliant · 1개 장치</text>
+<g>
+<rect class="s-part" x="690" y="40" width="284" height="180" rx="5"/>
+<text class="s-lbl" x="706" y="66" font-weight="600">Raspberry Pi 5</text>
+<text class="s-lbl" x="706" y="92" style="fill:var(--good)">GPIO 점유 0핀 · 호스트 코드 0줄</text>
+<text class="s-dim" x="706" y="114">snd-usb-audio 자동 열거</text>
+<text class="s-dim" x="706" y="134" font-family="IBM Plex Mono">fluidsynth -z 64 -c 4</text>
+<text class="s-dim" x="706" y="150" font-family="IBM Plex Mono">  -o audio.alsa.device=hw:X,0</text>
+<text class="s-dim" x="706" y="166" font-family="IBM Plex Mono">  -o midi.autoconnect=1</text>
+<line x1="706" y1="180" x2="958" y2="180" style="stroke:var(--rule)"/>
+<text class="s-lbl" x="706" y="202" style="fill:var(--acc)">40핀 헤더 → I2S DAC HAT으로 비워둔다</text>
+</g>
+<g transform="translate(24,258)">
+<text class="s-lbl" x="0" y="0" font-weight="600">이 배치가 공짜로 얻는 것</text>
+<text class="s-lbl" x="0" y="22" style="fill:var(--mut)">건반을 USB로 밀어낸 덕에 오디오를 GPIO(I2S HAT)로 뺄 수 있다. Pi 직접 스캔을 택했다면 27핀을 매트릭스에 쓰고 오디오는 USB 동글로 밀려나 3.5 ms 손해였다.</text>
+<text class="s-lbl" x="0" y="44" style="fill:var(--mut)">VBUS 소비 30 mA — Pi 5 다운스트림 예산 600 mA의 5%. 기존 v2.0(모듈마다 Pico)은 0.63~0.93 A로 예산의 105~155%였고 셀프파워 허브 50,000원이 강제였다.</text>
+</g>
+</svg>
+<figcaption>권고 아키텍처. MCU 한 장이 USB-MIDI 장치로 열거되고 라즈베리파이는 아무것도 하지 않는다.</figcaption>
+</figure>
+
+<h3>왜 Pi 직접 스캔이 기각되는가 — 지연이 아니라 지터</h3>
+<p>벨로시티는 값이 아니라 <b>두 엣지 사이 시간</b>이다. 두 엣지의 지연은 서로 상관이 없으므로 <b>상쇄되지 않고 그대로 dt에 실린다.</b> 시계를 스위치 옆에 두어야 하는 이유다.</p>
+<div class="tw"><table><thead><tr><th>시계 위치</th><th class="n">지터</th><th class="n">fff에서 MIDI 오차</th><th class="n">dB</th></tr></thead><tbody>
+<tr class="hi"><td><b>Pico PIO/DMA</b></td><td class="n"><b>1 µs</b></td><td class="n"><b>0.013 스텝</b></td><td class="n">−0.00</td></tr>
+<tr><td>Linux 전형</td><td class="n">50~60 µs</td><td class="n">0.77 스텝</td><td class="n">−0.11</td></tr>
+<tr><td>Pi 5 + PREEMPT_RT 테일</td><td class="n">2 ms</td><td class="n">25.81 스텝</td><td class="n">−3.95</td></tr>
+<tr class="hi"><td><b>표준 커널 테일</b></td><td class="n"><b>4 ms</b></td><td class="n"><b>51.61 스텝</b> (v 127→75)</td><td class="n"><b>−9.06</b></td></tr>
+</tbody></table></div>
+<p>MCU 대비 테일 열화가 <b>2,000~4,000배</b>다. 51스텝이면 포르티시모가 메조피아노로 들린다. 게다가 확률이 아니라 확정적인 정전이 있다 — 리눅스 실시간 스로틀링 기본값 때문에 <span class="mono">SCHED_FIFO</span> 스캔 루프는 <b>매 1초마다 50 ms 강제 정지</b>한다.</p>
+
+<div class="callout"><p><b>Pi 5 특유의 사정 3가지.</b> ① RP1 칩이 PCIe 뒤로 가면서 <span class="mono">pigpio</span>·<span class="mono">RPi.GPIO</span>가 동작하지 않는다. Pi 4까지 리눅스측 스캐너를 정당화하던 DMA 타임스탬프 샘플링이 사라졌다. ② 가용 GPIO 26개 vs 176노드 매트릭스 최소 27핀 — <b>1핀 부족으로 산술적으로 불가능</b>하다. ③ RP1 내장 ADC가 40핀 헤더에 나오지 않는다.</p>
+<p style="margin-top:8px"><b>정직한 반박:</b> RP1의 PIO를 쓰면 기술적으로는 가능하다. 그럼에도 기각하는 이유는 얻는 게 "건반 보드에 MCU를 안 다는 것"뿐인데 <b>Pico 2가 9,000원</b>이기 때문이다.</p></div>
+
+<h3>키를 누르고 소리가 날 때까지 8.07 ms</h3>
+<figure>
+<svg viewBox="0 0 960 250" role="img" aria-label="키 입력부터 소리까지의 지연 예산 누적 막대, ALSA 링버퍼가 전자 예산의 77퍼센트를 차지">
+<g>
+<g class="s-dim"><text x="60" y="30">0</text><text x="248" y="30">2</text><text x="436" y="30">4</text><text x="624" y="30">6</text><text x="812" y="30">8 ms</text></g>
+<line x1="60" y1="38" x2="874" y2="38" style="stroke:var(--rule)"/>
+<!-- 94.1 px/ms from x=60 -->
+<rect x="60" y="48" width="14.1" height="42" style="fill:var(--steel)"/>
+<rect x="74.1" y="48" width="1.4" height="42" style="fill:var(--mut)"/>
+<rect x="75.5" y="48" width="47" height="42" style="fill:var(--warn)"/>
+<rect x="122.5" y="48" width="9.4" height="42" style="fill:var(--mut)"/>
+<rect x="131.9" y="48" width="4.7" height="42" style="fill:var(--mut)"/>
+<rect x="136.6" y="48" width="439" height="42" style="fill:var(--crit)"/>
+<rect x="575.6" y="48" width="47" height="42" style="fill:var(--acc)"/>
+<rect x="622.6" y="48" width="4.7" height="42" style="fill:var(--mut)"/>
+<rect x="627.3" y="48" width="192.1" height="42" opacity=".55" style="fill:var(--good)"/>
+<line x1="627.3" y1="42" x2="627.3" y2="96" stroke-width="1.5" style="stroke:var(--ink)"/>
+<text class="s-lbl" x="60" y="112">센서 0.15</text>
+<text class="s-lbl" x="99" y="130" style="fill:var(--warn)">USB 프레임 0.50</text>
+<text class="s-lbl" x="356" y="74" text-anchor="middle" fill="#fff" font-weight="600">ALSA 링버퍼 4.667 ms — 전자 예산의 77.4%</text>
+<text class="s-lbl" x="599" y="130" style="fill:var(--acc)">I2S DAC 0.50</text>
+<text class="s-lbl" x="723" y="74" text-anchor="middle">공기 0.7 m · 2.041</text>
+<text class="s-lbl" x="627" y="112" text-anchor="middle">전자 소계 6.03</text>
+<text class="s-lbl" x="866" y="112" text-anchor="end" font-weight="600">총 8.07 ms</text>
+</g>
+<g transform="translate(60,170)">
+<text class="s-lbl" x="0" y="0" font-weight="600">센서·MCU·USB를 최적화하는 것은 완전한 시간 낭비다. 오직 <tspan font-family="IBM Plex Mono">-z</tspan> 와 <tspan font-family="IBM Plex Mono">-c</tspan> 두 글자가 지연을 결정한다.</text>
+<text class="s-lbl" x="0" y="26" style="fill:var(--mut)">기준선 — 음악가 JND 27~49 ms의 16~30% · 200bpm 16분음표 주기 75 ms의 10.8% · 60 Hz 한 프레임 16.67 ms의 48%</text>
+<text class="s-lbl" x="0" y="48" style="fill:var(--good)">그랜드와 비교하면 mf 이하에서는 오히려 우리가 더 빠르다. 전자 체인 전체가 그랜드의 자유비행 시간(pp에서 20 ms) 안에 들어간다.</text>
+</g>
+</svg>
+<figcaption>지연 예산. 원점은 "건반을 누른 순간"이 아니라 <b>임계 통과 = 벨로시티가 물리적으로 확정된 순간</b>이다. 그랜드의 let-off와 대응하는 지점이고, 두 악기가 공유하는 항을 예산에서 빼야 비교가 성립한다.</figcaption>
+</figure>
+
+<div class="callout crit"><p><b>합치면 42 ms가 되는 함정 2개.</b> ① FluidSynth의 리눅스 기본 <span class="mono">audio.periods = 16</span> 때문에 <span class="mono">-z 64</span> 단독은 20.67 ms가 된다. ② Bookworm 기본 오디오 서버가 PipeWire이고 FluidSynth의 기본 출력이 <span class="mono">default</span>라 PipeWire 브릿지를 타면 +21.3 ms가 붙는다. 둘은 독립이라 동시에 걸릴 수 있다. 해법은 <span class="mono">-z 64 -c 4 -o audio.alsa.device=hw:X,0</span> 한 줄이다.</p></div>
+<p><b>RT 커널은 불필요하다.</b> 그 대가로 얻는 것은 2.667 ms뿐이고, 음악가 JND의 5~10%다. 대신 공짜인 두 가지를 먼저 하라. systemd에 <span class="mono">LimitRTPRIO=95</span>를 주지 않으면 FluidSynth의 실시간 우선순위 요청이 <b>조용히 실패</b>하고 사용자는 RT로 돌고 있다고 믿게 된다. CPU 거버너를 <span class="mono">performance</span>로 고정하면 1.5 GHz에서 2.4 GHz로 올라가 연산 여유가 1.6배가 된다. 둘 다 0원, 3줄이다.</p>
+<p><b>출력 하드웨어는 I2S DAC HAT(0.3~1.0 ms, 2~5만원).</b> HDMI는 30~100 ms, 블루투스 SBC는 150~200 ms라 리듬게임 판정창 ±16.7 ms를 몇 배로 넘는다. 금지다.</p>
+</section>
+<section>
+<h2 id="s8"><span class="eyebrow">08 — 권고</span>자작 회전 해머 + 광학 콤, 그리고 도너 1대</h2>
+<p>검증 점수 1위는 도너 키베드(7.2)다. 그런데 점수가 높다고 그대로 권고하면 안 되는 이유가 있다. 사용자 목표와의 정합성을 따지면 도너안이 무너진다.</p>
+
+<div class="tw"><table><thead><tr><th>사용자 목표</th><th>도너 키베드</th><th>자작 회전해머 + 광학</th></tr></thead><tbody>
+<tr><td><b>3D프린터로 만든다</b></td><td>프린터 역할이 케이스로 축소되고, <b>재검증 결과 케이스조차 뽑으면 안 된다</b>(92~191시간, ±2 mm 누적오차). 정답은 도너 섀시 재사용 = <b>프린터 역할 실질 0</b></td><td>건반 + 해머 암 + 베인 + 프레임 = <b>악기의 심장이 전부 프린트</b></td></tr>
+<tr><td><b>리듬게임 13.3 Hz</b></td><td><b>조건부.</b> 재타 임계가 도너가 정해놓은 값이고, 해머 바운스와 재타가 <b>같은 신호로 위장되어 펌웨어로 분리할 수 없다</b></td><td><b>기하로 보장.</b> 재무장을 딥 55.6%에 두면 왕복 64.5 ms = 15.5 Hz, 여유 14%. 임계를 슬릿 위치로 자유 설계</td></tr>
+<tr><td><b>내구성</b></td><td><b>러버돔 카본 접점은 소모품이다.</b> 도너는 이미 수만~수십만 타 소모 상태로 도착한다. 마모가 접점 위치를 밀어 키별 벨로시티가 각기 다른 속도로 드리프트한다. 교체 13~29만원, 해외 2~4주, 단종 시 도너 전체 폐기</td><td><b>마모 부품 0개.</b> 광학 LED 수명은 하루 4시간이면 100년 이상. 해머 축은 PTFE 부싱. <b>인쇄 스프링이 없으므로 PETG 크리프가 원천 소멸</b></td></tr>
+</tbody></table></div>
+<div class="callout crit"><p>사용자가 애초에 컴플라이언트를 택한 이유가 <b>내구성</b>이었다. 도너안은 그 판단과 정면으로 충돌한다. 러버돔은 상용기의 가장 흔한 고장 부위이고 "소모품 교체 설계"가 전제다.</p></div>
+
+<h3>이 권고는 새 도박이 아니라 v2.0의 실패 원인을 고친 것이다</h3>
+<div class="tw"><table><thead><tr><th>v2.0의 리스크</th><th>권고안에서 어떻게 되는가</th></tr></thead><tbody>
+<tr><td>PETG 인쇄 스프링 약 20,000 사이클, 크리프 10~25%/년</td><td><b>스프링 0개 → 중력 복귀.</b> 야마하·롤랜드·카와이·카시오 4사 특허 전부 동일. 리스크 원천 소멸</td></tr>
+<tr><td>힘 곡선이 바닥으로 갈수록 <b>+20.4% 상승</b> (피아노는 −80% 하강)</td><td><span class="mono">cos(3.75°) = 0.9979</span> → 전행정 변화 <b>0.2%</b>. 실물 피아노와 같은 평탄</td></tr>
+<tr class="hi"><td>손끝 등가관성 <b>5.2 g</b> (그랜드의 1/45)</td><td><b>98~105 g</b> (19~20배, 그랜드의 41%). 봉돌 1개 + 프린트 암 1개, <b>키당 약 200원 · 88키 16,000원</b></td></tr>
+<tr><td>SS49E 로트 감도 산포 1.79배, 심 작업 6시간</td><td>임계가 <b>프린트 창 높이</b>로 바뀐다. 키간 산포 ±0.05 mm = ±0.8 스텝. 심 작업 <b>0시간</b></td></tr>
+<tr><td>USB 장치 8개, 셀프파워 허브, VBUS 예산 105~155% 초과</td><td><b>Pico 1장, USB 장치 1개, VBUS 30 mA</b>(예산의 5%). 허브 50,000원 삭제</td></tr>
+</tbody></table></div>
+<p><b>세 개의 교체다.</b> 관성을 R²로 사고, 스프링을 중력으로 바꾸고, 아날로그 임계를 프린트 기하로 바꾼다. 각각이 v2.0의 검증된 약점을 정확히 겨눈다.</p>
+
+<div class="callout good"><p><b>그리고 도너 1대를 같이 산다. 이건 경로 변경이 아니다.</b> 중고 15만원짜리를 <b>계측 기준기</b>로 둔다. 이게 없으면 자작 기구의 다운웨이트·관성·dt가 "맞는 값인지" 판정할 기준이 영원히 없다. 동시에 최악의 경우 탈출구다 — 2단계 게이트에서 탈락하면 그 도너가 즉시 본체가 된다.</p></div>
+
+<h3>이 권고가 틀렸다면 그 이유는 무엇일까</h3>
+<div class="tw"><table><thead><tr><th class="n">#</th><th>반증 시나리오</th><th>조기 발견 지점</th></tr></thead><tbody>
+<tr class="hi"><td class="n">1</td><td><b>88배 반복 노동이 프로젝트를 죽인다.</b> 5~24키 프로토타입에서 88키로 넘어가다 죽은 사례가 압도적이고 완주 사례는 0건이다</td><td><b>2단계.</b> 12키를 만들고 나서 "이걸 7번 더"가 몸에 실감되는 순간</td></tr>
+<tr><td class="n">2</td><td>ITR9608 전고 10.8 mm가 Z 포락과 충돌하고 CAD에서 안 풀린다</td><td><b>0단계 G2.</b> 센서 1개 실측으로 즉시 판정. 대안 3개 준비됨</td></tr>
+<tr><td class="n">3</td><td>자연색·백색 PETG가 940 nm를 투과해 차광에 실패한다</td><td><b>0단계 G1.</b> 쿠폰 1개, 30분</td></tr>
+<tr><td class="n">4</td><td>해머 접촉점이 회전 중 크게 미끄러진다</td><td>1단계. 1옥타브에서 즉시 드러남</td></tr>
+<tr><td class="n">5</td><td>FDM 공차 0.2 mm가 레버비 3.5배로 증폭돼 다운웨이트에 직결된다</td><td>1단계. 12키 실측 산포로 판정 (목표 ±3 gf)</td></tr>
+<tr class="hi"><td class="n">6</td><td><b>가장 정직한 반증: 사용자가 원하는 것이 "피아노"라면 도너안이 맞다.</b> 권고안은 3~5개월, 도너는 2주~6주다. 만드는 과정 자체가 목적이 아니라면 3~5개월은 순손실이다</td><td><b>지금.</b> 9장 결정 1</td></tr>
+</tbody></table></div>
+
+<h3>단계적 진입 — 각 단계에 탈출구가 있다</h3>
+<figure>
+<svg viewBox="0 0 960 200" role="img" aria-label="0단계 쿠폰부터 3단계 88키까지의 진입 경로와 게이트">
+<defs><marker id="ar6" markerWidth="9" markerHeight="9" refX="7" refY="3.2" orient="auto"><path d="M0,0 L7.5,3.2 L0,6.4 Z" style="fill:var(--mut)"/></marker></defs>
+<g>
+<rect class="s-part" x="24" y="40" width="200" height="86" rx="5"/>
+<text class="s-lbl" x="40" y="66" font-weight="600">0단계 — 쿠폰·시험</text>
+<text class="s-dim" x="40" y="86">49,400원 · 2주</text>
+<text class="s-dim" x="40" y="104">게이트 G1~G6</text>
+<text class="s-lbl" x="40" y="122" style="fill:var(--crit)">G6 없이는 성립 안 함</text>
+
+<rect class="s-part" x="248" y="40" width="200" height="86" rx="5"/>
+<text class="s-lbl" x="264" y="66" font-weight="600">1단계 — 1옥타브</text>
+<text class="s-dim" x="264" y="86">약 8만원 · 3주</text>
+<text class="s-dim" x="264" y="104">G7~G10</text>
+<text class="s-lbl" x="264" y="122">12키 USB-MIDI 완동작</text>
+
+<rect x="472" y="40" width="200" height="86" rx="5" stroke-width="2" style="fill:var(--acc-bg);stroke:var(--acc)"/>
+<text class="s-lbl" x="488" y="66" font-weight="600">2단계 — 2옥타브</text>
+<text class="s-dim" x="488" y="86">약 25만원 · 4주</text>
+<text class="s-dim" x="488" y="104">G11~G13 + PCB 발주</text>
+<text class="s-lbl" x="488" y="122" style="fill:var(--acc)">여기가 진짜 관문</text>
+
+<rect class="s-part" x="696" y="40" width="200" height="86" rx="5"/>
+<text class="s-lbl" x="712" y="66" font-weight="600">3단계 — 88키</text>
+<text class="s-dim" x="712" y="86">약 30만원 · 6~10주</text>
+<text class="s-dim" x="712" y="104">G14 전수 검사</text>
+
+<line class="s-arrow" x1="226" y1="83" x2="244" y2="83" marker-end="url(#ar6)" style="stroke:var(--mut)"/>
+<line class="s-arrow" x1="450" y1="83" x2="468" y2="83" marker-end="url(#ar6)" style="stroke:var(--mut)"/>
+<line class="s-arrow" x1="674" y1="83" x2="692" y2="83" marker-end="url(#ar6)" style="stroke:var(--mut)"/>
+</g>
+<g transform="translate(24,162)">
+<text class="s-lbl" x="0" y="0"><tspan font-weight="600" style="fill:var(--acc)">G11 — 두 번째 옥타브 제작 시간이 첫 옥타브의 60% 이하인가.</tspan> 초과하면 88키는 산술적으로 불가능하다. 여기서 도너로 전환하라.</text>
+</g>
+</svg>
+<figcaption>2단계가 이 계획에서 가장 중요한 게이트다. 사망 원인 1위가 "88배 반복 노동"이므로, 12키를 두 번 만들어보고 학습곡선이 실제로 작동하는지를 숫자로 확인한 뒤에만 88키로 간다.</figcaption>
+</figure>
+<p class="mono" style="font-size:12.5px;color:var(--mut)">0단계 구매 목록 핵심: 슬롯형 포토인터럽터 15개 15,000 · 74HC14 2개 1,000 · 74HC165 2개 1,400 · 디지털 저울 0.01g 9,000 · 분동 100g·200g 6,000 · Ø6 강봉 2,000 · 저반발 우레탄 3,000 — 합계 49,400원</p>
+<div class="callout"><p><b>0단계의 핵심 트릭.</b> 센서 12개를 <b>반음 피치 13.7083 mm를 보증하는 3D프린트 콤 홀더</b>에 끼우고 유선으로 만능기판까지 끌어온다. 만능기판의 2.54 mm 격자가 피치를 결정하지 못하게 분리하는 것이다. 이렇게 하지 않으면 4키 이상에서 물리적으로 불가능하다.</p></div>
+</section>
+
+<section>
+<h2 id="s9"><span class="eyebrow">09 — 결정</span>우리가 대신 정할 수 없는 3가지</h2>
+<p>나머지는 전부 위에서 숫자로 결정됐다. 이 셋만 남는다.</p>
+
+<h3>결정 1 — "만드는 것"이 목적인가, "피아노"가 목적인가</h3>
+<p>이 질문 하나가 경로를 가른다. 다른 어떤 기술적 근거보다 상위에 있다.</p>
+<div class="tw"><table><thead><tr><th></th><th>만드는 것이 목적</th><th>피아노가 목적</th></tr></thead><tbody>
+<tr><td>경로</td><td><b>자작 회전해머 + 광학</b></td><td><b>도너 키베드 이식</b></td></tr>
+<tr><td>기간</td><td>3~5개월</td><td>2주(풀타임) / 3.4~6주(주 18시간)</td></tr>
+<tr><td>비용</td><td>626,000원 (±15%)</td><td>274,100원</td></tr>
+<tr><td>프린터 역할</td><td>악기의 심장 전부</td><td>실질 0</td></tr>
+<tr><td>타건감</td><td>관성 98~105 g (그랜드 41%)</td><td>관성 138 g (그랜드 57%)</td></tr>
+<tr><td>실패 확률</td><td><b>높음</b> (완주 사례 0건)</td><td>낮음 (완주 사례 3건)</td></tr>
+<tr><td>실패하면 남는 것</td><td>시간과 필라멘트</td><td><b>15만원짜리 멀쩡한 디지털피아노</b></td></tr>
+</tbody></table></div>
+<p><b>양쪽 다 정당한 답이다.</b> 다만 도너를 고른다면 "3D프린터로 피아노를 만든다"는 프로젝트 정체성이 <b>"디지털피아노를 개조한다"</b>로 바뀐다는 것을 명시적으로 인정하고 시작하라고 권한다. "케이스는 프린트하니까 괜찮다"고 애매하게 넘어가면, 재검증 결과 그 케이스마저 뽑으면 안 되는 물건이라 결국 안 뽑게 된다.</p>
+
+<h3>결정 2 — 해머를 넣을 것인가</h3>
+<p>= 타건감 목표를 관성 몇 g으로 잡을 것인가. 이건 취향이 아니라 물리다.</p>
+<div class="tw"><table><thead><tr><th class="n">관성 목표</th><th>구현</th><th>대가</th></tr></thead><tbody>
+<tr><td class="n">5.2 g</td><td>일체형 컴플라이언트 (현행)</td><td>"플라스틱 장난감". 게다가 그 대가를 펌웨어로 갚아야 한다</td></tr>
+<tr><td class="n">16.6 g</td><td>꼬리 카운터웨이트</td><td><b>키당 153 g, 88키 13.5 kg인데 관성은 11 g만 는다.</b> 사실상 무의미</td></tr>
+<tr class="hi"><td class="n"><b>98~105 g</b></td><td>회전 해머 8 g @ r=55</td><td>해머 스윙 공간이 필요한데, <b>v2.0의 12단 사행 스프링이 쓰던 바로 그 공간이라 1:1 맞교환 가능</b>. 부품 +5개/키, 88키 약 16,000원</td></tr>
+<tr><td class="n">138 g</td><td>도너 키베드</td><td>깊이 270 mm(베드 220 초과), 11~14 kg, 업스톱 타격 소음</td></tr>
+</tbody></table></div>
+
+<h3>결정 3 — 도너를 계측 기준기로 살 것인가 (1~15만원)</h3>
+<div class="tw"><table><thead><tr><th>선택</th><th class="n">비용</th><th>얻는 것 / 잃는 것</th></tr></thead><tbody>
+<tr><td>사지 않는다</td><td class="n">0원</td><td>자작 기구의 다운웨이트·관성·dt가 맞는 값인지 판정할 <b>기준이 영원히 없다</b></td></tr>
+<tr><td>고장품</td><td class="n">1~5만원</td><td>해머·웨이트·펠트 실물 참조와 부품 창고. 접점이 죽어 있으면 dt 비교는 불가</td></tr>
+<tr class="hi"><td><b>동작품</b></td><td class="n">15만원</td><td>위 전부 + <b>나란히 놓고 실측 비교</b> + 2단계 탈락 시 즉시 전환할 자산</td></tr>
+</tbody></table></div>
+<p>이 보고서의 의견은 <b>동작품 15만원이 값어치가 있다</b>는 것이다. 예산의 24%를 "내가 만든 게 맞는지 판정하는 기준기"에 쓰는 것이고, 동시에 최악의 경우 탈출구다.</p>
+
+<h3>어느 경로를 택하든 유효한 공짜 결정 8개</h3>
+<div class="tw"><table><thead><tr><th class="n">#</th><th>결정</th><th>근거</th></tr></thead><tbody>
+<tr><td class="n">1</td><td>노트온을 키 바닥이 아니라 <b>딥의 85~90%</b>에서</td><td>그랜드 let-off 위치. 바닥 스위치는 pp에서 최대 35 ms 지각</td></tr>
+<tr><td class="n">2</td><td>재타 임계를 딥의 40~55%에 두고 히스테리시스</td><td>그랜드가 19세기에 레피티션 레버로 푼 문제를 상수 한 줄로</td></tr>
+<tr><td class="n">3</td><td>벨로시티를 로그가 아니라 <b>멱법칙 + 128엔트리 LUT</b></td><td>SF2가 진폭 ∝ (v/127)² 제곱법칙</td></tr>
+<tr><td class="n">4</td><td>Note Off를 <span class="mono">0x80 nn rr</span> 정식 형식으로</td><td>USB-MIDI 4바이트 고정이라 비용 0. Pianoteq 전환 시 릴리즈 벨로시티가 산다</td></tr>
+<tr><td class="n">5</td><td>스펙을 다운웨이트가 아니라 <b>밸런스웨이트</b>로</td><td>공장 사양의 진짜 상수는 BW이고 DW·UW는 마찰 때문에 변하는 종속변수</td></tr>
+<tr><td class="n">6</td><td>딥을 프린트 치수가 아니라 <b>조절 나사</b>로</td><td>야마하 공차 +0.02/−0.03 mm는 FDM 밖</td></tr>
+<tr><td class="n">7</td><td><span class="mono">-z 64 -c 4</span> + <span class="mono">hw:X,0</span> + <span class="mono">LimitRTPRIO=95</span> + 거버너 performance</td><td>안 하면 20.67 ms 또는 42 ms. 전부 0원</td></tr>
+<tr><td class="n">8</td><td>감쇠재를 나중이 아니라 <b>처음부터 기하에</b></td><td>나중에 붙이면 딥과 공차가 틀어진다. 업스톱은 반드시 저반발 우레탄 — 울 펠트를 쓰면 백체크가 필요해진다</td></tr>
+</tbody></table></div>
+</section>
+
+<div class="foot">Toccata · 2026-09-16. 10축 병렬 조사 → 독립 설계안 6종 → 설계안마다 3렌즈 적대적 검증 → 종합. 에이전트 42개, 성공 37개. 조사에 사용된 1차 출처는 제조사 규정값, 특허(야마하 US10529311 / 카시오 US10418003 / 카와이 US8766075·US9177535B2), 데이터시트, FluidSynth 소스, 그리고 Goebl·Ortmann의 실측 논문이다.
+<br><br><b>이 보고서의 한계 2가지.</b> ① 국내 단가는 자석 1건(엘레파츠 Ø3×2, 개당 99원)을 빼면 실시세로 교차검증되지 않았다. 총액 오차는 보수적으로 ±15%로 볼 것. ② 발주 전 반드시 확인할 것은 <b>ITR9608-F의 전고·빔 높이·개구폭</b>이다. 이게 틀리면 PCB 20장이 전량 폐기된다.</div>
+</div>

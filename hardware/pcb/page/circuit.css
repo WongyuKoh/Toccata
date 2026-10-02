@@ -1,0 +1,17 @@
+
+.csheet .cap{align-items:center}
+.zbar{display:inline-flex;gap:4px;align-items:center;flex-wrap:wrap}
+.zbar button{font:inherit;font-size:12px;border:1px solid #C9D0DA;background:#fff;color:#1A2030;border-radius:6px;padding:2px 8px;cursor:pointer}
+.zbar button[aria-pressed="true"]{background:#1A2030;color:#fff;border-color:#1A2030}
+.zbar a{margin-left:6px}
+.csheet .dwimg img{min-width:720px}
+.csheet.z2 .dwimg img{width:auto;min-width:0;max-width:none;width:2000px}
+.csheet.z3 .dwimg img{width:auto;min-width:0;max-width:none;width:3000px}
+details.cbom{margin:6px 0;border:1px solid var(--rule);border-radius:10px;background:var(--card);padding:6px 10px}
+details.cbom summary{font-size:14px;color:var(--ink);font-weight:600}
+details.cbom summary::before{content:"＋ "}
+details.cbom[open] summary::before{content:"－ "}
+details.cbom .tbl{margin:8px 0 4px}
+details.cbom table{font-size:12px}
+#p-circuit .tbl table td{font-size:12.5px}
+.sheet,[id^="sch"],h3{scroll-margin-top:calc(var(--navh,50px) + 12px)}

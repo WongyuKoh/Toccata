@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1010 400" width="1010" height="400" role="img" aria-label="Toccata v2.0 모노리식 건반 측면 단면">
+<title>Toccata v2.0 — 모노리식 컴플라이언트 건반 측면 단면 (실축 1:4)</title>
+<style>
+ text{font-family:"IBM Plex Sans KR","Noto Sans KR",system-ui,sans-serif}
+ .bed{fill:#D8D2C6;stroke:#8A8377;stroke-width:.8}
+ .comb{fill:#C6BFB0;stroke:#8A8377;stroke-width:.6}
+ .key{fill:#FDFCF9;stroke:#2B2B2B;stroke-width:1.1}
+ .leaf{fill:#1F5FD8;stroke:#12409A;stroke-width:.5}
+ .blade{stroke:#B3261E;stroke-width:2.6;stroke-linecap:round}
+ .piv{fill:#fff;stroke:#B3261E;stroke-width:1.6}
+ .rail{fill:#9AA0A8;stroke:#5C626A;stroke-width:.8}
+ .pcb{fill:#1D6B3A;stroke:#0E3B20;stroke-width:.6}
+ .sens{fill:#222} .mag{fill:#C62828}
+ .lbl{font-size:10.5px;fill:#2B2B2B} .dim-t{font-size:10px;fill:#B3261E}
+ .tick{stroke:#8A8377;stroke-width:.8} .tick-t{font-size:9.5px;fill:#6B6459}
+ .dimarrow{stroke:#B3261E;stroke-width:1;marker-end:url(#a);marker-start:url(#a)}
+ @media (prefers-color-scheme: dark){
+   .bed{fill:#3A3730;stroke:#6E675B} .comb{fill:#46423A;stroke:#6E675B}
+   .key{fill:#EDEAE3;stroke:#111} .lbl{fill:#E6E2DA} .tick-t{fill:#A8A093}
+ }
+</style>
+<defs><marker id="a" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,3 L6,0 L6,6 Z" fill="#B3261E"/></marker></defs>
+<rect width="1010" height="400" fill="none"/>
+<rect x="46.0" y="294.0" width="920.0" height="24.0" class="bed" />
+<rect x="110.0" y="289.8" width="40.0" height="4.2" class="bed" />
+<rect x="294.0" y="277.8" width="32.0" height="16.2" class="bed" />
+<rect x="166.0" y="222.0" width="48.0" height="96.0" class="comb" />
+<rect x="334.0" y="222.0" width="24.0" height="96.0" class="comb" />
+<rect x="614.0" y="222.0" width="48.0" height="96.0" class="comb" />
+<rect x="830.0" y="290.0" width="48.0" height="4.0" class="bed" />
+<rect x="926.0" y="71.2" width="40.0" height="246.8" class="bed" />
+<path d="M 666.0 318.0 L 666.0 269.2 L 674.8 269.2 L 674.8 281.2 L 737.2 281.2 L 737.2 269.2 L 742.0 269.2 L 742.0 318.0 Z" class="bed"/>
+<rect x="366.0" y="286.8" width="240.0" height="6.4" class="pcb" />
+<rect x="480.0" y="270.0" width="12.0" height="16.8" class="sens" />
+<rect x="480.0" y="244.8" width="12.0" height="8.0" class="mag" />
+<rect x="46.0" y="194.0" width="203.2" height="50.8" class="key" />
+<rect x="242.8" y="194.0" width="435.2" height="50.8" class="key" />
+<rect x="654.0" y="174.0" width="112.0" height="48.0" class="key" />
+<rect x="750.0" y="174.0" width="16.0" height="100.0" class="key" />
+<rect x="750.0" y="274.0" width="168.0" height="16.0" class="key" />
+<rect x="676.0" y="266.6" width="60.0" height="14.6" class="key" />
+<line x1="683.4" y1="267.4" x2="728.6" y2="222.2" class="blade" />
+<line x1="728.6" y1="267.4" x2="683.4" y2="222.2" class="blade" />
+<circle cx="706.0" cy="244.8" r="3.4" class="piv"/>
+<rect x="766.0" y="256.8" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="251.6" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="243.2" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="238.0" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="229.6" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="224.5" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="216.1" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="210.9" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="202.5" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="197.3" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="188.9" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="183.7" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="175.3" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="170.2" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="161.8" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="156.6" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="148.2" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="143.0" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="134.6" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="129.4" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="121.0" width="152.0" height="8.4" class="leaf" />
+<rect x="766.0" y="115.9" width="8.4" height="13.6" class="leaf" />
+<rect x="766.0" y="107.5" width="152.0" height="8.4" class="leaf" />
+<rect x="909.6" y="256.8" width="8.4" height="17.2" class="leaf" />
+<circle cx="766.0" cy="107.5" r="4.0" class="leaf"/>
+<rect x="734.0" y="95.2" width="56.0" height="8.0" class="rail" />
+<rect x="734.0" y="71.2" width="200.0" height="24.0" class="rail" />
+<text x="706.0" y="186.8" class="lbl" text-anchor="middle">피벗 (교차 판 4장)</text>
+<text x="486.0" y="174.8" class="lbl" text-anchor="middle">자석 Ø3×2 · 3.600↓</text>
+<text x="842.0" y="61.5" class="lbl" text-anchor="middle">예하중 레일 ↑ 반작용이 꼬리를 누른다</text>
+<text x="842.0" y="186.0" class="lbl" text-anchor="middle">12단 사행 판 t=2.10</text>
+<text x="854.0" y="312.0" class="lbl" text-anchor="middle">업스톱 = 정지 위치</text>
+<text x="130.0" y="309.8" class="lbl" text-anchor="middle">백건 다운스톱</text>
+<text x="310.0" y="271.8" class="lbl" text-anchor="middle">흑건</text>
+<text x="638.0" y="214.0" class="lbl" text-anchor="middle">가이드 콤</text>
+<text x="486.0" y="310.8" class="lbl" text-anchor="middle">SS49E</text>
+<text x="704.0" y="305.2" class="lbl" text-anchor="middle">드롭인 앵커</text>
+<line x1="46.0" y1="244.8" x2="46.0" y2="288.0" class="dim" />
+<text x="102.0" y="274.0" class="dim-t" text-anchor="start">딥 10.8</text>
+<line x1="46.0" y1="244.8" x2="46.0" y2="288.0" class="dimarrow"/>
+<line x1="46.0" y1="322.0" x2="46.0" y2="334.0" class="tick"/>
+<text x="46.0" y="354.0" class="tick-t" text-anchor="middle">0</text>
+<line x1="249.2" y1="322.0" x2="249.2" y2="334.0" class="tick"/>
+<text x="249.2" y="354.0" class="tick-t" text-anchor="middle">50.8</text>
+<line x1="486.0" y1="322.0" x2="486.0" y2="334.0" class="tick"/>
+<text x="486.0" y="354.0" class="tick-t" text-anchor="middle">110</text>
+<line x1="706.0" y1="322.0" x2="706.0" y2="334.0" class="tick"/>
+<text x="706.0" y="354.0" class="tick-t" text-anchor="middle">165</text>
+<line x1="766.0" y1="322.0" x2="766.0" y2="334.0" class="tick"/>
+<text x="766.0" y="354.0" class="tick-t" text-anchor="middle">180</text>
+<line x1="918.0" y1="322.0" x2="918.0" y2="334.0" class="tick"/>
+<text x="918.0" y="354.0" class="tick-t" text-anchor="middle">218</text>
+<text x="506.0" y="398.0" class="tick-t" text-anchor="middle">y (mm) — 0 = 연주자 앞끝, 165 = 피벗</text>
+</svg>

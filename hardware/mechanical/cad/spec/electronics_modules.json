@@ -1,0 +1,3855 @@
+{
+ "meta": {
+  "task": "c1 electronics inside the key modules and end parts",
+  "version": "v4 W1+ r4.5 key action, circuit W1 rev B (BRD-01/BRD-02 2026-09-29)",
+  "units": "mm",
+  "coords": "module_items: module local x (0 = C left boundary; world x = 47 + 164.5*(k-1) + x for octave module Ok), y from the white-key front lip, z from the desk. end_items: part=\"left\" -> local x = world x (left end part x0..47); part=\"right\" -> world x = 1198.5 + x; coords=\"world\" items are already world.",
+  "box": "{x:[min,max], y:[..], z:[..], label}; optional show:false on a box = small detail; cut:true = subtract from its parent item",
+  "cylinder": "{axis, center:[a,b] in the two other axes (z-axis -> [x,y]; y-axis -> [x,z]), d, range:[min,max] along the axis, label}",
+  "sweeps": "usb_cable only: arc + line centreline for the flexible cable",
+  "show": "false = small circuit part (resistors, caps, headers, pads, leads) - do not render by default",
+  "check": "bbox + point-in-polygon check of every rendered box against the fixed parts of geometry.json (module, left, right end parts): no clash except (1) the hall bodies inside the sensor bar - the bar prism in geometry.json has no pockets, the sensor-bar STL must subtract each hall item pocket / lead_groove / lead_holes; (2) the frame locating pins D2.8 inside the board holes D3.0 (by design); (3) fin bbox false positives (the hung F|F# fin is at z>=21.5 behind y172, its foot only in the slot y<172)",
+  "pedal_boards": "none in the modules or end parts: PB (pedal board, RP2040-Zero) sits in the CU tray and PS (pedal sensor) inside the pedal (bom.csv SCH-05; final-bom L35 / L43)"
+ },
+ "module_items": [
+  {
+   "id": "mb_board",
+   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6)",
+   "name_en": "control board MB (5x7 cm double-sided perfboard cut 70x50x1.6)",
+   "bom_id": "SE8 (bom.csv SCH-03 MB)",
+   "boxes": [
+    {
+     "x": [
+      47.25,
+      81.918
+     ],
+     "y": [
+      145.5,
+      195.5
+     ],
+     "z": [
+      9.0,
+      10.6
+     ],
+     "label": "board, left of the fin slot"
+    },
+    {
+     "x": [
+      81.918,
+      84.718
+     ],
+     "y": [
+      172.0,
+      195.5
+     ],
+     "z": [
+      9.0,
+      10.6
+     ],
+     "label": "board strip behind the fin slot (slot x81.918..84.718 y145.5..172.0 cut out, open to the front edge)"
+    },
+    {
+     "x": [
+      84.718,
+      117.25
+     ],
+     "y": [
+      145.5,
+      195.5
+     ],
+     "z": [
+      9.0,
+      10.6
+     ],
+     "label": "board, right of the fin slot"
+    }
+   ],
+   "cylinders": [
+    {
+     "axis": "z",
+     "center": [
+      50.0,
+      149.0
+     ],
+     "d": 3.2,
+     "range": [
+      9.0,
+      10.6
+     ],
+     "label": "M3 screw hole D3.2 (screw M3x6 L35 from below into the hung boss)",
+     "cut": true
+    },
+    {
+     "axis": "z",
+     "center": [
+      114.5,
+      192.5
+     ],
+     "d": 3.2,
+     "range": [
+      9.0,
+      10.6
+     ],
+     "label": "M3 screw hole D3.2",
+     "cut": true
+    },
+    {
+     "axis": "z",
+     "center": [
+      114.5,
+      149.0
+     ],
+     "d": 3.0,
+     "range": [
+      9.0,
+      10.6
+     ],
+     "label": "locating-pin hole D3.0 (frame pin D2.8)",
+     "cut": true
+    },
+    {
+     "axis": "z",
+     "center": [
+      50.0,
+      192.5
+     ],
+     "d": 3.0,
+     "range": [
+      9.0,
+      10.6
+     ],
+     "label": "locating-pin hole D3.0 (frame pin D2.8)",
+     "cut": true
+    }
+   ],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
+   "assumed": false,
+   "hole_grid": {
+    "x": "76.52 + 2.54 i",
+    "y": "173.59 + 2.54 j",
+    "d": 1.0,
+    "note": "all part holes lie on the RP2040-Zero pin grid; cut the perfboard to this grid (BRD-01 note 1)"
+   },
+   "keepouts": [
+    {
+     "x": [
+      81.218,
+      85.418
+     ],
+     "y": [
+      145.5,
+      173.2
+     ],
+     "z": [
+      9.0,
+      20.0
+     ],
+     "label": "no parts / pads / wires (W1 r4.3); only the Zero PCB overhangs y172.0..173.2 above z11.9"
+    },
+    {
+     "x": [
+      47.25,
+      117.25
+     ],
+     "y": [
+      145.8,
+      194.5
+     ],
+     "z": [
+      10.6,
+      20.0
+     ],
+     "label": "component height zone <= z20 (BRD-01 note 3)"
+    },
+    {
+     "x": [
+      54.3,
+      110.2
+     ],
+     "y": [
+      194.5,
+      195.5
+     ],
+     "z": [
+      10.6,
+      16.7
+     ],
+     "label": "rear strip <= z16.7 (geometry \"board components, rear strip\")"
+    },
+    {
+     "x": [
+      47.0,
+      53.0
+     ],
+     "y": [
+      144.5,
+      152.0
+     ],
+     "z": [
+      10.6,
+      17.0
+     ],
+     "label": "hung boss D6 zone + 1.3 ring: no parts (x<=54.3 / x>=110.2)"
+    },
+    {
+     "x": [
+      47.25,
+      117.25
+     ],
+     "y": [
+      145.5,
+      195.5
+     ],
+     "z": [
+      7.0,
+      9.0
+     ],
+     "label": "underside: header tails <= 2.0, C301, wiring, screw heads z7.35..9.0"
+    }
+   ],
+   "note": "Inserted from below through the floor hatch x46.25..118.25 y144.5..196.5 (x78.53..89.47 to y197.8). Board top z10.6 = underside of the 4 hung D6 bosses."
+  },
+  {
+   "id": "mb_screws",
+   "name_ko": "제어 기판 나사 M3×6 버튼헤드 ×2",
+   "name_en": "control-board screws M3x6 ISO 7380 x2",
+   "bom_id": "L35",
+   "boxes": [],
+   "cylinders": [
+    {
+     "axis": "z",
+     "center": [
+      50.0,
+      149.0
+     ],
+     "d": 5.7,
+     "range": [
+      7.35,
+      9.0
+     ],
+     "label": "button head D5.7 x 1.65 (under the board)"
+    },
+    {
+     "axis": "z",
+     "center": [
+      50.0,
+      149.0
+     ],
+     "d": 3.0,
+     "range": [
+      9.0,
+      15.0
+     ],
+     "label": "shank M3, tip z15.0 (boss bore D2.5 to z15.4)"
+    },
+    {
+     "axis": "z",
+     "center": [
+      114.5,
+      192.5
+     ],
+     "d": 5.7,
+     "range": [
+      7.35,
+      9.0
+     ],
+     "label": "button head D5.7 x 1.65"
+    },
+    {
+     "axis": "z",
+     "center": [
+      114.5,
+      192.5
+     ],
+     "d": 3.0,
+     "range": [
+      9.0,
+      15.0
+     ],
+     "label": "shank M3, tip z15.0"
+    }
+   ],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json parts \"control-board screw M3x6 head D5.7 x 3.0 envelope\"; circuit_r44.screw; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 8",
+   "assumed": false
+  },
+  {
+   "id": "zero",
+   "name_ko": "RP2040-Zero (A301), 핀 헤더로 세움",
+   "name_en": "RP2040-Zero (A301) on pin headers, mold removed",
+   "bom_id": "SEV2 (PP-A799-2); bom.csv A301",
+   "boxes": [
+    {
+     "x": [
+      75.14,
+      93.14
+     ],
+     "y": [
+      172.0,
+      195.5
+     ],
+     "z": [
+      11.9,
+      12.9
+     ],
+     "label": "Zero PCB 18.0 x 23.5 x 1.0 (edge y195.5 = USB side, +y)"
+    },
+    {
+     "x": [
+      77.2,
+      91.1
+     ],
+     "y": [
+      172.5,
+      195.0
+     ],
+     "z": [
+      10.6,
+      11.9
+     ],
+     "label": "underside chips/crystal/LDO on Kapton (C11), fills the 1.3 gap between the pin rows",
+     "assumed": true
+    },
+    {
+     "x": [
+      75.64,
+      92.64
+     ],
+     "y": [
+      172.5,
+      189.5
+     ],
+     "z": [
+      12.9,
+      16.3
+     ],
+     "label": "top components envelope (RP2040, flash, BOOT/RESET, LED) <= z16.3",
+     "assumed": true
+    },
+    {
+     "x": [
+      79.53,
+      88.47
+     ],
+     "y": [
+      189.5,
+      196.8
+     ],
+     "z": [
+      12.9,
+      16.1
+     ],
+     "label": "USB-C receptacle 8.94 x 7.3 x 3.2 (centre x84.00 z14.5), protrudes ~1.3 past the Zero edge"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
+   "assumed": false,
+   "envelope": {
+    "x": [
+     75.14,
+     93.14
+    ],
+    "y": [
+     172.0,
+     195.5
+    ],
+    "z": [
+     10.6,
+     16.3
+    ],
+    "label": "design envelope (geometry.json)"
+   },
+   "assumed_note": "split of the envelope into underside/top component boxes is proposed (only the PCB z, envelope heights and the receptacle are specified); receptacle overhang 1.3 is \"1.0~1.5, check on the real part\" (BRD-01 note 3)"
+  },
+  {
+   "id": "zero_headers",
+   "name_ko": "RP2040-Zero 핀 헤더 1×9 ×2 (몰드 뺌)",
+   "name_en": "RP2040-Zero pin headers 1x9 x2 (plastic removed)",
+   "bom_id": "SE7 (bom.csv A301-HDR)",
+   "boxes": [
+    {
+     "x": [
+      76.2,
+      76.84
+     ],
+     "y": [
+      173.27,
+      194.23
+     ],
+     "z": [
+      7.0,
+      16.3
+     ],
+     "label": "1x9 header pins 0.64 sq at x76.52, y173.59..193.91 (2.54), tails cut <=2.0 below the board, tops <= z16.3"
+    },
+    {
+     "x": [
+      91.44,
+      92.08
+     ],
+     "y": [
+      173.27,
+      194.23
+     ],
+     "z": [
+      7.0,
+      16.3
+     ],
+     "label": "1x9 header pins 0.64 sq at x91.76, y173.59..193.91 (2.54), tails cut <=2.0 below the board, tops <= z16.3"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,3 + table (left/right rows only, no bottom row GP9..13); rp2040_zero_pads.csv holes x1.38/16.62 from the left edge, y1.59..21.91 from the USB edge; hardware/bom/final-bom/data.json SE7 11.5 mm pins",
+   "assumed": false
+  },
+  {
+   "id": "usb_plug",
+   "name_ko": "USB-C 케이블 플러그 (W201~W207, Coms NA993)",
+   "name_en": "USB-C cable plug overmold (W201..W207, Coms NA993 USB-A to C 1 m)",
+   "bom_id": "C04",
+   "boxes": [
+    {
+     "x": [
+      77.75,
+      90.25
+     ],
+     "y": [
+      196.8,
+      221.8
+     ],
+     "z": [
+      10.7,
+      18.3
+     ],
+     "label": "overmold envelope limit 12.5 x 25 x 7.6 (plug face y196.8, centre x84.0 z14.5); NA993 mold ~11.3 wide x ~19.5 long (photo estimate)"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json parts \"USB-C plug envelope (z10.7-18.3)\" + plan \"USB plug\"; circuit_r44.usb (y196.8..221.8, slot 76.45..91.55); hardware/bom/final-bom/data.json C04 specs (몰드 한계 12.5 x 7.6 x 25); hardware/pcb/netlist/cables.csv W201..W207",
+   "assumed": false,
+   "envelope": {
+    "x": [
+     77.75,
+     90.25
+    ],
+    "y": [
+     196.8,
+     221.8
+    ],
+    "z": [
+     10.7,
+     18.3
+    ],
+    "label": "design envelope"
+   }
+  },
+  {
+   "id": "usb_plug_shell",
+   "name_ko": "USB-C 플러그 금속 쉘 (리셉터클 안)",
+   "name_en": "USB-C plug metal shell inside the receptacle",
+   "bom_id": "C04",
+   "boxes": [
+    {
+     "x": [
+      79.875,
+      88.125
+     ],
+     "y": [
+      190.1,
+      196.8
+     ],
+     "z": [
+      13.3,
+      15.7
+     ],
+     "label": "USB-C plug shell 8.25 x 2.4, ~6.7 deep inside the receptacle"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "USB Type-C spec plug shell 8.25 x 2.4 (standard); position = receptacle x79.53..88.47 z12.9..16.1",
+   "assumed": true
+  },
+  {
+   "id": "usb_cable",
+   "name_ko": "USB 케이블 (모듈 → CU 칸 입구)",
+   "name_en": "USB cable, module to the CU tray inlet",
+   "bom_id": "C04",
+   "boxes": [],
+   "cylinders": [
+    {
+     "axis": "y",
+     "center": [
+      84.0,
+      14.5
+     ],
+     "d": 3.5,
+     "range": [
+      221.8,
+      221.8
+     ],
+     "label": "cable exits the overmold at y221.8 (OD 3.5 assumed: NA993 OD not published)"
+    }
+   ],
+   "show": true,
+   "source": "circuit_r44.usb passage [215,258,22], bend 25.0, passage_spare 11.2 (key-action-v4/model/geometry.json); docs/report/toccata-build-v3.html drawing 7 (R27) polylines \"USB 케이블 O1..O7\" and \"CU 트레이 케이블 입구\" (world x540..700, centre ~620); cables.csv W201..W207 1 m",
+   "assumed": true,
+   "sweeps": [
+    {
+     "type": "arc",
+     "plane": "xy",
+     "z": 14.5,
+     "d": 3.5,
+     "R": 25.0,
+     "center": "[84.0 + 25*s, 221.8]",
+     "from": [
+      84.0,
+      221.8
+     ],
+     "to": "[84.0 + 25*s, 246.8]",
+     "label": "bend R25 in the cable passage (y215..258, z0..22); s = +1 for O1..O3 (toward +x), s = -1 for O4..O7 (toward -x)"
+    },
+    {
+     "type": "line",
+     "d": 3.5,
+     "from": "[84.0 + 25*s, 246.8, 14.5]",
+     "to": "world x ~620 (CU tray inlet x540..700), y246.8, lying on the passage floor after ~50 mm",
+     "label": "run along x in the passage to the hub"
+    }
+   ],
+   "assumed_note": "OD 3.5 and the run height are proposals; direction per module from v3 drawing 7 (cables converge on the CU inlet at world x~620)"
+  },
+  {
+   "id": "mux",
+   "name_ko": "CD74HC4067 16채널 먹스 모듈 (A302), 핀 헤더로 세움",
+   "name_en": "CD74HC4067 16-ch mux module (A302) on pin headers",
+   "bom_id": "SEV2 (PP-A324); bom.csv A302",
+   "boxes": [
+    {
+     "x": [
+      54.93,
+      57.47
+     ],
+     "y": [
+      152.0,
+      192.64
+     ],
+     "z": [
+      10.6,
+      13.1
+     ],
+     "label": "1x16 header plastic spacer 2.54 x 40.64 x 2.5 (channel row x56.20)",
+     "assumed": true
+    },
+    {
+     "x": [
+      70.17,
+      72.71
+     ],
+     "y": [
+      162.16,
+      182.48
+     ],
+     "z": [
+      10.6,
+      13.1
+     ],
+     "label": "1x8 header plastic spacer 2.54 x 20.32 x 2.5 (control row x71.44, y163.43..181.21)",
+     "assumed": true
+    },
+    {
+     "x": [
+      54.93,
+      72.71
+     ],
+     "y": [
+      152.0,
+      192.64
+     ],
+     "z": [
+      13.1,
+      14.7
+     ],
+     "label": "module PCB 17.78 x 40.64 x 1.6 (C0 at the front, C15 at the rear)"
+    },
+    {
+     "x": [
+      59.92,
+      67.72
+     ],
+     "y": [
+      168.22,
+      176.42
+     ],
+     "z": [
+      14.7,
+      16.7
+     ],
+     "label": "CD74HC4067 SSOP-24 (5.3 x 8.2 body, 7.8 over leads, <= 2.0 tall) + 0.1 uF / 10 k on top",
+     "assumed": true
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "assumed": false,
+   "envelope": {
+    "x": [
+     54.93,
+     72.71
+    ],
+    "y": [
+     152.0,
+     192.64
+    ],
+    "z": [
+     10.6,
+     20.0
+    ],
+    "label": "design envelope (geometry.json)"
+   },
+   "pins": {
+    "channel_row": {
+     "x": 56.2,
+     "y": [
+      153.27,
+      155.81,
+      158.35,
+      160.89,
+      163.43,
+      165.97,
+      168.51,
+      171.05,
+      173.59,
+      176.13,
+      178.67,
+      181.21,
+      183.75,
+      186.29,
+      188.83,
+      191.37
+     ],
+     "names": "C0..C15"
+    },
+    "control_row": {
+     "x": 71.44,
+     "y": [
+      163.43,
+      165.97,
+      168.51,
+      171.05,
+      173.59,
+      176.13,
+      178.67,
+      181.21
+     ],
+     "names": "GND,VCC,EN,S0,S1,S2,S3,SIG"
+    }
+   },
+   "assumed_note": "header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented"
+  },
+  {
+   "id": "mux_headers",
+   "name_ko": "먹스 모듈 핀 헤더 1×16 + 1×8",
+   "name_en": "mux pin headers 1x16 + 1x8",
+   "bom_id": "SE7 (bom.csv A302-HDR)",
+   "boxes": [
+    {
+     "x": [
+      55.88,
+      56.52
+     ],
+     "y": [
+      152.95,
+      191.69
+     ],
+     "z": [
+      7.6,
+      19.1
+     ],
+     "label": "1x16 pins 0.64 sq: tail 3.0 through the board (z7.6), top 6.0 above the mold (z19.1)"
+    },
+    {
+     "x": [
+      71.12,
+      71.76
+     ],
+     "y": [
+      163.11,
+      181.53
+     ],
+     "z": [
+      7.6,
+      19.1
+     ],
+     "label": "1x8 pins"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "hardware/bom/final-bom/data.json SE7 (11.5 mm, 1-mold); pin rows from wiring_MB.csv; z from the standard 3.0/2.5/6.0 split",
+   "assumed": true
+  },
+  {
+   "id": "j301_pads",
+   "name_ko": "J301 리본 2×8 패드 (아랫면 납땜, 윗면 납 ≤ z12.0)",
+   "name_en": "J301 ribbon 2x8 pads (soldered from the underside, joints <= z12.0)",
+   "bom_id": "bom.csv J301",
+   "boxes": [
+    {
+     "x": [
+      60.38,
+      79.96
+     ],
+     "y": [
+      147.29,
+      151.63
+     ],
+     "z": [
+      10.6,
+      12.0
+     ],
+     "label": "pads/solder x61.28..79.06 at y148.19 (odd, front) / y150.73 (even)"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "key-action-v4/model/geometry.json parts \"board part: J301 ribbon 2x8 pads\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table",
+   "assumed": false
+  },
+  {
+   "id": "ribbon",
+   "name_ko": "16심 리본 W10x (SB J201 → MB J301)",
+   "name_en": "16-core ribbon W10x (SB J201 to MB J301), 2651-16P 20.32 x 0.89",
+   "bom_id": "C05 (cables.csv W101~W107)",
+   "boxes": [
+    {
+     "x": [
+      60.32,
+      80.64
+     ],
+     "y": [
+      71.18,
+      77.5
+     ],
+     "z": [
+      5.0,
+      7.0
+     ],
+     "label": "ends soldered into SB J201 from below (pads x61.6..79.38 at y72.08/74.62), folding down through the rear-rib gap x59..82 to the floor"
+    },
+    {
+     "x": [
+      60.32,
+      80.64
+     ],
+     "y": [
+      77.5,
+      132.3
+     ],
+     "z": [
+      5.0,
+      5.89
+     ],
+     "label": "flat on the floor, centred x70.48"
+    },
+    {
+     "x": [
+      60.32,
+      80.64
+     ],
+     "y": [
+      132.3,
+      144.5
+     ],
+     "z": [
+      5.0,
+      5.89
+     ],
+     "label": "through the lane under the balance rail (lane x59.0..82.0, z5..10)"
+    },
+    {
+     "x": [
+      60.01,
+      80.64
+     ],
+     "y": [
+      144.5,
+      151.63
+     ],
+     "z": [
+      5.0,
+      9.0
+     ],
+     "label": "under the control board (z5..9); last ~6 mm split into strands and shifted -0.31 into J301 (centre x70.17)"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "assumed": false,
+   "path_length_mm": 85,
+   "cut_length_mm": 180,
+   "note": "cables.csv lists ~180 mm per ribbon; the laid path is ~85 mm - the rest is slack for soldering the MB outside the hatch before it is lifted in (BRD-01 note 8), folded under the board / on the floor (not modelled)"
+  },
+  {
+   "id": "j302_pads",
+   "name_ko": "J302 EXT 1×6 패드",
+   "name_en": "J302 EXT 1x6 pads (lead soldered from the underside)",
+   "bom_id": "bom.csv J302",
+   "boxes": [
+    {
+     "x": [
+      93.4,
+      107.9
+     ],
+     "y": [
+      193.01,
+      194.81
+     ],
+     "z": [
+      10.6,
+      12.0
+     ],
+     "label": "pads x94.30..107.00 at y193.91"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "key-action-v4/model/geometry.json parts \"board part: J302 EXT 1x6 pads\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table",
+   "assumed": false
+  },
+  {
+   "id": "r30x",
+   "name_ko": "EXT 풀다운 R301~R303 (O1·O7만)",
+   "name_en": "EXT pull-downs R301..R303 (O1 / O7 only)",
+   "bom_id": "L29 (bom.csv R301..R304)",
+   "boxes": [
+    {
+     "x": [
+      102.58,
+      108.88
+     ],
+     "y": [
+      152.02,
+      154.52
+     ],
+     "z": [
+      10.6,
+      13.1
+     ],
+     "label": "R301 100k lying flat, body D2.5 x 6.3 between holes x101.92/109.54 (fitted on O1,O7)"
+    },
+    {
+     "x": [
+      102.58,
+      108.88
+     ],
+     "y": [
+      157.1,
+      159.6
+     ],
+     "z": [
+      10.6,
+      13.1
+     ],
+     "label": "R302 100k lying flat, body D2.5 x 6.3 between holes x101.92/109.54 (fitted on O1)"
+    },
+    {
+     "x": [
+      102.58,
+      108.88
+     ],
+     "y": [
+      162.18,
+      164.68
+     ],
+     "z": [
+      10.6,
+      13.1
+     ],
+     "label": "R303 100k lying flat, body D2.5 x 6.3 between holes x101.92/109.54 (fitted on O1)"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table + note 9 (R301 laid flat, short leads); bom.csv R301 O1/O7, R302/R303 O1, R304 none; DIN0207 D2.5 x 6.3",
+   "assumed": false,
+   "modules": [
+    "O1",
+    "O7"
+   ]
+  },
+  {
+   "id": "ext_lead",
+   "name_ko": "EXT 연장선 W403 / W413 (L66 모듈 쪽 150 mm, 6심 22 AWG)",
+   "name_en": "EXT lead W403 / W413 (L66 module-side 150 mm, 6 x 22 AWG silicone)",
+   "bom_id": "L66",
+   "boxes": [
+    {
+     "x": [
+      88.0,
+      107.64
+     ],
+     "y": [
+      192.9,
+      195.4
+     ],
+     "z": [
+      5.0,
+      7.0
+     ],
+     "label": "6 wires leave J302 from the underside and run -x under the board, below the Zero header tails (z7.0), to x<=91"
+    },
+    {
+     "x": [
+      82.0,
+      91.0
+     ],
+     "y": [
+      195.4,
+      212.0
+     ],
+     "z": [
+      5.0,
+      10.7
+     ],
+     "label": "under the USB plug (z5..10.7), through the rear-wall opening x74..94 z5..21 into the cable passage"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 6; circuit_r43.ext_path (under_board 4.0, under_plug 5.7); circuit_r44.usb.wall_open [74,94,5,21]; cables.csv W403/W413; hardware/bom/final-bom/data.json L66",
+   "assumed": true,
+   "modules": [
+    "O1",
+    "O7"
+   ],
+   "assumed_note": "wire bundle cross-section (~8 x 2) and its exact x inside the stated bands are proposals"
+  },
+  {
+   "id": "sb_board",
+   "name_ko": "센서 기판 SB (6행 양면 도트 띠 161.6 × 15.24 × 1.6)",
+   "name_en": "sensor board SB (6-row double-sided perfboard strip 161.6 x 15.24 x 1.6)",
+   "bom_id": "L22 (bom.csv SCH-02 SB)",
+   "boxes": [
+    {
+     "x": [
+      1.0,
+      162.6
+     ],
+     "y": [
+      60.65,
+      75.89
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "board under the sensor bar (bar underside z8.6); rows y61.92 spare / 64.46 3V3 / 67.00 GND / 69.54 OUT / 72.08, 74.62 ribbon"
+    }
+   ],
+   "cylinders": [
+    {
+     "axis": "z",
+     "center": [
+      3.0,
+      61.9
+     ],
+     "d": 3.4,
+     "range": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot D3.4 for M3x10 self-tap (v3 P111), open to the left edge x1.0",
+     "cut": true,
+     "assumed": true
+    },
+    {
+     "axis": "z",
+     "center": [
+      3.0,
+      74.6
+     ],
+     "d": 3.4,
+     "range": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot D3.4 for M3x10 self-tap, open to the left edge",
+     "cut": true,
+     "assumed": true
+    }
+   ],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json parts \"sensor board SB (v3 6-row stripboard 1.6, under the sensor bar)\"; circuit_r45.interface.sb_board; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) note 1; hardware/bom/final-bom/data.json L22",
+   "assumed": false,
+   "u_slot_cut": [
+    {
+     "x": [
+      1.0,
+      3.0
+     ],
+     "y": [
+      60.2,
+      63.6
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot opening to the edge",
+     "cut": true
+    },
+    {
+     "x": [
+      1.0,
+      3.0
+     ],
+     "y": [
+      72.9,
+      76.3
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot opening to the edge",
+     "cut": true
+    }
+   ],
+   "hole_grid": {
+    "x": "0.63 + 2.54 i",
+    "y": [
+     61.92,
+     64.46,
+     67.0,
+     69.54,
+     72.08,
+     74.62
+    ],
+    "d": 1.0
+   },
+   "underside_zone": {
+    "x": [
+     1.0,
+     162.6
+    ],
+    "y": [
+     60.65,
+     75.89
+    ],
+    "z": [
+     5.2,
+     7.0
+    ],
+    "label": "underside parts / solder / clipped leads <= 1.8 (supported on ribs y61.0..62.8 and y73.2..75.5, top z7.0)"
+   },
+   "assumed_note": "U-slot opening direction (to the left edge) inferred from \"U홈\" with the centre 2.0 from the edge"
+  },
+  {
+   "id": "sb_underside",
+   "name_ko": "SB 아랫면 부품 (C201~C212 100n, C213·C214 10µ, 버스선, J201 납)",
+   "name_en": "SB underside parts (C201..C212 100n 1206, C213/C214 10u 1206, bus wires, J201 joints)",
+   "bom_id": "SE4, L67",
+   "boxes": [
+    {
+     "x": [
+      9.99,
+      11.59
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x10.79"
+    },
+    {
+     "x": [
+      25.23,
+      26.83
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x26.03"
+    },
+    {
+     "x": [
+      37.93,
+      39.53
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x38.73"
+    },
+    {
+     "x": [
+      53.17,
+      54.77
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x53.97"
+    },
+    {
+     "x": [
+      65.87,
+      67.47
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x66.67"
+    },
+    {
+     "x": [
+      81.11,
+      82.71
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x81.91"
+    },
+    {
+     "x": [
+      93.81,
+      95.41
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x94.61"
+    },
+    {
+     "x": [
+      106.51,
+      108.11
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x107.31"
+    },
+    {
+     "x": [
+      121.75,
+      123.35
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x122.55"
+    },
+    {
+     "x": [
+      134.45,
+      136.05
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x135.25"
+    },
+    {
+     "x": [
+      147.15,
+      148.75
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x147.95"
+    },
+    {
+     "x": [
+      159.85,
+      161.45
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "100n 1206 under lead column x160.65"
+    },
+    {
+     "x": [
+      7.45,
+      9.05
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.4,
+      7.0
+     ],
+     "label": "C213 10u 1206 x8.25"
+    },
+    {
+     "x": [
+      157.31,
+      158.91
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.4,
+      7.0
+     ],
+     "label": "C214 10u 1206 x158.11"
+    },
+    {
+     "x": [
+      60.69,
+      80.27
+     ],
+     "y": [
+      71.18,
+      75.52
+     ],
+     "z": [
+      5.2,
+      7.0
+     ],
+     "label": "J201 ribbon joints (underside)"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) note 4-6 (caps between the 3V3 y64.46 and GND y67.00 pads of each lead column); bom.csv C2xx; hardware/bom/final-bom/data.json SE4 thickness 1.25",
+   "assumed": false
+  },
+  {
+   "id": "hall_C",
+   "name_ko": "홀센서 U201 (C) DRV5055A2QLPG",
+   "name_en": "hall sensor U201 (C) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      5.89,
+      9.04
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      9.04,
+      11.04
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      10.54,
+      11.04
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x10.79 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"C\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "C",
+   "colour": "white",
+   "element": {
+    "x": 7.431,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     5.691,
+     9.241
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      9.241,
+      11.39
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 10.79,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_Cs",
+   "name_ko": "홀센서 U202 (C#) DRV5055A2QLPG",
+   "name_en": "hall sensor U202 (C#) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      19.674,
+      22.824
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      9.656,
+      11.176
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z9.656), leads +x"
+    },
+    {
+     "x": [
+      22.824,
+      26.28
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      10.196,
+      10.636
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      25.78,
+      26.28
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      10.636
+     ],
+     "label": "3 leads bent down at x26.03 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"C#\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "C#",
+   "colour": "black",
+   "element": {
+    "x": 21.215,
+    "y": 67.0,
+    "z_v3": 10.15,
+    "z_hall_md": 10.686
+   },
+   "pocket": {
+    "x": [
+     19.475,
+     23.025
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 9.656,
+    "z_bar_top": 11.5,
+    "lead_groove": {
+     "x": [
+      23.025,
+      26.63
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 9.656
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 26.03,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      11.5
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_D",
+   "name_ko": "홀센서 U203 (D) DRV5055A2QLPG",
+   "name_en": "hall sensor U203 (D) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      33.709,
+      36.859
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      36.859,
+      38.98
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      38.48,
+      38.98
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x38.73 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"D\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "D",
+   "colour": "white",
+   "element": {
+    "x": 35.25,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     33.51,
+     37.06
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      37.06,
+      39.33
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 38.73,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_Ds",
+   "name_ko": "홀센서 U204 (D#) DRV5055A2QLPG",
+   "name_en": "hall sensor U204 (D#) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      47.744,
+      50.894
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      9.656,
+      11.176
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z9.656), leads +x"
+    },
+    {
+     "x": [
+      50.894,
+      54.22
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      10.196,
+      10.636
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      53.72,
+      54.22
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      10.636
+     ],
+     "label": "3 leads bent down at x53.97 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"D#\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "D#",
+   "colour": "black",
+   "element": {
+    "x": 49.285,
+    "y": 67.0,
+    "z_v3": 10.15,
+    "z_hall_md": 10.686
+   },
+   "pocket": {
+    "x": [
+     47.545,
+     51.095
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 9.656,
+    "z_bar_top": 11.5,
+    "lead_groove": {
+     "x": [
+      51.095,
+      54.57
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 9.656
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 53.97,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      11.5
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_E",
+   "name_ko": "홀센서 U205 (E) DRV5055A2QLPG",
+   "name_en": "hall sensor U205 (E) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      61.529,
+      64.679
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      64.679,
+      66.92
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      66.42,
+      66.92
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x66.67 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"E\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "E",
+   "colour": "white",
+   "element": {
+    "x": 63.07,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     61.33,
+     64.88
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      64.88,
+      67.27
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 66.67,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_F",
+   "name_ko": "홀센서 U206 (F) DRV5055A2QLPG",
+   "name_en": "hall sensor U206 (F) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      75.818,
+      78.968
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      78.968,
+      82.16
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      81.66,
+      82.16
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x81.91 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"F\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "F",
+   "colour": "white",
+   "element": {
+    "x": 77.359,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     75.619,
+     79.169
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      79.169,
+      82.51
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 81.91,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_Fs",
+   "name_ko": "홀센서 U207 (F#) DRV5055A2QLPG",
+   "name_en": "hall sensor U207 (F#) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      89.032,
+      92.182
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      9.656,
+      11.176
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z9.656), leads +x"
+    },
+    {
+     "x": [
+      92.182,
+      94.86
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      10.196,
+      10.636
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      94.36,
+      94.86
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      10.636
+     ],
+     "label": "3 leads bent down at x94.61 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"F#\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "F#",
+   "colour": "black",
+   "element": {
+    "x": 90.573,
+    "y": 67.0,
+    "z_v3": 10.15,
+    "z_hall_md": 10.686
+   },
+   "pocket": {
+    "x": [
+     88.833,
+     92.383
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 9.656,
+    "z_bar_top": 11.5,
+    "lead_groove": {
+     "x": [
+      92.383,
+      95.21
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 9.656
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 94.61,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      11.5
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_G",
+   "name_ko": "홀센서 U208 (G) DRV5055A2QLPG",
+   "name_en": "hall sensor U208 (G) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      102.496,
+      105.646
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      105.646,
+      107.56
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      107.06,
+      107.56
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x107.31 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"G\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "G",
+   "colour": "white",
+   "element": {
+    "x": 104.037,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     102.297,
+     105.847
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      105.847,
+      107.91
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 107.31,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_Gs",
+   "name_ko": "홀센서 U209 (G#) DRV5055A2QLPG",
+   "name_en": "hall sensor U209 (G#) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      115.959,
+      119.109
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      9.656,
+      11.176
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z9.656), leads +x"
+    },
+    {
+     "x": [
+      119.109,
+      122.8
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      10.196,
+      10.636
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      122.3,
+      122.8
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      10.636
+     ],
+     "label": "3 leads bent down at x122.55 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"G#\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "G#",
+   "colour": "black",
+   "element": {
+    "x": 117.5,
+    "y": 67.0,
+    "z_v3": 10.15,
+    "z_hall_md": 10.686
+   },
+   "pocket": {
+    "x": [
+     115.76,
+     119.31
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 9.656,
+    "z_bar_top": 11.5,
+    "lead_groove": {
+     "x": [
+      119.31,
+      123.15
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 9.656
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 122.55,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      11.5
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_A",
+   "name_ko": "홀센서 U210 (A) DRV5055A2QLPG",
+   "name_en": "hall sensor U210 (A) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      129.423,
+      132.573
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      132.573,
+      135.5
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      135.0,
+      135.5
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x135.25 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"A\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "A",
+   "colour": "white",
+   "element": {
+    "x": 130.964,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     129.224,
+     132.774
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      132.774,
+      135.85
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 135.25,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_As",
+   "name_ko": "홀센서 U211 (A#) DRV5055A2QLPG",
+   "name_en": "hall sensor U211 (A#) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      142.886,
+      146.036
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      9.656,
+      11.176
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z9.656), leads +x"
+    },
+    {
+     "x": [
+      146.036,
+      148.2
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      10.196,
+      10.636
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      147.7,
+      148.2
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      10.636
+     ],
+     "label": "3 leads bent down at x147.95 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"A#\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "A#",
+   "colour": "black",
+   "element": {
+    "x": 144.427,
+    "y": 67.0,
+    "z_v3": 10.15,
+    "z_hall_md": 10.686
+   },
+   "pocket": {
+    "x": [
+     142.687,
+     146.237
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 9.656,
+    "z_bar_top": 11.5,
+    "lead_groove": {
+     "x": [
+      146.237,
+      148.55
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 9.656
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 147.95,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      11.5
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "hall_B",
+   "name_ko": "홀센서 U212 (B) DRV5055A2QLPG",
+   "name_en": "hall sensor U212 (B) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      156.1,
+      159.25
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      159.25,
+      160.9
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      160.4,
+      160.9
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x160.65 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) sensor table (element x = magnet x, lead-hole x = first grid 0.63+2.54i >= x+3.0); key-action-v4/model/geometry.json key \"B\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "B",
+   "colour": "white",
+   "element": {
+    "x": 157.641,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     155.901,
+     159.451
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      159.451,
+      161.25
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 160.65,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false"
+  },
+  {
+   "id": "magnets_module",
+   "name_ko": "건반 자석 Ø5×2 N35 ×12 (건반과 함께 움직임)",
+   "name_en": "key magnets D5x2 N35 x12 (move with the keys)",
+   "bom_id": "L21",
+   "boxes": [],
+   "cylinders": [
+    {
+     "axis": "z",
+     "center": [
+      7.431,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key C (rest pose)",
+     "moving_with": "key C"
+    },
+    {
+     "axis": "z",
+     "center": [
+      21.215,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key C# (rest pose)",
+     "moving_with": "key C#"
+    },
+    {
+     "axis": "z",
+     "center": [
+      35.25,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key D (rest pose)",
+     "moving_with": "key D"
+    },
+    {
+     "axis": "z",
+     "center": [
+      49.285,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key D# (rest pose)",
+     "moving_with": "key D#"
+    },
+    {
+     "axis": "z",
+     "center": [
+      63.07,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key E (rest pose)",
+     "moving_with": "key E"
+    },
+    {
+     "axis": "z",
+     "center": [
+      77.359,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key F (rest pose)",
+     "moving_with": "key F"
+    },
+    {
+     "axis": "z",
+     "center": [
+      90.573,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key F# (rest pose)",
+     "moving_with": "key F#"
+    },
+    {
+     "axis": "z",
+     "center": [
+      104.037,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key G (rest pose)",
+     "moving_with": "key G"
+    },
+    {
+     "axis": "z",
+     "center": [
+      117.5,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key G# (rest pose)",
+     "moving_with": "key G#"
+    },
+    {
+     "axis": "z",
+     "center": [
+      130.964,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key A (rest pose)",
+     "moving_with": "key A"
+    },
+    {
+     "axis": "z",
+     "center": [
+      144.427,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key A# (rest pose)",
+     "moving_with": "key A#"
+    },
+    {
+     "axis": "z",
+     "center": [
+      157.641,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "magnet key B (rest pose)",
+     "moving_with": "key B"
+    }
+   ],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json parts \"key <n> magnet boss\" (x centre = sensor x, y63.2..70.8, face z23.5); hardware/bom/final-bom/data.json L21 (pocket D5.2 x 2.1 opening down, S pole down, y67)",
+   "assumed": false
+  }
+ ],
+ "end_items": [
+  {
+   "id": "el_board",
+   "name_ko": "끝 부속 센서 기판 EL (6행 도트 띠 45.5 × 15.24 × 1.6)",
+   "name_en": "end-part sensor board EL (6-row perfboard strip 45.5 x 15.24 x 1.6)",
+   "bom_id": "L22 (bom.csv SCH-04 EL)",
+   "boxes": [
+    {
+     "x": [
+      1.0,
+      46.5
+     ],
+     "y": [
+      60.65,
+      75.89
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "board under the left end-part sensor bar (bar x0.5..46.5)"
+    }
+   ],
+   "cylinders": [
+    {
+     "axis": "z",
+     "center": [
+      3.0,
+      61.9
+     ],
+     "d": 3.4,
+     "range": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot D3.4 (M3x10 self-tap, v3 P111)",
+     "cut": true,
+     "assumed": true
+    },
+    {
+     "axis": "z",
+     "center": [
+      3.0,
+      74.6
+     ],
+     "d": 3.4,
+     "range": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot D3.4",
+     "cut": true,
+     "assumed": true
+    }
+   ],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json end_parts.left \"sensor board EL\"; circuit_r44.ends.left.board; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL section; hardware/bom/final-bom/data.json L22 (EL 45.5 x 15.24)",
+   "assumed": false,
+   "part": "left",
+   "u_slot_cut": [
+    {
+     "x": [
+      1.0,
+      3.0
+     ],
+     "y": [
+      60.2,
+      63.6
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot opening",
+     "cut": true
+    },
+    {
+     "x": [
+      1.0,
+      3.0
+     ],
+     "y": [
+      72.9,
+      76.3
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot opening",
+     "cut": true
+    }
+   ],
+   "underside_zone": {
+    "x": [
+     1.0,
+     46.5
+    ],
+    "y": [
+     60.65,
+     75.89
+    ],
+    "z": [
+     5.2,
+     7.0
+    ],
+    "label": "underside parts / solder <= 1.8"
+   }
+  },
+  {
+   "id": "el_underside",
+   "name_ko": "EL 아랫면 부품 (C401~C403 100n, R401~R403 1k, C404 10µ, J401 패드 ×5)",
+   "name_en": "EL underside parts (100n, 1k, 10u 1206; J401 5 pads)",
+   "bom_id": "SE4, L68, L67",
+   "boxes": [
+    {
+     "x": [
+      12.53,
+      14.13
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "C40x 100n under lead column x13.33"
+    },
+    {
+     "x": [
+      30.31,
+      31.91
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "C40x 100n under lead column x31.11"
+    },
+    {
+     "x": [
+      43.01,
+      44.61
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "C40x 100n under lead column x43.81"
+    },
+    {
+     "x": [
+      12.53,
+      14.13
+     ],
+     "y": [
+      69.87,
+      73.07
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "R40x 1k (OUT y69.54 -> y72.08) under column x13.33",
+     "assumed": true
+    },
+    {
+     "x": [
+      30.31,
+      31.91
+     ],
+     "y": [
+      69.87,
+      73.07
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "R40x 1k (OUT y69.54 -> y72.08) under column x31.11",
+     "assumed": true
+    },
+    {
+     "x": [
+      43.01,
+      44.61
+     ],
+     "y": [
+      69.87,
+      73.07
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "R40x 1k (OUT y69.54 -> y72.08) under column x43.81",
+     "assumed": true
+    },
+    {
+     "x": [
+      7.45,
+      9.05
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.4,
+      7.0
+     ],
+     "label": "C404 10u x8.25"
+    },
+    {
+     "x": [
+      17.51,
+      29.47
+     ],
+     "y": [
+      73.72,
+      75.52
+     ],
+     "z": [
+      5.2,
+      7.0
+     ],
+     "label": "J401 pads x18.41..28.57 (2.54) at y74.62, lead soldered from below"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL notes 2-3 and pad drawing (J401 pads x18.41..28.57 on row y74.62); circuit_r44.ends.left.pads [18.41, 28.57]",
+   "assumed": false,
+   "part": "left"
+  },
+  {
+   "id": "el_hall_A0",
+   "name_ko": "홀센서 U401 (A0) DRV5055A2QLPG",
+   "name_en": "hall sensor U401 (A0) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      8.746,
+      11.896
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      11.896,
+      13.58
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      13.08,
+      13.58
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x13.33 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL/ER sensor table; key-action-v4/model/geometry.json end_parts.left key \"A0\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "A0",
+   "colour": "white",
+   "element": {
+    "x": 10.287,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     8.547,
+     12.097
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      12.097,
+      13.93
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 13.33,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false",
+   "part": "left"
+  },
+  {
+   "id": "el_hall_As0",
+   "name_ko": "홀센서 U402 (A#0) DRV5055A2QLPG",
+   "name_en": "hall sensor U402 (A#0) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      25.386,
+      28.536
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      9.656,
+      11.176
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z9.656), leads +x"
+    },
+    {
+     "x": [
+      28.536,
+      31.36
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      10.196,
+      10.636
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      30.86,
+      31.36
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      10.636
+     ],
+     "label": "3 leads bent down at x31.11 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL/ER sensor table; key-action-v4/model/geometry.json end_parts.left key \"A#0\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "A#0",
+   "colour": "black",
+   "element": {
+    "x": 26.927,
+    "y": 67.0,
+    "z_v3": 10.15,
+    "z_hall_md": 10.686
+   },
+   "pocket": {
+    "x": [
+     25.187,
+     28.737
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 9.656,
+    "z_bar_top": 11.5,
+    "lead_groove": {
+     "x": [
+      28.737,
+      31.71
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 9.656
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 31.11,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      11.5
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false",
+   "part": "left"
+  },
+  {
+   "id": "el_hall_B0",
+   "name_ko": "홀센서 U403 (B0) DRV5055A2QLPG",
+   "name_en": "hall sensor U403 (B0) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      38.6,
+      41.75
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      41.75,
+      44.06
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      43.56,
+      44.06
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x43.81 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL/ER sensor table; key-action-v4/model/geometry.json end_parts.left key \"B0\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "B0",
+   "colour": "white",
+   "element": {
+    "x": 40.141,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     38.401,
+     41.951
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      41.951,
+      44.41
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 43.81,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false",
+   "part": "left"
+  },
+  {
+   "id": "el_lead",
+   "name_ko": "EL 리드 W401 (리본 5가닥, 폭 6.35)",
+   "name_en": "EL lead W401 (5 ribbon strands, 6.35 wide x 0.89)",
+   "bom_id": "C05 (cables.csv W401, 350 mm)",
+   "boxes": [
+    {
+     "x": [
+      17.8,
+      29.2
+     ],
+     "y": [
+      73.9,
+      75.5
+     ],
+     "z": [
+      5.0,
+      7.0
+     ],
+     "label": "strands leave the J401 pads (x18.41..28.57, y74.62) downward inside the rear-rib gap x15..38"
+    },
+    {
+     "x": [
+      14.825,
+      29.2
+     ],
+     "y": [
+      75.5,
+      77.39
+     ],
+     "z": [
+      5.0,
+      5.89
+     ],
+     "label": "strands gather to x14.825..21.175 by y77.39"
+    },
+    {
+     "x": [
+      14.825,
+      21.175
+     ],
+     "y": [
+      77.39,
+      212.0
+     ],
+     "z": [
+      5.0,
+      5.89
+     ],
+     "label": "flat on the floor, through the lane under the balance rail (x13.525..22.475, z5..10) and the rear-wall notch (z5..12) into the cable passage"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "circuit_r44.ends.left (lead [14.825,21.175], lane [13.525,22.475], lane_z [5,10], notch_z [5,12], fan_y 77.39); key-action-v4/model/geometry.json end_parts.left \"rear wall (over the lead notch z5-12)\" x13.525..22.475; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL note 4; circuit_r45.el_floor (full floor, no hatch)",
+   "assumed": false,
+   "part": "left"
+  },
+  {
+   "id": "er_board",
+   "name_ko": "끝 부속 센서 기판 ER (6행 도트 띠 22.0 × 15.24 × 1.6)",
+   "name_en": "end-part sensor board ER (6-row perfboard strip 22.0 x 15.24 x 1.6)",
+   "bom_id": "L22 (bom.csv SCH-04 ER)",
+   "boxes": [
+    {
+     "x": [
+      1.0,
+      23.0
+     ],
+     "y": [
+      60.65,
+      75.89
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "board under the right end-part sensor bar (bar x0.5..23.0)"
+    }
+   ],
+   "cylinders": [
+    {
+     "axis": "z",
+     "center": [
+      3.0,
+      61.9
+     ],
+     "d": 3.4,
+     "range": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot D3.4 (M3x10 self-tap)",
+     "cut": true,
+     "assumed": true
+    },
+    {
+     "axis": "z",
+     "center": [
+      3.0,
+      74.6
+     ],
+     "d": 3.4,
+     "range": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot D3.4",
+     "cut": true,
+     "assumed": true
+    }
+   ],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json end_parts.right \"sensor board ER\"; circuit_r44.ends.right.board; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) ER section; hardware/bom/final-bom/data.json L22 (ER 22.0 x 15.24)",
+   "assumed": false,
+   "part": "right",
+   "u_slot_cut": [
+    {
+     "x": [
+      1.0,
+      3.0
+     ],
+     "y": [
+      60.2,
+      63.6
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot opening",
+     "cut": true
+    },
+    {
+     "x": [
+      1.0,
+      3.0
+     ],
+     "y": [
+      72.9,
+      76.3
+     ],
+     "z": [
+      7.0,
+      8.6
+     ],
+     "label": "U-slot opening",
+     "cut": true
+    }
+   ],
+   "underside_zone": {
+    "x": [
+     1.0,
+     23.0
+    ],
+    "y": [
+     60.65,
+     75.89
+    ],
+    "z": [
+     5.2,
+     7.0
+    ],
+    "label": "underside parts / solder <= 1.8"
+   }
+  },
+  {
+   "id": "er_underside",
+   "name_ko": "ER 아랫면 부품 (C411 100n, R411 1k, C412 10µ, J411 패드 ×3)",
+   "name_en": "ER underside parts (100n, 1k, 10u 1206; J411 3 pads)",
+   "bom_id": "SE4, L68, L67",
+   "boxes": [
+    {
+     "x": [
+      15.07,
+      16.67
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "C411 100n under x15.87"
+    },
+    {
+     "x": [
+      15.07,
+      16.67
+     ],
+     "y": [
+      69.87,
+      73.07
+     ],
+     "z": [
+      5.75,
+      7.0
+     ],
+     "label": "R411 1k under x15.87",
+     "assumed": true
+    },
+    {
+     "x": [
+      7.45,
+      9.05
+     ],
+     "y": [
+      64.13,
+      67.33
+     ],
+     "z": [
+      5.4,
+      7.0
+     ],
+     "label": "C412 10u (position assumed x8.25 like C404)",
+     "assumed": true
+    },
+    {
+     "x": [
+      7.35,
+      14.23
+     ],
+     "y": [
+      73.72,
+      75.52
+     ],
+     "z": [
+      5.2,
+      7.0
+     ],
+     "label": "J411 pads x8.25/10.79/13.33 at y74.62"
+    }
+   ],
+   "cylinders": [],
+   "show": false,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) ER notes; circuit_r44.ends.right.pads [8.25, 13.33]",
+   "assumed": false,
+   "part": "right"
+  },
+  {
+   "id": "er_hall_C8",
+   "name_ko": "홀센서 U411 (C8) DRV5055A2QLPG",
+   "name_en": "hall sensor U411 (C8) DRV5055A2QLPG",
+   "bom_id": "L20",
+   "boxes": [
+    {
+     "x": [
+      10.209,
+      13.359
+     ],
+     "y": [
+      65.0,
+      69.0
+     ],
+     "z": [
+      12.189,
+      13.709
+     ],
+     "label": "DRV5055 LPG body 3.15 x 4.0 x 1.52 lying marked face up in the sensor-bar pocket (floor z12.189), leads +x"
+    },
+    {
+     "x": [
+      13.359,
+      16.12
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      12.729,
+      13.169
+     ],
+     "label": "3 leads +x (1.27 pitch at the body, spread to 2.54 at 1.40..3.44 from the body edge) in the lead groove",
+     "show": false
+    },
+    {
+     "x": [
+      15.62,
+      16.12
+     ],
+     "y": [
+      64.21,
+      69.79
+     ],
+     "z": [
+      5.2,
+      13.169
+     ],
+     "label": "3 leads bent down at x15.87 through the bar holes D0.9 and SB (y64.46 VCC / 67.00 GND / 69.54 OUT), clipped <= 1.8 under the board",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL/ER sensor table; key-action-v4/model/geometry.json end_parts.right key \"C8\" magnet boss centre; body hardware/bom/final-bom/data.json L20 + hardware/pcb/research/hall.md s1 (LPG0003A 3.9-4.1 x 3.05-3.25 x 1.42-1.62; element 2.0 from the sides, 1.54 below the top edge); pocket floor docs/report/toccata-build-v3.html table S23 (white z12.189) / S24 (black z9.656), D04 pocket 3.55 x 4.4 at element -1.74..+1.81, D05 holes/groove",
+   "assumed": false,
+   "key": "C8",
+   "colour": "white",
+   "element": {
+    "x": 11.75,
+    "y": 67.0,
+    "z_v3": 12.68,
+    "z_hall_md": 13.219
+   },
+   "pocket": {
+    "x": [
+     10.01,
+     13.56
+    ],
+    "y": [
+     64.8,
+     69.2
+    ],
+    "z_floor": 12.189,
+    "z_bar_top": 13.6,
+    "lead_groove": {
+     "x": [
+      13.56,
+      16.47
+     ],
+     "y": [
+      63.9,
+      70.1
+     ],
+     "z_floor": 12.189
+    },
+    "lead_holes": {
+     "d": 0.9,
+     "x": 15.87,
+     "y": [
+      64.46,
+      67.0,
+      69.54
+     ],
+     "z": [
+      8.6,
+      13.6
+     ]
+    }
+   },
+   "assumed_note": "lead centre plane at mid-thickness (z floor+0.76) is assumed; leads are show:false",
+   "part": "right"
+  },
+  {
+   "id": "er_lead",
+   "name_ko": "ER 리드 W411 (리본 3가닥, 폭 3.81)",
+   "name_en": "ER lead W411 (3 ribbon strands, 3.81 wide x 0.89)",
+   "bom_id": "C05 (cables.csv W411, 300 mm)",
+   "boxes": [
+    {
+     "x": [
+      7.65,
+      13.93
+     ],
+     "y": [
+      73.9,
+      75.5
+     ],
+     "z": [
+      5.0,
+      7.0
+     ],
+     "label": "strands leave the J411 pads (x8.25..13.33, y74.62) downward inside the rear-rib gap x6..16"
+    },
+    {
+     "x": [
+      7.65,
+      13.93
+     ],
+     "y": [
+      75.5,
+      77.39
+     ],
+     "z": [
+      5.0,
+      5.89
+     ],
+     "label": "strands gather to x8.885..12.695 by y77.39"
+    },
+    {
+     "x": [
+      8.885,
+      12.695
+     ],
+     "y": [
+      77.39,
+      212.0
+     ],
+     "z": [
+      5.0,
+      5.89
+     ],
+     "label": "flat on the floor, lane under the rail x7.585..13.995 z5..10, rear-wall notch z5..12"
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "circuit_r44.ends.right (lead [8.885,12.695], lane [7.585,13.995]); key-action-v4/model/geometry.json end_parts.right \"rear wall (over the lead notch z5-12)\" x7.585..13.995; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) ER note 4",
+   "assumed": false,
+   "part": "right"
+  },
+  {
+   "id": "magnets_end",
+   "name_ko": "끝 부속 건반 자석 Ø5×2 ×4",
+   "name_en": "end-part key magnets D5x2 x4",
+   "bom_id": "L21",
+   "boxes": [],
+   "cylinders": [
+    {
+     "axis": "z",
+     "center": [
+      10.287,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "A0",
+     "moving_with": "key A0",
+     "part": "left"
+    },
+    {
+     "axis": "z",
+     "center": [
+      26.927,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "A#0",
+     "moving_with": "key A#0",
+     "part": "left"
+    },
+    {
+     "axis": "z",
+     "center": [
+      40.141,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "B0",
+     "moving_with": "key B0",
+     "part": "left"
+    },
+    {
+     "axis": "z",
+     "center": [
+      11.75,
+      67.0
+     ],
+     "d": 5.0,
+     "range": [
+      23.5,
+      25.5
+     ],
+     "label": "C8",
+     "moving_with": "key C8",
+     "part": "right"
+    }
+   ],
+   "show": true,
+   "source": "key-action-v4/model/geometry.json end_parts magnet bosses (A0 10.287, A#0 26.927, B0 40.141 left; C8 11.75 right; y67, face z23.5)",
+   "assumed": false
+  },
+  {
+   "id": "xh_left",
+   "name_ko": "JST-XH 6P 짝 X401/X402 (EL ↔ O1, 뒤 케이블 통로)",
+   "name_en": "JST-XH 6P mated pair X401/X402 (EL to O1) in the cable passage",
+   "bom_id": "L66",
+   "boxes": [
+    {
+     "x": [
+      52.0,
+      69.4
+     ],
+     "y": [
+      222.0,
+      240.0
+     ],
+     "z": [
+      0.0,
+      6.0
+     ],
+     "label": "mated XH 6P housings ~17.4 x 18 x 6 lying on the passage floor (world coords)"
+    },
+    {
+     "x": [
+      14.825,
+      21.175
+     ],
+     "y": [
+      212.0,
+      231.0
+     ],
+     "z": [
+      0.0,
+      5.89
+     ],
+     "label": "W401 leaves the notch, drops to the passage floor (world coords)",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) EL note 4 (\"XH 커넥터는 뒤 통로에서 잇는다\", SCH-04 note 6); cables.csv W401 350 mm / W403 150 mm; docs/report/toccata-build-v3.html drawing 7 polyline \"끝 부속 EXT 선 L\" (y~225 from x~20 to the O1 USB opening x~131); passage y215..258 z0..22",
+   "assumed": true,
+   "coords": "world",
+   "assumed_note": "loose connector: position not fixed by any document - placed on the passage floor between the EL notch (x~18) and the O1 rear opening (world x121..141) where both lead lengths reach with slack; housing size = XH 2.5 pitch 6P (5 x 2.5 + 4.9 = 17.4 wide), height/length estimated"
+  },
+  {
+   "id": "xh_right",
+   "name_ko": "JST-XH 6P 짝 X411/X412 (ER ↔ O7, 뒤 케이블 통로)",
+   "name_en": "JST-XH 6P mated pair X411/X412 (ER to O7) in the cable passage",
+   "bom_id": "L66",
+   "boxes": [
+    {
+     "x": [
+      1160.0,
+      1177.4
+     ],
+     "y": [
+      222.0,
+      240.0
+     ],
+     "z": [
+      0.0,
+      6.0
+     ],
+     "label": "mated XH 6P housings ~17.4 x 18 x 6 on the passage floor (world coords)"
+    },
+    {
+     "x": [
+      1207.385,
+      1211.195
+     ],
+     "y": [
+      212.0,
+      231.0
+     ],
+     "z": [
+      0.0,
+      5.89
+     ],
+     "label": "W411 leaves the notch (world x = 1198.5 + 8.885..12.695)",
+     "show": false
+    }
+   ],
+   "cylinders": [],
+   "show": true,
+   "source": "hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) ER note 4; cables.csv W411 300 mm / W413 150 mm; docs/report/toccata-build-v3.html drawing 7 polyline \"끝 부속 EXT 선 R\" (from x~1214 to the O7 USB opening world x~1118..1138)",
+   "assumed": true,
+   "coords": "world",
+   "assumed_note": "loose connector, placed between the ER notch (world x1206..1212) and the O7 rear opening (world x = 1034 + 74..94 = 1108..1128); size as xh_left"
+  }
+ ],
+ "conflicts": [
+  "Hall element depth: v3 S23/S24 put the element 1.03 below the TOP (marked) face (z12.68 white / 10.15 black); hardware/pcb/research/hall.md (DRV5055 SBAS640C Fig. 6-5) says 1.03 +-0.115 from the FLAT BACK face, i.e. with the marked face up the element is ~0.5 below the top -> z13.22 white / 10.69 black (0.54 closer to the magnet). Body envelopes here do not depend on it; element.z_v3 and element.z_hall_md are both given.",
+  "v3 P114 placed control-board stand-offs at (49.75,148)(114.75,148)(49.75,193)(114.75,193) and P116 the mux at x52..92 y148..166; v4 r4.5 / BRD-01 rev B supersede them (hung bosses (50.0,149.0)(114.5,149.0)(50.0,192.5)(114.5,192.5), mux x54.93..72.71 y152.0..192.64). v4 values used.",
+  "v3 P108 SB outline x1.0..162.9; v4 r4.5 (circuit_r45 board_end 162.6, BRD-02 note 1) shortens it to x162.6 for the ledge post. v4 value used.",
+  "cables.csv W101..W107 ribbon ~180 mm vs laid path ~85 mm (v4 path is shorter than v3 ~180 mm); treated as slack.",
+  "USB cable run height: v3 drawing 7 shows the O1..O7 cables at y~232 in the passage; v4 circuit_r44.usb uses a bend R25 so the run is at y246.8 (spare 11.2 to y258). v4 value used."
+ ]
+}

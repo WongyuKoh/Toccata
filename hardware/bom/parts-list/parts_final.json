@@ -1,0 +1,1887 @@
+{
+ "groups": [
+  {
+   "name": "제어 · 전원 (핵심)",
+   "items": [
+    {
+     "short": "Raspberry Pi 5 (2GB)",
+     "use": "피아노 음원(FluidSynth)과 리듬게임을 돌리는 중앙 컴퓨터",
+     "qty": 1,
+     "unit": 119900,
+     "url": "https://www.icbanq.com/P016286897",
+     "full": "Raspberry Pi 5 2GB (라즈베리파이 5 2GB Raspberry pi 5)",
+     "seller": "아이씨뱅큐",
+     "b": "기본"
+    },
+    {
+     "short": "USB 허브 10포트 (전원형)",
+     "use": "모듈 7 + 페달을 Pi 5 한 포트로 모음",
+     "qty": 1,
+     "unit": 30700,
+     "url": "https://prod.danawa.com/info/?pcode=29865749",
+     "full": "이지넷유비쿼터스 NEXTU 유우젠 710U3 (10포트/USB 3.0, 유전원)",
+     "seller": "다나와 최저가 (쿠팡 로켓배송)",
+     "b": "기본"
+    },
+    {
+     "short": "PD 트리거 모듈 (HUSB238)",
+     "use": "USB-C 전원 입력 → 20 V",
+     "qty": 1,
+     "unit": 4950,
+     "url": "https://www.icbanq.com/P017179277",
+     "full": "100W QC PD 트리거 디코이 고정출력 모듈 5V-20V (HAM6113, HUSB238)",
+     "seller": "아이씨뱅큐 (제노)",
+     "b": "기본"
+    },
+    {
+     "short": "강압 모듈 XL4016",
+     "use": "20 V → 5.1 V (Pi 5 · 허브 전원)",
+     "qty": 1,
+     "unit": 5170,
+     "url": "https://www.icbanq.com/P017179502",
+     "full": "200W XL4016 DC-DC 강압 컨버터 모듈 IN 4-40V OUT 1.25-36V 5A (HAM6415, XH-M401)",
+     "seller": "아이씨뱅큐 (제노)",
+     "b": "기본"
+    },
+    {
+     "short": "microSD 32GB (SanDisk Ultra)",
+     "use": "운영체제 · 음원 · 게임 저장",
+     "qty": 1,
+     "unit": 15490,
+     "url": "https://prod.danawa.com/info/?pcode=20358155",
+     "full": "SanDisk micro SD Ultra 2022 32GB (SDSQUA4-032G-GN6MA)",
+     "seller": "다나와 최저가 판매처",
+     "b": "기본"
+    },
+    {
+     "short": "Pi 5 방열판 (4개 세트)",
+     "use": "Pi 5 칩 방열",
+     "qty": 1,
+     "unit": 1400,
+     "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=605179",
+     "full": "라즈베리파이5 방열판 / 5B 전용 / 알루미늄 (4개 세트)",
+     "seller": "메카솔루션",
+     "b": "기본"
+    },
+    {
+     "short": "로커 스위치",
+     "use": "피아노 전원 스위치",
+     "qty": 1,
+     "unit": 385,
+     "url": "https://www.eleparts.co.kr/goods/view?no=32569",
+     "full": "[ZX Electronics] KCD1-101A BLACK I/O 로커 스위치 (2P ON-OFF, 6A 250VAC / 10A 125VAC)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "퓨즈 홀더 (5×20 mm)",
+     "use": "20 V 선 보호",
+     "qty": 1,
+     "unit": 1110,
+     "url": "https://www.eleparts.co.kr/goods/view?no=3237821",
+     "full": "[Coms] BU914 원형 휴즈 홀더 (5×20 mm, 인라인)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "퓨즈 5 A 지연형 (5개)",
+     "use": "퓨즈 1 + 예비 4",
+     "qty": 5,
+     "unit": 110,
+     "url": "https://www.eleparts.co.kr/goods/view?no=12766820",
+     "full": "[LITTELFUSE] 0218005.MXP 5 A 지연형 퓨즈 5×20 mm",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "65 W PD 충전기",
+     "use": "벽 전원 (보조배터리 대신 쓸 때)",
+     "qty": 1,
+     "unit": 19800,
+     "url": "https://prod.danawa.com/info/?pcode=59074565",
+     "full": "파워마스터 PD PPS 65W 3포트 GaN 접지형 충전기 PG65PDG2C1A (케이블미포함)",
+     "seller": "다나와 최저가 판매처",
+     "b": "기본"
+    }
+   ]
+  },
+  {
+   "name": "센서 · MCU · 기판",
+   "items": [
+    {
+     "short": "RP2040-Zero 마이크로컨트롤러",
+     "use": "모듈 7 + 페달 1: 센서 읽기 · 세기 계산 · USB-MIDI",
+     "qty": 8,
+     "unit": 3300,
+     "url": "https://parts-parts.co.kr/product/detail.html?product_no=2383",
+     "full": "(PP-A799-2) 라즈베리 파이 피코 PICO RP2040-ZERO",
+     "seller": "파츠파츠 (동신전자)",
+     "b": "기본"
+    },
+    {
+     "short": "홀센서 TI DRV5055A2",
+     "use": "건반마다 1개, 건반 위치 측정 (88 + 페달 1 + 예비)",
+     "qty": 100,
+     "unit": 891,
+     "url": "https://www.icbanq.com/P018076669",
+     "full": "TI DRV5055A2QLPG (TO-92-3 Linear Hall Effect Sensor, LCSC 경유)",
+     "seller": "아이씨뱅큐 (LCSC 해외 재고)",
+     "b": "기본"
+    },
+    {
+     "short": "네오디뮴 자석 Ø5×2 N35",
+     "use": "건반 밑면에 1개씩, 센서가 읽는 자석",
+     "qty": 100,
+     "unit": 80,
+     "url": "https://dgmagnet.com/product/%EC%B4%88%EA%B0%95%EB%A0%A5-%EB%84%A4%EC%98%A4%EB%94%94%EC%9B%80-%EC%9B%90%ED%98%95%EC%9E%90%EC%84%9D-5mm/13/",
+     "full": "초강력 네오디움 원형자석 5mm (Ø5×2.0T, N35)",
+     "seller": "대건상사",
+     "b": "기본"
+    },
+    {
+     "short": "16채널 MUX 모듈 (CD74HC4067)",
+     "use": "센서 12 + 끝 부속 4를 ADC 1개로 차례로 읽음",
+     "qty": 7,
+     "unit": 500,
+     "url": "https://parts-parts.co.kr/product/detail.html?product_no=303",
+     "full": "(PP-A324) 16채널 아날로그/디지털 멀티플렉서 모듈",
+     "seller": "파츠파츠 (동신전자)",
+     "b": "기본"
+    },
+    {
+     "short": "만능기판 5×7 cm",
+     "use": "모듈 제어 기판 7 + 페달 보드 1 (W1: 앞쪽 핀 홈 자리 비움)",
+     "qty": 8,
+     "unit": 520,
+     "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=329798",
+     "full": "PCB기판/양면기판/에폭시/프로토보드 (5x7cm)",
+     "seller": "메카솔루션",
+     "b": "기본"
+    },
+    {
+     "short": "만능기판 12×18 cm",
+     "use": "센서 기판 띠로 잘라 씀 (모듈 7 + 끝 부속 2)",
+     "qty": 2,
+     "unit": 2200,
+     "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=540645",
+     "full": "PCB기판/양면기판/에폭시/프로토보드 (12x18cm)",
+     "seller": "메카솔루션",
+     "b": "기본"
+    },
+    {
+     "short": "칩 콘덴서 100 nF (1206)",
+     "use": "센서마다 전원 잡음 제거 + MUX (97개 사용)",
+     "qty": 100,
+     "unit": 44,
+     "url": "https://www.icbanq.com/P014968846",
+     "full": "Samsung CL31B104KCFNNNE (1206 100nF 100V X7R)",
+     "seller": "아이씨뱅큐 (LCSC 해외 재고)",
+     "b": "기본"
+    },
+    {
+     "short": "칩 콘덴서 10 µF (1206, 50개)",
+     "use": "센서 기판 양 끝 · 끝 부속 전원 안정 (16개 사용, 회로도 △1·△3)",
+     "qty": 1,
+     "unit": 7150,
+     "url": "https://www.icbanq.com/P001248090",
+     "full": "C3216-10UF(K 16V) — 1206 10 µF 16 V 칩 세라믹 콘덴서 (50개 단위)",
+     "seller": "아이씨뱅큐 (오렌지반도체)",
+     "b": "기본"
+    },
+    {
+     "short": "핀헤더 1×40",
+     "use": "MUX 모듈 7개 · RP2040-Zero 8개 핀 헤더 (312핀 → 9줄)",
+     "qty": 9,
+     "unit": 165,
+     "url": "https://www.icbanq.com/P005666127",
+     "full": "핀헤더 1×40 - 2.54MM(S/T) _ 11.5MM(1단몰드)",
+     "seller": "아이씨뱅큐",
+     "b": "기본"
+    },
+    {
+     "short": "저항 1 kΩ (10개)",
+     "use": "앰프 입력 저음 차단 R701·R702 · 페달 R501·R551 (4개 사용)",
+     "qty": 10,
+     "unit": 25,
+     "url": "https://www.eleparts.co.kr/goods/view?no=10911",
+     "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 1kΩ (10개 단위)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "저항 100 kΩ (10개)",
+     "use": "제어 기판 EXT 풀다운 R301~R303 · 페달 R502 (5개 사용)",
+     "qty": 10,
+     "unit": 25,
+     "url": "https://www.eleparts.co.kr/goods/view?no=10993",
+     "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 100kΩ (10개 단위)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "저항 10 kΩ (10개)",
+     "use": "예비",
+     "qty": 10,
+     "unit": 25,
+     "url": "https://www.eleparts.co.kr/goods/view?no=10951",
+     "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 10kΩ (10개 단위)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "저항 100 Ω (10개)",
+     "use": "페달 링 급전 20 Ω (5개 병렬)",
+     "qty": 10,
+     "unit": 25,
+     "url": "https://www.eleparts.co.kr/goods/view?no=10873",
+     "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 100Ω (10개 단위)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "칩 저항 1 kΩ (1206, 10개)",
+     "use": "끝 부속 EL · ER 입력 직렬 저항 R401~R403 · R411 (기판 밑면, 4개 사용, 회로도 △13)",
+     "qty": 10,
+     "unit": 44,
+     "url": "https://www.icbanq.com/P011433924",
+     "full": "Yageo RC1206JR-071KL — 1206 1 kΩ 5 % 1/4 W 칩 저항",
+     "seller": "아이씨뱅큐 (element14 해외 재고)",
+     "b": "기본"
+    }
+   ]
+  },
+  {
+   "name": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "items": [
+    {
+     "short": "강철 평철 9T×19 (1 m 맞춤 재단)",
+     "use": "무게 레버 강철 블록 90개 (40 mm씩 잘라 씀, 개당 53.7 g)",
+     "qty": 4,
+     "unit": 8610,
+     "url": "https://www.allsteelshop.com/product/squareplate/9t",
+     "full": "사각철판 9T (SS275) 19×1000 맞춤 재단",
+     "seller": "올스틸샵",
+     "b": "기본"
+    },
+    {
+     "short": "스테인리스 봉 Ø4 (1 m) — 건반 봉",
+     "use": "건반 시소의 축 (모듈 7 + 끝 부속 2 + 예비 1 토막)",
+     "qty": 2,
+     "unit": 1500,
+     "url": "https://www.11st.co.kr/products/1304631510",
+     "full": "[onezaze] 스텐환봉 절단판매 1M (4mm)",
+     "seller": "onezaze",
+     "b": "기본"
+    },
+    {
+     "short": "스테인리스 봉 Ø4 (1 m) — 레버 봉",
+     "use": "무게 레버가 매달리는 축 (건반 봉과 같은 봉)",
+     "qty": 2,
+     "unit": 1500,
+     "url": "https://www.11st.co.kr/products/1304631510",
+     "full": "[onezaze] 스텐환봉 절단판매 1M (4mm)",
+     "seller": "onezaze",
+     "b": "기본"
+    },
+    {
+     "short": "캡스턴 나사 M3×6 버튼헤드 (SUS)",
+     "use": "건반 꼬리에서 레버를 들어 올리는 나사, 높이 조정 (88 + 예비)",
+     "qty": 100,
+     "unit": 11,
+     "url": "https://www.icbanq.com/P015973844",
+     "full": "AOFENG ISO7380 M3-0.5X6 304 (Hex socket pan head cap screw)",
+     "seller": "아이씨뱅큐",
+     "b": "기본"
+    },
+    {
+     "short": "M3 육각 너트 (강철)",
+     "use": "캡스턴 나사 너트 96 + 스피커 브래킷 4",
+     "qty": 100,
+     "unit": 11,
+     "url": "https://www.icbanq.com/P015976209",
+     "full": "XHHD 육각너트 M3 강철 (LCSC C133377)",
+     "seller": "아이씨뱅큐 (LCSC 해외 재고)",
+     "b": "기본"
+    },
+    {
+     "short": "밸런스 핀 Ø2×12 (SUS, 100개)",
+     "use": "건반 뒤쪽 좌우 위치를 잡는 핀 (88 + 예비)",
+     "qty": 1,
+     "unit": 16600,
+     "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=6009",
+     "full": "다올핀 M2*6~20 STS304 GB119.1(ISO2338) — 옵션 2*12/100개/스텐STS304",
+     "seller": "나사코리아 nasakorea.com",
+     "b": "기본"
+    },
+    {
+     "short": "비틀림 스프링 미스미 C-UA90R5-3-0.5 (기성품)",
+     "use": "레버마다 1개 (88 + 예비 12) — 두 다리를 22.3 / 8.0 mm로 잘라 끼움 (r4.5)",
+     "qty": 100,
+     "unit": 310,
+     "url": "https://kr.misumi-ec.com/vona2/detail/110310556289/?HissuCode=C-UA90R5-3-0.5",
+     "full": "한국미스미 경제형 토션스프링 C-UA90R5-3-0.5 (SUS304-WPB, 내경 5 · 선경 0.5 · 3권 · 암 각 90° 오른쪽 감기, 암 50/50)",
+     "seller": "한국미스미",
+     "b": "기본"
+    },
+    {
+     "short": "양모 펠트 2 mm (20×30 cm)",
+     "use": "캡스턴 띠 · 앞 멈춤 · 키퍼 펠트",
+     "qty": 1,
+     "unit": 13800,
+     "url": "https://studiobunt.com/product/detail.html?product_no=4117",
+     "full": "100% 메리노양모 70수 펠트지 2mm 20×30cm (35 블랙)",
+     "seller": "스튜디오분트",
+     "b": "기본"
+    },
+    {
+     "short": "양모 펠트 1 mm (20×30 cm)",
+     "use": "업스톱 패드 윗면 · 쉼 펠트 (0.5T와 겹쳐 1.5T)",
+     "qty": 1,
+     "unit": 6900,
+     "url": "https://studiobunt.com/product/detail.html?product_no=1157",
+     "full": "100% 메리노양모 70수 펠트지 1mm 20×30cm (80 블랙)",
+     "seller": "스튜디오분트",
+     "b": "기본"
+    },
+    {
+     "short": "포론(PORON) 폼 5T 점착 (100×100)",
+     "use": "업스톱 패드 — 설계 6T 대신 5T: 패드 바 쐐기를 1.0 mm 두껍게 출력, 단계 0 시험 먼저",
+     "qty": 1,
+     "unit": 3399,
+     "url": "https://www.navimro.com/g/1028764/",
+     "full": "[와키(WAKI)] PORON 스폰지 접착 부착 PON-02 (100×100×5, 검정, 아크릴 점착)",
+     "seller": "나비엠알오",
+     "b": "기본"
+    },
+    {
+     "short": "충격흡수재 하네나이트 1T (170×245)",
+     "use": "앞 펠트 밑 완충층 (NBR 고무, 단계 0 시험으로 확인)",
+     "qty": 1,
+     "unit": 16489,
+     "url": "https://www.navimro.com/g/1029233/",
+     "full": "[와키(WAKI)] 충격흡수재 하네나이트 HNT002 (170×245×1, 검정)",
+     "seller": "나비엠알오",
+     "b": "기본"
+    },
+    {
+     "short": "접착 펠트 0.5T (30×45 cm)",
+     "use": "건반 노치 · 핀 홈 · 가이드 탭 부싱 천, 쉼 펠트 한 겹",
+     "qty": 1,
+     "unit": 1500,
+     "url": "https://www.11st.co.kr/products/8517880969",
+     "full": "[대원] 얇은 칼라펠트지 H 두께0.5mm 접착 30x45cm (H-20 검정)",
+     "seller": "상우아트",
+     "b": "기본"
+    }
+   ]
+  },
+  {
+   "name": "오디오 (스피커 · 앰프)",
+   "items": [
+    {
+     "short": "앰프 보드 XH-A232 (TPA3110)",
+     "use": "스피커 구동, 채널당 약 21 W",
+     "qty": 1,
+     "unit": 2750,
+     "url": "https://www.icbanq.com/P017179248",
+     "full": "XH-A232 (HW-404) TPA3110 2채널 앰프 보드 (제노 HAM6104)",
+     "seller": "아이씨뱅큐 (제노)",
+     "b": "기본"
+    },
+    {
+     "short": "스피커 유닛 삼미 CW-100B25 (4인치 8 Ω)",
+     "use": "좌우 내장 스피커",
+     "qty": 2,
+     "unit": 9600,
+     "url": "https://www.11st.co.kr/products/1565354988",
+     "full": "삼미스피커(SAAT) CW-100B25 4인치 풀레인지 8Ω 25W (KS 인증)",
+     "seller": "세운상가새한음향",
+     "b": "기본"
+    },
+    {
+     "short": "Apple USB-C 헤드폰 어댑터",
+     "use": "USB DAC (디지털 → 아날로그 소리)",
+     "qty": 1,
+     "unit": 14900,
+     "url": "https://www.apple.com/kr/shop/product/mw2q3kh/a",
+     "full": "Apple USB-C–3.5mm 헤드폰 잭 어댑터 (MW2Q3KH/A)",
+     "seller": "Apple",
+     "b": "기본"
+    },
+    {
+     "short": "USB-C → USB-A 젠더",
+     "use": "어댑터를 Pi 5 USB 포트에 연결",
+     "qty": 1,
+     "unit": 1700,
+     "url": "https://www.eleparts.co.kr/goods/view?no=11043038",
+     "full": "[Coms] IH190 USB-C(F) → USB-A(M) 변환 젠더 좌향 꺾임",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "3.5 mm 스테레오 잭 PJ-313",
+     "use": "헤드폰 잭(꽂으면 스피커 차단) · 앰프 입력 · 페달 잭",
+     "qty": 3,
+     "unit": 198,
+     "url": "https://www.eleparts.co.kr/goods/view?no=67811",
+     "full": "[BSUN] PJ-313 3.5Ф 스테레오잭 (이어폰잭)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "적층 세라믹 콘덴서 1 µF",
+     "use": "앰프 입력 저음 차단 필터",
+     "qty": 5,
+     "unit": 133,
+     "url": "https://www.icbanq.com/P014159115",
+     "full": "Monolithic Capacitor 1uF X7R 50V (리드형 적층 세라믹)",
+     "seller": "아이씨뱅큐 (동신전자)",
+     "b": "기본"
+    },
+    {
+     "short": "XT30 커넥터 수 (선 포함)",
+     "use": "스피커 연결 — 앰프 쪽",
+     "qty": 2,
+     "unit": 1760,
+     "url": "https://www.eleparts.co.kr/goods/view?no=12779720",
+     "full": "[AMASS] XT30U-M 수 커넥터 18AWG 10cm 실리콘 와이어",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "XT30 커넥터 암 (선 포함)",
+     "use": "스피커 연결 — 스피커 쪽",
+     "qty": 2,
+     "unit": 1760,
+     "url": "https://www.eleparts.co.kr/goods/view?no=12779721",
+     "full": "[AMASS] XT30U-F 암 커넥터 18AWG 10cm 실리콘 와이어",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "오꾸메 합판 400×1200 (무료 재단)",
+     "use": "스피커 상자 2개",
+     "qty": 1,
+     "unit": 17680,
+     "url": "https://namugongjang.com/product/detail.html?product_no=1378",
+     "full": "무료배송 오꾸메 합판 400×1200×11.5mm 무료재단",
+     "seller": "동진나무공장",
+     "b": "기본"
+    },
+    {
+     "short": "흡음솜 300 g",
+     "use": "스피커 상자 흡음재",
+     "qty": 1,
+     "unit": 2700,
+     "url": "https://www.11st.co.kr/products/2325598213",
+     "full": "두유레디 구름솜 300g (100% 국내산 할로우화이버)",
+     "seller": "두유레디",
+     "b": "기본"
+    }
+   ]
+  },
+  {
+   "name": "본체 구조 · 결합",
+   "items": [
+    {
+     "short": "오꾸메 합판 600×1200 (무료 재단)",
+     "use": "가운데 유닛 상자 (건반 보관함 · 제어부 · 배터리 칸)",
+     "qty": 1,
+     "unit": 22520,
+     "url": "https://namugongjang.com/product/detail.html?product_no=1378",
+     "full": "무료배송 오꾸메 합판 600×1200×11.5mm 무료재단",
+     "seller": "동진나무공장",
+     "b": "기본"
+    },
+    {
+     "short": "토글 래치 (SUS)",
+     "use": "가운데 유닛 ↔ 스피커 파트 잠금",
+     "qty": 2,
+     "unit": 2400,
+     "url": "https://www.metaldiy.com/item/itemView.do?itemId=8806379117286",
+     "full": "매미고리 1-20 (SUS304 스테인리스 토글 래치, 25×54mm)",
+     "seller": "철물박사",
+     "b": "기본"
+    },
+    {
+     "short": "네오디뮴 자석 Ø8×3",
+     "use": "가운데 유닛 뚜껑 고정",
+     "qty": 14,
+     "unit": 160,
+     "url": "https://dgmagnet.com/product/detail.html?product_no=17",
+     "full": "초강력 네오디움 원형자석 8mm — 3.0T (Ø8×3mm, N35)",
+     "seller": "대건상사",
+     "b": "기본"
+    },
+    {
+     "short": "JST-XH 6핀 연장선",
+     "use": "끝 부속 ↔ 모듈 센서 선 커넥터",
+     "qty": 2,
+     "unit": 3000,
+     "url": "https://www.rcbank.co.kr/shop/goods/goods_view.php?goodsno=29812",
+     "full": "리튬폴리머 배터리 밸런스잭 연장선 5셀용 (JST-XH 6핀 수↔암, BU-LP 5S, 200mm)",
+     "seller": "알씨뱅크",
+     "b": "기본"
+    },
+    {
+     "short": "고무발 28×5",
+     "use": "뒷바 받침 (5 mm 띄움, 진동 분리)",
+     "qty": 20,
+     "unit": 583,
+     "url": "https://www.eleparts.co.kr/goods/view?no=16628292",
+     "full": "[화성고무] 피스고무발 / 28x5 (RUB-E2)",
+     "seller": "엘레파츠",
+     "b": "기본"
+    },
+    {
+     "short": "M3 방진 댐퍼·그로밋 (20개)",
+     "use": "끝 부속 ↔ 스피커 브래킷 방진",
+     "qty": 1,
+     "unit": 4500,
+     "url": "https://www.rcbank.co.kr/shop/goods/goods_view.php?goodsno=67110",
+     "full": "알씨뱅크 M3 진동 방지 댐퍼 (20개)",
+     "seller": "알씨뱅크",
+     "b": "기본"
+    },
+    {
+     "short": "EVA 폼 3T (330×490)",
+     "use": "모듈 · 끝 부속 바닥 시트, 스피커 가스켓",
+     "qty": 3,
+     "unit": 2100,
+     "url": "https://www.11st.co.kr/products/7591566666",
+     "full": "에바폼 EVA 컬러 고밀도 칼라스펀지 3T (E-210 검정, 330×490)",
+     "seller": "상우아트",
+     "b": "기본"
+    },
+    {
+     "short": "렌치볼트 M3×10 (SUS)",
+     "use": "센서 바 · 제어부 부품 · 토글 래치 고정",
+     "qty": 50,
+     "unit": 60,
+     "url": "https://www.11st.co.kr/products/4236198413",
+     "full": "스텐 유두 렌치볼트 M3 × 10mm",
+     "seller": "굿나잇몰",
+     "b": "기본"
+    },
+    {
+     "short": "렌치볼트 M3×6 (SUS)",
+     "use": "제어 기판 고정",
+     "qty": 20,
+     "unit": 40,
+     "url": "https://www.11st.co.kr/products/4236198413",
+     "full": "스텐 유두 렌치볼트 M3 × 6mm",
+     "seller": "굿나잇몰",
+     "b": "기본"
+    },
+    {
+     "short": "렌치볼트 M2.5×6 (SUS)",
+     "use": "Pi 5 고정",
+     "qty": 6,
+     "unit": 200,
+     "url": "https://www.11st.co.kr/products/4236198413",
+     "full": "스텐 유두 렌치볼트 M2.5 × 6mm",
+     "seller": "굿나잇몰",
+     "b": "기본"
+    },
+    {
+     "short": "와셔 M4 (SUS)",
+     "use": "고무발 피스 받침",
+     "qty": 20,
+     "unit": 10,
+     "url": "https://www.11st.co.kr/products/4236198413",
+     "full": "스텐 와셔 M4x9x0.5T",
+     "seller": "굿나잇몰",
+     "b": "기본"
+    },
+    {
+     "short": "직결피스 13 mm",
+     "use": "뒷바 출력 부품 · 고무발 고정",
+     "qty": 54,
+     "unit": 40,
+     "url": "https://www.11st.co.kr/products/4353471537",
+     "full": "스텐 둥근머리 직결피스 8호(Ø4.2) 13mm",
+     "seller": "굿나잇몰",
+     "b": "기본"
+    },
+    {
+     "short": "직결피스 16 mm",
+     "use": "스피커 유닛 고정",
+     "qty": 8,
+     "unit": 50,
+     "url": "https://www.11st.co.kr/products/4353471537",
+     "full": "스텐 둥근머리 직결피스 8호(Ø4.2) 16mm",
+     "seller": "굿나잇몰",
+     "b": "기본"
+    },
+    {
+     "short": "직결피스 19 mm",
+     "use": "스피커 그릴 고정",
+     "qty": 8,
+     "unit": 50,
+     "url": "https://www.11st.co.kr/products/4353471537",
+     "full": "스텐 둥근머리 직결피스 8호(Ø4.2) 19mm",
+     "seller": "굿나잇몰",
+     "b": "기본"
+    }
+   ]
+  },
+  {
+   "name": "소모품",
+   "items": [
+    {
+     "short": "PETG 필라멘트 흰색 1 kg (스풀)",
+     "use": "백건 출력",
+     "qty": 1,
+     "unit": 16150,
+     "url": "https://kr.store.bambulab.com/products/petg-basic",
+     "full": "Bambu Lab PETG Basic 화이트(30106) 스풀 포함 1kg",
+     "seller": "Bambu Lab",
+     "b": "소모품"
+    },
+    {
+     "short": "PETG 필라멘트 흰색 1 kg (리필)",
+     "use": "백건 출력",
+     "qty": 1,
+     "unit": 12750,
+     "url": "https://kr.store.bambulab.com/products/petg-basic",
+     "full": "Bambu Lab PETG Basic 화이트(30106) 리필 1kg",
+     "seller": "Bambu Lab",
+     "b": "소모품"
+    },
+    {
+     "short": "PETG 필라멘트 검정 1 kg (스풀)",
+     "use": "프레임 · 레버 캐리어 · 흑건 등",
+     "qty": 5,
+     "unit": 16150,
+     "url": "https://kr.store.bambulab.com/products/petg-basic",
+     "full": "Bambu Lab PETG Basic 블랙(30105) 스풀 포함 1kg",
+     "seller": "Bambu Lab",
+     "b": "소모품"
+    },
+    {
+     "short": "PETG 필라멘트 1 kg 추가 (흰색 또는 검정)",
+     "use": "뒷바 출력 부품 · 여분",
+     "qty": 1,
+     "unit": 16150,
+     "url": "https://kr.store.bambulab.com/products/petg-basic",
+     "full": "Bambu Lab PETG Basic 스풀 포함 1kg 추가 (흰색 또는 검정)",
+     "seller": "Bambu Lab",
+     "b": "소모품"
+    },
+    {
+     "short": "USB-A → USB-C 케이블 1 m",
+     "use": "모듈 7 + 페달 → USB 허브",
+     "qty": 8,
+     "unit": 1620,
+     "url": "https://www.eleparts.co.kr/goods/view?no=4313490",
+     "full": "[NA993] Coms USB 3.1 Type C 케이블 1M USB 2.0 A to C타입 White",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "리본 케이블 16P (1 m)",
+     "use": "센서 기판 → 제어 기판",
+     "qty": 2,
+     "unit": 1529,
+     "url": "https://www.eleparts.co.kr/goods/view?no=425",
+     "full": "[EUNSUNG] Flat Data Cable 2651-16P (1m단위)",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "리본 케이블 16P (1 m) 추가",
+     "use": "기판 배선용 가닥",
+     "qty": 1,
+     "unit": 1529,
+     "url": "https://www.eleparts.co.kr/goods/view?no=425",
+     "full": "[EUNSUNG] Flat Data Cable 2651-16P (1m단위)",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "스피커 케이블 16AWG 7 m",
+     "use": "앰프 → 스피커, 20 V 전원선",
+     "qty": 1,
+     "unit": 14300,
+     "url": "https://www.eleparts.co.kr/goods/view?no=18388615",
+     "full": "[케이블스토어] 프리즘 국산 스피커케이블 50C 16AWG, 7M [블랙/PRS-50B07]",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "3.5 mm 스테레오 케이블 1.5 m",
+     "use": "어댑터 → 헤드폰 잭 → 앰프",
+     "qty": 2,
+     "unit": 1710,
+     "url": "https://www.eleparts.co.kr/goods/view?no=2925673",
+     "full": "[AV0176] Coms 스테레오 케이블 1.5M AUX 3극 Stereo 3.5 M/M",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "USB-C PD 케이블 0.6 m",
+     "use": "보조배터리 → 피아노",
+     "qty": 1,
+     "unit": 1440,
+     "url": "https://www.eleparts.co.kr/goods/view?no=17806172",
+     "full": "[MachLink] USB-C to C PD 60W 초고속충전 케이블, ML-CPD606 [블랙/0.6m]",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "USB-C PD 케이블 2 m",
+     "use": "충전기 → 피아노",
+     "qty": 1,
+     "unit": 2670,
+     "url": "https://www.eleparts.co.kr/goods/view?no=17806170",
+     "full": "[MachLink] USB-C to C PD 60W 초고속충전 케이블, ML-CPD62 [블랙/2m]",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "USB-C 전원 케이블 (제작용)",
+     "use": "강압 모듈 → Pi 5 전원",
+     "qty": 1,
+     "unit": 1190,
+     "url": "https://www.eleparts.co.kr/goods/view?no=17358965",
+     "full": "[MAXTEK] 맥스텍 USB C타입 제작용 케이블 2선 Type-C Male(숫) DIY PD 전원 [MT666]",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "열수축 튜브 세트",
+     "use": "선 이음 절연",
+     "qty": 1,
+     "unit": 6600,
+     "url": "https://www.eleparts.co.kr/goods/view?no=8170311",
+     "full": "[엘레파츠] 열수축튜브 530세트 - 프라스틱케이스",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "캡톤 테이프",
+     "use": "기판 절연",
+     "qty": 1,
+     "unit": 4059,
+     "url": "https://www.eleparts.co.kr/goods/view?no=557",
+     "full": "[KzPton] 캡톤테이프 10mm폭x33m",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "케이블 타이 (100개)",
+     "use": "케이블 정리",
+     "qty": 1,
+     "unit": 438,
+     "url": "https://www.eleparts.co.kr/goods/view?no=9100003",
+     "full": "티테크놀로지 케이블타이, 100개 [소/100mm] [블랙] [T-C2510B]",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "실납 0.8 mm 50 g",
+     "use": "손 납땜 (약 1,500곳)",
+     "qty": 1,
+     "unit": 3850,
+     "url": "https://www.eleparts.co.kr/goods/view?no=12755646",
+     "full": "[YUN FANG] 유연납 0.8mm 50g",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "순간접착제 5 g",
+     "use": "자석 고정",
+     "qty": 1,
+     "unit": 1100,
+     "url": "https://www.icbanq.com/P015309984",
+     "full": "순간접착제 (814-2010) — V-tech 강력 순간접착제 5g (VT-041)",
+     "seller": "아이씨뱅큐 (크레텍)",
+     "b": "소모품"
+    },
+    {
+     "short": "MS 폴리머 탄성 접착제 세메다인 슈퍼X 흰색 20 mL",
+     "use": "강철 블록을 레버 캐리어에 붙임 (필요 약 14 mL, 흰색·검정만 — 투명은 PET 접착이 약함)",
+     "qty": 2,
+     "unit": 8000,
+     "url": "https://www.11st.co.kr/products/7459325704",
+     "full": "세메다인 슈퍼X 8008 탄성접착제 백색 20 mL (AX-022)",
+     "seller": "주영종합상사",
+     "b": "소모품"
+    },
+    {
+     "short": "종이 양면테이프",
+     "use": "EVA 시트 · 펠트 부착",
+     "qty": 1,
+     "unit": 1080,
+     "url": "https://www.eleparts.co.kr/goods/view?no=17897439",
+     "full": "[NAVI] 종이 양면테이프, 백색/48mm/6m",
+     "seller": "엘레파츠",
+     "b": "소모품"
+    },
+    {
+     "short": "목공 본드 800 g",
+     "use": "합판 상자 접착",
+     "qty": 1,
+     "unit": 3949,
+     "url": "https://www.navimro.com/g/395062/",
+     "full": "오공 201 205 본드 800g 목공용본드 (옵션: 오공 205본드 800g)",
+     "seller": "나비엠알오",
+     "b": "소모품"
+    },
+    {
+     "short": "텅스텐 퍼티 (22 g)",
+     "use": "건반별 무게 미세 조정 (필요할 때만)",
+     "qty": 1,
+     "unit": 8750,
+     "url": "https://www.11st.co.kr/products/9579455646",
+     "full": "텅스텐 퍼티 소프트 싱커 무게추 (낚시용, 22 g)",
+     "seller": "골드그로브",
+     "b": "소모품"
+    },
+    {
+     "short": "OHP 필름 (A4 20매)",
+     "use": "0.1 mm 심 — 업스톱 시점 조정",
+     "qty": 1,
+     "unit": 2739,
+     "url": "https://www.navimro.com/g/37021/",
+     "full": "OHP 필름 (A4) 흑백 레이저용 1PK(20매) (copierland)",
+     "seller": "나비엠알오",
+     "b": "소모품"
+    },
+    {
+     "short": "흑연 가루 30 ml",
+     "use": "캡스턴 펠트 마찰 줄이기",
+     "qty": 1,
+     "unit": 2750,
+     "url": "https://www.11st.co.kr/products/1333385437",
+     "full": "크레타칼라 흑연파우더(소/30ml)",
+     "seller": "비젼몰",
+     "b": "소모품"
+    }
+   ]
+  }
+ ],
+ "flat": [
+  {
+   "no": 1,
+   "group": "제어 · 전원 (핵심)",
+   "short": "Raspberry Pi 5 (2GB)",
+   "use": "피아노 음원(FluidSynth)과 리듬게임을 돌리는 중앙 컴퓨터",
+   "qty": 1,
+   "unit": 119900,
+   "url": "https://www.icbanq.com/P016286897",
+   "full": "Raspberry Pi 5 2GB (라즈베리파이 5 2GB Raspberry pi 5)",
+   "seller": "아이씨뱅큐",
+   "b": "기본"
+  },
+  {
+   "no": 2,
+   "group": "제어 · 전원 (핵심)",
+   "short": "USB 허브 10포트 (전원형)",
+   "use": "모듈 7 + 페달을 Pi 5 한 포트로 모음",
+   "qty": 1,
+   "unit": 30700,
+   "url": "https://prod.danawa.com/info/?pcode=29865749",
+   "full": "이지넷유비쿼터스 NEXTU 유우젠 710U3 (10포트/USB 3.0, 유전원)",
+   "seller": "다나와 최저가 (쿠팡 로켓배송)",
+   "b": "기본"
+  },
+  {
+   "no": 3,
+   "group": "제어 · 전원 (핵심)",
+   "short": "PD 트리거 모듈 (HUSB238)",
+   "use": "USB-C 전원 입력 → 20 V",
+   "qty": 1,
+   "unit": 4950,
+   "url": "https://www.icbanq.com/P017179277",
+   "full": "100W QC PD 트리거 디코이 고정출력 모듈 5V-20V (HAM6113, HUSB238)",
+   "seller": "아이씨뱅큐 (제노)",
+   "b": "기본"
+  },
+  {
+   "no": 4,
+   "group": "제어 · 전원 (핵심)",
+   "short": "강압 모듈 XL4016",
+   "use": "20 V → 5.1 V (Pi 5 · 허브 전원)",
+   "qty": 1,
+   "unit": 5170,
+   "url": "https://www.icbanq.com/P017179502",
+   "full": "200W XL4016 DC-DC 강압 컨버터 모듈 IN 4-40V OUT 1.25-36V 5A (HAM6415, XH-M401)",
+   "seller": "아이씨뱅큐 (제노)",
+   "b": "기본"
+  },
+  {
+   "no": 5,
+   "group": "제어 · 전원 (핵심)",
+   "short": "microSD 32GB (SanDisk Ultra)",
+   "use": "운영체제 · 음원 · 게임 저장",
+   "qty": 1,
+   "unit": 15490,
+   "url": "https://prod.danawa.com/info/?pcode=20358155",
+   "full": "SanDisk micro SD Ultra 2022 32GB (SDSQUA4-032G-GN6MA)",
+   "seller": "다나와 최저가 판매처",
+   "b": "기본"
+  },
+  {
+   "no": 6,
+   "group": "제어 · 전원 (핵심)",
+   "short": "Pi 5 방열판 (4개 세트)",
+   "use": "Pi 5 칩 방열",
+   "qty": 1,
+   "unit": 1400,
+   "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=605179",
+   "full": "라즈베리파이5 방열판 / 5B 전용 / 알루미늄 (4개 세트)",
+   "seller": "메카솔루션",
+   "b": "기본"
+  },
+  {
+   "no": 7,
+   "group": "제어 · 전원 (핵심)",
+   "short": "로커 스위치",
+   "use": "피아노 전원 스위치",
+   "qty": 1,
+   "unit": 385,
+   "url": "https://www.eleparts.co.kr/goods/view?no=32569",
+   "full": "[ZX Electronics] KCD1-101A BLACK I/O 로커 스위치 (2P ON-OFF, 6A 250VAC / 10A 125VAC)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 8,
+   "group": "제어 · 전원 (핵심)",
+   "short": "퓨즈 홀더 (5×20 mm)",
+   "use": "20 V 선 보호",
+   "qty": 1,
+   "unit": 1110,
+   "url": "https://www.eleparts.co.kr/goods/view?no=3237821",
+   "full": "[Coms] BU914 원형 휴즈 홀더 (5×20 mm, 인라인)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 9,
+   "group": "제어 · 전원 (핵심)",
+   "short": "퓨즈 5 A 지연형 (5개)",
+   "use": "퓨즈 1 + 예비 4",
+   "qty": 5,
+   "unit": 110,
+   "url": "https://www.eleparts.co.kr/goods/view?no=12766820",
+   "full": "[LITTELFUSE] 0218005.MXP 5 A 지연형 퓨즈 5×20 mm",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 10,
+   "group": "제어 · 전원 (핵심)",
+   "short": "65 W PD 충전기",
+   "use": "벽 전원 (보조배터리 대신 쓸 때)",
+   "qty": 1,
+   "unit": 19800,
+   "url": "https://prod.danawa.com/info/?pcode=59074565",
+   "full": "파워마스터 PD PPS 65W 3포트 GaN 접지형 충전기 PG65PDG2C1A (케이블미포함)",
+   "seller": "다나와 최저가 판매처",
+   "b": "기본"
+  },
+  {
+   "no": 11,
+   "group": "센서 · MCU · 기판",
+   "short": "RP2040-Zero 마이크로컨트롤러",
+   "use": "모듈 7 + 페달 1: 센서 읽기 · 세기 계산 · USB-MIDI",
+   "qty": 8,
+   "unit": 3300,
+   "url": "https://parts-parts.co.kr/product/detail.html?product_no=2383",
+   "full": "(PP-A799-2) 라즈베리 파이 피코 PICO RP2040-ZERO",
+   "seller": "파츠파츠 (동신전자)",
+   "b": "기본"
+  },
+  {
+   "no": 12,
+   "group": "센서 · MCU · 기판",
+   "short": "홀센서 TI DRV5055A2",
+   "use": "건반마다 1개, 건반 위치 측정 (88 + 페달 1 + 예비)",
+   "qty": 100,
+   "unit": 891,
+   "url": "https://www.icbanq.com/P018076669",
+   "full": "TI DRV5055A2QLPG (TO-92-3 Linear Hall Effect Sensor, LCSC 경유)",
+   "seller": "아이씨뱅큐 (LCSC 해외 재고)",
+   "b": "기본"
+  },
+  {
+   "no": 13,
+   "group": "센서 · MCU · 기판",
+   "short": "네오디뮴 자석 Ø5×2 N35",
+   "use": "건반 밑면에 1개씩, 센서가 읽는 자석",
+   "qty": 100,
+   "unit": 80,
+   "url": "https://dgmagnet.com/product/%EC%B4%88%EA%B0%95%EB%A0%A5-%EB%84%A4%EC%98%A4%EB%94%94%EC%9B%80-%EC%9B%90%ED%98%95%EC%9E%90%EC%84%9D-5mm/13/",
+   "full": "초강력 네오디움 원형자석 5mm (Ø5×2.0T, N35)",
+   "seller": "대건상사",
+   "b": "기본"
+  },
+  {
+   "no": 14,
+   "group": "센서 · MCU · 기판",
+   "short": "16채널 MUX 모듈 (CD74HC4067)",
+   "use": "센서 12 + 끝 부속 4를 ADC 1개로 차례로 읽음",
+   "qty": 7,
+   "unit": 500,
+   "url": "https://parts-parts.co.kr/product/detail.html?product_no=303",
+   "full": "(PP-A324) 16채널 아날로그/디지털 멀티플렉서 모듈",
+   "seller": "파츠파츠 (동신전자)",
+   "b": "기본"
+  },
+  {
+   "no": 15,
+   "group": "센서 · MCU · 기판",
+   "short": "만능기판 5×7 cm",
+   "use": "모듈 제어 기판 7 + 페달 보드 1 (W1: 앞쪽 핀 홈 자리 비움)",
+   "qty": 8,
+   "unit": 520,
+   "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=329798",
+   "full": "PCB기판/양면기판/에폭시/프로토보드 (5x7cm)",
+   "seller": "메카솔루션",
+   "b": "기본"
+  },
+  {
+   "no": 16,
+   "group": "센서 · MCU · 기판",
+   "short": "만능기판 12×18 cm",
+   "use": "센서 기판 띠로 잘라 씀 (모듈 7 + 끝 부속 2)",
+   "qty": 2,
+   "unit": 2200,
+   "url": "https://www.mechasolution.com/goods/goods_view.php?goodsNo=540645",
+   "full": "PCB기판/양면기판/에폭시/프로토보드 (12x18cm)",
+   "seller": "메카솔루션",
+   "b": "기본"
+  },
+  {
+   "no": 17,
+   "group": "센서 · MCU · 기판",
+   "short": "칩 콘덴서 100 nF (1206)",
+   "use": "센서마다 전원 잡음 제거 + MUX (97개 사용)",
+   "qty": 100,
+   "unit": 44,
+   "url": "https://www.icbanq.com/P014968846",
+   "full": "Samsung CL31B104KCFNNNE (1206 100nF 100V X7R)",
+   "seller": "아이씨뱅큐 (LCSC 해외 재고)",
+   "b": "기본"
+  },
+  {
+   "no": 18,
+   "group": "센서 · MCU · 기판",
+   "short": "칩 콘덴서 10 µF (1206, 50개)",
+   "use": "센서 기판 양 끝 · 끝 부속 전원 안정 (16개 사용, 회로도 △1·△3)",
+   "qty": 1,
+   "unit": 7150,
+   "url": "https://www.icbanq.com/P001248090",
+   "full": "C3216-10UF(K 16V) — 1206 10 µF 16 V 칩 세라믹 콘덴서 (50개 단위)",
+   "seller": "아이씨뱅큐 (오렌지반도체)",
+   "b": "기본"
+  },
+  {
+   "no": 19,
+   "group": "센서 · MCU · 기판",
+   "short": "핀헤더 1×40",
+   "use": "MUX 모듈 7개 · RP2040-Zero 8개 핀 헤더 (312핀 → 9줄)",
+   "qty": 9,
+   "unit": 165,
+   "url": "https://www.icbanq.com/P005666127",
+   "full": "핀헤더 1×40 - 2.54MM(S/T) _ 11.5MM(1단몰드)",
+   "seller": "아이씨뱅큐",
+   "b": "기본"
+  },
+  {
+   "no": 20,
+   "group": "센서 · MCU · 기판",
+   "short": "저항 1 kΩ (10개)",
+   "use": "앰프 입력 저음 차단 R701·R702 · 페달 R501·R551 (4개 사용)",
+   "qty": 10,
+   "unit": 25,
+   "url": "https://www.eleparts.co.kr/goods/view?no=10911",
+   "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 1kΩ (10개 단위)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 21,
+   "group": "센서 · MCU · 기판",
+   "short": "저항 100 kΩ (10개)",
+   "use": "제어 기판 EXT 풀다운 R301~R303 · 페달 R502 (5개 사용)",
+   "qty": 10,
+   "unit": 25,
+   "url": "https://www.eleparts.co.kr/goods/view?no=10993",
+   "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 100kΩ (10개 단위)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 22,
+   "group": "센서 · MCU · 기판",
+   "short": "저항 10 kΩ (10개)",
+   "use": "예비",
+   "qty": 10,
+   "unit": 25,
+   "url": "https://www.eleparts.co.kr/goods/view?no=10951",
+   "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 10kΩ (10개 단위)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 23,
+   "group": "센서 · MCU · 기판",
+   "short": "저항 100 Ω (10개)",
+   "use": "페달 링 급전 20 Ω (5개 병렬)",
+   "qty": 10,
+   "unit": 25,
+   "url": "https://www.eleparts.co.kr/goods/view?no=10873",
+   "full": "[ABCO] CFR 1/4W 5% 탄소피막 저항 100Ω (10개 단위)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 24,
+   "group": "센서 · MCU · 기판",
+   "short": "칩 저항 1 kΩ (1206, 10개)",
+   "use": "끝 부속 EL · ER 입력 직렬 저항 R401~R403 · R411 (기판 밑면, 4개 사용, 회로도 △13)",
+   "qty": 10,
+   "unit": 44,
+   "url": "https://www.icbanq.com/P011433924",
+   "full": "Yageo RC1206JR-071KL — 1206 1 kΩ 5 % 1/4 W 칩 저항",
+   "seller": "아이씨뱅큐 (element14 해외 재고)",
+   "b": "기본"
+  },
+  {
+   "no": 25,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "강철 평철 9T×19 (1 m 맞춤 재단)",
+   "use": "무게 레버 강철 블록 90개 (40 mm씩 잘라 씀, 개당 53.7 g)",
+   "qty": 4,
+   "unit": 8610,
+   "url": "https://www.allsteelshop.com/product/squareplate/9t",
+   "full": "사각철판 9T (SS275) 19×1000 맞춤 재단",
+   "seller": "올스틸샵",
+   "b": "기본"
+  },
+  {
+   "no": 26,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "스테인리스 봉 Ø4 (1 m) — 건반 봉",
+   "use": "건반 시소의 축 (모듈 7 + 끝 부속 2 + 예비 1 토막)",
+   "qty": 2,
+   "unit": 1500,
+   "url": "https://www.11st.co.kr/products/1304631510",
+   "full": "[onezaze] 스텐환봉 절단판매 1M (4mm)",
+   "seller": "onezaze",
+   "b": "기본"
+  },
+  {
+   "no": 27,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "스테인리스 봉 Ø4 (1 m) — 레버 봉",
+   "use": "무게 레버가 매달리는 축 (건반 봉과 같은 봉)",
+   "qty": 2,
+   "unit": 1500,
+   "url": "https://www.11st.co.kr/products/1304631510",
+   "full": "[onezaze] 스텐환봉 절단판매 1M (4mm)",
+   "seller": "onezaze",
+   "b": "기본"
+  },
+  {
+   "no": 28,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "캡스턴 나사 M3×6 버튼헤드 (SUS)",
+   "use": "건반 꼬리에서 레버를 들어 올리는 나사, 높이 조정 (88 + 예비)",
+   "qty": 100,
+   "unit": 11,
+   "url": "https://www.icbanq.com/P015973844",
+   "full": "AOFENG ISO7380 M3-0.5X6 304 (Hex socket pan head cap screw)",
+   "seller": "아이씨뱅큐",
+   "b": "기본"
+  },
+  {
+   "no": 29,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "M3 육각 너트 (강철)",
+   "use": "캡스턴 나사 너트 96 + 스피커 브래킷 4",
+   "qty": 100,
+   "unit": 11,
+   "url": "https://www.icbanq.com/P015976209",
+   "full": "XHHD 육각너트 M3 강철 (LCSC C133377)",
+   "seller": "아이씨뱅큐 (LCSC 해외 재고)",
+   "b": "기본"
+  },
+  {
+   "no": 30,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "밸런스 핀 Ø2×12 (SUS, 100개)",
+   "use": "건반 뒤쪽 좌우 위치를 잡는 핀 (88 + 예비)",
+   "qty": 1,
+   "unit": 16600,
+   "url": "https://www.nasakorea.com/goods/goods_view.php?goodsNo=6009",
+   "full": "다올핀 M2*6~20 STS304 GB119.1(ISO2338) — 옵션 2*12/100개/스텐STS304",
+   "seller": "나사코리아 nasakorea.com",
+   "b": "기본"
+  },
+  {
+   "no": 31,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "비틀림 스프링 미스미 C-UA90R5-3-0.5 (기성품)",
+   "use": "레버마다 1개 (88 + 예비 12) — 두 다리를 22.3 / 8.0 mm로 잘라 끼움 (r4.5)",
+   "qty": 100,
+   "unit": 310,
+   "url": "https://kr.misumi-ec.com/vona2/detail/110310556289/?HissuCode=C-UA90R5-3-0.5",
+   "full": "한국미스미 경제형 토션스프링 C-UA90R5-3-0.5 (SUS304-WPB, 내경 5 · 선경 0.5 · 3권 · 암 각 90° 오른쪽 감기, 암 50/50)",
+   "seller": "한국미스미",
+   "b": "기본"
+  },
+  {
+   "no": 32,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "양모 펠트 2 mm (20×30 cm)",
+   "use": "캡스턴 띠 · 앞 멈춤 · 키퍼 펠트",
+   "qty": 1,
+   "unit": 13800,
+   "url": "https://studiobunt.com/product/detail.html?product_no=4117",
+   "full": "100% 메리노양모 70수 펠트지 2mm 20×30cm (35 블랙)",
+   "seller": "스튜디오분트",
+   "b": "기본"
+  },
+  {
+   "no": 33,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "양모 펠트 1 mm (20×30 cm)",
+   "use": "업스톱 패드 윗면 · 쉼 펠트 (0.5T와 겹쳐 1.5T)",
+   "qty": 1,
+   "unit": 6900,
+   "url": "https://studiobunt.com/product/detail.html?product_no=1157",
+   "full": "100% 메리노양모 70수 펠트지 1mm 20×30cm (80 블랙)",
+   "seller": "스튜디오분트",
+   "b": "기본"
+  },
+  {
+   "no": 34,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "포론(PORON) 폼 5T 점착 (100×100)",
+   "use": "업스톱 패드 — 설계 6T 대신 5T: 패드 바 쐐기를 1.0 mm 두껍게 출력, 단계 0 시험 먼저",
+   "qty": 1,
+   "unit": 3399,
+   "url": "https://www.navimro.com/g/1028764/",
+   "full": "[와키(WAKI)] PORON 스폰지 접착 부착 PON-02 (100×100×5, 검정, 아크릴 점착)",
+   "seller": "나비엠알오",
+   "b": "기본"
+  },
+  {
+   "no": 35,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "충격흡수재 하네나이트 1T (170×245)",
+   "use": "앞 펠트 밑 완충층 (NBR 고무, 단계 0 시험으로 확인)",
+   "qty": 1,
+   "unit": 16489,
+   "url": "https://www.navimro.com/g/1029233/",
+   "full": "[와키(WAKI)] 충격흡수재 하네나이트 HNT002 (170×245×1, 검정)",
+   "seller": "나비엠알오",
+   "b": "기본"
+  },
+  {
+   "no": 36,
+   "group": "건반 액션 (W1: 시소 건반 + 무게 레버)",
+   "short": "접착 펠트 0.5T (30×45 cm)",
+   "use": "건반 노치 · 핀 홈 · 가이드 탭 부싱 천, 쉼 펠트 한 겹",
+   "qty": 1,
+   "unit": 1500,
+   "url": "https://www.11st.co.kr/products/8517880969",
+   "full": "[대원] 얇은 칼라펠트지 H 두께0.5mm 접착 30x45cm (H-20 검정)",
+   "seller": "상우아트",
+   "b": "기본"
+  },
+  {
+   "no": 37,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "앰프 보드 XH-A232 (TPA3110)",
+   "use": "스피커 구동, 채널당 약 21 W",
+   "qty": 1,
+   "unit": 2750,
+   "url": "https://www.icbanq.com/P017179248",
+   "full": "XH-A232 (HW-404) TPA3110 2채널 앰프 보드 (제노 HAM6104)",
+   "seller": "아이씨뱅큐 (제노)",
+   "b": "기본"
+  },
+  {
+   "no": 38,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "스피커 유닛 삼미 CW-100B25 (4인치 8 Ω)",
+   "use": "좌우 내장 스피커",
+   "qty": 2,
+   "unit": 9600,
+   "url": "https://www.11st.co.kr/products/1565354988",
+   "full": "삼미스피커(SAAT) CW-100B25 4인치 풀레인지 8Ω 25W (KS 인증)",
+   "seller": "세운상가새한음향",
+   "b": "기본"
+  },
+  {
+   "no": 39,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "Apple USB-C 헤드폰 어댑터",
+   "use": "USB DAC (디지털 → 아날로그 소리)",
+   "qty": 1,
+   "unit": 14900,
+   "url": "https://www.apple.com/kr/shop/product/mw2q3kh/a",
+   "full": "Apple USB-C–3.5mm 헤드폰 잭 어댑터 (MW2Q3KH/A)",
+   "seller": "Apple",
+   "b": "기본"
+  },
+  {
+   "no": 40,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "USB-C → USB-A 젠더",
+   "use": "어댑터를 Pi 5 USB 포트에 연결",
+   "qty": 1,
+   "unit": 1700,
+   "url": "https://www.eleparts.co.kr/goods/view?no=11043038",
+   "full": "[Coms] IH190 USB-C(F) → USB-A(M) 변환 젠더 좌향 꺾임",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 41,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "3.5 mm 스테레오 잭 PJ-313",
+   "use": "헤드폰 잭(꽂으면 스피커 차단) · 앰프 입력 · 페달 잭",
+   "qty": 3,
+   "unit": 198,
+   "url": "https://www.eleparts.co.kr/goods/view?no=67811",
+   "full": "[BSUN] PJ-313 3.5Ф 스테레오잭 (이어폰잭)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 42,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "적층 세라믹 콘덴서 1 µF",
+   "use": "앰프 입력 저음 차단 필터",
+   "qty": 5,
+   "unit": 133,
+   "url": "https://www.icbanq.com/P014159115",
+   "full": "Monolithic Capacitor 1uF X7R 50V (리드형 적층 세라믹)",
+   "seller": "아이씨뱅큐 (동신전자)",
+   "b": "기본"
+  },
+  {
+   "no": 43,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "XT30 커넥터 수 (선 포함)",
+   "use": "스피커 연결 — 앰프 쪽",
+   "qty": 2,
+   "unit": 1760,
+   "url": "https://www.eleparts.co.kr/goods/view?no=12779720",
+   "full": "[AMASS] XT30U-M 수 커넥터 18AWG 10cm 실리콘 와이어",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 44,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "XT30 커넥터 암 (선 포함)",
+   "use": "스피커 연결 — 스피커 쪽",
+   "qty": 2,
+   "unit": 1760,
+   "url": "https://www.eleparts.co.kr/goods/view?no=12779721",
+   "full": "[AMASS] XT30U-F 암 커넥터 18AWG 10cm 실리콘 와이어",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 45,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "오꾸메 합판 400×1200 (무료 재단)",
+   "use": "스피커 상자 2개",
+   "qty": 1,
+   "unit": 17680,
+   "url": "https://namugongjang.com/product/detail.html?product_no=1378",
+   "full": "무료배송 오꾸메 합판 400×1200×11.5mm 무료재단",
+   "seller": "동진나무공장",
+   "b": "기본"
+  },
+  {
+   "no": 46,
+   "group": "오디오 (스피커 · 앰프)",
+   "short": "흡음솜 300 g",
+   "use": "스피커 상자 흡음재",
+   "qty": 1,
+   "unit": 2700,
+   "url": "https://www.11st.co.kr/products/2325598213",
+   "full": "두유레디 구름솜 300g (100% 국내산 할로우화이버)",
+   "seller": "두유레디",
+   "b": "기본"
+  },
+  {
+   "no": 47,
+   "group": "본체 구조 · 결합",
+   "short": "오꾸메 합판 600×1200 (무료 재단)",
+   "use": "가운데 유닛 상자 (건반 보관함 · 제어부 · 배터리 칸)",
+   "qty": 1,
+   "unit": 22520,
+   "url": "https://namugongjang.com/product/detail.html?product_no=1378",
+   "full": "무료배송 오꾸메 합판 600×1200×11.5mm 무료재단",
+   "seller": "동진나무공장",
+   "b": "기본"
+  },
+  {
+   "no": 48,
+   "group": "본체 구조 · 결합",
+   "short": "토글 래치 (SUS)",
+   "use": "가운데 유닛 ↔ 스피커 파트 잠금",
+   "qty": 2,
+   "unit": 2400,
+   "url": "https://www.metaldiy.com/item/itemView.do?itemId=8806379117286",
+   "full": "매미고리 1-20 (SUS304 스테인리스 토글 래치, 25×54mm)",
+   "seller": "철물박사",
+   "b": "기본"
+  },
+  {
+   "no": 49,
+   "group": "본체 구조 · 결합",
+   "short": "네오디뮴 자석 Ø8×3",
+   "use": "가운데 유닛 뚜껑 고정",
+   "qty": 14,
+   "unit": 160,
+   "url": "https://dgmagnet.com/product/detail.html?product_no=17",
+   "full": "초강력 네오디움 원형자석 8mm — 3.0T (Ø8×3mm, N35)",
+   "seller": "대건상사",
+   "b": "기본"
+  },
+  {
+   "no": 50,
+   "group": "본체 구조 · 결합",
+   "short": "JST-XH 6핀 연장선",
+   "use": "끝 부속 ↔ 모듈 센서 선 커넥터",
+   "qty": 2,
+   "unit": 3000,
+   "url": "https://www.rcbank.co.kr/shop/goods/goods_view.php?goodsno=29812",
+   "full": "리튬폴리머 배터리 밸런스잭 연장선 5셀용 (JST-XH 6핀 수↔암, BU-LP 5S, 200mm)",
+   "seller": "알씨뱅크",
+   "b": "기본"
+  },
+  {
+   "no": 51,
+   "group": "본체 구조 · 결합",
+   "short": "고무발 28×5",
+   "use": "뒷바 받침 (5 mm 띄움, 진동 분리)",
+   "qty": 20,
+   "unit": 583,
+   "url": "https://www.eleparts.co.kr/goods/view?no=16628292",
+   "full": "[화성고무] 피스고무발 / 28x5 (RUB-E2)",
+   "seller": "엘레파츠",
+   "b": "기본"
+  },
+  {
+   "no": 52,
+   "group": "본체 구조 · 결합",
+   "short": "M3 방진 댐퍼·그로밋 (20개)",
+   "use": "끝 부속 ↔ 스피커 브래킷 방진",
+   "qty": 1,
+   "unit": 4500,
+   "url": "https://www.rcbank.co.kr/shop/goods/goods_view.php?goodsno=67110",
+   "full": "알씨뱅크 M3 진동 방지 댐퍼 (20개)",
+   "seller": "알씨뱅크",
+   "b": "기본"
+  },
+  {
+   "no": 53,
+   "group": "본체 구조 · 결합",
+   "short": "EVA 폼 3T (330×490)",
+   "use": "모듈 · 끝 부속 바닥 시트, 스피커 가스켓",
+   "qty": 3,
+   "unit": 2100,
+   "url": "https://www.11st.co.kr/products/7591566666",
+   "full": "에바폼 EVA 컬러 고밀도 칼라스펀지 3T (E-210 검정, 330×490)",
+   "seller": "상우아트",
+   "b": "기본"
+  },
+  {
+   "no": 54,
+   "group": "본체 구조 · 결합",
+   "short": "렌치볼트 M3×10 (SUS)",
+   "use": "센서 바 · 제어부 부품 · 토글 래치 고정",
+   "qty": 50,
+   "unit": 60,
+   "url": "https://www.11st.co.kr/products/4236198413",
+   "full": "스텐 유두 렌치볼트 M3 × 10mm",
+   "seller": "굿나잇몰",
+   "b": "기본"
+  },
+  {
+   "no": 55,
+   "group": "본체 구조 · 결합",
+   "short": "렌치볼트 M3×6 (SUS)",
+   "use": "제어 기판 고정",
+   "qty": 20,
+   "unit": 40,
+   "url": "https://www.11st.co.kr/products/4236198413",
+   "full": "스텐 유두 렌치볼트 M3 × 6mm",
+   "seller": "굿나잇몰",
+   "b": "기본"
+  },
+  {
+   "no": 56,
+   "group": "본체 구조 · 결합",
+   "short": "렌치볼트 M2.5×6 (SUS)",
+   "use": "Pi 5 고정",
+   "qty": 6,
+   "unit": 200,
+   "url": "https://www.11st.co.kr/products/4236198413",
+   "full": "스텐 유두 렌치볼트 M2.5 × 6mm",
+   "seller": "굿나잇몰",
+   "b": "기본"
+  },
+  {
+   "no": 57,
+   "group": "본체 구조 · 결합",
+   "short": "와셔 M4 (SUS)",
+   "use": "고무발 피스 받침",
+   "qty": 20,
+   "unit": 10,
+   "url": "https://www.11st.co.kr/products/4236198413",
+   "full": "스텐 와셔 M4x9x0.5T",
+   "seller": "굿나잇몰",
+   "b": "기본"
+  },
+  {
+   "no": 58,
+   "group": "본체 구조 · 결합",
+   "short": "직결피스 13 mm",
+   "use": "뒷바 출력 부품 · 고무발 고정",
+   "qty": 54,
+   "unit": 40,
+   "url": "https://www.11st.co.kr/products/4353471537",
+   "full": "스텐 둥근머리 직결피스 8호(Ø4.2) 13mm",
+   "seller": "굿나잇몰",
+   "b": "기본"
+  },
+  {
+   "no": 59,
+   "group": "본체 구조 · 결합",
+   "short": "직결피스 16 mm",
+   "use": "스피커 유닛 고정",
+   "qty": 8,
+   "unit": 50,
+   "url": "https://www.11st.co.kr/products/4353471537",
+   "full": "스텐 둥근머리 직결피스 8호(Ø4.2) 16mm",
+   "seller": "굿나잇몰",
+   "b": "기본"
+  },
+  {
+   "no": 60,
+   "group": "본체 구조 · 결합",
+   "short": "직결피스 19 mm",
+   "use": "스피커 그릴 고정",
+   "qty": 8,
+   "unit": 50,
+   "url": "https://www.11st.co.kr/products/4353471537",
+   "full": "스텐 둥근머리 직결피스 8호(Ø4.2) 19mm",
+   "seller": "굿나잇몰",
+   "b": "기본"
+  },
+  {
+   "no": 61,
+   "group": "소모품",
+   "short": "PETG 필라멘트 흰색 1 kg (스풀)",
+   "use": "백건 출력",
+   "qty": 1,
+   "unit": 16150,
+   "url": "https://kr.store.bambulab.com/products/petg-basic",
+   "full": "Bambu Lab PETG Basic 화이트(30106) 스풀 포함 1kg",
+   "seller": "Bambu Lab",
+   "b": "소모품"
+  },
+  {
+   "no": 62,
+   "group": "소모품",
+   "short": "PETG 필라멘트 흰색 1 kg (리필)",
+   "use": "백건 출력",
+   "qty": 1,
+   "unit": 12750,
+   "url": "https://kr.store.bambulab.com/products/petg-basic",
+   "full": "Bambu Lab PETG Basic 화이트(30106) 리필 1kg",
+   "seller": "Bambu Lab",
+   "b": "소모품"
+  },
+  {
+   "no": 63,
+   "group": "소모품",
+   "short": "PETG 필라멘트 검정 1 kg (스풀)",
+   "use": "프레임 · 레버 캐리어 · 흑건 등",
+   "qty": 5,
+   "unit": 16150,
+   "url": "https://kr.store.bambulab.com/products/petg-basic",
+   "full": "Bambu Lab PETG Basic 블랙(30105) 스풀 포함 1kg",
+   "seller": "Bambu Lab",
+   "b": "소모품"
+  },
+  {
+   "no": 64,
+   "group": "소모품",
+   "short": "PETG 필라멘트 1 kg 추가 (흰색 또는 검정)",
+   "use": "뒷바 출력 부품 · 여분",
+   "qty": 1,
+   "unit": 16150,
+   "url": "https://kr.store.bambulab.com/products/petg-basic",
+   "full": "Bambu Lab PETG Basic 스풀 포함 1kg 추가 (흰색 또는 검정)",
+   "seller": "Bambu Lab",
+   "b": "소모품"
+  },
+  {
+   "no": 65,
+   "group": "소모품",
+   "short": "USB-A → USB-C 케이블 1 m",
+   "use": "모듈 7 + 페달 → USB 허브",
+   "qty": 8,
+   "unit": 1620,
+   "url": "https://www.eleparts.co.kr/goods/view?no=4313490",
+   "full": "[NA993] Coms USB 3.1 Type C 케이블 1M USB 2.0 A to C타입 White",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 66,
+   "group": "소모품",
+   "short": "리본 케이블 16P (1 m)",
+   "use": "센서 기판 → 제어 기판",
+   "qty": 2,
+   "unit": 1529,
+   "url": "https://www.eleparts.co.kr/goods/view?no=425",
+   "full": "[EUNSUNG] Flat Data Cable 2651-16P (1m단위)",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 67,
+   "group": "소모품",
+   "short": "리본 케이블 16P (1 m) 추가",
+   "use": "기판 배선용 가닥",
+   "qty": 1,
+   "unit": 1529,
+   "url": "https://www.eleparts.co.kr/goods/view?no=425",
+   "full": "[EUNSUNG] Flat Data Cable 2651-16P (1m단위)",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 68,
+   "group": "소모품",
+   "short": "스피커 케이블 16AWG 7 m",
+   "use": "앰프 → 스피커, 20 V 전원선",
+   "qty": 1,
+   "unit": 14300,
+   "url": "https://www.eleparts.co.kr/goods/view?no=18388615",
+   "full": "[케이블스토어] 프리즘 국산 스피커케이블 50C 16AWG, 7M [블랙/PRS-50B07]",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 69,
+   "group": "소모품",
+   "short": "3.5 mm 스테레오 케이블 1.5 m",
+   "use": "어댑터 → 헤드폰 잭 → 앰프",
+   "qty": 2,
+   "unit": 1710,
+   "url": "https://www.eleparts.co.kr/goods/view?no=2925673",
+   "full": "[AV0176] Coms 스테레오 케이블 1.5M AUX 3극 Stereo 3.5 M/M",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 70,
+   "group": "소모품",
+   "short": "USB-C PD 케이블 0.6 m",
+   "use": "보조배터리 → 피아노",
+   "qty": 1,
+   "unit": 1440,
+   "url": "https://www.eleparts.co.kr/goods/view?no=17806172",
+   "full": "[MachLink] USB-C to C PD 60W 초고속충전 케이블, ML-CPD606 [블랙/0.6m]",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 71,
+   "group": "소모품",
+   "short": "USB-C PD 케이블 2 m",
+   "use": "충전기 → 피아노",
+   "qty": 1,
+   "unit": 2670,
+   "url": "https://www.eleparts.co.kr/goods/view?no=17806170",
+   "full": "[MachLink] USB-C to C PD 60W 초고속충전 케이블, ML-CPD62 [블랙/2m]",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 72,
+   "group": "소모품",
+   "short": "USB-C 전원 케이블 (제작용)",
+   "use": "강압 모듈 → Pi 5 전원",
+   "qty": 1,
+   "unit": 1190,
+   "url": "https://www.eleparts.co.kr/goods/view?no=17358965",
+   "full": "[MAXTEK] 맥스텍 USB C타입 제작용 케이블 2선 Type-C Male(숫) DIY PD 전원 [MT666]",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 73,
+   "group": "소모품",
+   "short": "열수축 튜브 세트",
+   "use": "선 이음 절연",
+   "qty": 1,
+   "unit": 6600,
+   "url": "https://www.eleparts.co.kr/goods/view?no=8170311",
+   "full": "[엘레파츠] 열수축튜브 530세트 - 프라스틱케이스",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 74,
+   "group": "소모품",
+   "short": "캡톤 테이프",
+   "use": "기판 절연",
+   "qty": 1,
+   "unit": 4059,
+   "url": "https://www.eleparts.co.kr/goods/view?no=557",
+   "full": "[KzPton] 캡톤테이프 10mm폭x33m",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 75,
+   "group": "소모품",
+   "short": "케이블 타이 (100개)",
+   "use": "케이블 정리",
+   "qty": 1,
+   "unit": 438,
+   "url": "https://www.eleparts.co.kr/goods/view?no=9100003",
+   "full": "티테크놀로지 케이블타이, 100개 [소/100mm] [블랙] [T-C2510B]",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 76,
+   "group": "소모품",
+   "short": "실납 0.8 mm 50 g",
+   "use": "손 납땜 (약 1,500곳)",
+   "qty": 1,
+   "unit": 3850,
+   "url": "https://www.eleparts.co.kr/goods/view?no=12755646",
+   "full": "[YUN FANG] 유연납 0.8mm 50g",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 77,
+   "group": "소모품",
+   "short": "순간접착제 5 g",
+   "use": "자석 고정",
+   "qty": 1,
+   "unit": 1100,
+   "url": "https://www.icbanq.com/P015309984",
+   "full": "순간접착제 (814-2010) — V-tech 강력 순간접착제 5g (VT-041)",
+   "seller": "아이씨뱅큐 (크레텍)",
+   "b": "소모품"
+  },
+  {
+   "no": 78,
+   "group": "소모품",
+   "short": "MS 폴리머 탄성 접착제 세메다인 슈퍼X 흰색 20 mL",
+   "use": "강철 블록을 레버 캐리어에 붙임 (필요 약 14 mL, 흰색·검정만 — 투명은 PET 접착이 약함)",
+   "qty": 2,
+   "unit": 8000,
+   "url": "https://www.11st.co.kr/products/7459325704",
+   "full": "세메다인 슈퍼X 8008 탄성접착제 백색 20 mL (AX-022)",
+   "seller": "주영종합상사",
+   "b": "소모품"
+  },
+  {
+   "no": 79,
+   "group": "소모품",
+   "short": "종이 양면테이프",
+   "use": "EVA 시트 · 펠트 부착",
+   "qty": 1,
+   "unit": 1080,
+   "url": "https://www.eleparts.co.kr/goods/view?no=17897439",
+   "full": "[NAVI] 종이 양면테이프, 백색/48mm/6m",
+   "seller": "엘레파츠",
+   "b": "소모품"
+  },
+  {
+   "no": 80,
+   "group": "소모품",
+   "short": "목공 본드 800 g",
+   "use": "합판 상자 접착",
+   "qty": 1,
+   "unit": 3949,
+   "url": "https://www.navimro.com/g/395062/",
+   "full": "오공 201 205 본드 800g 목공용본드 (옵션: 오공 205본드 800g)",
+   "seller": "나비엠알오",
+   "b": "소모품"
+  },
+  {
+   "no": 81,
+   "group": "소모품",
+   "short": "텅스텐 퍼티 (22 g)",
+   "use": "건반별 무게 미세 조정 (필요할 때만)",
+   "qty": 1,
+   "unit": 8750,
+   "url": "https://www.11st.co.kr/products/9579455646",
+   "full": "텅스텐 퍼티 소프트 싱커 무게추 (낚시용, 22 g)",
+   "seller": "골드그로브",
+   "b": "소모품"
+  },
+  {
+   "no": 82,
+   "group": "소모품",
+   "short": "OHP 필름 (A4 20매)",
+   "use": "0.1 mm 심 — 업스톱 시점 조정",
+   "qty": 1,
+   "unit": 2739,
+   "url": "https://www.navimro.com/g/37021/",
+   "full": "OHP 필름 (A4) 흑백 레이저용 1PK(20매) (copierland)",
+   "seller": "나비엠알오",
+   "b": "소모품"
+  },
+  {
+   "no": 83,
+   "group": "소모품",
+   "short": "흑연 가루 30 ml",
+   "use": "캡스턴 펠트 마찰 줄이기",
+   "qty": 1,
+   "unit": 2750,
+   "url": "https://www.11st.co.kr/products/1333385437",
+   "full": "크레타칼라 흑연파우더(소/30ml)",
+   "seller": "비젼몰",
+   "b": "소모품"
+  }
+ ],
+ "excluded": [
+  {
+   "name": "페달",
+   "total": 11360
+  },
+  {
+   "name": "소프트웨어 (무료)",
+   "total": 0
+  },
+  {
+   "name": "2단계 리듬게임",
+   "total": 17050
+  },
+  {
+   "name": "공구",
+   "total": 139438
+  }
+ ],
+ "ship_ref": 54100,
+ "dropped": [
+  {
+   "name": "[DHG] 3mm 대폭 양모펠트지 150×10cm",
+   "why": "W1 r4.1 설계에 3T 펠트를 쓰는 곳이 없음 (앞 멈춤·키퍼는 2T)"
+  }
+ ]
+}

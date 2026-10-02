@@ -1,0 +1,2672 @@
+{
+ "src": {
+  "numbers": "touch3/design/numbers.json (수정 3판 3a)",
+  "numbers_md5": "8f5821c7119bd4a2a80246d23ebf0cab",
+  "revision": "3a (fix round 2026-10-01: ear outline, u24 rib, bottom notch, clip wire groove, ribbon on HDMI, power-wire count, service, studs fallback)",
+  "l2": "L2_cu.json (확정)",
+  "body_l2": "cad_copy/spec/body_L2.json (스피커 옆모양)",
+  "l2_md5": "c1ad7dd69e304389dad2939164fe8c20"
+ },
+ "est": {
+  "screen_back_recess": 2.0,
+  "zif_h": 2.0,
+  "mx_h": 2.0,
+  "ribbon_mouth_w": 7.0,
+  "screen_hole_depth": 4.0,
+  "m25_head": [
+   4.5,
+   1.8
+  ],
+  "m3_head": [
+   5.7,
+   1.65
+  ],
+  "lid_rib_t": 2.0,
+  "lid_wall_t": 3.0,
+  "lid_ribs_x": [
+   541.0,
+   611.0,
+   681.0
+  ],
+  "lid_ribs_y": [
+   262.0,
+   290.0
+  ],
+  "tab_w": [
+   2.0,
+   6.0
+  ],
+  "insert_od": 4.2,
+  "stack": 0.27,
+  "ramp_from_recess": [
+   5.5,
+   1.0
+  ],
+  "lid_boss_d": 8.0,
+  "wire_d": 1.1,
+  "wire_pitch": 1.3,
+  "dupont": [
+   2.5,
+   2.5,
+   14.0
+  ],
+  "grille_d": 115.0,
+  "grille_t": 2.0,
+  "feet_d": 28.0,
+  "gpio_pin_above_base": 6.0,
+  "pi_board_t": 1.6,
+  "cover_dome_skin": 1.2,
+  "loop_len": 23.04
+ },
+ "tol_mm3": 0.001,
+ "keepout": "y <= 215.0 and z >= 72.85 over x [-16.0, 1238.0] (modules are lifted out upward)",
+ "named": {
+  "ear": {
+   "overlap_22_mm3": 0.0,
+   "gap_22": 0.0,
+   "min_gap_25_90": [
+    0.373,
+    25.0
+   ],
+   "gap_22_to_25": [
+    [
+     22.0,
+     0.0,
+     0.0
+    ],
+    [
+     22.25,
+     0.03,
+     0.0
+    ],
+    [
+     22.5,
+     0.061,
+     0.0
+    ],
+    [
+     22.75,
+     0.091,
+     0.0
+    ],
+    [
+     23.0,
+     0.122,
+     0.0
+    ],
+    [
+     23.25,
+     0.153,
+     0.0
+    ],
+    [
+     23.5,
+     0.184,
+     0.0
+    ],
+    [
+     23.75,
+     0.216,
+     0.0
+    ],
+    [
+     24.0,
+     0.247,
+     0.0
+    ],
+    [
+     24.25,
+     0.278,
+     0.0
+    ],
+    [
+     24.5,
+     0.31,
+     0.0
+    ],
+    [
+     24.75,
+     0.341,
+     0.0
+    ],
+    [
+     25.0,
+     0.373,
+     0.0
+    ]
+   ],
+   "design": {
+    "gap_at_22": 0.0,
+    "min_gap_25_90": 0.37,
+    "rule": "whole ear outline vs stop block + slot floor: >= 0 at 22 deg (contact), >= 0.3 at 25..90 deg"
+   },
+   "ok": true,
+   "rev3_first_lobe": {
+    "22": {
+     "overlap_mm3": 99.338,
+     "depth_z": 2.09
+    },
+    "25": {
+     "overlap_mm3": 83.201,
+     "depth_z": 1.82
+    },
+    "30": {
+     "overlap_mm3": 54.885,
+     "depth_z": 1.34
+    },
+    "clears_from_deg": 42.1,
+    "design_says": {
+     "gap_at_22": -2.1,
+     "gap_at_25": -1.83,
+     "clears_from_deg": 42.1
+    }
+   }
+  },
+  "heel_gap_25": 0.373,
+  "heel_gap_25_design": 0.37,
+  "axle": {
+   "3a": {
+    "seated_thread_far_cheek_mm3": 11.494,
+    "seated_elsewhere_mm3": -0.0,
+    "path_overlap_mm3": 0.0,
+    "path_gap_to_ribs": 2.178,
+    "path_gap_to_back_plate_w13": 0.65
+   },
+   "rev3_u30_rib": {
+    "seated_thread_far_cheek_mm3": 11.494,
+    "seated_elsewhere_mm3": 7.523,
+    "path_overlap_mm3": 98.967,
+    "path_gap_to_ribs": 0.0,
+    "path_gap_to_back_plate_w13": 0.0
+   },
+   "design": {
+    "head_gap": 2.0,
+    "path_gap": 2.0,
+    "nearest": "다리 길 벽 1",
+    "rev3_u30": {
+     "head_gap": -2.35,
+     "path_gap": -2.35
+    }
+   },
+   "ok": true
+  },
+  "walls": {
+   "glass_bottom_gap": 0.0,
+   "glass_top_gap": 0.5,
+   "glass_side_gap": 0.3,
+   "design": {
+    "bottom": 0.0,
+    "top": 0.5,
+    "side": 0.3
+   },
+   "notch_material_mm3": 0.0,
+   "wall_beside_notch_fill": [
+    1.0,
+    1.0
+   ],
+   "tab_to_cradle_gap": 2.0,
+   "tab_margin_x_design": [
+    6.99,
+    6.76
+   ],
+   "boss_fill_fraction": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "print_height": 119.76,
+   "print_height_design": 119.76,
+   "ear_lowest_u": -16.26
+  },
+  "ear_to_cheek_side_gap": 0.2,
+  "cheek_gap_min_22_90": [
+   0.541,
+   90.0
+  ],
+  "cheek_gap_design": 0.59,
+  "leg_ramp_gap_25": 0.203,
+  "leg_ramp_gap_design": 0.2,
+  "leg_swing": {
+   "22": {
+    "pivot": [
+     244.4,
+     116.2
+    ],
+    "first_contact_deg": 40.0,
+    "max_overlap_mm3": 0.0,
+    "at_deg": null
+   },
+   "25": {
+    "pivot": [
+     246.2,
+     115.22
+    ],
+    "first_contact_deg": 36.2,
+    "max_overlap_mm3": 7.5183,
+    "at_deg": 38.0,
+    "depth": 0.65,
+    "overlap_deg": [
+     36.2,
+     39.7
+    ]
+   },
+   "design": {
+    "at_22_first_contact_deg": -39.95,
+    "at_25_first_contact_deg": -36.15,
+    "at_25_worst_overlap": -0.66,
+    "at_25_worst_at_deg": -38.2,
+    "procedure": "deploy / stow the leg with the screen held at the 22 deg heel stop; then let go (the foot slides down the ramp to the back wall)"
+   }
+  },
+  "fold_leg_gap_to_lid": 2.0,
+  "fold_leg_gap_design": 2.0,
+  "fold_clip_gap_to_lid": 0.78,
+  "fold_clip_gap_design": 0.78,
+  "fold_rear_margin": 2.45,
+  "fold_top_z": 95.35,
+  "fold_speaker_margin": 52.71,
+  "cables_gap_to_lid_plate_hole_knuckles_min": [
+   1.8,
+   84.0,
+   "power"
+  ],
+  "clip": {
+   "ribbon_z_in_clip": [
+    61.05,
+    61.35
+   ],
+   "clamp_z_design": [
+    61.05,
+    61.35
+   ],
+   "ribbon_to_clip_gap": 0.0,
+   "ribbon_to_pad_gap": 0.0,
+   "ribbon_clip_overlap_mm3": 0.0001,
+   "ribbon_pad_overlap_mm3": 0.0,
+   "wires_to_clip_gap": 0.351,
+   "wires_to_lid_gap": 0.65,
+   "wires_to_ribbon_gap": 0.974,
+   "pin_top_z": 65.55,
+   "pin_hole_bottom_z": 66.35,
+   "pin_tip_to_hole_bottom": 0.8,
+   "pin_len": 4.5
+  },
+  "lid_screw": {
+   "head_seat_z": 67.35,
+   "screw_z": [
+    57.35,
+    69.0
+   ],
+   "tip_z_design": 57.35,
+   "screw_to_lid_gap": 0.0,
+   "screw_lid_overlap_mm3": 0.0,
+   "screw_to_rail_gap": 0.5,
+   "tip_to_insert_hole_bottom": 0.5,
+   "rail_floor_under_hole": 1.5,
+   "rail_floor_design": 1.5,
+   "tip_to_post_top": 2.0,
+   "screw_insert_overlap_mm3": 28.098,
+   "cbore_d": 6.5,
+   "cbore_depth": 5.5
+  },
+  "cables": {
+   "ribbon_end_x": 591.7,
+   "disp1_back_x": 592,
+   "ribbon_end_short_of_back": 0.3,
+   "pi_insert": 2.7,
+   "pi_corner_xz": [
+    583.0,
+    28.17
+   ],
+   "ribbon_to_hdmi_gap": 0.0,
+   "ribbon_hdmi_overlap_mm3": 0.0006,
+   "ribbon_heatsink_overlap_mm3": 0.1274,
+   "ribbon_heatsink_overlap_box": [
+    582.85,
+    276.0,
+    29.32,
+    583.0,
+    276.35,
+    32.1
+   ],
+   "design_pi_clearance": {
+    "heatsink_y_gap": -0.35,
+    "heatsink_x_gap": -0.15,
+    "heatsink_vs_cad_keepout_x": -1.0,
+    "hdmi_top_gap": 0.0,
+    "note": "HDMI / heatsink boxes are estimates from a Pi 5 layout; the ribbon lies on the unused micro-HDMI as in the Waveshare photos. The drop column stays at the stiffener rule (mouth - 6); the CAD keep-out x582~600 wins over the heatsink estimate."
+   },
+   "ribbon_len_model": 244.83,
+   "ribbon_len_model_plus_lid_fold_roll": 254.25,
+   "ribbon_len_design": 256.32,
+   "cable": 300.0,
+   "wire_len_model_to_housing_top": [
+    320.68,
+    320.8
+   ],
+   "housing_top_to_pin_tip": 8.0,
+   "wire_len_model_plus_pin_and_dupont": [
+    343.68,
+    343.8
+   ],
+   "wire_len_design": 344.95,
+   "wire_available": [
+    500.0,
+    550.0
+   ],
+   "ffc_bbox": [
+    582.85,
+    221.63,
+    25.85,
+    652.2,
+    276.35,
+    137.1
+   ],
+   "l2_zones": [
+    {
+     "zone": "Z-DSI",
+     "ribbon_mm3": 171.203,
+     "wires_mm3": 0.0,
+     "own": "ribbon"
+    },
+    {
+     "zone": "Z-GPIO-LEAD",
+     "ribbon_mm3": 0.0,
+     "wires_mm3": 49.358,
+     "own": "wires"
+    }
+   ]
+  }
+ },
+ "poses": {
+  "22": {
+   "theta": 22.0,
+   "leg": "hang",
+   "info": {
+    "leg_mode": "hang",
+    "leg_pivot": [
+     244.4,
+     116.2
+    ],
+    "leg_tip": [
+     295.8,
+     73.21
+    ],
+    "leg_angle": 39.91,
+    "loop_len": 23.04,
+    "loop_min_y": 222.65,
+    "ffc_len": 244.83,
+    "wire_len": [
+     320.68,
+     320.8
+    ]
+   },
+   "interferences": [],
+   "expected_contacts": [
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-BEZEL",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 유리 테두리",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-ACTIVE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 보이는 영역 154.58×86.42",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-ZIF",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-MX",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-TAB",
+     "vol_mm3": 0.17,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-CRADLE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 받침(크래들)",
+     "touch": true,
+     "why": "보스·채움 블록 면이 화면 뒷면(w8)에, 아래 벽 안쪽 면(u0)이 유리 아래 끝에 닿음"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-FFC",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "touch": true,
+     "why": "리본이 화면 뒷면(w8)에 눕혀 붙음"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-SCREEN-ACTIVE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 보이는 영역 154.58×86.42",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-CRADLE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 받침(크래들)",
+     "touch": true,
+     "why": "유리 아래 끝이 아래 벽 안쪽 면(u0)에 얹힘"
+    },
+    {
+     "a": "TS-SCREEN-ZIF",
+     "b": "TS-FFC",
+     "vol_mm3": 12.285,
+     "a_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "why": "리본 끝이 화면 ZIF에 3.5 꽂힘"
+    },
+    {
+     "a": "TS-SCREEN-MX",
+     "b": "TS-PWR-RED",
+     "vol_mm3": 1.778,
+     "a_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "b_ko": "전원선 5V (빨강)",
+     "why": "전원선 끝이 MX1.25에 꽂힘"
+    },
+    {
+     "a": "TS-SCREEN-MX",
+     "b": "TS-PWR-BLK",
+     "vol_mm3": 1.778,
+     "a_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "b_ko": "전원선 GND (검정)",
+     "why": "전원선 끝이 MX1.25에 꽂힘"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-WINCOVER",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "점검창 덮개",
+     "touch": true,
+     "why": "점검창 덮개 턱이 뒷판 뒷면(w13)에 얹힘"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-1",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-2",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-3",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-4",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-LEG",
+     "vol_mm3": 11.494,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (다리 축)",
+     "why": "다리 축 M3가 먼 볼 Ø2.5에만 나사산을 냄 (물림 5.4) — 그 밖의 겹침은 간섭",
+     "zone_ok": true
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-FFC",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "touch": true,
+     "why": "리본이 받침 안 벽 면에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-LID",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+     "touch": true,
+     "why": "22°: 귀 뒤꿈치가 멈춤 블록 윗면에 닿음 / 90°: 받침 패드가 접이 받침 발에 얹힘"
+    },
+    {
+     "a": "TS-LEG",
+     "b": "TS-LID",
+     "vol_mm3": 0.0,
+     "a_ko": "받침다리 (22°에서 매달림)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+     "touch": true,
+     "why": "다리 발이 주머니 바닥·뒷벽(25°) 또는 경사(22°)에 닿음"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-LID",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+     "touch": true,
+     "why": "리본이 클립 자리 밑면(z61.35)에 눌려 물림"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-RCLIP",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "리본 클립 30×12×3",
+     "touch": true,
+     "why": "리본이 클립 윗면(z61.05)에 눌려 물림"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-DISP1",
+     "vol_mm3": 9.486,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 CAM/DISP 1",
+     "why": "리본 끝이 Pi CAM/DISP 1에 2.7 꽂힘"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-HDMI",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 HDMI 2개 (추정 자리)",
+     "touch": true,
+     "why": "리본이 안 쓰는 micro-HDMI 모서리에 얹힘 (HDMI는 추정 자리)"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-PWR-HOUSING",
+     "vol_mm3": 0.003,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "why": "선 끝이 점퍼 하우징에 들어감"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-PWR-HOUSING",
+     "vol_mm3": 0.003,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "why": "선 끝이 점퍼 하우징에 들어감"
+    },
+    {
+     "a": "TS-PWR-HOUSING",
+     "b": "PI5-GPIO",
+     "vol_mm3": 0.0,
+     "a_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "b_ko": "Pi 5 GPIO 40핀",
+     "touch": true,
+     "why": "점퍼 하우징이 GPIO 핀 받침 위에 끼워짐"
+    }
+   ],
+   "estimate_overlaps": [
+    {
+     "a": "TS-FFC",
+     "b": "PI5-HEATSINK",
+     "vol_mm3": 0.127,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 방열판 (추정 자리)",
+     "why": "방열판 상자는 추정 자리이고 CAD 리본 지킴 구역(x582부터)을 1.0 넘어 그려져 있음 → 실제 Pi 5로 확인 (사양 G-8)"
+    }
+   ],
+   "closest_gaps": [
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-1",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-2",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-3",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-4",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-PWR-RED",
+     "gap": 0.055,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-PWR-BLK",
+     "gap": 0.055,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-PWR-RED",
+     "gap": 0.055,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-PWR-BLK",
+     "gap": 0.055,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-HINGE-L",
+     "gap": 0.147,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (경첩 축 왼쪽)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-HINGE-R",
+     "gap": 0.147,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (경첩 축 오른쪽)"
+    },
+    {
+     "a": "TS-LEG",
+     "b": "TS-M3X20-LEG",
+     "gap": 0.147,
+     "a_ko": "받침다리 (22°에서 매달림)",
+     "b_ko": "M3×20 (다리 축)"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-PWR-BLK",
+     "gap": 0.219,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-LEG",
+     "gap": 0.3,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "받침다리 (22°에서 매달림)"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-RCLIP",
+     "gap": 0.352,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "리본 클립 30×12×3"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-RCLIP",
+     "gap": 0.352,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "리본 클립 30×12×3"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-LID",
+     "gap": 0.651,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-LID",
+     "gap": 0.651,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-PWR-RED",
+     "gap": 0.97,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-WINCOVER",
+     "b": "TS-FFC",
+     "gap": 1.0,
+     "a_ko": "점검창 덮개",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-WINCOVER",
+     "gap": 1.477,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "점검창 덮개"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-BOARD",
+     "gap": 1.75,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 기판"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-SCREEN-TAB",
+     "gap": 1.8,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)"
+    },
+    {
+     "a": "TS-SCREEN-TAB",
+     "b": "TS-CRADLE",
+     "gap": 2.0,
+     "a_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+     "b_ko": "화면 받침(크래들)"
+    },
+    {
+     "a": "TS-WINCOVER",
+     "b": "TS-PWR-RED",
+     "gap": 2.104,
+     "a_ko": "점검창 덮개",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-WINCOVER",
+     "b": "TS-PWR-BLK",
+     "gap": 2.104,
+     "a_ko": "점검창 덮개",
+     "b_ko": "전원선 GND (검정)"
+    }
+   ],
+   "keepout_hits": [],
+   "min_y_above_module_top": {
+    "moving": 216.0,
+    "cables": 221.69,
+    "per_part": {
+     "TS-SCREEN": 218.05,
+     "TS-SCREEN-BEZEL": 217.87,
+     "TS-SCREEN-ACTIVE": 221.48,
+     "TS-SCREEN-ZIF": 237.1,
+     "TS-SCREEN-MX": 244.63,
+     "TS-SCREEN-TAB": 219.4,
+     "TS-CRADLE": 216.0,
+     "TS-WINCOVER": 240.23,
+     "TS-M25-1": 224.49,
+     "TS-M25-2": 257.45,
+     "TS-M25-3": 224.49,
+     "TS-M25-4": 257.45,
+     "TS-LEG": 241.4,
+     "TS-M3X20-LEG": 241.55,
+     "TS-FFC": 221.69,
+     "TS-PWR-RED": 222.37,
+     "TS-PWR-BLK": 222.37
+    }
+   }
+  },
+  "25": {
+   "theta": 25.0,
+   "leg": "use",
+   "info": {
+    "leg_mode": "use",
+    "leg_pivot": [
+     246.2,
+     115.22
+    ],
+    "leg_tip": [
+     297.7,
+     72.35
+    ],
+    "loop_len": 23.04,
+    "loop_min_y": 222.7,
+    "ffc_len": 244.83,
+    "wire_len": [
+     320.68,
+     320.8
+    ]
+   },
+   "interferences": [],
+   "expected_contacts": [
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-BEZEL",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 유리 테두리",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-ACTIVE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 보이는 영역 154.58×86.42",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-ZIF",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-MX",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-TAB",
+     "vol_mm3": 0.17,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-CRADLE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 받침(크래들)",
+     "touch": true,
+     "why": "보스·채움 블록 면이 화면 뒷면(w8)에, 아래 벽 안쪽 면(u0)이 유리 아래 끝에 닿음"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-FFC",
+     "vol_mm3": 0.002,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "why": "리본이 화면 뒷면(w8)에 눕혀 붙음",
+     "touch": true,
+     "film_depth_um": 0.0
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-SCREEN-ACTIVE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 보이는 영역 154.58×86.42",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-CRADLE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 받침(크래들)",
+     "touch": true,
+     "why": "유리 아래 끝이 아래 벽 안쪽 면(u0)에 얹힘"
+    },
+    {
+     "a": "TS-SCREEN-ZIF",
+     "b": "TS-FFC",
+     "vol_mm3": 12.285,
+     "a_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "why": "리본 끝이 화면 ZIF에 3.5 꽂힘"
+    },
+    {
+     "a": "TS-SCREEN-MX",
+     "b": "TS-PWR-RED",
+     "vol_mm3": 1.778,
+     "a_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "b_ko": "전원선 5V (빨강)",
+     "why": "전원선 끝이 MX1.25에 꽂힘"
+    },
+    {
+     "a": "TS-SCREEN-MX",
+     "b": "TS-PWR-BLK",
+     "vol_mm3": 1.778,
+     "a_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "b_ko": "전원선 GND (검정)",
+     "why": "전원선 끝이 MX1.25에 꽂힘"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-WINCOVER",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "점검창 덮개",
+     "touch": true,
+     "why": "점검창 덮개 턱이 뒷판 뒷면(w13)에 얹힘"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-1",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-2",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-3",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-4",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-LEG",
+     "vol_mm3": 11.494,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (다리 축)",
+     "why": "다리 축 M3가 먼 볼 Ø2.5에만 나사산을 냄 (물림 5.4) — 그 밖의 겹침은 간섭",
+     "zone_ok": true
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-FFC",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "touch": true,
+     "why": "리본이 받침 안 벽 면에 닿음"
+    },
+    {
+     "a": "TS-LEG",
+     "b": "TS-LID",
+     "vol_mm3": 0.0,
+     "a_ko": "받침다리",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+     "touch": true,
+     "why": "다리 발이 주머니 바닥·뒷벽(25°) 또는 경사(22°)에 닿음"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-LID",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+     "touch": true,
+     "why": "리본이 클립 자리 밑면(z61.35)에 눌려 물림"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-RCLIP",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "리본 클립 30×12×3",
+     "touch": true,
+     "why": "리본이 클립 윗면(z61.05)에 눌려 물림"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-DISP1",
+     "vol_mm3": 9.486,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 CAM/DISP 1",
+     "why": "리본 끝이 Pi CAM/DISP 1에 2.7 꽂힘"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-HDMI",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 HDMI 2개 (추정 자리)",
+     "touch": true,
+     "why": "리본이 안 쓰는 micro-HDMI 모서리에 얹힘 (HDMI는 추정 자리)"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-PWR-HOUSING",
+     "vol_mm3": 0.003,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "why": "선 끝이 점퍼 하우징에 들어감"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-PWR-HOUSING",
+     "vol_mm3": 0.003,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "why": "선 끝이 점퍼 하우징에 들어감"
+    },
+    {
+     "a": "TS-PWR-HOUSING",
+     "b": "PI5-GPIO",
+     "vol_mm3": 0.0,
+     "a_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "b_ko": "Pi 5 GPIO 40핀",
+     "touch": true,
+     "why": "점퍼 하우징이 GPIO 핀 받침 위에 끼워짐"
+    }
+   ],
+   "estimate_overlaps": [
+    {
+     "a": "TS-FFC",
+     "b": "PI5-HEATSINK",
+     "vol_mm3": 0.127,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 방열판 (추정 자리)",
+     "why": "방열판 상자는 추정 자리이고 CAD 리본 지킴 구역(x582부터)을 1.0 넘어 그려져 있음 → 실제 Pi 5로 확인 (사양 G-8)"
+    }
+   ],
+   "closest_gaps": [
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-1",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-2",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-3",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-4",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-PWR-RED",
+     "gap": 0.061,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-PWR-BLK",
+     "gap": 0.061,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-PWR-RED",
+     "gap": 0.061,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-PWR-BLK",
+     "gap": 0.061,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-HINGE-L",
+     "gap": 0.147,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (경첩 축 왼쪽)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-HINGE-R",
+     "gap": 0.147,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (경첩 축 오른쪽)"
+    },
+    {
+     "a": "TS-LEG",
+     "b": "TS-M3X20-LEG",
+     "gap": 0.147,
+     "a_ko": "받침다리",
+     "b_ko": "M3×20 (다리 축)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-LID",
+     "gap": 0.2,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-PWR-BLK",
+     "gap": 0.224,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-LEG",
+     "gap": 0.3,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "받침다리"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-RCLIP",
+     "gap": 0.351,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "리본 클립 30×12×3"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-RCLIP",
+     "gap": 0.351,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "리본 클립 30×12×3"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-LID",
+     "gap": 0.65,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-LID",
+     "gap": 0.65,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-PWR-RED",
+     "gap": 0.974,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-WINCOVER",
+     "b": "TS-FFC",
+     "gap": 1.0,
+     "a_ko": "점검창 덮개",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-WINCOVER",
+     "gap": 1.477,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "점검창 덮개"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-BOARD",
+     "gap": 1.75,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 기판"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-SCREEN-TAB",
+     "gap": 1.8,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)"
+    },
+    {
+     "a": "TS-SCREEN-TAB",
+     "b": "TS-CRADLE",
+     "gap": 2.0,
+     "a_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+     "b_ko": "화면 받침(크래들)"
+    },
+    {
+     "a": "TS-WINCOVER",
+     "b": "TS-PWR-RED",
+     "gap": 2.11,
+     "a_ko": "점검창 덮개",
+     "b_ko": "전원선 5V (빨강)"
+    }
+   ],
+   "keepout_hits": [],
+   "min_y_above_module_top": {
+    "moving": 216.61,
+    "cables": 221.63,
+    "per_part": {
+     "TS-SCREEN": 218.75,
+     "TS-SCREEN-BEZEL": 218.57,
+     "TS-SCREEN-ACTIVE": 222.65,
+     "TS-SCREEN-ZIF": 239.43,
+     "TS-SCREEN-MX": 247.93,
+     "TS-SCREEN-TAB": 220.02,
+     "TS-CRADLE": 216.61,
+     "TS-WINCOVER": 242.3,
+     "TS-M25-1": 225.34,
+     "TS-M25-2": 262.53,
+     "TS-M25-3": 225.34,
+     "TS-M25-4": 262.53,
+     "TS-LEG": 243.2,
+     "TS-M3X20-LEG": 243.36,
+     "TS-FFC": 221.63,
+     "TS-PWR-RED": 222.4,
+     "TS-PWR-BLK": 222.4
+    }
+   }
+  },
+  "90": {
+   "theta": 90.0,
+   "leg": "stow",
+   "info": {
+    "leg_mode": "stow",
+    "loop_len": 23.04,
+    "loop_min_y": 225.57,
+    "ffc_len": 244.83,
+    "wire_len": [
+     320.68,
+     320.8
+    ]
+   },
+   "interferences": [],
+   "expected_contacts": [
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-BEZEL",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 유리 테두리",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-ACTIVE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 보이는 영역 154.58×86.42",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-ZIF",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-MX",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-SCREEN-TAB",
+     "vol_mm3": 0.17,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-CRADLE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "화면 받침(크래들)",
+     "touch": true,
+     "why": "보스·채움 블록 면이 화면 뒷면(w8)에, 아래 벽 안쪽 면(u0)이 유리 아래 끝에 닿음"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-FFC",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "touch": true,
+     "why": "리본이 화면 뒷면(w8)에 눕혀 붙음"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-SCREEN-ACTIVE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 보이는 영역 154.58×86.42",
+     "touch": true,
+     "why": "화면 더미 부품끼리"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-CRADLE",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 받침(크래들)",
+     "touch": true,
+     "why": "유리 아래 끝이 아래 벽 안쪽 면(u0)에 얹힘"
+    },
+    {
+     "a": "TS-SCREEN-ZIF",
+     "b": "TS-FFC",
+     "vol_mm3": 12.285,
+     "a_ko": "화면 DSI 22핀 ZIF (추정 위치)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "why": "리본 끝이 화면 ZIF에 3.5 꽂힘"
+    },
+    {
+     "a": "TS-SCREEN-MX",
+     "b": "TS-PWR-RED",
+     "vol_mm3": 1.778,
+     "a_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "b_ko": "전원선 5V (빨강)",
+     "why": "전원선 끝이 MX1.25에 꽂힘"
+    },
+    {
+     "a": "TS-SCREEN-MX",
+     "b": "TS-PWR-BLK",
+     "vol_mm3": 1.778,
+     "a_ko": "화면 전원 MX1.25 2핀 (추정 위치)",
+     "b_ko": "전원선 GND (검정)",
+     "why": "전원선 끝이 MX1.25에 꽂힘"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-WINCOVER",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "점검창 덮개",
+     "touch": true,
+     "why": "점검창 덮개 턱이 뒷판 뒷면(w13)에 얹힘"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-1",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-2",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-3",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M25-4",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M2.5×6 (화면 고정)",
+     "touch": true,
+     "why": "M2.5 머리가 보스 자리(w11)에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-LEG",
+     "vol_mm3": 11.494,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (다리 축)",
+     "why": "다리 축 M3가 먼 볼 Ø2.5에만 나사산을 냄 (물림 5.4) — 그 밖의 겹침은 간섭",
+     "zone_ok": true
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-FFC",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "touch": true,
+     "why": "리본이 받침 안 벽 면에 닿음"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-LID",
+     "vol_mm3": 0.0,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+     "touch": true,
+     "why": "22°: 귀 뒤꿈치가 멈춤 블록 윗면에 닿음 / 90°: 받침 패드가 접이 받침 발에 얹힘"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-LID",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)",
+     "touch": true,
+     "why": "리본이 클립 자리 밑면(z61.35)에 눌려 물림"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-RCLIP",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "리본 클립 30×12×3",
+     "touch": true,
+     "why": "리본이 클립 윗면(z61.05)에 눌려 물림"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-DISP1",
+     "vol_mm3": 9.486,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 CAM/DISP 1",
+     "why": "리본 끝이 Pi CAM/DISP 1에 2.7 꽂힘"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-HDMI",
+     "vol_mm3": 0.0,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 HDMI 2개 (추정 자리)",
+     "touch": true,
+     "why": "리본이 안 쓰는 micro-HDMI 모서리에 얹힘 (HDMI는 추정 자리)"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-PWR-BLK",
+     "vol_mm3": 0.023,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "전원선 GND (검정)",
+     "why": "두 선이 나란히 붙어 감"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-PWR-HOUSING",
+     "vol_mm3": 0.003,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "why": "선 끝이 점퍼 하우징에 들어감"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-PWR-HOUSING",
+     "vol_mm3": 0.003,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "why": "선 끝이 점퍼 하우징에 들어감"
+    },
+    {
+     "a": "TS-PWR-HOUSING",
+     "b": "PI5-GPIO",
+     "vol_mm3": 0.0,
+     "a_ko": "점퍼 F 하우징 (GPIO 2·6)",
+     "b_ko": "Pi 5 GPIO 40핀",
+     "touch": true,
+     "why": "점퍼 하우징이 GPIO 핀 받침 위에 끼워짐"
+    }
+   ],
+   "estimate_overlaps": [
+    {
+     "a": "TS-FFC",
+     "b": "PI5-HEATSINK",
+     "vol_mm3": 0.127,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 방열판 (추정 자리)",
+     "why": "방열판 상자는 추정 자리이고 CAD 리본 지킴 구역(x582부터)을 1.0 넘어 그려져 있음 → 실제 Pi 5로 확인 (사양 G-8)"
+    }
+   ],
+   "closest_gaps": [
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-LEG",
+     "gap": 0.02,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "받침다리 (접어 끼움)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-1",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-2",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-3",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-M25-4",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "M2.5×6 (화면 고정)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-PWR-RED",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-PWR-BLK",
+     "gap": 0.05,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-PWR-RED",
+     "gap": 0.05,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-PWR-BLK",
+     "gap": 0.05,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-HINGE-L",
+     "gap": 0.146,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (경첩 축 왼쪽)"
+    },
+    {
+     "a": "TS-CRADLE",
+     "b": "TS-M3X20-HINGE-R",
+     "gap": 0.146,
+     "a_ko": "화면 받침(크래들)",
+     "b_ko": "M3×20 (경첩 축 오른쪽)"
+    },
+    {
+     "a": "TS-LEG",
+     "b": "TS-M3X20-LEG",
+     "gap": 0.146,
+     "a_ko": "받침다리 (접어 끼움)",
+     "b_ko": "M3×20 (다리 축)"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-RCLIP",
+     "gap": 0.359,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "리본 클립 30×12×3"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-RCLIP",
+     "gap": 0.359,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "리본 클립 30×12×3"
+    },
+    {
+     "a": "TS-PWR-RED",
+     "b": "TS-LID",
+     "gap": 0.656,
+     "a_ko": "전원선 5V (빨강)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-PWR-BLK",
+     "b": "TS-LID",
+     "gap": 0.656,
+     "a_ko": "전원선 GND (검정)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-PWR-RED",
+     "gap": 0.729,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "전원선 5V (빨강)"
+    },
+    {
+     "a": "TS-WINCOVER",
+     "b": "TS-FFC",
+     "gap": 1.0,
+     "a_ko": "점검창 덮개",
+     "b_ko": "DSI 리본 22핀 0.5 mm 300 B형"
+    },
+    {
+     "a": "TS-SCREEN",
+     "b": "TS-WINCOVER",
+     "gap": 1.477,
+     "a_ko": "화면 7-DSI-TOUCH-C (더미)",
+     "b_ko": "점검창 덮개"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "PI5-BOARD",
+     "gap": 1.75,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "Pi 5 기판"
+    },
+    {
+     "a": "TS-SCREEN-BEZEL",
+     "b": "TS-SCREEN-TAB",
+     "gap": 1.8,
+     "a_ko": "화면 유리 테두리",
+     "b_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)"
+    },
+    {
+     "a": "TS-FFC",
+     "b": "TS-PWR-BLK",
+     "gap": 1.946,
+     "a_ko": "DSI 리본 22핀 0.5 mm 300 B형",
+     "b_ko": "전원선 GND (검정)"
+    },
+    {
+     "a": "TS-SCREEN-TAB",
+     "b": "TS-CRADLE",
+     "gap": 2.0,
+     "a_ko": "화면 아래 끝 돌기 (도면에서 잰 xr·높이, w는 추정)",
+     "b_ko": "화면 받침(크래들)"
+    },
+    {
+     "a": "TS-LEG",
+     "b": "TS-LID",
+     "gap": 2.0,
+     "a_ko": "받침다리 (접어 끼움)",
+     "b_ko": "가운데 화면 뚜껑 (B1판, L2 뚜껑에 더함)"
+    },
+    {
+     "a": "TS-WINCOVER",
+     "b": "TS-PWR-RED",
+     "gap": 2.099,
+     "a_ko": "점검창 덮개",
+     "b_ko": "전원선 5V (빨강)"
+    }
+   ],
+   "keepout_hits": [],
+   "min_y_above_module_top": {
+    "moving": 219.29,
+    "cables": 222.2,
+    "per_part": {
+     "TS-SCREEN": 235.55,
+     "TS-SCREEN-BEZEL": 235.55,
+     "TS-SCREEN-ACTIVE": 245.2,
+     "TS-SCREEN-ZIF": 272.05,
+     "TS-SCREEN-MX": 292.15,
+     "TS-SCREEN-TAB": 234.7,
+     "TS-CRADLE": 219.29,
+     "TS-WINCOVER": 267.05,
+     "TS-M25-1": 239.8,
+     "TS-M25-2": 327.8,
+     "TS-M25-3": 239.8,
+     "TS-M25-4": 327.8,
+     "TS-LEG": 262.55,
+     "TS-M3X20-LEG": 262.7,
+     "TS-FFC": 222.2,
+     "TS-PWR-RED": 224.84,
+     "TS-PWR-BLK": 224.84
+    }
+   }
+  }
+ },
+ "sweep": {
+  "step_deg": 1.0,
+  "leg": "clipped (stowed)",
+  "rows": [
+   {
+    "theta": 22.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 216.0,
+    "min_y_cables_above_top": 221.69
+   },
+   {
+    "theta": 23.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.122
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 216.2,
+    "min_y_cables_above_top": 221.67
+   },
+   {
+    "theta": 24.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 216.4,
+    "min_y_cables_above_top": 221.65
+   },
+   {
+    "theta": 25.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 216.61,
+    "min_y_cables_above_top": 221.63
+   },
+   {
+    "theta": 26.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 216.82,
+    "min_y_cables_above_top": 221.61
+   },
+   {
+    "theta": 27.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.03,
+    "min_y_cables_above_top": 221.6
+   },
+   {
+    "theta": 28.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.24,
+    "min_y_cables_above_top": 221.58
+   },
+   {
+    "theta": 29.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.46,
+    "min_y_cables_above_top": 221.56
+   },
+   {
+    "theta": 30.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.68,
+    "min_y_cables_above_top": 221.55
+   },
+   {
+    "theta": 31.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.9,
+    "min_y_cables_above_top": 221.53
+   },
+   {
+    "theta": 32.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.12,
+    "min_y_cables_above_top": 221.52
+   },
+   {
+    "theta": 33.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.35,
+    "min_y_cables_above_top": 221.51
+   },
+   {
+    "theta": 34.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.58,
+    "min_y_cables_above_top": 221.5
+   },
+   {
+    "theta": 35.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.6,
+    "min_y_cables_above_top": 221.49
+   },
+   {
+    "theta": 36.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.55,
+    "min_y_cables_above_top": 221.49
+   },
+   {
+    "theta": 37.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.49,
+    "min_y_cables_above_top": 221.48
+   },
+   {
+    "theta": 38.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.44,
+    "min_y_cables_above_top": 221.48
+   },
+   {
+    "theta": 39.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.39,
+    "min_y_cables_above_top": 221.48
+   },
+   {
+    "theta": 40.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.34,
+    "min_y_cables_above_top": 221.48
+   },
+   {
+    "theta": 41.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.3,
+    "min_y_cables_above_top": 221.48
+   },
+   {
+    "theta": 42.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.26,
+    "min_y_cables_above_top": 221.49
+   },
+   {
+    "theta": 43.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.22,
+    "min_y_cables_above_top": 221.5
+   },
+   {
+    "theta": 44.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.18,
+    "min_y_cables_above_top": 221.51
+   },
+   {
+    "theta": 45.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.15,
+    "min_y_cables_above_top": 221.52
+   },
+   {
+    "theta": 46.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.12,
+    "min_y_cables_above_top": 221.54
+   },
+   {
+    "theta": 47.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.09,
+    "min_y_cables_above_top": 221.55
+   },
+   {
+    "theta": 48.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.06,
+    "min_y_cables_above_top": 221.56
+   },
+   {
+    "theta": 49.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.04,
+    "min_y_cables_above_top": 221.58
+   },
+   {
+    "theta": 50.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.02,
+    "min_y_cables_above_top": 221.6
+   },
+   {
+    "theta": 51.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.0,
+    "min_y_cables_above_top": 221.61
+   },
+   {
+    "theta": 52.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.98,
+    "min_y_cables_above_top": 221.63
+   },
+   {
+    "theta": 53.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.97,
+    "min_y_cables_above_top": 221.65
+   },
+   {
+    "theta": 54.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.96,
+    "min_y_cables_above_top": 221.68
+   },
+   {
+    "theta": 55.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.95,
+    "min_y_cables_above_top": 221.7
+   },
+   {
+    "theta": 56.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.95,
+    "min_y_cables_above_top": 221.73
+   },
+   {
+    "theta": 57.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.95,
+    "min_y_cables_above_top": 221.75
+   },
+   {
+    "theta": 58.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.94,
+    "min_y_cables_above_top": 221.78
+   },
+   {
+    "theta": 59.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.95,
+    "min_y_cables_above_top": 221.81
+   },
+   {
+    "theta": 60.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.95,
+    "min_y_cables_above_top": 221.85
+   },
+   {
+    "theta": 61.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.96,
+    "min_y_cables_above_top": 221.88
+   },
+   {
+    "theta": 62.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.97,
+    "min_y_cables_above_top": 221.92
+   },
+   {
+    "theta": 63.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 217.98,
+    "min_y_cables_above_top": 221.95
+   },
+   {
+    "theta": 64.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.0,
+    "min_y_cables_above_top": 221.99
+   },
+   {
+    "theta": 65.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.02,
+    "min_y_cables_above_top": 222.04
+   },
+   {
+    "theta": 66.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.04,
+    "min_y_cables_above_top": 222.08
+   },
+   {
+    "theta": 67.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.06,
+    "min_y_cables_above_top": 222.13
+   },
+   {
+    "theta": 68.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "leg": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.09,
+    "min_y_cables_above_top": 222.18
+   },
+   {
+    "theta": 69.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.12,
+    "min_y_cables_above_top": 222.22
+   },
+   {
+    "theta": 70.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.15,
+    "min_y_cables_above_top": 222.27
+   },
+   {
+    "theta": 71.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.18,
+    "min_y_cables_above_top": 222.32
+   },
+   {
+    "theta": 72.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.22,
+    "min_y_cables_above_top": 222.37
+   },
+   {
+    "theta": 73.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.26,
+    "min_y_cables_above_top": 222.42
+   },
+   {
+    "theta": 74.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.3,
+    "min_y_cables_above_top": 222.47
+   },
+   {
+    "theta": 75.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.34,
+    "min_y_cables_above_top": 222.5
+   },
+   {
+    "theta": 76.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.39,
+    "min_y_cables_above_top": 222.49
+   },
+   {
+    "theta": 77.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.44,
+    "min_y_cables_above_top": 222.47
+   },
+   {
+    "theta": 78.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.49,
+    "min_y_cables_above_top": 222.45
+   },
+   {
+    "theta": 79.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.54,
+    "min_y_cables_above_top": 222.43
+   },
+   {
+    "theta": 80.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.6,
+    "min_y_cables_above_top": 222.41
+   },
+   {
+    "theta": 81.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.66,
+    "min_y_cables_above_top": 222.38
+   },
+   {
+    "theta": 82.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.72,
+    "min_y_cables_above_top": 222.36
+   },
+   {
+    "theta": 83.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.78,
+    "min_y_cables_above_top": 222.33
+   },
+   {
+    "theta": 84.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.85,
+    "min_y_cables_above_top": 222.31
+   },
+   {
+    "theta": 85.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.91,
+    "min_y_cables_above_top": 222.29
+   },
+   {
+    "theta": 86.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 218.99,
+    "min_y_cables_above_top": 222.28
+   },
+   {
+    "theta": 87.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 219.06,
+    "min_y_cables_above_top": 222.25
+   },
+   {
+    "theta": 88.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 3.0,
+     "axle": 3.0,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 219.13,
+    "min_y_cables_above_top": 222.24
+   },
+   {
+    "theta": 89.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.2,
+     "cover": 3.0,
+     "leg": 2.682,
+     "axle": 2.832,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 219.21,
+    "min_y_cables_above_top": 222.21
+   },
+   {
+    "theta": 90.0,
+    "hits": [],
+    "gap_to_lid": {
+     "cradle": 0.0,
+     "cover": 3.0,
+     "leg": 2.0,
+     "axle": 2.15,
+     "screen": 3.0,
+     "m25": 3.0
+    },
+    "keepout_vol": 0.0,
+    "min_y_moving_above_top": 219.29,
+    "min_y_cables_above_top": 222.2
+   }
+  ],
+  "unexpected_hits": [],
+  "keepout_violations": [],
+  "worst": {
+   "min_gap_to_lid_between_22_90": [
+    0.122,
+    23.0,
+    "cradle"
+   ],
+   "min_y_moving_above_top": [
+    216.00436889326843,
+    22.0
+   ],
+   "min_y_cables_above_top": [
+    221.4788055419922,
+    39.0
+   ]
+  }
+ },
+ "summary": {
+  "22": {
+   "interferences": 0,
+   "estimate_overlaps": 1,
+   "keepout_hits": 0
+  },
+  "25": {
+   "interferences": 0,
+   "estimate_overlaps": 1,
+   "keepout_hits": 0
+  },
+  "90": {
+   "interferences": 0,
+   "estimate_overlaps": 1,
+   "keepout_hits": 0
+  },
+  "sweep_unexpected": 0,
+  "sweep_keepout": 0
+ },
+ "elapsed_s": 11.7
+}
