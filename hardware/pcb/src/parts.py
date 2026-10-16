@@ -1,9 +1,11 @@
 """Module pinouts and part metadata for the Toccata schematics.
 
-Pad numbers for modules without an official symbol (RP2040-Zero, 4067 breakout, PD trigger,
+Pad numbers for modules without an official symbol (RP2040-Zero, 4067 breakout,
 buck, amp) are OUR convention and are listed in hardware/pcb/netlist/*.csv so a custom
 KiCad symbol/footprint can be made to match.
 """
+
+import harness as _HN  # noqa: E402  (cut lengths quoted in the BOM text; harness imports none of our modules)
 
 # RP2040-Zero (Waveshare / layout-identical clone), top view, USB-C at the top edge.
 # Pin numbers = dj505/RP2040-Zero-KiCAD library (symbol + footprint agree):
@@ -53,8 +55,7 @@ def mux_pin(name):
     raise KeyError(name)
 
 
-# HUSB238 PD trigger module (icbanq HAM6113): USB-C receptacle in, output pads.
-PDTRIG = [(1, "VOUT+"), (2, "VOUT+"), (3, "GND"), (4, "GND")]   # 2 round + pads, 2 square - pads
+# Rev D (2026-10-07): the HUSB238 PD trigger (A601) is gone; power comes from BT601, a LiFePO4 pack with an XT60 lead.
 # XL4016 buck module (XH-M401): screw terminals
 BUCK = [(1, "IN+"), (2, "IN-"), (3, "OUT+"), (4, "OUT-")]
 # XH-A232 (HW-404) TPA3110 amp board
@@ -62,56 +63,66 @@ AMP_IN = [(1, "L"), (2, "G"), (3, "R")]
 AMP_PWR = [(4, "VCC"), (5, "GND")]
 AMP_OUT = [(6, "L+"), (7, "L-"), (8, "R+"), (9, "R-")]   # silkscreen order along the top edge
 
-# BOM codes from docs/report/toccata-purchase-list-v4.xlsx ("부품 코드" column)
+# BOM codes = the "code" column of the FINAL purchase data (hardware/bom/final-bom/data.json, plan C 2026-10-08).
+# (code, description, where it comes from). The purchase STATE (학교 / 사비 / 보유) is read by purchase.py.
 BOM = {
     "DRV5055": ("L20", "TI DRV5055A2QLPG, TO-92-3 (LPG)", "아이씨뱅큐 P018076669"),
-    "C100n": ("SE4", "Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R", "아이씨뱅큐 P014968846"),
-    "C10u": ("L67", "C3216-10UF(K 16V) 1206 10 µF 16 V (50개 단위)", "아이씨뱅큐 P001248090"),
-    "C1u": ("L56", "리드형 적층 세라믹 1 µF 50 V X7R", "아이씨뱅큐 P014159115"),
-    "R1k": ("L29", "탄소피막 1/4 W 5 % 1 kΩ", "엘레파츠 10911"),
+    "C100n": ("SE4", "Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R", "디바이스마트 14991278"),
+    "C10u": ("L67", "Samsung CL31A106KOHNNNE 1206 10 µF 16 V X5R (낱개)", "엘레파츠 2675965"),
+    "C1u": ("L56", "리드형 적층 세라믹 1 µF 50 V X7R (몸통 105)", "아이씨뱅큐 P014159115"),
+    "R1k": ("L29", "탄소피막 1/4 W 5 % 1 kΩ (리드형, 갈·검·빨·금)", "사용자 보유 (ABCO CFR 같은 값)"),
     "R1k1206": ("L68", "Yageo RC1206JR-071KL 1206 1 kΩ 5 % 1/4 W (10개 단위)", "아이씨뱅큐 P011433924"),
-    "R100k": ("L29", "탄소피막 1/4 W 5 % 100 kΩ", "엘레파츠 10993"),
-    "R100": ("L29", "탄소피막 1/4 W 5 % 100 Ω", "엘레파츠 10873"),
-    "ZERO": ("SEV2", "Waveshare RP2040-Zero (파츠파츠 PP-A799-2)", "파츠파츠 2383"),
-    "MUX": ("SEV2", "CD74HC4067 16채널 먹스 모듈 (파츠파츠 PP-A324)", "파츠파츠 303"),
-    "HDR": ("SE7", "핀헤더 1×40 2.54 mm (자름) — 먹스 모듈 1×16 + 1×8", "아이씨뱅큐 P005666127"),
-    "PADS6": ("", "패드만 — L66 모듈 쪽 리드를 아랫면에서 직접 납땜 (헤더 없음)", ""),
-    "HDRZ": ("SE7", "핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2 (먹스 168 + 제로 144 = 312핀 → 1×40 9줄)", "아이씨뱅큐 P005666127"),
-    "PERF57": ("SE8", "양면 만능기판 5×7 cm", "메카솔루션 329798"),
-    "PERF1218": ("L22", "양면 만능기판 12×18 cm (띠로 자름)", "메카솔루션 540645"),
-    "RIBBON": ("C05", "EUNSUNG 2651-16P 플랫 케이블 (16심 전부 사용)", "엘레파츠 425"),
-    "JSTXH": ("L66", "JST-XH 6핀 밸런스 연장선 5S 200 mm (모듈 쪽 150 · 끝 부속 쪽 50으로 잘라 씀)", "알씨뱅크 29812"),
-    "PJ313": ("L15", "BSUN PJ-313 3.5 mm 스테레오 잭 (노멀 접점)", "엘레파츠 67811"),
-    "TRS3M": ("L50", "Coms BC256 3.5 mm 스테레오 케이블 3 m (한쪽 잘라 씀)", "아이씨뱅큐 P004711396"),
-    "TRS15": ("C14", "Coms AV0176 3.5 mm 스테레오 케이블 1.5 m (한쪽 잘라 씀)", "엘레파츠 2925673"),
+    "R100k": ("L29", "탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)", "사용자 보유 (ABCO CFR 같은 값)"),
+    "R100": ("L29", "탄소피막 1/4 W 5 % 100 Ω (리드형, 갈·검·갈·금)", "사용자 보유 (ABCO CFR 같은 값)"),
+    "ZERO": ("SEV2", "RP2040-Zero 호환 (파츠파츠 PP-A799-2, Waveshare 배치)", "파츠파츠 2383"),
+    "MUX": ("SEV2", "CD74HC4067 16채널 먹스 모듈 (파츠파츠 PP-A324, SparkFun BOB-09056 배치)", "파츠파츠 303"),
+    "HDR": ("SE7", "핀헤더 1×40 2.54 mm 11.5 mm 1단 몰드 (잘라 씀) — 먹스 모듈 1×16 + 1×8", "아이씨뱅큐 P005666127"),
+    "PADS6": ("", "패드만 — Adafruit 4876 플러그 선(모듈 쪽)을 아랫면에서 직접 납땜 (헤더 없음)", ""),
+    "HDRZ": ("SE7", "핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2, 몰드 뺌 (먹스 168 + 제로 144 = 312핀 → 1×40 9줄)", "아이씨뱅큐 P005666127"),
+    "PERF": ("u06", "Coms BE163 양면 만능기판 80 × 120 (30 × 42 구멍)에서 자른 70 × 50 조각 (지그 09_기판지그)", "사용자 보유 BE163 4장"),
+    "PERF1218": ("L22", "양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리", "메카솔루션 540645"),
+    "RIBBON": ("C05", "EUNSUNG 2651-16P 플랫 케이블 28 AWG (16심 전부 사용)", "엘레파츠 425"),
+    "RIBBONW": ("SE12", "EUNSUNG 2651-16P 1 m 더 — 가닥으로 갈라 기판 배선·W502", "엘레파츠 425"),
+    "JSTXH": ("L66", "Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 150 · 끝 부속 쪽 50으로 자름", "엘레파츠 19324904"),
+    "PJ313": ("L15", "GEC PJ-313 3.5 mm 스테레오 잭 (5핀 T·TN·R·RN·S, 노멀 접점, PCB형)", "디바이스마트 2674"),
+    "TRS3M": ("L50", "Coms BC256 3.5 mm 스테레오 케이블 3 m (페달 쪽 플러그를 잘라 씀)", "엘레파츠 2925651"),
+    "TRS15": ("C14", "Coms BC256 3.5 mm 스테레오 케이블 3 m 1가닥을 반으로 잘라 1.5 m × 2 (W702 그대로, W701 = 플러그 뒤 %.1f m + 나머지에서 W707)"
+              % (_HN.W701_CUT / 1000.0), "엘레파츠 2925651"),
     "PEDAL": ("L43", "듀로 서스테인 페달 (스위치형 → 홀센서 개조)", "피아노모아"),
     "MAG5": ("L21", "네오디뮴 Ø5×2 N35 (센서 자석)", "대건상사 (dgmagnet)"),
-    "PDTRIG": ("L57", "HUSB238 PD 트리거 모듈 5~20 V (HAM6113)", "아이씨뱅큐 P017179277"),
-    "FUSEH": ("L60", "Coms BU914 인라인 퓨즈 홀더 5×20 mm", "엘레파츠 3237821"),
-    "FUSE": ("L60", "Littelfuse 0218005.MXP 5 A 지연형 5×20 mm", "엘레파츠 12766820"),
-    "SW": ("L59", "KCD1-101A 로커 스위치 (SPST, 2핀)", "엘레파츠 32569"),
+    # power (R33, 2026-10-07)
+    "BATT": ("u01", "Turmera LiFePO4 12.8 V 4S1P 32700 (계산 6 Ah · 76.8 Wh), BMS 4S 40 A, 출력 XT60 암 리드 + DC 5.5×2.1 충전 리드, 140 × 72 × 35 mm", "사용자 구매 (쿠팡)"),
+    "XT60F": ("", "AMASS XT60 암 — BT601 팩 리드 끝에 달려 옴 (따로 사지 않음)", "BT601과 함께"),
+    "XT60M": ("L80", "AMASS XT60-M 16 AWG 실리콘 선 10 cm — W601 전지 하네스 (리드 %d mm로 자름 + 홀더 꼬리 %d mm, 이은 전체 %d mm 이하, 빨강 수축)"
+              % (_HN.LEAD_W601, _HN.STUB12, _HN.W601_MAX), "엘레파츠 12779718"),
+    "XT60F_BENCH": ("L81", "AMASS XT60-F 16 AWG 10 cm — 벤치 12 V SMPS 어댑터 (빨강 수축, 회로도 밖)", "엘레파츠 12779719"),
+    "FUSEH": ("u04", "ATC/ATO 블레이드 인라인 퓨즈 홀더 (덮개 끼움식, 12 AWG 꼬리, 40.1 × 11.1 × 33.8)", "사용자 보유"),
+    "FUSE": ("u05", "ATO 표준 블레이드 퓨즈 5 A (주황, 32 V DC) — 켤 때 끊기면 7.5 A (갈색)", "사용자 보유 (퓨즈 세트)"),
+    "SW": ("u03", "KCD1-104 로커 스위치 (4핀 2회로 ON-OFF, 패널 구멍 19 × 13, 두 회로 나란히)", "사용자 보유 (디바이스마트 1788과 같은 품번)"),
     "BUCK": ("L58", "XL4016 강압 모듈 XH-M401 (HAM6415) → 5.1 V", "아이씨뱅큐 P017179502"),
-    "MT666": ("C24", "MAXTEK MT666 USB-C 수 2선 DIY 전원선", "엘레파츠 17358965"),
+    "C24": ("C24", "Coms BT663 USB-A → C 측면 꺾임 20 cm (A 끝을 잘라 빨강·검정을 강압 출력에)", "엘레파츠 8105815"),
+    "HUBDC": ("L17 부속", "허브 5 V 어댑터 선의 플러그 쪽 (곧은 플러그는 잭 면에서 32 mm 이하일 때만, 아니면 ㄱ자 DC 플러그 선)", "허브와 함께"),
     "PI5": ("L01", "Raspberry Pi 5 2GB", "아이씨뱅큐 P016286897"),
-    "HUB": ("L17", "NEXTU 710U3 유전원 USB 허브 (10포트)", "다나와"),
-    "USBAC": ("C04", "Coms NA993 USB-A → C 1 m", "엘레파츠 4313490"),
-    "DONGLE": ("L51", "Apple USB-C → 3.5 mm 어댑터 MW2Q3", "Apple"),
-    "GENDER": ("L52", "Coms IH190 USB-C(F) → USB-A(M) 젠더", "엘레파츠 11043038"),
-    "AMP": ("L53", "XH-A232 (HW-404) TPA3110 2×15 W 앰프 보드", "아이씨뱅큐 P017179248"),
-    "XT30M": ("L61", "AMASS XT30U-M 18 AWG 10 cm", "엘레파츠 12779720"),
-    "XT30F": ("L61", "AMASS XT30U-F 18 AWG 10 cm", "엘레파츠 12779721"),
-    "SPK": ("L07", "삼미 CW-100B25 4인치 8 Ω 25 W", "11번가 1565354988"),
-    "SPKW": ("C13", "스피커선 16 AWG (전원선 겸용)", "엘레파츠 18388615"),
-    "PDCHG": ("L62", "파워마스터 65 W PD 충전기 PG65PDG2C1A", "다나와"),
-    "CC2M": ("C23", "USB-C to C PD 60 W 2 m", "엘레파츠 17806170"),
-    # △16 (rev C, 2026-10-01) R31 screen B1 — purchase list v4 rows with code "v4touch" (No. = list row number)
-    "DISP7C": ("v4touch No.135", "Waveshare 7-DSI-TOUCH-C 7인치 DSI 정전식 터치 1024×600 IPS (약 2.15 W, 동봉: 전원선 MX1.25 2핀 → 2.54 3핀, 22핀 200 mm 리본 2)", "G마켓 해외직구 4783965807"),
-    "JMPFF": ("v4touch No.51 · No.52", "실리콘 점퍼 26 AWG 20 cm F/F 빨강 1 + 검정 1 (W606, Pi 헤더 쪽 끝)", "엘레파츠 9461190 · 9461199"),
+    "HUB": ("L17", "NEXTU 710U3 유전원 USB 허브 (10포트, 5 V DC 입력)", "다나와"),
+    "USBAC": ("C04", "USB-A → C 데이터선 — Coms NA993 1 m ×2 (W201·W202), Coms HB466 50 cm ×6 (W203~W208; W205·W206은 CAD 0.3 m 자리라 남는 선을 묶음) (C 쪽 몰드 ≤ 12.5 × 7.6 × 25)", "엘레파츠 4313490 · 12185313 (사비)"),
+    "C25": ("C25", "Coms NA977 USB-A(상향 꺾임) → B 25 cm (허브 업스트림)", "엘레파츠 4314354"),
+    "DONGLE": ("L51", "Apple USB-C → 3.5 mm 헤드폰 어댑터 MW2Q3KH/A", "쿠팡 (Apple 정품)"),
+    "GENDER": ("L52", "Coms IH190 USB-C(F) → USB-A(M) ㄱ자 젠더", "엘레파츠 11043038"),
+    "AMP": ("L53", "XH-A232 (HW-404) TPA3110 2 × 15 W 앰프 보드 (12.8 V에서 약 8 W/ch)", "아이씨뱅큐 P017179248"),
+    # △18 (2026-10-07): speaker joints use the same XT60 as the battery -> L80 ×3 (W601 + 2), L81 ×3 (bench adapter + 2)
+    "XT60M_SPK": ("L80", "AMASS XT60-M 16 AWG 10 cm (앰프 쪽 스피커 리드, 파랑 수축 + SPK)", "엘레파츠 12779718"),
+    "XT60F_SPK": ("L81", "AMASS XT60-F 16 AWG 10 cm (스피커 꼬리선, 파랑 수축 + SPK)", "엘레파츠 12779719"),
+    "SPK": ("L07", "삼미 CW-100B25 4인치 8 Ω 25 W", "쿠팡"),
+    "SPKW": ("C13", "2심 전원·스피커선 16 AWG (18 AWG도 됨, 최대 약 3.4 A)", "엘레파츠 18388615 또는 보유 선"),
+    # △16 (rev C, 2026-10-01) R31 screen B1
+    "DISP7C": ("v4touch", "Waveshare 7-DSI-TOUCH-C 7인치 DSI 정전식 터치 1024×600 IPS (약 2.15 W, 동봉: 전원선 MX1.25 2핀 → 2.54 3핀, 22핀 200 mm 리본 2)", "G마켓 해외직구 4783965807"),
+    "JMPFF": ("v4touch", "실리콘 점퍼 26 AWG 20 cm F/F 빨강 1 + 검정 1 (W606, Pi 헤더 쪽 끝)", "엘레파츠 9461190 · 9461199"),
     "JMPFF2": ("", "W606 다른 끝 — P603과 같은 점퍼 (따로 사지 않음)", ""),
-    "JMPMM": ("v4touch No.53 · No.54", "실리콘 점퍼 26 AWG 20 cm M/M 빨강 1 + 검정 1 (W607, X601에 꽂는 끝)", "엘레파츠 9756990 · 9756998"),
+    "JMPMM": ("v4touch", "실리콘 점퍼 26 AWG 20 cm M/M 빨강 1 + 검정 1 (W607, X601에 꽂는 끝)", "엘레파츠 9756990 · 9756998"),
     "JMPMM2": ("", "W607 다른 끝 — X602와 같은 점퍼 (따로 사지 않음)", ""),
-    "DPWR": ("v4touch No.135 동봉", "화면 동봉 전원선 W608의 2.54 3핀 하우징 (A605에 들어 있음)", "A605와 함께"),
+    "DPWR": ("v4touch", "화면 동봉 전원선 W608의 2.54 3핀 하우징 (A605에 들어 있음)", "A605와 함께"),
     "DPWR2": ("", "W608 다른 끝 — MX1.25 2핀 플러그 (X604와 같은 선, 따로 사지 않음)", ""),
-    "FFC22B": ("v4touch No.49", "GUOCONN 0.5*22P*300*B FFC 22핀 0.5 mm 300 mm 반대면(B형) 5개 묶음", "엘레파츠 18622271"),
-    "FFC22A": ("v4touch No.50", "GUOCONN 0.5*22P*300*A FFC 22핀 0.5 mm 300 mm 같은 면(A형) 5개 묶음 (보험)", "엘레파츠 18581287"),
+    "FFC22B": ("v4touch", "GUOCONN 0.5*22P*300*B FFC 22핀 0.5 mm 300 mm 반대면(B형)", "엘레파츠 18622271"),
+    "FFC22A": ("v4touch", "GUOCONN 0.5*22P*300*A FFC 22핀 0.5 mm 300 mm 같은 면(A형, 보험)", "엘레파츠 18581287"),
+    "SHRINK": ("C10", "열수축 튜브 세트 (빨강·파랑 포함)", "엘레파츠 8170311"),
 }

@@ -100,7 +100,10 @@ for s in ((RES.get("shipping") or {}).get("sellers") or []):
 ships.update(OVR.get("_ships", {}))
 
 used_groups = [g for g in GROUPS if any(i["g"] == g for i in items)]
-data = dict(items=items, views=views, zones=Z, ships=ships, groups=used_groups, prep=OVR.get("_prep", []), design=OVR.get("_design", []),
+ORDER = json.load(open(os.path.join(F, "order_notes.json"), encoding="utf-8"))   # names / notes for the one-sheet order export
+ORDER.pop("_about", None)
+data = dict(items=items, views=views, zones=Z, ships=ships, groups=used_groups, order=ORDER, prep=OVR.get("_prep", []), design=OVR.get("_design", []),
+            budget=OVR.get("_budget"), budget_items_only=bool(OVR.get("_budget_items_only")), school_pays_ship=bool(OVR.get("_school_pays_ship")),   # 학교 지원 한도 (10/8): 4개 사이트 물건값, 배송비는 사비
             foot=OVR.get("_foot", "처음 목록 = docs/report/toccata-purchase-list-v4.xlsx (2026-09-29) + 게임용 HDMI 케이블. 가격은 판매처 페이지 확인값(VAT 포함)이며 주문 전에 다시 확인하세요. 배송비는 판매처 안내 기준으로 계산합니다."))
 
 os.makedirs(os.path.join(SITE, "img"), exist_ok=True)

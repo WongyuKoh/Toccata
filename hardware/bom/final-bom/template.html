@@ -151,6 +151,53 @@ a{color:var(--acc)}
   .wrap{padding-block:0 84px}
 }
 .row:hover{background:color-mix(in srgb,var(--sur) 60%,transparent)}
+
+/* view tabs: 재료 목록 / 학교·사비 구매 (10/8) */
+.views{display:flex;gap:6px;padding-top:14px;border-bottom:1px solid var(--rule);overflow-x:auto}
+.vbtn{border:1px solid var(--rule);border-bottom:0;background:transparent;color:var(--ink2);border-radius:8px 8px 0 0;padding:8px 14px;font-size:13.5px;white-space:nowrap}
+.vbtn[aria-selected="true"]{background:var(--sur);color:var(--ink);font-weight:600;border-color:var(--ink2)}
+.split{padding-top:16px;display:flex;flex-direction:column;gap:18px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.tiles{grid-template-columns:minmax(0,1fr)}}
+.tile{background:var(--sur);border:1px solid var(--rule);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.tile .lab{font-size:11.5px;letter-spacing:.06em;color:var(--mut)}
+.tile .v{font-family:var(--f-mono);font-size:24px;font-weight:500;line-height:1.15}
+.tile .v small{font-size:13px;margin-left:2px;color:var(--ink2)}
+.tile .d{font-size:12px;color:var(--ink2)}
+.tile.sch{border-color:color-mix(in srgb,var(--acc) 45%,var(--rule))}
+.meter{height:8px;background:var(--acc-bg);border-radius:99px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--acc);border-radius:99px}
+.meter.over i{background:var(--felt)}
+.sgrp{display:flex;flex-direction:column;gap:10px}
+.sgrp > header{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--ink);padding:0 2px 6px}
+.sgrp > header h3{margin:0;font-size:15px}
+.sgrp > header .m{font-size:12.5px;color:var(--ink2)}
+.sbox{background:var(--sur2);border:1px solid var(--rule);border-radius:var(--r);overflow:hidden}
+.sbox .sh{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;justify-content:space-between;padding:8px 12px;border-bottom:1px solid var(--rule);background:var(--sur)}
+.sbox .sh b{font-weight:600;font-size:13.5px}
+.sbox .sh span{font-size:12px;color:var(--ink2)}
+.tw{overflow-x:auto}
+.stbl{width:100%;border-collapse:collapse;font-size:12.5px;min-width:520px}
+.stbl th{font-size:11.5px;color:var(--mut);font-weight:500;text-align:left;padding:5px 10px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.stbl td{padding:6px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.stbl tr:last-child td{border-bottom:0}
+.stbl .n{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stbl tr.shiprow td{color:var(--ink2);background:color-mix(in srgb,var(--sur) 50%,transparent)}
+.stbl a{white-space:nowrap}
+.sfoot{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--ink2)}
+@media (max-width:640px){   /* phones: one item = two lines (품목명 / 단가 × 수량 · 총금액 · 링크) */
+  .stbl{min-width:0}
+  .stbl thead{display:none}
+  .stbl tr{display:grid;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"nm nm nm" "u a lk";column-gap:12px;row-gap:2px;padding:7px 10px;border-bottom:1px solid var(--rule)}
+  .stbl tr:last-child{border-bottom:0}
+  .stbl td{border:0;padding:0}
+  .stbl td:first-child{grid-area:nm}
+  .stbl td.u{grid-area:u;text-align:left;color:var(--ink2)}
+  .stbl td.u::after{content:" × " attr(data-q)}
+  .stbl td.q{display:none}
+  .stbl td.a{grid-area:a;font-weight:600}
+  .stbl td.lk{grid-area:lk;text-align:right}
+}
 </style>
 
 <header class="top">
@@ -167,7 +214,8 @@ a{color:var(--acc)}
       <span class="delta" id="delta"></span>
     </div>
     <div class="acts">
-      <button class="btn pri" id="xlsx" type="button">엑셀 받기</button>
+      <button class="btn pri" id="xlsx2" type="button" title="학교 구매·사비 구매 두 시트: 품목명 / 단가 / 수량 / 총금액 / 구매 사이트 / 제품 링크(URL)">학교·사비 엑셀 받기</button>
+      <button class="btn" id="xlsx" type="button" title="판매처별로 묶은 한 시트, 배송비 수식과 맨 아래 총합">판매처별 엑셀</button>
       <button class="btn" id="nospare" type="button" title="쓰고 남는 예비를 뺀 수량으로 맞춥니다">예비 빼기</button>
       <button class="btn" id="reset" type="button">처음 목록으로</button>
       <span id="resetAsk" hidden><button class="btn warn" id="resetYes" type="button">되돌리기</button> <button class="btn" id="resetNo" type="button">취소</button></span>
@@ -177,6 +225,12 @@ a{color:var(--acc)}
 </header>
 
 <div class="wrap">
+  <div class="views" id="views" role="tablist" aria-label="보기">
+    <button class="vbtn" type="button" role="tab" data-view="list" aria-selected="true" aria-controls="viewList">재료 목록</button>
+    <button class="vbtn" type="button" role="tab" data-view="split" aria-selected="false" aria-controls="viewSplit">학교·사비 구매</button>
+  </div>
+  <section class="split" id="viewSplit" role="tabpanel" aria-label="학교·사비 구매" hidden></section>
+  <div id="viewList" role="tabpanel" aria-label="재료 목록">
   <div class="filters">
     <input class="search" id="q" type="search" placeholder="품목·용도·판매처 검색" aria-label="검색">
     <div class="chips" id="chips"></div>
@@ -204,6 +258,7 @@ a{color:var(--acc)}
         <div>배송비는 판매처마다 남은 품목으로 다시 계산합니다.</div>
       </section>
     </aside>
+  </div>
   </div>
   <p class="foot" id="foot"></p>
 </div>
@@ -244,14 +299,19 @@ function compute(stateOn, stateQty){
     const k = it.sk || ("_" + it.store);
     (per[k] = per[k] || {sub:0, n:0, store:it.store, key:it.sk}).sub += a; per[k].n++;
   }
-  let ship = 0;
+  let ship = 0, school = 0, schoolShip = 0;
   for (const k in per){
     const p = per[k]; const sh = p.key && SHIPS[p.key];
     p.ship = 0;
-    if (sh){ p.ship = (sh.free_over != null && p.sub >= sh.free_over) ? 0 : sh.fee; }
+    // carry = 같은 장바구니에 담는 에어컨 재료 금액, shared = 그 판매처 배송비를 에어컨 목록이 이미 냄
+    if (sh){ p.ship = sh.shared ? 0 : (sh.free_over != null && p.sub + (sh.carry || 0) >= sh.free_over) ? 0 : sh.fee; }
     ship += p.ship;
+    if (sh && sh.school){                                // 학교 지원 주문 (따로 결제)
+      school += p.sub + (D.budget_items_only ? 0 : p.ship);  // 한도에 드는 금액
+      if (D.budget_items_only && D.school_pays_ship) schoolShip += p.ship;   // 10/8: 학교 주문 배송비는 학교 (한도 밖)
+    }
   }
-  return {items, ship, total: items + ship, cat, per};
+  return {items, ship, total: items + ship, cat, per, school, schoolShip, own: items + ship - school - schoolShip};
 }
 const BASE = compute(it => it.on, it => it.qty);
 
@@ -400,7 +460,11 @@ function refreshRow(id){
 function totals(){
   const r = compute(onOf, qtyOf);
   document.getElementById("grand").innerHTML = `${won(r.total)}<small>원</small>`;
-  document.getElementById("brk").innerHTML = `<span>부품 <b class="num">${won(r.cat["기본"]||0)}</b></span><span>소모품 <b class="num">${won(r.cat["소모품"]||0)}</b></span><span>공구 <b class="num">${won(r.cat["공구"]||0)}</b></span><span>배송비 <b class="num">${won(r.ship)}</b></span>`;
+  const lim = D.budget || 0, over = lim && r.school > lim;
+  document.getElementById("brk").innerHTML = (lim ? `<span>학교 지원${D.budget_items_only ? "(물건값)" : ""} <b class="num"${over ? ' style="color:var(--felt)"' : ""}>${won(r.school)}</b> / ${won(lim)}${over ? " — 한도 초과" : ""}</span>` +
+    (D.school_pays_ship ? `<span>학교 주문 배송비(학교) <b class="num">${won(r.schoolShip)}</b></span>` : "") +
+    `<span>사비${D.budget_items_only && !D.school_pays_ship ? "(배송비 모두 포함)" : "(배송비 포함)"} <b class="num">${won(r.own)}</b></span>` : "") +
+    `<span>물건값 <b class="num">${won(r.items)}</b></span><span>배송비 <b class="num">${won(r.ship)}</b></span>`;
   const d = r.total - BASE.total; const de = document.getElementById("delta");
   de.className = "delta " + (d < 0 ? "down" : d > 0 ? "up" : "");
   de.textContent = d === 0 ? "처음 목록과 같습니다" : `처음 목록 ${won(BASE.total)}원보다 ${d < 0 ? won(-d) + "원 적음" : won(d) + "원 많음"}`;
@@ -415,12 +479,15 @@ function totals(){
   document.getElementById("stores").innerHTML = rows.map(p => {
     const sh = p.key && SHIPS[p.key];
     let note = "";
-    if (sh){ note = p.ship ? `배송비 ${won(p.ship)}원` + (sh.free_over != null ? ` (${won(sh.free_over)}원 이상 무료)` : "") : (sh.free_over != null && sh.fee ? `배송 무료 (${won(sh.free_over)}원 이상)` : "배송 무료"); }
+    if (sh && sh.shared){ note = `배송비 ${won(sh.fee)}원은 에어컨 목록에 있음 (같은 장바구니)`; }
+    else if (sh && sh.carry && !p.ship){ note = `에어컨 재료 ${won(sh.carry)}원과 같은 장바구니 → 배송 무료`; }
+    else if (sh){ note = p.ship ? `배송비 ${won(p.ship)}원` + (sh.free_over != null ? ` (${won(sh.free_over)}원 이상 무료)` : "") : (sh.free_over != null && sh.fee ? `배송 무료 (${won(sh.free_over)}원 이상)` : "배송 무료"); }
     else note = "배송비 따로 없음";
-    const label = p.key && p.key !== p.store ? `${p.store} · ${p.key}` : p.store;
+    const label = (p.key && p.key !== p.store ? `${p.store} · ${p.key}` : p.store) + (sh && sh.school ? " · 학교 지원" : "");
     return `<tr><td>${esc(label)}<div class="ship">${p.n}개 · ${esc(note)}</div></td><td class="r num">${won(p.sub + p.ship)}</td></tr>`;
   }).join("") + offStores.map(s => `<tr class="off"><td>${esc(s)}<div class="ship">모두 뺌</div></td><td class="r num">0</td></tr>`).join("") +
   `<tr><td><b>합계</b></td><td class="r num"><b>${won(r.total)}</b></td></tr>`;
+  if (typeof renderSplit === "function") renderSplit();
 }
 
 // ---------- events
@@ -541,46 +608,94 @@ const xbtn = document.getElementById("xlsx");
 async function initDownloads(){
   const use = window.claude && window.claude.use ? window.claude.use.bind(window.claude) : null;
   try { downloads = use ? await use("downloads") : null; } catch (e){ downloads = null; }
-  if (!downloads){ xbtn.disabled = true; xbtn.title = "이 화면에서는 파일 받기를 쓸 수 없습니다"; }
+  if (!downloads){ for (const b of [xbtn, document.getElementById("xlsx2")]){ b.disabled = true; b.title = "이 화면에서는 파일 받기를 쓸 수 없습니다"; } }
 }
+// one sheet, same layout as 최종본/01_구매목록 (build_order_xlsx.py): store block = items → 배송비 → 소계, grand total at the bottom
+function shortUrl(u){ try { const x = new URL(u); let s = decodeURIComponent(x.host.replace(/^www\./, "") + x.pathname + x.search); return s.length > 46 ? s.slice(0, 45) + "…" : s; } catch (e){ return u; } }
+function hostOf(u){ try { return new URL(u).host.replace(/^www\./, ""); } catch (e){ return ""; } }
 function buildWorkbook(){
   const XL = window.XLSX; const wb = XL.utils.book_new();
   const r = compute(onOf, qtyOf);
+  const O = D.order || {site:{}, store_note:{}, note:{}};
   const today = new Date(); const ds = today.getFullYear() + "-" + String(today.getMonth()+1).padStart(2,"0") + "-" + String(today.getDate()).padStart(2,"0");
-  // sheet 1: order by store
-  const A = [["Toccata 최종 재료 — 판매처별 주문표", "", "", "", "", "", "", "", ""], ["만든 날: " + ds + " · v4 W1 r4.5 · 수량·단가를 고치면 금액·합계가 다시 계산됩니다"], [],
-             ["판매처", "분류", "품목", "상품명 (판매처 표기)", "수량", "단가(원)", "금액(원)", "구분", "링크", "쓰는 곳"]];
+  const A = [], links = [];
+  const next = () => A.length + 1;
+  A.push(["Toccata 구입 항목 정리표"]);
+  A.push([ds + " · 최종 재료 페이지에서 고른 그대로 (끈 품목 = 가진 것·안 살 것은 빠짐) · 단가는 VAT 포함 확인값이라 주문 전에 다시 확인 · 단가·갯수를 고치면 금액·배송비·합계가 다시 계산됩니다"]);
+  A.push([]);
+  const HR = next(); A.push(["품목", "단가", "갯수", "금액", "사이트 링크", "비고"]);
   const stores = {};
-  for (const it of ITEMS){ if (!onOf(it)) continue; const k = it.sk || ("_" + it.store); (stores[k] = stores[k] || []).push(it); }
-  const sumCells = [];
-  const order = Object.keys(stores).sort((a, b) => (r.per[b].sub + r.per[b].ship) - (r.per[a].sub + r.per[a].ship));
-  for (const k of order){
-    const its = stores[k]; const p = r.per[k]; const label = p.key && p.key !== p.store ? `${p.store} · ${p.key}` : p.store;
-    const start = A.length + 1;
-    its.forEach(it => { const rn = A.length + 1; const q = qtyOf(it), u = unitAt(it, q); A.push([label, it.g, it.t, it.n, q, u, {t:"n", f:`E${rn}*F${rn}`, v:q*u}, it.cat, it.url || "", it.where + (ruleText(it) ? " [" + ruleText(it) + "]" : "")]); });
-    const rn = A.length + 1;
-    A.push([label, "배송비", "배송비", "", 1, p.ship, {t:"n", f:`E${rn}*F${rn}`, v:p.ship}, "배송비", "", SHIPS[p.key] && SHIPS[p.key].free_over != null ? `${won(SHIPS[p.key].free_over)}원 이상 무료` : ""]);
-    const sr = A.length + 1; A.push(["", "", label + " 소계", "", "", "", {t:"n", f:`SUM(G${start}:G${rn})`, v:p.sub + p.ship}]); sumCells.push("G" + sr); A.push([]);
+  for (const it of ITEMS){
+    if (!onOf(it)) continue; const q = qtyOf(it), u = unitAt(it, q); if (q * u === 0) continue;   // free downloads: nothing to order
+    const k = it.sk || ("_" + it.store); (stores[k] = stores[k] || []).push([it, q, u]);
   }
-  const tr = A.length + 1; A.push(["", "", "최종 금액 (배송비 포함)", "", "", "", {t:"n", f: sumCells.join("+"), v:r.total}]);
+  const isSch = k => { const p = r.per[k], sh = p && p.key && SHIPS[p.key]; return !!(sh && sh.school); };
+  const order = Object.keys(stores).sort((a, b) => (isSch(b) - isSch(a)) || ((r.per[b].sub + r.per[b].ship) - (r.per[a].sub + r.per[a].ship)));
+  const itemRanges = [], shipCells = [], schCells = [], ownCells = [], schItemRanges = []; let nItems = 0, lastSec = null;
+  order.forEach((k, n) => {
+    const p = r.per[k], sk = p.key || p.store, rows = stores[k].sort((a, b) => b[1] * b[2] - a[1] * a[2]);
+    const sec = isSch(k) ? "학교" : "사비";
+    if (D.budget && sec !== lastSec){
+      A.push([]);
+      A.push([sec === "학교" ? `■ 학교 지원 주문 — 디바이스마트·엘레파츠·아이씨뱅큐·쿠팡, ${D.budget_items_only ? "물건값" : "배송비 포함"} ${won(D.budget)}원 이내 (따로 결제${D.budget_items_only ? (D.school_pays_ship ? ", 배송비는 학교가 내고 한도에 넣지 않음" : ", 배송비는 사비") : ""})` : "■ 사비 주문"]);
+      lastSec = sec;
+    }
+    const site = O.site[sk] || [p.store, hostOf(rows[0][0].url || "")];
+    const sh = p.key && SHIPS[p.key], fee = sh ? sh.fee : 0, fo = sh ? sh.free_over : null;
+    const carry = sh && sh.carry || 0, shared = !!(sh && sh.shared);
+    let rule = !fee ? "무료배송" : (fo != null ? `배송비 ${won(fee)}원 · ${won(fo)}원 이상 무료` : `배송비 ${won(fee)}원 (무료 조건 없음)`);
+    if (shared) rule = `배송비 ${won(fee)}원은 에어컨 목록에 있음 (같은 장바구니)`;
+    else if (carry) rule += ` · 에어컨 재료 ${won(carry)}원과 같은 장바구니`;
+    if (fee && sh.verified === false) rule += " · 추정";
+    A.push([]);
+    A.push([`${n + 1}. ${site[0]}` + (site[1] ? `  (${site[1]})` : "") + (sec === "학교" ? " · 학교 지원" : ""), "", "", "", `${rows.length}품목 · ${rule}`, O.store_note[sk] || ""]);
+    const first = next();
+    for (const [it, q, u] of rows){
+      const rn = next(); nItems++;
+      A.push([it.t, u, q, {t:"n", f:`B${rn}*C${rn}`, v:u * q}, it.url ? shortUrl(it.url) : "", O.note[it.id] || ruleText(it)]);
+      if (it.url) links.push([rn, it.url]);
+    }
+    const last = next() - 1; itemRanges.push(`D${first}:D${last}`);
+    if (sec === "학교" && D.budget_items_only) schItemRanges.push(`D${first}:D${last}`);
+    const sr = next();
+    A.push(["배송비", "", "", (!fee || shared) ? 0 : (fo != null ? {t:"n", f:`IF(SUM(D${first}:D${last})+${carry}>=${fo},0,${fee})`, v:p.ship} : fee)]);
+    shipCells.push("D" + sr);
+    (sec === "학교" ? schCells : ownCells).push("D" + next());
+    A.push([`${site[0].split(" · ")[0]} 소계 (물건값 + 배송비)`, "", "", {t:"n", f:`SUM(D${first}:D${last})+D${sr}`, v:p.sub + p.ship}]);
+  });
+  A.push([]);
+  const t1 = next();
+  A.push([`물건값 합계 (${nItems}품목)`, "", "", {t:"n", f:"SUM(" + itemRanges.join(",") + ")", v:r.items}]);
+  A.push([`배송비 합계 (판매처 ${order.length}곳)`, "", "", {t:"n", f:shipCells.join("+") || "0", v:r.ship}]);
+  A.push(["총합 (최종 가격)", "", "", {t:"n", f:`D${t1}+D${t1 + 1}`, v:r.total}, "VAT 포함 · 배송비 포함"]);
+  if (D.budget){
+    const tr = next() - 1;   // 총합 row
+    A.push([`학교 지원 합계 (한도 ${won(D.budget)}원${D.budget_items_only ? ", 물건값만" : ""})`, "", "",
+            {t:"n", f:(D.budget_items_only ? "SUM(" + (schItemRanges.join(",") || "0") + ")" : (schCells.join("+") || "0")), v:r.school},
+            D.budget_items_only ? "학교 지원 주문의 물건값 합 (배송비 제외)" : "학교 지원 주문 소계의 합"]);
+    if (D.school_pays_ship){
+      A.push(["학교 주문 배송비 (학교 부담, 한도 밖)", "", "", r.schoolShip, "학교 지원 판매처들의 배송비 합"]);
+      A.push(["사비 합계 (내가 내는 돈)", "", "", {t:"n", f:`D${tr}-D${tr + 1}-D${tr + 2}`, v:r.own}, "총합 − 학교 지원 − 학교 주문 배송비"]);
+    } else
+      A.push(["사비 합계 (내가 내는 돈)", "", "", {t:"n", f:`D${tr}-D${tr + 1}`, v:r.own}, D.budget_items_only ? "총합 − 학교 지원 (모든 배송비 포함)" : "총합 − 학교 지원"]);
+  }
+  A.push([]);
+  const nOff = ITEMS.filter(i => !onOf(i)).length;
+  A.push([`· 이 목록에 없는 것: 최종 재료 페이지에서 끈 품목 ${nOff}가지(가진 부품·공구, 안 살 것)와 무료 소프트웨어(FluidSynth, Salamander 피아노 음원).`]);
+  A.push(["· 배송비 줄: 무료 기준이 있는 판매처는 '그 판매처 물건값 ≥ 기준이면 0원' 수식입니다(기준 금액은 VAT 포함으로 바꿔 적음)."]);
+  A.push(["· 홀센서·미스미 스프링은 구간 단가라, 갯수를 100개 밑으로 줄이면 단가도 함께 고치세요(홀센서 1,023원, 스프링 365원)."]);
+  A.push(["· 출처: 최종 재료 페이지 https://claude.ai/artifact/9CJ3HwhbhoodCAui94g28n (품목 사진·규격·쓰는 위치)"]);
   const ws = XL.utils.aoa_to_sheet(A);
-  ws["!cols"] = [{wch:22},{wch:12},{wch:34},{wch:44},{wch:7},{wch:10},{wch:12},{wch:8},{wch:40},{wch:60}];
-  for (const addr in ws){ if (addr[0] === "!") continue; const c = ws[addr]; if ((addr[0] === "F" || addr[0] === "G") && (typeof c.v === "number" || c.f)) c.z = "#,##0"; }
-  XL.utils.book_append_sheet(wb, ws, "판매처별 주문");
-  // sheet 2: by group
-  const B = [["분류", "품목", "수량", "단가(원)", "금액(원)", "처음 수량", "판매처", "쓰는 곳", "규격", "링크"]];
-  let bsum = 0;
-  for (const g of GROUPS){ for (const it of ITEMS.filter(i => i.g === g && onOf(i))){ const rn = B.length + 1; const q = qtyOf(it), u = unitAt(it, q); bsum += q*u; B.push([g, it.t, q, u, {t:"n", f:`C${rn}*D${rn}`, v:q*u}, it.qty, it.store + (it.seller && it.seller !== it.store ? " · " + it.seller : ""), it.where, (it.specs||[]).map(s => s.join(": ")).join(" / "), it.url || ""]); } }
-  const br = B.length + 1; B.push(["", "부품·소모품·공구 합계 (배송비 제외)", "", "", {t:"n", f:`SUM(E2:E${br-1})`, v:bsum}]);
-  const ws2 = XL.utils.aoa_to_sheet(B); ws2["!cols"] = [{wch:12},{wch:34},{wch:7},{wch:10},{wch:12},{wch:9},{wch:24},{wch:60},{wch:60},{wch:40}];
-  for (const addr in ws2){ if (addr[0] === "!") continue; const c = ws2[addr]; if ((addr[0] === "D" || addr[0] === "E") && (typeof c.v === "number" || c.f)) c.z = "#,##0"; }
-  XL.utils.book_append_sheet(wb, ws2, "분류별 목록");
-  // sheet 3: removed
-  const C = [["분류", "품목", "처음 수량", "단가(원)", "처음 금액(원)", "판매처", "쓰는 곳", "링크"]];
-  for (const it of ITEMS.filter(i => !onOf(i))) C.push([it.g, it.t, it.qty, it.unit, it.unit * it.qty, it.store, it.where, it.url || ""]);
-  if (C.length === 1) C.push(["뺀 품목이 없습니다"]);
-  const ws3 = XL.utils.aoa_to_sheet(C); ws3["!cols"] = [{wch:12},{wch:34},{wch:9},{wch:10},{wch:12},{wch:24},{wch:60},{wch:40}];
-  XL.utils.book_append_sheet(wb, ws3, "뺀 품목");
+  ws["!cols"] = [{wch:46}, {wch:12}, {wch:7}, {wch:14}, {wch:48}, {wch:46}];
+  ws["!merges"] = [{s:{r:0, c:0}, e:{r:0, c:5}}, {s:{r:1, c:0}, e:{r:1, c:5}}];
+  for (const addr in ws){
+    if (addr[0] === "!") continue; const c = ws[addr], col = addr.replace(/\d+/g, ""), row = Number(addr.replace(/\D+/g, ""));
+    if ((col === "B" || col === "D") && row > HR && (typeof c.v === "number" || c.f)) c.z = '#,##0"원"';
+    if (col === "C" && row > HR && typeof c.v === "number") c.z = "#,##0";
+  }
+  for (const [rn, url] of links){ const c = ws["E" + rn]; if (c) c.l = {Target:url, Tooltip:"판매 페이지 열기"}; }
+  XL.utils.book_append_sheet(wb, ws, "구입항목");
+  wb.Props = {Title:"Toccata 구입 항목 정리표", CreatedDate:today};
   return {wb, ds, total: r.total};
 }
 xbtn.addEventListener("click", async () => {
@@ -590,7 +705,7 @@ xbtn.addEventListener("click", async () => {
   try {
     const {wb, ds} = buildWorkbook();
     const buf = window.XLSX.write(wb, {bookType:"xlsx", type:"array"});
-    await downloads.save({filename:`toccata-최종-재료-${ds}.xlsx`, data:new Blob([buf])});
+    await downloads.save({filename:`Toccata_구입항목_정리표_${ds}.xlsx`, data:new Blob([buf])});
     msg.style.color = "var(--good)"; msg.textContent = "엑셀을 저장했습니다.";
   } catch (e){
     msg.style.color = "var(--felt)";
@@ -599,10 +714,141 @@ xbtn.addEventListener("click", async () => {
   }
 });
 
+// ---------- 학교·사비 구매 (10/8): school orders vs personal orders, live from the current selection
+const viewList = document.getElementById("viewList"), viewSplit = document.getElementById("viewSplit");
+const VKEY = "toccata-final-bom-view";
+function setView(v){
+  viewList.hidden = v !== "list"; viewSplit.hidden = v !== "split";
+  document.querySelectorAll(".vbtn").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === v)));
+  try { localStorage.setItem(VKEY, v); } catch (e){}
+  if (v === "split") renderSplit();
+}
+document.getElementById("views").addEventListener("click", e => { const b = e.target.closest(".vbtn"); if (b) setView(b.dataset.view); });
+function siteName(k, it){
+  const s = ((D.order || {}).site || {})[k];
+  if (!s) return it.store;
+  return s[1] && !/\./.test(s[1]) ? `${s[0]} (${s[1]})` : s[0];
+}
+function splitData(){
+  const r = compute(onOf, qtyOf), groups = {};
+  for (const it of ITEMS){
+    if (!onOf(it)) continue; const q = qtyOf(it), u = unitAt(it, q), a = u * q; if (!a) continue;   // free downloads: nothing to order
+    const k = it.sk || ("_" + it.store), sh = it.sk && SHIPS[it.sk];
+    const g = groups[k] = groups[k] || {k, school: !!(sh && sh.school), name: siteName(k, it), rows: [], sub: 0, ship: (r.per[k] || {}).ship || 0};
+    g.rows.push({it, q, u, a}); g.sub += a;
+  }
+  const all = Object.values(groups).sort((a, b) => (b.school - a.school) || (b.sub - a.sub));
+  all.forEach(g => g.rows.sort((x, y) => y.a - x.a));
+  const sch = all.filter(g => g.school), own = all.filter(g => !g.school), io = !!D.budget_items_only;
+  const schItems = sch.reduce((a, g) => a + g.sub, 0), schShip = sch.reduce((a, g) => a + g.ship, 0);
+  const ownItems = own.reduce((a, g) => a + g.sub, 0), ownShip = own.reduce((a, g) => a + g.ship, 0);
+  const sp = io && !!D.school_pays_ship;   // 학교 주문 배송비를 학교가 냄 (한도 밖)
+  return {r, sch, own, io, sp, schItems, schShip, ownItems, ownShip, schPaid: io ? schItems : schItems + schShip};
+}
+function tableHTML(g, withShip, shipNote){
+  const rows = g.rows.map(x => `<tr><td>${esc(x.it.t)}</td><td class="n u" data-q="${won(x.q)}">${won(x.u)}</td><td class="n q">${won(x.q)}</td><td class="n a">${won(x.a)}</td><td class="lk">${x.it.url ? `<a href="${esc(x.it.url)}" target="_blank" rel="noopener">열기</a>` : ""}</td></tr>`).join("");
+  const ship = withShip && g.ship ? `<tr class="shiprow"><td>배송비${shipNote ? " — " + esc(shipNote) : ""}</td><td class="n u" data-q="1">${won(g.ship)}</td><td class="n q">1</td><td class="n a">${won(g.ship)}</td><td class="lk"></td></tr>` : "";
+  return `<div class="tw"><table class="stbl"><thead><tr><th>품목명</th><th class="n">단가</th><th class="n">수량</th><th class="n">총금액</th><th>링크</th></tr></thead><tbody>${rows}${ship}</tbody></table></div>`;
+}
+function renderSplit(){
+  if (viewSplit.hidden) return;
+  const x = splitData(), lim = D.budget || 0, over = lim && x.schPaid > lim;
+  const pct = lim ? Math.min(100, x.schPaid / lim * 100) : 0;
+  const ownShipAll = x.ownShip + (x.io && !x.sp ? x.schShip : 0);
+  let h = `<div class="tiles">
+    <div class="tile sch"><span class="lab">학교 구매${x.io ? " (물건값, 배송비 제외)" : " (배송비 포함)"}</span><span class="v">${won(x.schPaid)}<small>원</small></span>
+      <div class="meter${over ? " over" : ""}" role="img" aria-label="한도 ${won(lim)}원 중 ${Math.round(pct)}%"><i style="width:${pct.toFixed(1)}%"></i></div>
+      <span class="d">한도 ${won(lim)}원 · ${over ? `<b style="color:var(--felt)">${won(x.schPaid - lim)}원 초과</b>` : `남은 금액 ${won(lim - x.schPaid)}원`} · 판매처 ${x.sch.length}곳${x.sp ? ` · 배송비 ${won(x.schShip)}원은 학교 (한도 밖)` : ""}</span></div>
+    <div class="tile"><span class="lab">사비 구매 (내가 내는 돈)</span><span class="v">${won(x.r.own)}<small>원</small></span>
+      <span class="d">물건값 ${won(x.ownItems)}원 + 배송비 ${won(ownShipAll)}원${x.io && !x.sp && x.schShip ? ` (학교 주문 배송비 ${won(x.schShip)}원 포함)` : ""} · 판매처 ${x.own.length}곳</span></div>
+    <div class="tile"><span class="lab">전체 (VAT·배송비 포함)</span><span class="v">${won(x.r.total)}<small>원</small></span>
+      <span class="d">물건값 ${won(x.r.items)}원 + 배송비 ${won(x.r.ship)}원</span></div>
+  </div>
+  <div class="sfoot"><span>학교 지원은 디바이스마트·엘레파츠·아이씨뱅큐·쿠팡에서 산 ${x.io ? "물건값" : "금액(배송비 포함)"} ${won(lim)}원까지입니다${x.sp ? " (학교 주문 배송비는 한도에 넣지 않음)" : ""}. 학교 주문은 사비 주문과 따로 결제합니다.</span>
+    <button class="btn pri" type="button" data-xlsx2>학교·사비 엑셀 받기</button></div>`;
+  h += `<section class="sgrp"><header><h3>학교 구매</h3><span class="m num">판매처 ${x.sch.length}곳 · 물건값 ${won(x.schItems)}원${x.io ? (x.sp ? ` · 배송비 ${won(x.schShip)}원(학교, 한도 밖)` : "") : ` + 배송비 ${won(x.schShip)}원`}</span></header>` +
+    x.sch.map(g => `<div class="sbox"><div class="sh"><b>${esc(g.name)}</b><span class="num">${g.rows.length}품목 · 물건값 ${won(g.sub)}원 · 배송비 ${won(g.ship)}원${x.io && g.ship ? (x.sp ? "(학교)" : "(사비)") : ""}</span></div>${tableHTML(g, !x.io || x.sp, x.sp ? "학교 부담, 한도 밖" : "")}</div>`).join("") +
+    (x.sch.length ? "" : `<div class="empty">학교 구매로 표시된 품목이 없습니다.</div>`) + `</section>`;
+  h += `<section class="sgrp"><header><h3>사비 구매</h3><span class="m num">판매처 ${x.own.length}곳 · 물건값 ${won(x.ownItems)}원 + 배송비 ${won(ownShipAll)}원 = ${won(x.r.own)}원</span></header>` +
+    x.own.map(g => `<div class="sbox"><div class="sh"><b>${esc(g.name)}</b><span class="num">${g.rows.length}품목 · ${won(g.sub + g.ship)}원</span></div>${tableHTML(g, true)}</div>`).join("");
+  if (x.io && !x.sp && x.schShip){
+    const rows = x.sch.filter(g => g.ship).map(g => `<tr class="shiprow"><td>배송비 — ${esc(g.name)} (학교 주문)</td><td class="n u" data-q="1">${won(g.ship)}</td><td class="n q">1</td><td class="n a">${won(g.ship)}</td><td class="lk"></td></tr>`).join("");
+    h += `<div class="sbox"><div class="sh"><b>학교 주문 배송비 (사비로 냄)</b><span class="num">${won(x.schShip)}원</span></div><div class="tw"><table class="stbl"><thead><tr><th>품목명</th><th class="n">단가</th><th class="n">수량</th><th class="n">총금액</th><th>링크</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+  }
+  h += `</section>`;
+  viewSplit.innerHTML = h;
+}
+viewSplit.addEventListener("click", e => { if (e.target.closest("[data-xlsx2]")) exportSplit(); });
+// workbook: sheets 학교 구매 / 사비 구매 with exactly 품목명 · 단가 · 수량 · 총금액 · 구매 사이트 · 제품 링크(URL), then 요약
+function buildSplitWorkbook(){
+  const XL = window.XLSX, wb = XL.utils.book_new(), x = splitData(), lim = D.budget || 0;
+  const today = new Date(); const ds = today.getFullYear() + "-" + String(today.getMonth()+1).padStart(2,"0") + "-" + String(today.getDate()).padStart(2,"0");
+  const H = ["품목명", "단가", "수량", "총금액", "구매 사이트", "제품 링크(URL)"];
+  function sheet(rows, totalLabel){
+    const A = [H], links = [];
+    for (const y of rows){ const rn = A.length + 1; A.push([y.name, y.u, y.q, {t:"n", f:`B${rn}*C${rn}`, v:y.u * y.q}, y.site, y.url || ""]); if (y.url) links.push(rn); }
+    const last = A.length, tr = last + 1;
+    A.push([totalLabel, "", "", {t:"n", f:last > 1 ? `SUM(D2:D${last})` : "0", v:rows.reduce((a, y) => a + y.u * y.q, 0)}, "", ""]);
+    const ws = XL.utils.aoa_to_sheet(A);
+    ws["!cols"] = [{wch:46}, {wch:10}, {wch:6}, {wch:12}, {wch:30}, {wch:70}];
+    for (const addr in ws){
+      if (addr[0] === "!") continue; const c = ws[addr], col = addr.replace(/\d+/g, ""), row = Number(addr.replace(/\D+/g, ""));
+      if (row > 1 && (col === "B" || col === "C" || col === "D") && (typeof c.v === "number" || c.f)) c.z = "#,##0";
+    }
+    for (const rn of links){ const c = ws["F" + rn]; if (c) c.l = {Target: c.v, Tooltip: "판매 페이지 열기"}; }
+    ws["!autofilter"] = {ref: `A1:F${Math.max(1, last)}`};
+    return {ws, tr};
+  }
+  const sRows = [], oRows = [];
+  for (const g of x.sch){ for (const y of g.rows) sRows.push({name: y.it.t, u: y.u, q: y.q, site: g.name, url: y.it.url}); if (!x.io && g.ship) sRows.push({name: `배송비 — ${g.name}`, u: g.ship, q: 1, site: g.name}); }
+  for (const g of x.own){ for (const y of g.rows) oRows.push({name: y.it.t, u: y.u, q: y.q, site: g.name, url: y.it.url}); if (g.ship) oRows.push({name: `배송비 — ${g.name}`, u: g.ship, q: 1, site: g.name}); }
+  if (x.io && !x.sp) for (const g of x.sch) if (g.ship) oRows.push({name: `배송비 — ${g.name} (학교 주문)`, u: g.ship, q: 1, site: g.name});
+  const S1 = sheet(sRows, `학교 구매 합계 (${x.io ? "물건값, " : ""}한도 ${won(lim)}원)`), S2 = sheet(oRows, "사비 구매 합계 (배송비 포함)");
+  if (x.sp){   // 학교 주문 배송비: 물건값 합계 아래에 따로 (학교가 내지만 한도 밖)
+    const A = XL.utils.sheet_to_json(S1.ws, {header: 1, raw: false}); const base = A.length;   // rows so far (header + items + total)
+    const ships = x.sch.filter(g => g.ship).map(g => [`배송비 — ${g.name} (학교 부담, 한도 밖)`, g.ship, 1, g.ship, g.name, ""]);
+    XL.utils.sheet_add_aoa(S1.ws, [[], ...ships.map((r, i) => [r[0], r[1], r[2], {t:"n", f:`B${base + 2 + i}*C${base + 2 + i}`, v:r[3]}, r[4], r[5]]),
+      ["학교 주문 배송비 합계 (한도 밖)", "", "", {t:"n", f:ships.length ? `SUM(D${base + 2}:D${base + 1 + ships.length})` : "0", v:x.schShip}, "", ""],
+      ["학교 결제 총액 (물건값 + 배송비)", "", "", {t:"n", f:`D${S1.tr}+D${base + 2 + ships.length}`, v:x.schPaid + x.schShip}, "", ""]], {origin: base});
+    for (const addr in S1.ws){ if (addr[0] === "!") continue; const c = S1.ws[addr], col = addr.replace(/\d+/g, ""), row = Number(addr.replace(/\D+/g, "")); if (row > base && (col === "B" || col === "C" || col === "D") && (typeof c.v === "number" || c.f)) c.z = "#,##0"; }
+  }
+  XL.utils.book_append_sheet(wb, S1.ws, "학교 구매");
+  XL.utils.book_append_sheet(wb, S2.ws, "사비 구매");
+  const sum = XL.utils.aoa_to_sheet([
+    ["구분", "금액", "비고"],
+    ["학교 구매 (물건값)", {t:"n", f:`'학교 구매'!D${S1.tr}`, v:x.schPaid}, `한도 ${won(lim)}원 · ${x.io ? (x.sp ? "물건값만 (배송비는 학교가 따로, 한도 밖)" : "물건값만 (배송비는 사비)") : "배송비 포함"} · 판매처 ${x.sch.length}곳`],
+    ["학교 주문 배송비", x.sp ? x.schShip : 0, x.sp ? "학교가 냄 (20만 원 한도에 넣지 않음)" : "사비 구매에 포함"],
+    ["사비 구매", {t:"n", f:`'사비 구매'!D${S2.tr}`, v:x.r.own}, `물건값 + 배송비 · 판매처 ${x.own.length}곳`],
+    ["합계", {t:"n", f:"B2+B3+B4", v:x.r.total}, "VAT 포함 · 배송비 포함"],
+    [],
+    [`${ds} · Toccata 최종 재료 페이지 https://claude.ai/artifact/9CJ3HwhbhoodCAui94g28n 에서 고른 그대로 · 가격은 주문 전에 다시 확인`]]);
+  sum["!cols"] = [{wch:14}, {wch:14}, {wch:60}];
+  for (const a of ["B2", "B3", "B4", "B5"]) if (sum[a]) sum[a].z = "#,##0";
+  XL.utils.book_append_sheet(wb, sum, "요약");
+  wb.Props = {Title: "Toccata 학교·사비 구매 목록", CreatedDate: today};
+  return {wb, ds};
+}
+async function exportSplit(){
+  msg.textContent = "";
+  if (!window.XLSX){ msg.textContent = "엑셀 도구를 불러오지 못했습니다. 페이지를 새로 고친 뒤 다시 누르세요."; return; }
+  if (!downloads){ msg.textContent = "이 화면에서는 파일 받기를 쓸 수 없습니다."; return; }
+  try {
+    const {wb, ds} = buildSplitWorkbook();
+    const buf = window.XLSX.write(wb, {bookType:"xlsx", type:"array"});
+    await downloads.save({filename:`Toccata_학교_사비_구매목록_${ds}.xlsx`, data:new Blob([buf])});
+    msg.style.color = "var(--good)"; msg.textContent = "학교·사비 엑셀을 저장했습니다.";
+  } catch (e){
+    msg.style.color = "var(--felt)"; const c = e && e.code;
+    msg.textContent = c === "declined" ? "저장을 취소했습니다." : c === "rate_limited" ? "저장 창이 이미 열려 있습니다. 잠시 뒤 다시 누르세요." : (c === "extension_not_enabled" || c === "unavailable" || c === "not_granted") ? "이 화면에서는 엑셀 받기를 쓸 수 없습니다." : "엑셀을 만들지 못했습니다. 다시 눌러 보세요.";
+  }
+}
+document.getElementById("xlsx2").addEventListener("click", exportSplit);
+if (/preview\.html$/.test(location.pathname)) window.__buildSplit = buildSplitWorkbook;
 if (/preview\.html$/.test(location.pathname)) window.__build = buildWorkbook;
 document.getElementById("foot").textContent = D.foot || "";
 document.getElementById("designPanel").insertAdjacentHTML("beforeend", (D.design||[]).map(t => `<div>${esc(t)}</div>`).join(""));
 document.getElementById("prepPanel").insertAdjacentHTML("beforeend", `<ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px">${(D.prep||[]).map(t => `<li>${esc(t)}</li>`).join("")}</ul>`);
 chips(); render(); initStore(); initDownloads();
+{ let v = "list"; try { v = localStorage.getItem(VKEY) || "list"; } catch (e){} if (location.hash === "#split") v = "split"; setView(v === "split" ? "split" : "list"); }
 })();
 </script>

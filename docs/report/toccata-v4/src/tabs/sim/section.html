@@ -1,0 +1,151 @@
+<section class="page" id="p-sim" hidden>
+<h2>동작 시뮬레이션</h2>
+<p class="lede">완성된 악기에서 건반 하나를 누르면 기구, 센서, 회로, 소리, 전원이 어떻게 움직이는지 보여 줍니다. 움직임은 꾸민 애니메이션이 아니라 검증된 계산 모델의 기록을 그대로 재생한 것이고, 신호와 전원 숫자는 회로도 개정 <span class="sim-rev">E</span>의 부품 번호와 값에서 가져왔습니다.</p>
+<div class="note sim-about" id="sim-about">
+<p><b>이 시뮬레이션은</b> 건반 액션 계산 모델 <span class="mono">model_v4.py</span>(W1+ r4.5)의 4자유도 동역학을 4 µs 간격으로 돌린 기록입니다. 대표 건반 백건 D와 흑건 C#를 계산했고, 출력용 STL과 같은 좌표(geometry.json)의 단면을 움직입니다. 계산값은 검증 결과 파일(metrics.json)과 6자리까지 같습니다.</p>
+<p>가정: 업스톱 패드는 설계값(미세셀 우레탄 6T + 펠트 1T)으로 계산했습니다. 산 패드는 PORON 5T + 펠트 1T라서 패드 면 위치는 같지만 힘과 튕김은 단계 0 시험에서 다시 확인합니다. 자기장은 원판 자석 축 위 식(오차 약 ±10 %), 센서 출력은 DRV5055A2 3.3 V(1.65 V + 30 mV/mT), ADC는 12비트(3.3 V 기준)로 셈합니다. note-on 문턱(자석 90 % 내려감), 속도를 재는 구간(자석 50 → 90 %), MIDI 벨로시티 곡선, 재무장선에서 note-off를 보내는 규칙은 펌웨어를 만들기 전의 가정입니다. 건반마다 읽는 빠르기(kHz)도 추정입니다: 먹스 채널마다 4 µs 기다리고(SCH-03 주 7) 2 µs 변환한다고 잡았습니다(채널당 6 µs).</p>
+</div>
+<nav class="sim-toc" aria-label="이 탭의 내용">
+<a href="#sim-key"><span class="mono">1</span> 건반 액션</a><a href="#sim-chain"><span class="mono">2</span> 신호 흐름</a><a href="#sim-power"><span class="mono">3</span> 전원</a><a href="#sim-touch"><span class="mono">4</span> 화면 접기</a><a href="#sim-checks"><span class="mono">✓</span> 자체 검사</a>
+</nav>
+<p class="sim-status" id="sim-status" role="status">계산 기록을 불러오는 중입니다.</p>
+
+<h3 id="sim-key"><span class="no">1</span>건반 한 개: 누름 → 유지 → 놓음</h3>
+<p class="muted sim-p">손가락이 정한 속도로 건반을 치고(앞끝이 바닥 펠트에 닿는 순간의 속도), 바닥에서 1 N으로 약 0.2초 누르고 있다가 손을 뗍니다. 가장 여린 경우는 0.8 N으로 천천히 누르는 경우입니다. 시간 0~5 ms는 쉬는 자세이고 5 ms에 손가락이 닿습니다. 시간 막대를 끌면 원하는 순간을 볼 수 있습니다. 바닥에서 누르고 있는 구간은 그래프와 재생에서 줄여 보여 줍니다. 주황 테두리는 지금 힘을 받고 있는 접촉면입니다.</p>
+
+<div class="sim-ctl" id="sim-ctl">
+<div class="sim-row"><span class="sim-lab">건반</span>
+<div class="seg" role="group" aria-label="건반 선택" id="sim-col"><button type="button" data-col="white" aria-pressed="true">백건 D</button><button type="button" data-col="black" aria-pressed="false">흑건 C#</button></div></div>
+<div class="sim-row"><span class="sim-lab">누르는 세기</span>
+<div class="seg sim-segw" role="group" aria-label="누르는 세기" id="sim-run"></div></div>
+<div class="sim-row sim-transport">
+<button type="button" class="sim-btn" id="sim-play" aria-pressed="false">재생</button>
+<div class="seg" role="group" aria-label="재생 빠르기" id="sim-rate"><button type="button" data-rate="0.01" aria-pressed="false">1/100</button><button type="button" data-rate="0.05" aria-pressed="true">1/20</button><button type="button" data-rate="0.2" aria-pressed="false">1/5</button><button type="button" data-rate="1" aria-pressed="false">실제 빠르기</button></div>
+<input type="range" id="sim-tl" class="sim-range" min="0" max="1000" step="1" value="0" aria-label="시간 막대"/>
+<output id="sim-tnow" class="mono sim-tnow" for="sim-tl">0.0 ms</output>
+</div>
+</div>
+
+<div class="sim-stage">
+<figure class="sheet sim-side">
+<div class="cap"><span><b id="sim-side-title">측면 단면 · 백건 D</b> <span class="mono" id="sim-side-sub"></span></span><span class="mono">단위 mm · 실제 비율</span></div>
+<div class="sim-svgbox"><svg id="sim-svg" class="sim-draw" viewBox="-6 -79 224 82" role="img" aria-labelledby="sim-side-title"><g id="sim-world"><g id="sim-static"></g><g id="sim-spring"></g><g id="sim-lever"></g><g id="sim-keyg"></g><g id="sim-marks"></g></g><g id="sim-over"></g></svg></div>
+<div class="legend-mat sim-legend"><span><i class="sim-lg-print"></i>프레임 (출력)</span><span><i class="sim-lg-lever"></i>레버 캐리어 (출력)</span><span><i class="sim-lg-steel"></i>강철 · 봉 · 캡스턴</span><span><i class="sim-lg-felt"></i>펠트</span><span><i class="sim-lg-pad"></i>업스톱 패드</span><span><i class="sim-lg-mag"></i>자석 (아래 S극)</span><span><i class="sim-lg-hot"></i>지금 닿아 힘을 받는 곳</span></div>
+</figure>
+<div class="sim-panel">
+<figure class="sheet sim-insetfig">
+<div class="cap"><span><b>자석과 홀 센서</b> <span class="mono">확대</span></span><span class="mono" id="sim-ins-ref">U203 · y67</span></div>
+<svg id="sim-inset" class="sim-draw" viewBox="52 -31 30 27" role="img" aria-label="자석과 홀 센서 확대"><g id="sim-ins-world" aria-hidden="true"></g><g id="sim-ins-dim"></g></svg>
+</figure>
+<div class="kfs sim-read" id="sim-read" aria-live="off">
+<div class="kf"><b id="sim-r-phase">쉼</b><span id="sim-r-t">t = 0.0 ms</span></div>
+<div class="kf"><b id="sim-r-travel">0.00 mm</b><span>건반 앞끝 내려감</span></div>
+<div class="kf"><b id="sim-r-lever">0.00°</b><span>레버 각 (쉼에서)</span></div>
+<div class="kf"><b id="sim-r-gap">0.00 mm</b><span>자석–센서 간격</span></div>
+<div class="kf"><b id="sim-r-field">0.0 mT</b><span>센서 자기장</span></div>
+<div class="kf"><b id="sim-r-adc">0</b><span id="sim-r-volt">ADC 코드 · 0.000 V</span></div>
+<div class="kf"><b id="sim-r-cap">0.0 N</b><span>캡스턴이 레버를 미는 힘</span></div>
+<div class="kf"><b id="sim-r-pad">0 N</b><span>업스톱 패드 힘</span></div>
+<div class="kf"><b id="sim-r-finger">0.0 N</b><span>손가락 힘</span></div>
+<div class="kf sim-kf-wide"><b id="sim-r-note">note-on 전</b><span id="sim-r-vel">속도 추정은 자석이 90 % 내려갈 때 나옵니다</span></div>
+</div>
+<p class="small muted sim-p sim-restnote" id="sim-rest-note"></p>
+</div>
+</div>
+
+<div class="sim-pressrow">
+<button type="button" class="sim-btn sim-pressbtn" id="sim-press" aria-describedby="sim-press-how">직접 눌러 보기</button>
+<p class="small muted sim-p" id="sim-press-how">버튼을 누르고 있는 동안 건반이 내려가 바닥에 머물고, 손을 떼면 돌아옵니다(스페이스나 엔터 키도 됩니다). 새로 계산하는 것이 아니라 위에서 고른 세기의 기록을 이어 붙입니다: 누르면 기록의 0 ms부터 놓기 직전까지 재생하고 그 자리에 멈춥니다. 떼면 기록의 ‘놓음’ 순간으로 건너가 돌아오는 부분을 재생합니다. 바닥에 닿기 전에 떼면, 돌아오는 기록에서 자석 높이가 지금과 같은 첫 순간으로 건너뜁니다(근사). 재생 빠르기는 위 설정을 따릅니다.</p>
+</div>
+
+<div class="grid g3 sim-plots">
+<figure class="card sim-plot"><figcaption><b>건반 앞끝 내려감</b> <span class="mono">mm</span></figcaption><svg id="sim-p1" viewBox="0 0 340 190" role="img" aria-label="건반 앞끝 내려감 그래프"></svg></figure>
+<figure class="card sim-plot"><figcaption><b>센서 ADC 코드</b> <span class="mono">0~4095</span></figcaption><svg id="sim-p2" viewBox="0 0 340 190" role="img" aria-label="센서 ADC 코드 그래프"></svg></figure>
+<figure class="card sim-plot"><figcaption><b>접촉 힘</b> <span class="mono">N</span></figcaption><svg id="sim-p3" viewBox="0 0 340 190" role="img" aria-label="접촉 힘 그래프"></svg><div class="sim-plg" id="sim-p3-lg"></div></figure>
+</div>
+
+<h4 class="sim-h4">세기별 결과 <span class="muted small" id="sim-evt-col">백건 D</span></h4>
+<div class="tbl"><table id="sim-evt" class="sim-evt"></table></div>
+<p class="small muted sim-p">‘추정 속도’는 펌웨어처럼 자석이 50 %에서 90 %까지 내려가는 시간으로 잰 앞끝 속도입니다(행정비 백 1.91, 흑 1.18, SCH-03 주 9). 행정 가운데의 속도라서 바닥 펠트에 닿는 순간 속도와 조금 다릅니다. 여리게 칠수록 레버가 패드에 먼저 닿아 건반이 마지막에 느려지므로 추정이 더 크게 나오고(특히 흑건과 0.8 N 누름), 세게 칠수록 행정 아래쪽에서 더 빨라지므로 추정이 조금 작게 나옵니다. 흑건을 0.8 N으로 누르면 앞끝이 바닥 펠트에 닿지 않고 멈춥니다(1 N에서도 펠트 위 0.27 mm, 설계 그대로). 그래서 그 칸에 ‘닿지 않음’이라고 적었습니다.</p>
+
+<details class="spec sim-spec" id="sim-verified"><summary>검증된 값 (metrics.json에서 그대로 옮김)</summary>
+<div class="tbl"><table id="sim-mtbl"></table></div>
+<p class="small muted sim-p">ADC 값은 이 페이지의 식으로 다시 셈한 것입니다. 쉼, 재무장, 1 N 바닥은 회로 README 표와 같고, 강체 바닥은 표(2862 / 2962)보다 3 / 2 코드 큽니다(0.1 %, 자기장 식 오차 ±10 %보다 훨씬 작음).</p>
+</details>
+
+<h3 id="sim-chain"><span class="no">2</span>한 음의 신호: 건반에서 스피커까지</h3>
+<p class="muted sim-p">건반을 누르면 그 음이 지나가는 실제 부품 번호와 핀이 아래 흐름도와 오른쪽 표에 나옵니다. 경로는 회로도 개정 <span class="sim-rev">E</span>의 넷리스트와 배선표(netlist.csv, wiring_MB.csv, mux_module_pins.csv, harness.csv, bom.csv)에서 읽었습니다. 소리는 이 페이지가 만든 단순한 합성음이라 실제 음원(Salamander 그랜드 피아노)과 다릅니다. 첫 소리는 건반을 누를 때 켜집니다.</p>
+<div class="sim-ctl">
+<div class="sim-row"><span class="sim-lab">세기</span><div class="seg sim-segw" role="group" aria-label="건반 세기" id="sim-kvel"></div></div>
+<div class="sim-row">
+<button type="button" class="sim-btn" id="sim-sus" aria-pressed="false">서스테인 페달 밟기</button>
+<button type="button" class="sim-btn" id="sim-mute" aria-pressed="false">음소거</button>
+<span class="small muted">컴퓨터 키: <span class="mono">A W S E D F T G Y H U J K</span> = C~C, <span class="mono">Z</span>/<span class="mono">X</span> 옥타브 내리기·올리기 (지금 <span class="mono" id="sim-oct">C4</span>부터)</span>
+</div>
+</div>
+<div class="sim-kbdbox"><div class="sim-kbd" id="sim-kbd" tabindex="0" role="group" aria-label="88건반. 누르면 소리가 나고 그 음의 신호 경로가 표시됩니다."></div></div>
+<div class="sim-chaingrid">
+<div class="sim-chainbox"><svg id="sim-chainsvg" class="sim-chain" viewBox="0 0 920 340" role="img" aria-label="한 음의 신호 흐름도">
+<defs><marker id="sim-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="sim-arrhead"/></marker></defs>
+<text x="10" y="18" class="sim-cht">입력 (건반 쪽, 회로 SCH-02·03·04)</text>
+<text x="10" y="196" class="sim-cht">출력 (소리 쪽, 회로 SCH-07)</text>
+<g class="sim-wires">
+<path d="M118 75 H138" marker-end="url(#sim-arr)"/><path d="M248 75 H268" marker-end="url(#sim-arr)"/><path d="M378 75 H398" marker-end="url(#sim-arr)"/><path d="M508 75 H528" marker-end="url(#sim-arr)"/><path d="M638 75 H658" marker-end="url(#sim-arr)"/><path d="M768 75 H788" marker-end="url(#sim-arr)"/>
+<path d="M850 120 V200" marker-end="url(#sim-arr)"/>
+<path d="M788 255 H768" marker-end="url(#sim-arr)"/><path d="M658 255 H638" marker-end="url(#sim-arr)"/><path d="M528 255 H508" marker-end="url(#sim-arr)"/><path d="M398 255 H378" marker-end="url(#sim-arr)"/><path d="M268 255 H248" marker-end="url(#sim-arr)"/><path d="M138 255 H118" marker-end="url(#sim-arr)"/>
+</g>
+<g class="sim-node" id="sim-n1"><rect x="8" y="30" width="110" height="90" rx="8"/><text x="18" y="52" class="sim-nt">건반 · 자석</text><text x="18" y="70" class="sim-ns">Ø5×2 N35, S극 아래</text><text x="18" y="88" class="sim-nd" id="sim-c1">D4</text><text x="18" y="106" class="sim-ns" id="sim-c1b">y67</text></g>
+<g class="sim-node" id="sim-n2"><rect x="138" y="30" width="110" height="90" rx="8"/><text x="148" y="52" class="sim-nt">홀 센서</text><text x="148" y="70" class="sim-ns">DRV5055A2</text><text x="148" y="88" class="sim-nd" id="sim-c2">U203</text><text x="148" y="106" class="sim-ns" id="sim-c2b">SB · OUT</text></g>
+<g class="sim-node" id="sim-n3"><rect x="268" y="30" width="110" height="90" rx="8"/><text x="278" y="52" class="sim-nt">리본 · 리드</text><text x="278" y="70" class="sim-ns" id="sim-c3a">16심 2651-16P</text><text x="278" y="88" class="sim-nd" id="sim-c3">W104 5번</text><text x="278" y="106" class="sim-ns" id="sim-c3b">J201 → J301</text></g>
+<g class="sim-node" id="sim-n4"><rect x="398" y="30" width="110" height="90" rx="8"/><text x="408" y="52" class="sim-nt">먹스 A302</text><text x="408" y="70" class="sim-ns">CD74HC4067</text><text x="408" y="88" class="sim-nd" id="sim-c4">C2</text><text x="408" y="106" class="sim-ns" id="sim-c4b">S3~S0 0010</text></g>
+<g class="sim-node" id="sim-n5"><rect x="528" y="30" width="110" height="90" rx="8"/><text x="538" y="52" class="sim-nt">RP2040-Zero</text><text x="538" y="70" class="sim-ns">A301 · USB-MIDI</text><text x="538" y="88" class="sim-nd" id="sim-c5">GP26 ADC0</text><text x="538" y="106" class="sim-ns" id="sim-c5b">O4 · 약 13.9 kHz</text></g>
+<g class="sim-node" id="sim-n6"><rect x="658" y="30" width="110" height="90" rx="8"/><text x="668" y="52" class="sim-nt">USB 허브</text><text x="668" y="70" class="sim-ns">A604 NEXTU 710U3</text><text x="668" y="88" class="sim-nd" id="sim-c6">W204 0.5 m</text><text x="668" y="106" class="sim-ns">→ W209 → Pi</text></g>
+<g class="sim-node" id="sim-n7"><rect x="788" y="30" width="124" height="90" rx="8"/><text x="798" y="52" class="sim-nt">Raspberry Pi 5</text><text x="798" y="70" class="sim-ns">A603 · MIDI 입력</text><text x="798" y="88" class="sim-nd" id="sim-c7">note-on 62 · 104</text><text x="798" y="106" class="sim-ns" id="sim-c7b">'Toccata O4'</text></g>
+<g class="sim-node" id="sim-n8"><rect x="788" y="210" width="124" height="90" rx="8"/><text x="798" y="232" class="sim-nt">FluidSynth</text><text x="798" y="250" class="sim-ns">Salamander SF2</text><text x="798" y="268" class="sim-nd" id="sim-c8">D4 293.66 Hz</text><text x="798" y="286" class="sim-ns">ALSA hw: 48 kHz</text></g>
+<g class="sim-node" id="sim-n9"><rect x="658" y="210" width="110" height="90" rx="8"/><text x="668" y="232" class="sim-nt">USB 동글</text><text x="668" y="250" class="sim-ns">A701 (DAC)</text><text x="668" y="268" class="sim-nd">X701 → P701</text><text x="668" y="286" class="sim-ns">Pi USB-A 직결</text></g>
+<g class="sim-node" id="sim-n10"><rect x="528" y="210" width="110" height="90" rx="8"/><text x="538" y="232" class="sim-nt">헤드폰 잭</text><text x="538" y="250" class="sim-ns">J701 노멀 접점</text><text x="538" y="268" class="sim-nd">W701 · W702</text><text x="538" y="286" class="sim-ns">꽂으면 앰프 끊김</text></g>
+<g class="sim-node" id="sim-n11"><rect x="398" y="210" width="110" height="90" rx="8"/><text x="408" y="232" class="sim-nt">HPF (J702 기판)</text><text x="408" y="250" class="sim-ns">C701·C702 2 µF</text><text x="408" y="268" class="sim-nd">R701 1 kΩ</text><text x="408" y="286" class="sim-ns">약 93 Hz · W707</text></g>
+<g class="sim-node" id="sim-n12"><rect x="268" y="210" width="110" height="90" rx="8"/><text x="278" y="232" class="sim-nt">앰프 A702</text><text x="278" y="250" class="sim-ns">TPA3110 · 36 dB</text><text x="278" y="268" class="sim-nd">PVCC +12V8</text><text x="278" y="286" class="sim-ns">약 8 W/ch</text></g>
+<g class="sim-node" id="sim-n13"><rect x="138" y="210" width="110" height="90" rx="8"/><text x="148" y="232" class="sim-nt">XT60 (파랑 SPK)</text><text x="148" y="250" class="sim-ns">X703⇄X704 (L)</text><text x="148" y="268" class="sim-nd">X705⇄X706 (R)</text><text x="148" y="286" class="sim-ns">W703~W706</text></g>
+<g class="sim-node" id="sim-n14"><rect x="8" y="210" width="110" height="90" rx="8"/><text x="18" y="232" class="sim-nt">스피커</text><text x="18" y="250" class="sim-ns">LS701 왼쪽</text><text x="18" y="268" class="sim-nd">LS702 오른쪽</text><text x="18" y="286" class="sim-ns">스피커 파트 L·R</text></g>
+</svg></div>
+<div class="card sim-info" id="sim-info" aria-live="polite"><p class="muted">건반을 누르면 그 음의 경로가 여기에 나옵니다.</p></div>
+</div>
+
+<h3 id="sim-power"><span class="no">3</span>전원: 전지에서 각 부하까지</h3>
+<p class="muted sim-p">LiFePO4 12.8 V 6 Ah 전지(76.8 Wh) → XT60 → 5 A ATO 블레이드 퓨즈 → 스위치 → +12V8 버스에서 강압(5.1 V: Pi 5·허브·화면)과 앰프로 나뉩니다. 부하 값과 계산식은 SCH-06 전원 예산 그대로입니다(강압 효율 90 %, 앰프 평균은 피아노 음악 2~6 W, 가장 센 순간은 앰프 2 × 8 W ÷ 0.8 = 20 W). 강압과 앰프는 전압이 내려가도 같은 전력을 쓰므로 전지 전압이 낮을수록 전류가 커집니다.</p>
+<div class="sim-ctl">
+<div class="sim-row"><label class="sim-lab" for="sim-vol">음량 (앰프 평균)</label><input type="range" class="sim-range" id="sim-vol" min="2" max="6" step="0.5" value="4"/><output class="mono" id="sim-vol-o" for="sim-vol">4.0 W</output></div>
+<div class="sim-row"><label class="sim-lab" for="sim-vb">전지 전압</label><input type="range" class="sim-range" id="sim-vb" min="10" max="14.6" step="0.1" value="12.8"/><output class="mono" id="sim-vb-o" for="sim-vb">12.8 V</output><span class="small muted">10.0 V = BMS 차단(보통 값), 14.6 V = 충전 끝</span></div>
+<div class="sim-row"><button type="button" class="sim-btn" id="sim-scr" aria-pressed="true">화면 켬</button><button type="button" class="sim-btn" id="sim-peak" aria-pressed="false">가장 센 순간 (최저음 강타)</button></div>
+</div>
+<div class="sim-pwgrid">
+<div class="sim-chainbox"><svg id="sim-pwsvg" class="sim-chain sim-pw" viewBox="0 0 920 300" role="img" aria-label="전원 흐름도"></svg></div>
+<div class="kfs sim-pwk">
+<div class="kf"><b id="sim-pw-p">0 W</b><span>전지에서 나가는 전력</span></div>
+<div class="kf"><b id="sim-pw-i">0 A</b><span id="sim-pw-is">퓨즈 5 A 중</span></div>
+<div class="kf"><b id="sim-pw-b">0 A</b><span>강압 출력 (5.1 V)</span></div>
+<div class="kf"><b id="sim-pw-pi">0 A</b><span>Pi 5 입력 (화면·동글 포함)</span></div>
+<div class="kf"><b id="sim-pw-h">0 h</b><span id="sim-pw-hs">연주 시간 (76.8 Wh × 0.9 ÷ 평균)</span></div>
+<div class="kf"><b id="sim-pw-10">0 A</b><span>같은 부하, 전지 끝 10.0 V</span></div>
+</div>
+</div>
+<div class="sim-meter" aria-hidden="true"><div class="sim-meter-bar" id="sim-pw-bar"></div><span class="sim-meter-mk"></span></div>
+<p class="small muted sim-p" id="sim-pw-note"></p>
+
+<h3 id="sim-touch"><span class="no">4</span>화면 접기</h3>
+<p class="muted sim-p">터치스크린 받침이 경첩 축(y226.55, z81.35)을 중심으로 돕니다. 연주할 때 25°, 뒷굽이 뚜껑에 닿는 22°, 옮길 때 접은 90°입니다(도면 D05). 단면은 CAD 고체를 x651에서 자른 것이고, 접은 자세는 CAD의 접은 상태 보기와 높이가 같습니다(자체 검사). 받침다리는 사용 자세에서만 그렸습니다. 접을 때는 다리를 받침 뒤 클립에 끼웁니다.</p>
+<div class="sim-ctl"><div class="sim-row">
+<div class="seg" role="group" aria-label="화면 자세" id="sim-tpose"><button type="button" data-th="25" aria-pressed="true">사용 25°</button><button type="button" data-th="22" aria-pressed="false">뒷굽 닿음 22°</button><button type="button" data-th="90" aria-pressed="false">접음 90°</button></div>
+<input type="range" class="sim-range" id="sim-tang" min="22" max="90" step="0.5" value="25" aria-label="화면 기울기"/><output class="mono" id="sim-tang-o" for="sim-tang">25.0°</output>
+</div></div>
+<figure class="sheet sim-touchfig">
+<div class="cap"><span><b>화면 받침 측면 단면</b> <span class="mono">x651 (받침 몸통)</span></span><span class="mono">단위 mm</span></div>
+<div class="sim-svgbox sim-svgbox-t"><svg id="sim-tsvg" class="sim-draw" viewBox="200 -205 150 150" role="img" aria-label="화면 접기 단면"></svg></div>
+</figure>
+
+<details class="spec sim-spec" id="sim-checks"><summary>자체 검사 (내보내기 스크립트 export_sim.py가 확인한 것)</summary>
+<p class="small muted sim-p" id="sim-chk-sum"></p>
+<ul class="sim-chk" id="sim-chklist"></ul>
+</details>
+</section>

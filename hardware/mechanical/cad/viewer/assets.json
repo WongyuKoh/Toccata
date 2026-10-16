@@ -1,0 +1,20 @@
+{
+ "glb": "hardware/mechanical/cad/viewer/toccata_viewer.glb",
+ "parts": "hardware/mechanical/cad/viewer/parts.json",
+ "publish": {
+  "cad/parts.json": "hardware/mechanical/cad/viewer/parts.json",
+  "cad/toccata.glb.b64.txt": "base64 text of hardware/mechanical/cad/viewer/toccata_viewer.glb"
+ },
+ "page": {
+  "section": "hardware/mechanical/cad/viewer/cad.html",
+  "css": "hardware/mechanical/cad/viewer/cad.css",
+  "js": "hardware/mechanical/cad/viewer/cad.js"
+ },
+ "scripts": [
+  "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js (loaded by cad.js on first open)"
+ ],
+ "capabilities": {
+  "downloads": "optional: the 3D 모델 저장 button uses window.claude.use('downloads') to save Toccata_assembly.zip; without it the button shows a note"
+ },
+ "api": "window.toccata.cad.focus(sel, label, opts) -> Promise<count>; sel = exact id | id prefix (a string that is not an exact id, or ends with '*') | array of those | function(rec) -> bool; opts {view, keepView, inside}. Opens #cad, waits for the model, ghosts the rest at 15 %, frames the camera, shows label + 모두 보기. Also clear(), ready(), parts() -> Promise<[{id, name, kind, group, bbox, file, folder, qty, material, bom, note}]>, press(id), sets. window.toccata.three = shared Promise for three.js r128."
+}

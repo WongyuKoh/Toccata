@@ -1,53 +1,110 @@
-/* ---- CAD 모델 (09) — uses the merged page tokens ---- */
+/* ---- 04 3D 모델 (hardware/mechanical/cad/viewer/cad.css) — page tokens only ---- */
 #p-cad .cadv{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px;align-items:start;margin:10px 0 8px}
 @media (max-width:980px){#p-cad .cadv{grid-template-columns:minmax(0,1fr)}}
-#p-cad .cad-main{min-width:0;display:flex;flex-direction:column;gap:8px}
-#p-cad .cad-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
-#p-cad .cad-bar .lbl{font-size:12px;color:var(--ink-3)}
-#p-cad .cadchips{display:flex;flex-wrap:wrap;gap:6px}
-#p-cad .cadchip{font:inherit;font-size:12.5px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:99px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
-#p-cad .cadchip i{width:10px;height:10px;border-radius:3px;display:inline-block;border:1px solid color-mix(in srgb,var(--ink) 25%,transparent)}
-#p-cad .cadchip[data-kind][aria-pressed="false"]{opacity:.45;text-decoration:line-through}
-#p-cad .cadchip#cadDims[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-cad .cadmain{min-width:0;display:flex;flex-direction:column;gap:8px}
+#p-cad .cadbar{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;min-width:0}
+#p-cad .cadlbl{font-size:12px;color:var(--ink-3);min-width:2.6em}
+#p-cad .cadseg{max-width:100%;overflow-x:auto;scrollbar-width:thin;flex:0 1 auto}
+#p-cad .cadseg button{white-space:nowrap;min-height:34px}
+#p-cad .cadseg button:disabled{opacity:.45;cursor:default}
+#p-cad .cadtog{font:inherit;font-size:13px;min-height:34px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 11px;cursor:pointer;white-space:nowrap}
+#p-cad .cadtog:hover:not(:disabled){border-color:var(--blue)}
+#p-cad .cadtog[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-cad .cadtog:disabled{opacity:.45;cursor:default}
+#p-cad .cadrange{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);flex:1 1 220px;min-width:0}
+#p-cad .cadrange input{flex:1 1 auto;min-width:90px;accent-color:var(--blue)}
+#p-cad .cadrange output,#p-cad #cad-sec-out{font-family:var(--mono);font-size:12.5px;color:var(--ink);min-width:5ch;white-space:nowrap}
+#p-cad .cadsecbar input[type=range]{flex:1 1 200px;min-width:120px;accent-color:var(--blue)}
+#p-cad .cadchk{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--ink-2);cursor:pointer;min-height:34px}
+#p-cad .cadchk input{accent-color:var(--blue);width:16px;height:16px}
+#p-cad .cadstage{position:relative;height:clamp(340px,64vh,700px);border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card)}
+#p-cad .cadstage canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none;outline:none}
+#p-cad .cadstage canvas:active{cursor:grabbing}
+#p-cad .cadstage canvas:focus-visible{box-shadow:inset 0 0 0 2px var(--blue)}
+#p-cad .cadover{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#p-cad .cadover .cdim line{stroke:var(--blue);stroke-width:1.3}
+#p-cad .cadover .cdim line.ext{stroke-width:.8;stroke-dasharray:3 3;opacity:.7}
+#p-cad .cadover text{font:600 12px var(--mono);fill:var(--blue-ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round}
+#p-cad .cadover .cbar line{stroke:var(--ink);stroke-width:1.5}
+#p-cad .cadover .cbar text{fill:var(--ink);font-weight:500}
+#p-cad .cadover .cax line{stroke-width:2;stroke-linecap:round}
+#p-cad .cadover .cax .ax-x line{stroke:var(--s2)}#p-cad .cadover .cax .ax-x text{fill:var(--s2)}
+#p-cad .cadover .cax .ax-y line{stroke:var(--s3)}#p-cad .cadover .cax .ax-y text{fill:var(--s3)}
+#p-cad .cadover .cax .ax-z line{stroke:var(--s1)}#p-cad .cadover .cax .ax-z text{fill:var(--s1)}
+#p-cad .cadload{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-2);font-size:14px;text-align:center;padding:20px;background:var(--card)}
+#p-cad .cadload[hidden]{display:none}
+#p-cad .cadload p{margin:0;max-width:44ch}
+#p-cad .cadprog{width:min(280px,70%);height:6px;border-radius:99px;background:var(--rule);overflow:hidden}
+#p-cad .cadprog i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .2s}
+#p-cad .cadretry[hidden]{display:none}
+#p-cad .cadfocus{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;max-width:calc(100% - 20px);background:var(--ink);color:var(--paper);border-radius:99px;padding:4px 4px 4px 14px;font-size:13px;box-shadow:var(--shadow)}
+#p-cad .cadfocus[hidden]{display:none}
+#p-cad .cadfocus-t{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#p-cad .cadfocus-x{font:inherit;font-size:12.5px;border:0;border-radius:99px;background:var(--paper);color:var(--ink);padding:5px 12px;min-height:30px;cursor:pointer;white-space:nowrap}
+#p-cad .cadviewlbl{position:absolute;left:10px;top:10px;font:12px var(--mono);color:var(--ink-2);background:color-mix(in srgb,var(--card) 85%,transparent);padding:2px 8px;border-radius:6px;pointer-events:none}
+#p-cad .cadviewlbl:empty{display:none}
+#p-cad .cadhint{position:absolute;left:10px;bottom:8px;max-width:calc(100% - 150px);font-size:11.5px;color:var(--ink-3);background:color-mix(in srgb,var(--card) 85%,transparent);padding:2px 8px;border-radius:6px;pointer-events:none;transition:opacity .4s}
+#p-cad .cadhint.is-off{opacity:0}
+#p-cad .cadnote{margin:2px 0 0;max-width:none}
+#p-cad .cadside{display:flex;flex-direction:column;gap:10px;min-width:0}
+#p-cad .cadinfo{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;min-height:120px;min-width:0}
+#p-cad .cadinfo h4{font-size:15px;line-height:1.35;margin:4px 0 6px;word-break:keep-all;overflow-wrap:anywhere}
+#p-cad .cadempty{color:var(--ink-3);font-size:13px;margin:0}
+#p-cad .cadkd{display:inline-block;font-size:11px;border-radius:99px;padding:1px 8px;border:1px solid var(--rule-2);color:var(--ink-2);margin:0 4px 2px 0}
+#p-cad .cadkd-print{border-color:var(--blue);color:var(--blue-ink);background:var(--tint-blue)}
+#p-cad .cadkd-electronics{border-color:var(--good);color:var(--good);background:var(--tint-green)}
+#p-cad .cadkd-plywood,#p-cad .cadkd-consumable{border-color:var(--amber);color:var(--amber);background:var(--tint-amber)}
+#p-cad .cadinfo dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 10px;margin:8px 0 0;font-size:12.5px}
+#p-cad .cadinfo dt{color:var(--ink-3);white-space:nowrap}
+#p-cad .cadinfo dd{margin:0;min-width:0;overflow-wrap:anywhere}
+#p-cad .cadinfo .mono{font-family:var(--mono);font-size:12px}
+#p-cad .cadinfo details{grid-column:1/-1}
+#p-cad .cadinfo details summary{cursor:pointer;color:var(--blue);font-size:12.5px}
+#p-cad .cadinfo details p{margin:4px 0 0;font-size:12.5px;color:var(--ink-2)}
+#p-cad .caddl{margin:8px 0 0;padding-left:1.1em;font-size:12.5px}
+#p-cad .caddl b{font-family:var(--mono);font-weight:600}
+#p-cad .cadacts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+#p-cad .cadacts button{font:inherit;font-size:12.5px;border:1px solid var(--rule-2);background:var(--paper);color:var(--ink);border-radius:7px;padding:4px 9px;min-height:32px;cursor:pointer}
+#p-cad .cadacts button:hover{border-color:var(--blue)}
+#p-cad .cadbox{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:6px 10px;min-width:0}
+#p-cad .cadbox summary{cursor:pointer;font-size:13.5px;font-weight:600;padding:5px 0;list-style:none}
+#p-cad .cadbox summary::-webkit-details-marker{display:none}
+#p-cad .cadbox summary::before{content:"+ ";font-family:var(--mono);color:var(--ink-3)}
+#p-cad .cadbox[open] summary::before{content:"− "}
+#p-cad .cadsets{display:flex;flex-direction:column;gap:3px;padding:2px 0 6px}
+#p-cad .cadset{display:flex;align-items:center;gap:8px;width:100%;text-align:left;font:inherit;font-size:12.5px;line-height:1.35;border:1px solid transparent;background:transparent;color:var(--ink);border-radius:7px;padding:6px 6px;min-height:34px;cursor:pointer}
+#p-cad .cadset span{flex:1;min-width:0}
+#p-cad .cadset em{font-style:normal;font-size:11px;color:var(--ink-3)}
+#p-cad .cadset:hover{background:var(--paper);border-color:var(--rule)}
+#p-cad .cadset[aria-pressed="true"]{background:var(--tint-blue);border-color:var(--blue)}
+#p-cad .cadset-sec em{color:var(--felt)}
+#p-cad .cadchips{display:flex;flex-wrap:wrap;gap:6px;padding:2px 0 8px}
+#p-cad .cadchip{font:inherit;font-size:12.5px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:99px;padding:4px 10px;min-height:32px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+#p-cad .cadchip span{font-size:11px;color:var(--ink-3)}
+#p-cad .cadchip[aria-pressed="false"]{opacity:.5;text-decoration:line-through}
 #p-cad .cadchip:hover{border-color:var(--blue)}
-#p-cad .stage{position:relative;height:clamp(360px,62vh,640px);border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--card);touch-action:none}
-#p-cad .stage canvas{display:block;width:100%;height:100%;cursor:grab}
-#p-cad .stage canvas:active{cursor:grabbing}
-#p-cad .stage svg.dims{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-#p-cad .stage svg.dims line{stroke:var(--blue);stroke-width:1.3}
-#p-cad .stage svg.dims line.ext{stroke-width:.8;stroke-dasharray:3 3;opacity:.7}
-#p-cad .stage svg.dims text{font:600 12px var(--mono);fill:var(--blue-ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round}
-#p-cad .load[hidden]{display:none}
-#p-cad .load{position:absolute;inset:0;display:grid;place-items:center;color:var(--ink-2);font-size:14px;text-align:center;padding:20px}
-#p-cad .hint{position:absolute;left:10px;bottom:8px;font-size:11.5px;color:var(--ink-3);background:color-mix(in srgb,var(--card) 85%,transparent);padding:2px 8px;border-radius:6px}
-#p-cad .axes{position:absolute;right:10px;bottom:8px;font:11px var(--mono);color:var(--ink-3);background:color-mix(in srgb,var(--card) 85%,transparent);padding:2px 8px;border-radius:6px}
-#p-cad .secbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px}
-#p-cad .secbar input[type=range]{flex:1 1 220px;min-width:160px;accent-color:var(--blue)}
-#p-cad .secbar output{font-family:var(--mono);font-size:12.5px;min-width:7ch}
-#p-cad .side{display:flex;flex-direction:column;gap:10px;min-width:0}
-#p-cad .info{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;min-height:120px}
-#p-cad .info h4{font-size:15px;line-height:1.35;margin:2px 0 6px;word-break:keep-all}
-#p-cad .info .kd{display:inline-block;font-size:11px;border-radius:99px;padding:1px 8px;border:1px solid var(--rule-2);color:var(--ink-2);margin-right:4px}
-#p-cad .info .kd.print{border-color:var(--blue);color:var(--blue-ink);background:var(--tint-blue)}
-#p-cad .info dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:8px 0 0;font-size:12.5px}
-#p-cad .info dt{color:var(--ink-3);white-space:nowrap}
-#p-cad .info dd{margin:0;min-width:0;word-break:break-word}
-#p-cad .info .mono{font-size:12px}
-#p-cad .info .empty{color:var(--ink-3);font-size:13px;margin:0}
-#p-cad .info ul.dl{margin:6px 0 0;padding-left:1.1em;font-size:12.5px}
-#p-cad .grp{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:6px 10px}
-#p-cad .grp summary{cursor:pointer;font-size:13.5px;font-weight:600;padding:4px 0;list-style:none}
-#p-cad .grp summary::-webkit-details-marker{display:none}
-#p-cad .grp summary::before{content:"＋ ";font-family:var(--mono)}
-#p-cad .grp[open] summary::before{content:"－ "}
-#p-cad .glist{max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:2px;padding:4px 0 6px}
-#p-cad .glist label{display:flex;gap:8px;align-items:center;font-size:12.5px;padding:2px 2px;border-radius:5px;cursor:pointer}
-#p-cad .glist label:hover{background:var(--paper)}
-#p-cad .glist label span{flex:1;min-width:0}
-#p-cad .glist label em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
-#p-cad .gtools{display:flex;gap:6px;margin:2px 0 4px}
-#p-cad .gtools button{font:inherit;font-size:12px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:6px;padding:2px 8px;cursor:pointer}
-#p-cad .ptbl td:first-child{font-family:var(--mono);font-size:12.5px;word-break:break-all}
-#p-cad .ptbl td.num{text-align:right}
-#p-cad .adj td:first-child{font-family:var(--mono);font-weight:600;white-space:nowrap}
-#p-cad .files code{word-break:break-all}
+#p-cad .cadgtools{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}
+#p-cad .cadgtools button{font:inherit;font-size:12px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:6px;padding:3px 9px;min-height:30px;cursor:pointer}
+#p-cad .cadglist{max-height:380px;overflow:auto;display:flex;flex-direction:column;gap:1px;padding:0 0 6px}
+#p-cad .cadgh{margin:8px 0 2px;font-size:11.5px;color:var(--ink-3);font-weight:600}
+#p-cad .cadglist label{display:flex;gap:8px;align-items:center;font-size:12.5px;padding:3px 2px;border-radius:5px;cursor:pointer}
+#p-cad .cadglist label:hover{background:var(--paper)}
+#p-cad .cadglist label span{flex:1;min-width:0}
+#p-cad .cadglist label em{font-style:normal;font-size:11px;color:var(--ink-3)}
+#p-cad .cadglist input{accent-color:var(--blue)}
+#p-cad .cadfiles code{word-break:break-all;font-size:12.5px}
+#p-cad .cadsave{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:8px 0 14px}
+#p-cad .cadest ul{padding-left:1.2em}
+#p-cad .cadest li{margin:2px 0}
+@media (max-width:560px){
+  #p-cad .cadfocus{top:40px}
+  #p-cad .cadhint{max-width:calc(100% - 110px)}
+}
+@media (pointer:coarse){
+  #p-cad .cadtog,#p-cad .cadseg button,#p-cad .cadset,#p-cad .cadchip,#p-cad .cadacts button,#p-cad .cadgtools button,#p-cad .cadchk{min-height:44px}
+  #p-cad .cadglist label{min-height:40px}
+  #p-cad .cadfocus-x{min-height:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  #p-cad .cadprog i,#p-cad .cadhint{transition:none}
+}

@@ -17,7 +17,7 @@ spec/body_L2.json (stated on the sheets).
 
 Outputs: ../drawings/D01_plan.svg (전체 평면), D02_speaker_section.svg (스피커 단면), D03_centre_sections.svg (가운데 유닛 단면 2개),
 D04_rear_elevation.svg (뒷면 입면 - I/O 판), D05_touchscreen.svg (터치스크린: 사용 25° / 뒤꿈치 22° / 접은 상태),
-D06_plywood_cuts.svg (합판 재단도, 400 x 1200 한 장; each piece drawing says which face is up and draws the datum edges u·v are
+D06_plywood_cuts.svg (합판 재단도, 400 x 1200 한 장, 10 pieces since 2026-10-07 - lids / end walls / pod inner panels are printed; each piece drawing says which face is up and draws the datum edges u·v are
 measured from, the printed drilling jig per face (plywood_jigs.py placements) and the screw spots - countersunk, hub shelf, rubber
 feet - found from the parts the screws pass through) + the same names .png; ../renders/R01_front.png, R02_rear_left.png, R03_folded.png.
 Sheets are A2 landscape (594 x 420 mm); the view scales on each sheet are true when printed on A2. PNG = 4 px per sheet mm.
@@ -45,7 +45,7 @@ OUT = os.path.normpath(os.path.join(HERE, ".."))
 DWG = os.path.join(OUT, "drawings")
 REN = os.path.join(OUT, "renders")
 
-DATE = "2026-10-02"
+DATE = "2026-10-16"
 STATE = "L2 · 스피커 앞판 40° · 터치스크린 3판"
 SOURCES = "src/body.py · electronics.py · touchscreen_rev3.py · keyaction_parts.py (build_all.collect) · spec/body_L2.json"
 SHEETS = collections.OrderedDict([
@@ -54,7 +54,7 @@ SHEETS = collections.OrderedDict([
     ("D03", ("D03_centre_sections", "가운데 유닛 단면 2개")),
     ("D04", ("D04_rear_elevation", "뒷면 입면 - I/O 판")),
     ("D05", ("D05_touchscreen", "터치스크린: 사용 25° / 뒤꿈치 22° / 접은 상태")),
-    ("D06", ("D06_plywood_cuts", "합판 재단도 (400 × 1200 한 장)")),
+    # D06 (합판 재단도) dropped 2026-10-16: A안 - every former plywood panel is printed (sheet_D06 kept for the record, not built)
 ])
 A2 = (594.0, 420.0)
 PX_PER_MM = 4.0
@@ -213,7 +213,7 @@ _SIDE = re.compile(r"(?<![A-Za-z0-9])([LR])(?![A-Za-z0-9])")
 
 
 def pair_name(ps):
-    """one name for the instances of an item: 'XT30 짝 집게 L' + '... R' -> 'XT30 짝 집게 L·R'."""
+    """one name for the instances of an item: 'XT60 짝 집게 L' + '... R' -> 'XT60 짝 집게 L·R'."""
     names = [short(p.name_ko) for p in ps]
     if len(set(names)) > 1 and len(set(_SIDE.sub("#", n) for n in names)) == 1 and \
             {m.group(1) for n in names for m in _SIDE.finditer(n)} == {"L", "R"}:
@@ -658,7 +658,7 @@ class Sheet:
                 self.text(x + i * step * k, y + 4.6, fnum(i * step), T_SMALL, "middle", halo=False, check=False)
         self.text(x + n * step * k + 3, y + 1.6, "mm  " + label, T_SMALL, "start", halo=False)
 
-    def title_block(self, n_total=6):
+    def title_block(self, n_total=None):
         W, H = 196.0, 38.0
         x0, y0 = self.w - 10 - W, self.h - 10 - H
         self.rect(x0, y0, x0 + W, y0 + H, "grid", "over")
@@ -673,6 +673,7 @@ class Sheet:
         self.text(x0 + 65, y0 + 4.4, "도면 이름", T_SMALL - 0.4, cls="tm", halo=False)
         self.text(x0 + 65, y0 + 10.6, self.name, 4.4 if text_w(self.name, 4.4) < 83 else 3.4, bold=True, halo=False)
         self.text(x0 + 153, y0 + 4.4, "도면 번호", T_SMALL - 0.4, cls="tm", halo=False)
+        n_total = n_total or len(SHEETS)          # 5 since 2026-10-16 (D06 plywood cut sheet dropped)
         self.text(x0 + 153, y0 + 10.8, "%s / D%02d" % (self.code, n_total), 5.2, bold=True, halo=False)
         self.text(x0 + 3, r1 + 5.6, "뒷부분(L2) + 터치스크린 3판 도면 모음", T_SMALL, halo=False)
         self.text(x0 + 65, r1 + 3.6, "척도 (A2 594×420 출력 기준)", T_SMALL - 0.6, cls="tm", halo=False)
@@ -1042,7 +1043,7 @@ def sheet_D02(M):
     v.angle(Tp, (-math.cos(math.radians(body.ANGLE)), -math.sin(math.radians(body.ANGLE))), (-1.0, 0.0), 30.0,
             "%s°" % fnum(body.ANGLE), text_r=33.5)
     # callouts: pod parts on the right, context / lines on top
-    names = {"SPKL-PLY-BACK": "뒤판 (오꾸메 11.5)", "SPKL-PLY-TOP": "윗판 (오꾸메 11.5)", "SPKL-PLY-BOTTOM": "아랫판 (오꾸메 11.5)",
+    names = {"SPKL-PLY-BACK": "뒤판 (출력 11.5)", "SPKL-PLY-TOP": "윗판 (출력 11.5)", "SPKL-PLY-BOTTOM": "아랫판 (출력 11.5)",
              "SPKL-BAFFLE": "앞판 배플 %s° (출력)" % fnum(body.ANGLE), "SPKL-GRILLE": "육각 그릴 (판 2, 아래 링 벽 없음)",
              "SPKL-DUCTFORMER": "통로 틀: 앞벽·턱·지붕·세움벽 (출력)", "SPKL-GASKET": "EVA 가스켓 3T",
              "SPK-L": "스피커 유닛 CW-100B25 (Ø94 구멍)"}
@@ -1118,7 +1119,7 @@ def sheet_D02(M):
         "앞판 바깥면 F(%s, %s) → T(%s, %s), 길이 %s, 수평에서 %s° (수직에서 %s°)" % (fnum(body.SL_A[0]), fnum(body.SL_A[1]), fnum(body.SL_B[0]),
                                                                     fnum(body.SL_B[1]), fnum(body.SL_LEN), fnum(body.ANGLE), fnum(body.TH_V)),
         "유닛 가운데 (x%s / %s, y%s, z%s), 축은 앞판에 수직 (수평에서 %s° 위)" % (fnum(body.DRV_X["L"]), fnum(body.DRV_X["R"]), fnum(C[0]), fnum(C[1]), fnum(body.TH_V)),
-        "판: 오꾸메 %s (뒤판·윗판·아랫판·옆판), 앞판·통로 틀·그릴은 출력 PETG" % fnum(body.T),
+        "판: 모두 출력 PETG, 두께 %s (뒤판·윗판·아랫판·바깥 옆판은 10/16부터, 안쪽 옆판은 10/7부터; 앞판·통로 틀·그릴)" % fnum(body.T),
         "케이블 통로 y%s~%s × z%s~%s (스피커 밑, 책상이 바닥)" % (fnum(body.DUCT_Y[0]), fnum(body.DUCT_Y[1]), fnum(body.DUCT_Z[0]), fnum(body.DUCT_Z[1])),
     ])
     notes_box(sh, 206, yN, 176, "소리 길 27° · D14 (자석 ↔ 홀 센서)", [
@@ -1332,8 +1333,14 @@ def sheet_D05(M):
 # ------------------------------------------------------------------ D03 centre sections
 
 
-def plate_holes(M, pid, axis, c):
-    return hole_list(sec(M.by[pid].solid, axis, c))
+PILOT_PANELS = ("CU-PLY-BOTTOM", "CU-PLY-BACK")   # printed since 2026-10-16: screw pilots (D3.4 / D2.5) are not vents
+
+
+def plate_holes(M, pid, axis, c, pilots=False):
+    hs = hole_list(sec(M.by[pid].solid, axis, c))
+    if not pilots and pid in PILOT_PANELS:
+        hs = [h for h in hs if not (h["round"] and max(h["w"], h["h"]) < 5.0)]
+    return hs
 
 
 def section_planes(M):
@@ -1378,14 +1385,14 @@ def sheet_D03(M):
     sh = Sheet("D03", "1:1")
     xB, xC = section_planes(M)
     sh.heading(16, 21, "가운데 유닛 단면 B-B · C-C", "1:1 · 오른쪽 끝(+x)에서 본 방향, 연주자는 왼쪽 · 자르는 자리는 D01 평면에 표시")
-    names = {"CU-SCREENLID": "화면 뚜껑 (출력, 판 3 + 갈비)", "LID-R": "뚜껑 R (오꾸메, 배기 홈)", "CU-PLY-BOTTOM": "아랫판 (오꾸메, 흡기 홈)",
-             "CU-PLY-BACK": "뒤판 (오꾸메)", "TS-CRADLE": "화면 받침", "TS-LEG": "받침다리", "TS-E-SCREEN": "화면 Waveshare 7\"",
+    names = {"CU-SCREENLID": "화면 뚜껑 (출력, 판 3 + 갈비)", "LID-R": "뚜껑 R (출력, 배기 홈)", "CU-PLY-BOTTOM": "아랫판 (출력 3토막, 흡기 Ø8)",
+             "CU-PLY-BACK": "뒤판 (출력 3토막)", "TS-CRADLE": "화면 받침", "TS-LEG": "받침다리", "TS-E-SCREEN": "화면 Waveshare 7\"",
              "FOOT-06": "고무발 28×5", "FOOT-09": "고무발 28×5"}
     out = {}
     for tag, xs, win, at in (("B", xB, (160.0, 350.0, -3.0, 193.0), (32.0, 40.0)), ("C", xC, (160.0, 350.0, -3.0, 80.0), (32.0, 282.0))):
         v = View(sh, 1.0, win, at)
         x0, y0, x1, y1 = v.rect
-        what = "Pi 5 · 화면 (아랫판 흡기 홈 가운데)" if tag == "B" else "허브 · 앰프 (뒤판 환기 홈과 뚜껑 R 배기 홈이 겹치는 곳)"
+        what = "Pi 5 · 화면 (아랫판 흡기 구멍 가운데)" if tag == "B" else "허브 · 앰프 (뒤판 환기 구멍과 뚜껑 R 배기 홈이 겹치는 곳)"
         sh.text(x0, y0 - 3.5, "단면 %s-%s  x%s — %s" % (tag, tag, fnum(xs), what), T_HEAD - 0.6, bold=True)
         its = M.section(M.rear + M.ka, "x", xs, clip=v.clip())
         draw_section(v, its)
@@ -1439,14 +1446,14 @@ def sheet_D03(M):
         "앞 공간 y%s~%s는 앞벽 없이 케이블 통로 (z%s~%s)와 이어짐 — 뚜껑을 열면 모듈 USB-C를 위에서 잡음" % (fnum(body.Y0), fnum(body.DUCT_Y[1]), fnum(body.DUCT_Z[0]), fnum(body.DUCT_Z[1])),
         "Pi 5 x%s~%s, z%s~%s → 뚜껑 밑면까지 %s" % (fnum(pi[0]), fnum(pi[3]), fnum(pi[2]), fnum(pi[5]), fnum(body.Z_LIDU - pi[5])),
         "허브 z%s~%s, 선반 위 앰프 z%s~%s → 뚜껑 밑면까지 %s" % (fnum(hub[2]), fnum(hub[5]), fnum(amp[2]), fnum(amp[5]), fnum(body.Z_LIDU - amp[5])),
-        "흡기: 아랫판 홈 합 %s mm² (고무발 %s mm 틈으로) + 뒤판 출력물 루버 %s mm²" % ("{:,.0f}".format(intake), fnum(body.ZB), "{:,.0f}".format(louv)),
-        "배기 (홈만): 뚜껑 L %s + 화면 뚜껑 홈 %s + 뚜껑 R %s + 뒤판 앰프 뒤 %s = %s mm²" % ("{:,.0f}".format(ex_l), "{:,.0f}".format(ex_s), "{:,.0f}".format(ex_r), "{:,.0f}".format(ex_b), "{:,.0f}".format(ex_l + ex_s + ex_r + ex_b)),
+        "흡기: 아랫판 Ø8 구멍 합 %s mm² (고무발 %s mm 틈으로) + 뒤판 출력물 루버 %s mm²" % ("{:,.0f}".format(intake), fnum(body.ZB), "{:,.0f}".format(louv)),
+        "배기 (홈·구멍만): 뚜껑 L %s + 화면 뚜껑 홈 %s + 뚜껑 R %s + 뒤판 앰프 뒤 Ø8 %s = %s mm²" % ("{:,.0f}".format(ex_l), "{:,.0f}".format(ex_s), "{:,.0f}".format(ex_r), "{:,.0f}".format(ex_b), "{:,.0f}".format(ex_l + ex_s + ex_r + ex_b)),
     ]
     if sl_other:
         lines.append("  화면 뚜껑의 리본·전원선 구멍 %s (%s mm²)은 선이 지나는 구멍이라 배기 합에 넣지 않음"
                      % (" · ".join("%s×%s" % (fnum(h["w"], 1), fnum(h["h"], 1)) for h in sl_other), "{:,.0f}".format(ex_rib)))
-    for pid, axis, c, nm in (("CU-PLY-BOTTOM", "z", (bb[2] + bb[5]) / 2, "아랫판 흡기 홈 (x, y)"), ("LID-L", "z", body.Z_LID - body.T / 2, "뚜껑 L 배기 홈 (x, y)"),
-                             ("LID-R", "z", body.Z_LID - body.T / 2, "뚜껑 R 배기 홈 (x, y)"), ("CU-PLY-BACK", "y", body.YB - body.T / 2, "뒤판 환기 홈 (x, z)")):
+    for pid, axis, c, nm in (("CU-PLY-BOTTOM", "z", (bb[2] + bb[5]) / 2, "아랫판 흡기 구멍 (x, y)"), ("LID-L", "z", body.Z_LID - body.T / 2, "뚜껑 L 배기 홈 (x, y)"),
+                             ("LID-R", "z", body.Z_LID - body.T / 2, "뚜껑 R 배기 홈 (x, y)"), ("CU-PLY-BACK", "y", body.YB - body.T / 2, "뒤판 환기 구멍 (x, z)")):
         hs = plate_holes(M, pid, axis, c)
         hs = [h for h in hs if not (pid == "CU-PLY-BACK" and h["w"] > 100)]
         for t in pattern_text(hs):
@@ -1474,11 +1481,23 @@ def sheet_D03(M):
     return sh
 
 
+def mismate_lines():
+    """XT60 mis-mate guard (2026-10-07: the speaker joints use the same XT60 as the power) - the same lines on D01 and D04."""
+    import electronics as E
+    mm = E.mismate()
+    return [
+        "전원 XT60 (배터리 선 암, 하네스 수, 시험 전원 어댑터) = 빨간 수축 튜브. 스피커 XT60 (스피커 꼬리 암, 앰프 선 수, 끝벽 집게 L·R) = 파란 수축 튜브 + 'SPK'",
+        "배터리나 시험 전원을 스피커 이음에 꽂지 않음 - 12.8 V 직류가 앰프 출력이나 스피커 코일에 걸림",
+        "하네스 수 선은 퓨즈 홀더 -x 끝에서 (12 AWG 꼬리 + 이음 포함) %s mm로 잘라 둠: 스피커 집게에 꽂히려면 그 끝이 홀더 끝에서 직선 %s (L) / %s (R) mm 떨어져야 해서 닿지 않음 "
+        "(10 cm 그대로 두면 L에 닿음). 배터리 선 구역 → 집게 입구 %s (L) / %s (R) mm"
+        % (fnum(mm["cut"], 0), fnum(mm["need"]["L"], 0), fnum(mm["need"]["R"], 0), fnum(mm["zone"]["L"], 0), fnum(mm["zone"]["R"], 0)),
+    ]
+
+
 # ------------------------------------------------------------------ D04 rear elevation
 
 
-BP_NAMES = {"cable_pass": "케이블 통과 (보조배터리 선)", "usb_c_pd_input": "USB-C PD 입력 (HUSB238)",
-            "rocker": "로커 스위치 KCD1", "pedal_jack": "페달 잭 J501"}
+BP_NAMES = {"rocker": "로커 스위치 KCD1", "pedal_jack": "페달 잭 J501"}   # 2026-10-07: the cable pass / USB-C PD input are closed
 
 
 def sheet_D04(M):
@@ -1511,7 +1530,7 @@ def sheet_D04(M):
     sh.ordinates_v([(v.Py(z), None, fnum(z)) for z in zs], x0 - 2, -1, lo=y0 - 2, hi=y1 + 2)
     sh.text(x0 - 3, y0 - 3, "z", T_SMALL, "end", cls="tm")
     # callouts below
-    names = {"SPKL-PLY-BACK": "스피커 L 뒤판", "SPKR-PLY-BACK": "스피커 R 뒤판", "CU-PLY-BACK": "가운데 유닛 뒤판 (오꾸메)",
+    names = {"SPKL-PLY-BACK": "스피커 L 뒤판", "SPKR-PLY-BACK": "스피커 R 뒤판", "CU-PLY-BACK": "가운데 유닛 뒤판 (출력)",
              "PR-BACKPLATE": "뒤판 출력물 (I/O·루버)", "TS-CRADLE": "화면 받침 (뒷면)", "TS-LEG": "받침다리",
              "SPKL-PLY-SIDEOUT": "스피커 L 바깥 옆판", "SPKR-PLY-SIDEOUT": "스피커 R 바깥 옆판"}
     co = []
@@ -1526,7 +1545,8 @@ def sheet_D04(M):
     hk = [h for h in plate_holes(M, "CU-PLY-BACK", "y", body.YB - body.T / 2) if h["w"] < 100]
     if hk:
         h = hk[len(hk) // 2]
-        co.append(v.P(h["cu"], h["v1"]) + ("앰프 뒤 환기 홈 %s×%s ×%d" % (fnum(hk[0]["w"]), fnum(hk[0]["h"]), len(hk)),))
+        co.append(v.P(h["cu"], h["v1"]) + (("앰프 뒤 환기 구멍 Ø%s ×%d" % (fnum(hk[0]["d"], 1), len(hk))) if hk[0]["round"] else
+                                           ("앰프 뒤 환기 홈 %s×%s ×%d" % (fnum(hk[0]["w"]), fnum(hk[0]["h"]), len(hk))),))
     foots = [p for p in M.rear if p.id.startswith("FOOT-")]
     if foots:
         f = min(foots, key=lambda p: -M.bb(p)[0])
@@ -1599,6 +1619,7 @@ def sheet_D04(M):
     sh.legend(392, 200, sh.used, cols=1)
     sh.scale_bar(392, 300, k, 200, 50, "1:2.5")
     sh.scale_bar(392, 314, k2, 40, 10, "2:1")
+    notes_box(sh, 392, 330, 185, "XT60 잘못 꽂기 막기 (전원과 스피커가 같은 XT60)", mismate_lines())
     sh.title_block()
     return sh
 
@@ -1606,18 +1627,18 @@ def sheet_D04(M):
 # ------------------------------------------------------------------ D01 plan
 
 D01_ITEMS = [
-    (r"CU-PLY-END-[LR]$", "가운데 유닛 끝벽 L·R (ㄴ자, 오꾸메)"), (r"CU-PLY-BOTTOM$", "가운데 유닛 아랫판 (흡기 홈)"),
-    (r"CU-PLY-BACK$", "가운데 유닛 뒤판 (I/O 창, 환기 홈)"), (r"SEAM-POSTRAIL-\d$", None), (r"SEAM-INS-\d$|CU-M3X10-\d$", "화면 뚜껑 나사 자리 (M3 인서트 + M3×10)"),
-    (r"CU-MAG-PLY-", "뚜껑 자석 Ø8×3 (합판 쪽)"), (r"PB-E-BANK$", None), (r"CU-PBHOLDER$", None), (r"PR-BACKPLATE$", None),
-    (r"CU-E-FUSE$", None), (r"CU-FUSECRADLE$", None), (r"CU-E-SWITCH$", None), (r"CU-E-PDTRIG$", None),
+    (r"CU-PLY-END-[LR]$", "가운데 유닛 끝벽 L·R (ㄴ자, 출력)"), (r"CU-PLY-BOTTOM$", "가운데 유닛 아랫판 (흡기 Ø8)"),
+    (r"CU-PLY-BACK$", "가운데 유닛 뒤판 (I/O 창, 환기 Ø8)"), (r"SEAM-POSTRAIL-\d$", None), (r"SEAM-INS-\d$|CU-M3X10-\d$", "화면 뚜껑 나사 자리 (M3 인서트 + M3×10)"),
+    (r"CU-MAG-PLY-", "뚜껑 자석 Ø8×3 (뒤판·끝벽 쪽)"), (r"BAT-LFP$", None), (r"CU-BATFRAME$", None), (r"^C-XT60$|^C-DC$", "XT60 짝 (전원, 빨간 수축 튜브)·DC 충전 커넥터 (배터리 윗면)"),
+    (r"PR-BACKPLATE$", None), (r"CU-E-FUSE$", None), (r"CU-E-SWITCH$", None),
     (r"CU-E-J501BOARD$|CU-E-J501$", None), (r"CU-E-PEDBOARD$", None), (r"CU-E-PEDZERO$", None), (r"CU-E-BUCK$", None),
     (r"CU-E-J702BOARD$|CU-E-J702$", None), (r"CU-E-PI5$", None), (r"CU-E-PI5-.+", "Pi 5 포트 (RJ45·USB-A·DISP1)"),
     (r"CU-E-GENDER$", None), (r"CU-E-DONGLE$", None), (r"PB-E-HUB$", None), (r"PR-HUBSHELF$", None), (r"CU-E-AMP$", None),
-    (r"CU-POST-", "보드 받침 기둥 (출력)"), (r"XT30-CLIP-[LR]$", None), (r"C-XT30", "XT30 커넥터 짝 L·R (스피커 선)"),
+    (r"CU-POST-", "보드 받침 기둥 (출력)"), (r"XT60-CLIP-[LR]$", None), (r"^C-XT60[FM]-", "XT60 커넥터 짝 L·R (스피커 선, 파란 수축 튜브 + SPK)"),
     (r"JOIN-TS-", None), (r"JOIN-SLV-", None), (r"JOIN-EVA-", "EVA 3T 띠 (스피커 ↔ 가운데 틈)"), (r"CABLE-CLIP-E", None),
-    (r"^C-USB-|^O\d-C-USB|^C-PWR|^C-SPK", "케이블 (USB·전원·스피커)"),
+    (r"^C-USB-|^O\d-C-USB|^C-PWR|^C-SPK|^C-BAT-", "케이블 (USB·전원·배터리·스피커)"),
 ]
-BAY_KO = {"power_bank": "보조배터리", "io_ped_fuse": "I/O·페달·퓨즈", "buck_j702": "강압·J702", "pi_dongle": "Pi 5·동글",
+BAY_KO = {"battery_power": "배터리·퓨즈", "io_ped": "I/O·페달", "power_bank": "보조배터리", "io_ped_fuse": "I/O·페달·퓨즈", "buck_j702": "강압·J702", "pi_dongle": "Pi 5·동글",
           "hub_amp_shelf": "허브·앰프·선반"}
 LID_IDS = ("LID-L", "LID-R", "CU-SCREENLID")
 
@@ -1708,7 +1729,7 @@ def sheet_D01(M):
         return a
     co.append(vis_anchor("SPKL-PLY-TOP") + ("스피커 L (윗면 z%s)" % fnum(body.SPK_ZT),))
     co.append(vis_anchor("SPKR-GRILLE") + ("스피커 R (앞판 %s°, 그릴)" % fnum(body.ANGLE),))
-    co.append(vis_anchor("PB-E-BANK") + ("가운데 유닛 (뚜껑 뗌) → 아래 확대",))
+    co.append(vis_anchor("BAT-LFP") + ("가운데 유닛 (뚜껑 뗌) → 아래 확대",))
     co.append(v.P(seams[0], body.Y0 + 70) + ("뚜껑 이음 x%s · x%s" % (fnum(seams[0]), fnum(seams[1])),))
     sp = inner_point(polys(scr))
     co.append(v.P(sp[0] + 40, body.Y0 + 6) + ("화면 사용 25° 투영 (가는 1점 쇄선)",))
@@ -1758,7 +1779,7 @@ def sheet_D01(M):
         used |= set(ids)
         nm = lab or pair_name([M.by[i] for i in ids])
         n_inst = len(ids)
-        if re.match(r"CU-PLY-END|CU-E-FUSE|CU-E-J501|CU-E-J702|SEAM-INS|CU-E-PI5-|C-XT30|^C-USB|CU-POST", ids[0]):
+        if re.match(r"CU-PLY-END|CU-E-FUSE|CU-E-J501|CU-E-J702|SEAM-INS|CU-E-PI5-|C-XT60[FM]-|^C-USB|CU-POST", ids[0]):
             n_inst = 0
         visu = CrossSection()
         full = CrossSection()
@@ -1800,15 +1821,17 @@ def sheet_D01(M):
     sh.legend(392, 302, sh.used | {"ctx"}, cols=2, colw=96, extra=[("hid", "숨은 선 (스피커·바닥 밑)"), ("ph", "화면 투영 (사용 25°)"), ("cl", "뚜껑 이음·자르는 자리")])
     sh.scale_bar(392, 360, k1, 200, 50, "1:2.5")
     sh.scale_bar(500, 360, k2, 60, 20, "1:1.5")
+    notes_box(sh, 392, 333, 185, "XT60 잘못 꽂기 막기 (전원과 스피커가 같은 XT60)", mismate_lines(), size=T_SMALL)
     sh.title_block()
     return sh
 
 
 # ------------------------------------------------------------------ D06 plywood cut sheet
 
-PLY_SLOTS = [("PLY-POD-SIDE", r"SPKL-PLY-SIDEOUT$|SPKL-PLY-SIDEIN$|SPKR-PLY-SIDEIN$|SPKR-PLY-SIDEOUT$"), ("PLY-POD-BACK", r"SPK[LR]-PLY-BACK$"),
-             ("PLY-POD-TOP", r"SPK[LR]-PLY-TOP$"), ("PLY-POD-BOTTOM", r"SPK[LR]-PLY-BOTTOM$"), ("PLY-CU-END", r"CU-PLY-END-[LR]$"),
-             ("PLY-CU-BACK", r"CU-PLY-BACK$"), ("PLY-CU-BOTTOM", r"CU-PLY-BOTTOM$"), ("PLY-CU-LID-L", r"LID-L$"), ("PLY-CU-LID-R", r"LID-R$")]
+# 2026-10-07: the lids L / R, the end walls and the pod inner side panels are printed (not in this sheet); 10 plywood pieces
+PLY_SLOTS = [("PLY-POD-SIDE", r"SPKL-PLY-SIDEOUT$|SPKR-PLY-SIDEOUT$"), ("PLY-POD-BACK", r"SPK[LR]-PLY-BACK$"),
+             ("PLY-POD-TOP", r"SPK[LR]-PLY-TOP$"), ("PLY-POD-BOTTOM", r"SPK[LR]-PLY-BOTTOM$"),
+             ("PLY-CU-BACK", r"CU-PLY-BACK$"), ("PLY-CU-BOTTOM", r"CU-PLY-BOTTOM$")]
 
 
 def flat_piece(M, p):
@@ -1889,7 +1912,7 @@ def _piece_on_face(M, fps, P, i=None, fi=None, tol=0.05):
 def ply_spots(M, fps):
     """screw spots on the plywood - the screws are not modelled and the boards have no hole for them, so they are found from the
     parts that the screws pass through (built solids):
-      * 접시 8호 13 x6: the D4.5 seats of the countersunk holes in the power-bank tray floor (CU-PBHOLDER) and the back-plate tabs
+      * 접시 8호 13 x6: the D4.5 seats of the countersunk holes in the battery frame (CU-BATFRAME: 2 ears + 2 bores) and the back-plate tab
         (PR-BACKPLATE), sliced 0.3 above the bottom-ply top -> centre bottom ply, top face
       * 둥근머리 D3 x2: the D3.4 bracket holes of PR-HUBSHELF (teardrop, roof up: centre = lowest point + d/2), sliced 0.3 in front
         of the back ply -> centre back ply, inner face
@@ -1909,7 +1932,7 @@ def ply_spots(M, fps):
         out[fp["p"].id].append(dict(kind=kind, what=what, u=u, v=v, fi=fi))
         found[kind] += 1
 
-    for pid, what in (("CU-PBHOLDER", "보조배터리 받침"), ("PR-BACKPLATE", "뒤판 출력물 탭")):
+    for pid, what in (("CU-BATFRAME", "배터리 틀"), ("PR-BACKPLATE", "뒤판 출력물 탭")):
         for h in hole_list(sec(M.by[pid].solid, "z", body.Z_BOT + 0.3)):
             if h["round"] and h["d"] < 6.5:
                 put("csk", what, (h["cu"], h["cv"], body.Z_BOT), 2, 1)
@@ -1930,8 +1953,8 @@ SPOT_KIND = collections.OrderedDict([("csk", "접시머리 8호 13"), ("shelf", 
 
 def ply_jigs(M, fps):
     """which printed drilling jig (plywood_jigs.py, how to use: cad/jigs/README.md) works on which plywood piece and face, from the
-    jigs' own placements in the model (J-a / J-c bore points, J-b saddle origins on the edges, J-d slot-template boards) - not typed
-    here. -> {ply id: [dict(key, fi (face index) or edge (EDGE_KO index), n)]}"""
+    jigs' own placements in the model (J-d3 / J-d4 D8 template bore points, J-b saddle origins on the edges) - not typed here.
+    -> {ply id: [dict(key, fi (face index) or edge (EDGE_KO index), n)]}"""
     import plywood_jigs as PJ
     out = collections.defaultdict(list)
 
@@ -1968,21 +1991,19 @@ def ply_jigs(M, fps):
             w = np.asarray(j.placements["use"][0], float)[:, 2]               # out of the drilled face, toward the drill
             i = int(np.argmax(np.abs(w)))
             fi = 1 if w[i] > 0 else 0
+            fp0 = None
             for bo in j.bores:
                 fp = _piece_on_face(M, fps, bo["world"], i, fi)
-                add(fp, j.key, fi=fi)
-                if bo["name"] == "xt30":
-                    add(fp, "J-a5", fi=fi)
-    for gr in PJ.slot_groups():
-        fp = next((f for f in fps if re.search(r"(^|-)" + re.escape(gr["board"]) + "$", f["p"].id)), None)
-        w = np.asarray(gr["R"], float)[:, 2]
-        i = int(np.argmax(np.abs(w)))
-        add(fp, gr["key"], fi=1 if w[i] > 0 else 0)
+                if fp is None or (fp0 is not None and fp is not fp0):
+                    raise DrawingCheckError("D06: jig %s bore %s not on one plywood face" % (j.key, bo["name"]))
+                fp0 = fp
+            add(fp0, j.key, fi=fi)
+            out[fp0["p"].id][-1]["n"] = len(j.bores)
     return out
 
 
 def gauge_names(d, depth):
-    """J-e depth-gauge hole for a blind hole D d x depth (plywood_jigs.GAUGES: (name, short, bit, depth)) + the thin-board one."""
+    """J-e depth-gauge hole for a blind hole D d x depth (plywood_jigs.GAUGES: (name, short, bit, depth)) (+ a thin-board one if listed)."""
     import plywood_jigs as PJ
     hit = [g for g in PJ.GAUGES if abs(g[2] - d) < 0.15 and abs(g[3] - depth) < 0.15]
     if not hit:
@@ -2001,11 +2022,12 @@ def jig_line(M, fp, jigs, info):
     for e in jigs:
         k = e["key"]
         if k == "J-a5":
-            t = "J-a5 Ø14 원"
+            t = "J-a5 Ø%s 원" % fnum(__import__("body").END_HOLE_D, 0)
         elif e["edge"] is not None:
             t = "%s → %s 모서리 ×%d%s" % (k, EDGE_KO[fp["ax"]][e["edge"]], e["n"], " (새들 4종 다 뽑아 맞는 것)" if k == "J-b" else "")
         else:
-            t = "%s → %s%s" % (k, face_name(M, fp, e["fi"], True), " (이 면)" if e["fi"] == drawn else " (뒤집어서)")
+            t = "%s → %s%s%s" % (k, face_name(M, fp, e["fi"], True), " (이 면)" if e["fi"] == drawn else " (뒤집어서)",
+                                 " Ø8 ×%d 관통" % e["n"] if k.startswith("J-d") else "")
         items.append((JIG_ORDER.index(k[:3]) if k[:3] in JIG_ORDER else 9, k, t))
     gs = collections.OrderedDict()
     for h in info["blind"]:
@@ -2300,7 +2322,7 @@ def sheet_D06(M):
         return "R" if re.search(r"^SPKR-|-R$", pid) else ("L" if re.search(r"^SPKL-|-L$", pid) else "")
 
     # one drawing per type; an L·R type is split into its own L and R drawings when the hole / pocket / screw-spot positions
-    # are not mirror-equal (e.g. the R inner side panel and the R end wall have their holes elsewhere: XT30-CLIP-R, JOIN-*-R2).
+    # are not mirror-equal (e.g. the R inner side panel and the R end wall have their holes elsewhere: XT60-CLIP-R, JOIN-*-R2).
     # A drawn L·R pair always shows the L piece.
     groups = collections.OrderedDict()
     lab_of = {}
@@ -2358,8 +2380,9 @@ def sheet_D06(M):
               "조각 사이 가장 좁은 틈 %s (톱날 %s)" % (fnum(min(gaps), 2), fnum(kerf)),
               "배치 = 사양 nesting_400x1200 순서; 실제 조각 크기로 %d개를 최대 %s 옮김" % (len(moved), fnum(mv, 2)) if moved else "배치 = 사양 nesting_400x1200 그대로",
               "(90°) = 돌려 놓은 조각 · " + lr,
-              "가게: 직사각형으로만 자름. 경사·턱·홈·창·구멍·자석 자리는 집에서 — 톱 + 전동 드릴 + 출력 지그 (조각 그림의 '지그' 줄, "
-              "cad/jigs/README.md). 자르자마자 조각마다 이름·'L 끝'(옆판·끝벽은 '앞')·'윗면/안쪽'을 연필로 씀"]
+              "가게: 직사각형으로만 자름. 경사·턱·홈·창은 집에서 톱으로, 구멍(Ø8 환기 50)·자석 자리(4)는 전동 드릴 + 출력 지그 (조각 그림의 '지그' 줄, "
+              "cad/jigs/README.md). 자르자마자 조각마다 이름·'L 끝'(옆판은 '앞')·'윗면/안쪽'을 연필로 씀",
+              "2026-10-07부터 뚜껑 L·R, 가운데 끝벽 L·R, 스피커 안쪽 옆판 L·R은 PETG 출력 (05_본체출력물) — 이 판에서 뺌 (16 → %d조각)" % len(placed)]
     yy = sh.textblock(x1 + 14, y0 + 2, sum([sh.wrap(t, 582 - x1 - 16, T_SMALL) for t in info_l], []), T_SMALL)
     if issues or left:
         sh.text(x0, y1 + 14, "확인 필요: " + "; ".join(issues + left), T_SMALL, cls="tr")
@@ -2371,16 +2394,17 @@ def sheet_D06(M):
     import plywood_jigs as PJ
     Y0 = y1 + 18.0
     n_req = sum(1 for j in PJ.make_jigs() if j.key not in PJ.OPTIONAL)
-    face_rule = ["조각 그림 = 제목 밑 '이 면이 위'의 면을 위로 놓고 본 모습: x 두께(옆판·끝벽)는 +x 쪽(오른쪽 끝)에서, y 두께(뒤판)는 앞(안쪽 면)에서, "
-                 "z 두께(아랫판·윗판·뚜껑)는 위에서. u·v = 초록 굵은 선(기준 모서리)에서 잰 거리 — u는 왼쪽 기준(L 끝; 옆판·끝벽은 앞 모서리), "
+    face_rule = ["조각 그림 = 제목 밑 '이 면이 위'의 면을 위로 놓고 본 모습: x 두께(바깥 옆판)는 +x 쪽(오른쪽 끝)에서, y 두께(뒤판)는 앞(안쪽 면)에서, "
+                 "z 두께(아랫판·윗판)는 위에서. u·v = 초록 굵은 선(기준 모서리)에서 잰 거리 — u는 왼쪽 기준(L 끝; 옆판은 앞 모서리), "
                  "v는 아래 기준(아래 모서리; z 두께는 앞 모서리).",
                  "양면이 같지 않음: 판을 뒤집어 반대 면에 금을 그으면 그림이 좌우 거울로 보임 → 보이는 왼쪽 끝이 아니라 연필로 쓴 기준 끝(L 끝)에서 잼. "
-                 "뒤판·아랫판·뚜껑은 생김새로 L 끝을 알 수 없으므로 자르자마자 'L 끝'과 '윗면/안쪽'을 연필로 씀. L·R 짝은 제목 밑에 R을 어떻게 "
+                 "뒤판·아랫판은 생김새로 L 끝을 알 수 없으므로 자르자마자 'L 끝'과 '윗면/안쪽'을 연필로 씀. L·R 짝은 제목 밑에 R을 어떻게 "
                  "보는지 씀 (옆판 = 같은 그림·반대 면이 위, 뒤판·아랫판·윗판 = 좌우 거울)."]
     jig_rule = ["cad/jigs/README.md · stl/print/%s (꼭 뽑을 것 %d개): 조각 제목 밑 '지그' 줄대로, 지그 울타리는 README의 모서리에 댐. "
-                "J-e = 막힌 구멍 깊이 게이지 (척 멈춤). 나사 자리 ⊕는 지그 없음 — 송곳으로 찍고 나사 (README 8번)." % (PJ.PRINT_SUB, n_req),
-                "J-b 모서리 자석 새들은 틈 %s 네 개 모두 필수 — 4개를 다 뽑아, 실제 판 두께에 손으로 밀어 끼워지는 가장 좁은 것 하나를 씀 "
-                "(%s이 끼면 얇은 판 → 인서트 깊이는 J-e '얇5.8')." % (" · ".join(fnum(g_, 1) for g_ in PJ.SADDLE_GAPS), fnum(PJ.SADDLE_GAPS[0], 1))]
+                "J-d3·J-d4 = Ø8 환기 구멍판 (관통, 밑에 자투리), J-e = 자석 자리 깊이 게이지 (척 멈춤). 나사 자리 ⊕는 지그 없음 — 송곳으로 찍고 "
+                "나사 (README 8번)." % (PJ.PRINT_SUB, n_req),
+                "J-b 모서리 자석 새들(뒤판 윗모서리 4곳)은 틈 %s 네 개 모두 필수 — 4개를 다 뽑아, 실제 판 두께에 손으로 밀어 끼워지는 가장 좁은 것 "
+                "하나를 씀." % " · ".join(fnum(g_, 1) for g_ in PJ.SADDLE_GAPS)]
     yr = notes_box(sh, x1 + 14, yl + 5.0, 582 - x1 - 14, "보는 면 · 기준 모서리", face_rule, size=T_SMALL - 0.2)
     yr = notes_box(sh, x1 + 14, yr + 5.5, 582 - x1 - 14, "합판 지그", jig_rule, size=T_SMALL - 0.2)
     if yr > Y0 - 5.0:
@@ -2709,7 +2733,7 @@ def renders(M, verbose=True, size=(1800, 1100)):
         shutil.rmtree(tmp, ignore_errors=True)
 
 
-BUILDERS.update({"D01": sheet_D01, "D02": sheet_D02, "D03": sheet_D03, "D04": sheet_D04, "D05": sheet_D05, "D06": sheet_D06})
+BUILDERS.update({"D01": sheet_D01, "D02": sheet_D02, "D03": sheet_D03, "D04": sheet_D04, "D05": sheet_D05})
 
 if __name__ == "__main__":
     args = sys.argv[1:]

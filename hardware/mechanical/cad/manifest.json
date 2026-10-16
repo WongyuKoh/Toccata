@@ -928,8 +928,8 @@
     212.0,
     69.85
    ],
-   "volume_cm3": 298.2,
-   "mass_g_solid_petg": 378.7,
+   "volume_cm3": 298.12,
+   "mass_g_solid_petg": 378.6,
    "material": "PETG 회색",
    "note": "바로 세워 출력. 윗판 밑(y146.5~209)은 바닥·선반에서 올라오는 트리 서포트. 키퍼 훅 밑(y11~15 · y77~81, z28.6)과 매단 위치 핀도 서포트. 핀 보스 구멍 Ø3.9 눈물방울 → Ø4.0 드릴. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 서포트 약 88 g (DESIGN 15). 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid로 약 200 g 절약",
    "ids": [
@@ -1048,8 +1048,8 @@
     212.0,
     69.85
    ],
-   "volume_cm3": 269.42,
-   "mass_g_solid_petg": 342.2,
+   "volume_cm3": 269.34,
+   "mass_g_solid_petg": 342.1,
    "material": "PETG 회색",
    "note": "바로 세워 출력. 윗판 밑(y146.5~209)은 바닥·선반에서 올라오는 트리 서포트. 키퍼 훅 밑(y11~15 · y77~81, z28.6)과 매단 위치 핀도 서포트. 핀 보스 구멍 Ø3.9 눈물방울 → Ø4.0 드릴. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 서포트 약 88 g (DESIGN 15). 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid로 약 200 g 절약",
    "ids": [
@@ -1116,6 +1116,168 @@
     "ER-PADBAR-오른쪽"
    ],
    "name_ko": "패드바 끝부속 오른쪽",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커바깥옆판_L__1개.stl",
+   "name": "스피커바깥옆판_L",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    139.65,
+    128.5,
+    11.5
+   ],
+   "volume_cm3": 152.65,
+   "mass_g_solid_petg": 193.9,
+   "material": "PETG 회색",
+   "note": "바깥면(옆면)을 베드에 놓고 출력. 서포트 없음. **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상** (두드려 통통 울리면 채움 60~100 %로 다시), PETG 0.2 mm. 넓은 판이라 모서리가 뜨기 쉬움 - 문 닫고 베드 70~80 °C, 다 식은 뒤 떼어 냄, 뜨면 브림 3 mm. 상자 이음은 모두 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 117 g · 약 2시간 56분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKL-PLY-SIDEOUT"
+   ],
+   "name_ko": "스피커바깥옆판 L",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커안쪽옆판_L__1개.stl",
+   "name": "스피커안쪽옆판_L",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    139.65,
+    128.5,
+    11.5
+   ],
+   "volume_cm3": 152.0,
+   "mass_g_solid_petg": 193.0,
+   "material": "PETG 회색",
+   "note": "상자 안쪽 면을 베드에, 이음면(인서트 구멍 면)이 위로 (128.5 × 139.65 × 11.5, 256 판에 들어감). 구멍은 모두 세로라 서포트 없음, 인서트 구멍 바닥은 막힌 면 (브리지 없음). **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상 (또는 100 %)**, PETG 0.2 mm. 인서트 2개는 출력 후 인두(약 240 °C)로 이음면까지 곧게 눌러 넣음 (상자를 붙이기 전). 상자 둘레 이음은 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 117 g · 약 2시간 56분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKL-PLY-SIDEIN"
+   ],
+   "name_ko": "스피커안쪽옆판 L",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커뒤판_L·R__2개.stl",
+   "name": "스피커뒤판_L·R",
+   "qty": 2,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    250.0,
+    139.65,
+    11.5
+   ],
+   "volume_cm3": 401.49,
+   "mass_g_solid_petg": 509.9,
+   "material": "PETG 회색",
+   "note": "바깥면(뒷면)을 베드에 놓고 출력. 서포트 없음. **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상** (두드려 통통 울리면 채움 60~100 %로 다시), PETG 0.2 mm. 넓은 판이라 모서리가 뜨기 쉬움 - 문 닫고 베드 70~80 °C, 다 식은 뒤 떼어 냄, 뜨면 브림 3 mm. 상자 이음은 모두 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 300 g · 약 7시간 23분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKL-PLY-BACK",
+    "SPKR-PLY-BACK"
+   ],
+   "name_ko": "스피커뒤판 L·R",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커윗판_L·R__2개.stl",
+   "name": "스피커윗판_L·R",
+   "qty": 2,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    250.0,
+    14.14,
+    11.5
+   ],
+   "volume_cm3": 40.65,
+   "mass_g_solid_petg": 51.6,
+   "material": "PETG 회색",
+   "note": "윗면을 베드에 엎어 놓고 출력. 서포트 없음. **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상** (두드려 통통 울리면 채움 60~100 %로 다시), PETG 0.2 mm. 넓은 판이라 모서리가 뜨기 쉬움 - 문 닫고 베드 70~80 °C, 다 식은 뒤 떼어 냄, 뜨면 브림 3 mm. 상자 이음은 모두 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 37 g · 약 0시간 59분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKL-PLY-TOP",
+    "SPKR-PLY-TOP"
+   ],
+   "name_ko": "스피커윗판 L·R",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커아랫판_L__1개.stl",
+   "name": "스피커아랫판_L",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    250.0,
+    90.0,
+    11.5
+   ],
+   "volume_cm3": 258.43,
+   "mass_g_solid_petg": 328.2,
+   "material": "PETG 회색",
+   "note": "밑면을 베드에 놓고 출력. 서포트 없음 (고무발 나사 자리 Ø3.4는 세로 막힌 구멍). **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상** (두드려 통통 울리면 채움 60~100 %로 다시), PETG 0.2 mm. 넓은 판이라 모서리가 뜨기 쉬움 - 문 닫고 베드 70~80 °C, 다 식은 뒤 떼어 냄, 뜨면 브림 3 mm. 상자 이음은 모두 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 196 g · 약 4시간 51분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKL-PLY-BOTTOM"
+   ],
+   "name_ko": "스피커아랫판 L",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커바깥옆판_R__1개.stl",
+   "name": "스피커바깥옆판_R",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    139.65,
+    128.5,
+    11.5
+   ],
+   "volume_cm3": 152.65,
+   "mass_g_solid_petg": 193.9,
+   "material": "PETG 회색",
+   "note": "바깥면(옆면)을 베드에 놓고 출력. 서포트 없음. **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상** (두드려 통통 울리면 채움 60~100 %로 다시), PETG 0.2 mm. 넓은 판이라 모서리가 뜨기 쉬움 - 문 닫고 베드 70~80 °C, 다 식은 뒤 떼어 냄, 뜨면 브림 3 mm. 상자 이음은 모두 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 117 g · 약 2시간 56분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKR-PLY-SIDEOUT"
+   ],
+   "name_ko": "스피커바깥옆판 R",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커안쪽옆판_R__1개.stl",
+   "name": "스피커안쪽옆판_R",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    139.65,
+    128.5,
+    11.5
+   ],
+   "volume_cm3": 152.0,
+   "mass_g_solid_petg": 193.0,
+   "material": "PETG 회색",
+   "note": "상자 안쪽 면을 베드에, 이음면(인서트 구멍 면)이 위로 (128.5 × 139.65 × 11.5, 256 판에 들어감). 구멍은 모두 세로라 서포트 없음, 인서트 구멍 바닥은 막힌 면 (브리지 없음). **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상 (또는 100 %)**, PETG 0.2 mm. 인서트 2개는 출력 후 인두(약 240 °C)로 이음면까지 곧게 눌러 넣음 (상자를 붙이기 전). 상자 둘레 이음은 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 117 g · 약 2시간 56분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKR-PLY-SIDEIN"
+   ],
+   "name_ko": "스피커안쪽옆판 R",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/스피커아랫판_R__1개.stl",
+   "name": "스피커아랫판_R",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    250.0,
+    90.0,
+    11.5
+   ],
+   "volume_cm3": 258.43,
+   "mass_g_solid_petg": 328.2,
+   "material": "PETG 회색",
+   "note": "밑면을 베드에 놓고 출력. 서포트 없음 (고무발 나사 자리 Ø3.4는 세로 막힌 구멍). **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상** (두드려 통통 울리면 채움 60~100 %로 다시), PETG 0.2 mm. 넓은 판이라 모서리가 뜨기 쉬움 - 문 닫고 베드 70~80 °C, 다 식은 뒤 떼어 냄, 뜨면 브림 3 mm. 상자 이음은 모두 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 196 g · 약 4시간 51분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "SPKR-PLY-BOTTOM"
+   ],
+   "name_ko": "스피커아랫판 R",
    "extra": false
   },
   {
@@ -1274,7 +1436,7 @@
    "volume_cm3": 1.97,
    "mass_g_solid_petg": 2.5,
    "material": "PETG 회색",
-   "note": "밑면(z8)을 베드에, 핀이 위로 서도록 출력(서포트 없음). 그로밋 자리·웹 구멍(y 방향)은 눈물방울(꼭짓점 위) - 자리 밑 바닥은 0.75 (베드 위 첫 3~4층, 그대로 둠), 자리 윗부분은 3 mm 내민 지붕. 벽 4줄 + 채움 40 % (핀은 꽉). 그로밋을 웹에 끼우고 M3×16 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
+   "note": "밑면(z8)을 베드에, 핀이 위로 서도록 출력(서포트 없음). 그로밋 자리·웹 구멍(y 방향)은 눈물방울(꼭짓점 위) - 자리 밑 바닥은 0.75 (베드 위 첫 3~4층, 그대로 둠), 자리 윗부분은 3 mm 내민 지붕. 벽 4줄 + 채움 40 % (핀은 꽉). 그로밋을 웹에 끼우고 M3×20 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
    "ids": [
     "BRK2-L"
    ],
@@ -1294,11 +1456,91 @@
    "volume_cm3": 1.97,
    "mass_g_solid_petg": 2.5,
    "material": "PETG 회색",
-   "note": "밑면(z8)을 베드에, 핀이 위로 서도록 출력(서포트 없음). 그로밋 자리·웹 구멍(y 방향)은 눈물방울(꼭짓점 위) - 자리 밑 바닥은 0.75 (베드 위 첫 3~4층, 그대로 둠), 자리 윗부분은 3 mm 내민 지붕. 벽 4줄 + 채움 40 % (핀은 꽉). 그로밋을 웹에 끼우고 M3×16 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
+   "note": "밑면(z8)을 베드에, 핀이 위로 서도록 출력(서포트 없음). 그로밋 자리·웹 구멍(y 방향)은 눈물방울(꼭짓점 위) - 자리 밑 바닥은 0.75 (베드 위 첫 3~4층, 그대로 둠), 자리 윗부분은 3 mm 내민 지붕. 벽 4줄 + 채움 40 % (핀은 꽉). 그로밋을 웹에 끼우고 M3×20 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
    "ids": [
     "BRK2-R"
    ],
    "name_ko": "방진브래킷2 R",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/끝벽_L__1개.stl",
+   "name": "끝벽_L",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    56.35,
+    117.0,
+    11.5
+   ],
+   "volume_cm3": 64.41,
+   "mass_g_solid_petg": 81.8,
+   "material": "PETG 회색",
+   "note": "이음면(스피커 쪽 x260)을 베드에 눕혀 출력 (117 × 56.35 × 11.5). XT60 Ø19·슬리브 Ø8 구멍은 세로, 통로 홈은 모서리 따냄 - 서포트 없음; 윗모서리 자석 자리 Ø8 × 3.2만 눕힌 구멍이라 위쪽이 45° 지붕(꼭지 평평, 위 살 1.0). 벽 4줄 + 채움 25 %, PETG 0.2 mm. 아랫판·뒤판에 MS 폴리머로 붙임 (출력 PETG에는 목공본드가 잘 붙지 않음). 약 41 g · 약 1시간 05분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-END-L"
+   ],
+   "name_ko": "끝벽 L",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/끝벽_R__1개.stl",
+   "name": "끝벽_R",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    56.35,
+    117.0,
+    11.5
+   ],
+   "volume_cm3": 64.41,
+   "mass_g_solid_petg": 81.8,
+   "material": "PETG 회색",
+   "note": "이음면(스피커 쪽 x962)을 베드에 눕혀 출력 (117 × 56.35 × 11.5). XT60 Ø19·슬리브 Ø8 구멍은 세로, 통로 홈은 모서리 따냄 - 서포트 없음; 윗모서리 자석 자리 Ø8 × 3.2만 눕힌 구멍이라 위쪽이 45° 지붕(꼭지 평평, 위 살 1.0). 벽 4줄 + 채움 25 %, PETG 0.2 mm. 아랫판·뒤판에 MS 폴리머로 붙임 (출력 PETG에는 목공본드가 잘 붙지 않음). 약 41 g · 약 1시간 05분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-END-R"
+   ],
+   "name_ko": "끝벽 R",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/뚜껑_L__1개.stl",
+   "name": "뚜껑_L",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    241.0,
+    128.5,
+    11.5
+   ],
+   "volume_cm3": 347.26,
+   "mass_g_solid_petg": 441.0,
+   "material": "PETG 회색",
+   "note": "윗면(z72.85, 보이는 면)을 베드에 엎어 출력 (241 × 128.5 × 11.5, 256 판에 7.5씩 여유) - 윗면이 베드처럼 매끈. 배기 홈은 세로, 밑면 자석 자리 Ø8 × 3.2는 위로 열림, 앞 윗모서리 1×45° 모따기는 베드 쪽 (첫 층이 1 mm 안쪽에서 시작) - 서포트 없음. 벽 3줄 + 윗·아랫면 5층 + 채움 15 % (자이로이드/그리드), PETG 0.2 mm, 브림 없이 (모서리가 뜨면 3 mm 브림). 휨을 줄이려면 베드 70~80 °C, 문 닫음, 다 식은 뒤 떼어 냄. 약 154 g · 약 3시간 50분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "LID-L"
+   ],
+   "name_ko": "뚜껑 L",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/뚜껑_R__1개.stl",
+   "name": "뚜껑_R",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    241.0,
+    128.5,
+    11.5
+   ],
+   "volume_cm3": 337.14,
+   "mass_g_solid_petg": 428.2,
+   "material": "PETG 회색",
+   "note": "윗면(z72.85, 보이는 면)을 베드에 엎어 출력 (241 × 128.5 × 11.5, 256 판에 7.5씩 여유) - 윗면이 베드처럼 매끈. 배기 홈은 세로, 밑면 자석 자리 Ø8 × 3.2는 위로 열림, 앞 윗모서리 1×45° 모따기는 베드 쪽 (첫 층이 1 mm 안쪽에서 시작) - 서포트 없음. 벽 3줄 + 윗·아랫면 5층 + 채움 15 % (자이로이드/그리드), PETG 0.2 mm, 브림 없이 (모서리가 뜨면 3 mm 브림). 휨을 줄이려면 베드 70~80 °C, 문 닫음, 다 식은 뒤 떼어 냄. 약 156 g · 약 3시간 53분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "LID-R"
+   ],
+   "name_ko": "뚜껑 R",
    "extra": false
   },
   {
@@ -1331,7 +1573,7 @@
     117.0,
     44.85
    ],
-   "volume_cm3": 17.81,
+   "volume_cm3": 17.8,
    "mass_g_solid_petg": 22.6,
    "material": "PETG 회색",
    "note": "레일 윗면(z61.35)을 베드에, 기둥이 위로 서도록 출력(서포트 없음). 인서트는 베드 쪽 면(= 윗면)에서 인두로 넣음",
@@ -1351,7 +1593,7 @@
     117.0,
     44.85
    ],
-   "volume_cm3": 17.81,
+   "volume_cm3": 17.8,
    "mass_g_solid_petg": 22.6,
    "material": "PETG 회색",
    "note": "레일 윗면(z61.35)을 베드에, 기둥이 위로 서도록 출력(서포트 없음). 인서트는 베드 쪽 면(= 윗면)에서 인두로 넣음",
@@ -1469,12 +1711,12 @@
    "size_mm": [
     140.5,
     44.85,
-    38.5
+    26.5
    ],
-   "volume_cm3": 28.54,
-   "mass_g_solid_petg": 36.2,
+   "volume_cm3": 25.28,
+   "mass_g_solid_petg": 32.1,
    "material": "PETG 회색",
-   "note": "바깥면(y342.5)을 베드에. 구멍·루버는 수직, 스위치 테두리 자리 2 mm는 베드 쪽 오목(작은 브리지). 잭 받침·탭·오른쪽 탭의 혀(탭보다 좁음)는 위로 섬 - 서포트 없음. 벽 3줄 + 채움 25 %",
+   "note": "바깥면(y342.5)을 베드에. 구멍·루버는 수직, 스위치 테두리 자리 2 mm는 베드 쪽 오목(작은 브리지). 잭 받침·탭은 위로 섬 - 서포트 없음. 벽 3줄 + 채움 25 %",
    "ids": [
     "PR-BACKPLATE"
    ],
@@ -1502,63 +1744,63 @@
    "extra": false
   },
   {
-   "file": "stl/print/05_본체출력물/보조배터리받침__1개.stl",
-   "name": "보조배터리받침",
+   "file": "stl/print/05_본체출력물/배터리틀__1개.stl",
+   "name": "배터리틀",
    "qty": 1,
    "folder": "05_본체출력물",
    "size_mm": [
-    121.0,
-    88.0,
-    14.0
+    162.6,
+    112.95,
+    39.43
    ],
-   "volume_cm3": 23.91,
-   "mass_g_solid_petg": 30.4,
+   "volume_cm3": 28.8,
+   "mass_g_solid_petg": 36.6,
    "material": "PETG 회색",
-   "note": "바닥과 나사 귀 4개를 베드에. 끈 구멍은 브리지 22. 서포트 없음",
+   "note": "바닥면(z16.5)을 베드에. 퓨즈 선반 밑면은 y·x 모두 45°, 끈 구멍은 브리지 22, 꼭지 받침 구멍은 위가 열린 Ø8.3 (입구 쪽 처마 약 35°) - 서포트 없음. 벽 3줄 + 채움 20 %",
    "ids": [
-    "CU-PBHOLDER"
+    "CU-BATFRAME"
    ],
-   "name_ko": "보조배터리받침",
+   "name_ko": "배터리틀",
    "extra": false
   },
   {
-   "file": "stl/print/05_본체출력물/XT30집게_L__1개.stl",
-   "name": "XT30집게_L",
+   "file": "stl/print/05_본체출력물/XT60집게_L__1개.stl",
+   "name": "XT60집게_L",
    "qty": 1,
    "folder": "05_본체출력물",
    "size_mm": [
-    26.0,
-    19.0,
-    15.51
+    25.0,
+    23.5,
+    19.3
    ],
-   "volume_cm3": 1.79,
-   "mass_g_solid_petg": 2.3,
+   "volume_cm3": 3.44,
+   "mass_g_solid_petg": 4.4,
    "material": "PETG 회색",
-   "note": "끝벽에 붙는 판을 베드에, 홈이 위로 서도록 출력(서포트 없음)",
+   "note": "끝벽에 붙는 판을 베드에, 홈이 위로 서도록 출력 (판 앞 목 안쪽은 45° 원뿔 - 서포트 없음)",
    "ids": [
-    "XT30-CLIP-L"
+    "XT60-CLIP-L"
    ],
-   "name_ko": "XT30집게 L",
+   "name_ko": "XT60집게 L",
    "extra": false
   },
   {
-   "file": "stl/print/05_본체출력물/XT30집게_R__1개.stl",
-   "name": "XT30집게_R",
+   "file": "stl/print/05_본체출력물/XT60집게_R__1개.stl",
+   "name": "XT60집게_R",
    "qty": 1,
    "folder": "05_본체출력물",
    "size_mm": [
-    20.0,
-    19.0,
-    15.51
+    25.0,
+    24.0,
+    19.3
    ],
-   "volume_cm3": 1.3,
-   "mass_g_solid_petg": 1.7,
+   "volume_cm3": 3.91,
+   "mass_g_solid_petg": 5.0,
    "material": "PETG 회색",
-   "note": "끝벽에 붙는 판을 베드에, 홈이 위로 서도록 출력(서포트 없음)",
+   "note": "끝벽에 붙는 판을 베드에, 홈이 위로 서도록 출력 (판 앞 목 안쪽은 45° 원뿔 - 서포트 없음)",
    "ids": [
-    "XT30-CLIP-R"
+    "XT60-CLIP-R"
    ],
-   "name_ko": "XT30집게 R",
+   "name_ko": "XT60집게 R",
    "extra": false
   },
   {
@@ -1594,7 +1836,7 @@
     7.0,
     5.0
    ],
-   "volume_cm3": 0.17,
+   "volume_cm3": 0.16,
    "mass_g_solid_petg": 0.2,
    "material": "PETG 회색",
    "note": "밑면을 베드에 세워 출력, 채움 100 %. 서포트 없음",
@@ -1620,7 +1862,7 @@
     5.0
    ],
    "volume_cm3": 0.12,
-   "mass_g_solid_petg": 0.2,
+   "mass_g_solid_petg": 0.1,
    "material": "PETG 회색",
    "note": "밑면을 베드에 세워 출력, 채움 100 %. 서포트 없음",
    "ids": [
@@ -1652,26 +1894,6 @@
    "extra": false
   },
   {
-   "file": "stl/print/05_본체출력물/퓨즈홀더받침__1개.stl",
-   "name": "퓨즈홀더받침",
-   "qty": 1,
-   "folder": "05_본체출력물",
-   "size_mm": [
-    50.0,
-    14.0,
-    9.0
-   ],
-   "volume_cm3": 2.77,
-   "mass_g_solid_petg": 3.5,
-   "material": "PETG 회색",
-   "note": "밑면을 베드에. 서포트 없음",
-   "ids": [
-    "CU-FUSECRADLE"
-   ],
-   "name_ko": "퓨즈홀더받침",
-   "extra": false
-  },
-  {
    "file": "stl/print/05_본체출력물/케이블집게__8개.stl",
    "name": "케이블집게",
    "qty": 8,
@@ -1696,6 +1918,132 @@
     "CABLE-CLIP-E2"
    ],
    "name_ko": "케이블집게",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/가운데아랫판_1_왼쪽__1개.stl",
+   "name": "가운데아랫판_1_왼쪽",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    230.5,
+    90.0,
+    11.5
+   ],
+   "volume_cm3": 228.16,
+   "mass_g_solid_petg": 289.8,
+   "material": "PETG 회색",
+   "note": "3토막(230 / 242 / 238)으로 출력 - 가운데 토막은 밑면을, 양쪽 토막은 윗면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 흡기 Ø8·나사 자리 Ø3.4는 세로 구멍. 양쪽 토막의 앞 윗모서리 R3은 베드 쪽 첫 층이라 살짝 처져도 됨. 벽 4줄 + 윗·아랫면 5층 + 채움 25 %, PETG 0.2 mm, 문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 앞·뒤 모서리를 곧은 자에 맞추고 굳을 때까지 눌러 둠 (이음 기둥은 그 위에). 약 424 g · 약 10시간 35분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-BOTTOM"
+   ],
+   "piece_of": "CU-PLY-BOTTOM",
+   "name_ko": "가운데아랫판 1 왼쪽",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/가운데아랫판_2_가운데__1개.stl",
+   "name": "가운데아랫판_2_가운데",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    242.0,
+    90.0,
+    11.5
+   ],
+   "volume_cm3": 211.37,
+   "mass_g_solid_petg": 268.4,
+   "material": "PETG 회색",
+   "note": "3토막(230 / 242 / 238)으로 출력 - 가운데 토막은 밑면을, 양쪽 토막은 윗면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 흡기 Ø8·나사 자리 Ø3.4는 세로 구멍. 양쪽 토막의 앞 윗모서리 R3은 베드 쪽 첫 층이라 살짝 처져도 됨. 벽 4줄 + 윗·아랫면 5층 + 채움 25 %, PETG 0.2 mm, 문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 앞·뒤 모서리를 곧은 자에 맞추고 굳을 때까지 눌러 둠 (이음 기둥은 그 위에). 약 424 g · 약 10시간 35분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-BOTTOM"
+   ],
+   "piece_of": "CU-PLY-BOTTOM",
+   "name_ko": "가운데아랫판 2 가운데",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/가운데아랫판_3_오른쪽__1개.stl",
+   "name": "가운데아랫판_3_오른쪽",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    238.5,
+    90.0,
+    11.5
+   ],
+   "volume_cm3": 237.96,
+   "mass_g_solid_petg": 302.2,
+   "material": "PETG 회색",
+   "note": "3토막(230 / 242 / 238)으로 출력 - 가운데 토막은 밑면을, 양쪽 토막은 윗면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 흡기 Ø8·나사 자리 Ø3.4는 세로 구멍. 양쪽 토막의 앞 윗모서리 R3은 베드 쪽 첫 층이라 살짝 처져도 됨. 벽 4줄 + 윗·아랫면 5층 + 채움 25 %, PETG 0.2 mm, 문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 앞·뒤 모서리를 곧은 자에 맞추고 굳을 때까지 눌러 둠 (이음 기둥은 그 위에). 약 424 g · 약 10시간 35분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-BOTTOM"
+   ],
+   "piece_of": "CU-PLY-BOTTOM",
+   "name_ko": "가운데아랫판 3 오른쪽",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/가운데뒤판_1_왼쪽__1개.stl",
+   "name": "가운데뒤판_1_왼쪽",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    242.0,
+    56.35,
+    11.5
+   ],
+   "volume_cm3": 101.53,
+   "mass_g_solid_petg": 128.9,
+   "material": "PETG 회색",
+   "note": "3토막(242 / 242 / 250)으로 출력 - 가운데 토막은 바깥면(뒷면)을, 양쪽 토막은 안면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 환기 Ø8·허브 선반 나사 자리 Ø2.5는 세로 구멍, 윗모서리 자석 자리 Ø8 × 3.2만 눕힌 구멍이라 위쪽 45° 지붕(꼭지 평평). 벽 4줄 + 윗·아랫면 5층 + 채움 25 %, PETG 0.2 mm, 문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 윗·아랫모서리를 곧은 자에 맞춤 (아랫판 뒤 끝면과 끝벽에도 MS 폴리머). 약 241 g · 약 6시간 07분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-BACK"
+   ],
+   "piece_of": "CU-PLY-BACK",
+   "name_ko": "가운데뒤판 1 왼쪽",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/가운데뒤판_2_가운데__1개.stl",
+   "name": "가운데뒤판_2_가운데",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    242.0,
+    56.35,
+    11.5
+   ],
+   "volume_cm3": 123.72,
+   "mass_g_solid_petg": 157.1,
+   "material": "PETG 회색",
+   "note": "3토막(242 / 242 / 250)으로 출력 - 가운데 토막은 바깥면(뒷면)을, 양쪽 토막은 안면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 환기 Ø8·허브 선반 나사 자리 Ø2.5는 세로 구멍, 윗모서리 자석 자리 Ø8 × 3.2만 눕힌 구멍이라 위쪽 45° 지붕(꼭지 평평). 벽 4줄 + 윗·아랫면 5층 + 채움 25 %, PETG 0.2 mm, 문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 윗·아랫모서리를 곧은 자에 맞춤 (아랫판 뒤 끝면과 끝벽에도 MS 폴리머). 약 241 g · 약 6시간 07분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-BACK"
+   ],
+   "piece_of": "CU-PLY-BACK",
+   "name_ko": "가운데뒤판 2 가운데",
+   "extra": false
+  },
+  {
+   "file": "stl/print/05_본체출력물/가운데뒤판_3_오른쪽__1개.stl",
+   "name": "가운데뒤판_3_오른쪽",
+   "qty": 1,
+   "folder": "05_본체출력물",
+   "size_mm": [
+    250.0,
+    56.35,
+    11.5
+   ],
+   "volume_cm3": 150.68,
+   "mass_g_solid_petg": 191.4,
+   "material": "PETG 회색",
+   "note": "3토막(242 / 242 / 250)으로 출력 - 가운데 토막은 바깥면(뒷면)을, 양쪽 토막은 안면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 환기 Ø8·허브 선반 나사 자리 Ø2.5는 세로 구멍, 윗모서리 자석 자리 Ø8 × 3.2만 눕힌 구멍이라 위쪽 45° 지붕(꼭지 평평). 벽 4줄 + 윗·아랫면 5층 + 채움 25 %, PETG 0.2 mm, 문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 윗·아랫모서리를 곧은 자에 맞춤 (아랫판 뒤 끝면과 끝벽에도 MS 폴리머). 약 241 g · 약 6시간 07분 (P2S 어림, 슬라이서 값이 기준)",
+   "ids": [
+    "CU-PLY-BACK"
+   ],
+   "piece_of": "CU-PLY-BACK",
+   "name_ko": "가운데뒤판 3 오른쪽",
    "extra": false
   },
   {
@@ -1885,554 +2233,48 @@
    "variant": true
   },
   {
-   "file": "stl/print/08_합판지그/J-a1_스피커안쪽옆판_L__1개.stl",
-   "name": "J-a1_스피커안쪽옆판_L",
+   "file": "stl/print/09_기판지그/P-MB_제어기판지그_MB7장__1개.stl",
+   "name": "P-MB_제어기판지그_MB7장",
    "qty": 1,
-   "folder": "08_합판지그",
+   "folder": "09_기판지그",
    "size_mm": [
-    122.0,
-    60.0,
-    21.0
+    70.0,
+    50.0,
+    6.2
    ],
-   "volume_cm3": 40.74,
-   "mass_g_solid_petg": 51.7,
+   "volume_cm3": 16.91,
+   "mass_g_solid_petg": 21.5,
    "material": "PETG",
-   "note": "옆판 L 이음면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "note": "제어 기판 MB 7장을 BE163에서 자르고 뚫는 지그 (악기당 1개): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 홈 창 2.8 × 26.5의 세 변도 긋기, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
    "ids": [],
-   "name_ko": "J-a1 스피커안쪽옆판 L",
+   "name_ko": "P-MB 제어기판지그 MB7장",
    "variant": true,
    "extra": false,
-   "jig": "J-a1",
-   "mass_g_print_est": 34.8,
-   "print_min_est": 58.0
+   "pcbjig": "P-MB",
+   "mass_g_print_est": 13.5,
+   "print_min_est": 24.0
   },
   {
-   "file": "stl/print/08_합판지그/J-a2_스피커안쪽옆판_R__1개.stl",
-   "name": "J-a2_스피커안쪽옆판_R",
+   "file": "stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl",
+   "name": "P-PED_페달기판지그_PED1장",
    "qty": 1,
-   "folder": "08_합판지그",
+   "folder": "09_기판지그",
    "size_mm": [
-    122.0,
-    60.0,
-    21.0
+    70.0,
+    50.0,
+    6.2
    ],
-   "volume_cm3": 43.65,
-   "mass_g_solid_petg": 55.4,
+   "volume_cm3": 17.28,
+   "mass_g_solid_petg": 21.9,
    "material": "PETG",
-   "note": "옆판 R 이음면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
+   "note": "PED 페달 보드 1장용 지그: MB 지그와 같은 방법 (홈 없음), 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2 (cad/jigs/README.md '기판 지그'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
    "ids": [],
-   "name_ko": "J-a2 스피커안쪽옆판 R",
+   "name_ko": "P-PED 페달기판지그 PED1장",
    "variant": true,
    "extra": false,
-   "jig": "J-a2",
-   "mass_g_print_est": 36.9,
-   "print_min_est": 61.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-a3_끝벽_L__1개.stl",
-   "name": "J-a3_끝벽_L",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    122.0,
-    65.35,
-    21.0
-   ],
-   "volume_cm3": 45.8,
-   "mass_g_solid_petg": 58.2,
-   "material": "PETG",
-   "note": "끝벽 L 안쪽 면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-a3 끝벽 L",
-   "variant": true,
-   "extra": false,
-   "jig": "J-a3",
-   "mass_g_print_est": 39.0,
-   "print_min_est": 64.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-a4_끝벽_R__1개.stl",
-   "name": "J-a4_끝벽_R",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    122.0,
-    65.35,
-    21.0
-   ],
-   "volume_cm3": 48.24,
-   "mass_g_solid_petg": 61.3,
-   "material": "PETG",
-   "note": "끝벽 R 안쪽 면 (가운데 쪽): 앞·아래 울타리를 따낸 구석 두 모서리에 대고 뚫음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-a4 끝벽 R",
-   "variant": true,
-   "extra": false,
-   "jig": "J-a4",
-   "mass_g_print_est": 40.7,
-   "print_min_est": 67.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-a5_XT30_Ø14_표시원판__1개.stl",
-   "name": "J-a5_XT30_Ø14_표시원판",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    14.0,
-    14.0,
-    7.5
-   ],
-   "volume_cm3": 0.44,
-   "mass_g_solid_petg": 0.6,
-   "material": "PETG",
-   "note": "XT30 Ø14 원 그리기: 핀을 끝벽 Ø4 안내 구멍에 꽂고 연필로 원. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-a5 XT30 Ø14 표시원판",
-   "variant": true,
-   "extra": false,
-   "jig": "J-a5",
-   "mass_g_print_est": 0.6,
-   "print_min_est": 5.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈11.3__1개.stl",
-   "name": "J-b_모서리자석새들_틈11.3",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    30.0,
-    20.3,
-    24.0
-   ],
-   "volume_cm3": 10.38,
-   "mass_g_solid_petg": 13.2,
-   "material": "PETG",
-   "note": "모서리 자석 새들 (틈 11.3): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-b 모서리자석새들 틈11.3",
-   "variant": true,
-   "extra": false,
-   "jig": "J-b11.3",
-   "mass_g_print_est": 7.2,
-   "print_min_est": 18.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈11.6__1개.stl",
-   "name": "J-b_모서리자석새들_틈11.6",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    30.0,
-    20.6,
-    24.0
-   ],
-   "volume_cm3": 10.51,
-   "mass_g_solid_petg": 13.3,
-   "material": "PETG",
-   "note": "모서리 자석 새들 (틈 11.6): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-b 모서리자석새들 틈11.6",
-   "variant": true,
-   "extra": false,
-   "jig": "J-b11.6",
-   "mass_g_print_est": 7.2,
-   "print_min_est": 19.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈11.9__1개.stl",
-   "name": "J-b_모서리자석새들_틈11.9",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    30.0,
-    20.9,
-    24.0
-   ],
-   "volume_cm3": 10.64,
-   "mass_g_solid_petg": 13.5,
-   "material": "PETG",
-   "note": "모서리 자석 새들 (틈 11.9): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-b 모서리자석새들 틈11.9",
-   "variant": true,
-   "extra": false,
-   "jig": "J-b11.9",
-   "mass_g_print_est": 7.4,
-   "print_min_est": 19.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-b_모서리자석새들_틈12.2__1개.stl",
-   "name": "J-b_모서리자석새들_틈12.2",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    30.0,
-    21.2,
-    24.0
-   ],
-   "volume_cm3": 10.76,
-   "mass_g_solid_petg": 13.7,
-   "material": "PETG",
-   "note": "모서리 자석 새들 (틈 12.2): 4개 중 꼭 맞는 하나만 씀 (11.3이 끼면 얇은 판 → J-e '얇5.8'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-b 모서리자석새들 틈12.2",
-   "variant": true,
-   "extra": false,
-   "jig": "J-b12.2",
-   "mass_g_print_est": 7.4,
-   "print_min_est": 19.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-c1_뚜껑L_밑면자석__1개.stl",
-   "name": "J-c1_뚜껑L_밑면자석",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    232.0,
-    79.6,
-    21.0
-   ],
-   "volume_cm3": 51.65,
-   "mass_g_solid_petg": 65.6,
-   "material": "PETG",
-   "note": "뚜껑 L 밑면 자석: J-d로 배기 홈을 먼저 뚫고, 혀를 홈에 넣어 댐. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-c1 뚜껑L 밑면자석",
-   "variant": true,
-   "extra": false,
-   "jig": "J-c1",
-   "mass_g_print_est": 45.1,
-   "print_min_est": 73.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-c2_뚜껑R_밑면자석__1개.stl",
-   "name": "J-c2_뚜껑R_밑면자석",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    241.1,
-    79.6,
-    21.0
-   ],
-   "volume_cm3": 52.97,
-   "mass_g_solid_petg": 67.3,
-   "material": "PETG",
-   "note": "뚜껑 R 밑면 자석: J-d로 배기 홈을 먼저 뚫고, 혀를 홈에 넣어 댐. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-c2 뚜껑R 밑면자석",
-   "variant": true,
-   "extra": false,
-   "jig": "J-c2",
-   "mass_g_print_est": 46.2,
-   "print_min_est": 75.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d1a_뚜껑L_홈틀__1개.stl",
-   "name": "J-d1a_뚜껑L_홈틀",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    56.7,
-    84.25,
-    12.0
-   ],
-   "volume_cm3": 16.53,
-   "mass_g_solid_petg": 21.0,
-   "material": "PETG",
-   "note": "뚜껑 L 배기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d1a 뚜껑L 홈틀",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d1a",
-   "mass_g_print_est": 14.6,
-   "print_min_est": 27.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d1b_뚜껑L_홈슬라이더__1개.stl",
-   "name": "J-d1b_뚜껑L_홈슬라이더",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    30.0,
-    62.2,
-    14.0
-   ],
-   "volume_cm3": 18.33,
-   "mass_g_solid_petg": 23.3,
-   "material": "PETG",
-   "note": "뚜껑 L 배기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d1b 뚜껑L 홈슬라이더",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d1b",
-   "mass_g_print_est": 15.2,
-   "print_min_est": 28.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d1c_뚜껑L_홈심_1.73__1개.stl",
-   "name": "J-d1c_뚜껑L_홈심_1.73",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    9.73,
-    24.0,
-    8.0
-   ],
-   "volume_cm3": 0.9,
-   "mass_g_solid_petg": 1.1,
-   "material": "PETG",
-   "note": "뚜껑 L 배기 홈 심 1.73: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d1c 뚜껑L 홈심 1.73",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d1c",
-   "mass_g_print_est": 1.1,
-   "print_min_est": 6.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d2a_뚜껑R_홈틀__1개.stl",
-   "name": "J-d2a_뚜껑R_홈틀",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    124.75,
-    69.2,
-    12.0
-   ],
-   "volume_cm3": 26.91,
-   "mass_g_solid_petg": 34.2,
-   "material": "PETG",
-   "note": "뚜껑 R 배기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d2a 뚜껑R 홈틀",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d2a",
-   "mass_g_print_est": 22.8,
-   "print_min_est": 39.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d2b_뚜껑R_홈슬라이더__1개.stl",
-   "name": "J-d2b_뚜껑R_홈슬라이더",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    94.2,
-    39.52,
-    14.0
-   ],
-   "volume_cm3": 38.4,
-   "mass_g_solid_petg": 48.8,
-   "material": "PETG",
-   "note": "뚜껑 R 배기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d2b 뚜껑R 홈슬라이더",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d2b",
-   "mass_g_print_est": 29.7,
-   "print_min_est": 49.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d2c_뚜껑R_홈심_1.89__1개.stl",
-   "name": "J-d2c_뚜껑R_홈심_1.89",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    9.89,
-    24.0,
-    8.0
-   ],
-   "volume_cm3": 0.93,
-   "mass_g_solid_petg": 1.2,
-   "material": "PETG",
-   "note": "뚜껑 R 배기 홈 심 1.89: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d2c 뚜껑R 홈심 1.89",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d2c",
-   "mass_g_print_est": 1.2,
-   "print_min_est": 6.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d3a_뒤판_홈틀__1개.stl",
-   "name": "J-d3a_뒤판_홈틀",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    242.75,
-    34.05,
-    12.0
-   ],
-   "volume_cm3": 31.52,
-   "mass_g_solid_petg": 40.0,
-   "material": "PETG",
-   "note": "가운데 뒤판 환기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d3a 뒤판 홈틀",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d3a",
-   "mass_g_print_est": 28.6,
-   "print_min_est": 47.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d3b_뒤판_홈슬라이더__1개.stl",
-   "name": "J-d3b_뒤판_홈슬라이더",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    78.2,
-    15.49,
-    14.0
-   ],
-   "volume_cm3": 12.04,
-   "mass_g_solid_petg": 15.3,
-   "material": "PETG",
-   "note": "가운데 뒤판 환기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d3b 뒤판 홈슬라이더",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d3b",
-   "mass_g_print_est": 11.0,
-   "print_min_est": 22.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d3c_뒤판_홈심_1.57__1개.stl",
-   "name": "J-d3c_뒤판_홈심_1.57",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    9.57,
-    24.0,
-    8.0
-   ],
-   "volume_cm3": 0.87,
-   "mass_g_solid_petg": 1.1,
-   "material": "PETG",
-   "note": "가운데 뒤판 환기 홈 심 1.57: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d3c 뒤판 홈심 1.57",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d3c",
-   "mass_g_print_est": 1.1,
-   "print_min_est": 6.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d4a_아랫판_홈틀__1개.stl",
-   "name": "J-d4a_아랫판_홈틀",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    172.25,
-    72.7,
-    12.0
-   ],
-   "volume_cm3": 22.37,
-   "mass_g_solid_petg": 28.4,
-   "material": "PETG",
-   "note": "가운데 아랫판 흡기 홈 틀: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d4a 아랫판 홈틀",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d4a",
-   "mass_g_print_est": 21.2,
-   "print_min_est": 36.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d4b_아랫판_홈슬라이더__1개.stl",
-   "name": "J-d4b_아랫판_홈슬라이더",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    154.2,
-    52.2,
-    14.0
-   ],
-   "volume_cm3": 66.79,
-   "mass_g_solid_petg": 84.8,
-   "material": "PETG",
-   "note": "가운데 아랫판 흡기 홈 슬라이더: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d4b 아랫판 홈슬라이더",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d4b",
-   "mass_g_print_est": 49.1,
-   "print_min_est": 77.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-d4c_아랫판_홈심_2.00__1개.stl",
-   "name": "J-d4c_아랫판_홈심_2.00",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    10.0,
-    24.0,
-    8.0
-   ],
-   "volume_cm3": 0.95,
-   "mass_g_solid_petg": 1.2,
-   "material": "PETG",
-   "note": "가운데 아랫판 흡기 홈 심 2.00: 틀 + 슬라이더 + 심 한 벌, A·B·C·D 4번 뚫기. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-d4c 아랫판 홈심 2.00",
-   "variant": true,
-   "extra": false,
-   "jig": "J-d4c",
-   "mass_g_print_est": 1.2,
-   "print_min_est": 6.0
-  },
-  {
-   "file": "stl/print/08_합판지그/J-e_깊이게이지·시험블록__1개.stl",
-   "name": "J-e_깊이게이지·시험블록",
-   "qty": 1,
-   "folder": "08_합판지그",
-   "size_mm": [
-    134.0,
-    24.0,
-    26.0
-   ],
-   "volume_cm3": 59.67,
-   "mass_g_solid_petg": 75.8,
-   "material": "PETG",
-   "note": "깊이 게이지(척을 멈춤으로 쓰는 날 길이 맞추기) + 자투리 시험 구멍 — 가장 먼저 뽑음. PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-e 깊이게이지·시험블록",
-   "variant": true,
-   "extra": false,
-   "jig": "J-e",
-   "mass_g_print_est": 30.4,
-   "print_min_est": 53.0
-  },
-  {
-   "file": "stl/print_extra/선택_합판지그/J-f_홈다듬기_사포막대__1개.stl",
-   "name": "J-f_홈다듬기_사포막대",
-   "qty": 1,
-   "folder": "@extra/선택_합판지그",
-   "size_mm": [
-    180.0,
-    20.0,
-    8.0
-   ],
-   "volume_cm3": 11.99,
-   "mass_g_solid_petg": 15.2,
-   "material": "PETG",
-   "note": "4 mm 홈 사포 막대 (선택). PETG 0.2 mm, 서포트 없음, STL 방향 그대로 (cad/jigs/README.md)",
-   "ids": [],
-   "name_ko": "J-f 홈다듬기 사포막대",
-   "variant": true,
-   "extra": true,
-   "jig": "J-f",
-   "mass_g_print_est": 10.1,
-   "print_min_est": 19.0
+   "pcbjig": "P-PED",
+   "mass_g_print_est": 13.3,
+   "print_min_est": 24.0
   },
   {
    "file": "stl/print_extra/예비_건반/백건_C__1개.stl",
@@ -2765,7 +2607,7 @@
   "stl/assembly/끝_부속_왼쪽_전자부.stl",
   "stl/assembly/끝_부속_오른쪽_전자부.stl",
   "stl/assembly/CU_칸_전자부.stl",
-  "stl/assembly/보조배터리_칸.stl",
+  "stl/assembly/배터리_칸.stl",
   "stl/assembly/스피커_유닛.stl",
   "stl/assembly/댐퍼_페달_(바닥).stl"
  ],
@@ -27292,9 +27134,9 @@
   },
   {
    "id": "SPKL-PLY-SIDEOUT",
-   "name_ko": "스피커 파트 L 옆판(바깥쪽)",
-   "name_en": "speaker pod L side panel (outer)",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 L 옆판(바깥쪽) (출력)",
+   "name_en": "speaker pod L side panel (outer) (printed)",
+   "kind": "print",
    "group": "스피커 파트 L",
    "bbox": [
     -16.0,
@@ -27304,17 +27146,17 @@
     342.5,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 128.5×139.65 판에서 직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈 y214~241 × z5~27 → 8점 (214.00,27.00) (214.00,65.42) (218.25,65.42) (312.68,144.65) (342.50,144.65) (342.50,5.00) (241.00,5.00) (241.00,27.00))",
-   "note": ""
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커바깥옆판_L__1개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 128.5×139.65 판에서 직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈 y214~241 × z5~27 → 8점 (214.00,27.00) (214.00,65.42) (218.25,65.42) (312.68,144.65) (342.50,144.65) (342.50,5.00) (241.00,5.00) (241.00,27.00); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 128.5×139.65 판에서 직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈 y214~241 × z5~27 → 8점 (214.00,27.00) (214.00,65.42) (218.25,65.42) (312.68,144.65) (342.50,144.65) (342.50,5.00) (241.00,5.00) (241.00,27.00))"
   },
   {
    "id": "SPKL-PLY-SIDEIN",
-   "name_ko": "스피커 파트 L 옆판(가운데 유닛 쪽)",
-   "name_en": "speaker pod L side panel (centre-unit side)",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 L 옆판(가운데 유닛 쪽) (출력)",
+   "name_en": "speaker pod L side panel (centre-unit side) (printed)",
+   "kind": "print",
    "group": "스피커 파트 L",
    "bbox": [
     245.5,
@@ -27324,17 +27166,17 @@
     342.5,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 바깥쪽 옆판과 같은 8점 모양 + M4 나사산 인서트(L73) 구멍 Ø5.8 × 8 2개 (가운데 쪽 면에서, 막힘) + 스피커선 구멍 Ø6)",
-   "note": "사양과 다름(작은 고침): 10/1 구매 목록 L73(Norelem 07653-04 나사산 인서트 M4, 겉 Ø6.5 × 길이 6)에 맞춤 - 인서트 구멍 y227 z45 · y315 z43 - Ø6.5 × 8 → Ø5.8 × 8 (이음면에서 막힘; 오꾸메 자투리에 Ø5.8로 먼저 시험 - 헐거우면 Ø5.5); 제조사 최소 구멍 깊이 8 충족; 밀폐 규칙: 옆판 11.5에서 지름 부분 바닥 밑 3.5, 드릴 끝(118° 원뿔 1.8 / 목공 뿔 비트 촉 약 2, 2.0로 잡음) 밑 1.5 ≥ 1.5 남음 - 깊이 멈춤(테이프 표시 8 mm)으로 뚫음; 스피커선 구멍 Ø6 y243 z40 (선을 넣고 본드로 밀봉, EVA 띠 사이)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커안쪽옆판_L__1개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list PLY-POD-SIDE (안쪽 2장, 2026-10-07부터 출력: 바깥쪽 옆판과 같은 8점 모양 + M4 열압입 인서트 구멍 Ø5.6 × 6.5 2개 (가운데 쪽 면에서, 막힘) + 스피커선 구멍 Ø6 — 10/7부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 오꾸메 합판 → PETG 출력 (같은 8점 모양 x245.5~257.0, 두께 11.5, 40° 경사·통로 홈 27 × 22까지 출력 - 톱질·드릴 없음); 인서트 L73 (Norelem 07653-04, 구멍 Ø5.8 × 8 드릴) → 사용자 열 인서트 세트의 M4 황동 열압입 인서트 바깥 Ø6 × 길이 6를 출력 구멍 Ø5.6 × 6.5 (앞판 인서트 L69와 같은 규칙, 지름 0.4 물림)에 인두로 면까지 - 자리 y227 z45 · y315 z43 (이음면에서 막힘), 구멍 바닥 뒤 PETG 5.0 (밀폐 규칙 ≥ 1.5, 권장 ≥ 3.0); 스피커선 구멍 Ø6 y243 z40 (선을 넣고 MS 폴리머로 밀봉, EVA 띠 사이)"
   },
   {
    "id": "SPKL-PLY-BACK",
-   "name_ko": "스피커 파트 L 뒤판",
-   "name_en": "speaker pod L back panel",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 L 뒤판 (출력)",
+   "name_en": "speaker pod L back panel (printed)",
+   "kind": "print",
    "group": "스피커 파트 L",
    "bbox": [
     -4.5,
@@ -27344,17 +27186,17 @@
     342.5,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×139.65 (옆판 사이 y331~342.5, z5~144.65))",
-   "note": "흡음솜(폴리에스터 약 35 g/통)은 상자 전체에 느슨하게 채움 (W1 2026-10-01: 가운데 포함, 686 Hz x 방향 모드 억제; 유닛 뒤 10 mm와 자석 뒤 폴 벤트 축 방향 10 mm 이상은 비움 - 모델에 없음)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커뒤판_L·R__2개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×139.65 (옆판 사이 y331~342.5, z5~144.65); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 250×139.65 (옆판 사이 y331~342.5, z5~144.65)); 흡음솜(폴리에스터 약 35 g/통)은 상자 전체에 느슨하게 채움 (W1 2026-10-01: 가운데 포함, 686 Hz x 방향 모드 억제; 유닛 뒤 10 mm와 자석 뒤 폴 벤트 축 방향 10 mm 이상은 비움 - 모델에 없음)"
   },
   {
    "id": "SPKL-PLY-TOP",
-   "name_ko": "스피커 파트 L 윗판",
-   "name_en": "speaker pod L top panel",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 L 윗판 (출력)",
+   "name_en": "speaker pod L top panel (printed)",
+   "kind": "print",
    "group": "스피커 파트 L",
    "bbox": [
     -4.5,
@@ -27364,17 +27206,17 @@
     331.0,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×14.14 (y316.86~331, 앞 모서리는 출력 앞판 윗마개에 맞댐))",
-   "note": ""
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커윗판_L·R__2개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×14.14 (y316.86~331, 앞 모서리는 출력 앞판 윗마개에 맞댐); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 250×14.14 (y316.86~331, 앞 모서리는 출력 앞판 윗마개에 맞댐))"
   },
   {
    "id": "SPKL-PLY-BOTTOM",
-   "name_ko": "스피커 파트 L 아랫판",
-   "name_en": "speaker pod L bottom panel",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 L 아랫판 (출력)",
+   "name_en": "speaker pod L bottom panel (printed)",
+   "kind": "print",
    "group": "스피커 파트 L",
    "bbox": [
     -4.5,
@@ -27384,17 +27226,17 @@
     331.0,
     16.5
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×90 (y241~331, z5~16.5, 앞 모서리 y241 = 통로 뒷벽 아래))",
-   "note": ""
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커아랫판_L__1개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×90 (y241~331, z5~16.5, 앞 모서리 y241 = 통로 뒷벽 아래); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 250×90 (y241~331, z5~16.5, 앞 모서리 y241 = 통로 뒷벽 아래)); 고무발 나사 자리 Ø3.4 막힌 구멍 8개 (밑면에서, 끝은 윗면 1.5 아래 - 밀폐 유지)"
   },
   {
    "id": "SPKR-PLY-SIDEOUT",
-   "name_ko": "스피커 파트 R 옆판(바깥쪽)",
-   "name_en": "speaker pod R side panel (outer)",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 R 옆판(바깥쪽) (출력)",
+   "name_en": "speaker pod R side panel (outer) (printed)",
+   "kind": "print",
    "group": "스피커 파트 R",
    "bbox": [
     1226.5,
@@ -27404,17 +27246,17 @@
     342.5,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 128.5×139.65 판에서 직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈 y214~241 × z5~27 → 8점 (214.00,27.00) (214.00,65.42) (218.25,65.42) (312.68,144.65) (342.50,144.65) (342.50,5.00) (241.00,5.00) (241.00,27.00))",
-   "note": ""
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커바깥옆판_R__1개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 128.5×139.65 판에서 직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈 y214~241 × z5~27 → 8점 (214.00,27.00) (214.00,65.42) (218.25,65.42) (312.68,144.65) (342.50,144.65) (342.50,5.00) (241.00,5.00) (241.00,27.00); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 128.5×139.65 판에서 직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈 y214~241 × z5~27 → 8점 (214.00,27.00) (214.00,65.42) (218.25,65.42) (312.68,144.65) (342.50,144.65) (342.50,5.00) (241.00,5.00) (241.00,27.00))"
   },
   {
    "id": "SPKR-PLY-SIDEIN",
-   "name_ko": "스피커 파트 R 옆판(가운데 유닛 쪽)",
-   "name_en": "speaker pod R side panel (centre-unit side)",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 R 옆판(가운데 유닛 쪽) (출력)",
+   "name_en": "speaker pod R side panel (centre-unit side) (printed)",
+   "kind": "print",
    "group": "스피커 파트 R",
    "bbox": [
     965.0,
@@ -27424,17 +27266,17 @@
     342.5,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 바깥쪽 옆판과 같은 8점 모양 + M4 나사산 인서트(L73) 구멍 Ø5.8 × 8 2개 (가운데 쪽 면에서, 막힘) + 스피커선 구멍 Ø6)",
-   "note": "사양과 다름(작은 고침): 10/1 구매 목록 L73(Norelem 07653-04 나사산 인서트 M4, 겉 Ø6.5 × 길이 6)에 맞춤 - 인서트 구멍 y227 z45 · y315 z50 - Ø6.5 × 8 → Ø5.8 × 8 (이음면에서 막힘; 오꾸메 자투리에 Ø5.8로 먼저 시험 - 헐거우면 Ø5.5); 제조사 최소 구멍 깊이 8 충족; 밀폐 규칙: 옆판 11.5에서 지름 부분 바닥 밑 3.5, 드릴 끝(118° 원뿔 1.8 / 목공 뿔 비트 촉 약 2, 2.0로 잡음) 밑 1.5 ≥ 1.5 남음 - 깊이 멈춤(테이프 표시 8 mm)으로 뚫음; 스피커선 구멍 Ø6 y290 z40 (선을 넣고 본드로 밀봉, EVA 띠 사이)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커안쪽옆판_R__1개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list PLY-POD-SIDE (안쪽 2장, 2026-10-07부터 출력: 바깥쪽 옆판과 같은 8점 모양 + M4 열압입 인서트 구멍 Ø5.6 × 6.5 2개 (가운데 쪽 면에서, 막힘) + 스피커선 구멍 Ø6 — 10/7부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 오꾸메 합판 → PETG 출력 (같은 8점 모양 x965.0~976.5, 두께 11.5, 40° 경사·통로 홈 27 × 22까지 출력 - 톱질·드릴 없음); 인서트 L73 (Norelem 07653-04, 구멍 Ø5.8 × 8 드릴) → 사용자 열 인서트 세트의 M4 황동 열압입 인서트 바깥 Ø6 × 길이 6를 출력 구멍 Ø5.6 × 6.5 (앞판 인서트 L69와 같은 규칙, 지름 0.4 물림)에 인두로 면까지 - 자리 y227 z45 · y315 z50 (이음면에서 막힘), 구멍 바닥 뒤 PETG 5.0 (밀폐 규칙 ≥ 1.5, 권장 ≥ 3.0); 스피커선 구멍 Ø6 y290 z40 (선을 넣고 MS 폴리머로 밀봉, EVA 띠 사이)"
   },
   {
    "id": "SPKR-PLY-BACK",
-   "name_ko": "스피커 파트 R 뒤판",
-   "name_en": "speaker pod R back panel",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 R 뒤판 (출력)",
+   "name_en": "speaker pod R back panel (printed)",
+   "kind": "print",
    "group": "스피커 파트 R",
    "bbox": [
     976.5,
@@ -27444,17 +27286,17 @@
     342.5,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×139.65 (옆판 사이 y331~342.5, z5~144.65))",
-   "note": "흡음솜(폴리에스터 약 35 g/통)은 상자 전체에 느슨하게 채움 (W1 2026-10-01: 가운데 포함, 686 Hz x 방향 모드 억제; 유닛 뒤 10 mm와 자석 뒤 폴 벤트 축 방향 10 mm 이상은 비움 - 모델에 없음)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커뒤판_L·R__2개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×139.65 (옆판 사이 y331~342.5, z5~144.65); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 250×139.65 (옆판 사이 y331~342.5, z5~144.65)); 흡음솜(폴리에스터 약 35 g/통)은 상자 전체에 느슨하게 채움 (W1 2026-10-01: 가운데 포함, 686 Hz x 방향 모드 억제; 유닛 뒤 10 mm와 자석 뒤 폴 벤트 축 방향 10 mm 이상은 비움 - 모델에 없음)"
   },
   {
    "id": "SPKR-PLY-TOP",
-   "name_ko": "스피커 파트 R 윗판",
-   "name_en": "speaker pod R top panel",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 R 윗판 (출력)",
+   "name_en": "speaker pod R top panel (printed)",
+   "kind": "print",
    "group": "스피커 파트 R",
    "bbox": [
     976.5,
@@ -27464,17 +27306,17 @@
     331.0,
     144.65
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×14.14 (y316.86~331, 앞 모서리는 출력 앞판 윗마개에 맞댐))",
-   "note": ""
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커윗판_L·R__2개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×14.14 (y316.86~331, 앞 모서리는 출력 앞판 윗마개에 맞댐); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 250×14.14 (y316.86~331, 앞 모서리는 출력 앞판 윗마개에 맞댐))"
   },
   {
    "id": "SPKR-PLY-BOTTOM",
-   "name_ko": "스피커 파트 R 아랫판",
-   "name_en": "speaker pod R bottom panel",
-   "kind": "plywood",
+   "name_ko": "스피커 파트 R 아랫판 (출력)",
+   "name_en": "speaker pod R bottom panel (printed)",
+   "kind": "print",
    "group": "스피커 파트 R",
    "bbox": [
     976.5,
@@ -27484,11 +27326,11 @@
     331.0,
     16.5
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×90 (y241~331, z5~16.5, 앞 모서리 y241 = 통로 뒷벽 아래))",
-   "note": ""
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/스피커아랫판_R__1개.stl",
+   "source": "spec/body_L2.json speakers.panels / plywood_cut_list (재단 250×90 (y241~331, z5~16.5, 앞 모서리 y241 = 통로 뒷벽 아래); 2026-10-16부터 출력)",
+   "note": "사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 11.5 · 자리, 재단 250×90 (y241~331, z5~16.5, 앞 모서리 y241 = 통로 뒷벽 아래)); 고무발 나사 자리 Ø3.4 막힌 구멍 8개 (밑면에서, 끝은 윗면 1.5 아래 - 밀폐 유지)"
   },
   {
    "id": "SPKL-BAFFLE",
@@ -27907,7 +27749,7 @@
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/방진브래킷2_L__1개.stl",
-   "source": "spec/body_L2.json joints.rear_unit_to_key_bed (BRK2: 볼 뒷면 M3 자리 y212 z12 x-11.80/-4.88 · 1226.88/1233.80에 L42 그로밋 + M3×16, L1 그대로; 판 z8~14; 세운 핀 Ø6 z14~24 L x0.5 / R x1221.5, y230) + printed_parts BRK2 (22 × 24 × 16); spec/keyaction_features_frame.json cheeks + bracket.proposal_v4 (그로밋 웹 1.6)",
+   "source": "spec/body_L2.json joints.rear_unit_to_key_bed (BRK2: 볼 뒷면 M3 자리 y212 z12 x-11.80/-4.88 · 1226.88/1233.80에 L42 그로밋 + M3×20 (10/7, 볼 구멍 y199까지), L1 그대로; 판 z8~14; 세운 핀 Ø6 z14~24 L x0.5 / R x1221.5, y230) + printed_parts BRK2 (22 × 24 × 16); spec/keyaction_features_frame.json cheeks + bracket.proposal_v4 (그로밋 웹 1.6)",
    "note": "사양과 다름(작은 고침): 핀 x0.5 → x2.5 - 사양 자리면 핀 판(팔)이 안쪽 그로밋 M3 볼트의 머리(Ø5.7, x-7.73~-2.03)와 렌치 길을 막아 볼트를 넣고 조일 수 없음; 팔을 볼트 머리 길에서 0.8 띄우고 핀을 2 mm 안쪽으로(핀 사이 1217, R 긴 소켓 공차 그대로), 소켓도 같이 옮김; 추정: 세움 다리 x-15.5~6.5 y212.5~218 z8~18 (L1 그로밋 자리: 웹 1.6에 허리 구멍 Ø4.2, 플랜지 자리 Ø6.5 - x-11.80 -x, x-11.80↔x-4.88 이어짐), 팔 x-1.2~6.5 y218~236.5 z8~14 + 45° 받침, 핀 Ø6 z14~24; 다리 밑 z8은 헤드폰 선(z3~7.5) 위 0.5, EL 리드 노치 x13.5와 7.0 떨어짐"
   },
   {
@@ -27932,13 +27774,13 @@
   },
   {
    "id": "BRK2-L-BOLT1",
-   "name_ko": "M3×16 둥근머리 볼트 ISO 7380 (방진 브래킷)",
-   "name_en": "M3x16 button head bolt (bracket)",
+   "name_ko": "M3×20 둥근머리 볼트 (방진 브래킷)",
+   "name_en": "M3x20 pan head bolt (bracket)",
    "kind": "bought",
    "group": "방진 브래킷",
    "bbox": [
     -14.65,
-    204.6,
+    200.6,
     9.15,
     -8.95,
     222.25,
@@ -27947,8 +27789,8 @@
    "color": "#c0c6cc",
    "material": "SUS",
    "print_file": null,
-   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 16 = 그로밋 8.6 + 볼 속 7.4 (L1 그대로)",
-   "note": "추정: 머리 Ø5.7 × 1.65 (ISO 7380), 육각 렌치 2 mm는 뒤(+y)에서 - 스피커를 올리기 전에 조임"
+   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 20 = 그로밋 8.6 + 볼 속 11.4 (10/7: M3×16 → M3×20, 볼 구멍을 y203 → y199로 늘림, 끝 y200.6 → 구멍 바닥까지 1.6)",
+   "note": "추정: 머리 Ø5.7 × 1.65로 모델 (세트는 십자 둥근머리 - 머리 뒤 공간이 열려 있어 드라이버로 뒤(+y)에서 조임) - 스피커를 올리기 전에 조임"
   },
   {
    "id": "BRK2-L-NUT1",
@@ -27992,13 +27834,13 @@
   },
   {
    "id": "BRK2-L-BOLT2",
-   "name_ko": "M3×16 둥근머리 볼트 ISO 7380 (방진 브래킷)",
-   "name_en": "M3x16 button head bolt (bracket)",
+   "name_ko": "M3×20 둥근머리 볼트 (방진 브래킷)",
+   "name_en": "M3x20 pan head bolt (bracket)",
    "kind": "bought",
    "group": "방진 브래킷",
    "bbox": [
     -7.73,
-    204.6,
+    200.6,
     9.15,
     -2.03,
     222.25,
@@ -28007,8 +27849,8 @@
    "color": "#c0c6cc",
    "material": "SUS",
    "print_file": null,
-   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 16 = 그로밋 8.6 + 볼 속 7.4 (L1 그대로)",
-   "note": "추정: 머리 Ø5.7 × 1.65 (ISO 7380), 육각 렌치 2 mm는 뒤(+y)에서 - 스피커를 올리기 전에 조임"
+   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 20 = 그로밋 8.6 + 볼 속 11.4 (10/7: M3×16 → M3×20, 볼 구멍을 y203 → y199로 늘림, 끝 y200.6 → 구멍 바닥까지 1.6)",
+   "note": "추정: 머리 Ø5.7 × 1.65로 모델 (세트는 십자 둥근머리 - 머리 뒤 공간이 열려 있어 드라이버로 뒤(+y)에서 조임) - 스피커를 올리기 전에 조임"
   },
   {
    "id": "BRK2-L-NUT2",
@@ -28047,7 +27889,7 @@
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/방진브래킷2_R__1개.stl",
-   "source": "spec/body_L2.json joints.rear_unit_to_key_bed (BRK2: 볼 뒷면 M3 자리 y212 z12 x-11.80/-4.88 · 1226.88/1233.80에 L42 그로밋 + M3×16, L1 그대로; 판 z8~14; 세운 핀 Ø6 z14~24 L x0.5 / R x1221.5, y230) + printed_parts BRK2 (22 × 24 × 16); spec/keyaction_features_frame.json cheeks + bracket.proposal_v4 (그로밋 웹 1.6)",
+   "source": "spec/body_L2.json joints.rear_unit_to_key_bed (BRK2: 볼 뒷면 M3 자리 y212 z12 x-11.80/-4.88 · 1226.88/1233.80에 L42 그로밋 + M3×20 (10/7, 볼 구멍 y199까지), L1 그대로; 판 z8~14; 세운 핀 Ø6 z14~24 L x0.5 / R x1221.5, y230) + printed_parts BRK2 (22 × 24 × 16); spec/keyaction_features_frame.json cheeks + bracket.proposal_v4 (그로밋 웹 1.6)",
    "note": "사양과 다름(작은 고침): 핀 x1221.5 → x1219.5 - 사양 자리면 핀 판(팔)이 안쪽 그로밋 M3 볼트의 머리(Ø5.7, x1224.03~1229.73)와 렌치 길을 막아 볼트를 넣고 조일 수 없음; 팔을 볼트 머리 길에서 0.8 띄우고 핀을 2 mm 안쪽으로(핀 사이 1217, R 긴 소켓 공차 그대로), 소켓도 같이 옮김; 추정: 세움 다리 x1215.5~1237.5 y212.5~218 z8~18 (L1 그로밋 자리: 웹 1.6에 허리 구멍 Ø4.2, 플랜지 자리 Ø6.5 - x1233.80 +x, x1233.80↔x1226.88 이어짐), 팔 x1215.5~1223.2 y218~236.5 z8~14 + 45° 받침, 핀 Ø6 z14~24; 다리 밑 z8은 헤드폰 선(z3~7.5) 위 0.5, ER 리드 노치 x1212.5와 3.0 떨어짐"
   },
   {
@@ -28072,13 +27914,13 @@
   },
   {
    "id": "BRK2-R-BOLT1",
-   "name_ko": "M3×16 둥근머리 볼트 ISO 7380 (방진 브래킷)",
-   "name_en": "M3x16 button head bolt (bracket)",
+   "name_ko": "M3×20 둥근머리 볼트 (방진 브래킷)",
+   "name_en": "M3x20 pan head bolt (bracket)",
    "kind": "bought",
    "group": "방진 브래킷",
    "bbox": [
     1224.03,
-    204.6,
+    200.6,
     9.15,
     1229.73,
     222.25,
@@ -28087,8 +27929,8 @@
    "color": "#c0c6cc",
    "material": "SUS",
    "print_file": null,
-   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 16 = 그로밋 8.6 + 볼 속 7.4 (L1 그대로)",
-   "note": "추정: 머리 Ø5.7 × 1.65 (ISO 7380), 육각 렌치 2 mm는 뒤(+y)에서 - 스피커를 올리기 전에 조임"
+   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 20 = 그로밋 8.6 + 볼 속 11.4 (10/7: M3×16 → M3×20, 볼 구멍을 y203 → y199로 늘림, 끝 y200.6 → 구멍 바닥까지 1.6)",
+   "note": "추정: 머리 Ø5.7 × 1.65로 모델 (세트는 십자 둥근머리 - 머리 뒤 공간이 열려 있어 드라이버로 뒤(+y)에서 조임) - 스피커를 올리기 전에 조임"
   },
   {
    "id": "BRK2-R-NUT1",
@@ -28132,13 +27974,13 @@
   },
   {
    "id": "BRK2-R-BOLT2",
-   "name_ko": "M3×16 둥근머리 볼트 ISO 7380 (방진 브래킷)",
-   "name_en": "M3x16 button head bolt (bracket)",
+   "name_ko": "M3×20 둥근머리 볼트 (방진 브래킷)",
+   "name_en": "M3x20 pan head bolt (bracket)",
    "kind": "bought",
    "group": "방진 브래킷",
    "bbox": [
     1230.95,
-    204.6,
+    200.6,
     9.15,
     1236.65,
     222.25,
@@ -28147,8 +27989,8 @@
    "color": "#c0c6cc",
    "material": "SUS",
    "print_file": null,
-   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 16 = 그로밋 8.6 + 볼 속 7.4 (L1 그대로)",
-   "note": "추정: 머리 Ø5.7 × 1.65 (ISO 7380), 육각 렌치 2 mm는 뒤(+y)에서 - 스피커를 올리기 전에 조임"
+   "source": "spec/keyaction_features_frame.json bracket.proposal_v4 hardware; 길이 20 = 그로밋 8.6 + 볼 속 11.4 (10/7: M3×16 → M3×20, 볼 구멍을 y203 → y199로 늘림, 끝 y200.6 → 구멍 바닥까지 1.6)",
+   "note": "추정: 머리 Ø5.7 × 1.65로 모델 (세트는 십자 둥근머리 - 머리 뒤 공간이 열려 있어 드라이버로 뒤(+y)에서 조임) - 스피커를 올리기 전에 조임"
   },
   {
    "id": "BRK2-R-NUT2",
@@ -28228,12 +28070,12 @@
    "material": "SUS304",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (M4 나비나사 2개, 가운데 안에서 끝벽의 Ø8 고무 슬리브를 지나 스피커 안쪽 옆판의 M4 목재 인서트로, 막힘; screw_yz) + bom_changes (M4 나비나사 ×4) + 구매 목록 v4 L72 (평로렛 손잡이볼트 M4×20, 머리 Ø8 × 6)",
-   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, L73 인서트(길이 6)에 4.0 물림; M4×22면 6.0 물림, 끝이 구멍 바닥 2.0 위; 길이 24면 끝이 구멍 바닥(지름 부분 8 깊이)에 닿고 그보다 길면 밑 3.5 mm 밀폐 판을 누름 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
+   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, 열압입 인서트(길이 6)에 4.0 물림 (≥ 4); M4×22면 6.0 물림, 끝이 구멍 바닥 0.5 위; 22.5보다 길면 끝이 출력 구멍 바닥(깊이 6.5)을 누르고 뒤 5.0 mm 밀폐 벽을 밂 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
   },
   {
    "id": "JOIN-SLV-L1",
-   "name_ko": "고무 슬리브 OD8 ID4.2 (끝벽 구멍, L 앞 y227 z45)",
-   "name_en": "rubber sleeve OD8 ID4.2 (end-wall hole) L 1",
+   "name_ko": "고무 슬리브 = 연료 호스 OD8 ID4.5 (끝벽 구멍, L 앞 y227 z45)",
+   "name_en": "rubber sleeve = fuel hose OD8 ID4.5 (end-wall hole) L 1",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
@@ -28248,27 +28090,27 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (끝벽의 Ø8 고무 슬리브, EVA 띠 나사 자리 Ø10) + bom_changes (고무 슬리브(그로밋) ×4)",
-   "note": "추정: 고무 호스 OD8 ID4.2를 13.0 길이로 잘라 끝벽 Ø8 구멍에 끼움 (바깥면과 같은 높이) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
+   "note": "추정: 연료 호스 OD8 ID4.5를 13.0 길이로 잘라 출력 끝벽의 Ø8 구멍에 끼움 (바깥면과 같은 높이, 구멍 Ø8 그대로라 꽉 낌) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
   },
   {
    "id": "JOIN-INS-L1",
-   "name_ko": "M4 나사산 인서트 Norelem 07653-04 (L73, 겉 Ø6.5 × 6, 스피커 안쪽 옆판, L 앞 y227 z45)",
-   "name_en": "M4 self-tapping thread insert Norelem 07653-04 (L73) D6.5 x 6 L 1",
+   "name_ko": "M4 황동 열압입 인서트 (사용자 세트, 바깥 Ø6 × 6, 스피커 안쪽 옆판(출력), L 앞 y227 z45)",
+   "name_en": "M4 brass heat-set insert OD6 x 6 (user's set) in the printed pod inner panel L 1",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
     251.0,
-    223.751,
-    41.75,
+    224.005,
+    42.0,
     257.0,
-    230.249,
-    48.245
+    229.995,
+    48.0
    ],
    "color": "#b8b8b8",
-   "material": "강",
+   "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json joints.pods_to_centre (M4 목재 인서트, 8 깊이 막힘) + bom_changes (M4 목재 인서트 ×4) + 구매 목록 v4 L73 (Norelem 07653-04 셀프 태핑 나사산 인서트, 스틸, 컷팅 보어형, M4, 겉지름 6.5, 피치 0.8, 길이 6, 최소 구멍 깊이 8; 나비엠알오 g/3544290)",
-   "note": "10/1 구매 목록 L73에 맞춤 - 겉 Ø6.5 × 길이 6를 구멍 Ø5.8 × 8에 돌려 넣음 (옆판 면과 같은 높이까지만, 밑에 2 mm 빈 곳) - 모델은 겉나사가 구멍 벽을 반지름 0.35 파고드는 것을 겹침으로 보여 줌, 나사산 안지름 Ø3.3 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍은 Ø5.8에서 시작해 오꾸메 자투리에 시험 (헐거우면 Ø5.5 - 나무는 눌림); 제조사 최소 구멍 깊이 8 = 이 구멍 깊이; 슬롯형(07652)은 최소 깊이 10이고 나사를 잠가 손으로 푸는 손잡이볼트에 맞지 않아 쓰지 않음"
+   "source": "spec/body_L2.json joints.pods_to_centre (M4 인서트, 막힘) + bom_changes (M4 인서트 ×4) - 2026-10-07: 구매 목록 v4 L73 (Norelem 07653-04 나사산 인서트, 드릴 구멍 Ø5.8 × 8) 대신 사용자 열 인서트 세트의 M4 바깥 6 × 길이 6 (출력 옆판에 인두로)",
+   "note": "추정: 바깥 Ø6 × 길이 6를 출력 옆판 구멍 Ø5.6 × 6.5에 인두로 이음면까지 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음, 밑 0.5 mm는 나사 끝 자리), 나사산 안지름 Ø3.3로 모델 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍 바닥 뒤 PETG 5.0 (밀폐 규칙 ≥ 1.5); 상자를 붙이기 전에 넣음 - 인서트가 비뚤면 손잡이볼트가 끝벽 슬리브 축에서 벗어남"
   },
   {
    "id": "JOIN-TS-L2",
@@ -28288,12 +28130,12 @@
    "material": "SUS304",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (M4 나비나사 2개, 가운데 안에서 끝벽의 Ø8 고무 슬리브를 지나 스피커 안쪽 옆판의 M4 목재 인서트로, 막힘; screw_yz) + bom_changes (M4 나비나사 ×4) + 구매 목록 v4 L72 (평로렛 손잡이볼트 M4×20, 머리 Ø8 × 6)",
-   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, L73 인서트(길이 6)에 4.0 물림; M4×22면 6.0 물림, 끝이 구멍 바닥 2.0 위; 길이 24면 끝이 구멍 바닥(지름 부분 8 깊이)에 닿고 그보다 길면 밑 3.5 mm 밀폐 판을 누름 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
+   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, 열압입 인서트(길이 6)에 4.0 물림 (≥ 4); M4×22면 6.0 물림, 끝이 구멍 바닥 0.5 위; 22.5보다 길면 끝이 출력 구멍 바닥(깊이 6.5)을 누르고 뒤 5.0 mm 밀폐 벽을 밂 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
   },
   {
    "id": "JOIN-SLV-L2",
-   "name_ko": "고무 슬리브 OD8 ID4.2 (끝벽 구멍, L 뒤 y315 z43)",
-   "name_en": "rubber sleeve OD8 ID4.2 (end-wall hole) L 2",
+   "name_ko": "고무 슬리브 = 연료 호스 OD8 ID4.5 (끝벽 구멍, L 뒤 y315 z43)",
+   "name_en": "rubber sleeve = fuel hose OD8 ID4.5 (end-wall hole) L 2",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
@@ -28308,27 +28150,27 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (끝벽의 Ø8 고무 슬리브, EVA 띠 나사 자리 Ø10) + bom_changes (고무 슬리브(그로밋) ×4)",
-   "note": "추정: 고무 호스 OD8 ID4.2를 13.0 길이로 잘라 끝벽 Ø8 구멍에 끼움 (바깥면과 같은 높이) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
+   "note": "추정: 연료 호스 OD8 ID4.5를 13.0 길이로 잘라 출력 끝벽의 Ø8 구멍에 끼움 (바깥면과 같은 높이, 구멍 Ø8 그대로라 꽉 낌) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
   },
   {
    "id": "JOIN-INS-L2",
-   "name_ko": "M4 나사산 인서트 Norelem 07653-04 (L73, 겉 Ø6.5 × 6, 스피커 안쪽 옆판, L 뒤 y315 z43)",
-   "name_en": "M4 self-tapping thread insert Norelem 07653-04 (L73) D6.5 x 6 L 2",
+   "name_ko": "M4 황동 열압입 인서트 (사용자 세트, 바깥 Ø6 × 6, 스피커 안쪽 옆판(출력), L 뒤 y315 z43)",
+   "name_en": "M4 brass heat-set insert OD6 x 6 (user's set) in the printed pod inner panel L 2",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
     251.0,
-    311.751,
-    39.75,
+    312.005,
+    40.0,
     257.0,
-    318.249,
-    46.245
+    317.995,
+    46.0
    ],
    "color": "#b8b8b8",
-   "material": "강",
+   "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json joints.pods_to_centre (M4 목재 인서트, 8 깊이 막힘) + bom_changes (M4 목재 인서트 ×4) + 구매 목록 v4 L73 (Norelem 07653-04 셀프 태핑 나사산 인서트, 스틸, 컷팅 보어형, M4, 겉지름 6.5, 피치 0.8, 길이 6, 최소 구멍 깊이 8; 나비엠알오 g/3544290)",
-   "note": "10/1 구매 목록 L73에 맞춤 - 겉 Ø6.5 × 길이 6를 구멍 Ø5.8 × 8에 돌려 넣음 (옆판 면과 같은 높이까지만, 밑에 2 mm 빈 곳) - 모델은 겉나사가 구멍 벽을 반지름 0.35 파고드는 것을 겹침으로 보여 줌, 나사산 안지름 Ø3.3 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍은 Ø5.8에서 시작해 오꾸메 자투리에 시험 (헐거우면 Ø5.5 - 나무는 눌림); 제조사 최소 구멍 깊이 8 = 이 구멍 깊이; 슬롯형(07652)은 최소 깊이 10이고 나사를 잠가 손으로 푸는 손잡이볼트에 맞지 않아 쓰지 않음"
+   "source": "spec/body_L2.json joints.pods_to_centre (M4 인서트, 막힘) + bom_changes (M4 인서트 ×4) - 2026-10-07: 구매 목록 v4 L73 (Norelem 07653-04 나사산 인서트, 드릴 구멍 Ø5.8 × 8) 대신 사용자 열 인서트 세트의 M4 바깥 6 × 길이 6 (출력 옆판에 인두로)",
+   "note": "추정: 바깥 Ø6 × 길이 6를 출력 옆판 구멍 Ø5.6 × 6.5에 인두로 이음면까지 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음, 밑 0.5 mm는 나사 끝 자리), 나사산 안지름 Ø3.3로 모델 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍 바닥 뒤 PETG 5.0 (밀폐 규칙 ≥ 1.5); 상자를 붙이기 전에 넣음 - 인서트가 비뚤면 손잡이볼트가 끝벽 슬리브 축에서 벗어남"
   },
   {
    "id": "JOIN-EVA-R1",
@@ -28388,12 +28230,12 @@
    "material": "SUS304",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (M4 나비나사 2개, 가운데 안에서 끝벽의 Ø8 고무 슬리브를 지나 스피커 안쪽 옆판의 M4 목재 인서트로, 막힘; screw_yz) + bom_changes (M4 나비나사 ×4) + 구매 목록 v4 L72 (평로렛 손잡이볼트 M4×20, 머리 Ø8 × 6)",
-   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, L73 인서트(길이 6)에 4.0 물림; M4×22면 6.0 물림, 끝이 구멍 바닥 2.0 위; 길이 24면 끝이 구멍 바닥(지름 부분 8 깊이)에 닿고 그보다 길면 밑 3.5 mm 밀폐 판을 누름 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
+   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, 열압입 인서트(길이 6)에 4.0 물림 (≥ 4); M4×22면 6.0 물림, 끝이 구멍 바닥 0.5 위; 22.5보다 길면 끝이 출력 구멍 바닥(깊이 6.5)을 누르고 뒤 5.0 mm 밀폐 벽을 밂 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
   },
   {
    "id": "JOIN-SLV-R1",
-   "name_ko": "고무 슬리브 OD8 ID4.2 (끝벽 구멍, R 앞 y227 z45)",
-   "name_en": "rubber sleeve OD8 ID4.2 (end-wall hole) R 1",
+   "name_ko": "고무 슬리브 = 연료 호스 OD8 ID4.5 (끝벽 구멍, R 앞 y227 z45)",
+   "name_en": "rubber sleeve = fuel hose OD8 ID4.5 (end-wall hole) R 1",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
@@ -28408,27 +28250,27 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (끝벽의 Ø8 고무 슬리브, EVA 띠 나사 자리 Ø10) + bom_changes (고무 슬리브(그로밋) ×4)",
-   "note": "추정: 고무 호스 OD8 ID4.2를 13.0 길이로 잘라 끝벽 Ø8 구멍에 끼움 (바깥면과 같은 높이) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
+   "note": "추정: 연료 호스 OD8 ID4.5를 13.0 길이로 잘라 출력 끝벽의 Ø8 구멍에 끼움 (바깥면과 같은 높이, 구멍 Ø8 그대로라 꽉 낌) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
   },
   {
    "id": "JOIN-INS-R1",
-   "name_ko": "M4 나사산 인서트 Norelem 07653-04 (L73, 겉 Ø6.5 × 6, 스피커 안쪽 옆판, R 앞 y227 z45)",
-   "name_en": "M4 self-tapping thread insert Norelem 07653-04 (L73) D6.5 x 6 R 1",
+   "name_ko": "M4 황동 열압입 인서트 (사용자 세트, 바깥 Ø6 × 6, 스피커 안쪽 옆판(출력), R 앞 y227 z45)",
+   "name_en": "M4 brass heat-set insert OD6 x 6 (user's set) in the printed pod inner panel R 1",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
     965.0,
-    223.751,
-    41.75,
+    224.005,
+    42.0,
     971.0,
-    230.249,
-    48.245
+    229.995,
+    48.0
    ],
    "color": "#b8b8b8",
-   "material": "강",
+   "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json joints.pods_to_centre (M4 목재 인서트, 8 깊이 막힘) + bom_changes (M4 목재 인서트 ×4) + 구매 목록 v4 L73 (Norelem 07653-04 셀프 태핑 나사산 인서트, 스틸, 컷팅 보어형, M4, 겉지름 6.5, 피치 0.8, 길이 6, 최소 구멍 깊이 8; 나비엠알오 g/3544290)",
-   "note": "10/1 구매 목록 L73에 맞춤 - 겉 Ø6.5 × 길이 6를 구멍 Ø5.8 × 8에 돌려 넣음 (옆판 면과 같은 높이까지만, 밑에 2 mm 빈 곳) - 모델은 겉나사가 구멍 벽을 반지름 0.35 파고드는 것을 겹침으로 보여 줌, 나사산 안지름 Ø3.3 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍은 Ø5.8에서 시작해 오꾸메 자투리에 시험 (헐거우면 Ø5.5 - 나무는 눌림); 제조사 최소 구멍 깊이 8 = 이 구멍 깊이; 슬롯형(07652)은 최소 깊이 10이고 나사를 잠가 손으로 푸는 손잡이볼트에 맞지 않아 쓰지 않음"
+   "source": "spec/body_L2.json joints.pods_to_centre (M4 인서트, 막힘) + bom_changes (M4 인서트 ×4) - 2026-10-07: 구매 목록 v4 L73 (Norelem 07653-04 나사산 인서트, 드릴 구멍 Ø5.8 × 8) 대신 사용자 열 인서트 세트의 M4 바깥 6 × 길이 6 (출력 옆판에 인두로)",
+   "note": "추정: 바깥 Ø6 × 길이 6를 출력 옆판 구멍 Ø5.6 × 6.5에 인두로 이음면까지 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음, 밑 0.5 mm는 나사 끝 자리), 나사산 안지름 Ø3.3로 모델 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍 바닥 뒤 PETG 5.0 (밀폐 규칙 ≥ 1.5); 상자를 붙이기 전에 넣음 - 인서트가 비뚤면 손잡이볼트가 끝벽 슬리브 축에서 벗어남"
   },
   {
    "id": "JOIN-TS-R2",
@@ -28448,12 +28290,12 @@
    "material": "SUS304",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (M4 나비나사 2개, 가운데 안에서 끝벽의 Ø8 고무 슬리브를 지나 스피커 안쪽 옆판의 M4 목재 인서트로, 막힘; screw_yz) + bom_changes (M4 나비나사 ×4) + 구매 목록 v4 L72 (평로렛 손잡이볼트 M4×20, 머리 Ø8 × 6)",
-   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, L73 인서트(길이 6)에 4.0 물림; M4×22면 6.0 물림, 끝이 구멍 바닥 2.0 위; 길이 24면 끝이 구멍 바닥(지름 부분 8 깊이)에 닿고 그보다 길면 밑 3.5 mm 밀폐 판을 누름 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
+   "note": "추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 16, 열압입 인서트(길이 6)에 4.0 물림 (≥ 4); M4×22면 6.0 물림, 끝이 구멍 바닥 0.5 위; 22.5보다 길면 끝이 출력 구멍 바닥(깊이 6.5)을 누르고 뒤 5.0 mm 밀폐 벽을 밂 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
   },
   {
    "id": "JOIN-SLV-R2",
-   "name_ko": "고무 슬리브 OD8 ID4.2 (끝벽 구멍, R 뒤 y315 z50)",
-   "name_en": "rubber sleeve OD8 ID4.2 (end-wall hole) R 2",
+   "name_ko": "고무 슬리브 = 연료 호스 OD8 ID4.5 (끝벽 구멍, R 뒤 y315 z50)",
+   "name_en": "rubber sleeve = fuel hose OD8 ID4.5 (end-wall hole) R 2",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
@@ -28468,27 +28310,27 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json joints.pods_to_centre (끝벽의 Ø8 고무 슬리브, EVA 띠 나사 자리 Ø10) + bom_changes (고무 슬리브(그로밋) ×4)",
-   "note": "추정: 고무 호스 OD8 ID4.2를 13.0 길이로 잘라 끝벽 Ø8 구멍에 끼움 (바깥면과 같은 높이) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
+   "note": "추정: 연료 호스 OD8 ID4.5를 13.0 길이로 잘라 출력 끝벽의 Ø8 구멍에 끼움 (바깥면과 같은 높이, 구멍 Ø8 그대로라 꽉 낌) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
   },
   {
    "id": "JOIN-INS-R2",
-   "name_ko": "M4 나사산 인서트 Norelem 07653-04 (L73, 겉 Ø6.5 × 6, 스피커 안쪽 옆판, R 뒤 y315 z50)",
-   "name_en": "M4 self-tapping thread insert Norelem 07653-04 (L73) D6.5 x 6 R 2",
+   "name_ko": "M4 황동 열압입 인서트 (사용자 세트, 바깥 Ø6 × 6, 스피커 안쪽 옆판(출력), R 뒤 y315 z50)",
+   "name_en": "M4 brass heat-set insert OD6 x 6 (user's set) in the printed pod inner panel R 2",
    "kind": "bought",
    "group": "뒷바 이음·발",
    "bbox": [
     965.0,
-    311.751,
-    46.75,
+    312.005,
+    47.0,
     971.0,
-    318.249,
-    53.245
+    317.995,
+    53.0
    ],
    "color": "#b8b8b8",
-   "material": "강",
+   "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json joints.pods_to_centre (M4 목재 인서트, 8 깊이 막힘) + bom_changes (M4 목재 인서트 ×4) + 구매 목록 v4 L73 (Norelem 07653-04 셀프 태핑 나사산 인서트, 스틸, 컷팅 보어형, M4, 겉지름 6.5, 피치 0.8, 길이 6, 최소 구멍 깊이 8; 나비엠알오 g/3544290)",
-   "note": "10/1 구매 목록 L73에 맞춤 - 겉 Ø6.5 × 길이 6를 구멍 Ø5.8 × 8에 돌려 넣음 (옆판 면과 같은 높이까지만, 밑에 2 mm 빈 곳) - 모델은 겉나사가 구멍 벽을 반지름 0.35 파고드는 것을 겹침으로 보여 줌, 나사산 안지름 Ø3.3 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍은 Ø5.8에서 시작해 오꾸메 자투리에 시험 (헐거우면 Ø5.5 - 나무는 눌림); 제조사 최소 구멍 깊이 8 = 이 구멍 깊이; 슬롯형(07652)은 최소 깊이 10이고 나사를 잠가 손으로 푸는 손잡이볼트에 맞지 않아 쓰지 않음"
+   "source": "spec/body_L2.json joints.pods_to_centre (M4 인서트, 막힘) + bom_changes (M4 인서트 ×4) - 2026-10-07: 구매 목록 v4 L73 (Norelem 07653-04 나사산 인서트, 드릴 구멍 Ø5.8 × 8) 대신 사용자 열 인서트 세트의 M4 바깥 6 × 길이 6 (출력 옆판에 인두로)",
+   "note": "추정: 바깥 Ø6 × 길이 6를 출력 옆판 구멍 Ø5.6 × 6.5에 인두로 이음면까지 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음, 밑 0.5 mm는 나사 끝 자리), 나사산 안지름 Ø3.3로 모델 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍 바닥 뒤 PETG 5.0 (밀폐 규칙 ≥ 1.5); 상자를 붙이기 전에 넣음 - 인서트가 비뚤면 손잡이볼트가 끝벽 슬리브 축에서 벗어남"
   },
   {
    "id": "FOOT-01",
@@ -28588,7 +28430,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x292, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 보조배터리 받침 귀 접시 8호 13 (278, 257), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4)"
+   "note": "사양 그대로: (x292, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 배터리 틀 귀 접시 8호 13 (278, 257), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-06",
@@ -28608,7 +28450,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x611, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 153.2, 나사산 사이 나무 149.0 (check_body: 반대 면 나사 ≥ 4)"
+   "note": "사양 그대로: (x611, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (446.5, 321), 끝 z7.5 - 축 사이 174.8, 나사산 사이 나무 170.6 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-07",
@@ -28628,7 +28470,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x930, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 466.6, 나사산 사이 나무 462.4 (check_body: 반대 면 나사 ≥ 4)"
+   "note": "사양 그대로: (x930, y262); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (446.5, 321), 끝 z7.5 - 축 사이 487.1, 나사산 사이 나무 482.9 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-08",
@@ -28648,7 +28490,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x292, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 보조배터리 받침 귀 접시 8호 13 (278, 325), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4)"
+   "note": "사양 그대로: (x292, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 배터리 틀 귀 접시 8호 13 (278, 325), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-09",
@@ -28668,7 +28510,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x611, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 145.2, 나사산 사이 나무 141.0 (check_body: 반대 면 나사 ≥ 4)"
+   "note": "사양 그대로: (x611, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (446.5, 321), 끝 z7.5 - 축 사이 164.5, 나사산 사이 나무 160.3 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-10",
@@ -28688,7 +28530,7 @@
    "material": "고무",
    "print_file": null,
    "source": "spec/body_L2.json feet.positions_xy (화성고무 피스고무발 28×5, i039, 14개, 8호 13 mm 나사; 모든 발은 통로 뒤 y≥248)",
-   "note": "사양 그대로: (x930, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (466, 311.5), 끝 z7.5 - 축 사이 464.1, 나사산 사이 나무 459.9 (check_body: 반대 면 나사 ≥ 4)"
+   "note": "사양 그대로: (x930, y320); 추정: 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (446.5, 321), 끝 z7.5 - 축 사이 483.5, 나사산 사이 나무 479.3 (check_body: 반대 면 나사 ≥ 4)"
   },
   {
    "id": "FOOT-11",
@@ -28772,9 +28614,9 @@
   },
   {
    "id": "CU-PLY-BOTTOM",
-   "name_ko": "가운데 유닛 아랫판",
-   "name_en": "centre unit bottom",
-   "kind": "plywood",
+   "name_ko": "가운데 유닛 아랫판 (흡기 구멍 Ø8)",
+   "name_en": "centre unit bottom (D8 intake holes)",
+   "kind": "print",
    "group": "가운데 유닛",
    "bbox": [
     271.5,
@@ -28784,17 +28626,17 @@
     331.0,
     16.5
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json plywood_cut_list PLY-CU-BOTTOM (679×90, 끝벽 사이 x271.5~950.5, y241~331, 앞 모서리 R3, 강압·Pi 아래 흡기 홈) + centre.vents.intake (홈 4×34: 강압 아래 6, Pi 아래 8)",
-   "note": "사양 그대로: x271.5~950.5 y241~331 z5~16.5; 추정: 흡기 홈 4×34 강압 아래 x486~530 (사양 x482~534에서 보드 기둥 Ø7 자리를 피해 양끝 4 mm씩 안쪽) y292~326 6개, Pi 아래 x546~622 y273~307 8개 (합 1904 mm²); 앞 윗모서리 R3은 뚜껑 이음 기둥 자리(x500~512, 710~722)만 빼고 (케이블이 넘어가는 곳)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/가운데아랫판_1_왼쪽__1개.stl + stl/print/05_본체출력물/가운데아랫판_2_가운데__1개.stl + stl/print/05_본체출력물/가운데아랫판_3_오른쪽__1개.stl",
+   "source": "spec/body_L2.json plywood_cut_list PLY-CU-BOTTOM (679×90, 끝벽 사이 x271.5~950.5, y241~331, 앞 모서리 R3, 강압·Pi 아래 흡기) + centre.vents.intake (2026-10-07: 홈 4×34 14개 → Ø8 구멍; 2026-10-16부터 출력 3토막)",
+   "note": "사양 그대로: x271.5~950.5 y241~331 z5~16.5; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 흡기 홈 14개 4 × 34 (Ø4 224번 + 지그 J-d4 틀·슬라이더·심) → Ø8 구멍 40개 (가진 Ø8 날, 간격 11 = 구멍 사이 나무 3): 강압 아래 12 (y297: 4개 x492.5~525.5 / y308: 4개 x492.5~525.5 / y319: 4개 x492.5~525.5), Pi 아래 28 (y269: 4개 x557~590 / y280: 6개 x546~601 / y291: 8개 x546~623 / y302: 6개 x546~601 / y313: 4개 x557~590) - 합 2011 mm² (홈 1904 이상), 보드 받침 기둥에서 나무 3 이상, 가운데 고무발 Ø28 (x611)에서 떨어짐, 뒤 모서리까지 8 이상; 추정: 앞 윗모서리 R3은 뚜껑 이음 기둥 자리(x500~512, 710~722)만 빼고 (케이블이 넘어가는 곳); 사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력, 판이 679로 베드(256)보다 길어 x494 · x720에서 반턱 이음(겹침 16, 두께의 반씩)으로 3토막 (230.5 / 242.0 / 238.5) - 이음은 뚜껑 이음 기둥(x501~511, 711~721) 곁, MS 폴리머로 붙임; 나사 자리 Ø3.4 막힌 구멍 24개 (고무발 6 밑면에서, 배터리 틀 4·뒤판 탭 2 윗면에서)"
   },
   {
    "id": "CU-PLY-END-L",
-   "name_ko": "가운데 유닛 끝벽 L (ㄴ자)",
-   "name_en": "centre unit end wall L (L-shaped)",
-   "kind": "plywood",
+   "name_ko": "가운데 유닛 끝벽 L (ㄴ자, 출력)",
+   "name_en": "centre unit end wall L (L-shaped, printed)",
+   "kind": "print",
    "group": "가운데 유닛",
    "bbox": [
     260.0,
@@ -28804,17 +28646,17 @@
     331.0,
     61.35
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json plywood_cut_list PLY-CU-END (117×56.35 = y214~331 × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌, XT30 선 구멍 Ø14, 나비나사 구멍 Ø8(고무 슬리브) 2개) + centre.lids (LID 자석 끝벽 윗모서리 1)",
-   "note": "사양 그대로: x260.0~271.5, 나비나사 구멍 y227 z45 · y315 z43; 사양과 다름(작은 고침): XT30 구멍 Ø14 중심 y243 z40 → y243 z44.0 - 스피커 옆판 선 구멍(z40)과 곧게 건너는 사양 자리에서는 끝벽 집게 홈의 XT30U-F가 구멍으로 빠지지 않아(L: 모서리 반지름 8.3 > 7) 스피커를 뗄 수 없음 → 구멍을 집게 홈과 같은 축으로 올림 (F 모서리 반지름 5.72 < 7, 곧게 밀려 나감); 꼬리선은 틈에서 4.0 올라감; 추정: 자석 자리 Ø8 × 3.2 윗모서리 (x265.75 y275)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/끝벽_L__1개.stl",
+   "source": "spec/body_L2.json plywood_cut_list PLY-CU-END (117×56.35 = y214~331 × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌, XT60 선 구멍 Ø19, 나비나사 구멍 Ø8(고무 슬리브) 2개; 2026-10-07부터 출력) + centre.lids (LID 자석 끝벽 윗모서리 1)",
+   "note": "사양 그대로: x260.0~271.5, 나비나사 구멍 y227 z45 · y315 z43; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 오꾸메 합판 → PETG 출력 (같은 ㄴ자 모양·두께 11.5·자리; XT60 Ø19 구멍 (Ø4 안내 + 고리 구멍 8 + 줄질), 슬리브 Ø8 ×2, 윗모서리 자석 자리를 출력 - 드릴·톱·줄 없음; 슬리브 = 연료 호스 OD8 ID4.5가 Ø8 구멍에 꽉 낌); 사양과 다름(작은 고침): 스피커 선 구멍 Ø14 (XT30) → Ø19 (2026-10-07 XT60), 중심 y243 z40 (스피커 옆판 선 구멍과 곧게) → y244 z41.0 - 끝벽 집게 홈의 XT60 암(15.8 × 8.2, 모서리 반지름 8.90)이 홈에서 곧게 밀려 구멍으로 빠져야 스피커를 뗄 수 있어 구멍을 집게 홈과 같은 축에 둠 (Ø19 = 모서리 반지름 + 0.6); 스피커 옆판 Ø6 구멍은 이 구멍 안쪽에 들어옴 (꼬리선은 틈에서 1.0 올라감); 구멍과 슬리브 구멍 사이 3.96, 구멍 위 10.85; 추정: 자석 자리 Ø8 × 3.2 윗모서리 (x265.75 y275) - 출력에서 눕힌 구멍이라 가운데 쪽(출력 위)으로 45° 지붕, 축에서 4.75에서 평평 (위 살 1.00)"
   },
   {
    "id": "CU-PLY-END-R",
-   "name_ko": "가운데 유닛 끝벽 R (ㄴ자)",
-   "name_en": "centre unit end wall R (L-shaped)",
-   "kind": "plywood",
+   "name_ko": "가운데 유닛 끝벽 R (ㄴ자, 출력)",
+   "name_en": "centre unit end wall R (L-shaped, printed)",
+   "kind": "print",
    "group": "가운데 유닛",
    "bbox": [
     950.5,
@@ -28824,17 +28666,17 @@
     331.0,
     61.35
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json plywood_cut_list PLY-CU-END (117×56.35 = y214~331 × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌, XT30 선 구멍 Ø14, 나비나사 구멍 Ø8(고무 슬리브) 2개) + centre.lids (LID 자석 끝벽 윗모서리 1)",
-   "note": "사양 그대로: x950.5~962.0, 나비나사 구멍 y227 z45 · y315 z50; 사양과 다름(작은 고침): XT30 구멍 Ø14 중심 y290 z40 → y290 z49.5 - 스피커 옆판 선 구멍(z40)과 곧게 건너는 사양 자리에서는 끝벽 집게 홈의 XT30U-F가 구멍으로 빠지지 않아(R: 홈 축 z51가 구멍 z40 위로 11 - 홈이 구멍 밖) 스피커를 뗄 수 없음 → 구멍을 집게 홈 축보다 1.5 아래까지 올림 (옆판 구멍에서 오는 꼬리가 구멍 안에 남게) (F 모서리 반지름 5.72 < 7, 곧게 밀려 나감); 꼬리선은 틈에서 9.5 올라감; 추정: 자석 자리 Ø8 × 3.2 윗모서리 (x956.25 y275)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/끝벽_R__1개.stl",
+   "source": "spec/body_L2.json plywood_cut_list PLY-CU-END (117×56.35 = y214~331 × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌, XT60 선 구멍 Ø19, 나비나사 구멍 Ø8(고무 슬리브) 2개; 2026-10-07부터 출력) + centre.lids (LID 자석 끝벽 윗모서리 1)",
+   "note": "사양 그대로: x950.5~962.0, 나비나사 구멍 y227 z45 · y315 z50; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 오꾸메 합판 → PETG 출력 (같은 ㄴ자 모양·두께 11.5·자리; XT60 Ø19 구멍 (Ø4 안내 + 고리 구멍 8 + 줄질), 슬리브 Ø8 ×2, 윗모서리 자석 자리를 출력 - 드릴·톱·줄 없음; 슬리브 = 연료 호스 OD8 ID4.5가 Ø8 구멍에 꽉 낌); 사양과 다름(작은 고침): 스피커 선 구멍 Ø14 (XT30) → Ø19 (2026-10-07 XT60), 중심 y290 z40 (스피커 옆판 선 구멍과 곧게) → y290 z46.5 - 끝벽 집게 홈의 XT60 암(15.8 × 8.2, 모서리 반지름 8.90)이 홈에서 곧게 밀려 구멍으로 빠져야 스피커를 뗄 수 있어 구멍을 집게 홈과 같은 축에 둠 (Ø19 = 모서리 반지름 + 0.6); 스피커 옆판 Ø6 구멍은 이 구멍 안쪽에 들어옴 (꼬리선은 틈에서 6.5 올라감); 구멍과 슬리브 구멍 사이 11.74, 구멍 위 5.35; 추정: 자석 자리 Ø8 × 3.2 윗모서리 (x956.25 y275) - 출력에서 눕힌 구멍이라 가운데 쪽(출력 위)으로 45° 지붕, 축에서 4.75에서 평평 (위 살 1.00)"
   },
   {
    "id": "CU-PLY-BACK",
    "name_ko": "가운데 유닛 뒤판",
    "name_en": "centre unit back panel",
-   "kind": "plywood",
+   "kind": "print",
    "group": "가운데 유닛",
    "bbox": [
     260.0,
@@ -28844,17 +28686,17 @@
     342.5,
     61.35
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json plywood_cut_list PLY-CU-BACK (702×56.35, x260~962, y331~342.5, z5~61.35; 뒤판 출력물 창 x397.5~538 × z16.5~61.35, 위가 열림; 앰프 뒤 환기 홈 8개 4×15) + centre.lids (자석 뒤판 윗모서리 2씩)",
-   "note": "사양 그대로: 창 x397.5~538 z16.5~61.35 (뚜껑이 덮음); 추정: 환기 홈 8개 4×15 x745~805.0 z42~57 (간격 8, 홈 사이 나무 4; 앰프 x742~796 뒤, 윗모서리까지 4.35 남김), 자석 자리 Ø8 × 3.2 윗모서리 x290/380/733/935 (L은 창 왼쪽)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/가운데뒤판_1_왼쪽__1개.stl + stl/print/05_본체출력물/가운데뒤판_2_가운데__1개.stl + stl/print/05_본체출력물/가운데뒤판_3_오른쪽__1개.stl",
+   "source": "spec/body_L2.json plywood_cut_list PLY-CU-BACK (702×56.35, x260~962, y331~342.5, z5~61.35; 뒤판 출력물 창 x397.5~538 × z16.5~61.35, 위가 열림; 앰프 뒤 환기 - 2026-10-07: 홈 8개 4×15 → Ø8 구멍; 2026-10-16부터 출력 3토막) + centre.lids (자석 뒤판 윗모서리 2씩)",
+   "note": "사양 그대로: 창 x397.5~538 z16.5~61.35 (뚜껑이 덮음); 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 환기 홈 8개 4 × 15 (Ø4 64번 + 지그 J-d3 틀·슬라이더·심) → Ø8 구멍 10개 한 줄 x742~841 z50.5 (간격 11 = 나무 3; 구멍 z46.5~54.5 = 선반 띠 윗면 z43.5 위 3.0, 윗모서리 자석 자리 밑 3.65; 앰프 x742~796 뒤 5 + 오른쪽 5) - 합 503 mm² (홈 480 이상); 추정: 자석 자리 Ø8 × 3.2 윗모서리 x290/380/733/935 (L은 창 왼쪽); 사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력, 702로 베드보다 길어 x494 · x720에서 반턱 이음(겹침 16, 두께의 반씩)으로 3토막 (242.0 / 242.0 / 250.0) - 왼쪽 이음은 창 아래 띠(z5~16.5)에 있고 뒤판 출력물이 그 위에 붙음, 오른쪽 이음은 뚜껑 이음 레일 2(x711~731) 끝면이 덮음; 윗모서리 자석 자리는 출력에서 눕힌 구멍이라 +y(출력 위)로 45° 지붕, 축에서 4.75에서 평평 (바깥면까지 PETG 1.00); 허브 선반 나사 자리 Ø2.5 막힌 구멍 4개 (안면에서)"
   },
   {
    "id": "LID-L",
-   "name_ko": "가운데 유닛 뚜껑 L (오꾸메, 자석 3쌍)",
-   "name_en": "centre unit lid L (okoume, 3 magnet pairs)",
-   "kind": "plywood",
+   "name_ko": "가운데 유닛 뚜껑 L (출력, 자석 3쌍)",
+   "name_en": "centre unit lid L (printed, 3 magnet pairs)",
+   "kind": "print",
    "group": "가운데 유닛",
    "bbox": [
     260.0,
@@ -28864,11 +28706,11 @@
     342.5,
     72.85
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json centre.lids LID-L (x260~501, 오꾸메 11.5, 자석 8×3 3쌍: 뒤판 윗모서리 2, 끝벽 윗모서리 1) + plywood_cut_list PLY-CU-LID-L (241×128.5, 윗면 z72.85 = 건반 윗면, 앞 윗모서리 1×45° 모따기) + centre.vents.exhaust",
-   "note": "사양 그대로: x260~501 y214~342.5 z61.35~72.85, 앞 윗모서리 1×45°; 추정: 배기 홈 6 × (4×30) x459~489 y284~328, 간격 8 (홈 사이 나무 4 - 2.5면 오꾸메가 부러짐; 강압 쪽; 레일 x491~511 위는 피함), 자석 자리 Ø8 × 3.2 밑면 (x290.00 y336.75 · x380.00 y336.75 · x265.75 y275.00)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/뚜껑_L__1개.stl",
+   "source": "spec/body_L2.json centre.lids LID-L (x260~501, 11.5, 자석 8×3 3쌍: 뒤판 윗모서리 2, 끝벽 윗모서리 1) + plywood_cut_list PLY-CU-LID-L (241×128.5, 윗면 z72.85 = 건반 윗면, 앞 윗모서리 1×45° 모따기; 2026-10-07부터 출력) + centre.vents.exhaust",
+   "note": "사양 그대로: x260~501 y214~342.5 z61.35~72.85, 앞 윗모서리 1×45°; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 오꾸메 합판 → PETG 출력 (같은 모양·두께·자리, 배기 홈 (전엔 Ø4 96번 + 지그 J-d1)과 밑면 자석 자리 (전엔 J-c1)를 출력); 추정: 배기 홈 6 × (4×30) x459~489 y284~328, 간격 8 (강압 쪽; 레일 x491~511 위는 피함), 자석 자리 Ø8 × 3.2 밑면 (x290.00 y336.75 · x380.00 y336.75 · x265.75 y275.00)"
   },
   {
    "id": "CU-MAG-PLY-L1",
@@ -28888,7 +28730,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-L fix (자석 8×3 3쌍)",
-   "note": "추정: 합판 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 합판 윗면보다 0.2 아래"
+   "note": "추정: 출력 뒤판 (자리는 출력에 있음) 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래"
   },
   {
    "id": "CU-MAG-LID-L1",
@@ -28908,7 +28750,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-L fix (자석 8×3 3쌍)",
-   "note": "추정: 뚜껑 밑면 Ø8 × 3.2 자리에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
+   "note": "추정: 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
   },
   {
    "id": "CU-MAG-PLY-L2",
@@ -28928,7 +28770,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-L fix (자석 8×3 3쌍)",
-   "note": "추정: 합판 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 합판 윗면보다 0.2 아래"
+   "note": "추정: 출력 뒤판 (자리는 출력에 있음) 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래"
   },
   {
    "id": "CU-MAG-LID-L2",
@@ -28948,7 +28790,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-L fix (자석 8×3 3쌍)",
-   "note": "추정: 뚜껑 밑면 Ø8 × 3.2 자리에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
+   "note": "추정: 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
   },
   {
    "id": "CU-MAG-PLY-L3",
@@ -28968,7 +28810,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-L fix (자석 8×3 3쌍)",
-   "note": "추정: 합판 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 합판 윗면보다 0.2 아래"
+   "note": "추정: 출력 끝벽 (자리는 출력에 있음) 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래"
   },
   {
    "id": "CU-MAG-LID-L3",
@@ -28988,13 +28830,13 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-L fix (자석 8×3 3쌍)",
-   "note": "추정: 뚜껑 밑면 Ø8 × 3.2 자리에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
+   "note": "추정: 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
   },
   {
    "id": "LID-R",
-   "name_ko": "가운데 유닛 뚜껑 R (오꾸메, 자석 3쌍)",
-   "name_en": "centre unit lid R (okoume, 3 magnet pairs)",
-   "kind": "plywood",
+   "name_ko": "가운데 유닛 뚜껑 R (출력, 자석 3쌍)",
+   "name_en": "centre unit lid R (printed, 3 magnet pairs)",
+   "kind": "print",
    "group": "가운데 유닛",
    "bbox": [
     721.0,
@@ -29004,11 +28846,11 @@
     342.5,
     72.85
    ],
-   "color": "#d9b98b",
-   "material": "오꾸메 합판 11.5T",
-   "print_file": null,
-   "source": "spec/body_L2.json centre.lids LID-R (x721~962, 오꾸메 11.5, 자석 8×3 3쌍: 뒤판 윗모서리 2, 끝벽 윗모서리 1) + plywood_cut_list PLY-CU-LID-R (241×128.5, 윗면 z72.85 = 건반 윗면, 앞 윗모서리 1×45° 모따기) + centre.vents.exhaust",
-   "note": "사양 그대로: x721~962 y214~342.5 z61.35~72.85, 앞 윗모서리 1×45°; 추정: 배기 홈 10 × (4×40) x744~820 y288~328 (앰프·허브 위), 자석 자리 Ø8 × 3.2 밑면 (x733.00 y336.75 · x935.00 y336.75 · x956.25 y275.00)"
+   "color": "#7d858f",
+   "material": "PETG 회색",
+   "print_file": "stl/print/05_본체출력물/뚜껑_R__1개.stl",
+   "source": "spec/body_L2.json centre.lids LID-R (x721~962, 11.5, 자석 8×3 3쌍: 뒤판 윗모서리 2, 끝벽 윗모서리 1) + plywood_cut_list PLY-CU-LID-R (241×128.5, 윗면 z72.85 = 건반 윗면, 앞 윗모서리 1×45° 모따기; 2026-10-07부터 출력) + centre.vents.exhaust",
+   "note": "사양 그대로: x721~962 y214~342.5 z61.35~72.85, 앞 윗모서리 1×45°; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 오꾸메 합판 → PETG 출력 (같은 모양·두께·자리, 배기 홈 (전엔 Ø4 200번 + 지그 J-d2)과 밑면 자석 자리 (전엔 J-c2)를 출력); 추정: 배기 홈 10 × (4×40) x744~820 y288~328 (앰프·허브 위), 자석 자리 Ø8 × 3.2 밑면 (x733.00 y336.75 · x935.00 y336.75 · x956.25 y275.00)"
   },
   {
    "id": "CU-MAG-PLY-R1",
@@ -29028,7 +28870,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-R fix (자석 8×3 3쌍)",
-   "note": "추정: 합판 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 합판 윗면보다 0.2 아래"
+   "note": "추정: 출력 뒤판 (자리는 출력에 있음) 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래"
   },
   {
    "id": "CU-MAG-LID-R1",
@@ -29048,7 +28890,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-R fix (자석 8×3 3쌍)",
-   "note": "추정: 뚜껑 밑면 Ø8 × 3.2 자리에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
+   "note": "추정: 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
   },
   {
    "id": "CU-MAG-PLY-R2",
@@ -29068,7 +28910,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-R fix (자석 8×3 3쌍)",
-   "note": "추정: 합판 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 합판 윗면보다 0.2 아래"
+   "note": "추정: 출력 뒤판 (자리는 출력에 있음) 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래"
   },
   {
    "id": "CU-MAG-LID-R2",
@@ -29088,7 +28930,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-R fix (자석 8×3 3쌍)",
-   "note": "추정: 뚜껑 밑면 Ø8 × 3.2 자리에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
+   "note": "추정: 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
   },
   {
    "id": "CU-MAG-PLY-R3",
@@ -29108,7 +28950,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-R fix (자석 8×3 3쌍)",
-   "note": "추정: 합판 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 합판 윗면보다 0.2 아래"
+   "note": "추정: 출력 끝벽 (자리는 출력에 있음) 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래"
   },
   {
    "id": "CU-MAG-LID-R3",
@@ -29128,7 +28970,7 @@
    "material": "N35",
    "print_file": null,
    "source": "spec/body_L2.json centre.lids LID-R fix (자석 8×3 3쌍)",
-   "note": "추정: 뚜껑 밑면 Ø8 × 3.2 자리에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
+   "note": "추정: 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게"
   },
   {
    "id": "CU-SCREENLID",
@@ -29148,7 +28990,7 @@
    "material": "PETG",
    "print_file": "stl/print/05_본체출력물/CU화면뚜껑_터치3판__1개.stl",
    "source": "spec/body_L2.json centre.lids CU-SCREENLID (x501~721, PETG 출력 판 3 + 갈비, M3×10 4개: 레일 인서트 앞 2는 기둥 위 y246, 뒤 2는 y322) + printed_parts CU-SCREENLID; touchscreen/rev3/design/CAD_SPEC_rev3.md (3a) A-1~A-9 (경첩 받침·뒤꿈치 멈춤 블록, 리본·전원선 구멍 22×6 + 벽 2, 다리 주머니, 접이 받침 발 4 + 턱, 리본 클립 덩어리·핀 구멍, 배기 홈 8 × 34×4, 나사 자리파기 Ø6.5 × 5.5, 갈비 규칙) + touchscreen/rev3/design/numbers.json (3a) hinge / hole / clip / vents / leg.pocket / fold_feet_detail / lid_screw + touchscreen/rev3/drawings/t01~t06 (t02·t04)",
-   "note": "사양과 다름(작은 고침): ① x501~721 → x501.5~720.5 (이음마다 0.5 틈) - 사양대로면 오꾸메 뚜껑 L·R(재단 ±0.5)과 출력 뚜껑이 틈 0으로 맞닿아 조금만 커도 세 장이 나란히 들어가지 않음; ② 뒤끝 y342.5 (사양 자리 블록 y341.5는 43° 뒤판 - 40°에서 뒤판이 1.0 뒤로 감; 화면 쪽 값은 모두 사양 그대로, 접은 받침 뒤끝 y339.05와 뒤끝 사이 3.45); ③ 나사 자리는 CAD L2 보스 10 × 12 (사양 A-7의 Ø8 기둥을 덮음), 구멍 Ø3.4 + 위에서 Ø6.5 × 5.5 자리파기 (머리 자리 z67.35, 머리 밑 살 6.0); ④ 배기 홈 밑의 갈비 x571·x651은 그대로 둠 (홈 34 중 2 mm만 가림, 출력 때 갈비가 판을 받침); ⑤ 출력 방향이 자리만 잡은 판(윗면을 베드에)과 반대 - 경첩 볼·발이 윗면에 있어 사양 A-9대로 갈비 면(z61.35)을 베드에. 갈비 규칙(사양 A 머리말): 갈비 x531/571/611/651/691 · y254/290 (두께 2, z61.35~69.85)는 아래 덩어리와 만나는 곳에서 그 덩어리에 합침 - 경첩 받침 밑 채움 x538.6~559.0 · 663.0~683.4 y217.55~235.55, 구멍 벽 x633.35~659.35 y226.55~236.55, 클립 덩어리 x631.35~661.35 y236.55~248.55, 주머니 덩어리 x601~621 y287.43~303.70 (모두 z61.35까지 채움); x651 갈비는 구멍을 지나므로 구멍 둘레 벽 앞(y226.55)과 뒤(y236.55)에서 끊김. 클립 핀 자리(x634.35 y242.55 · x658.35 y242.55)와 접이 발 자리(윗면)는 갈비와 겹치지 않음. 경첩 받침 2개(뚜껑과 한 몸): 왼쪽 가까운 볼 x538.6~542.6 (Ø3.3 관통) · 귀 홈 x542.6~551.0 · 먼 볼 x551.0~559.0 (Ø2.5 관통 = M3×20 직접 탭 7.6), 오른쪽 먼 볼 x663.0~671.0 · 귀 홈 x671.0~679.4 · 가까운 볼 x679.4~683.4, 볼 옆모양 축 (y226.55, z81.35) R5.5 + 사다리꼴 z72.85에서 y217.55~235.55; 뒤꿈치 멈춤 블록 귀 홈 x · y217.55~224.55 · z72.85~76.35; 리본·전원선 구멍 x635.35~657.35 y228.55~234.55 관통, 위아래 모서리 R1, 둘레 벽 2; 다리 주머니 x604~618: 30° 경사 (y290.43, z72.85) → (y296.49, z69.35), 바닥 z69.35, 뒷벽 y300.7 (위 모서리 C0.5); 접이 받침 발 16 × 16 × 5.5 (z72.85~78.35) x535~551 · 671~687, y255.55~271.55 · 305.55~321.55, 뒤 발 뒤 턱 y322.05~324.05 z72.85~80.35 (발과 틈 0.5); 리본 클립 핀 구멍 Ø3.1 × 5 밑에서 ((634.35, 242.55) · (658.35, 242.55)); 배기 홈 x564~598 y300~304 · x624~658 y300~304 … y321~325; 자석 없음 (D14)"
+   "note": "사양과 다름(작은 고침): ① x501~721 → x501.5~720.5 (이음마다 0.5 틈) - 사양대로면 뚜껑 L·R(10/7부터 출력 ±0.2, 전엔 오꾸메 재단 ±0.5)과 출력 뚜껑이 틈 0으로 맞닿아 조금만 커도 세 장이 나란히 들어가지 않음; ② 뒤끝 y342.5 (사양 자리 블록 y341.5는 43° 뒤판 - 40°에서 뒤판이 1.0 뒤로 감; 화면 쪽 값은 모두 사양 그대로, 접은 받침 뒤끝 y339.05와 뒤끝 사이 3.45); ③ 나사 자리는 CAD L2 보스 10 × 12 (사양 A-7의 Ø8 기둥을 덮음), 구멍 Ø3.4 + 위에서 Ø6.5 × 5.5 자리파기 (머리 자리 z67.35, 머리 밑 살 6.0); ④ 배기 홈 밑의 갈비 x571·x651은 그대로 둠 (홈 34 중 2 mm만 가림, 출력 때 갈비가 판을 받침); ⑤ 출력 방향이 자리만 잡은 판(윗면을 베드에)과 반대 - 경첩 볼·발이 윗면에 있어 사양 A-9대로 갈비 면(z61.35)을 베드에. 갈비 규칙(사양 A 머리말): 갈비 x531/571/611/651/691 · y254/290 (두께 2, z61.35~69.85)는 아래 덩어리와 만나는 곳에서 그 덩어리에 합침 - 경첩 받침 밑 채움 x538.6~559.0 · 663.0~683.4 y217.55~235.55, 구멍 벽 x633.35~659.35 y226.55~236.55, 클립 덩어리 x631.35~661.35 y236.55~248.55, 주머니 덩어리 x601~621 y287.43~303.70 (모두 z61.35까지 채움); x651 갈비는 구멍을 지나므로 구멍 둘레 벽 앞(y226.55)과 뒤(y236.55)에서 끊김. 클립 핀 자리(x634.35 y242.55 · x658.35 y242.55)와 접이 발 자리(윗면)는 갈비와 겹치지 않음. 경첩 받침 2개(뚜껑과 한 몸): 왼쪽 가까운 볼 x538.6~542.6 (Ø3.3 관통) · 귀 홈 x542.6~551.0 · 먼 볼 x551.0~559.0 (Ø2.5 관통 = M3×20 직접 탭 7.6), 오른쪽 먼 볼 x663.0~671.0 · 귀 홈 x671.0~679.4 · 가까운 볼 x679.4~683.4, 볼 옆모양 축 (y226.55, z81.35) R5.5 + 사다리꼴 z72.85에서 y217.55~235.55; 뒤꿈치 멈춤 블록 귀 홈 x · y217.55~224.55 · z72.85~76.35; 리본·전원선 구멍 x635.35~657.35 y228.55~234.55 관통, 위아래 모서리 R1, 둘레 벽 2; 다리 주머니 x604~618: 30° 경사 (y290.43, z72.85) → (y296.49, z69.35), 바닥 z69.35, 뒷벽 y300.7 (위 모서리 C0.5); 접이 받침 발 16 × 16 × 5.5 (z72.85~78.35) x535~551 · 671~687, y255.55~271.55 · 305.55~321.55, 뒤 발 뒤 턱 y322.05~324.05 z72.85~80.35 (발과 틈 0.5); 리본 클립 핀 구멍 Ø3.1 × 5 밑에서 ((634.35, 242.55) · (658.35, 242.55)); 배기 홈 x564~598 y300~304 · x624~658 y300~304 … y321~325; 자석 없음 (D14)"
   },
   {
    "id": "SEAM-POSTRAIL-1",
@@ -29168,7 +29010,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/뚜껑이음레일기둥_1__1개.stl",
    "source": "spec/body_L2.json centre_contents PR-SEAMRAIL-1 (x491~511 y214~330 z55.35~61.35) + PR-SEAMPOST-1 (10×10, y241~251, z16.5~55.35, 기둥 위 M3 인서트) + printed_parts SEAM-POSTRAIL (117 × 20 × 44.85)",
-   "note": "사양과 다름(작은 고침): 기둥 x496~506 → x501~511 - 화면 뚜껑 나사(x506 = 뚜껑이 레일에 얹힌 10 mm의 가운데)가 사양 기둥(이음선 x501 가운데)의 모서리에 걸려 '기둥 위 인서트'가 안 됨; 추정: M3 열압입 인서트 L71 (바깥 Ø4.5 × 4, 구멍 Ø4 × 4.5) 레일 윗면 y246·y322; 레일 뒤 끝면은 PR-BACKPLATE 안면(y331)에 MS 폴리머, 기둥 밑은 아랫판에 MS 폴리머 (기둥 자리는 아랫판 R3 모서리 없음); 레일은 뒤판까지 y214~331 (사양 상자 y214~330는 43° 뒤판 기준, 뒤판이 1.0 뒤로 감)"
+   "note": "사양과 다름(작은 고침): 기둥 x496~506 → x501~511 - 화면 뚜껑 나사(x506 = 뚜껑이 레일에 얹힌 10 mm의 가운데)가 사양 기둥(이음선 x501 가운데)의 모서리에 걸려 '기둥 위 인서트'가 안 됨; 추정: M3 열압입 인서트 (M3 바깥 Ø5 × 4, 구멍 Ø4.2 × 4.5 - 10/7 L71 Ø4.5에서 바꿈) 레일 윗면 y246·y322; 레일 뒤 끝면은 PR-BACKPLATE 안면(y331)에 MS 폴리머, 기둥 밑은 아랫판에 MS 폴리머 (기둥 자리는 아랫판 R3 모서리 없음); 레일은 뒤판까지 y214~331 (사양 상자 y214~330는 43° 뒤판 기준, 뒤판이 1.0 뒤로 감)"
   },
   {
    "id": "SEAM-POSTRAIL-2",
@@ -29188,27 +29030,27 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/뚜껑이음레일기둥_2__1개.stl",
    "source": "spec/body_L2.json centre_contents PR-SEAMRAIL-2 (x711~731 y214~330 z55.35~61.35) + PR-SEAMPOST-2 (10×10, y241~251, z16.5~55.35, 기둥 위 M3 인서트) + printed_parts SEAM-POSTRAIL (117 × 20 × 44.85)",
-   "note": "사양과 다름(작은 고침): 기둥 x716~726 → x711~721 - 화면 뚜껑 나사(x716 = 뚜껑이 레일에 얹힌 10 mm의 가운데)가 사양 기둥(이음선 x721 가운데)의 모서리에 걸려 '기둥 위 인서트'가 안 됨; 추정: M3 열압입 인서트 L71 (바깥 Ø4.5 × 4, 구멍 Ø4 × 4.5) 레일 윗면 y246·y322; 레일 뒤 끝면은 뒤판 안면(y331)에 MS 폴리머, 기둥 밑은 아랫판에 MS 폴리머 (기둥 자리는 아랫판 R3 모서리 없음); 레일은 뒤판까지 y214~331 (사양 상자 y214~330는 43° 뒤판 기준, 뒤판이 1.0 뒤로 감)"
+   "note": "사양과 다름(작은 고침): 기둥 x716~726 → x711~721 - 화면 뚜껑 나사(x716 = 뚜껑이 레일에 얹힌 10 mm의 가운데)가 사양 기둥(이음선 x721 가운데)의 모서리에 걸려 '기둥 위 인서트'가 안 됨; 추정: M3 열압입 인서트 (M3 바깥 Ø5 × 4, 구멍 Ø4.2 × 4.5 - 10/7 L71 Ø4.5에서 바꿈) 레일 윗면 y246·y322; 레일 뒤 끝면은 뒤판 안면(y331)에 MS 폴리머, 기둥 밑은 아랫판에 MS 폴리머 (기둥 자리는 아랫판 R3 모서리 없음); 레일은 뒤판까지 y214~331 (사양 상자 y214~330는 43° 뒤판 기준, 뒤판이 1.0 뒤로 감)"
   },
   {
    "id": "SEAM-INS-1",
-   "name_ko": "M3 열압입 인서트 L71 (ShenzenAV M3x4x4.5, 바깥 Ø4.5 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 1)",
-   "name_en": "M3 heat-set insert L71 (M3x4x4.5, seam rail) 1",
+   "name_ko": "M3 열압입 인서트 (p16 세트 M3 × 4 × 바깥 5, 바깥 Ø5.0 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 1)",
+   "name_en": "M3 heat-set insert (p16 set M3 x 4 x OD 5, seam rail) 1",
    "kind": "bought",
    "group": "CU 칸 출력물",
    "bbox": [
-    503.757,
-    243.752,
+    503.506,
+    243.502,
     57.35,
-    508.25,
-    248.248,
+    508.5,
+    248.498,
     61.35
    ],
    "color": "#b8b8b8",
    "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 구매 목록 v4 L71 (ShenzenAV 황동 인서트너트 M3x4x4.5 × 6 = 4 + 예비 2)",
-   "note": "추정: 바깥 Ø4.5 × 높이 4를 레일 구멍 Ø4.0 × 4.5에 인두로 면까지 (지름 0.5 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 6개 사서 4개 쓰고 2개 예비"
+   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 황동 열 인서트 M3 바깥 5 × 길이 4 (10/7, L71 ShenzenAV M3x4x4.5 대신) 4개",
+   "note": "추정: 바깥 Ø5.0 × 높이 4를 레일 구멍 Ø4.2 × 4.5에 인두로 면까지 (지름 0.8 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 4개 사용"
   },
   {
    "id": "CU-M3X10-1",
@@ -29232,23 +29074,23 @@
   },
   {
    "id": "SEAM-INS-2",
-   "name_ko": "M3 열압입 인서트 L71 (ShenzenAV M3x4x4.5, 바깥 Ø4.5 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 2)",
-   "name_en": "M3 heat-set insert L71 (M3x4x4.5, seam rail) 2",
+   "name_ko": "M3 열압입 인서트 (p16 세트 M3 × 4 × 바깥 5, 바깥 Ø5.0 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 2)",
+   "name_en": "M3 heat-set insert (p16 set M3 x 4 x OD 5, seam rail) 2",
    "kind": "bought",
    "group": "CU 칸 출력물",
    "bbox": [
-    503.757,
-    319.752,
+    503.506,
+    319.502,
     57.35,
-    508.25,
-    324.248,
+    508.5,
+    324.498,
     61.35
    ],
    "color": "#b8b8b8",
    "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 구매 목록 v4 L71 (ShenzenAV 황동 인서트너트 M3x4x4.5 × 6 = 4 + 예비 2)",
-   "note": "추정: 바깥 Ø4.5 × 높이 4를 레일 구멍 Ø4.0 × 4.5에 인두로 면까지 (지름 0.5 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 6개 사서 4개 쓰고 2개 예비"
+   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 황동 열 인서트 M3 바깥 5 × 길이 4 (10/7, L71 ShenzenAV M3x4x4.5 대신) 4개",
+   "note": "추정: 바깥 Ø5.0 × 높이 4를 레일 구멍 Ø4.2 × 4.5에 인두로 면까지 (지름 0.8 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 4개 사용"
   },
   {
    "id": "CU-M3X10-2",
@@ -29272,23 +29114,23 @@
   },
   {
    "id": "SEAM-INS-3",
-   "name_ko": "M3 열압입 인서트 L71 (ShenzenAV M3x4x4.5, 바깥 Ø4.5 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 3)",
-   "name_en": "M3 heat-set insert L71 (M3x4x4.5, seam rail) 3",
+   "name_ko": "M3 열압입 인서트 (p16 세트 M3 × 4 × 바깥 5, 바깥 Ø5.0 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 3)",
+   "name_en": "M3 heat-set insert (p16 set M3 x 4 x OD 5, seam rail) 3",
    "kind": "bought",
    "group": "CU 칸 출력물",
    "bbox": [
-    713.757,
-    243.752,
+    713.506,
+    243.502,
     57.35,
-    718.25,
-    248.248,
+    718.5,
+    248.498,
     61.35
    ],
    "color": "#b8b8b8",
    "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 구매 목록 v4 L71 (ShenzenAV 황동 인서트너트 M3x4x4.5 × 6 = 4 + 예비 2)",
-   "note": "추정: 바깥 Ø4.5 × 높이 4를 레일 구멍 Ø4.0 × 4.5에 인두로 면까지 (지름 0.5 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 6개 사서 4개 쓰고 2개 예비"
+   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 황동 열 인서트 M3 바깥 5 × 길이 4 (10/7, L71 ShenzenAV M3x4x4.5 대신) 4개",
+   "note": "추정: 바깥 Ø5.0 × 높이 4를 레일 구멍 Ø4.2 × 4.5에 인두로 면까지 (지름 0.8 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 4개 사용"
   },
   {
    "id": "CU-M3X10-3",
@@ -29312,23 +29154,23 @@
   },
   {
    "id": "SEAM-INS-4",
-   "name_ko": "M3 열압입 인서트 L71 (ShenzenAV M3x4x4.5, 바깥 Ø4.5 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 4)",
-   "name_en": "M3 heat-set insert L71 (M3x4x4.5, seam rail) 4",
+   "name_ko": "M3 열압입 인서트 (p16 세트 M3 × 4 × 바깥 5, 바깥 Ø5.0 × 4, 뚜껑 이음 레일, 화면 뚜껑 나사 4)",
+   "name_en": "M3 heat-set insert (p16 set M3 x 4 x OD 5, seam rail) 4",
    "kind": "bought",
    "group": "CU 칸 출력물",
    "bbox": [
-    713.757,
-    319.752,
+    713.506,
+    319.502,
     57.35,
-    718.25,
-    324.248,
+    718.5,
+    324.498,
     61.35
    ],
    "color": "#b8b8b8",
    "material": "황동",
    "print_file": null,
-   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 구매 목록 v4 L71 (ShenzenAV 황동 인서트너트 M3x4x4.5 × 6 = 4 + 예비 2)",
-   "note": "추정: 바깥 Ø4.5 × 높이 4를 레일 구멍 Ø4.0 × 4.5에 인두로 면까지 (지름 0.5 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 6개 사서 4개 쓰고 2개 예비"
+   "source": "spec/body_L2.json centre.lids CU-SCREENLID fix (레일 인서트) + 황동 열 인서트 M3 바깥 5 × 길이 4 (10/7, L71 ShenzenAV M3x4x4.5 대신) 4개",
+   "note": "추정: 바깥 Ø5.0 × 높이 4를 레일 구멍 Ø4.2 × 4.5에 인두로 면까지 (지름 0.8 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 넣음), 나사산 안지름 Ø2.6로 모델 (나사 Ø3과 겹침 = 나사산 물림); 4개 사용"
   },
   {
    "id": "CU-M3X10-4",
@@ -29658,7 +29500,7 @@
    "group": "CU 칸 출력물",
    "bbox": [
     397.5,
-    304.0,
+    316.0,
     16.5,
     538.0,
     342.5,
@@ -29667,8 +29509,8 @@
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/뒤판출력물_IO__1개.stl",
-   "source": "spec/body_L2.json centre.back_plate_io (x397.5~538 y331~342.5 z16.5~61.35; 구멍 x/z: 케이블 통과 Ø12 (405, 38), USB-C PD 입력 (421, 38), KCD1 13.2×19.2 (438.5, 38.5) 2 mm 오목 자리에 테두리 → y342.5와 같은 면, J501 Ø6 (462.5, 40.5); 루버 x480~536 z18~46) + centre_contents CU-E-PDTRIG / CU-E-J501BOARD / CU-E-SWITCH",
-   "note": "사양과 다름(작은 고침): 판에 얹히는 HUSB238·J501 기판·J501·KCD1 자리와 판 주머니·잭 받침을 사양 상자보다 y+1.0 (뒤판이 40° 규칙으로 y341.5 → 342.5로 옮겨 감; 사양 그대로면 USB-C 입구 앞을 판 1.0 mm가 막음); 추정: 바깥 판 2 (y340.5~342.5) + 테 (위 4 · 아래 1.5 · 옆 2) - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 테두리(15.4×21.4)는 바깥면과 같은 높이; USB-C 입구 13 × 7.5 (바깥 판), HUSB238 주머니 x415.8~426.2 z35.6~40.4 (입구가 바깥면에서 2 안); J501 기판 받침 x449~476.5 y316.5~340.5 윗면 z36.4 (기판 밑) + 세운 받침벽 2 (x452~454/472~474, 2 두께, y320~340.5 z20.5~30: 바깥 판에서 곧게 올라 받침과 뒤 탭을 이음 - 출력 때 내민 면 없음); 루버 x480~534 (사양 536 → 옆 테 2를 남김) z18~46 3×6; 바닥 탭 2개 (x400~414, 452~474, y316~340.5, z16.5~20.5)에 접시 8호 13 mm를 아랫판으로: 왼쪽 (407, 322) (아랫판 뒤 모서리 y331에서 9), 오른쪽은 J501 받침이 탭 전체를 덮어 드라이버가 닿지 않으므로 탭에서 앞으로 낸 혀 x459.5~472.5 y304~316의 (466, 311.5) - 드라이버 Ø6 길이 받침·J501 기판 앞 1.0 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인) - 창 옆은 틈 없이 끼움; 탭 나사 끝 z7.5 = 아랫판 밑면 z5 위 2.5 (check_body: 끝 ≥ 1.0, 반대 면 나사와 나사산 사이 ≥ 4)"
+   "source": "spec/body_L2.json centre.back_plate_io (x397.5~538 y331~342.5 z16.5~61.35; 구멍 x/z: KCD1 13.2×19.2 (438.5, 38.5) 2 mm 오목 자리에 테두리 → y342.5와 같은 면, J501 Ø6 (462.5, 40.5); 루버 x480~536 z18~46; 2026-10-07 막음: 케이블 통과 Ø12 (405, 38) · USB-C PD 입력 (421, 38)) + centre.power_2026_10_07 + centre_contents CU-E-J501BOARD / CU-E-SWITCH",
+   "note": "사양과 다름(작은 고침): 판에 얹히는 J501 기판·J501·KCD1 자리와 잭 받침을 사양 상자보다 y+1.0 (뒤판이 40° 규칙으로 y341.5 → 342.5로 옮겨 감; 사양 그대로면 J501 코가 판 안 1.0에서 끝남); 사양과 다름(작은 고침, 2026-10-07 배터리): 옛 바닥 탭 2개 (x400~414 = 배터리 밑, x452~474 + 앞 혀 = 90° 돌린 PED 보드 밑) 대신 탭 하나 x427~451 y316~340.5 z16.5~20.5에 접시 8호 13 두 개 (431.5, 321) · (446.5, 321) - 배터리 뒤(y322.5~331)에 나사를 두면 아랫판 뒤 모서리에서 4 이하라 쪼개짐; 드라이버 Ø6 길: 왼쪽은 KCD1 단자 왼쪽 1.6, 오른쪽은 J501 받침 왼쪽 0.5 (받침 왼쪽 끝을 J501 기판 끝 x450에 맞춤, 전 x449), 스위치 몸통은 y327.5 뒤, PED 보드는 y314 앞 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인); PD 입력 주머니·케이블 통과 구멍은 막힌 벽 (케이블 통과 Ø12 (405, 38) · USB-C PD 입력 (421, 38)); 받침 버팀벽 2개와 오른쪽 혀는 없앰 (받침은 바깥 판에서 24 내민 6.4 두께); 추정: 바깥 판 2 (y340.5~342.5) + 테 (위 4 · 아래 1.5 · 옆 2) - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 테두리(15.4×21.4)는 바깥면과 같은 높이; J501 기판 받침 x450~476.5 y316.5~340.5 윗면 z36.4 (기판 밑); 루버 x480~534 (사양 536 → 옆 테 2를 남김) z18~46 3×6; 탭 나사 끝 z7.5 = 아랫판 밑면 z5 위 2.5 (check_body: 끝 ≥ 1.0, 반대 면 나사와 나사산 사이 ≥ 4) - 창 옆은 틈 없이 끼움"
   },
   {
    "id": "PR-HUBSHELF",
@@ -29688,67 +29530,67 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/허브선반__1개.stl",
    "source": "spec/body_L2.json centre_contents PR-HUBSHELF (224×47×2, x688~912 y282~329 z41.5~43.5) + PR-SHELFBRK-1/2 (x688~698 / 902~912, y322~330, z41.5~50, 뒤판에 나사) + CU-E-AMP (앰프 2 mm 받침 위 z45.5) + printed_parts PR-HUBSHELF",
-   "note": "추정: 선반 뒤 2 mm(y329~331)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, 받은 앰프로 재서 옮김) - 사양 STANDOFFS의 '앰프 2 mm 받침'을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; x693/907 z46, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 7 (M3 × 12, L78) / 8 (13 mm), 끝에서 뒤판 바깥면까지 4.5 / 3.5); 머리(아래 끝 z43.0)가 선반 윗면 z43.5보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (y282~322, 바닥 1.2 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. 8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)"
+   "note": "추정: 선반 뒤 2 mm(y329~331)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, 받은 앰프로 재서 옮김) - 사양 STANDOFFS의 '앰프 2 mm 받침'을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; x693/907 z46, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 뒤판 물림 7 (M3 × 12, L78) / 8 (13 mm), 끝에서 뒤판 바깥면까지 4.5 / 3.5); 머리(아래 끝 z43.0)가 선반 윗면 z43.5보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 7 × 0.8 (y282~322, 바닥 1.2 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. 8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)"
   },
   {
-   "id": "CU-PBHOLDER",
-   "name_ko": "보조배터리 받침 (바닥 2, 벽 1.5 × 14, 끈 구멍, 나사 귀 4)",
-   "name_en": "power-bank holder (printed tray, 4 screw ears)",
+   "id": "CU-BATFRAME",
+   "name_ko": "배터리 틀 (LiFePO4 둘레 벽 1.5 × 14, 끈 구멍, 나사 4, 앞에 퓨즈 선반)",
+   "name_en": "battery frame (corral round the LiFePO4 pack + fuse shelf, 4 screws)",
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
     272.0,
-    242.5,
+    217.55,
     16.5,
-    393.0,
+    434.6,
     330.5,
-    30.5
+    55.93
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
-   "print_file": "stl/print/05_본체출력물/보조배터리받침__1개.stl",
-   "source": "spec/body_L2.json centre_contents CU-PBHOLDER (x284~393 y252~327 z16.5~30.5, 바닥 2, 벽 1.5 × 14, 끈 구멍) + PB-E-BANK (Morui MT-65 105×71×32, 선택 O07, USB-C 끝 +x) + Z-BANK-PLUG",
-   "note": "사양과 다름(작은 고침, W1 7번 2026-10-02): 사양 상자 밖에 나사 귀 4개 (두께 4, z16.5~20.5, 뒤판 탭과 같은 두께) - 바닥 2 위 접시 8호 13이면 끝이 z5.5로 아랫판 밑면(z5) 위 0.5뿐 (11.3 합판이면 0.3, 11.0이면 0 = 뚫림), 그리고 옛 자리 (289, 272) · (388, 272) · (289, 307) · (388, 307) 중 x289 두 개는 고무발 (292, 262)·(292, 320)의 Ø28 위 (축 사이 10.4/13.3, 나사산 사이 나무 6.2/9.1). 배터리가 바닥을 0.5 틈으로 꽉 채워 바닥을 두껍게 하면 배터리가 뜨고, 굿나잇몰 L77은 13 mm부터라 짧은 나사 대신 귀를 냄 → 접시 8호 13 4곳 (278, 257) · (278, 325) · (308, 247.5) · (385, 247.5), 머리 z20.5, 끝 z7.5 = 밑면 위 2.5 (11.3 합판이면 2.3), 가운데 고무발 나사 축까지 14.9/14.9/21.6/94.1 (모두 Ø28 패드 밖), 나사산 사이 나무 10.7 이상, 판 모서리 5 이상, 다른 나사 축 8 이상, 나사 수·길이는 그대로 (L77 6개 = 받침 4 + 뒤판 탭 2); 귀: 왼쪽 벽 밖 x272~284 (끝벽 안면 x271.5과 0.5) y251~263 · y319~330.5, 앞 벽 밖 y242.5~252 x302~314 · x379~391 (끈 구멍 x327.5~349.5 앞은 비움; 앞 1.5는 아랫판 앞 R3 위로 0.4 이하 뜸); 드라이버 Ø6 길: 왼쪽 앞은 XT30 집게 뒤 1.5·케이블 집게 E1 앞 2.0, 왼쪽 뒤는 나비나사 L2 뒤 2.0 (check_body가 Ø6 × 80으로 확인); 추정: 배터리 둘레 0.5 틈 (배터리 x286~391 y254~325), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - 구매 목록 v4 L79 = 최종 재료 i221 벨크로 링벨트 20 mm × 30 cm)"
+   "print_file": "stl/print/05_본체출력물/배터리틀__1개.stl",
+   "source": "spec/body_L2.json centre_contents CU-BATFRAME (x272~434.6 y217.55~330.5 z16.5~55.93) + BAT-LFP (x284~424 y251.0~323.0 z16.5~51.5) + CU-E-FUSE + Z-BAT-LEADS + centre.power_2026_10_07 (사용자 2026-10-07: Turmera LiFePO4 12.8 V 6 Ah 4S1P 32700, 140×35×72, XT60 선 + DC 5.5×2.1 충전 선; 퓨즈 홀더 = 사용자 ATC/ATO 칼날형, 제품 도면 40.1 × 11.1 × 33.8)",
+   "note": "2026-10-07 새 부품 (보조배터리 받침 CU-PBHOLDER·퓨즈 받침 CU-FUSECRADLE 대신): 배터리는 셀을 눕혀 받침 바닥 없이 아랫판(z16.5) 위 - 뚜껑 밑 z61.35까지 9.85; 둘레 벽 x282.0~426.0 y249.0~325.0 z16.5~30.5 (두께 1.5, 배터리와 0.5 틈), +x 끝은 모서리 8씩만 남기고 y258~316 열림 - 선 두 개(XT60·DC 충전)가 나오는 끝 (가정), 그 앞 x424~434 z30~뚜껑은 선 꺾는 자리 Z-BAT-LEADS로 비워 둠 (PED 보드는 그 밑 z23.1 이하); 끈 구멍 22 × 3 (x304~326, 앞·뒤 벽 아래 - 20 mm 벨크로 L79 = 최종 재료 i221 링벨트 30 cm가 배터리 밑과 위를 감음, 둘레 약 232); 나사 접시 8호 13 4개: 왼쪽 벽 밖 귀 (278, 257) · (278, 325) (옛 받침 귀와 같은 자리·같은 드라이버 길), 앞 덩어리(x330~398, 벽 높이 z30.5)의 Ø9 구멍 바닥 (338, 246) · (392, 246) (아랫판 앞 모서리 y241에서 5.0) - 머리 z20.5, 끝 z7.5 = 밑면 위 2.5, 가운데 고무발 나사 축까지 14.9/14.9/48.7/101.3 (모두 Ø28 패드 밖), 나사 수·길이 그대로 (L77 6개 = 틀 4 + 뒤판 탭 2) - 퓨즈 홀더를 끼우기 전에 조임; 퓨즈 선반 x397~434.6 (2026-10-07 ATC/ATO 홀더, BU914 둥근 받침 대신): 바닥 띠 y241.5~249.0 위 덩어리 + 앞 공간으로 내민 선반 (밑면 45°, y220.5까지, 앞 공간에서 z27 위 - 통로 y212~241 z0~27은 비움), 윗면 z48 = 홀더 아랫면; 홀더(x397~437.1 y215.7~249.5 z48~59.1)를 옆으로 눕혀 놓고 양끝 선 꼭지 Ø8를 받침 2개 (x399.5~403.5 · 430.6~434.6, 구멍 Ø8.3, 축 y223.2 z53.55, 위 입구 6.8로 눌러 끼움, 윗면 z55.93)에; 틀 끝 x426 밖(밑에 PED 보드)은 z36 + (x - 426) 아래를 45°로 깎음; 퓨즈를 갈 때는 뚜껑 L을 들고 홀더를 위로 빼서 선 축으로 90° 돌려 덮개를 위로 뽑음; XT60 짝 (x392~423 y255~271 z51.5~59.7)과 DC 충전 커넥터 (x392~422 y304~313.5 z51.5~60.0)는 배터리 윗면에 눕힘 - 뚜껑 L(x260~501)만 들면 손이 닿음, 충전은 스위치를 끄고 DC 선에 충전기를 꽂음 (XT60은 그대로); 배터리 무게 약 0.9 kg (상품 설명 약 900 g - 받은 배터리로 잼); 추정: 선이 나오는 면·높이, DC 커넥터 크기, 끈 맞춤, 홀더 꼭지 위치(칼날 쪽 끝에서 7.5)·길이는 받은 물건으로 확인"
   },
   {
-   "id": "XT30-CLIP-L",
-   "name_ko": "XT30 짝 집게 L (끝벽 안쪽, 출력)",
-   "name_en": "XT30 pair clip on the end wall L (printed)",
+   "id": "XT60-CLIP-L",
+   "name_ko": "XT60 짝 집게 L (끝벽 안쪽, 출력)",
+   "name_en": "XT60 pair clip on the end wall L (printed)",
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
     271.5,
-    233.5,
-    28.0,
-    287.01,
-    252.5,
-    54.0
+    232.5,
+    28.5,
+    290.8,
+    256.0,
+    53.5
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
-   "print_file": "stl/print/05_본체출력물/XT30집게_L__1개.stl",
-   "source": "spec/body_L2.json centre_contents C-XT30-L (x271.5~295.0 y236~250 z40~48) + speakers.xt30 (스피커 꼬리 XT30U-F가 끝벽 구멍 Ø14로 들어가 끝벽 집게의 짝과 꽂힘) + printed_parts XT30-CLIP (24 × 14 × 10)",
-   "note": "사양과 다름(작은 고침): 끝벽에 붙는 판의 구멍 Ø14와 끝벽 구멍을 y243 z44.0로 (사양은 스피커 옆판 선 구멍 z40과 곧게) - 홈의 XT30U-F(모서리 반지름 5.72 < 7)가 홈에서 끝벽 쪽으로 곧게 밀려 판 3 + 끝벽 11.5 터널로 들어가고 스피커 쪽으로 빠짐 (L은 사양 자리에서 모서리가 판·끝벽에 걸려 빠지지 않았음); 판 위끝을 z54까지 올려 구멍 위 3을 남김; 추정: XT30U-F 홈 10.6 × 5.6 × 12.4 (x274.6~287.0, 10.2 × 5.2 × 12.4 + 0.2씩), 입구 +x(가운데 쪽)으로 앰프 선 XT30U-M이 꽂힘, 홈 위 걸림 턱 1 × 1.2 (위에서 눌러 끼움); 홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 스피커를 뗄 때 F가 터널로 빠짐, 그래서 홈 안의 F에 M을 대고 밀면 F가 터널로 밀려 들어감 → 짝 꽂기: F를 홈 입구로 가운데 쪽에 당겨 꺼내 (꼬리 여유 약 35 mm) 손으로 M을 끝까지 꽂고, 짝을 다시 가져와 F 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움; 뽑기는 거꾸로 (짝을 입구로 꺼낸 뒤 손으로 뽑음); 옆벽 밑에 45° 받침 2개를 판의 구멍 아래 부분까지 (출력 때 옆벽·바닥이 구멍 위에 뜨지 않게); 끝벽에 붙는 판 x271.5~274.5 y233.5~252.5 z28.0~54.0 (구멍 둘레 2.5~3), MS 폴리머로 붙임; 스피커 꼬리의 여유 약 35 mm는 터널 안에 느슨하게 1.5바퀴 감김 (C-SPKPIG, 스피커 밖 꼬리 약 54 mm)"
+   "print_file": "stl/print/05_본체출력물/XT60집게_L__1개.stl",
+   "source": "spec/body_L2.json centre_contents C-XT60-L (x271.5~305.8 y238.0~250.0 z31.7~50.3) + speakers.xt60 (스피커 꼬리 XT60 암이 끝벽 구멍 Ø19로 들어가 끝벽 집게의 짝과 꽂힘; 2026-10-07 XT30 → XT60) + printed_parts XT60-CLIP",
+   "note": "2026-10-07 XT60으로 바꿈 (사용자: 커넥터는 XT60 한 가지): 스피커 꼬리 = XT60 암(이 집게 홈 안), 앰프 선 = XT60 수(가운데 쪽에서 꽂힘), 둘 다 AMASS XT60 16 AWG 10 cm 선 (엘레파츠 12779719 암 / 12779718 수); 홈 16.2 × 8.6 × 16.2 (x274.6~290.8 y239.7~248.3 z32.9~49.1; XT60 암 15.8 × 8.2 × 16 + 0.2씩) - 세워 둠 (y 8.6, z 16.2): 눕히면(y 16.2) L은 나비나사 머리(y≤232)와 배터리(y≥251) 사이에 들어가지 않음; 끝벽에 붙는 판의 구멍 Ø19와 끝벽 구멍 Ø19가 홈과 같은 축 (y244 z41.0) - 암(모서리 반지름 8.90)이 홈에서 곧게 밀려 판 3 + 끝벽 11.5 터널로 들어가고 스피커 쪽으로 빠짐; 판 x271.5~274.5 y232.5~256.0 z28.5~53.5 (앞쪽 y232.5는 나비나사 머리 Ø10에서 0.5); 판 앞 목 5.7 (x274.5~280.2, 뒤쪽 y253.5까지 - 배터리 틀 귀 나사(278, 257) 드라이버 길 Ø6에서 0.5): 구멍 가장자리에서 45° 원뿔로 좁아져 옆벽까지 - 출력 때 옆벽·바닥이 구멍 위에 뜨지 않고, 암을 다시 넣을 때 깔때기; 걸림 턱 1 × 1.2는 목 밖 10.6 mm에만 (목 위는 홈 폭 그대로 열림); 입구 +x(가운데 쪽)으로 앰프 선 XT60 수가 꽂힘; 홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 스피커를 뗄 때 암이 터널로 빠짐, 그래서 홈 안의 암에 수를 대고 밀면 암이 터널로 밀려 들어감 → 짝 꽂기: 암을 홈 입구로 가운데 쪽에 당겨 꺼내 (꼬리 여유 약 35 mm) 손으로 수를 끝까지 꽂고, 짝을 다시 가져와 암 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움 (뒤쪽은 목 위 열린 곳으로 내려감); 뽑기는 거꾸로 (짝을 입구로 꺼낸 뒤 손으로 뽑음); 잘못 꽂기 막기: 스피커 XT60에는 파란 수축 튜브 + 'SPK', 전원 XT60(배터리·하네스·시험 전원)에는 빨간 수축 튜브 - 배터리나 시험 전원을 이 짝에 꽂으면 12.8 V 직류가 앰프 출력이나 스피커 코일에 걸림; MS 폴리머로 붙임; 스피커 꼬리의 여유 약 35 mm는 터널 안에 느슨하게 1.5바퀴 감김 (C-SPKPIG, 스피커 밖 꼬리 약 54 mm)"
   },
   {
-   "id": "XT30-CLIP-R",
-   "name_ko": "XT30 짝 집게 R (끝벽 안쪽, 출력)",
-   "name_en": "XT30 pair clip on the end wall R (printed)",
+   "id": "XT60-CLIP-R",
+   "name_ko": "XT60 짝 집게 R (끝벽 안쪽, 출력)",
+   "name_en": "XT60 pair clip on the end wall R (printed)",
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
-    934.99,
-    280.5,
-    39.5,
+    931.2,
+    278.0,
+    34.0,
     950.5,
-    299.5,
-    59.5
+    302.0,
+    59.0
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
-   "print_file": "stl/print/05_본체출력물/XT30집게_R__1개.stl",
-   "source": "spec/body_L2.json centre_contents C-XT30-R (x927.0~950.5 y283~297 z47~55) + speakers.xt30 (스피커 꼬리 XT30U-F가 끝벽 구멍 Ø14로 들어가 끝벽 집게의 짝과 꽂힘) + printed_parts XT30-CLIP (24 × 14 × 10)",
-   "note": "사양과 다름(작은 고침): 끝벽에 붙는 판의 구멍 Ø14와 끝벽 구멍을 y290 z49.5로 (사양은 스피커 옆판 선 구멍 z40과 곧게) - 홈의 XT30U-F(모서리 반지름 6.54 < 7)가 홈에서 끝벽 쪽으로 곧게 밀려 판 3 + 끝벽 11.5 터널로 들어가고 스피커 쪽으로 빠짐 (L은 사양 자리에서 모서리가 판·끝벽에 걸려 빠지지 않았음); R 선 홈은 없앰(꼬리가 구멍으로 곧게 감); 추정: XT30U-F 홈 10.6 × 5.6 × 12.4 (x935.0~947.4, 10.2 × 5.2 × 12.4 + 0.2씩), 입구 −x(가운데 쪽)으로 앰프 선 XT30U-M이 꽂힘, 홈 위 걸림 턱 1 × 1.2 (위에서 눌러 끼움); 홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 스피커를 뗄 때 F가 터널로 빠짐, 그래서 홈 안의 F에 M을 대고 밀면 F가 터널로 밀려 들어감 → 짝 꽂기: F를 홈 입구로 가운데 쪽에 당겨 꺼내 (꼬리 여유 약 35 mm) 손으로 M을 끝까지 꽂고, 짝을 다시 가져와 F 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움; 뽑기는 거꾸로 (짝을 입구로 꺼낸 뒤 손으로 뽑음); 옆벽 밑에 45° 받침 2개를 판의 구멍 아래 부분까지 (출력 때 옆벽·바닥이 구멍 위에 뜨지 않게); 끝벽에 붙는 판 x947.5~950.5 y280.5~299.5 z39.5~59.5 (구멍 둘레 2.5~3), MS 폴리머로 붙임; 스피커 꼬리의 여유 약 35 mm는 터널 안에 느슨하게 1.5바퀴 감김 (C-SPKPIG, 스피커 밖 꼬리 약 54 mm)"
+   "print_file": "stl/print/05_본체출력물/XT60집게_R__1개.stl",
+   "source": "spec/body_L2.json centre_contents C-XT60-R (x916.2~950.5 y284.0~296.0 z37.2~55.8) + speakers.xt60 (스피커 꼬리 XT60 암이 끝벽 구멍 Ø19로 들어가 끝벽 집게의 짝과 꽂힘; 2026-10-07 XT30 → XT60) + printed_parts XT60-CLIP",
+   "note": "2026-10-07 XT60으로 바꿈 (사용자: 커넥터는 XT60 한 가지): 스피커 꼬리 = XT60 암(이 집게 홈 안), 앰프 선 = XT60 수(가운데 쪽에서 꽂힘), 둘 다 AMASS XT60 16 AWG 10 cm 선 (엘레파츠 12779719 암 / 12779718 수); 홈 16.2 × 8.6 × 16.2 (x931.2~947.4 y285.7~294.3 z38.4~54.6; XT60 암 15.8 × 8.2 × 16 + 0.2씩) - 세워 둠 (y 8.6, z 16.2): 눕히면(y 16.2) L은 나비나사 머리(y≤232)와 배터리(y≥251) 사이에 들어가지 않음; 끝벽에 붙는 판의 구멍 Ø19와 끝벽 구멍 Ø19가 홈과 같은 축 (y290 z46.5) - 암(모서리 반지름 8.90)이 홈에서 곧게 밀려 판 3 + 끝벽 11.5 터널로 들어가고 스피커 쪽으로 빠짐; 판 x947.5~950.5 y278.0~302.0 z34.0~59.0; 판 앞 목 5.7 (x941.8~947.5): 구멍 가장자리에서 45° 원뿔로 좁아져 옆벽까지 - 출력 때 옆벽·바닥이 구멍 위에 뜨지 않고, 암을 다시 넣을 때 깔때기; 걸림 턱 1 × 1.2는 목 밖 10.6 mm에만 (목 위는 홈 폭 그대로 열림); 입구 −x(가운데 쪽)으로 앰프 선 XT60 수가 꽂힘; 홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 스피커를 뗄 때 암이 터널로 빠짐, 그래서 홈 안의 암에 수를 대고 밀면 암이 터널로 밀려 들어감 → 짝 꽂기: 암을 홈 입구로 가운데 쪽에 당겨 꺼내 (꼬리 여유 약 35 mm) 손으로 수를 끝까지 꽂고, 짝을 다시 가져와 암 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움 (뒤쪽은 목 위 열린 곳으로 내려감); 뽑기는 거꾸로 (짝을 입구로 꺼낸 뒤 손으로 뽑음); 잘못 꽂기 막기: 스피커 XT60에는 파란 수축 튜브 + 'SPK', 전원 XT60(배터리·하네스·시험 전원)에는 빨간 수축 튜브 - 배터리나 시험 전원을 이 짝에 꽂으면 12.8 V 직류가 앰프 출력이나 스피커 코일에 걸림; MS 폴리머로 붙임; 스피커 꼬리의 여유 약 35 mm는 터널 안에 느슨하게 1.5바퀴 감김 (C-SPKPIG, 스피커 밖 꼬리 약 54 mm)"
   },
   {
    "id": "CU-POST-PI-1",
@@ -29768,7 +29610,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_Pi_Ø6_6mm__4개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 6 (x545.5 y265.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 6 (x545.5 y265.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-PI-2",
@@ -29788,7 +29630,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_Pi_Ø6_6mm__4개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 6 (x603.5 y265.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 6 (x603.5 y265.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-PI-3",
@@ -29808,7 +29650,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_Pi_Ø6_6mm__4개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 6 (x545.5 y314.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 6 (x545.5 y314.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-PI-4",
@@ -29828,7 +29670,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_Pi_Ø6_6mm__4개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 6 (x603.5 y314.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 6 (x603.5 y314.5), M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-BUCK-1",
@@ -29848,7 +29690,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø7 × 5 (x480.7 y291.9), M3×5 자가 탭 (구멍 Ø2.7 × 4, 기판 1.6 → 물림 3.4, 바닥 1.0 - 6 mm 이상은 바닥을 뚫고 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø7 × 5 (x480.7 y291.9), M3×6 자가 탭 (구멍 Ø2.7 관통 5, 기판 1.6 → 물림 4.4, 끝이 아랫판 위 0.6 - 8 mm 이상은 아랫판에 닿아 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-BUCK-2",
@@ -29868,7 +29710,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø7 × 5 (x535.1 y291.9), M3×5 자가 탭 (구멍 Ø2.7 × 4, 기판 1.6 → 물림 3.4, 바닥 1.0 - 6 mm 이상은 바닥을 뚫고 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø7 × 5 (x535.1 y291.9), M3×6 자가 탭 (구멍 Ø2.7 관통 5, 기판 1.6 → 물림 4.4, 끝이 아랫판 위 0.6 - 8 mm 이상은 아랫판에 닿아 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-BUCK-3",
@@ -29888,7 +29730,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø7 × 5 (x480.7 y325.8), M3×5 자가 탭 (구멍 Ø2.7 × 4, 기판 1.6 → 물림 3.4, 바닥 1.0 - 6 mm 이상은 바닥을 뚫고 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø7 × 5 (x480.7 y325.8), M3×6 자가 탭 (구멍 Ø2.7 관통 5, 기판 1.6 → 물림 4.4, 끝이 아랫판 위 0.6 - 8 mm 이상은 아랫판에 닿아 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-BUCK-4",
@@ -29908,7 +29750,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø7 × 5 (x535.1 y325.8), M3×5 자가 탭 (구멍 Ø2.7 × 4, 기판 1.6 → 물림 3.4, 바닥 1.0 - 6 mm 이상은 바닥을 뚫고 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø7 × 5 (x535.1 y325.8), M3×6 자가 탭 (구멍 Ø2.7 관통 5, 기판 1.6 → 물림 4.4, 끝이 아랫판 위 0.6 - 8 mm 이상은 아랫판에 닿아 기둥을 밀어 올림) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-PED-1",
@@ -29917,18 +29759,18 @@
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
-    402.0,
-    248.005,
+    427.5,
+    245.005,
     16.5,
-    408.0,
-    253.995,
+    433.5,
+    250.995,
     21.5
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_PED_Ø6_5mm__2개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 5 (x405.0 y251.0), M3×5 자가 탭 (구멍 Ø2.5 × 4, 바닥 1.0) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 5 (x430.5 y248.0), M3×6 자가 탭 (구멍 Ø2.5 관통 5, 끝이 아랫판 위 0.6) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-PED-2",
@@ -29937,18 +29779,18 @@
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
-    464.0,
-    290.005,
+    469.5,
+    307.005,
     16.5,
-    470.0,
-    295.995,
+    475.5,
+    312.995,
     21.5
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_PED_Ø6_5mm__2개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 5 (x467.0 y293.0), M3×5 자가 탭 (구멍 Ø2.5 × 4, 바닥 1.0) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 5 (x472.5 y310.0), M3×6 자가 탭 (구멍 Ø2.5 관통 5, 끝이 아랫판 위 0.6) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-PED-3",
@@ -29957,18 +29799,18 @@
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
-    464.0,
-    248.005,
+    469.5,
+    245.005,
     16.5,
-    470.0,
-    253.995,
+    475.5,
+    250.995,
     24.0
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_PED_Ø6_5mm_핀__2개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 5 (x467.0 y251.0), M3×5 자가 탭 (구멍 Ø2.5 × 4, 바닥 1.0) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 5 (x472.5 y248.0), M3×6 자가 탭 (구멍 Ø2.5 관통 5, 끝이 아랫판 위 0.6) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-PED-4",
@@ -29977,18 +29819,18 @@
    "kind": "print",
    "group": "CU 칸 출력물",
    "bbox": [
-    402.0,
-    290.005,
+    427.5,
+    307.005,
     16.5,
-    408.0,
-    295.995,
+    433.5,
+    312.995,
     24.0
    ],
    "color": "#7d858f",
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_PED_Ø6_5mm_핀__2개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø6 × 5 (x405.0 y293.0), M3×5 자가 탭 (구멍 Ø2.5 × 4, 바닥 1.0) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø6 × 5 (x430.5 y310.0), M3×6 자가 탭 (구멍 Ø2.5 관통 5, 끝이 아랫판 위 0.6) / 위치 핀 Ø2.8 × 2.5 - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-J702-1",
@@ -30008,7 +29850,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø7 × 5 (x508.0 y258.0), M3×5 자가 탭 (구멍 Ø2.7 × 4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
+   "note": "추정: 기둥 Ø7 × 5 (x508.0 y258.0), M3×6 자가 탭 (구멍 Ø2.7 관통 5, 끝이 아랫판 위 0.6) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CU-POST-J702-2",
@@ -30028,27 +29870,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl",
    "source": "spec/body_L2.json printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + spec/body_centre_unit.json PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
-   "note": "추정: 기둥 Ø7 × 5 (x532.0 y277.0), M3×5 자가 탭 (구멍 Ø2.7 × 4, 바닥 1.0) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음"
-  },
-  {
-   "id": "CU-FUSECRADLE",
-   "name_ko": "퓨즈 홀더 받침 (BU914, 눌러 끼움)",
-   "name_en": "fuse-holder cradle (BU914)",
-   "kind": "print",
-   "group": "CU 칸 출력물",
-   "bbox": [
-    403.0,
-    299.0,
-    16.5,
-    453.0,
-    313.0,
-    25.5
-   ],
-   "color": "#7d858f",
-   "material": "PETG 회색",
-   "print_file": "stl/print/05_본체출력물/퓨즈홀더받침__1개.stl",
-   "source": "spec/body_L2.json centre_contents CU-E-FUSE (x405~451 y301~311 z17.5~27.5, 바닥에 집게로) + printed_parts STANDOFFS; spec/body_centre_unit.json PR-CU-TRAY fuse_holder_cradle (U 받침 안지름 10.5 + 타이 홈 2)",
-   "note": "사양과 다름(작은 고침): 안지름 10.5 → 10.3, 타이 홈 2 없앰 - 사양대로면 받침 밑 바닥이 0.75이고 타이 홈(2.1)이 그 바닥을 칼날처럼 뚫음; Ø10.3이면 바닥 0.85, 홀더는 눌러 끼움 + MS 폴리머 한 점으로 충분; 추정: 받침 x403~453 y299.00~313.00 z16.5~25.5, 축 (y306, z22.5) - 위가 8.4만 열려 Ø10 홀더를 눌러 끼움, 아랫판에 MS 폴리머"
+   "note": "추정: 기둥 Ø7 × 5 (x532.0 y277.0), M3×6 자가 탭 (구멍 Ø2.7 관통 5, 끝이 아랫판 위 0.6) - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); 사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)"
   },
   {
    "id": "CABLE-CLIP-L1",
@@ -30188,7 +30010,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/케이블집게__8개.stl",
    "source": "spec/body_L2.json printed_parts CABLE-CLIPS (8개, 20 × 10 × 8, '통로 지붕 아래·끝벽 케이블 집게', 자리 없음) + centre_contents Z-SPKLEAD-L2 (x271.5~284 y236~330 z50~58, 끝벽을 따라 내려오는 스피커선)",
-   "note": "추정: 끝벽 L 안면 x271.5에 붙여 y262~282 z48~58 - 끝벽을 따라 앞으로 오는 스피커선 C-SPK-L (x275.1 z53)을 홈 바닥에 잡음 (나비나사 머리 y310~320·XT30 집게 판 y≤252.5을 피함); 홈 4.5, 입구 3.0 걸림 턱, MS 폴리머로 붙임"
+   "note": "추정: 끝벽 L 안면 x271.5에 붙여 y262~282 z48~58 - 끝벽을 따라 앞으로 오는 스피커선 C-SPK-L (x275.1 z53)을 홈 바닥에 잡음 (나비나사 머리 y310~320·XT60 집게 판 y≤256을 피함); 홈 4.5, 입구 3.0 걸림 턱, MS 폴리머로 붙임"
   },
   {
    "id": "CABLE-CLIP-E2",
@@ -30208,12 +30030,12 @@
    "material": "PETG 회색",
    "print_file": "stl/print/05_본체출력물/케이블집게__8개.stl",
    "source": "spec/body_L2.json printed_parts CABLE-CLIPS (8개, 20 × 10 × 8, '통로 지붕 아래·끝벽 케이블 집게', 자리 없음) + centre_contents Z-SPKLEAD-L2 (x271.5~284 y236~330 z50~58, 끝벽을 따라 내려오는 스피커선)",
-   "note": "추정: 끝벽 L 안면 x271.5에 붙여 y286~306 z48~58 - 끝벽을 따라 앞으로 오는 스피커선 C-SPK-L (x275.1 z53)을 홈 바닥에 잡음 (나비나사 머리 y310~320·XT30 집게 판 y≤252.5을 피함); 홈 4.5, 입구 3.0 걸림 턱, MS 폴리머로 붙임"
+   "note": "추정: 끝벽 L 안면 x271.5에 붙여 y286~306 z48~58 - 끝벽을 따라 앞으로 오는 스피커선 C-SPK-L (x275.1 z53)을 홈 바닥에 잡음 (나비나사 머리 y310~320·XT60 집게 판 y≤256을 피함); 홈 4.5, 입구 3.0 걸림 턱, MS 폴리머로 붙임"
   },
   {
    "id": "O1-E-MB",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6) O1",
-   "name_en": "control board MB (perfboard 70x50x1.6) O1",
+   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O1",
+   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O1",
    "kind": "electronics",
    "group": "O1 전자부",
    "bbox": [
@@ -30228,7 +30050,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": ""
+   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O1-E-SB",
@@ -30352,8 +30174,8 @@
   },
   {
    "id": "O2-E-MB",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6) O2",
-   "name_en": "control board MB (perfboard 70x50x1.6) O2",
+   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O2",
+   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O2",
    "kind": "electronics",
    "group": "O2 전자부",
    "bbox": [
@@ -30368,7 +30190,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": ""
+   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O2-E-SB",
@@ -30472,8 +30294,8 @@
   },
   {
    "id": "O3-E-MB",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6) O3",
-   "name_en": "control board MB (perfboard 70x50x1.6) O3",
+   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O3",
+   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O3",
    "kind": "electronics",
    "group": "O3 전자부",
    "bbox": [
@@ -30488,7 +30310,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": ""
+   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O3-E-SB",
@@ -30592,8 +30414,8 @@
   },
   {
    "id": "O4-E-MB",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6) O4",
-   "name_en": "control board MB (perfboard 70x50x1.6) O4",
+   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O4",
+   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O4",
    "kind": "electronics",
    "group": "O4 전자부",
    "bbox": [
@@ -30608,7 +30430,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": ""
+   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O4-E-SB",
@@ -30712,8 +30534,8 @@
   },
   {
    "id": "O5-E-MB",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6) O5",
-   "name_en": "control board MB (perfboard 70x50x1.6) O5",
+   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O5",
+   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O5",
    "kind": "electronics",
    "group": "O5 전자부",
    "bbox": [
@@ -30728,7 +30550,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": ""
+   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O5-E-SB",
@@ -30832,8 +30654,8 @@
   },
   {
    "id": "O6-E-MB",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6) O6",
-   "name_en": "control board MB (perfboard 70x50x1.6) O6",
+   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O6",
+   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O6",
    "kind": "electronics",
    "group": "O6 전자부",
    "bbox": [
@@ -30848,7 +30670,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": ""
+   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O6-E-SB",
@@ -30952,8 +30774,8 @@
   },
   {
    "id": "O7-E-MB",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6) O7",
-   "name_en": "control board MB (perfboard 70x50x1.6) O7",
+   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O7",
+   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O7",
    "kind": "electronics",
    "group": "O7 전자부",
    "bbox": [
@@ -30968,7 +30790,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": ""
+   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O7-E-SB",
@@ -31372,7 +31194,7 @@
   },
   {
    "id": "CU-E-BUCK",
-   "name_ko": "XL4016 강압 모듈 XH-M401 (20 V → 5.1 V)",
+   "name_ko": "XL4016 강압 모듈 XH-M401 (12.8 V → 5.1 V)",
    "name_en": "XL4016 buck module XH-M401",
    "kind": "electronics",
    "group": "CU 칸 전자부",
@@ -31388,27 +31210,27 @@
    "material": "",
    "print_file": null,
    "source": "spec/body_L2.json centre_contents CU-E-BUCK (x477.5~538.3 y288.7~329 z21.5~50.5, 5 mm 받침, 루버 앞); spec/electronics_rearbar.json buck_xl4016 (60.8×40.3×29, L58)",
-   "note": "추정: 방열판 2·코일·캐패시터를 모서리 6.5×6.5를 뺀 한 덩어리(z23.1~50.5)로 표시, 구멍 Ø3.2 모서리에서 3.2 (body.py CU-POST-BUCK 자리); 입력 단자 -x 끝(x477.5 y306), 출력 단자 앞면(-y, x529.5) 가정"
+   "note": "추정: 방열판 2·코일·캐패시터를 모서리 6.5×6.5를 뺀 한 덩어리(z23.1~50.5)로 표시, 구멍 Ø3.2 모서리에서 3.2 (body.py CU-POST-BUCK 자리); 입력 단자 -x 끝(x477.5 y306), 출력 단자 앞면(-y, x529.5) 가정; 입력은 12.8 V 버스 (10.0~14.6 V, XL4016 입력 8~40 V 안)"
   },
   {
    "id": "CU-E-PEDBOARD",
-   "name_ko": "PED 페달 보드 (5×7 cm 만능기판 70×50)",
-   "name_en": "PED pedal board PB (5x7 perfboard)",
+   "name_ko": "PED 페달 보드 (BE163 만능기판에서 자른 70×50)",
+   "name_en": "PED pedal board PB (cut from a Coms BE163 perfboard)",
    "kind": "electronics",
    "group": "CU 칸 전자부",
    "bbox": [
-    401.0,
-    247.0,
+    426.5,
+    244.0,
     21.5,
-    471.0,
-    297.0,
+    476.5,
+    314.0,
     23.1
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/body_L2.json centre_contents CU-E-PEDBOARD (x401~471 y247~297 z21.5~23.1, 5 mm 받침); spec/electronics_rearbar.json ped_board",
-   "note": "추정: 나사 구멍 Ø3.2 (x405 y251 · x467 y293), 위치 핀 구멍 Ø3.0 (x467 y251 · x405 y293) - body.py CU-POST-PED 자리"
+   "source": "spec/body_L2.json centre_contents CU-E-PEDBOARD (x426~476 y244~314 z21.5~23.1, 5 mm 받침); spec/electronics_rearbar.json ped_board",
+   "note": "2026-10-07: Coms BE163에서 자른 조각 (지그 09_기판지그 P-PED); 배터리(x284~424)를 피해 90° 돌림 - 50 (x) × 70 (y), 같은 높이·같은 5 mm 기둥, Zero는 앞끝(USB-C -y)에서 오른쪽 x449~467 (왼쪽 x426.5~449 위는 배터리 선·전원선이 지나감); 추정: 나사 구멍 Ø3.2 (x430.5 y248 · x472.5 y310), 위치 핀 구멍 Ø3.0 (x472.5 y248 · x430.5 y310) - body.py CU-POST-PED 자리"
   },
   {
    "id": "CU-E-PEDZERO",
@@ -31417,18 +31239,18 @@
    "kind": "electronics",
    "group": "CU 칸 전자부",
    "bbox": [
-    440.0,
-    247.0,
+    449.0,
+    244.0,
     23.1,
-    458.0,
-    271.8,
+    467.0,
+    268.8,
     28.8
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json centre_contents CU-E-PEDZERO (x440~458 y247~271.8 z23.1~28.8, USB-C -y); spec/electronics_modules.json zero (same part / stack as the MB)",
-   "note": "추정: MB의 Zero 배치(핀 헤더 1.3 틈)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x449.14 z27.0)"
+   "source": "spec/body_L2.json centre_contents CU-E-PEDZERO (x449~467 y244~268.8 z23.1~28.8, USB-C -y); spec/electronics_modules.json zero (same part / stack as the MB)",
+   "note": "추정: MB의 Zero 배치(핀 헤더 1.3 틈)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x458.14 z27.0)"
   },
   {
    "id": "CU-E-J702BOARD",
@@ -31472,23 +31294,23 @@
   },
   {
    "id": "CU-E-FUSE",
-   "name_ko": "BU914 인라인 퓨즈 홀더 + 5 A T 퓨즈",
-   "name_en": "Coms BU914 inline fuse holder + 5 A T fuse",
+   "name_ko": "ATC/ATO 칼날형 인라인 퓨즈 홀더 + 5 A ATO 퓨즈 (사용자 것, 덮개 끼움식, 12 AWG 빨간 선)",
+   "name_en": "ATC/ATO blade inline fuse holder + 5 A ATO fuse (user's own)",
    "kind": "electronics",
    "group": "CU 칸 전자부",
    "bbox": [
-    405.0,
-    301.003,
-    17.5,
-    451.0,
-    310.997,
-    27.5
+    397.0,
+    215.7,
+    48.0,
+    437.1,
+    249.5,
+    59.1
    ],
    "color": "#222222",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json centre_contents CU-E-FUSE (x405~451 y301~311 z17.5~27.5, 바닥에 집게로); spec/electronics_rearbar.json fuse_holder_bu914",
-   "note": "추정: 지름 10 (body.py 받침 Ø10.3에 눌러 끼움) - 받은 홀더로 확인; 양끝 선은 C-PWR-IN / C-PWR-FUSE"
+   "source": "spec/body_L2.json centre_contents CU-E-FUSE (x397~437.1 y215.7~249.5 z48~59.1, 배터리 틀 퓨즈 선반에 눕힘) + centre.power_2026_10_07.fuse_holder (사용자 제품 도면: 40.1 × 11.1 × 33.8, 꼭지 Ø8, 아래 몸통 약 15, 덮개 밑변 약 24)",
+   "note": "2026-10-07 (사용자): Coms BU914 (5×20 유리관) 대신 ATC/ATO 칼날형 홀더 - 크기는 사용자 제품 도면 값 (전체 40.1 선 꼭지 포함 × 두께 11.1 × 높이 33.8 덮개 포함); 세우면 33.8 + 덮개 뽑을 자리 20이 앞 공간(z27~61.35, 34.35)에 들어가지 않아 옆으로 눕힘: 선 축 x, 덮개 +y (배터리 쪽), 칼날 쪽 -y, 아랫면 z48이 선반 윗면에, 양끝 꼭지 Ø8 (축 y223.2 z53.55)가 받침 2개에 눌러 끼워짐, 뚜껑 밑 2.25; 퓨즈 갈기: 뚜껑 L을 들고 홀더를 위로 빼서 선 축으로 90° 돌려 덮개를 위로 약 20 뽑음 (덮개는 끈 고리로 매달림); 모델 = 아래 몸통 26 × 11.1 × 15 + 꼭지 2 + 덮개 (밑변 24 → 끝 16 사다리꼴); 추정: 꼭지 축이 칼날 쪽 끝에서 7.5, 꼭지 길이 7.05, 덮개 끝 폭 - 받은 홀더로 확인; 선은 양끝에서 x로: C-PWR-IN (-x 끝, XT60 수에서) / C-PWR-FUSE (+x 끝, KCD1로)"
   },
   {
    "id": "CU-E-J501BOARD",
@@ -31508,7 +31330,7 @@
    "material": "FR4 만능기판",
    "print_file": null,
    "source": "spec/body_L2.json centre_contents CU-E-J501BOARD (x450~475 y316.5~340.5 z36.4~38, 뒤판 출력물 선반 위)",
-   "note": "사양과 다름(작은 고침): 사양 centre_contents 상자보다 y+1.0 - 뒤판 출력물이 40° 규칙으로 바깥면 y341.5 → 342.5로 옮겨 가 판에 얹힌 부품도 같이 감 (body.py DY_BACK; 그대로 두면 USB-C 입구 앞을 판이 막음); 추정: PR-BACKPLATE 잭 선반(윗면 z36.4)에 MS 폴리머 (구멍 없이)"
+   "note": "사양과 다름(작은 고침): 사양 centre_contents 상자보다 y+1.0 - 뒤판 출력물이 40° 규칙으로 바깥면 y341.5 → 342.5로 옮겨 가 판에 얹힌 부품도 같이 감 (body.py DY_BACK; 그대로 두면 J501 코가 판 안에서 끝남); 추정: PR-BACKPLATE 잭 선반(윗면 z36.4)에 MS 폴리머 (구멍 없이)"
   },
   {
    "id": "CU-E-J501",
@@ -31528,17 +31350,17 @@
    "material": "",
    "print_file": null,
    "source": "spec/body_L2.json centre_contents CU-E-J501 (x459.5~465.5 y328.5~342.5 z38~43) + centre.back_plate_io pedal_jack_J501_D6 (462.5, 40.5); spec/keyaction_features_frame.json cheeks.headphone_jack.jack_dims (SHOU HAN PJ-313 5JCJ, LCSC C668607: body 6.0 W × 11.5 L × 5.0 H, nose Ø5.0 × 2.5, axis 2.5 above the base) - one envelope for J701 / J501 / J702",
-   "note": "사양과 다름(작은 고침): 사양 centre_contents 상자보다 y+1.0 - 뒤판 출력물이 40° 규칙으로 바깥면 y341.5 → 342.5로 옮겨 가 판에 얹힌 부품도 같이 감 (body.py DY_BACK; 그대로 두면 USB-C 입구 앞을 판이 막음); 추정: 기판 위(z38), 축 z40.5 = 판 구멍 중심, 코 끝이 바깥면 y342.5과 같은 면 - 받은 부품으로 확인"
+   "note": "사양과 다름(작은 고침): 사양 centre_contents 상자보다 y+1.0 - 뒤판 출력물이 40° 규칙으로 바깥면 y341.5 → 342.5로 옮겨 가 판에 얹힌 부품도 같이 감 (body.py DY_BACK; 그대로 두면 J501 코가 판 안에서 끝남); 추정: 기판 위(z38), 축 z40.5 = 판 구멍 중심, 코 끝이 바깥면 y342.5과 같은 면 - 받은 부품으로 확인"
   },
   {
    "id": "CU-E-SWITCH",
-   "name_ko": "KCD1-101A 로커 스위치 (뒤판 출력물)",
-   "name_en": "KCD1-101A rocker switch in the printed back plate",
+   "name_ko": "KCD1-104 로커 스위치 4핀 (사용자 보유, 뒤판 출력물)",
+   "name_en": "KCD1-104 4-pin rocker switch (user's own) in the printed back plate",
    "kind": "electronics",
    "group": "CU 칸 전자부",
    "bbox": [
     431.0,
-    319.5,
+    318.3,
     28.0,
     446.0,
     342.5,
@@ -31547,28 +31369,8 @@
    "color": "#222222",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json centre_contents CU-E-SWITCH (x431~446 y319~342.5 z28~49, 2 mm 오목 자리에 테두리 → y342.5와 같은 면) + back_plate_io rocker_KCD1 (438.5, 38.5); spec/electronics_rearbar.json power_switch_kcd1 (bezel 15×21×2, body 13.2×19.2 'depth ~13 + lugs 8')",
-   "note": "사양과 다름(작은 고침): 사양 centre_contents 상자보다 y+1.0 - 뒤판 출력물이 40° 규칙으로 바깥면 y341.5 → 342.5로 옮겨 가 판에 얹힌 부품도 같이 감 (body.py DY_BACK; 그대로 두면 USB-C 입구 앞을 판이 막음); 추정: 테두리 15×21×2 (y340.5~342.5, 오목 자리 안), 몸통 13.2×19.2×13 (y327.5~340.5, 판 구멍에 스냅), 4.8×0.8 단자 2개 8 길이 (y319.5~327.5, z34.5 / 42.5) - 받은 스위치로 확인"
-  },
-  {
-   "id": "CU-E-PDTRIG",
-   "name_ko": "HUSB238 PD 트리거 + USB-C 전원 입력 (L57, 뒤판 출력물 주머니)",
-   "name_en": "HUSB238 USB-C PD trigger (L57) in the back-plate pocket",
-   "kind": "electronics",
-   "group": "CU 칸 전자부",
-   "bbox": [
-    416.0,
-    324.1,
-    35.8,
-    426.0,
-    340.5,
-    40.2
-   ],
-   "color": "#2a5caa",
-   "material": "",
-   "print_file": null,
-   "source": "spec/body_L2.json centre_contents CU-E-PDTRIG (x416~426 y324.1~340.5 z35.8~40.2, 입구가 바깥면에서 2 안) + back_plate_io usb_c_pd_input (421, 38); spec/electronics_rearbar.json pd_trigger_husb238 (10×16.4×4.4)",
-   "note": "사양과 다름(작은 고침): 사양 centre_contents 상자보다 y+1.0 - 뒤판 출력물이 40° 규칙으로 바깥면 y341.5 → 342.5로 옮겨 가 판에 얹힌 부품도 같이 감 (body.py DY_BACK; 그대로 두면 USB-C 입구 앞을 판이 막음); 추정: 기판 1.2 + USB-C 리셉터클 8.94×7.3×3.2 (+y 끝, 입구 y340.5); 출력 선은 -y 끝(y324.1)에서 C-PWR-IN"
+   "source": "spec/body_L2.json centre_contents CU-E-SWITCH (x431~446 y318~342.5 z28~49, 2 mm 오목 자리에 테두리 → y342.5와 같은 면) + back_plate_io rocker_KCD1 (438.5, 38.5); KCD1-104 데이터시트(디바이스마트 1788, 104_BLACK_1): 테두리 20.7×14.7, 패널 구멍 19×13 (판 0.6~2.5), 전체 높이 24.2, 단자 4개 9.2 × 9.5 간격, 6(4) A 250 VAC / 10 A 125 VAC, 4P ON-OFF",
+   "note": "사양과 다름(작은 고침): 사양 centre_contents 상자보다 y+1.0 - 뒤판 출력물이 40° 규칙으로 바깥면 y341.5 → 342.5로 옮겨 가 판에 얹힌 부품도 같이 감 (body.py DY_BACK; 그대로 두면 J501 코가 판 안에서 끝남); 2026-10-07 사용자 보유 KCD1-104(4핀, 2회로 ON-OFF)로 바꿈 - 구멍 13.2×19.2 그대로. 두 회로를 나란히 묶어 씀(입력 단자 둘, 출력 단자 둘을 각각 짧은 선으로 이음); 추정: 테두리 (y340.5~342.5, 오목 자리 안), 몸통 13.2×19.2×16.2 (y324.3~340.5), 4.8×0.8 단자 4개 6 길이 (y318.3~324.3, x433.75 / 443.25, z33.9 / 43.1) - 받은 스위치로 확인"
   },
   {
    "id": "C-USB-PED",
@@ -31577,7 +31379,7 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    442.89,
+    451.89,
     215.75,
     23.2,
     748.5,
@@ -31588,7 +31390,7 @@
    "material": "",
    "print_file": null,
    "source": "spec/electronics_rearbar.json ped_board (USB 8가닥 = 모듈 7 + PED 1); spec/body_L2.json centre_contents Z-PED-PLUG (x442.75~455.25 y222~247 z22~30) + Z-PED-LANE (x455.25~732 y222~232 z33~41) + cable_duct.cables PED (path 399 mm, 0.5 m)",
-   "note": "사양과 다름(작은 고침): 사양 Z-PED-PLUG z22~30은 리셉터클 축 z26 가정 - 사양 PEDZERO 상자 z23.1~28.8의 Zero는 축 z27.0이라 플러그 z23.2~30.8, 위로 0.8 나옴 (위는 비어 있음, PED 줄은 z33부터); 사양과 다름(작은 고침): 플러그 + 부트 25 mm 뒤의 굽힘이 y215.75까지 나옴 - 사양 Z-PED-PLUG·Z-PED-LANE 앞끝 y222보다 6.25 앞 (x443~472 z23~36, 그 자리 앞 공간은 비어 있고 뒷바 앞면 y214 안; USB 선을 그보다 좁게 굽힐 수 없음); 추정: PED Zero USB-C(축 x449.14)의 곧은 플러그 y222.0~247.0가 -y로, y217.5에서 +x로 꺾여 올라 앞 공간 줄 y227 z37를 달려 x731에서 묶음 위로 내려와 허브 포트 2(x740.5)로; 길이 374.3 mm (사양 399, 표준 0.5 m, 여유 126) - 경로는 보기용"
+   "note": "사양과 다름(작은 고침): 사양 Z-PED-PLUG z22~30은 리셉터클 축 z26 가정 - 사양 PEDZERO 상자 z23.1~28.8의 Zero는 축 z27.0이라 플러그 z23.2~30.8, 위로 0.8 나옴 (위는 비어 있음, PED 줄은 z33부터); 사양과 다름(작은 고침): 플러그 + 부트 25 mm 뒤의 굽힘이 y215.75까지 나옴 - 사양 Z-PED-PLUG·Z-PED-LANE 앞끝 y222보다 6.25 앞 (x443~472 z23~36, 그 자리 앞 공간은 비어 있고 뒷바 앞면 y214 안; USB 선을 그보다 좁게 굽힐 수 없음); 추정: PED Zero USB-C(축 x458.14)의 곧은 플러그 y219.0~244.0가 -y로, y217.5에서 +x로 꺾여 올라 앞 공간 줄 y227 z37를 달려 x731에서 묶음 위로 내려와 허브 포트 2(x740.5)로; 길이 363.5 mm (사양 399, 표준 0.5 m, 여유 136) - 경로는 보기용"
   },
   {
    "id": "C-USB-UPSTREAM",
@@ -31631,84 +31433,164 @@
    "note": "사양과 다름(작은 고침): W1 10/1 제품 사진대로 업스트림 USB 3.0 B 포트와 5 V DC 잭이 같은 끝면 → 둘 다 -x 끝면(x686.5, Pi·강압 쪽)에 둠 (사양 cable_duct.hub: 업스트림 -x 끝면 ㄱ자 플러그 · DC +x 끝면 추정) - Pi 업스트림(C25)과 5.1 V 선이 가장 짧고, 허브는 그대로 바닥에 뒤판에 붙여 모듈 선은 -y 면으로; 추정: 아래 포트 10개를 앞면(y282, -y 쪽) x696.5+22i, z28.5에, B 포트 y319 z28.5 (뒤쪽), DC 잭 y293 z28.5 (앞쪽) - 끝면 안 자리는 받은 허브로 확인; 포트 0·1(화면 뚜껑 아래)은 비움"
   },
   {
-   "id": "PB-E-BANK",
-   "name_ko": "모루이 MT-65 보조배터리 (20000 mAh, 65 W)",
-   "name_en": "Morui MT-65 65 W 20000 mAh power bank (optional O07)",
+   "id": "BAT-LFP",
+   "name_ko": "LiFePO4 배터리 12.8 V 6 Ah (Turmera 4S1P 32700, 76.8 Wh, 140×72×35)",
+   "name_en": "LiFePO4 battery pack 12.8 V 6 Ah 140x72x35",
    "kind": "electronics",
-   "group": "보조배터리 칸",
+   "group": "배터리 칸",
    "bbox": [
-    286.0,
-    254.0,
-    18.5,
-    391.0,
-    325.0,
-    50.5
+    284.0,
+    251.0,
+    16.5,
+    424.0,
+    323.0,
+    51.5
    ],
-   "color": "#c9ccd1",
-   "material": "",
+   "color": "#2f5d8a",
+   "material": "LiFePO4 팩",
    "print_file": null,
-   "source": "spec/electronics_rearbar.json power_bank_mt65 (105×71×32); spec/body_L2.json centre_contents PB-E-BANK (x286~391 y254~325 z18.5~50.5, USB-C 끝 +x, CU-PBHOLDER 안)",
-   "note": "추정: 받침 바닥(z18.5) 위, 둘레 0.5 틈; 선택품(O07) - ㄱ자 USB-C 선(Z-BANK-PLUG → 케이블 통과 → 뒤판 USB-C 입력)은 모델에 없음"
+   "source": "spec/body_L2.json centre_contents BAT-LFP (x284~424 y251.0~323.0 z16.5~51.5, 셀을 눕혀 바닥 위 - 배터리 틀 CU-BATFRAME 안) + centre.power_2026_10_07 (사용자 2026-10-07 상품 정보: 140 × 35 × 72, BMS 4S 40 A / 100 A, 출력 XT60 선, 충전 DC 5.5×2.1 선)",
+   "note": "추정: 상자 하나로; 무게 약 0.9 kg (상품 설명 약 900 g - 받은 배터리로 잼); 선 두 개는 +x 끝면에서 나온다고 가정 - XT60 선 y275 z34, DC 충전 선 y299 z34에서 나와 선 꺾는 자리 Z-BAT-LEADS로 위로 꺾여 윗면의 커넥터로; 버스 12.8 V (10.0~14.6 V), 앰프 약 8 W/채널, 사용 시간 약 3.5~4.4시간 - 받은 배터리로 선이 나오는 면·높이·길이 확인"
   },
   {
-   "id": "C-PWR-IN",
-   "name_ko": "전원선 HUSB238 → 퓨즈 홀더 (18 AWG 빨강·검정)",
-   "name_en": "power lead PD trigger to fuse holder",
+   "id": "C-XT60",
+   "name_ko": "XT60 짝 (배터리 암 + 버스 수, 배터리 윗면에 눕힘)",
+   "name_en": "XT60 mated pair (battery F + bus M) lying on the battery top",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    399.5,
-    304.5,
-    21.0,
-    422.5,
-    324.05,
-    37.9
+    392.0,
+    255.0,
+    51.5,
+    423.0,
+    271.0,
+    59.7
+   ],
+   "color": "#e6b422",
+   "material": "",
+   "print_file": null,
+   "source": "spec/body_L2.json centre_contents C-XT60 (x392~423 y255~271 z51.50~59.70, 배터리 윗면) + centre.power_2026_10_07",
+   "note": "추정: 짝 맞춘 겉모양 31 × 16 × 8.2 한 상자로; 배터리 쪽 암(+x, 선은 C-BAT-LEAD)과 버스 쪽 수(-x, 선은 C-PWR-IN이 -x로 나와 배터리 앞 모서리를 넘어 앞 공간 위 퓨즈 홀더 -x 끝으로); 뚜껑 밑 1.65; 충전 때는 뽑지 않음 - 12 V 전원 장치로 시험할 때만 뚜껑 L을 들고 뽑아 전원 장치의 XT60 암을 꽂음"
+  },
+  {
+   "id": "C-DC",
+   "name_ko": "DC 5.5×2.1 충전 커넥터 (배터리 충전 선 끝, 배터리 윗면에 눕힘)",
+   "name_en": "DC 5.5x2.1 charge connector on the battery top",
+   "kind": "electronics",
+   "group": "케이블",
+   "bbox": [
+    392.0,
+    304.0,
+    51.5,
+    422.0,
+    313.5,
+    60.0
+   ],
+   "color": "#222222",
+   "material": "",
+   "print_file": null,
+   "source": "spec/body_L2.json centre_contents C-DC (x392~422 y304~313.5 z51.5~60.0) + centre.power_2026_10_07 charging",
+   "note": "추정: 겉모양 30 × 9.5 × 8.5 상자로 (높이 8.85 이하이면 윗면에 들어감 - 받은 배터리로 확인); 충전: 스위치를 끄고 뚜껑 L을 들어 여기에 LiFePO4 충전기를 꽂음 (XT60은 그대로); 뚜껑 밑 1.35"
+  },
+  {
+   "id": "C-BAT-LEAD",
+   "name_ko": "배터리 XT60 선 (팩 +x 끝 → 윗면의 XT60 암, 배터리에 딸림)",
+   "name_en": "battery XT60 lead (pack +x end to the XT60 female on top)",
+   "kind": "electronics",
+   "group": "케이블",
+   "bbox": [
+    423.05,
+    261.5,
+    32.5,
+    430.5,
+    276.5,
+    57.1
    ],
    "color": "#b03a2e",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json cable_duct.other_leads.power (USB-C PD 입력 → HUSB238 → 퓨즈(x405~451) → KCD1 → 20 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre_contents Z-SPKLEAD-L (뒤 줄 y322~330 z51~55)",
-   "note": "추정: 두 가닥을 Ø3 한 줄로; PD 기판 -y 끝에서 앞으로 나와 y318을 따라 내려가 x401에서 퓨즈 홀더 왼쪽 끝으로 (받침 구멍 끝이 열림, Z-BANK-PLUG z26 아래); 약 41 mm - 경로는 보기용"
+   "source": "spec/body_L2.json cable_duct.other_leads.power (2026-10-07: LiFePO4 배터리 → XT60 → 퓨즈 → KCD1 → 12.8 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre.power_2026_10_07 + centre_contents Z-SPKLEAD-L (뒤 줄 y323.5~330 z51~55) + BAT-LFP / C-XT60 / Z-BAT-LEADS",
+   "note": "추정: 두 가닥을 Ø3 한 줄로; 팩 +x 끝면(y275 z34 가정)에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30 위)에서 x429로 위로 꺾여 배터리 윗면의 XT60 암 뒤(+x 끝 x423)로 들어감; 약 37 mm - 선이 나오는 면·높이·길이는 받은 배터리로 확인"
+  },
+  {
+   "id": "C-BAT-DC",
+   "name_ko": "배터리 충전 선 (팩 +x 끝 → 윗면의 DC 5.5×2.1 커넥터, 배터리에 딸림)",
+   "name_en": "battery charge lead (pack +x end to the DC connector on top)",
+   "kind": "electronics",
+   "group": "케이블",
+   "bbox": [
+    422.05,
+    297.5,
+    32.5,
+    430.5,
+    310.25,
+    57.25
+   ],
+   "color": "#3a3a3a",
+   "material": "",
+   "print_file": null,
+   "source": "spec/body_L2.json cable_duct.other_leads.power (2026-10-07: LiFePO4 배터리 → XT60 → 퓨즈 → KCD1 → 12.8 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre.power_2026_10_07 + centre_contents Z-SPKLEAD-L (뒤 줄 y323.5~330 z51~55) + BAT-LFP / C-DC / Z-BAT-LEADS",
+   "note": "추정: Ø3 한 줄로; 팩 +x 끝면(y299 z34 가정)에서 나와 XT60 선 옆(y299)에서 위로 꺾여 윗면의 DC 커넥터 +x 끝(x422)으로; 약 36 mm"
+  },
+  {
+   "id": "C-PWR-IN",
+   "name_ko": "전원선 XT60 수 → 퓨즈 홀더 (12 AWG 꼬리 + 이음 + 16 AWG)",
+   "name_en": "power lead XT60 male to the fuse holder (12 AWG stub, splice, 16 AWG)",
+   "kind": "electronics",
+   "group": "케이블",
+   "bbox": [
+    376.6,
+    221.1,
+    50.3,
+    396.95,
+    264.5,
+    59.75
+   ],
+   "color": "#b03a2e",
+   "material": "",
+   "print_file": null,
+   "source": "spec/body_L2.json cable_duct.other_leads.power (2026-10-07: LiFePO4 배터리 → XT60 → 퓨즈 → KCD1 → 12.8 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre.power_2026_10_07 + centre_contents Z-SPKLEAD-L (뒤 줄 y323.5~330 z51~55) + centre.power_2026_10_07.fuse_holder",
+   "note": "추정: 홀더 -x 끝 꼭지(x397)에서 12 AWG (Ø4.2)가 x로 나와 R15로 +y로 꺾임 (약 24 mm), x379.85 y238.2에서 이음 (12 AWG와 16 AWG를 납땜 + 수축 튜브, 12 × Ø6.5 추정), 16 AWG가 올라 배터리 앞 모서리 위를 넘어 y263에서 +x로 꺾여 XT60 수 뒤끝(x392)으로; 홀더 끝에서 약 58 mm (이음 끝까지 36 - 30 안쪽에서 이음 시작) - 하네스 수 선은 이 길이 + 10으로 잘라 둠 (스피커 집게에 닿지 않음, check_electronics.py); 빨강만 퓨즈로, 검정은 같이 따라가 KCD1로 (한 줄로 그림)"
   },
   {
    "id": "C-PWR-FUSE",
-   "name_ko": "전원선 퓨즈 홀더 → KCD1 입력 단자 (18 AWG)",
+   "name_ko": "전원선 퓨즈 홀더 → KCD1 입력 단자 (12 AWG 꼬리 + 이음 + 16 AWG)",
    "name_en": "power lead fuse holder to the KCD1 input lug",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    437.0,
-    304.5,
-    21.0,
-    458.0,
-    319.45,
-    36.0
+    437.15,
+    221.1,
+    31.615,
+    457.5,
+    318.25,
+    56.8
    ],
    "color": "#b03a2e",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json cable_duct.other_leads.power (USB-C PD 입력 → HUSB238 → 퓨즈(x405~451) → KCD1 → 20 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre_contents Z-SPKLEAD-L (뒤 줄 y322~330 z51~55)",
-   "note": "추정: 퓨즈 홀더 오른쪽 끝에서 x456.5로 나와 받침 위로 올라 KCD1 아래 단자(z34.5) 끝에 납땜 (J501 선반 y315.5 앞); 약 35 mm"
+   "source": "spec/body_L2.json cable_duct.other_leads.power (2026-10-07: LiFePO4 배터리 → XT60 → 퓨즈 → KCD1 → 12.8 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre.power_2026_10_07 + centre_contents Z-SPKLEAD-L (뒤 줄 y323.5~330 z51~55) + centre.power_2026_10_07.fuse_holder",
+   "note": "추정: 홀더 +x 끝 꼭지(x437.1)에서 12 AWG가 R15로 +y로 꺾여 (약 24 mm) x454.25에서 이음 (12 AWG와 16 AWG를 납땜 + 수축 튜브, 12 × Ø6.5 추정), 16 AWG가 PED 보드 위(z50 → 38, 선 꺾는 자리 x424~434 밖)로 뒤로 가 x443.2에서 KCD1 아래 단자(z33.9) 끝에 납땜; 약 110 mm"
   },
   {
-   "id": "C-PWR-20V",
-   "name_ko": "20 V 선 KCD1 → 강압 입력 + 앰프 전원 (18 AWG, 한 단자에서 두 갈래)",
-   "name_en": "20 V harness: KCD1 to buck input and amp",
+   "id": "C-PWR-BUS",
+   "name_ko": "12.8 V 선 KCD1 → 강압 입력 + 앰프 전원 (18 AWG, 한 단자에서 두 갈래)",
+   "name_en": "12.8 V bus: KCD1 to the buck input and the amp",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    437.0,
+    441.596,
     304.5,
     35.0,
     741.95,
-    325.5,
+    326.5,
     54.5
    ],
    "color": "#b03a2e",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json cable_duct.other_leads.power (USB-C PD 입력 → HUSB238 → 퓨즈(x405~451) → KCD1 → 20 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre_contents Z-SPKLEAD-L (뒤 줄 y322~330 z51~55)",
-   "note": "추정: KCD1 위 단자(z42.5)에서 두 갈래 - (1) 강압 -x 끝면 입력 단자(x477.5 y306 z36.5), (2) 위로 올라 뒤 줄 y324 z53 (뒤판을 따라, 강압 윗면 z50.5 위 1, 뚜껑 이음 레일 밑 0.85)을 x733까지 가서 앰프 -x 끝면 전원 단자(y313 z52); 약 370 mm"
+   "source": "spec/body_L2.json cable_duct.other_leads.power (2026-10-07: LiFePO4 배터리 → XT60 → 퓨즈 → KCD1 → 12.8 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre.power_2026_10_07 + centre_contents Z-SPKLEAD-L (뒤 줄 y323.5~330 z51~55)",
+   "note": "추정: KCD1 위 단자(z43.1)에서 두 갈래 - (1) 강압 -x 끝면 입력 단자(x477.5 y306 z36.5), (2) 위로 올라 뒤 줄 y325.0 z53 (뒤판을 따라, 강압 윗면 z50.5 위 1, 뚜껑 이음 레일 밑 0.85)을 x733까지 가서 앰프 -x 끝면 전원 단자(y313 z52); 12.8 V (10.0~14.6 V, 2026-10-07 전 20 V); 약 364 mm"
   },
   {
    "id": "C-PWR-5V",
@@ -31727,168 +31609,168 @@
    "color": "#b03a2e",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json cable_duct.other_leads.power (USB-C PD 입력 → HUSB238 → 퓨즈(x405~451) → KCD1 → 20 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre_contents Z-SPKLEAD-L (뒤 줄 y322~330 z51~55) + Z-PI-PWR (x546~560 y249~262 z22~31) + 구매 목록 v4 C24 ([BT663] Coms USB-C 측면꺾임 20 cm, A 쪽을 잘라 빨강·검정을 강압 출력에) / L17 허브 DC (딸린 5 V 어댑터 선의 플러그 쪽)",
+   "source": "spec/body_L2.json cable_duct.other_leads.power (2026-10-07: LiFePO4 배터리 → XT60 → 퓨즈 → KCD1 → 12.8 V를 강압(D칸)과 앰프(선반)로; 5.1 V는 강압 → Pi(C24), 허브 DC) + centre.power_2026_10_07 + centre_contents Z-SPKLEAD-L (뒤 줄 y323.5~330 z51~55) + Z-PI-PWR (x546~560 y249~262 z22~31) + 구매 목록 v4 C24 ([BT663] Coms USB-C 측면꺾임 20 cm, A 쪽을 잘라 빨강·검정을 강압 출력에) / L17 허브 DC (딸린 5 V 어댑터 선의 플러그 쪽)",
    "note": "사양과 다름(작은 고침): W1 10/1 - 허브 DC를 +x 끝면(Z-HUB-DC)에서 업스트림 B 포트와 같은 -x 끝면으로 옮겨 선반 앞 줄(Z-PWR-LANE)을 쓰지 않음; 추정: 강압 앞면 출력 단자(x529.5 z36)에서 두 갈래 - (1) J702 기판 위(z36)를 지나 Pi -y 가장자리의 C24 측면 꺾임 USB-C 머리 14×12×7 (x546~560 y250~262 z22.2~29.2, 사양 지킴 자리 Z-PI-PWR 14×13×9 안) + 꼬리 Ø4.5 (x542.5~546) - 선이 -x(강압 쪽)로 나오게 꽂음 (USB-C는 뒤집으면 +x), 강압 단자까지 경로 약 45 mm - 20 cm 선의 A 쪽을 자를 때 30~40 mm 여유만 남김; (2) y285 z48.5 (Pi USB-A 위 6.5, Z-DSI y280 뒤 3.5)를 x680.5까지 가서 허브 -x 끝면의 ㄱ자 DC 플러그 머리 12×12×10 (x674.5~686.5 y287~299 z23.5~33.5, 잭 y293 z28.5, 선이 위로 나옴)로 내려옴; 곧은 DC 플러그는 잭 면에서 몰드 끝까지 32 mm 이하이고 선을 바로 위로 R5로 꺾을 때만 들어감 (그보다 길면 Pi 쪽 젠더 IH190 x647.5에 닿음, check_electronics.py); 전체 약 225 mm"
   },
   {
-   "id": "C-XT30F-L",
-   "name_ko": "XT30U-F 암 (스피커 꼬리, 끝벽 집게 L 안)",
-   "name_en": "XT30U-F female (pod pigtail) in the end-wall clip L",
+   "id": "C-XT60F-L",
+   "name_ko": "XT60 암 (스피커 꼬리, 끝벽 집게 L 안, 파란 수축 튜브 + SPK)",
+   "name_en": "XT60 female (pod pigtail) in the end-wall clip L",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    274.6,
-    237.9,
-    41.4,
-    287.0,
+    274.8,
+    239.9,
+    33.1,
+    290.8,
     248.1,
-    46.6
+    48.9
    ],
    "color": "#e6b422",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_rearbar.json xt30_pair_L (face 10.2×5.2, M 13.7 + F 12.4 − 5.6 engaged); position body.py XT30_POCKET L = spec/body_L2.json centre_contents C-XT30-L (x271.5~295.0 y236~250 z40~48, 끝벽 집게) + speakers.xt30",
-   "note": "추정: 몸체를 10.2×5.2×12.4 상자로; 집게 홈(x274.6~287.0 y237.7~248.3 z41.2~46.8) 가운데, 입구를 홈 입구 x287.0(가운데 쪽)에 맞춤; 꼬리 선은 C-SPKPIG-L"
+   "source": "spec/body_L2.json centre_contents C-XT60-L (x271.5~305.8 y238~250 z31.7~50.3, 끝벽 집게) + speakers.xt60 (2026-10-07 사용자: XT30 → XT60, AMASS XT60 16 AWG 10 cm 선 - 엘레파츠 12779719 암 / 12779718 수); position body.py XT60_POCKET",
+   "note": "추정: 몸체를 15.8 × 8.2 × 16 상자로 (세워 둠: y 8.2, z 15.8); 집게 홈(x274.6~290.8 y239.7~248.3 z32.9~49.1) 가운데, 입구를 홈 입구 x290.8(가운데 쪽)에 맞춤; 꼬리 선은 C-SPKPIG-L; 스피커 쪽 XT60 2개는 파란 수축 튜브 + 'SPK' 표시 (전원 XT60은 빨강)"
   },
   {
-   "id": "C-XT30M-L",
-   "name_ko": "XT30U-M 수 (앰프 선, 가운데 쪽에서 꽂힘) L",
-   "name_en": "XT30U-M male (amp lead, mated) L",
+   "id": "C-XT60M-L",
+   "name_ko": "XT60 수 (앰프 선, 가운데 쪽에서 꽂힘, 파란 수축 튜브 + SPK) L",
+   "name_en": "XT60 male (amp lead, mated) L",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    287.0,
-    237.9,
-    41.4,
-    295.1,
+    290.8,
+    239.9,
+    33.1,
+    305.8,
     248.1,
-    46.6
+    48.9
    ],
    "color": "#e6b422",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_rearbar.json xt30_pair_L (face 10.2×5.2, M 13.7 + F 12.4 − 5.6 engaged); position body.py XT30_POCKET L = spec/body_L2.json centre_contents C-XT30-L (x271.5~295.0 y236~250 z40~48, 끝벽 집게) + speakers.xt30",
-   "note": "추정: 암 속으로 들어간 5.6은 빼고 밖에 보이는 8.1만 표시; 앰프 선은 C-SPK-L"
+   "source": "spec/body_L2.json centre_contents C-XT60-L (x271.5~305.8 y238~250 z31.7~50.3, 끝벽 집게) + speakers.xt60 (2026-10-07 사용자: XT30 → XT60, AMASS XT60 16 AWG 10 cm 선 - 엘레파츠 12779719 암 / 12779718 수); position body.py XT60_POCKET",
+   "note": "추정: 암 밖에 보이는 15만 표시 (짝 길이 약 31); 앰프 선은 C-SPK-L - 수의 16 AWG 10 cm 선을 앰프 선(18 AWG)에 이음 (납땜 + 수축 튜브)"
   },
   {
-   "id": "C-XT30F-R",
-   "name_ko": "XT30U-F 암 (스피커 꼬리, 끝벽 집게 R 안)",
-   "name_en": "XT30U-F female (pod pigtail) in the end-wall clip R",
+   "id": "C-XT60F-R",
+   "name_ko": "XT60 암 (스피커 꼬리, 끝벽 집게 R 안, 파란 수축 튜브 + SPK)",
+   "name_en": "XT60 female (pod pigtail) in the end-wall clip R",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    935.0,
-    284.9,
-    48.4,
-    947.4,
-    295.1,
-    53.6
+    931.2,
+    285.9,
+    38.6,
+    947.2,
+    294.1,
+    54.4
    ],
    "color": "#e6b422",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_rearbar.json xt30_pair_R (face 10.2×5.2, M 13.7 + F 12.4 − 5.6 engaged); position body.py XT30_POCKET R = spec/body_L2.json centre_contents C-XT30-R (x927.0~950.5 y283~297 z47~55, 끝벽 집게) + speakers.xt30",
-   "note": "추정: 몸체를 10.2×5.2×12.4 상자로; 집게 홈(x935.0~947.4 y284.7~295.3 z48.2~53.8) 가운데, 입구를 홈 입구 x935.0(가운데 쪽)에 맞춤; 꼬리 선은 C-SPKPIG-R"
+   "source": "spec/body_L2.json centre_contents C-XT60-R (x916.2~950.5 y284~296 z37.2~55.8, 끝벽 집게) + speakers.xt60 (2026-10-07 사용자: XT30 → XT60, AMASS XT60 16 AWG 10 cm 선 - 엘레파츠 12779719 암 / 12779718 수); position body.py XT60_POCKET",
+   "note": "추정: 몸체를 15.8 × 8.2 × 16 상자로 (세워 둠: y 8.2, z 15.8); 집게 홈(x931.2~947.4 y285.7~294.3 z38.4~54.6) 가운데, 입구를 홈 입구 x931.2(가운데 쪽)에 맞춤; 꼬리 선은 C-SPKPIG-R; 스피커 쪽 XT60 2개는 파란 수축 튜브 + 'SPK' 표시 (전원 XT60은 빨강)"
   },
   {
-   "id": "C-XT30M-R",
-   "name_ko": "XT30U-M 수 (앰프 선, 가운데 쪽에서 꽂힘) R",
-   "name_en": "XT30U-M male (amp lead, mated) R",
+   "id": "C-XT60M-R",
+   "name_ko": "XT60 수 (앰프 선, 가운데 쪽에서 꽂힘, 파란 수축 튜브 + SPK) R",
+   "name_en": "XT60 male (amp lead, mated) R",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    926.9,
-    284.9,
-    48.4,
-    935.0,
-    295.1,
-    53.6
+    916.2,
+    285.9,
+    38.6,
+    931.2,
+    294.1,
+    54.4
    ],
    "color": "#e6b422",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_rearbar.json xt30_pair_R (face 10.2×5.2, M 13.7 + F 12.4 − 5.6 engaged); position body.py XT30_POCKET R = spec/body_L2.json centre_contents C-XT30-R (x927.0~950.5 y283~297 z47~55, 끝벽 집게) + speakers.xt30",
-   "note": "추정: 암 속으로 들어간 5.6은 빼고 밖에 보이는 8.1만 표시; 앰프 선은 C-SPK-R"
+   "source": "spec/body_L2.json centre_contents C-XT60-R (x916.2~950.5 y284~296 z37.2~55.8, 끝벽 집게) + speakers.xt60 (2026-10-07 사용자: XT30 → XT60, AMASS XT60 16 AWG 10 cm 선 - 엘레파츠 12779719 암 / 12779718 수); position body.py XT60_POCKET",
+   "note": "추정: 암 밖에 보이는 15만 표시 (짝 길이 약 31); 앰프 선은 C-SPK-R - 수의 16 AWG 10 cm 선을 앰프 선(18 AWG)에 이음 (납땜 + 수축 튜브)"
   },
   {
    "id": "C-SPK-L",
-   "name_ko": "스피커선 L (앰프 → XT30U-M L, 18 AWG 2가닥)",
-   "name_en": "speaker lead L (amp to XT30U-M L)",
+   "name_ko": "스피커선 L (앰프 → XT60 수 L, 18 AWG 2가닥)",
+   "name_en": "speaker lead L (amp to XT60 male L)",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
     273.6,
-    241.5,
-    42.5,
+    242.5,
+    39.5,
     741.95,
-    329.5,
-    54.5
+    330.0,
+    58.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json centre_contents Z-SPKLEAD-L (뒤 줄 y322~330 z51~55: 앰프 → XT30 L + 20 V) + Z-SPKLEAD-L2 (x271.5~284 y236~330 z50~58, 끝벽을 따라) + cable_duct.other_leads.speaker",
-   "note": "추정: Ø3 한 줄로; 앰프 -x 끝면 L 단자(y318 z52)에서 뒤 줄 y328 z53 (20 V 선 y324 뒤)을 x275까지, 끝벽 L 안면을 따라 (케이블 집게 2개 y262~282·286~306의 홈 바닥, x275.1) y256까지 앞으로 와 (XT30 집게 판 y≤252.5 뒤) 보조배터리 앞(배터리 y254~)을 비스듬히 x301까지 z53으로 건넌 뒤 내려와 XT30U-M L 뒤끝(+x)으로 들어감 - 배터리를 곧게 들어 빼도 닿지 않음; 약 580 mm"
+   "source": "spec/body_L2.json centre_contents Z-SPKLEAD-L (뒤 줄 y323.5~330 z51~55: 앰프 → XT60 L + 12.8 V) + Z-SPKLEAD-L2 (x271.5~283 y236~330 z51~58, 끝벽을 따라) + cable_duct.other_leads.speaker",
+   "note": "추정: Ø3 한 줄로; 앰프 -x 끝면 L 단자(y318 z52)에서 뒤 줄 y328.5 z53 (12.8 V 선 y325.0 뒤)을 x275까지, 끝벽 L 안면을 따라 (케이블 집게 2개 y262~282·286~306의 홈 바닥, x275.1) 앞으로 와 집게 E1 앞에서 z56.5로 올라 XT60 집게 판(윗면 z53.5) 위로 y244까지, +x로 집게와 XT60 수 위를 지나 x311.8에서 내려와 XT60 수 L 뒤끝(+x)으로 들어감 (수의 16 AWG 10 cm 선과 이음) - 2026-10-07 배터리(y251~, 윗면 z51.5)가 옛 사선 길(보조배터리 앞)을 채워 끝벽을 따라 앞까지 옴; 배터리를 곧게 들어 빼도 닿지 않음; 약 607 mm"
   },
   {
    "id": "C-SPK-R",
-   "name_ko": "스피커선 R (앰프 → XT30U-M R, 18 AWG 2가닥)",
-   "name_en": "speaker lead R (amp to XT30U-M R)",
+   "name_ko": "스피커선 R (앰프 → XT60 수 R, 18 AWG 2가닥)",
+   "name_en": "speaker lead R (amp to XT60 male R)",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
     796.05,
     288.5,
-    48.0,
-    926.85,
+    45.0,
+    916.15,
     294.5,
-    52.5
+    51.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json centre_contents Z-SPKLEAD-R (x796~927 y286~296 z45~52, 선반 위) + cable_duct.other_leads.speaker",
-   "note": "추정: Ø3 한 줄로; 앰프 +x 끝면 R 단자(y293 z49.5)에서 선반 위 y293 z49.5를 x915까지, XT30U-M R 뒤끝(-x)으로; 약 129 mm"
+   "source": "spec/body_L2.json centre_contents Z-SPKLEAD-R (x796~915.5 y286~296 z45~52, 선반 위) + cable_duct.other_leads.speaker",
+   "note": "추정: Ø3 한 줄로; 앰프 +x 끝면 R 단자(y293 z49.5)에서 선반 위 y293 z49.5를 x900까지, 내려와 XT60 수 R 뒤끝(-x, x916.2)으로 (수의 16 AWG 10 cm 선과 이음); 약 118 mm"
   },
   {
    "id": "C-SPKPIG-L",
-   "name_ko": "스피커 꼬리선 L (XT30U-F 꼬리 150 → 유닛 단자)",
-   "name_en": "pod pigtail L (XT30U-F tail to the driver)",
+   "name_ko": "스피커 꼬리선 L (XT60 암 16 AWG 10 cm 선 + 상자 안 짧은 선 → 유닛 단자)",
+   "name_en": "pod pigtail L (XT60 female 16 AWG 10 cm lead + short lead to the driver)",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
     207.55,
-    237.5,
-    38.5,
-    274.55,
-    271.285,
-    89.193
+    238.0,
+    35.0,
+    274.75,
+    271.785,
+    89.693
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json speakers.xt30 (스피커 선 XT30U-F 꼬리 150이 안쪽 옆판의 밀봉 구멍 Ø6 (y243 z40, EVA 띠 사이)으로 나와 3 mm 틈을 건너 가운데 끝벽 구멍 Ø14로 들어가 끝벽 집게의 짝과 꽂힘); body.py WIRE_YZ / END_HOLE_YZ / XT30_POCKET / DRIVER_POSE",
-   "note": "추정: 2가닥을 Ø2 한 줄로 (보기용); 암 뒤끝에서 집게 판 구멍 → 끝벽 구멍 Ø14 (y243 z44.0, 집게 홈과 같은 축) 안에 느슨하게 1.5바퀴 (지름 약 9) 감긴 여유 → 틈 → 스피커 옆판 구멍 Ø6 (y243 z40, 본드로 밀봉) → 상자 안에서 유닛 바스켓 +x쪽 단자(유닛 축에서 x 48, 바깥면 뒤 16)까지 약 132 mm (꼬리 150; 스피커 밖 54 mm - 스피커를 약 10 mm 들고 15 mm 바깥으로 밀어도 F가 집게에 남음; 남는 선은 상자 안 흡음솜 속에)"
+   "source": "spec/body_L2.json speakers.xt60 (스피커 선 XT60 암 꼬리가 안쪽 옆판의 밀봉 구멍 Ø6 (y243 z40, EVA 띠 사이)으로 나와 3 mm 틈을 건너 가운데 끝벽 구멍 Ø19로 들어가 끝벽 집게의 짝과 꽂힘); body.py WIRE_YZ / END_HOLE_YZ / XT60_POCKET / DRIVER_POSE",
+   "note": "추정: 2가닥(16 AWG)을 Ø3 한 줄로 (보기용); 암 뒤끝에서 집게 판 구멍 → 끝벽 구멍 Ø19 (y244 z41.0, 집게 홈과 같은 축) 안에 느슨하게 1.5바퀴 (지름 약 9) 감긴 여유 → 틈 → 스피커 옆판 구멍 Ø6 (y243 z40, 본드로 밀봉) → 상자 안에서 유닛 바스켓 +x쪽 단자(유닛 축에서 x 48, 바깥면 뒤 16)까지 약 133 mm - 암의 10 cm 선은 옆판 구멍을 지나 이음면에서 약 45 mm (상자 안)에서 끝나고, 거기서 유닛 단자까지 약 33 mm는 짧은 선(앰프 선과 같은 18 AWG)을 납땜 + 수축 튜브로 이음 (이음은 상자 안, 흡음솜 속); 스피커 밖 55 mm - 스피커를 약 10 mm 들고 18 mm 바깥으로 밀어도 암이 집게에 남음; 16 AWG 두 가닥(각 겉지름 약 2.6~3.0)이 Ø6 구멍에 나란히 들어가는지 받은 선으로 확인"
   },
   {
    "id": "C-SPKPIG-R",
-   "name_ko": "스피커 꼬리선 R (XT30U-F 꼬리 150 → 유닛 단자)",
-   "name_en": "pod pigtail R (XT30U-F tail to the driver)",
+   "name_ko": "스피커 꼬리선 R (XT60 암 16 AWG 10 cm 선 + 상자 안 짧은 선 → 유닛 단자)",
+   "name_en": "pod pigtail R (XT60 female 16 AWG 10 cm lead + short lead to the driver)",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    947.45,
-    269.285,
-    39.269,
+    947.25,
+    268.785,
+    38.687,
     1014.45,
-    295.5,
-    89.193
+    296.0,
+    89.693
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/body_L2.json speakers.xt30 (스피커 선 XT30U-F 꼬리 150이 안쪽 옆판의 밀봉 구멍 Ø6 (y290 z40, EVA 띠 사이)으로 나와 3 mm 틈을 건너 가운데 끝벽 구멍 Ø14로 들어가 끝벽 집게의 짝과 꽂힘); body.py WIRE_YZ / END_HOLE_YZ / XT30_POCKET / DRIVER_POSE",
-   "note": "추정: 2가닥을 Ø2 한 줄로 (보기용); 암 뒤끝에서 집게 판 구멍 → 끝벽 구멍 Ø14 (y290 z49.5, 집게 홈 축 z51.0보다 1.5 아래) 안에 느슨하게 1.5바퀴 (지름 약 9) 감긴 여유 → 틈 → 스피커 옆판 구멍 Ø6 (y290 z40, 본드로 밀봉) → 상자 안에서 유닛 바스켓 -x쪽 단자(유닛 축에서 x 48, 바깥면 뒤 16)까지 약 129 mm (꼬리 150; 스피커 밖 54 mm - 스피커를 약 10 mm 들고 15 mm 바깥으로 밀어도 F가 집게에 남음; 남는 선은 상자 안 흡음솜 속에)"
+   "source": "spec/body_L2.json speakers.xt60 (스피커 선 XT60 암 꼬리가 안쪽 옆판의 밀봉 구멍 Ø6 (y290 z40, EVA 띠 사이)으로 나와 3 mm 틈을 건너 가운데 끝벽 구멍 Ø19로 들어가 끝벽 집게의 짝과 꽂힘); body.py WIRE_YZ / END_HOLE_YZ / XT60_POCKET / DRIVER_POSE",
+   "note": "추정: 2가닥(16 AWG)을 Ø3 한 줄로 (보기용); 암 뒤끝에서 집게 판 구멍 → 끝벽 구멍 Ø19 (y290 z46.5, 집게 홈과 같은 축) 안에 느슨하게 1.5바퀴 (지름 약 9) 감긴 여유 → 틈 → 스피커 옆판 구멍 Ø6 (y290 z40, 본드로 밀봉) → 상자 안에서 유닛 바스켓 -x쪽 단자(유닛 축에서 x 48, 바깥면 뒤 16)까지 약 129 mm - 암의 10 cm 선은 옆판 구멍을 지나 이음면에서 약 46 mm (상자 안)에서 끝나고, 거기서 유닛 단자까지 약 29 mm는 짧은 선(앰프 선과 같은 18 AWG)을 납땜 + 수축 튜브로 이음 (이음은 상자 안, 흡음솜 속); 스피커 밖 54 mm - 스피커를 약 10 mm 들고 18 mm 바깥으로 밀어도 암이 집게에 남음; 16 AWG 두 가닥(각 겉지름 약 2.6~3.0)이 Ø6 구멍에 나란히 들어가는지 받은 선으로 확인"
   },
   {
    "id": "SPK-L",

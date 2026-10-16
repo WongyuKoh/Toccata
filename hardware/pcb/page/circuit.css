@@ -1,17 +1,46 @@
 
+/* ---- shared by every drawing tab: zoom bar on .csheet (circuit.js toggles .z2 / .z3 page-wide). Inside .sheet the tokens are
+   the light sheet palette, so these stay paper-white in both themes. ---- */
 .csheet .cap{align-items:center}
 .zbar{display:inline-flex;gap:4px;align-items:center;flex-wrap:wrap}
-.zbar button{font:inherit;font-size:12px;border:1px solid #C9D0DA;background:#fff;color:#1A2030;border-radius:6px;padding:2px 8px;cursor:pointer}
-.zbar button[aria-pressed="true"]{background:#1A2030;color:#fff;border-color:#1A2030}
-.zbar a{margin-left:6px}
+.zbar button{font:inherit;font-size:12px;line-height:1.2;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:6px;padding:4px 9px;min-height:30px;cursor:pointer}
+.zbar button[aria-pressed="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.zbar a{margin-left:6px;white-space:nowrap}
 .csheet .dwimg img{min-width:720px}
-.csheet.z2 .dwimg img{width:auto;min-width:0;max-width:none;width:2000px}
-.csheet.z3 .dwimg img{width:auto;min-width:0;max-width:none;width:3000px}
-details.cbom{margin:6px 0;border:1px solid var(--rule);border-radius:10px;background:var(--card);padding:6px 10px}
-details.cbom summary{font-size:14px;color:var(--ink);font-weight:600}
-details.cbom summary::before{content:"＋ "}
-details.cbom[open] summary::before{content:"－ "}
-details.cbom .tbl{margin:8px 0 4px}
-details.cbom table{font-size:12px}
-#p-circuit .tbl table td{font-size:12.5px}
-.sheet,[id^="sch"],h3{scroll-margin-top:calc(var(--navh,50px) + 12px)}
+.csheet.z2 .dwimg img{width:2000px;min-width:0;max-width:none}
+.csheet.z3 .dwimg img{width:3000px;min-width:0;max-width:none}
+@media (pointer:coarse){.zbar button{min-height:44px;min-width:44px}}
+/* ---- 01 회로도 ---- */
+#p-circuit .circ-chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+#p-circuit .circ-chips a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border:1px solid var(--rule-2);border-radius:999px;background:var(--card);color:var(--ink);text-decoration:none;font-size:14px}
+#p-circuit .circ-chips a:hover{border-color:var(--blue);color:var(--blue)}
+#p-circuit .circ-chips a .q{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+#p-circuit .circ-part{border-top:1px solid var(--rule);margin-top:30px;padding-top:4px;scroll-margin-top:calc(var(--navh,50px) + 12px)}
+#p-circuit .circ-part > h3{margin-top:18px}
+#p-circuit .circ-what{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 14px;align-items:start}
+#p-circuit .circ-what > *{min-width:0}
+#p-circuit .circ-what p{margin:0 0 6px;color:var(--ink-2)}
+#p-circuit .circ-qty{font-family:var(--mono);white-space:nowrap;justify-self:start}
+#p-circuit .circ-top{margin:10px 0 0}
+#p-circuit .sheet,#p-circuit [id^="circuit-"]{scroll-margin-top:calc(var(--navh,50px) + 12px)}
+#p-circuit .dwimg.crop svg{display:block;width:100%;min-width:720px;height:auto}
+#p-circuit .csheet.z2 .dwimg.crop svg{width:2000px;min-width:0;max-width:none}
+#p-circuit .csheet.z3 .dwimg.crop svg{width:3000px;min-width:0;max-width:none}
+#p-circuit details.cbom{margin:10px 0;border:1px solid var(--rule);border-radius:10px;background:var(--card);padding:6px 10px}
+#p-circuit details.cbom summary{font-size:14px;color:var(--ink);font-weight:600;min-height:32px;display:flex;align-items:center}
+#p-circuit details.cbom .tbl{margin:8px 0 4px}
+#p-circuit details.cbom table{font-size:12px}
+#p-circuit .tbl td{font-size:12.5px}
+#p-circuit .tbl td.num{white-space:normal;overflow-wrap:anywhere}
+#p-circuit .sub4{margin:18px 0 6px}
+#p-circuit ul.flow{list-style:disc}
+#p-circuit .circ-dl{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+#p-circuit .circ-dlbtn{font:inherit;font-size:14px;min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+#p-circuit .circ-dlbtn.small{font-size:13px;min-height:44px;padding:6px 12px;background:var(--card);color:var(--ink);border-color:var(--rule-2)}
+#p-circuit .circ-dlbtn:disabled{opacity:.55;cursor:progress}
+#p-circuit .circ-dlbtn:focus-visible,#p-circuit .circ-chips a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media (max-width:620px){
+  #p-circuit .circ-what{grid-template-columns:minmax(0,1fr)}
+  #p-circuit .circ-chips a{font-size:13px;padding:6px 12px}
+}
+@media (prefers-reduced-motion:reduce){#p-circuit *{scroll-behavior:auto!important;transition:none!important}}

@@ -1,0 +1,347 @@
+{
+ "date": "2026-10-08",
+ "state": "W1+ r4.5 · L2 40° · 화면 3판 · 전원 R33 · 회로 E",
+ "sheets": {
+  "E01": "E01_front.svg",
+  "E02": "E02_rear.svg",
+  "E03": "E03_left.svg",
+  "E04": "E04_right.svg",
+  "E05": "E05_top.svg",
+  "E06": "E06_bottom.svg",
+  "E07": "E07_folded.svg",
+  "I01": "I01_inside_plan.svg",
+  "I02": "I02_centre_detail.svg",
+  "I03": "I03_long_sections.svg",
+  "I04": "I04_side_section.svg",
+  "I05": "I05_module_plan.svg"
+ },
+ "layout_issues": {
+  "E01": [],
+  "E02": [],
+  "E03": [],
+  "E04": [],
+  "E05": [],
+  "E06": [],
+  "E07": [],
+  "I01": [],
+  "I02": [],
+  "I03": [],
+  "I04": [],
+  "I05": []
+ },
+ "checks": [
+  {
+   "sheet": "E01",
+   "label": "전체 폭",
+   "printed": 1254.0,
+   "ref": 1254.0,
+   "src": "manifest.json bbox (모든 부품)",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "스피커 L 폭",
+   "printed": 273.0,
+   "ref": 273.0,
+   "src": "manifest 스피커 파트 L",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "가운데 유닛 폭",
+   "printed": 702.0,
+   "ref": 702.0,
+   "src": "manifest CU-PLY-BACK",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "화면 받침 위 끝 z",
+   "printed": 189.2262817059929,
+   "ref": 189.226,
+   "src": "manifest TS-CRADLE",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "스피커 윗면 z",
+   "printed": 144.65,
+   "ref": 144.65,
+   "src": "manifest SPKL-PLY-TOP",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "건반 바닥 윗면(모듈 윗판) z",
+   "printed": 72.85000000149012,
+   "ref": 72.85,
+   "src": "manifest O4-FRAME",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "흰 건반 윗면 z",
+   "printed": 43.5,
+   "ref": 43.5,
+   "src": "manifest O4-KEY-C",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "검은 건반 윗면 z",
+   "printed": 55.5,
+   "ref": 55.5,
+   "src": "manifest O4-KEY-Cs",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "볼 L 폭",
+   "printed": 15.799999997019768,
+   "ref": 15.8,
+   "src": "keyaction 볼 두께 (EL-FRAME 단면 z60)",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "흰 건반 폭",
+   "printed": 22.039999999999964,
+   "ref": 22.039999999999964,
+   "src": "manifest O4-KEY-C",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "검은 건반 머리 폭 (y100 단면)",
+   "printed": 10.400000005960464,
+   "ref": 10.4,
+   "src": "key-action-v4/model/model_v4.py black_w",
+   "ok": true
+  },
+  {
+   "sheet": "E01",
+   "label": "화면 받침 폭",
+   "printed": 170.70000000000005,
+   "ref": 170.70000000000005,
+   "src": "manifest TS-CRADLE",
+   "ok": true
+  },
+  {
+   "sheet": "E02",
+   "label": "뒤판 출력물 x 범위 폭",
+   "printed": 140.5,
+   "ref": 140.5,
+   "src": "manifest PR-BACKPLATE",
+   "ok": true
+  },
+  {
+   "sheet": "E02",
+   "label": "고무발 수",
+   "printed": 14.0,
+   "ref": 14.0,
+   "src": "spec feet.positions_xy",
+   "ok": true
+  },
+  {
+   "sheet": "E02",
+   "label": "KCD1 끼움 구멍 폭 (스위치 판 단면)",
+   "printed": 13.200000002980232,
+   "ref": 13.2,
+   "src": "spec holes_xz rocker_KCD1_13.2x19.2",
+   "ok": true
+  },
+  {
+   "sheet": "E02",
+   "label": "뒤판 환기 구멍 간격",
+   "printed": 11.0,
+   "ref": 11.0,
+   "src": "body.VENT_PITCH",
+   "ok": true
+  },
+  {
+   "sheet": "E03",
+   "label": "전체 깊이",
+   "printed": 342.5,
+   "ref": 342.5,
+   "src": "manifest bbox (모든 부품)",
+   "ok": true
+  },
+  {
+   "sheet": "E03",
+   "label": "뒷바 앞면 y",
+   "printed": 214.0,
+   "ref": 214.0,
+   "src": "manifest SPKL-PLY-SIDEOUT",
+   "ok": true
+  },
+  {
+   "sheet": "E04",
+   "label": "전체 깊이",
+   "printed": 342.5,
+   "ref": 342.5,
+   "src": "manifest bbox (모든 부품)",
+   "ok": true
+  },
+  {
+   "sheet": "E04",
+   "label": "뒷바 앞면 y",
+   "printed": 214.0,
+   "ref": 214.0,
+   "src": "manifest SPKL-PLY-SIDEOUT",
+   "ok": true
+  },
+  {
+   "sheet": "E05",
+   "label": "화면 뚜껑 x 시작",
+   "printed": 501.5,
+   "ref": 501.5,
+   "src": "manifest CU-SCREENLID",
+   "ok": true
+  },
+  {
+   "sheet": "E05",
+   "label": "뚜껑 L 오른쪽 끝 x",
+   "printed": 501.0,
+   "ref": 501.0,
+   "src": "manifest LID-L",
+   "ok": true
+  },
+  {
+   "sheet": "E06",
+   "label": "고무발 가운데 x (가운데 유닛 가운데)",
+   "printed": 611.0,
+   "ref": 611.0,
+   "src": "spec feet.positions_xy",
+   "ok": true
+  },
+  {
+   "sheet": "E06",
+   "label": "아랫판 흡기 구멍 수",
+   "printed": 40.0,
+   "ref": 40.0,
+   "src": "body.BOT_HOLES_BUCK + BOT_HOLES_PI",
+   "ok": true
+  },
+  {
+   "sheet": "E07",
+   "label": "접은 받침 위 끝 z",
+   "printed": 95.35,
+   "ref": 95.35,
+   "src": "manifest TS-CRADLE-FOLD",
+   "ok": true
+  },
+  {
+   "sheet": "I01",
+   "label": "스피커 유닛 가운데 x (L)",
+   "printed": 160.5,
+   "ref": 160.5,
+   "src": "manifest SPK-L",
+   "ok": true
+  },
+  {
+   "sheet": "I01",
+   "label": "I01 표 줄 수 = 번호 수",
+   "printed": 68.0,
+   "ref": 68.0,
+   "src": "number_groups",
+   "ok": true
+  },
+  {
+   "sheet": "I02",
+   "label": "기둥 수",
+   "printed": 14.0,
+   "ref": 14.0,
+   "src": "CU-POST-* (PI 4 · BUCK 4 · PED 4 · J702 2)",
+   "ok": true
+  },
+  {
+   "sheet": "I04",
+   "label": "단면 x (자석 D4 가운데)",
+   "printed": 575.75,
+   "ref": 575.7529999999999,
+   "src": "manifest O4-MAGNET-D",
+   "ok": true
+  },
+  {
+   "sheet": "I05",
+   "label": "O4 모듈 시작 x",
+   "printed": 540.5,
+   "ref": 540.5,
+   "src": "x = 47 + 164.5·(k−1)",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "전체 폭 (E01·E02·E05·E06)",
+   "printed": 1254.0,
+   "ref": 1254.0,
+   "src": "stl/assembly/Toccata_전체조립.stl bounds",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "전체 깊이 (E03·E04)",
+   "printed": 342.5,
+   "ref": 342.5,
+   "src": "stl/assembly/Toccata_전체조립.stl bounds",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "가장 높은 곳 z = 화면 받침 위 끝 (E01·E03)",
+   "printed": 189.226,
+   "ref": 189.226,
+   "src": "stl/assembly/Toccata_전체조립.stl bounds",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "CU-SCREENLID 출력 크기 (가장 긴 변)",
+   "printed": 219.0,
+   "ref": 219.0,
+   "src": "stl/print/05_본체출력물/CU화면뚜껑_터치3판__1개.stl",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "LID-L 출력 크기 (가장 긴 변)",
+   "printed": 241.0,
+   "ref": 241.0,
+   "src": "stl/print/05_본체출력물/뚜껑_L__1개.stl",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "SPKL-BAFFLE 출력 크기 (가장 긴 변)",
+   "printed": 250.0,
+   "ref": 250.0,
+   "src": "stl/print/05_본체출력물/스피커앞판_경사배플_L__1개.stl",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "TS-CRADLE 출력 크기 (가장 긴 변)",
+   "printed": 170.7,
+   "ref": 170.7,
+   "src": "stl/print/07_터치스크린/화면받침_크래들__1개.stl",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "CU-PLY-END-L 출력 크기 (가장 긴 변)",
+   "printed": 117.0,
+   "ref": 117.0,
+   "src": "stl/print/05_본체출력물/끝벽_L__1개.stl",
+   "ok": true
+  },
+  {
+   "sheet": "STL",
+   "label": "PR-BACKPLATE 출력 크기 (가장 긴 변)",
+   "printed": 140.5,
+   "ref": 140.5,
+   "src": "stl/print/05_본체출력물/뒤판출력물_IO__1개.stl",
+   "ok": true
+  }
+ ],
+ "all_ok": true
+}

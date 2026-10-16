@@ -17,8 +17,12 @@
     - drivers: pose / axis (body.py ANGLE), magnet >= 2 mm from every pod wall (back ply target 3.5), pole vent >= 10 mm free along
       the axis, basket <-> sill, normal depth, D14 (magnet centre >= 100 from the sensor row, nearest steel reported), the spec's
       27 deg sound path (flange / gasket corners >= 3.0 under it, grille plate edge = spec exception),
-    - XT30 pairs in the end-wall clips, pigtails through the sealed D6 pod hole and the D14 end-wall hole into the pod, speaker
+    - XT60 pairs in the end-wall clips, pigtails through the sealed D6 pod hole and the D19 end-wall hole into the pod, speaker
       leads and the power harness ending on their terminals,
+    - 2026-10-07 LiFePO4 battery: pack in its frame (0.5 round, on the floor, under the lid >= 1), lifts straight out, XT60 pair + DC
+      charge connector on its top and the ATC/ATO fuse holder lying on the frame's fuse shelf (nothing over it, 12 AWG R15 + splice
+      within 30, stub saddles), all under LID-L (reachable with only LID-L off), the lead-turn zone
+      at the +x end, the changed spec boxes >= 1.0 / 0.5 from every other box,
 (4) R31 touchscreen rev 3 (touchscreen/rev3/design/CAD_SPEC_rev3.md C, F, G + numbers.json points / ribbon / power_wire / pi5):
     display pose and fit in the cradle, DSI FFC route (lid hole, clip clamp, drop column in Z-DSI, 2.7 into CAM/DISP 1) and length,
     Pi heatsink / micro-HDMI clearance on the CAD Pi pose, power leads (hole, clip groove, GPIO 2 / 6), keep-out over the modules,
@@ -46,13 +50,13 @@ EPS = 0.02          # mm bbox tolerance
 EXPECTED = [
     # electronics x electronics
     (r"^CU-E-DONGLE$", r"^CU-E-GENDER$", "동글 USB-C 플러그(6.5)가 젠더 C 소켓 안으로 들어감 (의도)", 400.0),
-    (r"^C-XT30M-", r"^C-XT30F-", "XT30 수·암 짝맞춤 (면 닿음)", 0.5),
+    (r"^C-XT60M-", r"^C-XT60F-", "XT60 수·암 짝맞춤 (면 닿음)", 0.5),
     # electronics x key action
     (r"-E-MB$", r"-B-controlboardscrew", "M3×6 나사 몸통이 기판 구멍 Ø3.2를 지남 (다각형 근사)", None),
     (r"-E-MB$", r"-FRAME$", "프레임 위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0 (의도, 다각형 근사)", None),
     # electronics x body
     (r"^SPK-[LR]$", r"^SPK[LR]-(BAFFLE|GASKET)$", "바스켓 Ø94가 앞판 구멍·가스켓 구멍 Ø94를 지남 (같은 원 - 다각형 근사)", 5.0),
-    (r"^C-XT30F-", r"^XT30-CLIP-", "XT30U-F가 집게 홈에 끼움 (면 닿음)", 0.5),
+    (r"^C-XT60F-", r"^XT60-CLIP-", "XT60 암이 집게 홈에 끼움 (면 닿음)", 0.5),
     (r"^CU-E-SWITCH$", r"^PR-BACKPLATE$", "KCD1 몸통 13.2×19.2가 같은 크기 구멍에 스냅 (면 닿음)", 0.5),
     # R31 touchscreen rev 3
     (r"^TS-C-DSI$", r"^TS-E-SCREEN$", "R31 리본 끝이 화면 ZIF에 3.5 꽂힘 (의도)", 15.0),
@@ -63,6 +67,7 @@ EXPECTED = [
 ]
 
 SPEC_CONFLICTS = []
+MISMATE = {}       # mis-mate guard distances (2026-10-07), read by make_readme.py
 
 
 def load(name):
@@ -244,11 +249,13 @@ def main():
 
     # ---- spec centre_contents items
     exact = ["CU-E-PI5", "CU-E-PI5-RJ45", "CU-E-PI5-USBA1", "CU-E-PI5-USBA2", "CU-E-PI5-DISP1", "CU-E-GENDER", "CU-E-AMP", "CU-E-BUCK",
-             "CU-E-PEDBOARD", "CU-E-PEDZERO", "CU-E-J702BOARD", "CU-E-J702", "CU-E-FUSE", "CU-E-J501BOARD", "CU-E-J501", "CU-E-PDTRIG",
-             "PB-E-HUB", "PB-E-BANK"]
-    items = [c["id"] for c in L2["centre_contents"] if c["kind"] in ("item", "io") and re.match(r"^(CU-E|PB-E)-", c["id"])]
+             "CU-E-PEDBOARD", "CU-E-PEDZERO", "CU-E-J702BOARD", "CU-E-J702", "CU-E-FUSE", "CU-E-J501BOARD", "CU-E-J501",
+             "PB-E-HUB", "BAT-LFP", "C-XT60", "C-DC"]
+    items = [c["id"] for c in L2["centre_contents"] if c["kind"] in ("item", "io") and re.match(r"^(CU-E|PB-E|BAT)-|^C-(XT60|DC)$", c["id"])]
     miss = [i for i in items if i not in P]
-    chk("every spec CU-E-* / PB-E-* item has a part with the same id (%d)" % len(items), not miss, ", ".join(miss))
+    chk("every spec CU-E-* / PB-E-* / BAT-* / C-XT60 / C-DC item has a part with the same id (%d)" % len(items), not miss, ", ".join(miss))
+    gone = [i for i in ("PB-E-BANK", "CU-E-PDTRIG", "CU-PBHOLDER", "Z-BANK-PLUG", "IO-CABLEPASS") if i in P or i in CC]
+    chk("2026-10-07 power change: no power bank / PD trigger / bank plug / cable pass any more (parts and spec boxes)", not gone, ", ".join(gone))
     for cid in items:
         if cid not in P:
             continue
@@ -347,7 +354,7 @@ def main():
         if s is not None:
             chk("%s in x%.0f..%.0f, y<%.0f stays inside Z-HUB-DROPS (z<=%.0f)" % (pid, zd[0], zd[1], zd[3], zd[5]), inside(s, zd), fmt(s))
     part_slab_in("C-USB-PED", 0, CC["Z-PED-LANE"][0] + 25.0, CC["Z-PED-LANE"][1] - 2.0, "Z-PED-LANE")
-    for pid in ("C-SPK-L", "C-PWR-20V"):
+    for pid in ("C-SPK-L", "C-PWR-BUS"):
         part_slab_in(pid, 0, 480.0, 730.0, "Z-SPKLEAD-L")
     part_slab_in("C-SPK-L", 0, CC["Z-SPKLEAD-L2"][0], CC["Z-SPKLEAD-L2"][1] - 3.0, "Z-SPKLEAD-L2", tol=0.6)
     part_slab_in("C-SPK-R", 0, CC["Z-SPKLEAD-R"][0] + 3.0, CC["Z-SPKLEAD-R"][1] - 12.0, "Z-SPKLEAD-R")
@@ -355,9 +362,9 @@ def main():
     chk("C-PWR-5V ends at the hub -x end face (nothing in front of the shelf / at the +x end any more; spec Z-PWR-LANE / Z-HUB-DC unused)", s is None,
         fmt(s) if s else "")
     # keep-out zones (not modelled plugs / W1 screen / joints) free of electronics
-    own = {"Z-DSI": r"^TS-C-DSI$", "Z-GPIO-LEAD": r"^TS-C-PWR-(RED|BLK)$"}           # rev 3: the zone's own cable may (and does) run in it
+    own = {"Z-DSI": r"^TS-C-DSI$", "Z-GPIO-LEAD": r"^TS-C-PWR-(RED|BLK)$", "Z-BAT-LEADS": r"^C-BAT-(LEAD|DC)$"}           # rev 3: the zone's own cable may (and does) run in it
     for zid, why in (("Z-DSI", "W1 DSI ribbon"), ("Z-GPIO-LEAD", "W1 screen power lead"), ("Z-J702-PLUG", "W702 3.5 mm plug"),
-                     ("Z-DONGLE-PLUG", "W701 3.5 mm plug"), ("Z-BANK-PLUG", "power-bank right-angle plug"), ("Z-TS-L1", "thumb screw"),
+                     ("Z-DONGLE-PLUG", "W701 3.5 mm plug"), ("Z-BAT-LEADS", "battery lead-turn zone (2026-10-07)"), ("Z-TS-L1", "thumb screw"),
                      ("Z-TS-L2", "thumb screw"), ("Z-TS-R1", "thumb screw"), ("Z-TS-R2", "thumb screw")):
         zb = box(CC[zid][0], CC[zid][1], CC[zid][2], CC[zid][3], CC[zid][4], CC[zid][5])
         hit = [(p.id, (p.solid ^ zb).volume()) for p in onsite if boxes_touch(bb(p), zb.bounding_box())]
@@ -373,7 +380,7 @@ def main():
         if pid not in P:
             continue
         b = bb(P[pid])
-        io = pid in ("CU-E-PDTRIG", "CU-E-SWITCH", "CU-E-J501BOARD", "CU-E-J501")
+        io = pid in ("CU-E-SWITCH", "CU-E-J501BOARD", "CU-E-J501")
         yhi = body.YB if io else E.YBI
         chk("%s inside the centre inner space x%.1f..%.1f y%.0f..%.1f z%.1f..%.2f%s" % (pid, cx0, cx1, E.Y0, yhi, E.Z_BOT, E.Z_LIDU,
                                                                                     " (back-plate I/O)" if io else ""),
@@ -384,11 +391,13 @@ def main():
 
     # ---- min gaps between rear-unit electronics (solids)
     related = [("CU-E-PI5", "CU-E-PI5-"), ("CU-E-PI5-USBA1", "CU-E-GENDER"), ("CU-E-GENDER", "CU-E-DONGLE"), ("CU-E-J702BOARD", "CU-E-J702"),
-               ("CU-E-J501BOARD", "CU-E-J501"), ("CU-E-PEDBOARD", "CU-E-PEDZERO"), ("C-XT30F-", "C-XT30M-"),
-               ("C-PWR-IN", "CU-E-PDTRIG"), ("C-PWR-IN", "CU-E-FUSE"), ("C-PWR-FUSE", "CU-E-FUSE"), ("C-PWR-FUSE", "CU-E-SWITCH"),
-               ("C-PWR-20V", "CU-E-SWITCH"), ("C-PWR-20V", "CU-E-BUCK"), ("C-PWR-20V", "CU-E-AMP"), ("C-PWR-5V", "CU-E-BUCK"),
-               ("C-PWR-5V", "CU-E-PI5"), ("C-PWR-5V", "PB-E-HUB"), ("C-SPK-L", "CU-E-AMP"), ("C-SPK-R", "CU-E-AMP"), ("C-SPK-L", "C-XT30M-L"),
-               ("C-SPK-R", "C-XT30M-R"), ("C-SPKPIG-L", "C-XT30F-L"), ("C-SPKPIG-R", "C-XT30F-R"), ("C-SPKPIG-L", "SPK-L"),
+               ("CU-E-J501BOARD", "CU-E-J501"), ("CU-E-PEDBOARD", "CU-E-PEDZERO"), ("C-XT60F-", "C-XT60M-"),
+               ("C-PWR-IN", "C-XT60"), ("C-PWR-IN", "CU-E-FUSE"), ("C-PWR-FUSE", "CU-E-FUSE"), ("C-PWR-FUSE", "CU-E-SWITCH"),
+               ("C-BAT-LEAD", "BAT-LFP"), ("C-BAT-LEAD", "C-XT60"), ("C-BAT-DC", "BAT-LFP"), ("C-BAT-DC", "C-DC"), ("C-XT60", "BAT-LFP"),
+               ("C-DC", "BAT-LFP"),
+               ("C-PWR-BUS", "CU-E-SWITCH"), ("C-PWR-BUS", "CU-E-BUCK"), ("C-PWR-BUS", "CU-E-AMP"), ("C-PWR-5V", "CU-E-BUCK"),
+               ("C-PWR-5V", "CU-E-PI5"), ("C-PWR-5V", "PB-E-HUB"), ("C-SPK-L", "CU-E-AMP"), ("C-SPK-R", "CU-E-AMP"), ("C-SPK-L", "C-XT60M-L"),
+               ("C-SPK-R", "C-XT60M-R"), ("C-SPKPIG-L", "C-XT60F-L"), ("C-SPKPIG-R", "C-XT60F-R"), ("C-SPKPIG-L", "SPK-L"),
                ("C-SPKPIG-R", "SPK-R"), ("-C-USB", "PB-E-HUB"), ("C-USB-PED", "CU-E-PEDZERO"), ("C-USB-UPSTREAM", "CU-E-PI5-USBA2"),
                ("C-USB-UPSTREAM", "PB-E-HUB"), ("C-XH-", "-C-EXT"), ("C-XH-", "-C-LEAD"), ("C-USB-PED", "PB-E-HUB"),
                ("C-USB-PED", "CU-E-PEDBOARD"), ("O1-C-EXT", "O1-C-USB"), ("O7-C-EXT", "O7-C-USB")]
@@ -396,7 +405,7 @@ def main():
     def rel(a, b):
         return any((a.startswith(x) or x in a) and (b.startswith(y) or y in b) or (b.startswith(x) or x in b) and (a.startswith(y) or y in a)
                    for x, y in related)
-    rear = [p for p in onsite if re.match(r"^(CU-E|PB-E|C-|O\d-C-USB|O\d-C-EXT|EL-C-LEAD|ER-C-LEAD|SPK-)", p.id)]
+    rear = [p for p in onsite if re.match(r"^(CU-E|PB-E|BAT-|C-|O\d-C-USB|O\d-C-EXT|EL-C-LEAD|ER-C-LEAD|SPK-)", p.id)]
     tight, gaps_bad = [], []
     for a, b in itertools.combinations(rear, 2):
         if rel(a.id, b.id) or not boxes_touch(bb(a), bb(b), 1.5):
@@ -450,8 +459,12 @@ def main():
         if abs(ln - cs["path_mm"]) > 40:
             spec("%s modelled length %.0f differs from the spec estimate %d by more than 40" % (t, ln, cs["path_mm"]))
     info("other leads (path, mm)", ", ".join("%s %.0f" % (k, v) for k, v in E.LENGTHS.items() if not re.match(r"^(O\d|PED)$", k)))
-    chk("pod pigtails (XT30U-F tail 150) reach the driver: path <= 140", E.LENGTHS["PIG-L"] <= 140 and E.LENGTHS["PIG-R"] <= 140,
-        "L %.0f  R %.0f" % (E.LENGTHS["PIG-L"], E.LENGTHS["PIG-R"]))
+    pin_ = [body.PIG_LEAD_MM - E.LENGTHS["PIG-OUT-" + s_] for s_ in "LR"]
+    ext_ = [E.LENGTHS["PIG-" + s_] - body.PIG_LEAD_MM for s_ in "LR"]
+    chk("pod pigtails: the XT60 F's own %.0f mm 16 AWG lead ends inside the pod (%.0f / %.0f past the joint face >= panel %.1f + 10: the join sits "
+        "in the sealed box), a short lead %.0f / %.0f mm (<= 60) goes on to the driver tabs (path L %.0f  R %.0f)"
+        % (body.PIG_LEAD_MM, pin_[0], pin_[1], body.T, ext_[0], ext_[1], E.LENGTHS["PIG-L"], E.LENGTHS["PIG-R"]),
+        all(v >= body.T + 10.0 for v in pin_) and all(0.0 <= v <= 60.0 for v in ext_))
 
     # ---- cables: inside the body envelope (nothing visible from above / behind)
     cav = prism_x(body.CAVITY, body.SX0, body.SX1)
@@ -468,12 +481,12 @@ def main():
         allowed.append(box(ga, gb, wy - body.END_HOLE_D / 2, wy + body.END_HOLE_D / 2, min(wz, ez) - body.END_HOLE_D / 2,
                            max(wz, ez) + body.END_HOLE_D / 2))                     # 3 mm joint gap between the two holes
         ta, tb = (body.CU_X[0], cx0) if side == "L" else (cx1, body.CU_X[1])
-        allowed.append(cyl_x(ey, ez, ta, tb, body.END_HOLE_D))                     # end-wall tunnel D14 (slack coil)
+        allowed.append(cyl_x(ey, ez, ta, tb, body.END_HOLE_D))                     # end-wall tunnel D19 (slack coil)
     for k in range(1, 8):
         X0 = 47.0 + 164.5 * (k - 1)
         allowed.append(box(X0 + 77.75, X0 + 90.25, 196.8, 212.01, 10.7, 18.3))
     ALLOWED = union(allowed)
-    cab = [p for p in onsite if re.match(r"^(C-|O\d-C-USB|O\d-C-EXT|EL-C-LEAD|ER-C-LEAD|CU-E-|PB-E-)", p.id)]
+    cab = [p for p in onsite if re.match(r"^(C-|O\d-C-USB|O\d-C-EXT|EL-C-LEAD|ER-C-LEAD|CU-E-|PB-E-|BAT-)", p.id)]
     outside = []
     for p in cab:
         m = p.solid
@@ -602,17 +615,17 @@ def main():
             mod >= 3.0 and abs(mod - G.sightline_clear((212.0, 72.85))) < 1e-6)
         info("%s magnet gaps to the pod walls: %s" % (pid, ", ".join("%s %.2f" % (k.split("-", 1)[1], g) for k, g in sorted(gaps.items(), key=lambda kv: kv[1]))))
 
-    # ---- XT30 pairs, pigtails, speaker leads, power harness
-    pockets, psrc = E.xt30_pockets()
+    # ---- XT60 pairs, pigtails, speaker leads, power harness
+    pockets, psrc = E.xt60_pockets()
     for side in "LR":
         x0, x1, y0, y1, z0, z1 = pockets[side]
-        fb = bb(P["C-XT30F-" + side])
-        chk("C-XT30F-%s inside the %s clip pocket x%.1f..%.1f y%.1f..%.1f z%.1f..%.1f, mouth at the pocket end toward the centre"
+        fb = bb(P["C-XT60F-" + side])
+        chk("C-XT60F-%s inside the %s clip pocket x%.1f..%.1f y%.1f..%.1f z%.1f..%.1f, mouth at the pocket end toward the centre"
             % (side, psrc, x0, x1, y0, y1, z0, z1),
             inside(fb, (x0, x1, y0, y1, z0, z1)) and (abs(fb[3] - x1) < EPS if side == "L" else abs(fb[0] - x0) < EPS), fmt(fb))
-        mb = bb(P["C-XT30M-" + side])
-        chk("C-XT30M-%s mated from the centre side, pair inside the spec C-XT30-%s box %s (male tail 0.1 past: body pocket + 8.1)" % (side, side, cfmt(CC["C-XT30-" + side])),
-            (abs(mb[0] - fb[3]) < EPS if side == "L" else abs(mb[3] - fb[0]) < EPS) and inside(mb, CC["C-XT30-" + side], 0.15) and inside(fb, CC["C-XT30-" + side]), fmt(mb))
+        mb = bb(P["C-XT60M-" + side])
+        chk("C-XT60M-%s mated from the centre side, pair inside the spec C-XT60-%s box %s (male 15 seen outside the female)" % (side, side, cfmt(CC["C-XT60-" + side])),
+            (abs(mb[0] - fb[3]) < EPS if side == "L" else abs(mb[3] - fb[0]) < EPS) and inside(mb, CC["C-XT60-" + side], 0.06) and inside(fb, CC["C-XT60-" + side]), fmt(mb))
         pg = P["C-SPKPIG-" + side].solid
         wy, wz = body.WIRE_YZ[side]
         xa, xb = (body.SPK_IX["L"][1], body.SPK_X["L"][1]) if side == "L" else (body.SPK_X["R"][0], body.SPK_IX["R"][0])
@@ -625,16 +638,16 @@ def main():
         inhole = (pg ^ box(ea, eb, 0, 400, 0, 200)) - cyl_x(ey, ez, ea - 1, eb + 1, body.END_HOLE_D)
         chk("C-SPKPIG-%s passes the D%.0f end-wall hole (y%.0f z%.1f) x%.1f..%.1f with its slack coil inside the hole" % (side, body.END_HOLE_D, ey, ez, ea, eb),
             s is not None and inhole.volume() <= TOL, fmt(s) if s else "")
-        chk("C-SPKPIG-%s: %.1f mm of tail outside the pod (>= 45: the pod lifts 10 and slides 15 outboard with the XT30U-F still in its clip)"
-            % (side, E.LENGTHS["PIG-OUT-" + side]), E.LENGTHS["PIG-OUT-" + side] >= 45.0)
+        chk("C-SPKPIG-%s: %.1f mm of tail outside the pod (>= 45: the pod lifts %.0f and slides %.0f outboard with the XT60 F still in its clip)"
+            % (side, E.LENGTHS["PIG-OUT-" + side], body.POD_LIFT, body.POD_SLIDE), E.LENGTHS["PIG-OUT-" + side] >= 45.0)
         cavm = cav if side == "L" else body.mx(cav)
         inpod = pg.trim_by_plane((-1, 0, 0), -xa) if side == "L" else pg.trim_by_plane((1, 0, 0), xb)
         chk("C-SPKPIG-%s: the part inside the pod stays in the sealed cavity and ends at the driver" % side,
             (inpod - cavm).volume() <= TOL and pg.min_gap(P["SPK-" + side].solid, 1.0) <= 0.1, "outside %.3f" % (inpod - cavm).volume())
-    ends = [("C-PWR-IN", "CU-E-PDTRIG"), ("C-PWR-IN", "CU-E-FUSE"), ("C-PWR-FUSE", "CU-E-FUSE"), ("C-PWR-FUSE", "CU-E-SWITCH"),
-            ("C-PWR-20V", "CU-E-SWITCH"), ("C-PWR-20V", "CU-E-BUCK"), ("C-PWR-20V", "CU-E-AMP"), ("C-PWR-5V", "CU-E-BUCK"),
-            ("C-PWR-5V", "PB-E-HUB"), ("C-PWR-5V", "CU-E-PI5"), ("C-SPK-L", "CU-E-AMP"), ("C-SPK-L", "C-XT30M-L"), ("C-SPK-R", "CU-E-AMP"),
-            ("C-SPK-R", "C-XT30M-R"), ("C-SPKPIG-L", "C-XT30F-L"), ("C-SPKPIG-R", "C-XT30F-R"), ("C-USB-PED", "CU-E-PEDZERO"),
+    ends = [("C-BAT-LEAD", "BAT-LFP"), ("C-BAT-LEAD", "C-XT60"), ("C-BAT-DC", "BAT-LFP"), ("C-BAT-DC", "C-DC"), ("C-PWR-IN", "C-XT60"), ("C-PWR-IN", "CU-E-FUSE"), ("C-PWR-FUSE", "CU-E-FUSE"),
+            ("C-PWR-FUSE", "CU-E-SWITCH"), ("C-PWR-BUS", "CU-E-SWITCH"), ("C-PWR-BUS", "CU-E-BUCK"), ("C-PWR-BUS", "CU-E-AMP"), ("C-PWR-5V", "CU-E-BUCK"),
+            ("C-PWR-5V", "PB-E-HUB"), ("C-PWR-5V", "CU-E-PI5"), ("C-SPK-L", "CU-E-AMP"), ("C-SPK-L", "C-XT60M-L"), ("C-SPK-R", "CU-E-AMP"),
+            ("C-SPK-R", "C-XT60M-R"), ("C-SPKPIG-L", "C-XT60F-L"), ("C-SPKPIG-R", "C-XT60F-R"), ("C-USB-PED", "CU-E-PEDZERO"),
             ("C-USB-PED", "PB-E-HUB"), ("C-USB-UPSTREAM", "CU-E-PI5-USBA2"), ("C-USB-UPSTREAM", "PB-E-HUB")] + \
            [("O%d-C-USB" % k, "O%d-E-ZERO" % k) for k in range(1, 8)] + [("O%d-C-USB" % k, "PB-E-HUB") for k in range(1, 8)]
     bad_end = []
@@ -643,29 +656,133 @@ def main():
         if g > 0.1:
             bad_end.append("%s/%s %.2f" % (a, b, g))
     chk("every cable ends on its terminal / plug face (gap <= 0.1): %d ends" % len(ends), not bad_end, "; ".join(bad_end))
-    # pigtail numbers quoted in the XT30 clip notes (body.PIG_SLACK_MM / PIG_OUT_MM) = the modelled path
+    # pigtail numbers quoted in the XT60 clip notes (body.PIG_SLACK_MM / PIG_OUT_MM) = the modelled path
     sl_ = [E.LENGTHS["PIG-SLACK-" + s_] for s_ in "LR"]
     po_ = [E.LENGTHS["PIG-OUT-" + s_] for s_ in "LR"]
-    notes_ok = all(("여유 약 %.0f mm" % body.PIG_SLACK_MM) in Bb["XT30-CLIP-" + s_].note and ("스피커 밖 꼬리 약 %.0f mm" % body.PIG_OUT_MM) in Bb["XT30-CLIP-" + s_].note
+    notes_ok = all(("여유 약 %.0f mm" % body.PIG_SLACK_MM) in Bb["XT60-CLIP-" + s_].note and ("스피커 밖 꼬리 약 %.0f mm" % body.PIG_OUT_MM) in Bb["XT60-CLIP-" + s_].note
                    for s_ in "LR")
-    chk("XT30 clip notes quote the pigtail as modelled: coil slack %.1f / %.1f ~ %.0f, outside the pod %.1f / %.1f ~ %.0f (within 2.5)"
+    chk("XT60 clip notes quote the pigtail as modelled: coil slack %.1f / %.1f ~ %.0f, outside the pod %.1f / %.1f ~ %.0f (within 2.5)"
         % (sl_[0], sl_[1], body.PIG_SLACK_MM, po_[0], po_[1], body.PIG_OUT_MM),
         notes_ok and all(abs(v - body.PIG_SLACK_MM) <= 2.5 for v in sl_) and all(abs(v - body.PIG_OUT_MM) <= 2.5 for v in po_))
-    # power bank (optional, velcro): >= 1.5 from the speaker lead C-SPK-L and lifts straight out of its holder
-    bank = P["PB-E-BANK"].solid
-    gb = bank.min_gap(P["C-SPK-L"].solid, 5.0)
-    near = sorted(((bank.min_gap(p.solid, 5.0), p.id) for p in onsite if p.id != "PB-E-BANK" and boxes_touch(bb(p), bb(P["PB-E-BANK"]), 5.0)))
-    chk("PB-E-BANK <-> C-SPK-L %.2f >= 1.5 (the lead crosses in front of the bank, not over its corner)" % gb, gb >= 1.5,
+    # ---- mis-mate guard (2026-10-07): the speaker joints now use the same XT60 as the power. The harness male (bus side, C-PWR-IN, lead
+    # spliced to the fuse holder's -x stub lead) must not reach a speaker joint: straight distance from that solder end to where its back end
+    # would sit when mated in each clip (a lower bound on any route) vs the lead cut to the modelled C-PWR-IN path + 10 slack.
+    MISMATE.update(E.mismate())
+    assert abs(MISMATE["cut"] - (E.LENGTHS["PWR-IN"] + 10.0)) < 1e-6
+    need, cut_ = MISMATE["need"], MISMATE["cut"]
+    chk("mis-mate guard: harness XT60 male lead cut to C-PWR-IN %.0f + 10 = %.0f mm cannot reach a speaker joint - its back end would have to sit "
+        "%.1f (L) / %.1f (R) from the fuse-holder end (straight line); battery-lead zone Z-BAT-LEADS -> clip mouth %.1f (L) / %.1f (R), "
+        "battery XT60 pair C-XT60 -> clip mouth %.1f (L) / %.1f (R)"
+        % (E.LENGTHS["PWR-IN"], cut_, need["L"], need["R"], MISMATE["zone"]["L"], MISMATE["zone"]["R"], MISMATE["pair"]["L"], MISMATE["pair"]["R"]),
+        all(cut_ < need[s_] - 5.0 for s_ in "LR"))
+    info("mis-mate guard", "with the bought 10 cm lead left uncut the harness male could reach the L joint (%.1f < 100) - cut it; R is out of "
+         "reach either way (%.1f). Colour: power XT60 red heat-shrink, speaker XT60 blue + SPK" % (need["L"], need["R"]))
+    # ---- 2026-10-07 LiFePO4 battery (user): pack in the printed frame, XT60 pair on its top, ATC/ATO fuse holder on the frame's fuse shelf
+    bat = P["BAT-LFP"].solid
+    bab = bb(P["BAT-LFP"])
+    fr = Bb["CU-BATFRAME"].solid
+    gfr = bat.min_gap(fr, 2.0)
+    chk("BAT-LFP 140 x 72 x 35 on the floor z%.1f, top z%.1f = %.2f under the lid (>= 1.0); frame walls %.2f round it (0.5)"
+        % (bab[2], bab[5], E.Z_LIDU - bab[5], gfr), abs(bab[2] - E.Z_BOT) < EPS and E.Z_LIDU - bab[5] >= 1.0 and abs(gfr - 0.5) < 0.02
+        and abs((bab[3] - bab[0]) - 140.0) < EPS and abs((bab[4] - bab[1]) - 72.0) < EPS and abs((bab[5] - bab[2]) - 35.0) < EPS, fmt(bab))
+    gb = bat.min_gap(P["C-SPK-L"].solid, 5.0)
+    onbat = ("BAT-LFP", "C-BAT-LEAD", "C-BAT-DC", "C-XT60", "C-DC")
+    near = sorted(((bat.min_gap(p.solid, 5.0), p.id) for p in onsite if p.id not in onbat and boxes_touch(bb(p), bab, 5.0)))
+    chk("BAT-LFP <-> C-SPK-L %.2f >= 1.5 (the lead stays on the end wall and crosses over the XT60 clip, not over the battery)" % gb, gb >= 1.5,
         "closest: " + ", ".join("%s %.2f" % (i, g) for g, i in near[:4]))
     lids = r"^(LID-|CU-SCREENLID$|CU-MAG-LID-|CU-M3X10-)"
     lift_hit = []
     for dz in (1.0, 5.0, 10.0, 20.0, 30.0, 40.0):
-        m_ = bank.translate((0, 0, dz))
-        for p in [q for q in onsite if q.id != "PB-E-BANK"] + [q for q in B if not re.match(lids, q.id)]:
+        m_ = bat.translate((0, 0, dz))
+        for p in [q for q in onsite if q.id not in onbat + ("C-PWR-IN",)] + [q for q in B if not re.match(lids, q.id)]:
             if boxes_touch(bb(p), m_.bounding_box()) and (p.solid ^ m_).volume() > TOL:
                 lift_hit.append("%s at +%.0f" % (p.id, dz))
-    chk("PB-E-BANK lifts 40 mm straight out of its holder (lids off, plug out) without touching a cable, item or body part",
-        not lift_hit, ", ".join(sorted(set(lift_hit))[:6]))
+    chk("BAT-LFP lifts 40 mm straight out of its frame (LID-L off, strap undone, XT60 unplugged, the connectors on top laid aside - its own "
+        "leads go with it) without touching a cable, item or body part", not lift_hit, ", ".join(sorted(set(lift_hit))[:6]))
+    lidl = next(l for l in L2["centre"]["lids"] if l["id"] == "LID-L")["x"]
+    xtb, dcb, fub = bb(P["C-XT60"]), bb(P["C-DC"]), bb(P["CU-E-FUSE"])
+    sx_ = body.BF_STRAP_X
+    top_ok = all(abs(q[2] - bab[5]) < EPS and q[0] >= bab[0] - EPS and q[3] <= bab[3] + EPS and q[1] >= bab[1] - EPS and q[4] <= bab[4] + EPS
+                 and E.Z_LIDU - q[5] >= 1.0 and q[0] > sx_[1] for q in (xtb, dcb))
+
+    def over_(q, skip):
+        hit_ = [p.id for p in onsite + [r for r in B if not re.match(lids, r.id)] if p.id not in skip
+                and boxes_touch(bb(p), (q[0], q[1], q[5], q[3], q[4], 70.0)) and (p.solid ^ box(q[0], q[3], q[1], q[4], q[5] + 0.01, E.Z_LIDU)).volume() > TOL]
+        return hit_
+    ov_ = over_(xtb, ("C-XT60", "C-BAT-LEAD", "C-PWR-IN")) + over_(dcb, ("C-DC", "C-BAT-DC"))
+    chk("XT60 pair %s and DC charge connector %s lie on the battery top (z%.1f, inside its footprint, +x of the strap x%.0f..%.0f), under LID-L x%.0f..%.0f "
+        "(reachable with only LID-L off), %.2f / %.2f under the lid (>= 1), nothing over them"
+        % (fmt(xtb), fmt(dcb), bab[5], sx_[0], sx_[1], lidl[0], lidl[1], E.Z_LIDU - xtb[5], E.Z_LIDU - dcb[5]),
+        top_ok and xtb[3] <= lidl[1] and dcb[3] <= lidl[1] and not ov_, ", ".join(ov_))
+    gxf = P["CU-E-FUSE"].solid.min_gap(fr, 1.0)
+    chk("fuse holder %s on the frame's fuse shelf (gap %.2f <= 0.2) under LID-L, %.2f under the lid; order battery -> XT60 -> fuse -> KCD1"
+        % (fmt(fub), gxf, E.Z_LIDU - fub[5]), gxf <= 0.2 and fub[0] >= lidl[0] and fub[3] <= lidl[1] and E.Z_LIDU - fub[5] >= 1.0)
+    # 2026-10-07 ATC/ATO holder (user's product drawing 40.1 x 11.1 x 33.8): lies on its side (wire axis x, cover +y); fuse change = LID-L
+    # off, lift it out of the saddles, roll 90 deg about the wire axis, pull the cover up -> nothing over its footprint up to the lid
+    dims_ = sorted(round(fub[3 + i] - fub[i], 2) for i in range(3))
+    over_f = [p.id for p in onsite + [r for r in B if not re.match(lids, r.id)] if p.id != "CU-E-FUSE"
+              and boxes_touch(bb(p), (fub[0], fub[1], fub[5], fub[3], fub[4], E.Z_LIDU)) and (p.solid ^ box(fub[0], fub[3], fub[1], fub[4], fub[5] + 0.01, E.Z_LIDU + 30.0)).volume() > TOL]
+    fs_ = (P["CU-E-FUSE"].solid ^ box(fub[0] - 1, fub[0] + body.FH_STUB_L - 0.1, 0, 400, 0, 100)).bounding_box()
+    chk("fuse holder ATC/ATO %.1f x %.1f x %.1f (drawing 40.1 x 11.1 x 33.8) lying: wire axis x (%.1f), cover toward +y (%.1f), %.1f thick in z; stub D%.1f "
+        "on the axis y%.1f z%.2f; nothing over it up to the lid (lift out + roll + pull the cover with LID-L off)"
+        % (fub[3] - fub[0], fub[5] - fub[2], fub[4] - fub[1], fub[3] - fub[0], fub[4] - fub[1], fub[5] - fub[2], fs_[5] - fs_[2], body.FH_AXIS[0], body.FH_AXIS[1]),
+        dims_ == [11.1, 33.8, 40.1] and abs((fub[3] - fub[0]) - 40.1) < EPS and abs((fub[5] - fub[2]) - 11.1) < EPS and not over_f
+        and abs((fs_[5] - fs_[2]) - body.FH_STUB_D) < 0.05 and abs((fs_[2] + fs_[5]) / 2 - body.FH_AXIS[1]) < 0.01, ", ".join(over_f))
+    # 12 AWG stub leads: bend radius >= 15, splice starts within 30 of the holder end (user)
+    pw_ = E.pwr_paths()
+    sp_ok, sp_txt = True, []
+    for k in ("IN", "FUSE"):
+        l12 = E.path_len(pw_[k][0])
+        rad = E.FH_BEND
+        sp_txt.append("%s %.1f + splice %.0f" % (k, l12, E.SPLICE[0]))
+        sp_ok &= l12 <= 30.0 and rad >= 15.0 and len(pw_[k]) == 3
+    chk("fuse holder 12 AWG leads bent R%.0f (>= 15), splice to 16 AWG starts within 30 of the holder end: %s" % (E.FH_BEND, ", ".join(sp_txt)), sp_ok)
+    # the stub saddles hold the stubs (bore D8.3 on D8, snap mouth < D8 at the top)
+    sg_ = [P["CU-E-FUSE"].solid.min_gap(fr ^ box(a_, b_, 200, 260, 0, 100), 1.0) for (a_, b_) in body.FS_SADDLE_X]
+    chk("fuse shelf saddles x%s hold the D%.0f stubs: bore D%.1f (gap %s), snap mouth %.2f < D%.0f at z%.2f"
+        % (" / ".join("%.1f~%.1f" % ab for ab in body.FS_SADDLE_X), body.FH_STUB_D, body.FS_BORE, " / ".join("%.2f" % v for v in sg_), body.FS_MOUTH,
+           body.FH_STUB_D, body.FH_AXIS[1] + body.FS_LIP),
+        all(v <= (body.FS_BORE - body.FH_STUB_D) / 2 + 0.02 for v in sg_) and body.FS_MOUTH < body.FH_STUB_D - 0.8)
+    zl = CC["Z-BAT-LEADS"]
+    lsl = {i: slab(P[i].solid, 0, bab[3] + 0.01, zl[1] + 10.0) for i in ("C-BAT-LEAD", "C-BAT-DC")}
+    lead_in = all(v is not None and inside(v, zl, 0.05) for v in lsl.values())
+    low_ = [i for i, v in lsl.items() if v is None or v[2] < zl[4] - EPS]
+    pedtop = max(bb(P["CU-E-PEDBOARD"])[5], bb(P["CU-E-PEDZERO"])[5])
+    chk("lead-turn zone Z-BAT-LEADS %s (%.0f wide at the +x end, z%.0f up to the lid): both pack leads turn up inside it; PED board / Zero top z%.1f "
+        "below it (%.1f)" % (cfmt(zl), zl[1] - zl[0], zl[4], pedtop, zl[4] - pedtop),
+        zl[1] - zl[0] >= 10.0 and abs(zl[0] - bab[3]) < EPS and abs(zl[5] - E.Z_LIDU) < EPS and pedtop <= zl[4] - 1.0 and lead_in and not low_)
+    # changed spec boxes (2026-10-07) against every other centre_contents box: items >= 1.0, zones / cables >= 0.5 (spec rule), relations
+    # (an item and its own plug / lane / seat) skipped. Reported as numbers for the spec's centre_contents_check.
+    rel_box = {("BAT-LFP", "C-XT60"), ("BAT-LFP", "C-DC"), ("BAT-LFP", "Z-BAT-LEADS"), ("CU-E-PEDBOARD", "CU-E-PEDZERO"),
+               ("CU-E-PEDZERO", "Z-PED-PLUG"), ("Z-PED-PLUG", "Z-PED-LANE"), ("CU-E-PEDBOARD", "Z-PED-PLUG"),
+               ("Z-PED-LANE", "Z-HUB-DROPS"), ("Z-SPKLEAD-L", "CU-E-AMP"), ("Z-SPKLEAD-L", "Z-SPKLEAD-L2"),   # lanes end on their plug drops / amp
+               ("Z-SPKLEAD-R", "CU-E-AMP"),
+               ("C-XT60-R", "Z-HUB-DC")}     # hub DC zone unused since W1 10/1 (hub DC on the -x end face, checked above)
+    changed = ["BAT-LFP", "C-XT60", "C-DC", "Z-BAT-LEADS", "CU-E-FUSE", "CU-E-PEDBOARD", "CU-E-PEDZERO", "Z-PED-PLUG", "Z-PED-LANE", "Z-SPKLEAD-L", "Z-SPKLEAD-L2",
+               "C-XT60-L", "C-XT60-R", "Z-SPKLEAD-R"]                          # 2026-10-07 XT30 -> XT60 speaker joints
+    kinds = {c["id"]: c["kind"] for c in L2["centre_contents"]}
+
+    def boxgap(a, b_):
+        d = [max(a[2 * i] - b_[2 * i + 1], b_[2 * i] - a[2 * i + 1], 0.0) for i in range(3)]
+        inside_ = all(a[2 * i] < b_[2 * i + 1] and b_[2 * i] < a[2 * i + 1] for i in range(3))
+        return -1.0 if inside_ else math.sqrt(sum(v * v for v in d))
+    bad_b, tight_b, n_b = [], [], 0
+    for a_id in changed:
+        for c in L2["centre_contents"]:
+            b_id = c["id"]
+            if b_id == a_id or (a_id, b_id) in rel_box or (b_id, a_id) in rel_box or (b_id in changed and changed.index(b_id) < changed.index(a_id)) \
+                    or kinds[b_id] == "wall":              # printed parts: their solids are checked against every box in check_body.py
+                continue
+            n_b += 1
+            g_ = boxgap(CC[a_id], CC[b_id])
+            need = 1.0 if kinds[a_id] in ("item", "io") and kinds[b_id] in ("item", "io") else 0.5
+            tight_b.append((g_, a_id, b_id))
+            if g_ < need - 1e-6:
+                bad_b.append("%s/%s %.2f < %.1f" % (a_id, b_id, g_, need))
+    tight_b.sort()
+    chk("changed spec boxes (battery, XT60, DC connector, lead-turn zone, fuse, PED board / Zero / plug / lane, back lanes) vs every other centre_contents box except printed "
+        "walls (check_body.py: solids vs boxes): %d pairs, items >= 1.0, zones >= 0.5" % n_b, not bad_b, "; ".join(bad_b[:6]))
+    info("tightest changed-box gaps", ", ".join("%s/%s %.2f" % (a_, b_, g_) for g_, a_, b_ in tight_b[:10]))
 
     # ---- J701, pedal, modules
     cavj = F["cheeks"]["headphone_jack"]["pocket"]["body_cavity"]

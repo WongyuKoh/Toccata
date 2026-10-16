@@ -75,7 +75,7 @@ def cheek_features(side):
         adds.append(box(23.29, 24.19, 0.0, 212.0, 3.0, 5.0))
         bolts = [28.38, 35.30]      # A7: world 1226.88 / 1233.80, centred on the cheek (local 31.84)
     for bx in bolts:
-        cuts.append(teardrop_y(bx, 12.0, 203.0, 212.5, 3.4))
+        cuts.append(teardrop_y(bx, 12.0, 199.0, 212.5, 3.4))   # 2026-10-07: to y199 for M3x20 (was y203 for M3x16) - tip y200.6, 1.6 clear
         # M3 nut pocket AF 5.5 + 0.1, thickness 2.4 + 0.2 (same rule as the key nut traps), dropped in from below;
         # roof z15.2 >= 12 + 3.175 so the nut sits on the bolt axis
         cuts.append(box(bx - 2.8, bx + 2.8, 204.95, 207.55, 2.5, 15.2))

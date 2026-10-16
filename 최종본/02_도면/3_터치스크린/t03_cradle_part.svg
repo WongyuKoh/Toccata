@@ -1,0 +1,873 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1564" height="3177" viewBox="0 0 1564.0 3176.9"><style>#p0 .ln,#p0 .edge{fill:none;stroke:#1d2433;stroke-width:0.25080}
+#p0 .edge{stroke-width:0.36480}
+#p0 .dm{stroke:#1f5fbf;stroke-width:0.18240;fill:none}
+#p0 .ex{stroke:#8a96ab;stroke-width:0.13680;fill:none}
+#p0 .ah{fill:#1f5fbf;stroke:none}
+#p0 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p0 .tx,#p0 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p0 .tx-s{fill:#6b7690}
+#p0 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p0 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p0 .ld{stroke:#1d2433;stroke-width:0.15960;fill:none}
+#p0 .dot{fill:#1d2433}
+#p0 .cl{stroke:#6b7690;stroke-width:0.15960;stroke-dasharray:2.73600 0.68400 0.45600 0.68400;fill:none}
+#p0 .ph{stroke-dasharray:1.14000 0.68400;fill-opacity:.35}
+#p0 .ph2{fill:none;stroke:#6b7690;stroke-width:0.22800;stroke-dasharray:1.36800 0.68400}
+#p0 .pressed{fill:none;stroke:#c2410c;stroke-width:0.27360;stroke-dasharray:1.59600 0.91200}
+#p0 .nostroke{stroke:none}
+#p0 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p0 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.18240;fill-opacity:.85}
+#p0 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.13680}
+#p0 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.13680}
+#p0 .m-sensor{fill:#222;stroke:none}
+#p0 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.11400}
+#p0 .lead{stroke:#5d6778;stroke-width:0.27360;fill:none}
+#p0 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.18240}
+#p0 .pivot{fill:#c2410c;stroke:none}
+#p0 .spring{fill:none;stroke:#4a5568;stroke-width:0.27360}
+#p0 .hl-wood{stroke:#b89868;stroke-width:0.13680}
+#p0 .hl-print{stroke:#8fa1bb;stroke-width:0.11400}
+#p0 .hl-key{stroke:#9aa3b2;stroke-width:0.11400}
+#p0 .hl-steel{stroke:#5d6778;stroke-width:0.13680}
+#p0 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.22800}
+#p0 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p0 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.22800}
+#p0 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.22800}
+#p0 .kbt{fill:#4a4f59;stroke:none}
+#p0 .kph{fill:none;stroke:#6b7690;stroke-width:0.18240;stroke-dasharray:0.91200 0.68400}
+#p0 .sens{fill:#222}
+#p0 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.18240;stroke-dasharray:1.36800 0.91200}
+#p0 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.22800}
+#p0 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p0 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.13680}
+#p0 .m-cloth{fill:#e39b3c;stroke:none}
+#p0 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.18240}
+#p0 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.18240}
+#p0 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.18240}
+#p0 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.22800}
+#p0 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.22800}
+#p0 .hl-bar{stroke:#b8955a;stroke-width:0.11400}
+#p0 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.13680}
+#p0 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.22800}
+#p0 .fillonly{stroke:none}
+#p0 .env{fill:none;stroke:#2e7d4f;stroke-width:0.18240;stroke-dasharray:0.91200 0.45600}
+#p0 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.15960;stroke-dasharray:0.91200 0.57000}
+#p0 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.20520;stroke-dasharray:3.19200 0.68400 0.45600 0.68400}
+#p0 .vis{fill:none;stroke:#1d2433;stroke-width:0.12540}
+#p0 .out{fill:none;stroke:#1d2433;stroke-width:0.29640}
+#p0 .faint{fill:none;stroke:#b3bccb;stroke-width:0.18240}
+#p0 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.15960}
+#p0 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.13680;stroke-dasharray:0.45600 0.57000}
+#p0 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.20520;stroke-dasharray:0.68400 0.68400}
+#p0 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p0 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.15960}
+#p0 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.15960}
+#p0 .tw{fill:#fbfbf8;stroke:none}
+#p0 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p0 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p0 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.18240}
+#p0 .glass{fill:none;stroke:#0b2a55;stroke-width:0.50160}
+#p0 .act{fill:none;stroke:#3d8bff;stroke-width:0.91200}
+#p0 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.22800}
+#p0 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.22800}
+#p0 .hl-lid{stroke:#3f8a55;stroke-width:0.11400}
+#p0 .hl-cr{stroke:#1f5fbf;stroke-width:0.10260}
+#p0 .hl-leg{stroke:#7a4bb7;stroke-width:0.11400}
+#p0 .hl-ko{stroke:#d23c3c;stroke-width:0.11400}
+#p0 .rib{fill:none;stroke:#d97000;stroke-width:0.50160;stroke-linejoin:round}
+#p0 .rib-t{fill:none;stroke:#d97000;stroke-width:0.22800;stroke-dasharray:1.14000 0.68400}
+#p0 .pw{fill:none;stroke:#c2185b;stroke-width:0.31920;stroke-dasharray:1.36800 0.68400;stroke-linejoin:round}
+#p0 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.36480}
+#p0 .ko{fill:none;stroke:#d23c3c;stroke-width:0.27360;stroke-dasharray:1.36800 0.68400}
+#p0 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.31920}
+#p0 .snd{fill:none;stroke:#15907f;stroke-width:0.27360;stroke-dasharray:2.05200 0.91200}
+#p0 .eye{fill:none;stroke:#b03a8f;stroke-width:0.25080}
+#p0 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.20520;stroke-dasharray:1.59600 0.68400}
+#p0 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.13680;stroke-dasharray:0.45600 0.57000}
+#p0 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.25080;stroke-dasharray:2.28000 0.68400 0.45600 0.68400}
+#p0 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.20520;stroke-dasharray:1.36800 0.68400}
+#p0 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.18240;stroke-dasharray:1.14000 0.68400}
+#p0 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p0 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p0 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p0 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p0 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p0 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.18240}
+#p0 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.50160}
+#p0 .wireg{fill:none;stroke:#222;stroke-width:0.50160}
+#p0 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.18240}
+#p0 .ffc-c{fill:#c9a24a;stroke:none}
+#p0 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.22800}
+#p0 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}#p1 .ln,#p1 .edge{fill:none;stroke:#1d2433;stroke-width:0.11702}
+#p1 .edge{stroke-width:0.17021}
+#p1 .dm{stroke:#1f5fbf;stroke-width:0.08511;fill:none}
+#p1 .ex{stroke:#8a96ab;stroke-width:0.06383;fill:none}
+#p1 .ah{fill:#1f5fbf;stroke:none}
+#p1 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p1 .tx,#p1 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p1 .tx-s{fill:#6b7690}
+#p1 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p1 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p1 .ld{stroke:#1d2433;stroke-width:0.07447;fill:none}
+#p1 .dot{fill:#1d2433}
+#p1 .cl{stroke:#6b7690;stroke-width:0.07447;stroke-dasharray:1.27660 0.31915 0.21277 0.31915;fill:none}
+#p1 .ph{stroke-dasharray:0.53191 0.31915;fill-opacity:.35}
+#p1 .ph2{fill:none;stroke:#6b7690;stroke-width:0.10638;stroke-dasharray:0.63830 0.31915}
+#p1 .pressed{fill:none;stroke:#c2410c;stroke-width:0.12766;stroke-dasharray:0.74468 0.42553}
+#p1 .nostroke{stroke:none}
+#p1 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p1 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.08511;fill-opacity:.85}
+#p1 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.06383}
+#p1 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.06383}
+#p1 .m-sensor{fill:#222;stroke:none}
+#p1 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.05319}
+#p1 .lead{stroke:#5d6778;stroke-width:0.12766;fill:none}
+#p1 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.08511}
+#p1 .pivot{fill:#c2410c;stroke:none}
+#p1 .spring{fill:none;stroke:#4a5568;stroke-width:0.12766}
+#p1 .hl-wood{stroke:#b89868;stroke-width:0.06383}
+#p1 .hl-print{stroke:#8fa1bb;stroke-width:0.05319}
+#p1 .hl-key{stroke:#9aa3b2;stroke-width:0.05319}
+#p1 .hl-steel{stroke:#5d6778;stroke-width:0.06383}
+#p1 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.10638}
+#p1 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p1 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.10638}
+#p1 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.10638}
+#p1 .kbt{fill:#4a4f59;stroke:none}
+#p1 .kph{fill:none;stroke:#6b7690;stroke-width:0.08511;stroke-dasharray:0.42553 0.31915}
+#p1 .sens{fill:#222}
+#p1 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.08511;stroke-dasharray:0.63830 0.42553}
+#p1 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.10638}
+#p1 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p1 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.06383}
+#p1 .m-cloth{fill:#e39b3c;stroke:none}
+#p1 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.08511}
+#p1 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.08511}
+#p1 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.08511}
+#p1 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.10638}
+#p1 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.10638}
+#p1 .hl-bar{stroke:#b8955a;stroke-width:0.05319}
+#p1 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.06383}
+#p1 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.10638}
+#p1 .fillonly{stroke:none}
+#p1 .env{fill:none;stroke:#2e7d4f;stroke-width:0.08511;stroke-dasharray:0.42553 0.21277}
+#p1 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.07447;stroke-dasharray:0.42553 0.26596}
+#p1 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.09574;stroke-dasharray:1.48936 0.31915 0.21277 0.31915}
+#p1 .vis{fill:none;stroke:#1d2433;stroke-width:0.05851}
+#p1 .out{fill:none;stroke:#1d2433;stroke-width:0.13830}
+#p1 .faint{fill:none;stroke:#b3bccb;stroke-width:0.08511}
+#p1 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.07447}
+#p1 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.06383;stroke-dasharray:0.21277 0.26596}
+#p1 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.09574;stroke-dasharray:0.31915 0.31915}
+#p1 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p1 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.07447}
+#p1 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.07447}
+#p1 .tw{fill:#fbfbf8;stroke:none}
+#p1 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p1 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p1 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.08511}
+#p1 .glass{fill:none;stroke:#0b2a55;stroke-width:0.23404}
+#p1 .act{fill:none;stroke:#3d8bff;stroke-width:0.42553}
+#p1 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.10638}
+#p1 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.10638}
+#p1 .hl-lid{stroke:#3f8a55;stroke-width:0.05319}
+#p1 .hl-cr{stroke:#1f5fbf;stroke-width:0.04787}
+#p1 .hl-leg{stroke:#7a4bb7;stroke-width:0.05319}
+#p1 .hl-ko{stroke:#d23c3c;stroke-width:0.05319}
+#p1 .rib{fill:none;stroke:#d97000;stroke-width:0.23404;stroke-linejoin:round}
+#p1 .rib-t{fill:none;stroke:#d97000;stroke-width:0.10638;stroke-dasharray:0.53191 0.31915}
+#p1 .pw{fill:none;stroke:#c2185b;stroke-width:0.14894;stroke-dasharray:0.63830 0.31915;stroke-linejoin:round}
+#p1 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.17021}
+#p1 .ko{fill:none;stroke:#d23c3c;stroke-width:0.12766;stroke-dasharray:0.63830 0.31915}
+#p1 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.14894}
+#p1 .snd{fill:none;stroke:#15907f;stroke-width:0.12766;stroke-dasharray:0.95745 0.42553}
+#p1 .eye{fill:none;stroke:#b03a8f;stroke-width:0.11702}
+#p1 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.09574;stroke-dasharray:0.74468 0.31915}
+#p1 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.06383;stroke-dasharray:0.21277 0.26596}
+#p1 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.11702;stroke-dasharray:1.06383 0.31915 0.21277 0.31915}
+#p1 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.09574;stroke-dasharray:0.63830 0.31915}
+#p1 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.08511;stroke-dasharray:0.53191 0.31915}
+#p1 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p1 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p1 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p1 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p1 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p1 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.08511}
+#p1 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.23404}
+#p1 .wireg{fill:none;stroke:#222;stroke-width:0.23404}
+#p1 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.08511}
+#p1 .ffc-c{fill:#c9a24a;stroke:none}
+#p1 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.10638}
+#p1 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}#p2 .ln,#p2 .edge{fill:none;stroke:#1d2433;stroke-width:0.25080}
+#p2 .edge{stroke-width:0.36480}
+#p2 .dm{stroke:#1f5fbf;stroke-width:0.18240;fill:none}
+#p2 .ex{stroke:#8a96ab;stroke-width:0.13680;fill:none}
+#p2 .ah{fill:#1f5fbf;stroke:none}
+#p2 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p2 .tx,#p2 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p2 .tx-s{fill:#6b7690}
+#p2 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p2 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p2 .ld{stroke:#1d2433;stroke-width:0.15960;fill:none}
+#p2 .dot{fill:#1d2433}
+#p2 .cl{stroke:#6b7690;stroke-width:0.15960;stroke-dasharray:2.73600 0.68400 0.45600 0.68400;fill:none}
+#p2 .ph{stroke-dasharray:1.14000 0.68400;fill-opacity:.35}
+#p2 .ph2{fill:none;stroke:#6b7690;stroke-width:0.22800;stroke-dasharray:1.36800 0.68400}
+#p2 .pressed{fill:none;stroke:#c2410c;stroke-width:0.27360;stroke-dasharray:1.59600 0.91200}
+#p2 .nostroke{stroke:none}
+#p2 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p2 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.18240;fill-opacity:.85}
+#p2 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.13680}
+#p2 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.13680}
+#p2 .m-sensor{fill:#222;stroke:none}
+#p2 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.11400}
+#p2 .lead{stroke:#5d6778;stroke-width:0.27360;fill:none}
+#p2 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.18240}
+#p2 .pivot{fill:#c2410c;stroke:none}
+#p2 .spring{fill:none;stroke:#4a5568;stroke-width:0.27360}
+#p2 .hl-wood{stroke:#b89868;stroke-width:0.13680}
+#p2 .hl-print{stroke:#8fa1bb;stroke-width:0.11400}
+#p2 .hl-key{stroke:#9aa3b2;stroke-width:0.11400}
+#p2 .hl-steel{stroke:#5d6778;stroke-width:0.13680}
+#p2 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.22800}
+#p2 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p2 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.22800}
+#p2 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.22800}
+#p2 .kbt{fill:#4a4f59;stroke:none}
+#p2 .kph{fill:none;stroke:#6b7690;stroke-width:0.18240;stroke-dasharray:0.91200 0.68400}
+#p2 .sens{fill:#222}
+#p2 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.18240;stroke-dasharray:1.36800 0.91200}
+#p2 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.22800}
+#p2 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p2 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.13680}
+#p2 .m-cloth{fill:#e39b3c;stroke:none}
+#p2 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.18240}
+#p2 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.18240}
+#p2 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.18240}
+#p2 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.22800}
+#p2 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.22800}
+#p2 .hl-bar{stroke:#b8955a;stroke-width:0.11400}
+#p2 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.13680}
+#p2 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.22800}
+#p2 .fillonly{stroke:none}
+#p2 .env{fill:none;stroke:#2e7d4f;stroke-width:0.18240;stroke-dasharray:0.91200 0.45600}
+#p2 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.15960;stroke-dasharray:0.91200 0.57000}
+#p2 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.20520;stroke-dasharray:3.19200 0.68400 0.45600 0.68400}
+#p2 .vis{fill:none;stroke:#1d2433;stroke-width:0.12540}
+#p2 .out{fill:none;stroke:#1d2433;stroke-width:0.29640}
+#p2 .faint{fill:none;stroke:#b3bccb;stroke-width:0.18240}
+#p2 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.15960}
+#p2 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.13680;stroke-dasharray:0.45600 0.57000}
+#p2 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.20520;stroke-dasharray:0.68400 0.68400}
+#p2 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p2 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.15960}
+#p2 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.15960}
+#p2 .tw{fill:#fbfbf8;stroke:none}
+#p2 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p2 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p2 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.18240}
+#p2 .glass{fill:none;stroke:#0b2a55;stroke-width:0.50160}
+#p2 .act{fill:none;stroke:#3d8bff;stroke-width:0.91200}
+#p2 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.22800}
+#p2 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.22800}
+#p2 .hl-lid{stroke:#3f8a55;stroke-width:0.11400}
+#p2 .hl-cr{stroke:#1f5fbf;stroke-width:0.10260}
+#p2 .hl-leg{stroke:#7a4bb7;stroke-width:0.11400}
+#p2 .hl-ko{stroke:#d23c3c;stroke-width:0.11400}
+#p2 .rib{fill:none;stroke:#d97000;stroke-width:0.50160;stroke-linejoin:round}
+#p2 .rib-t{fill:none;stroke:#d97000;stroke-width:0.22800;stroke-dasharray:1.14000 0.68400}
+#p2 .pw{fill:none;stroke:#c2185b;stroke-width:0.31920;stroke-dasharray:1.36800 0.68400;stroke-linejoin:round}
+#p2 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.36480}
+#p2 .ko{fill:none;stroke:#d23c3c;stroke-width:0.27360;stroke-dasharray:1.36800 0.68400}
+#p2 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.31920}
+#p2 .snd{fill:none;stroke:#15907f;stroke-width:0.27360;stroke-dasharray:2.05200 0.91200}
+#p2 .eye{fill:none;stroke:#b03a8f;stroke-width:0.25080}
+#p2 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.20520;stroke-dasharray:1.59600 0.68400}
+#p2 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.13680;stroke-dasharray:0.45600 0.57000}
+#p2 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.25080;stroke-dasharray:2.28000 0.68400 0.45600 0.68400}
+#p2 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.20520;stroke-dasharray:1.36800 0.68400}
+#p2 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.18240;stroke-dasharray:1.14000 0.68400}
+#p2 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p2 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p2 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p2 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p2 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p2 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.18240}
+#p2 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.50160}
+#p2 .wireg{fill:none;stroke:#222;stroke-width:0.50160}
+#p2 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.18240}
+#p2 .ffc-c{fill:#c9a24a;stroke:none}
+#p2 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.22800}
+#p2 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}#p3 .ln,#p3 .edge{fill:none;stroke:#1d2433;stroke-width:0.11000}
+#p3 .edge{stroke-width:0.16000}
+#p3 .dm{stroke:#1f5fbf;stroke-width:0.08000;fill:none}
+#p3 .ex{stroke:#8a96ab;stroke-width:0.06000;fill:none}
+#p3 .ah{fill:#1f5fbf;stroke:none}
+#p3 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p3 .tx,#p3 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p3 .tx-s{fill:#6b7690}
+#p3 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p3 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p3 .ld{stroke:#1d2433;stroke-width:0.07000;fill:none}
+#p3 .dot{fill:#1d2433}
+#p3 .cl{stroke:#6b7690;stroke-width:0.07000;stroke-dasharray:1.20000 0.30000 0.20000 0.30000;fill:none}
+#p3 .ph{stroke-dasharray:0.50000 0.30000;fill-opacity:.35}
+#p3 .ph2{fill:none;stroke:#6b7690;stroke-width:0.10000;stroke-dasharray:0.60000 0.30000}
+#p3 .pressed{fill:none;stroke:#c2410c;stroke-width:0.12000;stroke-dasharray:0.70000 0.40000}
+#p3 .nostroke{stroke:none}
+#p3 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p3 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.08000;fill-opacity:.85}
+#p3 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.06000}
+#p3 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.06000}
+#p3 .m-sensor{fill:#222;stroke:none}
+#p3 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.05000}
+#p3 .lead{stroke:#5d6778;stroke-width:0.12000;fill:none}
+#p3 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.08000}
+#p3 .pivot{fill:#c2410c;stroke:none}
+#p3 .spring{fill:none;stroke:#4a5568;stroke-width:0.12000}
+#p3 .hl-wood{stroke:#b89868;stroke-width:0.06000}
+#p3 .hl-print{stroke:#8fa1bb;stroke-width:0.05000}
+#p3 .hl-key{stroke:#9aa3b2;stroke-width:0.05000}
+#p3 .hl-steel{stroke:#5d6778;stroke-width:0.06000}
+#p3 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.10000}
+#p3 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p3 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.10000}
+#p3 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.10000}
+#p3 .kbt{fill:#4a4f59;stroke:none}
+#p3 .kph{fill:none;stroke:#6b7690;stroke-width:0.08000;stroke-dasharray:0.40000 0.30000}
+#p3 .sens{fill:#222}
+#p3 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.08000;stroke-dasharray:0.60000 0.40000}
+#p3 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.10000}
+#p3 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p3 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.06000}
+#p3 .m-cloth{fill:#e39b3c;stroke:none}
+#p3 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.08000}
+#p3 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.08000}
+#p3 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.08000}
+#p3 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.10000}
+#p3 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.10000}
+#p3 .hl-bar{stroke:#b8955a;stroke-width:0.05000}
+#p3 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.06000}
+#p3 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.10000}
+#p3 .fillonly{stroke:none}
+#p3 .env{fill:none;stroke:#2e7d4f;stroke-width:0.08000;stroke-dasharray:0.40000 0.20000}
+#p3 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.07000;stroke-dasharray:0.40000 0.25000}
+#p3 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.09000;stroke-dasharray:1.40000 0.30000 0.20000 0.30000}
+#p3 .vis{fill:none;stroke:#1d2433;stroke-width:0.05500}
+#p3 .out{fill:none;stroke:#1d2433;stroke-width:0.13000}
+#p3 .faint{fill:none;stroke:#b3bccb;stroke-width:0.08000}
+#p3 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.07000}
+#p3 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.06000;stroke-dasharray:0.20000 0.25000}
+#p3 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.09000;stroke-dasharray:0.30000 0.30000}
+#p3 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p3 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.07000}
+#p3 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.07000}
+#p3 .tw{fill:#fbfbf8;stroke:none}
+#p3 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p3 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p3 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.08000}
+#p3 .glass{fill:none;stroke:#0b2a55;stroke-width:0.22000}
+#p3 .act{fill:none;stroke:#3d8bff;stroke-width:0.40000}
+#p3 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.10000}
+#p3 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.10000}
+#p3 .hl-lid{stroke:#3f8a55;stroke-width:0.05000}
+#p3 .hl-cr{stroke:#1f5fbf;stroke-width:0.04500}
+#p3 .hl-leg{stroke:#7a4bb7;stroke-width:0.05000}
+#p3 .hl-ko{stroke:#d23c3c;stroke-width:0.05000}
+#p3 .rib{fill:none;stroke:#d97000;stroke-width:0.22000;stroke-linejoin:round}
+#p3 .rib-t{fill:none;stroke:#d97000;stroke-width:0.10000;stroke-dasharray:0.50000 0.30000}
+#p3 .pw{fill:none;stroke:#c2185b;stroke-width:0.14000;stroke-dasharray:0.60000 0.30000;stroke-linejoin:round}
+#p3 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.16000}
+#p3 .ko{fill:none;stroke:#d23c3c;stroke-width:0.12000;stroke-dasharray:0.60000 0.30000}
+#p3 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.14000}
+#p3 .snd{fill:none;stroke:#15907f;stroke-width:0.12000;stroke-dasharray:0.90000 0.40000}
+#p3 .eye{fill:none;stroke:#b03a8f;stroke-width:0.11000}
+#p3 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.09000;stroke-dasharray:0.70000 0.30000}
+#p3 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.06000;stroke-dasharray:0.20000 0.25000}
+#p3 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.11000;stroke-dasharray:1.00000 0.30000 0.20000 0.30000}
+#p3 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.09000;stroke-dasharray:0.60000 0.30000}
+#p3 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.08000;stroke-dasharray:0.50000 0.30000}
+#p3 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p3 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p3 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p3 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p3 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p3 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.08000}
+#p3 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.22000}
+#p3 .wireg{fill:none;stroke:#222;stroke-width:0.22000}
+#p3 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.08000}
+#p3 .ffc-c{fill:#c9a24a;stroke:none}
+#p3 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.10000}
+#p3 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}#p4 .ln,#p4 .edge{fill:none;stroke:#1d2433;stroke-width:0.13152}
+#p4 .edge{stroke-width:0.19130}
+#p4 .dm{stroke:#1f5fbf;stroke-width:0.09565;fill:none}
+#p4 .ex{stroke:#8a96ab;stroke-width:0.07174;fill:none}
+#p4 .ah{fill:#1f5fbf;stroke:none}
+#p4 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p4 .tx,#p4 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p4 .tx-s{fill:#6b7690}
+#p4 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p4 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p4 .ld{stroke:#1d2433;stroke-width:0.08370;fill:none}
+#p4 .dot{fill:#1d2433}
+#p4 .cl{stroke:#6b7690;stroke-width:0.08370;stroke-dasharray:1.43478 0.35870 0.23913 0.35870;fill:none}
+#p4 .ph{stroke-dasharray:0.59783 0.35870;fill-opacity:.35}
+#p4 .ph2{fill:none;stroke:#6b7690;stroke-width:0.11957;stroke-dasharray:0.71739 0.35870}
+#p4 .pressed{fill:none;stroke:#c2410c;stroke-width:0.14348;stroke-dasharray:0.83696 0.47826}
+#p4 .nostroke{stroke:none}
+#p4 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p4 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.09565;fill-opacity:.85}
+#p4 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.07174}
+#p4 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.07174}
+#p4 .m-sensor{fill:#222;stroke:none}
+#p4 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.05978}
+#p4 .lead{stroke:#5d6778;stroke-width:0.14348;fill:none}
+#p4 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.09565}
+#p4 .pivot{fill:#c2410c;stroke:none}
+#p4 .spring{fill:none;stroke:#4a5568;stroke-width:0.14348}
+#p4 .hl-wood{stroke:#b89868;stroke-width:0.07174}
+#p4 .hl-print{stroke:#8fa1bb;stroke-width:0.05978}
+#p4 .hl-key{stroke:#9aa3b2;stroke-width:0.05978}
+#p4 .hl-steel{stroke:#5d6778;stroke-width:0.07174}
+#p4 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.11957}
+#p4 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p4 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p4 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p4 .kbt{fill:#4a4f59;stroke:none}
+#p4 .kph{fill:none;stroke:#6b7690;stroke-width:0.09565;stroke-dasharray:0.47826 0.35870}
+#p4 .sens{fill:#222}
+#p4 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.09565;stroke-dasharray:0.71739 0.47826}
+#p4 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p4 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p4 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.07174}
+#p4 .m-cloth{fill:#e39b3c;stroke:none}
+#p4 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.09565}
+#p4 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.09565}
+#p4 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.09565}
+#p4 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.11957}
+#p4 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.11957}
+#p4 .hl-bar{stroke:#b8955a;stroke-width:0.05978}
+#p4 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.07174}
+#p4 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.11957}
+#p4 .fillonly{stroke:none}
+#p4 .env{fill:none;stroke:#2e7d4f;stroke-width:0.09565;stroke-dasharray:0.47826 0.23913}
+#p4 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.08370;stroke-dasharray:0.47826 0.29891}
+#p4 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.10761;stroke-dasharray:1.67391 0.35870 0.23913 0.35870}
+#p4 .vis{fill:none;stroke:#1d2433;stroke-width:0.06576}
+#p4 .out{fill:none;stroke:#1d2433;stroke-width:0.15543}
+#p4 .faint{fill:none;stroke:#b3bccb;stroke-width:0.09565}
+#p4 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.08370}
+#p4 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p4 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.10761;stroke-dasharray:0.35870 0.35870}
+#p4 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p4 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.08370}
+#p4 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.08370}
+#p4 .tw{fill:#fbfbf8;stroke:none}
+#p4 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p4 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p4 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.09565}
+#p4 .glass{fill:none;stroke:#0b2a55;stroke-width:0.26304}
+#p4 .act{fill:none;stroke:#3d8bff;stroke-width:0.47826}
+#p4 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.11957}
+#p4 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.11957}
+#p4 .hl-lid{stroke:#3f8a55;stroke-width:0.05978}
+#p4 .hl-cr{stroke:#1f5fbf;stroke-width:0.05380}
+#p4 .hl-leg{stroke:#7a4bb7;stroke-width:0.05978}
+#p4 .hl-ko{stroke:#d23c3c;stroke-width:0.05978}
+#p4 .rib{fill:none;stroke:#d97000;stroke-width:0.26304;stroke-linejoin:round}
+#p4 .rib-t{fill:none;stroke:#d97000;stroke-width:0.11957;stroke-dasharray:0.59783 0.35870}
+#p4 .pw{fill:none;stroke:#c2185b;stroke-width:0.16739;stroke-dasharray:0.71739 0.35870;stroke-linejoin:round}
+#p4 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.19130}
+#p4 .ko{fill:none;stroke:#d23c3c;stroke-width:0.14348;stroke-dasharray:0.71739 0.35870}
+#p4 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.16739}
+#p4 .snd{fill:none;stroke:#15907f;stroke-width:0.14348;stroke-dasharray:1.07609 0.47826}
+#p4 .eye{fill:none;stroke:#b03a8f;stroke-width:0.13152}
+#p4 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.10761;stroke-dasharray:0.83696 0.35870}
+#p4 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p4 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.13152;stroke-dasharray:1.19565 0.35870 0.23913 0.35870}
+#p4 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.10761;stroke-dasharray:0.71739 0.35870}
+#p4 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.09565;stroke-dasharray:0.59783 0.35870}
+#p4 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p4 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p4 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p4 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p4 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p4 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.09565}
+#p4 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.26304}
+#p4 .wireg{fill:none;stroke:#222;stroke-width:0.26304}
+#p4 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.09565}
+#p4 .ffc-c{fill:#c9a24a;stroke:none}
+#p4 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p4 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}#p5 .ln,#p5 .edge{fill:none;stroke:#1d2433;stroke-width:0.13152}
+#p5 .edge{stroke-width:0.19130}
+#p5 .dm{stroke:#1f5fbf;stroke-width:0.09565;fill:none}
+#p5 .ex{stroke:#8a96ab;stroke-width:0.07174;fill:none}
+#p5 .ah{fill:#1f5fbf;stroke:none}
+#p5 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p5 .tx,#p5 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p5 .tx-s{fill:#6b7690}
+#p5 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p5 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p5 .ld{stroke:#1d2433;stroke-width:0.08370;fill:none}
+#p5 .dot{fill:#1d2433}
+#p5 .cl{stroke:#6b7690;stroke-width:0.08370;stroke-dasharray:1.43478 0.35870 0.23913 0.35870;fill:none}
+#p5 .ph{stroke-dasharray:0.59783 0.35870;fill-opacity:.35}
+#p5 .ph2{fill:none;stroke:#6b7690;stroke-width:0.11957;stroke-dasharray:0.71739 0.35870}
+#p5 .pressed{fill:none;stroke:#c2410c;stroke-width:0.14348;stroke-dasharray:0.83696 0.47826}
+#p5 .nostroke{stroke:none}
+#p5 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p5 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.09565;fill-opacity:.85}
+#p5 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.07174}
+#p5 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.07174}
+#p5 .m-sensor{fill:#222;stroke:none}
+#p5 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.05978}
+#p5 .lead{stroke:#5d6778;stroke-width:0.14348;fill:none}
+#p5 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.09565}
+#p5 .pivot{fill:#c2410c;stroke:none}
+#p5 .spring{fill:none;stroke:#4a5568;stroke-width:0.14348}
+#p5 .hl-wood{stroke:#b89868;stroke-width:0.07174}
+#p5 .hl-print{stroke:#8fa1bb;stroke-width:0.05978}
+#p5 .hl-key{stroke:#9aa3b2;stroke-width:0.05978}
+#p5 .hl-steel{stroke:#5d6778;stroke-width:0.07174}
+#p5 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.11957}
+#p5 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p5 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p5 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p5 .kbt{fill:#4a4f59;stroke:none}
+#p5 .kph{fill:none;stroke:#6b7690;stroke-width:0.09565;stroke-dasharray:0.47826 0.35870}
+#p5 .sens{fill:#222}
+#p5 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.09565;stroke-dasharray:0.71739 0.47826}
+#p5 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p5 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p5 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.07174}
+#p5 .m-cloth{fill:#e39b3c;stroke:none}
+#p5 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.09565}
+#p5 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.09565}
+#p5 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.09565}
+#p5 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.11957}
+#p5 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.11957}
+#p5 .hl-bar{stroke:#b8955a;stroke-width:0.05978}
+#p5 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.07174}
+#p5 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.11957}
+#p5 .fillonly{stroke:none}
+#p5 .env{fill:none;stroke:#2e7d4f;stroke-width:0.09565;stroke-dasharray:0.47826 0.23913}
+#p5 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.08370;stroke-dasharray:0.47826 0.29891}
+#p5 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.10761;stroke-dasharray:1.67391 0.35870 0.23913 0.35870}
+#p5 .vis{fill:none;stroke:#1d2433;stroke-width:0.06576}
+#p5 .out{fill:none;stroke:#1d2433;stroke-width:0.15543}
+#p5 .faint{fill:none;stroke:#b3bccb;stroke-width:0.09565}
+#p5 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.08370}
+#p5 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p5 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.10761;stroke-dasharray:0.35870 0.35870}
+#p5 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p5 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.08370}
+#p5 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.08370}
+#p5 .tw{fill:#fbfbf8;stroke:none}
+#p5 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p5 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p5 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.09565}
+#p5 .glass{fill:none;stroke:#0b2a55;stroke-width:0.26304}
+#p5 .act{fill:none;stroke:#3d8bff;stroke-width:0.47826}
+#p5 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.11957}
+#p5 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.11957}
+#p5 .hl-lid{stroke:#3f8a55;stroke-width:0.05978}
+#p5 .hl-cr{stroke:#1f5fbf;stroke-width:0.05380}
+#p5 .hl-leg{stroke:#7a4bb7;stroke-width:0.05978}
+#p5 .hl-ko{stroke:#d23c3c;stroke-width:0.05978}
+#p5 .rib{fill:none;stroke:#d97000;stroke-width:0.26304;stroke-linejoin:round}
+#p5 .rib-t{fill:none;stroke:#d97000;stroke-width:0.11957;stroke-dasharray:0.59783 0.35870}
+#p5 .pw{fill:none;stroke:#c2185b;stroke-width:0.16739;stroke-dasharray:0.71739 0.35870;stroke-linejoin:round}
+#p5 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.19130}
+#p5 .ko{fill:none;stroke:#d23c3c;stroke-width:0.14348;stroke-dasharray:0.71739 0.35870}
+#p5 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.16739}
+#p5 .snd{fill:none;stroke:#15907f;stroke-width:0.14348;stroke-dasharray:1.07609 0.47826}
+#p5 .eye{fill:none;stroke:#b03a8f;stroke-width:0.13152}
+#p5 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.10761;stroke-dasharray:0.83696 0.35870}
+#p5 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p5 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.13152;stroke-dasharray:1.19565 0.35870 0.23913 0.35870}
+#p5 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.10761;stroke-dasharray:0.71739 0.35870}
+#p5 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.09565;stroke-dasharray:0.59783 0.35870}
+#p5 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p5 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p5 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p5 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p5 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p5 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.09565}
+#p5 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.26304}
+#p5 .wireg{fill:none;stroke:#222;stroke-width:0.26304}
+#p5 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.09565}
+#p5 .ffc-c{fill:#c9a24a;stroke:none}
+#p5 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p5 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}#p6 .ln,#p6 .edge{fill:none;stroke:#1d2433;stroke-width:0.13152}
+#p6 .edge{stroke-width:0.19130}
+#p6 .dm{stroke:#1f5fbf;stroke-width:0.09565;fill:none}
+#p6 .ex{stroke:#8a96ab;stroke-width:0.07174;fill:none}
+#p6 .ah{fill:#1f5fbf;stroke:none}
+#p6 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p6 .tx,#p6 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p6 .tx-s{fill:#6b7690}
+#p6 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p6 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p6 .ld{stroke:#1d2433;stroke-width:0.08370;fill:none}
+#p6 .dot{fill:#1d2433}
+#p6 .cl{stroke:#6b7690;stroke-width:0.08370;stroke-dasharray:1.43478 0.35870 0.23913 0.35870;fill:none}
+#p6 .ph{stroke-dasharray:0.59783 0.35870;fill-opacity:.35}
+#p6 .ph2{fill:none;stroke:#6b7690;stroke-width:0.11957;stroke-dasharray:0.71739 0.35870}
+#p6 .pressed{fill:none;stroke:#c2410c;stroke-width:0.14348;stroke-dasharray:0.83696 0.47826}
+#p6 .nostroke{stroke:none}
+#p6 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p6 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.09565;fill-opacity:.85}
+#p6 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.07174}
+#p6 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.07174}
+#p6 .m-sensor{fill:#222;stroke:none}
+#p6 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.05978}
+#p6 .lead{stroke:#5d6778;stroke-width:0.14348;fill:none}
+#p6 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.09565}
+#p6 .pivot{fill:#c2410c;stroke:none}
+#p6 .spring{fill:none;stroke:#4a5568;stroke-width:0.14348}
+#p6 .hl-wood{stroke:#b89868;stroke-width:0.07174}
+#p6 .hl-print{stroke:#8fa1bb;stroke-width:0.05978}
+#p6 .hl-key{stroke:#9aa3b2;stroke-width:0.05978}
+#p6 .hl-steel{stroke:#5d6778;stroke-width:0.07174}
+#p6 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.11957}
+#p6 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p6 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p6 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p6 .kbt{fill:#4a4f59;stroke:none}
+#p6 .kph{fill:none;stroke:#6b7690;stroke-width:0.09565;stroke-dasharray:0.47826 0.35870}
+#p6 .sens{fill:#222}
+#p6 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.09565;stroke-dasharray:0.71739 0.47826}
+#p6 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p6 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p6 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.07174}
+#p6 .m-cloth{fill:#e39b3c;stroke:none}
+#p6 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.09565}
+#p6 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.09565}
+#p6 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.09565}
+#p6 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.11957}
+#p6 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.11957}
+#p6 .hl-bar{stroke:#b8955a;stroke-width:0.05978}
+#p6 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.07174}
+#p6 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.11957}
+#p6 .fillonly{stroke:none}
+#p6 .env{fill:none;stroke:#2e7d4f;stroke-width:0.09565;stroke-dasharray:0.47826 0.23913}
+#p6 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.08370;stroke-dasharray:0.47826 0.29891}
+#p6 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.10761;stroke-dasharray:1.67391 0.35870 0.23913 0.35870}
+#p6 .vis{fill:none;stroke:#1d2433;stroke-width:0.06576}
+#p6 .out{fill:none;stroke:#1d2433;stroke-width:0.15543}
+#p6 .faint{fill:none;stroke:#b3bccb;stroke-width:0.09565}
+#p6 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.08370}
+#p6 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p6 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.10761;stroke-dasharray:0.35870 0.35870}
+#p6 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p6 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.08370}
+#p6 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.08370}
+#p6 .tw{fill:#fbfbf8;stroke:none}
+#p6 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p6 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p6 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.09565}
+#p6 .glass{fill:none;stroke:#0b2a55;stroke-width:0.26304}
+#p6 .act{fill:none;stroke:#3d8bff;stroke-width:0.47826}
+#p6 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.11957}
+#p6 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.11957}
+#p6 .hl-lid{stroke:#3f8a55;stroke-width:0.05978}
+#p6 .hl-cr{stroke:#1f5fbf;stroke-width:0.05380}
+#p6 .hl-leg{stroke:#7a4bb7;stroke-width:0.05978}
+#p6 .hl-ko{stroke:#d23c3c;stroke-width:0.05978}
+#p6 .rib{fill:none;stroke:#d97000;stroke-width:0.26304;stroke-linejoin:round}
+#p6 .rib-t{fill:none;stroke:#d97000;stroke-width:0.11957;stroke-dasharray:0.59783 0.35870}
+#p6 .pw{fill:none;stroke:#c2185b;stroke-width:0.16739;stroke-dasharray:0.71739 0.35870;stroke-linejoin:round}
+#p6 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.19130}
+#p6 .ko{fill:none;stroke:#d23c3c;stroke-width:0.14348;stroke-dasharray:0.71739 0.35870}
+#p6 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.16739}
+#p6 .snd{fill:none;stroke:#15907f;stroke-width:0.14348;stroke-dasharray:1.07609 0.47826}
+#p6 .eye{fill:none;stroke:#b03a8f;stroke-width:0.13152}
+#p6 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.10761;stroke-dasharray:0.83696 0.35870}
+#p6 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p6 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.13152;stroke-dasharray:1.19565 0.35870 0.23913 0.35870}
+#p6 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.10761;stroke-dasharray:0.71739 0.35870}
+#p6 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.09565;stroke-dasharray:0.59783 0.35870}
+#p6 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p6 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p6 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p6 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p6 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p6 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.09565}
+#p6 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.26304}
+#p6 .wireg{fill:none;stroke:#222;stroke-width:0.26304}
+#p6 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.09565}
+#p6 .ffc-c{fill:#c9a24a;stroke:none}
+#p6 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p6 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}#p7 .ln,#p7 .edge{fill:none;stroke:#1d2433;stroke-width:0.13152}
+#p7 .edge{stroke-width:0.19130}
+#p7 .dm{stroke:#1f5fbf;stroke-width:0.09565;fill:none}
+#p7 .ex{stroke:#8a96ab;stroke-width:0.07174;fill:none}
+#p7 .ah{fill:#1f5fbf;stroke:none}
+#p7 .dt{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:500}
+#p7 .tx,#p7 .tx-s{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p7 .tx-s{fill:#6b7690}
+#p7 .lt{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif}
+#p7 .nt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p7 .ld{stroke:#1d2433;stroke-width:0.08370;fill:none}
+#p7 .dot{fill:#1d2433}
+#p7 .cl{stroke:#6b7690;stroke-width:0.08370;stroke-dasharray:1.43478 0.35870 0.23913 0.35870;fill:none}
+#p7 .ph{stroke-dasharray:0.59783 0.35870;fill-opacity:.35}
+#p7 .ph2{fill:none;stroke:#6b7690;stroke-width:0.11957;stroke-dasharray:0.71739 0.35870}
+#p7 .pressed{fill:none;stroke:#c2410c;stroke-width:0.14348;stroke-dasharray:0.83696 0.47826}
+#p7 .nostroke{stroke:none}
+#p7 .m-wood{fill:#e9d9bf;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-print{fill:#dfe6ef;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-print2{fill:#cfe3d6;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-key{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-keyfar{fill:#f1f1ec;stroke:none}
+#p7 .m-black{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-steel{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-felt{fill:#c74a4a;stroke:#1d2433;stroke-width:0.09565;fill-opacity:.85}
+#p7 .m-magN{fill:#c0392b;stroke:#1d2433;stroke-width:0.07174}
+#p7 .m-magS{fill:#2f6fd6;stroke:#1d2433;stroke-width:0.07174}
+#p7 .m-sensor{fill:#222;stroke:none}
+#p7 .m-wire{fill:#e0a526;stroke:#1d2433;stroke-width:0.05978}
+#p7 .lead{stroke:#5d6778;stroke-width:0.14348;fill:none}
+#p7 .void{fill:#ffffff;stroke:#1d2433;stroke-width:0.09565}
+#p7 .pivot{fill:#c2410c;stroke:none}
+#p7 .spring{fill:none;stroke:#4a5568;stroke-width:0.14348}
+#p7 .hl-wood{stroke:#b89868;stroke-width:0.07174}
+#p7 .hl-print{stroke:#8fa1bb;stroke-width:0.05978}
+#p7 .hl-key{stroke:#9aa3b2;stroke-width:0.05978}
+#p7 .hl-steel{stroke:#5d6778;stroke-width:0.07174}
+#p7 .bl{fill:#ffffff;stroke:#1d2433;stroke-width:0.11957}
+#p7 .bt{fill:#1d2433;font-family:Menlo,"Apple SD Gothic Neo",monospace;font-weight:600}
+#p7 .kw{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p7 .kb{fill:#2a2d33;stroke:#1d2433;stroke-width:0.11957}
+#p7 .kbt{fill:#4a4f59;stroke:none}
+#p7 .kph{fill:none;stroke:#6b7690;stroke-width:0.09565;stroke-dasharray:0.47826 0.35870}
+#p7 .sens{fill:#222}
+#p7 .zone{fill:#c2410c;fill-opacity:.06;stroke:#c2410c;stroke-width:0.09565;stroke-dasharray:0.71739 0.47826}
+#p7 .spk{fill:#b9c0cc;stroke:#1d2433;stroke-width:0.11957}
+#p7 .ot{fill:#1f5fbf;font-family:Menlo,"Apple SD Gothic Neo",monospace}
+#p7 .m-lever{fill:#d3e8d9;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-cover{fill:#e7e1f2;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-pu{fill:#a98bd6;stroke:#1d2433;stroke-width:0.07174}
+#p7 .m-cloth{fill:#e39b3c;stroke:none}
+#p7 .m-clothfar{fill:#e39b3c;fill-opacity:.32;stroke:#1d2433;stroke-width:0.09565}
+#p7 .m-brass{fill:#d8b45c;stroke:#1d2433;stroke-width:0.09565}
+#p7 .m-lead{fill:#7b808a;stroke:#1d2433;stroke-width:0.09565}
+#p7 .m-pcb{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.11957}
+#p7 .m-bar{fill:#f4e7cc;stroke:#1d2433;stroke-width:0.11957}
+#p7 .hl-bar{stroke:#b8955a;stroke-width:0.05978}
+#p7 .m-foam{fill:#b9a3e0;stroke:#1d2433;stroke-width:0.07174}
+#p7 .m-sbar{fill:#e4ecf5;stroke:#1d2433;stroke-width:0.11957}
+#p7 .fillonly{stroke:none}
+#p7 .env{fill:none;stroke:#2e7d4f;stroke-width:0.09565;stroke-dasharray:0.47826 0.23913}
+#p7 .hid{fill:none;stroke:#7d8aa3;stroke-width:0.08370;stroke-dasharray:0.47826 0.29891}
+#p7 .phan{fill:none;stroke:#6f4fb3;stroke-width:0.10761;stroke-dasharray:1.67391 0.35870 0.23913 0.35870}
+#p7 .vis{fill:none;stroke:#1d2433;stroke-width:0.06576}
+#p7 .out{fill:none;stroke:#1d2433;stroke-width:0.15543}
+#p7 .faint{fill:none;stroke:#b3bccb;stroke-width:0.09565}
+#p7 .faintfill{fill:#f3f5f8;stroke:#9aa5b8;stroke-width:0.08370}
+#p7 .pressed3{fill:none;stroke:#c2410c;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p7 .pressed2{fill:none;stroke:#c2410c;stroke-width:0.10761;stroke-dasharray:0.35870 0.35870}
+#p7 .ttl{fill:#1d2433;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:700}
+#p7 .tbl{fill:none;stroke:#8a96ab;stroke-width:0.08370}
+#p7 .tbh{fill:#eef2f7;stroke:#8a96ab;stroke-width:0.08370}
+#p7 .tw{fill:#fbfbf8;stroke:none}
+#p7 .inv{fill:#ffffff;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p7 .ok{fill:#2e7d4f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p7 .m-scr{fill:#c9d3e3;stroke:#0b2a55;stroke-width:0.09565}
+#p7 .glass{fill:none;stroke:#0b2a55;stroke-width:0.26304}
+#p7 .act{fill:none;stroke:#3d8bff;stroke-width:0.47826}
+#p7 .m-lid{fill:#d6ead9;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-cr{fill:#dfe9fb;stroke:#1d2433;stroke-width:0.11957}
+#p7 .m-leg{fill:#e4d8f3;stroke:#1d2433;stroke-width:0.11957}
+#p7 .hl-lid{stroke:#3f8a55;stroke-width:0.05978}
+#p7 .hl-cr{stroke:#1f5fbf;stroke-width:0.05380}
+#p7 .hl-leg{stroke:#7a4bb7;stroke-width:0.05978}
+#p7 .hl-ko{stroke:#d23c3c;stroke-width:0.05978}
+#p7 .rib{fill:none;stroke:#d97000;stroke-width:0.26304;stroke-linejoin:round}
+#p7 .rib-t{fill:none;stroke:#d97000;stroke-width:0.11957;stroke-dasharray:0.59783 0.35870}
+#p7 .pw{fill:none;stroke:#c2185b;stroke-width:0.16739;stroke-dasharray:0.71739 0.35870;stroke-linejoin:round}
+#p7 .pw-s{fill:none;stroke:#c2185b;stroke-width:0.19130}
+#p7 .ko{fill:none;stroke:#d23c3c;stroke-width:0.14348;stroke-dasharray:0.71739 0.35870}
+#p7 .ko-line{fill:none;stroke:#d23c3c;stroke-width:0.16739}
+#p7 .snd{fill:none;stroke:#15907f;stroke-width:0.14348;stroke-dasharray:1.07609 0.47826}
+#p7 .eye{fill:none;stroke:#b03a8f;stroke-width:0.13152}
+#p7 .cr-ph{fill:none;stroke:#1f5fbf;stroke-width:0.10761;stroke-dasharray:0.83696 0.35870}
+#p7 .cr-ph2{fill:none;stroke:#1f5fbf;stroke-width:0.07174;stroke-dasharray:0.23913 0.29891}
+#p7 .fold-ph{fill:none;stroke:#5d6b80;stroke-width:0.13152;stroke-dasharray:1.19565 0.35870 0.23913 0.35870}
+#p7 .leg-ph{fill:none;stroke:#7a4bb7;stroke-width:0.10761;stroke-dasharray:0.71739 0.35870}
+#p7 .lid-ph{fill:none;stroke:#3f8a55;stroke-width:0.09565;stroke-dasharray:0.59783 0.35870}
+#p7 .kot{fill:#d23c3c;font-family:"Apple SD Gothic Neo",sans-serif;font-weight:600}
+#p7 .rbt{fill:#d97000;font-family:"Apple SD Gothic Neo",sans-serif}
+#p7 .pwt{fill:#c2185b;font-family:"Apple SD Gothic Neo",sans-serif}
+#p7 .sndt{fill:#15907f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p7 .eyet{fill:#b03a8f;font-family:"Apple SD Gothic Neo",sans-serif}
+#p7 .m-pi{fill:#9fd0ae;stroke:#2e7d4f;stroke-width:0.09565}
+#p7 .wire5{fill:none;stroke:#d23c3c;stroke-width:0.26304}
+#p7 .wireg{fill:none;stroke:#222;stroke-width:0.26304}
+#p7 .ffc{fill:#f2c38a;stroke:#d97000;stroke-width:0.09565}
+#p7 .ffc-c{fill:#c9a24a;stroke:none}
+#p7 .conn{fill:#fbfbf8;stroke:#1d2433;stroke-width:0.11957}
+#p7 .halo{fill:#ffffff;stroke:none;fill-opacity:.9}</style><rect x="0" y="0" width="1564.0" height="3176.9" fill="#ffffff"/><text x="14" y="30.0" font-size="20" font-weight="700" fill="#1d2433" font-family='"Apple SD Gothic Neo",sans-serif'>도면 T3. 화면 받침 (크래들) 부품도 — PETG 출력 1개</text><text x="14" y="52.0" font-size="12.5" font-weight="400" fill="#4a5568" font-family='"Apple SD Gothic Neo",sans-serif'>좌표 mm: x = A0 왼쪽 경계, y = 흰건반 앞끝에서 뒤로, z = 책상에서 위로 · 받침 좌표 xr = x − 611, u = 유리 아래 끝에서 위로, w = 유리 앞면에서 뒤로 · 숫자 = numbers.json(수정 3a판, 확정 L2)</text><text x="14" y="70.0" font-size="12.5" font-weight="400" fill="#4a5568" font-family='"Apple SD Gothic Neo",sans-serif'>받침 170.7×106×17, 화면 Waveshare 7-DSI-TOUCH-C를 뒤에서 M2.5×6 ×4로 고정. 단면 위치는 앞·뒤 그림의 xr 값.</text><text x="14" y="3166.9" font-size="11.5" font-weight="400" fill="#4a5568" font-family='"Apple SD Gothic Neo",sans-serif'>일반 공차 ±0.3 (FDM PETG, P2S) · 표시 없는 모서리 C0.5 · 출처: design/numbers.json md5 8f5821c7 · design/CAD_SPEC_rev3.md md5 ef2b2491 · L2_cu.json md5 c1ad7dd6 · drawings/src/ctx/body_L2.json md5 2d716999</text><text x="1550.0" y="30.0" font-size="13" font-weight="700" fill="#1d2433" text-anchor="end" font-family='"Apple SD Gothic Neo",sans-serif'>Toccata R31 터치스크린 수정 3a판 (B1 · L2) · 도면 고침 1 · 2026-10-01</text><svg id="p0" x="10.0" y="82.0" width="1012.0" height="862.9" viewBox="-101.368 -117.368 230.736 196.736"><text class="ttl" x="-99.5" y="-113.5" font-size="2.736" text-anchor="start">앞에서 본 모습 (유리 쪽, 화면 없이) — xr 오른쪽, u 위</text><rect class="m-cr" x="-68.2" y="2.5" width="8" height="13.76"/><line class="cl" x1="-70.2" y1="9" x2="-58.2" y2="9"/><rect class="m-cr" x="60.2" y="2.5" width="8" height="13.76"/><line class="cl" x1="58.2" y1="9" x2="70.2" y2="9"/><rect class="m-cr" x="-85.35" y="-103.5" width="170.7" height="106"/><rect class="m-sbar" x="-83.35" y="-101.5" width="166.7" height="101.5"/><rect class="void" x="15.5" y="-69" width="29.5" height="36"/><rect class="m-cr" x="26.75" y="-16" width="12.7" height="8"/><rect class="m-cr" x="-83.35" y="-10.5" width="6.35" height="8"/><circle class="m-cr" cx="-77" cy="-6.5" r="4"/><circle class="void" cx="-77" cy="-6.5" r="1.4"/><rect class="m-cr" x="-83.35" y="-98.5" width="6.35" height="8"/><circle class="m-cr" cx="-77" cy="-94.5" r="4"/><circle class="void" cx="-77" cy="-94.5" r="1.4"/><rect class="m-cr" x="77" y="-10.5" width="6.35" height="8"/><circle class="m-cr" cx="77" cy="-6.5" r="4"/><circle class="void" cx="77" cy="-6.5" r="1.4"/><rect class="m-cr" x="77" y="-98.5" width="6.35" height="8"/><circle class="m-cr" cx="77" cy="-94.5" r="4"/><circle class="void" cx="77" cy="-94.5" r="1.4"/><rect class="hid" x="25.75" y="-3" width="19.2" height="5.5"/><rect class="m-sbar" x="48" y="-0" width="18" height="2.5"/><rect class="ph2" x="-83.05" y="-101" width="166.1" height="101"/><rect class="cr-ph2" x="-79.08" y="-96.07" width="154.58" height="86.42"/><line class="cl" x1="0" y1="19.26" x2="0" y2="-106.5"/><line class="cl" x1="-88.35" y1="-50.5" x2="88.35" y2="-50.5"/><line class="ex" x1="-85.35" y1="2.956" x2="-85.35" y2="20.26"/><circle class="dot" cx="-85.35" cy="20.26" r="0.342"/><line class="ex" x1="-85.35" y1="20.26" x2="-85.775" y2="22.312"/><text class="ot" x="-85.0226" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -85.0226 22.996)">xr-85.35  바깥</text><line class="ex" x1="-83.35" y1="0.456" x2="-83.35" y2="20.26"/><circle class="dot" cx="-83.35" cy="20.26" r="0.342"/><line class="ex" x1="-83.35" y1="20.26" x2="-82.925" y2="22.312"/><text class="ot" x="-82.1726" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -82.1726 22.996)">xr-83.35  안</text><line class="ex" x1="-77" y1="-6.044" x2="-77" y2="20.26"/><circle class="dot" cx="-77" cy="20.26" r="0.342"/><line class="ex" x1="-77" y1="20.26" x2="-77" y2="22.312"/><text class="ot" x="-76.2476" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -76.2476 22.996)">xr-77  보스</text><line class="ex" x1="-68.2" y1="16.716" x2="-68.2" y2="20.26"/><circle class="dot" cx="-68.2" cy="20.26" r="0.342"/><line class="ex" x1="-68.2" y1="20.26" x2="-68.2" y2="22.312"/><text class="ot" x="-67.4476" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -67.4476 22.996)">xr-68.2  귀</text><line class="ex" x1="-60.2" y1="16.716" x2="-60.2" y2="20.26"/><circle class="dot" cx="-60.2" cy="20.26" r="0.342"/><line class="ex" x1="-60.2" y1="20.26" x2="-60.2" y2="22.312"/><text class="ot" x="-59.4476" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -59.4476 22.996)">xr-60.2</text><line class="ex" x1="0" y1="2.956" x2="0" y2="20.26"/><circle class="dot" cx="0" cy="20.26" r="0.342"/><line class="ex" x1="0" y1="20.26" x2="0" y2="22.312"/><text class="ot" x="0.7524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 0.7524 22.996)">xr0  가운데</text><line class="ex" x1="15.5" y1="-32.544" x2="15.5" y2="20.26"/><circle class="dot" cx="15.5" cy="20.26" r="0.342"/><line class="ex" x1="15.5" y1="20.26" x2="15.5" y2="22.312"/><text class="ot" x="16.2524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 16.2524 22.996)">xr15.5  창</text><line class="ex" x1="26.75" y1="-7.544" x2="26.75" y2="20.26"/><circle class="dot" cx="26.75" cy="20.26" r="0.342"/><line class="ex" x1="26.75" y1="20.26" x2="26.75" y2="22.312"/><text class="ot" x="27.5024" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 27.5024 22.996)">xr26.75  누름 패드</text><line class="ex" x1="39.45" y1="-7.544" x2="39.45" y2="20.26"/><circle class="dot" cx="39.45" cy="20.26" r="0.342"/><line class="ex" x1="39.45" y1="20.26" x2="39.45" y2="22.312"/><text class="ot" x="40.2024" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 40.2024 22.996)">xr39.45</text><line class="ex" x1="45" y1="-32.544" x2="45" y2="20.26"/><circle class="dot" cx="45" cy="20.26" r="0.342"/><line class="ex" x1="45" y1="20.26" x2="45" y2="22.312"/><text class="ot" x="45.7524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 45.7524 22.996)">xr45  창</text><line class="ex" x1="48" y1="2.956" x2="48" y2="20.26"/><circle class="dot" cx="48" cy="20.26" r="0.342"/><line class="ex" x1="48" y1="20.26" x2="48" y2="22.312"/><text class="ot" x="48.7524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 48.7524 22.996)">xr48  아래 벽 홈</text><line class="ex" x1="60.2" y1="16.716" x2="60.2" y2="20.26"/><circle class="dot" cx="60.2" cy="20.26" r="0.342"/><line class="ex" x1="60.2" y1="20.26" x2="60.2" y2="22.312"/><text class="ot" x="60.9524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 60.9524 22.996)">xr60.2  귀</text><line class="ex" x1="66" y1="2.956" x2="66" y2="20.26"/><circle class="dot" cx="66" cy="20.26" r="0.342"/><line class="ex" x1="66" y1="20.26" x2="65.675" y2="22.312"/><text class="ot" x="66.4274" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 66.4274 22.996)">xr66</text><line class="ex" x1="68.2" y1="16.716" x2="68.2" y2="20.26"/><circle class="dot" cx="68.2" cy="20.26" r="0.342"/><line class="ex" x1="68.2" y1="20.26" x2="68.525" y2="22.312"/><text class="ot" x="69.2774" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 69.2774 22.996)">xr68.2</text><line class="ex" x1="77" y1="-6.044" x2="77" y2="20.26"/><circle class="dot" cx="77" cy="20.26" r="0.342"/><line class="ex" x1="77" y1="20.26" x2="77" y2="22.312"/><text class="ot" x="77.7524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 77.7524 22.996)">xr77  보스</text><line class="ex" x1="83.35" y1="0.456" x2="83.35" y2="20.26"/><circle class="dot" cx="83.35" cy="20.26" r="0.342"/><line class="ex" x1="83.35" y1="20.26" x2="82.925" y2="22.312"/><text class="ot" x="83.6774" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 83.6774 22.996)">xr83.35  안</text><line class="ex" x1="85.35" y1="2.956" x2="85.35" y2="20.26"/><circle class="dot" cx="85.35" cy="20.26" r="0.342"/><line class="ex" x1="85.35" y1="20.26" x2="85.775" y2="22.312"/><text class="ot" x="86.5274" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 86.5274 22.996)">xr85.35  바깥</text><line class="ex" x1="68.656" y1="16.26" x2="91.35" y2="16.26"/><circle class="dot" cx="91.35" cy="16.26" r="0.342"/><line class="ex" x1="91.35" y1="16.26" x2="93.402" y2="16.26"/><text class="ot" x="94.086" y="17.0124" font-size="2.052" text-anchor="start">u-16.26  귀 아래 끝</text><line class="ex" x1="68.656" y1="9" x2="91.35" y2="9"/><circle class="dot" cx="91.35" cy="9" r="0.342"/><line class="ex" x1="91.35" y1="9" x2="93.402" y2="9"/><text class="ot" x="94.086" y="9.7524" font-size="2.052" text-anchor="start">u-9  경첩 축 ±0.2</text><line class="ex" x1="85.806" y1="2.5" x2="91.35" y2="2.5"/><circle class="dot" cx="91.35" cy="2.5" r="0.342"/><line class="ex" x1="91.35" y1="2.5" x2="93.402" y2="2.675"/><text class="ot" x="94.086" y="3.4274" font-size="2.052" text-anchor="start">u-2.5  바깥 아래</text><line class="ex" x1="83.806" y1="-0" x2="91.35" y2="-0"/><circle class="dot" cx="91.35" cy="-0" r="0.342"/><line class="ex" x1="91.35" y1="-0" x2="93.402" y2="-0.175"/><text class="ot" x="94.086" y="0.5774" font-size="2.052" text-anchor="start">u0  유리 받침 +0.2 / 0</text><line class="ex" x1="77.456" y1="-6.5" x2="91.35" y2="-6.5"/><circle class="dot" cx="91.35" cy="-6.5" r="0.342"/><line class="ex" x1="91.35" y1="-6.5" x2="93.402" y2="-5.825"/><text class="ot" x="94.086" y="-5.0726" font-size="2.052" text-anchor="start">u6.5  보스</text><line class="ex" x1="39.906" y1="-8" x2="91.35" y2="-8"/><circle class="dot" cx="91.35" cy="-8" r="0.342"/><line class="ex" x1="91.35" y1="-8" x2="93.402" y2="-8.675"/><text class="ot" x="94.086" y="-7.9226" font-size="2.052" text-anchor="start">u8  누름 패드</text><line class="ex" x1="39.906" y1="-16" x2="91.35" y2="-16"/><circle class="dot" cx="91.35" cy="-16" r="0.342"/><line class="ex" x1="91.35" y1="-16" x2="93.402" y2="-16"/><text class="ot" x="94.086" y="-15.2476" font-size="2.052" text-anchor="start">u16</text><line class="ex" x1="45.456" y1="-33" x2="91.35" y2="-33"/><circle class="dot" cx="91.35" cy="-33" r="0.342"/><line class="ex" x1="91.35" y1="-33" x2="93.402" y2="-33"/><text class="ot" x="94.086" y="-32.2476" font-size="2.052" text-anchor="start">u33  창</text><line class="ex" x1="85.806" y1="-50.5" x2="91.35" y2="-50.5"/><circle class="dot" cx="91.35" cy="-50.5" r="0.342"/><line class="ex" x1="91.35" y1="-50.5" x2="93.402" y2="-50.5"/><text class="ot" x="94.086" y="-49.7476" font-size="2.052" text-anchor="start">u50.5  유리 가운데</text><line class="ex" x1="45.456" y1="-69" x2="91.35" y2="-69"/><circle class="dot" cx="91.35" cy="-69" r="0.342"/><line class="ex" x1="91.35" y1="-69" x2="93.402" y2="-69"/><text class="ot" x="94.086" y="-68.2476" font-size="2.052" text-anchor="start">u69  창</text><line class="ex" x1="77.456" y1="-94.5" x2="91.35" y2="-94.5"/><circle class="dot" cx="91.35" cy="-94.5" r="0.342"/><line class="ex" x1="91.35" y1="-94.5" x2="93.402" y2="-94.5"/><text class="ot" x="94.086" y="-93.7476" font-size="2.052" text-anchor="start">u94.5  보스</text><line class="ex" x1="83.506" y1="-101" x2="91.35" y2="-101"/><circle class="dot" cx="91.35" cy="-101" r="0.342"/><line class="ex" x1="91.35" y1="-101" x2="93.402" y2="-99.15"/><text class="ot" x="94.086" y="-98.3976" font-size="2.052" text-anchor="start">u101  유리 위</text><line class="ex" x1="83.806" y1="-101.5" x2="91.35" y2="-101.5"/><circle class="dot" cx="91.35" cy="-101.5" r="0.342"/><line class="ex" x1="91.35" y1="-101.5" x2="93.402" y2="-102"/><text class="ot" x="94.086" y="-101.2476" font-size="2.052" text-anchor="start">u101.5  안 위</text><line class="ex" x1="85.806" y1="-103.5" x2="91.35" y2="-103.5"/><circle class="dot" cx="91.35" cy="-103.5" r="0.342"/><line class="ex" x1="91.35" y1="-103.5" x2="93.402" y2="-104.85"/><text class="ot" x="94.086" y="-104.0976" font-size="2.052" text-anchor="start">u103.5  바깥 위</text><line class="ex" x1="-85.35" y1="-104.07" x2="-85.35" y2="-110.298"/><line class="ex" x1="85.35" y1="-104.07" x2="85.35" y2="-110.298"/><line class="dm" x1="-85.35" y1="-109.5" x2="85.35" y2="-109.5"/><polygon class="ah" points="-85.35,-109.5 -83.754,-108.9528 -83.754,-110.0472"/><polygon class="ah" points="85.35,-109.5 83.754,-110.0472 83.754,-108.9528"/><text class="dt" x="0" y="-110.2296" font-size="2.28" text-anchor="middle">170.7 (x525.65~696.35)</text><line class="ex" x1="-83.35" y1="-102.07" x2="-83.35" y2="-106.098"/><line class="ex" x1="83.35" y1="-102.07" x2="83.35" y2="-106.098"/><line class="dm" x1="-83.35" y1="-105.3" x2="83.35" y2="-105.3"/><polygon class="ah" points="-83.35,-105.3 -81.754,-104.7528 -81.754,-105.8472"/><polygon class="ah" points="83.35,-105.3 81.754,-105.8472 81.754,-104.7528"/><text class="dt" x="0" y="-106.0296" font-size="2.166" text-anchor="middle">166.7 = 유리 166.1 + 틈 0.3×2</text><line class="ex" x1="-77" y1="-93.93" x2="-77" y2="-85.702"/><line class="ex" x1="77" y1="-93.93" x2="77" y2="-85.702"/><line class="dm" x1="-77" y1="-86.5" x2="77" y2="-86.5"/><polygon class="ah" points="-77,-86.5 -75.404,-85.9528 -75.404,-87.0472"/><polygon class="ah" points="77,-86.5 75.404,-87.0472 75.404,-85.9528"/><text class="dt" x="0" y="-87.2296" font-size="2.166" text-anchor="middle">154 ±0.2 (화면 구멍)</text><line class="ex" x1="-76.43" y1="-6.5" x2="-67.202" y2="-6.5"/><line class="ex" x1="-76.43" y1="-94.5" x2="-67.202" y2="-94.5"/><line class="dm" x1="-68" y1="-6.5" x2="-68" y2="-94.5"/><polygon class="ah" points="-68,-6.5 -67.4528,-8.096 -68.5472,-8.096"/><polygon class="ah" points="-68,-94.5 -68.5472,-92.904 -67.4528,-92.904"/><text class="dt" x="-68.912" y="-50.5" font-size="2.166" text-anchor="middle" transform="rotate(-90 -68.912 -50.5)">88 ±0.2</text><line class="ex" x1="-85.92" y1="2.5" x2="-92.148" y2="2.5"/><line class="ex" x1="-85.92" y1="-103.5" x2="-92.148" y2="-103.5"/><line class="dm" x1="-91.35" y1="2.5" x2="-91.35" y2="-103.5"/><polygon class="ah" points="-91.35,2.5 -90.8028,0.904 -91.8972,0.904"/><polygon class="ah" points="-91.35,-103.5 -91.8972,-101.904 -90.8028,-101.904"/><text class="dt" x="-92.262" y="-50.5" font-size="2.28" text-anchor="middle" transform="rotate(-90 -92.262 -50.5)">106</text><line class="ld" x1="-79.8" y1="-9.3" x2="-77.2805" y2="-11.8195"/><circle class="dot" cx="-79.8" cy="-9.3" r="0.3648"/><circle class="bl" cx="-76.152" cy="-12.948" r="1.596"/><text class="bt" x="-76.152" y="-12.2184" font-size="2.052" text-anchor="middle">a</text><line class="ld" x1="26.75" y1="-16" x2="24.6865" y2="-18.0635"/><circle class="dot" cx="26.75" cy="-16" r="0.3648"/><circle class="bl" cx="23.558" cy="-19.192" r="1.596"/><text class="bt" x="23.558" y="-18.4624" font-size="2.052" text-anchor="middle">b</text><line class="ld" x1="15.5" y1="-69" x2="13.2054" y2="-70.4341"/><circle class="dot" cx="15.5" cy="-69" r="0.3648"/><circle class="bl" cx="11.852" cy="-71.28" r="1.596"/><text class="bt" x="11.852" y="-70.5504" font-size="2.052" text-anchor="middle">c</text><line class="ld" x1="-40" y1="-70" x2="-40" y2="-72.508"/><circle class="dot" cx="-40" cy="-70" r="0.3648"/><circle class="bl" cx="-40" cy="-74.104" r="1.596"/><text class="bt" x="-40" y="-73.3744" font-size="2.052" text-anchor="middle">d</text><line class="ld" x1="-79.08" y1="-86.07" x2="-76.2358" y2="-83.8578"/><circle class="dot" cx="-79.08" cy="-86.07" r="0.3648"/><circle class="bl" cx="-74.976" cy="-82.878" r="1.596"/><text class="bt" x="-74.976" y="-82.1484" font-size="2.052" text-anchor="middle">e</text><line class="ld" x1="35.35" y1="-1.5" x2="35.35" y2="-3.552"/><circle class="dot" cx="35.35" cy="-1.5" r="0.3648"/><circle class="bl" cx="35.35" cy="-5.148" r="1.596"/><text class="bt" x="35.35" y="-4.4184" font-size="2.052" text-anchor="middle">f</text><line class="ld" x1="68.2" y1="9.38" x2="70.252" y2="9.38"/><circle class="dot" cx="68.2" cy="9.38" r="0.3648"/><circle class="bl" cx="71.848" cy="9.38" r="1.596"/><text class="bt" x="71.848" y="10.1096" font-size="2.052" text-anchor="middle">g</text><line class="ld" x1="-85.35" y1="-50" x2="-87.1284" y2="-52.3712"/><circle class="dot" cx="-85.35" cy="-50" r="0.3648"/><circle class="bl" cx="-88.086" cy="-53.648" r="1.596"/><text class="bt" x="-88.086" y="-52.9184" font-size="2.052" text-anchor="middle">h</text><line class="ld" x1="57" y1="1.25" x2="55.2929" y2="-3.1884"/><circle class="dot" cx="57" cy="1.25" r="0.3648"/><circle class="bl" cx="54.72" cy="-4.678" r="1.596"/><text class="bt" x="54.72" y="-3.9484" font-size="2.052" text-anchor="middle">i</text><circle class="bl" cx="-96.404" cy="45.2248" r="1.596"/><text class="bt" x="-96.404" y="46.0456" font-size="2.052" text-anchor="middle">a</text><text class="lt" x="-93.668" y="46" font-size="2.1432" text-anchor="start">보스 Ø8 ×4 (옆벽까지 채움), 구멍 Ø2.8, 화면 뒷면 w8에 닿음 0 / −0.2</text><circle class="bl" cx="-96.404" cy="48.5308" r="1.596"/><text class="bt" x="-96.404" y="49.3516" font-size="2.052" text-anchor="middle">b</text><text class="lt" x="-93.668" y="49.306" font-size="2.1432" text-anchor="start">리본 누름 패드 w8.60~10.50 (뒷판 안면, 리본 + 틈 0.3)</text><circle class="bl" cx="-96.404" cy="51.8368" r="1.596"/><text class="bt" x="-96.404" y="52.6576" font-size="2.052" text-anchor="middle">c</text><text class="lt" x="-93.668" y="52.612" font-size="2.1432" text-anchor="start">점검창 29.5×36 (뒷판 관통, 덮개 T5)</text><circle class="bl" cx="-96.404" cy="55.1428" r="1.596"/><text class="bt" x="-96.404" y="55.9636" font-size="2.052" text-anchor="middle">d</text><text class="lt" x="-93.668" y="55.918" font-size="2.1432" text-anchor="start">뒷판 안면 w10.5: 화면 뒷면과 2.5 틈 = 리본·전원선 길</text><circle class="bl" cx="-96.404" cy="58.4488" r="1.596"/><text class="bt" x="-96.404" y="59.2696" font-size="2.052" text-anchor="middle">e</text><text class="lt" x="-93.668" y="59.224" font-size="2.1432" text-anchor="start">점선 = 유리 166.1×101 · 보이는 영역 154.58×86.42</text><circle class="bl" cx="13.596" cy="45.2248" r="1.596"/><text class="bt" x="13.596" y="46.0456" font-size="2.052" text-anchor="middle">f</text><text class="lt" x="16.332" y="46" font-size="2.1432" text-anchor="start">아래 홈 xr25.75~44.95 (뒤쪽 w8.00~16.00, 숨은 선)</text><circle class="bl" cx="13.596" cy="48.5308" r="1.596"/><text class="bt" x="13.596" y="49.3516" font-size="2.052" text-anchor="middle">g</text><text class="lt" x="16.332" y="49.306" font-size="2.1432" text-anchor="start">경첩 귀 (받침 아래) xr-68.20~-60.20 · 60.20~68.20</text><circle class="bl" cx="13.596" cy="51.8368" r="1.596"/><text class="bt" x="13.596" y="52.6576" font-size="2.052" text-anchor="middle">h</text><text class="lt" x="16.332" y="52.612" font-size="2.1432" text-anchor="start">테 (옆벽 2·아래 2.5·위 2), 유리보다 1 앞</text><circle class="bl" cx="13.596" cy="55.1428" r="1.596"/><text class="bt" x="13.596" y="55.9636" font-size="2.052" text-anchor="middle">i</text><text class="lt" x="16.332" y="55.918" font-size="2.1432" text-anchor="start">【3a】 아래 벽 홈 xr48.00~66.00 (x659.00~677.00) 관통, w-1.00~8.00 — 화면 아래 끝 돌기 자리 (상세 H)</text><line class="dm" x1="90" y1="-110" x2="110" y2="-110"/><line class="dm" x1="90" y1="-109.316" x2="90" y2="-110.684"/><line class="dm" x1="95" y1="-109.316" x2="95" y2="-110.684"/><line class="dm" x1="100" y1="-109.316" x2="100" y2="-110.684"/><line class="dm" x1="105" y1="-109.316" x2="105" y2="-110.684"/><line class="dm" x1="110" y1="-109.316" x2="110" y2="-110.684"/><text class="dt" x="111.368" y="-109.202" font-size="2.28" text-anchor="start">20 mm</text></svg><svg id="p1" x="1030.0" y="82.0" width="482.0" height="886.2" viewBox="-0.6383 -93.6383 51.2766 94.2766"><defs><clipPath id="c53"><rect x="3.0000" y="-40.5000" width="44.0000" height="14.0000"/></clipPath><pattern id="h54" patternUnits="userSpaceOnUse" width="0.6383" height="0.6383" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6383" class="hl-lid"/></pattern><pattern id="h55" patternUnits="userSpaceOnUse" width="0.5319" height="0.5319" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.5319" class="hl-cr"/></pattern><pattern id="h56" patternUnits="userSpaceOnUse" width="0.5319" height="0.5319" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.5319" class="hl-leg"/></pattern><pattern id="h57" patternUnits="userSpaceOnUse" width="0.6383" height="0.6383" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6383" class="hl-print"/></pattern><pattern id="h58" patternUnits="userSpaceOnUse" width="0.7447" height="0.7447" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7447" class="hl-wood"/></pattern><pattern id="h59" patternUnits="userSpaceOnUse" width="0.4255" height="0.4255" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.4255" class="hl-steel"/></pattern><pattern id="h60" patternUnits="userSpaceOnUse" width="0.9574" height="0.9574" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.9574" class="hl-ko"/></pattern><clipPath id="c61"><rect x="6.0000" y="-18.0000" width="38.0000" height="14.0000"/></clipPath></defs><text class="ttl" x="0.5" y="-91.3" font-size="1.2766" text-anchor="start">요점 · 공차 · 출력</text><text class="lt" x="0.5" y="-88" font-size="0.9787" text-anchor="start">• 바깥 170.7×106×17: xr-85.35~85.35, u-2.50~103.50, w-1.00~16.00</text><text class="lt" x="0.5" y="-86.4894" font-size="0.9787" text-anchor="start">• 옆벽 2, 유리와 틈 0.3 · 아래 벽 2.5: 안쪽 면 u0에 유리가 얹힘</text><text class="lt" x="0.5" y="-84.9787" font-size="0.9787" text-anchor="start">• 위 벽 2 (안쪽 u101.5, 유리 위와 0.5) · 앞 테: 유리보다 1 앞 (w-1)</text><text class="lt" x="0.5" y="-83.4681" font-size="0.9787" text-anchor="start">• 뒷판 w10.50~13.00 (2.5), 리브 w13.00~16.00 두께 2</text><text class="lt" x="0.5" y="-81.9574" font-size="0.9787" text-anchor="start">• 볼록판(화면 뒤, 높이 약 2.1)과 뒷판 틈 0.4</text><text class="lt" x="0.5" y="-80.4468" font-size="0.9787" text-anchor="start">• 보스 Ø8 ×4 xr ±77 u6.5·94.5 (154×88 ±0.2), 옆벽까지 채움</text><text class="lt" x="0.5" y="-78.9362" font-size="0.9787" text-anchor="start">   구멍 Ø2.8 w8.00~11.00, 자리파기 Ø5.5 w11.00~16.00</text><text class="lt" x="0.5" y="-77.4255" font-size="0.9787" text-anchor="start">   M2.5×6: 물림 3 = min(구멍 깊이 − 0.5, 4), 최소 2 (깊이 모름)</text><text class="lt" x="0.5" y="-75.9149" font-size="0.9787" text-anchor="start">• 경첩 귀 xr-68.20~-60.20 · 60.20~68.20 (두께 8)</text><text class="lt" x="0.5" y="-74.4043" font-size="0.9787" text-anchor="start">   축 u-9 w13 ±0.2, 구멍 Ø3.3 +0.1 / 0 (드릴 Ø3.3), 축살 R4.2</text><text class="lt" x="0.5" y="-72.8936" font-size="0.9787" text-anchor="start">   윤곽(3a) = 축살 + 받침 아래 + 뒤꿈치 (u-16.26, w8.38) 하나, C–C</text><text class="lt" x="0.5" y="-71.383" font-size="0.9787" text-anchor="start">   뒤꿈치 R8.6: 22°에서 world (y219.55, z76.35), 모서리 R0.3 이하</text><text class="lt" x="0.5" y="-69.8723" font-size="0.9787" text-anchor="start">• 다리 걸이 축 u30 w16.5: 가까운 볼 xr-9.30~-5.30 Ø3.3 관통</text><text class="lt" x="0.5" y="-68.3617" font-size="0.9787" text-anchor="start">   먼 볼 xr5.30~11.30 Ø2.5 × 6 (M3×20 물림 5.4)</text><text class="lt" x="0.5" y="-66.8511" font-size="0.9787" text-anchor="start">   볼 R3.8, +u 쪽 45° 모따기 · 축 나사 ISO 7380 −x에서 (F–F)</text><text class="lt" x="0.5" y="-65.3404" font-size="0.9787" text-anchor="start">• 다리 클립 u87.00~93.00: 몸 xr ±5.30~8.50</text><text class="lt" x="0.5" y="-63.8298" font-size="0.9787" text-anchor="start">   턱 0.8 (다리 위 0.5), w19.52~20.72</text><text class="lt" x="0.5" y="-62.3191" font-size="0.9787" text-anchor="start">• C2 모따기 (아래 뒤 모서리): 뚜껑 볼과 0.59</text><text class="lt" x="0.5" y="-60.8085" font-size="0.9787" text-anchor="start">• 점검창 xr15.50~45.00 u33.00~69.00, 둘레 리브 1.8 밖</text><text class="lt" x="0.5" y="-59.2979" font-size="0.9787" text-anchor="start">• 아래 홈 xr25.75~44.95 u-2.50~3.00 w8.00~16.00 (아래·뒤 트임)</text><text class="lt" x="0.5" y="-57.7872" font-size="0.9787" text-anchor="start">• 누름 패드 xr26.75~39.45 u8.00~16.00 w8.60~10.50 + 캡톤</text><text class="lt" x="0.5" y="-56.2766" font-size="0.9787" text-anchor="start">• 스터드가 박혀 있으면(G-2): 보스를 Ø6.2로 w8.00~13.70 파고 보스 Ø8.6,</text><text class="lt" x="0.5" y="-54.766" font-size="0.9787" text-anchor="start">   뒤에서 M2.5×6 (물림 3.7, 머리 1.8 나옴) — 뒷판·축 그대로</text><text class="lt" x="0.5" y="-53.2553" font-size="0.9787" text-anchor="start">출력: 윗변(u103.5 면)을 베드에 세움, 높이 119.76 (= u103.5 − 뒤꿈치 u-16.26)</text><text class="lt" x="0.5" y="-51.7447" font-size="0.9787" text-anchor="start">약 82 g · 약 3.7시간 (추정) · PETG · 구멍은 물방울 모양으로 뽑고 드릴</text><text class="lt" x="0.5" y="-50.234" font-size="0.9787" text-anchor="start">일반 공차 ±0.3 · 추정값: 커넥터 ±0.5, 볼록판 높이, 아래 끝 돌기 위치</text><text class="ttl" x="0.5" y="-46.5" font-size="1.117" text-anchor="start">상세 H — 아래 벽 홈 【3a】 배율 2:1 (위: 앞에서 · 아래: H–H 단면 xr57)</text><g clip-path="url(#c53)"><rect class="m-cr" x="-1" y="-34.5" width="52" height="5"/><rect class="m-sbar" x="7" y="-34.5" width="36" height="5"/><rect class="vis" x="7" y="-34.5" width="36" height="5"/><rect class="m-cr" x="31.4" y="-29.5" width="16" height="7"/><rect class="ph2" x="-1" y="-44.5" width="52" height="10"/><rect class="conn" x="20.98" y="-34.5" width="8.5" height="1.7"/></g><line class="ex" x1="7" y1="-34.766" x2="7" y2="-42.8723"/><line class="ex" x1="43" y1="-34.766" x2="43" y2="-42.8723"/><line class="dm" x1="7" y1="-42.5" x2="43" y2="-42.5"/><polygon class="ah" points="7,-42.5 7.7447,-42.2447 7.7447,-42.7553"/><polygon class="ah" points="43,-42.5 42.2553,-42.7553 42.2553,-42.2447"/><text class="dt" x="25" y="-42.8404" font-size="0.9574" text-anchor="middle">18 (xr48.00~66.00, x659.00~677.00)</text><line class="ex" x1="7" y1="-29.234" x2="7" y2="-24.6277"/><line class="ex" x1="20.98" y1="-32.534" x2="20.98" y2="-24.6277"/><line class="dm" x1="7" y1="-25" x2="20.98" y2="-25"/><polygon class="ah" points="7,-25 7.7447,-24.7447 7.7447,-25.2553"/><polygon class="ah" points="20.98,-25 20.2353,-25.2553 20.2353,-24.7447"/><text class="dt" x="13.99" y="-25.3404" font-size="0.9362" text-anchor="middle">6.99</text><line class="ex" x1="29.48" y1="-32.534" x2="29.48" y2="-24.6277"/><line class="ex" x1="43" y1="-29.234" x2="43" y2="-24.6277"/><line class="dm" x1="29.48" y1="-25" x2="43" y2="-25"/><polygon class="ah" points="29.48,-25 30.2247,-24.7447 30.2247,-25.2553"/><polygon class="ah" points="43,-25 42.2553,-25.2553 42.2553,-24.7447"/><text class="dt" x="36.24" y="-25.3404" font-size="0.9362" text-anchor="middle">6.76</text><line class="ex" x1="2.734" y1="-29.5" x2="2.0277" y2="-29.5"/><line class="ex" x1="2.734" y1="-34.5" x2="2.0277" y2="-34.5"/><line class="dm" x1="2.4" y1="-29.5" x2="2.4" y2="-34.5"/><polygon class="ah" points="2.4,-29.5 2.6553,-30.2447 2.1447,-30.2447"/><polygon class="ah" points="2.4,-34.5 2.1447,-33.7553 2.6553,-33.7553"/><text class="dt" x="1.7617" y="-31.6277" font-size="0.9362" text-anchor="end">2.5</text><text style="stroke:#ffffff;stroke-width:0.2766;stroke-linejoin:round;paint-order:stroke" class="lt" x="25.23" y="-29.8" font-size="0.9149" text-anchor="middle">돌기 xr54.99~59.24, 0.85 나옴 (추정)</text><text style="stroke:#ffffff;stroke-width:0.2766;stroke-linejoin:round;paint-order:stroke" class="lt" x="32.4" y="-27.5" font-size="0.9149" text-anchor="start">귀</text><text style="stroke:#ffffff;stroke-width:0.2766;stroke-linejoin:round;paint-order:stroke" class="tx-s" x="4" y="-38.1" font-size="0.9149" text-anchor="start">유리 (점선)</text><g clip-path="url(#c61)"><path class="m-cr fillonly" fill-rule="evenodd" d="M7.99,-219 L42.01,-219 L42,-214.99 L36.01,-214.98 L36.01,-174.02 L42.01,-174 L42,-169.99 L36.01,-169.98 L36.01,-62.02 L42.01,-62 L42,-57.99 L36.01,-57.98 L36.01,-12.02 L42.01,-12 L42.01,-11 L38,-6.99 L26.01,-7 L26.01,-12 L30.99,-12.02 L30.99,-214.98 L8,-214.99 L7.99,-219 Z"/><path fill="url(#h55)" fill-rule="evenodd" class="nostroke" d="M7.99,-219 L42.01,-219 L42,-214.99 L36.01,-214.98 L36.01,-174.02 L42.01,-174 L42,-169.99 L36.01,-169.98 L36.01,-62.02 L42.01,-62 L42,-57.99 L36.01,-57.98 L36.01,-12.02 L42.01,-12 L42.01,-11 L38,-6.99 L26.01,-7 L26.01,-12 L30.99,-12.02 L30.99,-214.98 L8,-214.99 L7.99,-219 Z"/><path class="out" d="M7.99,-219 L42.01,-219 L42,-214.99 L36.01,-214.98 L36.01,-174.02 L42.01,-174 L42,-169.99 L36.01,-169.98 L36.01,-62.02 L42.01,-62 L42,-57.99 L36.01,-57.98 L36.01,-12.02 L42.01,-12 L42.01,-11 L38,-6.99 L26.01,-7 L26.01,-12 L30.99,-12.02 L30.99,-214.98 L8,-214.99 L7.99,-219 Z"/><polygon class="ph2" points="10,-12 10,-214 26,-214 26,-12"/><polygon class="conn" points="10,-10.3 10,-12 26,-12 26,-10.3"/></g><line class="ex" x1="8" y1="-12.266" x2="8" y2="-20.3723"/><line class="ex" x1="26" y1="-12.266" x2="26" y2="-20.3723"/><line class="dm" x1="8" y1="-20" x2="26" y2="-20"/><polygon class="ah" points="8,-20 8.7447,-19.7447 8.7447,-20.2553"/><polygon class="ah" points="26,-20 25.2553,-20.2553 25.2553,-19.7447"/><text class="dt" x="17" y="-20.3404" font-size="0.9362" text-anchor="middle">홈 w-1.00~8.00</text><line class="ex" x1="26" y1="-12.266" x2="26" y2="-20.3723"/><line class="ex" x1="42" y1="-12.266" x2="42" y2="-20.3723"/><line class="dm" x1="26" y1="-20" x2="42" y2="-20"/><polygon class="ah" points="26,-20 26.7447,-19.7447 26.7447,-20.2553"/><polygon class="ah" points="42,-20 41.2553,-20.2553 41.2553,-19.7447"/><text class="dt" x="34" y="-20.3404" font-size="0.9362" text-anchor="middle">남는 벽 w8.00~16.00</text><text class="ttl" x="45" y="-7" font-size="1.0638" text-anchor="start">H–H</text><text class="tx-s" x="0.5" y="-1.4" font-size="0.9149" text-anchor="start">유리는 홈 양옆 아래 벽에 얹힘 · 받으면 돌기 자리·높이 확인 (G-7), 밖이면 홈을 옮김</text></svg><svg id="p2" x="10.0" y="976.2" width="1012.0" height="968.1" viewBox="-101.368 -117.368 230.736 220.736"><text class="ttl" x="-99.5" y="-113.5" font-size="2.736" text-anchor="start">뒤에서 본 모습 (리브 쪽, 좌우 반전: 왼쪽이 +x) — 점선 = 창으로 보이는 화면 부품·선 (추정)</text><rect class="m-cr" x="60.2" y="2.5" width="8" height="13.76"/><line class="cl" x1="66.2" y1="9" x2="62.2" y2="9"/><rect class="m-cr" x="-68.2" y="2.5" width="8" height="13.76"/><line class="cl" x1="-62.2" y1="9" x2="-66.2" y2="9"/><rect class="m-cr" x="-85.35" y="-103.5" width="170.7" height="106"/><rect class="m-sbar" x="-83.35" y="-101.5" width="166.7" height="101.5"/><line class="vis" x1="85.35" y1="0.5" x2="-85.35" y2="0.5"/><rect class="m-cr" x="-48.8" y="-72.8" width="37.1" height="43.6"/><rect class="void" x="-45" y="-69" width="29.5" height="36"/><rect class="m-sbar" x="-15.5" y="-70.8" width="1.8" height="37.8"/><rect class="m-sbar" x="-46.8" y="-70.8" width="1.8" height="37.8"/><rect class="m-sbar" x="-46.8" y="-33" width="33.1" height="1.8"/><rect class="m-sbar" x="-46.8" y="-70.8" width="33.1" height="1.8"/><rect class="ph2" x="-43.55" y="-70.5" width="26.2" height="40.3"/><rect class="conn" x="-23.25" y="-52.4" width="5.4" height="15.9"/><rect class="conn" x="-24.35" y="-65.2" width="5" height="8.6"/><rect class="rib-t" x="-38.95" y="-49.65" width="11.7" height="11.7"/><rect class="rib-t" x="-38.95" y="-37.95" width="11.7" height="40.45"/><rect class="rib-t" x="-27.25" y="-49.65" width="4" height="11.7"/><polyline class="pw" points="-24.35,-60.9 -41.95,-60.9 -41.95,2.5"/><rect class="m-cr" x="7.3" y="-25" width="76.05" height="2"/><rect class="m-cr" x="-83.35" y="-25" width="76.05" height="2"/><rect class="m-cr" x="7.3" y="-81" width="76.05" height="2"/><rect class="m-cr" x="-83.35" y="-81" width="76.05" height="2"/><rect class="m-cr" x="5.3" y="-103.5" width="2" height="77.3"/><rect class="m-cr" x="-7.3" y="-103.5" width="2" height="77.3"/><rect class="m-print2" x="60" y="-36" width="16" height="16"/><rect class="m-print2" x="60" y="-86" width="16" height="16"/><rect class="m-print2" x="-76" y="-36" width="16" height="16"/><rect class="m-print2" x="-76" y="-86" width="16" height="16"/><rect class="m-cr" x="77" y="-10.5" width="6.35" height="8"/><circle class="m-cr" cx="77" cy="-6.5" r="4"/><circle class="void" cx="77" cy="-6.5" r="2.75"/><circle class="ln" cx="77" cy="-6.5" r="1.4"/><rect class="m-cr" x="77" y="-98.5" width="6.35" height="8"/><circle class="m-cr" cx="77" cy="-94.5" r="4"/><circle class="void" cx="77" cy="-94.5" r="2.75"/><circle class="ln" cx="77" cy="-94.5" r="1.4"/><rect class="m-cr" x="-83.35" y="-10.5" width="6.35" height="8"/><circle class="m-cr" cx="-77" cy="-6.5" r="4"/><circle class="void" cx="-77" cy="-6.5" r="2.75"/><circle class="ln" cx="-77" cy="-6.5" r="1.4"/><rect class="m-cr" x="-83.35" y="-98.5" width="6.35" height="8"/><circle class="m-cr" cx="-77" cy="-94.5" r="4"/><circle class="void" cx="-77" cy="-94.5" r="2.75"/><circle class="ln" cx="-77" cy="-94.5" r="1.4"/><rect class="m-cr" x="5.3" y="-38.874" width="4" height="12.674"/><rect class="m-cr" x="-11.3" y="-38.874" width="6" height="12.674"/><line class="cl" x1="9.3" y1="-30" x2="-11.3" y2="-30"/><rect class="m-cr" x="5.3" y="-93" width="3.2" height="6"/><rect class="m-cr" x="4.5" y="-93" width="0.8" height="6"/><rect class="m-cr" x="-8.5" y="-93" width="3.2" height="6"/><rect class="m-cr" x="-5.3" y="-93" width="0.8" height="6"/><rect class="void" x="-44.95" y="-3" width="19.2" height="5.5"/><rect class="hid" x="-66" y="-0" width="18" height="2.5"/><rect class="leg-ph" x="-5" y="-100" width="10" height="73"/><line class="cl" x1="0" y1="19.26" x2="0" y2="-106.5"/><line class="ex" x1="-85.35" y1="2.956" x2="-85.35" y2="20.26"/><circle class="dot" cx="-85.35" cy="20.26" r="0.342"/><line class="ex" x1="-85.35" y1="20.26" x2="-85.35" y2="22.312"/><text class="ot" x="-84.5976" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -84.5976 22.996)">−xr -85.35</text><line class="ex" x1="-76" y1="-19.544" x2="-76" y2="20.26"/><circle class="dot" cx="-76" cy="20.26" r="0.342"/><line class="ex" x1="-76" y1="20.26" x2="-76" y2="22.312"/><text class="ot" x="-75.2476" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -75.2476 22.996)">−xr -76</text><line class="ex" x1="-60" y1="-19.544" x2="-60" y2="20.26"/><circle class="dot" cx="-60" cy="20.26" r="0.342"/><line class="ex" x1="-60" y1="20.26" x2="-60" y2="22.312"/><text class="ot" x="-59.2476" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -59.2476 22.996)">−xr -60  패드</text><line class="ex" x1="-48.8" y1="-28.744" x2="-48.8" y2="20.26"/><circle class="dot" cx="-48.8" cy="20.26" r="0.342"/><line class="ex" x1="-48.8" y1="20.26" x2="-48.8" y2="22.312"/><text class="ot" x="-48.0476" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -48.0476 22.996)">−xr -48.8</text><line class="ex" x1="-44.95" y1="2.956" x2="-44.95" y2="20.26"/><circle class="dot" cx="-44.95" cy="20.26" r="0.342"/><line class="ex" x1="-44.95" y1="20.26" x2="-44.95" y2="22.312"/><text class="ot" x="-44.1976" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -44.1976 22.996)">−xr -44.95</text><line class="ex" x1="-25.75" y1="2.956" x2="-25.75" y2="20.26"/><circle class="dot" cx="-25.75" cy="20.26" r="0.342"/><line class="ex" x1="-25.75" y1="20.26" x2="-25.75" y2="22.312"/><text class="ot" x="-24.9976" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -24.9976 22.996)">−xr -25.75  홈</text><line class="ex" x1="-11.7" y1="-28.744" x2="-11.7" y2="20.26"/><circle class="dot" cx="-11.7" cy="20.26" r="0.342"/><line class="ex" x1="-11.7" y1="20.26" x2="-14.52" y2="22.312"/><text class="ot" x="-13.7676" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -13.7676 22.996)">−xr -11.7  창 리브</text><line class="ex" x1="-11.3" y1="-25.744" x2="-11.3" y2="20.26"/><circle class="dot" cx="-11.3" cy="20.26" r="0.342"/><line class="ex" x1="-11.3" y1="20.26" x2="-11.67" y2="22.312"/><text class="ot" x="-10.9176" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -10.9176 22.996)">−xr -11.3  먼 볼</text><line class="ex" x1="-8.5" y1="-86.544" x2="-8.5" y2="20.26"/><circle class="dot" cx="-8.5" cy="20.26" r="0.342"/><line class="ex" x1="-8.5" y1="20.26" x2="-8.82" y2="22.312"/><text class="ot" x="-8.0676" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -8.0676 22.996)">−xr -8.5  클립</text><line class="ex" x1="-7.3" y1="-25.744" x2="-7.3" y2="20.26"/><circle class="dot" cx="-7.3" cy="20.26" r="0.342"/><line class="ex" x1="-7.3" y1="20.26" x2="-5.97" y2="22.312"/><text class="ot" x="-5.2176" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -5.2176 22.996)">−xr -7.3  길 벽</text><line class="ex" x1="-5.3" y1="-25.744" x2="-5.3" y2="20.26"/><circle class="dot" cx="-5.3" cy="20.26" r="0.342"/><line class="ex" x1="-5.3" y1="20.26" x2="-3.12" y2="22.312"/><text class="ot" x="-2.3676" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 -2.3676 22.996)">−xr -5.3</text><line class="ex" x1="9.3" y1="-25.744" x2="9.3" y2="20.26"/><circle class="dot" cx="9.3" cy="20.26" r="0.342"/><line class="ex" x1="9.3" y1="20.26" x2="9.3" y2="22.312"/><text class="ot" x="10.0524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 10.0524 22.996)">−xr 9.3  가까운 볼</text><line class="ex" x1="60" y1="-19.544" x2="60" y2="20.26"/><circle class="dot" cx="60" cy="20.26" r="0.342"/><line class="ex" x1="60" y1="20.26" x2="60" y2="22.312"/><text class="ot" x="60.7524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 60.7524 22.996)">−xr 60</text><line class="ex" x1="76" y1="-19.544" x2="76" y2="20.26"/><circle class="dot" cx="76" cy="20.26" r="0.342"/><line class="ex" x1="76" y1="20.26" x2="76" y2="22.312"/><text class="ot" x="76.7524" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 76.7524 22.996)">−xr 76  패드</text><line class="ex" x1="85.35" y1="2.956" x2="85.35" y2="20.26"/><circle class="dot" cx="85.35" cy="20.26" r="0.342"/><line class="ex" x1="85.35" y1="20.26" x2="85.35" y2="22.312"/><text class="ot" x="86.1024" y="22.996" font-size="2.052" text-anchor="end" transform="rotate(-90 86.1024 22.996)">−xr 85.35</text><line class="ex" x1="85.806" y1="0.5" x2="91.35" y2="0.5"/><circle class="dot" cx="91.35" cy="0.5" r="0.342"/><line class="ex" x1="91.35" y1="0.5" x2="93.402" y2="0.5"/><text class="ot" x="94.086" y="1.2524" font-size="2.052" text-anchor="start">u-0.5  C2 모따기 끝</text><line class="ex" x1="-75.544" y1="-20" x2="91.35" y2="-20"/><circle class="dot" cx="91.35" cy="-20" r="0.342"/><line class="ex" x1="91.35" y1="-20" x2="93.402" y2="-19.14"/><text class="ot" x="94.086" y="-18.3876" font-size="2.052" text-anchor="start">u20  패드</text><line class="ex" x1="85.806" y1="-23" x2="91.35" y2="-23"/><circle class="dot" cx="91.35" cy="-23" r="0.342"/><line class="ex" x1="91.35" y1="-23" x2="93.402" y2="-21.99"/><text class="ot" x="94.086" y="-21.2376" font-size="2.052" text-anchor="start">u23  가로 리브</text><line class="ex" x1="85.806" y1="-25" x2="91.35" y2="-25"/><circle class="dot" cx="91.35" cy="-25" r="0.342"/><line class="ex" x1="91.35" y1="-25" x2="93.402" y2="-24.84"/><text class="ot" x="94.086" y="-24.0876" font-size="2.052" text-anchor="start">u25</text><line class="ex" x1="7.756" y1="-26.2" x2="91.35" y2="-26.2"/><circle class="dot" cx="91.35" cy="-26.2" r="0.342"/><line class="ex" x1="91.35" y1="-26.2" x2="93.402" y2="-27.69"/><text class="ot" x="94.086" y="-26.9376" font-size="2.052" text-anchor="start">u26.2  다리 길·걸이</text><line class="ex" x1="0.456" y1="-30" x2="91.35" y2="-30"/><circle class="dot" cx="91.35" cy="-30" r="0.342"/><line class="ex" x1="91.35" y1="-30" x2="93.402" y2="-30.54"/><text class="ot" x="94.086" y="-29.7876" font-size="2.052" text-anchor="start">u30  다리 축</text><line class="ex" x1="-75.544" y1="-36" x2="91.35" y2="-36"/><circle class="dot" cx="91.35" cy="-36" r="0.342"/><line class="ex" x1="91.35" y1="-36" x2="93.402" y2="-36"/><text class="ot" x="94.086" y="-35.2476" font-size="2.052" text-anchor="start">u36</text><line class="ex" x1="0.456" y1="-38.874" x2="91.35" y2="-38.874"/><circle class="dot" cx="91.35" cy="-38.874" r="0.342"/><line class="ex" x1="91.35" y1="-38.874" x2="93.402" y2="-38.874"/><text class="ot" x="94.086" y="-38.1216" font-size="2.052" text-anchor="start">u38.87  걸이 끝</text><line class="ex" x1="-75.544" y1="-70" x2="91.35" y2="-70"/><circle class="dot" cx="91.35" cy="-70" r="0.342"/><line class="ex" x1="91.35" y1="-70" x2="93.402" y2="-69.975"/><text class="ot" x="94.086" y="-69.2226" font-size="2.052" text-anchor="start">u70  패드</text><line class="ex" x1="12.156" y1="-72.8" x2="91.35" y2="-72.8"/><circle class="dot" cx="91.35" cy="-72.8" r="0.342"/><line class="ex" x1="91.35" y1="-72.8" x2="93.402" y2="-72.825"/><text class="ot" x="94.086" y="-72.0726" font-size="2.052" text-anchor="start">u72.8  창 리브</text><line class="ex" x1="85.806" y1="-79" x2="91.35" y2="-79"/><circle class="dot" cx="91.35" cy="-79" r="0.342"/><line class="ex" x1="91.35" y1="-79" x2="93.402" y2="-78.575"/><text class="ot" x="94.086" y="-77.8226" font-size="2.052" text-anchor="start">u79  가로 리브</text><line class="ex" x1="85.806" y1="-81" x2="91.35" y2="-81"/><circle class="dot" cx="91.35" cy="-81" r="0.342"/><line class="ex" x1="91.35" y1="-81" x2="93.402" y2="-81.425"/><text class="ot" x="94.086" y="-80.6726" font-size="2.052" text-anchor="start">u81</text><line class="ex" x1="-75.544" y1="-86" x2="91.35" y2="-86"/><circle class="dot" cx="91.35" cy="-86" r="0.342"/><line class="ex" x1="91.35" y1="-86" x2="93.402" y2="-85.075"/><text class="ot" x="94.086" y="-84.3226" font-size="2.052" text-anchor="start">u86</text><line class="ex" x1="-8.044" y1="-87" x2="91.35" y2="-87"/><circle class="dot" cx="91.35" cy="-87" r="0.342"/><line class="ex" x1="91.35" y1="-87" x2="93.402" y2="-87.925"/><text class="ot" x="94.086" y="-87.1726" font-size="2.052" text-anchor="start">u87  클립</text><line class="ex" x1="-8.044" y1="-93" x2="91.35" y2="-93"/><circle class="dot" cx="91.35" cy="-93" r="0.342"/><line class="ex" x1="91.35" y1="-93" x2="93.402" y2="-93"/><text class="ot" x="94.086" y="-92.2476" font-size="2.052" text-anchor="start">u93</text><line class="ex" x1="0.456" y1="-100" x2="91.35" y2="-100"/><circle class="dot" cx="91.35" cy="-100" r="0.342"/><line class="ex" x1="91.35" y1="-100" x2="93.402" y2="-100"/><text class="ot" x="94.086" y="-99.2476" font-size="2.052" text-anchor="start">u100  접은 다리 끝</text><text class="lt" x="-60" y="-106.5" font-size="2.508" text-anchor="middle">+x</text><text class="lt" x="60" y="-106.5" font-size="2.508" text-anchor="middle">−x</text><line class="ld" x1="-23.25" y1="-52.4" x2="-24.6841" y2="-54.6946"/><circle class="dot" cx="-23.25" cy="-52.4" r="0.3648"/><circle class="bl" cx="-25.53" cy="-56.048" r="1.596"/><text class="bt" x="-25.53" y="-55.3184" font-size="2.052" text-anchor="middle">A</text><line class="ld" x1="-24.35" y1="-65.2" x2="-25.7841" y2="-67.4946"/><circle class="dot" cx="-24.35" cy="-65.2" r="0.3648"/><circle class="bl" cx="-26.63" cy="-68.848" r="1.596"/><text class="bt" x="-26.63" y="-68.1184" font-size="2.052" text-anchor="middle">B</text><line class="ld" x1="-38.95" y1="-37.95" x2="-41.3212" y2="-36.1716"/><circle class="dot" cx="-38.95" cy="-37.95" r="0.3648"/><circle class="bl" cx="-42.598" cy="-35.214" r="1.596"/><text class="bt" x="-42.598" y="-34.4844" font-size="2.052" text-anchor="middle">C</text><line class="ld" x1="-41.95" y1="-20" x2="-44.458" y2="-20"/><circle class="dot" cx="-41.95" cy="-20" r="0.3648"/><circle class="bl" cx="-46.054" cy="-20" r="1.596"/><text class="bt" x="-46.054" y="-19.2704" font-size="2.052" text-anchor="middle">D</text><line class="ld" x1="-79.75" y1="-94.5" x2="-80.6133" y2="-91.9101"/><circle class="dot" cx="-79.75" cy="-94.5" r="0.3648"/><circle class="bl" cx="-81.118" cy="-90.396" r="1.596"/><text class="bt" x="-81.118" y="-89.6664" font-size="2.052" text-anchor="middle">E</text><line class="ld" x1="0" y1="-64" x2="1.8063" y2="-65.0322"/><circle class="dot" cx="0" cy="-64" r="0.3648"/><circle class="bl" cx="3.192" cy="-65.824" r="1.596"/><text class="bt" x="3.192" y="-65.0944" font-size="2.052" text-anchor="middle">F</text><line class="ld" x1="68" y1="-36" x2="69.6075" y2="-37.6075"/><circle class="dot" cx="68" cy="-36" r="0.3648"/><circle class="bl" cx="70.736" cy="-38.736" r="1.596"/><text class="bt" x="70.736" y="-38.0064" font-size="2.052" text-anchor="middle">G</text><line class="ld" x1="60.2" y1="14.26" x2="62.252" y2="14.26"/><circle class="dot" cx="60.2" cy="14.26" r="0.3648"/><circle class="bl" cx="63.848" cy="14.26" r="1.596"/><text class="bt" x="63.848" y="14.9896" font-size="2.052" text-anchor="middle">H</text><line class="ld" x1="9.3" y1="-26.2" x2="11.2802" y2="-24.5027"/><circle class="dot" cx="9.3" cy="-26.2" r="0.3648"/><circle class="bl" cx="12.492" cy="-23.464" r="1.596"/><text class="bt" x="12.492" y="-22.7344" font-size="2.052" text-anchor="middle">I</text><line class="ld" x1="-8.5" y1="-93" x2="-9.8523" y2="-94.8933"/><circle class="dot" cx="-8.5" cy="-93" r="0.3648"/><circle class="bl" cx="-10.78" cy="-96.192" r="1.596"/><text class="bt" x="-10.78" y="-95.4624" font-size="2.052" text-anchor="middle">J</text><line class="ld" x1="-7.3" y1="-96" x2="-9.025" y2="-96.7393"/><circle class="dot" cx="-7.3" cy="-96" r="0.3648"/><circle class="bl" cx="-10.492" cy="-97.368" r="1.596"/><text class="bt" x="-10.492" y="-96.6384" font-size="2.052" text-anchor="middle">K</text><line class="ld" x1="-11.7" y1="-72.8" x2="-10.0925" y2="-74.4075"/><circle class="dot" cx="-11.7" cy="-72.8" r="0.3648"/><circle class="bl" cx="-8.964" cy="-75.536" r="1.596"/><text class="bt" x="-8.964" y="-74.8064" font-size="2.052" text-anchor="middle">L</text><line class="ld" x1="-60" y1="-80" x2="-60" y2="-81.596"/><circle class="dot" cx="-60" cy="-80" r="0.3648"/><circle class="bl" cx="-60" cy="-83.192" r="1.596"/><text class="bt" x="-60" y="-82.4624" font-size="2.052" text-anchor="middle">M</text><line class="ld" x1="-35.35" y1="2.5" x2="-35.35" y2="0.904"/><circle class="dot" cx="-35.35" cy="2.5" r="0.3648"/><circle class="bl" cx="-35.35" cy="-0.692" r="1.596"/><text class="bt" x="-35.35" y="0.0376" font-size="2.052" text-anchor="middle">N</text><line class="ld" x1="60" y1="0.5" x2="60" y2="2.096"/><circle class="dot" cx="60" cy="0.5" r="0.3648"/><circle class="bl" cx="60" cy="3.692" r="1.596"/><text class="bt" x="60" y="4.4216" font-size="2.052" text-anchor="middle">O</text><circle class="bl" cx="-96.404" cy="45.2248" r="1.596"/><text class="bt" x="-96.404" y="46.0456" font-size="2.052" text-anchor="middle">A</text><text class="lt" x="-93.668" y="46" font-size="2.1432" text-anchor="start">DSI ZIF 22핀 0.5 xr17.85~23.25 u36.50~52.40, 입구 +x (추정 ±0.5)</text><circle class="bl" cx="-96.404" cy="48.5308" r="1.596"/><text class="bt" x="-96.404" y="49.3516" font-size="2.052" text-anchor="middle">B</text><text class="lt" x="-93.668" y="49.306" font-size="2.1432" text-anchor="start">MX1.25 2핀 xr19.35~24.35 u56.60~65.20, 입구 +x (추정)</text><circle class="bl" cx="-96.404" cy="51.8368" r="1.596"/><text class="bt" x="-96.404" y="52.6576" font-size="2.052" text-anchor="middle">C</text><text class="lt" x="-93.668" y="52.612" font-size="2.1432" text-anchor="start">리본 45° 접기 R3 xr27.25~38.95 u37.95~49.65 → −u로 내려감 (주황 점선)</text><circle class="bl" cx="-96.404" cy="55.1428" r="1.596"/><text class="bt" x="-96.404" y="55.9636" font-size="2.052" text-anchor="middle">D</text><text class="lt" x="-93.668" y="55.918" font-size="2.1432" text-anchor="start">전원선 길 xr40.45~43.45 (분홍)</text><circle class="bl" cx="-96.404" cy="58.4488" r="1.596"/><text class="bt" x="-96.404" y="59.2696" font-size="2.052" text-anchor="middle">E</text><text class="lt" x="-93.668" y="59.224" font-size="2.1432" text-anchor="start">자리파기 Ø5.5 → 머리 자리 w11 (M2.5×6 물림 3)</text><circle class="bl" cx="-96.404" cy="61.7548" r="1.596"/><text class="bt" x="-96.404" y="62.5756" font-size="2.052" text-anchor="middle">F</text><text class="lt" x="-93.668" y="62.53" font-size="2.1432" text-anchor="start">접은 다리 (보라 점선) u27.00~100.00, w13.50~19.50</text><circle class="bl" cx="-96.404" cy="65.0608" r="1.596"/><text class="bt" x="-96.404" y="65.8816" font-size="2.052" text-anchor="middle">G</text><text class="lt" x="-93.668" y="65.836" font-size="2.1432" text-anchor="start">뒤 패드 16×16 ×4 (w13.00~16.00) — 접으면 받침 발 위</text><circle class="bl" cx="-96.404" cy="68.3668" r="1.596"/><text class="bt" x="-96.404" y="69.1876" font-size="2.052" text-anchor="middle">H</text><text class="lt" x="-93.668" y="69.142" font-size="2.1432" text-anchor="start">경첩 귀 두께 8, 축 구멍 Ø3.3 (u-9 w13)</text><circle class="bl" cx="13.596" cy="45.2248" r="1.596"/><text class="bt" x="13.596" y="46.0456" font-size="2.052" text-anchor="middle">I</text><text class="lt" x="16.332" y="46" font-size="2.1432" text-anchor="start">다리 걸이: 가까운 볼 xr-9.30~-5.30 Ø3.3 · 먼 볼 xr5.30~11.30 Ø2.5</text><circle class="bl" cx="13.596" cy="48.5308" r="1.596"/><text class="bt" x="13.596" y="49.3516" font-size="2.052" text-anchor="middle">J</text><text class="lt" x="16.332" y="49.306" font-size="2.1432" text-anchor="start">다리 클립 u87.00~93.00, 몸 xr ±5.30~8.50, 턱 0.8</text><circle class="bl" cx="13.596" cy="51.8368" r="1.596"/><text class="bt" x="13.596" y="52.6576" font-size="2.052" text-anchor="middle">K</text><text class="lt" x="16.332" y="52.612" font-size="2.1432" text-anchor="start">다리 길 벽 xr ±5.30~7.30, u26.20~103.50</text><circle class="bl" cx="13.596" cy="55.1428" r="1.596"/><text class="bt" x="13.596" y="55.9636" font-size="2.052" text-anchor="middle">L</text><text class="lt" x="16.332" y="55.918" font-size="2.1432" text-anchor="start">창 둘레 리브 (창보다 1.8 밖, 두께 2) — 덮개 턱 자리</text><circle class="bl" cx="13.596" cy="58.4488" r="1.596"/><text class="bt" x="13.596" y="59.2696" font-size="2.052" text-anchor="middle">M</text><text class="lt" x="16.332" y="59.224" font-size="2.1432" text-anchor="start">가로 리브 u24·u80 (두께 2, 다리 길에서 끊김) — 【3a】 아래 리브는 다리 축 줄 u30에서 비킴</text><circle class="bl" cx="13.596" cy="61.7548" r="1.596"/><text class="bt" x="13.596" y="62.5756" font-size="2.052" text-anchor="middle">N</text><text class="lt" x="16.332" y="62.53" font-size="2.1432" text-anchor="start">아래 홈 (아래·뒤 트임): 선을 뒤에서 넣고 뺌</text><circle class="bl" cx="13.596" cy="65.0608" r="1.596"/><text class="bt" x="13.596" y="65.8816" font-size="2.052" text-anchor="middle">O</text><text class="lt" x="16.332" y="65.836" font-size="2.1432" text-anchor="start">C2 모따기 (아래 뒤 모서리 전체)</text><line class="dm" x1="90" y1="-110" x2="110" y2="-110"/><line class="dm" x1="90" y1="-109.316" x2="90" y2="-110.684"/><line class="dm" x1="95" y1="-109.316" x2="95" y2="-110.684"/><line class="dm" x1="100" y1="-109.316" x2="100" y2="-110.684"/><line class="dm" x1="105" y1="-109.316" x2="105" y2="-110.684"/><line class="dm" x1="110" y1="-109.316" x2="110" y2="-110.684"/><text class="dt" x="111.368" y="-109.202" font-size="2.28" text-anchor="start">20 mm</text></svg><svg id="p3" x="1030.0" y="976.2" width="482.0" height="962.0" viewBox="-17.6 -34.6 48.2 96.2"><defs><pattern id="h62" patternUnits="userSpaceOnUse" width="0.6000" height="0.6000" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6000" class="hl-lid"/></pattern><pattern id="h63" patternUnits="userSpaceOnUse" width="0.5000" height="0.5000" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.5000" class="hl-cr"/></pattern><pattern id="h64" patternUnits="userSpaceOnUse" width="0.5000" height="0.5000" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.5000" class="hl-leg"/></pattern><pattern id="h65" patternUnits="userSpaceOnUse" width="0.6000" height="0.6000" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.6000" class="hl-print"/></pattern><pattern id="h66" patternUnits="userSpaceOnUse" width="0.7000" height="0.7000" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7000" class="hl-wood"/></pattern><pattern id="h67" patternUnits="userSpaceOnUse" width="0.4000" height="0.4000" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.4000" class="hl-steel"/></pattern><pattern id="h68" patternUnits="userSpaceOnUse" width="0.9000" height="0.9000" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.9000" class="hl-ko"/></pattern></defs><text class="ttl" x="-16.5" y="-31.5" font-size="1.1" text-anchor="start">F–F (u30): 다리 걸이 + M3×20 축 (ISO 7380)</text><path class="m-cr fillonly" fill-rule="evenodd" d="M-9.31,-20.3 L-5.3,-20.31 L-5.29,-18.16 L-9.3,-18.15 L-9.31,-20.3 Z M5.29,-20.3 L11.3,-20.31 L11.31,-17.76 L5.3,-17.75 L5.29,-20.3 Z M11.69,-16 L16.01,-16 L16,-10.49 L-16.01,-10.5 L-16,-13.01 L-9.32,-13.01 L-9.3,-14.83 L-5.3,-14.83 L-5.28,-13.01 L5.28,-13.01 L5.3,-15.23 L11.3,-15.23 L11.31,-13.02 L11.68,-13.01 L11.69,-16 Z"/><path fill="url(#h63)" fill-rule="evenodd" class="nostroke" d="M-9.31,-20.3 L-5.3,-20.31 L-5.29,-18.16 L-9.3,-18.15 L-9.31,-20.3 Z M5.29,-20.3 L11.3,-20.31 L11.31,-17.76 L5.3,-17.75 L5.29,-20.3 Z M11.69,-16 L16.01,-16 L16,-10.49 L-16.01,-10.5 L-16,-13.01 L-9.32,-13.01 L-9.3,-14.83 L-5.3,-14.83 L-5.28,-13.01 L5.28,-13.01 L5.3,-15.23 L11.3,-15.23 L11.31,-13.02 L11.68,-13.01 L11.69,-16 Z"/><path class="out" d="M-9.31,-20.3 L-5.3,-20.31 L-5.29,-18.16 L-9.3,-18.15 L-9.31,-20.3 Z M5.29,-20.3 L11.3,-20.31 L11.31,-17.76 L5.3,-17.75 L5.29,-20.3 Z M11.69,-16 L16.01,-16 L16,-10.49 L-16.01,-10.5 L-16,-13.01 L-9.32,-13.01 L-9.3,-14.83 L-5.3,-14.83 L-5.28,-13.01 L5.28,-13.01 L5.3,-15.23 L11.3,-15.23 L11.31,-13.02 L11.68,-13.01 L11.69,-16 Z"/><rect class="ph2" x="-16" y="-8" width="32" height="8"/><path class="m-leg fillonly" fill-rule="evenodd" d="M-5.01,-19.5 L5,-19.51 L5.01,-18.16 L-5,-18.15 L-5.01,-19.5 Z M-5.01,-14.82 L5,-14.83 L5.01,-13.5 L-5,-13.49 L-5.01,-14.82 Z"/><path fill="url(#h64)" fill-rule="evenodd" class="nostroke" d="M-5.01,-19.5 L5,-19.51 L5.01,-18.16 L-5,-18.15 L-5.01,-19.5 Z M-5.01,-14.82 L5,-14.83 L5.01,-13.5 L-5,-13.49 L-5.01,-14.82 Z"/><path class="out" d="M-5.01,-19.5 L5,-19.51 L5.01,-18.16 L-5,-18.15 L-5.01,-19.5 Z M-5.01,-14.82 L5,-14.83 L5.01,-13.5 L-5,-13.49 L-5.01,-14.82 Z"/><polyline class="vis" points="-16,-9.9 -15.4,-13.25 -16.6,-14.05 -16,-16.6"/><polyline class="vis" points="16,-9.9 16.6,-13.25 15.4,-14.05 16,-16.6"/><rect class="m-steel" x="-9.3" y="-18" width="20" height="3"/><rect class="m-steel" x="-10.95" y="-19.35" width="1.65" height="5.7"/><rect class="cr-ph" x="-16" y="-19.35" width="5.05" height="5.7"/><line class="ex" x1="-9.3" y1="-20.55" x2="-9.3" y2="-23.15"/><line class="ex" x1="-5.3" y1="-20.55" x2="-5.3" y2="-23.15"/><line class="dm" x1="-9.3" y1="-22.8" x2="-5.3" y2="-22.8"/><polygon class="ah" points="-9.3,-22.8 -8.6,-22.56 -8.6,-23.04"/><polygon class="ah" points="-5.3,-22.8 -6,-23.04 -6,-22.56"/><text class="dt" x="-7.3" y="-23.12" font-size="0.9" text-anchor="middle">4</text><line class="ex" x1="5.3" y1="-20.55" x2="5.3" y2="-23.15"/><line class="ex" x1="11.3" y1="-20.55" x2="11.3" y2="-23.15"/><line class="dm" x1="5.3" y1="-22.8" x2="11.3" y2="-22.8"/><polygon class="ah" points="5.3,-22.8 6,-22.56 6,-23.04"/><polygon class="ah" points="11.3,-22.8 10.6,-23.04 10.6,-22.56"/><text class="dt" x="8.3" y="-23.12" font-size="0.9" text-anchor="middle">6</text><line class="ex" x1="-5" y1="-19.75" x2="-5" y2="-27.15"/><line class="ex" x1="5" y1="-19.75" x2="5" y2="-27.15"/><line class="dm" x1="-5" y1="-26.8" x2="5" y2="-26.8"/><polygon class="ah" points="-5,-26.8 -4.3,-26.56 -4.3,-27.04"/><polygon class="ah" points="5,-26.8 4.3,-27.04 4.3,-26.56"/><text class="dt" x="0" y="-27.12" font-size="0.9" text-anchor="middle">다리 10 (양쪽 틈 0.3)</text><text class="lt" x="-16.5" y="3.5" font-size="0.9" text-anchor="start">축 20: 머리 Ø5.7×1.65 xr-9.3 → 끝 xr10.7, 먼 볼 물림 5.4</text><text class="tx-s" x="-16.5" y="7" font-size="0.9" text-anchor="start">−x에서 넣음 (파랑 점선 = 넣는 길 xr-30.95~-9.3), L렌치 2.0</text><text class="tx-s" x="-16.5" y="10.5" font-size="0.9" text-anchor="start">머리·넣는 길과 리브·패드·보스 2 이상 (다리 길 벽), 뒷판 위 0.65</text><text class="tx-s" x="-16.5" y="14" font-size="0.9" text-anchor="start">위 = 뒤(+w) · 아래 점선 = 화면 (w0~8)</text><text class="ttl" x="-16.5" y="18.5" font-size="1.1" text-anchor="start">G–G (u90): 다리 클립 (접은 다리)</text><path class="m-cr fillonly" fill-rule="evenodd" d="M-8.51,29.28 L-4.49,29.28 L-4.49,30.48 L-5.29,30.5 L-5.28,36.99 L5.28,36.99 L5.29,30.5 L4.49,30.48 L4.49,29.28 L8.5,29.27 L8.51,36.98 L16,36.99 L16.01,39.5 L-16,39.51 L-16,36.99 L-8.51,36.98 L-8.51,29.28 Z"/><path fill="url(#h63)" fill-rule="evenodd" class="nostroke" d="M-8.51,29.28 L-4.49,29.28 L-4.49,30.48 L-5.29,30.5 L-5.28,36.99 L5.28,36.99 L5.29,30.5 L4.49,30.48 L4.49,29.28 L8.5,29.27 L8.51,36.98 L16,36.99 L16.01,39.5 L-16,39.51 L-16,36.99 L-8.51,36.98 L-8.51,29.28 Z"/><path class="out" d="M-8.51,29.28 L-4.49,29.28 L-4.49,30.48 L-5.29,30.5 L-5.28,36.99 L5.28,36.99 L5.29,30.5 L4.49,30.48 L4.49,29.28 L8.5,29.27 L8.51,36.98 L16,36.99 L16.01,39.5 L-16,39.51 L-16,36.99 L-8.51,36.98 L-8.51,29.28 Z"/><rect class="ph2" x="-16" y="42" width="32" height="8"/><path class="m-leg fillonly" fill-rule="evenodd" d="M-5.01,30.5 L5,30.49 L5.01,36.5 L-5,36.51 L-5.01,30.5 Z"/><path fill="url(#h64)" fill-rule="evenodd" class="nostroke" d="M-5.01,30.5 L5,30.49 L5.01,36.5 L-5,36.51 L-5.01,30.5 Z"/><path class="out" d="M-5.01,30.5 L5,30.49 L5.01,36.5 L-5,36.51 L-5.01,30.5 Z"/><polyline class="vis" points="-16,40.1 -15.4,36.75 -16.6,35.95 -16,33.4"/><polyline class="vis" points="16,40.1 16.6,36.75 15.4,35.95 16,33.4"/><line class="ex" x1="-5.3" y1="29.03" x2="-5.3" y2="26.43"/><line class="ex" x1="5.3" y1="29.03" x2="5.3" y2="26.43"/><line class="dm" x1="-5.3" y1="26.78" x2="5.3" y2="26.78"/><polygon class="ah" points="-5.3,26.78 -4.6,27.02 -4.6,26.54"/><polygon class="ah" points="5.3,26.78 4.6,26.54 4.6,27.02"/><text class="dt" x="0" y="26.46" font-size="0.9" text-anchor="middle">10.6</text><line class="ex" x1="-4.5" y1="29.03" x2="-4.5" y2="22.43"/><line class="ex" x1="4.5" y1="29.03" x2="4.5" y2="22.43"/><line class="dm" x1="-4.5" y1="22.78" x2="4.5" y2="22.78"/><polygon class="ah" points="-4.5,22.78 -3.8,23.02 -3.8,22.54"/><polygon class="ah" points="4.5,22.78 3.8,22.54 3.8,23.02"/><text class="dt" x="0" y="22.46" font-size="0.9" text-anchor="middle">9 (턱 0.8)</text><text class="lt" x="9.5" y="34.48" font-size="0.9" text-anchor="start">턱 w19.52 ↔ 다리 뒤 w19.5: 0.02</text><text class="lt" x="9.5" y="37.98" font-size="0.9" text-anchor="start">턱 두께 1.2 (w20.72까지)</text><text class="tx-s" x="-16.5" y="53.5" font-size="0.9" text-anchor="start">다리를 눌러 끼움 (턱 끝 모따기는 CAD 재량)</text><line class="dm" x1="18" y1="59" x2="23" y2="59"/><line class="dm" x1="18" y1="59.3" x2="18" y2="58.7"/><line class="dm" x1="23" y1="59.3" x2="23" y2="58.7"/><text class="dt" x="23.6" y="59.35" font-size="1" text-anchor="start">5 mm</text></svg><svg id="p4" x="10.0" y="1952.3" width="380.0" height="1132.7" viewBox="-4.7174 -110.7174 45.4348 135.4348"><defs><pattern id="h69" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-lid"/></pattern><pattern id="h70" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-cr"/></pattern><pattern id="h71" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-leg"/></pattern><pattern id="h72" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-print"/></pattern><pattern id="h73" patternUnits="userSpaceOnUse" width="0.8370" height="0.8370" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.8370" class="hl-wood"/></pattern><pattern id="h74" patternUnits="userSpaceOnUse" width="0.4783" height="0.4783" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.4783" class="hl-steel"/></pattern><pattern id="h75" patternUnits="userSpaceOnUse" width="1.0761" height="1.0761" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.0761" class="hl-ko"/></pattern></defs><text class="ttl" x="-3.8" y="-108" font-size="1.375" text-anchor="start">B–B (xr-6.3)</text><text class="tx-s" x="-3.8" y="-104" font-size="1.0761" text-anchor="start">다리 걸이 · 다리 길 · 클립</text><polygon class="ph2" points="0,-0 0,-101 8,-101 8,-0"/><polygon class="ph2" points="8,-32.2 8,-71 10.1,-71 10.1,-32.2"/><line class="glass" x1="0" y1="-0" x2="0" y2="-101"/><path class="m-cr fillonly" fill-rule="evenodd" d="M-1.01,-103.5 L16,-103.51 L16.01,-93.02 L20.73,-93 L20.73,-87 L16.01,-86.98 L16.01,-35.88 L16.09,-35.8 L16.09,-35.78 L19.47,-32.4 L19.65,-32.16 L19.71,-32.04 L19.79,-31.94 L19.95,-31.62 L19.95,-31.58 L20.09,-31.32 L20.09,-31.28 L20.13,-31.2 L20.13,-31.14 L20.19,-31 L20.21,-30.82 L20.23,-30.8 L20.23,-30.72 L20.25,-30.7 L20.25,-30.58 L20.27,-30.56 L20.27,-30.42 L20.29,-30.4 L20.31,-29.84 L20.29,-29.82 L20.29,-29.6 L20.27,-29.58 L20.25,-29.3 L20.23,-29.28 L20.23,-29.2 L20.21,-29.18 L20.19,-29 L20.13,-28.86 L20.13,-28.8 L20.09,-28.72 L20.09,-28.68 L19.95,-28.42 L19.95,-28.38 L19.79,-28.06 L19.47,-27.6 L18.93,-27.06 L18.44,-26.71 L18.28,-26.63 L18.24,-26.63 L17.98,-26.49 L17.94,-26.49 L17.8,-26.41 L17.76,-26.41 L17.68,-26.37 L17.62,-26.37 L17.48,-26.31 L17.4,-26.31 L17.38,-26.29 L17.28,-26.29 L17.26,-26.27 L17.18,-26.27 L17.16,-26.25 L17.02,-26.25 L17,-26.23 L16.86,-26.23 L16.84,-26.21 L16.52,-26.21 L16.5,-26.19 L13.01,-26.18 L13.01,-0.02 L16.01,0 L16.01,0.5 L14,2.51 L-1.01,2.5 L-1,-0.01 L10.49,-0.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M16.5,-31.67 L16.48,-31.65 L16.38,-31.65 L16.36,-31.63 L16.24,-31.63 L16.22,-31.61 L16,-31.57 L15.92,-31.53 L15.76,-31.49 L15.54,-31.35 L15.44,-31.25 L15.42,-31.25 L15.13,-30.94 L15.07,-30.82 L15.03,-30.78 L14.93,-30.52 L14.93,-30.46 L14.91,-30.44 L14.91,-30.38 L14.87,-30.28 L14.87,-30.14 L14.85,-30.12 L14.87,-29.72 L14.89,-29.7 L14.89,-29.64 L14.91,-29.62 L14.95,-29.42 L14.97,-29.4 L14.99,-29.3 L15.09,-29.12 L15.25,-28.94 L15.25,-28.92 L15.54,-28.65 L15.76,-28.51 L15.92,-28.47 L16,-28.43 L16.22,-28.39 L16.24,-28.37 L16.36,-28.37 L16.38,-28.35 L16.48,-28.35 L16.5,-28.33 L16.52,-28.35 L16.62,-28.35 L16.64,-28.37 L16.76,-28.37 L16.78,-28.39 L17,-28.43 L17.08,-28.47 L17.24,-28.51 L17.46,-28.65 L17.56,-28.75 L17.58,-28.75 L17.87,-29.06 L18.01,-29.3 L18.03,-29.4 L18.07,-29.48 L18.09,-29.62 L18.11,-29.64 L18.13,-29.8 L18.15,-29.82 L18.15,-29.92 L18.17,-29.94 L18.17,-30.06 L18.15,-30.08 L18.13,-30.28 L18.11,-30.3 L18.07,-30.52 L18.03,-30.6 L18.01,-30.7 L17.87,-30.94 L17.75,-31.06 L17.75,-31.08 L17.46,-31.35 L17.24,-31.49 L17.08,-31.53 L17,-31.57 L16.78,-31.61 L16.76,-31.63 L16.64,-31.63 L16.62,-31.65 L16.52,-31.65 L16.5,-31.67 Z"/><path fill="url(#h70)" fill-rule="evenodd" class="nostroke" d="M-1.01,-103.5 L16,-103.51 L16.01,-93.02 L20.73,-93 L20.73,-87 L16.01,-86.98 L16.01,-35.88 L16.09,-35.8 L16.09,-35.78 L19.47,-32.4 L19.65,-32.16 L19.71,-32.04 L19.79,-31.94 L19.95,-31.62 L19.95,-31.58 L20.09,-31.32 L20.09,-31.28 L20.13,-31.2 L20.13,-31.14 L20.19,-31 L20.21,-30.82 L20.23,-30.8 L20.23,-30.72 L20.25,-30.7 L20.25,-30.58 L20.27,-30.56 L20.27,-30.42 L20.29,-30.4 L20.31,-29.84 L20.29,-29.82 L20.29,-29.6 L20.27,-29.58 L20.25,-29.3 L20.23,-29.28 L20.23,-29.2 L20.21,-29.18 L20.19,-29 L20.13,-28.86 L20.13,-28.8 L20.09,-28.72 L20.09,-28.68 L19.95,-28.42 L19.95,-28.38 L19.79,-28.06 L19.47,-27.6 L18.93,-27.06 L18.44,-26.71 L18.28,-26.63 L18.24,-26.63 L17.98,-26.49 L17.94,-26.49 L17.8,-26.41 L17.76,-26.41 L17.68,-26.37 L17.62,-26.37 L17.48,-26.31 L17.4,-26.31 L17.38,-26.29 L17.28,-26.29 L17.26,-26.27 L17.18,-26.27 L17.16,-26.25 L17.02,-26.25 L17,-26.23 L16.86,-26.23 L16.84,-26.21 L16.52,-26.21 L16.5,-26.19 L13.01,-26.18 L13.01,-0.02 L16.01,0 L16.01,0.5 L14,2.51 L-1.01,2.5 L-1,-0.01 L10.49,-0.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M16.5,-31.67 L16.48,-31.65 L16.38,-31.65 L16.36,-31.63 L16.24,-31.63 L16.22,-31.61 L16,-31.57 L15.92,-31.53 L15.76,-31.49 L15.54,-31.35 L15.44,-31.25 L15.42,-31.25 L15.13,-30.94 L15.07,-30.82 L15.03,-30.78 L14.93,-30.52 L14.93,-30.46 L14.91,-30.44 L14.91,-30.38 L14.87,-30.28 L14.87,-30.14 L14.85,-30.12 L14.87,-29.72 L14.89,-29.7 L14.89,-29.64 L14.91,-29.62 L14.95,-29.42 L14.97,-29.4 L14.99,-29.3 L15.09,-29.12 L15.25,-28.94 L15.25,-28.92 L15.54,-28.65 L15.76,-28.51 L15.92,-28.47 L16,-28.43 L16.22,-28.39 L16.24,-28.37 L16.36,-28.37 L16.38,-28.35 L16.48,-28.35 L16.5,-28.33 L16.52,-28.35 L16.62,-28.35 L16.64,-28.37 L16.76,-28.37 L16.78,-28.39 L17,-28.43 L17.08,-28.47 L17.24,-28.51 L17.46,-28.65 L17.56,-28.75 L17.58,-28.75 L17.87,-29.06 L18.01,-29.3 L18.03,-29.4 L18.07,-29.48 L18.09,-29.62 L18.11,-29.64 L18.13,-29.8 L18.15,-29.82 L18.15,-29.92 L18.17,-29.94 L18.17,-30.06 L18.15,-30.08 L18.13,-30.28 L18.11,-30.3 L18.07,-30.52 L18.03,-30.6 L18.01,-30.7 L17.87,-30.94 L17.75,-31.06 L17.75,-31.08 L17.46,-31.35 L17.24,-31.49 L17.08,-31.53 L17,-31.57 L16.78,-31.61 L16.76,-31.63 L16.64,-31.63 L16.62,-31.65 L16.52,-31.65 L16.5,-31.67 Z"/><path class="out" d="M-1.01,-103.5 L16,-103.51 L16.01,-93.02 L20.73,-93 L20.73,-87 L16.01,-86.98 L16.01,-35.88 L16.09,-35.8 L16.09,-35.78 L19.47,-32.4 L19.65,-32.16 L19.71,-32.04 L19.79,-31.94 L19.95,-31.62 L19.95,-31.58 L20.09,-31.32 L20.09,-31.28 L20.13,-31.2 L20.13,-31.14 L20.19,-31 L20.21,-30.82 L20.23,-30.8 L20.23,-30.72 L20.25,-30.7 L20.25,-30.58 L20.27,-30.56 L20.27,-30.42 L20.29,-30.4 L20.31,-29.84 L20.29,-29.82 L20.29,-29.6 L20.27,-29.58 L20.25,-29.3 L20.23,-29.28 L20.23,-29.2 L20.21,-29.18 L20.19,-29 L20.13,-28.86 L20.13,-28.8 L20.09,-28.72 L20.09,-28.68 L19.95,-28.42 L19.95,-28.38 L19.79,-28.06 L19.47,-27.6 L18.93,-27.06 L18.44,-26.71 L18.28,-26.63 L18.24,-26.63 L17.98,-26.49 L17.94,-26.49 L17.8,-26.41 L17.76,-26.41 L17.68,-26.37 L17.62,-26.37 L17.48,-26.31 L17.4,-26.31 L17.38,-26.29 L17.28,-26.29 L17.26,-26.27 L17.18,-26.27 L17.16,-26.25 L17.02,-26.25 L17,-26.23 L16.86,-26.23 L16.84,-26.21 L16.52,-26.21 L16.5,-26.19 L13.01,-26.18 L13.01,-0.02 L16.01,0 L16.01,0.5 L14,2.51 L-1.01,2.5 L-1,-0.01 L10.49,-0.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M16.5,-31.67 L16.48,-31.65 L16.38,-31.65 L16.36,-31.63 L16.24,-31.63 L16.22,-31.61 L16,-31.57 L15.92,-31.53 L15.76,-31.49 L15.54,-31.35 L15.44,-31.25 L15.42,-31.25 L15.13,-30.94 L15.07,-30.82 L15.03,-30.78 L14.93,-30.52 L14.93,-30.46 L14.91,-30.44 L14.91,-30.38 L14.87,-30.28 L14.87,-30.14 L14.85,-30.12 L14.87,-29.72 L14.89,-29.7 L14.89,-29.64 L14.91,-29.62 L14.95,-29.42 L14.97,-29.4 L14.99,-29.3 L15.09,-29.12 L15.25,-28.94 L15.25,-28.92 L15.54,-28.65 L15.76,-28.51 L15.92,-28.47 L16,-28.43 L16.22,-28.39 L16.24,-28.37 L16.36,-28.37 L16.38,-28.35 L16.48,-28.35 L16.5,-28.33 L16.52,-28.35 L16.62,-28.35 L16.64,-28.37 L16.76,-28.37 L16.78,-28.39 L17,-28.43 L17.08,-28.47 L17.24,-28.51 L17.46,-28.65 L17.56,-28.75 L17.58,-28.75 L17.87,-29.06 L18.01,-29.3 L18.03,-29.4 L18.07,-29.48 L18.09,-29.62 L18.11,-29.64 L18.13,-29.8 L18.15,-29.82 L18.15,-29.92 L18.17,-29.94 L18.17,-30.06 L18.15,-30.08 L18.13,-30.28 L18.11,-30.3 L18.07,-30.52 L18.03,-30.6 L18.01,-30.7 L17.87,-30.94 L17.75,-31.06 L17.75,-31.08 L17.46,-31.35 L17.24,-31.49 L17.08,-31.53 L17,-31.57 L16.78,-31.61 L16.76,-31.63 L16.64,-31.63 L16.62,-31.65 L16.52,-31.65 L16.5,-31.67 Z"/><polygon class="leg-ph" points="13.5,-97 13.5576,-97.5853 13.7284,-98.1481 14.0056,-98.6667 14.3787,-99.1213 14.8333,-99.4944 15.3519,-99.7716 15.9147,-99.9424 16.5,-100 17.0853,-99.9424 17.6481,-99.7716 18.1667,-99.4944 18.6213,-99.1213 18.9944,-98.6667 19.2716,-98.1481 19.4424,-97.5853 19.5,-97 19.5,-30 19.4424,-29.4147 19.2716,-28.8519 18.9944,-28.3333 18.6213,-27.8787 18.1667,-27.5056 17.6481,-27.2284 17.0853,-27.0576 16.5,-27 15.9147,-27.0576 15.3519,-27.2284 14.8333,-27.5056 14.3787,-27.8787 14.0056,-28.3333 13.7284,-28.8519 13.5576,-29.4147 13.5,-30"/><circle class="m-steel" cx="16.5" cy="-30" r="1.5"/><line class="ex" x1="16.2391" y1="-26.2" x2="25" y2="-26.2"/><circle class="dot" cx="25" cy="-26.2" r="0.1793"/><line class="ex" x1="25" y1="-26.2" x2="26.0761" y2="-26.2"/><text class="ot" x="26.4348" y="-25.8054" font-size="1.0522" text-anchor="start">u26.2  길 벽 · 걸이</text><line class="ex" x1="20.5391" y1="-30" x2="25" y2="-30"/><circle class="dot" cx="25" cy="-30" r="0.1793"/><line class="ex" x1="25" y1="-30" x2="26.0761" y2="-30"/><text class="ot" x="26.4348" y="-29.6054" font-size="1.0522" text-anchor="start">u30  다리 축</text><line class="ex" x1="13.2391" y1="-38.874" x2="25" y2="-38.874"/><circle class="dot" cx="25" cy="-38.874" r="0.1793"/><line class="ex" x1="25" y1="-38.874" x2="26.0761" y2="-38.874"/><text class="ot" x="26.4348" y="-38.4794" font-size="1.0522" text-anchor="start">u38.87  걸이 끝 (45°)</text><line class="ex" x1="20.9591" y1="-87" x2="25" y2="-87"/><circle class="dot" cx="25" cy="-87" r="0.1793"/><line class="ex" x1="25" y1="-87" x2="26.0761" y2="-87"/><text class="ot" x="26.4348" y="-86.6054" font-size="1.0522" text-anchor="start">u87  클립</text><line class="ex" x1="20.9591" y1="-93" x2="25" y2="-93"/><circle class="dot" cx="25" cy="-93" r="0.1793"/><line class="ex" x1="25" y1="-93" x2="26.0761" y2="-93"/><text class="ot" x="26.4348" y="-92.6054" font-size="1.0522" text-anchor="start">u93</text><line class="ex" x1="16.2391" y1="-103.5" x2="25" y2="-103.5"/><circle class="dot" cx="25" cy="-103.5" r="0.1793"/><line class="ex" x1="25" y1="-103.5" x2="26.0761" y2="-103.5"/><text class="ot" x="26.4348" y="-103.1054" font-size="1.0522" text-anchor="start">u103.5  위</text><line class="ex" x1="13" y1="2.7391" x2="13" y2="5.5"/><circle class="dot" cx="13" cy="5.5" r="0.1793"/><line class="ex" x1="13" y1="5.5" x2="13" y2="6.5761"/><text class="ot" x="13.3946" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 13.3946 6.9348)">w13  뒷판 뒤</text><line class="ex" x1="16" y1="2.7391" x2="16" y2="5.5"/><circle class="dot" cx="16" cy="5.5" r="0.1793"/><line class="ex" x1="16" y1="5.5" x2="15.5326" y2="6.5761"/><text class="ot" x="15.9272" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 15.9272 6.9348)">w16  리브</text><line class="ex" x1="16.5" y1="2.7391" x2="16.5" y2="5.5"/><circle class="dot" cx="16.5" cy="5.5" r="0.1793"/><line class="ex" x1="16.5" y1="5.5" x2="16.9674" y2="6.5761"/><text class="ot" x="17.362" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 17.362 6.9348)">w16.5  축</text><line class="ex" x1="20.72" y1="2.7391" x2="20.72" y2="5.5"/><circle class="dot" cx="20.72" cy="5.5" r="0.1793"/><line class="ex" x1="20.72" y1="5.5" x2="20.72" y2="6.5761"/><text class="ot" x="21.1146" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 21.1146 6.9348)">w20.72  클립 뒤</text></svg><svg id="p5" x="398.0" y="1952.3" width="380.0" height="1193.6" viewBox="-4.7174 -110.7174 45.4348 142.7135"><defs><pattern id="h76" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-lid"/></pattern><pattern id="h77" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-cr"/></pattern><pattern id="h78" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-leg"/></pattern><pattern id="h79" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-print"/></pattern><pattern id="h80" patternUnits="userSpaceOnUse" width="0.8370" height="0.8370" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.8370" class="hl-wood"/></pattern><pattern id="h81" patternUnits="userSpaceOnUse" width="0.4783" height="0.4783" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.4783" class="hl-steel"/></pattern><pattern id="h82" patternUnits="userSpaceOnUse" width="1.0761" height="1.0761" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.0761" class="hl-ko"/></pattern></defs><text class="ttl" x="-3.8" y="-108" font-size="1.375" text-anchor="start">C–C (xr-64.2)</text><text class="tx-s" x="-3.8" y="-104" font-size="1.0761" text-anchor="start">경첩 귀 (3a 윤곽) · 패드 · 가로 리브</text><polygon class="ph2" points="0,-0 0,-101 8,-101 8,-0"/><line class="glass" x1="0" y1="-0" x2="0" y2="-101"/><path class="m-cr fillonly" fill-rule="evenodd" d="M-1.01,-103.5 L16.01,-103.5 L16,-101.49 L13.01,-101.48 L13.01,-86.02 L16.01,-86 L16.01,-70 L13.01,-69.98 L13.01,-36.02 L16.01,-36 L16.01,-20 L13.01,-19.98 L13.01,-0.02 L16,-0.01 L16.01,0.5 L14,2.51 L13.03,2.52 L13.29,2.82 L13.29,2.84 L13.41,2.96 L13.41,2.98 L13.53,3.1 L13.63,3.24 L13.75,3.36 L13.75,3.38 L13.99,3.64 L14.09,3.78 L14.33,4.04 L14.43,4.18 L14.79,4.58 L14.89,4.72 L15.13,4.98 L15.23,5.12 L15.59,5.52 L15.69,5.66 L15.93,5.92 L16.03,6.06 L16.15,6.18 L16.15,6.2 L16.39,6.48 L16.59,6.78 L16.91,7.42 L16.93,7.52 L16.97,7.58 L16.99,7.68 L17.05,7.8 L17.07,7.94 L17.13,8.1 L17.15,8.3 L17.17,8.32 L17.17,8.42 L17.19,8.44 L17.19,8.66 L17.21,8.68 L17.21,9.3 L17.19,9.32 L17.19,9.48 L17.17,9.5 L17.17,9.62 L17.15,9.64 L17.15,9.74 L17.13,9.76 L17.11,9.96 L17.09,9.98 L17.09,10.04 L17.05,10.12 L17.03,10.26 L17.01,10.28 L16.97,10.44 L16.93,10.5 L16.91,10.6 L16.71,11 L16.47,11.36 L16.45,11.42 L16.37,11.52 L16.35,11.58 L15.8,12.15 L15.56,12.31 L15.24,12.57 L14.9,12.73 L14.86,12.77 L14.68,12.85 L14.64,12.89 L14.16,13.13 L14.12,13.17 L13.94,13.25 L13.9,13.29 L13.42,13.53 L13.38,13.57 L13.2,13.65 L13.16,13.69 L12.94,13.79 L12.9,13.83 L12.72,13.91 L12.68,13.95 L12.2,14.19 L12.16,14.23 L11.98,14.31 L11.94,14.35 L11.46,14.59 L11.42,14.63 L11.24,14.71 L11.2,14.75 L10.72,14.99 L10.68,15.03 L10.24,15.25 L10.2,15.29 L9.76,15.51 L9.72,15.55 L9.5,15.65 L9.46,15.69 L9.28,15.77 L9.24,15.81 L9.02,15.91 L8.98,15.95 L8.76,16.05 L8.72,16.09 L8.54,16.17 L8.5,16.21 L8.38,16.27 L8.37,15.9 L8.35,15.88 L8.35,15.18 L8.33,15.16 L8.33,14.46 L8.31,14.44 L8.31,13.74 L8.29,13.72 L8.29,13.02 L8.27,13 L8.27,12.28 L8.25,12.26 L8.25,11.56 L8.23,11.54 L8.23,10.84 L8.21,10.82 L8.21,10.12 L8.19,10.1 L8.19,9.38 L8.17,9.36 L8.17,8.66 L8.15,8.64 L8.15,7.94 L8.13,7.92 L8.13,7.22 L8.11,7.2 L8.11,6.5 L8.09,6.48 L8.09,5.76 L8.07,5.74 L8.07,5.04 L8.05,5.02 L8.05,4.32 L8.03,4.3 L8.03,3.6 L8.01,3.58 L8.01,2.88 L7.99,2.86 L7.99,2.52 L-1,2.51 L-1.01,0 L10.49,-0.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M13,7.33 L12.98,7.35 L12.88,7.35 L12.86,7.37 L12.74,7.37 L12.72,7.39 L12.5,7.43 L12.42,7.47 L12.26,7.51 L12.04,7.65 L11.94,7.75 L11.92,7.75 L11.63,8.06 L11.57,8.18 L11.53,8.22 L11.43,8.48 L11.43,8.54 L11.41,8.56 L11.41,8.62 L11.37,8.72 L11.37,8.86 L11.35,8.88 L11.37,9.28 L11.39,9.3 L11.39,9.36 L11.41,9.38 L11.41,9.44 L11.43,9.46 L11.43,9.52 L11.45,9.54 L11.47,9.64 L11.59,9.88 L11.75,10.06 L11.75,10.08 L12.04,10.35 L12.26,10.49 L12.42,10.53 L12.5,10.57 L12.72,10.61 L12.74,10.63 L12.86,10.63 L12.88,10.65 L12.98,10.65 L13,10.67 L13.02,10.65 L13.12,10.65 L13.14,10.63 L13.26,10.63 L13.28,10.61 L13.5,10.57 L13.58,10.53 L13.74,10.49 L13.96,10.35 L14.06,10.25 L14.08,10.25 L14.37,9.94 L14.51,9.7 L14.55,9.54 L14.57,9.52 L14.59,9.38 L14.61,9.36 L14.63,9.2 L14.65,9.18 L14.65,9.08 L14.67,9.06 L14.67,8.94 L14.65,8.92 L14.63,8.72 L14.61,8.7 L14.57,8.48 L14.55,8.46 L14.51,8.3 L14.37,8.06 L14.25,7.94 L14.25,7.92 L13.96,7.65 L13.74,7.51 L13.58,7.47 L13.5,7.43 L13.28,7.39 L13.26,7.37 L13.14,7.37 L13.12,7.35 L13.02,7.35 L13,7.33 Z"/><path fill="url(#h77)" fill-rule="evenodd" class="nostroke" d="M-1.01,-103.5 L16.01,-103.5 L16,-101.49 L13.01,-101.48 L13.01,-86.02 L16.01,-86 L16.01,-70 L13.01,-69.98 L13.01,-36.02 L16.01,-36 L16.01,-20 L13.01,-19.98 L13.01,-0.02 L16,-0.01 L16.01,0.5 L14,2.51 L13.03,2.52 L13.29,2.82 L13.29,2.84 L13.41,2.96 L13.41,2.98 L13.53,3.1 L13.63,3.24 L13.75,3.36 L13.75,3.38 L13.99,3.64 L14.09,3.78 L14.33,4.04 L14.43,4.18 L14.79,4.58 L14.89,4.72 L15.13,4.98 L15.23,5.12 L15.59,5.52 L15.69,5.66 L15.93,5.92 L16.03,6.06 L16.15,6.18 L16.15,6.2 L16.39,6.48 L16.59,6.78 L16.91,7.42 L16.93,7.52 L16.97,7.58 L16.99,7.68 L17.05,7.8 L17.07,7.94 L17.13,8.1 L17.15,8.3 L17.17,8.32 L17.17,8.42 L17.19,8.44 L17.19,8.66 L17.21,8.68 L17.21,9.3 L17.19,9.32 L17.19,9.48 L17.17,9.5 L17.17,9.62 L17.15,9.64 L17.15,9.74 L17.13,9.76 L17.11,9.96 L17.09,9.98 L17.09,10.04 L17.05,10.12 L17.03,10.26 L17.01,10.28 L16.97,10.44 L16.93,10.5 L16.91,10.6 L16.71,11 L16.47,11.36 L16.45,11.42 L16.37,11.52 L16.35,11.58 L15.8,12.15 L15.56,12.31 L15.24,12.57 L14.9,12.73 L14.86,12.77 L14.68,12.85 L14.64,12.89 L14.16,13.13 L14.12,13.17 L13.94,13.25 L13.9,13.29 L13.42,13.53 L13.38,13.57 L13.2,13.65 L13.16,13.69 L12.94,13.79 L12.9,13.83 L12.72,13.91 L12.68,13.95 L12.2,14.19 L12.16,14.23 L11.98,14.31 L11.94,14.35 L11.46,14.59 L11.42,14.63 L11.24,14.71 L11.2,14.75 L10.72,14.99 L10.68,15.03 L10.24,15.25 L10.2,15.29 L9.76,15.51 L9.72,15.55 L9.5,15.65 L9.46,15.69 L9.28,15.77 L9.24,15.81 L9.02,15.91 L8.98,15.95 L8.76,16.05 L8.72,16.09 L8.54,16.17 L8.5,16.21 L8.38,16.27 L8.37,15.9 L8.35,15.88 L8.35,15.18 L8.33,15.16 L8.33,14.46 L8.31,14.44 L8.31,13.74 L8.29,13.72 L8.29,13.02 L8.27,13 L8.27,12.28 L8.25,12.26 L8.25,11.56 L8.23,11.54 L8.23,10.84 L8.21,10.82 L8.21,10.12 L8.19,10.1 L8.19,9.38 L8.17,9.36 L8.17,8.66 L8.15,8.64 L8.15,7.94 L8.13,7.92 L8.13,7.22 L8.11,7.2 L8.11,6.5 L8.09,6.48 L8.09,5.76 L8.07,5.74 L8.07,5.04 L8.05,5.02 L8.05,4.32 L8.03,4.3 L8.03,3.6 L8.01,3.58 L8.01,2.88 L7.99,2.86 L7.99,2.52 L-1,2.51 L-1.01,0 L10.49,-0.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M13,7.33 L12.98,7.35 L12.88,7.35 L12.86,7.37 L12.74,7.37 L12.72,7.39 L12.5,7.43 L12.42,7.47 L12.26,7.51 L12.04,7.65 L11.94,7.75 L11.92,7.75 L11.63,8.06 L11.57,8.18 L11.53,8.22 L11.43,8.48 L11.43,8.54 L11.41,8.56 L11.41,8.62 L11.37,8.72 L11.37,8.86 L11.35,8.88 L11.37,9.28 L11.39,9.3 L11.39,9.36 L11.41,9.38 L11.41,9.44 L11.43,9.46 L11.43,9.52 L11.45,9.54 L11.47,9.64 L11.59,9.88 L11.75,10.06 L11.75,10.08 L12.04,10.35 L12.26,10.49 L12.42,10.53 L12.5,10.57 L12.72,10.61 L12.74,10.63 L12.86,10.63 L12.88,10.65 L12.98,10.65 L13,10.67 L13.02,10.65 L13.12,10.65 L13.14,10.63 L13.26,10.63 L13.28,10.61 L13.5,10.57 L13.58,10.53 L13.74,10.49 L13.96,10.35 L14.06,10.25 L14.08,10.25 L14.37,9.94 L14.51,9.7 L14.55,9.54 L14.57,9.52 L14.59,9.38 L14.61,9.36 L14.63,9.2 L14.65,9.18 L14.65,9.08 L14.67,9.06 L14.67,8.94 L14.65,8.92 L14.63,8.72 L14.61,8.7 L14.57,8.48 L14.55,8.46 L14.51,8.3 L14.37,8.06 L14.25,7.94 L14.25,7.92 L13.96,7.65 L13.74,7.51 L13.58,7.47 L13.5,7.43 L13.28,7.39 L13.26,7.37 L13.14,7.37 L13.12,7.35 L13.02,7.35 L13,7.33 Z"/><path class="out" d="M-1.01,-103.5 L16.01,-103.5 L16,-101.49 L13.01,-101.48 L13.01,-86.02 L16.01,-86 L16.01,-70 L13.01,-69.98 L13.01,-36.02 L16.01,-36 L16.01,-20 L13.01,-19.98 L13.01,-0.02 L16,-0.01 L16.01,0.5 L14,2.51 L13.03,2.52 L13.29,2.82 L13.29,2.84 L13.41,2.96 L13.41,2.98 L13.53,3.1 L13.63,3.24 L13.75,3.36 L13.75,3.38 L13.99,3.64 L14.09,3.78 L14.33,4.04 L14.43,4.18 L14.79,4.58 L14.89,4.72 L15.13,4.98 L15.23,5.12 L15.59,5.52 L15.69,5.66 L15.93,5.92 L16.03,6.06 L16.15,6.18 L16.15,6.2 L16.39,6.48 L16.59,6.78 L16.91,7.42 L16.93,7.52 L16.97,7.58 L16.99,7.68 L17.05,7.8 L17.07,7.94 L17.13,8.1 L17.15,8.3 L17.17,8.32 L17.17,8.42 L17.19,8.44 L17.19,8.66 L17.21,8.68 L17.21,9.3 L17.19,9.32 L17.19,9.48 L17.17,9.5 L17.17,9.62 L17.15,9.64 L17.15,9.74 L17.13,9.76 L17.11,9.96 L17.09,9.98 L17.09,10.04 L17.05,10.12 L17.03,10.26 L17.01,10.28 L16.97,10.44 L16.93,10.5 L16.91,10.6 L16.71,11 L16.47,11.36 L16.45,11.42 L16.37,11.52 L16.35,11.58 L15.8,12.15 L15.56,12.31 L15.24,12.57 L14.9,12.73 L14.86,12.77 L14.68,12.85 L14.64,12.89 L14.16,13.13 L14.12,13.17 L13.94,13.25 L13.9,13.29 L13.42,13.53 L13.38,13.57 L13.2,13.65 L13.16,13.69 L12.94,13.79 L12.9,13.83 L12.72,13.91 L12.68,13.95 L12.2,14.19 L12.16,14.23 L11.98,14.31 L11.94,14.35 L11.46,14.59 L11.42,14.63 L11.24,14.71 L11.2,14.75 L10.72,14.99 L10.68,15.03 L10.24,15.25 L10.2,15.29 L9.76,15.51 L9.72,15.55 L9.5,15.65 L9.46,15.69 L9.28,15.77 L9.24,15.81 L9.02,15.91 L8.98,15.95 L8.76,16.05 L8.72,16.09 L8.54,16.17 L8.5,16.21 L8.38,16.27 L8.37,15.9 L8.35,15.88 L8.35,15.18 L8.33,15.16 L8.33,14.46 L8.31,14.44 L8.31,13.74 L8.29,13.72 L8.29,13.02 L8.27,13 L8.27,12.28 L8.25,12.26 L8.25,11.56 L8.23,11.54 L8.23,10.84 L8.21,10.82 L8.21,10.12 L8.19,10.1 L8.19,9.38 L8.17,9.36 L8.17,8.66 L8.15,8.64 L8.15,7.94 L8.13,7.92 L8.13,7.22 L8.11,7.2 L8.11,6.5 L8.09,6.48 L8.09,5.76 L8.07,5.74 L8.07,5.04 L8.05,5.02 L8.05,4.32 L8.03,4.3 L8.03,3.6 L8.01,3.58 L8.01,2.88 L7.99,2.86 L7.99,2.52 L-1,2.51 L-1.01,0 L10.49,-0.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M13,7.33 L12.98,7.35 L12.88,7.35 L12.86,7.37 L12.74,7.37 L12.72,7.39 L12.5,7.43 L12.42,7.47 L12.26,7.51 L12.04,7.65 L11.94,7.75 L11.92,7.75 L11.63,8.06 L11.57,8.18 L11.53,8.22 L11.43,8.48 L11.43,8.54 L11.41,8.56 L11.41,8.62 L11.37,8.72 L11.37,8.86 L11.35,8.88 L11.37,9.28 L11.39,9.3 L11.39,9.36 L11.41,9.38 L11.41,9.44 L11.43,9.46 L11.43,9.52 L11.45,9.54 L11.47,9.64 L11.59,9.88 L11.75,10.06 L11.75,10.08 L12.04,10.35 L12.26,10.49 L12.42,10.53 L12.5,10.57 L12.72,10.61 L12.74,10.63 L12.86,10.63 L12.88,10.65 L12.98,10.65 L13,10.67 L13.02,10.65 L13.12,10.65 L13.14,10.63 L13.26,10.63 L13.28,10.61 L13.5,10.57 L13.58,10.53 L13.74,10.49 L13.96,10.35 L14.06,10.25 L14.08,10.25 L14.37,9.94 L14.51,9.7 L14.55,9.54 L14.57,9.52 L14.59,9.38 L14.61,9.36 L14.63,9.2 L14.65,9.18 L14.65,9.08 L14.67,9.06 L14.67,8.94 L14.65,8.92 L14.63,8.72 L14.61,8.7 L14.57,8.48 L14.55,8.46 L14.51,8.3 L14.37,8.06 L14.25,7.94 L14.25,7.92 L13.96,7.65 L13.74,7.51 L13.58,7.47 L13.5,7.43 L13.28,7.39 L13.26,7.37 L13.14,7.37 L13.12,7.35 L13.02,7.35 L13,7.33 Z"/><circle class="m-steel" cx="13" cy="9" r="1.5"/><line class="ex" x1="12.7478" y1="8.8395" x2="11.4365" y2="8.005"/><line class="ex" x1="8.1278" y1="16.0995" x2="6.8165" y2="15.265"/><line class="dm" x1="11.7895" y1="8.2297" x2="7.1695" y2="15.4897"/><polygon class="ah" points="7.1695,15.4897 7.861,14.9377 7.3768,14.6295"/><polygon class="ah" points="11.7895,8.2297 11.0981,8.7817 11.5823,9.0899"/><text style="stroke:#ffffff;stroke-width:0.3109;stroke-linejoin:round;paint-order:stroke" class="dt" x="9.883" y="12.1165" font-size="1.0761" text-anchor="middle" transform="rotate(-57.5288 9.883 12.1165)">R8.6</text><line class="ex" x1="8.6191" y1="16.26" x2="25" y2="16.26"/><circle class="dot" cx="25" cy="16.26" r="0.1793"/><line class="ex" x1="25" y1="16.26" x2="26.0761" y2="16.26"/><text class="ot" x="26.4348" y="16.6546" font-size="1.0522" text-anchor="start">u-16.26  뒤꿈치</text><line class="ex" x1="15.2391" y1="12.69" x2="25" y2="12.69"/><circle class="dot" cx="25" cy="12.69" r="0.1793"/><line class="ex" x1="25" y1="12.69" x2="26.0761" y2="12.69"/><text class="ot" x="26.4348" y="13.0846" font-size="1.0522" text-anchor="start">u-12.69  접점</text><line class="ex" x1="13.2391" y1="9" x2="25" y2="9"/><circle class="dot" cx="25" cy="9" r="0.1793"/><line class="ex" x1="25" y1="9" x2="26.0761" y2="9"/><text class="ot" x="26.4348" y="9.3946" font-size="1.0522" text-anchor="start">u-9  축 ±0.2</text><line class="ex" x1="16.4291" y1="6.27" x2="25" y2="6.27"/><circle class="dot" cx="25" cy="6.27" r="0.1793"/><line class="ex" x1="25" y1="6.27" x2="26.0761" y2="6.27"/><text class="ot" x="26.4348" y="6.6646" font-size="1.0522" text-anchor="start">u-6.27  접점</text><line class="ex" x1="16.2391" y1="2.5" x2="25" y2="2.5"/><circle class="dot" cx="25" cy="2.5" r="0.1793"/><line class="ex" x1="25" y1="2.5" x2="26.0761" y2="2.5"/><text class="ot" x="26.4348" y="2.8946" font-size="1.0522" text-anchor="start">u-2.5  받침 아래</text><line class="ex" x1="16.2391" y1="-20" x2="25" y2="-20"/><circle class="dot" cx="25" cy="-20" r="0.1793"/><line class="ex" x1="25" y1="-20" x2="26.0761" y2="-20"/><text class="ot" x="26.4348" y="-19.6054" font-size="1.0522" text-anchor="start">u20  패드</text><line class="ex" x1="16.2391" y1="-24" x2="25" y2="-24"/><circle class="dot" cx="25" cy="-24" r="0.1793"/><line class="ex" x1="25" y1="-24" x2="26.0761" y2="-24"/><text class="ot" x="26.4348" y="-23.6054" font-size="1.0522" text-anchor="start">u24  가로 리브</text><line class="ex" x1="16.2391" y1="-36" x2="25" y2="-36"/><circle class="dot" cx="25" cy="-36" r="0.1793"/><line class="ex" x1="25" y1="-36" x2="26.0761" y2="-36"/><text class="ot" x="26.4348" y="-35.6054" font-size="1.0522" text-anchor="start">u36</text><line class="ex" x1="16.2391" y1="-70" x2="25" y2="-70"/><circle class="dot" cx="25" cy="-70" r="0.1793"/><line class="ex" x1="25" y1="-70" x2="26.0761" y2="-70"/><text class="ot" x="26.4348" y="-69.6054" font-size="1.0522" text-anchor="start">u70  패드</text><line class="ex" x1="16.2391" y1="-80" x2="25" y2="-80"/><circle class="dot" cx="25" cy="-80" r="0.1793"/><line class="ex" x1="25" y1="-80" x2="26.0761" y2="-80"/><text class="ot" x="26.4348" y="-79.6054" font-size="1.0522" text-anchor="start">u80  가로 리브</text><line class="ex" x1="16.2391" y1="-86" x2="25" y2="-86"/><circle class="dot" cx="25" cy="-86" r="0.1793"/><line class="ex" x1="25" y1="-86" x2="26.0761" y2="-86"/><text class="ot" x="26.4348" y="-85.6054" font-size="1.0522" text-anchor="start">u86</text><line class="ex" x1="16.2391" y1="-103.5" x2="25" y2="-103.5"/><circle class="dot" cx="25" cy="-103.5" r="0.1793"/><line class="ex" x1="25" y1="-103.5" x2="26.0761" y2="-103.5"/><text class="ot" x="26.4348" y="-103.1054" font-size="1.0522" text-anchor="start">u103.5  위</text><line class="ex" x1="-1" y1="16.4991" x2="-1" y2="19.26"/><circle class="dot" cx="-1" cy="19.26" r="0.1793"/><line class="ex" x1="-1" y1="19.26" x2="-1" y2="20.3361"/><text class="ot" x="-0.6054" y="20.6948" font-size="1.0522" text-anchor="end" transform="rotate(-90 -0.6054 20.6948)">w-1  앞 테</text><line class="ex" x1="8" y1="16.4991" x2="8" y2="19.26"/><circle class="dot" cx="8" cy="19.26" r="0.1793"/><line class="ex" x1="8" y1="19.26" x2="7.4726" y2="20.3361"/><text class="ot" x="7.8672" y="20.6948" font-size="1.0522" text-anchor="end" transform="rotate(-90 7.8672 20.6948)">w8  화면 뒤 = 귀 앞</text><line class="ex" x1="8.38" y1="16.4991" x2="8.38" y2="19.26"/><circle class="dot" cx="8.38" cy="19.26" r="0.1793"/><line class="ex" x1="8.38" y1="19.26" x2="8.9074" y2="20.3361"/><text class="ot" x="9.302" y="20.6948" font-size="1.0522" text-anchor="end" transform="rotate(-90 9.302 20.6948)">w8.38  뒤꿈치</text><line class="ex" x1="13" y1="16.4991" x2="13" y2="19.26"/><circle class="dot" cx="13" cy="19.26" r="0.1793"/><line class="ex" x1="13" y1="19.26" x2="13" y2="20.3361"/><text class="ot" x="13.3946" y="20.6948" font-size="1.0522" text-anchor="end" transform="rotate(-90 13.3946 20.6948)">w13  축</text><line class="ex" x1="15" y1="16.4991" x2="15" y2="19.26"/><circle class="dot" cx="15" cy="19.26" r="0.1793"/><line class="ex" x1="15" y1="19.26" x2="14.6319" y2="20.3361"/><text class="ot" x="15.0264" y="20.6948" font-size="1.0522" text-anchor="end" transform="rotate(-90 15.0264 20.6948)">w15  접점</text><line class="ex" x1="16" y1="16.4991" x2="16" y2="19.26"/><circle class="dot" cx="16" cy="19.26" r="0.1793"/><line class="ex" x1="16" y1="19.26" x2="16.0667" y2="20.3361"/><text class="ot" x="16.4612" y="20.6948" font-size="1.0522" text-anchor="end" transform="rotate(-90 16.4612 20.6948)">w16  리브</text><line class="ex" x1="17.2" y1="16.4991" x2="17.2" y2="19.26"/><circle class="dot" cx="17.2" cy="19.26" r="0.1793"/><line class="ex" x1="17.2" y1="19.26" x2="17.5014" y2="20.3361"/><text class="ot" x="17.896" y="20.6948" font-size="1.0522" text-anchor="end" transform="rotate(-90 17.896 20.6948)">w17.2  축살</text></svg><svg id="p6" x="786.0" y="1952.3" width="380.0" height="1132.7" viewBox="-4.7174 -110.7174 45.4348 135.4348"><defs><pattern id="h83" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-lid"/></pattern><pattern id="h84" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-cr"/></pattern><pattern id="h85" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-leg"/></pattern><pattern id="h86" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-print"/></pattern><pattern id="h87" patternUnits="userSpaceOnUse" width="0.8370" height="0.8370" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.8370" class="hl-wood"/></pattern><pattern id="h88" patternUnits="userSpaceOnUse" width="0.4783" height="0.4783" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.4783" class="hl-steel"/></pattern><pattern id="h89" patternUnits="userSpaceOnUse" width="1.0761" height="1.0761" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.0761" class="hl-ko"/></pattern></defs><text class="ttl" x="-3.8" y="-108" font-size="1.375" text-anchor="start">D–D (xr35.35)</text><text class="tx-s" x="-3.8" y="-104" font-size="1.0761" text-anchor="start">아래 홈 · 누름 패드 · 점검창</text><polygon class="ph2" points="0,-0 0,-101 8,-101 8,-0"/><line class="glass" x1="0" y1="-0" x2="0" y2="-101"/><path class="m-cr fillonly" fill-rule="evenodd" d="M-1.01,-103.5 L16.01,-103.5 L16,-101.49 L13.01,-101.48 L13.01,-81.02 L16.01,-81 L16,-78.99 L13.01,-78.98 L13.01,-72.82 L16,-72.81 L16.01,-70.8 L13.02,-70.79 L13,-69.01 L10.49,-69.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M10.49,-32.98 L13,-32.99 L13.02,-31.21 L16.01,-31.2 L16,-29.19 L13.01,-29.18 L13.01,-25.02 L16,-25.01 L16.01,-23 L13.01,-22.98 L13,-3.01 L10.49,-3.02 L10.49,-7.98 L8.59,-8 L8.59,-16 L10.49,-16.02 L10.49,-32.98 Z M-1.01,0 L7.98,-0.01 L7.99,2.5 L-1,2.51 L-1.01,0 Z"/><path fill="url(#h84)" fill-rule="evenodd" class="nostroke" d="M-1.01,-103.5 L16.01,-103.5 L16,-101.49 L13.01,-101.48 L13.01,-81.02 L16.01,-81 L16,-78.99 L13.01,-78.98 L13.01,-72.82 L16,-72.81 L16.01,-70.8 L13.02,-70.79 L13,-69.01 L10.49,-69.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M10.49,-32.98 L13,-32.99 L13.02,-31.21 L16.01,-31.2 L16,-29.19 L13.01,-29.18 L13.01,-25.02 L16,-25.01 L16.01,-23 L13.01,-22.98 L13,-3.01 L10.49,-3.02 L10.49,-7.98 L8.59,-8 L8.59,-16 L10.49,-16.02 L10.49,-32.98 Z M-1.01,0 L7.98,-0.01 L7.99,2.5 L-1,2.51 L-1.01,0 Z"/><path class="out" d="M-1.01,-103.5 L16.01,-103.5 L16,-101.49 L13.01,-101.48 L13.01,-81.02 L16.01,-81 L16,-78.99 L13.01,-78.98 L13.01,-72.82 L16,-72.81 L16.01,-70.8 L13.02,-70.79 L13,-69.01 L10.49,-69.02 L10.49,-101.48 L-1,-101.49 L-1.01,-103.5 Z M10.49,-32.98 L13,-32.99 L13.02,-31.21 L16.01,-31.2 L16,-29.19 L13.01,-29.18 L13.01,-25.02 L16,-25.01 L16.01,-23 L13.01,-22.98 L13,-3.01 L10.49,-3.02 L10.49,-7.98 L8.59,-8 L8.59,-16 L10.49,-16.02 L10.49,-32.98 Z M-1.01,0 L7.98,-0.01 L7.99,2.5 L-1,2.51 L-1.01,0 Z"/><polyline class="rib" points="9.25,-43.8 9.25,4.5"/><circle class="rib-t" cx="11" cy="-43.8" r="3"/><text class="rbt" x="-3.8" y="20.5" font-size="1.0761" text-anchor="start">주황 = 리본 (틈 w8.00~10.50, 접기 R3)</text><line class="ex" x1="-0.7609" y1="2.5" x2="25" y2="2.5"/><circle class="dot" cx="25" cy="2.5" r="0.1793"/><line class="ex" x1="25" y1="2.5" x2="26.0761" y2="2.5"/><text class="ot" x="26.4348" y="2.8946" font-size="1.0522" text-anchor="start">u-2.5  받침 아래</text><line class="ex" x1="13.2391" y1="-3" x2="25" y2="-3"/><circle class="dot" cx="25" cy="-3" r="0.1793"/><line class="ex" x1="25" y1="-3" x2="26.0761" y2="-3"/><text class="ot" x="26.4348" y="-2.6054" font-size="1.0522" text-anchor="start">u3  홈 위</text><line class="ex" x1="8.8391" y1="-8" x2="25" y2="-8"/><circle class="dot" cx="25" cy="-8" r="0.1793"/><line class="ex" x1="25" y1="-8" x2="26.0761" y2="-8"/><text class="ot" x="26.4348" y="-7.6054" font-size="1.0522" text-anchor="start">u8  누름 패드</text><line class="ex" x1="8.8391" y1="-16" x2="25" y2="-16"/><circle class="dot" cx="25" cy="-16" r="0.1793"/><line class="ex" x1="25" y1="-16" x2="26.0761" y2="-16"/><text class="ot" x="26.4348" y="-15.6054" font-size="1.0522" text-anchor="start">u16</text><line class="ex" x1="16.2391" y1="-29.2" x2="25" y2="-29.2"/><circle class="dot" cx="25" cy="-29.2" r="0.1793"/><line class="ex" x1="25" y1="-29.2" x2="26.0761" y2="-29.2"/><text class="ot" x="26.4348" y="-28.8054" font-size="1.0522" text-anchor="start">u29.2  창 리브</text><line class="ex" x1="13.2391" y1="-33" x2="25" y2="-33"/><circle class="dot" cx="25" cy="-33" r="0.1793"/><line class="ex" x1="25" y1="-33" x2="26.0761" y2="-33"/><text class="ot" x="26.4348" y="-32.6054" font-size="1.0522" text-anchor="start">u33  창</text><line class="ex" x1="9.4891" y1="-43.8" x2="25" y2="-43.8"/><circle class="dot" cx="25" cy="-43.8" r="0.1793"/><line class="ex" x1="25" y1="-43.8" x2="26.0761" y2="-43.8"/><text class="ot" x="26.4348" y="-43.4054" font-size="1.0522" text-anchor="start">u43.8  리본 접기</text><line class="ex" x1="13.2391" y1="-69" x2="25" y2="-69"/><circle class="dot" cx="25" cy="-69" r="0.1793"/><line class="ex" x1="25" y1="-69" x2="26.0761" y2="-69"/><text class="ot" x="26.4348" y="-68.6054" font-size="1.0522" text-anchor="start">u69  창</text><line class="ex" x1="16.2391" y1="-72.8" x2="25" y2="-72.8"/><circle class="dot" cx="25" cy="-72.8" r="0.1793"/><line class="ex" x1="25" y1="-72.8" x2="26.0761" y2="-72.8"/><text class="ot" x="26.4348" y="-72.4054" font-size="1.0522" text-anchor="start">u72.8</text><line class="ex" x1="16.2391" y1="-103.5" x2="25" y2="-103.5"/><circle class="dot" cx="25" cy="-103.5" r="0.1793"/><line class="ex" x1="25" y1="-103.5" x2="26.0761" y2="-103.5"/><text class="ot" x="26.4348" y="-103.1054" font-size="1.0522" text-anchor="start">u103.5  위</text><line class="ex" x1="8" y1="2.7391" x2="8" y2="5.5"/><circle class="dot" cx="8" cy="5.5" r="0.1793"/><line class="ex" x1="8" y1="5.5" x2="7.5826" y2="6.5761"/><text class="ot" x="7.9772" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 7.9772 6.9348)">w8  화면 뒤</text><line class="ex" x1="8.6" y1="2.7391" x2="8.6" y2="5.5"/><circle class="dot" cx="8.6" cy="5.5" r="0.1793"/><line class="ex" x1="8.6" y1="5.5" x2="9.0174" y2="6.5761"/><text class="ot" x="9.412" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 9.412 6.9348)">w8.6  패드</text><line class="ex" x1="10.5" y1="2.7391" x2="10.5" y2="5.5"/><circle class="dot" cx="10.5" cy="5.5" r="0.1793"/><line class="ex" x1="10.5" y1="5.5" x2="10.5" y2="6.5761"/><text class="ot" x="10.8946" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 10.8946 6.9348)">w10.5  뒷판</text><line class="ex" x1="15.2" y1="2.7391" x2="15.2" y2="5.5"/><circle class="dot" cx="15.2" cy="5.5" r="0.1793"/><line class="ex" x1="15.2" y1="5.5" x2="14.8826" y2="6.5761"/><text class="ot" x="15.2772" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 15.2772 6.9348)">w15.2  덮개 볼록</text><line class="ex" x1="16" y1="2.7391" x2="16" y2="5.5"/><circle class="dot" cx="16" cy="5.5" r="0.1793"/><line class="ex" x1="16" y1="5.5" x2="16.3174" y2="6.5761"/><text class="ot" x="16.712" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 16.712 6.9348)">w16  리브</text></svg><svg id="p7" x="1174.0" y="1952.3" width="380.0" height="1132.7" viewBox="-4.7174 -110.7174 45.4348 135.4348"><defs><pattern id="h90" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-lid"/></pattern><pattern id="h91" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-cr"/></pattern><pattern id="h92" patternUnits="userSpaceOnUse" width="0.5978" height="0.5978" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.5978" class="hl-leg"/></pattern><pattern id="h93" patternUnits="userSpaceOnUse" width="0.7174" height="0.7174" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.7174" class="hl-print"/></pattern><pattern id="h94" patternUnits="userSpaceOnUse" width="0.8370" height="0.8370" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="0.8370" class="hl-wood"/></pattern><pattern id="h95" patternUnits="userSpaceOnUse" width="0.4783" height="0.4783" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="0.4783" class="hl-steel"/></pattern><pattern id="h96" patternUnits="userSpaceOnUse" width="1.0761" height="1.0761" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.0761" class="hl-ko"/></pattern></defs><text class="ttl" x="-3.8" y="-108" font-size="1.375" text-anchor="start">E–E (xr77)</text><text class="tx-s" x="-3.8" y="-104" font-size="1.0761" text-anchor="start">보스 · M2.5×6</text><polygon class="ph2" points="0,-0 0,-101 8,-101 8,-0"/><line class="glass" x1="0" y1="-0" x2="0" y2="-101"/><path class="m-cr fillonly" fill-rule="evenodd" d="M-1.01,-103.5 L16,-103.51 L16,-101.49 L13.01,-101.48 L13.01,-98.52 L16,-98.51 L16.01,-97.28 L11,-97.27 L10.98,-95.91 L8,-95.91 L7.99,-98.5 L10.49,-98.52 L10.48,-101.49 L-1,-101.49 L-1.01,-103.5 Z M7.99,-93.08 L10.98,-93.09 L11,-91.75 L16.01,-91.74 L16,-90.49 L13.01,-90.48 L13.01,-81.02 L16.01,-81 L16,-78.99 L13.01,-78.98 L13.01,-25.02 L16.01,-25 L16,-22.99 L13.01,-22.98 L13.01,-10.52 L16,-10.51 L16.01,-9.26 L11,-9.25 L10.98,-7.91 L7.99,-7.92 L7.99,-10.5 L10.49,-10.52 L10.49,-90.48 L7.99,-90.5 L7.99,-93.08 Z M7.99,-5.08 L10.98,-5.09 L11,-3.73 L16.01,-3.72 L16,-2.49 L13.01,-2.48 L13.02,-0.01 L16.01,0 L16.01,0.5 L14,2.51 L-1.01,2.5 L-1,-0.01 L10.48,-0.01 L10.48,-2.49 L7.99,-2.5 L7.99,-5.08 Z"/><path fill="url(#h91)" fill-rule="evenodd" class="nostroke" d="M-1.01,-103.5 L16,-103.51 L16,-101.49 L13.01,-101.48 L13.01,-98.52 L16,-98.51 L16.01,-97.28 L11,-97.27 L10.98,-95.91 L8,-95.91 L7.99,-98.5 L10.49,-98.52 L10.48,-101.49 L-1,-101.49 L-1.01,-103.5 Z M7.99,-93.08 L10.98,-93.09 L11,-91.75 L16.01,-91.74 L16,-90.49 L13.01,-90.48 L13.01,-81.02 L16.01,-81 L16,-78.99 L13.01,-78.98 L13.01,-25.02 L16.01,-25 L16,-22.99 L13.01,-22.98 L13.01,-10.52 L16,-10.51 L16.01,-9.26 L11,-9.25 L10.98,-7.91 L7.99,-7.92 L7.99,-10.5 L10.49,-10.52 L10.49,-90.48 L7.99,-90.5 L7.99,-93.08 Z M7.99,-5.08 L10.98,-5.09 L11,-3.73 L16.01,-3.72 L16,-2.49 L13.01,-2.48 L13.02,-0.01 L16.01,0 L16.01,0.5 L14,2.51 L-1.01,2.5 L-1,-0.01 L10.48,-0.01 L10.48,-2.49 L7.99,-2.5 L7.99,-5.08 Z"/><path class="out" d="M-1.01,-103.5 L16,-103.51 L16,-101.49 L13.01,-101.48 L13.01,-98.52 L16,-98.51 L16.01,-97.28 L11,-97.27 L10.98,-95.91 L8,-95.91 L7.99,-98.5 L10.49,-98.52 L10.48,-101.49 L-1,-101.49 L-1.01,-103.5 Z M7.99,-93.08 L10.98,-93.09 L11,-91.75 L16.01,-91.74 L16,-90.49 L13.01,-90.48 L13.01,-81.02 L16.01,-81 L16,-78.99 L13.01,-78.98 L13.01,-25.02 L16.01,-25 L16,-22.99 L13.01,-22.98 L13.01,-10.52 L16,-10.51 L16.01,-9.26 L11,-9.25 L10.98,-7.91 L7.99,-7.92 L7.99,-10.5 L10.49,-10.52 L10.49,-90.48 L7.99,-90.5 L7.99,-93.08 Z M7.99,-5.08 L10.98,-5.09 L11,-3.73 L16.01,-3.72 L16,-2.49 L13.01,-2.48 L13.02,-0.01 L16.01,0 L16.01,0.5 L14,2.51 L-1.01,2.5 L-1,-0.01 L10.48,-0.01 L10.48,-2.49 L7.99,-2.5 L7.99,-5.08 Z"/><rect class="m-steel" x="11" y="-8.75" width="2.5" height="4.5"/><rect class="m-steel" x="5" y="-7.75" width="6" height="2.5"/><rect class="m-steel" x="11" y="-96.75" width="2.5" height="4.5"/><rect class="m-steel" x="5" y="-95.75" width="6" height="2.5"/><text class="lt" x="-3.8" y="20.5" font-size="1.0761" text-anchor="start">M2.5×6 (점선 화면 안 물림 3)</text><line class="ex" x1="16.2391" y1="2.5" x2="25" y2="2.5"/><circle class="dot" cx="25" cy="2.5" r="0.1793"/><line class="ex" x1="25" y1="2.5" x2="26.0761" y2="2.5"/><text class="ot" x="26.4348" y="2.8946" font-size="1.0522" text-anchor="start">u-2.5  아래</text><line class="ex" x1="16.2391" y1="-6.5" x2="25" y2="-6.5"/><circle class="dot" cx="25" cy="-6.5" r="0.1793"/><line class="ex" x1="25" y1="-6.5" x2="26.0761" y2="-6.5"/><text class="ot" x="26.4348" y="-6.1054" font-size="1.0522" text-anchor="start">u6.5  보스</text><line class="ex" x1="16.2391" y1="-24" x2="25" y2="-24"/><circle class="dot" cx="25" cy="-24" r="0.1793"/><line class="ex" x1="25" y1="-24" x2="26.0761" y2="-24"/><text class="ot" x="26.4348" y="-23.6054" font-size="1.0522" text-anchor="start">u24  가로 리브</text><line class="ex" x1="16.2391" y1="-80" x2="25" y2="-80"/><circle class="dot" cx="25" cy="-80" r="0.1793"/><line class="ex" x1="25" y1="-80" x2="26.0761" y2="-80"/><text class="ot" x="26.4348" y="-79.6054" font-size="1.0522" text-anchor="start">u80  가로 리브</text><line class="ex" x1="16.2391" y1="-94.5" x2="25" y2="-94.5"/><circle class="dot" cx="25" cy="-94.5" r="0.1793"/><line class="ex" x1="25" y1="-94.5" x2="26.0761" y2="-94.5"/><text class="ot" x="26.4348" y="-94.1054" font-size="1.0522" text-anchor="start">u94.5  보스</text><line class="ex" x1="16.2391" y1="-103.5" x2="25" y2="-103.5"/><circle class="dot" cx="25" cy="-103.5" r="0.1793"/><line class="ex" x1="25" y1="-103.5" x2="26.0761" y2="-103.5"/><text class="ot" x="26.4348" y="-103.1054" font-size="1.0522" text-anchor="start">u103.5  위</text><line class="ex" x1="-1" y1="2.7391" x2="-1" y2="5.5"/><circle class="dot" cx="-1" cy="5.5" r="0.1793"/><line class="ex" x1="-1" y1="5.5" x2="-1" y2="6.5761"/><text class="ot" x="-0.6054" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 -0.6054 6.9348)">w-1  앞 테</text><line class="ex" x1="5" y1="2.7391" x2="5" y2="5.5"/><circle class="dot" cx="5" cy="5.5" r="0.1793"/><line class="ex" x1="5" y1="5.5" x2="5" y2="6.5761"/><text class="ot" x="5.3946" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 5.3946 6.9348)">w5  나사 끝</text><line class="ex" x1="8" y1="2.7391" x2="8" y2="5.5"/><circle class="dot" cx="8" cy="5.5" r="0.1793"/><line class="ex" x1="8" y1="5.5" x2="8" y2="6.5761"/><text class="ot" x="8.3946" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 8.3946 6.9348)">w8  보스 면</text><line class="ex" x1="11" y1="2.7391" x2="11" y2="5.5"/><circle class="dot" cx="11" cy="5.5" r="0.1793"/><line class="ex" x1="11" y1="5.5" x2="11" y2="6.5761"/><text class="ot" x="11.3946" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 11.3946 6.9348)">w11  머리 자리</text><line class="ex" x1="16" y1="2.7391" x2="16" y2="5.5"/><circle class="dot" cx="16" cy="5.5" r="0.1793"/><line class="ex" x1="16" y1="5.5" x2="16" y2="6.5761"/><text class="ot" x="16.3946" y="6.9348" font-size="1.0522" text-anchor="end" transform="rotate(-90 16.3946 6.9348)">w16  리브</text></svg></svg>

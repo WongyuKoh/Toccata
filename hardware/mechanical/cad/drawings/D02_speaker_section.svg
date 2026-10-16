@@ -75,9 +75,9 @@
 <path class="S-ctx" fill-rule="evenodd" d="M67.17 146.69 L55.17 144.65 L54.00 151.55 L66.00 153.59Z" clip-path="url(#cv1)"/>
 <path class="S-ctx" fill-rule="evenodd" d="M95.50 206.00 L80.50 206.00 L80.50 209.00 L95.50 209.00Z" clip-path="url(#cv1)"/>
 <path class="S-ctx" fill-rule="evenodd" d="M75.26 198.40 L34.11 198.40 L34.11 200.00 L75.26 200.00Z M79.50 198.40 L77.74 198.40 L77.74 200.00 L79.50 200.00Z" clip-path="url(#cv1)"/>
-<path class="S-wood" fill-rule="evenodd" d="M226.50 64.35 L215.00 64.35 L215.00 204.00 L226.50 204.00Z" clip-path="url(#cv1)"/>
-<path class="S-wood" fill-rule="evenodd" d="M215.00 64.35 L200.86 64.35 L200.86 75.85 L215.00 75.85Z" clip-path="url(#cv1)"/>
-<path class="S-wood" fill-rule="evenodd" d="M215.00 192.50 L125.00 192.50 L125.00 204.00 L215.00 204.00Z" clip-path="url(#cv1)"/>
+<path class="S-print" fill-rule="evenodd" d="M226.50 64.35 L215.00 64.35 L215.00 204.00 L226.50 204.00Z" clip-path="url(#cv1)"/>
+<path class="S-print" fill-rule="evenodd" d="M215.00 64.35 L200.86 64.35 L200.86 75.85 L215.00 75.85Z" clip-path="url(#cv1)"/>
+<path class="S-print" fill-rule="evenodd" d="M215.00 192.50 L125.00 192.50 L125.00 204.00 L215.00 204.00Z" clip-path="url(#cv1)"/>
 <path class="S-print" fill-rule="evenodd" d="M200.86 75.85 L200.86 64.35 L196.68 64.35 L180.00 78.34 L187.40 87.15Z M108.00 138.76 L102.25 143.58 L112.04 143.58Z" clip-path="url(#cv1)"/>
 <path class="S-print" fill-rule="evenodd" d="M187.66 71.91 L181.32 64.35 L176.45 64.35 L171.38 68.61 L172.67 70.14 L177.53 66.06 L184.60 74.48Z M163.82 77.56 L162.53 76.03 L155.72 81.74 L157.01 83.27Z M148.16 90.70 L146.88 89.17 L140.07 94.88 L141.35 96.41Z M132.51 103.83 L131.22 102.30 L124.41 108.02 L125.70 109.55Z M116.85 116.97 L115.56 115.44 L108.75 121.16 L110.04 122.69Z M101.19 130.11 L99.91 128.58 L97.34 130.73 L98.63 132.26Z" clip-path="url(#cv1)"/>
 <path class="S-print" fill-rule="evenodd" d="M131.00 176.00 L104.00 176.00 L104.00 151.58 L109.00 151.58 L109.00 143.58 L98.00 143.58 L98.00 182.00 L125.00 182.00 L125.00 192.50 L131.00 192.50Z" clip-path="url(#cv1)"/>
@@ -196,16 +196,15 @@
 <path class="grid2" d="M112.000 386.200 L112.000 389.750"/>
 <path class="grid2" d="M162.000 386.200 L162.000 389.750"/>
 <path class="grid2" d="M206.000 386.200 L206.000 389.750"/>
-<rect class="S-wood" x="392.000" y="216.500" width="8.000" height="3.600"/>
-<rect class="S-print" x="392.000" y="221.500" width="8.000" height="3.600"/>
-<rect class="S-metal" x="392.000" y="226.500" width="8.000" height="3.600"/>
-<rect class="S-rubber" x="392.000" y="231.500" width="8.000" height="3.600"/>
-<rect class="S-cable" x="392.000" y="236.500" width="8.000" height="3.600"/>
-<rect class="S-ctx" x="392.000" y="241.500" width="8.000" height="3.600"/>
-<rect class="air" x="392.000" y="246.500" width="8.000" height="3.600"/>
-<path class="sound" d="M392.000 253.300 L400.000 253.300"/>
-<path class="ax" d="M392.000 258.300 L400.000 258.300"/>
-<path class="vis" d="M392.000 263.300 L400.000 263.300"/>
+<rect class="S-print" x="392.000" y="216.500" width="8.000" height="3.600"/>
+<rect class="S-metal" x="392.000" y="221.500" width="8.000" height="3.600"/>
+<rect class="S-rubber" x="392.000" y="226.500" width="8.000" height="3.600"/>
+<rect class="S-cable" x="392.000" y="231.500" width="8.000" height="3.600"/>
+<rect class="S-ctx" x="392.000" y="236.500" width="8.000" height="3.600"/>
+<rect class="air" x="392.000" y="241.500" width="8.000" height="3.600"/>
+<path class="sound" d="M392.000 248.300 L400.000 248.300"/>
+<path class="ax" d="M392.000 253.300 L400.000 253.300"/>
+<path class="vis" d="M392.000 258.300 L400.000 258.300"/>
 <rect class="seca" x="392.000" y="330.000" width="10.000" height="1.400"/>
 <rect class="bal" x="402.000" y="330.000" width="10.000" height="1.400"/>
 <rect class="seca" x="412.000" y="330.000" width="10.000" height="1.400"/>
@@ -382,15 +381,15 @@
 <text class="t h td" x="131.465" y="82.517" font-size="3.20" text-anchor="middle" transform="rotate(-40.000 131.465 82.517)">앞판 바깥면 123.26</text>
 <text class="t h td" x="165.196" y="76.928" font-size="3.20" text-anchor="end">40°</text>
 <text class="t h" x="248.000" y="69.957" font-size="3.50" text-anchor="start">육각 그릴 (판 2, 아래 링 벽 없음)</text>
-<text class="t h" x="248.000" y="75.507" font-size="3.50" text-anchor="start">윗판 (오꾸메 11.5)</text>
+<text class="t h" x="248.000" y="75.507" font-size="3.50" text-anchor="start">윗판 (출력 11.5)</text>
 <text class="t h" x="248.000" y="81.057" font-size="3.50" text-anchor="start">앞판 배플 40° (출력)</text>
 <text class="t h" x="248.000" y="134.760" font-size="3.50" text-anchor="start">스피커 유닛 CW-100B25 (Ø94 구멍)</text>
 <text class="t h" x="248.000" y="140.683" font-size="3.50" text-anchor="start">EVA 가스켓 3T</text>
 <text class="t h" x="248.000" y="148.773" font-size="3.50" text-anchor="start">통로 틀: 앞벽·턱·지붕·세움벽 (출력)</text>
 <text class="t h" x="248.000" y="174.740" font-size="3.50" text-anchor="start">안 공간 2.159 L (폴리에스터 솜)</text>
-<text class="t h" x="248.000" y="197.676" font-size="3.50" text-anchor="start">뒤판 (오꾸메 11.5)</text>
+<text class="t h" x="248.000" y="197.676" font-size="3.50" text-anchor="start">뒤판 (출력 11.5)</text>
 <text class="t h" x="248.000" y="203.226" font-size="3.50" text-anchor="start">USB-C 케이블 W201</text>
-<text class="t h" x="248.000" y="208.776" font-size="3.50" text-anchor="start">아랫판 (오꾸메 11.5)</text>
+<text class="t h" x="248.000" y="208.776" font-size="3.50" text-anchor="start">아랫판 (출력 11.5)</text>
 <text class="t h" x="52.000" y="39.000" font-size="3.50" text-anchor="middle">27° 소리 길</text>
 <text class="t h" x="76.152" y="39.000" font-size="3.50" text-anchor="middle">건반 모듈 O1 (참고)</text>
 <text class="t h" x="118.288" y="39.000" font-size="3.50" text-anchor="middle">유닛 축 (앞판에 수직, 수평에서 50°)</text>
@@ -416,7 +415,7 @@
 <text class="t" x="19.000" y="281.608" font-size="3.10" text-anchor="start">Qts 0.72 · Vas 3.0 L는 재지 않은 가정 (사양 speakers.qtc)</text>
 <text class="t" x="16.000" y="286.010" font-size="3.10" text-anchor="start">· 앞판 바깥면 F(218.25, 65.42) → T(312.68, 144.65), 길이 123.26, 수평에서 40° (수직에서 50°)</text>
 <text class="t" x="16.000" y="290.412" font-size="3.10" text-anchor="start">· 유닛 가운데 (x160.5 / 1061.5, y260, z100.45), 축은 앞판에 수직 (수평에서 50° 위)</text>
-<text class="t" x="16.000" y="294.814" font-size="3.10" text-anchor="start">· 판: 오꾸메 11.5 (뒤판·윗판·아랫판·옆판), 앞판·통로 틀·그릴은 출력 PETG</text>
+<text class="t" x="16.000" y="294.814" font-size="3.10" text-anchor="start">· 판: 모두 출력 PETG, 두께 11.5 (뒤판·윗판·아랫판·바깥 옆판은 10/16부터, 안쪽 옆판은 10/7부터; 앞판·통로 틀·그릴)</text>
 <text class="t" x="16.000" y="299.216" font-size="3.10" text-anchor="start">· 케이블 통로 y212~241 × z0~27 (스피커 밑, 책상이 바닥)</text>
 <text class="t tb" x="206.000" y="262.000" font-size="3.50" text-anchor="start">소리 길 27° · D14 (자석 ↔ 홀 센서)</text>
 <text class="t" x="206.000" y="268.402" font-size="3.10" text-anchor="start">· 27° 선: 콘 아래 가장자리 (y224, z70.24)에서 연주자 쪽으로 27° 위</text>
@@ -431,23 +430,23 @@
 <text class="t tb" x="163.000" y="339.125" font-size="2.50" text-anchor="start">자기 크기 (기울기 풀어 잼)</text>
 <text class="t tb" x="212.000" y="339.125" font-size="2.50" text-anchor="middle">수량</text>
 <text class="t" x="17.000" y="342.675" font-size="2.50" text-anchor="start">스피커 파트 L 옆판(바깥쪽)</text>
-<text class="t" x="113.000" y="342.675" font-size="2.50" text-anchor="start">오꾸메 합판 11.5T</text>
+<text class="t" x="113.000" y="342.675" font-size="2.50" text-anchor="start">PETG 회색</text>
 <text class="t" x="163.000" y="342.675" font-size="2.50" text-anchor="start">139.6 × 128.5 × 11.5</text>
 <text class="t" x="212.000" y="342.675" font-size="2.50" text-anchor="middle">1</text>
 <text class="t" x="17.000" y="346.225" font-size="2.50" text-anchor="start">스피커 파트 L 옆판(가운데 유닛 쪽)</text>
-<text class="t" x="113.000" y="346.225" font-size="2.50" text-anchor="start">오꾸메 합판 11.5T</text>
+<text class="t" x="113.000" y="346.225" font-size="2.50" text-anchor="start">PETG 회색</text>
 <text class="t" x="163.000" y="346.225" font-size="2.50" text-anchor="start">139.6 × 128.5 × 11.5</text>
 <text class="t" x="212.000" y="346.225" font-size="2.50" text-anchor="middle">1</text>
 <text class="t" x="17.000" y="349.775" font-size="2.50" text-anchor="start">스피커 파트 L 뒤판</text>
-<text class="t" x="113.000" y="349.775" font-size="2.50" text-anchor="start">오꾸메 합판 11.5T</text>
-<text class="t" x="163.000" y="349.775" font-size="2.50" text-anchor="start">250 × 139.6 × 11.5</text>
+<text class="t" x="113.000" y="349.775" font-size="2.50" text-anchor="start">PETG 회색</text>
+<text class="t" x="163.000" y="349.775" font-size="2.50" text-anchor="start">250 × 139.7 × 11.5</text>
 <text class="t" x="212.000" y="349.775" font-size="2.50" text-anchor="middle">1</text>
 <text class="t" x="17.000" y="353.325" font-size="2.50" text-anchor="start">스피커 파트 L 윗판</text>
-<text class="t" x="113.000" y="353.325" font-size="2.50" text-anchor="start">오꾸메 합판 11.5T</text>
+<text class="t" x="113.000" y="353.325" font-size="2.50" text-anchor="start">PETG 회색</text>
 <text class="t" x="163.000" y="353.325" font-size="2.50" text-anchor="start">250 × 14.1 × 11.5</text>
 <text class="t" x="212.000" y="353.325" font-size="2.50" text-anchor="middle">1</text>
 <text class="t" x="17.000" y="356.875" font-size="2.50" text-anchor="start">스피커 파트 L 아랫판</text>
-<text class="t" x="113.000" y="356.875" font-size="2.50" text-anchor="start">오꾸메 합판 11.5T</text>
+<text class="t" x="113.000" y="356.875" font-size="2.50" text-anchor="start">PETG 회색</text>
 <text class="t" x="163.000" y="356.875" font-size="2.50" text-anchor="start">250 × 90 × 11.5</text>
 <text class="t" x="212.000" y="356.875" font-size="2.50" text-anchor="middle">1</text>
 <text class="t" x="17.000" y="360.425" font-size="2.50" text-anchor="start">스피커 앞판(배플, 40° 경사) L</text>
@@ -487,16 +486,15 @@
 <text class="t" x="163.000" y="388.825" font-size="2.50" text-anchor="start">105 × 105 × 61</text>
 <text class="t" x="212.000" y="388.825" font-size="2.50" text-anchor="middle">1</text>
 <text class="t tb" x="392.000" y="214.000" font-size="3.10" text-anchor="start">범례</text>
-<text class="t" x="402.000" y="219.400" font-size="2.80" text-anchor="start">오꾸메 합판 11.5T</text>
-<text class="t" x="402.000" y="224.400" font-size="2.80" text-anchor="start">출력물 PETG</text>
-<text class="t" x="402.000" y="229.400" font-size="2.80" text-anchor="start">구매 금속 (스피커·나사·인서트·자석)</text>
-<text class="t" x="402.000" y="234.400" font-size="2.80" text-anchor="start">고무·EVA·실리콘</text>
-<text class="t" x="402.000" y="239.400" font-size="2.80" text-anchor="start">케이블</text>
-<text class="t" x="402.000" y="244.400" font-size="2.80" text-anchor="start">건반 모듈 (참고, 연한 회색)</text>
-<text class="t" x="402.000" y="249.400" font-size="2.80" text-anchor="start">안 공기 (솜)</text>
-<text class="t" x="402.000" y="254.400" font-size="2.80" text-anchor="start">27° 소리 길</text>
-<text class="t" x="402.000" y="259.400" font-size="2.80" text-anchor="start">유닛 축</text>
-<text class="t" x="402.000" y="264.400" font-size="2.80" text-anchor="start">옆판 윤곽 (단면 뒤)</text>
+<text class="t" x="402.000" y="219.400" font-size="2.80" text-anchor="start">출력물 PETG</text>
+<text class="t" x="402.000" y="224.400" font-size="2.80" text-anchor="start">구매 금속 (스피커·나사·인서트·자석)</text>
+<text class="t" x="402.000" y="229.400" font-size="2.80" text-anchor="start">고무·EVA·실리콘</text>
+<text class="t" x="402.000" y="234.400" font-size="2.80" text-anchor="start">케이블</text>
+<text class="t" x="402.000" y="239.400" font-size="2.80" text-anchor="start">건반 모듈 (참고, 연한 회색)</text>
+<text class="t" x="402.000" y="244.400" font-size="2.80" text-anchor="start">안 공기 (솜)</text>
+<text class="t" x="402.000" y="249.400" font-size="2.80" text-anchor="start">27° 소리 길</text>
+<text class="t" x="402.000" y="254.400" font-size="2.80" text-anchor="start">유닛 축</text>
+<text class="t" x="402.000" y="259.400" font-size="2.80" text-anchor="start">옆판 윤곽 (단면 뒤)</text>
 <text class="t" x="392.000" y="334.600" font-size="2.80" text-anchor="middle">0</text>
 <text class="t" x="402.000" y="334.600" font-size="2.80" text-anchor="middle">10</text>
 <text class="t" x="412.000" y="334.600" font-size="2.80" text-anchor="middle">20</text>
@@ -515,14 +513,14 @@
 <text class="t tm" x="453.000" y="376.400" font-size="2.40" text-anchor="start">도면 이름</text>
 <text class="t tb" x="453.000" y="382.600" font-size="4.40" text-anchor="start">스피커 단면</text>
 <text class="t tm" x="541.000" y="376.400" font-size="2.40" text-anchor="start">도면 번호</text>
-<text class="t tb" x="541.000" y="382.800" font-size="5.20" text-anchor="start">D02 / D06</text>
+<text class="t tb" x="541.000" y="382.800" font-size="5.20" text-anchor="start">D02 / D05</text>
 <text class="t" x="391.000" y="390.600" font-size="2.80" text-anchor="start">뒷부분(L2) + 터치스크린 3판 도면 모음</text>
 <text class="t tm" x="453.000" y="388.600" font-size="2.20" text-anchor="start">척도 (A2 594×420 출력 기준)</text>
 <text class="t" x="453.000" y="392.300" font-size="2.80" text-anchor="start">1:1 · 확대 A 5:1</text>
 <text class="t tm" x="521.000" y="388.600" font-size="2.20" text-anchor="start">단위</text>
 <text class="t" x="521.000" y="392.300" font-size="2.80" text-anchor="start">mm</text>
 <text class="t tm" x="538.000" y="388.600" font-size="2.20" text-anchor="start">날짜</text>
-<text class="t" x="538.000" y="392.300" font-size="2.80" text-anchor="start">2026-10-02</text>
+<text class="t" x="538.000" y="392.300" font-size="2.80" text-anchor="start">2026-10-16</text>
 <text class="t" x="391.000" y="398.600" font-size="2.50" text-anchor="start">좌표: x 가로(0 = A0 왼쪽 끝) · y 흰 건반 앞 끝에서 뒤로 · z 책상에서 위로</text>
 <text class="t tm" x="521.000" y="396.600" font-size="2.20" text-anchor="start">설계 상태</text>
 <text class="t" x="521.000" y="400.300" font-size="2.40" text-anchor="start">L2 · 스피커 앞판 40° · 터치스크린 3판</text>

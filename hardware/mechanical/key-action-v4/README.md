@@ -88,9 +88,10 @@ v4는 그랜드 피아노나 디지털 피아노처럼 **무게로 돌아오는*
 | `drawings/` | 도면 15장 SVG. `src/`는 생성기(`render_v4.py`, `render_v4b.py`, `kit.py`, `draw.py`, `dwg.css`, `drawings.json`) |
 | `printables/tools/` | 출력 공구 4개: 벤치 지그, 높이 블록, 캡스턴 게이지, 핀 높이 게이지. `make_tools.py`, `tools.md`(쓰는 법), `stl/`, `scad/` |
 | `printables/stage0/` | 단계 0 시편·지그 34개. `make_stage0.py`, `stage0_procedure.md`(절차서), `stage0_results_template.csv`, `stl/`, `scad/` |
-| `concepts/` | 구조안 5개(S1 H1 K1 W1 F1)와 심사 결과 |
-| `verification/` | 라운드별 검증 지적과 처리 기록, 지시서 |
-| `report/` | 보고서 HTML: `r3-progress/`, `r4/`, `r4.5/`. 각 폴더의 `index.html`을 엽니다 |
+| `verification/` | 검증 기록: r4.4(`R44_BRIEF.md`, `r44*.json`, `verify44/`)와 r4.5(`verify45/`) |
+| `report/r4.5/` | 보고서 HTML(`index.html`을 엽니다) |
+
+보관(2026-10-06 `archive/hardware/mechanical/key-action-v4/`로 옮김): 구조안 5개 비교 `concepts/`(S1 H1 K1 W1 F1), 지난 보고서 `report/r3-progress/`·`report/r4/`, r3·r4 검증 기록과 지시서.
 
 ## 다시 계산하기
 

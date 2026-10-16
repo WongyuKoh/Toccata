@@ -2,7 +2,7 @@
 
 화면은 사용자가 고른 **B1 Waveshare 7-DSI-TOUCH-C**입니다(7인치, 가로 1024×600, DSI). 자리는 **L2 가운데 화면 뚜껑**(x501~721, y214~341.5, 윗면 z72.85)입니다. 모든 좌표는 `design/numbers.json`의 `placement` 블록(L2 확정값 `cad/spec/body_L2.json`)에서 스크립트로 계산합니다.
 
-**상태:** 2026-10-01 사용자 승인("3판 승인"). `design/CAD_SPEC_rev3.md`를 CAD 세션에 넘겼고 CAD가 만드는 중입니다(사양과 다르게 만든 곳은 CAD가 목록으로 보냄). 설계 기준 R31·D14·D16·D19·D20~D24를 3판 값으로 고쳤습니다. 2판(공식 TD2, L1) 기록은 `../rev2_td2/`로 옮겼습니다(CAD L1 보관본이 거기서 읽음). CAD 3판은 통합본 v15 탭 09, `cad/src/touchscreen_rev3.py`입니다(사양과 다르게 만든 18곳은 W1 확인 완료).
+**상태:** 2026-10-01 사용자 승인("3판 승인"). `design/CAD_SPEC_rev3.md`를 CAD 세션에 넘겼고 CAD가 만드는 중입니다(사양과 다르게 만든 곳은 CAD가 목록으로 보냄). 설계 기준 R31·D14·D16·D19·D20~D24를 3판 값으로 고쳤습니다. 2판(공식 TD2, L1) 기록은 `archive/hardware/mechanical/touchscreen/rev2_td2/`로 옮겼습니다(2026-10-06; CAD L1 보관본은 원래 `../rev2_td2/`에서 읽음). CAD 3판은 통합본 v15 탭 09, `cad/src/touchscreen_rev3.py`입니다(사양과 다르게 만든 18곳은 W1 확인 완료).
 
 | 폴더·파일 | 내용 |
 |---|---|

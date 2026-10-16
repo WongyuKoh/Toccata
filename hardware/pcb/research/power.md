@@ -1,9 +1,12 @@
 # Toccata CU power chain — part verification (2026-09-28)
 
 Scope: the parts in the CU power path (R28): USB-C PD trigger -> 5 A T fuse -> rocker switch -> 20 V bus -> XL4016 buck (5.1 V) -> Pi 5 (USB-C pigtail) + USB hub (DC jack). The goal is correct pin names and settings for a KiCad schematic.
+
+> **2026-10-07 개정 D (△17): 전원 입력이 LiFePO4 전지 팩으로 바뀌었습니다(R33).** 지금 기준은 아래 **0장**입니다. 1장(PD 트리거)과 "20 V 버스"를 전제로 한 문장, 맨 끝의 넷 뼈대는 개정 C까지의 **기록**으로 남깁니다(지우지 않음). 2~7장의 부품 사실(강압·스위치·퓨즈·Pi·허브·MT666)은 그대로 유효하고, 입력 전압만 20 V → 12.8 V(10.0~14.6 V)로 바뀝니다.
+
 Raw downloads (seller images, datasheet text) are in `scratchpad/research/raw/`.
 
-Summary of what changes versus the brief:
+Summary of what changed versus the brief (2026-09-28; items 1–2 are history since rev D):
 
 1. **PD trigger (HAM6113):** it is a HUSB238 board. The chip marking "HUSB238 000DD" is visible in the seller photos. The voltage is set with **3 solder-bridge pad pairs, not a DIP switch**. **20 V is the factory default, with all pads open.** The seller's feature text and its small top thumbnail show a different board with a DIP switch, so the listing is inconsistent (see 1.1).
 2. **New risk: the HUSB238 may refuse a 20 V/3 A (60 W) source and fall back to a lower voltage, possibly 5 V.** The cause is its 3.25 A current request when the ISET pin is left open. The board's ISET configuration is not documented. The D19 "power bank PD 20 V 3 A" must be bench-tested. A 65 W charger (20 V/3.25 A) is safe.
@@ -13,7 +16,95 @@ Summary of what changes versus the brief:
 
 ---
 
-## 1. PD trigger — icbanq P017179277 "100W QC PD 트리거 디코이 고정출력 제어 모듈 5V-20V (HAM6113)"
+## 0. 전지 입력 (개정 D, 2026-10-07) — 지금 쓰는 전원
+
+사용자 결정 2026-10-07(R33). USB-C PD 입력(A601 HUSB238 + 65 W 충전기 / PD 보조배터리, W601 C-C 선)을 빼고 LiFePO4 전지 팩을 XT60으로 바로 받습니다. 계산은 `src/sheets.py`의 `BATT`·`budget()`에 있고 SCH-06 표·주가 같은 값을 씁니다.
+
+### 0.1 연결
+
+```
+BT601 LiFePO4 12.8 V 6 Ah (76.8 Wh, BMS 내장 — 받으면 확인), 팩 리드 끝 XT60 암 = X605
+  ⇄ X606 XT60 수 (W601 하네스, L80, 16 AWG 10 cm): 빨강 → F601 홀더 선, 검정 → ★ 강압 IN−
+  → F601 5 A T (0218005.MXP, BU914 홀더) → SW601 KCD1-101A → +12V8 버스 (10.0~14.6 V)
+  → A602 XL4016 IN+ (5.1 V → Pi 5 · 허브 · 화면)   /   A702 XH-A232 (TPA3110) VCC
+넷: VBAT = 전지 + → XT60 → 퓨즈, VBAT_F = 퓨즈 → 스위치, +12V8 = 스위치 뒤 (전원 심볼)
+```
+
+충전 잭은 팩에 있습니다. 회로에는 충전 경로가 없습니다.
+
+### 0.2 버스 전압 범위와 두 부하
+
+- 위 끝: 14.6 V = LiFePO4 4셀 충전 끝 전압(3.65 V × 4). 충전하며 연주하지 않으므로 실제로는 쉰 전압 약 13.0~13.4 V에서 시작합니다.
+- 아래 끝: BMS 저전압 차단, 보통 약 10 V(2.5 V × 4). 받으면 판매 정보로 확인합니다.
+- 강압 XL4016: 5.1 V를 내려면 VIN ≥ VOUT + 약 2 V = 약 7 V(2장). 10 V − 7 V = 3 V 남음 → **범위 전체에서 동작**합니다.
+- 앰프 TPA3110: PVCC 권장 8~26 V(보드 콘덴서 35 V) → 10.0~14.6 V 모두 안.
+- 그래서 둘 다 BMS가 끊을 때까지 켜져 있고, 끊기면 한꺼번에 꺼집니다(Pi는 갑자기 꺼짐 → 읽기 전용 파일 시스템, R13).
+
+### 0.3 앰프 출력과 음량 상한 (8 Ω, BTL)
+
+TPA3110 Rds(on) 약 240 mΩ, BTL이면 직렬 2개 = 0.48 Ω (audio.md와 같은 계산).
+
+| PVCC | 최대 진폭 Vp = PVCC × 8 / 8.48 | 이상값 Vp² / (2 × 8) | 1 % THD 실제 (약 90 %) |
+|---|---|---|---|
+| 20 V | 18.87 V | 22.3 W | 약 20 W/ch |
+| 12.8 V | 12.08 V | 9.1 W | **약 8 W/ch** |
+
+- 비: 8 / 20 = 0.40 → 10 × log10(0.40) = **−3.98 dB ≈ −4 dB** (전압 비로도 20 × log10(12.8 / 20) = −3.88 dB).
+- 최대 출력에 필요한 입력(36 dB = ×63): √(8 W × 8 Ω) = 8.0 Vrms ÷ 63 ≈ **0.13 Vrms** (20 V 때 √(20 × 8) = 12.6 Vrms ÷ 63 ≈ 0.20 Vrms).
+- 그래서 **소프트웨어 음량 상한을 20 V 때보다 약 4 dB 낮춰** 앰프가 찌그러지지 않게 합니다(D19, SCH-07 주 4). 리미터는 그대로 둡니다.
+- 전지가 다 돼 가면 더 낮아집니다: 11 V면 (11 / 12.8)² = 0.74 → −1.3 dB. 끝 무렵 큰 소리에서 찌그러지면 충전합니다.
+
+### 0.4 전력 예산
+
+5 V 쪽: Pi 7.7 + 허브 2.0 + 동글 0.5 + 화면 2.15 = 12.35 W
+강압 손실(효율 90 %): 12.35 ÷ 0.9 − 12.35 = 1.37 W → 앰프 밖 입력 = 13.72 W
+앰프 평균: 2~6 W (20 V 표 값 그대로. 새 상한이 4 dB 낮아 실제로는 더 작음 → 보수적)
+
+| | 계산 | 결과 |
+|---|---|---|
+| 평균 | 13.72 + 2 = 15.72 W, 13.72 + 6 = 19.72 W | **약 15.7~19.7 W** |
+| 평균 전류 | 15.72 ÷ 12.8 = 1.23 A, 19.72 ÷ 12.8 = 1.54 A | **약 1.2~1.5 A** |
+| 순간 최대 (최저음 강타, 앰프가 찌그러지기 시작) | 앰프 입력 2 × 8 W ÷ 0.8(효율, 대기 전류 포함 보수적) = 20.0 W → 13.72 + 20.0 | **약 33.7 W, 12.8 V에서 2.63 A** |
+| 같은 순간, BMS 차단 직전 | 33.7 ÷ 10.0 | 약 3.4 A |
+| (비교) 이전 방식 | 개정 C D19 52 W의 앰프 몫 = 52 − 11.33 = 40.67 W, × 8 / 20 = 16.27 W → 13.72 + 16.27 | 약 30.0 W, 2.34 A |
+
+- 순간 최대는 **약 30~34 W, 12.8 V에서 약 2.3~2.6 A**입니다. 표에는 큰 값(33.7 W, 2.6 A)을 씁니다.
+- D19 글의 15.69~19.69 W와 0.03 W 차이는 반올림입니다(여기서는 손실을 12.35 ÷ 0.9로 계산).
+
+### 0.5 퓨즈 5 A T (그대로)
+
+- 정상: 순간 최대 3.4 A(10 V) < 5 A. 218 시리즈는 1.5 × In = 7.5 A 아래에서 1시간 넘게 끊기지 않으므로(4장) 연주 중에는 끊기지 않습니다.
+- **전지는 PD 전원처럼 스스로 전류를 3.25 A로 묶지 않습니다.** 단락이면 수십 A 이상이 흐를 수 있어 이제 퓨즈가 실제 보호입니다(BMS 단락 보호와 함께). 홀더를 XT60(X606) 바로 뒤 + 선에 둡니다.
+- 돌입 전류: 스위치를 켤 때 강압·앰프 입력 콘덴서(약 0.5~1.5 mF)를 채웁니다. 선로·스위치·퓨즈 합 약 0.1 Ω이면 첫 순간 12.8 ÷ 0.1 = 128 A, 시정수 0.1 Ω × 1.5 mF = 0.15 ms → I²t ≈ 128² × 0.15 ms ÷ 2 ≈ 1.2 A²s. 퓨즈 녹는 I²t 111 A²s보다 훨씬 작아 퓨즈는 괜찮습니다. BMS가 이것을 단락으로 볼 수 있으니 스위치를 10번 켜고 끄며 확인합니다(검토 R12).
+- 강하: 0.0104 Ω × 1.5 A ≈ 16 mV, 무시해도 됩니다.
+
+### 0.6 KCD1 스위치
+
+- DC 차단 정격이 공개되지 않았습니다(3장). AC 정격을 DC에서 50 %로 줄이면 약 3 A이고, 평균 1.2~1.5 A는 그 안입니다.
+- **소리를 멈춘 뒤 끕니다.** 그러면 끊는 전류가 앰프 대기 + 5 V 쪽뿐(약 1.1 A)이라 불꽃이 작습니다.
+
+### 0.7 연주 시간
+
+76.8 Wh × 0.9(쓸 수 있는 몫) = 69.1 Wh → 69.1 ÷ 15.72 = 4.40 h, 69.1 ÷ 19.72 = 3.50 h → **약 3.5~4.4시간**.
+
+### 0.8 접지 · 극성 · 충전 · 벤치
+
+- 별 접지점은 강압 IN− 단자 그대로(△5). 전지 −(W601 검정)와 앰프 GND 선이 여기서만 만납니다.
+- 극성: XT60은 모양으로 극성이 정해집니다. 하네스 X606을 납땜한 뒤 빨강 = +인지 전지 쪽과 맞춰 멀티미터로 확인합니다. 강압 모듈은 역극성 보호가 없습니다(2장).
+- 충전: 뚜껑 L을 열고 사용자 LiFePO4 충전기(14.6 V)를 팩 DC 잭에 꽂습니다. 충전기가 부하를 단 채 충전해도 된다고 밝히지 않으면 **충전하며 연주하지 않습니다**(충전 중 버스가 14.6 V까지 오르고, 충전기의 끝 판정이 부하 전류 때문에 틀어질 수 있음).
+- 벤치 시험: 12 V SMPS 출력에 XT60 암(L81)을 달아 **전지 대신** X606에 꽂습니다. **둘을 함께 꽂지 않습니다.** SMPS 선의 + 극성을 먼저 잽니다.
+
+### 0.9 받으면 확인할 것
+
+1. 무부하 전압 약 13.0~13.4 V(10 V 아래면 쓰지 않음).
+2. BMS가 있는지(판매 정보·라벨), 저전압 차단 전압(보통 약 10 V), 연속 방전 한도(5 A 이상이면 충분).
+3. XT60 극성(하네스 납땜 뒤, 벤치 SMPS 쪽도).
+4. 스위치 10번 켜고 끔 — BMS가 끊기지 않음.
+5. 처음 다 쓸 때 꺼지기 직전 버스 전압을 적어 둠.
+
+---
+
+## 1. (기록 — 개정 C까지) PD trigger — icbanq P017179277 "100W QC PD 트리거 디코이 고정출력 제어 모듈 5V-20V (HAM6113)"
 
 Source: icbanq product page plus its detail images (JENO, `gi.esmplus.com/jeno0921/HAM6113/d1.jpg`, `d2.jpg`). The detail photos show a purple board with the silk text "ZYPDH" and "YZX" on the back and an IC marked "HUSB238 000DD 2117".
 
@@ -139,7 +230,7 @@ Primary sources: the Raspberry Pi white paper "USB Power Delivery on Raspberry P
 ## 6. NEXTU / 유우젠 710U3, 10-port USB 3.0 powered hub (danawa pcode 29865749)
 
 - Could not be re-verified today. The manufacturer's image host (`ez-net.co.kr` → `eznetimg.synology.me`) refused TLS from here, and danawa's text has no power specification.
-- Earlier-session finding (repo `docs/report/toccata-build-v3.html`, L17 card, R28 check on 9/25, from the danawa detail and manufacturer images): **DC 5 V 3 A adapter (15 W)**. The hub also works bus-powered ("외부전원 겸용"). It is 48 × 228 × 24 mm, 130 g, with a 0.6 m detachable upstream cable.
+- Earlier-session finding (repo `archive/docs/report/toccata-build-v3.html`, L17 card, R28 check on 9/25, from the danawa detail and manufacturer images): **DC 5 V 3 A adapter (15 W)**. The hub also works bus-powered ("외부전원 겸용"). It is 48 × 228 × 24 mm, 130 g, with a 0.6 m detachable upstream cable.
 - **Barrel size and polarity are not published.** Do not assume 5.5 × 2.1 mm.
   - Read the polarity symbol on the adapter label. It is normally centre-positive, but verify.
   - Before cutting, plug the adapter in and measure the centre pin against the sleeve. After cutting, find which wire goes to the centre with a continuity test.
@@ -170,7 +261,7 @@ Source: the MAXTEK detail image on compuzone (ProductNo 1241239).
 
 ---
 
-## Suggested net and ref-des skeleton (power sheet)
+## Suggested net and ref-des skeleton (power sheet) — 기록 (개정 C까지, 개정 D는 0.1)
 
 ```
 J1  PD trigger module (HAM6113/HUSB238): VOUT+ x2 -> net VBUS_PD ; GND x2 -> GND   [all VSET pads open = 20 V]

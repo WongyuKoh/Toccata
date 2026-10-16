@@ -1,20 +1,37 @@
 """Toccata circuit sheets (design data + drawing). Run build.py to regenerate outputs."""
 from sch import (Sheet, sym_R, sym_C, sym_hall, sym_box, sym_conn, sym_jumper, sym_fuse,
-                 sym_switch, sym_speaker, sym_jack, sym_plug, sym_conn2, sym_tp, sym_conn_pos)
+                 sym_switch, sym_switch_dpst, sym_speaker, sym_jack, sym_plug, sym_conn2, sym_tp, sym_conn_pos)
 import parts as P
 
-TOTAL = 9
+TOTAL = 15
 KEYS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 NET = {k: "HALL_" + k.replace("#", "S") for k in KEYS}           # HALL_C, HALL_CS, ...
 RIBBON = ["+3V3", "GND"] + ["HALL_" + k.replace("#", "S") for k in ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]] + ["GND", "+3V3"]
 SENSOR_X = [7.431, 21.215, 35.250, 49.285, 63.070, 77.359, 90.573, 104.037, 117.500, 130.964, 144.427, 157.641]
 
 
-POWER = ("GND", "+3V3", "+3V3_O1", "+3V3_O7", "+20V", "+5V1", "+5V_PI")
+POWER = ("GND", "+3V3", "+3V3_O1", "+3V3_O7", "+12V8", "+5V1", "+5V_PI")
 
 # ------------------------------------------------------------------ R31 touchscreen (rev C, 2026-10-01)
 # B1 = Waveshare 7-DSI-TOUCH-C, powered from the Pi 40-pin header (pin 2 = 5 V, pin 6 = GND).
 REV_C = dict(rev="C", date="2026-10-01")
+# ------------------------------------------------------------------ △17 battery input (rev D, 2026-10-07)
+# User decision 2026-10-07 (R33): USB-C PD (HUSB238 A601 + 65 W charger / PD power bank) -> LiFePO4 pack BT601.
+REV_D = dict(rev="D", date="2026-10-07")
+# ------------------------------------------------------------------ rev E (2026-10-08): final purchases (plan C) + physical sheets
+# BE163 board pieces, Adafruit 4876 EXT pair, KCD1-104 as two poles in parallel, ATO blade fuse holder, C24 Pi lead, J502 pads,
+# AUX halves, wire lengths from the CAD (cad_extract.py); new sheets BRD-03 (PED board) .. BRD-06 (signal harnesses).
+REV_E = dict(rev="E", date="2026-10-08")
+BATT = dict(
+    model="LiFePO4 12.8 V 6 Ah",
+    v_nom=12.8, v_min=10.0, v_max=14.6,   # bus range: BMS low-voltage cut (typ.) .. charger end voltage
+    wh=76.8, usable=0.9,                   # 12.8 V x 6 Ah; about 90 % usable
+    buck_min_v=7.0,                        # XL4016 at 5.1 V out, 3-5 A: VIN >= VOUT + about 2 V (research/power.md 2)
+    amp_pvcc=(8, 26),                      # TPA3110D2 recommended PVCC
+    amp_w_ch=8.0, amp_w_ch_20v=20.0,       # 8 ohm BTL, 1 % THD: about 8 W/ch at 12.8 V, about 20 W/ch at 20 V
+    amp_eff=0.8,                           # amp input = output / 0.8 at clipping (efficiency incl. idle, conservative)
+    fuse_a=5.0,
+)
 DISP = dict(
     model="Waveshare 7-DSI-TOUCH-C",
     power_w=2.15,            # purchase list No.135 / Waveshare wiki: about 2.15 W from the GPIO 5 V
@@ -24,15 +41,17 @@ DISP = dict(
     ffc_mm=300,              # GUOCONN 22P 0.5 mm 300 mm B-type (reverse); A-type bought as insurance
     overlay="dtoverlay=vc4-kms-dsi-waveshare-panel-v2,7_0_inch_c",
 )
-# SCH-06 rev B budget inputs (unchanged) + D19 peak basis (52 W, the larger value than the rev B table's 50 W)
+# SCH-06 rev B budget inputs (unchanged) + D19 peak basis of rev C (52 W at 20 V, kept only to show the old amp share)
 BUDGET_IN = dict(pi_w=7.7, pi_a=1.5, hub_w=2.0, hub_a=0.4, dongle_w=0.5, dongle_a=0.1, eff=0.90,
-                 amp_avg_w=(2.0, 6.0), amp_avg_a=(0.1, 0.3), peak_basis_w=52.0, bus_v=20.0, pi_v=5.1,
-                 supply_w=60.0, small_supply_w=45.0)
+                 amp_avg_w=(2.0, 6.0), peak_basis_w=52.0, pi_v=5.1)
 
 
 def budget():
-    """Power budget with the R31 display (all derived numbers of SCH-06 rev C and README △16)."""
+    """Power budget, rev D (battery 12.8 V) with the R31 display: all derived numbers of SCH-06 and README △17.
+    The amp average (2~6 W) is kept from the 20 V table (conservative: the new ceiling is about 4 dB lower)."""
+    import math
     b = BUDGET_IN
+    t = BATT
     d_w = DISP["power_w"]
     d_a = d_w / DISP["v"]
     five_old = b["pi_w"] + b["hub_w"] + b["dongle_w"]
@@ -42,18 +61,21 @@ def budget():
     avg = [five_new + loss_new + a for a in b["amp_avg_w"]]
     base_old = five_old + loss_old                 # non-amp input power, rev B
     base_new = five_new + loss_new                 # non-amp input power, with the display
-    amp_peak = b["peak_basis_w"] - base_old        # amp share of the D19 peak
-    peak = amp_peak + base_new                      # = 52 + display / efficiency
-    db = lambda x: 10 ** (x / 10.0)
-    cut1 = amp_peak * db(-1) + base_new
-    cut2 = amp_peak * db(-2) + base_new
-    cut1_off = amp_peak * db(-1) + base_old
+    # amp at 12.8 V: clips at about 8 W/ch instead of about 20 W/ch -> the level ceiling drops by
+    amp_db = 10 * math.log10(t["amp_w_ch"] / t["amp_w_ch_20v"])           # about -4 dB
+    amp_old = b["peak_basis_w"] - base_old         # rev C: amp share of the D19 52 W peak at 20 V
+    amp_lo = amp_old * t["amp_w_ch"] / t["amp_w_ch_20v"]                   # same share, scaled to the 12.8 V clip power
+    amp_hi = 2 * t["amp_w_ch"] / t["amp_eff"]      # 2 x 8 W at clipping / 0.8 (conservative)
+    peak_lo, peak = base_new + amp_lo, base_new + amp_hi
+    run = [t["wh"] * t["usable"] / x for x in avg]                         # hours, [light, heavy]
     pi_in_a = (b["pi_w"] + b["dongle_w"] + d_w) / b["pi_v"]
     drop = 2 * DISP["jumper_m"] * 2 * DISP["jumper_awg26_ohm_m"] * d_a   # 2 jumpers in series, out and back
-    return dict(disp_w=d_w, disp_a=d_a, five_new=five_new, loss_old=loss_old, loss_new=loss_new,
-                avg=avg, avg_a=[x / b["bus_v"] for x in avg], peak=peak, peak_a=peak / b["bus_v"],
-                margin=b["supply_w"] - peak, amp_peak=amp_peak, cut1=cut1, cut2=cut2, cut1_off=cut1_off,
-                pi_in_a=pi_in_a, drop_v=drop, small=b["small_supply_w"])
+    v = t["v_nom"]
+    return dict(disp_w=d_w, disp_a=d_a, five_new=five_new, loss_old=loss_old, loss_new=loss_new, base_new=base_new,
+                avg=avg, avg_a=[x / v for x in avg], amp_avg_a=[a / v for a in b["amp_avg_w"]],
+                amp_db=amp_db, amp_old=amp_old, amp_lo=amp_lo, amp_hi=amp_hi,
+                peak=peak, peak_a=peak / v, peak_lo=peak_lo, peak_lo_a=peak_lo / v, peak_a_min_v=peak / t["v_min"],
+                run=run, pi_in_a=pi_in_a, drop_v=drop)
 
 
 def net_end(s, x, y, name, side="R"):
@@ -191,7 +213,7 @@ ID_BITS = {1: (1, 0, 0), 2: (0, 1, 0), 3: (1, 1, 0), 4: (0, 0, 1), 5: (1, 0, 1),
 def sch03(sig_r=None):
     s = Sheet("SCH-03", 3, TOTAL, "옥타브 제어 기판 (MB)",
               "RP2040-Zero가 CD74HC4067 먹스로 센서 12개 + EXT 4채널을 ADC0(GP26) 하나로 읽어 USB-MIDI로 보낸다. 모듈 O1~O7에 7장, ID 점퍼만 다르다.",
-              "MB", qty="MB × 7", basis="v4 W1+ r4.5")
+              "MB", qty="MB × 7", basis="v4 W1+ r4.5", **REV_E)
     e = {}
     # J301 ribbon in — 2x8 block (same numbering as J201)
     names = RIBBON
@@ -306,8 +328,8 @@ def sch03(sig_r=None):
         s.wire((px, py), (px - L, py))
         net_end(s, px - L, py, nm, "L")
         exp_add(e, nm, f"J302.{i+1}")
-        s.text(353, py + 0.8, ["GND (검정 끝선)", "EXT1 → C12", "EXT2 → C13", "EXT3 → C14", "EXT4 → C15", "3V3 (빨강 끝선)"][i], "notes", size=2.0)
-    s.text(318, 68.5, "O1·O7만 6심 150 mm 연장선 → JST-XH 6P (SCH-04)", "notes", size=2.0)
+        s.text(353, py + 0.8, ["GND (XH 1번)", "EXT1 → C12", "EXT2 → C13", "EXT3 → C14", "EXT4 → C15", "3V3 (XH 6번)"][i], "notes", size=2.0)
+    s.text(318, 68.5, "O1·O7만 Adafruit 4876 플러그 선 150 mm → XH 6P (SCH-04)", "notes", size=2.0)
     s.chg(338, 26.5, 6)
     s.chg(66, 26.5, 12)
     # EXT pull-downs (△8, review R4); the 1 kohm series resistors sit on EL/ER at the sensor (SCH-04)
@@ -358,7 +380,7 @@ def sch03(sig_r=None):
             title="RP2040-Zero 핀 배정 (패드 = dj505 KiCad 라이브러리 번호 / Waveshare 회로도 P1 번호)", mono_cols=(0, 1, 2))
     s.para(190, 132, [
         "주",
-        "1. 기판: 양면 만능기판 5×7 cm, x47.25~117.25 × y145.5~195.5, 모듈 바닥 구멍으로 밑에서 넣는다(W1 r4.5). 고정 4곳",
+        "1. 기판: Coms BE163(80 × 120)에서 자른 70 × 50 조각(지그 P-MB), x47.25~117.25 × y145.5~195.5, 모듈 바닥 구멍으로 밑에서 넣는다. 고정 4곳",
         "    (50.0,149.0)(114.5,149.0)(50.0,192.5)(114.5,192.5) = 매단 보스 — 대각 2곳 M3×6(밑에서), 2곳 위치 핀 (BRD-01 주 8).",
         "2. W1 r4.3: 앞 모서리에서 홈 x81.92~84.72 × y145.5~172.0을 따낸다(F|F# 핀 발·킬이 지나감, r4.5).",
         "    W1 r4.3 금지 구역 x81.22~85.42 × y145.5~173.2에는 부품·배선·리본 패드를 두지 않는다 (제로 PCB만 y172~173.2에 걸침).",
@@ -468,7 +490,7 @@ def _end_board(s, e, y0, tag, keys, ubase, cbase, rbase, jref, xref, rail):
         exp_add(e, net, f"{jref}.{r[0]}", f"{xa}.{pos}", f"{xb}.{pos}")
     s.cable((jx + 22, y0 + 8.5), (jx + 55, y0 + 8.5), text=None)
     s.text(jx + 22, y0 + 7.0, f"W{xref}: {n}심 {'350' if tag=='L' else '300'} mm", "cabt", size=2.2)
-    col = {1: "검정 끝선", 6: "빨강 끝선"}
+    col = {1: "XH 1번", 6: "XH 6번"}
     for pos in range(1, 7):
         bx, by = s.pin(xb, pos)
         if pos in (1, 6):
@@ -488,7 +510,7 @@ def _end_board(s, e, y0, tag, keys, ubase, cbase, rbase, jref, xref, rail):
 def sch04():
     s = Sheet("SCH-04", 4, TOTAL, "끝 부속 센서 기판 (EL · ER) + EXT 연결",
               "왼쪽 끝 부속 A0·A#0·B0 센서 3개는 O1, 오른쪽 C8 센서 1개는 O7 제어 기판의 EXT(먹스 C12~)로 읽는다. 파트 사이는 JST-XH 6핀 잠금 커넥터(R26).",
-              "EL · ER", qty="EL × 1 · ER × 1", basis="v4 W1+ r4.5 끝 부속")
+              "EL · ER", qty="EL × 1 · ER × 1", basis="v4 W1+ r4.5 끝 부속", **REV_E)
     e = {}
     s.box(14, 22, 380, 94, "EL — 왼쪽 끝 부속 센서 기판 (x1.0~46.5 × y60.65~75.89, 45.5 × 15.24 mm, 6행) — BRD-02 배치")
     _end_board(s, e, 22, "L", [("A0", "EL_A0", 1), ("A#0", "EL_AS0", 2), ("B0", "EL_B0", 3)],
@@ -498,17 +520,17 @@ def sch04():
     s.para(15, 220, [
         "주  1. 끝 부속 센서도 SCH-02와 같다: DRV5055A2 + 100 nF(센서 옆). W1 자석 x: 왼쪽 부속(x0~47) A0 10.287, A#0 26.927, B0 40.141, 오른쪽 부속(로컬 x0~23.5) C8 11.75.",
         "        기판은 W1 r4.2 끝 부속 센서 바(왼 x0.5~46.5, 오른 x0.5~23.0) 안: EL x1.0~46.5, ER x1.0~23.0 (SB와 같은 6행 15.24). 리드 구멍 A0 13.33, A#0 31.11, B0 43.81, C8 15.87.",
-        "     2. 커넥터: 밸런스 연장선(JST-XH 6P, 200 mm)을 모듈 쪽 150 · 끝 부속 쪽 50으로 잘라 쓴다. ‘>>’ = 맞물림(KiCad에서는 연결이 아니다 →",
+        "     2. 커넥터: Adafruit 4876 JST-XH 호환 6P 짝(각 약 20 cm, 26 AWG) — 플러그 선은 모듈 쪽 150, 소켓 선은 끝 부속 쪽 50으로 자름. ‘>>’ = 맞물림(KiCad 연결 아님 →",
         "        양쪽에 같은 넷 이름). +3V3_EL·+3V3_ER은 각각 O1·O7 제어 기판의 3V3 레일이다(프로젝트 전원 심볼로 추가).",
-        "     3. △6 XH 위치 = J302 EXT 패드 번호: 1 = GND(검정 끝선), 2~5 = 먹스 C12~C15, 6 = 3V3(빨강 끝선). 빨강 1 + 검정 5라 위치로만 구분 —",
-        "        자르기 전에 양쪽에 번호 테이프, 납땜 뒤 끝에서 끝까지 통전 확인.",
+        "     3. △6 XH 위치 = J302 EXT 패드 번호: 1 = GND, 2~5 = 먹스 C12~C15, 6 = 3V3. 선 색이 아니라 하우징 번호로 구분 —",
+        "        자르기 전에 양쪽에 번호 테이프, 납땜 뒤 끝에서 끝까지 통전 확인. 선 만들기·자르는 길이 = BRD-06.",
         "     4. △3 C404·C412 10 µF: 3V3가 긴 선 끝(EL 150 + 350 mm, ER 150 + 300 mm)이라 벌크 콘덴서 추가.",
         "     5. △8 R401~R403·R411 1 kΩ 1206 칩(아랫면, △13): 센서 바가 기판 윗면을 덮어 리드형 저항을 둘 자리가 없다 — OUT 구멍과 바로 뒤 행(y72.08) 사이.",
         "        센서 OUT 바로 뒤에서 약 0.6 m 선 용량을 떼어 낸다(TI: OUT에 C 직결 금지). MB의 100 kΩ 풀다운과 함께",
         "        끝 부속을 빼면 EXT = 0 V. 펌웨어: O1 C12~C14 → MIDI 21~23, O7 C12 → 108, 0.15 V 아래면 센서 없음.",
         "     6. W401·W411 길(W1 r4.4, r4.5 그대로): 패드(아랫면) → 기판 밑 → 뒤 받침 리브 틈 → 패드 줄 뒤 y77.39 안에서 EL x14.83~21.18 · ER x8.89~12.70으로 모음",
         "        → 바닥(건반 밑) → 끝 부속 밸런스 레일 밑 차선(z5~10; EL x13.53~22.48, ER x7.59~14.00) → 뒷벽 홈(z5~12) → 뒤 케이블 통로의 X401·X411.",
-        "        순서: 리본 가닥을 J401/J411에 납땜 → 기판·센서 바 고정 → 자유 끝을 리브 틈·차선·뒷벽 홈으로 꿴 뒤, 뒤 통로에서 L66 끝 부속 쪽 50 mm 리드와",
+        "        순서: 리본 가닥을 J401/J411에 납땜 → 기판·센서 바 고정 → 자유 끝을 리브 틈·차선·뒷벽 홈으로 꿴 뒤, 뒤 통로에서 L66 소켓 선(50 mm)과",
         "        이어 열수축(C10). XH 하우징(폭 약 17)은 차선·홈을 못 지나므로 먼저 달지 않는다. 아랫면 칩·납땜 ≤ 1.8 mm(기판 밑 2.0).",
     ], size=2.2)
     s.frame()
@@ -522,8 +544,8 @@ SHEETS.append(sch04)
 # ------------------------------------------------------------------ SCH-05
 def sch05(ring_r="20"):
     s = Sheet("SCH-05", 5, TOTAL, "페달 보드 (PB) + 댐퍼 페달 센서 (PS)",
-              "댐퍼(서스테인) 페달 1개(R24). 페달 안 홀센서가 발판 자석 거리를 재고, PED 보드 RP2040-Zero가 CC64 0~127(하프페달)로 보낸다.",
-              "PB · PS", qty="PB × 1 · PS × 1", basis="v4 W1+ · R24")
+              "댐퍼(서스테인) 페달 1개(R24). 페달 안 홀센서가 발판 자석 거리를 재고, PED 보드 RP2040-Zero가 CC64 0~127(하프페달)로 보낸다. 기판 자리는 BRD-03.",
+              "PB · PS", qty="PB × 1 · PS × 1", basis="v4 W1+ · R24", **REV_E)
     e = {}
     # --- pedal sensor (inside the pedal)
     s.box(14, 22, 88, 80, "PS — 페달 안 센서 (만능기판 자투리)")
@@ -549,7 +571,7 @@ def sch05(ring_r="20"):
     exp_add(e, "GND", "U551.2", "C551.2")
     s.text(18, 96.5, "W501 3 m 케이블 쪽 끝을 여기에 납땜 (팁 = OUT, 링 = VCC, 슬리브 = GND)", "cabt", size=2.0)
     # --- I/O plate: cable plug P501 mated into jack J501
-    s.box(106, 22, 68, 80, "I/O 판 — 페달 잭")
+    s.box(106, 22, 78, 80, "뒤판 출력물 — 페달 잭 기판 (J501 조각)")
     s.place(sym_plug(), "P501", "TRS 플러그 (PS 쪽)", 125, 42.5, ref_at=(0, -2.2), val_at=(0, 19.5),
             part="W501 끝 (3 m, L50)", part_at=(0, 21.8))
     for nm, net in (("T", "PED_TIP"), ("R", "PED_VCC"), ("S", "GND")):
@@ -563,33 +585,51 @@ def sch05(ring_r="20"):
     jt, jr, js = s.pin("J501", "T"), s.pin("J501", "R"), s.pin("J501", "S")
     x, y = s.pin("J501", "RN")
     s.nc(x, y)
+    # rev E: the jack sits on its own perfboard scrap on the back plate; W502 (4 ribbon strands) lands on the PB pads J502
     x, y = s.pin("J501", "TN")
-    s.wire((x, y), (x + 8, y))
-    s.pwr(x + 8, y, "GND")
-    s.chg(x + 14, y - 0.5, 9)
+    s.wire((x, y), (x + 5, y))
+    s.pwr(x + 5, y, "GND")
+    s.chg(x + 10.5, y - 0.5, 9)
+    s.wire(jt, (jt[0] + 3, jt[1]))
+    s.label(jt[0] + 3, jt[1], "PED_TIP", "R")
+    s.wire(jr, (jr[0] + 3, jr[1]))
+    s.label(jr[0] + 3, jr[1], "PED_VCC", "R", up=False)
+    s.wire(js, (js[0] + 5, js[1]))
+    s.pwr(js[0] + 5, js[1], "GND")
     exp_add(e, "GND", "J501.TN")
     exp_add(e, "PED_TIP", "J501.T")
     exp_add(e, "PED_VCC", "J501.R")
     exp_add(e, "GND", "J501.S")
-    s.text(108, 97.0, "J501 → PB: 짧은 선 4가닥 약 10 cm (T, TN, R, S)", "cabt", size=2.0)
+    s.text(108, 97.0, "W502: J501 → PB J502, 리본 가닥 4개 (BRD-06)", "cabt", size=2.0)
+    s.chg(196.5, 36.5, 19)
     # --- PB board
-    s.box(178, 22, 218, 110, "PB — 페달 보드 5 × 7 cm (CU 칸 안)")
-    s.place(sym_R(), "R501", "1k", 207.5, jt[1], rot=90, ref_at=(0, -3.0, "middle"), val_at=(0, 4.9, "middle"))
-    s.place(sym_R(), "R502", "100k", 207.5, jt[1] - 12.5, rot=90, ref_at=(0, -3.0, "middle"), val_at=(0, 4.9, "middle"))
-    s.place(sym_R(), "R503", ring_r + "Ω", 207.5, jr[1], rot=90,
+    s.box(188, 22, 208, 110, "PB — 페달 보드 70 × 50 (BE163 조각, CU 칸 안) — 자리: BRD-03")
+    jp = sym_conn_pos("Conn_01x04", 5, [(1, 0), (3, 2), (2, 3), (4, 4)], side="R", width=9)
+    s.place(jp, "J502", "W502 패드 1×4", 190, jt[1] - 2.5, ref_at=(0, -1.2), val_at=(0, 29.6), meta=dict(bomkey="PADS"))
+    for n, nm in ((1, "T"), (3, "R"), (2, "TN"), (4, "S")):
+        px_, py_ = s.pin("J502", n)
+        s.text(191.0, py_ + 0.8, nm, "pinname", size=2.0)
+    s.place(sym_R(), "R501", "1k", 215.0, jt[1], rot=90, ref_at=(0, -3.0, "middle"), val_at=(0, 4.9, "middle"))
+    s.place(sym_R(), "R502", "100k", 215.0, jt[1] - 12.5, rot=90, ref_at=(0, -3.0, "middle"), val_at=(0, 4.9, "middle"))
+    s.place(sym_R(), "R503", ring_r + "Ω", 215.0, jr[1], rot=90,
             ref_at=(0, 5.0, "middle"), val_at=(0, 8.0, "middle"), part="100Ω ×5 병렬", part_at=(0, 10.3, "middle"))
     L = lambda ref: min((s.pin(ref, 1), s.pin(ref, 2)), key=lambda p: p[0])
     Rr = lambda ref: max((s.pin(ref, 1), s.pin(ref, 2)), key=lambda p: p[0])
     num = lambda ref, pt: "1" if s.pin(ref, 1) == pt else "2"
-    s.wire(jt, (190, jt[1]), L("R501"))
-    s.wire((190, jt[1]), (190, L("R502")[1]), L("R502"))
-    s.label(181, jt[1], "PED_TIP", "R")
-    s.wire(jr, L("R503"))
-    s.label(181, jr[1], "PED_VCC", "R")
+    j1, j3, j2, j4 = s.pin("J502", 1), s.pin("J502", 3), s.pin("J502", 2), s.pin("J502", 4)
+    s.wire(j1, L("R501"))
+    s.wire((j1[0] + 1.75, j1[1]), (j1[0] + 1.75, L("R502")[1]), L("R502"))
+    s.wire(j3, L("R503"))
+    s.label(j1[0] + 1.75, j1[1] - 6.0, "PED_TIP", "U")
+    s.label(j3[0] + 0.5, j3[1], "PED_VCC", "R")
+    s.wire(j2, (j2[0] + 1.5, j2[1]), (j2[0] + 1.5, j4[1]))
+    s.wire(j4, (j4[0] + 1.5, j4[1]))
+    s.pwr(j4[0] + 1.5, j4[1], "GND")
+    exp_add(e, "PED_TIP", "J502.1")
+    exp_add(e, "GND", "J502.2", "J502.4")
+    exp_add(e, "PED_VCC", "J502.3")
     s.wire(Rr("R503"), (Rr("R503")[0] + 7.5, jr[1]))
     s.pwr(Rr("R503")[0] + 7.5, jr[1], "+3V3")
-    s.wire(js, (185, js[1]))
-    s.pwr(185, js[1], "GND")
     s.place(sym_C(), "C501", "100n", 235, jt[1] + 5, ref_at=(3.2, -0.6), val_at=(3.2, 2.4))
     s.wire(Rr("R501"), (235, jt[1]), (255, jt[1]))
     s.label(255, jt[1], "PED_ADC", "R")
@@ -603,7 +643,7 @@ def sch05(ring_r="20"):
     exp_add(e, "GND", "R502." + num("R502", Rr("R502")))
     exp_add(e, "PED_VCC", "R503." + num("R503", L("R503")))
     exp_add(e, "+3V3", "R503." + num("R503", Rr("R503")))
-    s.chg(207.5, jr[1] + 13.5, 4)
+    s.chg(215.0, jr[1] + 13.5, 4)
     # A501 RP2040-Zero
     zx, zy = 320, 35
     s.place(zero_sym(), "A501", "RP2040-Zero", zx, zy, val_at=(0, 80.5), part_at=(0, 82.8),
@@ -635,7 +675,7 @@ def sch05(ring_r="20"):
         "1. 페달(L43)의 마이크로스위치 배선을 떼고, 발판 밑면 발끝 쪽에 자석 Ø5×2(S극 아래)를 붙인다. 바로 아래 바닥판에 U551을 표시면이 위로 오게",
         "    세워 붙인다. 간격: 눌렀을 때 약 4.5 mm, 뗐을 때 12 mm 이상 (약 36 → 2.4 mT, DRV5055A2 선형 범위 안). 발판이 강철이면 최대값 확인.",
         "2. W501: 3 m 스테레오 케이블(L50)의 한쪽 플러그를 잘라 팁 = 센서 OUT, 링 = VCC, 슬리브 = GND로 납땜, 케이블 타이로 당김 방지.",
-        "3. J501 → PB: 짧은 선 4가닥 (약 10 cm). △9 TN을 GND에: 플러그가 없으면 팁이 GND에 붙어 0 V (RN은 안 씀).",
+        "3. W502: J501 조각 → PB J502 (1 T, 2 TN, 3 R, 4 S), 리본 가닥 4개(BRD-06). △9 TN을 GND에: 플러그가 없으면 팁이 GND에 붙어 0 V (RN은 안 씀).",
         "4. R501 1 kΩ + C501 100 nF: ADC 입력 RC (fc 약 1.6 kHz). △11 R502 100 kΩ 팁→GND (이전 글 사양의 'GP27로 뗀 쪽 전압 구동'은",
         "    GPIO가 0 / 3.3 V만 내므로 불가 → 고정 풀다운). 자석 S극이 표시면을 향해 누르면 OUT이 오른다. 0.15 V 아래 = 페달 없음 → CC64 = 0.",
         "5. △4 R503 20 Ω = 100 Ω ×5 병렬 (이전 사양 0 Ω, 구매 목록의 100 Ω 사용): 플러그를 꽂는 순간이나 TS(모노) 플러그로 링이 GND에 닿아도",
@@ -757,7 +797,7 @@ def _display_band(s, e, y0=180.0):
         "9. A605는 Pi 40핀 헤더 2번(5 V)·6번(GND)에서만 전원을 받는다.",
         "    Pi에서 나가는 방향이라 허용(D16). 화면·연장선에 다른 5 V를",
         "    넣지 않는다. 헤더 2번은 Pi 안에서 USB-C 입력 레일과 같은 선:",
-        "    P601(MT666) ← +5V1에서 온다 → 넷 이름 +5V_PI(전원 심볼).",
+        "    P601(C24) ← +5V1에서 온다 → 넷 이름 +5V_PI(전원 심볼).",
         "10. 동봉선 2.54 3핀 하우징 = 1 빨강 5 V · 2 빈 칸 · 3 검정 GND",
         "    (Waveshare 연결 사진: 원래 헤더 2·4·6에 바로 꽂는 선).",
         "    받으면 통전 검사로 확인한 뒤 연장선을 꽂는다.",
@@ -776,47 +816,78 @@ def _display_band(s, e, y0=180.0):
 
 def sch06():
     B = budget()
+    T = BATT
     s = Sheet("SCH-06", 6, TOTAL, "전원 (CU)",
-              "USB-C PD 입력 하나(R28): PD 20 V → 퓨즈 → 스위치 → 20 V 버스 → 앰프 + 5.1 V 강압 → Pi 5 · 허브 · 화면(Pi GPIO 5 V, R31). Pi에는 강압 5 V만(D16).",
-              "CU 전원", qty="CU × 1", basis="v4 W1+ · R28 · R31", **REV_C)
+              "전지 입력 하나(R33): LiFePO4 12.8 V 6 Ah → XT60 → 5 A 퓨즈 → 스위치(두 회로 나란히) → 12.8 V 버스 → 앰프 + 5.1 V 강압 → Pi 5 · 허브 · 화면(Pi GPIO 5 V, R31). 배선 경로는 BRD-04, 자르는 길이는 BRD-05.",
+              "CU 전원", qty="CU × 1", basis="v4 W1+ · R31 · R33", **REV_E)
     e = {}
-    # source (external)
-    s.rect(16, 40, 34, 10, "mod", "body")
-    s.text(18, 45.8, "65 W PD 충전기 / 보조배터리", "notes", size=2.0)
-    s.text(16, 54, "벽: L62 65 W (한 포트만) · 무선: PD 20 V 3.25 A 이상 (D19)", "notes", size=1.9)
-    s.text(16, 56.6, "W601: C-C 2 m (C23) / 0.6 m (C22)", "cabt", size=1.9)
-    s.cable((50, 45), (80, 45), text="USB-C PD", at=(56, 43.2), anchor="start")
-    # A601 PD trigger (4 output pads: 2 x VOUT+ round, 2 x GND square)
-    pd = sym_box("HUSB238_module", [], [(1, "VOUT+"), (2, "VOUT+"), None, (3, "GND"), (4, "GND")], width=28, cls="mod", rows=5)
-    s.place(pd, "A601", "HUSB238 PD 트리거 → 20 V", 80, 40, val_at=(0, 33.5), part="I/O 판 포켓 (L57) · VSET 패드 모두 열림 = 20 V", part_at=(0, 35.8))
-    s.text(81.5, 50.8, "USB-C", "notes", size=2.0)
-    v1, v2 = s.pin("A601", 1), s.pin("A601", 2)
-    g1, g2 = s.pin("A601", 3), s.pin("A601", 4)
-    s.wire(v2, (v2[0] + 3, v2[1]), (v1[0] + 3, v1[1]))
-    s.wire(g1, (g1[0] + 3, g1[1]), (g2[0] + 3, g2[1]), g2)
-    vx, vy = v1
-    gx, gy = g1
-    exp_add(e, "+20V_PD", "A601.2")
-    exp_add(e, "GND", "A601.4")
+    # △17 (rev D) BT601 LiFePO4 pack (KiCad Device:Battery, 1 = +, 2 = -) with its XT60 female lead (X605)
+    pk = sym_box("LiFePO4_pack", [], [(1, "+", "pwr"), (2, "−", "pwr")], width=26, cls="mod", rows=2)
+    for cx in (4.0, 10.0):                                   # two cell glyphs (long + short plate)
+        pk.line(cx, 3.5, cx, 11.5, "bodyl")
+        pk.line(cx + 2.0, 5.5, cx + 2.0, 9.5, "bodyl")
+    pk.line(6.0, 7.5, 10.0, 7.5, "bodyl")
+    s.place(pk, "BT601", f"{T['model']}", 16, 40, val_at=(0, 18.5),
+            part=f"{T['wh']} Wh · BMS 내장 (받으면 확인)", part_at=(0, 20.8), meta=dict(bomkey="BATT"))
+    s.chg(44, 37.5, 17)
+    xf_, xm = 62.0, 69.5
+    s.place(sym_conn("XT60-F", 2, side="L", width=6, rev=True), "X605", "XT60 암", xf_, 42.5,
+            ref_at=(0, -2.2), val_at=(-1, 17.5), part="팩 리드 끝", part_at=(-1, 19.8), meta=dict(bomkey="XT60F"))
+    s.place(sym_conn("XT60-M", 2, side="R", width=6, rev=True), "X606", "XT60 수", xm, 42.5,
+            ref_at=(0, -2.2), val_at=(1, 17.5), part="W601 (L80)", part_at=(1, 19.8), meta=dict(bomkey="XT60M"))
+    s.mate("X605", "X606", at=(xf_ + 6.3, 42.5 + 12.3))
+    s.text(xf_ + 3.6, 42.5 + 3.3, "+", "pinnameh", size=2.3)
+    s.text(xf_ + 3.6, 42.5 + 8.3, "−", "pinnameh", size=2.3)
+    for k, pb in ((1, "1"), (2, "2")):                       # BT601 + -> X605 2, BT601 - -> X605 1
+        s.wire(s.pin("BT601", k), s.pin("X605", "2" if k == 1 else "1"))
+    vx, vy = s.pin("X606", 2)                                # + row (y45)
+    gx, gy = s.pin("X606", 1)                                # - row (y50)
+    s.label(49.0, vy, "VBAT", "R")
+    exp_add(e, "VBAT", "BT601.1", "X605.2", "X606.2")
+    exp_add(e, "GND", "BT601.2", "X605.1", "X606.1")
+    s.wire((xf_ - 7.5, gy), (xf_ - 7.5, gy + 4.0))
+    s.pwr(xf_ - 7.5, gy + 4.0, "GND")
+    s.para(16, 66.0, [
+        "충전: 스위치 끄고 뚜껑 L을 열어 사용자 LiFePO4 충전기(14.4 V)를 팩 DC 5.5×2.1 입력에 (XT60은 꽂아 둔 채).",
+        "충전하며 연주하지 않는다(충전기가 부하 동시 사용을 밝힌 경우만 예외).",
+        "벤치 시험: 전지 대신 12 V SMPS(XT60 암 L81)를 X606에.",
+        "둘을 함께 꽂지 않는다. SMPS 선 극성은 멀티미터로 먼저 확인.",
+        f"W601: X606 리드 {HN.LEAD_W601} mm + 홀더 꼬리 {HN.STUB12} mm (이은 전체 ≤ {HN.W601_MAX} mm) → 빨강 = F601 꼬리와 이음, 검정 = ★ 강압 IN−까지",
+    ], "notes", size=2.0, lh=2.8)
+    # △18 mis-mating guard: speaker joints are XT60 too
+    s.chg(18.0, 82.2, 18)
+    s.para(22, 83.0, [
+        "잘못 꽂기 방지: 스피커 접속(SCH-07 X703~X706)도 XT60. 여기에 전원을 꽂으면 12.8 V DC가",
+        "BTL 출력·보이스 코일에 걸린다(6.2 Ω에 약 2 A, 스피커 과열).",
+        "전원 XT60(팩 리드 X605·W601 X606·벤치 L81) = 빨강 수축, 스피커 XT60 = 파랑 수축 + ‘SPK’.",
+        f"W601은 홀더 −x 끝에서 XT60 뒤끝까지 {HN.W601_MAX} mm 이하(꼬리 {HN.STUB12} + 리드 {HN.LEAD_W601} − 겹침 10) → 왼쪽 스피커 XT60(직선 {HN.W601_NEED_L:.1f} mm)에 닿지 않는다.",
+    ], "notes", size=2.0, lh=2.8)
     # fuse + switch
-    s.place(sym_fuse(), "F601", "5 A T (0218005.MXP)", vx + 22.5, vy, ref_at=(0, -3.0, "middle"), val_at=(0, 5.0, "middle"),
-            part="홀더 BU914 (XF601)", part_at=(0, 7.2, "middle"))
+    fx, swx = 100.0, 130.0
+    s.place(sym_fuse(), "F601", "5 A ATO 블레이드", fx, vy, ref_at=(0, -3.0, "middle"), val_at=(0, 5.0, "middle"),
+            part="ATC/ATO 홀더 (보유)", part_at=(0, 7.2, "middle"))
     s.wire((vx, vy), s.pin("F601", 1))
-    s.place(sym_switch(), "SW601", "KCD1-101A", vx + 55, vy, ref_at=(0, -4.2, "middle"), val_at=(0, 5.0, "middle"),
-            part="I/O 판 전원 스위치", part_at=(0, 7.2, "middle"))
+    # rev E: KCD1-104 = DPST, both poles in parallel (inputs 1+3, outputs 2+4) - KiCad Switch:SW_DPST
+    s.place(sym_switch_dpst(), "SW601", "KCD1-104", swx, vy, ref_at=(0, -4.2, "middle"), val_at=(0, 15.0, "middle"),
+            part="두 회로 나란히 · 뒤판 출력물", part_at=(0, 17.2, "middle"))
     s.wire(s.pin("F601", 2), s.pin("SW601", 1))
-    s.label(vx + 3.5, vy, "+20V_PD", "R")
-    s.label(s.pin("F601", 2)[0] + 1, vy, "+20V_F", "R")
-    exp_add(e, "+20V_PD", "A601.1", "F601.1")
-    exp_add(e, "+20V_F", "F601.2", "SW601.1")
-    # 20 V bus
+    s.wire((swx - 10.0, vy), (swx - 10.0, vy + 10.0), s.pin("SW601", 3))
+    s.wire(s.pin("SW601", 4), (swx + 10.0, vy + 10.0), (swx + 10.0, vy))
+    s.chg(swx + 14.5, vy + 8.0, 20)
+    s.label(vx + 1.5, vy, "VBAT", "R")
+    s.label(s.pin("F601", 2)[0] + 1, vy, "VBAT_F", "R")
+    exp_add(e, "VBAT", "F601.1")
+    exp_add(e, "VBAT_F", "F601.2", "SW601.1", "SW601.3")
+    s.wire((gx, gy), (gx + 3.5, gy))
+    s.pwr(gx + 3.5, gy, "GND")
+    # 12.8 V bus (10.0 ~ 14.6 V)
     bx = 185
     s.wire(s.pin("SW601", 2), (bx, vy))
-    s.pwr(bx - 5, vy, "+20V")
-    exp_add(e, "+20V", "SW601.2")
-    s.wire((gx + 3, gy), (gx + 8, gy))
-    s.pwr(gx + 8, gy, "GND")
-    exp_add(e, "GND", "A601.3")
+    s.pwr(bx - 5, vy, "+12V8")
+    s.text(143, vy + 5.0, f"버스 {T['v_min']:.1f}~{T['v_max']:.1f} V (공칭 {T['v_nom']} V)", "notes", size=2.0)
+    s.regions["power"] = (9.0, 20.0, 411.0, 178.0)
+    s.regions["display"] = (9.0, 178.6, 411.0, 253.0)
+    exp_add(e, "+12V8", "SW601.2", "SW601.4")
     # A602 buck
     bk = sym_box("XL4016_module", [(1, "IN+"), None, (2, "IN-")], [(3, "OUT+"), None, (4, "OUT-")], width=30, cls="mod", rows=3)
     s.place(bk, "A602", "XL4016 강압 → 5.1 V", 195, 80, val_at=(0, 23.5), part="XH-M401 (L58) · 가변저항으로 5.10 V 맞춤", part_at=(0, 25.8))
@@ -825,11 +896,11 @@ def sch06():
     s.wire(i2, (i2[0] - 7.5, i2[1]))
     s.pwr(i2[0] - 7.5, i2[1], "GND")
     s.text(i2[0] - 30, i2[1] + 7.5, "★ 별 접지점: 강압 IN− 단자", "noteb", size=2.3)
-    exp_add(e, "+20V", "A602.1")
+    exp_add(e, "+12V8", "A602.1")
     exp_add(e, "GND", "A602.2")
-    # 20 V to amp (sheet 7)
+    # 12.8 V to amp (sheet 7)
     s.wire((bx, vy), (bx + 55, vy))
-    s.pwr(bx + 55, vy, "+20V")
+    s.pwr(bx + 55, vy, "+12V8")
     s.text(bx + 58, vy + 0.8, "→ SCH-07 A702 VCC (W602)", "notes", size=2.0)
     o1, o2 = s.pin("A602", 3), s.pin("A602", 4)
     s.wire(o2, (o2[0] + 7.5, o2[1]))
@@ -843,8 +914,10 @@ def sch06():
     pl = sym_box("USB_C_Plug_USB2.0", [("A4", "VBUS"), None, ("A1", "GND")], [], width=14, cls="body", rows=3)
     pl2 = sym_box("Barrel_Plug", [("1", "+"), None, ("2", "−")], [], width=14, cls="body", rows=3)
     px0 = o1[0] + 45
-    s.place(pl, "P601", "USB-C 수 2선 (MT666)", px0, 55, val_at=(0, 23.5), part="→ Pi 5 USB-C 전원 (C24)", part_at=(0, 25.8))
-    s.place(pl2, "P602", "DC 플러그 (허브 어댑터 선)", px0, 95, val_at=(0, 23.5), part="→ 허브 DC 입력 (L17)", part_at=(0, 25.8))
+    s.place(pl, "P601", "USB-C 측면 꺾임 (C24 BT663)", px0, 55, val_at=(0, 23.5), part="A 끝을 잘라 2선 → Pi 5 USB-C (W603)", part_at=(0, 25.8),
+            meta=dict(bomkey="C24"))
+    s.place(pl2, "P602", "DC 플러그 (허브 어댑터 선)", px0, 95, val_at=(0, 23.5), part="→ 허브 DC 입력 (W604, L17 부속)", part_at=(0, 25.8),
+            meta=dict(bomkey="HUBDC"))
     xa = o1[0] + 30
     for ref in ("P601", "P602"):
         pv, pg = ("A4", "A1") if ref == "P601" else ("1", "2")
@@ -865,7 +938,7 @@ def sch06():
     s.cable((px0 + 19, 57.5), (px0 + 30, 57.5))
     s.cable((px0 + 19, 97.5), (px0 + 30, 97.5))
     s.chg(s.pin("A602", 2)[0] - 15, s.pin("A602", 2)[1] + 1, 5)
-    for i, (ref, net) in enumerate((("TP601", "+20V"), ("TP602", "+5V1"), ("TP603", "GND"))):
+    for i, (ref, net) in enumerate((("TP601", "+12V8"), ("TP602", "+5V1"), ("TP603", "GND"))):
         tx, ty = 110 + i * 20, 118
         s.place(sym_tp(), ref, "", tx, ty, ref_at=(1.8, -3.2), hide_val=True)
         if net == "GND":
@@ -873,40 +946,44 @@ def sch06():
         else:
             s.wire((tx, ty), (tx, ty + 2.5), (tx - 5, ty + 2.5)); s.pwr(tx - 5, ty + 2.5, net)
         exp_add(e, net, f"{ref}.1")
-    # current budget table (rev C: + R31 screen; D19 peak basis 52 W)
+    # current budget table (rev D: battery 12.8 V; R31 screen kept)
     I = BUDGET_IN
+    v = f"{T['v_nom']} V"
     rows = [["Pi 5 (FluidSynth, USB 장치 포함)", "5.1 V", f"약 {I['pi_a']} A (최대 5 A 한도)", f"{f1(I['pi_w'])} W"],
             ["허브 + RP2040 8개 + 센서 89개", "5.1 V", f"약 {I['hub_a']} A", f"{f1(I['hub_w'])} W"],
             ["USB 동글 (Pi 포트)", "5 V", f"약 {I['dongle_a']} A", f"{f1(I['dongle_w'])} W"],
             ["화면 A605 (Pi 헤더 2번, 밝기 100 %)", f"{DISP['v']:.0f} V", f"약 {B['disp_a']:.2f} A", f"{B['disp_w']:.2f} W"],
             [f"강압 효율 {I['eff'] * 100:.0f} % 손실", "", "", f"{f1(B['loss_new'])} W"],
-            ["앰프 평균 (피아노 음악, 최대 음량 상한)", "20 V", f"약 {I['amp_avg_a'][0]}~{I['amp_avg_a'][1]} A",
+            ["앰프 평균 (피아노 음악, 보수적 추정)", v, f"약 {B['amp_avg_a'][0]:.2f}~{B['amp_avg_a'][1]:.2f} A",
              f"{I['amp_avg_w'][0]:.0f}~{I['amp_avg_w'][1]:.0f} W"],
-            ["합계 (평균)", "20 V 입력", f"약 {f1(B['avg_a'][0])}~{f1(B['avg_a'][1])} A",
-             f"약 {B['avg'][0]:.0f}~{B['avg'][1]:.0f} W"],
-            [f"순간 최대 (최저음 강타, D19 {I['peak_basis_w']:.0f} W + 화면)", "20 V 입력", f"약 {f1(B['peak_a'])} A", f"약 {f1(B['peak'])} W"],
-            [f"{I['supply_w']:.0f} W 전원 여유 (D19)", "", "", f"약 {f1(B['margin'])} W"],
-            [f"{I['small_supply_w']:.0f} W 전원: 볼륨 상한 −2 dB (−1 dB면 화면 끔)", "20 V 입력", "",
-             f"약 {f1(B['cut2'])} W"]]
+            ["합계 (평균)", v + " 입력", f"약 {f1(B['avg_a'][0])}~{f1(B['avg_a'][1])} A",
+             f"약 {f1(B['avg'][0])}~{f1(B['avg'][1])} W"],
+            [f"순간 최대 (최저음 강타, 앰프 2 × {T['amp_w_ch']:.0f} W ÷ {T['amp_eff']})", v + " 입력", f"약 {f1(B['peak_a'])} A",
+             f"약 {f1(B['peak'])} W"],
+            ["같은 순간 최대, 전지 끝 (BMS 차단 직전)", f"{T['v_min']:.1f} V", f"약 {f1(B['peak_a_min_v'])} A",
+             f"퓨즈 {T['fuse_a']:.0f} A ATO"],
+            [f"연주 시간 ({T['wh']} Wh × {T['usable']} ÷ 평균)", "", "", f"약 {f1(B['run'][1])}~{f1(B['run'][0])} h"]]
     ty_end = s.table(15, 135, ["부하", "전압", "전류", "전력"], rows, [70, 22, 44, 20],
-                     title="전원 예산 (R28 · R31 계산, 65 W 충전기 / PD 20 V 3 A 보조배터리)")
+                     title=f"전원 예산 (R31 · R33 계산, {T['model']} = {T['wh']} Wh)")
     s.chg(174.5, 135 + 4.2 + 3.3 * 4 + 1.8, 16)
+    s.chg(174.5, 135 + 4.2 + 3.3 * 7 + 1.8, 17)
     s.para(190, 135, [
         "주",
-        "1. A601: VSET 납땜 패드 3쌍을 모두 열어 두면 20 V(기본). HUSB238은 ISET 열림 = 3.25 A를 요구해",
-        "    20 V 3 A(60 W) 보조배터리·2포트 사용 충전기는 조건을 못 맞춰 15·12 V, 최악 5 V로 떨어진다(검토 R5).",
-        "    처음에 전원마다 무부하로 20 V가 나오는지 잰다. 5 V면 강압·앰프가 켜지지 않는다.",
-        "2. F601: 5 A 지연형, A601 출력 + 선에 인라인 홀더. SW601은 퓨즈 뒤 20 V 쪽 (앰프와 강압 모듈을 함께 끔).",
-        "3. 20 V 배선은 16 AWG 스피커선(C13). 분기: 스위치 출력 한 곳에서 두 선(앰프, 강압)으로 나눈다.",
+        f"1. BT601 {T['model']}({T['wh']} Wh), BMS 내장(받으면 확인). 버스 {T['v_min']:.1f}~{T['v_max']:.1f} V: 강압은 5.1 V에 약 {T['buck_min_v']:.0f} V 이상,",
+        f"    앰프 PVCC {T['amp_pvcc'][0]}~{T['amp_pvcc'][1]} V라 범위 전체에서 동작하고 BMS 저전압 차단(보통 약 {T['v_min']:.0f} V)까지 켜져 있다. XT60은 모양으로 극성이 정해진다.",
+        "2. 충전은 스위치를 끄고 LiFePO4 충전기(14.4 V)를 팩 DC 5.5×2.1 입력에(XT60은 꽂아 둔 채). 충전기가 부하 동시 사용을 밝히지 않으면 충전하며 연주하지 않는다.",
+        "    벤치 시험: 전지 대신 12 V SMPS(XT60 암 L81)를 X606에 — 둘을 함께 꽂지 않는다. SMPS 쪽 선 극성은 멀티미터로 먼저 확인.",
+        f"3. F601 5 A ATO 블레이드(사용자 보유 홀더, 12 AWG 꼬리 둘 다 홀더 끝에서 {HN.STUB12} mm로 잘라 16 AWG에 납땜 + 수축): X606 바로 뒤 + 선. 전지는 단락 전류가 커서 퓨즈 + BMS가 막는다.",
+        "    SW601 = KCD1-104(4핀 DPST, 사용자 보유): 켬 상태 통전으로 한 회로의 두 단자를 찾고, 입력 둘(1·3)·출력 둘(2·4)을 짧은 선으로 묶는다. DC 차단 정격 미공개 → 소리를 멈춘 뒤 끈다.",
         "4. Pi 5에는 P601(USB-C 2선 리드)로 5.1 V만 넣는다. GPIO 5V 핀 급전·동시 급전 금지(D16). 화면은 헤더에서 받아 감(주 9).",
         "5. 허브는 딸린 5 V 어댑터 선을 잘라 플러그 쪽(P602)을 강압 모듈에 물린다. 극성은 멀티미터로 확인.",
-        "6. △5 GND는 한 점(★ 강압 IN− 단자)에서 모은다: PD GND·앰프 GND 선이 여기서만 만난다 (검토 R7, 험 방지).",
-        "7. 첫 연결 전: 강압 출력을 무부하로 5.10~5.15 V에 맞추고 가변저항을 고정(접착) — 출고값은 20 V까지 나올 수 있다(R6).",
-        "    MT666 빨강 = +, 허브 선 중심 = + 를 멀티미터로 확인. Pi 헤더 핀 2–6이 부하 때 5.0 V 이상.",
-        "8. 스위치로 끄면 Pi가 갑자기 꺼진다 → 읽기 전용 오버레이 파일 시스템 권장(R13).",
-        f"△16 예산: 순간 최대 = D19 {I['peak_basis_w']:.0f} W + 화면 {B['disp_w']:.2f} W ÷ {I['eff']:.1f}. {I['small_supply_w']:.0f} W 전원에서 −1 dB면 약 {f1(B['cut1'])} W(넘침),",
-        f"    화면을 끄면 약 {f1(B['cut1_off'])} W → −2 dB(약 {f1(B['cut2'])} W), 또는 −1 dB + 화면 끔.",
-    ], size=2.2)
+        "6. △5 GND는 한 점(★ 강압 IN− 단자)에서 모은다: 전지 −(W601 검정)·앰프 GND 선이 여기서만 만난다 (검토 R7, 험 방지).",
+        f"7. 첫 연결 전: 강압 출력을 무부하로 5.10~5.15 V에 맞추고 가변저항을 고정(접착) — 출고값은 입력(최대 {T['v_max']} V)까지 나올 수 있다(R6).",
+        "    C24 빨강 = +, 허브 선 중심 = + 를 멀티미터로 확인. Pi 헤더 핀 2–6이 부하 때 5.0 V 이상. 12.8 V·5.1 V 선 = 16 AWG(18 AWG도 됨).",
+        "8. 스위치로 끄면 Pi가 갑자기 꺼진다 → 읽기 전용 오버레이 파일 시스템 권장(R13). 스위치를 10번 켜고 끄며 BMS가 끊기지 않는지 확인(R12).",
+        f"△17 순간 최대 = 앰프 2 × {T['amp_w_ch']:.0f} W ÷ {T['amp_eff']} = {B['amp_hi']:.1f} W + 나머지 {f1(B['base_new'])} W = 약 {f1(B['peak'])} W.",
+        f"    앰프 최대 출력 약 {T['amp_w_ch']:.0f} W/ch(8 Ω, 1 % THD, 입력 약 0.13 Vrms) — 찌그러지지 않게 소프트웨어 음량 상한을 둔다(SCH-07 주 4).",
+    ], size=2.1, lh=3.0)
     _display_band(s, e, 180.0)
     s.frame()
     s.expected = e
@@ -919,8 +996,8 @@ SHEETS.append(sch06)
 # ------------------------------------------------------------------ SCH-07
 def sch07():
     s = Sheet("SCH-07", 7, TOTAL, "오디오 (CU)",
-              "Pi 5 → USB 동글(DAC) → 왼쪽 볼 헤드폰 잭(노멀 접점) → 앰프 입력 잭 → 약 93 Hz RC → XH-A232 (TPA3110) → XT30 → 스피커 2개. 헤드폰을 꽂으면 앰프 입력이 끊긴다(R15).",
-              "CU 오디오", qty="CU × 1", basis="v4 W1+ · R25")
+              "Pi 5 → USB 동글(DAC) → 왼쪽 볼 헤드폰 잭(노멀 접점) → 앰프 입력 잭 → 약 93 Hz RC → XH-A232 (TPA3110) → XT60 → 스피커 2개. 헤드폰을 꽂으면 앰프 입력이 끊긴다(R15).",
+              "CU 오디오", qty="CU × 1", basis="v4 W1+ · R25 · R33", **REV_E)
     e = {}
     plug = sym_plug()
     # dongle block with its 3.5 mm jack contacts (T,R,S)
@@ -937,7 +1014,7 @@ def sch07():
         s.wire((x, y), (x + 10, y))
         s.label(x + 10, y, net, "R")
         exp_add(e, net, f"P701.{nm}", f"A701.{nm}")
-    s.text(18, 72, "W701: 3.5 mm 스테레오 1.5 m (C14) — 볼 쪽 끝을 잘라 J701에 납땜", "cabt", size=2.0)
+    s.text(18, 72, "W701: BC256 3 m를 반으로 자른 1.5 m (C14) — 잘린 끝을 J701에", "cabt", size=2.0)
     # J701 headphone jack (left cheek)
     s.box(112, 22, 76, 78, "왼쪽 볼 — 헤드폰 잭 (R15)")
     s.place(sym_jack(), "J701", "PJ-313 헤드폰 잭", 150, 35, mirror=True, ref_at=(-16, -2.2), val_at=(-16, 31.5),
@@ -951,7 +1028,7 @@ def sch07():
     s.text(116, 85.8, "헤드폰 꽂음: TN·RN 떨어짐 → 앰프 입력 끊김", "notes", size=2.0)
     s.text(116, 95, "W702 볼 쪽 끝 → J701 TN·RN·S 납땜", "cabt", size=2.0)
     # W702 plug -> J702
-    s.place(plug, "P702", "W702 플러그", 215, 40, ref_at=(0, -2.2), val_at=(0, 19.5), part="1.5 m (C14)", part_at=(0, 21.8))
+    s.place(plug, "P702", "W702 플러그", 215, 40, ref_at=(0, -2.2), val_at=(0, 19.5), part="BC256 반쪽 (C14)", part_at=(0, 21.8))
     for nm, net in (("T", "HP_TN_L"), ("R", "HP_RN_R"), ("S", "AGND")):
         x, y = s.pin("P702", nm)
         s.wire((x, y), (x - 7.5, y))
@@ -1008,21 +1085,26 @@ def sch07():
         exp_add(e, net, f"A702.{pin}")
     x, y = s.pin("A702", "2"); s.wire((x, y), (x - 7.5, y)); s.label(x - 7.5, y, "AGND", "L"); exp_add(e, "AGND", "A702.2")
     s.chg(x - 27, y - 1.5, 10)
-    x, y = s.pin("A702", "4"); s.wire((x, y), (x - 10, y)); s.pwr(x - 10, y, "+20V"); exp_add(e, "+20V", "A702.4")
+    x, y = s.pin("A702", "4"); s.wire((x, y), (x - 10, y)); s.pwr(x - 10, y, "+12V8"); exp_add(e, "+12V8", "A702.4")
     x, y = s.pin("A702", "5"); s.wire((x, y), (x - 3.5, y)); s.pwr(x - 3.5, y, "GND"); exp_add(e, "GND", "A702.5")
     for pin, net in (("6", "SPK_L_P"), ("7", "SPK_L_N"), ("8", "SPK_R_P"), ("9", "SPK_R_N")):
         x, y = s.pin("A702", pin)
         s.wire((x, y), (x + 5, y))
         s.label(x + 5, y, net, "R")
         exp_add(e, net, f"A702.{pin}")
-    s.text(318, 64.5, "+20V: SCH-06", "notes", size=1.9)
+    s.text(316.5, 64.5, "+12V8: SCH-06", "notes", size=1.9)
+    s.text(316.5, 67.1, f"PVCC {BATT['v_min']:.0f}~{BATT['v_max']} V (전지)", "notes", size=1.9)
+    s.chg(339.5, 61.5, 17)
     # speakers
-    s.box(14, 150, 216, 80, "스피커 파트 연결 (R26: XT30 꽂았다 뺌, D13: 직렬 콘덴서 없음)")
+    s.box(14, 150, 216, 80, "스피커 파트 연결 (R26: XT60 꽂았다 뺌 △18, D13: 직렬 콘덴서 없음)")
     for i, (side, pnet, nnet, xm, xf_, ls) in enumerate((("L", "SPK_L_P", "SPK_L_N", "X703", "X704", "LS701"),
                                                           ("R", "SPK_R_P", "SPK_R_N", "X705", "X706", "LS702"))):
         y0 = 165 + i * 32
-        s.place(sym_conn("XT30U-M", 2, side="L", width=6, rev=True), xm, "XT30U-M", 70, y0, ref_at=(0, -2.2), val_at=(-16, 14.5))
-        s.place(sym_conn("XT30U-F", 2, side="R", width=6, rev=True), xf_, "XT30U-F", 77.5, y0, ref_at=(0, -2.2), val_at=(1, 14.5))
+        # △18: XT60 like the battery; blue heat-shrink + "SPK" (power XT60s are red, see note 8)
+        s.place(sym_conn("XT60-M", 2, side="L", width=6, rev=True), xm, "XT60 수 SPK", 70, y0, ref_at=(0, -2.2), val_at=(-16, 14.5),
+                meta=dict(bomkey="XT60M_SPK"))
+        s.place(sym_conn("XT60-F", 2, side="R", width=6, rev=True), xf_, "XT60 암 SPK", 77.5, y0, ref_at=(0, -2.2), val_at=(1, 14.5),
+                meta=dict(bomkey="XT60F_SPK"))
         s.mate(xm, xf_, at=(76.3, y0 + 12.3))
         s.text(72.2, y0 + 3.3, "+", "pinnameh", size=2.3)
         s.text(72.2, y0 + 8.3, "−", "pinnameh", size=2.3)
@@ -1038,7 +1120,11 @@ def sch07():
             s.wire((x, y), (tx, ty))
             s.label(x + 3, y, pnet if lsp == "1" else nnet, "R")
             exp_add(e, pnet if lsp == "1" else nnet, f"{ls}.{lsp}")
-        s.text(20, y0 + 19.5, f"W70{3+2*i}: 앰프 → 통로 → XT30 약 0.6 m · W70{4+2*i}: 스피커 파트 안 0.3 m (16 AWG)", "cabt", size=2.0)
+        if i == 0:
+            s.chg(90.0, y0 - 4.5, 18)
+        _sl, _pg = HN.L("SPK-" + side), HN.L("PIG-" + side)
+        s.text(20, y0 + 19.5, (f"W70{3+2*i}: 앰프 → XT60 수 경로 {_sl:.0f} mm · W70{4+2*i}: XT60 암 → 유닛 {_pg:.0f} mm (CAD, BRD-05)"
+                               if _sl else f"W70{3+2*i} · W70{4+2*i}: BRD-05"), "cabt", size=2.0)
     s.para(240, 150, [
         "주",
         "1. 동글 A701은 젠더 X701로 Pi 5 USB-A에 직결(허브 경유 금지). ALSA hw:CARD=<이름>,DEV=0, 48 kHz 전용(D7).",
@@ -1046,11 +1132,16 @@ def sch07():
         "    ‘PJ-313’ 이름만으로 노멀 접점·핀 번호가 보장되지 않는다 → 도착 즉시 통전 검사(플러그 없음: T–TN, R–RN 닫힘).",
         "3. HPF: 1 µF ×2 병렬(2 µF) 직렬 + 1 kΩ 병렬. 앰프(36 dB, 입력 9 kΩ)와 겹쳐 실제 fc ≈ 93 Hz.",
         "    80 Hz가 꼭 필요하면 1 kΩ → 1.2 kΩ (구매). △10 AGND: 잭 슬리브·1 kΩ는 앰프 IN G 단자로만 모은다.",
-        "4. XH-A232는 36 dB 출고 → 입력 약 0.2 Vrms면 최대 출력. 동글은 0.5~1 Vrms라 소프트웨어 상한 필수",
-        "    (ALSA Headphone·FluidSynth synth.gain 상한 + synth.limiter). 스피커 25 W 정격 보호(D18).",
-        "5. XT30: 납작한 면 = +, 모따기 면 = − (KiCad 패드 1 = −, 2 = +). 좌우 같은 방향으로 납땜해 위상을 맞춘다.",
+        f"4. XH-A232는 36 dB 출고. △17 PVCC {BATT['v_nom']} V(전지): 8 Ω에서 1 % THD 약 {BATT['amp_w_ch']:.0f} W/ch,",
+        "    입력 약 0.13 Vrms면 최대 출력. 동글은 0.5~1 Vrms라 소프트웨어 상한 필수 — 최대 출력 약 8 W/ch(입력 약 0.13 Vrms)에서",
+        "    찌그러지지 않게 상한을 정한다. ALSA Headphone·FluidSynth synth.gain 상한 + synth.limiter. 스피커 25 W 보호(D18).",
+        "5. XT60(△18, 전지와 같은 커넥터): KiCad 패드 1 = −, 2 = + (실물 +/− 표시로 확인). 좌우 같은 방향으로 납땜해 위상을 맞춘다.",
         "6. BTL: L−·R−를 GND나 서로에 묶지 않는다. 스피커선은 쌍마다 꼬고 리본·EXT 선에서 30 mm 이상(D14).",
         "7. 스피커 Re를 잰다: 6~7 Ω = 8 Ω 유닛, 3~3.5 Ω면 4 Ω 판매분(출력·발열 재검토).",
+        "8. △18 잘못 꽂기 방지: 커넥터가 모두 XT60이라 전지·벤치 12 V를 스피커 XT60에 꽂을 수 있다 → 12.8 V DC가",
+        "    BTL 출력·보이스 코일에 걸림(6.2 Ω에 약 2 A, 스피커 과열). 전원 XT60(팩 리드·W601·벤치 L81) = 빨강 수축,",
+        f"    스피커 XT60(X703~X706) = 파랑 수축 + ‘SPK’. W601은 홀더 끝에서 XT60 뒤끝까지 {HN.W601_MAX} mm 이하라 왼쪽 집게({HN.W601_NEED_L:.1f} mm)까지 닿지 않는다.",
+        "    스피커 XT60에 전원을 꽂지 않는다. XT60 정격(30 A)은 스피커 전류보다 훨씬 커서 전기적 손해는 없다.",
     ], size=2.2)
     s.frame()
     s.expected = e
@@ -1129,8 +1220,8 @@ def mux_hole(name):
 
 def brd01():
     s = Sheet("BRD-01", 8, TOTAL, "제어 기판 배치 (MB · 위에서 봄)",
-              "5×7 cm 만능기판 위 부품 자리와 구멍 좌표(모듈 좌표 mm). W1 r4.3~r4.5의 앞 홈·금지 구역·높이 구역·바닥 구멍·매단 보스를 지킨 배치. 배선은 netlist/wiring_MB.csv의 점 대 점 목록을 따른다.",
-              "MB", qty="MB × 7", basis="v4 W1+ r4.5 P23")
+              "BE163에서 자른 70 × 50 조각 위 부품 자리와 구멍 좌표(모듈 좌표 mm). W1 r4.3~r4.5의 앞 홈·금지 구역·높이 구역·바닥 구멍·매단 보스를 지킨 배치. 배선은 netlist/wiring_MB.csv.",
+              "MB", qty="MB × 7", basis="v4 W1+ r4.5 P23", **REV_E)
     S = 3.0
     ox, oy = 28, 30
 
@@ -1265,7 +1356,7 @@ def brd01():
     s.table(262, 30, ["부품", "자리 (모듈 좌표)", "방향", "메모"], rows, [26, 56, 22, 44], title="배치표 (모든 구멍 = 제로 핀 격자)")
     s.para(262, 74, [
         "주",
-        "1. 좌표 = 모듈 좌표(mm), 기판 5×7 cm. 모든 부품 구멍은 RP2040-Zero 핀 격자",
+        "1. 좌표 = 모듈 좌표(mm), 기판 70 × 50 (BE163 조각, 지그 P-MB). 모든 부품 구멍은 RP2040-Zero 핀 격자",
         f"    x = {f2(LAT_X)} + 2.54·i, y = 173.59 + 2.54·j 위 — 만능기판을 이 격자에 맞춰 자른다.",
         f"    △15 제로 왼쪽 모서리 x{f2(ZX)}: Waveshare 치수도에서 USB-C가 오른쪽 모서리에서 4.67(가운데보다 0.14 왼쪽)이라",
         "    제로를 +0.14 옮겨 리셉터클·플러그 가운데를 W1 선반 홈 가운데 x84.00에 맞춘다(양옆 1.30 그대로).",
@@ -1280,8 +1371,8 @@ def brd01():
         "    부품 높이: y145.8~194.5 ≤ z20, 뒤 띠 y194.5~195.5 ≤ z16.7. W1 r4.5는 기판 밑 바닥을 뚫었다(점선: x46.25~118.25 ×",
         "    y144.5~196.5, 리셉터클 뒤 x78.53~89.47은 y197.8까지). 아랫면: 헤더 핀 끝 ≤ 2 mm, C301·배선, 나사 머리 1.65.",
         "4. 빨간 원 = 배선 연결점, 빈 원 = 안 씀. 제로 아래 줄(GP9~13)은 헤더 없음.",
-        "5. 배선: 기판 아랫면, 피복 단선. 금지 구역(y≤173.2)을 가로지르지 않도록 제로 밑(y≥174.86, 핀 줄 사이",
-        "    반 칸)으로 지나간다. 목록: netlist/wiring_MB.csv.",
+        "5. 배선: 기판 아랫면, 피복 단선 — 선마다 경로·꺾인 점은 BRD-08(아래에서 본 그림)과 netlist/wiring_MB.csv.",
+        "    금지 구역(y≤173.2)은 제로 밑(y≥174.86, 핀 줄 사이 반 칸)에서만 건넌다. 납땜 패드 위는 지나지 않는다(검사).",
         "6. O1·O7 EXT 연장선(W403·W413): J302 아랫면에서 납땜, 기판 밑(z5~9)으로 x≤91까지, USB 플러그 밑(z5~10.7)으로",
         "    뒷벽 개구(x74~94 z5~21)를 지나 뒤 케이블 통로로 (W1 r4.3 경로).",
         "7. J301도 아랫면에서 납땜: 리본은 기판 밑(z5~9)으로 평평하게 앞 모서리 y145.5를 지나 밸런스 레일 밑 차선",
@@ -1387,7 +1478,7 @@ def _end_plans(s):
             wires.append(((end_col(xk), 72.08), (jx[1 + i], 74.62)))
         for (a1, a2) in wires:
             o.append(f'<line x1="{X(a1[0]):.2f}" y1="{Y(a1[1]):.2f}" x2="{X(a2[0]):.2f}" y2="{Y(a2[1]):.2f}" stroke="#1f5fbf" stroke-width=".35" stroke-dasharray="1.1 .6"/>')
-        s.text(X(jx[0]) - 1.5, Y(75.89) - 6.0, f"{B['jref']} 리드 패드 ×{len(jx)} (1 GND … {len(jx)} 3V3, 아랫면 납땜)", "cabt", size=1.9, check=False)
+        s.text(X(jx[0]) - 1.5, Y(75.89) - 6.0, f"{B['jref']} 리드 패드 ×{len(jx)} (1 GND … {len(jx)} 3V3)", "cabt", size=1.9, check=False)
         # mounting U-notches (same as SB)
         for (x, y, edge) in ((3.0, 61.9, 60.65), (3.0, 74.6, 75.89)):
             y0_, y1_ = min(y, edge), max(y, edge)
@@ -1411,7 +1502,7 @@ def _end_plans(s):
 def brd02():
     s = Sheet("BRD-02", 9, TOTAL, "센서 기판 배치 (SB · EL · ER, 위에서 봄)",
               "SB 161.6 × 15.24 양면 도트 기판: 센서 12개 리드 구멍, 3V3·GND·OUT 행, 디커플링 자리, 리본 2×8 블록, 고정 U홈(모듈 좌표 mm). 아래: 끝 부속 EL·ER 기판.",
-              "SB · EL · ER", qty="SB × 7 · EL × 1 · ER × 1", basis="v4 W1+ r4.5")
+              "SB · EL · ER", qty="SB × 7 · EL × 1 · ER × 1", basis="v4 W1+ r4.5", **REV_E)
     S = 2.2
     ox, oy = 40, 60
 
@@ -1470,6 +1561,10 @@ def brd02():
         o.append(f'<rect x="{X(161.5):.2f}" y="{Y(yb):.2f}" width="{1.5*S:.2f}" height="{(yb-ya)*S:.2f}" fill="#c9d0da" fill-opacity=".6" stroke="#6b7690" stroke-width=".3"/>')
         o.append(f'<rect x="{X(163.0):.2f}" y="{Y(yb):.2f}" width="{1.3*S:.2f}" height="{(yb-ya)*S:.2f}" fill="#9aa6b8" stroke="#6b7690" stroke-width=".3"/>')
     s.text(X(164.3), Y(58.5) + 16.5, "오른쪽 턱(W1 r4.5 P36): 립 x161.5~163.0 z13.6~15.1(바 끝 위 1.4), 기둥 x163.0~164.3 — 바를 1.5 왼쪽에 놓고 오른쪽으로 밀어 넣은 뒤 왼쪽 M3", "notes", "end", size=2.0)
+    # OUT -> J201 wires (underside), from boards3.sb_rows() + route check
+    import boards3
+    boards3.draw_sb_routes(s, X, Y)
+    s.board_check = ["SB: " + p for p in boards3.sb_check()]
     # table
     rows = [[u, k, f"{xk:.3f}", f"{col:.2f}", f"C{201+i}", f"{col:.2f}"] for i, (u, k, xk, col) in enumerate(tab)]
     s.table(15, 118, ["센서", "건반", "소자 x", "리드 구멍 x (3행)", "100n", "100n 구멍 x"], rows, [16, 12, 18, 30, 14, 22],
@@ -1484,12 +1579,16 @@ def brd02():
         "3. 확인: 3.3 V를 주고 자석 없이 OUT 1.59~1.71 V, S극을 표시면에 가까이 하면 올라간다. 건반을 얹은 쉼 백 ≈1.78 · 흑 ≈1.72 V.",
         "4. 100 nF 1206: 아랫면, 각 센서 리드 구멍 열의 3V3(y64.46)–GND(y67.00) 패드 사이(점선). 10 µF도 아랫면:",
         "    C213 x8.25(왼쪽 받침 기둥 x0.5~6.0과 U201 리드 x10.79 사이), C214 x158.11. 버스는 x8.25부터.",
-        "5. 3V3·GND 버스는 아랫면 주석선. OUT 패드 → 아랫면 단선으로 리본 블록 J201(홀수 앞줄)까지.",
+        "5. 3V3·GND 버스 = 아랫면 주석선 x8.25~160.65. OUT → J201 피복 단선 12가닥(파란 점선) + △27 J201 전원 4가닥(빨강 J201.1·16 → 3V3, 검정 J201.2·15 → GND,",
+        "    끝은 버스가 지나는 빈 구멍 ○에 버스와 함께 납땜) — wiring_SB.csv. J201: 홀수 = 앞줄 y72.08, 짝수 = 뒷줄 y74.62, x = 61.59 + 2.54·⌊(n−1)/2⌋.",
+        "    OUT 선은 모두 y70.81 줄, 짝수행은 핀 옆 반 칸 기둥에서 앞줄을 건너 y73.35로 1.27만. 받침 리브(점선 띠) 위에는 선이 없고 뒤 리브 띠는 틈 x59~82에서만 건넌다.",
+        "    확인: J201.1·16 ↔ U201 핀 1 = 0 Ω, J201.2·15 ↔ U201 핀 2 = 0 Ω, J201 핀 n ↔ 센서 OUT = 0 Ω.",
         "6. 리본 16심은 아랫면에서 2×8 블록에 납땜(선 n = 핀 n, 15 = GND, 16 = 3V3). IDC 2×8 헤더로 바꿔도 번호가 같다.",
-        "    리본(중심 x70.48, x60.32~80.64)은 뒤 받침 리브(y73.2~75.5)의 틈 x59~82를 지난다(W1 r4.4에서 v3 x60~82를 넓힘,",
-        "    양옆 1.32 / 1.36 — 리본 차선과 같음).",
+        "    리본(중심 x70.48, x60.32~80.64)은 뒤 리브 틈 x59~82를 지난다(W1 r4.4에서 넓힘, 양옆 1.32 / 1.36 — 리본 차선과 같음).",
     ], size=2.2)
     ep = _end_plans(s)
+    s.regions["sb"] = (9.0, 20.0, 411.0, 166.5)
+    s.regions["end"] = (9.0, 166.5, 411.0, 253.0)
     s.frame()
     s.expected = {}
     return s
@@ -1499,39 +1598,48 @@ SHEETS += [brd01, brd02]
 
 
 # ------------------------------------------------------------------ SCH-01 (system interconnect)
-CABLES = [
-    # id, kind, length, from, to, conductors, bom
-    ("W101~W107", "플랫 리본 2651-16P, 16심 전부 사용", "약 180 mm ×7", "SB J201 (2×8)", "MB J301 (2×8)", "16 (3V3 ×2, GND ×2, 신호 12)", "C05"),
-    ("W201~W207", "USB-A → C 1 m (C 쪽 몰드 ≤ 12.5×7.6×25)", "1 m ×7", "허브 다운스트림", "O1~O7 RP2040-Zero USB-C", "USB 2.0", "C04"),
-    ("W208", "USB-A → C 1 m (CU 안, 짧게 묶음)", "1 m", "허브 다운스트림", "PB RP2040-Zero USB-C", "USB 2.0", "C04"),
-    ("W209", "허브 기본 업스트림 선", "허브 부속", "허브 업스트림", "Pi 5 USB-A", "USB 3.0", "L17"),
-    ("W401", "EL 리드 (리본 가닥 5심)", "350 mm", "EL J401 (아랫면)", "X401 XH 6P (끝 부속 쪽 50 mm, 뒤 통로)", "5 (XH 1·2·3·4·6)", "C05 · L66"),
-    ("W403", "O1 EXT 연장 6심 (L66 모듈 쪽 150 mm)", "150 mm", "O1 MB J302 (아랫면)", "X402 JST-XH 6P (모듈 쪽)", "6", "L66"),
-    ("W411", "ER 리드 (리본 가닥 3심)", "300 mm", "ER J411 (아랫면)", "X411 XH 6P (끝 부속 쪽 50 mm, 뒤 통로)", "3 (XH 1·2·6)", "C05 · L66"),
-    ("W413", "O7 EXT 연장 6심 (L66 모듈 쪽 150 mm)", "150 mm", "O7 MB J302 (아랫면)", "X412 JST-XH 6P (모듈 쪽)", "6", "L66"),
-    ("W501", "3.5 mm 스테레오 3 m (한쪽 잘라 페달에 납땜)", "3 m", "PS U551 (페달 안)", "P501 → J501 (I/O 판)", "3 (T OUT, R VCC, S GND)", "L50"),
-    ("W502", "잭 → PB 단선", "약 10 cm", "J501 T·TN·R·S", "PB", "4", "SE12"),
-    ("W601", "USB-C ↔ C PD 60 W", "2 m / 0.6 m", "충전기 / 보조배터리", "A601 USB-C", "PD", "C23 / C22"),
-    ("W602", "20 V 배선 16 AWG", "약 1 m", "A601 → F601 → SW601", "A602 IN · A702 VCC", "2", "C13"),
-    ("W603", "USB-C 수 2선 (MT666)", "약 25 cm", "A602 OUT", "Pi 5 USB-C", "2 (빨강 +, 검정 −)", "C24"),
-    ("W604", "허브 어댑터 선 (잘라 씀)", "약 30 cm", "A602 OUT", "허브 DC 입력", "2 (중심 +)", "L17 부속"),
-    # △16 (rev C) R31 screen A605 (B1 Waveshare 7-DSI-TOUCH-C)
-    ("W605", f"DSI FFC 22핀 0.5 mm {DISP['ffc_mm']} mm B형(반대면), A형 보험", f"{DISP['ffc_mm']} mm", "Pi 5 CAM/DISP 1", "A605 DSI 22핀", "22 (1 ↔ 1)", "v4touch 49·50"),
-    ("W606", "실리콘 점퍼 26 AWG F/F 빨강·검정", f"{DISP['jumper_m'] * 100:.0f} cm ×2", "Pi 헤더 핀 2·6 (P603)", "X601 ⇄ X602", "2 (빨강 5 V, 검정 GND)", "v4touch 51·52"),
-    ("W607", "실리콘 점퍼 26 AWG M/M 빨강·검정", f"{DISP['jumper_m'] * 100:.0f} cm ×2", "X602 (X601에 꽂음)", "X603 ⇄ X604 (3핀 1·3)", "2", "v4touch 53·54"),
-    ("W608", "화면 동봉 전원선 MX1.25 2핀 → 2.54 3핀", "동봉", "X604 2.54 3핀 하우징", "P604 ⇄ A605 MX1.25 2핀", "2 (가운데 빈 칸)", "v4touch 135"),
-    ("W701", "3.5 mm 스테레오 1.5 m (볼 쪽 잘라 납땜)", "1.5 m", "동글 A701 (플러그 P701)", "J701 T·R·S (볼)", "3", "C14"),
-    ("W702", "3.5 mm 스테레오 1.5 m (볼 쪽 잘라 납땜)", "1.5 m", "J701 TN·RN·S", "P702 → J702 (CU)", "3", "C14"),
-    ("W703·W705", "스피커선 16 AWG, 쌍마다 꼼", "약 0.6 m ×2", "A702 L± / R±", "X703 / X705 XT30U-M", "2 ×2", "C13"),
-    ("W704·W706", "스피커선 16 AWG", "약 0.3 m ×2", "X704 / X706 XT30U-F", "LS701 / LS702", "2 ×2", "C13"),
-    ("X701", "USB-C(F) → USB-A(M) 젠더", "—", "동글", "Pi 5 USB-A", "—", "L52"),
-]
+# rev E: the cable list is built from harness.py (one source: CAD lengths + cut lengths), bought cables included
+import harness as HN  # noqa: E402
+
+
+def _wkey(c):
+    import re
+    m = re.match(r"[WX](\d+)([a-z]?)", c[0])
+    return (0 if c[0].startswith("W") else 1, int(m.group(1)) if m else 999, m.group(2) if m else "")
+
+
+def _cables(group_usb=False):
+    """cable list rows. group_usb=True folds W201~W207 into one row (SCH-01 table; the per-W length is on the drawing)."""
+    rows = []
+    codes = lambda keys: " · ".join(dict.fromkeys(P.BOM[k.strip()][0] for k in keys.split("·") if k.strip() in P.BOM and P.BOM[k.strip()][0]))
+    for h in HN.HARNESS:
+        rows.append((h["id"], h["title"], h["cut_short"], h["a"][0], h["b"][0], "%d심" % len(h["cond"]), codes(h["bom"])))
+    seen = set()
+    for b in HN.BOUGHT:
+        g = b.get("group") if group_usb else None
+        if g:
+            if g not in seen:
+                seen.add(g)
+                cnt = {}
+                for bb in HN.BOUGHT:
+                    if bb.get("group") == g:
+                        cnt[bb["std_m"]] = cnt.get(bb["std_m"], 0) + 1
+                txt = " · ".join("%s %s ×%d" % (HN.USB_MODEL[m].split()[-1], HN.m_txt(m), n) for m, n in sorted(cnt.items(), reverse=True))
+                rows.append((g, "USB-A→C " + txt, "산 그대로", "허브 포트 3~9", "O1~O7 USB-C", "—", codes(b["bom"])))
+            continue
+        rows.append((b["id"], b["cable"].split(" (")[0], "산 그대로", b["a"].split(" (")[0], b["b"].split(" (")[0], "—", codes(b["bom"])))
+    rows.sort(key=_wkey)
+    return rows
+
+
+CABLES = _cables()                   # one row per cable (cables.csv, page)
+CABLES_SHEET = _cables(group_usb=True)
 
 
 def sch01():
     s = Sheet("SCH-01", 1, TOTAL, "시스템 연결도 (배선 계통)",
-              "모든 파트·보드와 그 사이 선(W 번호). 파트 사이는 모두 꽂았다 빼는 커넥터(R26). 각 보드의 회로는 SCH-02~07, 부품 자리는 BRD-01·02.",
-              "전체", qty="O1~O7 · EL · ER · PB · CU", basis="v4 W1+ r4.5 · R31", **REV_C)
+              "모든 파트·보드와 그 사이 선(W 번호). 파트 사이는 모두 꽂았다 빼는 커넥터(R26). 회로는 SCH-02~07, 기판 BRD-01~03·07·08, 가운데 유닛 배선 BRD-04, 선 만들기 BRD-05·06.",
+              "전체", qty="O1~O7 · EL · ER · PB · CU", basis="v4 W1+ r4.5 · R31 · R33", **REV_E)
     o = s.out["body"]
 
     def blk(x, y, w, h, title, lines=(), cls="mod"):
@@ -1550,6 +1658,7 @@ def sch01():
         x = 50 + i * 43
         blk(x, 26, 39, 30, f"O{i+1} (C{i+1}~B{i+1})", ["W1 건반 12 · 자석 y67", "SB 센서 12 ─W10%d─" % (i + 1), "MB RP2040 + 4067", f"ID {''.join(str(b) for b in reversed(ID_BITS[i+1]))} · 'Toccata O{i+1}'"])
         cab([(x + 19.5, 56), (x + 19.5, 96)], f"W20{i+1}", (x + 21, 78))
+        s.text(x + 21, 81.2, HN.m_txt(HN.USB_BUY.get(f"O{i+1}", 1.0)), "notes", size=2.0)
     blk(353, 26, 44, 30, "ER 오른쪽 끝", ["C8", "센서 1"])
     cab([(44, 36), (50, 36)])
     s.text(22, 62, "W401 → X401⇄X402 ← W403", "cabt", size=2.0)
@@ -1558,10 +1667,14 @@ def sch01():
     s.text(330, 62, "W413 → X412⇄X411 ← W411", "cabt", size=2.0)
     s.text(330, 64.8, "(O7 EXT = 먹스 C12)", "notes", size=2.0)
     # hub
-    blk(50, 96, 300, 14, "A604 NEXTU 710U3 유전원 USB 허브 (L17) — 다운스트림 8: O1~O7 + PED", ["보조배터리 칸 뒤 벽 · 허브에 꽂힌 채 케이블 통로(y215~258)에 놓임"])
+    pm = HN.HUB_PORTS
+    blk(50, 96, 300, 14, "A604 NEXTU 710U3 유전원 USB 허브 (L17) — 다운스트림 8: O1~O7 + PED",
+        ["가운데 유닛 F칸 바닥, 뒤판에 붙임, 포트 앞쪽 (L2) · 업스트림 B·DC 잭 = −x 끝면",
+         "포트 번호(−x부터 0~9): " + " · ".join("%d %s" % (v, k) for k, v in sorted(pm.items(), key=lambda kv: kv[1]))
+         + " (0·1 비움) · 1개는 충전 전용 → 0·1번인지 확인, 쓰는 8개 포트 스위치 켬 (BRD-06 주 3)"])
     # PED
     blk(360, 72, 37, 22, "PB 페달 보드", ["RP2040-Zero", "'Toccata PED'"])
-    cab([(378.5, 94), (378.5, 103), (350, 103)], "W208", (366, 101.5))
+    cab([(378.5, 94), (378.5, 103), (350, 103)], "W208 " + HN.m_txt(HN.USB_BUY.get("PED", 0.5)), (362, 101.5))
     blk(360, 118, 37, 18, "PS 댐퍼 페달", ["DRV5055 + 1 kΩ", "듀로 페달 개조"])
     cab([(378.5, 118), (378.5, 108)], None)
     s.text(380, 113, "W501 3 m → J501", "cabt", size=2.0)
@@ -1586,26 +1699,30 @@ def sch01():
     cab([(291, 146), (310, 146)], None)
     cab([(291, 160), (310, 160)], None)
     s.text(292, 138.5, "W703⇄W704", "cabt", size=2.0)
-    s.text(292, 172.5, "W705⇄W706 (XT30)", "cabt", size=2.0)
+    s.text(292, 172.5, "W705⇄W706 (XT60 SPK)", "cabt", size=2.0)
+    s.chg(325.0, 172.0, 18)
     # power
-    blk(125, 180, 40, 16, "A601 PD 트리거 20 V", ["I/O 판 USB-C 입력 (W601)"])
-    blk(175, 180, 34, 16, "F601 5 A T · SW601", ["I/O 판 스위치"])
+    blk(125, 180, 40, 16, "BT601 LiFePO4 전지", [f"{BATT['v_nom']} V 6 Ah · {BATT['wh']} Wh", "BMS 내장 · 뚜껑 L 밑", "XT60 암 → W601"])
+    s.chg(161.0, 177.5, 17)
+    blk(175, 180, 34, 16, "F601 5 A · SW601", ["ATO 퓨즈 · KCD1-104", "두 회로 나란히"])
     blk(220, 180, 38, 16, "A602 XL4016 → 5.1 V", ["★ 별 접지점 IN−"])
     cab([(165, 188), (175, 188)], None)
     cab([(209, 188), (220, 188)], None)
-    s.text(206, 199.5, "+20V", "cabt", size=2.0)
-    cab([(214.5, 188), (214.5, 175), (266, 175), (266, 162)], "W602 +20V → 앰프", (230, 173.5))
+    s.text(206, 199.5, "+12V8", "cabt", size=2.0)
+    cab([(214.5, 188), (214.5, 175), (266, 175), (266, 162)], "W602c +12V8 → 앰프", (230, 173.5))
     cab([(239, 196), (239, 202), (95, 202), (95, 170)], "W603 5.1 V → Pi USB-C", (120, 205))
     cab([(258, 188), (353, 188), (353, 110), (350, 110)], "W604 5.1 V → 허브 DC", (300, 186.5))
-    s.text(16, 184.5, "벽 65 W PD / 보조배터리 → W601", "cabt", size=2.2)
+    s.text(16, 184.5, "충전: LiFePO4 충전기 → 팩 DC 잭 (연주 중 아님)", "cabt", size=2.2)
     cab([(16, 188), (125, 188)], None)
+    s.text(16, 192.5, "벤치: 12 V SMPS → W601 XT60 (전지와 함께 꽂지 않음)", "notes", size=2.0)
     # cable schedule
-    rows = [[c[0], c[1], c[2], c[3], c[4], c[5], c[6]] for c in CABLES]
+    rows = [[c[0], c[1], c[2], c[3], c[4], c[5], c[6]] for c in CABLES_SHEET]
     n2 = 11                                   # rows that fit in table 2 above the title block
-    n1 = len(CABLES) - n2
-    s.table(14, 212, ["W", "종류", "길이", "한쪽", "다른 쪽", "심선", "BOM"], rows[:n1], [18, 56, 20, 30, 44, 34, 14], title="선 목록 (1/2)", rh=3.0)
-    rows2 = [[c[0], c[1], f"{c[3]} → {c[4]}", c[6]] for c in CABLES[n1:]]
-    s.table(248, 210, ["W", "종류", "한쪽 → 다른 쪽", "BOM"], rows2, [16, 58, 68, 18], title="선 목록 (2/2)", rh=3.0)
+    n1 = len(CABLES_SHEET) - n2
+    s.table(14, 212, ["W", "선", "자르는 길이 (mm)", "한쪽", "다른 쪽", "심", "구매 코드"], rows[:n1], [17, 66, 30, 30, 34, 11, 28],
+            title="선 목록 (1/2) — 만드는 법·핀은 BRD-05·06", rh=3.0)
+    rows2 = [[c[0], c[1], f"{c[3]} → {c[4]}", c[6]] for c in CABLES_SHEET[n1:]]
+    s.table(248, 210, ["W", "선", "한쪽 → 다른 쪽", "코드"], rows2, [17, 62, 64, 17], title="선 목록 (2/2)", rh=3.0)
     s.frame()
     s.expected = {}
     s.cable_rows_2 = rows[n1:]
@@ -1613,3 +1730,13 @@ def sch01():
 
 
 SHEETS.insert(0, sch01)
+
+# rev E physical sheets (boards2.py): BRD-03 PED board, BRD-04 centre-unit wiring, BRD-05 / BRD-06 harnesses
+import boards2  # noqa: E402
+
+SHEETS += [boards2.brd03, boards2.brd04, boards2.brd05, boards2.brd06]
+
+# review fixes (2026-10-08): BRD-07 small boards (J702 / J501 / PS + J701 direct wiring), BRD-08 MB underside routed wiring
+import boards3  # noqa: E402
+
+SHEETS += [boards3.brd07, boards3.brd08]

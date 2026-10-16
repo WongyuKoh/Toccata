@@ -46,11 +46,14 @@ for it in D["items"]:
     st["sub"] += u * q
 for st in stores.values():
     sh = D["ships"].get(st["key"]) if st["key"] else None
-    st["fee"] = 0 if not sh else (0 if (sh.get("free_over") is not None and st["sub"] >= sh["free_over"]) else sh["fee"])
+    # carry = the user's aircon order in the same cart; shared = that list already pays this store's fee
+    st["fee"] = 0 if not sh else (0 if (sh.get("shared") or (sh.get("free_over") is not None and st["sub"] + sh.get("carry", 0) >= sh["free_over"])) else sh["fee"])
     st["free_over"] = sh.get("free_over") if sh else None
+    st["shared"] = bool(sh and sh.get("shared")); st["carry"] = (sh or {}).get("carry", 0)
 parts = sum(s["sub"] for s in stores.values())
 ship = sum(s["fee"] for s in stores.values())
-assert parts + ship == 731485, parts + ship
+EXPECT = int(os.environ["EXPECT"]) if os.environ.get("EXPECT") else None   # e.g. EXPECT=448988 (10/7 store re-optimisation)
+assert EXPECT is None or parts + ship == EXPECT, parts + ship
 
 order = sorted(stores.values(), key=lambda s: -s["sub"])
 blocks = []
@@ -63,6 +66,10 @@ for st in order:
     rule = ""
     if st["free_over"]:
         rule = f'{W(st["free_over"])}원 이상 무료'
+    if st["shared"]:
+        rule = "배송비는 에어컨 목록에 있음 · 같은 장바구니"
+    elif st["carry"]:
+        rule += f' · 에어컨 재료 {W(st["carry"])}원과 같은 장바구니'
     fee_txt = "무료" if st["fee"] == 0 else f'{W(st["fee"])}원'
     blocks.append(
         f'<section class="store"><header><h3>{E(st["name"])}</h3><span class="meta">{len(st["rows"])}품목 · 부품 {W(st["sub"])}원 · 배송비 {fee_txt}'

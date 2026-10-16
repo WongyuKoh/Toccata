@@ -1010,7 +1010,7 @@ title --> [story]    --> world map --> chapter --> scroll cutscene --> song --> 
 
 | 후보 | Pi 5 콘솔 모드 | MIDI 입력·시각 | 연출·제작 | 판단 |
 |---|---|---|---|---|
-| **Python + pygame** (apt `python3-pygame`, 시스템 SDL2 KMSDRM) | 데스크톱 없는 Pi OS Lite에서 바로 전체 화면으로 돈다. [하드웨어 설계서 §7.1](01-hardware-design.md#71-os-lite와-pygame) 결정과 같다(옛 v2.0 §6.1, [보관본](archive/v2.0-monolithic.md#61-os-lite--sdl-kmsdrm)) | 입력 브리지가 시각을 기록한다 | 2D 층 그림·스프라이트에 충분하다. UI는 직접 그려야 한다 | **기본안.** 콘솔 모드와 PC 모드를 같은 코드로 |
+| **Python + pygame** (apt `python3-pygame`, 시스템 SDL2 KMSDRM) | 데스크톱 없는 Pi OS Lite에서 바로 전체 화면으로 돈다. [하드웨어 설계서 §7.1](01-hardware-design.md#71-os-lite와-pygame) 결정과 같다(옛 v2.0 §6.1, [보관본](../archive/docs/v2.0-monolithic.md#61-os-lite--sdl-kmsdrm)) | 입력 브리지가 시각을 기록한다 | 2D 층 그림·스프라이트에 충분하다. UI는 직접 그려야 한다 | **기본안.** 콘솔 모드와 PC 모드를 같은 코드로 |
 | Godot 4 | 리눅스에서 X11/Wayland 표시 서버가 필요하다. OS Lite에서는 키오스크용 Wayland 컴포지터(예: cage) 위에서 돌려야 한다. 이때 컴포지터나 오디오 스택이 오디오 장치(ALSA hw:)를 잡지 않는지 확인해야 한다 | 기본 MIDI 입력은 프레임 단위로 처리되고 모듈(장치)을 구분하는지도 불확실하다 → 입력 브리지로 보완 | 편집기·애니메이션이 강하다 | [검토]. G2에서 조건(오디오 장치 비선점, 60 fps)을 통과하면 G3 전에 전환할 수 있다 (H15) |
 | 웹 (Chromium + Web MIDI) | 브라우저를 띄울 표시 서버가 필요하고 메모리가 크다 | 이벤트에 도착 시각이 붙는다 | 좋다 | PC 시연·공유용 후보 |
 | Unity | Pi 5(ARM 리눅스)에서 돌리기 어렵다 | 플러그인 필요 | — | 제외 |
@@ -1033,7 +1033,7 @@ title --> [story]    --> world map --> chapter --> scroll cutscene --> song --> 
 
 ### 10.4 반주·오디오 경로
 
-[하드웨어 설계서 §7.1](01-hardware-design.md#71-os-lite와-pygame)의 결정을 따른다(옛 v2.0 §6.1, [보관본](archive/v2.0-monolithic.md#61-os-lite--sdl-kmsdrm)). OS는 Raspberry Pi OS Lite이고, FluidSynth는 ALSA `hw:`로 출력 장치(현재 설계는 USB 오디오 동글)를 **배타적으로** 쓴다. 게임 소리는 믹서를 두지 않고 **반주를 MIDI로 FluidSynth에 보내 같은 신스로 재생**한다.
+[하드웨어 설계서 §7.1](01-hardware-design.md#71-os-lite와-pygame)의 결정을 따른다(옛 v2.0 §6.1, [보관본](../archive/docs/v2.0-monolithic.md#61-os-lite--sdl-kmsdrm)). OS는 Raspberry Pi OS Lite이고, FluidSynth는 ALSA `hw:`로 출력 장치(현재 설계는 USB 오디오 동글)를 **배타적으로** 쓴다. 게임 소리는 믹서를 두지 않고 **반주를 MIDI로 FluidSynth에 보내 같은 신스로 재생**한다.
 
 | 소리 | 경로 | 비고 |
 |---|---|---|

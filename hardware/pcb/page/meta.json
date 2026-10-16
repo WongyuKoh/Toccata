@@ -1,0 +1,6 @@
+{
+  "tab": "circuit",
+  "section": "p-circuit",
+  "source": "hardware/pcb/src/page.py (run after hardware/pcb/src/build.py)",
+  "notes": "Fragment = circuit.html (one <section class=\"page\" id=\"p-circuit\" hidden>, every element id prefixed 'circuit-'), circuit.css, circuit.js (one IIFE, no globals). assets.txt lists every runtime file relative to docs/report/toccata-v4/: the 15 sheets under sch/ (merge.py copies hardware/pcb/schematic/*.svg and board/*.svg there, BRD-07 small boards and BRD-08 MB underside are new) and the download files under fin/circuit/ (16 CSV + toccata-circuit-revE.zip.b64.txt). The download buttons need the page to declare the 'downloads' runtime capability (window.claude.use('downloads')); without it they show where the same file is in the repo (data-repo). circuit.css keeps a small page-wide block for .zbar / .csheet (zoom buttons; circuit.js toggles .z2/.z3 page-wide because other drawing tabs reuse this markup) - colours via tokens only; every other selector is under #p-circuit. Sheet crops are inline <svg viewBox> + <image data-href> whose href is set when #p-circuit is first shown (MutationObserver on hidden)."
+}

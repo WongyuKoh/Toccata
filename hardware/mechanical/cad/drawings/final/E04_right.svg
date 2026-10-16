@@ -1,0 +1,541 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="594mm" height="420mm" viewBox="0 0 594 420">
+<title>Toccata E04 우측면도 (사용 상태)</title>
+<defs><style>
+.bg{fill:#ffffff}
+.frame{fill:none;stroke:#1d2433;stroke-width:.5}
+.t{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic','IBM Plex Sans KR',sans-serif;fill:#1d2433}
+.h{paint-order:stroke;stroke:#ffffff;stroke-width:.75;stroke-linejoin:round}
+.tb{font-weight:700}
+.td{fill:#1f5fbf}
+.tm{fill:#5b6578}
+.tr{fill:#c2410c}
+.S-wood{fill:url(#hw);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-print{fill:url(#hp);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-metal{fill:url(#hm);stroke:#1d2433;stroke-width:.32;stroke-linejoin:round}
+.S-rubber{fill:#50555e;stroke:#1d2433;stroke-width:.25}
+.S-elec{fill:url(#he);stroke:#1d2433;stroke-width:.3}
+.S-screen{fill:#3a4150;stroke:#1d2433;stroke-width:.3}
+.S-cable{fill:#e3b23c;stroke:#6b5a1e;stroke-width:.18}
+.S-ctx{fill:#eceef1;stroke:#a3aab5;stroke-width:.18}
+.P-wood{fill:#f2e6d2;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-print{fill:#e5ebf3;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-metal{fill:#c9ced6;stroke:#39404d;stroke-width:.2}
+.P-rubber{fill:#7d828b;stroke:#39404d;stroke-width:.18}
+.P-elec{fill:#d3ead8;stroke:#39404d;stroke-width:.2}
+.P-screen{fill:#596070;stroke:#39404d;stroke-width:.2}
+.P-cable{fill:#f0cf7a;fill-opacity:.55;stroke:#8a7430;stroke-width:.14;stroke-opacity:.7}
+.P-ctx{fill:#f2f3f5;stroke:#b3b9c3;stroke-width:.18}
+.air{fill:#e8f1fb;stroke:none}
+.hid{fill:none;stroke:#39404d;stroke-width:.24;stroke-dasharray:1.6 .9}
+.hidc{fill:none;stroke:#c2410c;stroke-width:.28;stroke-dasharray:2.2 1.1}
+.ph{fill:none;stroke:#5b6578;stroke-width:.3;stroke-dasharray:4 1 1 1}
+.cl{fill:none;stroke:#6b7690;stroke-width:.2;stroke-dasharray:6 1.2 1 1.2}
+.thin{fill:none;stroke:#39404d;stroke-width:.2}
+.vis{fill:none;stroke:#1d2433;stroke-width:.3}
+.sound{fill:none;stroke:#c2410c;stroke-width:.4;stroke-dasharray:3 1.2}
+.ax{fill:none;stroke:#7a3fb5;stroke-width:.3;stroke-dasharray:5 1.2 1 1.2}
+.keep{fill:none;stroke:#b42318;stroke-width:.3;stroke-dasharray:1.2 1}
+.dm{fill:none;stroke:#1f5fbf;stroke-width:.18}
+.ex{fill:none;stroke:#8a96ab;stroke-width:.15}
+.ah{fill:#1f5fbf;stroke:none}
+.ld{fill:none;stroke:#3d4555;stroke-width:.18}
+.dot{fill:#3d4555}
+.bal{fill:#ffffff;stroke:#1d2433;stroke-width:.25}
+.secl{fill:none;stroke:#1d2433;stroke-width:.55}
+.seca{fill:#1d2433}
+.grid{fill:none;stroke:#1d2433;stroke-width:.25}
+.grid2{fill:none;stroke:#8a96ab;stroke-width:.15}
+.box{fill:#fbfbfc;stroke:#c3c9d3;stroke-width:.2}
+.sheetply{fill:#fbf6ee;stroke:#1d2433;stroke-width:.35}
+.zone{fill:#f4f6f9;stroke:#8a96ab;stroke-width:.2}
+.datum{fill:none;stroke:#15803d;stroke-width:.9;stroke-linecap:round;stroke-opacity:.9}
+.spot{fill:none;stroke:#c2410c;stroke-width:.32}
+.spoth{fill:none;stroke:#c2410c;stroke-width:.32;stroke-dasharray:.45 .3}
+
+.P-keyw{fill:#fdfdfa;stroke:#39404d;stroke-width:.2;stroke-linejoin:round}
+.P-keyb{fill:#454a53;stroke:#1d2433;stroke-width:.2;stroke-linejoin:round}
+.S-keyw{fill:url(#hk);stroke:#1d2433;stroke-width:.35;stroke-linejoin:round}
+.S-keyb{fill:#2a2d33;stroke:#1d2433;stroke-width:.3;stroke-linejoin:round}
+.P-felt{fill:#ecc3bd;stroke:#39404d;stroke-width:.16}
+.S-felt{fill:#d98c8c;stroke:#1d2433;stroke-width:.22}
+.lt{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic','IBM Plex Sans KR',sans-serif;fill:#1d2433}
+.cutl{fill:none;stroke:#1d2433;stroke-width:.7}
+.tag{fill:#ffffff;stroke:#1d2433;stroke-width:.3}
+</style>
+<pattern id="hw" patternUnits="userSpaceOnUse" width="1.6" height="1.6" patternTransform="rotate(45)"><rect width="1.6" height="1.6" fill="#ecdcc2"/><line x1="0" y1="0" x2="0" y2="1.6" stroke="#a8875a" stroke-width=".22"/></pattern>
+<pattern id="hp" patternUnits="userSpaceOnUse" width="1.1" height="1.1" patternTransform="rotate(-45)"><rect width="1.1" height="1.1" fill="#dfe6ef"/><line x1="0" y1="0" x2="0" y2="1.1" stroke="#7f93b0" stroke-width=".16"/></pattern>
+<pattern id="hm" patternUnits="userSpaceOnUse" width=".9" height=".9" patternTransform="rotate(45)"><rect width=".9" height=".9" fill="#c3c8d1"/><path d="M0 0V.9M0 0H.9" stroke="#5d6778" stroke-width=".12"/></pattern>
+<pattern id="he" patternUnits="userSpaceOnUse" width="1.4" height="1.4"><rect width="1.4" height="1.4" fill="#cfe6d3"/><line x1="0" y1=".7" x2="1.4" y2=".7" stroke="#5f9a6c" stroke-width=".14"/></pattern>
+<pattern id="hk" patternUnits="userSpaceOnUse" width="1.4" height="1.4" patternTransform="rotate(45)"><rect width="1.4" height="1.4" fill="#f7f7f3"/><line x1="0" y1="0" x2="0" y2="1.4" stroke="#9aa3b2" stroke-width=".14"/></pattern><clipPath id="cv1"><rect x="44.00" y="40.00" width="356.00" height="199.00"/></clipPath><clipPath id="cv2"><rect x="44.00" y="283.00" width="112.00" height="72.00"/></clipPath></defs>
+<rect class="bg" x="0" y="0" width="594" height="420"/>
+<rect class="frame" x="10" y="10" width="574" height="400"/>
+<g id="geo">
+<path class="P-metal" fill-rule="evenodd" d="M296.40 122.19 L297.05 121.87 L297.50 121.30 L297.50 120.31 L297.37 120.05 L296.72 119.51 L296.17 119.38 L295.80 120.11 L295.80 120.31 L295.09 121.63 L295.21 122.13 L295.50 122.42Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M304.24 123.59 L304.22 123.56 L299.86 119.93 L299.76 120.01 L299.90 120.29 L299.90 121.29 L299.80 121.39 L299.80 121.69 L299.71 121.78 L299.61 122.29 L299.13 123.06 L298.45 123.73 L297.88 124.12 L297.11 124.40 L296.14 124.51 L296.11 124.60 L299.55 127.46Z M295.71 122.36 L295.69 122.35 L295.38 122.21 L295.30 122.15 L295.30 122.50 L295.65 122.50Z" clip-path="url(#cv1)"/>
+<path class="P-cable" fill-rule="evenodd" d="M274.55 147.25 L274.35 147.25 L274.35 147.45 L274.55 147.45Z M274.25 147.95 L274.05 147.95 L274.05 148.15 L273.95 148.15 L273.95 148.35 L274.15 148.35 L274.15 148.15 L274.25 148.15Z M273.95 148.65 L273.75 148.65 L273.75 148.85 L273.65 148.85 L273.65 149.05 L273.85 149.05 L273.85 148.85 L273.95 148.85Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M305.35 100.94 L304.84 100.70 L304.80 100.70 L304.80 101.01 L304.10 102.31 L304.10 102.52 L302.00 106.82 L302.00 107.01 L301.40 108.11 L301.40 108.31 L300.70 109.61 L300.70 109.82 L298.60 114.12 L298.60 114.31 L298.10 115.21 L298.10 115.32 L298.54 115.53Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M288.02 137.16 L294.15 124.01 L294.76 124.30 L295.08 124.41 L295.42 124.50 L295.76 124.56 L296.10 124.58 L296.45 124.58 L296.79 124.54 L297.13 124.47 L297.46 124.37 L297.78 124.24 L298.09 124.08 L298.38 123.90 L298.66 123.68 L298.91 123.45 L299.14 123.19 L299.35 122.92 L299.53 122.62 L299.68 122.31 L299.81 121.99 L299.90 121.65 L299.97 121.31 L300.00 120.97 L300.00 120.62 L299.97 120.28 L299.91 119.94 L299.82 119.61 L299.78 119.48 L298.23 115.25 L319.84 68.91 L324.12 70.91 L326.65 65.47 L324.37 59.20 L326.81 53.96 L311.41 46.77 L266.61 142.84 L274.77 146.65 L273.76 148.97 L273.85 149.04Z M295.22 121.72 L296.23 119.54 L296.42 119.55 L296.73 119.65 L297.01 119.83 L297.23 120.07 L297.38 120.36 L297.45 120.67 L297.44 121.00 L297.34 121.31 L297.16 121.59 L296.92 121.81 L296.63 121.96 L295.46 122.39Z" clip-path="url(#cv1)"/>
+<path class="P-cable" fill-rule="evenodd" d="M273.30 219.38 L272.49 219.61 L272.51 219.70 L273.30 219.70Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M269.31 169.80 L269.41 169.80 L269.80 169.41 L269.80 169.10 L265.46 163.97 L266.23 163.29 L266.17 163.15 L264.99 163.15 L264.00 164.14 L264.00 170.70 L268.31 170.70Z" clip-path="url(#cv1)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M271.80 167.60 L269.84 165.33 L267.85 167.00 L269.78 169.30Z" clip-path="url(#cv1)"/>
+<path class="P-metal" fill-rule="evenodd" d="M269.80 165.37 L269.80 165.19 L269.20 164.59 L269.20 164.49 L268.70 163.99 L268.70 163.89 L268.16 163.35 L267.66 162.64 L267.22 162.31 L265.28 163.93 L267.85 167.00Z" clip-path="url(#cv1)"/>
+<path class="P-cable" fill-rule="evenodd" d="M272.10 233.00 L267.75 233.00 L264.56 228.44 L264.07 228.11 L263.50 228.00 L262.00 228.00 L262.00 227.90 L261.90 227.90 L261.90 229.10 L263.19 229.10 L263.83 229.65 L266.46 234.10 L272.10 234.10Z" clip-path="url(#cv1)"/>
+<path class="P-cable" fill-rule="evenodd" d="M273.40 219.75 L271.80 219.75 L271.80 217.70 L261.90 217.70 L261.90 221.10 L262.60 221.10 L262.60 218.11 L262.61 218.10 L267.89 218.10 L270.99 221.20 L272.19 221.20 L272.20 221.21 L272.20 222.10 L273.40 222.10Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M353.66 98.91 L347.32 91.35 L342.45 91.35 L263.34 157.73 L271.70 167.69Z" clip-path="url(#cv1)"/>
+<path class="P-cable" fill-rule="evenodd" d="M273.40 230.00 L272.00 230.00 L272.00 234.10 L273.40 234.10Z M290.00 234.90 L281.93 234.90 L281.81 235.37 L281.27 235.91 L281.31 236.00 L290.00 236.00Z" clip-path="url(#cv1)"/>
+<path class="P-cable" fill-rule="evenodd" d="M281.38 235.92 L281.71 235.71 L281.92 235.38 L282.00 235.00 L281.98 234.90 L273.41 234.90 L273.40 234.89 L273.40 234.00 L266.55 234.00 L263.92 229.62 L263.71 229.29 L263.38 229.08 L263.00 229.00 L262.00 229.00 L261.90 229.02 L261.90 231.00 L262.45 231.00 L265.08 235.38 L265.29 235.71 L265.62 235.92 L266.00 236.00 L281.00 236.00Z" clip-path="url(#cv1)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M384.00 231.00 L356.00 231.00 L356.00 236.00 L384.00 236.00Z" clip-path="url(#cv1)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M326.00 231.00 L298.00 231.00 L298.00 236.00 L326.00 236.00Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M273.40 222.00 L272.20 222.00 L272.20 226.79 L272.19 226.80 L270.59 226.80 L270.49 226.90 L267.21 226.90 L267.20 226.89 L267.20 221.11 L267.21 221.10 L270.49 221.10 L270.59 221.20 L271.05 221.20 L271.09 221.10 L268.00 218.01 L268.00 218.00 L262.50 218.00 L262.50 221.10 L265.39 221.10 L265.40 221.11 L265.40 226.89 L265.39 226.90 L262.50 226.90 L262.50 228.00 L273.40 228.00Z" clip-path="url(#cv1)"/>
+<path class="P-metal" fill-rule="evenodd" d="M272.25 221.15 L270.60 221.15 L270.60 222.50 L270.50 222.50 L270.50 225.50 L270.60 225.50 L270.60 226.85 L272.25 226.85Z" clip-path="url(#cv1)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M265.50 226.00 L265.60 226.00 L265.60 222.00 L265.50 222.00 L265.50 221.01 L262.00 221.01 L262.00 226.99 L265.50 226.99Z M270.60 221.01 L267.10 221.01 L267.10 222.00 L267.00 222.00 L267.00 226.00 L267.10 226.00 L267.10 226.99 L270.60 226.99Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M262.00 163.15 L50.00 163.15 L50.00 233.00 L262.00 233.00Z" clip-path="url(#cv1)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M261.50 233.00 L50.50 233.00 L50.50 236.00 L261.50 236.00Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M392.50 91.35 L362.68 91.35 L268.25 170.58 L264.00 170.58 L264.00 209.00 L291.00 209.00 L291.00 231.00 L392.50 231.00Z" clip-path="url(#cv1)"/>
+<path class="P-print" fill-rule="evenodd" d="M291.00 209.00 L264.00 209.00 L264.00 217.00 L273.30 217.00 L273.30 235.00 L291.00 235.00Z" clip-path="url(#cv1)"/>
+<path class="P-cable" fill-rule="evenodd" d="M98.72 317.69 L98.66 317.72 L97.10 318.29 L96.66 318.39 L96.34 318.41 L96.30 318.45 L96.36 318.60 L98.72 318.60Z" clip-path="url(#cv2)"/>
+<path class="P-cable" fill-rule="evenodd" d="M96.08 345.00 L87.51 345.00 L81.12 335.88 L80.15 335.23 L79.00 335.00 L76.00 335.00 L76.00 334.92 L75.92 334.92 L75.92 337.08 L78.15 337.08 L78.23 337.16 L78.57 337.16 L79.39 337.69 L80.01 338.61 L80.10 338.86 L80.26 339.02 L80.34 339.26 L80.50 339.42 L80.58 339.66 L80.74 339.82 L80.82 340.06 L80.98 340.22 L81.06 340.46 L81.22 340.62 L81.30 340.86 L81.46 341.02 L81.54 341.26 L81.70 341.42 L81.78 341.66 L81.94 341.82 L82.02 342.06 L82.18 342.22 L82.26 342.46 L82.42 342.62 L82.50 342.86 L82.66 343.02 L82.74 343.26 L82.90 343.42 L82.98 343.66 L83.14 343.82 L83.22 344.06 L83.38 344.22 L83.46 344.46 L83.62 344.62 L83.70 344.86 L83.86 345.02 L83.94 345.26 L84.10 345.43 L84.90 346.87 L85.11 347.08 L96.08 347.08Z" clip-path="url(#cv2)"/>
+<path class="P-cable" fill-rule="evenodd" d="M98.72 318.50 L95.60 318.50 L95.60 314.40 L75.92 314.40 L75.92 321.08 L77.04 321.08 L77.04 315.09 L77.05 315.08 L87.91 315.08 L94.23 321.40 L96.39 321.40 L96.40 321.41 L96.40 323.08 L98.72 323.08Z" clip-path="url(#cv2)"/>
+<path class="P-cable" fill-rule="evenodd" d="M98.72 339.00 L96.00 339.00 L96.00 347.08 L98.72 347.08Z M132.00 348.92 L115.94 348.92 L115.84 349.56 L115.39 350.31 L114.46 350.91 L114.49 351.00 L132.00 351.00Z" clip-path="url(#cv2)"/>
+<path class="P-cable" fill-rule="evenodd" d="M114.77 350.85 L115.41 350.41 L115.85 349.77 L116.00 349.00 L115.98 348.92 L98.73 348.92 L98.72 348.91 L98.72 347.00 L85.11 347.00 L79.85 338.23 L79.41 337.59 L78.77 337.15 L78.00 337.00 L76.00 337.00 L75.92 337.02 L75.92 341.00 L76.89 341.00 L82.15 349.77 L82.59 350.41 L83.23 350.85 L84.00 351.00 L114.00 351.00Z" clip-path="url(#cv2)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M156.08 341.00 L148.00 341.00 L148.00 351.00 L156.08 351.00Z" clip-path="url(#cv2)"/>
+<path class="P-print" fill-rule="evenodd" d="M98.72 323.00 L96.40 323.00 L96.40 332.59 L96.39 332.60 L93.12 332.60 L93.12 332.91 L93.11 332.92 L86.33 332.92 L86.32 332.91 L86.32 321.09 L86.33 321.08 L93.11 321.08 L93.12 321.09 L93.12 321.40 L94.28 321.40 L94.31 321.33 L88.00 315.02 L88.00 315.00 L77.00 315.00 L77.00 321.08 L82.87 321.08 L82.88 321.09 L82.88 332.91 L82.87 332.92 L77.00 332.92 L77.00 335.00 L98.72 335.00Z" clip-path="url(#cv2)"/>
+<path class="P-metal" fill-rule="evenodd" d="M96.50 321.30 L93.20 321.30 L93.20 324.01 L93.12 324.01 L93.12 329.99 L93.20 329.99 L93.20 332.70 L96.50 332.70Z" clip-path="url(#cv2)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M83.00 331.00 L83.04 331.00 L83.04 323.00 L83.00 323.00 L83.00 321.01 L76.00 321.01 L76.00 332.99 L83.00 332.99Z M93.20 321.01 L86.20 321.01 L86.20 323.00 L86.16 323.00 L86.16 331.00 L86.20 331.00 L86.20 332.99 L93.20 332.99Z" clip-path="url(#cv2)"/>
+<path class="P-print" fill-rule="evenodd" d="M76.00 282.92 L43.92 282.92 L43.92 345.00 L76.00 345.00Z" clip-path="url(#cv2)"/>
+<path class="P-rubber" fill-rule="evenodd" d="M75.00 345.00 L43.92 345.00 L43.92 351.00 L75.00 351.00Z" clip-path="url(#cv2)"/>
+<path class="P-print" fill-rule="evenodd" d="M156.08 282.92 L80.00 282.92 L80.00 297.00 L134.00 297.00 L134.00 341.00 L156.08 341.00Z" clip-path="url(#cv2)"/>
+<path class="P-print" fill-rule="evenodd" d="M134.00 297.00 L80.00 297.00 L80.00 313.00 L98.60 313.00 L98.60 349.00 L134.00 349.00Z" clip-path="url(#cv2)"/>
+</g>
+<g id="over">
+<path class="vis" d="M44.00 236.00 L400.00 236.00" clip-path="url(#cv1)"/>
+<path class="thin" d="M47.00 236.00 L49.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M53.00 236.00 L55.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M59.00 236.00 L61.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M65.00 236.00 L67.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M71.00 236.00 L73.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M77.00 236.00 L79.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M83.00 236.00 L85.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M89.00 236.00 L91.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M95.00 236.00 L97.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M101.00 236.00 L103.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M107.00 236.00 L109.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M113.00 236.00 L115.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M119.00 236.00 L121.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M125.00 236.00 L127.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M131.00 236.00 L133.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M137.00 236.00 L139.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M143.00 236.00 L145.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M149.00 236.00 L151.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M155.00 236.00 L157.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M161.00 236.00 L163.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M167.00 236.00 L169.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M173.00 236.00 L175.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M179.00 236.00 L181.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M185.00 236.00 L187.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M191.00 236.00 L193.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M197.00 236.00 L199.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M203.00 236.00 L205.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M209.00 236.00 L211.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M215.00 236.00 L217.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M221.00 236.00 L223.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M227.00 236.00 L229.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M233.00 236.00 L235.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M239.00 236.00 L241.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M245.00 236.00 L247.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M251.00 236.00 L253.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M257.00 236.00 L259.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M263.00 236.00 L265.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M269.00 236.00 L271.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M275.00 236.00 L277.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M281.00 236.00 L283.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M287.00 236.00 L289.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M293.00 236.00 L295.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M299.00 236.00 L301.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M305.00 236.00 L307.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M311.00 236.00 L313.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M317.00 236.00 L319.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M323.00 236.00 L325.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M329.00 236.00 L331.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M335.00 236.00 L337.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M341.00 236.00 L343.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M347.00 236.00 L349.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M353.00 236.00 L355.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M359.00 236.00 L361.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M365.00 236.00 L367.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M371.00 236.00 L373.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M377.00 236.00 L379.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M383.00 236.00 L385.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M389.00 236.00 L391.40 237.80" clip-path="url(#cv1)"/>
+<path class="thin" d="M395.00 236.00 L397.40 237.80" clip-path="url(#cv1)"/>
+<path class="ex" d="M362.67 91.35 L318.67 91.35" clip-path="url(#cv1)"/>
+<path class="ex" d="M276.55 154.65 L276.55 74.65" clip-path="url(#cv1)"/>
+<path class="cl" d="M273.55 154.65 L279.55 154.65"/>
+<path class="cl" d="M276.55 151.65 L276.55 157.65"/>
+<rect class="thin" x="44.00" y="283.00" width="112.00" height="72.00"/>
+<path class="vis" d="M44.00 351.00 L156.00 351.00" clip-path="url(#cv2)"/>
+<path class="thin" d="M51.00 351.00 L53.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M57.00 351.00 L59.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M63.00 351.00 L65.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M69.00 351.00 L71.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M75.00 351.00 L77.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M81.00 351.00 L83.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M87.00 351.00 L89.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M93.00 351.00 L95.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M99.00 351.00 L101.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M105.00 351.00 L107.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M111.00 351.00 L113.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M117.00 351.00 L119.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M123.00 351.00 L125.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M129.00 351.00 L131.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M135.00 351.00 L137.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M141.00 351.00 L143.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M147.00 351.00 L149.40 352.80" clip-path="url(#cv2)"/>
+<path class="thin" d="M153.00 351.00 L155.40 352.80" clip-path="url(#cv2)"/>
+<rect class="grid" x="196.00" y="271.50" width="145.00" height="50.40"/>
+<path class="grid2" d="M266.00 271.50 L266.00 275.10"/>
+<path class="grid2" d="M281.00 271.50 L281.00 275.10"/>
+<path class="grid2" d="M311.00 271.50 L311.00 275.10"/>
+<path class="grid" d="M196.00 275.10 L341.00 275.10"/>
+<path class="grid2" d="M266.00 275.10 L266.00 278.70"/>
+<path class="grid2" d="M281.00 275.10 L281.00 278.70"/>
+<path class="grid2" d="M311.00 275.10 L311.00 278.70"/>
+<path class="grid2" d="M196.00 278.70 L341.00 278.70"/>
+<path class="grid2" d="M266.00 278.70 L266.00 282.30"/>
+<path class="grid2" d="M281.00 278.70 L281.00 282.30"/>
+<path class="grid2" d="M311.00 278.70 L311.00 282.30"/>
+<path class="grid2" d="M196.00 282.30 L341.00 282.30"/>
+<path class="grid2" d="M266.00 282.30 L266.00 285.90"/>
+<path class="grid2" d="M281.00 282.30 L281.00 285.90"/>
+<path class="grid2" d="M311.00 282.30 L311.00 285.90"/>
+<path class="grid2" d="M196.00 285.90 L341.00 285.90"/>
+<path class="grid2" d="M266.00 285.90 L266.00 289.50"/>
+<path class="grid2" d="M281.00 285.90 L281.00 289.50"/>
+<path class="grid2" d="M311.00 285.90 L311.00 289.50"/>
+<path class="grid2" d="M196.00 289.50 L341.00 289.50"/>
+<path class="grid2" d="M266.00 289.50 L266.00 293.10"/>
+<path class="grid2" d="M281.00 289.50 L281.00 293.10"/>
+<path class="grid2" d="M311.00 289.50 L311.00 293.10"/>
+<path class="grid2" d="M196.00 293.10 L341.00 293.10"/>
+<path class="grid2" d="M266.00 293.10 L266.00 296.70"/>
+<path class="grid2" d="M281.00 293.10 L281.00 296.70"/>
+<path class="grid2" d="M311.00 293.10 L311.00 296.70"/>
+<path class="grid2" d="M196.00 296.70 L341.00 296.70"/>
+<path class="grid2" d="M266.00 296.70 L266.00 300.30"/>
+<path class="grid2" d="M281.00 296.70 L281.00 300.30"/>
+<path class="grid2" d="M311.00 296.70 L311.00 300.30"/>
+<path class="grid2" d="M196.00 300.30 L341.00 300.30"/>
+<path class="grid2" d="M266.00 300.30 L266.00 303.90"/>
+<path class="grid2" d="M281.00 300.30 L281.00 303.90"/>
+<path class="grid2" d="M311.00 300.30 L311.00 303.90"/>
+<path class="grid2" d="M196.00 303.90 L341.00 303.90"/>
+<path class="grid2" d="M266.00 303.90 L266.00 307.50"/>
+<path class="grid2" d="M281.00 303.90 L281.00 307.50"/>
+<path class="grid2" d="M311.00 303.90 L311.00 307.50"/>
+<path class="grid2" d="M196.00 307.50 L341.00 307.50"/>
+<path class="grid2" d="M266.00 307.50 L266.00 311.10"/>
+<path class="grid2" d="M281.00 307.50 L281.00 311.10"/>
+<path class="grid2" d="M311.00 307.50 L311.00 311.10"/>
+<path class="grid2" d="M196.00 311.10 L341.00 311.10"/>
+<path class="grid2" d="M266.00 311.10 L266.00 314.70"/>
+<path class="grid2" d="M281.00 311.10 L281.00 314.70"/>
+<path class="grid2" d="M311.00 311.10 L311.00 314.70"/>
+<path class="grid2" d="M196.00 314.70 L341.00 314.70"/>
+<path class="grid2" d="M266.00 314.70 L266.00 318.30"/>
+<path class="grid2" d="M281.00 314.70 L281.00 318.30"/>
+<path class="grid2" d="M311.00 314.70 L311.00 318.30"/>
+<path class="grid2" d="M196.00 318.30 L341.00 318.30"/>
+<path class="grid2" d="M266.00 318.30 L266.00 321.90"/>
+<path class="grid2" d="M281.00 318.30 L281.00 321.90"/>
+<path class="grid2" d="M311.00 318.30 L311.00 321.90"/>
+<rect class="S-print" x="392.00" y="271.50" width="8.00" height="3.60"/>
+<rect class="S-metal" x="392.00" y="276.50" width="8.00" height="3.60"/>
+<rect class="P-rubber" x="392.00" y="281.50" width="8.00" height="3.60"/>
+<rect class="P-cable" x="392.00" y="286.50" width="8.00" height="3.60"/>
+<rect class="seca" x="392.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="bal" x="402.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="seca" x="412.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="bal" x="422.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="seca" x="432.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="seca" x="470.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="bal" x="480.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="seca" x="490.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="bal" x="500.00" y="345.00" width="10.00" height="1.40"/>
+<rect class="grid" x="374.00" y="372.00" width="210.00" height="38.00"/>
+<rect x="374.20" y="372.20" width="209.60" height="37.60" fill="#ffffff"/>
+<path class="grid2" d="M374.00 385.00 L584.00 385.00"/>
+<path class="grid2" d="M374.00 393.00 L584.00 393.00"/>
+<path class="grid2" d="M374.00 401.00 L584.00 401.00"/>
+<path class="grid2" d="M436.00 372.00 L436.00 401.00"/>
+<path class="grid2" d="M536.00 372.00 L536.00 385.00"/>
+<path class="grid2" d="M508.00 385.00 L508.00 401.00"/>
+<path class="grid2" d="M526.00 385.00 L526.00 393.00"/>
+</g>
+<g id="dim">
+<path class="dm" d="M50.00 241.00 L50.00 242.50 L50.00 245.50 L50.00 246.50"/>
+<circle class="ah" cx="50.00" cy="241.00" r="0.35"/>
+<path class="dm" d="M262.00 241.00 L262.00 242.50 L262.00 245.50 L262.00 246.50"/>
+<circle class="ah" cx="262.00" cy="241.00" r="0.35"/>
+<path class="dm" d="M264.00 241.00 L264.00 242.50 L265.90 245.50 L265.90 246.50"/>
+<circle class="ah" cx="264.00" cy="241.00" r="0.35"/>
+<path class="dm" d="M266.61 241.00 L266.61 242.50 L269.80 245.50 L269.80 246.50"/>
+<circle class="ah" cx="266.61" cy="241.00" r="0.35"/>
+<path class="dm" d="M268.25 241.00 L268.25 242.50 L273.71 245.50 L273.71 246.50"/>
+<circle class="ah" cx="268.25" cy="241.00" r="0.35"/>
+<path class="dm" d="M276.55 241.00 L276.55 242.50 L277.61 245.50 L277.61 246.50"/>
+<circle class="ah" cx="276.55" cy="241.00" r="0.35"/>
+<path class="dm" d="M291.00 241.00 L291.00 242.50 L291.00 245.50 L291.00 246.50"/>
+<circle class="ah" cx="291.00" cy="241.00" r="0.35"/>
+<path class="dm" d="M326.81 241.00 L326.81 242.50 L326.81 245.50 L326.81 246.50"/>
+<circle class="ah" cx="326.81" cy="241.00" r="0.35"/>
+<path class="dm" d="M362.68 241.00 L362.68 242.50 L362.68 245.50 L362.68 246.50"/>
+<circle class="ah" cx="362.68" cy="241.00" r="0.35"/>
+<path class="dm" d="M392.50 241.00 L392.50 242.50 L392.50 245.50 L392.50 246.50"/>
+<circle class="ah" cx="392.50" cy="241.00" r="0.35"/>
+<path class="dm" d="M402.00 46.77 L403.50 46.77 L406.50 46.77 L407.50 46.77"/>
+<circle class="ah" cx="402.00" cy="46.77" r="0.35"/>
+<path class="dm" d="M402.00 91.35 L403.50 91.35 L406.50 91.35 L407.50 91.35"/>
+<circle class="ah" cx="402.00" cy="91.35" r="0.35"/>
+<path class="dm" d="M402.00 154.65 L403.50 154.65 L406.50 154.65 L407.50 154.65"/>
+<circle class="ah" cx="402.00" cy="154.65" r="0.35"/>
+<path class="dm" d="M402.00 163.15 L403.50 163.15 L406.50 163.15 L407.50 163.15"/>
+<circle class="ah" cx="402.00" cy="163.15" r="0.35"/>
+<path class="dm" d="M402.00 170.58 L403.50 170.58 L406.50 170.58 L407.50 170.58"/>
+<circle class="ah" cx="402.00" cy="170.58" r="0.35"/>
+<path class="dm" d="M402.00 209.00 L403.50 209.00 L406.50 209.00 L407.50 209.00"/>
+<circle class="ah" cx="402.00" cy="209.00" r="0.35"/>
+<path class="dm" d="M402.00 231.00 L403.50 231.00 L406.50 231.00 L407.50 231.00"/>
+<circle class="ah" cx="402.00" cy="231.00" r="0.35"/>
+<path class="dm" d="M402.00 233.00 L403.50 233.00 L406.50 235.19 L407.50 235.19"/>
+<circle class="ah" cx="402.00" cy="233.00" r="0.35"/>
+<path class="dm" d="M402.00 236.00 L403.50 236.00 L406.50 239.38 L407.50 239.38"/>
+<circle class="ah" cx="402.00" cy="236.00" r="0.35"/>
+<path class="ex" d="M50.00 162.35 L50.00 26.80"/>
+<path class="ex" d="M392.50 90.55 L392.50 26.80"/>
+<path class="dm" d="M50.00 28.00 L392.50 28.00"/>
+<path class="ah" d="M50.00 28.00 L52.20 27.34 L52.20 28.66 Z"/>
+<path class="ah" d="M392.50 28.00 L390.30 28.66 L390.30 27.34 Z"/>
+<path class="ex" d="M50.00 162.35 L50.00 34.80"/>
+<path class="dm" d="M50.00 36.00 L262.00 36.00"/>
+<path class="ah" d="M50.00 36.00 L52.20 35.34 L52.20 36.66 Z"/>
+<path class="ah" d="M262.00 36.00 L259.80 36.66 L259.80 35.34 Z"/>
+<path class="ex" d="M392.50 90.55 L392.50 34.80"/>
+<path class="dm" d="M264.00 36.00 L392.50 36.00"/>
+<path class="ah" d="M264.00 36.00 L266.20 35.34 L266.20 36.66 Z"/>
+<path class="ah" d="M392.50 36.00 L390.30 36.66 L390.30 35.34 Z"/>
+<path class="dm" d="M332.67 91.35 L332.68 92.22 L332.72 93.09 L332.79 93.96 L332.87 94.83 L332.99 95.69 L333.13 96.55 L333.29 97.41 L333.48 98.26 L333.69 99.11 L333.93 99.95 L334.19 100.78 L334.48 101.61 L334.79 102.42 L335.12 103.23 L335.48 104.02 L335.86 104.81 L336.26 105.58 L336.69 106.35 L337.14 107.09 L337.61 107.83 L338.10 108.55 L338.61 109.26 L339.14 109.95 L339.69 110.63"/>
+<path class="ah" d="M332.67 91.35 L333.26 93.13 L332.18 93.16 Z"/>
+<path class="ah" d="M339.69 110.63 L338.15 109.55 L339.00 108.88 Z"/>
+<path class="dm" d="M301.90 100.27 L300.91 99.82 L299.91 99.38 L298.90 98.97 L297.88 98.57 L296.86 98.19 L295.83 97.83 L294.80 97.49 L293.75 97.17 L292.71 96.86 L291.65 96.58 L290.59 96.31 L289.53 96.07 L288.46 95.84 L287.39 95.63 L286.32 95.45 L285.24 95.28 L284.16 95.13 L283.08 95.00 L281.99 94.89 L280.90 94.80 L279.82 94.73 L278.73 94.69 L277.64 94.66 L276.55 94.65"/>
+<path class="ah" d="M301.90 100.27 L300.04 100.03 L300.48 99.04 Z"/>
+<path class="ah" d="M276.55 94.65 L278.36 94.14 L278.34 95.22 Z"/>
+<path class="dm" d="M76.00 357.00 L76.00 358.50 L76.00 361.50 L76.00 362.50"/>
+<circle class="ah" cx="76.00" cy="357.00" r="0.35"/>
+<path class="dm" d="M77.00 357.00 L77.00 358.50 L79.90 361.50 L79.90 362.50"/>
+<circle class="ah" cx="77.00" cy="357.00" r="0.35"/>
+<path class="dm" d="M80.00 357.00 L80.00 358.50 L83.80 361.50 L83.80 362.50"/>
+<circle class="ah" cx="80.00" cy="357.00" r="0.35"/>
+<path class="dm" d="M125.00 357.00 L125.00 358.50 L125.00 361.50 L125.00 362.50"/>
+<circle class="ah" cx="125.00" cy="357.00" r="0.35"/>
+<path class="dm" d="M134.00 357.00 L134.00 358.50 L134.00 361.50 L134.00 362.50"/>
+<circle class="ah" cx="134.00" cy="357.00" r="0.35"/>
+<path class="dm" d="M158.00 297.00 L159.50 297.00 L162.50 297.00 L163.50 297.00"/>
+<circle class="ah" cx="158.00" cy="297.00" r="0.35"/>
+<path class="dm" d="M158.00 303.00 L159.50 303.00 L162.50 303.00 L163.50 303.00"/>
+<circle class="ah" cx="158.00" cy="303.00" r="0.35"/>
+<path class="dm" d="M158.00 335.00 L159.50 335.00 L162.50 335.00 L163.50 335.00"/>
+<circle class="ah" cx="158.00" cy="335.00" r="0.35"/>
+<path class="dm" d="M158.00 341.00 L159.50 341.00 L162.50 341.00 L163.50 341.00"/>
+<circle class="ah" cx="158.00" cy="341.00" r="0.35"/>
+<path class="dm" d="M158.00 345.00 L159.50 345.00 L162.50 345.19 L163.50 345.19"/>
+<circle class="ah" cx="158.00" cy="345.00" r="0.35"/>
+<path class="dm" d="M158.00 349.00 L159.50 349.00 L162.50 349.38 L163.50 349.38"/>
+<circle class="ah" cx="158.00" cy="349.00" r="0.35"/>
+<path class="dm" d="M158.00 351.00 L159.50 351.00 L162.50 353.57 L163.50 353.57"/>
+<circle class="ah" cx="158.00" cy="351.00" r="0.35"/>
+</g>
+<g id="lead">
+<circle class="dot" cx="315.42" cy="60.59" r="0.55"/>
+<path class="ld" d="M315.42 60.59 L419.00 60.59 L421.20 60.59"/>
+<circle class="dot" cx="301.16" cy="123.59" r="0.55"/>
+<path class="ld" d="M301.16 123.59 L419.00 123.59 L421.20 123.59"/>
+<circle class="dot" cx="273.10" cy="157.37" r="0.55"/>
+<path class="ld" d="M273.10 157.37 L419.00 157.37 L421.20 157.37"/>
+<circle class="dot" cx="340.40" cy="178.15" r="0.55"/>
+<path class="ld" d="M340.40 178.15 L419.00 178.15 L421.20 178.15"/>
+<circle class="dot" cx="84.37" cy="199.01" r="0.55"/>
+<path class="ld" d="M84.37 199.01 L419.00 199.01 L421.20 199.01"/>
+<circle class="dot" cx="266.62" cy="223.13" r="0.55"/>
+<path class="ld" d="M266.62 223.13 L419.00 217.83 L421.20 217.83"/>
+<circle class="dot" cx="271.35" cy="225.00" r="0.55"/>
+<path class="ld" d="M271.35 225.00 L419.00 222.86 L421.20 222.86"/>
+<circle class="dot" cx="268.75" cy="225.21" r="0.55"/>
+<path class="ld" d="M268.75 225.21 L419.00 227.89 L421.20 227.89"/>
+<circle class="dot" cx="282.24" cy="225.86" r="0.55"/>
+<path class="ld" d="M282.24 225.86 L419.00 232.92 L421.20 232.92"/>
+<circle class="dot" cx="359.02" cy="233.56" r="0.55"/>
+<path class="ld" d="M359.02 233.56 L419.00 237.95 L421.20 237.95"/>
+<circle class="dot" cx="56.20" cy="234.54" r="0.55"/>
+<path class="ld" d="M56.20 234.54 L419.00 242.98 L421.20 242.98"/>
+<circle class="dot" cx="85.21" cy="325.27" r="0.55"/>
+<path class="ld" d="M85.21 325.27 L175.00 325.27 L177.20 325.27"/>
+<circle class="dot" cx="59.52" cy="328.22" r="0.55"/>
+<path class="ld" d="M59.52 328.22 L175.00 329.91 L177.20 329.91"/>
+<circle class="dot" cx="145.79" cy="330.01" r="0.55"/>
+<path class="ld" d="M145.79 330.01 L175.00 334.55 L177.20 334.55"/>
+<circle class="dot" cx="116.48" cy="330.73" r="0.55"/>
+<path class="ld" d="M116.48 330.73 L175.00 339.19 L177.20 339.19"/>
+</g>
+<g id="text">
+<text class="t h tb" x="16.00" y="21.00" font-size="4.80" text-anchor="start">우측면도 — 오른쪽 끝(+x)에서 봄, 연주자는 왼쪽</text>
+<text class="t h tm" x="112.26" y="21.00" font-size="3.10" text-anchor="start">1:1 · 사용 상태 (화면 25°) · 숨은 선 없음</text>
+<text class="t h td" x="50.89" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 50.89 247.10)">0</text>
+<text class="t h td" x="262.89" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 262.89 247.10)">212</text>
+<text class="t h td" x="266.80" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 266.80 247.10)">214</text>
+<text class="t h td" x="270.70" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 270.70 247.10)">216.61</text>
+<text class="t h td" x="274.60" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 274.60 247.10)">218.25</text>
+<text class="t h td" x="278.51" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 278.51 247.10)">226.55</text>
+<text class="t h td" x="291.89" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 291.89 247.10)">241</text>
+<text class="t h td" x="327.70" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 327.70 247.10)">276.81</text>
+<text class="t h td" x="363.57" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 363.57 247.10)">312.68</text>
+<text class="t h td" x="393.39" y="247.10" font-size="3.20" text-anchor="end" transform="rotate(-90 393.39 247.10)">342.5</text>
+<text class="t h tm" x="402.00" y="242.60" font-size="2.80" text-anchor="start">y</text>
+<text class="t h td" x="408.10" y="47.82" font-size="3.20" text-anchor="start">189.23</text>
+<text class="t h td" x="408.10" y="92.40" font-size="3.20" text-anchor="start">144.65</text>
+<text class="t h td" x="408.10" y="155.70" font-size="3.20" text-anchor="start">81.35</text>
+<text class="t h td" x="408.10" y="164.20" font-size="3.20" text-anchor="start">72.85</text>
+<text class="t h td" x="408.10" y="171.63" font-size="3.20" text-anchor="start">65.42</text>
+<text class="t h td" x="408.10" y="210.05" font-size="3.20" text-anchor="start">27</text>
+<text class="t h td" x="408.10" y="232.05" font-size="3.20" text-anchor="start">5</text>
+<text class="t h td" x="408.10" y="236.24" font-size="3.20" text-anchor="start">3</text>
+<text class="t h td" x="408.10" y="240.44" font-size="3.20" text-anchor="start">0</text>
+<text class="t h td" x="221.25" y="27.10" font-size="3.20" text-anchor="middle">전체 깊이 342.5</text>
+<text class="t h td" x="156.00" y="35.10" font-size="3.20" text-anchor="middle">건반 모듈 212</text>
+<text class="t h td" x="328.25" y="35.10" font-size="3.20" text-anchor="middle">뒷바 128.5</text>
+<text class="t h td" x="330.72" y="104.09" font-size="3.20" text-anchor="end">앞판 40°</text>
+<text class="t h td" x="274.95" y="95.85" font-size="3.20" text-anchor="end">화면 25°</text>
+<text class="t h" x="422.00" y="61.67" font-size="3.10" text-anchor="start">화면 받침 (출력)</text>
+<text class="t h" x="422.00" y="124.67" font-size="3.10" text-anchor="start">받침다리</text>
+<text class="t h" x="422.00" y="158.45" font-size="3.10" text-anchor="start">육각 그릴</text>
+<text class="t h" x="422.00" y="179.24" font-size="3.10" text-anchor="start">스피커 R 바깥 옆판 (오꾸메 11.5)</text>
+<text class="t h" x="422.00" y="200.10" font-size="3.10" text-anchor="start">볼 R (끝 부속 프레임)</text>
+<text class="t h" x="422.00" y="218.92" font-size="3.10" text-anchor="start">방진 브래킷 R (출력)</text>
+<text class="t h" x="422.00" y="223.95" font-size="3.10" text-anchor="start">M3×20 볼트 (브래킷)</text>
+<text class="t h" x="422.00" y="228.98" font-size="3.10" text-anchor="start">실리콘 그로밋</text>
+<text class="t h" x="422.00" y="234.01" font-size="3.10" text-anchor="start">케이블 통로 옆 마개 R (출력)</text>
+<text class="t h" x="422.00" y="239.04" font-size="3.10" text-anchor="start">고무발 28×5</text>
+<text class="t h" x="422.00" y="244.07" font-size="3.10" text-anchor="start">EVA 3T 바닥</text>
+<text class="t h tb" x="16.00" y="261.00" font-size="4.20" text-anchor="start">확대 E — 건반 뒤 틈 · 케이블 통로 입구 · 방진 브래킷</text>
+<text class="t h tm" x="107.85" y="261.00" font-size="3.10" text-anchor="start">2:1</text>
+<text class="t h td" x="76.89" y="363.10" font-size="3.20" text-anchor="end" transform="rotate(-90 76.89 363.10)">212</text>
+<text class="t h td" x="80.80" y="363.10" font-size="3.20" text-anchor="end" transform="rotate(-90 80.80 363.10)">212.5</text>
+<text class="t h td" x="84.70" y="363.10" font-size="3.20" text-anchor="end" transform="rotate(-90 84.70 363.10)">214</text>
+<text class="t h td" x="125.89" y="363.10" font-size="3.20" text-anchor="end" transform="rotate(-90 125.89 363.10)">236.5</text>
+<text class="t h td" x="134.89" y="363.10" font-size="3.20" text-anchor="end" transform="rotate(-90 134.89 363.10)">241</text>
+<text class="t h td" x="164.10" y="298.05" font-size="3.20" text-anchor="start">27</text>
+<text class="t h td" x="164.10" y="304.05" font-size="3.20" text-anchor="start">24</text>
+<text class="t h td" x="164.10" y="336.05" font-size="3.20" text-anchor="start">8</text>
+<text class="t h td" x="164.10" y="342.05" font-size="3.20" text-anchor="start">5</text>
+<text class="t h td" x="164.10" y="346.24" font-size="3.20" text-anchor="start">3</text>
+<text class="t h td" x="164.10" y="350.44" font-size="3.20" text-anchor="start">1</text>
+<text class="t h td" x="164.10" y="354.63" font-size="3.20" text-anchor="start">0</text>
+<text class="t h" x="178.00" y="326.25" font-size="2.80" text-anchor="start">방진 브래킷</text>
+<text class="t h" x="178.00" y="330.89" font-size="2.80" text-anchor="start">볼 (끝 부속)</text>
+<text class="t h" x="178.00" y="335.53" font-size="2.80" text-anchor="start">스피커 바깥 옆판</text>
+<text class="t h" x="178.00" y="340.17" font-size="2.80" text-anchor="start">통로 옆 마개</text>
+<text class="t h tm" x="16.00" y="377.00" font-size="2.80" text-anchor="start">건반 모듈 뒷벽 y212와 뒷바 앞면 y214 사이 2 mm는 공기 틈입니다 (딱딱하게 닿지 않음, D15).</text>
+<text class="t h tm" x="16.00" y="380.97" font-size="2.80" text-anchor="start">케이블 통로 y212~241 × z0~27는 책상이 바닥이고, 옆 끝은 마개로 막습니다.</text>
+<text class="t tb" x="196.00" y="269.00" font-size="3.50" text-anchor="start">오른쪽에서 보이는 것 (보이는 넓이 순)</text>
+<text class="t tb" x="197.00" y="274.18" font-size="2.60" text-anchor="start">이름 (부품 이름에서)</text>
+<text class="t tb" x="273.50" y="274.18" font-size="2.60" text-anchor="middle">보이는 수</text>
+<text class="t tb" x="282.00" y="274.18" font-size="2.60" text-anchor="start">y</text>
+<text class="t tb" x="312.00" y="274.18" font-size="2.60" text-anchor="start">z</text>
+<text class="t" x="197.00" y="277.78" font-size="2.60" text-anchor="start">끝 부속 프레임</text>
+<text class="t" x="273.50" y="277.78" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="277.78" font-size="2.60" text-anchor="start">0 ~ 212</text>
+<text class="t" x="312.00" y="277.78" font-size="2.60" text-anchor="start">3 ~ 72.9</text>
+<text class="t" x="197.00" y="281.38" font-size="2.60" text-anchor="start">스피커 파트 R 옆판(바깥쪽)</text>
+<text class="t" x="273.50" y="281.38" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="281.38" font-size="2.60" text-anchor="start">214 ~ 342.5</text>
+<text class="t" x="312.00" y="281.38" font-size="2.60" text-anchor="start">5 ~ 144.6</text>
+<text class="t" x="197.00" y="284.98" font-size="2.60" text-anchor="start">화면 받침(크래들)</text>
+<text class="t" x="273.50" y="284.98" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="284.98" font-size="2.60" text-anchor="start">216.6 ~ 276.8</text>
+<text class="t" x="312.00" y="284.98" font-size="2.60" text-anchor="start">76.7 ~ 189.2</text>
+<text class="t" x="197.00" y="288.58" font-size="2.60" text-anchor="start">스피커 육각 그릴</text>
+<text class="t" x="273.50" y="288.58" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="288.58" font-size="2.60" text-anchor="start">213.3 ~ 303.7</text>
+<text class="t" x="312.00" y="288.58" font-size="2.60" text-anchor="start">68.3 ~ 144.7</text>
+<text class="t" x="197.00" y="292.18" font-size="2.60" text-anchor="start">EVA 고밀도 폼 3T 바닥</text>
+<text class="t" x="273.50" y="292.18" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="292.18" font-size="2.60" text-anchor="start">0.5 ~ 211.5</text>
+<text class="t" x="312.00" y="292.18" font-size="2.60" text-anchor="start">0 ~ 3</text>
+<text class="t" x="197.00" y="295.78" font-size="2.60" text-anchor="start">통로 옆 마개</text>
+<text class="t" x="273.50" y="295.78" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="295.78" font-size="2.60" text-anchor="start">214 ~ 241</text>
+<text class="t" x="312.00" y="295.78" font-size="2.60" text-anchor="start">1 ~ 27</text>
+<text class="t" x="197.00" y="299.38" font-size="2.60" text-anchor="start">피스고무발 28×5</text>
+<text class="t" x="273.50" y="299.38" font-size="2.60" text-anchor="middle">2</text>
+<text class="t" x="282.00" y="299.38" font-size="2.60" text-anchor="start">248 ~ 334</text>
+<text class="t" x="312.00" y="299.38" font-size="2.60" text-anchor="start">0 ~ 5</text>
+<text class="t" x="197.00" y="302.98" font-size="2.60" text-anchor="start">방진 브래킷</text>
+<text class="t" x="273.50" y="302.98" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="302.98" font-size="2.60" text-anchor="start">212.5 ~ 236.5</text>
+<text class="t" x="312.00" y="302.98" font-size="2.60" text-anchor="start">8 ~ 24</text>
+<text class="t" x="197.00" y="306.58" font-size="2.60" text-anchor="start">실리콘 방진 그로밋 M3</text>
+<text class="t" x="273.50" y="306.58" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="306.58" font-size="2.60" text-anchor="start">212 ~ 220.6</text>
+<text class="t" x="312.00" y="306.58" font-size="2.60" text-anchor="start">9 ~ 15</text>
+<text class="t" x="197.00" y="310.18" font-size="2.60" text-anchor="start">ER 리드 W411</text>
+<text class="t" x="273.50" y="310.18" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="310.18" font-size="2.60" text-anchor="start">73.9 ~ 232</text>
+<text class="t" x="312.00" y="310.18" font-size="2.60" text-anchor="start">0 ~ 7</text>
+<text class="t" x="197.00" y="313.78" font-size="2.60" text-anchor="start">가운데 유닛 뚜껑</text>
+<text class="t" x="273.50" y="313.78" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="313.78" font-size="2.60" text-anchor="start">214 ~ 342.5</text>
+<text class="t" x="312.00" y="313.78" font-size="2.60" text-anchor="start">61.3 ~ 72.8</text>
+<text class="t" x="197.00" y="317.38" font-size="2.60" text-anchor="start">받침다리</text>
+<text class="t" x="273.50" y="317.38" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="317.38" font-size="2.60" text-anchor="start">243.2 ~ 300.7</text>
+<text class="t" x="312.00" y="317.38" font-size="2.60" text-anchor="start">69.4 ~ 118.2</text>
+<text class="t" x="197.00" y="320.98" font-size="2.60" text-anchor="start">USB-C 케이블 W207</text>
+<text class="t" x="273.50" y="320.98" font-size="2.60" text-anchor="middle">1</text>
+<text class="t" x="282.00" y="320.98" font-size="2.60" text-anchor="start">196.8 ~ 282</text>
+<text class="t" x="312.00" y="320.98" font-size="2.60" text-anchor="start">4.5 ~ 32.5</text>
+<text class="t tb" x="392.00" y="269.00" font-size="3.10" text-anchor="start">범례</text>
+<text class="t" x="402.00" y="274.40" font-size="2.80" text-anchor="start">출력물 PETG</text>
+<text class="t" x="402.00" y="279.40" font-size="2.80" text-anchor="start">구매 금속 (나사·자석·강철·스피커)</text>
+<text class="t" x="402.00" y="284.40" font-size="2.80" text-anchor="start">고무·EVA·실리콘</text>
+<text class="t" x="402.00" y="289.40" font-size="2.80" text-anchor="start">케이블·커넥터</text>
+<text class="t" x="392.00" y="349.60" font-size="2.80" text-anchor="middle">0</text>
+<text class="t" x="402.00" y="349.60" font-size="2.80" text-anchor="middle">10</text>
+<text class="t" x="412.00" y="349.60" font-size="2.80" text-anchor="middle">20</text>
+<text class="t" x="422.00" y="349.60" font-size="2.80" text-anchor="middle">30</text>
+<text class="t" x="432.00" y="349.60" font-size="2.80" text-anchor="middle">40</text>
+<text class="t" x="442.00" y="349.60" font-size="2.80" text-anchor="middle">50</text>
+<text class="t" x="445.00" y="346.60" font-size="2.80" text-anchor="start">mm  1:1</text>
+<text class="t" x="470.00" y="349.60" font-size="2.80" text-anchor="middle">0</text>
+<text class="t" x="480.00" y="349.60" font-size="2.80" text-anchor="middle">5</text>
+<text class="t" x="490.00" y="349.60" font-size="2.80" text-anchor="middle">10</text>
+<text class="t" x="500.00" y="349.60" font-size="2.80" text-anchor="middle">15</text>
+<text class="t" x="510.00" y="349.60" font-size="2.80" text-anchor="middle">20</text>
+<text class="t" x="513.00" y="346.60" font-size="2.80" text-anchor="start">mm  2:1</text>
+<text class="t tb" x="377.00" y="381.20" font-size="6.50" text-anchor="start">Toccata</text>
+<text class="t tm" x="439.00" y="376.40" font-size="2.40" text-anchor="start">도면 이름</text>
+<text class="t tb" x="439.00" y="382.60" font-size="4.20" text-anchor="start">우측면도 (사용 상태)</text>
+<text class="t tm" x="539.00" y="376.40" font-size="2.40" text-anchor="start">도면 번호</text>
+<text class="t tb" x="539.00" y="382.80" font-size="5.00" text-anchor="start">E04 / 12장</text>
+<text class="t" x="377.00" y="390.60" font-size="2.80" text-anchor="start">최종 설계도 (전체 6방향 · 내부)</text>
+<text class="t tm" x="439.00" y="388.60" font-size="2.20" text-anchor="start">척도 (A2 594×420 출력 기준)</text>
+<text class="t" x="439.00" y="392.30" font-size="2.80" text-anchor="start">1:1 · 확대 2:1</text>
+<text class="t tm" x="511.00" y="388.60" font-size="2.20" text-anchor="start">단위</text>
+<text class="t" x="511.00" y="392.30" font-size="2.80" text-anchor="start">mm</text>
+<text class="t tm" x="529.00" y="388.60" font-size="2.20" text-anchor="start">날짜</text>
+<text class="t" x="529.00" y="392.30" font-size="2.80" text-anchor="start">2026-10-08</text>
+<text class="t" x="377.00" y="398.60" font-size="2.40" text-anchor="start">좌표: x 가로(0 = A0 왼쪽 끝) · y 흰 건반 앞 끝에서 뒤로 · z 책상에서 위로</text>
+<text class="t tm" x="511.00" y="396.60" font-size="2.20" text-anchor="start">설계 상태</text>
+<text class="t" x="511.00" y="400.30" font-size="1.90" text-anchor="start">W1+ r4.5 · L2 40° · 화면 3판 · 전원 R33 · 회로 E</text>
+<text class="t tm" x="377.00" y="404.70" font-size="2.20" text-anchor="start">원본 (모든 선과 숫자는 이 생성기의 입체에서 계산 · src/drawings_final.py)</text>
+<text class="t" x="377.00" y="408.50" font-size="2.20" text-anchor="start">build_all.collect() = keyaction_parts.py · body.py · electronics.py · touchscreen_rev3.py · spec/body_L2.json</text>
+</g>
+</svg>

@@ -8,7 +8,9 @@
 Outputs (../):
   stl/print/<NN_폴더>/<부품이름>__<수량>개.stl   print-ready, lying on the bed, one file per distinct shape
                                                  (06_출력공구 = key-action tools, 08_합판지그 = plywood drilling jigs from
-                                                 src/plywood_jigs.py, guide cad/jigs/README.md; optional prints -> stl/print_extra/)
+                                                 src/plywood_jigs.py, guide cad/jigs/README.md; 09_기판지그 = perfboard cut / drill
+                                                 jigs for the BE163 control / PED boards from src/perfboard_jigs.py; optional
+                                                 prints -> stl/print_extra/)
   Toccata_출력STL_전체.zip                        everything in stl/print in one file
   stl/assembly/<그룹>.stl                        every part in world coordinates (open them together)
   stl/assembly/Toccata_전체조립.stl               the whole instrument in one file
@@ -114,8 +116,12 @@ def print_path(folder, fn):
 
 def write_print(parts):
     groups = collections.OrderedDict()
+    pieces = []                   # (part, file stem, solid on bed): parts longer than the bed, printed in pieces (2026-10-16)
     for p in parts:
         if p.kind != "print" or p.print_solid is None:
+            continue
+        if p.print_pieces:
+            pieces += [(p, nm, q) for nm, q in p.print_pieces]
             continue
         sig = signature(p.print_solid)
         groups.setdefault((p.print_folder, sig), []).append(p)
@@ -147,6 +153,22 @@ def write_print(parts):
             "material": ps[0].material, "note": ps[0].print_note, "ids": [p.id for p in ps],
             "name_ko": name.replace("_", " "), "extra": folder.startswith(EXTRA),
         })
+    files = {}
+    for p, nm, q in pieces:
+        path = print_path(p.print_folder, "%s__1개.stl" % safe(nm))
+        b = q.bounding_box()
+        write_stl(q, path, "Toccata %s piece %s  %.1fx%.1fx%.1f mm" % (p.id, nm.encode("ascii", "ignore").decode() or "", b[3] - b[0], b[4] - b[1], b[5] - b[2]))
+        files.setdefault(p.id, []).append(os.path.relpath(path, OUT))
+        rows.append({
+            "file": os.path.relpath(path, OUT), "name": nm, "qty": 1, "folder": p.print_folder,
+            "size_mm": [round(b[3] - b[0], 2), round(b[4] - b[1], 2), round(b[5] - b[2], 2)],
+            "volume_cm3": round(q.volume() / 1000.0, 2), "mass_g_solid_petg": round(q.volume() / 1000.0 * 1.27, 1),
+            "material": p.material, "note": p.print_note, "ids": [p.id], "piece_of": p.id,
+            "name_ko": nm.replace("_", " "), "extra": p.print_folder.startswith(EXTRA),
+        })
+    for p in parts:
+        if p.id in files:
+            p._print_file = " + ".join(files[p.id])
     # print-only variants (not in the assembly), e.g. pad bars for the PORON 5T that the purchase list buys
     import keyaction_parts
     for (folder, name, solid, qty, material, note) in keyaction_parts.EXTRA_PRINTS:
@@ -180,7 +202,9 @@ def write_print(parts):
     # printed plywood drilling jigs (W1 2026-10-02, src/plywood_jigs.py, how to use: cad/jigs/README.md): required -> stl/print/08_합판지그
     # (one set per instrument, all four J-b saddle gaps included), optional J-f -> stl/print_extra/선택_합판지그. Tools, not instrument parts
     # (variant True). A failure here only drops the jigs (warning), the rest of the build goes on.
-    rows += write_jigs()
+    # 2026-10-16 (A안): no plywood left (all panels printed, holes / pilots / magnet seats in the prints) -> the 08 plywood drilling
+    # jigs are no longer built (src/plywood_jigs.py kept for the record)
+    rows += write_pcb_jigs()
     # spare keys (optional) -> stl/print_extra/예비_건반: same STL as the 01 file, count = spares only
     for r in [r for r in rows if r["folder"] == "01_건반"]:
         spare = SPARE_KEYS.get(r["name"], 1 if r["name"].startswith("백건") else 0)
@@ -222,6 +246,31 @@ def write_jigs():
             g, minutes = est(solid)                       # 3 walls + 15 % infill estimate (plywood_jigs.est_print, P2S)
             row["mass_g_print_est"], row["print_min_est"] = round(g, 1), round(minutes, 0)
         rows.append(row)
+    return rows
+
+
+def write_pcb_jigs():
+    """perfboard_jigs.build() (2026-10-07: BE163 control / PED board cut + drill jigs) -> stl/print/09_기판지그. [] + a warning on failure."""
+    try:
+        import perfboard_jigs
+        jigs = perfboard_jigs.build()
+    except Exception as ex:  # noqa: BLE001
+        print("WARNING: perfboard_jigs failed (%s: %s) - no 09_기판지그 jigs in this build; run src/check_perfboard_jigs.py" % (type(ex).__name__, ex))
+        return []
+    rows = []
+    for j in jigs:
+        solid, qty = j["solid"], int(j.get("qty", 1))
+        folder = perfboard_jigs.PRINT_SUB
+        path = print_path(folder, "%s__%d개.stl" % (safe(j["name"]), qty))
+        b = solid.bounding_box()
+        write_stl(solid, path, "Toccata %s x%d perfboard jig  %.1fx%.1fx%.1f mm" % (j.get("key", "jig"), qty, b[3] - b[0], b[4] - b[1], b[5] - b[2]))
+        g, minutes = perfboard_jigs.est_print(solid)
+        rows.append({"file": os.path.relpath(path, OUT), "name": j["name"], "qty": qty, "folder": folder,
+                     "size_mm": [round(b[3] - b[0], 2), round(b[4] - b[1], 2), round(b[5] - b[2], 2)],
+                     "volume_cm3": round(solid.volume() / 1000.0, 2), "mass_g_solid_petg": round(solid.volume() / 1000.0 * 1.27, 1),
+                     "material": "PETG", "note": j.get("note", ""), "ids": [], "name_ko": j["name"].replace("_", " "),
+                     "variant": True, "extra": False, "pcbjig": j.get("key"),
+                     "mass_g_print_est": round(g, 1), "print_min_est": round(minutes, 0)})
     return rows
 
 

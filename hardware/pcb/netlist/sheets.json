@@ -1,0 +1,290 @@
+{
+ "SCH-01": {
+  "file": "SCH-01_system.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "시스템 연결도 (배선 계통)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "SCH-02": {
+  "file": "SCH-02_sensor_board.svg",
+  "rev": "B",
+  "date": "2026-09-29",
+  "title": "옥타브 센서 기판 (SB)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "SCH-03": {
+  "file": "SCH-03_control_board.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "옥타브 제어 기판 (MB)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "SCH-04": {
+  "file": "SCH-04_end_parts.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "끝 부속 센서 기판 (EL · ER) + EXT 연결",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "SCH-05": {
+  "file": "SCH-05_pedal.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "페달 보드 (PB) + 댐퍼 페달 센서 (PS)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "SCH-06": {
+  "file": "SCH-06_power.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "전원 (CU)",
+  "regions": {
+   "power": [
+    9.0,
+    20.0,
+    411.0,
+    178.0
+   ],
+   "display": [
+    9.0,
+    178.6,
+    411.0,
+    253.0
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "SCH-07": {
+  "file": "SCH-07_audio.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "오디오 (CU)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-01": {
+  "file": "BRD-01_control_board_placement.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "제어 기판 배치 (MB · 위에서 봄)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-02": {
+  "file": "BRD-02_sensor_board_placement.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "센서 기판 배치 (SB · EL · ER, 위에서 봄)",
+  "regions": {
+   "sb": [
+    9.0,
+    20.0,
+    411.0,
+    166.5
+   ],
+   "end": [
+    9.0,
+    166.5,
+    411.0,
+    253.0
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-03": {
+  "file": "BRD-03_pedal_board_placement.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "페달 보드 배치 (PB · 위에서 봄)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-04": {
+  "file": "BRD-04_centre_unit_wiring.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "가운데 유닛 배선도 (위에서 봄, 뚜껑·화면 뗌)",
+  "regions": {},
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-05": {
+  "file": "BRD-05_power_audio_harness.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "전원 · 오디오 하네스 (선 만들기)",
+  "regions": {
+   "power": [
+    9.0,
+    20.0,
+    210.0,
+    143.20000000000005
+   ],
+   "audio": [
+    209.0,
+    20.0,
+    411.0,
+    159.20000000000002
+   ],
+   "switch": [
+    232.0,
+    158.20000000000002,
+    340.0,
+    211.44000000000003
+   ],
+   "j702": [
+    338.0,
+    161.20000000000002,
+    411.0,
+    197.70000000000005
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-06": {
+  "file": "BRD-06_signal_harness.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "신호 하네스 (리본 · EXT · 페달 · 화면 전원)",
+  "regions": {
+   "left": [
+    9.0,
+    20.0,
+    210.0,
+    166.0
+   ],
+   "right": [
+    209.0,
+    20.0,
+    411.0,
+    123.60000000000004
+   ],
+   "ped": [
+    209.0,
+    20.0,
+    411.0,
+    69.7
+   ],
+   "ts": [
+    209.0,
+    68.7,
+    411.0,
+    123.60000000000004
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-07": {
+  "file": "BRD-07_small_boards.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "작은 기판 (J702 · J501 · PS) + 헤드폰 잭 J701",
+  "regions": {
+   "j702": [
+    14.0,
+    24.0,
+    124.0,
+    119.0
+   ],
+   "j501": [
+    14.0,
+    130.0,
+    124.0,
+    223.0
+   ],
+   "ps": [
+    128.0,
+    171.2,
+    237.12,
+    237.08
+   ],
+   "j701": [
+    256.0,
+    92.0,
+    352.0,
+    149.2
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-08": {
+  "file": "BRD-08_control_board_underside.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "제어 기판 아랫면 배선 (MB · 아래에서 봄 — 좌우 거울상)",
+  "regions": {
+   "mbu": [
+    14.0,
+    24.0,
+    244.0,
+    196.0
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ }
+}

@@ -1,0 +1,61 @@
+/* 02 설계도 — every selector is scoped to #p-dwg; UI colours use the page tokens only (sheets stay paper-white via .sheet) */
+#p-dwg .note{max-width:none}
+#p-dwg .dwg-idx table{min-width:720px}
+#p-dwg .dwg-idx td,#p-dwg .dwg-idx th{font-weight:400;background:var(--card)}
+#p-dwg .dwg-idx td:first-child{white-space:nowrap}
+#p-dwg .dwg-idx td:nth-child(3),#p-dwg .dwg-idx td:nth-child(4){white-space:nowrap;color:var(--ink-2)}
+#p-dwg .dwg-idx tr.dwg-ih th{background:var(--tint-blue);color:var(--ink);font-size:12.5px;font-weight:600;padding-top:9px}
+#p-dwg .dwg-idx a{display:inline-block;min-height:28px;line-height:28px}
+#p-dwg .dwg-chk{margin:4px 0 18px}
+#p-dwg .dwg-chk summary{min-height:44px;display:flex;align-items:center}
+#p-dwg .dwg-chk table{min-width:640px}
+#p-dwg .dwg-chk td,#p-dwg .dwg-chk th{font-weight:400;background:var(--card)}
+#p-dwg .dwg-chk .ok{color:var(--good);font-weight:600}
+#p-dwg .dwg-chk .bad{color:var(--warn);font-weight:600}
+
+/* group chips (sticky under the tab bar) */
+#p-dwg .dwg-chips{position:sticky;top:var(--navh,52px);z-index:5;display:flex;flex-wrap:wrap;gap:6px;padding:8px 0;margin:8px 0 4px;background:var(--paper);border-bottom:1px solid var(--rule)}
+#p-dwg .dwg-chips button{font:inherit;font-size:13.5px;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink-2);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+#p-dwg .dwg-chips button .num{font-size:11.5px;color:var(--ink-3)}
+#p-dwg .dwg-chips button:hover{color:var(--ink);border-color:var(--ink-3)}
+#p-dwg .dwg-chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+#p-dwg .dwg-chips button[aria-pressed="true"] .num{color:inherit;opacity:.75}
+#p-dwg .dwg-chips button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+#p-dwg .dwg-grp{scroll-margin-top:calc(var(--navh,52px) + 64px)}
+#p-dwg .dwg-grp > h3{margin-top:22px}
+#p-dwg .dwg-grp > p{margin-top:0}
+#p-dwg .sheet{scroll-margin-top:calc(var(--navh,52px) + 64px)}
+#p-dwg .sheet figcaption{padding:6px 2px 0;max-width:none}
+#p-dwg .zbar{row-gap:6px}
+#p-dwg .dwg-sv{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px}
+#p-dwg .dwg-save{font:inherit;font-size:12px;border:1px solid var(--ink-2);background:var(--card);color:var(--ink);border-radius:6px;padding:2px 8px;cursor:pointer}
+#p-dwg .dwg-save:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+#p-dwg .dwg-save[disabled]{opacity:.6;cursor:default}
+#p-dwg .dwg-msg{margin-left:6px;color:var(--ink-2)}
+#p-dwg .dwg-rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px}
+#p-dwg .dwg-rgrid > *{min-width:0}
+#p-dwg .dwg-ren .dwimg img{min-width:0;width:100%}
+@media (pointer:coarse){
+  #p-dwg .zbar button,#p-dwg .dwg-save{min-height:44px;padding:0 12px}
+}
+@media (max-width:560px){
+  #p-dwg .dwg-grp,#p-dwg .sheet,#p-dwg .dwg-ply{scroll-margin-top:calc(var(--navh,52px) + 112px)}
+  #p-dwg .dwg-chips{gap:4px}
+  #p-dwg .dwg-chips button{padding:0 11px;font-size:13px}
+  #p-dwg .sheet .cap{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  #p-dwg *{scroll-behavior:auto}
+}
+
+/* D06 piece label -> 03 tab part sheet code */
+#p-dwg .dwg-ply{margin:-8px 0 18px;scroll-margin-top:calc(var(--navh,52px) + 64px)}
+#p-dwg .dwg-ply table{min-width:560px}
+#p-dwg .dwg-ply caption{text-align:left;padding:8px 10px 2px;color:var(--ink-2);caption-side:top}
+#p-dwg .dwg-ply td,#p-dwg .dwg-ply th{font-weight:400;background:var(--card);vertical-align:top}
+#p-dwg .dwg-ply td:first-child{white-space:nowrap}
+#p-dwg .dwg-ply a{display:inline-block;min-height:28px;line-height:28px}
+@media (max-width:560px){
+  #p-dwg .dwg-ply{scroll-margin-top:calc(var(--navh,52px) + 112px)}
+}

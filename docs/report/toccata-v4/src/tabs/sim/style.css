@@ -1,0 +1,205 @@
+/* 05 동작 시뮬레이션 (tab sim). UI colours: tokens only. Drawings (.sheet .sim-draw, keyboard) use the --d-* drawing tokens. */
+#p-sim .sim-p{max-width:78ch;margin:.4rem 0 .8rem}
+#p-sim .sim-about p{margin:.25rem 0}
+#p-sim .sim-toc{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 14px}
+#p-sim .sim-toc a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:6px 12px;border:1px solid var(--rule-2);border-radius:8px;background:var(--card);color:var(--ink);text-decoration:none;font-size:13.5px}
+#p-sim .sim-toc a:hover{border-color:var(--blue);color:var(--blue)}
+#p-sim .sim-toc a .mono{color:var(--ink-3);font-size:12px}
+#p-sim .sim-status{font-size:13px;color:var(--ink-2);margin:0 0 6px}
+#p-sim .sim-status.err{color:var(--warn)}
+#p-sim .sim-status:empty{display:none}
+#p-sim h3{scroll-margin-top:calc(var(--navh, 52px) + 12px)}
+#p-sim .sim-h4{font-size:15px;margin:18px 0 4px}
+
+/* controls */
+#p-sim .sim-ctl{display:flex;flex-direction:column;gap:8px;margin:10px 0 12px;min-width:0}
+#p-sim .sim-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-width:0}
+#p-sim .sim-lab{font-size:13px;color:var(--ink-2);min-width:88px}
+#p-sim .seg{max-width:100%;flex-wrap:wrap}
+#p-sim .seg button{min-height:44px;font-size:13.5px}
+#p-sim .seg button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+#p-sim .seg button small{display:block;font-size:11px;font-family:var(--mono);opacity:.8;line-height:1.2}
+#p-sim .sim-btn{font:inherit;font-size:14px;min-height:44px;padding:8px 14px;border:1px solid var(--rule-2);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;touch-action:manipulation}
+#p-sim .sim-btn:hover{border-color:var(--blue)}
+#p-sim .sim-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-sim .sim-btn:disabled{opacity:.5;cursor:default}
+#p-sim .sim-range{flex:1 1 220px;min-width:150px;height:44px;margin:0;accent-color:var(--blue);background:transparent}
+#p-sim .sim-range:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+#p-sim output{font-size:13px;color:var(--ink);min-width:64px}
+#p-sim .sim-tnow{min-width:92px}
+
+/* key action stage */
+#p-sim .sim-stage{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);gap:14px;align-items:start}
+#p-sim .sim-stage>*{min-width:0}
+@media (max-width:980px){#p-sim .sim-stage{grid-template-columns:minmax(0,1fr)}}
+#p-sim .sim-side,#p-sim .sim-insetfig,#p-sim .sim-touchfig{margin:0}
+#p-sim .sim-svgbox{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#p-sim .sim-svgbox svg{display:block;width:100%;height:auto;min-width:560px}
+#p-sim .sim-svgbox-t svg{min-width:0;max-width:560px;margin:0 auto}
+#p-sim #sim-inset{display:block;width:100%;height:auto;max-height:320px}
+#p-sim .sim-panel{display:flex;flex-direction:column;gap:12px;min-width:0}
+#p-sim .sim-read{margin:0;grid-template-columns:repeat(auto-fit,minmax(132px,1fr))}
+#p-sim .sim-read .kf b{font-size:17px}
+#p-sim .sim-read .kf{min-width:0}
+#p-sim .sim-read .kf span{display:block}
+#p-sim .sim-kf-wide{grid-column:1/-1}
+#p-sim .sim-read .kf.on b{color:var(--good)}
+#p-sim .sim-read .kf.alert b{color:var(--felt)}
+#p-sim .sim-legend i{vertical-align:middle}
+
+/* drawing (sheet: light in both themes) */
+#p-sim .sim-draw{font-family:var(--sans)}
+#p-sim .sim-draw path,#p-sim .sim-draw line,#p-sim .sim-draw circle,#p-sim .sim-draw polyline{vector-effect:non-scaling-stroke}
+#p-sim .sim-draw .m-frame{fill:var(--d-print);stroke:var(--d-print-h);stroke-width:.8;fill-rule:evenodd}
+#p-sim .sim-draw .m-key{fill:var(--d-key);stroke:var(--d-ink);stroke-width:1;fill-rule:evenodd}
+#p-sim .sim-draw .m-keyb{fill:var(--d-black);stroke:var(--d-ink);stroke-width:1;fill-rule:evenodd}
+#p-sim .sim-draw .m-nb{fill:var(--d-keyfar);stroke:var(--d-key-h);stroke-width:.7;fill-rule:evenodd}
+#p-sim .sim-draw .m-beyond{fill:none;stroke:var(--d-key-h);stroke-width:.6}
+#p-sim .sim-draw .m-lever{fill:var(--d-print2);stroke:var(--d-ink);stroke-width:1;fill-rule:evenodd}
+#p-sim .sim-draw .m-steel{fill:var(--d-steel);stroke:var(--d-steel-h);stroke-width:.8}
+#p-sim .sim-draw .m-felt{fill:var(--d-felt);stroke:var(--d-ink);stroke-width:.5}
+#p-sim .sim-draw .m-pad{fill:var(--d-wood);stroke:var(--d-wood-h);stroke-width:.8}
+#p-sim .sim-draw .m-bar{fill:var(--d-print);stroke:var(--d-print-h);stroke-width:.8}
+#p-sim .sim-draw .m-sbar{fill:var(--d-print2);stroke:var(--d-print-h);stroke-width:.8}
+#p-sim .sim-draw .m-pcb{fill:#2f7d4a;stroke:#1d5532;stroke-width:.6}
+#p-sim .sim-draw .m-cover{fill:var(--d-keyfar);stroke:var(--d-key-h);stroke-width:.6}
+#p-sim .sim-draw .m-magS{fill:var(--d-magS)}
+#p-sim .sim-draw .m-magN{fill:var(--d-magN)}
+#p-sim .sim-draw .m-spring{fill:none;stroke:var(--d-spring);stroke-width:1.4}
+#p-sim .sim-draw .m-sensor{fill:var(--d-sensor);stroke:none}
+#p-sim .sim-draw .m-axis{fill:none;stroke:var(--d-ph);stroke-width:.6;stroke-dasharray:4 3}
+#p-sim .sim-draw .hot{stroke:var(--d-press);stroke-width:2.6}
+#p-sim .sim-draw .m-finger{stroke:var(--d-press);stroke-width:2;fill:none}
+#p-sim .sim-draw .m-fhead{fill:var(--d-press)}
+#p-sim .sim-draw .t-lab{fill:var(--d-ink);font-size:3.2px;font-family:var(--mono)}
+#p-sim .sim-draw .t-lab2{fill:var(--d-ph);font-size:2.6px;font-family:var(--sans)}
+#p-sim .sim-draw .t-press{fill:var(--d-press);font-size:3px;font-family:var(--mono);font-weight:600}
+#p-sim .sim-draw .d-line{stroke:var(--d-dim);stroke-width:1.2;fill:none}
+#p-sim .sim-draw .d-ext{stroke:var(--d-ext);stroke-width:.7;stroke-dasharray:2 2;fill:none}
+#p-sim .sim-draw .d-txt{fill:var(--d-dim);font-family:var(--mono);font-weight:600}
+#p-sim .sim-draw .d-txt2{fill:var(--d-ph);font-family:var(--sans)}
+#p-sim #sim-inset .d-txt,#p-sim #sim-inset .d-txt2{paint-order:stroke;stroke:var(--d-bg);stroke-width:.4;stroke-linejoin:round}
+#p-sim .sim-lg-print{background:var(--d-print)}
+#p-sim .sim-lg-lever{background:var(--d-print2)}
+#p-sim .sim-lg-steel{background:var(--d-steel)}
+#p-sim .sim-lg-felt{background:var(--d-felt)}
+#p-sim .sim-lg-pad{background:var(--d-wood)}
+#p-sim .sim-lg-mag{background:linear-gradient(to top,var(--d-magS) 50%,var(--d-magN) 50%)}
+#p-sim .sim-lg-hot{background:transparent;border:2px solid var(--d-press)!important}
+
+/* direct press */
+#p-sim .sim-pressrow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px 16px;margin:14px 0 6px}
+#p-sim .sim-pressbtn{min-height:64px;min-width:180px;font-size:15px;font-weight:600;border-width:2px;user-select:none;-webkit-user-select:none;touch-action:none}
+#p-sim .sim-pressbtn.down{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-sim .sim-pressrow .sim-p{flex:1 1 320px;margin:0}
+
+/* plots (UI colours) */
+#p-sim .sim-plots{margin:14px 0 6px}
+#p-sim .sim-plot{margin:0;padding:10px 12px 8px}
+#p-sim .sim-plot figcaption{font-size:13px;color:var(--ink-2);margin-bottom:4px;display:flex;gap:8px;align-items:baseline}
+#p-sim .sim-plot figcaption b{color:var(--ink);font-weight:600}
+#p-sim .sim-plot svg{display:block;width:100%;height:auto;overflow:visible}
+#p-sim .sim-plot .ax{stroke:var(--rule-2);stroke-width:1;fill:none}
+#p-sim .sim-plot .gr{stroke:var(--rule);stroke-width:1;fill:none}
+#p-sim .sim-plot .tk{fill:var(--ink-3);font:10px var(--mono)}
+#p-sim .sim-plot .tl{fill:var(--ink-2);font:10.5px var(--sans)}
+#p-sim .sim-plot .brk{fill:var(--card);stroke:var(--rule-2)}
+#p-sim .sim-plot .ln{fill:none;stroke-width:1.6;stroke-linejoin:round}
+#p-sim .sim-plot .c1{stroke:var(--s1)}
+#p-sim .sim-plot .c2{stroke:var(--s2)}
+#p-sim .sim-plot .c3{stroke:var(--s3)}
+#p-sim .sim-plot .c4{stroke:var(--s4)}
+#p-sim .sim-plot .c5{stroke:var(--s5)}
+#p-sim .sim-plot .thr{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:4 3;fill:none}
+#p-sim .sim-plot .ev{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:1 3;fill:none}
+#p-sim .sim-plot .cur{stroke:var(--felt);stroke-width:1.5}
+#p-sim .sim-plot .curdot{fill:var(--felt)}
+#p-sim .sim-plg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink-2);margin-top:4px}
+#p-sim .sim-plg i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+#p-sim .sim-plg .c1{background:var(--s1)}
+#p-sim .sim-plg .c2{background:var(--s2)}
+#p-sim .sim-plg .c3{background:var(--s3)}
+#p-sim .sim-plg .c4{background:var(--s4)}
+#p-sim .sim-plg .c5{background:var(--s5)}
+
+/* tables */
+#p-sim .sim-evt th,#p-sim .sim-evt td{font-size:13px}
+#p-sim .sim-evt tr.sel td{background:var(--tint-blue)}
+#p-sim .sim-evt td button{font:inherit;font-size:13px;min-height:36px;padding:4px 10px;border:1px solid var(--rule-2);border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;white-space:nowrap}
+#p-sim .sim-evt tr.sel td button{border-color:var(--blue);color:var(--blue)}
+#p-sim .sim-spec{margin:10px 0 18px}
+#p-sim .sim-spec>summary{min-height:36px;display:flex;align-items:center;font-size:13.5px}
+#p-sim #sim-mtbl td:first-child{white-space:normal;width:auto}
+#p-sim .sim-chk{list-style:none;padding:0;margin:6px 0;font-size:12.5px;columns:2 360px;column-gap:24px}
+#p-sim .sim-chk li{break-inside:avoid;padding:3px 0;border-bottom:1px solid var(--rule);display:flex;gap:8px}
+#p-sim .sim-chk li b{font-family:var(--mono);font-size:11.5px;color:var(--good);flex:none}
+#p-sim .sim-chk li.bad b{color:var(--warn)}
+#p-sim .sim-chk li span{min-width:0;word-break:break-word}
+
+/* keyboard (drawn like a sheet: light keys in both themes) */
+#p-sim .sim-kbdbox{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--sheet);border:1px solid var(--sheet-rule);border-radius:10px;padding:8px 8px 10px;margin:8px 0 12px}
+#p-sim .sim-kbd{position:relative;height:168px;user-select:none;-webkit-user-select:none;touch-action:pan-x}
+#p-sim .sim-kbd:focus-visible{outline:2px solid var(--d-dim);outline-offset:3px}
+#p-sim .sim-band{position:absolute;top:0;height:30px;border:1px solid var(--d-key-h);border-radius:5px;background:var(--d-bg);color:var(--d-ph);font:11px var(--mono);display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:nowrap;box-sizing:border-box}
+#p-sim .sim-band.on{border-color:var(--d-dim);color:var(--d-dim);font-weight:600;box-shadow:inset 0 0 0 1px var(--d-dim)}
+#p-sim .sim-wk,#p-sim .sim-bk{position:absolute;box-sizing:border-box;cursor:pointer}
+#p-sim .sim-wk{top:36px;height:128px;background:var(--d-key);border:1px solid var(--d-key-h);border-radius:0 0 4px 4px}
+#p-sim .sim-bk{top:36px;height:80px;background:var(--d-black);border:1px solid var(--d-ink);border-radius:0 0 3px 3px;z-index:2}
+#p-sim .sim-wk span{position:absolute;bottom:4px;left:0;right:0;text-align:center;font:9.5px var(--mono);color:var(--d-ph)}
+#p-sim .sim-wk.on{background:var(--d-print);border-color:var(--d-dim);box-shadow:inset 0 -6px 0 var(--d-dim)}
+#p-sim .sim-bk.on{background:var(--d-dim);border-color:var(--d-dim)}
+#p-sim .sim-wk.mod,#p-sim .sim-bk.mod{border-top:3px solid var(--d-dim)}
+
+/* signal chain + info */
+#p-sim .sim-chaingrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+#p-sim .sim-chaingrid>*{min-width:0}
+@media (max-width:1100px){#p-sim .sim-chaingrid{grid-template-columns:minmax(0,1fr)}}
+#p-sim .sim-chainbox{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--rule);border-radius:12px;background:var(--card);padding:6px}
+#p-sim .sim-chain{display:block;width:100%;height:auto;min-width:720px}
+#p-sim .sim-chain .sim-cht{fill:var(--ink-3);font:12px var(--sans)}
+#p-sim .sim-chain .sim-wires path{fill:none;stroke:var(--ink-3);stroke-width:1.6}
+#p-sim .sim-chain .sim-arrhead{fill:var(--ink-3)}
+#p-sim .sim-chain .sim-node rect{fill:var(--card);stroke:var(--rule-2);stroke-width:1.2}
+#p-sim .sim-chain .sim-nt{fill:var(--ink);font:600 13.5px var(--sans)}
+#p-sim .sim-chain .sim-ns{fill:var(--ink-2);font:11.5px var(--sans)}
+#p-sim .sim-chain .sim-nd{fill:var(--blue-ink);font:600 12.5px var(--mono)}
+#p-sim .sim-chain .sim-node.on rect{fill:var(--tint-blue);stroke:var(--blue);stroke-width:2}
+#p-sim .sim-chain .sim-node.flash rect{animation:simFlash .5s ease-out}
+@keyframes simFlash{from{stroke-width:5}to{stroke-width:2}}
+#p-sim .sim-info{padding:14px 16px}
+#p-sim .sim-info h4{margin:0 0 8px;font-size:16px}
+#p-sim .sim-info dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 12px;margin:0;font-size:13px}
+#p-sim .sim-info dt{color:var(--ink-3);white-space:nowrap}
+#p-sim .sim-info dd{margin:0;min-width:0;word-break:break-word}
+#p-sim .sim-info dd .mono{font-size:12.5px}
+#p-sim .sim-info ol{margin:0;padding-left:18px}
+#p-sim .sim-info p{margin:.4em 0;font-size:13px}
+
+/* power */
+#p-sim .sim-pwgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+#p-sim .sim-pwgrid>*{min-width:0}
+@media (max-width:1100px){#p-sim .sim-pwgrid{grid-template-columns:minmax(0,1fr)}}
+#p-sim .sim-pwk{margin:0}
+#p-sim .sim-pw .pw-box{fill:var(--card);stroke:var(--rule-2);stroke-width:1.2}
+#p-sim .sim-pw .pw-box.off{stroke-dasharray:4 3;opacity:.55}
+#p-sim .sim-pw .pw-t{fill:var(--ink);font:600 13px var(--sans)}
+#p-sim .sim-pw .pw-s{fill:var(--ink-2);font:11.5px var(--sans)}
+#p-sim .sim-pw .pw-v{fill:var(--blue-ink);font:600 12px var(--mono)}
+#p-sim .sim-pw .pw-w12{stroke:var(--amber);fill:none;stroke-linecap:round}
+#p-sim .sim-pw .pw-w5{stroke:var(--blue);fill:none;stroke-linecap:round}
+#p-sim .sim-pw .pw-wsp{stroke:var(--s3);fill:none;stroke-linecap:round}
+#p-sim .sim-pw .pw-gnd{stroke:var(--ink-3);fill:none;stroke-dasharray:3 3}
+#p-sim .sim-meter{position:relative;height:12px;border-radius:6px;background:var(--rule);margin:12px 0 4px;max-width:720px}
+#p-sim .sim-meter-bar{height:100%;width:0;border-radius:6px;background:var(--good)}
+#p-sim .sim-meter-bar.warn{background:var(--warn)}
+#p-sim .sim-meter-mk{position:absolute;top:-4px;bottom:-4px;left:100%;width:2px;background:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){
+  #p-sim .sim-chain .sim-node.flash rect{animation:none}
+}
+@media (max-width:620px){
+  #p-sim .sim-lab{min-width:0;width:100%}
+  #p-sim .sim-read .kf b{font-size:16px}
+}
+#p-sim .sim-restnote{margin:0}
+#p-sim .sim-restnote:empty{display:none}

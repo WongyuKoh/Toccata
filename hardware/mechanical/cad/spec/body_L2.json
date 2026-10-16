@@ -693,7 +693,7 @@
    "hall_elements_3d_measured": "홀 소자 88개(EL·ER 포함, y67, 흰 z12.94 / 검은 z10.41)까지 3D: 자석 중심 L 228.6 (O1-G) / R 228.5 (O7-D), 가장 가까운 쇠 159.7 (플랜지 아래 모서리)"
   },
   "d15": "스피커는 모듈에 닿지 않음: 앞 2.0 mm 공기, 그릴 판도 y213 뒤·모듈 윗면 위 5.4. 볼 브래킷(실리콘 그로밋 L42)의 핀에 얹히고, 가운데 유닛과는 EVA 3T + 고무 슬리브 나비나사로만 이어짐",
-  "xt30": "스피커 선(XT30U-F 꼬리 150)이 안쪽 옆판의 밀봉 구멍 Ø6(L y243 z40 / R y290 z40, EVA 띠 사이)으로 나와 3 mm 틈을 건너 가운데 끝벽 구멍 Ø14로 들어가 끝벽 집게의 짝과 꽂힘",
+  "xt60": "스피커 선(XT60 암, 16 AWG 10 cm 선 - 상자 안에서 유닛 단자 쪽 짧은 선과 이음)이 안쪽 옆판의 밀봉 구멍 Ø6(L y243 z40 / R y290 z40, EVA 띠 사이)으로 나와 3 mm 틈을 건너 가운데 끝벽 구멍 Ø19(L y244 z41 / R y290 z46.5)로 들어가 끝벽 집게의 짝과 꽂힘 (2026-10-07 사용자: XT30 → XT60, 커넥터는 XT60 한 가지; 스피커 XT60은 파란 수축 튜브 + SPK, 전원 XT60은 빨간 수축 튜브)",
   "valley": "건반 뒤 윗모서리(212, 72.85)와 앞판 사이: 앞벽 턱 z65.42까지 7.4 mm 낮음, y212~218.3. 앉은 눈높이(귀 z460)에서 y218 앞까지 가려짐. 그릴 판 아래 모서리(213.34, 78.27)가 건반 바로 뒤에서 시작해 한 덩어리처럼 보임",
   "earlier_choice_43deg": {
    "note": "43° (2026-10-01 첫 L2 선택) 값. 사용자가 2026-10-01 40°로 바꿈 (W1 세션 전달) — 연구값으로 보관",
@@ -1230,12 +1230,12 @@
    "end_wall_notch": "y214~241 × z5~27 (통로)"
   },
   "bays_x": {
-   "A_power_bank": [
+   "A_battery_power": [
     271.5,
-    395.5
+    426.0
    ],
-   "B_io_ped_fuse": [
-    395.5,
+   "B_io_ped": [
+    426.0,
     475.5
    ],
    "D_buck_j702": [
@@ -1258,7 +1258,7 @@
      260.0,
      501.0
     ],
-    "material": "오꾸메 11.5",
+    "material": "PETG 출력 11.5 (2026-10-07, 전 오꾸메 11.5)",
     "fix": "자석 8×3 3쌍 (뒤판 윗모서리 2, 끝벽 윗모서리 1)"
    },
    {
@@ -1276,7 +1276,7 @@
      721.0,
      962.0
     ],
-    "material": "오꾸메 11.5",
+    "material": "PETG 출력 11.5 (2026-10-07, 전 오꾸메 11.5)",
     "fix": "자석 8×3 3쌍"
    }
   ],
@@ -1314,14 +1314,6 @@
     61.349999999999994
    ],
    "holes_xz": {
-    "cable_pass_D12": [
-     405.0,
-     38.0
-    ],
-    "usb_c_pd_input_HUSB238": [
-     421.0,
-     38.0
-    ],
     "rocker_KCD1_13.2x19.2": [
      438.5,
      38.5
@@ -1332,11 +1324,21 @@
     ]
    },
    "louvres": "x480~536, z18~46 (강압 뒤, 낮은 흡기)",
-   "note": "모두 뒤판 안면 y331 기준으로 안쪽 부품 깊이: KCD1 23 (2 mm 오목 자리에 테두리 → y342.5와 같은 면), J501 보드 24, HUSB238 16.4"
+   "note": "모두 뒤판 안면 y331 기준으로 안쪽 부품 깊이: KCD1 23 (2 mm 오목 자리에 테두리 → y342.5와 같은 면), J501 보드 24. 2026-10-07 전원이 LiFePO4 배터리(가운데 유닛 안)로 바뀌어 USB-C PD 입력(HUSB238, x421 z38)과 케이블 통과 Ø12(x405 z38)는 막음 (벽)",
+   "closed_2026_10_07": {
+    "cable_pass_D12": [
+     405.0,
+     38.0
+    ],
+    "usb_c_pd_input_HUSB238": [
+     421.0,
+     38.0
+    ]
+   }
   },
   "vents": {
-   "intake": "아랫판 홈 4×34: 강압 아래 6개(x482~534), Pi 아래 8개(x546~622), 앰프 앞 허브 사이 없음 — 약 2,400 mm², 고무발 5 mm 틈으로 들어옴 + 뒤판 루버",
-   "exhaust": "뚜껑 L 홈 6×(4×30) 강압 위, 화면 뚜껑 뒤쪽 8×(4×34), 뚜껑 R 10×(4×40) 앰프·허브 위, 뒤판 앰프 뒤 8×(4×15) — 약 4,000 mm²",
+   "intake": "아랫판 Ø8 구멍 40개 (2026-10-07, 전 홈 4×34 14개): 강압 아래 4×3 = 12 (x492.5~525.5 y297~319), Pi 아래 28 (마름모 4·6·8·6·4, x546~623 y269~313), 간격 11 — 약 2,011 mm², 고무발 5 mm 틈으로 들어옴 + 뒤판 루버",
+   "exhaust": "뚜껑 L 홈 6×(4×30) 강압 위, 화면 뚜껑 뒤쪽 8×(4×34), 뚜껑 R 10×(4×40) 앰프·허브 위 (뚜껑 L·R은 2026-10-07부터 출력, 홈 그대로), 뒤판 앰프 뒤 Ø8 10개 (2026-10-07, 전 홈 8×(4×15)) — 약 4,000 mm²",
    "estimate": "약 12 W (Pi 5~7, 강압 2~3.5, 앰프 1~2, 허브 1): 안 온도 12~20 °C 상승 예상. 최대 부하에서 vcgencmd get_throttled = 0x0 확인, 안 되면 Pi Active Cooler (+8,000원)"
   },
   "earlier_choice_43deg": {
@@ -1366,70 +1368,129 @@
     "depth": 127.5,
     "folded": "7인치 화면을 뒤로 접으면 z73~약 98, 스피커 윗면 z148.06 아래. 경첩에서 약 125 필요 → 경첩 축이 y216~218이면 y341~343까지 (뚜껑 뒤 끝 341.5를 넘어도 1.5). L1식 받침(141.7)이면 뒤로 16~18 튀어나옴 (운반할 때만, 뒤에 아무것도 없음)"
    }
+  },
+  "power_2026_10_07": {
+   "decision": "사용자 2026-10-07: USB-C PD 20 V (65 W 충전기 또는 PD 보조배터리, HUSB238) 대신 LiFePO4 12.8 V 6 Ah (76.8 Wh) 배터리 140 × 72 × 35, 출력 XT60 암(선 끝) + DC 충전 잭 (팩 위 자리 모름). 배터리는 가운데 유닛 안 (뚜껑 L x260~501 아래), 충전은 뚜껑 L을 들고 사용자 LiFePO4 충전기로. USB-C 입력 없음. 시험 때는 12 V 전원 장치를 같은 XT60에 꽂음. 10/7 상품 정보: Turmera 12.8 V LiFePO4 4S1P 32700 셀, 수축 튜브 막대 140 × 35 × 72 (셀을 눕혀 140 x × 72 y × 35 z), BMS 4S 밸런스 연속 40 A / 순간 100 A, 출력 XT60 선, 충전 입력 DC 5.5×2.1 따로 (아마 같은 끝의 선), 무게 약 900 g (상품 설명)",
+   "bus": "12.8 V 공칭 (10.0~14.6 V): 배터리 → XT60 → 퓨즈 5 A ATO (칼날형) → KCD1 → 강압(5.1 V: Pi·허브) + 앰프",
+   "amp": "XH-A232 TPA3110 약 8 W/채널 (12.8 V, 4 Ω 기준 추정)",
+   "runtime_h": [
+    3.5,
+    4.4
+   ],
+   "mass_kg_est": 0.9,
+   "mass_note": "상품 설명 약 900 g - 받은 배터리로 잼",
+   "layout": "배터리 x284~424 y251~323 z16.5~51.5 (바닥 위, 받침 바닥 없음) + 출력 배터리 틀 CU-BATFRAME (벽 1.5 × 14, 둘레 0.5, +x 끝은 모서리 8만 남기고 열림, 끈 구멍 22 × 3 앞·뒤 벽 아래, 앞에 퓨즈 선반 x397~434.6 - ATC/ATO 홀더를 앞 공간 위에 눕혀 끼움). 선 두 개(XT60·DC)는 +x 끝면에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30~뚜껑)에서 위로 꺾여 배터리 윗면(z51.5~61.35)의 XT60 짝·DC 충전 커넥터로. PED 보드는 90° 돌려 x426.5~476.5 y244~314 (z23.1 이하, 선 자리 밑). 뒤판 탭은 x427~451 하나로 (나사 (431.5, 321) · (446.5, 321)), J501 받침 왼쪽 끝 x449 → 450",
+   "charging": "스위치를 끄고 뚜껑 L을 들어 배터리 윗면의 DC 5.5×2.1 충전 선에 충전기를 꽂음 - XT60은 뽑지 않음. 12 V 전원 장치로 시험할 때만 XT60을 뽑고 전원 장치의 XT60 암을 꽂음",
+   "on_arrival": [
+    "선(XT60·DC)이 나오는 면과 높이 (가정: +x 끝면, y275 / y299, z34)",
+    "DC 충전 커넥터 겉모양 (높이 8.85 이하면 배터리 윗면에 눕힘)",
+    "배터리 크기·무게 (140 × 72 × 35, 약 900 g)",
+    "끈(L79)이 배터리 밑·위로 감기는지",
+    "선 길이 (XT60 선 경로 약 50 mm, DC 선 약 45 mm)",
+    "퓨즈 홀더 크기 (40.1 × 11.1 × 33.8)와 꼭지 위치·지름 (Ø8, 칼날 쪽 끝에서 7.5 가정) - 받침 2개 (Ø8.3, 위 입구 6.8)에 눌러 끼워지는지",
+    "덮개 뽑을 자리: 뚜껑 L을 들고 홀더를 받침에서 빼서 돌렸을 때 덮개가 위로 약 20 빠지는지, 끈 고리가 걸리지 않는지",
+    "퓨즈: 5 A ATO (표준 칼날) - 미니(ATM)·맥시가 아님",
+    "12 AWG 꼬리 이음: 홀더 끝에서 약 24~36 mm에서 16 AWG와 납땜 + 수축 튜브, 12 AWG는 R15보다 좁게 꺾지 않음"
+   ],
+   "fuse_holder": {
+    "decision": "사용자 2026-10-07: Coms BU914 (5×20 유리관, Ø10 × 46) 대신 사용자 것 ATC/ATO (표준 칼날형) 인라인 퓨즈 홀더, 덮개 끼움식, 12 AWG 빨간 선, 5 A ATO 칼날 퓨즈",
+    "drawing_mm": "사용자 제품 도면: 전체 40.1 (양 짧은 끝의 둥근 선 꼭지 포함, 선 축 방향) × 두께 11.1 × 높이 33.8 (덮개 포함). 아래 몸통 약 40.1 × 11.1 × 15 (꼭지는 아래쪽 약 Ø8), 위에 덮개 (밑변 약 24, 위로 좁아짐, 한쪽 끈 고리로 매달림). 퓨즈는 칼날이 아래로 서서 들어감. 덮개는 곧게 위로 뽑음 - 위로 약 20 필요",
+    "fuse": "ATO 표준 칼날 5 A: 폭 18.8 × 몸 11.9 + 칼날 7.1, 두께 4.8",
+    "placement": "앞 공간(y214~241, 위로 열림) 위 x397~437.1 y215.7~249.5 z48~59.1에 옆으로 눕힘: 선 축 x, 덮개 +y (배터리 쪽), 칼날 쪽 -y. 세우면 33.8 + 뽑을 자리 20이 앞 공간 높이 z27~61.35 (34.35)에 들어가지 않음 - 그래서 눕힘. 덮개를 -y로 두어도 앞은 건반 모듈 뒷벽(y212)이라 그 자리에서 뽑을 수 없음",
+    "service": "뚜껑 L(x260~501)을 들고 홀더를 위로 들어 받침 2개에서 빼고 (꼭지가 눌러 끼워짐), 선 축으로 90° 돌려 덮개를 위로 해서 뽑음 → 퓨즈 교체 → 덮개 끼우고 되돌려 받침에 눌러 넣음. 홀더 위는 뚜껑까지 비어 있음",
+    "assumed": "추정 (받은 홀더로 확인): 꼭지 축이 칼날 쪽 끝에서 7.5 (아래 몸통 15의 가운데), 꼭지 길이 7.05 (몸통 26), 덮개 끝 폭 16",
+    "leads": "12 AWG (바깥 Ø4.2)는 양 끝 꼭지에서 x로 나와 R15로 +y로 꺾임 (호 약 24 mm), 몸통 끝에서 약 24~36 mm에 16 AWG와 이음 (납땜 + 수축 튜브, 길이 12, Ø6.5 모델)"
+   }
   }
  },
  "centre_contents": [
   {
-   "id": "CU-PBHOLDER",
-   "name": "power-bank holder (printed tray: floor 2, walls 1.5 x 14 high, strap slots)",
+   "id": "CU-BATFRAME",
+   "name": "printed battery frame: corral walls 1.5 x 14 round the pack (0.5 gap, +x end open between 8 mm corner returns), strap slots, 4 screws (2 ears + 2 bores in a low front block), fuse shelf in front x397~434.6 (ATC/ATO holder lying over the front zone, 2 snap saddles for its wire stubs, 45 deg undersides)",
+   "bbox_x0x1y0y1z0z1": [
+    272.0,
+    434.6,
+    217.55,
+    330.5,
+    16.5,
+    55.93
+   ],
+   "kind": "wall"
+  },
+  {
+   "id": "BAT-LFP",
+   "name": "LiFePO4 pack Turmera 12.8 V 6 Ah 4S1P 32700 (76.8 Wh) 140x72x35 lying on the floor, XT60 lead + DC 5.5x2.1 charge lead at the +x end (assumed)",
    "bbox_x0x1y0y1z0z1": [
     284.0,
-    393.0,
-    252.0,
-    327.0,
+    424.0,
+    251.0,
+    323.0,
     16.5,
-    30.5
+    51.5
    ],
    "kind": "item"
   },
   {
-   "id": "PB-E-BANK",
-   "name": "Morui MT-65 power bank 105x71x32 (optional O07), USB-C end +x",
+   "id": "C-XT60",
+   "name": "XT60 mated pair 31x16x8.2 lying on top of the battery (battery F from +x, bus-side M lead to the fuse holder on the frame's fuse shelf)",
    "bbox_x0x1y0y1z0z1": [
-    286.0,
-    391.0,
-    254.0,
-    325.0,
-    18.5,
-    50.5
+    392.0,
+    423.0,
+    255.0,
+    271.0,
+    51.5,
+    59.7
    ],
    "kind": "item"
   },
   {
-   "id": "Z-BANK-PLUG",
-   "name": "right-angle USB-C plug on the bank + cable along +y to the cable pass",
+   "id": "C-DC",
+   "name": "DC 5.5x2.1 charge connector (female, on the pack's charge lead) lying on top of the battery, envelope 30x9.5x8.5 (assumed)",
    "bbox_x0x1y0y1z0z1": [
-    391.0,
-    404.0,
-    278.0,
-    330.0,
-    26.0,
-    43.0
+    392.0,
+    422.0,
+    304.0,
+    313.5,
+    51.5,
+    60.0
+   ],
+   "kind": "item"
+  },
+  {
+   "id": "Z-BAT-LEADS",
+   "name": "battery lead-turn zone at the +x end: XT60 + DC leads leave the end face and bend up into the space over the pack (above the PED board level)",
+   "bbox_x0x1y0y1z0z1": [
+    424.0,
+    434.0,
+    259.0,
+    315.0,
+    30.0,
+    61.35
    ],
    "kind": "zone"
   },
   {
-   "id": "C-XT30-L",
-   "name": "XT30U pair L (pod pigtail F + amp lead M) in a printed clip on the left end wall, front zone",
+   "id": "C-XT60-L",
+   "name": "XT60 pair L (pod pigtail F + amp lead M, AMASS XT60 16 AWG; 2026-10-07 was XT30U) on edge in a printed clip on the left end wall, front zone",
    "bbox_x0x1y0y1z0z1": [
     271.5,
-    295.0,
-    236.0,
+    305.8,
+    238.0,
     250.0,
-    40.0,
-    48.0
+    31.7,
+    50.3
    ],
    "kind": "item"
   },
   {
    "id": "Z-SPKLEAD-L2",
-   "name": "amp lead L down the left end wall from the back lane to the XT30 L",
+   "name": "amp lead L along the left end wall from the back lane to the XT60 L (2026-10-07: x to 283, 1.0 off the battery; rises to z56.5 over the XT60 clip plate; z from 51: 0.7 over the XT60 clip)",
    "bbox_x0x1y0y1z0z1": [
     271.5,
-    284.0,
+    283.0,
     236.0,
     330.0,
-    50.0,
+    51.0,
     58.0
    ],
    "kind": "zone"
@@ -1449,7 +1510,7 @@
   },
   {
    "id": "Z-TS-L2",
-   "name": "M4 thumb screw head + rubber sleeve (pod L joint, rear, beside the bank)",
+   "name": "M4 thumb screw head + rubber sleeve (pod L joint, rear, beside the battery frame)",
    "bbox_x0x1y0y1z0z1": [
     271.5,
     281.5,
@@ -1462,7 +1523,7 @@
   },
   {
    "id": "PR-BACKPLATE",
-   "name": "printed back plate: I/O (pass, USB-C PD in, KCD1, J501) + louvres behind the buck",
+   "name": "printed back plate: I/O (KCD1, J501) + louvres behind the buck; USB-C PD input and cable pass closed (2026-10-07)",
    "bbox_x0x1y0y1z0z1": [
     397.5,
     538.0,
@@ -1474,38 +1535,12 @@
    "kind": "wall"
   },
   {
-   "id": "IO-CABLEPASS",
-   "name": "cable pass D12 (bank cable loops out to the PD input)",
-   "bbox_x0x1y0y1z0z1": [
-    399.0,
-    411.0,
-    329.0,
-    341.5,
-    32.0,
-    44.0
-   ],
-   "kind": "io"
-  },
-  {
-   "id": "CU-E-PDTRIG",
-   "name": "HUSB238 PD trigger + USB-C input in the plate pocket (mouth 2 inside the outer face)",
-   "bbox_x0x1y0y1z0z1": [
-    416.0,
-    426.0,
-    323.1,
-    339.5,
-    35.8,
-    40.2
-   ],
-   "kind": "io"
-  },
-  {
    "id": "CU-E-SWITCH",
-   "name": "KCD1-101A rocker (bezel in a 2 mm recess, flush with y341.5)",
+   "name": "KCD1-104 4-pin rocker, user's own (bezel in a 2 mm recess, flush with y341.5); 2026-10-07 was KCD1-101A",
    "bbox_x0x1y0y1z0z1": [
     431.0,
     446.0,
-    318.0,
+    317.0,
     341.5,
     28.0,
     49.0
@@ -1540,12 +1575,12 @@
   },
   {
    "id": "CU-E-PEDBOARD",
-   "name": "PED pedal board 70x50 perfboard on 5 mm printed standoffs",
+   "name": "PED pedal board 70x50 perfboard turned 90 deg (50 x, 70 y) on 5 mm printed standoffs",
    "bbox_x0x1y0y1z0z1": [
-    401.0,
-    471.0,
-    247.0,
-    297.0,
+    426.5,
+    476.5,
+    244.0,
+    314.0,
     21.5,
     23.1
    ],
@@ -1553,12 +1588,12 @@
   },
   {
    "id": "CU-E-PEDZERO",
-   "name": "RP2040-Zero on the PED board, USB-C faces -y",
+   "name": "RP2040-Zero on the PED board front edge, USB-C faces -y",
    "bbox_x0x1y0y1z0z1": [
-    440.0,
-    458.0,
-    247.0,
-    271.8,
+    449.0,
+    467.0,
+    244.0,
+    268.8,
     23.1,
     28.8
    ],
@@ -1568,10 +1603,10 @@
    "id": "Z-PED-PLUG",
    "name": "PED USB-C plug + boot 25, then the cable turns +x in the front zone",
    "bbox_x0x1y0y1z0z1": [
-    442.75,
-    455.25,
+    451.75,
+    464.25,
     222.0,
-    247.0,
+    244.0,
     22.0,
     30.0
    ],
@@ -1581,7 +1616,7 @@
    "id": "Z-PED-LANE",
    "name": "PED cable lane in the front zone to hub port 2 (x740.5)",
    "bbox_x0x1y0y1z0z1": [
-    455.25,
+    464.25,
     732.0,
     222.0,
     232.0,
@@ -1592,20 +1627,20 @@
   },
   {
    "id": "CU-E-FUSE",
-   "name": "BU914 inline fuse holder + 5 A T, clipped to the floor",
+   "name": "ATC/ATO (standard blade) inline fuse holder + 5 A ATO blade fuse, user's own (2026-10-07: was Coms BU914 5x20), 40.1 x 11.1 x 33.8 lying on its side on the battery frame's fuse shelf (wire axis x, cover toward +y, blades toward -y), front zone, stubs snapped into 2 saddles (axis y223.2 z53.55)",
    "bbox_x0x1y0y1z0z1": [
-    405.0,
-    451.0,
-    301.0,
-    311.0,
-    17.5,
-    27.5
+    397.0,
+    437.1,
+    215.7,
+    249.5,
+    48.0,
+    59.1
    ],
    "kind": "item"
   },
   {
    "id": "CU-E-BUCK",
-   "name": "XL4016 buck XH-M401 60.8x40.3x29 on 5 mm standoffs, against the louvres",
+   "name": "XL4016 buck XH-M401 60.8x40.3x29 on 5 mm standoffs, against the louvres (12.8 V bus -> 5.1 V)",
    "bbox_x0x1y0y1z0z1": [
     477.5,
     538.3,
@@ -1943,10 +1978,10 @@
   },
   {
    "id": "Z-SPKLEAD-R",
-   "name": "amp -> XT30 R speaker lead over the shelf",
+   "name": "amp -> XT60 R speaker lead over the shelf (2026-10-07: ends at x915.5, the XT60 male starts at x916.2)",
    "bbox_x0x1y0y1z0z1": [
     796.0,
-    927.0,
+    915.5,
     286.0,
     296.0,
     45.0,
@@ -1955,15 +1990,15 @@
    "kind": "zone"
   },
   {
-   "id": "C-XT30-R",
-   "name": "XT30U pair R in a printed clip on the right end wall",
+   "id": "C-XT60-R",
+   "name": "XT60 pair R (pod pigtail F + amp lead M, AMASS XT60 16 AWG; 2026-10-07 was XT30U) on edge in a printed clip on the right end wall",
    "bbox_x0x1y0y1z0z1": [
-    927.0,
+    916.2,
     950.5,
-    283.0,
-    297.0,
-    47.0,
-    55.0
+    284.0,
+    296.0,
+    37.2,
+    55.8
    ],
    "kind": "item"
   },
@@ -1995,11 +2030,11 @@
   },
   {
    "id": "Z-SPKLEAD-L",
-   "name": "back lane: amp -> XT30 L lead + 20 V amp feed, along the back ply",
+   "name": "back lane: amp -> XT60 L lead (y328.5) + 12.8 V amp feed (y325), along the back ply (from y323.5: 0.5 behind the battery top edge)",
    "bbox_x0x1y0y1z0z1": [
     284.0,
     742.0,
-    322.0,
+    323.5,
     330.0,
     51.0,
     55.0
@@ -2008,7 +2043,7 @@
   },
   {
    "id": "Z-PWR-LANE",
-   "name": "front-of-shelf lane: 5 V buck -> hub DC, 20 V to the amp",
+   "name": "front-of-shelf lane: 5 V buck -> hub DC, 12.8 V to the amp (unused since W1 10/1)",
    "bbox_x0x1y0y1z0z1": [
     731.0,
     935.0,
@@ -2139,7 +2174,8 @@
   ],
   "rule": "관련 없는 두 물건 사이 ≥1.0 (물건-물건), ≥0.5 (자리/케이블 구역 포함). 플러그·짝은 관련으로 뺌. 모든 물건은 가운데 안 공간(x271.5~950.5, y214~330, z≤61.35) 안, 앞 공간에서는 z27 위",
   "layout_back_y": 341.5,
-  "layout_note": "centre_contents 상자는 뒤 바깥면 y341.5 (뒤판 안면 y330, 43° 때) 기준으로 그린 것. 40°에서는 뒤판이 y331~342.5로 1.0 뒤로 감: 뒤판에 붙는 것(PR-BACKPLATE, KCD1 테두리, 선반 뒤 띠, 이음 레일, 끝벽·아랫판 뒤 끝)은 body.YB에서 계산되어 같이 움직이고, 나머지 상자(허브 뒷면 y330 등)는 그대로 — 허브 뒤와 뒤판 사이 1.0 틈"
+  "layout_note": "centre_contents 상자는 뒤 바깥면 y341.5 (뒤판 안면 y330, 43° 때) 기준으로 그린 것. 40°에서는 뒤판이 y331~342.5로 1.0 뒤로 감: 뒤판에 붙는 것(PR-BACKPLATE, KCD1 테두리, 선반 뒤 띠, 이음 레일, 끝벽·아랫판 뒤 끝)은 body.YB에서 계산되어 같이 움직이고, 나머지 상자(허브 뒷면 y330 등)는 그대로 — 허브 뒤와 뒤판 사이 1.0 틈",
+  "note_2026_10_07": "배터리·틀·XT60·퓨즈·PED·Z-PED-*·Z-SPKLEAD-L 상자를 바꾸고 보조배터리·PD 상자 5개를 뺌 - 쌍 검사는 check_electronics.py가 다시 함 (tightest_gaps_mm은 10/1 기록); 같은 날 퓨즈 홀더 BU914 → ATC/ATO (앞 공간 위 x397~437.1, 배터리 틀 퓨즈 선반)"
  },
  "cable_duct": {
   "cross_section": {
@@ -2323,9 +2359,9 @@
    "EL/ER leads + JST-XH 6P": "그대로: XH x52~69 / 1160~1177, y222~240, z0~6 — 스피커 밑 통로 안",
    "O1/O7 EXT leads": "그대로 통로 바닥",
    "headphone W701/W702": "왼쪽 볼 홈(x-12.6~-4.1, z3~7.5)에서 통로 바닥을 따라 가운데로 → W701은 동글 소켓(x650 앞, y222~262), W702는 J702(x520, y222~255)로 올라감",
-   "speaker": "스피커 꼬리 XT30U-F → 끝벽 집게 (L 앞 공간 y236~250 z40~48 / R y283~297 z47~55). 앰프 선은 뒤판을 따라 z51~55 (L), 선반 위 z45~52 (R)",
-   "power": "USB-C PD 입력(또는 보조배터리를 케이블 통과로 빼서 입력에 꽂음) → HUSB238 → 퓨즈(x405~451) → KCD1 → 20 V를 강압(D칸)과 앰프(선반)로. 5.1 V는 강압 → Pi(MT666), 허브 DC(선반 앞 줄 z45~52)",
-   "PED": "PED Zero USB-C → 앞 공간 줄 z33~41 → 허브 포트 2 (0.5 m)",
+   "speaker": "스피커 꼬리 XT60 암 → 끝벽 집게 (L 앞 공간 y238~250 z31.7~50.3 / R y284~296 z37.2~55.8; 2026-10-07 XT30U → XT60, 세워 꽂음). 앰프 선(끝에 XT60 수)은 뒤판을 따라 z51~55 (L, y328.5), 끝벽 L을 따라 앞으로 와 집게 판 위 z56.5로 XT60 L까지 (2026-10-07: 배터리 앞 사선 길 없앰), 선반 위 z45~52 (R)",
+   "power": "LiFePO4 12.8 V 배터리(가운데 유닛 A칸) → 선이 +x 끝에서 위로 꺾여 배터리 윗면의 XT60 짝 → 버스 쪽 선이 앞으로 넘어와 퓨즈 홀더(ATC/ATO, 앞 공간 위 배터리 틀 퓨즈 선반 x397~437.1, 12 AWG 꼬리 + 이음) → KCD1(뒤판) → 12.8 V를 강압(D칸)과 앰프(선반, 뒤 줄 y325 z53)로. 5.1 V는 강압 → Pi(C24), 허브 DC(-x 끝면). 충전은 윗면의 DC 5.5×2.1 선. 2026-10-07 전: USB-C PD 입력 → HUSB238 → 퓨즈(x405~451)",
+   "PED": "PED Zero USB-C (보드 앞끝 x458) → 앞 공간 줄 z33~41 → 허브 포트 2 (0.5 m)",
    "DSI": "Pi DISP1에서 곧게 위로 화면 뚜껑 구멍까지"
   },
   "fill": "가장 붐비는 곳(허브 앞 x740 근처): USB 선 최대 7개 OD 4 → 약 88 mm², 통로 단면 783 mm²의 약 11 %",
@@ -2333,7 +2369,7 @@
  },
  "joints": {
   "rear_unit_to_key_bed": {
-   "brackets": "BRK2-L/R: 볼 뒷면 M3 자리(y212, z12, x-11.80/-4.88 · 1226.88/1233.80)에 L42 실리콘 그로밋 + M3×16 (L1 그대로). 판 z8~14는 헤드폰 선(z3~7.5) 위, EL 리드(x14.8~) 옆을 피함",
+   "brackets": "BRK2-L/R: 볼 뒷면 M3 자리(y212, z12, x-11.80/-4.88 · 1226.88/1233.80)에 L42 실리콘 그로밋 + M3×20 (10/7: M3×16에서, 볼 구멍 y199까지). 판 z8~14는 헤드폰 선(z3~7.5) 위, EL 리드(x14.8~) 옆을 피함",
    "pins": "세운 핀 Ø6 z14~24: L (x0.5, y230) → 둥근 소켓 Ø6.5 / R (x1221.5, y230) → x방향 긴 소켓 6.5×11 (1221 mm 사이 공차 ±2.3)",
    "sockets": "스피커 통로 지붕 아래에 붙인 출력 블록 (밀폐 상자를 뚫지 않음), 핀과 소켓 바닥 사이 2 mm → 위아래 힘이 핀으로 가지 않음",
    "gap": "앞 2.0 mm 공기 (y212~214)",
@@ -2363,7 +2399,7 @@
      ]
     ]
    },
-   "separation": "뚜껑 열기 → XT30U-M 뽑기 → 나비나사 2개 풀기 → 스피커를 약 10 mm 들어 핀에서 빼고 약 15 mm 바깥으로 밂 (끝벽 Ø14 구멍 안에 감긴 꼬리 여유가 풀림) → 가운데 안에서 XT30U-F를 집게 홈에서 끝벽 구멍(홈과 같은 축)으로 곧게 밀어 넣고 벌어진 틈에서 꼬리를 당겨 빼냄 → 스피커를 들어냄 (가로 다월 없음) [CAD 고침 2026-10-01: 꼬리가 밀봉 구멍에 묶여 곧게 들 수 없음]",
+   "separation": "뚜껑 열기 → XT60 수 뽑기 → 나비나사 2개 풀기 → 스피커를 약 10 mm 들어 핀에서 빼고 약 18 mm 바깥으로 밂 (끝벽 Ø19 구멍 안에 감긴 꼬리 여유가 풀림; 길이 16인 XT60 암이 벌어진 틈에 들어가려면 18 - 2026-10-07, XT30 때 15) → 가운데 안에서 XT60 암을 집게 홈에서 끝벽 구멍(홈과 같은 축)으로 곧게 밀어 넣고 벌어진 틈에서 꼬리를 당겨 빼냄 → 스피커를 들어냄 (가로 다월 없음) [CAD 고침 2026-10-01: 꼬리가 밀봉 구멍에 묶여 곧게 들 수 없음]",
    "replaced_from_L1": "도브테일 블록 4개 + 토글 래치 2개 (y447~471) 없앰"
   },
   "service": {
@@ -2499,20 +2535,20 @@
      44.85
     ],
     "fits_256_bed": true,
-    "note": "뒤판 창에 끼우는 판: 케이블 통과 Ø12, USB-C PD 입력 주머니, KCD1(2 mm 오목), J501 + 강압 뒤 루버",
+    "note": "뒤판 창에 끼우는 판: KCD1(2 mm 오목), J501 + 강압 뒤 루버, 바닥 탭 하나(x427~451, 접시 8호 13 ×2). 2026-10-07: 케이블 통과 Ø12·USB-C PD 입력 주머니를 막음",
     "g_each_est": 55.0
    },
    {
-    "part": "CU-PBHOLDER",
+    "part": "CU-BATFRAME",
     "qty": 1,
     "print_size_mm": [
-     109.0,
-     75.0,
-     14.0
+     162.6,
+     113.0,
+     39.43
     ],
     "fits_256_bed": true,
-    "note": "보조배터리 받침 (바닥 2, 벽 1.5, 끈 구멍)",
-    "g_each_est": 35.0
+    "note": "LiFePO4 배터리 틀 (2026-10-07, 보조배터리 받침 + 퓨즈 받침 대신): 벽 1.5 × 14, 둘레 0.5, 끈 구멍 22 × 3 ×2, 나사 귀 2 + 앞 덩어리 나사 구멍 2, 앞에 퓨즈 선반 x397~434.6 (ATC/ATO 홀더를 눕혀 놓음, 꼭지 받침 2 눌러 끼움, 밑면 y·x 45°)",
+    "g_each_est": 37.0
    },
    {
     "part": "PR-HUBSHELF",
@@ -2527,16 +2563,16 @@
     "g_each_est": 45.0
    },
    {
-    "part": "XT30-CLIP-L/R",
+    "part": "XT60-CLIP-L/R",
     "qty": 2,
     "print_size_mm": [
+     34.0,
      24.0,
-     14.0,
-     10.0
+     25.0
     ],
     "fits_256_bed": true,
-    "note": "끝벽 안쪽 XT30 짝 집게",
-    "g_each_est": 3.0
+    "note": "끝벽 안쪽 XT60 짝 집게 (2026-10-07 XT30 → XT60: 세워 꽂는 홈 16.2 × 8.6 × 16.2, 판 구멍 Ø19, 45° 원뿔 목)",
+    "g_each_est": 6.0
    },
    {
     "part": "STANDOFFS",
@@ -2547,7 +2583,7 @@
      6.0
     ],
     "fits_256_bed": true,
-    "note": "Pi 6 mm, 강압·PED·J702 5 mm, 앰프 2 mm 받침",
+    "note": "Pi 6 mm, 강압·PED·J702 5 mm, 앰프 2 mm 받침 (PED는 2026-10-07 보드를 90° 돌린 자리)",
     "g_each_est": 30.0
    },
    {
@@ -2561,6 +2597,42 @@
     "fits_256_bed": true,
     "note": "통로 지붕 아래·끝벽 케이블 집게",
     "g_each_est": 10.0
+   },
+   {
+    "part": "CU-LID-L/R (LID-L, LID-R)",
+    "qty": 2,
+    "print_size_mm": [
+     241.0,
+     128.5,
+     11.5
+    ],
+    "fits_256_bed": true,
+    "note": "2026-10-07 오꾸메 → 출력: 윗면을 베드에 엎어, 배기 홈·밑면 자석 자리 Ø8×3.2 3곳 출력, 앞 윗모서리 1×45° (베드 쪽). 벽 3 + 채움 15 %",
+    "g_each_est": 155.0
+   },
+   {
+    "part": "CU-END-L/R (CU-PLY-END-L/R)",
+    "qty": 2,
+    "print_size_mm": [
+     117.0,
+     56.35,
+     11.5
+    ],
+    "fits_256_bed": true,
+    "note": "2026-10-07 오꾸메 → 출력: ㄴ자 (통로 홈 27×22), XT60 Ø19, 슬리브 Ø8 ×2 (연료 호스 OD8 ID4.5), 윗모서리 자석 자리 (눕힌 구멍, 평평한 꼭지 눈물방울). 이음면을 베드에",
+    "g_each_est": 41.0
+   },
+   {
+    "part": "SPK-SIDEIN-L/R (SPK[LR]-PLY-SIDEIN)",
+    "qty": 2,
+    "print_size_mm": [
+     139.65,
+     128.5,
+     11.5
+    ],
+    "fits_256_bed": true,
+    "note": "2026-10-07 오꾸메 → 출력: 8점 모양 (40° 경사·통로 홈), M4 열 인서트 구멍 Ø5.6 × 6.5 막힘 ×2 (뒤 PETG 5.0), 선 구멍 Ø6. 밀폐 벽: 벽 5 + 채움 40 % 이상",
+    "g_each_est": 117.0
    }
   ],
   "all_fit": true,
@@ -2646,15 +2718,16 @@
     "SPK-DUCTFORMER-L/R": "앞벽 y214~220 + 턱 y220~225 + 통로 지붕 z27~33 + 세움벽 y241~247, 두께 6 (C 접목, 심사 수정 4→6). 끝면을 바닥에",
     "SPK-GRILLE-L/R": "L1 육각 그릴에서 아래 링 벽 없앰(C), 판은 s-50부터, 위는 z148.06에서 잘림"
    }
-  }
+  },
+  "petg_note_2026_10_07": "배터리 틀 약 37 g (속 꽉 채움, 입체에서 계산; 같은 날 퓨즈 홀더 BU914 → ATC/ATO로 앞 받침 대신 낮은 덩어리 + 퓨즈 선반, 49 → 37 g) - 보조배터리 받침 30 g + 퓨즈 받침 3.5 g 대신; 뒤판 출력물 36 → 32 g. 05_본체출력물 합계 약 1,495 → 1,493 g"
  },
  "plywood_cut_list": {
   "material": "오꾸메 11.5",
   "pieces": [
    {
     "id": "PLY-POD-SIDE",
-    "name": "스피커 옆판 (L 바깥/안, R 안/바깥)",
-    "qty": 4,
+    "name": "스피커 바깥 옆판 L·R",
+    "qty": 2,
     "blank_mm": [
      128.5,
      139.65
@@ -2693,7 +2766,7 @@
       27.0
      ]
     ],
-    "note": "직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈(y214~241 × z5~27). 안쪽 옆판에 M4 목재 인서트 2개(바깥면에서 8 깊이, 막힘)와 XT30 선 구멍 Ø6(밀봉)"
+    "note": "직선 자르기: 40° 경사 1번 + 앞 턱 + 통로 홈(y214~241 × z5~27). 2026-10-07: 안쪽 옆판 2장(인서트·선 구멍)은 PETG 출력으로 옮김 (printed_parts SPK-SIDEIN-L/R) — 합판은 바깥 옆판 2장, 구멍 없음"
    },
    {
     "id": "PLY-POD-BACK",
@@ -2729,17 +2802,6 @@
     "note": "y241~331, z5~16.5 (앞 모서리 y241이 통로 뒷벽 아래쪽)"
    },
    {
-    "id": "PLY-CU-END",
-    "name": "가운데 유닛 끝벽 L/R (ㄴ자)",
-    "qty": 2,
-    "blank_mm": [
-     117.0,
-     56.35
-    ],
-    "profile_yz": null,
-    "note": "y214~331 × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌. XT30 선 구멍 Ø14, 나비나사 구멍 Ø8(고무 슬리브) 2개"
-   },
-   {
     "id": "PLY-CU-BACK",
     "name": "가운데 유닛 뒤판",
     "qty": 1,
@@ -2748,7 +2810,7 @@
      56.35
     ],
     "profile_yz": null,
-    "note": "x260~962, y331~342.5, z5~61.35. 뒤판 출력물 창 x397.5~538 × z16.5~61.35 (위가 열림, 뚜껑이 덮음), 앰프 뒤 환기 홈 8개 4×15"
+    "note": "x260~962, y331~342.5, z5~61.35. 뒤판 출력물 창 x397.5~538 × z16.5~61.35 (위가 열림, 뚜껑이 덮음), 앰프 뒤 환기 Ø8 구멍 10개 한 줄 x742~841 z50.5 (간격 11; 2026-10-07, 전 홈 8개 4×15), 윗모서리 자석 자리 Ø8 × 3.2 4곳"
    },
    {
     "id": "PLY-CU-BOTTOM",
@@ -2759,38 +2821,16 @@
      90.0
     ],
     "profile_yz": null,
-    "note": "끝벽 사이 x271.5~950.5, y241~331. 앞 모서리 R3 (케이블이 넘어감), 강압·Pi 아래 흡기 홈"
-   },
-   {
-    "id": "PLY-CU-LID-L",
-    "name": "뚜껑 L",
-    "qty": 1,
-    "blank_mm": [
-     241.0,
-     128.5
-    ],
-    "profile_yz": null,
-    "note": "x260~501, 윗면 z72.85 (건반 윗면과 같은 높이), 앞 윗모서리 1×45° 모따기"
-   },
-   {
-    "id": "PLY-CU-LID-R",
-    "name": "뚜껑 R",
-    "qty": 1,
-    "blank_mm": [
-     241.0,
-     128.5
-    ],
-    "profile_yz": null,
-    "note": "x721~962, 앰프 위 배기 홈"
+    "note": "끝벽 사이 x271.5~950.5, y241~331. 앞 모서리 R3 (케이블이 넘어감), 강압·Pi 아래 흡기 Ø8 구멍 40개 (강압 4×3, Pi 28 마름모; 간격 11; 2026-10-07, 전 홈 14개 4×34)"
    }
   ],
-  "area_m2": 0.343,
-  "blank_area_m2": 0.369,
+  "area_m2": 0.24,
+  "blank_area_m2": 0.258,
   "L1_area_m2": 0.633,
   "nesting_400x1200": {
    "fits": true,
    "used_mm": [
-    1181.8,
+    965.0,
     385.0
    ],
    "kerf": 3.0,
@@ -2824,27 +2864,6 @@
      139.7
     ],
     [
-     "PLY-POD-SIDE",
-     968.0,
-     0.0,
-     128.5,
-     139.7
-    ],
-    [
-     "PLY-CU-END",
-     1099.5,
-     0.0,
-     56.4,
-     117.0
-    ],
-    [
-     "PLY-POD-SIDE",
-     0.0,
-     152.4,
-     128.5,
-     139.7
-    ],
-    [
      "PLY-POD-BACK",
      131.5,
      152.4,
@@ -2857,27 +2876,6 @@
      152.4,
      250.0,
      139.7
-    ],
-    [
-     "PLY-CU-LID-L",
-     637.5,
-     152.4,
-     241.0,
-     128.5
-    ],
-    [
-     "PLY-CU-LID-R",
-     881.5,
-     152.4,
-     241.0,
-     128.5
-    ],
-    [
-     "PLY-CU-END",
-     1125.5,
-     152.4,
-     56.4,
-     117.0
     ],
     [
      "PLY-POD-BOTTOM",
@@ -2908,7 +2906,7 @@
      14.1
     ]
    ],
-   "note": "가게에서 직사각형 조각으로 자르고, 옆판 경사·턱·홈과 끝벽 홈·뒤판 창은 직접 톱으로. 가게가 이 배치를 못 하면 600×1200을 그대로 삼"
+   "note": "가게에서 직사각형 조각으로 자르고, 옆판 경사·턱·홈과 끝벽 홈·뒤판 창은 직접 톱으로. 가게가 이 배치를 못 하면 600×1200을 그대로 삼 2026-10-07: 뚜껑 L·R, 끝벽 L·R, 스피커 안쪽 옆판 2장은 PETG 출력으로 옮겨 이 배치에서 뺌 (나머지 자리는 그대로, 남는 조각이 커짐)"
   },
   "earlier_choice_43deg": {
    "note": "43° (2026-10-01 첫 L2 선택) 값. 사용자가 2026-10-01 40°로 바꿈 (W1 세션 전달) — 연구값으로 보관",
@@ -3102,6 +3100,22 @@
      "note": "x721~962, 앰프 위 배기 홈"
     }
    }
+  },
+  "drill_reduction_2026_10_07": {
+   "request": "사용자 2026-10-07 '드릴을 써야되는 부분을 최소한으로 줄여줘' (공구는 새로 사지 않음, 가진 드릴·Ø4·Ø6·Ø8 날)",
+   "moved_to_print": [
+    "PLY-CU-LID-L / LID-R → 출력 뚜껑 L·R (같은 241 × 128.5 × 11.5, 1×45° 모따기, 배기 홈·밑면 자석 자리 출력)",
+    "PLY-CU-END ×2 → 출력 끝벽 L·R (같은 ㄴ자, XT60 Ø19·슬리브 Ø8 ×2·윗모서리 자석 자리 출력)",
+    "PLY-POD-SIDE 안쪽 2장 → 출력 안쪽 옆판 L·R (같은 8점 모양, M4 열 인서트 구멍 Ø5.6 × 6.5 막힘·선 구멍 Ø6 출력; L73 Norelem 인서트 대신 사용자 세트의 M4 × 바깥 6 × 길이 6)"
+   ],
+   "vents": "뒤판 환기 홈 8 × (4 × 15) → Ø8 10개 (503 mm² ≥ 480), 아랫판 흡기 홈 14 × (4 × 34) → Ø8 40개 (2,011 mm² ≥ 1,904); 구멍 사이 나무 3",
+   "drilled_holes": {
+    "before": 624,
+    "after": 54,
+    "after_list": "Ø8 관통 50 (뒤판 10, 아랫판 40) + 뒤판 윗모서리 자석 자리 Ø8 × 3.2 4"
+   },
+   "pieces_before": 16,
+   "pieces_after": 10
   }
  },
  "bom_changes": [
@@ -3122,8 +3136,9 @@
   },
   {
    "item": "ㄱ자 USB-C to C 케이블 0.3 m (보조배터리 → 케이블 통과)",
-   "change": "추가",
-   "krw": 2060
+   "change": "뺌 (2026-10-07 LiFePO4 배터리로 바뀌어 케이블 통과·PD 입력이 없음)",
+   "krw": 0,
+   "krw_before_2026_10_07": 2060
   },
   {
    "item": "USB-A→C 케이블 (NA993 1 m ×8)",
@@ -3132,7 +3147,7 @@
    "note": "짧은 것 1,300~1,900원으로 거의 같음. 1 m ×8을 그대로 써도 되지만 남는 선 약 2.3 m를 감아 둬야 함"
   },
   {
-   "item": "고무발 14, L42 그로밋 4, EVA 3T, 흡음솜, XT30 짝, 네오디뮴 8×3",
+   "item": "고무발 14, L42 그로밋 4, EVA 3T, 흡음솜, XT60 짝 (2026-10-07, 전 XT30), 네오디뮴 8×3",
    "change": "기존 줄로 충분 (개수 같거나 줄어듦)",
    "krw": 0
   },
@@ -3152,9 +3167,15 @@
    "change": "선택: 온도 시험에서 걸리면",
    "krw": 0,
    "note": "+8,000~9,000"
+  },
+  {
+   "item": "M4 나사산 인서트 L73 (Norelem 07653-04) ×4",
+   "change": "2026-10-07 뺌 — 안쪽 옆판을 출력하고 사용자 열 인서트 세트의 M4 × 바깥 6 × 길이 6을 씀 (드릴 구멍 없음)",
+   "krw": 0,
+   "note": "구매 목록 반영은 따로 (L73 4 × 1,749원)"
   }
  ],
- "bom_net_krw": -21060,
+ "bom_net_krw": -23120,
  "comparison_vs_L1": {
   "depth_y": {
    "L1": 447.0,
@@ -3255,9 +3276,10 @@
   "출력 앞판이 250 폭으로 256 판에 3 mm씩 여유 → 브림 필수, 휘면 앞판을 2조각(혀-홈 + MS 폴리머, 누설 시험)",
   "합판 400×1200 한 장은 주어진 배치대로 잘라야 들어감 (여유 높이 14 mm). 가게가 못 하면 600×1200 유지 (+22,520원)",
   "건반 뒤 좁은 골(y212~218.6, z65~72.85)에 먼지가 모임. 앉은 자리에서는 가려짐",
-  "보조배터리를 뺄 때 뒤판을 따라가는 선(z51~55)이 0.5 위에 있어 배터리를 기울여 빼야 함",
+  "LiFePO4 배터리(2026-10-07): 끈은 배터리 밑(끈 구멍 x304~326)을 지나 위로 감음 - 배터리 왼쪽 끝이 끈 두께(약 1~2)만큼 뜰 수 있음 (윗면의 XT60·DC는 +x 쪽 x392~423, 바닥에 닿은 쪽). 선(XT60·DC)이 +x 끝면에서 나온다고 가정 - 받은 배터리로 선이 나오는 면·높이 확인",
   "케이블 길이는 약 ±30 mm 추정 — 사기 전에 끈으로 재기. O1/O2 1 m는 남는 선 약 0.23/0.37 m를 앞 공간에 감음",
-  "예비 건반 칸(R29)을 본체에서 뺌 — 사용자 승인 (2026-10-02)"
+  "예비 건반 칸(R29)을 본체에서 뺌 — 사용자 승인 (2026-10-02)",
+  "배터리 무게 약 0.9 kg (상품 설명 약 900 g)이 가운데 유닛 왼쪽에 실림 - 고무발 (292, 262)·(292, 320)이 바로 밑. 들 때 가운데 유닛 왼쪽이 무거움"
  ],
  "implementation_notes": {
   "body.py": {
@@ -3299,7 +3321,7 @@
     "SEAM-POSTRAIL-1/2",
     "CU-SCREENLID (자리만, W1)",
     "PR-HUBSHELF + 받침 2",
-    "XT30-CLIP-L/R (끝벽)",
+    "XT60-CLIP-L/R (끝벽; 2026-10-07 XT30 → XT60)",
     "M4 나비나사·인서트·고무 슬리브 4쌍",
     "환기 홈 (아랫판, 뚜껑, 뒤판)"
    ],
@@ -3311,7 +3333,7 @@
    "module_cables": "플러그 → R15 → y236.8·z13 줄로 통로 안 x 방향 → 포트 x에서 앞 공간으로 올라가 R15 → +y로 포트 (길이는 cable_duct.cables)",
    "upstream": "Pi USB-A 2단 위 포트 (x629.5~654.5) → S자 → 허브 -x 끝 ㄱ자 플러그 (x670~686.5)",
    "speakers": "SPK_C = body.DRIVER_POSE (speakers.driver), _A = 90 − body.ANGLE (40°: 50° 수직에서; 43° 때 47°), SPK_N = body.DRIVER_AXIS = (0, −sin ANGLE, cos ANGLE)",
-   "xt30": "C-XT30F/M-L → x271.5~295 y236~250 z40~48 (앞 공간 끝벽 집게), -R → x927~950.5 y283~297 z47~55. body.XT30_POCKET 새로",
+   "xt60": "C-XT60F/M-L → x271.5~305.8 y238~250 z31.7~50.3 (앞 공간 끝벽 집게, 세워 꽂음), -R → x916.2~950.5 y284~296 z37.2~55.8. body.XT60_POCKET 새로 (2026-10-07 XT30 → XT60)",
    "unchanged": "모듈 안 전자부, EL/ER 리드·XH, EXT 리드, J701"
   },
   "touchscreen.py": "L2는 touchscreen_rev3.py (R31 3판 3a, ../touchscreen/rev3/design/CAD_SPEC_rev3.md + numbers.json): 받침 좌표 xr·u·w, 경첩 축 (y226.55, z81.35), 자세 25° 사용 / 22° 뒤꿈치 / 90° 접음, numbers.json poses와 같음을 assert. body.py가 CU-SCREENLID(경첩·주머니·구멍·클립·발·배기 홈)와 TS-CRADLE·TS-LEG·TS-WINCOVER·TS-RCLIP·TS-SCREENCOVER(07_터치스크린)·M3×20·M2.5×6을, electronics.py가 화면·DSI FFC·전원선을 만듦; 접은 상태는 altview 부품. touchscreen.py는 2판(Touch Display 2) 그대로 L1 보관본(body_L1·electronics_L1·check_*_L1)만 씀. 사양과 다른 점은 README 부록 A10 표",

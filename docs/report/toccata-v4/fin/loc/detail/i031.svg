@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 192.9" width="600" height="965">
+<title>탄소피막 저항 100 kΩ 1/4 W — 자리 상세</title>
+<defs><style>
+.bg{fill:#ffffff}
+.frame{fill:none;stroke:#1d2433;stroke-width:.5}
+.t{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic','IBM Plex Sans KR',sans-serif;fill:#1d2433}
+.h{paint-order:stroke;stroke:#ffffff;stroke-width:.75;stroke-linejoin:round}
+.tb{font-weight:700}
+.td{fill:#1f5fbf}
+.tm{fill:#5b6578}
+.tr{fill:#c2410c}
+.S-wood{fill:url(#hw);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-print{fill:url(#hp);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-metal{fill:url(#hm);stroke:#1d2433;stroke-width:.32;stroke-linejoin:round}
+.S-rubber{fill:#50555e;stroke:#1d2433;stroke-width:.25}
+.S-elec{fill:url(#he);stroke:#1d2433;stroke-width:.3}
+.S-screen{fill:#3a4150;stroke:#1d2433;stroke-width:.3}
+.S-cable{fill:#e3b23c;stroke:#6b5a1e;stroke-width:.18}
+.S-ctx{fill:#eceef1;stroke:#a3aab5;stroke-width:.18}
+.P-wood{fill:#f2e6d2;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-print{fill:#e5ebf3;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-metal{fill:#c9ced6;stroke:#39404d;stroke-width:.2}
+.P-rubber{fill:#7d828b;stroke:#39404d;stroke-width:.18}
+.P-elec{fill:#d3ead8;stroke:#39404d;stroke-width:.2}
+.P-screen{fill:#596070;stroke:#39404d;stroke-width:.2}
+.P-cable{fill:#f0cf7a;fill-opacity:.55;stroke:#8a7430;stroke-width:.14;stroke-opacity:.7}
+.P-ctx{fill:#f2f3f5;stroke:#b3b9c3;stroke-width:.18}
+.air{fill:#e8f1fb;stroke:none}
+.hid{fill:none;stroke:#39404d;stroke-width:.24;stroke-dasharray:1.6 .9}
+.hidc{fill:none;stroke:#c2410c;stroke-width:.28;stroke-dasharray:2.2 1.1}
+.ph{fill:none;stroke:#5b6578;stroke-width:.3;stroke-dasharray:4 1 1 1}
+.cl{fill:none;stroke:#6b7690;stroke-width:.2;stroke-dasharray:6 1.2 1 1.2}
+.thin{fill:none;stroke:#39404d;stroke-width:.2}
+.vis{fill:none;stroke:#1d2433;stroke-width:.3}
+.sound{fill:none;stroke:#c2410c;stroke-width:.4;stroke-dasharray:3 1.2}
+.ax{fill:none;stroke:#7a3fb5;stroke-width:.3;stroke-dasharray:5 1.2 1 1.2}
+.keep{fill:none;stroke:#b42318;stroke-width:.3;stroke-dasharray:1.2 1}
+.dm{fill:none;stroke:#1f5fbf;stroke-width:.18}
+.ex{fill:none;stroke:#8a96ab;stroke-width:.15}
+.ah{fill:#1f5fbf;stroke:none}
+.ld{fill:none;stroke:#3d4555;stroke-width:.18}
+.dot{fill:#3d4555}
+.bal{fill:#ffffff;stroke:#1d2433;stroke-width:.25}
+.secl{fill:none;stroke:#1d2433;stroke-width:.55}
+.seca{fill:#1d2433}
+.grid{fill:none;stroke:#1d2433;stroke-width:.25}
+.grid2{fill:none;stroke:#8a96ab;stroke-width:.15}
+.box{fill:#fbfbfc;stroke:#c3c9d3;stroke-width:.2}
+.sheetply{fill:#fbf6ee;stroke:#1d2433;stroke-width:.35}
+.zone{fill:#f4f6f9;stroke:#8a96ab;stroke-width:.2}
+.datum{fill:none;stroke:#15803d;stroke-width:.9;stroke-linecap:round;stroke-opacity:.9}
+.spot{fill:none;stroke:#c2410c;stroke-width:.32}
+.spoth{fill:none;stroke:#c2410c;stroke-width:.32;stroke-dasharray:.45 .3}
+
+.Zkw{fill:#fbfbf8;stroke:#7d8592;stroke-width:.16}.Zkb{fill:#aab0b9;stroke:#5d6672;stroke-width:.16}.Zpr{fill:#e6eaf0;stroke:#7d8592;stroke-width:.16}
+.Zwd{fill:#efe4d0;stroke:#8a7a5e;stroke-width:.16}.Zel{fill:#dbe9df;stroke:#6f8a77;stroke-width:.16}.Zmt{fill:#d2d7de;stroke:#6f7887;stroke-width:.14}
+.Zrb{fill:#c4c8ce;stroke:#6f7887;stroke-width:.14}.Zcb{fill:#efdca4;stroke:#9a8240;stroke-width:.12}
+.Skw{fill:#f4f4ee;stroke:#1d2433;stroke-width:.3}.Skb{fill:#8e95a0;stroke:#1d2433;stroke-width:.3}.Spr{fill:url(#hp);stroke:#1d2433;stroke-width:.3}
+.Swd{fill:url(#hw);stroke:#1d2433;stroke-width:.3}.Sel{fill:url(#he);stroke:#1d2433;stroke-width:.26}.Smt{fill:url(#hm);stroke:#1d2433;stroke-width:.24}
+.Srb{fill:#7d828b;stroke:#1d2433;stroke-width:.22}.Scb{fill:#e3b23c;stroke:#6b5a1e;stroke-width:.16}
+.HL{fill:#B3342D;fill-opacity:.88;stroke:#6e1c17;stroke-width:.3;stroke-linejoin:round}
+.HLs{fill:#B3342D;stroke:#5a1511;stroke-width:.32;stroke-linejoin:round}
+.HL2{fill:#B3342D;fill-opacity:.32;stroke:#B3342D;stroke-width:.2}
+.HLp{fill:#B3342D;fill-opacity:.14;stroke:#B3342D;stroke-width:.3;stroke-dasharray:1.2 .7}
+.HH{fill:#d9822b;fill-opacity:.35;stroke:#a35a12;stroke-width:.22}
+.vf{fill:none;stroke:#8a96ab;stroke-width:.25}
+.lead{fill:none;stroke:#6e1c17;stroke-width:.3}
+.tl{fill:#6e1c17}
+.nb{fill:#5b6578}
+</style>
+<pattern id="hw" patternUnits="userSpaceOnUse" width="1.6" height="1.6" patternTransform="rotate(45)"><rect width="1.6" height="1.6" fill="#ecdcc2"/><line x1="0" y1="0" x2="0" y2="1.6" stroke="#a8875a" stroke-width=".22"/></pattern>
+<pattern id="hp" patternUnits="userSpaceOnUse" width="1.1" height="1.1" patternTransform="rotate(-45)"><rect width="1.1" height="1.1" fill="#dfe6ef"/><line x1="0" y1="0" x2="0" y2="1.1" stroke="#7f93b0" stroke-width=".16"/></pattern>
+<pattern id="hm" patternUnits="userSpaceOnUse" width=".9" height=".9" patternTransform="rotate(45)"><rect width=".9" height=".9" fill="#c3c8d1"/><path d="M0 0V.9M0 0H.9" stroke="#5d6778" stroke-width=".12"/></pattern>
+<pattern id="he" patternUnits="userSpaceOnUse" width="1.4" height="1.4"><rect width="1.4" height="1.4" fill="#cfe6d3"/><line x1="0" y1=".7" x2="1.4" y2=".7" stroke="#5f9a6c" stroke-width=".14"/></pattern>
+<clipPath id="c0"><rect x="17.00" y="22.70" width="100.00" height="81.13"/></clipPath><clipPath id="c1"><rect x="17.00" y="122.33" width="100.00" height="43.72"/></clipPath></defs>
+<rect class="bg" x="0" y="0" width="120" height="192.9"/>
+<g class="L-geo">
+<path class="Zrb" fill-rule="evenodd" d="M66.71 37.70 63.57 37.70 63.57 38.84 66.71 38.84Z" clip-path="url(#c0)"/>
+<path class="Zmt" fill-rule="evenodd" d="M37.10 84.56 37.24 84.56 37.71 84.09 37.71 83.17 37.57 83.03 37.57 82.84 37.39 82.84 37.10 82.56 36.18 82.56 36.04 82.70 35.86 82.70 35.86 82.88 35.57 83.17 35.57 84.09 35.86 84.37 35.86 84.56 36.18 84.56 36.33 84.70 36.96 84.70Z" clip-path="url(#c0)"/>
+<path class="Zmt" fill-rule="evenodd" d="M97.96 43.56 98.10 43.56 98.57 43.09 98.57 42.17 98.29 41.88 98.29 41.70 98.10 41.70 97.96 41.56 97.67 41.56 97.50 41.38 97.33 41.56 97.04 41.56 96.90 41.70 96.76 41.70 96.57 41.88 96.57 42.03 96.43 42.17 96.43 43.09 96.90 43.56 97.04 43.56 97.18 43.70 97.82 43.70Z" clip-path="url(#c0)"/>
+<path class="Zcb" fill-rule="evenodd" d="M65.57 86.99 46.00 86.99 46.00 87.84 65.57 87.84ZM65.57 99.41 46.29 99.41 46.29 103.84 65.57 103.84Z" clip-path="url(#c0)"/>
+<path class="Zcb" fill-rule="evenodd" d="M75.43 24.13 72.67 24.13 72.57 24.03 72.57 22.70 69.57 22.70 69.57 24.03 69.47 24.13 66.71 24.13 66.71 39.99 75.43 39.99Z" clip-path="url(#c0)"/>
+<path class="Zpr" fill-rule="evenodd" d="M97.10 43.56 96.96 43.56 96.43 43.03 96.43 42.23 96.57 42.09 96.57 41.94 96.82 41.70 96.96 41.70 97.10 41.56 97.39 41.56 97.50 41.44 97.61 41.56 97.90 41.56 98.04 41.70 98.18 41.70 98.29 41.80 98.29 41.94 98.57 42.23 98.57 43.03 98.04 43.56 97.90 43.56 97.76 43.70 97.24 43.70ZM36.24 84.56 35.96 84.56 35.86 84.46 35.86 84.31 35.57 84.03 35.57 83.23 35.86 82.94 35.86 82.80 35.96 82.70 36.10 82.70 36.24 82.56 37.04 82.56 37.33 82.84 37.47 82.84 37.57 82.94 37.57 83.09 37.71 83.23 37.71 84.03 37.18 84.56 37.04 84.56 36.90 84.70 36.39 84.70ZM46.29 99.52 46.39 99.41 65.47 99.41 65.57 99.52 65.57 103.84 117.00 103.84 117.00 24.13 75.43 24.13 75.43 38.84 94.47 38.84 94.57 38.94 94.57 45.56 100.43 45.56 100.43 38.94 100.53 38.84 100.90 38.84 101.00 38.94 101.00 87.74 100.90 87.84 100.53 87.84 100.43 87.74 100.43 80.70 94.57 80.70 94.57 87.74 94.47 87.84 68.96 87.84 68.86 87.74 68.86 63.13 67.29 63.13 67.29 87.74 67.18 87.84 39.67 87.84 39.57 87.74 39.57 80.70 33.71 80.70 33.71 87.74 33.61 87.84 33.24 87.84 33.14 87.74 33.14 38.94 33.24 38.84 33.61 38.84 33.71 38.94 33.71 45.56 39.57 45.56 39.57 38.94 39.67 38.84 63.57 38.84 63.57 37.80 63.67 37.70 66.71 37.70 66.71 24.13 17.00 24.13 17.00 103.84 46.29 103.84Z" clip-path="url(#c0)"/>
+<path class="Spr" fill-rule="evenodd" d="M115.26 122.33 111.77 122.33 111.77 131.17 115.26 131.17ZM36.77 133.61 28.51 133.61 28.51 133.49 22.58 133.49 22.58 149.77 17.00 149.77 17.00 152.10 36.77 152.10ZM115.26 149.77 98.74 149.77 98.74 152.10 115.26 152.10Z" clip-path="url(#c1)"/>
+<path class="Skw" fill-rule="evenodd" d="M29.74 130.79 29.78 130.09 29.97 129.43 30.31 128.83 30.79 128.32 31.36 127.94 32.01 127.70 32.70 127.62 33.38 127.70 34.03 127.94 34.60 128.32 35.08 128.83 35.43 129.43 35.62 130.09 35.65 130.79 35.53 131.46 36.47 131.46 36.47 129.66 38.51 129.66 38.51 122.33 24.56 122.33 24.56 129.66 28.93 129.66 28.93 131.46 29.86 131.46Z" clip-path="url(#c1)"/>
+<path class="Srb" fill-rule="evenodd" d="M114.67 152.10 97.23 152.10 97.23 155.59 114.67 155.59ZM36.77 152.10 17.00 152.10 17.00 155.59 36.77 155.59Z" clip-path="url(#c1)"/>
+<path class="Sel" fill-rule="evenodd" d="M95.49 141.75 96.07 141.75 96.07 140.59 97.58 140.59 97.58 136.87 89.09 136.87 89.09 136.63 69.33 136.63 69.33 140.59 68.74 140.59 68.74 141.75 69.33 141.75 69.33 143.26 95.49 143.26Z" clip-path="url(#c1)"/>
+<path class="Smt" fill-rule="evenodd" d="M33.42 132.80 34.07 132.47 34.58 131.96 34.91 131.31 35.02 130.59 34.91 129.87 34.58 129.22 34.07 128.70 33.42 128.38 32.70 128.26 31.98 128.38 31.33 128.70 30.81 129.22 30.49 129.87 30.37 130.59 30.49 131.31 30.81 131.96 31.33 132.47 31.98 132.80 32.70 132.91Z" clip-path="url(#c1)"/>
+<path class="Scb" fill-rule="evenodd" d="M115.26 143.15 95.95 143.15 95.95 143.26 96.07 143.26 96.07 145.12 95.95 145.12 95.95 149.77 115.26 149.77Z" clip-path="url(#c1)"/>
+<path class="Scb" fill-rule="evenodd" d="M117.00 134.31 97.58 134.31 97.58 143.15 117.00 143.15Z" clip-path="url(#c1)"/>
+</g>
+<g class="L-over">
+<path class="HH" fill-rule="evenodd" d="M97.18 44.00 96.87 43.91 96.58 43.76 96.33 43.55 96.13 43.29 95.99 42.99 95.92 42.67 95.92 42.35 95.99 42.03 96.13 41.73 96.33 41.47 96.58 41.26 96.87 41.11 97.18 41.02 97.51 41.00 97.83 41.06 98.13 41.18 98.40 41.36 98.63 41.60 98.79 41.88 98.90 42.19 98.93 42.51 98.90 42.84 98.79 43.15 98.63 43.42 98.40 43.66 98.13 43.84 97.83 43.97 97.51 44.02ZM36.17 43.87 35.87 43.74 35.60 43.54 35.39 43.29 35.25 43.00 35.17 42.68 35.17 42.35 35.25 42.03 35.39 41.73 35.60 41.48 35.87 41.29 36.17 41.16 36.49 41.10 36.82 41.12 37.14 41.21 37.42 41.38 37.66 41.60 37.84 41.88 37.95 42.18 37.99 42.51 37.95 42.84 37.84 43.15 37.66 43.42 37.42 43.65 37.14 43.81 36.82 43.90 36.49 43.92ZM36.33 85.04 36.02 84.95 35.73 84.80 35.48 84.59 35.28 84.33 35.15 84.03 35.07 83.71 35.07 83.39 35.15 83.07 35.28 82.77 35.48 82.51 35.73 82.30 36.02 82.15 36.33 82.06 36.66 82.04 36.98 82.09 37.28 82.22 37.55 82.40 37.78 82.64 37.95 82.92 38.05 83.22 38.08 83.55 38.05 83.87 37.95 84.18 37.78 84.46 37.55 84.70 37.28 84.88 36.98 85.00 36.66 85.06ZM97.02 84.90 96.72 84.77 96.45 84.58 96.24 84.33 96.09 84.03 96.02 83.71 96.02 83.38 96.09 83.07 96.24 82.77 96.45 82.52 96.72 82.32 97.02 82.19 97.34 82.14 97.67 82.16 97.99 82.25 98.27 82.41 98.51 82.64 98.69 82.91 98.80 83.22 98.84 83.55 98.80 83.88 98.69 84.18 98.51 84.46 98.27 84.68 97.99 84.85 97.67 84.94 97.34 84.96ZM66.69 61.85 69.33 61.85 69.33 86.85 100.02 86.85 100.02 39.68 33.98 39.68 33.98 86.85 66.69 86.85Z" clip-path="url(#c0)"/>
+<rect class="vf" x="17.000" y="22.700" width="100.000" height="81.132"/>
+<rect class="seca" x="105.566" y="101.232" width="9.434" height="0.900"/>
+<path class="HLp" fill-rule="evenodd" d="M96.07 143.26 37.93 143.26 37.93 145.12 96.07 145.12Z" clip-path="url(#c1)"/>
+<path class="HH" fill-rule="evenodd" d="M96.07 143.26 68.74 143.26 68.74 145.12 96.07 145.12Z" clip-path="url(#c1)"/>
+<rect class="vf" x="17.000" y="122.332" width="100.000" height="43.721"/>
+<rect class="seca" x="103.372" y="163.453" width="11.628" height="0.900"/>
+</g>
+<g class="L-dim">
+<path class="dm" d="M67.000 103.832 L67.000 105.632"/>
+<path class="dm" d="M15.200 63.266 L17.000 63.266"/>
+<path class="ex" d="M33.981 38.881 L33.981 36.081"/>
+<path class="ex" d="M100.019 38.881 L100.019 36.081"/>
+<path class="dm" d="M33.981 37.281 L100.019 37.281"/>
+<path class="ah" d="M33.981 37.281 L36.181 36.621 L36.181 37.941 Z"/>
+<path class="ah" d="M100.019 37.281 L97.819 37.941 L97.819 36.621 Z"/>
+<path class="ex" d="M100.819 39.681 L103.819 39.681"/>
+<path class="ex" d="M100.819 86.851 L103.819 86.851"/>
+<path class="dm" d="M102.619 39.681 L102.619 86.851"/>
+<path class="ah" d="M102.619 39.681 L103.279 41.881 L101.959 41.881 Z"/>
+<path class="ah" d="M102.619 86.851 L101.959 84.651 L103.279 84.651 Z"/>
+<path class="dm" d="M67.000 166.053 L67.000 167.853"/>
+<path class="dm" d="M15.200 144.193 L17.000 144.193"/>
+<path class="ex" d="M37.930 142.462 L37.930 139.662"/>
+<path class="ex" d="M96.070 142.462 L96.070 139.662"/>
+<path class="dm" d="M37.930 140.862 L96.070 140.862"/>
+<path class="ah" d="M37.930 140.862 L40.130 140.202 L40.130 141.522 Z"/>
+<path class="ah" d="M96.070 140.862 L93.870 141.522 L93.870 140.202 Z"/>
+</g>
+<g class="L-lead">
+<path class="lead" d="M67.00 63.27 L75.53 28.90 L76.53 28.90"/>
+<circle class="tl" cx="67.000" cy="63.266" r="0.600"/>
+</g>
+<g class="L-text">
+<text class="t tb" x="3.000" y="7.000" font-size="4.20" text-anchor="start">탄소피막 저항 100 kΩ 1/4 W</text>
+<text class="t tm" x="3.000" y="12.200" font-size="2.90" text-anchor="start">쓰는 자리 · 대표 자리 O1-E-MB · 전체 3곳</text>
+<text class="t tb" x="3.000" y="19.700" font-size="3.30" text-anchor="start">① 위에서 본 자리 — z10.6 위 부품은 걷어 냄</text>
+<text class="t h td" x="67.000" y="109.032" font-size="2.90" text-anchor="middle">x 129.25</text>
+<text class="t h td" x="14.600" y="64.266" font-size="2.90" text-anchor="end">y 170.5</text>
+<text class="t tm" x="17.000" y="113.232" font-size="2.50" text-anchor="start">x 76.2</text>
+<text class="t tm" x="117.000" y="113.232" font-size="2.50" text-anchor="end">x 182.2</text>
+<text class="t h td" x="67.000" y="36.381" font-size="2.90" text-anchor="middle">70</text>
+<text class="t h td" x="101.719" y="63.266" font-size="2.90" text-anchor="middle" transform="rotate(-90 101.719 63.266)">50</text>
+<text class="t h tb tl" x="115.000" y="27.700" font-size="3.30" text-anchor="end">탄소피막 저항 100 kΩ 1/4 W</text>
+<text class="t h tm" x="110.283" y="100.432" font-size="2.50" text-anchor="middle">10 mm</text>
+<text class="t h nb" x="27.811" y="96.225" font-size="2.90" text-anchor="middle">프레임</text>
+<text class="t tb" x="3.000" y="119.332" font-size="3.30" text-anchor="start">② 옆 단면 x = 129.25 (왼쪽에서 봄, 연주자 쪽 = 왼쪽)</text>
+<text class="t h td" x="67.000" y="171.253" font-size="2.90" text-anchor="middle">y 170.5</text>
+<text class="t h td" x="14.600" y="145.193" font-size="2.90" text-anchor="end">z 9.8</text>
+<text class="t tm" x="17.000" y="175.453" font-size="2.50" text-anchor="start">y 127.5</text>
+<text class="t tm" x="117.000" y="175.453" font-size="2.50" text-anchor="end">y 213.5</text>
+<text class="t h td" x="67.000" y="139.962" font-size="2.90" text-anchor="middle">50</text>
+<text class="t h tm" x="109.186" y="162.653" font-size="2.50" text-anchor="middle">10 mm</text>
+<text class="t h nb" x="29.822" y="146.060" font-size="2.90" text-anchor="middle">프레임</text>
+<text class="t h nb" x="28.329" y="126.786" font-size="2.90" text-anchor="middle">백건 F1</text>
+<text class="t h nb" x="102.305" y="139.847" font-size="2.90" text-anchor="middle">USB-C 케이블 W201</text>
+<text class="t" x="3.000" y="178.553" font-size="2.90" text-anchor="start">대표 자리 중심 (x 129.25, y 170.5, z 9.8) · 바깥 크기 70 × 50 × 1.6 (x·y·z, 입체 상자)</text>
+<text class="t" x="3.000" y="182.671" font-size="2.90" text-anchor="start">모듈 O1: x = 47 + 164.5(k-1) + 82.25 (k = 1·7, 모듈마다 같은 자리 1곳)</text>
+<text class="t" x="3.000" y="186.789" font-size="2.90" text-anchor="start">주황 = 쓰는 자리 · 빨간 점선 = 단면 밖 부분 · 숫자는 mm, CAD 입체에서 계산</text>
+</g>
+</svg>

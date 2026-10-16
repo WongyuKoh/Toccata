@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297">
+<title>Toccata P-05-34 케이블집게</title>
+<defs><style>
+.bg{fill:#ffffff}
+.frame{fill:none;stroke:#1d2433;stroke-width:.5}
+.t{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic','IBM Plex Sans KR',sans-serif;fill:#1d2433}
+.h{paint-order:stroke;stroke:#ffffff;stroke-width:.75;stroke-linejoin:round}
+.tb{font-weight:700}
+.td{fill:#1f5fbf}
+.tm{fill:#5b6578}
+.tr{fill:#c2410c}
+.S-wood{fill:url(#hw);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-print{fill:url(#hp);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-metal{fill:url(#hm);stroke:#1d2433;stroke-width:.32;stroke-linejoin:round}
+.S-rubber{fill:#50555e;stroke:#1d2433;stroke-width:.25}
+.S-elec{fill:url(#he);stroke:#1d2433;stroke-width:.3}
+.S-screen{fill:#3a4150;stroke:#1d2433;stroke-width:.3}
+.S-cable{fill:#e3b23c;stroke:#6b5a1e;stroke-width:.18}
+.S-ctx{fill:#eceef1;stroke:#a3aab5;stroke-width:.18}
+.P-wood{fill:#f2e6d2;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-print{fill:#e5ebf3;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-metal{fill:#c9ced6;stroke:#39404d;stroke-width:.2}
+.P-rubber{fill:#7d828b;stroke:#39404d;stroke-width:.18}
+.P-elec{fill:#d3ead8;stroke:#39404d;stroke-width:.2}
+.P-screen{fill:#596070;stroke:#39404d;stroke-width:.2}
+.P-cable{fill:#f0cf7a;fill-opacity:.55;stroke:#8a7430;stroke-width:.14;stroke-opacity:.7}
+.P-ctx{fill:#f2f3f5;stroke:#b3b9c3;stroke-width:.18}
+.air{fill:#e8f1fb;stroke:none}
+.hid{fill:none;stroke:#39404d;stroke-width:.24;stroke-dasharray:1.6 .9}
+.hidc{fill:none;stroke:#c2410c;stroke-width:.28;stroke-dasharray:2.2 1.1}
+.ph{fill:none;stroke:#5b6578;stroke-width:.3;stroke-dasharray:4 1 1 1}
+.cl{fill:none;stroke:#6b7690;stroke-width:.2;stroke-dasharray:6 1.2 1 1.2}
+.thin{fill:none;stroke:#39404d;stroke-width:.2}
+.vis{fill:none;stroke:#1d2433;stroke-width:.3}
+.sound{fill:none;stroke:#c2410c;stroke-width:.4;stroke-dasharray:3 1.2}
+.ax{fill:none;stroke:#7a3fb5;stroke-width:.3;stroke-dasharray:5 1.2 1 1.2}
+.keep{fill:none;stroke:#b42318;stroke-width:.3;stroke-dasharray:1.2 1}
+.dm{fill:none;stroke:#1f5fbf;stroke-width:.18}
+.ex{fill:none;stroke:#8a96ab;stroke-width:.15}
+.ah{fill:#1f5fbf;stroke:none}
+.ld{fill:none;stroke:#3d4555;stroke-width:.18}
+.dot{fill:#3d4555}
+.bal{fill:#ffffff;stroke:#1d2433;stroke-width:.25}
+.secl{fill:none;stroke:#1d2433;stroke-width:.55}
+.seca{fill:#1d2433}
+.grid{fill:none;stroke:#1d2433;stroke-width:.25}
+.grid2{fill:none;stroke:#8a96ab;stroke-width:.15}
+.box{fill:#fbfbfc;stroke:#c3c9d3;stroke-width:.2}
+.sheetply{fill:#fbf6ee;stroke:#1d2433;stroke-width:.35}
+.zone{fill:#f4f6f9;stroke:#8a96ab;stroke-width:.2}
+.datum{fill:none;stroke:#15803d;stroke-width:.9;stroke-linecap:round;stroke-opacity:.9}
+.spot{fill:none;stroke:#c2410c;stroke-width:.32}
+.spoth{fill:none;stroke:#c2410c;stroke-width:.32;stroke-dasharray:.45 .3}
+
+.pv{fill:none;stroke:#141a26;stroke-width:.35;stroke-linejoin:round;stroke-linecap:round}
+.ph2{fill:none;stroke:#5b6578;stroke-width:.2;stroke-dasharray:1.4 .7}
+.pcl{fill:none;stroke:#6b7690;stroke-width:.18;stroke-dasharray:5 1 1 1}
+.pcut{fill:none;stroke:#1d2433;stroke-width:.5;stroke-dasharray:6 1.2 1.2 1.2}
+.psec{fill:url(#hp);stroke:#141a26;stroke-width:.35;stroke-linejoin:round}
+.pbed{fill:#f4f6f9;stroke:#8a96ab;stroke-width:.2}
+.pfoot{fill:#dfe6ef;stroke:#39404d;stroke-width:.2}
+.pnum{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace}
+.datum{fill:none;stroke:#15803d;stroke-width:.9;stroke-linecap:round;stroke-opacity:.9}
+.tg{fill:#15803d}
+</style>
+<pattern id="hw" patternUnits="userSpaceOnUse" width="1.6" height="1.6" patternTransform="rotate(45)"><rect width="1.6" height="1.6" fill="#ecdcc2"/><line x1="0" y1="0" x2="0" y2="1.6" stroke="#a8875a" stroke-width=".22"/></pattern>
+<pattern id="hp" patternUnits="userSpaceOnUse" width="1.1" height="1.1" patternTransform="rotate(-45)"><rect width="1.1" height="1.1" fill="#dfe6ef"/><line x1="0" y1="0" x2="0" y2="1.1" stroke="#7f93b0" stroke-width=".16"/></pattern>
+<pattern id="hm" patternUnits="userSpaceOnUse" width=".9" height=".9" patternTransform="rotate(45)"><rect width=".9" height=".9" fill="#c3c8d1"/><path d="M0 0V.9M0 0H.9" stroke="#5d6778" stroke-width=".12"/></pattern>
+<pattern id="he" patternUnits="userSpaceOnUse" width="1.4" height="1.4"><rect width="1.4" height="1.4" fill="#cfe6d3"/><line x1="0" y1=".7" x2="1.4" y2=".7" stroke="#5f9a6c" stroke-width=".14"/></pattern>
+</defs>
+<rect class="bg" x="0" y="0" width="420" height="297"/>
+<rect class="frame" x="10" y="10" width="400" height="277"/>
+<g id="geo">
+<path class="ph2" d="M28.50 64.75 128.50 64.75M28.50 64.50 128.50 64.50M28.50 61.00 128.50 61.00M28.50 46.00 128.50 46.00M28.50 42.50 128.50 42.50M28.50 42.25 128.50 42.25"/>
+<path class="pv" d="M28.50 78.50 28.50 28.50 128.50 28.50 128.50 78.50 28.50 78.50"/>
+<path class="ph2" d="M28.50 113.50 128.50 113.50M28.50 98.50 128.50 98.50M28.50 125.00 128.50 125.00M28.50 117.25 128.50 117.25"/>
+<path class="pv" d="M28.50 128.50 28.50 88.50 128.50 88.50 128.50 128.50 28.50 128.50"/>
+<path class="pv" d="M156.25 113.50 156.25 98.50 178.75 98.50 178.75 113.50 175.00 117.25M156.25 113.50 160.00 117.25 160.00 125.00 156.50 128.50 142.50 128.50 142.50 88.50 192.50 88.50 192.50 128.50 178.50 128.50 175.00 125.00 175.00 117.25"/>
+<path class="psec" fill-rule="evenodd" d="M120.00 155.50 20.00 155.50 20.00 165.50 120.00 165.50Z"/>
+</g>
+<g id="over">
+<path class="pcut" d="M24.500 53.500 L132.500 53.500"/>
+<path class="secl" d="M26.000 53.500 L26.000 50.000"/>
+<path class="seca" d="M26.000 50.000 L26.480 51.600 L25.520 51.600 Z"/>
+<path class="secl" d="M131.000 53.500 L131.000 50.000"/>
+<path class="seca" d="M131.000 50.000 L131.480 51.600 L130.520 51.600 Z"/>
+<path class="grid2" d="M257.000 10.000 L257.000 287.000"/>
+<rect class="grid" x="260.000" y="231.400" width="150.000" height="55.600"/>
+<path class="grid" d="M260.000 242.400 L410.000 242.400"/>
+<path class="grid2" d="M260.000 250.400 L410.000 250.400"/>
+<path class="grid2" d="M297.500 250.400 L297.500 257.400"/>
+<path class="grid2" d="M335.000 250.400 L335.000 257.400"/>
+<path class="grid2" d="M372.500 250.400 L372.500 257.400"/>
+<path class="grid2" d="M260.000 257.400 L410.000 257.400"/>
+<path class="grid2" d="M302.000 257.400 L302.000 264.400"/>
+<path class="grid2" d="M362.000 257.400 L362.000 264.400"/>
+<path class="grid2" d="M260.000 264.400 L410.000 264.400"/>
+<path class="grid2" d="M260.000 272.400 L410.000 272.400"/>
+<path class="grid2" d="M260.000 281.000 L410.000 281.000"/>
+<rect class="pbed" x="260.000" y="34.580" width="34.000" height="34.000"/>
+<path class="pfoot" fill-rule="evenodd" d="M278.33 50.92 275.67 50.92 275.67 52.24 278.33 52.24Z"/>
+<path class="pfoot" fill-rule="evenodd" d="M360.00 38.58 300.00 38.58 300.00 62.58 360.00 62.58Z"/>
+<path class="vis" d="M298.000 62.980 L362.000 62.980"/>
+</g>
+<g id="dim">
+<path class="ex" d="M28.500 129.300 L28.500 135.700"/>
+<path class="ex" d="M128.500 129.300 L128.500 135.700"/>
+<path class="dm" d="M28.500 134.500 L128.500 134.500"/>
+<path class="ah" d="M28.500 134.500 L30.700 133.840 L30.700 135.160 Z"/>
+<path class="ah" d="M128.500 134.500 L126.300 135.160 L126.300 133.840 Z"/>
+<path class="ex" d="M129.300 28.500 L135.700 28.500"/>
+<path class="ex" d="M129.300 78.500 L135.700 78.500"/>
+<path class="dm" d="M134.500 28.500 L134.500 78.500"/>
+<path class="ah" d="M134.500 28.500 L135.160 30.700 L133.840 30.700 Z"/>
+<path class="ah" d="M134.500 78.500 L133.840 76.300 L135.160 76.300 Z"/>
+<path class="ex" d="M142.500 129.300 L142.500 135.700"/>
+<path class="ex" d="M192.500 129.300 L192.500 135.700"/>
+<path class="dm" d="M142.500 134.500 L192.500 134.500"/>
+<path class="ah" d="M142.500 134.500 L144.700 133.840 L144.700 135.160 Z"/>
+<path class="ah" d="M192.500 134.500 L190.300 135.160 L190.300 133.840 Z"/>
+<path class="ex" d="M193.300 88.500 L199.700 88.500"/>
+<path class="ex" d="M193.300 128.500 L199.700 128.500"/>
+<path class="dm" d="M198.500 88.500 L198.500 128.500"/>
+<path class="ah" d="M198.500 88.500 L199.160 90.700 L197.840 90.700 Z"/>
+<path class="ah" d="M198.500 128.500 L197.840 126.300 L199.160 126.300 Z"/>
+<path class="dm" d="M28.500 27.500 L28.500 26.000 L28.500 23.000 L28.500 22.000"/>
+<circle class="ah" cx="28.500" cy="27.500" r="0.350"/>
+<path class="dm" d="M128.500 27.500 L128.500 26.000 L128.500 23.000 L128.500 22.000"/>
+<circle class="ah" cx="128.500" cy="27.500" r="0.350"/>
+<path class="dm" d="M27.500 28.500 L26.000 28.500 L23.000 28.500 L22.000 28.500"/>
+<circle class="ah" cx="27.500" cy="28.500" r="0.350"/>
+<path class="dm" d="M27.500 42.250 L26.000 42.250 L23.000 42.250 L22.000 42.250"/>
+<circle class="ah" cx="27.500" cy="42.250" r="0.350"/>
+<path class="dm" d="M27.500 46.000 L26.000 46.000 L23.000 46.000 L22.000 46.000"/>
+<circle class="ah" cx="27.500" cy="46.000" r="0.350"/>
+<path class="dm" d="M27.500 61.000 L26.000 61.000 L23.000 61.000 L22.000 61.000"/>
+<circle class="ah" cx="27.500" cy="61.000" r="0.350"/>
+<path class="dm" d="M27.500 64.750 L26.000 64.750 L23.000 64.750 L22.000 64.750"/>
+<circle class="ah" cx="27.500" cy="64.750" r="0.350"/>
+<path class="dm" d="M27.500 78.500 L26.000 78.500 L23.000 78.500 L22.000 78.500"/>
+<circle class="ah" cx="27.500" cy="78.500" r="0.350"/>
+<path class="dm" d="M27.500 88.500 L26.000 88.500 L23.000 88.500 L22.000 88.500"/>
+<circle class="ah" cx="27.500" cy="88.500" r="0.350"/>
+<path class="dm" d="M27.500 98.500 L26.000 98.500 L23.000 98.500 L22.000 98.500"/>
+<circle class="ah" cx="27.500" cy="98.500" r="0.350"/>
+<path class="dm" d="M27.500 128.500 L26.000 128.500 L23.000 128.500 L22.000 128.500"/>
+<circle class="ah" cx="27.500" cy="128.500" r="0.350"/>
+<path class="dm" d="M111.667 152.300 L111.667 168.700"/>
+<path class="ah" d="M111.667 155.500 L111.187 153.900 L112.147 153.900 Z"/>
+<path class="ah" d="M111.667 165.500 L112.147 167.100 L111.187 167.100 Z"/>
+<path class="dm" d="M16.800 160.500 L123.200 160.500"/>
+<path class="ah" d="M20.000 160.500 L18.400 160.980 L18.400 160.020 Z"/>
+<path class="ah" d="M120.000 160.500 L121.600 160.020 L121.600 160.980 Z"/>
+</g>
+<g id="text">
+<text class="t h tb" x="28.500" y="84.700" font-size="2.80" text-anchor="start">평면도 (위에서)</text>
+<text class="t h tb" x="28.500" y="141.700" font-size="2.80" text-anchor="start">정면도 (앞에서)</text>
+<text class="t h tb" x="142.500" y="141.700" font-size="2.80" text-anchor="start">우측면도 (오른쪽에서)</text>
+<text class="t h td" x="78.500" y="133.600" font-size="2.50" text-anchor="middle">20</text>
+<text class="t h td" x="133.600" y="53.500" font-size="2.50" text-anchor="middle" transform="rotate(-90 133.600 53.500)">10</text>
+<text class="t h td" x="167.500" y="133.600" font-size="2.50" text-anchor="middle">10</text>
+<text class="t h td" x="197.600" y="108.500" font-size="2.50" text-anchor="middle" transform="rotate(-90 197.600 108.500)">8</text>
+<text class="t h td" x="29.200" y="21.400" font-size="2.50" text-anchor="start" transform="rotate(-90 29.200 21.400)">0</text>
+<text class="t h td" x="129.200" y="21.400" font-size="2.50" text-anchor="start" transform="rotate(-90 129.200 21.400)">20</text>
+<text class="t h td" x="21.400" y="29.325" font-size="2.50" text-anchor="end">10</text>
+<text class="t h td" x="21.400" y="43.075" font-size="2.50" text-anchor="end">7.25</text>
+<text class="t h td" x="21.400" y="46.825" font-size="2.50" text-anchor="end">6.5</text>
+<text class="t h td" x="21.400" y="61.825" font-size="2.50" text-anchor="end">3.5</text>
+<text class="t h td" x="21.400" y="65.575" font-size="2.50" text-anchor="end">2.75</text>
+<text class="t h td" x="21.400" y="79.325" font-size="2.50" text-anchor="end">0</text>
+<text class="t h td" x="21.400" y="89.325" font-size="2.50" text-anchor="end">8</text>
+<text class="t h td" x="21.400" y="99.325" font-size="2.50" text-anchor="end">6</text>
+<text class="t h td" x="21.400" y="129.325" font-size="2.50" text-anchor="end">0</text>
+<text class="t tm" x="130.000" y="14.000" font-size="2.15" text-anchor="start">x 좌표</text>
+<text class="t h tb" x="27.200" y="50.900" font-size="2.80" text-anchor="start">A</text>
+<text class="t h tb" x="132.200" y="50.900" font-size="2.80" text-anchor="start">A</text>
+<text class="t h td" x="111.667" y="171.650" font-size="2.15" text-anchor="middle">2</text>
+<text class="t h td" x="124.000" y="161.252" font-size="2.15" text-anchor="start">20</text>
+<text class="t h tb" x="20.000" y="172.000" font-size="2.80" text-anchor="start">A-A 단면 (y = 5)</text>
+<text class="t h tm" x="20.000" y="175.500" font-size="1.95" text-anchor="start">그림 왼쪽 아래 = x 0 · z 6 (부품 기준)</text>
+<text class="t tb" x="262.500" y="239.000" font-size="4.60" text-anchor="start">Toccata 부품도</text>
+<text class="t tb" x="407.500" y="239.400" font-size="5.40" text-anchor="end">P-05-34</text>
+<text class="t tb" x="262.500" y="248.000" font-size="3.60" text-anchor="start">케이블집게</text>
+<text class="t tm" x="262.000" y="253.000" font-size="1.90" text-anchor="start">척도</text>
+<text class="t" x="262.000" y="256.400" font-size="2.40" text-anchor="start">5:1</text>
+<text class="t tm" x="299.500" y="253.000" font-size="1.90" text-anchor="start">단위</text>
+<text class="t" x="299.500" y="256.400" font-size="2.40" text-anchor="start">mm</text>
+<text class="t tm" x="337.000" y="253.000" font-size="1.90" text-anchor="start">용지</text>
+<text class="t" x="337.000" y="256.400" font-size="2.40" text-anchor="start">A3</text>
+<text class="t tm" x="374.500" y="253.000" font-size="1.90" text-anchor="start">날짜</text>
+<text class="t" x="374.500" y="256.400" font-size="2.40" text-anchor="start">2026-10-08</text>
+<text class="t tm" x="262.000" y="260.000" font-size="1.90" text-anchor="start">수량 (악기 1대)</text>
+<text class="t" x="262.000" y="263.400" font-size="2.40" text-anchor="start">8개</text>
+<text class="t tm" x="304.000" y="260.000" font-size="1.90" text-anchor="start">재료·색</text>
+<text class="t" x="304.000" y="263.400" font-size="2.40" text-anchor="start">PETG 회색</text>
+<text class="t tm" x="364.000" y="260.000" font-size="1.90" text-anchor="start">질량 (속 100 %)</text>
+<text class="t" x="364.000" y="263.400" font-size="2.40" text-anchor="start">1.4 g</text>
+<text class="t tm" x="262.000" y="267.000" font-size="1.90" text-anchor="start">파일</text>
+<text class="t" x="270.000" y="267.200" font-size="2.00" text-anchor="start">stl/print/05_본체출력물/케이블집게__8개.stl</text>
+<text class="t tm" x="270.000" y="270.700" font-size="1.80" text-anchor="start"></text>
+<text class="t tm" x="262.000" y="275.200" font-size="1.90" text-anchor="start">출력·가공 메모</text>
+<text class="t" x="262.000" y="278.500" font-size="2.10" text-anchor="start">붙이는 면(20 × 10)을 베드에, 홈이 위로. 걸림 턱 밑은 45° - 서포트 없음. 8개를 한 판에</text>
+<text class="t tm" x="262.000" y="285.200" font-size="1.90" text-anchor="start">모든 선과 숫자는 출력 파일의 입체에서 잼 (src/part_sheets.py) · 3각법</text>
+<text class="t tb" x="260.000" y="16.000" font-size="4.00" text-anchor="start">케이블집게</text>
+<text class="t" x="260.000" y="21.000" font-size="2.40" text-anchor="start">P-05-34 · 05 본체 출력물</text>
+<text class="t" x="260.000" y="24.360" font-size="2.40" text-anchor="start">크기 (도면 자세) 20 × 10 × 8</text>
+<text class="t" x="260.000" y="27.720" font-size="2.40" text-anchor="start">출력 파일 크기 20 × 10 × 8 (STL 그대로)</text>
+<text class="t tb" x="260.000" y="32.580" font-size="2.80" text-anchor="start">출력 자세</text>
+<text class="t" x="277.000" y="71.780" font-size="1.95" text-anchor="middle">베드 256 × 256 (위에서)</text>
+<text class="t" x="300.000" y="66.180" font-size="1.95" text-anchor="start">옆에서 (3:1) · 출력 높이 8</text>
+<text class="t" x="260.000" y="75.580" font-size="2.15" text-anchor="start">베드에 닿는 면 = 도면의 윗면(+z) (뒤집어 출력)</text>
+<text class="t" x="260.000" y="82.547" font-size="2.40" text-anchor="start">구멍·포켓: 없음 (x·y·z 모든 꼭짓점 평면 사이를 잘라 봄: 닫힌 안쪽 윤곽 없음)</text>
+<text class="t tb" x="260.000" y="87.547" font-size="2.70" text-anchor="start">치수 메모</text>
+<text class="t" x="260.000" y="91.221" font-size="2.30" text-anchor="start">· 월드 좌표 = 부품 기준 + (30, 226, 19) — 기준 개체 CABLE-CLIP-L1</text>
+<text class="t" x="260.000" y="94.395" font-size="2.30" text-anchor="start">· 모서리 좌표 11개 전부 시트에 있음 (좌표 CSV · DXF에도 같음)</text>
+<text class="t" x="260.000" y="97.569" font-size="2.30" text-anchor="start">· A-A 단면 벽 두께: 2 · 20</text>
+<text class="t" x="260.000" y="100.743" font-size="2.30" text-anchor="start">· 개체 8개: CABLE-CLIP-L1 (x 30) · CABLE-CLIP-L2 (x 95) · CABLE-CLIP-L3 (x 170) · CABLE-CLIP-R1 (x 1172) · CABLE-CLIP-R2 (x 1107) ·</text>
+<text class="t" x="262.500" y="103.917" font-size="2.30" text-anchor="start">CABLE-CLIP-R3 (x 1032) · CABLE-CLIP-E1 (x 271.5) · CABLE-CLIP-E2 (x 271.5)</text>
+</g>
+</svg>

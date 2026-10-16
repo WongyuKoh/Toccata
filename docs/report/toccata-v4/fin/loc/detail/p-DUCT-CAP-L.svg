@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 268.1" width="600" height="1340">
+<title>통로옆마개 — 자리 상세</title>
+<defs><style>
+.bg{fill:#ffffff}
+.frame{fill:none;stroke:#1d2433;stroke-width:.5}
+.t{font-family:'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic','IBM Plex Sans KR',sans-serif;fill:#1d2433}
+.h{paint-order:stroke;stroke:#ffffff;stroke-width:.75;stroke-linejoin:round}
+.tb{font-weight:700}
+.td{fill:#1f5fbf}
+.tm{fill:#5b6578}
+.tr{fill:#c2410c}
+.S-wood{fill:url(#hw);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-print{fill:url(#hp);stroke:#1d2433;stroke-width:.4;stroke-linejoin:round}
+.S-metal{fill:url(#hm);stroke:#1d2433;stroke-width:.32;stroke-linejoin:round}
+.S-rubber{fill:#50555e;stroke:#1d2433;stroke-width:.25}
+.S-elec{fill:url(#he);stroke:#1d2433;stroke-width:.3}
+.S-screen{fill:#3a4150;stroke:#1d2433;stroke-width:.3}
+.S-cable{fill:#e3b23c;stroke:#6b5a1e;stroke-width:.18}
+.S-ctx{fill:#eceef1;stroke:#a3aab5;stroke-width:.18}
+.P-wood{fill:#f2e6d2;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-print{fill:#e5ebf3;stroke:#39404d;stroke-width:.22;stroke-linejoin:round}
+.P-metal{fill:#c9ced6;stroke:#39404d;stroke-width:.2}
+.P-rubber{fill:#7d828b;stroke:#39404d;stroke-width:.18}
+.P-elec{fill:#d3ead8;stroke:#39404d;stroke-width:.2}
+.P-screen{fill:#596070;stroke:#39404d;stroke-width:.2}
+.P-cable{fill:#f0cf7a;fill-opacity:.55;stroke:#8a7430;stroke-width:.14;stroke-opacity:.7}
+.P-ctx{fill:#f2f3f5;stroke:#b3b9c3;stroke-width:.18}
+.air{fill:#e8f1fb;stroke:none}
+.hid{fill:none;stroke:#39404d;stroke-width:.24;stroke-dasharray:1.6 .9}
+.hidc{fill:none;stroke:#c2410c;stroke-width:.28;stroke-dasharray:2.2 1.1}
+.ph{fill:none;stroke:#5b6578;stroke-width:.3;stroke-dasharray:4 1 1 1}
+.cl{fill:none;stroke:#6b7690;stroke-width:.2;stroke-dasharray:6 1.2 1 1.2}
+.thin{fill:none;stroke:#39404d;stroke-width:.2}
+.vis{fill:none;stroke:#1d2433;stroke-width:.3}
+.sound{fill:none;stroke:#c2410c;stroke-width:.4;stroke-dasharray:3 1.2}
+.ax{fill:none;stroke:#7a3fb5;stroke-width:.3;stroke-dasharray:5 1.2 1 1.2}
+.keep{fill:none;stroke:#b42318;stroke-width:.3;stroke-dasharray:1.2 1}
+.dm{fill:none;stroke:#1f5fbf;stroke-width:.18}
+.ex{fill:none;stroke:#8a96ab;stroke-width:.15}
+.ah{fill:#1f5fbf;stroke:none}
+.ld{fill:none;stroke:#3d4555;stroke-width:.18}
+.dot{fill:#3d4555}
+.bal{fill:#ffffff;stroke:#1d2433;stroke-width:.25}
+.secl{fill:none;stroke:#1d2433;stroke-width:.55}
+.seca{fill:#1d2433}
+.grid{fill:none;stroke:#1d2433;stroke-width:.25}
+.grid2{fill:none;stroke:#8a96ab;stroke-width:.15}
+.box{fill:#fbfbfc;stroke:#c3c9d3;stroke-width:.2}
+.sheetply{fill:#fbf6ee;stroke:#1d2433;stroke-width:.35}
+.zone{fill:#f4f6f9;stroke:#8a96ab;stroke-width:.2}
+.datum{fill:none;stroke:#15803d;stroke-width:.9;stroke-linecap:round;stroke-opacity:.9}
+.spot{fill:none;stroke:#c2410c;stroke-width:.32}
+.spoth{fill:none;stroke:#c2410c;stroke-width:.32;stroke-dasharray:.45 .3}
+
+.Zkw{fill:#fbfbf8;stroke:#7d8592;stroke-width:.16}.Zkb{fill:#aab0b9;stroke:#5d6672;stroke-width:.16}.Zpr{fill:#e6eaf0;stroke:#7d8592;stroke-width:.16}
+.Zwd{fill:#efe4d0;stroke:#8a7a5e;stroke-width:.16}.Zel{fill:#dbe9df;stroke:#6f8a77;stroke-width:.16}.Zmt{fill:#d2d7de;stroke:#6f7887;stroke-width:.14}
+.Zrb{fill:#c4c8ce;stroke:#6f7887;stroke-width:.14}.Zcb{fill:#efdca4;stroke:#9a8240;stroke-width:.12}
+.Skw{fill:#f4f4ee;stroke:#1d2433;stroke-width:.3}.Skb{fill:#8e95a0;stroke:#1d2433;stroke-width:.3}.Spr{fill:url(#hp);stroke:#1d2433;stroke-width:.3}
+.Swd{fill:url(#hw);stroke:#1d2433;stroke-width:.3}.Sel{fill:url(#he);stroke:#1d2433;stroke-width:.26}.Smt{fill:url(#hm);stroke:#1d2433;stroke-width:.24}
+.Srb{fill:#7d828b;stroke:#1d2433;stroke-width:.22}.Scb{fill:#e3b23c;stroke:#6b5a1e;stroke-width:.16}
+.HL{fill:#B3342D;fill-opacity:.88;stroke:#6e1c17;stroke-width:.3;stroke-linejoin:round}
+.HLs{fill:#B3342D;stroke:#5a1511;stroke-width:.32;stroke-linejoin:round}
+.HL2{fill:#B3342D;fill-opacity:.32;stroke:#B3342D;stroke-width:.2}
+.HLp{fill:#B3342D;fill-opacity:.14;stroke:#B3342D;stroke-width:.3;stroke-dasharray:1.2 .7}
+.HH{fill:#d9822b;fill-opacity:.35;stroke:#a35a12;stroke-width:.22}
+.vf{fill:none;stroke:#8a96ab;stroke-width:.25}
+.lead{fill:none;stroke:#6e1c17;stroke-width:.3}
+.tl{fill:#6e1c17}
+.nb{fill:#5b6578}
+</style>
+<pattern id="hw" patternUnits="userSpaceOnUse" width="1.6" height="1.6" patternTransform="rotate(45)"><rect width="1.6" height="1.6" fill="#ecdcc2"/><line x1="0" y1="0" x2="0" y2="1.6" stroke="#a8875a" stroke-width=".22"/></pattern>
+<pattern id="hp" patternUnits="userSpaceOnUse" width="1.1" height="1.1" patternTransform="rotate(-45)"><rect width="1.1" height="1.1" fill="#dfe6ef"/><line x1="0" y1="0" x2="0" y2="1.1" stroke="#7f93b0" stroke-width=".16"/></pattern>
+<pattern id="hm" patternUnits="userSpaceOnUse" width=".9" height=".9" patternTransform="rotate(45)"><rect width=".9" height=".9" fill="#c3c8d1"/><path d="M0 0V.9M0 0H.9" stroke="#5d6778" stroke-width=".12"/></pattern>
+<pattern id="he" patternUnits="userSpaceOnUse" width="1.4" height="1.4"><rect width="1.4" height="1.4" fill="#cfe6d3"/><line x1="0" y1=".7" x2="1.4" y2=".7" stroke="#5f9a6c" stroke-width=".14"/></pattern>
+<clipPath id="c0"><rect x="17.00" y="22.70" width="100.00" height="105.00"/></clipPath><clipPath id="c1"><rect x="17.00" y="146.20" width="100.00" height="95.00"/></clipPath></defs>
+<rect class="bg" x="0" y="0" width="120" height="268.1"/>
+<g class="L-geo">
+<path class="Zrb" fill-rule="evenodd" d="M76.71 100.41 66.57 100.41 66.57 100.99 76.71 100.99Z" clip-path="url(#c0)"/>
+<path class="Zrb" fill-rule="evenodd" d="M88.14 100.41 78.00 100.41 78.00 100.99 88.14 100.99Z" clip-path="url(#c0)"/>
+<path class="Zpr" fill-rule="evenodd" d="M117.00 22.70 83.86 22.70 83.86 42.70 117.00 42.70Z" clip-path="url(#c0)"/>
+<path class="Zpr" fill-rule="evenodd" d="M102.14 97.84 65.29 97.84 65.29 100.41 102.14 100.41Z" clip-path="url(#c0)"/>
+<path class="Zkw" fill-rule="evenodd" d="M115.14 122.70 101.71 122.70 101.71 127.70 115.14 127.70Z" clip-path="url(#c0)"/>
+<path class="Zpr" fill-rule="evenodd" d="M117.00 42.70 83.71 42.70 83.71 97.84 117.00 97.84Z" clip-path="url(#c0)"/>
+<path class="Zpr" fill-rule="evenodd" d="M101.71 122.80 101.82 122.70 115.04 122.70 115.14 122.80 115.14 127.70 117.00 127.70 117.00 100.99 64.57 100.99 64.57 127.70 101.71 127.70Z" clip-path="url(#c0)"/>
+<path class="Zpr" fill-rule="evenodd" d="M83.71 42.80 83.86 42.66 83.86 22.70 64.57 22.70 64.57 97.84 83.71 97.84Z" clip-path="url(#c0)"/>
+<path class="Spr" fill-rule="evenodd" d="M32.45 191.86 36.43 191.86 36.43 210.55 43.25 210.55 43.25 146.20 17.00 146.20 17.00 210.55 32.45 210.55Z" clip-path="url(#c1)"/>
+<path class="Spr" fill-rule="evenodd" d="M117.00 146.20 46.31 146.20 46.31 173.78 87.69 173.78 87.69 207.49 117.00 207.49Z" clip-path="url(#c1)"/>
+<path class="Spr" fill-rule="evenodd" d="M52.44 201.74 51.06 201.74 51.06 189.72 52.44 189.72 52.44 187.57 44.02 187.57 44.02 189.72 48.61 189.72 48.61 201.74 44.02 201.74 44.02 202.89 52.44 202.89Z" clip-path="url(#c1)"/>
+<path class="Srb" fill-rule="evenodd" d="M42.48 210.55 17.00 210.55 17.00 215.15 42.48 215.15Z" clip-path="url(#c1)"/>
+<path class="Srb" fill-rule="evenodd" d="M48.61 194.77 43.25 194.77 43.25 198.76 48.61 198.76ZM56.43 194.77 51.06 194.77 51.06 198.76 56.43 198.76Z" clip-path="url(#c1)"/>
+<path class="Smt" fill-rule="evenodd" d="M58.96 195.39 56.43 195.39 56.43 198.14 58.96 198.14Z" clip-path="url(#c1)"/>
+<path class="Smt" fill-rule="evenodd" d="M36.28 194.29 32.60 194.29 32.60 199.24 36.28 199.24Z" clip-path="url(#c1)"/>
+</g>
+<g class="L-over">
+<path class="HL" fill-rule="evenodd" d="M69.50 52.70 64.50 52.70 64.50 97.70 69.50 97.70Z" clip-path="url(#c0)"/>
+<rect class="vf" x="17.000" y="22.700" width="100.000" height="105.000"/>
+<rect class="seca" x="106.667" y="125.100" width="8.333" height="0.900"/>
+<path class="HLp" fill-rule="evenodd" d="M87.69 173.78 46.31 173.78 46.31 186.04 60.56 186.04 60.56 213.62 87.69 213.62Z" clip-path="url(#c1)"/>
+<path class="HLs" fill-rule="evenodd" d="M87.69 173.78 46.31 173.78 46.31 186.04 60.56 186.04 60.56 213.62 87.69 213.62Z" clip-path="url(#c1)"/>
+<rect class="vf" x="17.000" y="146.200" width="100.000" height="95.000"/>
+<rect class="seca" x="107.339" y="238.600" width="7.661" height="0.900"/>
+</g>
+<g class="L-dim">
+<path class="dm" d="M67.000 127.700 L67.000 129.500"/>
+<path class="dm" d="M15.200 75.200 L17.000 75.200"/>
+<path class="ex" d="M70.300 52.700 L73.300 52.700"/>
+<path class="ex" d="M70.300 97.700 L73.300 97.700"/>
+<path class="dm" d="M72.100 52.700 L72.100 97.700"/>
+<path class="ah" d="M72.100 52.700 L72.760 54.900 L71.440 54.900 Z"/>
+<path class="ah" d="M72.100 97.700 L71.440 95.500 L72.760 95.500 Z"/>
+<path class="dm" d="M67.000 241.200 L67.000 243.000"/>
+<path class="dm" d="M15.200 193.700 L17.000 193.700"/>
+<path class="ex" d="M46.315 172.981 L46.315 170.181"/>
+<path class="ex" d="M87.685 172.981 L87.685 170.181"/>
+<path class="dm" d="M46.315 171.381 L87.685 171.381"/>
+<path class="ah" d="M46.315 171.381 L48.515 170.721 L48.515 172.041 Z"/>
+<path class="ah" d="M87.685 171.381 L85.485 172.041 L85.485 170.721 Z"/>
+<path class="ex" d="M88.485 173.781 L91.485 173.781"/>
+<path class="ex" d="M88.485 213.619 L91.485 213.619"/>
+<path class="dm" d="M90.285 173.781 L90.285 213.619"/>
+<path class="ah" d="M90.285 173.781 L90.945 175.981 L89.625 175.981 Z"/>
+<path class="ah" d="M90.285 213.619 L89.625 211.419 L90.945 211.419 Z"/>
+</g>
+<g class="L-lead">
+<path class="lead" d="M67.00 75.20 L99.36 28.90 L100.36 28.90"/>
+<circle class="tl" cx="67.000" cy="75.200" r="0.600"/>
+</g>
+<g class="L-text">
+<text class="t tb" x="3.000" y="7.000" font-size="4.20" text-anchor="start">통로옆마개</text>
+<text class="t tm" x="3.000" y="12.200" font-size="2.90" text-anchor="start">대표 자리 DUCT-CAP-L · 전체 2곳</text>
+<text class="t tb" x="3.000" y="19.700" font-size="3.30" text-anchor="start">① 위에서 본 자리 — z27 위 부품은 걷어 냄</text>
+<text class="t h td" x="67.000" y="132.900" font-size="2.90" text-anchor="middle">x -14.5</text>
+<text class="t h td" x="14.600" y="76.200" font-size="2.90" text-anchor="end">y 227.5</text>
+<text class="t tm" x="17.000" y="137.100" font-size="2.50" text-anchor="start">x -44.5</text>
+<text class="t tm" x="117.000" y="137.100" font-size="2.50" text-anchor="end">x 15.5</text>
+<text class="t h td" x="71.200" y="75.200" font-size="2.90" text-anchor="middle" transform="rotate(-90 71.200 75.200)">27</text>
+<text class="t h tb tl" x="115.000" y="27.700" font-size="3.30" text-anchor="end">통로옆마개</text>
+<text class="t h tm" x="110.833" y="124.300" font-size="2.50" text-anchor="middle">5 mm</text>
+<text class="t h nb" x="99.907" y="82.449" font-size="2.90" text-anchor="middle">스피커 통로 틀</text>
+<text class="t h nb" x="74.475" y="41.978" font-size="2.90" text-anchor="middle">스피커 파트 L 옆판</text>
+<text class="t h nb" x="78.741" y="115.704" font-size="2.90" text-anchor="middle">끝 부속 프레임 왼쪽</text>
+<text class="t h nb" x="93.710" y="33.970" font-size="2.90" text-anchor="middle">스피커 파트 L 아랫판</text>
+<text class="t tb" x="3.000" y="143.200" font-size="3.30" text-anchor="start">② 옆 단면 x = -14.5 (왼쪽에서 봄, 연주자 쪽 = 왼쪽)</text>
+<text class="t h td" x="67.000" y="246.400" font-size="2.90" text-anchor="middle">y 227.5</text>
+<text class="t h td" x="14.600" y="194.700" font-size="2.90" text-anchor="end">z 14</text>
+<text class="t tm" x="17.000" y="250.600" font-size="2.50" text-anchor="start">y 194.9</text>
+<text class="t tm" x="117.000" y="250.600" font-size="2.50" text-anchor="end">y 260.1</text>
+<text class="t h td" x="67.000" y="170.481" font-size="2.90" text-anchor="middle">27</text>
+<text class="t h td" x="89.385" y="193.700" font-size="2.90" text-anchor="middle" transform="rotate(-90 89.385 193.700)">26</text>
+<text class="t h tm" x="111.169" y="237.800" font-size="2.50" text-anchor="middle">5 mm</text>
+<text class="t h nb" x="99.806" y="163.765" font-size="2.90" text-anchor="middle">스피커 파트 L 옆판</text>
+<text class="t" x="3.000" y="253.700" font-size="2.90" text-anchor="start">대표 자리 중심 (x -14.5, y 227.5, z 14) · 바깥 크기 3 × 27 × 26 (x·y·z, 입체 상자)</text>
+<text class="t" x="3.000" y="257.818" font-size="2.90" text-anchor="start">빨간 면 = 이 물건 (진한 = 대표, 연한 = 같은 물건의 다른 자리) · 빨간 점선 = 단면 밖 부분 · 숫자는</text>
+<text class="t" x="3.000" y="261.936" font-size="2.90" text-anchor="start">mm, CAD 입체에서 계산</text>
+</g>
+</svg>

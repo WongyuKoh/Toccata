@@ -1,0 +1,11 @@
+{
+  "tab": "parts",
+  "title": "06 부품·사용처",
+  "notes": "Rebuild: (1) python3 hardware/mechanical/cad/src/locate.py (~15 s; only build_all.collect(), never build_all.main()) writes fin/loc/base_plan.svg, base_side.svg, base_front.svg, overlays.json and detail/<key>.svg (183 figures); (2) python3 docs/report/toccata-v4/src/tabs/parts/build_section.py writes section.html, assets.txt and fin/loc/cards.json. section.html holds the header, filters, the static purchase record (totals asserted equal to data/final_items.json: school 199,960 + school shipping 28,700 + personal 227,166 = 455,826), the dropped list, the print tools/jigs table and one empty anchor per card (ids parts-<key>: item ids i014.., print files p-<slug> e.g. p-KEY-C, plywood ply-pod-side/ply-pod-back/ply-pod-top/ply-pod-bottom/ply-cu-back/ply-cu-bottom) so deep links work with the router. script.js fetches fin/loc/cards.json + fin/loc/overlays.json when the section is first shown (MutationObserver on hidden), fills the cards, and draws each location figure lazily (IntersectionObserver): base SVG as <img> + an inline overlay <svg> with the same viewBox (plan X=x,Y=-y; side X=y,Y=-z; front X=x,Y=-z, world mm). No capabilities needed. Uses window.toccata.cad.focus(ids, name) for '3D에서 보기' (switches to #cad, waits up to 8 s for the API; guarded), window.toccata.prep.line(id)/onChange(cb) for a readiness line on each card (guarded, prep line ids a-<item>, d-<tool>, b-.. for print files, c-ply-<cad id> for plywood; a card's prep is one id or a list - plywood L+R pieces - and the status sums them), links #partdwg-<code> (code from fin/parts/index.json), circuit anchors resolved at runtime (circuit-sch-0n; SCH-06 -> circuit-sch-06-pwr, or circuit-sch-06-ts for cat 터치스크린; else #circuit), #prep-r-<line>. Shared assets also listed: img/bom/*.jpg (from the items step). Dropped item ids in CAD print notes are replaced by the kept item (final_items.json dropped[].replaced_by, e.g. i068 -> i062) in locate.py and build_section.py; i221 (velcro strap) is drawn on its hosts CU-BATFRAME + BAT-LFP, with the strap slots measured on the frame solid.",
+  "api": "window.toccata.parts = { ready: Promise, show(key) }",
+  "data": [
+    "fin/loc/cards.json",
+    "fin/loc/overlays.json"
+  ],
+  "capabilities": {}
+}

@@ -1,5 +1,7 @@
 # Toccata electrical design review (before the schematic is frozen)
 
+> **2026-10-07 개정 D (△17):** 전원 입력이 USB-C PD에서 LiFePO4 전지(12.8 V, XT60)로 바뀌어 R5(PD 트리거)는 없어졌고 R12(돌입)·R23(퓨즈·스위치)은 `power.md` 0.5~0.6의 전지 기준으로 봅니다. 아래 20 V·PD 내용은 검토 당시 기록입니다.
+
 Reviewer role: independent senior-HW review of CIRCUIT_BRIEF.md (v3 electronics, still valid for v4 r4.1).
 Date: 2026-09-28. Scope: octave sensor board + control board (x7), end parts, PED board + pedal, CU power, CU audio.
 Severity: **must-fix** = will not work or can damage; **should-fix** = robustness; **note** = OK as is / information.

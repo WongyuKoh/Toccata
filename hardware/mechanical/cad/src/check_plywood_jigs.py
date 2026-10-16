@@ -1,23 +1,20 @@
 #!/usr/bin/env python3
-"""Self-check for plywood_jigs.py (build_all writes them to stl/print/08_합판지그 + stl/print_extra/선택_합판지그).
+"""Self-check for plywood_jigs.py (build_all writes them to stl/print/08_합판지그).
 
   python3 src/check_plywood_jigs.py      # writes every jig with plywood_jigs.write_files() to a temp dir and checks those STLs
 
+2026-10-07: the lids, end walls and pod inner panels are printed, the plywood vents are D8 grids -> J-a / J-c / slot J-d / J-f are gone.
 (1) every STL written: watertight + consistent winding (trimesh), one body, volume = generator solid, footprint <= 250 x 250,
-    lies on z = 0
+    lies on z = 0; the jig set is J-b x4, J-d3, J-d4, J-e (nothing for the printed lids / end walls / pod panels)
 (2) every guide bore MEASURED BACK FROM THE STL (section at mid guide length, least-squares circle) vs its target in the print
     frame (<= 0.05) and its diameter (bit + 0.2)
-(3) the measured bore axes taken to the world (the jig placed on its board) vs the hole axes MEASURED FROM THE body.py MODEL MESHES
-    (pod inner panels, end walls, back ply, lids): <= 0.05; J-a pod-panel bores vs end-wall bores coaxial
+(3) the measured bore axes taken to the world (the jig placed on its board) vs the holes MEASURED FROM THE body.py MODEL MESHES
+    (back ply D8 vents + top-edge magnet seats, bottom ply D8 vents): <= 0.05; every model hole of those boards has its bore
 (4) placement: jig ^ board = 0 (sits on the board), fences touch the datum edges and the guides / pads touch the face (board moved
-    0.05 toward each); wrong placements are blocked (J-a on the other face of a panel, end-wall jig on a pod panel: key / guard
-    lands on the wood; slider turned 180 deg: the frame pin blocks it)
-(5) slots: window / slider / shim measured from the STLs -> the 4 pass positions -> D4 hole centres per slot vs the slot measured
-    from the model (on the centre line, inside the ends, max pitch -> cusp <= 0.30), hole count
-(6) J-e gauges: full-diameter seat depth below the top (cone measured from the STL) = GUIDE + target depth
-(7) minimum wall >= 1.6 measured from the STLs (inward rays from surface samples; text side walls in the 0.85 label skin and the
-    shim blades, whose thickness IS the pass step p, are reported but not failed)
-(8) J-c slot tongue vs the drilled slot: clearance per side >= 0.5 at the narrowest slot width (4 - 2 cusp - 2 slider play)
+    0.05 toward each); J-b gaps vs an 11.5 edge
+(6) J-e gauge: full-diameter seat depth below the top (cone measured from the STL) = GUIDE + target depth
+(7) minimum wall >= 1.6 measured from the STLs (inward rays from surface samples; text side walls in the 0.85 label skin are
+    reported but not failed)
 """
 import math
 import os
@@ -162,6 +159,10 @@ def main():
                                                and abs(d["solid"].volume() - j.printed.volume()) < 1e-6 for d, j in zip(api, jigs)))
     print(ok(names_ok and len(files) == len(set(files)) == len(jigs), "file set"),
           "files %d = generator %d, build() names/required/solids consistent: %s" % (len(files), len(jigs), names_ok))
+    keys = sorted(j.key for j in jigs)
+    want_keys = sorted(["J-b%.1f" % g for g in PJ.SADDLE_GAPS] + ["J-d3", "J-d4", "J-e"])
+    print(ok(keys == want_keys and not PJ.OPTIONAL, "jig set"), "jig set (2026-10-07): %s - no J-a / J-c / slot J-d / J-f (lids, end walls, "
+          "pod inner panels printed; plywood vents D8)" % ", ".join(keys))
     TM = {}
     for j in jigs:
         tm = load(paths[j.key])
@@ -174,6 +175,7 @@ def main():
             j.file, ext[0], ext[1], ext[2], tm.is_watertight, tm.is_winding_consistent, nb, tm.volume, j.printed.volume()))
 
     print("\n== (2) guide bores measured from the STLs (print frame, section at mid guide length)")
+    vent_e = {}
     MEAS = {}      # (jig key, bore name) -> (local point on axis, measured diameter)
     worst = 0.0
     for j in jigs:
@@ -181,7 +183,7 @@ def main():
             continue
         tm = TM[j.key]
         for b in j.bores:
-            w_mid = PJ.GUIDE / 2.0
+            w_mid = (PJ.GUIDE_THRU if j.key.startswith("J-d") else PJ.GUIDE) / 2.0
             P = j.to_print((b["u"], b["v"], w_mid))
             pts = section_pts(tm, P, (0, 0, 1))
             c, r, n = circle_near(pts[:, :2], P[:2], b["d"])
@@ -194,70 +196,62 @@ def main():
             Rinv, tinv = inv(j.R_print, j.t_print)
             loc = Rinv @ Pm + tinv
             MEAS[(j.key, b["name"])] = (loc, 2 * r)
-            if j.key[:4] in ("J-d1", "J-d2", "J-d3", "J-d4"):
-                continue                    # 288 slot bores: summarised below
-            print(ok(e <= TOL and abs(2 * r - b["d"]) <= TOL, "%s %s bore" % (j.key, b["name"])),
+            good = e <= TOL and abs(2 * r - b["d"]) <= TOL
+            if j.key.startswith("J-d"):
+                ok(good, "%s %s bore" % (j.key, b["name"]))
+                vent_e.setdefault(j.key, []).append((e, 2 * r, good))
+                continue                    # 50 vent bores: summarised below
+            print(ok(good, "%s %s bore" % (j.key, b["name"])),
                   "%-7s %-8s bit %.1f  bore D%.3f (design %.2f)  centre error %.4f" % (j.key, b["name"], b["bit"], 2 * r, b["d"], e))
-    slot_e = [float(np.linalg.norm(np.array(j.to_print((b["u"], b["v"], 0))[:2]) -
-                                   np.array(j.to_print(MEAS[(j.key, b["name"])][0])[:2])))
-              for j in jigs if j.key[:4] in ("J-d1", "J-d2", "J-d3", "J-d4") for b in j.bores if (j.key, b["name"]) in MEAS]
-    nslot = sum(len(j.bores) for j in jigs if j.key[:4] in ("J-d1", "J-d2", "J-d3", "J-d4"))
-    print(ok(len(slot_e) == nslot and max(slot_e) <= TOL, "slot bores"), "slider bores D4.2: %d/%d measured, max centre error %.4f"
-          % (len(slot_e), nslot, max(slot_e) if slot_e else -1))
-    print("   worst bore centre error (all %d bores) %.4f mm" % (len(MEAS), max(worst, max(slot_e) if slot_e else 0)))
+    for k_, v_ in vent_e.items():
+        print(ok(all(g for _, _, g in v_) and len(v_) == len(byk[k_].bores), "%s bores" % k_),
+              "%-7s %d bores D%.2f: max centre error %.4f, diameters %.3f..%.3f" % (k_, len(v_), byk[k_].bores[0]["d"], max(e for e, _, _ in v_),
+                                                                              min(d for _, d, _ in v_), max(d for _, d, _ in v_)))
+    print("   worst bore centre error (all %d bores) %.4f mm" % (len(MEAS), worst))
 
     # ------------------------------------------------------------------ (3) world coordinates vs the model meshes
     print("\n== (3) bore axes in the world (jig on its board) vs the holes measured from the body.py model")
     o = B.Out()
     B.cu_panels(o)
-    BOARD = {p.id: p.solid for p in o}
-    BOARD["POD-L"] = B.side_in_panel("L")
-    BOARD["POD-R"] = B.side_in_panel("R")
+    BOARD = {p.id: p.solid for p in o if p.kind == "plywood"}
     BTM = {k: tm_from_manifold(v) for k, v in BOARD.items()}
-    board_of = {"J-a1": "POD-L", "J-a2": "POD-R", "J-a3": "CU-PLY-END-L", "J-a4": "CU-PLY-END-R", "J-c1": "LID-L", "J-c2": "LID-R"}
-    world_axes = {}
-    for jk, bk in board_of.items():
+    for jk in ("J-d3", "J-d4"):
         j = byk[jk]
+        bk = j.meta["board"]
         R, org = j.placements["use"]
+        errs = []
         for b in j.bores:
             loc, dm = MEAS[(jk, b["name"])]
             wpt = np.asarray(R) @ loc + np.asarray(org)
             axis = np.asarray(R) @ np.array([0, 0, 1.0])
-            world_axes[(jk, b["name"])] = (wpt, axis)
-            # model hole: probe inside the hole (blind pockets: half their depth; through: mid thickness)
-            dmodel = next(v for k_, v in (("insert", PJ.BIT_INSERT), ("wire", PJ.BIT_WIRE), ("sleeve", PJ.BIT_SLEEVE),
-                                          ("xt30", PJ.XT30_D), ("mag", PJ.BIT_MAG)) if b["name"].startswith(k_))
-            face_pt = np.array(b["world"], float)
-            depth_in = -(b.get("depth") or PJ.PLY_T) / 2.0           # into the wood = -w
-            c, dm_model = model_hole(BTM[bk], face_pt, axis, dmodel, depth_in)
+            c, dm_model = model_hole(BTM[bk], np.array(b["world"], float), axis, PJ.BIT_VENT, -PJ.PLY_T / 2.0)
             if c is None:
-                print(ok(False, "%s %s model hole" % (jk, b["name"])), jk, b["name"], "model hole not found")
+                errs.append((99.0, b["name"], 0.0))
                 continue
-            e = perp_dist(wpt, c, axis)
-            print(ok(e <= TOL, "%s %s world" % (jk, b["name"])),
-                  "%-5s %-8s on %-13s jig axis (%.3f, %.3f, %.3f) | model hole D%.2f at (%.3f, %.3f, %.3f) | off-axis %.4f" % (
-                      jk, b["name"], bk, wpt[0], wpt[1], wpt[2], dm_model, c[0], c[1], c[2], e))
-    # coaxiality pod inner panel <-> end wall (the same screw axis)
-    for sd, ja, je in (("L", "J-a1", "J-a3"), ("R", "J-a2", "J-a4")):
-        for k in (1, 2):
-            pa, ax = world_axes[(ja, "insert%d" % k)]
-            pe, _ = world_axes[(je, "sleeve%d" % k)]
-            e = perp_dist(pa, pe, ax)
-            print(ok(e <= TOL, "coax %s %d" % (sd, k)), "coaxial %s screw %d: pod insert bore (J-%s) vs end-wall sleeve bore (J-%s): %.4f mm "
-                  "(screw axis y%.0f z%.0f)" % (sd, k, ja[2:], je[2:], e, B.TS_YZ[sd][k - 1][0], B.TS_YZ[sd][k - 1][1]))
-    # J-b saddles on every edge seat (one variant is enough for the axis; all gaps share it)
+            errs.append((perp_dist(wpt, c, axis), b["name"], dm_model))
+        # every D8 vent of the model board has a bore (count the round holes of the board section at mid thickness)
+        wdir = np.asarray(R)[:, 2]
+        pts = section_pts(BTM[bk], np.asarray(org, float) - wdir * PJ.PLY_T / 2.0, wdir)
+        n_model = len(B.BACK_HOLES) if bk == "CU-PLY-BACK" else len(B.BOT_HOLES_BUCK) + len(B.BOT_HOLES_PI)
+        worst = max(e for e, _, _ in errs)
+        print(ok(worst <= TOL and len(errs) == n_model and len(pts) > 0, "%s world" % jk),
+              "%-5s on %-13s %d bores vs %d model holes D%.2f..%.2f: worst off-axis %.4f (%s)" % (
+                  jk, bk, len(errs), n_model, min(d_ for _, _, d_ in errs), max(d_ for _, _, d_ in errs), worst,
+                  max(errs)[1]))
+    # J-b saddles on every back-ply edge seat (one variant is enough for the axis; all gaps share it)
     jb = byk["J-b11.6"]
     loc, _ = MEAS[("J-b11.6", "mag")]
     for pn, (R, org) in jb.placements.items():
         wpt = np.asarray(R) @ loc + np.asarray(org)
         axis = np.asarray(R) @ np.array([0, 0, 1.0])
-        bk = "CU-PLY-BACK" if pn.startswith("back") else "CU-PLY-END-%s" % pn[-1]
-        c, dmod = model_hole(BTM[bk], org, axis, PJ.BIT_MAG, -PJ.DEPTH_MAG / 2.0)
+        c, dmod = model_hole(BTM["CU-PLY-BACK"], org, axis, PJ.BIT_MAG, -PJ.DEPTH_MAG / 2.0)
         e = perp_dist(wpt, c, axis)
         print(ok(e <= TOL, "J-b %s" % pn), "J-b     %-6s on %-13s saddle axis (%.3f, %.3f) | model pocket D%.2f (%.3f, %.3f) | off-axis %.4f" % (
-            pn, bk, wpt[0], wpt[1], dmod, c[0], c[1], e))
+            pn, "CU-PLY-BACK", wpt[0], wpt[1], dmod, c[0], c[1], e))
+    print(ok(len(jb.placements) == len(B.MAG_BACK_X["L"]) + len(B.MAG_BACK_X["R"]), "J-b seats"),
+          "J-b seats: %d (back-ply top edge only; the end-wall seats are printed now)" % len(jb.placements))
 
-    # ------------------------------------------------------------------ (4) placement / contact / fool-proofing
+    # ------------------------------------------------------------------ (4) placement / contact
     print("\n== (4) placement on the boards (STL meshes taken back to the world)")
     MAN = {}
     for j in jigs:
@@ -273,16 +267,8 @@ def main():
         return (jm ^ board.translate(tuple(np.asarray(shift) * 0.05))).volume()
 
     DAT = {  # key: (board, [named shifts toward the fences / face])
-        "J-a1": ("POD-L", [("앞 모서리", (0, -1, 0)), ("아래 모서리", (0, 0, -1)), ("면", (1, 0, 0))]),
-        "J-a2": ("POD-R", [("앞 모서리", (0, -1, 0)), ("아래 모서리", (0, 0, -1)), ("면", (-1, 0, 0))]),
-        "J-a3": ("CU-PLY-END-L", [("앞 모서리", (0, -1, 0)), ("아래 모서리", (0, 0, -1)), ("면", (1, 0, 0))]),
-        "J-a4": ("CU-PLY-END-R", [("앞 모서리", (0, -1, 0)), ("아래 모서리", (0, 0, -1)), ("면", (-1, 0, 0))]),
-        "J-c1": ("LID-L", [("뒤 모서리", (0, 1, 0)), ("왼쪽 끝", (-1, 0, 0)), ("밑면", (0, 0, -1))]),
-        "J-c2": ("LID-R", [("뒤 모서리", (0, 1, 0)), ("오른쪽 끝", (1, 0, 0)), ("밑면", (0, 0, -1))]),
-        "J-d1a": ("LID-L", [("오른쪽 끝", (1, 0, 0)), ("뒤 모서리", (0, 1, 0)), ("윗면", (0, 0, 1))]),
-        "J-d2a": ("LID-R", [("왼쪽 끝", (-1, 0, 0)), ("뒤 모서리", (0, 1, 0)), ("윗면", (0, 0, 1))]),
-        "J-d3a": ("CU-PLY-BACK", [("오른쪽 끝", (1, 0, 0)), ("윗모서리", (0, 0, 1)), ("바깥면", (0, 1, 0))]),
-        "J-d4a": ("CU-PLY-BOTTOM", [("뒤 모서리", (0, 1, 0)), ("윗면", (0, 0, 1))]),
+        "J-d3": ("CU-PLY-BACK", [("오른쪽 끝", (1, 0, 0)), ("윗모서리", (0, 0, 1)), ("바깥면", (0, 1, 0))]),
+        "J-d4": ("CU-PLY-BOTTOM", [("뒤 모서리", (0, 1, 0)), ("윗면", (0, 0, 1))]),
     }
     for key, (bk, shifts) in DAT.items():
         jm = placed(key, "use")
@@ -292,76 +278,11 @@ def main():
         good = ov <= 0.01 and all(v > 0.01 for _, v in res)
         print(ok(good, "%s placement" % key), "%-6s on %-13s overlap %.3f mm3; touches %s" % (
             key, bk, ov, ", ".join("%s %.2f" % (nm, v) for nm, v in res)))
-    for key, pn, bk, why in (("J-a1", "wrong_face", "POD-L", "옆판 L 반대 면(상자 안쪽 면)"),
-                             ("J-a2", "wrong_face", "POD-R", "옆판 R 반대 면(상자 안쪽 면)"),
-                             ("J-a3", "wrong_face", "CU-PLY-END-L", "끝벽 L 반대 면(이음면)"),
-                             ("J-a4", "wrong_face", "CU-PLY-END-R", "끝벽 R 반대 면(이음면)"),
-                             ("J-a3", "on_pod_panel", "POD-L", "끝벽 지그를 스피커 옆판 L에"),
-                             ("J-a4", "on_pod_panel", "POD-R", "끝벽 지그를 스피커 옆판 R에")):
-        ov = (placed(key, pn) ^ BOARD[bk]).volume()
-        print(ok(ov > 50.0, "%s %s blocked" % (key, pn)), "%-5s %-28s blocked: key/guard in the wood %.0f mm3 (cannot sit flat)" % (key, why, ov))
-    # J-a: every way to put a jig on a panel face (2 faces x 4 in-plane turns, datum corner on the panel's bounding-box corner)
-    #      -> only the intended placement may sit flat with both fences on edges
-    def fits(key, bk):
-        j = byk[key]
-        s_ = PJ.SGN[j.meta["side"]]
-        bb = BOARD[bk].bounding_box()
-        res = []
-        for nx in (1.0, -1.0):
-            wv = np.array([nx, 0, 0])
-            for ud in ((0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)):
-                u = np.array(ud, float)
-                v = np.cross(wv, u)
-                R = np.column_stack([u, v, wv])
-                board_dirs = (s_ * u, v)                   # the board lies toward +s*u and +v from the datum corner
-                org = np.array([bb[3] if nx > 0 else bb[0], 0.0, 0.0])
-                for ax in (1, 2):
-                    lo, hi = bb[ax], bb[ax + 3]
-                    comp = sum(d[ax] for d in board_dirs)
-                    org[ax] = lo if comp > 0 else hi
-                jm = MAN[key].transform(M34(R, org))
-                ov = (jm ^ BOARD[bk]).volume()
-                t1 = touch(jm, BOARD[bk], -board_dirs[0])
-                t2 = touch(jm, BOARD[bk], -board_dirs[1])
-                if ov <= 1.0 and t1 > 0.01 and t2 > 0.01:
-                    res.append((nx, ud))
-        return res
-    for key, bk, exp in (("J-a1", "POD-L", 1), ("J-a2", "POD-R", 1), ("J-a3", "CU-PLY-END-L", 1), ("J-a4", "CU-PLY-END-R", 1),
-                         ("J-a3", "POD-L", 0), ("J-a4", "POD-R", 0), ("J-a1", "CU-PLY-END-L", 1), ("J-a2", "CU-PLY-END-R", 1)):
-        f = fits(key, bk)
-        want = byk[key].placements["use"][0][:, 2][0]
-        right = all(abs(nx - want) < 1e-9 and ud == ((0, 1, 0) if PJ.SGN[byk[key].meta["side"]] > 0 else (0, -1, 0)) for nx, ud in f)
-        note = {0: "어느 방향으로도 앉지 않음", 1: "한 가지 방향으로만 앉음"}.get(len(f), "%d 가지 방향으로 앉음" % len(f))
-        extra = " (옆판 지그가 끝벽에도 맞음 - 허용: 지름 5.8 막힌 구멍·Ø6 구멍만, 아래 README)" if key in ("J-a1", "J-a2") and bk.startswith("CU") else ""
-        print(ok(len(f) == exp and (exp == 0 or right), "%s on %s placements" % (key, bk)),
-              "%-5s on %-13s 8 ways tried (2 faces x 4 turns, datum corner on the panel corner): %s%s" % (key, bk, note, extra))
-    # J-c: 2 faces x 4 turns at every lid corner -> only the underside / datum corner (the slot key needs the drilled exhaust slot)
-    for key, bk in (("J-c1", "LID-L"), ("J-c2", "LID-R")):
-        j = byk[key]
-        sv = 1.0 if j.meta["side"] == "L" else -1.0
-        bb = BOARD[bk].bounding_box()
-        f = []
-        for nz in (1.0, -1.0):
-            wv = np.array([0, 0, nz])
-            for ud in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0)):
-                u = np.array(ud, float)
-                v = np.cross(wv, u)
-                R = np.column_stack([u, v, wv])
-                dirs = (u, sv * v)
-                org = np.array([0.0, 0.0, bb[5] if nz > 0 else bb[2]])
-                for ax in (0, 1):
-                    org[ax] = bb[ax] if sum(d_[ax] for d_ in dirs) > 0 else bb[ax + 3]
-                jm = MAN[key].transform(M34(R, org))
-                ov = (jm ^ BOARD[bk]).volume()
-                jb = jm.bounding_box()
-                over = max(bb[0] - jb[0], bb[1] - jb[1], jb[3] - bb[3], jb[4] - bb[4])   # sticks out past the lid outline
-                if ov <= 1.0 and over <= PJ.FENCE_T + 0.01 and touch(jm, BOARD[bk], -dirs[0]) > 0.01 and \
-                        touch(jm, BOARD[bk], -dirs[1]) > 0.01:
-                    f.append((nz, ud))
-        Ru = np.asarray(j.placements["use"][0])
-        right = len(f) == 1 and f[0][0] == Ru[2, 2] and tuple(int(round(x)) for x in Ru[:, 0]) == f[0][1]
-        print(ok(right, "%s placements" % key), "%-5s on %-13s 8 ways tried (2 faces x 4 turns, datum corner on the lid corner, not sticking out past the lid): %s "
-              "(홈 열쇠가 배기 홈에 들어가야 앉음 - J-d로 홈을 먼저)" % (key, bk, "한 가지 방향으로만 앉음" if right else "%d 가지" % len(f)))
+    # J-d4: the plate edge on the pencil line (u = SIGHT_U from the left end) is the x datum
+    j4 = byk["J-d4"]
+    pb = placed("J-d4", "use").bounding_box()
+    print(ok(abs(pb[0] - (B.CU_IX[0] + PJ.SIGHT_U)) < 0.01, "J-d4 sight"), "J-d4   plate edge x%.2f = left end x%.1f + %.0f (pencil line)"
+          % (pb[0], B.CU_IX[0], PJ.SIGHT_U))
     # saddles: every gap >= board sits; 11.3 does not fit an 11.5 board; contact on the edge
     for g in PJ.SADDLE_GAPS:
         jk = "J-b%.1f" % g
@@ -373,100 +294,8 @@ def main():
         print(ok(good, "%s fit" % jk), "%-8s on an 11.5 edge: %s (overlap %.2f mm3, seat contact %.2f); cheek play %.2f per side" % (
             jk, "sits" if ov <= 0.01 else "too narrow for 11.5 - for a thinner board", ov, tz, (g - PJ.PLY_T) / 2.0))
 
-    # ------------------------------------------------------------------ (5) slots
-    print("\n== (5) slot templates: passes A/B/C/D from the measured frame window, slider and shim -> D4 holes vs the model slots")
-    for gr in PJ.slot_groups():
-        k = gr["key"]
-        jf, js, jsh = byk[k + "a"], byk[k + "b"], byk[k + "c"]
-        meta = js.meta
-        p = meta["p"]
-        ax, sg = gr["t_axis"]
-
-        def to_tc(loc):
-            u, v = loc[0], loc[1]
-            return (sg * u, v) if ax == "u" else (sg * v, u)
-
-        # window walls (frame section at mid plate height, local w = 2.5)
-        Rinv, tinv = inv(jf.R_print, jf.t_print)
-        P0 = jf.to_print((0, 0, PJ.FRAME_T / 2.0))
-        pts = section_pts(TM[jf.key], P0, (0, 0, 1))
-        loc = (Rinv @ pts.T).T + tinv
-        tc = np.array([to_tc(q) for q in loc])
-        (wt0, wt1), (wc0, wc1) = meta["window_t"], meta["window_c"]
-        mid = (tc[:, 1] > wc0 + 4.0) & (tc[:, 1] < wc1 - 1.0)
-        near = tc[mid & (np.abs(tc[:, 0] - wt0) < 0.6), 0]
-        far = tc[mid & (np.abs(tc[:, 0] - wt1) < 0.6), 0]
-        W0, W1 = float(np.median(near)), float(np.median(far))
-        # slider ends (section at local w = 2)
-        Rinv2, tinv2 = inv(js.R_print, js.t_print)
-        P1 = js.to_print((0, 0, 2.0))
-        pts = section_pts(TM[js.key], P1, (0, 0, 1))
-        loc = (Rinv2 @ pts.T).T + tinv2
-        tc = np.array([to_tc(q) for q in loc])
-        (st0, st1), (sc0, sc1) = meta["slider_t"], meta["slider_c"]
-        mid = (tc[:, 1] > sc0 + 4.0) & (tc[:, 1] < sc1 - 1.0)
-        S0 = float(np.median(tc[mid & (np.abs(tc[:, 0] - st0) < 0.6), 0]))
-        S1 = float(np.median(tc[mid & (np.abs(tc[:, 0] - st1) < 0.6), 0]))
-        # shim blade thickness (print frame: blade z 3..8 -> section z 5.5)
-        tmsh = TM[jsh.key]
-        pts = section_pts(tmsh, (0, 0, 5.5), (0, 0, 1))
-        shim = float(np.ptp(pts[:, 0]))
-        offs = {"A": W0 - S0, "B": (W1 - shim) - S1, "C": (W0 + shim) - S0, "D": W1 - S1}
-        travel = (W1 - W0) - (S1 - S0)
-        print(ok(abs(shim - p) <= TOL and abs(travel - meta["travel"]) <= TOL, "%s window/shim" % k),
-              "%s %-4s p %.4f: window %.3f..%.3f, slider %.3f..%.3f -> travel %.3f (3p+%.1f = %.3f), shim %.3f; offsets A %.3f B %.3f C %.3f D %.3f"
-              % (k, gr["name"], p, W0, W1, S0, S1, travel, PJ.TRAVEL_EXTRA, meta["travel"], shim, offs["A"], offs["B"], offs["C"], offs["D"]))
-        # slider bores (measured) per slot row
-        bores = [(b, MEAS[(js.key, b["name"])][0]) for b in js.bores]
-        # model slots: section the board at mid thickness, points -> group local (t, c)
-        bk = gr["board"]
-        Rg, og = np.asarray(gr["R"]), np.asarray(gr["origin"], float)
-        wdir = Rg[:, 2]
-        mid_pt = og - wdir * PJ.PLY_T / 2.0
-        pts = section_pts(BTM[bk], mid_pt, wdir)
-        locb = (Rg.T @ (pts - og).T).T
-        tcb = np.array([to_tc(q) for q in locb])
-        worst_c = worst_end = max_gap = 0.0
-        nh_tot = 0
-        good = True
-        for i, s in enumerate(gr["slots"]):
-            ta, tb = s["slot_t"]
-            sel = tcb[(tcb[:, 0] > ta - 0.6) & (tcb[:, 0] < tb + 0.6) & (np.abs(tcb[:, 1] - s["c"]) < 2.6)]
-            mt0, mt1 = float(sel[:, 0].min()), float(sel[:, 0].max())
-            mc = float((sel[:, 1].min() + sel[:, 1].max()) / 2.0)
-            mw = float(sel[:, 1].max() - sel[:, 1].min())
-            rowb = [to_tc(lc) for b, lc in bores if b["name"].startswith("r%dk" % (i + 1))]
-            holes = sorted(t + offs[ps] for (t, c) in rowb for ps in "ABCD")
-            cs = [c for (t, c) in rowb]
-            gaps = np.diff(holes)
-            worst_c = max(worst_c, max(abs(c - mc) for c in cs))
-            end_err = max(mt0 + PJ.SLOT_END - holes[0], holes[-1] - (mt1 - PJ.SLOT_END) - PJ.TRAVEL_EXTRA)
-            worst_end = max(worst_end, end_err)
-            max_gap = max(max_gap, float(gaps.max()))
-            nh_tot += len(holes)
-            good &= len(holes) == gr["n_holes"] and abs(mw - 4.0) < 0.01 and gaps.min() > 0.5
-        cusp = 2.0 - math.sqrt(max(4.0 - (max_gap / 2.0) ** 2, 0.0))
-        good &= worst_c <= TOL and worst_end <= TOL and cusp <= 0.30
-        print(ok(good, "%s slots" % k), "   %d slots x %d holes = %d: off the slot centre line max %.4f, past the slot-end limit max %.4f "
-              "(D pass carries the +%.1f travel allowance: an exactly printed window makes the slot %.1f longer), max pitch %.3f -> cusp %.3f"
-              % (len(gr["slots"]), gr["n_holes"], nh_tot, worst_c, worst_end, PJ.TRAVEL_EXTRA, PJ.TRAVEL_EXTRA, max_gap, cusp))
-        # passes: slider / shim / frame never overlap; slider turned 180 deg is blocked by the pin
-        fm = MAN[jf.key]
-        sm = MAN[js.key]
-        tdir_loc = np.array([sg, 0, 0]) if ax == "u" else np.array([0, sg, 0])
-        ovs = [(fm ^ sm.translate(tuple(tdir_loc * offs[ps]))).volume() for ps in "ABCD"]
-        tA = (fm ^ sm.translate(tuple(tdir_loc * (offs["A"] - 0.05)))).volume()
-        tD = (fm ^ sm.translate(tuple(tdir_loc * (offs["D"] + 0.05)))).volume()
-        b0 = sm.bounding_box()
-        cx, cy = (b0[0] + b0[3]) / 2.0, (b0[1] + b0[4]) / 2.0
-        rot = sm.translate((-cx, -cy, 0)).rotate((0, 0, 180)).translate((cx, cy, 0))
-        ov_rot = min((fm ^ rot.translate(tuple(tdir_loc * d))).volume() for d in np.linspace(0, meta["travel"], 9))
-        good = max(ovs) <= 0.01 and tA > 0.01 and tD > 0.01 and ov_rot > 1.0
-        print(ok(good, "%s passes" % k), "   slider in the frame at A/B/C/D: overlap max %.3f mm3; touches the A·C wall %.2f / B·D wall %.2f; "
-              "turned 180 deg: pin overlap %.1f mm3 (blocked)" % (max(ovs), tA, tD, ov_rot))
-
     # ------------------------------------------------------------------ (6) J-e
-    print("\n== (6) J-e depth gauges (cone 118 deg measured from the STL)")
+    print("\n== (6) J-e depth gauge (cone 118 deg measured from the STL)")
     je = byk["J-e"]
     tm = TM["J-e"]
     for gdef in je.meta["gauges"]:
@@ -494,46 +323,14 @@ def main():
         th, nrm, pts = wall_rays(tm, 15000)
         flipped = abs(j.R_print[2, 2] + 1.0) < 1e-9
         skins = [(0.0, ENGRAVE_SKIN)] if flipped else []
-        if j.key == "J-a5":
-            skins = [(0.0, ENGRAVE_SKIN)]
         if j.key == "J-e":
             skins = [(PJ.GAUGE_H - ENGRAVE_SKIN, PJ.GAUGE_H), (PJ.GUIDE - ENGRAVE_SKIN, PJ.GUIDE)]
-        if j.key == "J-f":
-            skins = [(8.0 - ENGRAVE_SKIN, 8.0)]                 # handle top label
-        if j.key.endswith("b") and j.key[:3] == "J-d":
-            skins = [(PJ.PLATE_T - 0.05, PJ.PLATE_T + PJ.RAISE + 0.05)]
         side = np.abs(nrm[:, 2]) < 0.9
         txt = np.zeros(len(pts), bool)
         for z0, z1 in skins:
             txt |= side & (pts[:, 2] >= z0 - 1e-6) & (pts[:, 2] <= z1 + 1e-6)
-        is_shim = j.key.endswith("c") and j.key[:3] == "J-d"
         mn = float(th[~txt].min()) if np.any(~txt) else float("inf")
-        lim = min(WALL_MIN, j.meta["p"] - 0.01) if is_shim else WALL_MIN
-        note = " (shim blade = pass step p %.2f: thickness is the function, print as is)" % j.meta["p"] if is_shim and mn < WALL_MIN else ""
-        print(ok(mn >= lim, "%s wall" % j.key), "%-7s min wall %.2f (label text side walls excluded: %d samples)%s" % (j.key, mn, int(txt.sum()), note))
-    # ------------------------------------------------------------------ (8) J-c tongue in the drilled slot
-    print("\n== (8) J-c slot tongue vs the J-d slot (narrowest clear width = 4 - 2 cusp - 2 slider play)")
-    groups = {g["key"]: g for g in PJ.slot_groups()}
-    for key, gk in (("J-c1", "J-d1"), ("J-c2", "J-d2")):
-        j = byk[key]
-        k0, k1, k2, k3 = j.meta["key"]
-        # tongue measured from the STL taken back to the local frame: section 3.5 below the wood face
-        polys = [np.asarray(q) for q in MAN[key].slice(-PJ.FENCE_DROP / 2.0).to_polygons()]
-        sv = 1.0 if j.meta["side"] == "L" else -1.0
-        cand = [q for q in polys if abs(q[:, 0].min() - k0) < 0.05 and abs(q[:, 0].max() - k1) < 0.05]
-        tw = None
-        if cand:
-            q = cand[0]
-            tw = min(q[:, 0].max() - q[:, 0].min(), q[:, 1].max() - q[:, 1].min())
-        gr = groups[gk]
-        pmax = gr["p"] + PJ.TRAVEL_EXTRA
-        cusp = 2.0 - math.sqrt(4.0 - (pmax / 2.0) ** 2)
-        clear_w = PJ.BIT_SLOT - 2.0 * cusp - 2.0 * PJ.SLIDE_CLR
-        cl = (clear_w - tw) / 2.0 if tw is not None else -1.0
-        why = ("lid L: tongue across the slot is set from the back edge by both J-d1 and J-c1" if key == "J-c1" else
-               "lid R: J-d2 sets the slot from the screen-lid end, J-c2 from the far end -> the clearance also takes the lid length error")
-        print(ok(tw is not None and cl >= 0.5, "%s tongue" % key), "%-5s tongue %.2f wide (measured), slot clear width %.2f -> %.2f per side (%s)" % (
-            key, tw if tw is not None else float("nan"), clear_w, cl, why))
+        print(ok(mn >= WALL_MIN, "%s wall" % j.key), "%-7s min wall %.2f (label text side walls excluded: %d samples)" % (j.key, mn, int(txt.sum())))
 
     print("\n%s: %d problem(s)" % ("PASS" if not FAIL else "FAIL", len(FAIL)))
     for f in FAIL:

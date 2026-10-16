@@ -15,7 +15,8 @@
     grille plate lower edge = spec exception), grille W1 (open area >= 40 %, holes >= D3, plate <= 2, 4 screws), R18 (nothing of
     the rear unit at y<214 below z75, modules lift out), cable duct, centre unit, joints, feet, wood screws (body.wood_screws: tip
     >= 1.0 from the panel's opposite face, screws from opposite faces with overlapping depths >= 4 thread to thread, seats measured;
-    W1 item 7 power-bank holder ears), BRK2 pins, pods lift off,
+    W1 item 7 ear rule, now on the 2026-10-07 LiFePO4 battery frame), BRK2 pins, pods lift off, battery frame (corral, strap slots,
+    XT60 on its top, fuse shelf with the ATC/ATO holder's stub saddles, back plate with the PD input and cable pass closed),
     spec centre_contents boxes vs the body solids, pareto_by_angle reproduced by body.PodGeom
 (4) R31 touchscreen rev 3 (touchscreen/rev3/design/CAD_SPEC_rev3.md A..G, numbers.json points / checks): screen lid additions + rib rule,
     cradle, hinge sweep 22..90 deg against the lid, Pi, cables, pods, key modules (nothing over the modules at y<=215), heel contact /
@@ -44,38 +45,39 @@ SPEC = json.load(open(os.path.join(HERE, "..", "spec", "body_L2.json")))
 # (regex a, regex b, reason) - intended overlaps (order-free)
 INTENDED = [
     (r"^BRK2-.-BOLT", r"^BRK2-.-NUT", "M3 볼트 ↔ 너트 나사산 물림 (너트 Ø2.5 구멍으로 모델)"),
-    (r"^JOIN-TS-", r"^JOIN-INS-", "M4 손잡이 나사 ↔ 목재 인서트 나사산 물림 (인서트 안지름 Ø3.3으로 모델)"),
+    (r"^JOIN-TS-", r"^JOIN-INS-", "M4 손잡이 나사 ↔ 열 인서트 나사산 물림 (인서트 안지름 Ø3.3으로 모델)"),
     (r"^CU-M3X10-", r"^SEAM-INS-", "M3×10 ↔ 열압입 인서트 나사산 물림 (인서트 안지름 Ø2.6으로 모델)"),
-    (r"^JOIN-INS-", r"^SPK.-PLY-SIDEIN$", "L73 나사산 인서트 겉 Ø6.5가 Ø5.8 구멍 벽에 나사산을 냄 (반지름 0.35 물림 - 의도, 아래에서 부피 확인)"),
+    (r"^JOIN-INS-", r"^SPK.-PLY-SIDEIN$", "M4 열 인서트 바깥 Ø6이 출력 옆판 Ø5.6 구멍을 녹여 들어감 (반지름 0.2 - 의도, 아래에서 부피 확인)"),
     (r"^SPK.-INS-\d$", r"^SPK.-BAFFLE$", "L69 열압입 인서트 바깥 Ø6이 Ø5.6 구멍을 녹여 들어감 (반지름 0.2 - 의도, 아래에서 부피 확인)"),
-    (r"^SEAM-INS-\d$", r"^SEAM-POSTRAIL-\d$", "L71 열압입 인서트 바깥 Ø4.5가 Ø4 구멍을 녹여 들어감 (반지름 0.25 - 의도, 아래에서 부피 확인)"),
+    (r"^SEAM-INS-\d$", r"^SEAM-POSTRAIL-\d$", "M3 열압입 인서트(p16 세트) 바깥 Ø5가 Ø4.2 구멍을 녹여 들어감 (반지름 0.4 - 의도, 아래에서 부피 확인)"),
     (r"^TS-M3X20-HINGE-[LR]$", r"^CU-SCREENLID$", "R31 M3×20 경첩 축이 먼 볼 Ø2.5에 직접 탭 (물림 7.6)"),
     (r"^TS-M3X20-LEG$", r"^TS-CRADLE$", "R31 M3×20 다리 축이 다리 걸이 먼 볼 Ø2.5에 직접 탭 (물림 5.4)"),
 ]
 INTENDED_E = [
     (r"^SPK.-BAFFLE$", r"^SPK-.$", "유닛 바스켓 Ø94가 구멍 Ø94를 지남 (같은 원 - 다각형 근사 오차)"),
     (r"^SPK.-GASKET$", r"^SPK-.$", "가스켓 안 Ø94 = 유닛 바스켓 테두리 Ø94 (같은 원 - 다각형 근사 오차)"),
-    (r"^XT30-CLIP-.$", r"^C-XT30F-.$", "XT30U-F가 집게 홈에 끼움 (면 일치)"),
+    (r"^XT60-CLIP-.$", r"^C-XT60F-.$", "XT60 암이 집게 홈에 끼움 (면 일치)"),
     (r"^PR-BACKPLATE$", r"^CU-E-SWITCH$", "로커 몸체 13.2×19.2가 같은 크기 구멍에 스냅 끼움 (면 일치)"),
     (r"^TS-M25-\d$", r"^TS-E-SCREEN$", "R31 M2.5×6이 화면 모서리 구멍에 나사산을 냄 (물림 3, 구멍 안지름 Ø2.2로 모델)"),
 ]
 # spec centre_contents boxes (the electronics agent's envelopes) vs body solids: boxes are coarse, these touch by design
 INTENDED_CC = [
-    (r"^C-XT30-L$", r"^XT30-CLIP-L$", "XT30 짝 상자 = 집게 자리"), (r"^C-XT30-R$", r"^XT30-CLIP-R$", "XT30 짝 상자 = 집게 자리"),
+    (r"^C-XT60-L$", r"^XT60-CLIP-L$", "XT60 짝 상자 = 집게 자리"), (r"^C-XT60-R$", r"^XT60-CLIP-R$", "XT60 짝 상자 = 집게 자리"),
+    (r"^Z-HUB-DC$", r"^XT60-CLIP-R$", "허브 DC 구역은 W1 10/1부터 안 씀 (허브 DC는 -x 끝면, check_electronics.py) - XT60 R 집게 판·목이 그 +x 끝 위쪽(x931~934.5, z34~44)에"),
     (r"^Z-TS-[LR][12]$", r"^JOIN-(TS|SLV)-", "나비나사 머리 + 고무 슬리브 자리"),
-    (r"^IO-CABLEPASS$", r"^PR-BACKPLATE$", "케이블 통과 Ø12 (사각 상자 ↔ 둥근 구멍)"),
     (r"^CU-E-SWITCH$", r"^PR-BACKPLATE$", "KCD1 테두리 15×21 상자가 판 구멍·오목 자리에 끼움"),
     (r"^CU-E-J501$", r"^PR-BACKPLATE$", "J501 코 Ø6이 판 구멍 Ø6.3에 (사각 상자 ↔ 둥근 구멍)"),
     (r"^CU-E-PEDBOARD$", r"^CU-POST-PED-[34]$", "위치 핀 Ø2.8이 기판 구멍 Ø3.0에"),
-    (r"^CU-E-FUSE$", r"^CU-FUSECRADLE$", "퓨즈 홀더 Ø10 사각 상자가 받침 Ø%.1f에 (상자 모서리)" % body.FUSE_BORE),
-    (r"^Z-SPKLEAD-L2$", r"^XT30-CLIP-L$", "집게 판 윗부분(z50~54, x271.5~274.5, y233.5~252.5)이 스피커선 구역 가장자리에 - 선은 판 뒤(y256에서 끝벽을 떠남)"),
+    (r"^CU-E-FUSE$", r"^CU-BATFRAME$", "퓨즈 홀더 상자가 배터리 틀 퓨즈 선반의 꼭지 받침 2개(Ø%.1f, 상자 안)를 감쌈 - 홀더 꼭지 Ø%.0f가 받침에 끼움" % (body.FS_BORE, body.FH_STUB_D)),
+    (r"^Z-SPKLEAD-L2$", r"^XT60-CLIP-L$", "집게 판·목 윗부분(z51~53.5, x271.5~280.2, y232.5~256)이 스피커선 구역 아래 가장자리에 - 선은 그 위 z55~58로 지남 (check_electronics.py)"),
     (r"^Z-SPKLEAD-L2$", r"^CABLE-CLIP-E[12]$", "끝벽 케이블 집게가 스피커선 구역 안에서 선(x275.1 z53)을 잡음"),
     (r"^Z-HUB-DROPS$", r"^CU-PLY-BOTTOM$", "구역 상자(y214~247, z0~40)가 아랫판 앞 6 mm를 덮음 - 선은 플러그(y247, z28.5)에서 R15로 z27 위에서 "
                                            "꺾여 통로(y<241)로 내려가 판에 닿지 않음 (앞 모서리 R3)"),
 ]
 L1_GONE = [r"^SPK.-PLY-FRONT$", r"^SPK.-XT30HOLDER$", r"^JOIN-DT-", r"^JOIN-LATCH-", r"^CU-PLY-P\d\d$", r"^CU-TRAY$", r"^CU-LIDSUP-",
            r"^CU-MAG-(SUP|LID)-(KS|CU|PB)-", r"^CU-KSINSERT$", r"^CU-SMALLBOX", r"^CU-LID$", r"^CU-IOPLATE$", r"^BRK-[LR]",
-           r"^TS-(E-TD2|C-POWER$|RCLIP-(LID|CR)$|M3X10-LID|M25-LUG)"]                 # rev 2 (Touch Display 2) touchscreen parts
+           r"^TS-(E-TD2|C-POWER$|RCLIP-(LID|CR)$|M3X10-LID|M25-LUG)",                  # rev 2 (Touch Display 2) touchscreen parts
+           r"^CU-PBHOLDER$", r"^CU-FUSECRADLE$"]                                       # 2026-10-07: power bank holder + floor fuse cradle (battery frame)
 BRK_FAMILY = r"^BRK2-"
 
 
@@ -272,7 +274,18 @@ def main():
                 probs.append("%s: %d bodies" % (p.id, len(comps)))
             if abs(q[2]) > 1e-6 or abs(q[0]) > 1e-6 or abs(q[1]) > 1e-6:
                 probs.append("%s: print solid not at the bed origin %s" % (p.id, q[:3]))
-            if max(sz) > 256.0:
+            if p.print_pieces:              # 2026-10-16: longer than the bed -> the STL files are the pieces
+                vp = 0.0
+                for nm, pq in p.print_pieces:
+                    b_ = pq.bounding_box()
+                    s_ = (b_[3] - b_[0], b_[4] - b_[1], b_[5] - b_[2])
+                    vp += pq.volume()
+                    if max(s_) > 256.0 or len(pq.decompose()) != 1 or not watertight(pq) or max(abs(b_[0]), abs(b_[1]), abs(b_[2])) > 1e-6:
+                        probs.append("%s: piece %s %s (bed <= 256, 1 body, watertight, at the origin)" % (p.id, nm, "×".join("%.1f" % v for v in s_)))
+                if abs(vp - p.solid.volume()) > 1e-3 * p.solid.volume():
+                    probs.append("%s: pieces volume %.1f != part %.1f" % (p.id, vp, p.solid.volume()))
+                line += "  | %d pieces %s" % (len(p.print_pieces), " / ".join("%.1f" % (q_.bounding_box()[3] - q_.bounding_box()[0]) for _, q_ in p.print_pieces))
+            elif max(sz) > 256.0:
                 probs.append("%s: bed size %.1f > 256" % (p.id, max(sz)))
             elif max(sz) > 220:
                 line += "  (> 220)"
@@ -295,7 +308,7 @@ def main():
            "%d problems" % len(probs))
     gone = [i for i in ids if any(re.search(r, i) for r in L1_GONE)]
     C.true("L1 delete list gone (front strips, XT30 holders, dovetails, latches, P01..P11, tray, lid supports, KS insert, "
-           "small box, CU lid v2, I/O plate, L1 brackets, rev 2 Touch Display 2 parts)", not gone, ", ".join(gone) or "none left")
+           "small box, CU lid v2, I/O plate, L1 brackets, rev 2 Touch Display 2 parts; 2026-10-07 power-bank holder + floor fuse cradle)", not gone, ", ".join(gone) or "none left")
     src = open(os.path.join(HERE, "body.py")).read()
     C.true("body.py builds the touchscreen from touchscreen_rev3.py = rev 3 numbers (%s)" % TS.N["revision"][:2],
            re.search(r"^import touchscreen_rev3 as TS", src, re.M) is not None and str(TS.N["revision"]).startswith("3a") and "rev3" in TS.TS_DIR)
@@ -427,7 +440,7 @@ def check_wood_screws(by, C):
             bad_seat.append("%s %s" % (r["label"], at))
         print("       %-40s %-16s %s%-14s face %6.1f  tip %6.1f  bite %4.1f  to the opposite face %4.1f" % (
             r["label"], r["ply"], ax, "(%.1f, %.1f)" % at, r["face"], r["tip"], bite, gap))
-    true("wood screws: %d (feet 14, holder 4, back-plate tabs 2, hub shelf 2, L73 pilots 4); entry faces measured on the panels = "
+    true("wood screws: %d (feet 14, battery frame 4, back-plate tab 2, hub shelf 2, heat-set insert holes 4 in the printed pod panels); entry faces measured on the panels = "
          "wood_screws" % len(rows), not bad_face and len(rows) == 26, "; ".join(bad_face) or "all")
     true("wood screws: every head seat on its solid (csk cone open, ear / tab round the head, flush top on the panel; foot seat D9 x 2; "
          "shelf seat D6.5 x 4; pilot depth)", not bad_seat, "; ".join(bad_seat) or "all")
@@ -448,10 +461,162 @@ def check_wood_screws(by, C):
     true("no two screws from opposite faces of one panel within %.0f thread to thread where their depths overlap" % SCREW_OPP_GAP,
          all(p_[0] >= SCREW_OPP_GAP for p_ in pairs), info if pairs else "no overlapping pairs")
     feet_c = [r["at"] for r in rows if r["kind"] == "foot" and r["ply"] == "CU-PLY-BOTTOM"]
-    dpb = min(math.dist(s, f) for s in body.PB_SCREWS for f in feet_c)
-    true("power-bank holder screws (W1 item 7): ear head z%.1f, tip z%.1f = %.1f over the ply underside, every axis off the D28 foot pads "
-         "(nearest foot axis %.1f > 14)" % (body.PB_HEAD_Z, body.PB_HEAD_Z - body.CSK_SCREW[1], body.PB_HEAD_Z - body.CSK_SCREW[1] - body.ZB, dpb),
-         dpb > 14.0 and body.PB_HEAD_Z - body.CSK_SCREW[1] - body.ZB >= SCREW_TIP_MIN)
+    dpb = min(math.dist(s, f) for s in body.BF_SCREWS for f in feet_c)
+    true("battery-frame screws (W1 item 7 rule): head z%.1f, tip z%.1f = %.1f over the ply underside, every axis off the D28 foot pads "
+         "(nearest foot axis %.1f > 14)" % (body.BF_HEAD_Z, body.BF_HEAD_Z - body.CSK_SCREW[1], body.BF_HEAD_Z - body.CSK_SCREW[1] - body.ZB, dpb),
+         dpb > 14.0 and body.BF_HEAD_Z - body.CSK_SCREW[1] - body.ZB >= SCREW_TIP_MIN)
+
+
+def _min_web(pts, d):
+    """smallest wood web between neighbouring holes of diameter d (centre distance - d)."""
+    return min(math.dist(a, b) for a, b in itertools.combinations(pts, 2)) - d
+
+
+def _unsupported(pm, layer=0.2, grow=0.25, bridge=2.5):
+    """print solid on the bed: per layer, the part not standing on the layer below grown by `grow` (45 deg at 0.2 layers + slack).
+    Regions that a `bridge`-wide strip covers (erode by bridge / 2 -> empty) are short bridges between supported walls.
+    -> (worst unsupported area, at z, worst area that is NOT a short bridge)."""
+    from manifold3d import JoinType
+    hz = pm.bounding_box()[5]
+    worst, at, wide = 0.0, 0.0, 0.0
+    for z_ in np.arange(layer + 0.1, hz - 0.05, layer):
+        un = pm.slice(z_) - pm.slice(z_ - layer).offset(grow, JoinType.Round)
+        a_ = un.area()
+        if a_ > worst:
+            worst, at = a_, z_
+        if a_ > 0.05 and not un.offset(-bridge / 2.0, JoinType.Round).is_empty():
+            wide = max(wide, un.offset(-bridge / 2.0, JoinType.Round).area())
+    return worst, at, wide
+
+
+def check_drill_reduction(P, by, C):
+    """2026-10-07 (user: '드릴을 써야되는 부분을 최소한으로 줄여줘'): lids L / R, end walls L / R and the pod inner side panels are PRINTED (holes, slots,
+    magnet seats and the insert holes in the print); the plywood keeps only the back-ply top-edge magnet seats and D8 vent grids."""
+    chk, at_least, at_most, true = C.chk, C.at_least, C.at_most, C.true
+    YB, YBI, T = body.YB, body.YBI, body.T
+    B_ = box
+    print("   --  drill reduction (2026-10-07): printed lids / end walls / pod inner panels, D8 vent grids in the plywood")
+    newp = ["LID-L", "LID-R", "CU-PLY-END-L", "CU-PLY-END-R", "SPKL-PLY-SIDEIN", "SPKR-PLY-SIDEIN"]
+    rows = []
+    for pid in newp:
+        p = by[pid]
+        q = p.print_solid.bounding_box()
+        rows.append((pid, p.kind, p.print_folder, q[3] - q[0], q[4] - q[1], q[5] - q[2], abs(p.print_solid.volume() - p.solid.volume())))
+    true("printed (not plywood) and on the 256 x 256 bed, 05 folder: %s" % " · ".join("%s %.1f×%.1f×%.1f" % (r[0], r[3], r[4], r[5]) for r in rows),
+         all(r[1] == "print" and r[2] == body.FOLDER and max(r[3], r[4]) <= 256.0 and r[6] < 1e-3 * by[r[0]].solid.volume() for r in rows))
+    plys = sorted(p.id for p in P if p.kind == "plywood")
+    true("plywood pieces left: %d (2026-10-16 A안: every former plywood panel is printed) %s" % (len(plys), ", ".join(plys)), not plys)
+    # A안 (2026-10-16): the 10 former okoume panels are printed - same place, PETG, pilots for every wood_screws() screw, the two long
+    # centre panels in 3 half-lap pieces that fit the bed and add up to the part
+    olds = ["SPK%s-PLY-%s" % (s_, t_) for s_ in "LR" for t_ in ("SIDEOUT", "BACK", "TOP", "BOTTOM")] + ["CU-PLY-BOTTOM", "CU-PLY-BACK"]
+    true("A안: former plywood panels printed in the 05 folder (%d)" % len(olds),
+         all(by[i].kind == "print" and by[i].print_folder == body.FOLDER and "PETG" in by[i].material for i in olds))
+    for pid in ("CU-PLY-BOTTOM", "CU-PLY-BACK"):
+        pcs = by[pid].print_pieces
+        ln = [q.bounding_box()[3] - q.bounding_box()[0] for _, q in pcs]
+        true("A안: %s in %d pieces %s (each <= 250 on the 256 bed, half laps %.0f at x%s)" % (pid, len(pcs), " / ".join("%.1f" % v for v in ln),
+             body.LAP, " · ".join("%.0f" % x for x in body.SPLIT_X)), len(pcs) == 3 and max(ln) <= 250.0 + 1e-6)
+    for r in body.wood_screws():
+        if r["kind"] not in body.PILOT_D:
+            continue
+        ax = r["axis"]
+        a_, b_ = r["at"]
+        mid = (r["face"] + r["tip"]) / 2.0
+        probe = {"x": box(mid - 0.2, mid + 0.2, a_ - 0.5, a_ + 0.5, b_ - 0.5, b_ + 0.5), "y": box(a_ - 0.5, a_ + 0.5, mid - 0.2, mid + 0.2, b_ - 0.5, b_ + 0.5),
+                 "z": box(a_ - 0.5, a_ + 0.5, b_ - 0.5, b_ + 0.5, mid - 0.2, mid + 0.2)}[ax]
+        if vol(by[r["ply"]].solid, probe) > 0.01:
+            true("A안: printed pilot for %s at %s in %s" % (r["label"], r["at"], r["ply"]), False)
+            break
+    else:
+        true("A안: every screw into a printed panel has its printed pilot (%s)" % " · ".join("%s Ø%.1f" % kv for kv in body.PILOT_D.items()), True)
+    prints = [(i, by[i].print_solid) for i in olds if not by[i].print_pieces] + [(nm, q) for i in olds for nm, q in by[i].print_pieces]
+    bad = []
+    for nm, q in prints:
+        w_, at_, wide = _unsupported(q)
+        if wide >= 0.05:
+            bad.append("%s %.2f at z%.1f" % (nm, wide, at_))
+    true("A안: the %d new print files print without supports (pilot ends are 45 deg cones, lap tongues on the bed)" % len(prints), not bad,
+         "; ".join(bad) or "all")
+    # printability of the new prints (bed orientation from the part): every layer stands on the one below (45 deg), except short bridges
+    for pid in newp:
+        w_, at_, wide = _unsupported(by[pid].print_solid)
+        true("%s prints without supports: worst unsupported area per 0.2 layer %.2f mm2 at z%.1f, none wider than a 2.5 bridge (%.3f)"
+             % (pid, w_, at_, wide), wide < 0.05)
+    # lids: same outline as the okoume lids (bbox checked above), every exhaust slot open through, 3 underside magnet seats D8 x 3.2
+    for lid, side in (("LID-L", "L"), ("LID-R", "R")):
+        m = by[lid].solid
+        if side == "L":
+            sl = [B_(x0 + 0.05, x1 - 0.05, y0 + 0.05, y0 + 3.95, body.Z_LIDU - 0.1, body.Z_LID + 0.1) for (x0, x1, y0) in body.LIDL_SLOTS]
+        else:
+            sl = [B_(x0 + 0.05, x0 + 3.95, y0 + 0.05, y1 - 0.05, body.Z_LIDU - 0.1, body.Z_LID + 0.1) for (x0, y0, y1) in body.LIDR_SLOTS]
+        mags = [(x, (YBI + YB) / 2.0) for x in body.MAG_BACK_X[side]] + [body.MAG_END[side]]
+        seat = all(vol(m, cyl_z(x, y, body.Z_LIDU - 0.1, body.Z_LIDU + body.MAG[2] - 0.02, body.MAG[0] - 0.05)) < TOL
+                   and vol(m, cyl_z(x, y, body.Z_LIDU + body.MAG[2] + 0.02, body.Z_LID, body.MAG[0])) > 0.98 * math.pi * 16 * (T - body.MAG[2] - 0.02)
+                   for (x, y) in mags)
+        ch = vol(m, B_(body.LIDS[lid][0] + 1, body.LIDS[lid][1] - 1, body.Y0, body.Y0 + 0.45, body.Z_LID - 0.45, body.Z_LID))
+        true("%s (printed): %d exhaust slots open through, 3 magnet seats D%.0f x %.1f open from the underside with %.1f of PETG over them, front chamfer"
+             % (lid, len(sl), body.MAG[0], body.MAG[2], T - body.MAG[2]), all(vol(m, b_) < TOL for b_ in sl) and seat and ch < TOL)
+    # end walls: XT60 / sleeve holes D19 / D8 round (sleeve grips), magnet seat holds a D8 x 3.2 circle with >= 1.0 of PETG round it
+    for s in "LR":
+        m = by["CU-PLY-END-%s" % s].solid
+        a, b_ = (body.CU_X[0], body.CU_IX[0]) if s == "L" else (body.CU_IX[1], body.CU_X[1])
+        mx_, my_ = body.MAG_END[s]
+        sleeves = all(vol(m, cyl_x(y, z, a - 1, b_ + 1, body.SLV[0] - 0.1)) < TOL and vol(m, diff(cyl_x(y, z, a + 0.5, b_ - 0.5, body.SLV[0] + 0.6),
+                                                                                                   [cyl_x(y, z, a, b_, body.SLV[0] + 0.05)])) > 0.98 * math.pi / 4 * ((body.SLV[0] + 0.6) ** 2 - (body.SLV[0] + 0.05) ** 2) * (T - 1.0)
+                      for (y, z) in body.TS_YZ[s])
+        pocket = vol(m, cyl_z(mx_, my_, body.Z_LIDU - body.MAG[2] + 0.02, body.Z_LIDU + 0.1, body.MAG[0] - 0.05)) < TOL
+        sec = (m ^ B_(a - 1, b_ + 1, my_ - 0.05, my_ + 0.05, body.Z_LIDU - body.MAG[2] + 0.2, body.Z_LIDU - 0.2))
+        # skin over the seat: wood (PETG) between the seat cut and each face, measured on the section y = magnet centre
+        lo_skin = (m ^ B_(a - 1, mx_ - body.MAG[0] / 2 + 0.01, my_ - 0.05, my_ + 0.05, body.Z_LIDU - 2.0, body.Z_LIDU - 1.0)).bounding_box()
+        hi_ = (m ^ B_(mx_, b_ + 1, my_ - 0.05, my_ + 0.05, body.Z_LIDU - 2.0, body.Z_LIDU - 1.0))
+        hb = hi_.bounding_box()
+        skins = ((lo_skin[3] - lo_skin[0]) if s == "L" else (hb[3] - hb[0]), (hb[3] - hb[0]) if s == "L" else (lo_skin[3] - lo_skin[0]))
+        true("CU-PLY-END-%s (printed): sleeve holes D%.0f round through (fuel hose OD8 grips, PETG all round), magnet seat D%.0f x %.1f open from the "
+             "top edge, PETG beside it %.2f (bed side) / %.2f (print top, flat-capped teardrop) >= 0.9"
+             % (s, body.SLV[0], body.MAG[0], body.MAG[2], skins[0], skins[1]), sleeves and pocket and min(skins) >= 0.9 and not sec.is_empty())
+    # vents left in the plywood: D8 grids (owned bit), web >= 3, open area >= the replaced slot rows
+    back, bot = by["CU-PLY-BACK"].solid, by["CU-PLY-BOTTOM"].solid
+    d = body.VENT_D
+    a1 = math.pi / 4 * d * d
+    open_k = all(vol(back, cyl_y(x, z, YBI - 0.1, YB + 0.1, d - 0.1)) < TOL for (x, z) in body.BACK_HOLES)
+    held_k = sum(vol(back, B_(x - d / 2 - 3, x + d / 2 + 3, YBI, YB, z - d / 2 - 3, z + d / 2 + 3)) for (x, z) in body.BACK_HOLES)
+    want_k = len(body.BACK_HOLES) * ((d + 6) ** 2 - a1) * T
+    sh = by["PR-HUBSHELF"].solid
+    shelf_top = (sh ^ B_(805, 895, YBI - 2.5, YBI, 0, 60)).bounding_box()[5]     # the strip glued to the back ply (not the amp pads)
+    mag_bot = body.Z_LIDU - body.MAG[2]
+    zc = body.BACK_HOLES[0][1]
+    gap_mag = min(math.hypot(x - mx, 0) for (x, z) in body.BACK_HOLES for s_ in "LR" for mx in body.MAG_BACK_X[s_])
+    web_k = _min_web(body.BACK_HOLES, d)
+    true("back ply amp vents: %d x D%.0f open (x%.0f..%.0f z%.1f), web %.2f >= 3, %.0f mm2 >= the 8 x (4 x 15) slots %.0f mm2; hole bottom z%.1f is %.2f over "
+         "the shelf strip top z%.1f, hole top z%.1f is %.2f under the top-edge magnet seats (z%.2f), %.2f under the top edge; wood round every hole"
+         % (len(body.BACK_HOLES), d, body.BACK_HOLES[0][0], body.BACK_HOLES[-1][0], zc, web_k, len(body.BACK_HOLES) * a1, body.OLD_SLOT_AREA["back"],
+            zc - d / 2, zc - d / 2 - shelf_top, shelf_top, zc + d / 2, mag_bot - (zc + d / 2), mag_bot, body.Z_LIDU - (zc + d / 2)),
+         open_k and web_k >= 3.0 - 1e-9 and len(body.BACK_HOLES) * a1 >= body.OLD_SLOT_AREA["back"] and zc - d / 2 - shelf_top >= 3.0 - 1e-9
+         and mag_bot - (zc + d / 2) >= 3.0 and held_k > 0.97 * want_k)
+    hs = body.BOT_HOLES_BUCK + body.BOT_HOLES_PI
+    open_b = all(vol(bot, cyl_z(x, y, body.ZB - 0.1, body.Z_BOT + 0.1, d - 0.1)) < TOL for (x, y) in hs)
+    web_b = _min_web(hs, d)
+    posts = [(x, y, dd) for (tag, k, x, y, zt, dd, hd, hdep, pin) in body._board_posts()]
+    post_web = min(math.dist((x, y), (px, py)) - d / 2 - dd / 2 for (x, y) in hs for (px, py, dd) in posts)
+    feet_c = [xy for g_, xy, _ in body.foot_positions() if g_ == "가운데 유닛"]
+    foot_cl = min(math.dist(h, f_) - d / 2 - 14.0 for h in hs for f_ in feet_c)
+    bb_ = bot.bounding_box()
+    edge = min(min(x - bb_[0], bb_[3] - x, y - bb_[1], bb_[4] - y) - d / 2 for (x, y) in hs)
+    # nothing printed / bought rests over a hole on the ply top or under it (posts, battery frame, seam posts, feet)
+    over = sorted(set(i for (x, y) in hs for i in hits([p for p in P if p.kind != "plywood"], cyl_z(x, y, body.Z_BOT, body.Z_BOT + 1.0, d - 0.1))))
+    under = sorted(set(i for (x, y) in hs for i in hits([p for p in P if p.kind != "plywood"], cyl_z(x, y, 0.0, body.ZB, d - 0.1))))
+    true("bottom ply intake: %d x D%.0f open (buck %d, Pi %d), web %.2f >= 3, %.0f mm2 >= the 14 x (4 x 34) slots %.0f mm2; wood to every board post %.2f "
+         "(>= 3), to the D28 centre-foot pads %.2f (>= 0), to the ply edges %.2f; nothing on / under a hole: %s"
+         % (len(hs), d, len(body.BOT_HOLES_BUCK), len(body.BOT_HOLES_PI), web_b, len(hs) * a1, body.OLD_SLOT_AREA["bottom"], post_web, foot_cl, edge,
+            ", ".join(over + under) or "clear"),
+         open_b and web_b >= 3.0 - 1e-9 and len(hs) * a1 >= body.OLD_SLOT_AREA["bottom"] and post_web >= 3.0 - 1e-9 and foot_cl >= 0.0 and edge >= 3.0
+         and not over and not under)
+    # every remaining drilled hole in the plywood (from the solids: through holes + blind seats), the target of the change
+    n_k = len(body.BACK_HOLES) + len(hs)
+    n_m = len(body.MAG_BACK_X["L"]) + len(body.MAG_BACK_X["R"])
+    true("drilling left in the plywood: %d D8 vent holes (back %d, bottom %d) + %d D8 x %.1f back-ply top-edge magnet seats = %d (was about 624: "
+         "lid slots 96 + 200 and 6 seats + end walls 2 x (XT60 9 + sleeves 2 + magnet 1) + pod inner panels 2 x 3 + back 64 + 4 seats + bottom 224)"
+         % (n_k, len(body.BACK_HOLES), len(hs), n_m, body.MAG[2], n_k + n_m), n_k + n_m == 54)
 
 
 def run_checks(P, by, K, C, E=None):
@@ -884,19 +1049,65 @@ def run_checks(P, by, K, C, E=None):
         exp[l["id"]] = (l["x"][0], 214.0, zlu, l["x"][1], YB, zlt)
     exp["CU-SCREENLID"] = (body.SLID_X[0], 214.0, zlu, body.SLID_X[1], YB, TS.AX_Z + TS.KNUCKLE["R"])   # 0.5 seam play; top = rev 3 hinge cheeks
     cc = dict(CC_B)                                                     # spec boxes; back-plate items moved with the back face
-    # power-bank holder (W1 item 7, 2026-10-02): spec box + 4 screw ears <= z16.5 + PB_EAR_T outside it -> the box above the ears = spec,
-    # whole bbox = spec box grown to the ears, nothing outside the spec box above the ear tops
-    v = cc["CU-PBHOLDER"]
-    hb = by["CU-PBHOLDER"].solid
-    ez = body.PB_HEAD_Z
-    chk("CU-PBHOLDER above the ears (z>%.1f) bbox = spec" % ez, (hb ^ B_(200, 450, 200, 400, ez + 0.01, 100)).bounding_box(),
-        (v[0], v[2], ez + 0.01, v[1], v[3], v[5]))
-    ears_bb = (min([v[0]] + [e[0] for _, e in body.PB_EARS]), min([v[2]] + [e[2] for _, e in body.PB_EARS]), v[4],
-               max([v[1]] + [e[1] for _, e in body.PB_EARS]), max([v[3]] + [e[3] for _, e in body.PB_EARS]), v[5])
-    chk("CU-PBHOLDER bbox = spec box + 4 screw ears (z%.1f..%.1f)" % (v[4], ez), hb.bounding_box(), ears_bb)
-    out_spec = hb - B_(v[0], v[1], v[2], v[3], v[4] - 1, v[5] + 1)
-    true("CU-PBHOLDER outside the spec box = only the 4 ears (top z%.1f, %.0f cm3)" % (ez, out_spec.volume() / 1000.0),
-         len(out_spec.decompose()) == 4 and out_spec.bounding_box()[5] <= ez + 1e-6)
+    # battery frame (2026-10-07, LiFePO4 pack): bbox = spec box; corral 0.5 round the pack, walls 1.5 x 14, +x end open between the
+    # 8 mm corner returns, strap slots open, fuse shelf with the stub saddles for the ATC/ATO holder (spec box), nothing under the pack
+    v = cc["CU-BATFRAME"]
+    fr = by["CU-BATFRAME"].solid
+    chk("CU-BATFRAME bbox = spec", fr.bounding_box(), (v[0], v[2], v[4], v[1], v[3], v[5]))
+    bt = cc["BAT-LFP"]
+    g_, w_, rt = body.BF_GAP, body.BF_WALL, body.BF_RETURN
+    zt_ = body.Z_BOT + body.BF_H
+    inner = B_(bt[0] - g_ + 0.01, bt[1] + g_ - 0.01, bt[2] - g_ + 0.01, bt[3] + g_ - 0.01, body.Z_BOT - 1, 80)
+    ring = diff(B_(bt[0] - g_ - w_ + 0.05, bt[1] + g_ + w_ - 0.05, bt[2] - g_ - w_ + 0.05, bt[3] + g_ + w_ - 0.05, body.Z_BOT + 4.0, zt_ - 0.05),
+                [B_(bt[0] - g_ - 0.05, bt[1] + g_ + 0.05, bt[2] - g_ - 0.05, bt[3] + g_ + 0.05, 0, 100)])
+    wall_v = vol(fr, ring)
+    open_x = vol(fr, B_(bt[1], bt[1] + g_ + w_ + 0.5, bt[2] - g_ + rt + 0.05, bt[3] + g_ - rt - 0.05, body.Z_BOT, 80))
+    true("battery frame: pack box x%.0f~%.0f y%.1f~%.1f free inside the corral (gap %.1f), walls %.1f x %.0f round it (z%.1f~%.1f), +x end open "
+         "y%.0f~%.0f between %.0f mm corner returns, nothing over the pack (no tray floor: the pack sits on the ply)"
+         % (bt[0], bt[1], bt[2], bt[3], g_, w_, body.BF_H, body.Z_BOT, zt_, bt[2] - g_ + rt, bt[3] + g_ - rt, rt),
+         vol(fr, inner) < TOL and wall_v > 0.9 * ((2 * (bt[1] - bt[0] + 2 * g_ + 2 * w_) + (bt[3] - bt[2] + 2 * g_)) * w_ * (zt_ - body.Z_BOT - 4.0)) - 400.0
+         and open_x < TOL and vol(by["CU-PLY-BOTTOM"].solid, B_(bt[0], bt[1], bt[2], bt[3], bt[4] + 0.01, bt[5])) < TOL,
+         "wall %.0f mm3, +x end %.2f" % (wall_v, open_x))
+    sx0, sx1 = body.BF_STRAP_X
+    oy0, oy1 = bt[2] - g_ - w_, bt[3] + g_ + w_
+    true("battery frame: strap slots %.0f x %.0f open through the front and back walls (x%.0f~%.0f) for the 20 mm velcro L79 under / over the pack"
+         % (sx1 - sx0, body.BF_STRAP_H, sx0, sx1),
+         vol(fr, B_(sx0 + 0.05, sx1 - 0.05, oy0 - 0.1, oy0 + w_ + 0.1, body.Z_BOT + 0.05, body.Z_BOT + body.BF_STRAP_H - 0.05)) < TOL
+         and vol(fr, B_(sx0 + 0.05, sx1 - 0.05, oy1 - w_ - 0.1, oy1 + 0.1, body.Z_BOT + 0.05, body.Z_BOT + body.BF_STRAP_H - 0.05)) < TOL)
+    fu = cc["CU-E-FUSE"]
+    ay, az = body.FH_AXIS
+    sx_ = body.FS_SADDLE_X
+    st_ = az + body.FS_LIP
+    bore_free = all(vol(fr, cyl_x(ay, az, a_ - 0.5, b_ + 0.5, body.FS_BORE - 0.1)) < TOL for (a_, b_) in sx_)
+    held = all(vol(fr, diff(cyl_x(ay, az, a_ + 0.2, b_ - 0.2, body.FS_BORE + 2.0), [cyl_x(ay, az, a_, b_, body.FS_BORE + 0.05)])) > 20.0 for (a_, b_) in sx_)
+    mouth = [vol(fr, B_(a_ + 0.2, b_ - 0.2, ay - body.FS_MOUTH / 2 + 0.05, ay + body.FS_MOUTH / 2 - 0.05, az, 70)) for (a_, b_) in sx_]
+    lips = [vol(fr, B_(a_ + 0.2, b_ - 0.2, ay - body.FH_STUB_D / 2, ay - body.FS_MOUTH / 2 - 0.05, az + 0.5, st_ - 0.05)) for (a_, b_) in sx_]
+    top_ = vol(fr, B_(fu[0] + body.FH_STUB_L + 0.5, fu[1] - body.FH_STUB_L - 0.5, body.CR_BLOCK_Y - (body.FS_TOP - 27.0) + 0.5, fu[3] - 1.0, body.FS_TOP - 0.3, body.FS_TOP - 0.05))
+    true("battery frame fuse shelf (ATC/ATO holder, 2026-10-07): top z%.0f under the holder x%.0f~%.1f, stub saddles x%s with bore D%.1f on the stub axis "
+         "(y%.1f z%.2f) free, snap mouth %.2f open to z%.2f with lips each side (stub D%.0f snaps past)"
+         % (body.FS_TOP, fu[0], fu[1], " / ".join("%.1f~%.1f" % ab for ab in sx_), body.FS_BORE, ay, az, body.FS_MOUTH, st_, body.FH_STUB_D),
+         bore_free and held and all(v < TOL for v in mouth) and all(v > 0.5 for v in lips) and top_ > 100 and abs(fu[4] - body.FS_TOP) < 1e-9
+         and abs((fu[4] + fu[5]) / 2 - az) < 1e-9 and abs(fu[2] + body.FH_STUB_UP - ay) < 1e-9,
+         "top %.0f mm3, mouth %s, lips %s" % (top_, "/".join("%.2f" % v for v in mouth), "/".join("%.1f" % v for v in lips)))
+    zmin_x = [(fr ^ B_(x_ - 0.05, x_ + 0.05, 200, 260, 0, 200)).bounding_box()[2] for x_ in (body.FS_CUT_X + 1.0, (body.FS_CUT_X + body.FS_X[1]) / 2, body.FS_X[1] - 0.1)]
+    true("fuse shelf past the frame end x%.0f (PED board below): nothing under z%.0f + (x - %.0f) - 45 deg in x, prints without support; lowest z %s"
+         % (body.FS_CUT_X, body.FS_CUT_Z, body.FS_CUT_X, " / ".join("%.2f" % v for v in zmin_x)),
+         all(z_ >= body.FS_CUT_Z + (x_ - body.FS_CUT_X) - 0.2 for z_, x_ in zip(zmin_x, (body.FS_CUT_X + 1.0, (body.FS_CUT_X + body.FS_X[1]) / 2, body.FS_X[1] - 0.1))))
+    zl = cc["Z-BAT-LEADS"]
+    true("battery frame leaves the lead-turn zone Z-BAT-LEADS x%.0f~%.0f y%.0f~%.0f z%.0f~%.2f free (no body part in it)" % tuple(zl),
+         not hits(P, B_(zl[0], zl[1], zl[2], zl[3], zl[4], zl[5] - 0.01)), ", ".join(hits(P, B_(zl[0], zl[1], zl[2], zl[3], zl[4], zl[5] - 0.01))))
+    low = (fr ^ B_(200, 450, 200, 241.0, 0, 200)).bounding_box()
+    pf_ = body.fuse_shelf_profile()
+    a_, b_ = pf_[4], pf_[3]
+    sp_, _ = body.fuse_saddle_profile()
+    sa_, sb2 = sp_[0], sp_[3]
+    # the underside over the front zone: every slice y = const is above the 45 deg line through (y241.5, z27)
+    under_ok = all((fr ^ B_(200, 450, y_ - 0.05, y_ + 0.05, 0, 200)).bounding_box()[2] >= 27.0 + (body.CR_BLOCK_Y - (y_ + 0.05)) - 0.05
+                   for y_ in (219.0, 225.0, 232.0, 240.0))
+    true("battery frame fuse shelf over the front zone: everything at y<241 is above z%.2f (>= the duct roof level z27: cable duct y212..241 "
+         "z0..27 free), shelf underside 45 deg from (y%.1f z%.1f) to (y%.1f z%.1f), saddle undersides on the same line (y%.2f z%.2f .. y%.2f z%.2f) "
+         "- prints without support" % (low[2], a_[0], a_[1], b_[0], b_[1], sb2[0], sb2[1], sa_[0], sa_[1]),
+         low[2] >= 27.0 and abs(abs(b_[1] - a_[1]) - abs(b_[0] - a_[0])) < 1e-6 and abs(abs(sb2[1] - sa_[1]) - abs(sb2[0] - sa_[0])) < 1e-6 and under_ok)
     sh, b1 = cc["PR-HUBSHELF"], cc["PR-SHELFBRK-1"]
     exp["PR-HUBSHELF"] = (sh[0], sh[2], sh[4], sh[1], YBI, b1[5])     # shelf back strip + brackets reach the back ply (spec boxes: to y330 at 43 deg)
     for i in (1, 2):
@@ -933,53 +1144,72 @@ def run_checks(P, by, K, C, E=None):
         ew = by["CU-PLY-END-%s" % s].solid
         pi_ = by["SPK%s-PLY-SIDEIN" % s].solid
         ey, ez = body.END_HOLE_YZ[s]
-        true("end wall %s: XT30 hole D14 at y%.0f z%.1f (clip pocket axis, deviation from the D6 axis) open; pod wire hole D6 (y%.0f z%.0f) open"
-             % (s, ey, ez, wy, wz), vol(ew, cyl_x(ey, ez, a - 1, b_ + 1, 13.8)) < TOL and vol(pi_, cyl_x(wy, wz, -100, 1300, 5.8)) < TOL)
+        true("end wall %s: XT60 hole D%.0f at y%.0f z%.1f (clip pocket axis, deviation from the D6 axis) open; pod wire hole D6 (y%.0f z%.0f) open"
+             % (s, body.END_HOLE_D, ey, ez, wy, wz), vol(ew, cyl_x(ey, ez, a - 1, b_ + 1, body.END_HOLE_D - 0.2)) < TOL and vol(pi_, cyl_x(wy, wz, -100, 1300, 5.8)) < TOL)
         pf = body.SPK_X["L"][1] if s == "L" else body.SPK_X["R"][0]
         sg = -1.0 if s == "L" else 1.0
-        dq, dd, t_ply = body.QS_HOLE[1], body.QS_HOLE[0], body.T
-        open_ = all(vol(pi_, cyl_x(y_, z_, min(pf, pf + sg * (dq - 0.2)), max(pf, pf + sg * (dq - 0.2)), dd - 0.2)) < TOL for (y_, z_) in body.TS_YZ[s])
-        floor_ = all(vol(pi_, cyl_x(y_, z_, min(pf + sg * (dq + 0.05), pf + sg * t_ply), max(pf + sg * (dq + 0.05), pf + sg * t_ply), dd))
-                     > 0.98 * math.pi / 4 * dd ** 2 * (t_ply - dq - 0.05) for (y_, z_) in body.TS_YZ[s])
-        under = t_ply - dq - body.QS_POINT
-        true("pod %s L73 insert holes D%.1f x %.1f blind from the joint face (Norelem 07653-04 OD %.1f x %.0f: %.2f radial bite; maker min hole depth %.0f): "
-             "%.1f of ply under the full-diameter bottom, %.1f under a %.1f drill point >= %.1f (sealed box); insert flush, %.0f free below it"
-             % (s, dd, dq, body.INS[0], body.INS[2], (body.INS[0] - dd) / 2, body.QS_MIN_DEPTH, t_ply - dq, under, body.QS_POINT, body.QS_MIN_PLY,
-                dq - body.INS[2]),
-             open_ and floor_ and under >= body.QS_MIN_PLY - 1e-9 and body.INS[2] <= dq + 1e-9 and dq >= body.QS_MIN_DEPTH - 1e-9)
-        xt = by["XT30-CLIP-%s" % s].solid
-        pk = body.XT30_POCKET[s]
+        dq, dd, t_ply = body.INS_HOLE[1], body.INS_HOLE[0], body.T
+        open_ = all(vol(pi_, cyl_x(y_, z_, min(pf, pf + sg * (dq - 0.05)), max(pf, pf + sg * (dq - 0.05)), dd - 0.1)) < TOL for (y_, z_) in body.TS_YZ[s])
+        back_ = [vol(pi_, cyl_x(y_, z_, min(pf + sg * (dq + 0.02), pf + sg * t_ply), max(pf + sg * (dq + 0.02), pf + sg * t_ply), dd))
+                 / (math.pi / 4 * dd ** 2 * (t_ply - dq - 0.02)) for (y_, z_) in body.TS_YZ[s]]
+        behind = t_ply - dq
+        true("pod %s (printed inner panel) M4 heat-set insert holes D%.1f x %.1f blind from the joint face (insert OD %.0f x %.0f: %.2f radial melt, "
+             "baffle-insert rule): open, %.1f of solid PETG behind the bottom (sealed box >= %.1f, preferred >= %.1f), insert flush %.1f short of the bottom"
+             % (s, dd, dq, body.INS[0], body.INS[2], (body.INS[0] - dd) / 2, behind, body.INS_BACK_MIN, body.INS_BACK_PREF, dq - body.INS[2]),
+             open_ and min(back_) > 0.98 and behind >= body.INS_BACK_PREF - 1e-9 and body.INS[2] <= dq + 1e-9 and (body.INS_HOLE == body.DRV_INSERT),
+             "filled behind %.3f / %.3f" % tuple(back_))
+        xt = by["XT60-CLIP-%s" % s].solid
+        pk = body.XT60_POCKET[s]
         pkb = B_(pk[0] + 0.05, pk[1] - 0.05, pk[2] + 0.05, pk[3] - 0.05, pk[4] + 0.05, pk[5] - 0.05)
-        chk("XT30 clip %s pocket 12.4 x 10.6 x 5.6 empty (XT30U-F 12.4 x 10.2 x 5.2)" % s, (vol(xt, pkb), pk[1] - pk[0], pk[3] - pk[2], pk[5] - pk[4]),
-            (0.0, 12.4, 10.6, 5.6), tol=0.011)
+        pw, pt, pl = body.XT60_W + 2 * body.XT60_CLR, body.XT60_T + 2 * body.XT60_CLR, body.XT60_LF + body.XT60_CLR
+        chk("XT60 clip %s pocket %.1f long x %.1f (y) x %.1f (z) empty, on edge (XT60 F %.1f x %.1f x %.0f + %.1f per side)"
+            % (s, pl, pt, pw, body.XT60_W, body.XT60_T, body.XT60_LF, body.XT60_CLR), (vol(xt, pkb), pk[1] - pk[0], pk[3] - pk[2], pk[5] - pk[4]),
+            (0.0, pl, pt, pw), tol=0.011)
         mouth = pk[1] if s == "L" else pk[0]
         mbox = B_(mouth - 0.2, mouth + 10, pk[2] + 0.1, pk[3] - 0.1, pk[4] + 0.1, pk[5] - 0.1) if s == "L" else \
             B_(mouth - 10, mouth + 0.2, pk[2] + 0.1, pk[3] - 0.1, pk[4] + 0.1, pk[5] - 0.1)
-        hole_ok = vol(xt, cyl_x(ey, ez, a - 1, b_ + 2.98, 13.8) if s == "L" else cyl_x(ey, ez, a - 2.98, b_ + 1, 13.8)) < TOL
-        true("XT30 clip %s mouth open toward the centre (x%.1f), plate hole D14 coaxial with the end-wall hole, open" % (s, mouth),
-             vol(xt, mbox) < TOL and hole_ok)
+        hole_ok = vol(xt, cyl_x(ey, ez, a - 1, b_ + 2.98, body.END_HOLE_D - 0.2) if s == "L" else cyl_x(ey, ez, a - 2.98, b_ + 1, body.END_HOLE_D - 0.2)) < TOL
+        # the F leaves straight through the open pocket back, the collar and the plate (pocket section swept to the end-wall face)
+        sweep = B_(pk[0] - 30.0 if s == "L" else pk[0], pk[1] if s == "L" else pk[1] + 30.0, pk[2] + 0.1, pk[3] - 0.1, pk[4] + 0.1, pk[5] - 0.1)
+        true("XT60 clip %s mouth open toward the centre (x%.1f), plate hole D%.0f coaxial with the end-wall hole, open; pocket open at the back "
+             "through the collar and the plate" % (s, mouth, body.END_HOLE_D), vol(xt, mbox) < TOL and hole_ok and vol(xt, sweep) < TOL)
+        # coaxial rule: the F (15.8 x 8.2, square corners) inside the D19 hole with >= 0.5 all round
+        cr = math.hypot(body.XT60_W / 2, body.XT60_T / 2) + math.hypot((pk[2] + pk[3]) / 2 - ey, (pk[4] + pk[5]) / 2 - ez)
+        at_least("XT60 clip %s: F corner radius %.2f (+ axis offset) inside the D%.0f hole, clearance" % (s, cr, body.END_HOLE_D), body.END_HOLE_D / 2 - cr, 0.5)
+        # printability: plate on the bed (print z = world x for L, -x for R), the collar cone at 45 deg -> every 0.2 layer lies on the
+        # layer below grown by 0.2 (45 deg) + 0.05; the unsupported area of every layer is reported
+        from manifold3d import JoinType
+        pm = orient(xt, body.R_XMIN if s == "L" else body.R_XMAX)
+        pm = pm.translate((0, 0, -pm.bounding_box()[2]))
+        hz_ = pm.bounding_box()[5]
+        worst_ov, at_ = 0.0, 0.0
+        for z_ in np.arange(0.3, hz_ - 0.05, 0.2):
+            un = pm.slice(z_) - pm.slice(z_ - 0.2).offset(0.25, JoinType.Round)
+            if un.area() > worst_ov:
+                worst_ov, at_ = un.area(), z_
+        true("XT60 clip %s prints plate-down without supports: collar cone 45 deg from the D%.0f rim to the side walls (%.1f deep), lips past it; "
+             "worst unsupported area per 0.2 layer %.3f mm2 (at %.1f)" % (s, body.END_HOLE_D, body.CLIP_COLLAR, worst_ov, at_), worst_ov < 0.05)
+
     bpl = by["PR-BACKPLATE"].solid
     hz = {k: tuple(v) for k, v in CE["back_plate_io"]["holes_xz"].items()}
-    true("back plate: cable pass D12, USB-C mouth, KCD1 13.2 x 19.2 + 2 mm bezel recess, J501 D6 open at the spec x / z",
-         vol(bpl, cyl_y(hz["cable_pass_D12"][0], hz["cable_pass_D12"][1], YBI - 0.1, YB + 0.1, 11.8)) < TOL
-         and vol(bpl, cyl_y(hz["usb_c_pd_input_HUSB238"][0], hz["usb_c_pd_input_HUSB238"][1], YB - 1.95, YB + 0.1, 7.0)) < TOL
-         and vol(bpl, B_(hz["rocker_KCD1_13.2x19.2"][0] - 6.5, hz["rocker_KCD1_13.2x19.2"][0] + 6.5, YBI, YB + 0.1, hz["rocker_KCD1_13.2x19.2"][1] - 9.5, hz["rocker_KCD1_13.2x19.2"][1] + 9.5)) < TOL
+    true("back plate: KCD1 13.2 x 19.2 + 2 mm bezel recess, J501 D6 open at the spec x / z",
+         vol(bpl, B_(hz["rocker_KCD1_13.2x19.2"][0] - 6.5, hz["rocker_KCD1_13.2x19.2"][0] + 6.5, YBI, YB + 0.1, hz["rocker_KCD1_13.2x19.2"][1] - 9.5, hz["rocker_KCD1_13.2x19.2"][1] + 9.5)) < TOL
          and vol(bpl, B_(hz["rocker_KCD1_13.2x19.2"][0] - 7.5, hz["rocker_KCD1_13.2x19.2"][0] + 7.5, YB - 1.95, YB + 0.1, hz["rocker_KCD1_13.2x19.2"][1] - 10.5, hz["rocker_KCD1_13.2x19.2"][1] + 10.5)) < TOL
          and vol(bpl, cyl_y(hz["pedal_jack_J501_D6"][0], hz["pedal_jack_J501_D6"][1], YB - 2.1, YB + 0.1, 6.1)) < TOL)
+    cz_ = {k: tuple(v) for k, v in CE["back_plate_io"].get("closed_2026_10_07", {}).items()}
+    true("back plate (2026-10-07): the old cable pass D12 and USB-C PD mouth are solid skin now (%s); spec holes_xz = KCD1 + J501 only"
+         % ", ".join("%s x%.0f z%.0f" % (k, v[0], v[1]) for k, v in cz_.items()),
+         len(cz_) == 2 and sorted(hz) == ["pedal_jack_J501_D6", "rocker_KCD1_13.2x19.2"]
+         and all(abs(vol(bpl, cyl_y(v[0], v[1], YB - body.BP_SKIN + 0.05, YB - 0.05, 6.0)) - math.pi * 9 * (body.BP_SKIN - 0.1)) < 1.0 for v in cz_.values()))
     true("back plate: louvres x480..534 z18..46 open (6 slots of 3)", all(vol(bpl, B_(480.1, 533.9, YB - 2.1, YB + 0.1, z + 0.1, z + 2.9)) < TOL for (z, _) in body.BP_LOUV))
-    pdt, j5 = cc["CU-E-PDTRIG"], cc["CU-E-J501"]
-    true("back plate items ride on the plate: HUSB238 USB-C mouth y%.1f on the skin inner face y%.1f, J501 nose y%.1f flush with the outer face y%.1f"
-         % (pdt[3], YB - body.BP_SKIN, j5[3], YB), abs(pdt[3] - (YB - body.BP_SKIN)) < 1e-6 and abs(j5[3] - YB) < 1e-6)
+    j5 = cc["CU-E-J501"]
+    true("back plate items ride on the plate: J501 nose y%.1f flush with the outer face y%.1f" % (j5[3], YB), abs(j5[3] - YB) < 1e-6)
     jb = cc["CU-E-J501BOARD"]
     true("back plate: J501 board ledge top = board underside z%.1f, board box free" % jb[4],
          vol(bpl, B_(jb[0], jb[1], jb[2], jb[3], jb[4] - 0.3, jb[4])) > 10.0 and vol(bpl, B_(jb[0] + 0.1, jb[1] - 0.1, jb[2] + 0.1, jb[3] - 0.1, jb[4] + 0.01, jb[5])) < TOL)
     back = by["CU-PLY-BACK"].solid
-    true("back ply window x397.5..538 z16.5..61.35 open, amp vents 8 x (4 x 15) open", vol(back, B_(397.6, 537.9, YBI, YB, 16.6, 61.4)) < TOL
-         and all(vol(back, B_(a + 0.1, a + 3.9, YBI, YB, z0 + 0.1, z1 - 0.1)) < TOL for (a, z0, z1) in body.BACK_SLOTS))
-    bot = by["CU-PLY-BOTTOM"].solid
-    true("bottom ply intake slots open (6 under the buck, 8 under the Pi) and none under a board post",
-         all(vol(bot, B_(a + 0.1, a + 3.9, y0 + 0.1, y1 - 0.1, 5, 16.5)) < TOL for (a, y0, y1) in body.BOT_SLOTS_BUCK + body.BOT_SLOTS_PI)
-         and all(total_vol([p for p in P if p.id.startswith("CU-POST")], B_(a, a + 4.0, y0, y1, 16.4, 30)) < TOL for (a, y0, y1) in body.BOT_SLOTS_BUCK + body.BOT_SLOTS_PI))
+    true("back ply window x397.5..538 z16.5..61.35 open", vol(back, B_(397.6, 537.9, YBI, YB, 16.6, 61.4)) < TOL)
+    check_drill_reduction(P, by, C)
     for i, (x, y) in enumerate(body.SLID_SCREWS):
         sl_ = by["CU-SCREENLID"].solid
         true("screen-lid screw %d (x%.0f y%.0f): D3.4 through, head seat D6.5 x 6, M3 insert L71 OD %.1f x %.0f melted into the D%.1f x %.1f rail hole%s"
@@ -993,7 +1223,7 @@ def run_checks(P, by, K, C, E=None):
                    abs(by["CU-MAG-LID-%s" % p.id[-2:]].solid.bounding_box()[0] - p.solid.bounding_box()[0]) < 1e-6 for p in mags if "-PLY-" in p.id)
     true("LID-L / LID-R: 3 magnet pairs each (back-ply top edge 2, end-wall top edge 1), 0.4 apart, in pockets", len(mags) == 12 and pairs_ok)
     print("   ..  spec centre_contents boxes vs body solids (the electronics agent's envelopes):")
-    walls_ids = ("CU-PBHOLDER", "PR-BACKPLATE", "PR-HUBSHELF", "PR-SHELFBRK-1", "PR-SHELFBRK-2", "PR-SEAMPOST-1", "PR-SEAMRAIL-1", "PR-SEAMPOST-2", "PR-SEAMRAIL-2")
+    walls_ids = ("CU-BATFRAME", "PR-BACKPLATE", "PR-HUBSHELF", "PR-SHELFBRK-1", "PR-SHELFBRK-2", "PR-SEAMPOST-1", "PR-SEAMRAIL-1", "PR-SEAMPOST-2", "PR-SEAMRAIL-2")
     badcc, okcc = [], []
     for c in S["centre_contents"]:
         if c["id"] in walls_ids:
@@ -1033,12 +1263,13 @@ def run_checks(P, by, K, C, E=None):
             tb_ = t_.bounding_box()
             pf = body.SPK_X["L"][1] if s == "L" else body.SPK_X["R"][0]
             bite = (pf - tb_[0]) if s == "L" else (tb_[3] - pf)
-            ring = math.pi / 4 * (body.INS[0] ** 2 - body.QS_HOLE[0] ** 2) * body.INS[2]
-            true("thumb screw %s%d (y%.0f z%.0f): M4x%.0f bites %.1f in the %.0f-long quick-sert (tip %.1f above the hole bottom), sleeve in the end-wall D8 hole, "
-                 "head only on rubber; quick-sert D%.0f cuts %.2f into the D%.1f hole wall (%.1f mm3)"
-                 % (s, k + 1, y, z, body.TS_LEN, bite, body.INS[2], body.QS_HOLE[1] - bite, body.INS[0], (body.INS[0] - body.QS_HOLE[0]) / 2, body.QS_HOLE[0], ring),
+            ring = math.pi / 4 * (body.INS[0] ** 2 - body.INS_HOLE[0] ** 2) * body.INS[2]
+            true("thumb screw %s%d (y%.0f z%.0f): M4x%.0f bites %.1f (>= 4) in the %.0f-long heat-set insert (tip %.1f above the hole bottom), sleeve in the "
+                 "end-wall D8 hole, head only on rubber; insert D%.0f melts %.2f into the D%.1f hole wall (%.1f mm3)"
+                 % (s, k + 1, y, z, body.TS_LEN, bite, body.INS[2], body.INS_HOLE[1] - bite, body.INS[0], (body.INS[0] - body.INS_HOLE[0]) / 2, body.INS_HOLE[0], ring),
                  vol(t_, ins) > 10.0 and vol(sv, by["CU-PLY-END-%s" % s].solid) < TOL and abs(vol(ins, by["SPK%s-PLY-SIDEIN" % s].solid) - ring) < 1.0
-                 and t_.min_gap(by["CU-PLY-END-%s" % s].solid, 3.0) > 0.05 and abs(bite - (body.TS_LEN - 16.0)) < 0.01 and bite < body.QS_HOLE[1] - 1.0)
+                 and t_.min_gap(by["CU-PLY-END-%s" % s].solid, 3.0) > 0.05 and abs(bite - (body.TS_LEN - 16.0)) < 0.011 and bite >= 4.0 - 0.011
+                 and bite <= body.INS[2] + 1e-9 and bite < body.INS_HOLE[1] - 1.0)
             zz = cc["Z-TS-%s%d" % (s, k + 1)]
             hd = (t_ ^ B_(ix0 if s == "L" else ix1 - 30, ix0 + 30 if s == "L" else ix1, 150, 400, 0, 100)).bounding_box()
             true("thumb screw %s%d head inside the spec zone Z-TS-%s%d" % (s, k + 1, s, k + 1),
@@ -1059,7 +1290,7 @@ def run_checks(P, by, K, C, E=None):
         e_ = min(min(x - bp_[0], bp_[3] - x) for (_, (x, y), _) in fp if bp_[0] <= x <= bp_[3])
         at_least("pod %s feet: 8호 screw axis from the bottom-ply ends (spec x-2 / 1224 gave 2.5)" % s, e_, 10.0)
     # screws into the same ply: axes >= 8 apart and >= 5 from the ply edges (feet from below, PB holder / back-plate tabs from above)
-    groups = {"CU-PLY-BOTTOM": [xy for g, xy, _ in fp if g == "가운데 유닛"] + list(body.PB_SCREWS) + [(sx, sy) for (_, _, sx, sy) in body.BP_TABS],
+    groups = {"CU-PLY-BOTTOM": [xy for g, xy, _ in fp if g == "가운데 유닛"] + list(body.BF_SCREWS) + [(sx, sy) for (_, _, sx, sy) in body.BP_TABS],
               "SPKL-PLY-BOTTOM": [xy for g, xy, _ in fp if g == "스피커 L"], "SPKR-PLY-BOTTOM": [xy for g, xy, _ in fp if g == "스피커 R"]}
     for pid, pts in groups.items():
         dmin = min(math.dist(a_, b2) for a_, b2 in itertools.combinations(pts, 2))
@@ -1069,11 +1300,10 @@ def run_checks(P, by, K, C, E=None):
     check_wood_screws(by, C)
     # screw access (review 2026-10-01: the right back-plate tab screw sat under the J501 ledge, 9.5 free over its head): a straight
     # driver D6 x 80 along each screw axis from the head must not touch a solid. Assembly / service state: lids off; cables pushed aside
-    # and the power bank out (not in the test); boards, hub, amp and every other rigid item in place. BRK2 bolts: before the pods go on.
+    # (the 2026-10-07 battery stays IN); boards, hub, amp and every other rigid item in place. BRK2 bolts: before the pods go on.
     print("   --  screw access: straight driver D%.0f x %.0f along each screw axis from its head" % (body.DRIVER_D, body.DRIVER_L))
     lidfam = r"^(LID-|CU-SCREENLID$|CU-MAG-LID-|CU-M3X10-)"
-    rigid_e = [e for e in (E or []) if e.note not in ("offdesk", "altview") and not re.match(r"^(C-|O\d-C-|EL-C-|ER-C-)", e.id)
-               and e.id != "PB-E-BANK"]
+    rigid_e = [e for e in (E or []) if e.note not in ("offdesk", "altview") and not re.match(r"^(C-|O\d-C-|EL-C-|ER-C-)", e.id)]
 
     def shaft(pt, axis):
         x, y, z = pt
@@ -1083,9 +1313,12 @@ def run_checks(P, by, K, C, E=None):
     brk_set = list(K) + [p for p in P if p.id.startswith("BRK2-")] + rigid_e
     sh_ = cc["PR-HUBSHELF"]
     screw_groups = [
-        ("back-plate tab screws (csk 8호 13, head flush z20.5)", [((sx, sy, 20.5), ("z", 1)) for (_, _, sx, sy) in body.BP_TABS], centre_set),
-        ("power-bank holder ear screws (csk 8호 13, head flush z%.1f)" % body.PB_HEAD_Z,
-         [((x, y, body.PB_HEAD_Z), ("z", 1)) for (x, y) in body.PB_SCREWS], centre_set),
+        # the rocker (KCD1-104, 4 lugs over the tab screws since 2026-10-07) snaps into the plate from OUTSIDE after the tab screws are in:
+        # assembly order = screw the tabs, then push the switch in from the back face - so it is not in the way of this driver
+        ("back-plate tab screws (csk 8호 13, head flush z20.5; switch goes in after)", [((sx, sy, 20.5), ("z", 1)) for (_, _, sx, sy) in body.BP_TABS],
+         [p_ for p_ in centre_set if p_.id != "CU-E-SWITCH"]),
+        ("battery-frame screws (csk 8호 13: 2 ears + 2 down the D%.0f front-block bores, head flush z%.1f)" % (body.BF_BORE_D, body.BF_HEAD_Z),
+         [((x, y, body.BF_HEAD_Z), ("z", 1)) for (x, y) in body.BF_SCREWS], centre_set),
         ("hub-shelf bracket screws (D3 pan head D6 in the D6.5 seat, head top 2.1 in front of the seat bottom)",
          [(((b_[0] + b_[1]) / 2.0, b_[2] + 4.0 - 2.1, body.SHELF_SCREW_Z), ("y", -1)) for b_ in (cc["PR-SHELFBRK-1"], cc["PR-SHELFBRK-2"])], centre_set),
         ("BRK2 M3x16 bolts (hex key from +y, before the pods)",
@@ -1117,27 +1350,28 @@ def run_checks(P, by, K, C, E=None):
         true("pod %s lifts straight up off the pins once the 2 thumb screws are out (0.5..50 mm, body parts only)" % s, worst_ < TOL, "%.3f" % worst_)
         PODG[s] = podg
 
-    # ---------------- pod service with the sealed pigtail (review 2026-10-01): XT30U-F out through the coaxial tunnel, tether
-    print("   --  pod service: XT30U-F slides out of its clip through the plate + end-wall D14 tunnel; pod lift 10, slide 15 outboard, lift to 60")
+    # ---------------- pod service with the sealed pigtail (review 2026-10-01): XT60 F out through the coaxial tunnel, tether
+    print("   --  pod service: XT60 F slides out of its clip through the plate + end-wall D%.0f tunnel; pod lift %.0f, slide %.0f outboard, lift to 60"
+          % (body.END_HOLE_D, body.POD_LIFT, body.POD_SLIDE))
     if E is None:
         true("pod service sequence (needs electronics.build())", False, "electronics.build() failed")
     else:
         import electronics as EL
         byE = {e.id: e for e in E}
-        LIFT, SLIDE = 10.0, 15.0
+        LIFT, SLIDE = body.POD_LIFT, body.POD_SLIDE                     # 10 / 18 (2026-10-07: the 16 long XT60 F needs 18)
         for s in "LR":
             sg = -1.0 if s == "L" else 1.0                                   # outboard
             podg = PODG[s]
             rest = [p for p in P if p not in podg and not p.id.startswith("JOIN-TS-")]
-            F = byE["C-XT30F-%s" % s].solid
+            F = byE["C-XT60F-%s" % s].solid
             fb = F.bounding_box()
             wall = body.CU_X[0] if s == "L" else body.CU_X[1]                # end-wall outer (joint) face 260 / 962
             d_out = (fb[3] - (wall - 0.05)) if s == "L" else ((wall + 0.05) - fb[0])
             worst_f = max(total_vol(rest, F.translate((sg * d, 0, 0))) for d in list(np.arange(0.0, d_out, 0.5)) + [d_out])
-            true("pod %s: XT30U-F slides straight from its clip through the plate + end-wall hole to the joint face (%.1f mm, no body part hit)"
+            true("pod %s: XT60 F slides straight from its clip through the plate + end-wall hole to the joint face (%.1f mm, no body part hit)"
                  % (s, d_out), worst_f < TOL, "%.3f mm3" % worst_f)
             worst_p = 0.0
-            moves = [(0, 0, dz) for dz in (0.5, 2.0, 5.0, 7.5, LIFT)] + [(sg * dx, 0, LIFT) for dx in (2.5, 5.0, 7.5, 10.0, 12.5, SLIDE)] \
+            moves = [(0, 0, dz) for dz in (0.5, 2.0, 5.0, 7.5, LIFT)] + [(sg * dx, 0, LIFT) for dx in sorted(set((2.5, 5.0, 7.5, 10.0, 12.5, 15.0, SLIDE)))] \
                 + [(sg * SLIDE, 0, dz) for dz in (20.0, 30.0, 45.0, 60.0)]
             for mv in moves:
                 for p in podg:
@@ -1147,7 +1381,7 @@ def run_checks(P, by, K, C, E=None):
                  % (s, LIFT, SLIDE), worst_p < TOL, "%.3f mm3" % worst_p)
             Fout = F.translate((sg * d_out, 0, 0))
             podm = [p.solid.translate((sg * SLIDE, 0, LIFT)) for p in podg]
-            true("pod %s: XT30U-F out of the end wall sits in the widened gap, clear of the moved pod" % s,
+            true("pod %s: XT60 F out of the end wall sits in the widened gap, clear of the moved pod" % s,
                  sum(vol(Fout, m) for m in podm) < TOL and total_vol(rest, Fout) < TOL)
             wy, wz = body.WIRE_YZ[s]
             face = body.SPK_X["L"][1] if s == "L" else body.SPK_X["R"][0]

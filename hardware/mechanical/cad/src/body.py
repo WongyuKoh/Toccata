@@ -36,13 +36,15 @@ wall); new printed parts in 07_터치스크린: cradle (built in its xr/u/w fram
 optional screen cover; bought M3x20 axles and M2.5x6 screen screws. The folded state (90 deg) is a separate view group ('altview', not in
 the one-file assembly / 3MF / GLB). The Waveshare display, the DSI FFC and the GPIO power lead are in electronics.py.
 Not modelled: glue, foot screws, plywood screws, grille / driver / board screws, polyester fill (note on the pod back panels).
-wood_screws() lists every screw / insert pilot into a plywood panel (feet, power-bank holder ears, back-plate tabs, hub shelf, L73)
+wood_screws() lists every screw / insert hole into a panel (feet, battery-frame ears / bores, back-plate tab, hub shelf, the M4 heat-set insert holes
+of the printed pod inner panels)
 for check_body.py (tip >= 1.0 from the opposite face, opposite-face pairs >= 4 thread to thread).
 Cable clips (spec printed list 'CABLE-CLIPS' 8, no positions): 6 under the pod duct roofs (empty in the model) + 2 on the left end
 wall holding C-SPK-L; one print file.
 Every printed part: kind='print', one body, lies on the bed via to_bed(orient(...)), print folder 05_본체출력물.
 Horizontal holes in printed parts are teardrops whose apex points up in the print orientation.
 """
+import collections
 import json
 import math
 import os
@@ -228,30 +230,51 @@ BP = CE["back_plate_io"]
 BP_X = tuple(BP["x"])                                                   # 397.5 .. 538 back-ply window + printed back plate
 CC = {c["id"]: c["bbox_x0x1y0y1z0z1"] for c in L2["centre_contents"]}   # centre contents (electronics reads the same list)
 # the spec centre_contents boxes were drawn for the 43 deg back face (centre_contents_check.layout_back_y = 341.5). The items that ride
-# on the printed back plate move with the back face YB (40 deg: +1.0) - left at the spec y, 1 mm of plate would close the HUSB238
-# USB-C mouth and the J501 nose would end 1 mm inside the plate. electronics.py applies the same shift (BACK_PLATE_ITEMS, DY_BACK).
+# on the printed back plate move with the back face YB (40 deg: +1.0) - left at the spec y, the KCD1 bezel would stand 1 mm proud
+# and the J501 nose would end 1 mm inside the plate. electronics.py applies the same shift (BACK_PLATE_ITEMS, DY_BACK).
+# 2026-10-07 (user): LiFePO4 12.8 V pack inside the centre unit - the USB-C PD input (HUSB238) and the cable pass are gone.
 LAYOUT_BACK_Y = L2["centre_contents_check"].get("layout_back_y", YB)
 DY_BACK = YB - LAYOUT_BACK_Y                                            # 1.0 at 40 deg, 0 at 43
-BACK_PLATE_ITEMS = ("PR-BACKPLATE", "IO-CABLEPASS", "CU-E-PDTRIG", "CU-E-J501BOARD", "CU-E-J501", "CU-E-SWITCH")
+BACK_PLATE_ITEMS = ("PR-BACKPLATE", "CU-E-J501BOARD", "CU-E-J501", "CU-E-SWITCH")
 for _k in BACK_PLATE_ITEMS:
     _b = CC[_k]
     CC[_k] = [_b[0], _b[1], _b[2] + DY_BACK, _b[3] + DY_BACK, _b[4], _b[5]]
 HUB = tuple(L2["cable_duct"]["hub"]["bbox"])                            # (686.5, 914.5, 282, 330, 16.5, 40.5)
 TS_YZ = {s: [tuple(v) for v in JN["pods_to_centre"]["screw_yz"][s]] for s in "LR"}   # M4 thumb screws (y, z)
-WIRE_YZ = {"L": (243.0, 40.0), "R": (290.0, 40.0)}                      # speaker-lead hole D6 in the pod inner side panel (spec xt30)
-WIRE_D, END_HOLE_D = 6.0, 14.0                                          # pod hole D6 (sealed) / end-wall hole D14 (XT30U-F passes)
-# end-wall hole D14 (and the clip-plate hole) coaxial with the XT30U-F pocket, NOT on the pod D6 axis (spec: straight across at z40):
-# the XT30U-F (10.2 x 5.2, half diagonal 5.72 < 7) slides straight from its pocket through the tunnel to the pod side (service);
-# on the spec axis the left clip trapped it (review 2026-10-01). R: 49.5 (pocket axis 51 - 1.5 keeps the wire from the pod D6 z40 in the hole)
-END_HOLE_YZ = {"L": (243.0, 44.0), "R": (290.0, 49.5)}
-# pigtail numbers quoted in the XT30 clip notes (electronics.py pig_paths builds the path; check_electronics.py keeps these within 2.5):
+WIRE_YZ = {"L": (243.0, 40.0), "R": (290.0, 40.0)}                      # speaker-lead hole D6 in the pod inner side panel (spec xt60)
+# 2026-10-07 (user): one connector type - the speaker joints use XT60 like the battery (AMASS XT60, 16 AWG 10 cm leads, 엘레파츠
+# no=12779719 F / 12779718 M). Pod pigtail = XT60 female (in the end-wall clip), amp lead = XT60 male (plugs in from the centre side).
+XT60_W, XT60_T = 15.8, 8.2   # housing cross-section (the battery pair C-XT60 is drawn 16 x 8.2)
+XT60_LF, XT60_LM = 16.0, 15.0  # female body length / male length seen outside the female (mated pair about 31)
+XT60_CLR = 0.2               # pocket clearance per side
+XT60_R = math.hypot(XT60_W / 2, XT60_T / 2)                             # 8.90 housing corner radius (square corners: worst case)
+WIRE_D, END_HOLE_D = 6.0, 19.0                                          # pod hole D6 (sealed) / end-wall hole D19 (XT60 female passes)
+# end-wall hole D19 (and the clip-plate hole) coaxial with the XT60 female pocket, NOT on the pod D6 axis (spec: straight across at z40):
+# the XT60 F (15.8 x 8.2, corner radius 8.90 + 0.6 = 9.5) slides straight from its pocket through the tunnel to the pod side (service).
+# The pocket stands on edge (8.6 across y, 16.2 up z): lying flat (16.2 across y) it does not fit between the L thumb-screw head (y<=232)
+# and the battery (y>=251). L: y244 z41 - 3.96 of wood to the D8 sleeve hole, cradle 1.0 in front of the battery and 0.7 under the
+# speaker-lead zone z51, hole 4.7 over the duct notch z27; R: y290 z46.5 - hole top 4.85 under the lid, the pod D6 hole inside it
+END_HOLE_YZ = {"L": (244.0, 41.0), "R": (290.0, 46.5)}
+# pod service (lift off the pins, slide outboard, then push the F out through the tunnel into the widened gap): the 16 long F needs the
+# gap between the end wall (x260) and the moved pod's EVA strip >= 16 + 2 -> slide 18 (15 was enough for the 12.4 XT30)
+POD_LIFT, POD_SLIDE = 10.0, 18.0
+# pigtail numbers quoted in the XT60 clip notes (electronics.py pig_paths builds the path; check_electronics.py keeps these within 2.5):
 PIG_SLACK_MM = 35.0       # slack in the 1.5 loose turns inside the end-wall tunnel (helix length - its axial length)
-PIG_OUT_MM = 54.0         # pigtail length outside the pod (pod joint face -> XT30U-F back)
+PIG_OUT_MM = 54.0         # pigtail length outside the pod (pod joint face -> XT60 F back)
+PIG_LEAD_MM = 100.0       # the XT60 F's own 16 AWG lead (10 cm); joined inside the pod to a short lead to the driver tabs
 
 # ------------------------------------------------------------------ exports for electronics.py (the other agent)
 
-# XT30U-F pocket in the printed clip on the centre end walls (x0, x1, y0, y1, z0, z1): mouth +x (L) / -x (R) toward the centre
-XT30_POCKET = {"L": (274.6, 287.0, 237.7, 248.3, 41.2, 46.8), "R": (935.0, 947.4, 284.7, 295.3, 48.2, 53.8)}
+# XT60 F pocket in the printed clip on the centre end walls (x0, x1, y0, y1, z0, z1): on edge, coaxial with the end-wall hole,
+# 0.1 off the clip plate, mouth +x (L) / -x (R) toward the centre
+def _xt60_pocket(side):
+    ey, ez = END_HOLE_YZ[side]
+    hy, hz, ln = XT60_T / 2 + XT60_CLR, XT60_W / 2 + XT60_CLR, XT60_LF + XT60_CLR
+    x0 = CU_IX[0] + 3.1 if side == "L" else CU_IX[1] - 3.1 - ln
+    return (round(x0, 3), round(x0 + ln, 3), ey - hy, ey + hy, ez - hz, ez + hz)
+
+
+XT60_POCKET = {s: _xt60_pocket(s) for s in "LR"}      # L (274.6, 290.8, 239.7, 248.3, 32.9, 49.1) / R (931.2, 947.4, ...)
 DRIVER_POSE = {s: (DRV_X[s], DRV_YZ[0], DRV_YZ[1]) for s in "LR"}     # centre on the outer face; axis DRIVER_AXIS
 SPK_N = DRIVER_AXIS
 SPK_U = (0.0, CA, SA)                                                   # up the slant
@@ -260,7 +283,7 @@ GEOM = {
     "angle_deg": ANGLE, "driver_pose": DRIVER_POSE, "driver_axis": DRIVER_AXIS, "pod_top_z": SPK_ZT, "back_y": YB,
     "back_ply_inner_y": YBI, "front_y": Y0, "duct_y": DUCT_Y, "duct_z": DUCT_Z, "duct_roof_z": (DUCT_Z[1], DUCT_Z[1] + ROOF_T),
     "centre_x": CU_X, "centre_inner_x": CU_IX, "floor_z": Z_BOT, "lid_underside_z": Z_LIDU, "lid_top_z": Z_LID,
-    "hub_bbox": HUB, "xt30_pocket": XT30_POCKET, "pod_wire_hole_yz": WIRE_YZ, "end_wall_hole_d": END_HOLE_D, "end_wall_hole_yz": END_HOLE_YZ,
+    "hub_bbox": HUB, "xt60_pocket": XT60_POCKET, "pod_wire_hole_yz": WIRE_YZ, "end_wall_hole_d": END_HOLE_D, "end_wall_hole_yz": END_HOLE_YZ,
     "board_underside_z": BOARD_Z, "centre_contents": CC, "back_plate_dy": DY_BACK, "back_plate_items": BACK_PLATE_ITEMS,
 }
 
@@ -376,19 +399,47 @@ def sl(m, xc):
     return orient(m, R_SL, (xc, DRV_YZ[0], DRV_YZ[1]))
 
 
+EST_PLAIN = (1.1, 0.15)       # print estimate: 3 walls + 5 top / bottom layers (shell ~1.1 mm of the surface), 15 % infill
+EST_SEALED = (1.6, 0.40)      # sealed speaker-box wall: 5 walls + 5 top / bottom layers (~1.6 mm), 40 % infill
+
+
+def print_est(m, shell_t=EST_PLAIN[0], infill=EST_PLAIN[1]):
+    """rough P2S PETG estimate (the plywood_jigs.est_print rule, wall / infill as parameters): shell = surface x shell_t, infill of the
+    rest; ~9 mm3/s + 2.5 s per 0.2 layer + 3 min. m = the print solid (on the bed). -> (grams, minutes)."""
+    V, A = m.volume(), m.surface_area()
+    shell = min(V, A * shell_t)
+    printed = shell + infill * (V - shell)
+    b = m.bounding_box()
+    minutes = printed / 9.0 / 60.0 + (b[5] - b[2]) / 0.2 * 2.5 / 60.0 + 3.0
+    return printed / 1000.0 * 1.27, minutes
+
+
+def fill_est(p, shell_t=EST_PLAIN[0], infill=EST_PLAIN[1]):
+    """replace the '약 0 g · 0시간' placeholder of a print note with the print_est numbers of its print solid."""
+    if p.print_pieces:                                   # a part printed in pieces: the sum of the pieces
+        ests = [print_est(q, shell_t, infill) for _, q in p.print_pieces]
+        g, mi = sum(e[0] for e in ests), sum(e[1] for e in ests)
+    else:
+        g, mi = print_est(p.print_solid, shell_t, infill)
+    h, mm = divmod(int(round(mi)), 60)
+    p.print_note = p.print_note.replace("약 0 g · 0시간", "약 %.0f g · 약 %d시간 %02d분 (P2S 어림, 슬라이서 값이 기준)" % (g, h, mm))
+
+
 class Out(list):
     def add(self, id, name_ko, name_en, kind, group, solid, color, material="", source="", note="",
-            print_name=None, R=None, print_note="", dims=(), folder=None, ps=None, no_print=False):
-        """ps: print solid given directly (already on the bed); no_print: a printed part shown a second time - no print file."""
+            print_name=None, R=None, print_note="", dims=(), folder=None, ps=None, no_print=False, pieces=None):
+        """ps: print solid given directly (already on the bed); no_print: a printed part shown a second time - no print file;
+        pieces: [(file stem, world solid, R)] for a part longer than the bed - the STL files are the pieces (bed each with its R)."""
         solid = clean(solid)
         if kind == "print" and not no_print:
             ps = to_bed(ps) if ps is not None else bed(solid, R if R is not None else R_NONE)
         else:
             ps = None
+        pp = [(nm, bed(clean(m), r)) for nm, m, r in pieces] if (pieces and kind == "print" and not no_print) else []
         self.append(Part(id=id, name_ko=name_ko, name_en=name_en, kind=kind, group=group, solid=solid, color=color,
                          material=material, print_name=print_name if kind == "print" else None,
                          print_folder=(folder or FOLDER) if kind == "print" else None, print_solid=ps, print_note=print_note,
-                         dims=list(dims), source=source, note=note))
+                         print_pieces=pp, dims=list(dims), source=source, note=note))
 
 
 # ------------------------------------------------------------------ speaker pods L / R
@@ -447,13 +498,14 @@ def build_grille(S):
 
 
 def side_in_panel(side):
-    """inner side panel (centre-unit side): M4 L73 thread-insert pilot holes D5.8 x 8 blind from the joint face (QS_HOLE; 3.5 of ply under
-    the full-diameter bottom, >= 1.5 under the drill point) + sealed wire hole D6."""
+    """inner side panel (centre-unit side), PRINTED since 2026-10-07 (user: as few drilled holes as possible): the 8-point outline of
+    the outer panel (40 deg bevel + duct notch printed in), M4 heat-set insert holes INS_HOLE D5.6 x 6.5 blind from the joint face
+    (5.0 of PETG behind the bottom - sealed box) + sealed wire hole D6."""
     x0, x1 = (SPK_IX["L"][1], SPK_X["L"][1]) if side == "L" else (SPK_X["R"][0], SPK_IX["R"][0])
     face = x1 if side == "L" else x0
     sgn = -1.0 if side == "L" else 1.0
-    dq = QS_HOLE[1]
-    cuts = [cyl_x(y, z, min(face, face + sgn * dq) - (0.01 if side == "R" else 0.0), max(face, face + sgn * dq) + (0.01 if side == "L" else 0.0), QS_HOLE[0])
+    dq = INS_HOLE[1]
+    cuts = [cyl_x(y, z, min(face, face + sgn * dq) - (0.01 if side == "R" else 0.0), max(face, face + sgn * dq) + (0.01 if side == "L" else 0.0), INS_HOLE[0])
             for (y, z) in TS_YZ[side]]
     wy, wz = WIRE_YZ[side]
     cuts.append(cyl_x(wy, wz, x0 - 0.01, x1 + 0.01, WIRE_D))
@@ -473,7 +525,7 @@ def speaker_parts(S, out):
     op = " ".join("(%.2f,%.2f)" % p for p in OUTER)
     cut_txt = {
         "SIDEOUT": "%.1f×%.2f 판에서 직선 자르기: %.0f° 경사 1번 + 앞 턱 + 통로 홈 y214~241 × z5~27 → 8점 %s" % (YB - Y0, SPK_ZT - ZB, ANGLE, op),
-        "SIDEIN": "바깥쪽 옆판과 같은 8점 모양 + M4 나사산 인서트(L73) 구멍 Ø%.1f × %.0f 2개 (가운데 쪽 면에서, 막힘) + 스피커선 구멍 Ø6" % QS_HOLE,
+        "SIDEIN": "바깥쪽 옆판과 같은 8점 모양 + M4 열압입 인서트 구멍 Ø%.1f × %.1f 2개 (가운데 쪽 면에서, 막힘) + 스피커선 구멍 Ø6 — 10/7부터 출력" % INS_HOLE,
         "BACK": "%.0f×%.2f (옆판 사이 y%.0f~%.1f, z5~%.2f)" % (SX1 - SX0, SPK_ZT - ZB, YBI, YB, SPK_ZT),
         "TOP": "%.0f×%.2f (y%.2f~%.0f, 앞 모서리는 출력 앞판 윗마개에 맞댐)" % (SX1 - SX0, YBI - TOP_Y0, TOP_Y0, YBI),
         "BOTTOM": "%.0f×%.0f (y241~%.0f, z5~16.5, 앞 모서리 y241 = 통로 뒷벽 아래)" % (SX1 - SX0, YBI - RISER[0], YBI),
@@ -489,18 +541,63 @@ def speaker_parts(S, out):
                 m = left[tag] if side == "L" else mx(left[tag])
             note = ""
             if tag == "SIDEIN":
+                # 2026-10-07 (user: '드릴을 써야되는 부분을 최소한으로 줄여줘'): printed PETG, same outline / thickness / holes' axes; heat-set
+                # inserts from the user's set replace the L73 Norelem thread inserts (no drilling, no depth stop, no saw cut)
                 ins = " · ".join("y%.0f z%.0f" % p for p in TS_YZ[side])
-                note = ("사양과 다름(작은 고침): 10/1 구매 목록 L73(Norelem 07653-04 나사산 인서트 M4, 겉 Ø%.1f × 길이 %.0f)에 맞춤 - 인서트 구멍 %s - "
-                        "Ø6.5 × 8 → Ø%.1f × %.0f (이음면에서 막힘; 오꾸메 자투리에 Ø%.1f로 먼저 시험 - 헐거우면 Ø5.5); 제조사 최소 구멍 깊이 %.0f 충족; "
-                        "밀폐 규칙: 옆판 %.1f에서 지름 부분 바닥 밑 %.1f, 드릴 끝(118° 원뿔 1.8 / 목공 뿔 비트 촉 약 2, %.1f로 잡음) 밑 %.1f ≥ %.1f 남음 - "
-                        "깊이 멈춤(테이프 표시 %.0f mm)으로 뚫음; 스피커선 구멍 Ø6 y%.0f z%.0f (선을 넣고 본드로 밀봉, EVA 띠 사이)"
-                        % (INS[0], INS[2], ins, QS_HOLE[0], QS_HOLE[1], QS_HOLE[0], QS_MIN_DEPTH, T, T - QS_HOLE[1], QS_POINT,
-                           T - QS_HOLE[1] - QS_POINT, QS_MIN_PLY, QS_HOLE[1], WIRE_YZ[side][0], WIRE_YZ[side][1]))
-            elif tag == "BACK":
-                note = fill
-            out.add("SPK%s-PLY-%s" % (side, tag), "스피커 파트 %s %s" % (side, g_ko[tag]), "speaker pod %s %s" % (side, g_en[tag]),
-                    "plywood", g, m, COLORS["plywood"], PLY,
-                    source=SRC + " speakers.panels / plywood_cut_list (재단 %s)" % cut_txt[tag], note=note)
+                fx0, fx1 = (SPK_IX["L"][1], SPK_X["L"][1]) if side == "L" else (SPK_X["R"][0], SPK_IX["R"][0])
+                note = ("사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 오꾸메 합판 → PETG 출력 (같은 8점 모양 x%.1f~%.1f, "
+                        "두께 %.1f, %.0f° 경사·통로 홈 %.0f × %.0f까지 출력 - 톱질·드릴 없음); 인서트 L73 (Norelem 07653-04, 구멍 Ø5.8 × 8 드릴) → "
+                        "사용자 열 인서트 세트의 M4 황동 열압입 인서트 바깥 Ø%.0f × 길이 %.0f를 출력 구멍 Ø%.1f × %.1f (앞판 인서트 L69와 같은 규칙, 지름 %.1f 물림)에 "
+                        "인두로 면까지 - 자리 %s (이음면에서 막힘), 구멍 바닥 뒤 PETG %.1f (밀폐 규칙 ≥ %.1f, 권장 ≥ %.1f); 스피커선 구멍 Ø6 y%.0f z%.0f "
+                        "(선을 넣고 MS 폴리머로 밀봉, EVA 띠 사이)"
+                        % (fx0, fx1, T, ANGLE, DUCT_Y[1] - Y0, DUCT_Z[1] - ZB, INS[0], INS[2], INS_HOLE[0], INS_HOLE[1], INS[0] - INS_HOLE[0], ins,
+                           T - INS_HOLE[1], INS_BACK_MIN, INS_BACK_PREF, WIRE_YZ[side][0], WIRE_YZ[side][1]))
+                dims = [("y", Y0, YB, "%.1f (y%.0f~%.1f)" % (YB - Y0, Y0, YB), 0), ("y", Y0, DUCT_Y[1], "통로 홈 %.0f" % (DUCT_Y[1] - Y0), 1)]
+                dims += [("y", Y0, y_, "인서트 구멍 Ø%.1f × %.1f y%.0f" % (INS_HOLE[0], INS_HOLE[1], y_), 2 + k) for k, (y_, z_) in enumerate(TS_YZ[side])]
+                dims += [("y", Y0, WIRE_YZ[side][0], "선 구멍 Ø6 y%.0f" % WIRE_YZ[side][0], 4),
+                         ("z", ZB, SPK_ZT, "%.2f (z%.0f~%.2f)" % (SPK_ZT - ZB, ZB, SPK_ZT), 0), ("z", ZB, DUCT_Z[1], "통로 홈 %.0f" % (DUCT_Z[1] - ZB), 1)]
+                dims += [("z", ZB, z_, "인서트 z%.0f" % z_, 2 + k) for k, (y_, z_) in enumerate(TS_YZ[side])]
+                dims += [("z", ZB, WIRE_YZ[side][1], "선 구멍 z%.0f" % WIRE_YZ[side][1], 4), ("x", fx0, fx1, "두께 %.1f" % T, 0)]
+                out.add("SPK%s-PLY-SIDEIN" % side, "스피커 파트 %s %s (출력)" % (side, g_ko[tag]), "speaker pod %s %s (printed)" % (side, g_en[tag]),
+                        "print", g, m, COLORS["printed_body"], PETG,
+                        source=SRC + " speakers.panels / plywood_cut_list PLY-POD-SIDE (안쪽 2장, 2026-10-07부터 출력: %s)" % cut_txt[tag], note=note,
+                        print_name="스피커안쪽옆판_" + side, R=R_XMIN if side == "L" else R_XMAX,
+                        print_note="상자 안쪽 면을 베드에, 이음면(인서트 구멍 면)이 위로 (%.1f × %.2f × %.1f, 256 판에 들어감). 구멍은 모두 세로라 서포트 없음, "
+                                   "인서트 구멍 바닥은 막힌 면 (브리지 없음). **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 %% 이상 (또는 100 %%)**, "
+                                   "PETG 0.2 mm. 인서트 2개는 출력 후 인두(약 240 °C)로 이음면까지 곧게 눌러 넣음 (상자를 붙이기 전). 상자 둘레 이음은 "
+                                   "MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 0 g · 0시간"
+                                   % (YB - Y0, SPK_ZT - ZB, T),
+                        dims=dims)
+                fill_est(out[-1], *EST_SEALED)
+                continue
+            # 2026-10-16 (user: A안 '합판 전부 출력'): the four okoume pod panels are PRINTED - same outline / thickness / place; the foot
+            # screws get printed pilots (screw_pilots), the joints are MS polymer (PETG does not take wood glue)
+            pid = "SPK%s-PLY-%s" % (side, tag)
+            pil = screw_pilots(pid)
+            if pil:
+                m = diff(m, pil)
+            mb = m.bounding_box()
+            note = ("사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력 (같은 모양 · 두께 %.1f · 자리, "
+                    "재단 %s)%s" % (T, cut_txt[tag], "; 고무발 나사 자리 Ø%.1f 막힌 구멍 %d개 (밑면에서, 끝은 윗면 %.1f 아래 - 밀폐 유지)"
+                                    % (PILOT_D["foot"], len(pil), Z_BOT - (FOOT_SEAT[1] + FOOT_SCREW[1])) if pil else ""))
+            if tag == "BACK":
+                note += "; " + fill
+            pr = {"SIDEOUT": ("스피커바깥옆판_", R_XMIN if side == "L" else R_XMAX, "바깥면(옆면)을 베드에"),
+                  "BACK": ("스피커뒤판_", R_YMAX, "바깥면(뒷면)을 베드에"),
+                  "TOP": ("스피커윗판_", R_FLIP, "윗면을 베드에 엎어"),
+                  "BOTTOM": ("스피커아랫판_", R_NONE, "밑면을 베드에")}[tag]
+            dims = [("x", mb[0], mb[3], "%.1f" % (mb[3] - mb[0]), 0), ("y", mb[1], mb[4], "%.2f (y%.2f~%.1f)" % (mb[4] - mb[1], mb[1], mb[4]), 0),
+                    ("z", mb[2], mb[5], "%.2f (z%.1f~%.2f)" % (mb[5] - mb[2], mb[2], mb[5]), 0)]
+            out.add(pid, "스피커 파트 %s %s (출력)" % (side, g_ko[tag]), "speaker pod %s %s (printed)" % (side, g_en[tag]),
+                    "print", g, m, COLORS["printed_body"], PETG,
+                    source=SRC + " speakers.panels / plywood_cut_list (재단 %s; 2026-10-16부터 출력)" % cut_txt[tag], note=note,
+                    print_name=pr[0] + side, R=pr[1],
+                    print_note="%s 놓고 출력. 서포트 없음%s. **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 %% 이상** (두드려 통통 울리면 "
+                               "채움 60~100 %%로 다시), PETG 0.2 mm. 넓은 판이라 모서리가 뜨기 쉬움 - 문 닫고 베드 70~80 °C, 다 식은 뒤 떼어 냄, "
+                               "뜨면 브림 3 mm. 상자 이음은 모두 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 0 g · 0시간"
+                               % (pr[2], " (고무발 나사 자리 Ø%.1f는 세로 막힌 구멍)" % PILOT_D["foot"] if pil else ""),
+                    dims=dims)
+            fill_est(out[-1], *EST_SEALED)
 
     # ---- printed ANGLE-deg baffle (left, then mirrored)
     baf = prism_x(BAFFLE_POLY, SX0, SX1)
@@ -781,14 +878,14 @@ def bracket(F, out):
             dims = mdims(dims)
         out.add("BRK2-%s" % side, "방진 브래킷 %s (끝 부속 볼 ↔ 스피커 핀, L2)" % side, "anti-vibration bracket %s with the pod pin (L2)" % side,
                 "print", G_BR, brk, COLORS["printed_body"], "PETG 회색",
-                source=SRC + " joints.rear_unit_to_key_bed (BRK2: 볼 뒷면 M3 자리 y212 z12 x-11.80/-4.88 · 1226.88/1233.80에 L42 그로밋 + M3×16, "
+                source=SRC + " joints.rear_unit_to_key_bed (BRK2: 볼 뒷면 M3 자리 y212 z12 x-11.80/-4.88 · 1226.88/1233.80에 L42 그로밋 + M3×20 (10/7, 볼 구멍 y199까지), "
                              "L1 그대로; 판 z8~14; 세운 핀 Ø6 z14~24 L x0.5 / R x1221.5, y230) + printed_parts BRK2 (22 × 24 × 16); "
                        + SRC_F + " cheeks + bracket.proposal_v4 (그로밋 웹 1.6)",
                 note=brk_note(side, opened),
                 print_name="방진브래킷2_" + side, R=R_NONE,
                 print_note="밑면(z8)을 베드에, 핀이 위로 서도록 출력(서포트 없음). 그로밋 자리·웹 구멍(y 방향)은 눈물방울(꼭짓점 위) - 자리 밑 바닥은 "
                            "0.75 (베드 위 첫 3~4층, 그대로 둠), 자리 윗부분은 3 mm 내민 지붕. 벽 4줄 + 채움 "
-                           "40 % (핀은 꽉). 그로밋을 웹에 끼우고 M3×16 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
+                           "40 % (핀은 꽉). 그로밋을 웹에 끼우고 M3×20 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
                 dims=dims)
         seats = sorted(BRK_SEAT_X[side])
         for i, hxc in enumerate(seats):
@@ -798,11 +895,11 @@ def bracket(F, out):
                     "bought", G_BR, gm, COLORS["rubber"], "실리콘", source="hardware/bom L42; " + SRC_F + " bracket.proposal_v4",
                     note="추정: 플랜지 Ø6 × 3.5 + 허리 Ø4 × 1.6 + 플랜지 Ø6 × 3.5 = 길이 8.6, 구멍 Ø3.2; 앞 플랜지가 볼 뒷면 y212에 닿음 (L1 그대로)")
             yb0 = 212.0 + G_LEN
-            bolt = union([cyl_y(hxc, BRK_Z, yb0 - 16.0, yb0, 3.0), cyl_y(hxc, BRK_Z, yb0, yb0 + 1.65, 5.7)])
-            out.add("BRK2-%s-BOLT%d" % (side, i + 1), "M3×16 둥근머리 볼트 ISO 7380 (방진 브래킷)", "M3x16 button head bolt (bracket)",
+            bolt = union([cyl_y(hxc, BRK_Z, yb0 - 20.0, yb0, 3.0), cyl_y(hxc, BRK_Z, yb0, yb0 + 1.65, 5.7)])
+            out.add("BRK2-%s-BOLT%d" % (side, i + 1), "M3×20 둥근머리 볼트 (방진 브래킷)", "M3x20 pan head bolt (bracket)",
                     "bought", G_BR, bolt, COLORS["stainless"], "SUS",
-                    source=SRC_F + " bracket.proposal_v4 hardware; 길이 16 = 그로밋 8.6 + 볼 속 7.4 (L1 그대로)",
-                    note="추정: 머리 Ø5.7 × 1.65 (ISO 7380), 육각 렌치 2 mm는 뒤(+y)에서 - 스피커를 올리기 전에 조임")
+                    source=SRC_F + " bracket.proposal_v4 hardware; 길이 20 = 그로밋 8.6 + 볼 속 11.4 (10/7: M3×16 → M3×20, 볼 구멍을 y203 → y199로 늘림, 끝 y200.6 → 구멍 바닥까지 1.6)",
+                    note="추정: 머리 Ø5.7 × 1.65로 모델 (세트는 십자 둥근머리 - 머리 뒤 공간이 열려 있어 드라이버로 뒤(+y)에서 조임) - 스피커를 올리기 전에 조임")
             rc = 5.5 / math.sqrt(3.0)
             nut = diff(prism_y(hex_pts(hxc, BRK_Z, rc), 205.05, 207.45), [cyl_y(hxc, BRK_Z, 205.0, 207.5, 2.5)])
             out.add("BRK2-%s-NUT%d" % (side, i + 1), "M3 육각 너트 (볼의 너트 홈에 압입, 방진 브래킷)", "M3 hex nut in the cheek pocket",
@@ -816,12 +913,12 @@ EVA_ROWS = [((243.0, 339.0), (8.0, 26.0)), ((216.0, 339.0), (48.0, 70.0))]   # s
 JOINT_GAP = {"L": (SPK_X["L"][1], CU_X[0]), "R": (CU_X[1], SPK_X["R"][0])}   # (257, 260) / (962, 965)
 TS_HEAD = (10.0, 6.5)          # knurled thumb-screw head D x h (envelope; L72 head D8 x 6 fits inside)
 TS_LEN = 20.0                  # M4 x 20 (L72)
-SLV = (8.0, 4.2, 1.5)          # rubber sleeve OD, ID, protrusion into the centre past the end-wall inner face (sleeve = end wall + 1.5)
-INS = (6.5, 3.3, 6.0)          # L73 = Norelem 07653-04 self-tapping thread insert (steel, cutting bore): M4, OD 6.5, pitch 0.8, length 6; thread minor bore 3.3 (model)
-QS_HOLE = (5.8, 8.0)           # insert pilot D (W1: start D5.8 in okoume, D5.5 if loose) / full-diameter depth from the pod joint face (blind - sealed box)
-QS_POINT = 2.0                 # drill-point allowance below the full-diameter depth (118 deg HSS D6: 1.80; brad-point spur about 2)
-QS_MIN_DEPTH = 8.0             # Norelem 07653-04 minimum blind-hole depth (maker) - the 8 deep hole meets it
-QS_MIN_PLY = 1.5               # sealed-box rule: ply left under the deepest point of the blind hole
+SLV = (8.0, 4.5, 1.5)          # rubber sleeve OD, ID, protrusion into the centre past the end-wall inner face (sleeve = end wall + 1.5);
+                               # 2026-10-07: a fuel hose ID4.5 x OD8 (was a tube OD8 ID4.2) in the printed D8 hole
+INS = (6.0, 3.3, 6.0)          # 2026-10-07: M4 brass heat-set insert from the user's insert set, OD 6 x length 6 (was L73 Norelem 07653-04 OD 6.5
+                               # in a drilled D5.8 x 8 okoume hole); thread minor bore 3.3 (model)
+INS_HOLE = DRV_INSERT          # (5.6, 6.5) printed blind hole from the pod joint face - the baffle-insert rule (OD 6 melts 0.2 a side into PETG)
+INS_BACK_MIN, INS_BACK_PREF = 1.5, 3.0   # sealed box: printed panel left behind the blind-hole bottom (rule / preferred)
 
 
 def joints(out):
@@ -863,26 +960,25 @@ def joints(out):
                     source=SRC + " joints.pods_to_centre (M4 나비나사 2개, 가운데 안에서 끝벽의 Ø8 고무 슬리브를 지나 스피커 안쪽 옆판의 M4 목재 "
                                  "인서트로, 막힘; screw_yz) + bom_changes (M4 나비나사 ×4) + 구매 목록 v4 L72 (평로렛 손잡이볼트 M4×20, 머리 Ø8 × 6)",
                     note="추정: 머리 자리 Ø10 × 6.5 (L72 머리 Ø8 × 6이 그 안, 사양 자리 Z-TS 10 × 10 × 10 안), 몸통 M4 × 20 (슬리브 끝 → 이음면 %.0f, "
-                         "L73 인서트(길이 %.0f)에 %.1f 물림; M4×22면 %.1f 물림, 끝이 구멍 바닥 %.1f 위; 길이 %.0f면 끝이 구멍 바닥(지름 부분 %.0f 깊이)에 닿고 "
-                         "그보다 길면 밑 %.1f mm 밀폐 판을 누름 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
-                         % (reach, INS[2], TS_LEN - reach, 22.0 - reach, QS_HOLE[1] - (22.0 - reach), reach + QS_HOLE[1], QS_HOLE[1],
-                            T - QS_HOLE[1]))
-            out.add("JOIN-SLV-%s%d" % (side, k + 1), "고무 슬리브 OD8 ID4.2 (끝벽 구멍, %s %s)" % (side, where),
-                    "rubber sleeve OD8 ID4.2 (end-wall hole) %s %d" % (side, k + 1), "bought", G_JOIN, slv, COLORS["rubber"], "고무",
+                         "열압입 인서트(길이 %.0f)에 %.1f 물림 (≥ 4); M4×22면 %.1f 물림, 끝이 구멍 바닥 %.1f 위; %.1f보다 길면 끝이 출력 구멍 바닥(깊이 %.1f)을 "
+                         "누르고 뒤 %.1f mm 밀폐 벽을 밂 → 최대 M4×22), 머리는 고무 슬리브 끝에만 닿음 (D15: 나무·출력물에 쇠가 닿지 않음)"
+                         % (reach, INS[2], TS_LEN - reach, 22.0 - reach, INS_HOLE[1] - (22.0 - reach), reach + INS_HOLE[1], INS_HOLE[1],
+                            T - INS_HOLE[1]))
+            out.add("JOIN-SLV-%s%d" % (side, k + 1), "고무 슬리브 = 연료 호스 OD%.0f ID%.1f (끝벽 구멍, %s %s)" % (SLV[0], SLV[1], side, where),
+                    "rubber sleeve = fuel hose OD%.0f ID%.1f (end-wall hole) %s %d" % (SLV[0], SLV[1], side, k + 1), "bought", G_JOIN, slv, COLORS["rubber"], "고무",
                     source=SRC + " joints.pods_to_centre (끝벽의 Ø8 고무 슬리브, EVA 띠 나사 자리 Ø10) + bom_changes (고무 슬리브(그로밋) ×4)",
-                    note="추정: 고무 호스 OD8 ID4.2를 %.1f 길이로 잘라 끝벽 Ø8 구멍에 끼움 (바깥면과 같은 높이) - 가운데 쪽으로 %.1f 나와 나사 머리를 "
+                    note="추정: 연료 호스 OD8 ID4.5를 %.1f 길이로 잘라 출력 끝벽의 Ø8 구멍에 끼움 (바깥면과 같은 높이, 구멍 Ø8 그대로라 꽉 낌) - 가운데 쪽으로 %.1f 나와 나사 머리를 "
                          "받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남"
                          % (abs(x_slv1 - x_slv0), SLV[2]))
-            out.add("JOIN-INS-%s%d" % (side, k + 1), "M4 나사산 인서트 Norelem 07653-04 (L73, 겉 Ø%.1f × %.0f, 스피커 안쪽 옆판, %s %s)" % (INS[0], INS[2], side, where),
-                    "M4 self-tapping thread insert Norelem 07653-04 (L73) D%.1f x %.0f %s %d" % (INS[0], INS[2], side, k + 1), "bought", G_JOIN, ins,
-                    COLORS["metal"], "강",
-                    source=SRC + " joints.pods_to_centre (M4 목재 인서트, 8 깊이 막힘) + bom_changes (M4 목재 인서트 ×4) + 구매 목록 v4 L73 "
-                                 "(Norelem 07653-04 셀프 태핑 나사산 인서트, 스틸, 컷팅 보어형, M4, 겉지름 6.5, 피치 0.8, 길이 6, 최소 구멍 깊이 8; 나비엠알오 g/3544290)",
-                    note="10/1 구매 목록 L73에 맞춤 - 겉 Ø%.1f × 길이 %.0f를 구멍 Ø%.1f × %.0f에 돌려 넣음 (옆판 면과 같은 높이까지만, 밑에 %.0f mm 빈 곳) - "
-                         "모델은 겉나사가 구멍 벽을 반지름 %.2f 파고드는 것을 겹침으로 보여 줌, 나사산 안지름 Ø3.3 (손잡이볼트 Ø4와 겹침 = 나사산 물림); "
-                         "구멍은 Ø%.1f에서 시작해 오꾸메 자투리에 시험 (헐거우면 Ø5.5 - 나무는 눌림); 제조사 최소 구멍 깊이 %.0f = 이 구멍 깊이; "
-                         "슬롯형(07652)은 최소 깊이 10이고 나사를 잠가 손으로 푸는 손잡이볼트에 맞지 않아 쓰지 않음"
-                         % (INS[0], INS[2], QS_HOLE[0], QS_HOLE[1], QS_HOLE[1] - INS[2], (INS[0] - QS_HOLE[0]) / 2.0, QS_HOLE[0], QS_MIN_DEPTH))
+            out.add("JOIN-INS-%s%d" % (side, k + 1), "M4 황동 열압입 인서트 (사용자 세트, 바깥 Ø%.0f × %.0f, 스피커 안쪽 옆판(출력), %s %s)" % (INS[0], INS[2], side, where),
+                    "M4 brass heat-set insert OD%.0f x %.0f (user's set) in the printed pod inner panel %s %d" % (INS[0], INS[2], side, k + 1), "bought", G_JOIN, ins,
+                    COLORS["metal"], "황동",
+                    source=SRC + " joints.pods_to_centre (M4 인서트, 막힘) + bom_changes (M4 인서트 ×4) - 2026-10-07: 구매 목록 v4 L73 (Norelem 07653-04 "
+                                 "나사산 인서트, 드릴 구멍 Ø5.8 × 8) 대신 사용자 열 인서트 세트의 M4 바깥 6 × 길이 6 (출력 옆판에 인두로)",
+                    note="추정: 바깥 Ø%.0f × 길이 %.0f를 출력 옆판 구멍 Ø%.1f × %.1f에 인두로 이음면까지 (지름 %.1f 물림 - 모델은 겹침으로 보여 줌, 더 밀어 "
+                         "넣지 않음, 밑 %.1f mm는 나사 끝 자리), 나사산 안지름 Ø%.1f로 모델 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍 바닥 뒤 PETG %.1f "
+                         "(밀폐 규칙 ≥ %.1f); 상자를 붙이기 전에 넣음 - 인서트가 비뚤면 손잡이볼트가 끝벽 슬리브 축에서 벗어남"
+                         % (INS[0], INS[2], INS_HOLE[0], INS_HOLE[1], INS[0] - INS_HOLE[0], INS_HOLE[1] - INS[2], INS[1], T - INS_HOLE[1], INS_BACK_MIN))
 
 
 # ------------------------------------------------------------------ feet (5 mm rubber, i039 28x5)
@@ -932,18 +1028,31 @@ def feet(out):
                 % (FOOT_SEAT[0], FOOT_SEAT[1], tip, Z_BOT - tip) + seal)
 
 
-# ------------------------------------------------------------------ centre unit plywood + lid magnets
+# ------------------------------------------------------------------ centre unit plywood + printed lids / end walls + lid magnets
 
 MAG = (8.0, 3.0, 3.2)                                              # magnet D, h, pocket depth
 MAG_BACK_X = {"L": (290.0, 380.0), "R": (733.0, 935.0)}           # back-ply top-edge magnets (L: left of the back-plate window)
 MAG_END = {"L": ((CU_X[0] + CU_IX[0]) / 2.0, 275.0), "R": ((CU_IX[1] + CU_X[1]) / 2.0, 275.0)}   # end-wall top-edge magnet
-BOT_SLOTS_BUCK = [(486.0 + 8.0 * i, 292.0, 326.0) for i in range(6)]            # (x0, y0, y1), 4 wide
-BOT_SLOTS_PI = [(546.0 + (622.0 - 546.0 - 4.0) / 7.0 * i, 273.0, 307.0) for i in range(8)]
-SLOT_PITCH = 8.0                                                                # 4 wide slots, 4 mm slats (a 2.5 slat breaks in okoume)
-BACK_SLOTS = [(745.0 + SLOT_PITCH * i, 42.0, 57.0) for i in range(8)]            # (x0, z0, z1), 4 wide, behind the amp (x745..805)
+# 2026-10-07 (user: '드릴을 써야되는 부분을 최소한으로 줄여줘'): the lids L / R, the end walls L / R and the two pod inner side panels are PRINTED
+# (slots, holes and magnet seats printed in - same outlines, thickness and positions); the vents left in the plywood (back ply, bottom ply)
+# are D8 holes (owned bit) at pitch 11 = wood web 3, at least the open area of the 4 mm slot rows they replace (8 x 4 x 15 / 14 x 4 x 34,
+# drilled as 64 / 224 D4 holes through the J-d slot templates)
+VENT_D, VENT_PITCH = 8.0, 11.0
+VENT_WEB = VENT_PITCH - VENT_D                                      # 3.0 wood between neighbouring holes
+OLD_SLOT_AREA = {"back": 8 * 4.0 * 15.0, "bottom": 14 * 4.0 * 34.0}  # 480 / 1904 mm2 (the replaced slot rows)
+BOT_HOLES_BUCK = [(492.5 + VENT_PITCH * i, 297.0 + VENT_PITCH * j) for j in range(3) for i in range(4)]   # (x, y) 4 x 3 under the buck
+_PI_ROWS = [(269.0, 557.0, 4), (280.0, 546.0, 6), (291.0, 546.0, 8), (302.0, 546.0, 6), (313.0, 557.0, 4)]   # (y, first x, count)
+BOT_HOLES_PI = [(x0 + VENT_PITCH * i, y) for (y, x0, n) in _PI_ROWS for i in range(n)]   # 28 under the Pi (diamond: clear of its posts
+                                                                                        # by >= 3 and of the D28 centre feet x611)
+BACK_HOLES = [(742.0 + VENT_PITCH * i, 50.5) for i in range(10)]   # (x, z) one row behind / beside the amp x742..796: hole z46.5..54.5 =
+                                                                   # 3 over the shelf strip z43.5, 3.65 under the x733 top-edge magnet seat
+SLOT_PITCH = 8.0                                                                # lid slots: 4 wide, 4 mm slats (kept from the okoume lids)
 LIDL_SLOTS = [(459.0, 489.0, 284.0 + SLOT_PITCH * i) for i in range(6)]         # (x0, x1, y0), 4 deep in y (y284..328)
 LIDR_SLOTS = [(744.0 + 8.0 * i, 288.0, 328.0) for i in range(10)]               # (x0, y0, y1), 4 wide in x
 FILLET_SKIP = [(500.0, 512.0), (710.0, 722.0)]                                  # no R3 under the seam posts
+END_MAG_CAP = 4.75        # printed end wall (lying on its joint face): the top-edge magnet seat D8 is a horizontal hole in print -> teardrop
+                          # toward the print top, cut flat 4.75 from the axis (1.0 of PETG over it, flat roof 1.81 wide)
+EST_WALL = (1.3, 0.25)    # print estimate for the end walls: 4 walls + 5 top / bottom layers, 25 % infill
 
 
 def fillet_cut(y0, z1, r, x0, x1):
@@ -960,63 +1069,134 @@ def mag_pocket_up(x, y, z_bot):
     return cyl_z(x, y, z_bot - 0.01, z_bot + MAG[2], MAG[0])
 
 
+def vent_text(holes, axis_ko):
+    """'4열 x 3줄' style summary of a D8 hole grid: rows by the second coordinate."""
+    rows = collections.OrderedDict()
+    for (a, b) in sorted(holes, key=lambda h: (h[1], h[0])):
+        rows.setdefault(b, []).append(a)
+    return " / ".join("%s%s: %d개 x%s~%s" % (axis_ko, _n(b), len(v), _n(v[0]), _n(v[-1])) for b, v in rows.items())
+
+
 def cu_panels(out):
-    # ---- bottom
+    # ---- bottom (PRINTED since 2026-10-16, 3 pieces): D8 intake holes, screw pilots
     x0, x1 = CU_IX
-    fl = []
     segs = [(x0 - 0.01, FILLET_SKIP[0][0]), (FILLET_SKIP[0][1], FILLET_SKIP[1][0]), (FILLET_SKIP[1][1], x1 + 0.01)]
     fl = [fillet_cut(RISER[0], Z_BOT, 3.0, a, b) for (a, b) in segs]
-    sl_ = [box(a, a + 4.0, b, c, ZB - 0.01, Z_BOT + 0.01) for (a, b, c) in BOT_SLOTS_BUCK + BOT_SLOTS_PI]
-    bot = diff(box(x0, x1, RISER[0], YBI, ZB, Z_BOT), fl + sl_)
-    out.add("CU-PLY-BOTTOM", "가운데 유닛 아랫판", "centre unit bottom", "plywood", G_CU, bot, COLORS["plywood"], PLY,
-            source=SRC + " plywood_cut_list PLY-CU-BOTTOM (679×%.0f, 끝벽 사이 x271.5~950.5, y241~%.0f, 앞 모서리 R3, 강압·Pi 아래 흡기 홈) + "
-                         "centre.vents.intake (홈 4×34: 강압 아래 6, Pi 아래 8)" % (YBI - RISER[0], YBI),
-            note="사양 그대로: x%.1f~%.1f y241~%.0f z5~16.5; 추정: 흡기 홈 4×34 강압 아래 x%.0f~%.0f (사양 x482~534에서 보드 기둥 Ø7 자리를 피해 "
-                 "양끝 4 mm씩 안쪽) y292~326 6개, Pi 아래 x546~622 y273~307 8개 (합 %.0f mm²); 앞 윗모서리 R3은 뚜껑 이음 기둥 자리(x500~512, "
-                 "710~722)만 빼고 (케이블이 넘어가는 곳)" % (x0, x1, YBI, BOT_SLOTS_BUCK[0][0], BOT_SLOTS_BUCK[-1][0] + 4, 4 * 34 * 14))
-    # ---- end walls (L-shaped: duct notch), XT30 hole D14, sleeve holes D8, magnet pocket
+    vh = [cyl_z(x, y, ZB - 0.01, Z_BOT + 0.01, VENT_D) for (x, y) in BOT_HOLES_BUCK + BOT_HOLES_PI]
+    pil = screw_pilots("CU-PLY-BOTTOM")
+    bot = diff(box(x0, x1, RISER[0], YBI, ZB, Z_BOT), fl + vh + pil)
+    bp = lap_pieces(bot, x0, x1, "z", ZB, Z_BOT, "lo")
+    n_b = len(BOT_HOLES_BUCK) + len(BOT_HOLES_PI)
+    a_b = n_b * math.pi / 4.0 * VENT_D ** 2
+    out.add("CU-PLY-BOTTOM", "가운데 유닛 아랫판 (흡기 구멍 Ø8)", "centre unit bottom (D8 intake holes)", "print", G_CU, bot, COLORS["printed_body"], PETG,
+            source=SRC + " plywood_cut_list PLY-CU-BOTTOM (679×%.0f, 끝벽 사이 x271.5~950.5, y241~%.0f, 앞 모서리 R3, 강압·Pi 아래 흡기) + "
+                         "centre.vents.intake (2026-10-07: 홈 4×34 14개 → Ø8 구멍; 2026-10-16부터 출력 3토막)" % (YBI - RISER[0], YBI),
+            note="사양 그대로: x%.1f~%.1f y241~%.0f z5~16.5; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - 흡기 홈 14개 "
+                 "4 × 34 (Ø4 224번 + 지그 J-d4 틀·슬라이더·심) → Ø8 구멍 %d개 (가진 Ø8 날, 간격 %.0f = 구멍 사이 나무 %.0f): 강압 아래 %d (%s), "
+                 "Pi 아래 %d (%s) - 합 %.0f mm² (홈 %.0f 이상), 보드 받침 기둥에서 나무 3 이상, 가운데 고무발 Ø28 (x611)에서 떨어짐, 뒤 모서리까지 8 이상; "
+                 "추정: 앞 윗모서리 R3은 뚜껑 이음 기둥 자리(x500~512, 710~722)만 빼고 (케이블이 넘어가는 곳)"
+                 % (x0, x1, YBI, n_b, VENT_PITCH, VENT_WEB, len(BOT_HOLES_BUCK), vent_text(BOT_HOLES_BUCK, "y"), len(BOT_HOLES_PI),
+                    vent_text(BOT_HOLES_PI, "y"), a_b, OLD_SLOT_AREA["bottom"])
+                 + "; 사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력, 판이 679로 베드(256)보다 길어 "
+                   "x%.0f · x%.0f에서 반턱 이음(겹침 %.0f, 두께의 반씩)으로 3토막 (%s) - 이음은 뚜껑 이음 기둥(x501~511, 711~721) 곁, MS 폴리머로 붙임; "
+                   "나사 자리 Ø%.1f 막힌 구멍 %d개 (고무발 6 밑면에서, 배터리 틀 4·뒤판 탭 2 윗면에서)"
+                 % (SPLIT_X[0], SPLIT_X[1], LAP, " / ".join("%.1f" % (q.bounding_box()[3] - q.bounding_box()[0]) for q in bp),
+                    PILOT_D["foot"], len(pil)),
+            print_name="가운데아랫판", R=R_NONE,
+            pieces=[("가운데아랫판_%d_%s" % (k + 1, "왼쪽" if k == 0 else "가운데" if k == 1 else "오른쪽"), q, R_NONE if k == 1 else R_FLIP)
+                    for k, q in enumerate(bp)],
+            print_note="3토막(%s)으로 출력 - 가운데 토막은 밑면을, 양쪽 토막은 윗면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 흡기 Ø8·나사 자리 "
+                       "Ø%.1f는 세로 구멍. 양쪽 토막의 앞 윗모서리 R3은 베드 쪽 첫 층이라 살짝 처져도 됨. 벽 4줄 + 윗·아랫면 5층 + 채움 25 %%, PETG 0.2 mm, "
+                       "문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 앞·뒤 모서리를 곧은 자에 맞추고 굳을 때까지 눌러 둠 (이음 기둥은 그 위에). "
+                       "약 0 g · 0시간" % (" / ".join("%.0f" % (q.bounding_box()[3] - q.bounding_box()[0]) for q in bp), PILOT_D["foot"]),
+            dims=[("x", x0, x1, "679 (x%.1f~%.1f, 3토막)" % (x0, x1), 0), ("x", SPLIT_X[0] - LAP / 2, SPLIT_X[0] + LAP / 2, "반턱 %.0f" % LAP, 1),
+                  ("x", SPLIT_X[1] - LAP / 2, SPLIT_X[1] + LAP / 2, "반턱 %.0f" % LAP, 1),
+                  ("y", RISER[0], YBI, "%.0f (y%.0f~%.0f)" % (YBI - RISER[0], RISER[0], YBI), 0), ("z", ZB, Z_BOT, "%.1f" % T, 0)])
+    fill_est(out[-1], 1.4, 0.25)
+    # ---- end walls (PRINTED since 2026-10-07; L-shaped: duct notch), XT60 hole D19, sleeve holes D8, magnet seat
     for side in "LR":
         a, b = (CU_X[0], CU_IX[0]) if side == "L" else (CU_IX[1], CU_X[1])
         wy, wz = END_HOLE_YZ[side]
         mxy = MAG_END[side]
+        up = 1.0 if side == "L" else -1.0                           # print: joint face on the bed -> print 'up' = toward the centre
         cuts = [box(a - 0.01, b + 0.01, Y0 - 0.01, RISER[0], ZB - 0.01, DUCT_Z[1]), cyl_x(wy, wz, a - 0.01, b + 0.01, END_HOLE_D)]
         cuts += [cyl_x(y, z, a - 0.01, b + 0.01, SLV[0]) for (y, z) in TS_YZ[side]]
-        cuts.append(mag_pocket_down(mxy[0], mxy[1], Z_LIDU))
+        cuts.append(prism_z(tear_cap_pts(mxy[0], mxy[1], MAG[0], (up, 0.0), END_MAG_CAP), Z_LIDU - MAG[2], Z_LIDU + 0.01))
         m = diff(box(a, b, Y0, YBI, ZB, Z_LIDU), cuts)
-        out.add("CU-PLY-END-%s" % side, "가운데 유닛 끝벽 %s (ㄴ자)" % side, "centre unit end wall %s (L-shaped)" % side, "plywood", G_CU, m,
-                COLORS["plywood"], PLY,
-                source=SRC + " plywood_cut_list PLY-CU-END (%.0f×56.35 = y214~%.0f × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌, XT30 선 구멍 Ø14, "
-                             "나비나사 구멍 Ø8(고무 슬리브) 2개) + centre.lids (LID 자석 끝벽 윗모서리 1)" % (YBI - Y0, YBI),
-                note="사양 그대로: x%.1f~%.1f, 나비나사 구멍 %s; 사양과 다름(작은 고침): XT30 구멍 Ø14 중심 y%.0f z%.0f → y%.0f z%.1f - "
-                     "스피커 옆판 선 구멍(z%.0f)과 곧게 건너는 사양 자리에서는 끝벽 집게 홈의 XT30U-F가 구멍으로 빠지지 않아(%s) "
-                     "스피커를 뗄 수 없음 → %s (F 모서리 반지름 5.72 < 7, 곧게 밀려 나감); 꼬리선은 틈에서 %.1f 올라감; "
-                     "추정: 자석 자리 Ø8 × 3.2 윗모서리 (x%.2f y%.0f)"
-                     % (a, b, " · ".join("y%.0f z%.0f" % p for p in TS_YZ[side]), WIRE_YZ[side][0], WIRE_YZ[side][1], wy, wz,
-                        WIRE_YZ[side][1],
-                        "L: 모서리 반지름 8.3 > 7" if side == "L" else "R: 홈 축 z%.0f가 구멍 z%.0f 위로 %.0f - 홈이 구멍 밖" % (
-                            (XT30_POCKET["R"][4] + XT30_POCKET["R"][5]) / 2, WIRE_YZ["R"][1], (XT30_POCKET["R"][4] + XT30_POCKET["R"][5]) / 2 - WIRE_YZ["R"][1]),
-                        "구멍을 집게 홈과 같은 축으로 올림" if side == "L" else "구멍을 집게 홈 축보다 %.1f 아래까지 올림 (옆판 구멍에서 오는 꼬리가 구멍 안에 남게)" % (
-                            (XT30_POCKET["R"][4] + XT30_POCKET["R"][5]) / 2 - wz),
-                        wz - WIRE_YZ[side][1], mxy[0], mxy[1]))
-    # ---- back ply (window for the printed back plate, amp vents, magnet pockets)
+        web_s = min(math.dist((wy, wz), p_) for p_ in TS_YZ[side]) - END_HOLE_D / 2 - SLV[0] / 2
+        web_t = Z_LIDU - (wz + END_HOLE_D / 2)
+        out.add("CU-PLY-END-%s" % side, "가운데 유닛 끝벽 %s (ㄴ자, 출력)" % side, "centre unit end wall %s (L-shaped, printed)" % side, "print", G_CU, m,
+                COLORS["printed_body"], PETG,
+                source=SRC + " plywood_cut_list PLY-CU-END (%.0f×56.35 = y214~%.0f × z5~61.35에서 통로 홈 y214~241 × z5~27을 뺌, XT60 선 구멍 Ø19, "
+                             "나비나사 구멍 Ø8(고무 슬리브) 2개; 2026-10-07부터 출력) + centre.lids (LID 자석 끝벽 윗모서리 1)" % (YBI - Y0, YBI),
+                note="사양 그대로: x%.1f~%.1f, 나비나사 구멍 %s; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - "
+                     "오꾸메 합판 → PETG 출력 (같은 ㄴ자 모양·두께 11.5·자리; XT60 Ø%.0f 구멍 (Ø4 안내 + 고리 구멍 8 + 줄질), 슬리브 Ø8 ×2, 윗모서리 자석 자리를 "
+                     "출력 - 드릴·톱·줄 없음; 슬리브 = 연료 호스 OD8 ID4.5가 Ø8 구멍에 꽉 낌); "
+                     "사양과 다름(작은 고침): 스피커 선 구멍 Ø14 (XT30) → Ø%.0f (2026-10-07 XT60), "
+                     "중심 y%.0f z%.0f (스피커 옆판 선 구멍과 곧게) → y%.0f z%.1f - 끝벽 집게 홈의 XT60 암(15.8 × 8.2, 모서리 반지름 %.2f)이 홈에서 "
+                     "곧게 밀려 구멍으로 빠져야 스피커를 뗄 수 있어 구멍을 집게 홈과 같은 축에 둠 (Ø%.0f = 모서리 반지름 + 0.6); 스피커 옆판 Ø6 구멍은 "
+                     "이 구멍 안쪽에 들어옴 (꼬리선은 틈에서 %.1f 올라감); 구멍과 슬리브 구멍 사이 %.2f, 구멍 위 %.2f; "
+                     "추정: 자석 자리 Ø8 × 3.2 윗모서리 (x%.2f y%.0f) - 출력에서 눕힌 구멍이라 가운데 쪽(출력 위)으로 45° 지붕, 축에서 %.2f에서 평평 (위 살 %.2f)"
+                     % (a, b, " · ".join("y%.0f z%.0f" % p for p in TS_YZ[side]), END_HOLE_D, END_HOLE_D, WIRE_YZ[side][0], WIRE_YZ[side][1], wy, wz,
+                        XT60_R, END_HOLE_D, wz - WIRE_YZ[side][1], web_s, web_t, mxy[0], mxy[1], END_MAG_CAP, T / 2 - END_MAG_CAP),
+                print_name="끝벽_" + side, R=R_XMIN if side == "L" else R_XMAX,
+                print_note="이음면(스피커 쪽 x%.0f)을 베드에 눕혀 출력 (%.0f × %.2f × %.1f). XT60 Ø%.0f·슬리브 Ø8 구멍은 세로, 통로 홈은 모서리 따냄 - "
+                           "서포트 없음; 윗모서리 자석 자리 Ø8 × 3.2만 눕힌 구멍이라 위쪽이 45° 지붕(꼭지 평평, 위 살 %.1f). 벽 4줄 + 채움 25 %%, PETG 0.2 mm. "
+                           "아랫판·뒤판에 MS 폴리머로 붙임 (출력 PETG에는 목공본드가 잘 붙지 않음). 약 0 g · 0시간"
+                           % (a if side == "L" else b, YBI - Y0, Z_LIDU - ZB, T, END_HOLE_D, T / 2 - END_MAG_CAP),
+                dims=[("y", Y0, YBI, "%.0f (y%.0f~%.0f)" % (YBI - Y0, Y0, YBI), 0), ("y", Y0, RISER[0], "통로 홈 %.0f" % (RISER[0] - Y0), 1),
+                      ("y", Y0, wy, "XT60 Ø%.0f y%.0f" % (END_HOLE_D, wy), 2)] +
+                     [("y", Y0, y_, "슬리브 Ø8 y%.0f" % y_, 3 + k) for k, (y_, z_) in enumerate(TS_YZ[side])] +
+                     [("y", Y0, mxy[1], "자석 y%.0f" % mxy[1], 5), ("z", ZB, Z_LIDU, "%.2f (z%.0f~%.2f)" % (Z_LIDU - ZB, ZB, Z_LIDU), 0),
+                      ("z", ZB, DUCT_Z[1], "통로 홈 %.0f" % (DUCT_Z[1] - ZB), 1), ("z", ZB, wz, "XT60 z%.1f" % wz, 2)] +
+                     [("z", ZB, z_, "슬리브 z%.0f" % z_, 3 + k) for k, (y_, z_) in enumerate(TS_YZ[side])] + [("x", a, b, "두께 %.1f" % T, 0)])
+        fill_est(out[-1], *EST_WALL)
+    # ---- back (PRINTED since 2026-10-16, 3 pieces): window for the printed back plate, D8 amp vents, magnet seats, shelf pilots
     cuts = [box(BP_X[0], BP_X[1], YBI - 0.01, YB + 0.01, Z_BOT, Z_LIDU + 0.01)]
-    cuts += [box(a, a + 4.0, YBI - 0.01, YB + 0.01, z0, z1) for (a, z0, z1) in BACK_SLOTS]
-    cuts += [mag_pocket_down(x, (YBI + YB) / 2.0, Z_LIDU) for s in "LR" for x in MAG_BACK_X[s]]
-    back = diff(box(CU_X[0], CU_X[1], YBI, YB, ZB, Z_LIDU), cuts)
-    out.add("CU-PLY-BACK", "가운데 유닛 뒤판", "centre unit back panel", "plywood", G_CU, back, COLORS["plywood"], PLY,
+    cuts += [cyl_y(x, z, YBI - 0.01, YB + 0.01, VENT_D) for (x, z) in BACK_HOLES]
+    # top-edge magnet seats: horizontal holes in print (the end pieces lie inner face down) -> teardrop toward +y (print up), flat
+    # END_MAG_CAP from the axis (1.0 of PETG under the outer face), like the printed end walls
+    cuts += [prism_z(tear_cap_pts(x, (YBI + YB) / 2.0, MAG[0], (0.0, 1.0), END_MAG_CAP), Z_LIDU - MAG[2], Z_LIDU + 0.01)
+             for s in "LR" for x in MAG_BACK_X[s]]
+    pil = screw_pilots("CU-PLY-BACK")
+    back = diff(box(CU_X[0], CU_X[1], YBI, YB, ZB, Z_LIDU), cuts + pil)
+    kp = lap_pieces(back, CU_X[0], CU_X[1], "y", YBI, YB, "hi")
+    a_k = len(BACK_HOLES) * math.pi / 4.0 * VENT_D ** 2
+    out.add("CU-PLY-BACK", "가운데 유닛 뒤판", "centre unit back panel", "print", G_CU, back, COLORS["printed_body"], PETG,
             source=SRC + " plywood_cut_list PLY-CU-BACK (702×56.35, x260~962, y%.0f~%.1f, z5~61.35; 뒤판 출력물 창 x397.5~538 × z16.5~61.35, "
-                         "위가 열림; 앰프 뒤 환기 홈 8개 4×15) + centre.lids (자석 뒤판 윗모서리 2씩)" % (YBI, YB),
-            note="사양 그대로: 창 x%.1f~%.0f z16.5~61.35 (뚜껑이 덮음); 추정: 환기 홈 8개 4×15 x%.0f~%.1f z%.0f~%.0f (간격 8, 홈 사이 나무 4; "
-                 "앰프 x742~796 뒤, 윗모서리까지 4.35 남김), 자석 자리 Ø8 × 3.2 윗모서리 x%s (L은 창 왼쪽)"
-                 % (BP_X[0], BP_X[1], BACK_SLOTS[0][0], BACK_SLOTS[-1][0] + 4, BACK_SLOTS[0][1], BACK_SLOTS[0][2],
-                    "/".join("%.0f" % x for s in "LR" for x in MAG_BACK_X[s])))
-    # ---- lids L / R (okoume, magnets, exhaust slots)
+                         "위가 열림; 앰프 뒤 환기 - 2026-10-07: 홈 8개 4×15 → Ø8 구멍; 2026-10-16부터 출력 3토막) + centre.lids (자석 뒤판 윗모서리 2씩)" % (YBI, YB),
+            note="사양 그대로: 창 x%.1f~%.0f z16.5~61.35 (뚜껑이 덮음); 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 최소한으로' - "
+                 "환기 홈 8개 4 × 15 (Ø4 64번 + 지그 J-d3 틀·슬라이더·심) → Ø8 구멍 %d개 한 줄 x%.0f~%.0f z%.1f (간격 %.0f = 나무 %.0f; 구멍 z%.1f~%.1f = "
+                 "선반 띠 윗면 z43.5 위 %.1f, 윗모서리 자석 자리 밑 %.2f; 앰프 x742~796 뒤 5 + 오른쪽 5) - 합 %.0f mm² (홈 %.0f 이상); "
+                 "추정: 자석 자리 Ø8 × 3.2 윗모서리 x%s (L은 창 왼쪽)"
+                 % (BP_X[0], BP_X[1], len(BACK_HOLES), BACK_HOLES[0][0], BACK_HOLES[-1][0], BACK_HOLES[0][1], VENT_PITCH, VENT_WEB,
+                    BACK_HOLES[0][1] - VENT_D / 2, BACK_HOLES[0][1] + VENT_D / 2, BACK_HOLES[0][1] - VENT_D / 2 - 43.5,
+                    Z_LIDU - MAG[2] - (BACK_HOLES[0][1] + VENT_D / 2), a_k, OLD_SLOT_AREA["back"],
+                    "/".join("%.0f" % x for s in "LR" for x in MAG_BACK_X[s]))
+                 + "; 사양과 다름(작은 고침): 2026-10-16 사용자 'A안: 합판 전부 출력' - 오꾸메 합판 → PETG 출력, 702로 베드보다 길어 x%.0f · x%.0f에서 "
+                   "반턱 이음(겹침 %.0f, 두께의 반씩)으로 3토막 (%s) - 왼쪽 이음은 창 아래 띠(z5~16.5)에 있고 뒤판 출력물이 그 위에 붙음, 오른쪽 이음은 "
+                   "뚜껑 이음 레일 2(x711~731) 끝면이 덮음; 윗모서리 자석 자리는 출력에서 눕힌 구멍이라 +y(출력 위)로 45° 지붕, 축에서 %.2f에서 평평 "
+                   "(바깥면까지 PETG %.2f); 허브 선반 나사 자리 Ø%.1f 막힌 구멍 %d개 (안면에서)"
+                 % (SPLIT_X[0], SPLIT_X[1], LAP, " / ".join("%.1f" % (q.bounding_box()[3] - q.bounding_box()[0]) for q in kp), END_MAG_CAP,
+                    T / 2 - END_MAG_CAP, PILOT_D["pan"], len(pil)),
+            print_name="가운데뒤판", R=R_YMAX,
+            pieces=[("가운데뒤판_%d_%s" % (k + 1, "왼쪽" if k == 0 else "가운데" if k == 1 else "오른쪽"), q, R_YMAX if k == 1 else R_YMIN)
+                    for k, q in enumerate(kp)],
+            print_note="3토막(%s)으로 출력 - 가운데 토막은 바깥면(뒷면)을, 양쪽 토막은 안면을 베드에 (이음 혀가 베드 쪽이라 서포트 없음). 환기 Ø8·허브 "
+                       "선반 나사 자리 Ø%.1f는 세로 구멍, 윗모서리 자석 자리 Ø8 × 3.2만 눕힌 구멍이라 위쪽 45° 지붕(꼭지 평평). 벽 4줄 + 윗·아랫면 5층 + "
+                       "채움 25 %%, PETG 0.2 mm, 문 닫고 베드 70~80 °C. 붙이기: 반턱을 겹쳐 MS 폴리머, 윗·아랫모서리를 곧은 자에 맞춤 (아랫판 뒤 끝면과 "
+                       "끝벽에도 MS 폴리머). 약 0 g · 0시간" % (" / ".join("%.0f" % (q.bounding_box()[3] - q.bounding_box()[0]) for q in kp), PILOT_D["pan"]),
+            dims=[("x", CU_X[0], CU_X[1], "702 (x%.0f~%.0f, 3토막)" % CU_X, 0), ("x", BP_X[0], BP_X[1], "창 %.1f" % (BP_X[1] - BP_X[0]), 1),
+                  ("x", SPLIT_X[1] - LAP / 2, SPLIT_X[1] + LAP / 2, "반턱 %.0f" % LAP, 2),
+                  ("z", ZB, Z_LIDU, "%.2f (z%.0f~%.2f)" % (Z_LIDU - ZB, ZB, Z_LIDU), 0), ("y", YBI, YB, "%.1f" % T, 0)])
+    fill_est(out[-1], 1.4, 0.25)
+    # ---- lids L / R (PRINTED since 2026-10-07: same outline, exhaust slots and underside magnet seats printed in)
     for lid, side in (("LID-L", "L"), ("LID-R", "R")):
         a, b = LIDS[lid]
         cuts = [chamfer_front_top(a, b)]
         if side == "L":
             cuts += [box(x0_, x1_, y0_, y0_ + 4.0, Z_LIDU - 0.01, Z_LID + 0.01) for (x0_, x1_, y0_) in LIDL_SLOTS]
-            slot_txt = ("배기 홈 6 × (4×30) x%.0f~%.0f y%.0f~%.0f, 간격 %.0f (홈 사이 나무 4 - 2.5면 오꾸메가 부러짐; 강압 쪽; 레일 x491~511 위는 피함)"
+            slot_txt = ("배기 홈 6 × (4×30) x%.0f~%.0f y%.0f~%.0f, 간격 %.0f (강압 쪽; 레일 x491~511 위는 피함)"
                         % (LIDL_SLOTS[0][0], LIDL_SLOTS[0][1], LIDL_SLOTS[0][2], LIDL_SLOTS[-1][2] + 4, SLOT_PITCH))
         else:
             cuts += [box(x0_, x0_ + 4.0, y0_, y1_, Z_LIDU - 0.01, Z_LID + 0.01) for (x0_, y0_, y1_) in LIDR_SLOTS]
@@ -1024,30 +1204,51 @@ def cu_panels(out):
         mags = [(x, (YBI + YB) / 2.0) for x in MAG_BACK_X[side]] + [MAG_END[side]]
         cuts += [mag_pocket_up(x, y, Z_LIDU) for (x, y) in mags]
         m = diff(box(a, b, Y0, YB, Z_LIDU, Z_LID), cuts)
-        out.add(lid, "가운데 유닛 뚜껑 %s (오꾸메, 자석 3쌍)" % side, "centre unit lid %s (okoume, 3 magnet pairs)" % side, "plywood", G_CU, m,
-                COLORS["plywood"], PLY,
-                source=SRC + " centre.lids %s (x%.0f~%.0f, 오꾸메 11.5, 자석 8×3 3쌍: 뒤판 윗모서리 2, 끝벽 윗모서리 1) + plywood_cut_list "
-                             "PLY-CU-LID-%s (241×%.1f, 윗면 z72.85 = 건반 윗면, 앞 윗모서리 1×45° 모따기) + centre.vents.exhaust" % (lid, a, b, side, YB - Y0),
-                note="사양 그대로: x%.0f~%.0f y214~%.1f z%.2f~%.2f, 앞 윗모서리 1×45°; 추정: %s, 자석 자리 Ø8 × 3.2 밑면 (%s)"
-                     % (a, b, YB, Z_LIDU, Z_LID, slot_txt, " · ".join("x%.2f y%.2f" % p for p in mags)))
+        sl = LIDL_SLOTS if side == "L" else LIDR_SLOTS
+        dims = [("x", a, b, "%.0f (x%.0f~%.0f)" % (b - a, a, b), 0), ("y", Y0, YB, "%.1f (y%.0f~%.1f)" % (YB - Y0, Y0, YB), 0),
+                ("z", Z_LIDU, Z_LID, "11.5 (윗면 z%.2f = 건반 윗면)" % Z_LID, 0)]
+        if side == "L":
+            dims += [("x", sl[0][0], sl[0][1], "배기 홈 30 (x%.0f~%.0f)" % (sl[0][0], sl[0][1]), 1), ("y", sl[0][2], sl[-1][2] + 4, "홈 6 × 4, 간격 8", 1)]
+        else:
+            dims += [("x", sl[0][0], sl[-1][0] + 4, "배기 홈 10 × 4, 간격 8", 1), ("y", sl[0][1], sl[0][2], "홈 40 (y%.0f~%.0f)" % (sl[0][1], sl[0][2]), 1)]
+        dims += [("x", a, mags[2][0] if side == "L" else mags[0][0], "자석 x%.2f" % (mags[2][0] if side == "L" else mags[0][0]), 2)]
+        out.add(lid, "가운데 유닛 뚜껑 %s (출력, 자석 3쌍)" % side, "centre unit lid %s (printed, 3 magnet pairs)" % side, "print", G_CU, m,
+                COLORS["printed_body"], PETG,
+                source=SRC + " centre.lids %s (x%.0f~%.0f, 11.5, 자석 8×3 3쌍: 뒤판 윗모서리 2, 끝벽 윗모서리 1) + plywood_cut_list "
+                             "PLY-CU-LID-%s (241×%.1f, 윗면 z72.85 = 건반 윗면, 앞 윗모서리 1×45° 모따기; 2026-10-07부터 출력) + centre.vents.exhaust"
+                       % (lid, a, b, side, YB - Y0),
+                note="사양 그대로: x%.0f~%.0f y214~%.1f z%.2f~%.2f, 앞 윗모서리 1×45°; 사양과 다름(작은 고침): 2026-10-07 사용자 요청 '드릴을 써야되는 부분을 "
+                     "최소한으로' - 오꾸메 합판 → PETG 출력 (같은 모양·두께·자리, 배기 홈 (전엔 Ø4 %d번 + 지그 J-d%s)과 밑면 자석 자리 (전엔 J-c%s)를 출력); "
+                     "추정: %s, 자석 자리 Ø8 × 3.2 밑면 (%s)"
+                     % (a, b, YB, Z_LIDU, Z_LID, 96 if side == "L" else 200, "1" if side == "L" else "2", "1" if side == "L" else "2", slot_txt,
+                        " · ".join("x%.2f y%.2f" % p for p in mags)),
+                print_name="뚜껑_" + side, R=R_FLIP,
+                print_note="윗면(z%.2f, 보이는 면)을 베드에 엎어 출력 (%.0f × %.1f × %.1f, 256 판에 %.1f씩 여유) - 윗면이 베드처럼 매끈. 배기 홈은 세로, "
+                           "밑면 자석 자리 Ø8 × 3.2는 위로 열림, 앞 윗모서리 1×45° 모따기는 베드 쪽 (첫 층이 1 mm 안쪽에서 시작) - 서포트 없음. "
+                           "벽 3줄 + 윗·아랫면 5층 + 채움 15 %% (자이로이드/그리드), PETG 0.2 mm, 브림 없이 (모서리가 뜨면 3 mm 브림). 휨을 줄이려면 "
+                           "베드 70~80 °C, 문 닫음, 다 식은 뒤 떼어 냄. 약 0 g · 0시간"
+                           % (Z_LID, b - a, YB - Y0, T, (256.0 - (b - a)) / 2.0),
+                dims=dims)
+        fill_est(out[-1], *EST_PLAIN)
         for k, (x, y) in enumerate(mags):
             ply_z = Z_LIDU - 0.2 - MAG[1]
             out.add("CU-MAG-PLY-%s%d" % (side, k + 1), "네오디뮴 자석 Ø8×3 N35 (L65) — %s 윗모서리 %s%d" % ("끝벽" if k == 2 else "뒤판", side, k + 1),
                     "magnet 8x3 N35 in the %s top edge %s%d" % ("end wall" if k == 2 else "back ply", side, k + 1), "bought", G_CU,
                     cyl_z(x, y, ply_z, ply_z + MAG[1], MAG[0]), COLORS["magnet"], "N35",
                     source=SRC + " centre.lids %s fix (자석 8×3 3쌍)" % lid,
-                    note="추정: 합판 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 합판 윗면보다 0.2 아래")
+                    note="추정: %s 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래"
+                         % ("출력 끝벽 (자리는 출력에 있음)" if k == 2 else "출력 뒤판 (자리는 출력에 있음)"))
             lid_z = Z_LIDU + 0.2
             out.add("CU-MAG-LID-%s%d" % (side, k + 1), "네오디뮴 자석 Ø8×3 N35 (L65) — 뚜껑 %s 밑면 %d" % (side, k + 1),
                     "magnet 8x3 N35 in the lid %s underside %d" % (side, k + 1), "bought", G_CU,
                     cyl_z(x, y, lid_z, lid_z + MAG[1], MAG[0]), COLORS["magnet"], "N35",
                     source=SRC + " centre.lids %s fix (자석 8×3 3쌍)" % lid,
-                    note="추정: 뚜껑 밑면 Ø8 × 3.2 자리에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게")
+                    note="추정: 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게")
 
 
 # ------------------------------------------------------------------ CU screen lid (L2 lid + R31 touchscreen rev 3 additions, spec A)
 
-LID_SEAM_GAP = 0.5                               # screen lid 0.5 short at each seam (spec x501..721 butts both okoume lids with 0 play)
+LID_SEAM_GAP = 0.5                               # screen lid 0.5 short at each seam (spec x501..721 butts both lids with 0 play; lids printed since 10/7)
 SLID_X = (LIDS["CU-SCREENLID"][0] + LID_SEAM_GAP, LIDS["CU-SCREENLID"][1] - LID_SEAM_GAP)   # 501.5 .. 720.5
 SLID_PLATE, SLID_WALL, SLID_RIB = 3.0, 3.0, 2.0
 SLID_RIB_X = [531.0, 571.0, 611.0, 651.0, 691.0]
@@ -1168,7 +1369,7 @@ def screen_lid(out):
                          "printed_parts CU-SCREENLID; " + TS.SRC_SPEC + " A-1~A-9 (경첩 받침·뒤꿈치 멈춤 블록, 리본·전원선 구멍 22×6 + 벽 2, "
                          "다리 주머니, 접이 받침 발 4 + 턱, 리본 클립 덩어리·핀 구멍, 배기 홈 8 × 34×4, 나사 자리파기 Ø6.5 × 5.5, 갈비 규칙) + "
                          + TS.SRC_NUM + " hinge / hole / clip / vents / leg.pocket / fold_feet_detail / lid_screw + " + TS.SRC_DRW + " (t02·t04)",
-            note=("사양과 다름(작은 고침): ① x%.0f~%.0f → x%.1f~%.1f (이음마다 %.1f 틈) - 사양대로면 오꾸메 뚜껑 L·R(재단 ±0.5)과 출력 뚜껑이 틈 0으로 "
+            note=("사양과 다름(작은 고침): ① x%.0f~%.0f → x%.1f~%.1f (이음마다 %.1f 틈) - 사양대로면 뚜껑 L·R(10/7부터 출력 ±0.2, 전엔 오꾸메 재단 ±0.5)과 출력 뚜껑이 틈 0으로 "
                   "맞닿아 조금만 커도 세 장이 나란히 들어가지 않음; ② 뒤끝 y%.1f (사양 자리 블록 y%.1f는 %.0f° 뒤판 - %.0f°에서 뒤판이 %.1f 뒤로 감; "
                   "화면 쪽 값은 모두 사양 그대로, 접은 받침 뒤끝 y%.2f와 뒤끝 사이 %.2f); ③ 나사 자리는 CAD L2 보스 10 × 12 (사양 A-7의 Ø8 기둥을 "
                   "덮음), 구멍 Ø3.4 + 위에서 Ø6.5 × 5.5 자리파기 (머리 자리 z%.2f, 머리 밑 살 6.0); ④ 배기 홈 밑의 갈비 x571·x651은 그대로 둠 "
@@ -1219,8 +1420,8 @@ def screen_lid(out):
 
 RAIL_W, RAIL_T = 20.0, 6.0
 POST = 10.0
-INS3 = (4.5, 2.6, 4.0, 4.5)       # M3 heat-set insert OD (L71 ShenzenAV M3x4x4.5: OD 4.5), thread minor bore, length; hole depth
-INS3_HOLE = 4.0                   # hole D in the rail (kept: the OD 4.5 insert melts in, 0.5 on the diameter)
+INS3 = (5.0, 2.6, 4.0, 4.5)       # M3 heat-set insert OD (2026-10-07: aircon p16 set, M3 OD 5 x 4), thread minor bore, length; hole depth
+INS3_HOLE = 4.2                   # hole D in the rail (OD 5 insert melts in, 0.8 on the diameter; was 4.0 for the OD 4.5 L71)
 
 
 def seam_rails(out):
@@ -1237,7 +1438,7 @@ def seam_rails(out):
                              "기둥 위 M3 인서트) + printed_parts SEAM-POSTRAIL (%.0f × 20 × 44.85)"
                        % (i + 1, xs - RAIL_W / 2, xs + RAIL_W / 2, i + 1, YBI - Y0),
                 note="사양과 다름(작은 고침): 기둥 x%.0f~%.0f → x%.0f~%.0f - 화면 뚜껑 나사(x%.0f = 뚜껑이 레일에 얹힌 10 mm의 가운데)가 사양 "
-                     "기둥(이음선 x%.0f 가운데)의 모서리에 걸려 '기둥 위 인서트'가 안 됨; 추정: M3 열압입 인서트 L71 (바깥 Ø4.5 × 4, 구멍 Ø4 × 4.5) "
+                     "기둥(이음선 x%.0f 가운데)의 모서리에 걸려 '기둥 위 인서트'가 안 됨; 추정: M3 열압입 인서트 (M3 바깥 Ø5 × 4, 구멍 Ø4.2 × 4.5 - 10/7 L71 Ø4.5에서 바꿈) "
                      "레일 윗면 y246·y322; 레일 뒤 끝면은 %s 안면(y%.0f)에 MS 폴리머, 기둥 밑은 아랫판에 MS 폴리머 (기둥 자리는 아랫판 R3 모서리 없음)%s"
                      % (spec_post[0], spec_post[1], px0, px1, sx, xs, "PR-BACKPLATE" if i == 0 else "뒤판", YBI,
                         "" if abs(DY_BACK) < 1e-9 else "; 레일은 뒤판까지 y214~%.0f (사양 상자 y214~%.0f는 43° 뒤판 기준, 뒤판이 %.1f 뒤로 감)"
@@ -1250,12 +1451,12 @@ def seam_rails(out):
     for k, (sx, sy) in enumerate(SLID_SCREWS):
         z_head = Z_LID - SLID_CB[1]
         ins = diff(cyl_z(sx, sy, Z_LIDU - INS3[2], Z_LIDU, INS3[0]), [cyl_z(sx, sy, Z_LIDU - INS3[2] - 0.01, Z_LIDU + 0.01, INS3[1])])
-        out.add("SEAM-INS-%d" % (k + 1), "M3 열압입 인서트 L71 (ShenzenAV M3x4x4.5, 바깥 Ø%.1f × %.0f, 뚜껑 이음 레일, 화면 뚜껑 나사 %d)"
-                % (INS3[0], INS3[2], k + 1), "M3 heat-set insert L71 (M3x4x4.5, seam rail) %d" % (k + 1),
+        out.add("SEAM-INS-%d" % (k + 1), "M3 열압입 인서트 (p16 세트 M3 × 4 × 바깥 5, 바깥 Ø%.1f × %.0f, 뚜껑 이음 레일, 화면 뚜껑 나사 %d)"
+                % (INS3[0], INS3[2], k + 1), "M3 heat-set insert (p16 set M3 x 4 x OD 5, seam rail) %d" % (k + 1),
                 "bought", G_CUP, ins, COLORS["metal"], "황동",
-                source=SRC + " centre.lids CU-SCREENLID fix (레일 인서트) + 구매 목록 v4 L71 (ShenzenAV 황동 인서트너트 M3x4x4.5 × 6 = 4 + 예비 2)",
+                source=SRC + " centre.lids CU-SCREENLID fix (레일 인서트) + 황동 열 인서트 M3 바깥 5 × 길이 4 (10/7, L71 ShenzenAV M3x4x4.5 대신) 4개",
                 note="추정: 바깥 Ø%.1f × 높이 %.0f를 레일 구멍 Ø%.1f × %.1f에 인두로 면까지 (지름 %.1f 물림 - 모델은 겹침으로 보여 줌; 레일을 붙이기 전에 "
-                     "넣음), 나사산 안지름 Ø%.1f로 모델 (나사 Ø3과 겹침 = 나사산 물림); 6개 사서 4개 쓰고 2개 예비"
+                     "넣음), 나사산 안지름 Ø%.1f로 모델 (나사 Ø3과 겹침 = 나사산 물림); 4개 사용"
                      % (INS3[0], INS3[2], INS3_HOLE, INS3[3], INS3[0] - INS3_HOLE, INS3[1]))
         scr = union([cyl_z(sx, sy, z_head, z_head + 1.65, 5.7), cyl_z(sx, sy, z_head - 10.0, z_head, 3.0)])
         out.add("CU-M3X10-%d" % (k + 1), "M3×10 둥근머리 렌치볼트 (화면 뚜껑 고정 %d)" % (k + 1), "M3x10 button head bolt (screen lid) %d" % (k + 1),
@@ -1638,19 +1839,18 @@ def touch_parts(out):
 
 BP_Z = (Z_BOT, Z_LIDU)
 BP_SKIN = 2.0
-BP_HOLES = {k: tuple(v) for k, v in BP["holes_xz"].items()}   # cable_pass_D12, usb_c_pd_input_HUSB238, rocker_KCD1, pedal_jack_J501_D6
+BP_HOLES = {k: tuple(v) for k, v in BP["holes_xz"].items()}   # rocker_KCD1, pedal_jack_J501_D6 (2026-10-07: pass + PD input closed)
+BP_CLOSED = {k: tuple(v) for k, v in BP.get("closed_2026_10_07", {}).items()}   # old cable pass D12 / USB-C PD mouth spots (solid now)
 BP_LOUV = [(z, z + 3.0) for z in (18.0, 23.0, 28.0, 33.0, 38.0, 43.0)]   # louvre slots x480..534 (spec x480~536, z18~46)
 BP_LOUV_X = (480.0, 534.0)
-BP_TABS = [(400.0, 414.0, 407.0, 322.0), (452.0, 474.0, 466.0, 311.5)]   # bottom tabs x0, x1, screw x, screw y (y316..skin, z16.5..20.5)
-BP_TAB_Y0 = 316.0                                               # tab front y (left screw y322: 9 from the floor's back edge y331 at 40)
+# 2026-10-07: ONE bottom tab x427..451 (y316..skin, z16.5..20.5) with 2 csk screws. The old tabs no longer fit: the left one (x400..414)
+# is under the battery (y250.5..322.5) and the right one's tongue (x459.5..472.5 to y304) under the turned PED board (y244..314); a screw
+# behind the battery would sit 4 or less from the bottom ply's back edge. Between the battery frame (x<=426) and the J501 ledge (x>=450)
+# both driver paths D6 are free: (431.5, 321) 1.6 left of the KCD1 lugs, (446.5, 321) 0.5 left of the ledge (ledge starts at the J501
+# board edge x450, was x449), switch body behind y327.5, PED board in front y<=314.
+BP_TABS = [(427.0, 439.0, 431.5, 321.0), (439.0, 451.0, 446.5, 321.0)]   # x0, x1, screw x, screw y (one tab, two screws)
+BP_TAB_Y0 = 316.0                                               # tab front y (screws y321: 10 from the floor's back edge y331)
 BP_TAB_TOP = 20.5                                               # tab top = csk head face (4 thick: 8호 13 tip z7.5, 2.5 over the ply underside)
-# right tab: the J501 ledge (x449..476.5 y315.5..339.5 z30..36.4, same print) covers the whole tab x452..474, so a screw there cannot
-# be driven (review 2026-10-01: first material 9.5 over the head). A tongue x459.5..472.5 runs forward to y304 and carries the screw
-# at y311.5: its D6 driver path (y308.5..314.5) passes 1.0 in front of the ledge / J501 board; the tongue stays 6.5 off the fuse
-# cradle (x<=453) and 1.5 off the fuse lead riser (x456.5). Not a hole through the ledge: that leaves a 2 mm strip at the ledge front
-# edge and puts the screw under the glued J501 board (no service access).
-BP_TONGUE = (459.5, 472.5, 304.0)                               # right-tab tongue x0, x1, front y
-BP_WEBS = (452.0, 472.0)                                        # J501-ledge webs x (2 wide, skin -> ledge, over the tab x452..474)
 DRIVER_D, DRIVER_L = 6.0, 80.0                                  # driver shaft used by check_body's screw-access test
 
 
@@ -1658,64 +1858,55 @@ def back_plate(out):
     x0, x1 = BP_X
     z0, z1 = BP_Z
     ys = YB - BP_SKIN                                               # 340.5 skin inner face (40 deg)
-    pcx, pcz = BP_HOLES["cable_pass_D12"]
-    ux, uz = BP_HOLES["usb_c_pd_input_HUSB238"]
     kx, kz = BP_HOLES["rocker_KCD1_13.2x19.2"]
     jx, jz = BP_HOLES["pedal_jack_J501_D6"]
-    pd = CC["CU-E-PDTRIG"]
     jb = CC["CU-E-J501BOARD"]
     add = [box(x0, x1, ys, YB, z0, z1),                                                   # outer skin 2
            box(x0, x1, YBI, YB, z1 - 4.0, z1), box(x0, x1, YBI, YB, z0, z0 + 1.5),        # top frame 4, bottom frame 1.5
            box(x0, x0 + 2.0, YBI, YB, z0, z1), box(x1 - 2.0, x1, YBI, YB, z0, z1),        # side frames 2
            box(kx - 10.5, kx + 10.5, ys - 2.0, ys + 0.01, kz - 13.5, kz + 13.5),          # switch panel (2 behind the skin)
-           box(ux - 8.5, ux + 8.5, YBI, ys + 0.01, uz - 5.0, uz + 5.0),                   # PD-trigger pocket block
-           box(jb[0] - 1.0, jb[1] + 1.5, jb[2], ys + 0.01, 30.0, jb[4]),                  # J501 board ledge (top = board underside)
+           box(jb[0], jb[1] + 1.5, jb[2], ys + 0.01, 30.0, jb[4]),                        # J501 board ledge (top = board underside)
            ]
-    for gx in BP_WEBS:                                  # ledge webs: rise straight from the skin in print (no overhang), tie ledge <-> tab
-        add.append(box(gx, gx + 2.0, 320.0, ys + 0.01, BP_TAB_TOP - 0.01, 30.01))
-    for (a, b, sx, sy) in BP_TABS:
-        add.append(box(a, b, BP_TAB_Y0, ys + 0.01, z0, BP_TAB_TOP))
-    add.append(box(BP_TONGUE[0], BP_TONGUE[1], BP_TONGUE[2], BP_TAB_Y0 + 0.01, z0, BP_TAB_TOP))   # right-tab tongue (screw out of the ledge shadow)
+    tx0, tx1 = min(t[0] for t in BP_TABS), max(t[1] for t in BP_TABS)
+    add.append(box(tx0, tx1, BP_TAB_Y0, ys + 0.01, z0, BP_TAB_TOP))                      # one bottom tab, 2 screws
     plate = union(add)
-    cuts = [cyl_y(pcx, pcz, YBI - 0.01, YB + 0.01, 12.0)]
-    cuts += [stadium_y(ux, uz, 13.0, 7.5, ys - 0.01, YB + 0.01),
-             box(pd[0] - 0.2, pd[1] + 0.2, YBI - 0.01, pd[3], pd[4] - 0.2, pd[5] + 0.2)]        # USB-C mouth + board pocket
-    cuts += [box(kx - 6.6, kx + 6.6, ys - 2.01, YB + 0.01, kz - 9.6, kz + 9.6),
-             box(kx - 7.7, kx + 7.7, ys, YB + 0.01, kz - 10.7, kz + 10.7)]                      # KCD1 13.2 x 19.2 + 2 mm bezel recess
+    cuts = [box(kx - 6.6, kx + 6.6, ys - 2.01, YB + 0.01, kz - 9.6, kz + 9.6),
+            box(kx - 7.7, kx + 7.7, ys, YB + 0.01, kz - 10.7, kz + 10.7)]                      # KCD1 13.2 x 19.2 + 2 mm bezel recess
     cuts.append(cyl_y(jx, jz, ys - 0.01, YB + 0.01, 6.3))
     cuts += [box(BP_LOUV_X[0], BP_LOUV_X[1], ys - 0.01, YB + 0.01, za, zb) for (za, zb) in BP_LOUV]
     for (a, b, sx, sy) in BP_TABS:
         cuts.append(csk_z(sx, sy, BP_TAB_TOP, z0 - 0.01))
     plate = diff(plate, cuts)
+    closed = " · ".join("%s (%s, %s)" % ({"cable_pass_D12": "케이블 통과 Ø12", "usb_c_pd_input_HUSB238": "USB-C PD 입력"}.get(k, k), _n(v[0]), _n(v[1]))
+                        for k, v in BP_CLOSED.items())
     out.add("PR-BACKPLATE", "뒤판 출력물 (I/O·루버 판)", "printed back plate (I/O + louvres)", "print", G_CUP, plate, COLORS["printed_body"], PETG,
-            source=SRC + " centre.back_plate_io (x397.5~538 y%.0f~%.1f z16.5~61.35; 구멍 x/z: 케이블 통과 Ø12 (405, 38), USB-C PD 입력 (421, 38), "
-                         "KCD1 13.2×19.2 (438.5, 38.5) 2 mm 오목 자리에 테두리 → y%.1f와 같은 면, J501 Ø6 (462.5, 40.5); 루버 x480~536 z18~46) + "
-                         "centre_contents CU-E-PDTRIG / CU-E-J501BOARD / CU-E-SWITCH" % (YBI, YB, YB),
-            note=("" if abs(DY_BACK) < 1e-9 else "사양과 다름(작은 고침): 판에 얹히는 HUSB238·J501 기판·J501·KCD1 자리와 판 주머니·잭 받침을 사양 상자보다 "
-                 "y+%.1f (뒤판이 %.0f° 규칙으로 y%.1f → %.1f로 옮겨 감; 사양 그대로면 USB-C 입구 앞을 판 %.1f mm가 막음); " % (
-                     DY_BACK, ANGLE, LAYOUT_BACK_Y, YB, DY_BACK)) + "추정: 바깥 판 2 (y%.1f~%.1f) + 테 (위 4 · 아래 1.5 · 옆 2)" % (ys, YB) + " - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 "
-                 "테두리(15.4×21.4)는 바깥면과 같은 높이; USB-C 입구 13 × 7.5 (바깥 판), HUSB238 주머니 x%.1f~%.1f z%.1f~%.1f (입구가 바깥면에서 2 "
-                 "안); J501 기판 받침 x%.0f~%.1f y%.1f~%.1f 윗면 z%.1f (기판 밑) + 세운 받침벽 2 (x%s, 2 두께, y320~%.1f z20.5~30: 바깥 판에서 곧게 "
-                 "올라 받침과 뒤 탭을 이음 - 출력 때 내민 면 없음); 루버 x%.0f~%.0f (사양 536 → 옆 테 2를 남김) z18~46 3×6; 바닥 탭 2개 (x400~414, "
-                 "452~474, y%.0f~%.1f, z16.5~20.5)에 접시 8호 13 mm를 아랫판으로: 왼쪽 (%.0f, %.0f) (아랫판 뒤 모서리 y%.0f에서 %.0f), 오른쪽은 J501 받침이 "
-                 "탭 전체를 덮어 드라이버가 닿지 않으므로 탭에서 앞으로 낸 혀 x%.1f~%.1f y%.0f~316의 (%.0f, %.1f) - 드라이버 Ø6 길이 받침·J501 기판 앞 "
-                 "1.0 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인) - 창 옆은 틈 없이 끼움"
-                 % (pd[0] - 0.2, pd[1] + 0.2, pd[4] - 0.2, pd[5] + 0.2, jb[0] - 1.0, jb[1] + 1.5, jb[2], ys, jb[4],
-                    "/".join("%.0f~%.0f" % (g, g + 2) for g in BP_WEBS), ys, BP_LOUV_X[0], BP_LOUV_X[1], BP_TAB_Y0, ys,
-                    BP_TABS[0][2], BP_TABS[0][3], YBI, YBI - BP_TABS[0][3], BP_TONGUE[0], BP_TONGUE[1], BP_TONGUE[2], BP_TABS[1][2], BP_TABS[1][3])
-                 + "; 탭 나사 끝 z%.1f = 아랫판 밑면 z%.0f 위 %.1f (check_body: 끝 ≥ 1.0, 반대 면 나사와 나사산 사이 ≥ 4)"
-                 % (BP_TAB_TOP - CSK_SCREW[1], ZB, BP_TAB_TOP - CSK_SCREW[1] - ZB),
+            source=SRC + " centre.back_plate_io (x397.5~538 y%.0f~%.1f z16.5~61.35; 구멍 x/z: KCD1 13.2×19.2 (438.5, 38.5) 2 mm 오목 자리에 테두리 → "
+                         "y%.1f와 같은 면, J501 Ø6 (462.5, 40.5); 루버 x480~536 z18~46; 2026-10-07 막음: %s) + centre.power_2026_10_07 + "
+                         "centre_contents CU-E-J501BOARD / CU-E-SWITCH" % (YBI, YB, YB, closed),
+            note=("" if abs(DY_BACK) < 1e-9 else "사양과 다름(작은 고침): 판에 얹히는 J501 기판·J501·KCD1 자리와 잭 받침을 사양 상자보다 "
+                 "y+%.1f (뒤판이 %.0f° 규칙으로 y%.1f → %.1f로 옮겨 감; 사양 그대로면 J501 코가 판 안 %.1f에서 끝남); " % (
+                     DY_BACK, ANGLE, LAYOUT_BACK_Y, YB, DY_BACK))
+                 + "사양과 다름(작은 고침, 2026-10-07 배터리): 옛 바닥 탭 2개 (x400~414 = 배터리 밑, x452~474 + 앞 혀 = 90° 돌린 PED 보드 밑) 대신 "
+                   "탭 하나 x%.0f~%.0f y%.0f~%.1f z16.5~20.5에 접시 8호 13 두 개 (%.1f, %.0f) · (%.1f, %.0f) - 배터리 뒤(y322.5~331)에 나사를 두면 아랫판 "
+                   "뒤 모서리에서 4 이하라 쪼개짐; 드라이버 Ø6 길: 왼쪽은 KCD1 단자 왼쪽 1.6, 오른쪽은 J501 받침 왼쪽 0.5 (받침 왼쪽 끝을 J501 기판 끝 "
+                   "x%.0f에 맞춤, 전 x%.0f), 스위치 몸통은 y327.5 뒤, PED 보드는 y314 앞 (check_body.py가 나사마다 Ø6 × 80 드라이버 길을 확인); "
+                   "PD 입력 주머니·케이블 통과 구멍은 막힌 벽 (%s); 받침 버팀벽 2개와 오른쪽 혀는 없앰 (받침은 바깥 판에서 24 내민 6.4 두께); "
+                   % (tx0, tx1, BP_TAB_Y0, ys, BP_TABS[0][2], BP_TABS[0][3], BP_TABS[1][2], BP_TABS[1][3], jb[0], jb[0] - 1.0, closed)
+                 + "추정: 바깥 판 2 (y%.1f~%.1f) + 테 (위 4 · 아래 1.5 · 옆 2)" % (ys, YB) + " - 뚜껑 L·화면 뚜껑이 윗면에 얹혀 누름; KCD1은 2 mm 판에 끼우고 "
+                 "테두리(15.4×21.4)는 바깥면과 같은 높이; J501 기판 받침 x%.0f~%.1f y%.1f~%.1f 윗면 z%.1f (기판 밑); 루버 x%.0f~%.0f (사양 536 → 옆 테 2를 "
+                 "남김) z18~46 3×6; 탭 나사 끝 z%.1f = 아랫판 밑면 z%.0f 위 %.1f (check_body: 끝 ≥ 1.0, 반대 면 나사와 나사산 사이 ≥ 4) - 창 옆은 틈 없이 끼움"
+                 % (jb[0], jb[1] + 1.5, jb[2], ys, jb[4], BP_LOUV_X[0], BP_LOUV_X[1], BP_TAB_TOP - CSK_SCREW[1], ZB, BP_TAB_TOP - CSK_SCREW[1] - ZB),
             print_name="뒤판출력물_IO", R=R_YMAX,
-            print_note="바깥면(y%.1f)을 베드에. 구멍·루버는 수직, 스위치 테두리 자리 2 mm는 베드 쪽 오목(작은 브리지). 잭 받침·탭·오른쪽 탭의 "
-                       "혀(탭보다 좁음)는 위로 섬 - 서포트 없음. 벽 3줄 + 채움 25 %%" % YB,
-            dims=[("x", x0, x1, "140.5 (창 x397.5~538)", 0), ("x", x0, pcx, "케이블 통과 x405 Ø12", 1), ("x", x0, ux, "USB-C x421", 2),
-                  ("x", x0, kx, "KCD1 x438.5", 3), ("x", x0, jx, "J501 x462.5 Ø6.3", 4), ("x", BP_LOUV_X[0], BP_LOUV_X[1], "루버 54", 5),
+            print_note="바깥면(y%.1f)을 베드에. 구멍·루버는 수직, 스위치 테두리 자리 2 mm는 베드 쪽 오목(작은 브리지). 잭 받침·탭은 위로 섬 - "
+                       "서포트 없음. 벽 3줄 + 채움 25 %%" % YB,
+            dims=[("x", x0, x1, "140.5 (창 x397.5~538)", 0), ("x", x0, kx, "KCD1 x438.5", 1), ("x", x0, jx, "J501 x462.5 Ø6.3", 2),
+                  ("x", BP_LOUV_X[0], BP_LOUV_X[1], "루버 54", 3), ("x", tx0, tx1, "탭 x%.0f~%.0f (나사 x%.1f · %.1f)" % (tx0, tx1, BP_TABS[0][2], BP_TABS[1][2]), 4),
                   ("y", YBI, YB, "11.5", 0), ("y", ys, YB, "바깥 판 2", 1), ("y", jb[2], YBI, "잭 받침 %.1f 앞으로" % (YBI - jb[2]), 2),
-                  ("y", BP_TONGUE[2], YB, "오른쪽 탭 혀 y%.0f (나사 y%.1f)" % (BP_TONGUE[2], BP_TABS[1][3]), 3),
-                  ("z", z0, z1, "44.85 (z16.5~61.35)", 0), ("z", z0, 38.0, "구멍 중심 z38", 1), ("z", 18.0, 46.0, "루버 z18~46", 2)])
+                  ("y", BP_TAB_Y0, YB, "탭 y%.0f (나사 y%.0f)" % (BP_TAB_Y0, BP_TABS[0][3]), 3),
+                  ("z", z0, z1, "44.85 (z16.5~61.35)", 0), ("z", z0, 38.5, "KCD1 중심 z38.5", 1), ("z", 18.0, 46.0, "루버 z18~46", 2)])
 
 
-# ------------------------------------------------------------------ hub shelf (+ amp pads), power-bank holder, XT30 clips
+# ------------------------------------------------------------------ hub shelf (+ amp pads), battery frame, XT60 clips
 
 AMP_HOLES = [(745.5, 286.5), (792.5, 286.5), (745.5, 325.5), (792.5, 325.5)]   # XH-A232 54 x 46, holes 3.5 in (v3 amp_bosses)
 SHELF_SCREW_Z = 46.0                     # bracket screw axis (D3 x 12~13 pan head, head D6 or less, seat D6.5 x 4)
@@ -1748,7 +1939,7 @@ def hub_shelf(out):
                          "z41.5~50, 뒤판에 나사) + CU-E-AMP (앰프 2 mm 받침 위 z45.5) + printed_parts PR-HUBSHELF",
             note="추정: 선반 뒤 %.0f mm(y%.0f~%.0f)를 뒤판까지 이어 한 몸, 앰프 받침 Ø7 × 2 (구멍 Ø2.7 관통, 앰프 구멍 3.5 안쪽 가정 = v3 amp_bosses, "
                  "받은 앰프로 재서 옮김) - 사양 STANDOFFS의 '앰프 2 mm 받침'을 선반에 붙임; 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; "
-                 "x%s z%.0f, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 합판 물림 %.0f (M3 × 12, L78) / %.0f (13 mm), "
+                 "x%s z%.0f, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 뒤판 물림 %.0f (M3 × 12, L78) / %.0f (13 mm), "
                  "끝에서 뒤판 바깥면까지 %.1f / %.1f); 머리(아래 끝 z%.1f)가 선반 "
                  "윗면 z%.1f보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 %.0f × %.1f (y%.0f~%.0f, 바닥 %.1f 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. "
                  "8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)"
@@ -1763,70 +1954,134 @@ def hub_shelf(out):
                   ("z", sh[4], b1[5], "z41.5~50", 0), ("z", sh[4], zt, "선반 2", 1), ("z", zt, zt + 2.0, "앰프 받침 2", 2)])
 
 
-CSK_SCREW = (4.2, 13.0)          # L77 스텐 접시머리 직결피스 8호 13 (holder + back-plate tabs): thread D, length incl. the head; the
+CSK_SCREW = (4.2, 13.0)          # L77 스텐 접시머리 직결피스 8호 13 (battery frame + back-plate tab): thread D, length incl. the head; the
                                  # 굿나잇몰 listing (11번가 4350230243) starts at 13 mm, so no shorter csk 8호 from the same order
-PB_FLOOR = 2.0                   # holder floor under the bank (z16.5..18.5)
-PB_EAR_T = 4.0                   # screw ears outside the walls, 4 thick like the back-plate tabs: head flush z20.5 -> tip z7.5
-PB_HEAD_Z = Z_BOT + PB_EAR_T     # 20.5
-# W1 item 7 (2026-10-02): the first holder had the 4 csk heads flush with the 2 mm floor (z18.5) at PB_SCREWS_V1, so a 13 mm screw
-# ended at z5.5 = 0.5 over the ply underside (0.3 with an 11.3 ply, 0 = through with 11.0) and the two x289 tips sat inside the D28 pads of
-# the feet (292, 262) / (292, 320), 10.4 / 13.3 from their screw axes (wood between the threads 6.2 / 9.1, depths overlapping 9.5).
-# The bank fills the floor (0.5 gap) - a thicker floor or bosses lift it - and there is no shorter L77 -> 4 ears outside the walls.
-PB_SCREWS_V1 = [(289.0, 272.0), (388.0, 272.0), (289.0, 307.0), (388.0, 307.0)]
-PB_EARS = [((278.0, 257.0), (272.0, 284.0, 251.0, 263.0)),      # left wall, front: driver path 1.5 behind the XT30 clip, 2.0 before cable clip E1
-           ((278.0, 325.0), (272.0, 284.0, 319.0, 330.5)),      # left wall, back: path 2.0 behind thumb screw L2 (y320); 0.5 off the back ply
-           ((308.0, 247.5), (302.0, 314.0, 242.5, 252.0)),      # front wall, left of the strap slot (x327.5..349.5 stays free)
-           ((385.0, 247.5), (379.0, 391.0, 242.5, 252.0))]      # front wall, right (front 1.5 of the ear over the ply's R3 round: <= 0.4 air)
-PB_SCREWS = [s for s, _ in PB_EARS]                             # (x, y) csk 8호 13 into the centre bottom ply
 CSK_HEAD_D = 8.6                                                # csk_z head seat D
+# ---- 2026-10-07 (user): LiFePO4 12.8 V 6 Ah pack 140 x 72 x 35 on the centre floor (no tray floor), printed corral frame + fuse shelf
+BAT = tuple(CC["BAT-LFP"])                                      # (284, 424, 251, 323, 16.5, 51.5)
+BF_GAP, BF_WALL, BF_H = 0.5, 1.5, 14.0                          # corral: 0.5 round the pack, walls 1.5 x 14 (z16.5..30.5)
+BF_RETURN = 8.0                                                 # +x end: only 8 mm corner returns (lead / DC jack end open between them)
+BF_STRAP_X = (304.0, 326.0)                                     # strap slots 22 x 3 at the base of the front / back walls (L79 velcro 20 mm)
+BF_STRAP_H = 3.0
+BF_EAR_T = 4.0                                                  # ears 4 thick like the back-plate tab: head flush z20.5 -> tip z7.5
+BF_HEAD_Z = Z_BOT + BF_EAR_T                                    # 20.5
+# 2 ears outside the left wall (the old holder's left ears, same driver paths: 0.5 behind the XT60 clip plate (collar 1.0) / 2.0 before cable clip E1;
+# 2.0 behind thumb screw L2) + 2 screws down bores in the cradle block in front (y246 = 5.0 from the ply's front edge y241)
+BF_EARS = [((278.0, 257.0), (272.0, 282.0, 251.0, 263.0)),
+           ((278.0, 325.0), (272.0, 282.0, 319.0, 330.5))]
+BF_BORES = [(338.0, 246.0), (392.0, 246.0)]                     # csk seat at z20.5 at the bottom of a D9 bore through the cradle block
+BF_BORE_D = 9.0
+BF_SCREWS = [s for s, _ in BF_EARS] + BF_BORES                  # (x, y) csk 8호 13 into the centre bottom ply
+# 2026-10-07 (user, same day): the fuse holder is the user's ATC/ATO (standard blade) inline holder with a snap-on cover, 12 AWG leads and a
+# 5 A ATO fuse (was the Coms BU914 5x20 round holder in a D10.3 snap bore here). Product drawing: 40.1 long incl. the round wire stubs
+# (wire axis), 11.1 thick, 33.8 tall incl. the cover, which pulls straight UP (about 20 needed). Standing it needs 33.8 + 20 over the
+# front zone floor level z27 - the lid underside is z61.35 (34.35), so it LIES ON ITS SIDE over the front zone (spec box CU-E-FUSE):
+# wire axis x, cover toward +y (battery), blade end toward -y. The frame keeps a low front block (2 screw bores) and gets a fuse shelf
+# x397..434.6: y-z profile = floor block y241.5..front wall + 45 deg underside over the front zone (y<241 stays above z27), flat top
+# = the holder's lower face; 2 snap saddles (D8.3, top opening 6.8) take the holder's D8 wire stubs; past the frame end x426 (PED
+# board below) the shelf is cut back at 45 deg in x. LID-L off -> lift the holder out of the saddles, roll it 90 deg about the wire
+# axis (cover up), pull the cover.
+CR_X = (330.0, 398.0)                                            # low front block with the 2 screw bores (top = wall top z30.5)
+CR_BLOCK_Y = 241.5                                               # front face of the block / shelf floor strip (ply edge y241)
+FH_BOX = tuple(CC["CU-E-FUSE"])                                  # holder envelope (397, 437.1, 215.7, 249.5, 48, 59.1)
+FH_STUB_D, FH_STUB_L, FH_STUB_UP = 8.0, 7.05, 7.5               # wire stubs D8 (drawing), stub length / axis above the blade end (추정)
+FH_LOWER, FH_COVER_BASE, FH_COVER_TIP = 15.0, 24.0, 16.0        # lower body height (drawing ~15), cover base ~24 (drawing), tip (추정)
+FH_AXIS = (FH_BOX[2] + FH_STUB_UP, (FH_BOX[4] + FH_BOX[5]) / 2.0)   # stub axis y, z (223.2, 53.55)
+FS_X = (FH_BOX[0], 434.6)                                        # fuse shelf x span (+x saddle ends 2.5 before the stub end)
+FS_CUT_X, FS_CUT_Z = 426.0, 36.0                                 # x > 426 (frame end, PED board below): nothing under z36 + (x - 426)
+FS_SADDLE_X = [(FH_BOX[0] + 2.5, FH_BOX[0] + 6.5), (FS_X[1] - 4.0, FS_X[1])]   # 4 wide on each stub (stub 7.05: 0.55 off the body)
+FS_BORE, FS_WALL, FS_LIP = 8.3, 1.5, 2.38                       # saddle bore (stub D8 + 0.3), wall, saddle top above the stub axis
+FS_MOUTH = 2.0 * math.sqrt((FS_BORE / 2.0) ** 2 - FS_LIP ** 2)   # snap mouth at the top 6.80 (stub D8: 0.6 a side to snap past)
+FS_TOP = FH_BOX[4]                                               # shelf top = holder lower face z48
 
 
-def pb_holder(out):
-    x0, x1, y0, y1, z0, z1 = CC["CU-PBHOLDER"]
-    w, fl = 1.5, PB_FLOOR
-    add = [box(x0, x1, y0, y1, z0, z0 + fl), box(x0, x0 + w, y0, y1, z0, z1), box(x1 - w, x1, y0, y1, z0, z1),
-           box(x0, x1, y0, y0 + w, z0, z1), box(x0, x1, y1 - w, y1, z0, z1)]
-    for _, (a, b, c, d) in PB_EARS:                       # ears merge 0.01 into the wall they stand against
-        add.append(box(a, b + (0.01 if b == x0 else 0.0), c, d + (0.01 if d == y0 else 0.0), z0, PB_HEAD_Z))
+def fuse_shelf_profile():
+    """y-z profile of the fuse shelf (floor block to the front wall + 45 deg underside over the front zone, top z48)."""
+    zt = FS_TOP
+    return [(CR_BLOCK_Y, Z_BOT), (248.6, Z_BOT), (248.6, zt), (CR_BLOCK_Y - (zt - 27.0), zt), (CR_BLOCK_Y, 27.0)]
+
+
+def fuse_saddle_profile():
+    """y-z profile of one stub saddle (before the bore): from its front lip down the 45 deg line to the shelf, top at the snap mouth."""
+    ay, az = FH_AXIS
+    r = FS_BORE / 2.0
+    y0, y1 = ay - r - FS_WALL, ay + r + FS_WALL
+    zt = az + FS_LIP
+    line = lambda y: 27.0 + (CR_BLOCK_Y - y)                    # 45 deg underside line through (y241.5, z27)
+    return [(y0, line(y0)), (y0, zt), (y1, zt), (y1, line(y1))], zt
+
+
+def bat_frame(out):
+    x0, x1, y0, y1, z0, z1 = BAT
+    g, w = BF_GAP, BF_WALL
+    ix0, ix1, iy0, iy1 = x0 - g, x1 + g, y0 - g, y1 + g                # 283.5 .. 424.5, 250 .. 323
+    ox0, ox1, oy0, oy1 = ix0 - w, ix1 + w, iy0 - w, iy1 + w            # 282 .. 426, 248.5 .. 324.5
+    zt = Z_BOT + BF_H
+    add = [box(ox0, ix0, oy0, oy1, Z_BOT, zt),                                          # left wall (-x)
+           box(ox0, ox1, oy0, iy0, Z_BOT, zt), box(ox0, ox1, iy1, oy1, Z_BOT, zt),      # front / back walls
+           box(ix1, ox1, oy0, iy0 + BF_RETURN, Z_BOT, zt), box(ix1, ox1, iy1 - BF_RETURN, oy1, Z_BOT, zt)]   # +x corner returns
+    for _, (a, b, c, d) in BF_EARS:
+        add.append(box(a, b + 0.01, c, d, Z_BOT, BF_HEAD_Z))
+    add.append(box(CR_X[0], CR_X[1], CR_BLOCK_Y, oy0 + 0.1, Z_BOT, zt))               # low front block (2 screw bores) to the front wall
+    shelf = prism_x(fuse_shelf_profile(), FS_X[0], FS_X[1])
+    sp, s_top = fuse_saddle_profile()
+    sad = [prism_x(sp, a, b) for (a, b) in FS_SADDLE_X]
+    cut_x = prism_y([(FS_CUT_X, Z_BOT - 1.0), (FS_X[1] + 1.0, Z_BOT - 1.0), (FS_X[1] + 1.0, FS_CUT_Z + FS_X[1] + 1.0 - FS_CUT_X), (FS_CUT_X, FS_CUT_Z)],
+                    200.0, 260.0)                                                         # past the frame end: 45 deg in x, nothing under z36
+    add.append(diff(union([shelf] + sad), [cut_x]))
     m = union(add)
-    xm = (x0 + x1) / 2.0
-    pz = CC["Z-BANK-PLUG"]
-    cuts = [box(pz[0] - 0.5, x1 + 0.01, pz[2] - 2.0, y1 + 0.01, pz[4] - 0.5, z1 + 0.01),               # plug / cable notch in the +x corner
-            box(xm - 11.0, xm + 11.0, y0 - 0.01, y0 + w + 0.01, z0 + fl, z0 + fl + 3.0),           # strap slots 22 x 3
-            box(xm - 11.0, xm + 11.0, y1 - w - 0.01, y1 + 0.01, z0 + fl, z0 + fl + 3.0)]
-    cuts += [csk_z(x, y, PB_HEAD_Z, z0 - 0.01, d_head=CSK_HEAD_D) for (x, y) in PB_SCREWS]
+    ay, az = FH_AXIS
+    cuts = [box(BF_STRAP_X[0], BF_STRAP_X[1], oy0 - 0.01, iy0 + 0.01, Z_BOT - 0.01, Z_BOT + BF_STRAP_H),     # strap slots (front / back)
+            box(BF_STRAP_X[0], BF_STRAP_X[1], iy1 - 0.01, oy1 + 0.01, Z_BOT - 0.01, Z_BOT + BF_STRAP_H),
+            cyl_x(ay, az, FS_X[0] - 0.01, FS_X[1] + 0.01, FS_BORE)]                               # stub bores (snap: mouth 6.8 at the top)
+    for (x, y) in BF_SCREWS:
+        cuts.append(csk_z(x, y, BF_HEAD_Z, Z_BOT - 0.01, d_head=CSK_HEAD_D))
+    for (x, y) in BF_BORES:
+        cuts.append(cyl_z(x, y, BF_HEAD_Z, 60.0, BF_BORE_D))
     m = diff(m, cuts)
-    bank = CC["PB-E-BANK"]
-    tip = PB_HEAD_Z - CSK_SCREW[1]
-    feet_c = [xy for g, xy, _ in foot_positions() if g == "가운데 유닛"]
-    near = [min(math.dist(s, f) for f in feet_c) for s in PB_SCREWS]
-    near_v1 = [min(math.dist(s, f) for f in feet_c) for s in PB_SCREWS_V1]
-    out.add("CU-PBHOLDER", "보조배터리 받침 (바닥 2, 벽 1.5 × 14, 끈 구멍, 나사 귀 4)", "power-bank holder (printed tray, 4 screw ears)", "print", G_CUP,
-            m, COLORS["printed_body"], PETG,
-            source=SRC + " centre_contents CU-PBHOLDER (x284~393 y252~327 z16.5~30.5, 바닥 2, 벽 1.5 × 14, 끈 구멍) + PB-E-BANK (Morui MT-65 "
-                         "105×71×32, 선택 O07, USB-C 끝 +x) + Z-BANK-PLUG",
-            note=("사양과 다름(작은 고침, W1 7번 2026-10-02): 사양 상자 밖에 나사 귀 4개 (두께 %.0f, z%.1f~%.1f, 뒤판 탭과 같은 두께) - 바닥 2 위 접시 "
-                  "8호 13이면 끝이 z%.1f로 아랫판 밑면(z%.0f) 위 %.1f뿐 (11.3 합판이면 %.1f, 11.0이면 0 = 뚫림), 그리고 옛 자리 %s 중 x289 두 개는 "
-                  "고무발 (292, 262)·(292, 320)의 Ø28 위 (축 사이 %s, 나사산 사이 나무 %s). 배터리가 바닥을 0.5 틈으로 꽉 채워 바닥을 두껍게 하면 배터리가 "
-                  "뜨고, 굿나잇몰 L77은 13 mm부터라 짧은 나사 대신 귀를 냄 → 접시 8호 13 4곳 %s, 머리 z%.1f, 끝 z%.1f = 밑면 위 %.1f "
-                  "(11.3 합판이면 %.1f), 가운데 고무발 나사 축까지 %s (모두 Ø28 패드 밖), 나사산 사이 나무 %.1f 이상, 판 모서리 5 이상, "
-                  "다른 나사 축 8 이상, 나사 수·길이는 그대로 (L77 6개 = 받침 4 + 뒤판 탭 2); 귀: 왼쪽 벽 밖 x%.0f~%.0f (끝벽 안면 x%.1f과 0.5) "
-                  "y%.0f~%.0f · y%.0f~%.1f, 앞 벽 밖 y%.1f~%.0f x%.0f~%.0f · x%.0f~%.0f (끈 구멍 x%.1f~%.1f 앞은 비움; 앞 1.5는 아랫판 앞 R3 위로 "
-                  "0.4 이하 뜸); 드라이버 Ø6 길: 왼쪽 앞은 XT30 집게 뒤 1.5·케이블 집게 E1 앞 2.0, 왼쪽 뒤는 나비나사 L2 뒤 2.0 (check_body가 "
-                  "Ø6 × 80으로 확인); 추정: "
-                  % (PB_EAR_T, z0, PB_HEAD_Z, z0 + fl - CSK_SCREW[1], ZB, z0 + fl - CSK_SCREW[1] - ZB, z0 + fl - CSK_SCREW[1] - (Z_BOT - 11.3),
-                     " · ".join("(%.0f, %.0f)" % q for q in PB_SCREWS_V1), "/".join("%.1f" % v for v in near_v1 if v < 14.0),
-                     "/".join("%.1f" % (v - CSK_SCREW[0]) for v in near_v1 if v < 14.0), " · ".join("(%s, %s)" % (_n(a), _n(b)) for (a, b) in PB_SCREWS),
-                     PB_HEAD_Z, tip, tip - ZB, tip - (Z_BOT - 11.3), "/".join("%.1f" % v for v in near), min(near) - CSK_SCREW[0],
-                     PB_EARS[0][1][0], x0, CU_IX[0], PB_EARS[0][1][2], PB_EARS[0][1][3], PB_EARS[1][1][2], PB_EARS[1][1][3],
-                     PB_EARS[2][1][2], y0, PB_EARS[2][1][0], PB_EARS[2][1][1], PB_EARS[3][1][0], PB_EARS[3][1][1], xm - 11.0, xm + 11.0))
-                 + "배터리 둘레 0.5 틈 (배터리 x%.0f~%.0f y%.0f~%.0f), +x 벽과 뒤 벽 끝(x390.5~)은 ㄱ자 USB-C 플러그·선 자리(Z-BANK-PLUG "
-                   "z26~43)에서 0.5 띄워 y276부터 z25.5로 낮춤, 끈 구멍 22 × 3 (앞·뒤 벽 바닥, 20 mm 벨크로가 배터리 밑·위를 감음 - 구매 목록 v4 L79 = 최종 재료 i221 벨크로 링벨트 20 mm × 30 cm)"
-                 % (bank[0], bank[1], bank[2], bank[3]),
-            print_name="보조배터리받침", R=R_NONE, print_note="바닥과 나사 귀 4개를 베드에. 끈 구멍은 브리지 22. 서포트 없음",
-            dims=[("x", x0, x1, "109", 0), ("x", bank[0], bank[1], "배터리 105", 1), ("x", PB_EARS[0][1][0], x0, "왼쪽 귀 12", 2),
-                  ("y", y0, y1, "75", 0), ("y", bank[2], bank[3], "배터리 71", 1), ("y", PB_EARS[2][1][2], y0, "앞 귀 %.1f" % (y0 - PB_EARS[2][1][2]), 2),
-                  ("z", z0, z1, "14", 0), ("z", z0, z0 + fl, "바닥 2", 1), ("z", z0, PB_HEAD_Z, "귀 %.0f (접시 머리 면)" % PB_EAR_T, 2)])
+    tip = BF_HEAD_Z - CSK_SCREW[1]
+    feet_c = [xy for g_, xy, _ in foot_positions() if g_ == "가운데 유닛"]
+    near = [min(math.dist(s_, f) for f in feet_c) for s_ in BF_SCREWS]
+    xt, dc, fu, zl = CC["C-XT60"], CC["C-DC"], CC["CU-E-FUSE"], CC["Z-BAT-LEADS"]
+    pc = CE.get("power_2026_10_07", {})
+    bb_ = m.bounding_box()
+    out.add("CU-BATFRAME", "배터리 틀 (LiFePO4 둘레 벽 1.5 × 14, 끈 구멍, 나사 4, 앞에 퓨즈 선반)",
+            "battery frame (corral round the LiFePO4 pack + fuse shelf, 4 screws)", "print", G_CUP, m, COLORS["printed_body"], PETG,
+            source=SRC + " centre_contents CU-BATFRAME (x272~%.1f y%.2f~330.5 z16.5~%.2f) + BAT-LFP (x%.0f~%.0f y%.1f~%.1f z%.1f~%.1f) + "
+                         "CU-E-FUSE + Z-BAT-LEADS + centre.power_2026_10_07 (사용자 2026-10-07: Turmera LiFePO4 12.8 V 6 Ah 4S1P 32700, 140×35×72, "
+                         "XT60 선 + DC 5.5×2.1 충전 선; 퓨즈 홀더 = 사용자 ATC/ATO 칼날형, 제품 도면 40.1 × 11.1 × 33.8)" % ((bb_[3], bb_[1], bb_[5]) + BAT),
+            note="2026-10-07 새 부품 (보조배터리 받침 CU-PBHOLDER·퓨즈 받침 CU-FUSECRADLE 대신): 배터리는 셀을 눕혀 받침 바닥 없이 아랫판(z%.1f) 위 - "
+                 "뚜껑 밑 z%.2f까지 %.2f; 둘레 벽 x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f (두께 %.1f, 배터리와 %.1f 틈), +x 끝은 모서리 %.0f씩만 남기고 y%.0f~%.0f 열림 "
+                 "- 선 두 개(XT60·DC 충전)가 나오는 끝 (가정), 그 앞 x%.0f~%.0f z%.0f~뚜껑은 선 꺾는 자리 Z-BAT-LEADS로 비워 둠 (PED 보드는 그 밑 z23.1 이하); "
+                 "끈 구멍 %.0f × %.0f (x%.0f~%.0f, 앞·뒤 벽 아래 - 20 mm 벨크로 L79 = 최종 재료 i221 링벨트 30 cm가 배터리 밑과 위를 감음, 둘레 약 %.0f); "
+                 "나사 접시 8호 13 4개: 왼쪽 벽 밖 귀 %s (옛 받침 귀와 같은 자리·같은 드라이버 길), 앞 덩어리(x%.0f~%.0f, 벽 높이 z%.1f)의 Ø%.0f 구멍 바닥 %s "
+                 "(아랫판 앞 모서리 y241에서 5.0) - 머리 z%.1f, 끝 z%.1f = 밑면 위 %.1f, 가운데 고무발 나사 축까지 %s (모두 Ø28 패드 밖), 나사 수·길이 그대로 "
+                 "(L77 6개 = 틀 4 + 뒤판 탭 2) - 퓨즈 홀더를 끼우기 전에 조임; "
+                 "퓨즈 선반 x%.0f~%.1f (2026-10-07 ATC/ATO 홀더, BU914 둥근 받침 대신): 바닥 띠 y%.1f~%.1f 위 덩어리 + 앞 공간으로 내민 선반 (밑면 45°, y%.1f까지, "
+                 "앞 공간에서 z27 위 - 통로 y212~241 z0~27은 비움), 윗면 z%.0f = 홀더 아랫면; 홀더(%s)를 옆으로 눕혀 놓고 양끝 선 꼭지 Ø%.0f를 받침 2개 "
+                 "(x%s, 구멍 Ø%.1f, 축 y%.1f z%.2f, 위 입구 %.1f로 눌러 끼움, 윗면 z%.2f)에; 틀 끝 x%.0f 밖(밑에 PED 보드)은 z%.0f + (x - %.0f) 아래를 45°로 깎음; "
+                 "퓨즈를 갈 때는 뚜껑 L을 들고 홀더를 위로 빼서 선 축으로 90° 돌려 덮개를 위로 뽑음; "
+                 "XT60 짝 (%s)과 DC 충전 커넥터 (%s)는 배터리 윗면에 눕힘 - "
+                 "뚜껑 L(x260~501)만 들면 손이 닿음, 충전은 스위치를 끄고 DC 선에 충전기를 꽂음 (XT60은 그대로); 배터리 무게 약 %.1f kg (%s); "
+                 "추정: 선이 나오는 면·높이, DC 커넥터 크기, 끈 맞춤, 홀더 꼭지 위치(칼날 쪽 끝에서 %.1f)·길이는 받은 물건으로 확인"
+                 % (Z_BOT, Z_LIDU, Z_LIDU - z1, ox0, ox1, oy0, oy1, Z_BOT, zt, w, g, BF_RETURN, iy0 + BF_RETURN, iy1 - BF_RETURN, zl[0], zl[1], zl[4],
+                    BF_STRAP_X[1] - BF_STRAP_X[0], BF_STRAP_H, BF_STRAP_X[0], BF_STRAP_X[1], 2 * ((oy1 - oy0) + (z1 - Z_BOT)) + 10,
+                    " · ".join("(%s, %s)" % (_n(a), _n(b)) for (a, b), _ in BF_EARS), CR_X[0], CR_X[1], zt, BF_BORE_D,
+                    " · ".join("(%s, %s)" % (_n(a), _n(b)) for (a, b) in BF_BORES),
+                    BF_HEAD_Z, tip, tip - ZB, "/".join("%.1f" % v for v in near),
+                    FS_X[0], FS_X[1], CR_BLOCK_Y, oy0, CR_BLOCK_Y - (FS_TOP - 27.0), FS_TOP,
+                    "x%.0f~%.1f y%.1f~%.1f z%.0f~%.1f" % tuple(fu), FH_STUB_D, " · ".join("%.1f~%.1f" % ab for ab in FS_SADDLE_X), FS_BORE, ay, az, FS_MOUTH, s_top,
+                    FS_CUT_X, FS_CUT_Z, FS_CUT_X,
+                    "x%.0f~%.0f y%.0f~%.0f z%.1f~%.1f" % tuple(xt), "x%.0f~%.0f y%.0f~%.1f z%.1f~%.1f" % tuple(dc),
+                    pc.get("mass_kg_est", 0.9), pc.get("mass_note", "추정"), FH_STUB_UP),
+            print_name="배터리틀", R=R_NONE,
+            print_note="바닥면(z16.5)을 베드에. 퓨즈 선반 밑면은 y·x 모두 45°, 끈 구멍은 브리지 22, 꼭지 받침 구멍은 위가 열린 Ø8.3 (입구 쪽 처마 약 35°) - "
+                       "서포트 없음. 벽 3줄 + 채움 20 %",
+            dims=[("x", ox0, ox1, "%.0f" % (ox1 - ox0), 0), ("x", x0, x1, "배터리 140", 1), ("x", BF_EARS[0][1][0], ox0, "왼쪽 귀 %.0f" % (ox0 - BF_EARS[0][1][0]), 2),
+                  ("x", FS_X[0], FS_X[1], "퓨즈 선반 %.1f" % (FS_X[1] - FS_X[0]), 3),
+                  ("y", oy0, oy1, "%.0f" % (oy1 - oy0), 0), ("y", y0, y1, "배터리 72", 1), ("y", bb_[1], oy0, "퓨즈 선반 %.1f" % (oy0 - bb_[1]), 2),
+                  ("z", Z_BOT, zt, "벽 14", 0), ("z", Z_BOT, BF_HEAD_Z, "귀 %.0f (접시 머리 면)" % BF_EAR_T, 1), ("z", Z_BOT, FS_TOP, "선반 z%.0f" % FS_TOP, 2),
+                  ("z", Z_BOT, s_top, "받침 z%.2f" % s_top, 3)])
 
 
 def wood_screws():
@@ -1840,9 +2095,9 @@ def wood_screws():
     for i, (g, (x, y), _) in enumerate(foot_positions()):
         rows.append(dict(label="고무발 FOOT-%02d 8호 13 (아래에서)" % (i + 1), kind="foot", ply=plies[g], axis="z", at=(x, y), face=ZB, dir=1.0,
                          head=FOOT_SEAT[1], tip=FOOT_SEAT[1] + FOOT_SCREW[1], d=FOOT_SCREW[0], part="FOOT-%02d" % (i + 1)))
-    for (x, y) in PB_SCREWS:
-        rows.append(dict(label="보조배터리 받침 귀 접시 8호 13", kind="csk", ply="CU-PLY-BOTTOM", axis="z", at=(x, y), face=Z_BOT, dir=-1.0,
-                         head=PB_HEAD_Z, tip=PB_HEAD_Z - CSK_SCREW[1], d=CSK_SCREW[0], part="CU-PBHOLDER"))
+    for (x, y) in BF_SCREWS:
+        rows.append(dict(label="배터리 틀 %s 접시 8호 13" % ("받침 구멍" if (x, y) in BF_BORES else "귀"), kind="csk", ply="CU-PLY-BOTTOM", axis="z",
+                         at=(x, y), face=Z_BOT, dir=-1.0, head=BF_HEAD_Z, tip=BF_HEAD_Z - CSK_SCREW[1], d=CSK_SCREW[0], part="CU-BATFRAME"))
     for (_, _, x, y) in BP_TABS:
         rows.append(dict(label="뒤판 탭 접시 8호 13", kind="csk", ply="CU-PLY-BOTTOM", axis="z", at=(x, y), face=Z_BOT, dir=-1.0,
                          head=BP_TAB_TOP, tip=BP_TAB_TOP - CSK_SCREW[1], d=CSK_SCREW[0], part="PR-BACKPLATE"))
@@ -1856,72 +2111,150 @@ def wood_screws():
         face = SPK_X["L"][1] if s == "L" else SPK_X["R"][0]
         sg = -1.0 if s == "L" else 1.0
         for k, (y, z) in enumerate(TS_YZ[s]):
-            rows.append(dict(label="L73 인서트 구멍 %s%d Ø%.1f × %.0f (이음 면에서, 막힘)" % (s, k + 1, QS_HOLE[0], QS_HOLE[1]), kind="insert",
-                             ply="SPK%s-PLY-SIDEIN" % s, axis="x", at=(y, z), face=face, dir=sg, head=face, tip=face + sg * QS_HOLE[1],
-                             d=QS_HOLE[0], part=None))
+            rows.append(dict(label="열 인서트 구멍 %s%d Ø%.1f × %.1f (출력 옆판, 이음 면에서 막힘)" % (s, k + 1, INS_HOLE[0], INS_HOLE[1]), kind="insert",
+                             ply="SPK%s-PLY-SIDEIN" % s, axis="x", at=(y, z), face=face, dir=sg, head=face, tip=face + sg * INS_HOLE[1],
+                             d=INS_HOLE[0], part=None))
     return rows
 
 
-def xt30_clips(out):
-    for side in "LR":
-        pk = XT30_POCKET[side]
-        wy, wz = END_HOLE_YZ[side]                                   # plate hole = end-wall hole, coaxial with the pocket (L) / 1.5 under (R)
-        hr = END_HOLE_D / 2.0
-        if side == "L":
-            pa, pb_ = CU_IX[0], CU_IX[0] + 3.0                       # plate x271.5..274.5 on the end-wall inner face
-            ca, cb = pb_, pk[1]                                      # cradle x274.5..287
-            y0_, y1_ = pk[2] - 1.7, pk[3] + 1.7                      # 236 .. 250
-            pz0, pz1 = 28.0, wz + hr + 3.0                           # plate z28..54 (under the hole too: glue land; 3 over the hole)
-            qy0, qy1 = wy - hr - 2.5, wy + hr + 2.5                  # plate y: 2.5 wall beside the D14 hole
-            fz0 = pk[4] - 1.2                                        # floor z40
+PILOT_D = {"foot": 3.4, "csk": 3.4, "pan": 2.5}   # 2026-10-16 printed panels: self-tapping pilots (8호 4.2 -> 3.4, Ø3 pan -> 2.5)
+
+
+def screw_pilots(ply_id):
+    """printed pilot holes for the screws wood_screws() sends into one (formerly plywood, now printed) panel: from the entry face to the
+    screw tip, blind (the tip keeps its gap to the opposite face). Insert holes are already in their parts."""
+    from manifold3d import Manifold
+    cuts = []
+    for r in wood_screws():
+        if r["ply"] != ply_id or r["kind"] not in PILOT_D or r["axis"] not in "yz":
+            continue
+        a, b = r["at"]
+        d = PILOT_D[r["kind"]]
+        sg, f, t = r["dir"], r["face"], r["tip"]
+        k = t - sg * d / 2.0                     # the blind end is a 45 deg cone (drill point): no bridge whichever face is down
+        lo, hi = (f - 0.01, k) if sg > 0 else (k, f + 0.01)
+        c0, c1 = (k, t) if sg > 0 else (t, k)
+        r0, r1 = (d / 2.0, 0.1) if sg > 0 else (0.1, d / 2.0)
+        cone = Manifold.cylinder(c1 - c0, r0, r1, 24)
+        if r["axis"] == "y":
+            cuts += [cyl_y(a, b, lo, hi, d), cone.rotate((-90, 0, 0)).translate((a, c0, b))]
         else:
-            pa, pb_ = CU_IX[1] - 3.0, CU_IX[1]                       # plate x947.5..950.5
-            ca, cb = pk[0], pa                                       # cradle x935..947.5
-            y0_, y1_ = pk[2] - 1.7, pk[3] + 1.7                      # 283 .. 297
-            pz0, pz1 = wz - hr - 3.0, wz + hr + 3.0                  # plate z39.5..59.5 (3 around the hole, lid underside 61.35)
-            qy0, qy1 = wy - hr - 2.5, wy + hr + 2.5
-            fz0 = pk[4] - 1.2                                        # floor z47
-        top = pk[5] + 1.2
-        add = [box(pa, pb_, qy0, qy1, pz0, pz1),
-               box(min(ca, cb) - 0.01, max(ca, cb) + 0.01, y0_, y1_, fz0, pk[4]),                  # floor
-               box(min(ca, cb) - 0.01, max(ca, cb) + 0.01, y0_, pk[2], fz0, top),                  # side walls
-               box(min(ca, cb) - 0.01, max(ca, cb) + 0.01, pk[3], y1_, fz0, top),
-               box(min(ca, cb) - 0.01, max(ca, cb) + 0.01, pk[2] - 0.01, pk[2] + 1.0, pk[5], top),  # snap lips 1 over the connector
-               box(min(ca, cb) - 0.01, max(ca, cb) + 0.01, pk[3] - 1.0, pk[3] + 0.01, pk[5], top)]
-        for (a, b) in ((y0_, pk[2]), (pk[3], y1_)):         # side walls run down to the plate below the hole: 45 deg gussets (in print the
-            if side == "L":                                  # walls / floor start over the D14 hole and would hang in the air)
-                add.append(prism_y([(pb_ - 0.01, pz0), (pb_ - 0.01, fz0 + 0.01), (pb_ + (fz0 - pz0), fz0 + 0.01)], a, b))
-            else:
-                add.append(prism_y([(pa + 0.01, pz0), (pa + 0.01, fz0 + 0.01), (pa - (fz0 - pz0), fz0 + 0.01)], a, b))
+            cuts += [cyl_z(a, b, lo, hi, d), cone.translate((a, b, c0))]
+    return cuts
+
+
+SPLIT_X = (494.0, 720.0)     # 2026-10-16: centre bottom / back printed in 3 pieces, half-lap joints centred here (under the lid seam
+LAP = 16.0                   # rails / posts x491..511, 711..731); lap length - pieces <= 250 on the 256 bed
+
+
+def lap_pieces(m, x0, x1, ax, t0, t1, mid_side):
+    """split a panel (x0..x1 along x, thickness t0..t1 along `ax` 'y' or 'z') into 3 at SPLIT_X with half-lap joints LAP long.
+    The middle piece keeps the `mid_side` half ('lo' / 'hi') of the thickness in both laps, the end pieces the other half - so each
+    piece prints with its lap tongue on the bed (middle: mid_side face down, ends: the other face down)."""
+    h, tm, big = LAP / 2.0, (t0 + t1) / 2.0, 1000.0
+
+    def B(xa, xb, ta, tb):
+        return box(xa, xb, ta, tb, -big, big) if ax == "y" else box(xa, xb, -big, big, ta, tb)
+    lo_h, hi_h = (t0 - 1, tm), (tm, t1 + 1)
+    mid_h, end_h = (lo_h, hi_h) if mid_side == "lo" else (hi_h, lo_h)
+    s1, s2 = SPLIT_X
+    regs = [union([B(x0 - 1, s1 - h, t0 - 1, t1 + 1), B(s1 - h, s1 + h, *end_h)]),
+            union([B(s1 + h, s2 - h, t0 - 1, t1 + 1), B(s1 - h, s1 + h, *mid_h), B(s2 - h, s2 + h, *mid_h)]),
+            union([B(s2 + h, x1 + 1, t0 - 1, t1 + 1), B(s2 - h, s2 + h, *end_h)])]
+    return [m ^ r for r in regs]
+
+
+CLIP_PLATE_T = 3.0           # glue plate on the end-wall inner face (MS polymer)
+CLIP_WALL_T, CLIP_FLOOR_T = 1.7, 1.2                      # cradle side walls (y) / bottom wall (z)
+CLIP_LIP = (1.0, 1.2)        # snap lips over the pocket top: overhang in y, thickness in z (the F is pressed in from above)
+CLIP_RIM = (2.5, 3.0)        # plate beyond the D19 hole: across y / up-down z
+CLIP_TS_CLR = 0.5            # plate / collar edge off the thumb-screw head (D10)
+CLIP_EAR_CLR = 0.5           # L collar +y edge before the D6 driver path of the battery-frame ear screw (278, 257): y253.5 = the D19 rim
+CLIP_COLLAR = END_HOLE_D / 2 - (XT60_T / 2 + XT60_CLR) + 0.5     # 5.7: 45 deg cone from the D19 rim reaches the side walls, + 0.5
+
+
+def cone_x(cy, cz, x0, x1, d0, d1):
+    """cone along x from x0 (diameter d0) to x1 (d1); x1 may be smaller than x0."""
+    h = abs(x1 - x0)
+    m = Manifold.cylinder(h, d0 / 2.0, d1 / 2.0, _nseg(max(d0, d1)))
+    return m.rotate((0, 90 if x1 > x0 else -90, 0)).translate((x0, cy, cz))
+
+
+def xt60_clips(out):
+    for side in "LR":
+        pk = XT60_POCKET[side]
+        wy, wz = END_HOLE_YZ[side]                                   # plate hole = end-wall hole = pocket axis
+        hr = END_HOLE_D / 2.0
+        sg = 1.0 if side == "L" else -1.0                            # toward the centre
+        wall_in = CU_IX[0] if side == "L" else CU_IX[1]
+        pa, pb_ = (wall_in, wall_in + CLIP_PLATE_T) if side == "L" else (wall_in - CLIP_PLATE_T, wall_in)
+        face = pb_ if side == "L" else pa                            # plate face toward the centre
+        mouth = pk[1] if side == "L" else pk[0]
+        col = (face, face + sg * CLIP_COLLAR)
+        ts_y1 = max(y + TS_HEAD[0] / 2 for (y, z) in TS_YZ[side] if y < wy) + CLIP_TS_CLR
+        ts_y0 = min(y - TS_HEAD[0] / 2 for (y, z) in TS_YZ[side] if y > wy) - CLIP_TS_CLR
+        qy0, qy1 = max(wy - hr - CLIP_RIM[0], ts_y1), min(wy + hr + CLIP_RIM[0], ts_y0)
+        pz0, pz1 = wz - hr - CLIP_RIM[1], wz + hr + CLIP_RIM[1]
+        ears = [e for e, _ in BF_EARS if abs(e[0] - (col[0] + col[1]) / 2) < CLIP_COLLAR / 2 + DRIVER_D / 2 and e[1] > wy]
+        cy1 = min([qy1] + [e[1] - DRIVER_D / 2 - CLIP_EAR_CLR for e in ears])   # collar +y edge (L: ear-screw driver path)
+        assert cy1 >= wy + hr - 1e-6, "collar edge inside the D19 rim -> bridge in print"
+        y0w, y1w = pk[2] - CLIP_WALL_T, pk[3] + CLIP_WALL_T
+        fz0, top = pk[4] - CLIP_FLOOR_T, pk[5] + CLIP_LIP[1]
+        xa, xb = sorted((face, mouth))
+        lw = CLIP_LIP[0]
+        add = [box(pa, pb_, qy0, qy1, pz0, pz1),                                         # glue plate
+               box(col[0], col[1], qy0, cy1, pz0, pz1),                                  # collar (45 deg cone inside)
+               box(xa, xb, y0w, y1w, fz0, top)]                                          # cradle (walls + bottom + lips after the cuts)
         m = union(add)
-        m = diff(m, [cyl_x(wy, wz, pa - 0.01, pb_ + 0.01, END_HOLE_D)])
-        cc = CC["C-XT30-%s" % side]
-        fy, fz = (pk[2] + pk[3]) / 2.0, (pk[4] + pk[5]) / 2.0
-        rmax = math.hypot(5.1, 2.6 + abs(fz - wz))
-        out.add("XT30-CLIP-%s" % side, "XT30 짝 집게 %s (끝벽 안쪽, 출력)" % side, "XT30 pair clip on the end wall %s (printed)" % side, "print",
+        c1 = col[1]
+        # opening over the pocket: full pocket width over the collar, narrowing at 45 deg to the snap-lip gap over the first lw past it
+        n0, n1 = c1 - sg * 0.3, c1 + sg * (lw - 0.3)                 # (starts 0.3 inside the collar: no knife edge at the collar face)
+        # past the collar: snap-lip gap over the pocket, narrowing at 45 deg from the full pocket width over the first lw
+        opening = [(n0 - sg * 0.01, pk[2]), (n1, pk[2] + lw), (mouth + sg * 0.01, pk[2] + lw),
+                   (mouth + sg * 0.01, pk[3] - lw), (n1, pk[3] - lw), (n0 - sg * 0.01, pk[3])]
+        cuts = [cyl_x(wy, wz, pa - 0.01, pb_ + 0.01, END_HOLE_D),                         # D19 through the plate
+                cone_x(wy, wz, face - sg * 0.2, face + sg * (hr + 0.05), END_HOLE_D + 0.5, 0.0),     # 45 deg print cone (0.05 over the
+                                                                                 # hole at the plate face: no coincident surfaces)
+                box(face - sg * 0.01, n0, pk[2], pk[3], pk[4], pz1 + 0.01),              # pocket + open top over the collar (one box: the
+                                                                                 # cone crosses no pocket edge)
+                box(n0, mouth + sg * 0.01, pk[2], pk[3], pk[4], pk[5]),                   # pocket past the collar, open at the mouth
+                prism_z(opening, pk[4] + 0.5, pz1 + 0.01)]
+        m = diff(m, cuts)
+        cc = CC["C-XT60-%s" % side]
+        lip_len = abs(mouth - col[1])
+        out.add("XT60-CLIP-%s" % side, "XT60 짝 집게 %s (끝벽 안쪽, 출력)" % side, "XT60 pair clip on the end wall %s (printed)" % side, "print",
                 G_CUP, m, COLORS["printed_body"], PETG,
-                source=SRC + " centre_contents C-XT30-%s (x%.1f~%.1f y%.0f~%.0f z%.0f~%.0f) + speakers.xt30 (스피커 꼬리 XT30U-F가 끝벽 구멍 Ø14로 "
-                             "들어가 끝벽 집게의 짝과 꽂힘) + printed_parts XT30-CLIP (24 × 14 × 10)" % ((side,) + tuple(cc)),
-                note="사양과 다름(작은 고침): 끝벽에 붙는 판의 구멍 Ø14와 끝벽 구멍을 y%.0f z%.1f로 (사양은 스피커 옆판 선 구멍 z40과 곧게) - 홈의 "
-                     "XT30U-F(모서리 반지름 %.2f < 7)가 홈에서 끝벽 쪽으로 곧게 밀려 판 %.0f + 끝벽 11.5 터널로 들어가고 스피커 쪽으로 빠짐 (L은 사양 자리에서 "
-                     "모서리가 판·끝벽에 걸려 빠지지 않았음)%s; 추정: XT30U-F 홈 %.1f × %.1f × %.1f (x%.1f~%.1f, 10.2 × 5.2 × 12.4 + 0.2씩), 입구 %s"
-                     "(가운데 쪽)으로 앰프 선 XT30U-M이 꽂힘, 홈 위 걸림 턱 1 × 1.2 (위에서 눌러 끼움); 홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 "
-                     "스피커를 뗄 때 F가 터널로 빠짐, 그래서 홈 안의 F에 M을 대고 밀면 F가 터널로 밀려 들어감 → 짝 꽂기: F를 홈 입구로 가운데 쪽에 당겨 꺼내 "
-                     "(꼬리 여유 약 %.0f mm) 손으로 M을 끝까지 꽂고, 짝을 다시 가져와 F 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움; 뽑기는 거꾸로 "
-                     "(짝을 입구로 꺼낸 뒤 손으로 뽑음); 옆벽 밑에 45° 받침 2개를 판의 구멍 아래 부분까지 (출력 때 옆벽·바닥이 구멍 위에 뜨지 않게); 끝벽에 붙는 판 "
-                     "x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f (구멍 둘레 2.5~3), MS 폴리머로 붙임; 스피커 꼬리의 여유 약 %.0f mm는 터널 안에 느슨하게 1.5바퀴 감김 "
-                     "(C-SPKPIG, 스피커 밖 꼬리 약 %.0f mm)"
-                     % (wy, wz, rmax, pb_ - pa, "; 판 위끝을 z%.0f까지 올려 구멍 위 3을 남김" % pz1 if side == "L" else "; R 선 홈은 없앰(꼬리가 구멍으로 곧게 감)",
-                        pk[3] - pk[2], pk[5] - pk[4], pk[1] - pk[0], pk[0], pk[1], "+x" if side == "L" else "−x", PIG_SLACK_MM, pa, pb_, qy0, qy1, pz0, pz1,
-                        PIG_SLACK_MM, PIG_OUT_MM),
-                print_name="XT30집게_" + side, R=R_XMIN if side == "L" else R_XMAX,
-                print_note="끝벽에 붙는 판을 베드에, 홈이 위로 서도록 출력(서포트 없음)",
-                dims=[("x", min(pa, ca), max(pb_, cb), "%.1f" % (max(pb_, cb) - min(pa, ca)), 0), ("x", pk[0], pk[1], "홈 12.4", 1),
-                      ("y", qy0, qy1, "판 %.0f" % (qy1 - qy0), 0), ("y", pk[2], pk[3], "홈 10.6", 1), ("z", pz0, max(pz1, top), "z%.1f~%.1f" % (pz0, max(pz1, top)), 0),
-                      ("z", pk[4], pk[5], "홈 5.6", 1), ("z", wz - hr, wz + hr, "구멍 Ø14 z%.1f" % wz, 2)])
+                source=SRC + " centre_contents C-XT60-%s (x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f) + speakers.xt60 (스피커 꼬리 XT60 암이 끝벽 구멍 Ø19로 "
+                             "들어가 끝벽 집게의 짝과 꽂힘; 2026-10-07 XT30 → XT60) + printed_parts XT60-CLIP" % ((side,) + tuple(cc)),
+                note="2026-10-07 XT60으로 바꿈 (사용자: 커넥터는 XT60 한 가지): 스피커 꼬리 = XT60 암(이 집게 홈 안), 앰프 선 = XT60 수(가운데 쪽에서 꽂힘), "
+                     "둘 다 AMASS XT60 16 AWG 10 cm 선 (엘레파츠 12779719 암 / 12779718 수); 홈 %.1f × %.1f × %.1f (x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f; "
+                     "XT60 암 15.8 × 8.2 × 16 + 0.2씩) - 세워 둠 (y 8.6, z 16.2): 눕히면(y 16.2) L은 나비나사 머리(y≤232)와 배터리(y≥251) 사이에 "
+                     "들어가지 않음; 끝벽에 붙는 판의 구멍 Ø%.0f와 끝벽 구멍 Ø%.0f가 홈과 같은 축 (y%.0f z%.1f) - 암(모서리 반지름 %.2f)이 홈에서 곧게 밀려 "
+                     "판 %.0f + 끝벽 11.5 터널로 들어가고 스피커 쪽으로 빠짐; 판 x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f%s; 판 앞 목 %.1f (x%.1f~%.1f%s): "
+                     "구멍 가장자리에서 45° 원뿔로 좁아져 옆벽까지 - 출력 때 옆벽·바닥이 구멍 위에 뜨지 않고, 암을 다시 넣을 때 깔때기; 걸림 턱 %.0f × %.1f는 "
+                     "목 밖 %.1f mm에만 (목 위는 홈 폭 그대로 열림); 입구 %s(가운데 쪽)으로 앰프 선 XT60 수가 꽂힘; "
+                     "홈에는 축 방향 멈춤이 없음 - 홈 뒤가 터널로 열려 있어야 스피커를 뗄 때 암이 터널로 빠짐, 그래서 홈 안의 암에 수를 대고 밀면 암이 "
+                     "터널로 밀려 들어감 → 짝 꽂기: 암을 홈 입구로 가운데 쪽에 당겨 꺼내 (꼬리 여유 약 %.0f mm) 손으로 수를 끝까지 꽂고, 짝을 다시 가져와 "
+                     "암 앞면을 홈 입구에 맞춰 위에서 걸림 턱 밑으로 눌러 끼움 (뒤쪽은 목 위 열린 곳으로 내려감); 뽑기는 거꾸로 (짝을 입구로 꺼낸 뒤 손으로 "
+                     "뽑음); 잘못 꽂기 막기: 스피커 XT60에는 파란 수축 튜브 + 'SPK', 전원 XT60(배터리·하네스·시험 전원)에는 빨간 수축 튜브 - 배터리나 "
+                     "시험 전원을 이 짝에 꽂으면 12.8 V 직류가 앰프 출력이나 스피커 코일에 걸림; MS 폴리머로 붙임; 스피커 꼬리의 여유 약 %.0f mm는 터널 "
+                     "안에 느슨하게 1.5바퀴 감김 (C-SPKPIG, 스피커 밖 꼬리 약 %.0f mm)"
+                     % (pk[1] - pk[0], pk[3] - pk[2], pk[5] - pk[4], pk[0], pk[1], pk[2], pk[3], pk[4], pk[5], END_HOLE_D, END_HOLE_D, wy, wz, XT60_R,
+                        CLIP_PLATE_T, pa, pb_, qy0, qy1, pz0, pz1,
+                        " (앞쪽 y%.1f는 나비나사 머리 Ø10에서 %.1f)" % (qy0, CLIP_TS_CLR) if qy0 > wy - hr - CLIP_RIM[0] + 1e-6 else "",
+                        CLIP_COLLAR, min(col), max(col),
+                        ", 뒤쪽 y%.1f까지 - 배터리 틀 귀 나사(278, 257) 드라이버 길 Ø6에서 %.1f" % (cy1, CLIP_EAR_CLR) if cy1 < qy1 - 1e-6 else "",
+                        CLIP_LIP[0], CLIP_LIP[1], lip_len, "+x" if side == "L" else "−x", PIG_SLACK_MM, PIG_SLACK_MM, PIG_OUT_MM),
+                print_name="XT60집게_" + side, R=R_XMIN if side == "L" else R_XMAX,
+                print_note="끝벽에 붙는 판을 베드에, 홈이 위로 서도록 출력 (판 앞 목 안쪽은 45° 원뿔 - 서포트 없음)",
+                dims=[("x", min(pa, xa), max(pb_, xb), "%.1f" % (max(pb_, xb) - min(pa, xa)), 0), ("x", pk[0], pk[1], "홈 %.1f" % (pk[1] - pk[0]), 1),
+                      ("x", min(col), max(col), "목 %.1f" % CLIP_COLLAR, 2),
+                      ("y", qy0, qy1, "판 %.1f" % (qy1 - qy0), 0), ("y", pk[2], pk[3], "홈 %.1f" % (pk[3] - pk[2]), 1),
+                      ("z", pz0, pz1, "판 z%.1f~%.1f" % (pz0, pz1), 0), ("z", pk[4], pk[5], "홈 %.1f" % (pk[5] - pk[4]), 1),
+                      ("z", wz - hr, wz + hr, "구멍 Ø%.0f z%.1f" % (END_HOLE_D, wz), 2)])
 
 
-# ------------------------------------------------------------------ board posts (spec STANDOFFS) + fuse cradle
+# ------------------------------------------------------------------ board posts (spec STANDOFFS)
 
 def _board_posts():
     """(tag, id suffix, x, y, top z, D, hole D, hole depth, pin) from the centre_contents boxes + v3 boss offsets (body_centre_unit)."""
@@ -1933,21 +2266,18 @@ def _board_posts():
     for k, (x, y) in enumerate([(pi[0] + 3.5, pi[2] + 3.5), (pi[0] + 61.5, pi[2] + 3.5), (pi[0] + 3.5, pi[3] - 3.5), (pi[0] + 61.5, pi[3] - 3.5)]):
         rows.append(("PI", k + 1, x, y, BOARD_Z["PI"], 6.0, 2.2, 5.0, False))
     for k, (x, y) in enumerate([(bk[0] + 3.2, bk[2] + 3.2), (bk[1] - 3.2, bk[2] + 3.2), (bk[0] + 3.2, bk[3] - 3.2), (bk[1] - 3.2, bk[3] - 3.2)]):
-        rows.append(("BUCK", k + 1, x, y, BOARD_Z["BUCK"], 7.0, 2.7, 4.0, False))
+        rows.append(("BUCK", k + 1, x, y, BOARD_Z["BUCK"], 7.0, 2.7, 5.0, False))
     for k, (x, y, pin) in enumerate([(pb[0] + 4, pb[2] + 4, False), (pb[1] - 4, pb[3] - 4, False), (pb[1] - 4, pb[2] + 4, True), (pb[0] + 4, pb[3] - 4, True)]):
-        rows.append(("PED", k + 1, x, y, BOARD_Z["PED"], 6.0, 2.5, 4.0, pin))
+        rows.append(("PED", k + 1, x, y, BOARD_Z["PED"], 6.0, 2.5, 5.0, pin))
     for k, (x, y) in enumerate([(jb[0] + 3.0, jb[2] + 3.0), (jb[1] - 3.0, jb[3] - 3.0)]):
-        rows.append(("J702", k + 1, x, y, BOARD_Z["J702"], 7.0, 2.7, 4.0, False))
+        rows.append(("J702", k + 1, x, y, BOARD_Z["J702"], 7.0, 2.7, 5.0, False))
     return rows
 
 
 POST_NAMES = {"PI": ("라즈베리파이 5", "Pi 5", "M2.5×6 자가 탭 (구멍 Ø2.2 × 5, 기판 1.6 → 물림 4.4, 바닥 1.0)"),
-              "BUCK": ("강압 XL4016", "buck XL4016", "M3×5 자가 탭 (구멍 Ø2.7 × 4, 기판 1.6 → 물림 3.4, 바닥 1.0 - 6 mm 이상은 바닥을 뚫고 기둥을 밀어 올림)"),
-              "PED": ("페달 보드 PED", "PED board", "M3×5 자가 탭 (구멍 Ø2.5 × 4, 바닥 1.0) / 위치 핀 Ø2.8 × 2.5"),
-              "J702": ("앰프 입력 잭 기판 J702", "J702 board", "M3×5 자가 탭 (구멍 Ø2.7 × 4, 바닥 1.0)")}
-
-
-FUSE_BORE = 10.3          # fuse-holder cradle bore (spec 10.5 left a 0.75 floor; the BU914 holder is D10)
+              "BUCK": ("강압 XL4016", "buck XL4016", "M3×6 자가 탭 (구멍 Ø2.7 관통 5, 기판 1.6 → 물림 4.4, 끝이 아랫판 위 0.6 - 8 mm 이상은 아랫판에 닿아 기둥을 밀어 올림)"),
+              "PED": ("페달 보드 PED", "PED board", "M3×6 자가 탭 (구멍 Ø2.5 관통 5, 끝이 아랫판 위 0.6) / 위치 핀 Ø2.8 × 2.5"),
+              "J702": ("앰프 입력 잭 기판 J702", "J702 board", "M3×6 자가 탭 (구멍 Ø2.7 관통 5, 끝이 아랫판 위 0.6)")}
 
 
 def board_posts(out):
@@ -1956,7 +2286,7 @@ def board_posts(out):
         if pin:
             m = union([m, cyl_z(x, y, zt - 0.01, zt + 2.5, 2.8)])
         else:
-            m = diff(m, [cyl_z(x, y, zt - hdep, zt + 0.01, hd)])
+            m = diff(m, [cyl_z(x, y, zt - hdep if hdep < zt - Z_BOT - 1e-6 else Z_BOT - 0.01, zt + 0.01, hd)])   # hdep = post height -> open through
         ko, en, scr = POST_NAMES[tag]
         h = zt - Z_BOT
         out.add("CU-POST-%s-%d" % (tag, k), "보드 받침 기둥 (%s, %.0f mm%s)" % (ko, h, ", 위치 핀" if pin else ""),
@@ -1964,27 +2294,11 @@ def board_posts(out):
                 source=SRC + " printed_parts STANDOFFS (Pi 6 mm, 강압·PED·J702 5 mm) + centre_contents (보드 상자) + " + SRC_C
                        + " PR-CU-TRAY pi5/buck/ped/amp_input_jack_board bosses (구멍 = 보드 모서리에서 같은 거리)",
                 note="추정: 기둥 Ø%.0f × %.0f (x%.1f y%.1f), %s - 보드에 먼저 나사로 달고 기둥 밑을 아랫판에 MS 폴리머로 붙임(스스로 자리 잡음); "
-                     "사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음" % (d, h, x, y, scr),
+                     "사양의 '받침 판'(90×60) 대신 낱개 기둥 - 아랫판 흡기 홈을 막지 않음; 관통 구멍 기둥은 MS 폴리머를 구멍에서 1 mm 떨어진 고리로만 (구멍을 막지 않게)" % (d, h, x, y, scr),
                 print_name="보드받침기둥_%s_Ø%.0f_%.0fmm%s" % ({"PI": "Pi", "BUCK": "나사", "J702": "나사", "PED": "PED"}[tag], d, h, "_핀" if pin else ""),
                 R=R_NONE, print_note="밑면을 베드에 세워 출력, 채움 100 %. 서포트 없음",
                 dims=[("x", x - d / 2, x + d / 2, "Ø%.0f" % d, 0), ("z", Z_BOT, zt + (2.5 if pin else 0.0), "%.1f" % (zt + (2.5 if pin else 0) - Z_BOT), 0)])
-    # fuse cradle (BU914 inline holder clipped to the floor)
-    fu = CC["CU-E-FUSE"]
-    ay, az = (fu[2] + fu[3]) / 2.0, (fu[4] + fu[5]) / 2.0
-    ri = FUSE_BORE
-    x0, x1 = fu[0] - 2.0, fu[1] + 2.0
-    top = az + 3.0
-    wall = 1.85
-    m = diff(box(x0, x1, ay - ri / 2 - wall, ay + ri / 2 + wall, Z_BOT, top), [cyl_x(ay, az, x0 - 0.01, x1 + 0.01, ri)])
-    out.add("CU-FUSECRADLE", "퓨즈 홀더 받침 (BU914, 눌러 끼움)", "fuse-holder cradle (BU914)", "print", G_CUP, m, COLORS["printed_body"], PETG,
-            source=SRC + " centre_contents CU-E-FUSE (x405~451 y301~311 z17.5~27.5, 바닥에 집게로) + printed_parts STANDOFFS; " + SRC_C
-                   + " PR-CU-TRAY fuse_holder_cradle (U 받침 안지름 10.5 + 타이 홈 2)",
-            note="사양과 다름(작은 고침): 안지름 10.5 → %.1f, 타이 홈 2 없앰 - 사양대로면 받침 밑 바닥이 0.75이고 타이 홈(2.1)이 그 바닥을 칼날처럼 뚫음; "
-                 "Ø%.1f이면 바닥 %.2f, 홀더는 눌러 끼움 + MS 폴리머 한 점으로 충분; 추정: 받침 x%.0f~%.0f y%.2f~%.2f z16.5~%.1f, 축 (y%.0f, z%.1f) - 위가 %.1f만 "
-                 "열려 Ø10 홀더를 눌러 끼움, 아랫판에 MS 폴리머"
-                 % (ri, ri, az - ri / 2 - Z_BOT, x0, x1, ay - ri / 2 - wall, ay + ri / 2 + wall, top, ay, az, 2 * math.sqrt((ri / 2) ** 2 - (top - az) ** 2)),
-            print_name="퓨즈홀더받침", R=R_NONE, print_note="밑면을 베드에. 서포트 없음",
-            dims=[("x", x0, x1, "%.0f" % (x1 - x0), 0), ("y", ay - ri / 2 - wall, ay + ri / 2 + wall, "%.0f" % (ri + 2 * wall), 0), ("z", Z_BOT, top, "%.1f" % (top - Z_BOT), 0)])
+    # (2026-10-07: the fuse holder (ATC/ATO, was BU914) sits on the battery frame's fuse shelf - the floor cradle CU-FUSECRADLE is gone)
 
 
 # ------------------------------------------------------------------ cable clips (spec printed_parts CABLE-CLIPS 8)
@@ -2036,9 +2350,9 @@ def cable_clips(out):
                 source=SRC + " printed_parts CABLE-CLIPS (8개, 20 × 10 × 8, '통로 지붕 아래·끝벽 케이블 집게', 자리 없음) + centre_contents "
                              "Z-SPKLEAD-L2 (x271.5~284 y236~330 z50~58, 끝벽을 따라 내려오는 스피커선)",
                 note="추정: 끝벽 L 안면 x%.1f에 붙여 y%.0f~%.0f z%.0f~%.0f - 끝벽을 따라 앞으로 오는 스피커선 C-SPK-L (x%.1f z%.0f)을 홈 바닥에 잡음 "
-                     "(나비나사 머리 y310~320·XT30 집게 판 y≤252.5을 피함); 홈 %.1f, 입구 %.1f 걸림 턱, MS 폴리머로 붙임"
+                     "(나비나사 머리 y310~320·XT60 집게 판 y≤%.0f을 피함); 홈 %.1f, 입구 %.1f 걸림 턱, MS 폴리머로 붙임"
                      % (CU_IX[0], yc - CLIP_L / 2, yc + CLIP_L / 2, CLIP_WALL_Z - CLIP_W / 2, CLIP_WALL_Z + CLIP_W / 2, CU_IX[0] + CLIP_SEAT + 0.1,
-                        CLIP_WALL_Z, CLIP_SLOT, CLIP_MOUTH),
+                        CLIP_WALL_Z, END_HOLE_YZ["L"][0] + END_HOLE_D / 2 + CLIP_RIM[0], CLIP_SLOT, CLIP_MOUTH),
                 print_name="케이블집게", ps=ps, print_note=pn,
                 dims=[("y", yc - CLIP_L / 2, yc + CLIP_L / 2, "20", 0), ("z", CLIP_WALL_Z - CLIP_W / 2, CLIP_WALL_Z + CLIP_W / 2, "10 (홈 4.5)", 0),
                       ("x", CU_IX[0], CU_IX[0] + CLIP_H, "8 (끝벽에서)", 0)])
@@ -2062,8 +2376,8 @@ def build():
     touch_parts(out)
     back_plate(out)
     hub_shelf(out)
-    pb_holder(out)
-    xt30_clips(out)
+    bat_frame(out)
+    xt60_clips(out)
     board_posts(out)
     cable_clips(out)
     return list(out)

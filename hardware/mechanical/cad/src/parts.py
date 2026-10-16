@@ -29,6 +29,8 @@ class Part:
     print_folder: Optional[str] = None    # e.g. "01_건반"
     print_solid: Optional[Manifold] = None  # already oriented on the bed (z=0); None = not printed
     print_note: str = ""                  # orientation / supports / post-processing
+    print_pieces: list = field(default_factory=list)  # [(file stem, solid on the bed)]: a part longer than the bed printed in pieces
+                                                      # (the STL files are these; print_solid stays the whole part for the drawings)
     dims: list = field(default_factory=list)  # [(label, value_mm, source)] shown in the README + annotated STL
     source: str = ""
     note: str = ""

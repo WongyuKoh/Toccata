@@ -155,6 +155,7 @@ class Sheet:
         self.warnings = []
         self.mates = []     # (refA, refB, pin-map dict or None)
         self.gboxes = []    # graphic boxes (power symbols etc.) for text collision checks
+        self.regions = {}   # named crop regions (x0, y0, x1, y1) in sheet mm, used by page.py for part views
 
     # ---------- low level svg ----------
     def _t(self, layer, x, y, s, cls, anchor="start", rot=0, size=None, check=True):
@@ -468,7 +469,14 @@ class Sheet:
         cell(x0 + 104, y0 + 18.5, 38, "크기 · 단위", "A3 · mm")
         cell(x0 + 142, y0 + 18.5, 34, "작성", "Claude (검토 필요)")
         t.append(f'<text x="{x0+1.2:.2f}" y="{y0+28.4:.2f}" class="tbk">설명</text>')
-        t.append(f'<text x="{x0+1.2:.2f}" y="{y0+32.2:.2f}" class="tbv" style="font-size:2.3px">{html.escape(self.subtitle)}</text>')
+        desc, fs = self.subtitle, 2.3
+        while text_w(desc, fs) > W - 2.6 and fs > 1.55:          # shrink the description to fit the title-block cell
+            fs = round(fs - 0.05, 2)
+        if text_w(desc, fs) > W - 2.6:                           # still too long: cut at a word and add an ellipsis
+            while desc and text_w(desc + " …", fs) > W - 2.6:
+                desc = desc[:-1]
+            desc = desc.rstrip() + " …"
+        t.append(f'<text x="{x0+1.2:.2f}" y="{y0+32.2:.2f}" class="tbv" style="font-size:{fs}px">{html.escape(desc)}</text>')
         # sheet heading (top left)
         self.text(i + 3, i + 7.5, f"{self.code}  {self.title}", "tbt", size=4.6)
         self.text(i + 3, i + 12.2, self.subtitle, "notes", size=2.0)
@@ -781,8 +789,8 @@ def sym_jack(name="PJ-313"):
     return s
 
 
-def sym_xt30(gender="M"):
-    s = Sym("XT30U-" + gender, "box")
+def sym_xt60(gender="M"):
+    s = Sym("XT60-" + gender, "box")
     s.rect(0, 0, 6, 10)
     s.text(3, 4.0, "+", "pinnameh", "middle")
     s.text(3, 8.8, "−", "pinnameh", "middle")
@@ -846,4 +854,19 @@ def sym_conn_pos(name, rows, pins, side="R", pitch=5.0, width=6.0):
             s.circle(2.2, y, 0.55, "bodyl")
             s.line(0, y, 1.6, y, "bodyl")
     s.h, s.w = h, width
+    return s
+
+
+def sym_switch_dpst():
+    """KiCad Switch:SW_DPST: pole A = pins 1-2, pole B = pins 3-4 (dashed mechanical link). Pins on the left = inputs."""
+    s = Sym("SW_DPST", "box")
+    for dy, a, b in ((0.0, 1, 2), (10.0, 3, 4)):
+        s.circle(-2.5, dy, 0.6, "bodyl")
+        s.circle(2.5, dy, 0.6, "bodyl")
+        s.line(-1.9, dy - 0.3, 2.4, dy - 2.6, "bodyl")
+        s.pin(a, "", -7.5, dy, "R", 4.4, show_name=False, show_num=True)
+        s.pin(b, "", 7.5, dy, "L", 4.4, show_name=False, show_num=True)
+    for k in range(5):                                    # dashed link between the two levers
+        y0 = -1.6 + k * 2.0
+        s.line(0.2, y0 + 0.4, 0.2, y0 + 1.4, "bodyl")
     return s

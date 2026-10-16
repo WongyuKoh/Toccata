@@ -9,9 +9,10 @@ __pycache__/
 hardware/mechanical/cad/stl/assembly/
 hardware/mechanical/cad/stl/annotated/
 
-# final-BOM builder backups from before the L2 switch
-hardware/bom/final-bom/*.pre_L2.*
-hardware/bom/final-bom/site_pre_L2/
+# final-BOM builder backups from before the L2 switch (moved to archive/ on 2026-10-06)
+archive/hardware/bom/final-bom/*.pre_L2.*
+archive/hardware/bom/final-bom/site_pre_L2/
 
 # one-file download of stl/print (rebuilt from the committed STLs)
 hardware/mechanical/cad/Toccata_출력STL_전체.zip
+최종본/04_3D출력_STL/Toccata_출력STL_전체.zip

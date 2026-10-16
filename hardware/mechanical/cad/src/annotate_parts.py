@@ -71,38 +71,38 @@ def body_families():
             ("z", ZFB, ZT, "사선 %s %s (길이 %s, 윗면 z%s)" % (ang, _f(ZT - ZFB), _f(B.SL_LEN), _f(ZT)), 2)]
     fams = [(r"^SPK[LR]-PLY-SIDEOUT$", side)]
     for s_ in "LR":
-        holes = [("y", Y0, y, "인서트 구멍 Ø%s×%s 막힘 y%s" % (_f(B.QS_HOLE[0]), _f(B.QS_HOLE[1]), _f(y)), 4 + k) for k, (y, z) in enumerate(B.TS_YZ[s_])]
+        holes = [("y", Y0, y, "열 인서트 구멍 Ø%s×%s 막힘 y%s" % (_f(B.INS_HOLE[0]), _f(B.INS_HOLE[1]), _f(y)), 4 + k) for k, (y, z) in enumerate(B.TS_YZ[s_])]
         holes += [("z", ZB, z, "인서트 z%s" % _f(z), 3 + k) for k, (y, z) in enumerate(B.TS_YZ[s_])]
         wy, wz = B.WIRE_YZ[s_]
         holes += [("y", Y0, wy, "선 구멍 Ø6 y%s" % _f(wy), 6), ("z", ZB, wz, "선 구멍 z%s" % _f(wz), 5)]
-        fams.append((r"^SPK%s-PLY-SIDEIN$" % s_, side + holes))
+        fams.append((r"^스피커안쪽옆판_%s$" % s_, side + holes))            # printed since 2026-10-07 (by print name)
         feet = sorted(set(y for x, y in B.L2["feet"]["positions_xy"]["pod_" + s_]))
         fams.append((r"^SPK%s-PLY-BOTTOM$" % s_, [("y", B.RISER[0], y, "고무발 y%s" % _f(y), k) for k, y in enumerate(feet)]))
         wall = [("y", Y0, B.RISER[0], "통로 홈 27 (y214~241)", 0),
-                ("y", Y0, wy, "XT30 구멍 Ø14 y%s" % _f(wy), 1)] + \
+                ("y", Y0, B.END_HOLE_YZ[s_][0], "XT60 구멍 Ø%s y%s" % (_f(B.END_HOLE_D), _f(B.END_HOLE_YZ[s_][0])), 1)] + \
                [("y", Y0, y, "슬리브 Ø8 y%s" % _f(y), 2 + k) for k, (y, z) in enumerate(B.TS_YZ[s_])] + \
                [("y", Y0, B.MAG_END[s_][1], "자석 y%s" % _f(B.MAG_END[s_][1]), 4),
-                ("z", ZB, dz1, "통로 홈 22 (z5~27)", 0), ("z", ZB, wz, "XT30 z%s" % _f(wz), 1)] + \
+                ("z", ZB, dz1, "통로 홈 22 (z5~27)", 0), ("z", ZB, B.END_HOLE_YZ[s_][1], "XT60 z%s" % _f(B.END_HOLE_YZ[s_][1]), 1)] + \
                [("z", ZB, z, "슬리브 z%s" % _f(z), 2 + k) for k, (y, z) in enumerate(B.TS_YZ[s_])]
-        fams.append((r"^CU-PLY-END-%s$" % s_, wall))
+        fams.append((r"^끝벽_%s$" % s_, wall))                              # printed since 2026-10-07 (by print name)
     fams += [
         (r"^SPK[LR]-PLY-BACK$", [("y", YBI, YB, "11.5 (y%s~%s)" % (_f(YBI), _f(YB)), 0), ("z", ZB, ZT, "z%s~%s" % (_f(ZB), _f(ZT)), 0)]),
         (r"^SPK[LR]-PLY-TOP$", [("y", B.TOP_Y0, YBI, "%s (앞은 앞판 윗마개에 맞댐)" % _f(YBI - B.TOP_Y0), 0),
                                 ("z", ZT - B.T, ZT, "윗면 z%s" % _f(ZT), 0)]),
         (r"^CU-PLY-BACK$", [("x", B.CU_X[0], B.BP_X[0], "창까지 %s" % _f(B.BP_X[0] - B.CU_X[0]), 0),
                             ("x", B.BP_X[0], B.BP_X[1], "뒤판 출력물 창 %s" % _f(B.BP_X[1] - B.BP_X[0]), 1),
-                            ("x", B.BACK_SLOTS[0][0], B.BACK_SLOTS[-1][0] + 4, "환기 홈 8 × (4×15)", 2),
-                            ("z", ZB, B.Z_BOT, "창 밑 %s" % _f(B.Z_BOT - ZB), 0), ("z", B.BACK_SLOTS[0][1], B.BACK_SLOTS[0][2], "환기 홈 z%s~%s" % (_f(B.BACK_SLOTS[0][1]), _f(B.BACK_SLOTS[0][2])), 1)]),
-        (r"^CU-PLY-BOTTOM$", [("x", B.CU_IX[0], B.BOT_SLOTS_BUCK[0][0], "강압 흡기 홈까지 %s" % _f(B.BOT_SLOTS_BUCK[0][0] - B.CU_IX[0]), 0),
-                              ("x", B.BOT_SLOTS_BUCK[0][0], B.BOT_SLOTS_BUCK[-1][0] + 4, "홈 6 × (4×34)", 1),
-                              ("x", B.BOT_SLOTS_PI[0][0], B.BOT_SLOTS_PI[-1][0] + 4, "Pi 아래 홈 8 × (4×34)", 2),
-                              ("y", B.RISER[0], B.BOT_SLOTS_BUCK[0][1], "강압 홈 y%s~%s (앞 모서리 R3)" % (_f(B.BOT_SLOTS_BUCK[0][1]), _f(B.BOT_SLOTS_BUCK[0][2])), 0),
-                              ("y", B.RISER[0], B.BOT_SLOTS_PI[0][1], "Pi 홈 y%s~%s" % (_f(B.BOT_SLOTS_PI[0][1]), _f(B.BOT_SLOTS_PI[0][2])), 1)]),
-        (r"^LID-L$", [("x", B.LIDS["LID-L"][0], B.LIDL_SLOTS[0][0], "배기 홈까지 %s" % _f(B.LIDL_SLOTS[0][0] - B.LIDS["LID-L"][0]), 0),
+                            ("x", B.BACK_HOLES[0][0], B.BACK_HOLES[-1][0], "환기 Ø8 ×%d 중심 간격 %s" % (len(B.BACK_HOLES), _f(B.VENT_PITCH)), 2),
+                            ("z", ZB, B.Z_BOT, "창 밑 %s" % _f(B.Z_BOT - ZB), 0), ("z", ZB, B.BACK_HOLES[0][1], "환기 Ø8 중심 z%s" % _f(B.BACK_HOLES[0][1]), 1)]),
+        (r"^CU-PLY-BOTTOM$", [("x", B.CU_IX[0], B.BOT_HOLES_BUCK[0][0], "강압 아래 첫 Ø8 중심까지 %s" % _f(B.BOT_HOLES_BUCK[0][0] - B.CU_IX[0]), 0),
+                              ("x", min(x for x, y in B.BOT_HOLES_BUCK), max(x for x, y in B.BOT_HOLES_BUCK), "강압 아래 Ø8 4열 × 3줄, 간격 %s" % _f(B.VENT_PITCH), 1),
+                              ("x", min(x for x, y in B.BOT_HOLES_PI), max(x for x, y in B.BOT_HOLES_PI), "Pi 아래 Ø8 %d (4·6·8·6·4)" % len(B.BOT_HOLES_PI), 2),
+                              ("y", B.RISER[0], min(y for x, y in B.BOT_HOLES_BUCK), "강압 Ø8 첫 줄 y%s (앞 모서리 R3)" % _f(min(y for x, y in B.BOT_HOLES_BUCK)), 0),
+                              ("y", B.RISER[0], min(y for x, y in B.BOT_HOLES_PI), "Pi Ø8 첫 줄 y%s" % _f(min(y for x, y in B.BOT_HOLES_PI)), 1)]),
+        (r"^뚜껑_L$", [("x", B.LIDS["LID-L"][0], B.LIDL_SLOTS[0][0], "배기 홈까지 %s" % _f(B.LIDL_SLOTS[0][0] - B.LIDS["LID-L"][0]), 0),
                       ("x", B.LIDL_SLOTS[0][0], B.LIDL_SLOTS[0][1], "홈 30", 1),
                       ("y", Y0, B.LIDL_SLOTS[0][2], "홈 6 × 4 y%s~" % _f(B.LIDL_SLOTS[0][2]), 0),
                       ("z", B.Z_LIDU, B.Z_LID, "11.5 (윗면 z%s = 건반 윗면)" % _f(B.Z_LID), 0)]),
-        (r"^LID-R$", [("x", B.LIDS["LID-R"][0], B.LIDR_SLOTS[0][0], "배기 홈까지 %s" % _f(B.LIDR_SLOTS[0][0] - B.LIDS["LID-R"][0]), 0),
+        (r"^뚜껑_R$", [("x", B.LIDS["LID-R"][0], B.LIDR_SLOTS[0][0], "배기 홈까지 %s" % _f(B.LIDR_SLOTS[0][0] - B.LIDS["LID-R"][0]), 0),
                       ("x", B.LIDR_SLOTS[0][0], B.LIDR_SLOTS[-1][0] + 4, "홈 10 × (4×40)", 1),
                       ("y", Y0, B.LIDR_SLOTS[0][1], "홈 y%s~%s" % (_f(B.LIDR_SLOTS[0][1]), _f(B.LIDR_SLOTS[0][2])), 0),
                       ("z", B.Z_LIDU, B.Z_LID, "11.5 (윗면 z%s = 건반 윗면)" % _f(B.Z_LID), 0)]),
