@@ -2,12 +2,12 @@
  "generated": "2026-10-08",
  "page": {
   "path": "index.html",
-  "bytes": 1138981
+  "bytes": 1175961
  },
- "count": 308,
- "count_with_page": 309,
- "total_bytes": 50273882,
- "total_mb": 47.94,
+ "count": 309,
+ "count_with_page": 310,
+ "total_bytes": 50604678,
+ "total_mb": 48.26,
  "limits": {
   "per_file_mb": 15,
   "per_publish_files": 255,
@@ -28,7 +28,7 @@
   "cad/": 2,
   "dwg/": 14,
   "fin/bundle": 17,
-  "fin/circuit": 17,
+  "fin/circuit": 18,
   "fin/dwg": 13,
   "fin/loc": 5,
   "fin/parts": 120,
@@ -163,6 +163,7 @@
    "fin/bundle/parts-zip-ex.json",
    "fin/circuit/bom.csv",
    "fin/circuit/cables.csv",
+   "fin/circuit/circuit3d.json",
    "fin/circuit/harness.csv",
    "fin/circuit/id_jumpers.csv",
    "fin/circuit/mux_map.csv",
@@ -376,10 +377,10 @@
    "img/bom/i070.jpg",
    "img/bom/i071.jpg",
    "img/bom/i080.jpg",
-   "img/bom/i081.jpg",
-   "img/bom/i084.jpg"
+   "img/bom/i081.jpg"
   ],
   [
+   "img/bom/i084.jpg",
    "img/bom/i085.jpg",
    "img/bom/i087.jpg",
    "img/bom/i088.jpg",
@@ -721,6 +722,14 @@
   {
    "path": "fin/circuit/cables.csv",
    "bytes": 3111,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
+   "path": "fin/circuit/circuit3d.json",
+   "bytes": 330796,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"

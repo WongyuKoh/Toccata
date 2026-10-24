@@ -257,6 +257,43 @@ code{font-family:var(--mono);font-size:.92em;background:var(--tint-blue);padding
   #p-circuit .circ-chips a{font-size:13px;padding:6px 12px}
 }
 @media (prefers-reduced-motion:reduce){#p-circuit *{scroll-behavior:auto!important;transition:none!important}}
+/* ---- 01 회로도 · 회로 3D 모델 (hardware/pcb/src/circuit3d.css; page tokens only) ---- */
+#p-circuit .c3d{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;align-items:start;margin:10px 0 6px}
+@media (max-width:980px){#p-circuit .c3d{grid-template-columns:minmax(0,1fr)}}
+#p-circuit .c3d-main{min-width:0;display:flex;flex-direction:column;gap:8px}
+#p-circuit .c3d-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-width:0}
+#p-circuit .c3d-lbl{font-size:12px;color:var(--ink-3);min-width:2.8em}
+#p-circuit .c3d-scenes,#p-circuit .c3d-views,#p-circuit .c3d-togs{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+#p-circuit .c3d-btn{font:inherit;font-size:13px;min-height:34px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 11px;cursor:pointer;white-space:nowrap}
+#p-circuit .c3d-btn:hover{border-color:var(--blue)}
+#p-circuit .c3d-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-circuit .c3d-tog[aria-pressed="false"]{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
+#p-circuit .c3d-net{font:inherit;font-size:13px;min-height:34px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 8px;max-width:100%}
+#p-circuit .c3d-stage{position:relative;height:clamp(340px,62vh,680px);border:1px solid var(--rule);border-radius:12px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%,var(--card) 0%,var(--paper) 100%)}
+#p-circuit .c3d-stage canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none;outline:none}
+#p-circuit .c3d-stage canvas:active{cursor:grabbing}
+#p-circuit .c3d-stage canvas:focus-visible{box-shadow:inset 0 0 0 2px var(--blue)}
+#p-circuit .c3d-over{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#p-circuit .c3d-over text{font:600 12px var(--mono);fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round}
+#p-circuit .c3d-over text.lv0{font-size:13px;fill:var(--blue-ink)}
+#p-circuit .c3d-over text.lv2{font-size:11px;font-weight:500}
+#p-circuit .c3d-load{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-2);font-size:14px;text-align:center;padding:20px;background:var(--card)}
+#p-circuit .c3d-load[hidden],#p-circuit .c3d-go[hidden]{display:none}
+#p-circuit .c3d-load p{margin:0;max-width:46ch}
+#p-circuit .c3d-hint{position:absolute;left:10px;bottom:8px;font-size:12px;color:var(--ink-3);pointer-events:none;background:color-mix(in srgb,var(--card) 80%,transparent);padding:2px 8px;border-radius:6px}
+#p-circuit .c3d-side{display:flex;flex-direction:column;gap:10px;min-width:0}
+#p-circuit .c3d-info{border:1px solid var(--rule);border-radius:12px;padding:10px 12px;background:var(--card);font-size:13.5px;min-height:120px;overflow-wrap:anywhere}
+#p-circuit .c3d-info p{margin:0 0 6px}
+#p-circuit .c3d-info ul{margin:4px 0 0;padding-left:18px}
+#p-circuit .c3d-info li{margin:2px 0;color:var(--ink-2)}
+#p-circuit .c3d-it{font-size:14.5px}
+#p-circuit .c3d-muted{color:var(--ink-3)}
+#p-circuit .c3d-sub{font-size:13px;color:var(--ink-2);margin:0}
+#p-circuit .c3d-notes{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}
+#p-circuit .c3d-notes li{margin:3px 0}
+@media (max-width:620px){#p-circuit .c3d-stage{height:clamp(300px,58vh,520px)}}
+@media (pointer:coarse){#p-circuit .c3d-btn,#p-circuit .c3d-net{min-height:44px}}
 
 /* ---- 04 3D 모델 ---- */
 /* ---- 04 3D 모델 (hardware/mechanical/cad/viewer/cad.css) — page tokens only ---- */
@@ -1193,8 +1230,9 @@ ol.flow li ul li{margin:3px 0}
 <h2>회로도 — 파트별 상세</h2>
 <p class="lede">악기 전자부를 파트별로 나눴습니다. 파트마다 하는 일, 회로도, 기판·배선 도면, 부품표(KiCad 심볼·풋프린트와 최종 구매 상태), 선 만드는 길이, 핀 표, 만드는 순서와 확인을 한곳에 모았습니다. 부품 번호·핀 번호·넷 이름·값·구멍 좌표가 모두 있어 KiCad나 만능기판으로 그대로 옮길 수 있고, 가운데 유닛 배선과 선 길이는 CAD 모델에서 잰 값입니다.</p>
 <div class="kfs"><div class="kf"><b>15장</b><span>회로도 7 + 기판·배선 8 (A3, 개정 E)</span></div><div class="kf"><b>133줄</b><span>부품표 — 파트별 표에 모두 나옴</span></div><div class="kf"><b>56개</b><span>이름 있는 넷 (그린 도면에서 다시 계산)</span></div><div class="kf"><b>41가닥</b><span>선 (표 35줄, 젠더 X701 포함) · 자르는 길이 = CAD 경로 + 20</span></div><div class="kf"><b>0 · 0 · 0</b><span>연결 오류 · 글자 겹침 · 기판 배선 검사 (15장 자동 검사)</span></div></div>
-<nav class="circ-chips" id="circuit-parts" aria-label="회로 파트"><a href="#circuit-sys">시스템 <span class="q">SCH-01</span></a><a href="#circuit-sb">센서 기판 SB <span class="q">×7</span></a><a href="#circuit-mb">제어 기판 MB <span class="q">×7</span></a><a href="#circuit-end">끝 부속 EL·ER <span class="q">×2</span></a><a href="#circuit-ped">페달 PB·PS <span class="q">×1</span></a><a href="#circuit-pwr">전원 <span class="q">CU</span></a><a href="#circuit-aud">오디오 <span class="q">CU</span></a><a href="#circuit-ts">터치스크린 <span class="q">CU</span></a><a href="#circuit-arrive">받으면 확인 <span class="q">14</span></a><a href="#circuit-kicad">KiCad로 <span class="q">8단계</span></a><a href="#circuit-files">파일 받기 <span class="q">CSV · ZIP</span></a></nav>
+<nav class="circ-chips" id="circuit-parts" aria-label="회로 파트"><a href="#circuit-3d">3D 모델 <span class="q">5장면</span></a><a href="#circuit-sys">시스템 <span class="q">SCH-01</span></a><a href="#circuit-sb">센서 기판 SB <span class="q">×7</span></a><a href="#circuit-mb">제어 기판 MB <span class="q">×7</span></a><a href="#circuit-end">끝 부속 EL·ER <span class="q">×2</span></a><a href="#circuit-ped">페달 PB·PS <span class="q">×1</span></a><a href="#circuit-pwr">전원 <span class="q">CU</span></a><a href="#circuit-aud">오디오 <span class="q">CU</span></a><a href="#circuit-ts">터치스크린 <span class="q">CU</span></a><a href="#circuit-arrive">받으면 확인 <span class="q">14</span></a><a href="#circuit-kicad">KiCad로 <span class="q">8단계</span></a><a href="#circuit-files">파일 받기 <span class="q">CSV · ZIP</span></a></nav>
 <p class="small muted">도면 색: 초록 선 = 배선, 갈색 테두리 = 부품, 파란 상자 = 산 모듈, 점선 갈색 = 케이블, 노란 △ = 처음 글 사양 대비 바꾼 곳(번호는 맨 아래 표). "&gt;&gt;" = 맞물린 커넥터(KiCad에서는 연결이 아니라 양쪽에 같은 넷 이름). 도면은 "2배·3배"로 페이지 안에서 확대해 옆으로 넘겨 봅니다. USB 선 길이: W201·W202 1 m · W203·W204·W205·W206·W207 0.5 m · W208 0.5 m.</p>
+<section class="circ-part" id="circuit-3d" aria-labelledby="circuit-3d-h"><h3 id="circuit-3d-h"><span class="no">3D</span>회로 3D 모델</h3><p>도면의 기판·부품·배선을 실제 높이로 세운 모델입니다. 구멍·패드·부품 자리는 BRD 도면과 같은 좌표, 아랫면 선은 배선표(wiring_*.csv)의 경로, 부품 높이와 센서·리본·USB 플러그는 CAD 사양(electronics_modules.json), 가운데 유닛의 모듈·선은 CAD 모델의 외곽과 선 중심선에서 읽었습니다. 부품·패드·선을 누르면 값·넷·구매 상태가 나오고 같은 넷이 함께 밝아집니다. "아랫면" 보기로 만능기판 밑 배선을 봅니다.</p><div class="c3d" id="circuit-3d-view" data-src="fin/circuit/circuit3d.json"><div class="c3d-main"><div class="c3d-row"><span class="c3d-lbl">장면</span><div class="c3d-scenes" role="group" aria-label="장면"><button type="button" class="c3d-btn" disabled>악기 전체 배선</button><button type="button" class="c3d-btn" disabled>옥타브 모듈 SB·MB</button><button type="button" class="c3d-btn" disabled>끝 부속 EL·ER</button><button type="button" class="c3d-btn" disabled>페달 PB·J501·PS</button><button type="button" class="c3d-btn" disabled>앰프 입력 J702</button></div></div><p class="c3d-sub"></p><div class="c3d-stage"><canvas tabindex="0" aria-label="회로 3D 모델. 드래그로 돌리고 휠로 확대합니다."></canvas><svg class="c3d-over" aria-hidden="true"></svg><div class="c3d-load"><p class="c3d-load-t">이 자리에 오면 3D 모델(323 KB)과 three.js를 불러옵니다.</p><button type="button" class="c3d-btn c3d-go" hidden>3D 모델 불러오기</button></div><div class="c3d-hint">드래그 돌리기 · 오른쪽(Shift) 드래그 옮기기 · 휠·두 손가락 확대 · 두 번 눌러 다가가기</div></div><div class="c3d-row"><span class="c3d-lbl">보기</span><div class="c3d-views"></div><button type="button" class="c3d-btn c3d-reset">처음으로</button></div><div class="c3d-row"><span class="c3d-lbl">표시</span><div class="c3d-togs"></div><select class="c3d-net" aria-label="넷 강조"><option value="">넷 강조: 없음</option></select></div></div><div class="c3d-side"><div class="c3d-info" aria-live="polite"><p class="c3d-muted">부품·패드·선을 누르면 이름, 값, 넷, 구매 상태가 여기에 나옵니다.</p></div><ul class="c3d-notes"></ul></div></div><p class="small muted">장면 5개 · 넷 45개 · 부품 정보 339개. 만들기: <span class="mono">hardware/pcb/src/model3d.py</span> (page.py가 부름). 모양을 모르는 곳(제로 윗면 부품, 잭 다리, W502 경로, RP2040 칩 자리)은 상자·점선 칸으로 두고 정보에 "추정"이라 적었습니다.</p><p class="small circ-top"><a href="#circuit-parts">파트 목록으로 ↑</a></p></section>
 <section class="circ-part" id="circuit-sys" aria-labelledby="circuit-sys-h"><h3 id="circuit-sys-h"><span class="no">A</span>시스템 연결</h3><div class="circ-what"><p>건반 모듈 7개의 제어 기판과 페달 보드가 USB-MIDI 장치가 되어 허브에 모이고, 허브는 Pi 5로 갑니다. Pi 5가 소리를 만들어 USB 동글 → 헤드폰 잭 → 앰프 → 스피커로 보냅니다. 전원은 가운데 유닛의 LiFePO4 전지 하나입니다.</p><span class="pill circ-qty">보드 6종 · 선 41가닥</span></div><figure class="sheet csheet" id="circuit-sch-01"><div class="cap"><span><b>SCH-01 · 시스템 연결도</b> <span class="mono">개정 E</span></span><span class="zbar" role="group" aria-label="확대"><button type="button" data-z="1" aria-pressed="true">맞춤</button><button type="button" data-z="2" aria-pressed="false">2배</button><button type="button" data-z="3" aria-pressed="false">3배</button><a class="mono" href="sch/SCH-01_system.svg" target="_blank" rel="noopener">크게 보기 (SVG) ↗</a></span></div><div class="dwimg"><img src="sch/SCH-01_system.svg" alt="SCH-01 시스템 연결도" loading="lazy" decoding="async" width="1680" height="1188"></div><figcaption class="small muted">모든 파트·보드와 선(W 번호), 선 목록. 파트 사이는 모두 꽂았다 빼는 커넥터(R26). USB 선 옆 숫자 = 선 길이.</figcaption></figure><h4 class="sub4">USB 장치와 허브 포트</h4><div class="tbl"><table><thead><tr><th>보드</th><th>JP301 GP6</th><th>JP302 GP7</th><th>JP303 GP8</th><th>GP14 점퍼</th><th>USB 이름</th><th>C 건반 MIDI</th><th>허브 포트</th></tr></thead><tbody><tr><td class="num">O1</td><td>닫음</td><td>—</td><td>—</td><td>열림</td><td>Toccata O1</td><td>24 (C1)</td><td class="num">4</td></tr><tr><td class="num">O2</td><td>—</td><td>닫음</td><td>—</td><td>열림</td><td>Toccata O2</td><td>36 (C2)</td><td class="num">5</td></tr><tr><td class="num">O3</td><td>닫음</td><td>닫음</td><td>—</td><td>열림</td><td>Toccata O3</td><td>48 (C3)</td><td class="num">3</td></tr><tr><td class="num">O4</td><td>—</td><td>—</td><td>닫음</td><td>열림</td><td>Toccata O4</td><td>60 (C4)</td><td class="num">6</td></tr><tr><td class="num">O5</td><td>닫음</td><td>—</td><td>닫음</td><td>열림</td><td>Toccata O5</td><td>72 (C5)</td><td class="num">7</td></tr><tr><td class="num">O6</td><td>—</td><td>닫음</td><td>닫음</td><td>열림</td><td>Toccata O6</td><td>84 (C6)</td><td class="num">8</td></tr><tr><td class="num">O7</td><td>닫음</td><td>닫음</td><td>닫음</td><td>열림</td><td>Toccata O7</td><td>96 (C7)</td><td class="num">9</td></tr><tr><td class="num">PED</td><td>—</td><td>—</td><td>—</td><td>닫음 (JP504)</td><td>Toccata PED</td><td>CC64</td><td class="num">2</td></tr></tbody></table></div><p class="small muted">허브 포트 번호는 −x 끝(Pi 쪽)부터 0~9, 0·1은 비움 (CAD cable_duct.hub.port_map). 동글은 허브를 거치지 않고 Pi에 바로(X701).</p><h4 class="sub4">허브 포트 옮김 (충전 전용 포트가 2~9번일 때)</h4><p class="small">710U3는 10포트 중 1개가 충전 전용이라 그 포트에 꽂은 보드는 장치로 보이지 않습니다. 충전 전용 포트가 2~9번이면 그 보드를 1번(또는 0번)으로 옮깁니다. 옮긴 뒤 길이는 CAD 경로에서 가로 길이만 바꾼 추정이고, 선 길이 − 40 mm보다 길면 더 긴 선으로 바꿉니다. 쓰는 8개 포트의 스위치는 켭니다.</p><div class="tbl"><table><thead><tr><th>W</th><th>보드</th><th>지금 포트</th><th>선</th><th>CAD 길이 (mm)</th><th>한계 (선 − 40)</th><th>1번 포트로 옮기면</th><th>0번 포트로 옮기면</th></tr></thead><tbody><tr><td class="num">W208</td><td>PED</td><td class="num">2</td><td>0.5 m</td><td class="num">364</td><td class="num">460</td><td class="num">342 (그대로)</td><td class="num">320 (그대로)</td></tr><tr><td class="num">W203</td><td>O3</td><td class="num">3</td><td>0.5 m</td><td class="num">386</td><td class="num">460</td><td class="num">342 (그대로)</td><td class="num">320 (그대로)</td></tr><tr><td class="num">W201</td><td>O1</td><td class="num">4</td><td>1 m</td><td class="num">740</td><td class="num">960</td><td class="num">674 (그대로)</td><td class="num">652 (그대로)</td></tr><tr><td class="num">W202</td><td>O2</td><td class="num">5</td><td>1 m</td><td class="num">602</td><td class="num">960</td><td class="num">514 (그대로)</td><td class="num">492 (그대로)</td></tr><tr><td class="num">W204</td><td>O4</td><td class="num">6</td><td>0.5 m</td><td class="num">301</td><td class="num">460</td><td class="num">191 (그대로)</td><td class="num">169 (그대로)</td></tr><tr><td class="num">W205</td><td>O5</td><td class="num">7</td><td>0.5 m</td><td class="num">147</td><td class="num">460</td><td class="num">156 (그대로)</td><td class="num">178 (그대로)</td></tr><tr><td class="num">W206</td><td>O6</td><td class="num">8</td><td>0.5 m</td><td class="num">166</td><td class="num">460</td><td class="num">320 (그대로)</td><td class="num">342 (그대로)</td></tr><tr><td class="num">W207</td><td>O7</td><td class="num">9</td><td>0.5 m</td><td class="num">315</td><td class="num">460</td><td class="num">491 → 1 m 선</td><td class="num">513 → 1 m 선</td></tr></tbody></table></div><h4 class="sub4">산 그대로 꽂는 선</h4><div class="tbl"><table><thead><tr><th>W</th><th>선</th><th>끝 → 끝</th><th>CAD 경로 · 길이 (mm)</th><th>자르는 길이</th><th>수축 튜브</th><th>심 · 넷</th></tr></thead><tbody><tr><td class="num">W201</td><td>Coms NA993 USB-A → C 1 m</td><td>허브 포트 4 → O1 RP2040-Zero USB-C</td><td class="num">740.1</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 740 ≤ 1 m − 40 (CAD 경로 기준 1 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W202</td><td>Coms NA993 USB-A → C 1 m</td><td>허브 포트 5 → O2 RP2040-Zero USB-C</td><td class="num">602.1</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 602 ≤ 1 m − 40 (CAD 경로 기준 1 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W203</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 3 → O3 RP2040-Zero USB-C</td><td class="num">386.4</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 386 ≤ 0.5 m − 40 (CAD 경로 기준 0.5 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W204</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 6 → O4 RP2040-Zero USB-C</td><td class="num">300.7</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 301 ≤ 0.5 m − 40 (CAD 경로 기준 0.5 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W205</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 7 → O5 RP2040-Zero USB-C</td><td class="num">146.8</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 147 ≤ 0.5 m − 40 (CAD 경로 기준 0.3 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W206</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 8 → O6 RP2040-Zero USB-C</td><td class="num">166.3</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 166 ≤ 0.5 m − 40 (CAD 경로 기준 0.3 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W207</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 9 → O7 RP2040-Zero USB-C</td><td class="num">314.6</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 315 ≤ 0.5 m − 40 (CAD 경로 기준 0.5 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W208</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 2 → PB RP2040-Zero USB-C</td><td class="num">363.5</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이 364 ≤ 0.5 m − 40. 앞 공간 줄 y227 z37을 따라감</td></tr><tr><td class="num">W209</td><td>Coms NA977 USB-A(상향 꺾임) → B 25 cm (C25)</td><td>Pi 5 USB-A (GPIO 쪽 2단의 아래) → 허브 업스트림 B (−x 끝면)</td><td class="num">250 (커넥터 포함 제품 길이)</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>위 포트는 머리에 가려 비움</td></tr><tr><td class="num">W605</td><td>GUOCONN FFC 22핀 0.5 mm 300 mm B형 (A형은 보험)</td><td>Pi 5 CAM/DISP 1 → A605 DSI 22핀</td><td class="num">244.8 (+ 뚜껑 밑 말아 접기 9.4 = 254.2)</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>22심 1 ↔ 1</td></tr><tr><td class="num">X701</td><td>Coms IH190 USB-C(F) → USB-A(M) ㄱ자 젠더</td><td>동글 A701 → Pi 5 USB-A (RJ45 옆 2단의 아래)</td><td class="num">—</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>허브를 거치지 않음 (D7)</td></tr></tbody></table></div><details class="spec cbom" id="circuit-sys-bom"><summary>부품표 — 시스템 (USB 선) (1줄)</summary><div class="tbl"><table><thead><tr><th>부품</th><th>값</th><th>설명</th><th>전체 수량</th><th>KiCad 심볼</th><th>KiCad 풋프린트</th><th>구매 코드</th><th>구매 상태 (최종 목록)</th></tr></thead><tbody><tr><td class="num">W201~W208</td><td>USB-A → C 1 m ×2 · 0.5 m ×6</td><td>USB-A → C 데이터선 — Coms NA993 1 m ×2 (W201·W202), Coms HB466 50 cm ×6 (W203~W208; W205·W206은 CAD 0.3 m 자리라 남는 선을 묶음) (C 쪽 몰드 ≤ 12.5 × 7.6 × 25)</td><td class="num">8</td><td>—</td><td>보드 밖 (Exclude from board) — 선</td><td class="num">C04</td><td>사비 구매 · 엘레파츠</td></tr></tbody></table></div></details><p class="small circ-top"><a href="#circuit-parts">파트 목록으로 ↑</a></p></section>
 <section class="circ-part" id="circuit-sb" aria-labelledby="circuit-sb-h"><h3 id="circuit-sb-h"><span class="no">B</span>센서 기판 SB</h3><div class="circ-what"><p>건반 12개 밑 자석의 거리를 홀센서 DRV5055 12개가 전압으로 바꿉니다. 출력 12선과 3V3·GND 두 가닥씩을 16심 리본으로 제어 기판에 보냅니다.</p><span class="pill circ-qty">×7 (모듈마다 1장)</span></div><figure class="sheet csheet" id="circuit-sch-02"><div class="cap"><span><b>SCH-02 · 옥타브 센서 기판 (SB ×7)</b> <span class="mono">개정 B</span></span><span class="zbar" role="group" aria-label="확대"><button type="button" data-z="1" aria-pressed="true">맞춤</button><button type="button" data-z="2" aria-pressed="false">2배</button><button type="button" data-z="3" aria-pressed="false">3배</button><a class="mono" href="sch/SCH-02_sensor_board.svg" target="_blank" rel="noopener">크게 보기 (SVG) ↗</a></span></div><div class="dwimg"><img src="sch/SCH-02_sensor_board.svg" alt="SCH-02 옥타브 센서 기판 (SB ×7)" loading="lazy" decoding="async" width="1680" height="1188"></div><figcaption class="small muted">DRV5055A2 ×12 (U201~U212, 핀 1 VCC · 2 GND · 3 OUT), 센서마다 100 nF, 버스 양 끝 10 µF, 리본 16심 2×8 블록 J201.</figcaption></figure><figure class="sheet csheet" id="circuit-brd-02-sb"><div class="cap"><span><b>BRD-02 · 센서 기판 배치 (SB)</b> <span class="mono">부분</span></span><span class="zbar" role="group" aria-label="확대"><button type="button" data-z="1" aria-pressed="true">맞춤</button><button type="button" data-z="2" aria-pressed="false">2배</button><button type="button" data-z="3" aria-pressed="false">3배</button><a class="mono" href="sch/BRD-02_sensor_board_placement.svg" target="_blank" rel="noopener">전체 도면 (SVG) ↗</a></span></div><div class="dwimg crop"><svg viewBox="9.0 20.0 402.0 146.5" role="img" aria-label="BRD-02 센서 기판 배치 (SB)" style="aspect-ratio:402.0/146.5"><rect x="9.0" y="20.0" width="402.0" height="146.5" fill="#fff"/><image data-href="sch/BRD-02_sensor_board_placement.svg" x="0" y="0" width="420" height="297" preserveAspectRatio="none"/></svg></div><figcaption class="small muted">161.6 × 15.24 띠: 센서 리드 구멍 열, 3V3·GND·OUT 행, 100 nF·10 µF 자리(아랫면), 리본 블록, OUT → J201 배선(파란 점선)과 J201 전원 4가닥(빨강 = 3V3, 검정 = GND), 고정 U홈. 모듈 좌표 mm.</figcaption></figure><details class="spec cbom" id="circuit-sb-bom"><summary>부품표 — SB 한 장 (×7) (28줄)</summary><div class="tbl"><table><thead><tr><th>부품</th><th>값</th><th>설명</th><th>전체 수량</th><th>KiCad 심볼</th><th>KiCad 풋프린트</th><th>구매 코드</th><th>구매 상태 (최종 목록)</th></tr></thead><tbody><tr><td class="num">U201</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C201</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U202</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C202</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U203</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C203</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U204</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C204</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U205</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C205</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U206</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C206</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U207</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C207</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U208</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C208</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U209</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C209</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U210</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C210</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U211</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C211</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">U212</td><td>DRV5055A2QLPG</td><td>TI DRV5055A2QLPG, TO-92-3 (LPG)</td><td class="num">7</td><td>Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)</td><td>Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정</td><td class="num">L20</td><td>학교 지원 구매 · 아이씨뱅큐</td></tr><tr><td class="num">C212</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">C213</td><td>10µ</td><td>Samsung CL31A106KOHNNNE 1206 10 µF 16 V X5R (낱개)</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">L67</td><td>학교 지원 구매 · 엘레파츠</td></tr><tr><td class="num">C214</td><td>10µ</td><td>Samsung CL31A106KOHNNNE 1206 10 µF 16 V X5R (낱개)</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">L67</td><td>학교 지원 구매 · 엘레파츠</td></tr><tr><td class="num">J201</td><td>리본 16심 → 2×8 구멍 (2.54)</td><td>EUNSUNG 2651-16P 플랫 케이블 28 AWG (16심 전부 사용)</td><td class="num">7</td><td>Connector_Generic:Conn_02x08_Odd_Even</td><td>Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical (패드만, 리본 직접 납땜)</td><td class="num">C05</td><td>학교 지원 구매 · 엘레파츠</td></tr><tr><td class="num">PCB-SB</td><td>161.6 × 15.24 6행</td><td>양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리</td><td class="num">7</td><td>—</td><td>Edge.Cuts x1.0~162.6 × y60.65~75.89 (BRD-02)</td><td class="num">L22</td><td>가진 것</td></tr></tbody></table></div></details><h4 class="sub4">센서 자리와 채널</h4><div class="tbl"><table><thead><tr><th>센서</th><th>건반</th><th>소자 x</th><th>리드 구멍 x</th><th>100 nF</th><th>넷</th><th>먹스 채널</th><th>리본 심</th></tr></thead><tbody><tr><td class="num">U201</td><td>C</td><td class="num">7.431</td><td class="num">10.79</td><td class="num">C201</td><td class="num">HALL_C</td><td class="num">C0</td><td class="num">3</td></tr><tr><td class="num">U202</td><td>C#</td><td class="num">21.215</td><td class="num">26.03</td><td class="num">C202</td><td class="num">HALL_CS</td><td class="num">C1</td><td class="num">4</td></tr><tr><td class="num">U203</td><td>D</td><td class="num">35.250</td><td class="num">38.73</td><td class="num">C203</td><td class="num">HALL_D</td><td class="num">C2</td><td class="num">5</td></tr><tr><td class="num">U204</td><td>D#</td><td class="num">49.285</td><td class="num">53.97</td><td class="num">C204</td><td class="num">HALL_DS</td><td class="num">C3</td><td class="num">6</td></tr><tr><td class="num">U205</td><td>E</td><td class="num">63.070</td><td class="num">66.67</td><td class="num">C205</td><td class="num">HALL_E</td><td class="num">C4</td><td class="num">7</td></tr><tr><td class="num">U206</td><td>F</td><td class="num">77.359</td><td class="num">81.91</td><td class="num">C206</td><td class="num">HALL_F</td><td class="num">C5</td><td class="num">8</td></tr><tr><td class="num">U207</td><td>F#</td><td class="num">90.573</td><td class="num">94.61</td><td class="num">C207</td><td class="num">HALL_FS</td><td class="num">C6</td><td class="num">9</td></tr><tr><td class="num">U208</td><td>G</td><td class="num">104.037</td><td class="num">107.31</td><td class="num">C208</td><td class="num">HALL_G</td><td class="num">C7</td><td class="num">10</td></tr><tr><td class="num">U209</td><td>G#</td><td class="num">117.500</td><td class="num">122.55</td><td class="num">C209</td><td class="num">HALL_GS</td><td class="num">C8</td><td class="num">11</td></tr><tr><td class="num">U210</td><td>A</td><td class="num">130.964</td><td class="num">135.25</td><td class="num">C210</td><td class="num">HALL_A</td><td class="num">C9</td><td class="num">12</td></tr><tr><td class="num">U211</td><td>A#</td><td class="num">144.427</td><td class="num">147.95</td><td class="num">C211</td><td class="num">HALL_AS</td><td class="num">C10</td><td class="num">13</td></tr><tr><td class="num">U212</td><td>B</td><td class="num">157.641</td><td class="num">160.65</td><td class="num">C212</td><td class="num">HALL_B</td><td class="num">C11</td><td class="num">14</td></tr></tbody></table></div><h4 class="sub4">J201 배선 (아랫면 피복 단선 16가닥 = OUT 12 + 전원 4, wiring_SB.csv)</h4><p class="small muted">J201: 1번 = 앞줄 왼쪽, 홀수 = 앞줄 y72.08 · 짝수 = 뒷줄 y74.62, 핀 x = 61.59 + 2.54·⌊(n−1)/2⌋. OUT 선은 모두 반 칸 줄 y70.81을 나란히 눕혀 오고, 짝수로 가는 선은 핀 바로 옆 반 칸 기둥에서 앞줄을 구멍 사이로 건너 반 칸 줄 y73.35로 1.27만 갑니다. 기판은 받침 리브(앞 y61.0~62.8, 뒤 y73.2~75.5 — 뒤는 x59~82만 열림) 위에 바로 놓이므로 리브 띠 위에는 아랫면 선이 없어야 합니다(BRD-02 점선 띠, 자동 검사). <b>전원 4가닥</b>: J201.1·16(3V3) → 3V3 버스, J201.2·15(GND) → GND 버스. 리본의 3V3·GND는 이 4가닥으로만 센서 버스에 이어집니다. 3V3 가닥은 GND 버스를 구멍 사이(반 칸)로 건너고, 끝은 버스가 지나는 빈 구멍에서 버스와 함께 납땜합니다.</p><div class="tbl"><table><thead><tr><th>선 (센서 / 버스)</th><th>건반</th><th>넷</th><th>시작 구멍 (x, y)</th><th>J201 핀 (x, y)</th><th>줄</th><th>경로 (꺾인 점)</th><th>길이</th></tr></thead><tbody><tr><td class="num">U201</td><td>C</td><td class="num">HALL_C</td><td class="num">(10.79, 69.54)</td><td class="num">J201.3 (64.13, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(10.79,69.54) → (10.79,70.81) → (64.13,70.81) → (64.13,72.08)</td><td class="num">55.9</td></tr><tr><td class="num">U202</td><td>C#</td><td class="num">HALL_CS</td><td class="num">(26.03, 69.54)</td><td class="num">J201.4 (64.13, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(26.03,69.54) → (26.03,70.81) → (62.86,70.81) → (62.86,73.35) → (64.13,73.35) → (64.13,74.62)</td><td class="num">43.2</td></tr><tr><td class="num">U203</td><td>D</td><td class="num">HALL_D</td><td class="num">(38.73, 69.54)</td><td class="num">J201.5 (66.67, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(38.73,69.54) → (38.73,70.81) → (66.67,70.81) → (66.67,72.08)</td><td class="num">30.5</td></tr><tr><td class="num">U204</td><td>D#</td><td class="num">HALL_DS</td><td class="num">(53.97, 69.54)</td><td class="num">J201.6 (66.67, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(53.97,69.54) → (53.97,70.81) → (65.40,70.81) → (65.40,73.35) → (66.67,73.35) → (66.67,74.62)</td><td class="num">17.8</td></tr><tr><td class="num">U205</td><td>E</td><td class="num">HALL_E</td><td class="num">(66.67, 69.54)</td><td class="num">J201.7 (69.21, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(66.67,69.54) → (66.67,70.81) → (69.21,70.81) → (69.21,72.08)</td><td class="num">5.1</td></tr><tr><td class="num">U206</td><td>F</td><td class="num">HALL_F</td><td class="num">(81.91, 69.54)</td><td class="num">J201.8 (69.21, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(81.91,69.54) → (81.91,70.81) → (70.48,70.81) → (70.48,73.35) → (69.21,73.35) → (69.21,74.62)</td><td class="num">17.8</td></tr><tr><td class="num">U207</td><td>F#</td><td class="num">HALL_FS</td><td class="num">(94.61, 69.54)</td><td class="num">J201.9 (71.75, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(94.61,69.54) → (94.61,70.81) → (71.75,70.81) → (71.75,72.08)</td><td class="num">25.4</td></tr><tr><td class="num">U208</td><td>G</td><td class="num">HALL_G</td><td class="num">(107.31, 69.54)</td><td class="num">J201.10 (71.75, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(107.31,69.54) → (107.31,70.81) → (73.02,70.81) → (73.02,73.35) → (71.75,73.35) → (71.75,74.62)</td><td class="num">40.6</td></tr><tr><td class="num">U209</td><td>G#</td><td class="num">HALL_GS</td><td class="num">(122.55, 69.54)</td><td class="num">J201.11 (74.29, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(122.55,69.54) → (122.55,70.81) → (74.29,70.81) → (74.29,72.08)</td><td class="num">50.8</td></tr><tr><td class="num">U210</td><td>A</td><td class="num">HALL_A</td><td class="num">(135.25, 69.54)</td><td class="num">J201.12 (74.29, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(135.25,69.54) → (135.25,70.81) → (75.56,70.81) → (75.56,73.35) → (74.29,73.35) → (74.29,74.62)</td><td class="num">66.0</td></tr><tr><td class="num">U211</td><td>A#</td><td class="num">HALL_AS</td><td class="num">(147.95, 69.54)</td><td class="num">J201.13 (76.83, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(147.95,69.54) → (147.95,70.81) → (76.83,70.81) → (76.83,72.08)</td><td class="num">73.7</td></tr><tr><td class="num">U212</td><td>B</td><td class="num">HALL_B</td><td class="num">(160.65, 69.54)</td><td class="num">J201.14 (76.83, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(160.65,69.54) → (160.65,70.81) → (78.10,70.81) → (78.10,73.35) → (76.83,73.35) → (76.83,74.62)</td><td class="num">88.9</td></tr><tr><td class="num">3V3 버스</td><td>—</td><td class="num">+3V3</td><td class="num">(56.51, 64.46)</td><td class="num">J201.1 (61.59, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(56.51,64.46) → (56.51,65.73) → (57.78,65.73) → (57.78,72.08) → (61.59,72.08)</td><td class="num">12.7</td></tr><tr><td class="num">GND 버스</td><td>—</td><td class="num">GND</td><td class="num">(59.05, 67.00)</td><td class="num">J201.2 (61.59, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(59.05,67.00) → (59.05,68.27) → (60.32,68.27) → (60.32,74.62) → (61.59,74.62)</td><td class="num">10.2</td></tr><tr><td class="num">GND 버스</td><td>—</td><td class="num">GND</td><td class="num">(84.45, 67.00)</td><td class="num">J201.15 (79.37, 72.08)</td><td>앞줄 (홀수)</td><td class="num">(84.45,67.00) → (84.45,72.08) → (79.37,72.08)</td><td class="num">10.2</td></tr><tr><td class="num">3V3 버스</td><td>—</td><td class="num">+3V3</td><td class="num">(79.37, 64.46)</td><td class="num">J201.16 (79.37, 74.62)</td><td>뒷줄 (짝수)</td><td class="num">(79.37,64.46) → (79.37,65.73) → (80.64,65.73) → (80.64,74.62) → (79.37,74.62)</td><td class="num">12.7</td></tr></tbody></table></div><h4 class="sub4">리본 W101~W107 심 배정 (J201 ↔ J301, 같은 번호)</h4><div class="tbl"><table><thead><tr><th>심</th><th>표시</th><th>넷</th><th>SB</th><th>MB</th></tr></thead><tbody><tr><td class="num">1</td><td>빨간 줄</td><td class="num">+3V3</td><td class="num">J201.1</td><td class="num">J301.1</td></tr><tr><td class="num">2</td><td></td><td class="num">GND</td><td class="num">J201.2</td><td class="num">J301.2</td></tr><tr><td class="num">3</td><td></td><td class="num">HALL_C</td><td class="num">J201.3</td><td class="num">J301.3</td></tr><tr><td class="num">4</td><td></td><td class="num">HALL_CS</td><td class="num">J201.4</td><td class="num">J301.4</td></tr><tr><td class="num">5</td><td></td><td class="num">HALL_D</td><td class="num">J201.5</td><td class="num">J301.5</td></tr><tr><td class="num">6</td><td></td><td class="num">HALL_DS</td><td class="num">J201.6</td><td class="num">J301.6</td></tr><tr><td class="num">7</td><td></td><td class="num">HALL_E</td><td class="num">J201.7</td><td class="num">J301.7</td></tr><tr><td class="num">8</td><td></td><td class="num">HALL_F</td><td class="num">J201.8</td><td class="num">J301.8</td></tr><tr><td class="num">9</td><td></td><td class="num">HALL_FS</td><td class="num">J201.9</td><td class="num">J301.9</td></tr><tr><td class="num">10</td><td></td><td class="num">HALL_G</td><td class="num">J201.10</td><td class="num">J301.10</td></tr><tr><td class="num">11</td><td></td><td class="num">HALL_GS</td><td class="num">J201.11</td><td class="num">J301.11</td></tr><tr><td class="num">12</td><td></td><td class="num">HALL_A</td><td class="num">J201.12</td><td class="num">J301.12</td></tr><tr><td class="num">13</td><td></td><td class="num">HALL_AS</td><td class="num">J201.13</td><td class="num">J301.13</td></tr><tr><td class="num">14</td><td></td><td class="num">HALL_B</td><td class="num">J201.14</td><td class="num">J301.14</td></tr><tr><td class="num">15</td><td></td><td class="num">GND</td><td class="num">J201.15</td><td class="num">J301.15</td></tr><tr><td class="num">16</td><td></td><td class="num">+3V3</td><td class="num">J201.16</td><td class="num">J301.16</td></tr></tbody></table></div><h4 class="sub4">선</h4><div class="tbl"><table><thead><tr><th>W</th><th>선</th><th>끝 → 끝</th><th>CAD 경로 · 길이 (mm)</th><th>자르는 길이</th><th>수축 튜브</th><th>심 · 넷</th></tr></thead><tbody><tr><td class="num">W101~W107</td><td>EUNSUNG 2651-16P 16심 28 AWG, 1.27 피치</td><td>J201 → J301</td><td class="num">85.0</td><td>180 × 7 (남는 95는 차선 안에서 접어 둠)</td><td>—</td><td>16심 (BRD-06 표)</td></tr></tbody></table></div><ul class="flow small"><li><b class="mono">W101~W107</b> 1번 심(빨간 줄) = J201·J301 1번 구멍. 홀수 = 앞줄.</li><li><b class="mono">W101~W107</b> J301 쪽 끝 6 mm만 가닥을 갈라 0.31 비껴 꽂는다(BRD-01 주 7).</li><li><b class="mono">W101~W107</b> 가닥 끝 1.5 mm 벗겨 납 먹임 → 아랫면에서 납땜, 끝을 1 mm 아래로 자름(기판 밑 틈 2.0).</li></ul><h4 class="sub4">만드는 순서와 확인</h4><ol class="flow"><li>12 × 18 양면 만능기판에서 6행 띠 161.6 × 15.24를 자른다(x1.0~162.6 — 오른쪽 턱 기둥과 0.4).</li><li>아랫면 먼저: 센서마다 100 nF 1206(3V3–GND 패드 사이), 버스 양 끝 10 µF(C213 x8.25, C214 x158.11). 아랫면 부품·납땜 ≤ 1.8 mm.</li><li>3V3(y64.46)·GND(y67.00) 버스를 아랫면 주석선으로 x8.25~160.65. OUT(y69.54) → J201은 위 표의 경로대로 피복 단선 12가닥, 이어서 J201 전원 4가닥(J201.1·16 → 3V3 버스, J201.2·15 → GND 버스).</li><li>센서: 표시면을 위로 눕혀 리드를 +x로, 1.40~3.44 mm에서 2.54 간격으로 벌려 꺾어 구멍(소자 x + 3.0 이상 첫 격자)에 꽂는다. 납땜 뒤 다리 1 mm 아래로.</li><li>리본 16심을 J201에 아랫면 납땜(1번 = 빨간 줄 = 앞줄 왼쪽).</li><li>확인: 3V3–GND 단락 없음, J201.1·J201.16 ↔ U201 핀 1 = 0 Ω, J201.2·J201.15 ↔ U201 핀 2 = 0 Ω, J201 핀 n과 센서 OUT 사이 0 Ω(표) → 3.3 V 넣고 자석 없이 OUT 1.59~1.71 V, S극을 가까이 하면 오름.</li></ol><p class="small circ-top"><a href="#circuit-parts">파트 목록으로 ↑</a></p></section>
 <section class="circ-part" id="circuit-mb" aria-labelledby="circuit-mb-h"><h3 id="circuit-mb-h"><span class="no">C</span>제어 기판 MB</h3><div class="circ-what"><p>RP2040-Zero가 4067 먹스로 센서 12개와 끝 부속 입력 4개(EXT)를 ADC 하나로 차례로 읽어 USB-MIDI로 보냅니다. 7장 모두 같은 기판이고 ID 점퍼로 몇 번째 옥타브인지 정합니다.</p><span class="pill circ-qty">×7 (ID 점퍼만 다름)</span></div><figure class="sheet csheet" id="circuit-sch-03"><div class="cap"><span><b>SCH-03 · 옥타브 제어 기판 (MB ×7)</b> <span class="mono">개정 E</span></span><span class="zbar" role="group" aria-label="확대"><button type="button" data-z="1" aria-pressed="true">맞춤</button><button type="button" data-z="2" aria-pressed="false">2배</button><button type="button" data-z="3" aria-pressed="false">3배</button><a class="mono" href="sch/SCH-03_control_board.svg" target="_blank" rel="noopener">크게 보기 (SVG) ↗</a></span></div><div class="dwimg"><img src="sch/SCH-03_control_board.svg" alt="SCH-03 옥타브 제어 기판 (MB ×7)" loading="lazy" decoding="async" width="1680" height="1188"></div><figcaption class="small muted">RP2040-Zero(A301)가 4067 모듈(A302)의 SIG를 GP26(ADC0)로 읽고 GP2~GP5로 채널을 고른다. GP6~GP8 ID 점퍼, GP14 PED 점퍼, EXT 풀다운, 테스트 포인트.</figcaption></figure><figure class="sheet csheet" id="circuit-brd-01"><div class="cap"><span><b>BRD-01 · 제어 기판 배치 (MB, 위에서 봄)</b> <span class="mono">개정 E</span></span><span class="zbar" role="group" aria-label="확대"><button type="button" data-z="1" aria-pressed="true">맞춤</button><button type="button" data-z="2" aria-pressed="false">2배</button><button type="button" data-z="3" aria-pressed="false">3배</button><a class="mono" href="sch/BRD-01_control_board_placement.svg" target="_blank" rel="noopener">크게 보기 (SVG) ↗</a></span></div><div class="dwimg"><img src="sch/BRD-01_control_board_placement.svg" alt="BRD-01 제어 기판 배치 (MB, 위에서 봄)" loading="lazy" decoding="async" width="1680" height="1188"></div><figcaption class="small muted">BE163에서 자른 70 × 50: 모든 구멍 = 제로 핀 격자(x = 76.52 + 2.54i, y = 173.59 + 2.54j). W1 홈·금지 구역·매단 보스·바닥 구멍.</figcaption></figure><figure class="sheet csheet" id="circuit-brd-08"><div class="cap"><span><b>BRD-08 · 제어 기판 아랫면 배선 (아래에서 봄, 거울상)</b> <span class="mono">개정 E</span></span><span class="zbar" role="group" aria-label="확대"><button type="button" data-z="1" aria-pressed="true">맞춤</button><button type="button" data-z="2" aria-pressed="false">2배</button><button type="button" data-z="3" aria-pressed="false">3배</button><a class="mono" href="sch/BRD-08_control_board_underside.svg" target="_blank" rel="noopener">크게 보기 (SVG) ↗</a></span></div><div class="dwimg"><img src="sch/BRD-08_control_board_underside.svg" alt="BRD-08 제어 기판 아랫면 배선 (아래에서 봄, 거울상)" loading="lazy" decoding="async" width="1680" height="1188"></div><figcaption class="small muted">피복 단선 49가닥을 1.27 격자 위 경로로: 납땜 패드·금지 구역·나사 머리 위를 지나지 않고 두 선이 한 칸을 같이 쓰지 않음(자동 검사). 선 번호 = 아래 표.</figcaption></figure><details class="spec cbom" id="circuit-mb-bom"><summary>부품표 — MB 한 장 (×7, 실장 조건 열 참고) (19줄)</summary><div class="tbl"><table><thead><tr><th>부품</th><th>값</th><th>설명</th><th>전체 수량</th><th>KiCad 심볼</th><th>KiCad 풋프린트</th><th>구매 코드</th><th>구매 상태 (최종 목록)</th></tr></thead><tbody><tr><td class="num">J301</td><td>리본 16심 입력 2×8</td><td>EUNSUNG 2651-16P 플랫 케이블 28 AWG (16심 전부 사용)</td><td class="num">7</td><td>Connector_Generic:Conn_02x08_Odd_Even</td><td>Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical (패드만, 리본 직접 납땜)</td><td class="num">C05</td><td>학교 지원 구매 · 엘레파츠</td></tr><tr><td class="num">A302</td><td>CD74HC4067 16채널 먹스 모듈</td><td>CD74HC4067 16채널 먹스 모듈 (파츠파츠 PP-A324, SparkFun BOB-09056 배치)</td><td class="num">7</td><td>Toccata:CD74HC4067_Breakout (직접 만듦, 핀 1~16 C0~C15, 17~24 J2)</td><td>Toccata:CD74HC4067_Breakout_40.6x17.8 (행 간격 15.24) 또는 PinHeader_1x16 + PinHeader_1x08</td><td class="num">SEV2</td><td>사비 구매 · 파츠파츠</td></tr><tr><td class="num">A302-HDR</td><td>1×16 + 1×8</td><td>핀헤더 1×40 2.54 mm 11.5 mm 1단 몰드 (잘라 씀) — 먹스 모듈 1×16 + 1×8</td><td class="num">168</td><td>—</td><td>Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조)</td><td class="num">SE7</td><td>가진 것</td></tr><tr><td class="num">C301</td><td>100n</td><td>Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R</td><td class="num">7</td><td>Device:C</td><td>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</td><td class="num">SE4</td><td>학교 지원 구매 · 디바이스마트</td></tr><tr><td class="num">A301</td><td>RP2040-Zero</td><td>RP2040-Zero 호환 (파츠파츠 PP-A799-2, Waveshare 배치)</td><td class="num">7</td><td>dj505/RP2040-Zero-KiCAD : RP2040-Zero (3V3 핀을 power_out으로)</td><td>dj505/RP2040-Zero-KiCAD 풋프린트를 복사해 드릴만 1.0 mm로 (핀 헤더용, 패드 번호는 dj505 심볼과 같음 — 다른 라이브러리 풋프린트는 번호가 다를 수 있어 쓰지 않음)</td><td class="num">SEV2</td><td>사비 구매 · 파츠파츠</td></tr><tr><td class="num">A301-HDR</td><td>1×9 ×2</td><td>핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2, 몰드 뺌 (먹스 168 + 제로 144 = 312핀 → 1×40 9줄)</td><td class="num">126</td><td>—</td><td>Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조)</td><td class="num">SE7</td><td>가진 것</td></tr><tr><td class="num">JP304</td><td>열림</td><td>SolderJumper_2_Open</td><td class="num">7</td><td>Jumper:SolderJumper_2_Open</td><td>Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지)</td><td class="num"></td><td>납땜 브리지 (부품 없음)</td></tr><tr><td class="num">JP301</td><td></td><td>SolderJumper_2_Open</td><td class="num">7</td><td>Jumper:SolderJumper_2_Open</td><td>Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지)</td><td class="num"></td><td>납땜 브리지 (부품 없음)</td></tr><tr><td class="num">JP302</td><td></td><td>SolderJumper_2_Open</td><td class="num">7</td><td>Jumper:SolderJumper_2_Open</td><td>Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지)</td><td class="num"></td><td>납땜 브리지 (부품 없음)</td></tr><tr><td class="num">JP303</td><td></td><td>SolderJumper_2_Open</td><td class="num">7</td><td>Jumper:SolderJumper_2_Open</td><td>Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지)</td><td class="num"></td><td>납땜 브리지 (부품 없음)</td></tr><tr><td class="num">J302</td><td>EXT 패드 1×6 (2.54)</td><td>패드만 — Adafruit 4876 플러그 선(모듈 쪽)을 아랫면에서 직접 납땜 (헤더 없음)</td><td class="num">7</td><td>Connector_Generic:Conn_01x06</td><td>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical (패드만)</td><td class="num"></td><td>패드만 (부품 없음)</td></tr><tr><td class="num">R301</td><td>100k</td><td>탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)</td><td class="num">2</td><td>Device:R</td><td>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</td><td class="num">L29</td><td>가진 것</td></tr><tr><td class="num">R302</td><td>100k</td><td>탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)</td><td class="num">1</td><td>Device:R</td><td>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</td><td class="num">L29</td><td>가진 것</td></tr><tr><td class="num">R303</td><td>100k</td><td>탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)</td><td class="num">1</td><td>Device:R</td><td>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</td><td class="num">L29</td><td>가진 것</td></tr><tr><td class="num">R304</td><td>100k</td><td>탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)</td><td class="num">0</td><td>Device:R</td><td>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</td><td class="num">L29</td><td>가진 것</td></tr><tr><td class="num">TP301</td><td></td><td>TestPoint</td><td class="num">7</td><td>Connector:TestPoint</td><td>TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm</td><td class="num"></td><td>구멍 패드 (부품 없음)</td></tr><tr><td class="num">TP302</td><td></td><td>TestPoint</td><td class="num">7</td><td>Connector:TestPoint</td><td>TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm</td><td class="num"></td><td>구멍 패드 (부품 없음)</td></tr><tr><td class="num">TP303</td><td></td><td>TestPoint</td><td class="num">7</td><td>Connector:TestPoint</td><td>TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm</td><td class="num"></td><td>구멍 패드 (부품 없음)</td></tr><tr><td class="num">PCB-MB</td><td>70 × 50</td><td>Coms BE163 양면 만능기판 80 × 120 (30 × 42 구멍)에서 자른 70 × 50 조각 (지그 09_기판지그)</td><td class="num">7</td><td>—</td><td>Edge.Cuts x47.25~117.25 × y145.5~195.5, 홈 x81.92~84.72 × y≤172 (BRD-01)</td><td class="num">u06</td><td>가진 것</td></tr></tbody></table></div></details><h4 class="sub4">RP2040-Zero 패드 → 넷 (MB 7장 공통)</h4><div class="tbl"><table><thead><tr><th>패드 dj505</th><th>WS P1</th><th>이름</th><th>가장자리</th><th>MB 넷</th><th>헤더</th><th>구멍 x</th><th>구멍 y</th></tr></thead><tbody><tr><td class="num">1</td><td class="num">23</td><td class="num">5V</td><td>왼쪽</td><td>연결 금지 (USB VBUS)</td><td>헤더</td><td class="num">1.38</td><td class="num">1.59</td></tr><tr><td class="num">2</td><td class="num">22</td><td class="num">GND</td><td>왼쪽</td><td>GND</td><td>헤더</td><td class="num">1.38</td><td class="num">4.13</td></tr><tr><td class="num">3</td><td class="num">21</td><td class="num">3V3</td><td>왼쪽</td><td>+3V3 (센서·먹스·EXT 급전)</td><td>헤더</td><td class="num">1.38</td><td class="num">6.67</td></tr><tr><td class="num">4</td><td class="num">20</td><td class="num">GP29</td><td>왼쪽</td><td>NC</td><td>헤더</td><td class="num">1.38</td><td class="num">9.21</td></tr><tr><td class="num">5</td><td class="num">19</td><td class="num">GP28</td><td>왼쪽</td><td>NC</td><td>헤더</td><td class="num">1.38</td><td class="num">11.75</td></tr><tr><td class="num">6</td><td class="num">18</td><td class="num">GP27</td><td>왼쪽</td><td>NC</td><td>헤더</td><td class="num">1.38</td><td class="num">14.29</td></tr><tr><td class="num">7</td><td class="num">17</td><td class="num">GP26</td><td>왼쪽</td><td>MUX_SIG (ADC0)</td><td>헤더</td><td class="num">1.38</td><td class="num">16.83</td></tr><tr><td class="num">8</td><td class="num">16</td><td class="num">GP15</td><td>왼쪽</td><td>NC</td><td>헤더</td><td class="num">1.38</td><td class="num">19.37</td></tr><tr><td class="num">9</td><td class="num">15</td><td class="num">GP14</td><td>왼쪽</td><td>PED_SEL (JP304 열림)</td><td>헤더</td><td class="num">1.38</td><td class="num">21.91</td></tr><tr><td class="num">10</td><td class="num">1</td><td class="num">GP0</td><td>오른쪽</td><td>NC</td><td>헤더</td><td class="num">16.62</td><td class="num">1.59</td></tr><tr><td class="num">11</td><td class="num">2</td><td class="num">GP1</td><td>오른쪽</td><td>NC</td><td>헤더</td><td class="num">16.62</td><td class="num">4.13</td></tr><tr><td class="num">12</td><td class="num">3</td><td class="num">GP2</td><td>오른쪽</td><td>MUX_S0</td><td>헤더</td><td class="num">16.62</td><td class="num">6.67</td></tr><tr><td class="num">13</td><td class="num">4</td><td class="num">GP3</td><td>오른쪽</td><td>MUX_S1</td><td>헤더</td><td class="num">16.62</td><td class="num">9.21</td></tr><tr><td class="num">14</td><td class="num">5</td><td class="num">GP4</td><td>오른쪽</td><td>MUX_S2</td><td>헤더</td><td class="num">16.62</td><td class="num">11.75</td></tr><tr><td class="num">15</td><td class="num">6</td><td class="num">GP5</td><td>오른쪽</td><td>MUX_S3</td><td>헤더</td><td class="num">16.62</td><td class="num">14.29</td></tr><tr><td class="num">16</td><td class="num">7</td><td class="num">GP6</td><td>오른쪽</td><td>ID0 (JP301)</td><td>헤더</td><td class="num">16.62</td><td class="num">16.83</td></tr><tr><td class="num">17</td><td class="num">8</td><td class="num">GP7</td><td>오른쪽</td><td>ID1 (JP302)</td><td>헤더</td><td class="num">16.62</td><td class="num">19.37</td></tr><tr><td class="num">18</td><td class="num">9</td><td class="num">GP8</td><td>오른쪽</td><td>ID2 (JP303)</td><td>헤더</td><td class="num">16.62</td><td class="num">21.91</td></tr><tr><td class="num">19</td><td class="num">14</td><td class="num">GP13</td><td>아래</td><td>NC</td><td>헤더 없음 (아래 줄)</td><td class="num">3.92</td><td class="num">21.91</td></tr><tr><td class="num">20</td><td class="num">13</td><td class="num">GP12</td><td>아래</td><td>NC</td><td>헤더 없음 (아래 줄)</td><td class="num">6.46</td><td class="num">21.91</td></tr><tr><td class="num">21</td><td class="num">12</td><td class="num">GP11</td><td>아래</td><td>NC</td><td>헤더 없음 (아래 줄)</td><td class="num">9.00</td><td class="num">21.91</td></tr><tr><td class="num">22</td><td class="num">11</td><td class="num">GP10</td><td>아래</td><td>NC</td><td>헤더 없음 (아래 줄)</td><td class="num">11.54</td><td class="num">21.91</td></tr><tr><td class="num">23</td><td class="num">10</td><td class="num">GP9</td><td>아래</td><td>NC</td><td>헤더 없음 (아래 줄)</td><td class="num">14.08</td><td class="num">21.91</td></tr></tbody></table></div><h4 class="sub4">먹스 채널 → 건반 (펌웨어 표, MIDI 번호)</h4><div class="tbl"><table><thead><tr><th>먹스 채널</th><th>O1</th><th>O2</th><th>O3</th><th>O4</th><th>O5</th><th>O6</th><th>O7</th></tr></thead><tbody><tr><td class="num">C0</td><td class="num">C1 = 24</td><td class="num">C2 = 36</td><td class="num">C3 = 48</td><td class="num">C4 = 60</td><td class="num">C5 = 72</td><td class="num">C6 = 84</td><td class="num">C7 = 96</td></tr><tr><td class="num">C1</td><td class="num">C#1 = 25</td><td class="num">C#2 = 37</td><td class="num">C#3 = 49</td><td class="num">C#4 = 61</td><td class="num">C#5 = 73</td><td class="num">C#6 = 85</td><td class="num">C#7 = 97</td></tr><tr><td class="num">C2</td><td class="num">D1 = 26</td><td class="num">D2 = 38</td><td class="num">D3 = 50</td><td class="num">D4 = 62</td><td class="num">D5 = 74</td><td class="num">D6 = 86</td><td class="num">D7 = 98</td></tr><tr><td class="num">C3</td><td class="num">D#1 = 27</td><td class="num">D#2 = 39</td><td class="num">D#3 = 51</td><td class="num">D#4 = 63</td><td class="num">D#5 = 75</td><td class="num">D#6 = 87</td><td class="num">D#7 = 99</td></tr><tr><td class="num">C4</td><td class="num">E1 = 28</td><td class="num">E2 = 40</td><td class="num">E3 = 52</td><td class="num">E4 = 64</td><td class="num">E5 = 76</td><td class="num">E6 = 88</td><td class="num">E7 = 100</td></tr><tr><td class="num">C5</td><td class="num">F1 = 29</td><td class="num">F2 = 41</td><td class="num">F3 = 53</td><td class="num">F4 = 65</td><td class="num">F5 = 77</td><td class="num">F6 = 89</td><td class="num">F7 = 101</td></tr><tr><td class="num">C6</td><td class="num">F#1 = 30</td><td class="num">F#2 = 42</td><td class="num">F#3 = 54</td><td class="num">F#4 = 66</td><td class="num">F#5 = 78</td><td class="num">F#6 = 90</td><td class="num">F#7 = 102</td></tr><tr><td class="num">C7</td><td class="num">G1 = 31</td><td class="num">G2 = 43</td><td class="num">G3 = 55</td><td class="num">G4 = 67</td><td class="num">G5 = 79</td><td class="num">G6 = 91</td><td class="num">G7 = 103</td></tr><tr><td class="num">C8</td><td class="num">G#1 = 32</td><td class="num">G#2 = 44</td><td class="num">G#3 = 56</td><td class="num">G#4 = 68</td><td class="num">G#5 = 80</td><td class="num">G#6 = 92</td><td class="num">G#7 = 104</td></tr><tr><td class="num">C9</td><td class="num">A1 = 33</td><td class="num">A2 = 45</td><td class="num">A3 = 57</td><td class="num">A4 = 69</td><td class="num">A5 = 81</td><td class="num">A6 = 93</td><td class="num">A7 = 105</td></tr><tr><td class="num">C10</td><td class="num">A#1 = 34</td><td class="num">A#2 = 46</td><td class="num">A#3 = 58</td><td class="num">A#4 = 70</td><td class="num">A#5 = 82</td><td class="num">A#6 = 94</td><td class="num">A#7 = 106</td></tr><tr><td class="num">C11</td><td class="num">B1 = 35</td><td class="num">B2 = 47</td><td class="num">B3 = 59</td><td class="num">B4 = 71</td><td class="num">B5 = 83</td><td class="num">B6 = 95</td><td class="num">B7 = 107</td></tr><tr><td class="num">C12</td><td class="num">EXT1 A0 = 21</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">EXT1 C8 = 108</td></tr><tr><td class="num">C13</td><td class="num">EXT2 A#0 = 22</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr><tr><td class="num">C14</td><td class="num">EXT3 B0 = 23</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr><tr><td class="num">C15</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr></tbody></table></div><h4 class="sub4">ID 점퍼 (닫음 = GND 납땜 브리지 = 1)</h4><div class="tbl"><table><thead><tr><th>보드</th><th>JP301 GP6</th><th>JP302 GP7</th><th>JP303 GP8</th><th>JP304/JP504 GP14</th><th>USB 이름</th><th>C 건반 MIDI</th><th>허브 포트</th></tr></thead><tbody><tr><td class="num">O1</td><td>닫음</td><td>—</td><td>—</td><td>열림</td><td>Toccata O1</td><td>24 (C1)</td><td class="num">4</td></tr><tr><td class="num">O2</td><td>—</td><td>닫음</td><td>—</td><td>열림</td><td>Toccata O2</td><td>36 (C2)</td><td class="num">5</td></tr><tr><td class="num">O3</td><td>닫음</td><td>닫음</td><td>—</td><td>열림</td><td>Toccata O3</td><td>48 (C3)</td><td class="num">3</td></tr><tr><td class="num">O4</td><td>—</td><td>—</td><td>닫음</td><td>열림</td><td>Toccata O4</td><td>60 (C4)</td><td class="num">6</td></tr><tr><td class="num">O5</td><td>닫음</td><td>—</td><td>닫음</td><td>열림</td><td>Toccata O5</td><td>72 (C5)</td><td class="num">7</td></tr><tr><td class="num">O6</td><td>—</td><td>닫음</td><td>닫음</td><td>열림</td><td>Toccata O6</td><td>84 (C6)</td><td class="num">8</td></tr><tr><td class="num">O7</td><td>닫음</td><td>닫음</td><td>닫음</td><td>열림</td><td>Toccata O7</td><td>96 (C7)</td><td class="num">9</td></tr><tr><td class="num">PED</td><td>—</td><td>—</td><td>—</td><td>닫음 (JP504)</td><td>Toccata PED</td><td>CC64</td><td class="num">2</td></tr></tbody></table></div><details class="spec cbom" id="circuit-mb-wire"><summary>아랫면 배선 경로 (wiring_MB.csv, 49가닥 — BRD-08 번호)</summary><div class="tbl"><table><thead><tr><th>번호</th><th>넷</th><th>시작</th><th>x</th><th>y</th><th>끝</th><th>x</th><th>y</th><th>경로 (꺾인 점, 모듈 좌표)</th><th>길이 (mm)</th><th>꺾임 수</th></tr></thead><tbody><tr><td class="num">1</td><td class="num">+3V3</td><td class="num">A301.3</td><td class="num">76.52</td><td class="num">188.83</td><td class="num">TP301.1</td><td class="num">96.84</td><td class="num">188.83</td><td class="num">(76.52,188.83) → (77.79,188.83) → (77.79,179.94) → (94.30,179.94) → (94.30,188.83) → (96.84,188.83)</td><td class="num">38.1</td><td class="num">4</td></tr><tr><td class="num">2</td><td class="num">+3V3</td><td class="num">A302.18</td><td class="num">71.44</td><td class="num">165.97</td><td class="num">A301.3</td><td class="num">76.52</td><td class="num">188.83</td><td class="num">(71.44,165.97) → (71.44,167.24) → (75.25,167.24) → (75.25,188.83) → (76.52,188.83)</td><td class="num">27.9</td><td class="num">3</td></tr><tr><td class="num">3</td><td class="num">+3V3</td><td class="num">J301.1</td><td class="num">61.28</td><td class="num">148.19</td><td class="num">J301.16</td><td class="num">79.06</td><td class="num">150.73</td><td class="num">(61.28,148.19) → (61.28,149.46) → (79.06,149.46) → (79.06,150.73)</td><td class="num">20.3</td><td class="num">2</td></tr><tr><td class="num">4</td><td class="num">+3V3</td><td class="num">J301.16</td><td class="num">79.06</td><td class="num">150.73</td><td class="num">A302.18</td><td class="num">71.44</td><td class="num">165.97</td><td class="num">(79.06,150.73) → (79.06,165.97) → (71.44,165.97)</td><td class="num">22.9</td><td class="num">1</td></tr><tr><td class="num">5</td><td class="num">+3V3</td><td class="num">TP301.1</td><td class="num">96.84</td><td class="num">188.83</td><td class="num">J302.6</td><td class="num">107.00</td><td class="num">193.91</td><td class="num">(96.84,188.83) → (96.84,186.29) → (107.00,186.29) → (107.00,193.91)</td><td class="num">20.3</td><td class="num">2</td></tr><tr><td class="num">6</td><td class="num">EXT1</td><td class="num">A302.13</td><td class="num">56.20</td><td class="num">183.75</td><td class="num">J302.2</td><td class="num">96.84</td><td class="num">193.91</td><td class="num">(56.20,183.75) → (56.20,185.02) → (95.57,185.02) → (95.57,193.91) → (96.84,193.91)</td><td class="num">50.8</td><td class="num">3</td></tr><tr><td class="num">7</td><td class="num">EXT1</td><td class="num">J302.2</td><td class="num">96.84</td><td class="num">193.91</td><td class="num">R301.1</td><td class="num">101.92</td><td class="num">153.27</td><td class="num">(96.84,193.91) → (96.84,190.10) → (104.46,190.10) → (104.46,153.27) → (101.92,153.27)</td><td class="num">50.8</td><td class="num">3</td></tr><tr><td class="num">8</td><td class="num">EXT2</td><td class="num">A302.14</td><td class="num">56.20</td><td class="num">186.29</td><td class="num">J302.3</td><td class="num">99.38</td><td class="num">193.91</td><td class="num">(56.20,186.29) → (56.20,187.56) → (98.11,187.56) → (98.11,193.91) → (99.38,193.91)</td><td class="num">50.8</td><td class="num">3</td></tr><tr><td class="num">9</td><td class="num">EXT2</td><td class="num">J302.3</td><td class="num">99.38</td><td class="num">193.91</td><td class="num">R302.1</td><td class="num">101.92</td><td class="num">158.35</td><td class="num">(99.38,193.91) → (100.65,193.91) → (100.65,158.35) → (101.92,158.35)</td><td class="num">38.1</td><td class="num">2</td></tr><tr><td class="num">10</td><td class="num">EXT3</td><td class="num">A302.15</td><td class="num">56.20</td><td class="num">188.83</td><td class="num">J302.4</td><td class="num">101.92</td><td class="num">193.91</td><td class="num">(56.20,188.83) → (57.47,188.83) → (57.47,192.64) → (101.92,192.64) → (101.92,193.91)</td><td class="num">50.8</td><td class="num">3</td></tr><tr><td class="num">11</td><td class="num">EXT3</td><td class="num">J302.4</td><td class="num">101.92</td><td class="num">193.91</td><td class="num">R303.1</td><td class="num">101.92</td><td class="num">163.43</td><td class="num">(101.92,193.91) → (103.19,193.91) → (103.19,163.43) → (101.92,163.43)</td><td class="num">33.0</td><td class="num">2</td></tr><tr><td class="num">12</td><td class="num">EXT4</td><td class="num">A302.16</td><td class="num">56.20</td><td class="num">191.37</td><td class="num">J302.5</td><td class="num">104.46</td><td class="num">193.91</td><td class="num">(56.20,191.37) → (56.20,190.10) → (79.06,190.10) → (79.06,176.13) → (90.49,176.13) → (90.49,171.05) → (108.27,171.05) → (108.27,192.64) → (104.46,192.64) → (104.46,193.91)</td><td class="num">99.1</td><td class="num">8</td></tr><tr><td class="num">13</td><td class="num">EXT4</td><td class="num">J302.5</td><td class="num">104.46</td><td class="num">193.91</td><td class="num">R304.1</td><td class="num">101.92</td><td class="num">168.51</td><td class="num">(104.46,193.91) → (105.73,193.91) → (105.73,168.51) → (101.92,168.51)</td><td class="num">30.5</td><td class="num">2</td></tr><tr><td class="num">14</td><td class="num">GND</td><td class="num">A301.2</td><td class="num">76.52</td><td class="num">191.37</td><td class="num">J302.1</td><td class="num">94.30</td><td class="num">193.91</td><td class="num">(76.52,191.37) → (90.49,191.37) → (90.49,190.10) → (94.30,190.10) → (94.30,193.91)</td><td class="num">22.9</td><td class="num">3</td></tr><tr><td class="num">15</td><td class="num">GND</td><td class="num">A302.17</td><td class="num">71.44</td><td class="num">163.43</td><td class="num">A302.19</td><td class="num">71.44</td><td class="num">168.51</td><td class="num">(71.44,163.43) → (72.71,163.43) → (72.71,168.51) → (71.44,168.51)</td><td class="num">7.6</td><td class="num">2</td></tr><tr><td class="num">16</td><td class="num">GND</td><td class="num">A302.19</td><td class="num">71.44</td><td class="num">168.51</td><td class="num">A301.2</td><td class="num">76.52</td><td class="num">191.37</td><td class="num">(71.44,168.51) → (71.44,169.78) → (73.98,169.78) → (73.98,191.37) → (76.52,191.37)</td><td class="num">27.9</td><td class="num">3</td></tr><tr><td class="num">17</td><td class="num">GND</td><td class="num">J301.2</td><td class="num">61.28</td><td class="num">150.73</td><td class="num">J301.15</td><td class="num">79.06</td><td class="num">148.19</td><td class="num">(61.28,150.73) → (60.01,150.73) → (60.01,146.92) → (79.06,146.92) → (79.06,148.19)</td><td class="num">25.4</td><td class="num">3</td></tr><tr><td class="num">18</td><td class="num">GND</td><td class="num">J301.2</td><td class="num">61.28</td><td class="num">150.73</td><td class="num">A302.17</td><td class="num">71.44</td><td class="num">163.43</td><td class="num">(61.28,150.73) → (61.28,163.43) → (71.44,163.43)</td><td class="num">22.9</td><td class="num">1</td></tr><tr><td class="num">19</td><td class="num">GND</td><td class="num">J302.1</td><td class="num">94.30</td><td class="num">193.91</td><td class="num">TP302.1</td><td class="num">99.38</td><td class="num">188.83</td><td class="num">(94.30,193.91) → (93.03,193.91) → (93.03,191.37) → (99.38,191.37) → (99.38,188.83)</td><td class="num">12.7</td><td class="num">3</td></tr><tr><td class="num">20</td><td class="num">GND</td><td class="num">JP301.2</td><td class="num">99.38</td><td class="num">181.21</td><td class="num">JP302.2</td><td class="num">99.38</td><td class="num">178.67</td><td class="num">(99.38,181.21) → (99.38,178.67)</td><td class="num">2.5</td><td class="num">0</td></tr><tr><td class="num">21</td><td class="num">GND</td><td class="num">JP302.2</td><td class="num">99.38</td><td class="num">178.67</td><td class="num">JP303.2</td><td class="num">99.38</td><td class="num">176.13</td><td class="num">(99.38,178.67) → (99.38,176.13)</td><td class="num">2.5</td><td class="num">0</td></tr><tr><td class="num">22</td><td class="num">GND</td><td class="num">JP303.2</td><td class="num">99.38</td><td class="num">176.13</td><td class="num">JP304.1</td><td class="num">99.38</td><td class="num">173.59</td><td class="num">(99.38,176.13) → (99.38,173.59)</td><td class="num">2.5</td><td class="num">0</td></tr><tr><td class="num">23</td><td class="num">GND</td><td class="num">JP304.1</td><td class="num">99.38</td><td class="num">173.59</td><td class="num">R304.2</td><td class="num">109.54</td><td class="num">168.51</td><td class="num">(99.38,173.59) → (109.54,173.59) → (109.54,168.51)</td><td class="num">15.2</td><td class="num">1</td></tr><tr><td class="num">24</td><td class="num">GND</td><td class="num">R302.2</td><td class="num">109.54</td><td class="num">158.35</td><td class="num">R301.2</td><td class="num">109.54</td><td class="num">153.27</td><td class="num">(109.54,158.35) → (109.54,153.27)</td><td class="num">5.1</td><td class="num">0</td></tr><tr><td class="num">25</td><td class="num">GND</td><td class="num">R303.2</td><td class="num">109.54</td><td class="num">163.43</td><td class="num">R302.2</td><td class="num">109.54</td><td class="num">158.35</td><td class="num">(109.54,163.43) → (109.54,158.35)</td><td class="num">5.1</td><td class="num">0</td></tr><tr><td class="num">26</td><td class="num">GND</td><td class="num">R304.2</td><td class="num">109.54</td><td class="num">168.51</td><td class="num">R303.2</td><td class="num">109.54</td><td class="num">163.43</td><td class="num">(109.54,168.51) → (109.54,163.43)</td><td class="num">5.1</td><td class="num">0</td></tr><tr><td class="num">27</td><td class="num">GND</td><td class="num">TP302.1</td><td class="num">99.38</td><td class="num">188.83</td><td class="num">JP301.2</td><td class="num">99.38</td><td class="num">181.21</td><td class="num">(99.38,188.83) → (99.38,181.21)</td><td class="num">7.6</td><td class="num">0</td></tr><tr><td class="num">28</td><td class="num">HALL_A</td><td class="num">A302.10</td><td class="num">56.20</td><td class="num">176.13</td><td class="num">J301.12</td><td class="num">73.98</td><td class="num">150.73</td><td class="num">(56.20,176.13) → (60.01,176.13) → (60.01,157.08) → (73.98,157.08) → (73.98,150.73)</td><td class="num">43.2</td><td class="num">3</td></tr><tr><td class="num">29</td><td class="num">HALL_AS</td><td class="num">A302.11</td><td class="num">56.20</td><td class="num">178.67</td><td class="num">J301.13</td><td class="num">76.52</td><td class="num">148.19</td><td class="num">(56.20,178.67) → (66.36,178.67) → (66.36,158.35) → (75.25,158.35) → (75.25,148.19) → (76.52,148.19)</td><td class="num">50.8</td><td class="num">4</td></tr><tr><td class="num">30</td><td class="num">HALL_B</td><td class="num">A302.12</td><td class="num">56.20</td><td class="num">181.21</td><td class="num">J301.14</td><td class="num">76.52</td><td class="num">150.73</td><td class="num">(56.20,181.21) → (57.47,181.21) → (57.47,172.32) → (76.52,172.32) → (76.52,150.73)</td><td class="num">50.8</td><td class="num">3</td></tr><tr><td class="num">31</td><td class="num">HALL_C</td><td class="num">A302.1</td><td class="num">56.20</td><td class="num">153.27</td><td class="num">J301.3</td><td class="num">63.82</td><td class="num">148.19</td><td class="num">(56.20,153.27) → (62.55,153.27) → (62.55,148.19) → (63.82,148.19)</td><td class="num">12.7</td><td class="num">2</td></tr><tr><td class="num">32</td><td class="num">HALL_CS</td><td class="num">A302.2</td><td class="num">56.20</td><td class="num">155.81</td><td class="num">J301.4</td><td class="num">63.82</td><td class="num">150.73</td><td class="num">(56.20,155.81) → (63.82,155.81) → (63.82,150.73)</td><td class="num">12.7</td><td class="num">1</td></tr><tr><td class="num">33</td><td class="num">HALL_D</td><td class="num">A302.3</td><td class="num">56.20</td><td class="num">158.35</td><td class="num">J301.5</td><td class="num">66.36</td><td class="num">148.19</td><td class="num">(56.20,158.35) → (65.09,158.35) → (65.09,148.19) → (66.36,148.19)</td><td class="num">20.3</td><td class="num">2</td></tr><tr><td class="num">34</td><td class="num">HALL_DS</td><td class="num">A302.4</td><td class="num">56.20</td><td class="num">160.89</td><td class="num">J301.6</td><td class="num">66.36</td><td class="num">150.73</td><td class="num">(56.20,160.89) → (58.74,160.89) → (58.74,152.00) → (66.36,152.00) → (66.36,150.73)</td><td class="num">20.3</td><td class="num">3</td></tr><tr><td class="num">35</td><td class="num">HALL_E</td><td class="num">A302.5</td><td class="num">56.20</td><td class="num">163.43</td><td class="num">J301.7</td><td class="num">68.90</td><td class="num">148.19</td><td class="num">(56.20,163.43) → (56.20,162.16) → (67.63,162.16) → (67.63,148.19) → (68.90,148.19)</td><td class="num">27.9</td><td class="num">3</td></tr><tr><td class="num">36</td><td class="num">HALL_F</td><td class="num">A302.6</td><td class="num">56.20</td><td class="num">165.97</td><td class="num">J301.8</td><td class="num">68.90</td><td class="num">150.73</td><td class="num">(56.20,165.97) → (68.90,165.97) → (68.90,150.73)</td><td class="num">27.9</td><td class="num">1</td></tr><tr><td class="num">37</td><td class="num">HALL_FS</td><td class="num">A302.7</td><td class="num">56.20</td><td class="num">168.51</td><td class="num">J301.9</td><td class="num">71.44</td><td class="num">148.19</td><td class="num">(56.20,168.51) → (70.17,168.51) → (70.17,148.19) → (71.44,148.19)</td><td class="num">35.6</td><td class="num">2</td></tr><tr><td class="num">38</td><td class="num">HALL_G</td><td class="num">A302.8</td><td class="num">56.20</td><td class="num">171.05</td><td class="num">J301.10</td><td class="num">71.44</td><td class="num">150.73</td><td class="num">(56.20,171.05) → (57.47,171.05) → (57.47,154.54) → (71.44,154.54) → (71.44,150.73)</td><td class="num">35.6</td><td class="num">3</td></tr><tr><td class="num">39</td><td class="num">HALL_GS</td><td class="num">A302.9</td><td class="num">56.20</td><td class="num">173.59</td><td class="num">J301.11</td><td class="num">73.98</td><td class="num">148.19</td><td class="num">(56.20,173.59) → (62.55,173.59) → (62.55,159.62) → (72.71,159.62) → (72.71,148.19) → (73.98,148.19)</td><td class="num">43.2</td><td class="num">4</td></tr><tr><td class="num">40</td><td class="num">ID0</td><td class="num">A301.16</td><td class="num">91.76</td><td class="num">178.67</td><td class="num">JP301.1</td><td class="num">96.84</td><td class="num">181.21</td><td class="num">(91.76,178.67) → (95.57,178.67) → (95.57,181.21) → (96.84,181.21)</td><td class="num">7.6</td><td class="num">2</td></tr><tr><td class="num">41</td><td class="num">ID1</td><td class="num">A301.17</td><td class="num">91.76</td><td class="num">176.13</td><td class="num">JP302.1</td><td class="num">96.84</td><td class="num">178.67</td><td class="num">(91.76,176.13) → (91.76,177.40) → (96.84,177.40) → (96.84,178.67)</td><td class="num">7.6</td><td class="num">2</td></tr><tr><td class="num">42</td><td class="num">ID2</td><td class="num">A301.18</td><td class="num">91.76</td><td class="num">173.59</td><td class="num">JP303.1</td><td class="num">96.84</td><td class="num">176.13</td><td class="num">(91.76,173.59) → (91.76,174.86) → (96.84,174.86) → (96.84,176.13)</td><td class="num">7.6</td><td class="num">2</td></tr><tr><td class="num">43</td><td class="num">MUX_S0</td><td class="num">A302.20</td><td class="num">71.44</td><td class="num">171.05</td><td class="num">A301.12</td><td class="num">91.76</td><td class="num">188.83</td><td class="num">(71.44,171.05) → (80.33,171.05) → (80.33,188.83) → (91.76,188.83)</td><td class="num">38.1</td><td class="num">2</td></tr><tr><td class="num">44</td><td class="num">MUX_S1</td><td class="num">A302.21</td><td class="num">71.44</td><td class="num">173.59</td><td class="num">A301.13</td><td class="num">91.76</td><td class="num">186.29</td><td class="num">(71.44,173.59) → (71.44,174.86) → (87.95,174.86) → (87.95,186.29) → (91.76,186.29)</td><td class="num">33.0</td><td class="num">3</td></tr><tr><td class="num">45</td><td class="num">MUX_S2</td><td class="num">A302.22</td><td class="num">71.44</td><td class="num">176.13</td><td class="num">A301.14</td><td class="num">91.76</td><td class="num">183.75</td><td class="num">(71.44,176.13) → (71.44,177.40) → (90.49,177.40) → (90.49,183.75) → (91.76,183.75)</td><td class="num">27.9</td><td class="num">3</td></tr><tr><td class="num">46</td><td class="num">MUX_S3</td><td class="num">A302.23</td><td class="num">71.44</td><td class="num">178.67</td><td class="num">A301.15</td><td class="num">91.76</td><td class="num">181.21</td><td class="num">(71.44,178.67) → (72.71,178.67) → (72.71,182.48) → (86.68,182.48) → (86.68,181.21) → (91.76,181.21)</td><td class="num">25.4</td><td class="num">4</td></tr><tr><td class="num">47</td><td class="num">MUX_SIG</td><td class="num">A301.7</td><td class="num">76.52</td><td class="num">178.67</td><td class="num">TP303.1</td><td class="num">101.92</td><td class="num">188.83</td><td class="num">(76.52,178.67) → (89.22,178.67) → (89.22,182.48) → (101.92,182.48) → (101.92,188.83)</td><td class="num">35.6</td><td class="num">3</td></tr><tr><td class="num">48</td><td class="num">MUX_SIG</td><td class="num">A302.24</td><td class="num">71.44</td><td class="num">181.21</td><td class="num">A301.7</td><td class="num">76.52</td><td class="num">178.67</td><td class="num">(71.44,181.21) → (71.44,179.94) → (76.52,179.94) → (76.52,178.67)</td><td class="num">7.6</td><td class="num">2</td></tr><tr><td class="num">49</td><td class="num">PED_SEL</td><td class="num">A301.9</td><td class="num">76.52</td><td class="num">173.59</td><td class="num">JP304.2</td><td class="num">96.84</td><td class="num">173.59</td><td class="num">(76.52,173.59) → (87.95,173.59) → (87.95,172.32) → (96.84,172.32) → (96.84,173.59)</td><td class="num">22.9</td><td class="num">3</td></tr></tbody></table></div></details><details class="spec cbom" id="circuit-mb-mux"><summary>4067 모듈 핀 (심볼 핀 ↔ 모듈 헤더)</summary><div class="tbl"><table><thead><tr><th>심볼 핀</th><th>이름</th><th>모듈 헤더</th><th>헤더 핀</th></tr></thead><tbody><tr><td class="num">1</td><td>C0</td><td>J1</td><td class="num">1</td></tr><tr><td class="num">2</td><td>C1</td><td>J1</td><td class="num">2</td></tr><tr><td class="num">3</td><td>C2</td><td>J1</td><td class="num">3</td></tr><tr><td class="num">4</td><td>C3</td><td>J1</td><td class="num">4</td></tr><tr><td class="num">5</td><td>C4</td><td>J1</td><td class="num">5</td></tr><tr><td class="num">6</td><td>C5</td><td>J1</td><td class="num">6</td></tr><tr><td class="num">7</td><td>C6</td><td>J1</td><td class="num">7</td></tr><tr><td class="num">8</td><td>C7</td><td>J1</td><td class="num">8</td></tr><tr><td class="num">9</td><td>C8</td><td>J1</td><td class="num">9</td></tr><tr><td class="num">10</td><td>C9</td><td>J1</td><td class="num">10</td></tr><tr><td class="num">11</td><td>C10</td><td>J1</td><td class="num">11</td></tr><tr><td class="num">12</td><td>C11</td><td>J1</td><td class="num">12</td></tr><tr><td class="num">13</td><td>C12</td><td>J1</td><td class="num">13</td></tr><tr><td class="num">14</td><td>C13</td><td>J1</td><td class="num">14</td></tr><tr><td class="num">15</td><td>C14</td><td>J1</td><td class="num">15</td></tr><tr><td class="num">16</td><td>C15</td><td>J1</td><td class="num">16</td></tr><tr><td class="num">17</td><td>GND</td><td>J2</td><td class="num">1</td></tr><tr><td class="num">18</td><td>VCC</td><td>J2</td><td class="num">2</td></tr><tr><td class="num">19</td><td>EN</td><td>J2</td><td class="num">3</td></tr><tr><td class="num">20</td><td>S0</td><td>J2</td><td class="num">4</td></tr><tr><td class="num">21</td><td>S1</td><td>J2</td><td class="num">5</td></tr><tr><td class="num">22</td><td>S2</td><td>J2</td><td class="num">6</td></tr><tr><td class="num">23</td><td>S3</td><td>J2</td><td class="num">7</td></tr><tr><td class="num">24</td><td>SIG</td><td>J2</td><td class="num">8</td></tr></tbody></table></div></details><h4 class="sub4">선</h4><div class="tbl"><table><thead><tr><th>W</th><th>선</th><th>끝 → 끝</th><th>CAD 경로 · 길이 (mm)</th><th>자르는 길이</th><th>수축 튜브</th><th>심 · 넷</th></tr></thead><tbody><tr><td class="num">W101~W107</td><td>EUNSUNG 2651-16P 16심 28 AWG, 1.27 피치</td><td>J201 → J301</td><td class="num">85.0</td><td>180 × 7 (남는 95는 차선 안에서 접어 둠)</td><td>—</td><td>16심 (BRD-06 표)</td></tr><tr><td class="num">W403</td><td>Adafruit 4876 플러그 선 6심 26 AWG → 150 mm로 자름</td><td>O1 J302 → X402</td><td class="num">—</td><td>150 (약 20 cm 선에서)</td><td>—</td><td>1 GND · 2 EL_A0 (EXT1) · 3 EL_AS0 (EXT2) · 4 EL_B0 (EXT3) · 5 EXT4 (비움) · 6 +3V3</td></tr><tr><td class="num">W413</td><td>Adafruit 4876 플러그 선 6심 → 150 mm</td><td>O7 J302 → X412</td><td class="num">—</td><td>150</td><td>—</td><td>1 GND · 2 ER_C8 (EXT1) · 3 EXT2 (비움) · 4 EXT3 (비움) · 5 EXT4 (비움) · 6 +3V3</td></tr><tr><td class="num">W201</td><td>Coms NA993 USB-A → C 1 m</td><td>허브 포트 4 → O1 RP2040-Zero USB-C</td><td class="num">740.1</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 740 ≤ 1 m − 40 (CAD 경로 기준 1 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W202</td><td>Coms NA993 USB-A → C 1 m</td><td>허브 포트 5 → O2 RP2040-Zero USB-C</td><td class="num">602.1</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 602 ≤ 1 m − 40 (CAD 경로 기준 1 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W203</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 3 → O3 RP2040-Zero USB-C</td><td class="num">386.4</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 386 ≤ 0.5 m − 40 (CAD 경로 기준 0.5 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W204</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 6 → O4 RP2040-Zero USB-C</td><td class="num">300.7</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 301 ≤ 0.5 m − 40 (CAD 경로 기준 0.5 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W205</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 7 → O5 RP2040-Zero USB-C</td><td class="num">146.8</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 147 ≤ 0.5 m − 40 (CAD 경로 기준 0.3 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W206</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 8 → O6 RP2040-Zero USB-C</td><td class="num">166.3</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 166 ≤ 0.5 m − 40 (CAD 경로 기준 0.3 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr><tr><td class="num">W207</td><td>Coms HB466 USB-A → C 0.5 m</td><td>허브 포트 9 → O7 RP2040-Zero USB-C</td><td class="num">314.6</td><td>산 그대로 (자르지 않음)</td><td>—</td><td>CAD 길이(플러그 포함) 315 ≤ 0.5 m − 40 (CAD 경로 기준 0.5 m). C 쪽 몰드 ≤ 12.5 × 7.6 × 25. 남는 선은 통로에서 끈·벨크로로 묶음 (집게에 끼우지 않음)</td></tr></tbody></table></div><h4 class="sub4">만드는 순서와 확인</h4><ol class="flow"><li>BE163을 지그 P-MB로 70 × 50 + 홈 2.8 × 26.5를 긋고 꺾는다. 나사 Ø3.2 (50.0, 149.0)·(114.5, 192.5), 위치 핀 Ø3.0 (114.5, 149.0)·(50.0, 192.5)을 안내 구멍으로 먼저.</li><li>C301(먹스 VCC–GND, 아랫면 1206) → 아랫면 배선(BRD-08 번호 순서는 주 4). 금지 구역 x81.22~85.42 × y≤173.2는 제로 밑 y≥174.86에서만 건넌다.</li><li>먹스 헤더 1×16 + 1×8, 제로 헤더 1×9 ×2(몰드 뺌, 아래 줄 없음) → 제로 밑면에 캡톤 → 모듈 납땜. R301(O1·O7)~R303(O1)은 붙여 눕힘.</li><li>ID 점퍼: O 번호에 맞춰 JP301~JP303 납땜 브리지(표). JP304는 열어 둔다.</li><li>J301 리본·J302(O1·O7만) 플러그 선을 <b>모듈에 넣기 전에</b> 아랫면에서 납땜 → 모듈을 뒤집어 바닥 구멍으로 넣고 M3×6 ×2(밑에서).</li><li>확인: 3V3–GND 단락 없음, ID 핀–GND 0 Ω/열림이 표와 같음 → USB를 꽂으면 'Toccata O1'~'O7'로 보임.</li></ol><p class="small circ-top"><a href="#circuit-parts">파트 목록으로 ↑</a></p></section>
@@ -3507,6 +3545,570 @@ ol.flow li ul li{margin:3px 0}
       else say('받기에 실패했습니다 (' + c + ').');
     }).then(function(){ b.disabled = false; });
   });
+})();
+/* 01 회로도 · 회로 3D 모델 (hardware/pcb/src/circuit3d.js; page.py appends it to page/circuit.js).
+   Data: fin/circuit/circuit3d.json from src/model3d.py (boards, holes, pads, parts, wires; mm, z up from the desk).
+   Only three.js r128 from cdnjs, loaded once through window.toccata.three (shared with 04 3D 모델). Orbit / pan / zoom, touch,
+   picking, net highlight and layer toggles are written here. Loads when the 3D block first scrolls into view (or on its button).
+   Model -> three: the root group is turned -90 deg about x, so (x, y, z) model = (x, z, -y) three. */
+(function () {
+  'use strict';
+  var box = document.getElementById('circuit-3d-view');
+  if (!box) return;
+  var sec = document.getElementById('p-circuit');
+  var NS = window.toccata = window.toccata || {};
+  var THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  var SRC = box.getAttribute('data-src');
+  var stage = box.querySelector('.c3d-stage'), canvas = stage.querySelector('canvas'), over = stage.querySelector('.c3d-over');
+  var loadBox = stage.querySelector('.c3d-load'), loadTxt = loadBox.querySelector('.c3d-load-t'), goBtn = loadBox.querySelector('.c3d-go');
+  var sceneBar = box.querySelector('.c3d-scenes'), viewBar = box.querySelector('.c3d-views'), togBar = box.querySelector('.c3d-togs');
+  var netSel = box.querySelector('.c3d-net'), infoBox = box.querySelector('.c3d-info'), subEl = box.querySelector('.c3d-sub'),
+      notesEl = box.querySelector('.c3d-notes');
+  var mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var METAL = { '#c0c6cc': 1, '#c9ccd2': 1, '#b8bec6': 1, '#d8c27a': 1, '#5a5f66': 1, '#c9894b': 1 };
+  var LAYERS = [['part', '부품'], ['wire', '기판 배선'], ['cable', '선·리본'], ['board', '기판'], ['ctx', '주변 출력물'], ['lab', '이름표']];
+  var FOV = 30, TAN = Math.tan(FOV / 2 * Math.PI / 180);
+
+  var T = null, D = null, renderer = null, camera = null, scene = null, root = null, raf = 0;
+  var S = { sc: -1, lay: { part: true, wire: true, cable: true, board: true, ctx: true, lab: true }, net: null, sel: null };
+  var cam = { tx: 0, ty: 0, tz: 0, dist: 300, az: -0.6, el: 0.7 };
+  var meshes = [], labels = [], picks = [];
+  var started = false;
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function css(name, fb) { try { var v = getComputedStyle(box).getPropertyValue(name).trim(); return v || fb; } catch (e) { return fb; } }
+
+  // ------------------------------------------------------------------ start (lazy)
+  function ensureThree() {
+    if (window.THREE && window.THREE.WebGLRenderer) return Promise.resolve();
+    if (!NS.three) {
+      NS.three = new Promise(function (res, rej) {
+        var s = document.createElement('script');
+        s.src = THREE_URL; s.async = true;
+        s.onload = function () { res(); };
+        s.onerror = function () { NS.three = null; rej(new Error('three.js를 받지 못했습니다')); };
+        document.head.appendChild(s);
+      });
+    }
+    return NS.three;
+  }
+  function say(t) { loadBox.hidden = false; loadTxt.textContent = t; }
+  function start() {
+    if (started) return; started = true;
+    goBtn.hidden = true;
+    say('3D 모델을 불러오는 중…');
+    Promise.all([ensureThree(), fetch(SRC).then(function (r) { if (!r.ok) throw new Error('모델 파일 ' + r.status); return r.json(); })])
+      .then(function (a) { D = a[1]; T = window.THREE; init(); })
+      .catch(function (e) { started = false; goBtn.hidden = false; say('불러오지 못했습니다: ' + (e && e.message ? e.message : e)); });
+  }
+  goBtn.addEventListener('click', start);
+  // start once the block is on screen while the tab is shown (the router may un-hide the tab after the first intersection report)
+  var inView = false;
+  function visible() { return !sec || !sec.hidden; }
+  function maybe() { if (inView && visible()) start(); }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { en.forEach(function (x) { inView = x.isIntersecting; }); maybe(); }, { rootMargin: '200px' }).observe(stage);
+  } else goBtn.hidden = false;
+  if (sec) try { new MutationObserver(function () { if (!sec.hidden) { maybe(); invalidate(); } }).observe(sec, { attributes: true, attributeFilter: ['hidden'] }); } catch (e) { /* */ }
+  setTimeout(function () { if (!started) goBtn.hidden = false; }, 1500);
+
+  // ------------------------------------------------------------------ three setup
+  function init() {
+    try {
+      renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    } catch (e) { say('이 브라우저에서는 WebGL을 쓸 수 없습니다.'); return; }
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    renderer.setClearColor(0x000000, 0);
+    scene = new T.Scene();
+    camera = new T.PerspectiveCamera(FOV, 1, 0.5, 20000);
+    scene.add(new T.HemisphereLight(0xffffff, 0x9aa0a8, 1.05));
+    var d1 = new T.DirectionalLight(0xffffff, 0.85); d1.position.set(-0.6, 1.0, 0.8); scene.add(d1);
+    var d2 = new T.DirectionalLight(0xffffff, 0.45); d2.position.set(0.7, -0.6, -0.5); scene.add(d2);
+    camera.userData.lights = [d1, d2];
+    buildUi();
+    bindPointer();
+    if ('ResizeObserver' in window) new ResizeObserver(function () { invalidate(); }).observe(stage);
+    else window.addEventListener('resize', invalidate);
+    var want = 0, h = (location.hash || '').replace('#', '');
+    D.scenes.forEach(function (s, k) { if (h === 'circuit-3d-' + s.id) want = k; });
+    loadScene(want);
+    loadBox.hidden = true;
+  }
+
+  // ------------------------------------------------------------------ materials (shared by colour / state)
+  var mats = {};
+  function mat(c, o, state) {
+    var key = c + '|' + (o == null ? 1 : o) + '|' + (state || '');
+    if (mats[key]) return mats[key];
+    var metal = !!METAL[c];
+    var m = new T.MeshStandardMaterial({ color: new T.Color(c), roughness: metal ? 0.35 : 0.62, metalness: metal ? 0.55 : 0.0 });
+    var op = o == null ? 1 : o;
+    if (state === 'dim') op = Math.min(op, 0.08);
+    if (op < 1) { m.transparent = true; m.opacity = op; m.depthWrite = op > 0.5; }
+    if (state === 'hot') { m.emissive = new T.Color(c); m.emissiveIntensity = 0.45; }
+    if (state === 'sel') { m.emissive = new T.Color('#3b82f6'); m.emissiveIntensity = 0.55; }
+    mats[key] = m;
+    return m;
+  }
+
+  // ------------------------------------------------------------------ geometry builders (model coordinates)
+  function boxGeo(b) {
+    var g = new T.BoxGeometry(Math.max(0.02, b[3] - b[0]), Math.max(0.02, b[4] - b[1]), Math.max(0.02, b[5] - b[2]));
+    g.translate((b[0] + b[3]) / 2, (b[1] + b[4]) / 2, (b[2] + b[5]) / 2);
+    return g;
+  }
+  function cylGeo(o) {
+    var L = Math.max(0.02, o.s[1] - o.s[0]), mid = (o.s[0] + o.s[1]) / 2, g;
+    if (o.ring) { g = new T.TorusGeometry(o.r, 0.17, 6, 18); if (o.a === 'x') g.rotateY(Math.PI / 2); else if (o.a === 'y') g.rotateX(Math.PI / 2); }
+    else {
+      g = new T.CylinderGeometry(o.r, o.r, L, o.r > 1.5 ? 24 : 14);
+      if (o.a === 'z') g.rotateX(Math.PI / 2); else if (o.a === 'x') g.rotateZ(-Math.PI / 2);
+    }
+    if (o.a === 'z') g.translate(o.p[0], o.p[1], mid);
+    else if (o.a === 'y') g.translate(o.p[0], mid, o.p[1]);
+    else g.translate(mid, o.p[0], o.p[1]);
+    return g;
+  }
+  function tubeGeo(pts, r) {
+    var n = pts.length, seg = r > 1.2 ? 10 : 7, P = [], pos = [], idx = [];
+    for (var i = 0; i < n; i++) P.push(new T.Vector3(pts[i][0], pts[i][1], pts[i][2]));
+    var Nv = null;
+    for (i = 0; i < n; i++) {
+      var tin = i > 0 ? P[i].clone().sub(P[i - 1]).normalize() : null, tout = i < n - 1 ? P[i + 1].clone().sub(P[i]).normalize() : null;
+      var t = (tin && tout) ? tin.clone().add(tout) : (tin || tout).clone();
+      if (t.lengthSq() < 1e-9) t = (tout || tin).clone();
+      t.normalize();
+      var sc = 1;
+      if (tin && tout) { var c = Math.max(0.35, Math.sqrt(Math.max(0, (1 + tin.dot(tout)) / 2))); sc = Math.min(1.6, 1 / c); }
+      if (!Nv) { Nv = Math.abs(t.z) < 0.9 ? new T.Vector3(0, 0, 1) : new T.Vector3(1, 0, 0); }
+      Nv.sub(t.clone().multiplyScalar(Nv.dot(t))); if (Nv.lengthSq() < 1e-9) Nv = Math.abs(t.z) < 0.9 ? new T.Vector3(0, 0, 1) : new T.Vector3(1, 0, 0);
+      Nv.normalize();
+      var Bv = new T.Vector3().crossVectors(t, Nv).normalize();
+      for (var k = 0; k < seg; k++) {
+        var a = k / seg * Math.PI * 2, ca = Math.cos(a) * r * sc, sa = Math.sin(a) * r * sc;
+        pos.push(P[i].x + ca * Nv.x + sa * Bv.x, P[i].y + ca * Nv.y + sa * Bv.y, P[i].z + ca * Nv.z + sa * Bv.z);
+      }
+    }
+    for (i = 0; i < n - 1; i++) for (k = 0; k < seg; k++) {
+      var a0 = i * seg + k, a1 = i * seg + (k + 1) % seg, b0 = a0 + seg, b1 = a1 + seg;
+      idx.push(a0, b0, a1, a1, b0, b1);
+    }
+    // end caps (flat)
+    [[0, 1], [n - 1, -1]].forEach(function (e) {
+      var base = pos.length / 3, c = P[e[0]];
+      pos.push(c.x, c.y, c.z);
+      for (var q = 0; q < seg; q++) {
+        var u = e[0] * seg + q, v = e[0] * seg + (q + 1) % seg;
+        if (e[1] > 0) idx.push(base, v, u); else idx.push(base, u, v);
+      }
+    });
+    var g = new T.BufferGeometry();
+    g.setAttribute('position', new T.Float32BufferAttribute(pos, 3));
+    g.setIndex(idx);
+    g.computeVertexNormals();
+    return g;
+  }
+  function shapesOf(polys) {
+    if (!polys.length) return [];
+    if (typeof polys[0][0] === 'number') polys = [polys];
+    var outers = [], holes = [];
+    polys.forEach(function (p) {
+      if (p.length < 3) return;
+      var v = p.map(function (q) { return new T.Vector2(q[0], q[1]); });
+      if (T.ShapeUtils.isClockWise(v)) holes.push(v); else outers.push(v);
+    });
+    if (!outers.length && holes.length) { outers = holes.map(function (h) { return h.slice().reverse(); }); holes = []; }
+    var shapes = outers.map(function (v) { return new T.Shape(v); });
+    holes.forEach(function (h) {
+      var p = h[0], best = 0;
+      for (var i = 0; i < outers.length; i++) if (inPoly(p, outers[i])) { best = i; break; }
+      if (shapes[best]) shapes[best].holes.push(new T.Path(h));
+    });
+    return shapes;
+  }
+  function inPoly(p, v) {
+    var c = false;
+    for (var i = 0, j = v.length - 1; i < v.length; j = i++) {
+      if (((v[i].y > p.y) !== (v[j].y > p.y)) && (p.x < (v[j].x - v[i].x) * (p.y - v[i].y) / (v[j].y - v[i].y) + v[i].x)) c = !c;
+    }
+    return c;
+  }
+  function prismGeo(polys, z0, z1) {
+    var sh = shapesOf(polys);
+    if (!sh.length) return null;
+    var g = new T.ExtrudeGeometry(sh, { depth: Math.max(0.05, z1 - z0), bevelEnabled: false, curveSegments: 6 });
+    g.translate(0, 0, z0);
+    return g;
+  }
+  function boardMesh(o) {
+    var sh = new T.Shape(o.p.map(function (q) { return new T.Vector2(q[0], q[1]); }));
+    (o.m || []).forEach(function (h) { var p = new T.Path(); p.absarc(h[0], h[1], h[2] / 2, 0, Math.PI * 2, true); sh.holes.push(p); });
+    var g = new T.ExtrudeGeometry(sh, { depth: o.z[1] - o.z[0], bevelEnabled: false, curveSegments: 16 });
+    g.translate(0, 0, o.z[0]);
+    var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+    o.p.forEach(function (q) { x0 = Math.min(x0, q[0]); y0 = Math.min(y0, q[1]); x1 = Math.max(x1, q[0]); y1 = Math.max(y1, q[1]); });
+    var w = x1 - x0, h = y1 - y0, ppm = Math.min(14, 2048 / Math.max(w, h)), cv = document.createElement('canvas');
+    cv.width = Math.max(8, Math.round(w * ppm)); cv.height = Math.max(8, Math.round(h * ppm));
+    var ctx = cv.getContext('2d');
+    ctx.fillStyle = o.c; ctx.fillRect(0, 0, cv.width, cv.height);
+    (o.h || []).forEach(function (q) {
+      var cx = (q[0] - x0) * ppm, cy = (y1 - q[1]) * ppm;
+      ctx.fillStyle = '#b07a3e'; ctx.beginPath(); ctx.arc(cx, cy, 0.82 * ppm, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#2b2116'; ctx.beginPath(); ctx.arc(cx, cy, 0.48 * ppm, 0, Math.PI * 2); ctx.fill();
+    });
+    var tex = new T.CanvasTexture(cv);
+    tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    tex.repeat.set(1 / w, 1 / h); tex.offset.set(-x0 / w, -y0 / h);
+    var cap = new T.MeshStandardMaterial({ map: tex, roughness: 0.7, metalness: 0 });
+    var side = new T.MeshStandardMaterial({ color: new T.Color(o.cs || '#a8863f'), roughness: 0.8 });
+    var m = new T.Mesh(g, [cap, side]);
+    m.userData.fixedMat = [cap, side];
+    return m;
+  }
+  var padGeoRing = null, padGeoDome = null;
+  function padGroup(o) {
+    if (!padGeoRing) {
+      padGeoRing = new T.CylinderGeometry(0.86, 0.86, 0.07, 16); padGeoRing.rotateX(Math.PI / 2);
+      padGeoDome = new T.SphereGeometry(0.78, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2); padGeoDome.rotateX(Math.PI / 2); padGeoDome.scale(1, 1, 0.75);
+    }
+    var gp = new T.Group(), list = [];
+    var rT = new T.Mesh(padGeoRing); rT.position.set(o.p[0], o.p[1], o.z[1] + 0.04);
+    var rB = new T.Mesh(padGeoRing); rB.position.set(o.p[0], o.p[1], o.z[0] - 0.04);
+    rT.userData.role = rB.userData.role = 'ring';
+    list.push(rT, rB);
+    if (o.s && o.s.indexOf('b') >= 0) { var d = new T.Mesh(padGeoDome); d.position.set(o.p[0], o.p[1], o.z[0] - 0.05); d.scale.z = -1; d.userData.role = 'dome'; list.push(d); }
+    if (o.s && o.s.indexOf('t') >= 0) { var u = new T.Mesh(padGeoDome); u.position.set(o.p[0], o.p[1], o.z[1] + 0.05); u.userData.role = 'dome'; list.push(u); }
+    list.forEach(function (m) { gp.add(m); });
+    return gp;
+  }
+
+  // ------------------------------------------------------------------ scene load
+  function clearScene() {
+    if (root) {
+      scene.remove(root);
+      root.traverse(function (m) {
+        if (m.geometry && m.geometry !== padGeoRing && m.geometry !== padGeoDome) m.geometry.dispose();
+        if (m.userData && m.userData.fixedMat) m.userData.fixedMat.forEach(function (x) { if (x.map) x.map.dispose(); x.dispose(); });
+      });
+    }
+    meshes = []; labels = []; picks = [];
+  }
+  function loadScene(k) {
+    clearScene();
+    S.sc = k; S.net = null; S.sel = null;
+    var sd = D.scenes[k];
+    root = new T.Group(); root.rotation.x = -Math.PI / 2; scene.add(root);
+    var bb = [1e9, 1e9, 1e9, -1e9, -1e9, -1e9];
+    function grow(b) { for (var i = 0; i < 3; i++) { bb[i] = Math.min(bb[i], b[i]); bb[i + 3] = Math.max(bb[i + 3], b[i + 3]); } }
+    sd.objs.forEach(function (o) {
+      var m = null;
+      if (o.k === 'l') { labels.push(o); return; }
+      if (o.k === 'b') { m = new T.Mesh(boxGeo(o.b)); grow(o.b); }
+      else if (o.k === 'c') { m = new T.Mesh(cylGeo(o)); }
+      else if (o.k === 't') { m = new T.Mesh(tubeGeo(o.p, o.r)); }
+      else if (o.k === 'e') { var g = prismGeo(o.p, o.z[0], o.z[1]); if (!g) return; m = new T.Mesh(g); }
+      else if (o.k === 'B') { m = boardMesh(o); }
+      else if (o.k === 'p') { m = padGroup(o); }
+      if (!m) return;
+      m.userData.o = o;
+      root.add(m);
+      meshes.push(m);
+      if (o.k === 'p') m.children.forEach(function (c) { c.userData.o = o; picks.push(c); }); else picks.push(m);
+    });
+    root.updateMatrixWorld(true);
+    var b3 = new T.Box3().setFromObject(root);
+    sd._box = [b3.min.x, -b3.max.z, b3.min.y, b3.max.x, -b3.min.z, b3.max.y];
+    restyle();
+    buildViews(sd);
+    buildNets(sd);
+    sceneBar.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', i === k ? 'true' : 'false'); });
+    subEl.textContent = sd.s || '';
+    notesEl.innerHTML = (sd.notes || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+    showInfo(null);
+    var v0 = sd.v0 && sd.views[sd.v0] ? sd.v0 : null;
+    if (v0) setView(v0, true); else fit(sd._box, -0.6, 0.7, true);
+  }
+
+  // ------------------------------------------------------------------ style (layers, net highlight, selection)
+  function layerOn(o) {
+    var g = o.g || 'part';
+    if (g === 'pad') return S.lay.board;
+    return S.lay[g] !== false;
+  }
+  function restyle() {
+    var hot = S.net, sel = S.sel;
+    meshes.forEach(function (m) {
+      var o = m.userData.o;
+      m.visible = layerOn(o);
+      if (!m.visible) return;
+      var state = '';
+      if (hot) state = (o.n === hot) ? 'hot' : 'dim';
+      if (sel && sameItem(o, sel)) state = 'sel';
+      if (o.k === 'B') {
+        var fm = m.userData.fixedMat;
+        fm.forEach(function (x) { x.transparent = state === 'dim'; x.opacity = state === 'dim' ? 0.25 : 1; x.depthWrite = state !== 'dim'; });
+        return;
+      }
+      if (o.k === 'p') {
+        m.children.forEach(function (c) {
+          var base = c.userData.role === 'ring' ? '#c9894b' : '#c9ccd2';
+          if (state === 'hot' || state === 'sel') base = o.n ? D.nets[o.n] || '#3b82f6' : '#3b82f6';
+          c.material = mat(base, null, state === 'dim' ? 'dim' : (state ? 'hot' : ''));
+        });
+        return;
+      }
+      m.material = mat(o.c || '#888', o.o, state);
+    });
+    invalidate();
+  }
+  function sameItem(o, sel) { return o === sel || (sel.i && o.i === sel.i && o.k !== 'p' && sel.k !== 'p'); }
+
+  // ------------------------------------------------------------------ UI
+  function button(txt, cls, fn) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = cls; b.textContent = txt;
+    b.addEventListener('click', fn);
+    return b;
+  }
+  function buildUi() {
+    sceneBar.innerHTML = '';
+    D.scenes.forEach(function (s, k) {
+      var b = button(s.st || s.t, 'c3d-btn', function () { loadScene(k); });
+      b.title = s.t;
+      sceneBar.appendChild(b);
+    });
+    togBar.innerHTML = '';
+    LAYERS.forEach(function (L) {
+      var b = button(L[1], 'c3d-btn c3d-tog', function () {
+        S.lay[L[0]] = !S.lay[L[0]]; b.setAttribute('aria-pressed', S.lay[L[0]] ? 'true' : 'false'); restyle();
+      });
+      b.setAttribute('aria-pressed', 'true');
+      togBar.appendChild(b);
+    });
+    netSel.addEventListener('change', function () { S.net = netSel.value || null; S.sel = null; restyle(); showNet(); });
+    box.querySelector('.c3d-reset').addEventListener('click', function () { var sd = D.scenes[S.sc]; S.net = null; S.sel = null; netSel.value = ''; restyle(); showInfo(null); setView(sd.v0 || Object.keys(sd.views)[0]); });
+  }
+  function buildViews(sd) {
+    viewBar.innerHTML = '';
+    Object.keys(sd.views).forEach(function (name) {
+      viewBar.appendChild(button(name, 'c3d-btn', function () { setView(name); }));
+    });
+  }
+  function buildNets(sd) {
+    var seen = {};
+    sd.objs.forEach(function (o) { if (o.n) seen[o.n] = (seen[o.n] || 0) + 1; });
+    var names = Object.keys(seen).sort(function (a, b) {
+      var pa = /^(\+|GND|AGND)/.test(a) ? 0 : 1, pb = /^(\+|GND|AGND)/.test(b) ? 0 : 1;
+      return pa - pb || a.localeCompare(b);
+    });
+    netSel.innerHTML = '<option value="">넷 강조: 없음</option>' + names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + ' (' + seen[n] + ')</option>'; }).join('');
+    netSel.disabled = !names.length;
+  }
+  function infoOf(o) {
+    var I = D.info, key = o.i || '', base = key.split('.')[0];
+    return I[key] || I[base] || null;
+  }
+  function showInfo(o) {
+    if (!o) {
+      infoBox.innerHTML = '<p class="c3d-muted">부품·패드·선을 누르면 이름, 값, 넷, 구매 상태가 여기에 나옵니다. 패드나 선을 누르면 같은 넷이 함께 밝아집니다.</p>';
+      return;
+    }
+    var I = infoOf(o), key = o.i || '', pin = key.indexOf('.') > 0 ? key.slice(key.indexOf('.') + 1) : null;
+    var h = '<p class="c3d-it"><b>' + esc(I ? I.t : key) + '</b></p>';
+    if (pin) h += '<p class="c3d-net-l">패드 <span class="mono">' + esc(key) + '</span>' + (o.n ? ' · 넷 <b class="mono" style="color:' + esc(D.nets[o.n] || 'inherit') + '">' + esc(o.n) + '</b>' : ' · 연결 없음') + '</p>';
+    else if (o.n) h += '<p class="c3d-net-l">넷 <b class="mono" style="color:' + esc(D.nets[o.n] || 'inherit') + '">' + esc(o.n) + '</b>' + (o.w ? ' · ' + esc(o.w) : '') + '</p>';
+    if (I && I.d && I.d.length) h += '<ul>' + I.d.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+    infoBox.innerHTML = h;
+  }
+  function showNet() {
+    if (!S.net) { showInfo(null); return; }
+    var n = 0;
+    D.scenes[S.sc].objs.forEach(function (o) { if (o.n === S.net && o.k === 'p') n++; });
+    infoBox.innerHTML = '<p class="c3d-it"><b class="mono" style="color:' + esc(D.nets[S.net] || 'inherit') + '">' + esc(S.net) + '</b></p><p>이 장면에서 패드 ' + n +
+      '개와 그 넷의 선·핀이 밝아지고 나머지는 흐려집니다. 넷 목록에서 "없음"을 고르거나 빈 곳을 누르면 돌아갑니다.</p>';
+  }
+
+  // ------------------------------------------------------------------ camera
+  function size() { return [Math.max(1, stage.clientWidth), Math.max(1, stage.clientHeight)]; }
+  function m2t(x, y, z) { return new T.Vector3(x, z, -y); }
+  function applyCam() {
+    var wh = size();
+    camera.aspect = wh[0] / wh[1];
+    var t = m2t(cam.tx, cam.ty, cam.tz), ce = Math.cos(cam.el);
+    var dir = new T.Vector3(Math.sin(cam.az) * ce, Math.sin(cam.el), Math.cos(cam.az) * ce);
+    camera.position.copy(t).add(dir.multiplyScalar(cam.dist));
+    camera.up.set(0, 1, 0);
+    if (Math.abs(Math.sin(cam.el)) > 0.999) camera.up.set(-Math.sin(cam.az), 0, -Math.cos(cam.az));
+    camera.lookAt(t);
+    camera.near = Math.max(0.2, cam.dist / 200); camera.far = cam.dist * 30 + 5000;
+    camera.updateProjectionMatrix();
+  }
+  function fit(b, az, el, now) {
+    // frame the 8 corners of box b (model mm) for a camera at (az, el): centre the projected extents, then back off until all fit
+    var wh = size(), asp = wh[0] / wh[1], ce = Math.cos(el);
+    var dir = new T.Vector3(Math.sin(az) * ce, Math.sin(el), Math.cos(az) * ce);
+    var up = new T.Vector3(0, 1, 0);
+    if (Math.abs(Math.sin(el)) > 0.999) up.set(-Math.sin(az), 0, -Math.cos(az));
+    var right = new T.Vector3().crossVectors(up, dir).normalize(), upv = new T.Vector3().crossVectors(dir, right).normalize();
+    var c = m2t((b[0] + b[3]) / 2, (b[1] + b[4]) / 2, (b[2] + b[5]) / 2), pts = [];
+    for (var i = 0; i < 8; i++) pts.push(m2t(i & 1 ? b[3] : b[0], i & 2 ? b[4] : b[1], i & 4 ? b[5] : b[2]).sub(c));
+    var xr = pts.map(function (p) { return p.dot(right); }), yu = pts.map(function (p) { return p.dot(upv); });
+    var sx = (Math.max.apply(null, xr) + Math.min.apply(null, xr)) / 2, sy = (Math.max.apply(null, yu) + Math.min.apply(null, yu)) / 2;
+    c.add(right.clone().multiplyScalar(sx)).add(upv.clone().multiplyScalar(sy));
+    var D = 0;
+    pts.forEach(function (p, k) {
+      var x = Math.abs(xr[k] - sx), y = Math.abs(yu[k] - sy), z = p.dot(dir);
+      D = Math.max(D, z + x / (TAN * asp), z + y / TAN);
+    });
+    animTo({ tx: c.x, ty: -c.z, tz: c.y, dist: Math.max(8, D * 1.08), az: az, el: el }, now);
+  }
+  function setView(name, now) {
+    var sd = D.scenes[S.sc], v = sd.views[name];
+    if (!v) return;
+    fit(v.b, v.az * Math.PI / 180, v.el * Math.PI / 180, now);
+  }
+  var anim = null;
+  function animTo(goal, now) {
+    if (now || (mq && mq.matches)) { Object.assign(cam, goal); anim = null; invalidate(); return; }
+    var from = Object.assign({}, cam);
+    var da = goal.az - from.az; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+    anim = { from: from, goal: Object.assign({}, goal, { az: from.az + da }), t0: performance.now(), dur: 420 };
+    invalidate();
+  }
+  function invalidate() { if (!raf && renderer) raf = requestAnimationFrame(frame); }
+  function frame(now) {
+    raf = 0;
+    if (!renderer || (sec && sec.hidden)) return;
+    var wh = size();
+    var cw = Math.round(wh[0]), ch = Math.round(wh[1]);
+    if (canvas.width !== Math.round(cw * renderer.getPixelRatio()) || canvas.height !== Math.round(ch * renderer.getPixelRatio())) renderer.setSize(cw, ch, false);
+    if (anim) {
+      var u = Math.min(1, (now - anim.t0) / anim.dur), e = u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+      ['tx', 'ty', 'tz', 'dist', 'az', 'el'].forEach(function (k) { cam[k] = anim.from[k] + (anim.goal[k] - anim.from[k]) * e; });
+      if (u >= 1) anim = null;
+    }
+    applyCam();
+    renderer.render(scene, camera);
+    drawLabels();
+    if (anim) invalidate();
+  }
+
+  // ------------------------------------------------------------------ labels (SVG overlay, greedy de-overlap)
+  function drawLabels() {
+    if (!S.lay.lab) { over.innerHTML = ''; return; }
+    var wh = size(), placed = [], out = '';
+    var list = labels.slice().sort(function (a, b) { return (a.lv || 0) - (b.lv || 0); });
+    list.forEach(function (l) {
+      var v = m2t(l.p[0], l.p[1], l.p[2]).applyMatrix4(new T.Matrix4()).project(camera);
+      if (v.z > 1 || v.z < -1) return;
+      var x = (v.x + 1) / 2 * wh[0], y = (1 - v.y) / 2 * wh[1];
+      if (x < 4 || y < 10 || x > wh[0] - 4 || y > wh[1] - 4) return;
+      var w = l.t.length * 7.2 + 10, h = 18, r = [x - w / 2, y - h, x + w / 2, y];
+      for (var i = 0; i < placed.length; i++) { var q = placed[i]; if (r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1]) return; }
+      placed.push(r);
+      out += '<text class="lv' + (l.lv || 0) + '" x="' + x.toFixed(1) + '" y="' + (y - 5).toFixed(1) + '" text-anchor="middle">' + esc(l.t) + '</text>';
+    });
+    over.innerHTML = out;
+  }
+
+  // ------------------------------------------------------------------ pointer: rotate / pan / pinch / tap
+  function bindPointer() {
+    var ptrs = {}, drag = null;
+    canvas.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    canvas.addEventListener('pointerdown', function (e) {
+      try { canvas.setPointerCapture(e.pointerId); } catch (x) { /* */ }
+      ptrs[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var np = Object.keys(ptrs).length;
+      anim = null;
+      if (np === 1) drag = { mode: (e.button === 2 || e.shiftKey || e.ctrlKey || e.metaKey) ? 'pan' : 'rot', x: e.clientX, y: e.clientY, moved: false, t0: performance.now(), btn: e.button };
+      else if (np === 2) { var p = Object.keys(ptrs).map(function (k) { return ptrs[k]; }); drag = { mode: 'pinch', d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y), cx: (p[0].x + p[1].x) / 2, cy: (p[0].y + p[1].y) / 2, moved: true, dist: cam.dist }; }
+    });
+    canvas.addEventListener('pointermove', function (e) {
+      if (!ptrs[e.pointerId] || !drag) return;
+      ptrs[e.pointerId] = { x: e.clientX, y: e.clientY };
+      if (drag.mode === 'pinch') {
+        var p = Object.keys(ptrs).map(function (k) { return ptrs[k]; });
+        if (p.length < 2) return;
+        var d = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y), cx = (p[0].x + p[1].x) / 2, cy = (p[0].y + p[1].y) / 2;
+        cam.dist = Math.max(4, drag.dist * drag.d / Math.max(10, d));
+        pan(cx - drag.cx, cy - drag.cy); drag.cx = cx; drag.cy = cy;
+        invalidate(); return;
+      }
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
+      drag.x = e.clientX; drag.y = e.clientY;
+      if (drag.mode === 'rot') { cam.az -= dx * 0.008; cam.el = Math.max(-1.55, Math.min(1.55, cam.el + dy * 0.008)); }
+      else pan(dx, dy);
+      invalidate();
+    });
+    function end(e) {
+      if (!ptrs[e.pointerId]) return;
+      delete ptrs[e.pointerId];
+      var np = Object.keys(ptrs).length;
+      if (drag && drag.mode !== 'pinch' && np === 0 && !drag.moved && performance.now() - drag.t0 < 650 && drag.btn === 0 && e.type === 'pointerup') tap(e.clientX, e.clientY);
+      if (np === 0) drag = null;
+    }
+    canvas.addEventListener('pointerup', end);
+    canvas.addEventListener('pointercancel', end);
+    canvas.addEventListener('wheel', function (e) {
+      e.preventDefault(); anim = null;
+      var f = Math.exp((e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY) * 0.0012);
+      zoomAt(e.clientX, e.clientY, f);
+    }, { passive: false });
+    canvas.addEventListener('dblclick', function (e) {
+      var h = hit(e.clientX, e.clientY);
+      if (!h) return;
+      var p = h.point.clone();                    // three world -> model
+      animTo({ tx: p.x, ty: -p.z, tz: p.y, dist: Math.max(10, cam.dist * 0.45), az: cam.az, el: cam.el });
+    });
+    canvas.addEventListener('keydown', function (e) {
+      var k = e.key, used = true;
+      if (k === 'ArrowLeft') cam.az += 0.08; else if (k === 'ArrowRight') cam.az -= 0.08;
+      else if (k === 'ArrowUp') cam.el = Math.min(1.55, cam.el + 0.08); else if (k === 'ArrowDown') cam.el = Math.max(-1.55, cam.el - 0.08);
+      else if (k === '+' || k === '=') cam.dist *= 0.85; else if (k === '-') cam.dist /= 0.85; else used = false;
+      if (used) { e.preventDefault(); invalidate(); }
+    });
+  }
+  function pan(dx, dy) {
+    var wh = size(), mmpp = 2 * cam.dist * TAN / wh[1];
+    var right = new T.Vector3(), up = new T.Vector3();
+    camera.matrixWorld.extractBasis(right, up, new T.Vector3());
+    var d = right.multiplyScalar(-dx * mmpp).add(up.multiplyScalar(dy * mmpp));
+    cam.tx += d.x; cam.ty += -d.z; cam.tz += d.y;
+  }
+  function zoomAt(cx, cy, f) {
+    var r = canvas.getBoundingClientRect(), wh = size();
+    var nx = (cx - r.left) / wh[0] - 0.5, ny = (cy - r.top) / wh[1] - 0.5;
+    var before = cam.dist;
+    cam.dist = Math.max(4, Math.min(20000, cam.dist * f));
+    var k = (before - cam.dist) / before;                // move the target toward the cursor as we zoom in
+    pan(-nx * wh[0] * k, -ny * wh[1] * k);
+    invalidate();
+  }
+  var ray = null;
+  function hit(cx, cy) {
+    if (!ray) ray = new T.Raycaster();
+    var r = canvas.getBoundingClientRect();
+    ray.setFromCamera(new T.Vector2((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1), camera);
+    var vis = picks.filter(function (m) { var o = m.userData.o; return layerOn(o) && !(S.net && o.n !== S.net && o.g === 'ctx'); });
+    var hs = ray.intersectObjects(vis, false);
+    for (var i = 0; i < hs.length; i++) {
+      var o = hs[i].object.userData.o;
+      if (o.g === 'ctx' && hs.length > i + 1) continue;          // ghosts never hide what is behind them
+      if (S.net && o.n !== S.net && hs[i].object.material && hs[i].object.material.opacity < 0.2) continue;
+      return hs[i];
+    }
+    return null;
+  }
+  function tap(cx, cy) {
+    var h = hit(cx, cy);
+    if (!h) { S.sel = null; S.net = null; netSel.value = ''; restyle(); showInfo(null); return; }
+    var o = h.object.userData.o;
+    S.sel = o;
+    if (o.n) { S.net = o.n; netSel.value = o.n; } else if (S.net && o.n !== S.net) { S.net = null; netSel.value = ''; }
+    restyle();
+    showInfo(o);
+  }
 })();
 </script>
 <script>/* dwg */

@@ -44,3 +44,40 @@
   #p-circuit .circ-chips a{font-size:13px;padding:6px 12px}
 }
 @media (prefers-reduced-motion:reduce){#p-circuit *{scroll-behavior:auto!important;transition:none!important}}
+/* ---- 01 회로도 · 회로 3D 모델 (hardware/pcb/src/circuit3d.css; page tokens only) ---- */
+#p-circuit .c3d{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;align-items:start;margin:10px 0 6px}
+@media (max-width:980px){#p-circuit .c3d{grid-template-columns:minmax(0,1fr)}}
+#p-circuit .c3d-main{min-width:0;display:flex;flex-direction:column;gap:8px}
+#p-circuit .c3d-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-width:0}
+#p-circuit .c3d-lbl{font-size:12px;color:var(--ink-3);min-width:2.8em}
+#p-circuit .c3d-scenes,#p-circuit .c3d-views,#p-circuit .c3d-togs{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+#p-circuit .c3d-btn{font:inherit;font-size:13px;min-height:34px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 11px;cursor:pointer;white-space:nowrap}
+#p-circuit .c3d-btn:hover{border-color:var(--blue)}
+#p-circuit .c3d-btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-circuit .c3d-tog[aria-pressed="false"]{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
+#p-circuit .c3d-net{font:inherit;font-size:13px;min-height:34px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 8px;max-width:100%}
+#p-circuit .c3d-stage{position:relative;height:clamp(340px,62vh,680px);border:1px solid var(--rule);border-radius:12px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%,var(--card) 0%,var(--paper) 100%)}
+#p-circuit .c3d-stage canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none;outline:none}
+#p-circuit .c3d-stage canvas:active{cursor:grabbing}
+#p-circuit .c3d-stage canvas:focus-visible{box-shadow:inset 0 0 0 2px var(--blue)}
+#p-circuit .c3d-over{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#p-circuit .c3d-over text{font:600 12px var(--mono);fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:4px;stroke-linejoin:round}
+#p-circuit .c3d-over text.lv0{font-size:13px;fill:var(--blue-ink)}
+#p-circuit .c3d-over text.lv2{font-size:11px;font-weight:500}
+#p-circuit .c3d-load{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-2);font-size:14px;text-align:center;padding:20px;background:var(--card)}
+#p-circuit .c3d-load[hidden],#p-circuit .c3d-go[hidden]{display:none}
+#p-circuit .c3d-load p{margin:0;max-width:46ch}
+#p-circuit .c3d-hint{position:absolute;left:10px;bottom:8px;font-size:12px;color:var(--ink-3);pointer-events:none;background:color-mix(in srgb,var(--card) 80%,transparent);padding:2px 8px;border-radius:6px}
+#p-circuit .c3d-side{display:flex;flex-direction:column;gap:10px;min-width:0}
+#p-circuit .c3d-info{border:1px solid var(--rule);border-radius:12px;padding:10px 12px;background:var(--card);font-size:13.5px;min-height:120px;overflow-wrap:anywhere}
+#p-circuit .c3d-info p{margin:0 0 6px}
+#p-circuit .c3d-info ul{margin:4px 0 0;padding-left:18px}
+#p-circuit .c3d-info li{margin:2px 0;color:var(--ink-2)}
+#p-circuit .c3d-it{font-size:14.5px}
+#p-circuit .c3d-muted{color:var(--ink-3)}
+#p-circuit .c3d-sub{font-size:13px;color:var(--ink-2);margin:0}
+#p-circuit .c3d-notes{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}
+#p-circuit .c3d-notes li{margin:3px 0}
+@media (max-width:620px){#p-circuit .c3d-stage{height:clamp(300px,58vh,520px)}}
+@media (pointer:coarse){#p-circuit .c3d-btn,#p-circuit .c3d-net{min-height:44px}}

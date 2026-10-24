@@ -3,7 +3,7 @@
 usage: python3 page.py   (after build.py)
   -> hardware/pcb/page/circuit.html, circuit.css, circuit.js, assets.txt
   -> docs/report/toccata-v4/fin/circuit/*.csv + toccata-circuit-revE.zip.b64.txt (download bundle, base64 because the
-     artifact host does not serve .zip)
+     artifact host does not serve .zip) + circuit3d.json (회로 3D 모델, model3d.py; viewer src/circuit3d.js · .css)
 Sheets are published by merge.py as sch/<name>.svg (it copies hardware/pcb/schematic and board).
 """
 import base64
@@ -19,6 +19,7 @@ import zipfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import harness as HN  # noqa: E402
+import model3d as M3  # noqa: E402
 import purchase as PU  # noqa: E402
 import sheets as S  # noqa: E402
 
@@ -239,6 +240,37 @@ DELTA_E = [
     ("29", "SCH-07 · BRD-04·05", f"W701 경로 = CAD 약 {HN.W701_PATH:.0f} mm(볼 홈 → 통로 → 동글) → 플러그 뒤끝에서 {HN.W701_CUT / 1000:.1f} m로 자름, 남는 토막에서 W707. W702 경로 약 {HN.W702_PATH:.0f} mm(1.5 m 그대로)", "검토: '약 0.7 m' 경로와 0.9 m 자르기는 플러그를 빼면 짧았음"),
     ("30", "SCH-06 · BRD-04·05", f"12 AWG 홀더 꼬리 둘 다 {HN.STUB12} mm(R15 굽힘 23.5 + 이음 자리 12) — 이음이 굽힘 뒤에. W602a 16 AWG {HN.W602A_16} mm, W601 리드 {HN.LEAD_W601} mm(전체 약 {HN.W601_TOTAL} ≤ {HN.W601_MAX}), 검정 연장 {HN.BLACK_EXT} mm", "검토: 꼬리 24 + 95 − 겹침 10은 KCD1 탭에 3~6 mm 모자라고 이음이 R15 굽힘 안에 들어감"),
 ]
+
+
+def model3d_section(data, rep):
+    """'회로 3D 모델' block: the viewer (src/circuit3d.js) builds the meshes from fin/circuit/circuit3d.json (model3d.py)."""
+    sc = data["scenes"]
+    btn = "".join(f'<button type="button" class="c3d-btn" disabled>{E(x["st"])}</button>' for x in sc)
+    kb = round(rep["bytes"] / 1024)
+    return ('<section class="circ-part" id="circuit-3d" aria-labelledby="circuit-3d-h"><h3 id="circuit-3d-h"><span class="no">3D</span>회로 3D 모델</h3>'
+            '<p>도면의 기판·부품·배선을 실제 높이로 세운 모델입니다. 구멍·패드·부품 자리는 BRD 도면과 같은 좌표, 아랫면 선은 배선표(wiring_*.csv)의 경로, '
+            '부품 높이와 센서·리본·USB 플러그는 CAD 사양(electronics_modules.json), 가운데 유닛의 모듈·선은 CAD 모델의 외곽과 선 중심선에서 읽었습니다. '
+            '부품·패드·선을 누르면 값·넷·구매 상태가 나오고 같은 넷이 함께 밝아집니다. "아랫면" 보기로 만능기판 밑 배선을 봅니다.</p>'
+            f'<div class="c3d" id="circuit-3d-view" data-src="fin/circuit/circuit3d.json">'
+            '<div class="c3d-main">'
+            f'<div class="c3d-row"><span class="c3d-lbl">장면</span><div class="c3d-scenes" role="group" aria-label="장면">{btn}</div></div>'
+            '<p class="c3d-sub"></p>'
+            '<div class="c3d-stage"><canvas tabindex="0" aria-label="회로 3D 모델. 드래그로 돌리고 휠로 확대합니다."></canvas>'
+            '<svg class="c3d-over" aria-hidden="true"></svg>'
+            f'<div class="c3d-load"><p class="c3d-load-t">이 자리에 오면 3D 모델({kb} KB)과 three.js를 불러옵니다.</p>'
+            '<button type="button" class="c3d-btn c3d-go" hidden>3D 모델 불러오기</button></div>'
+            '<div class="c3d-hint">드래그 돌리기 · 오른쪽(Shift) 드래그 옮기기 · 휠·두 손가락 확대 · 두 번 눌러 다가가기</div></div>'
+            '<div class="c3d-row"><span class="c3d-lbl">보기</span><div class="c3d-views"></div>'
+            '<button type="button" class="c3d-btn c3d-reset">처음으로</button></div>'
+            '<div class="c3d-row"><span class="c3d-lbl">표시</span><div class="c3d-togs"></div>'
+            '<select class="c3d-net" aria-label="넷 강조"><option value="">넷 강조: 없음</option></select></div>'
+            '</div>'
+            '<div class="c3d-side"><div class="c3d-info" aria-live="polite"><p class="c3d-muted">부품·패드·선을 누르면 이름, 값, 넷, 구매 상태가 여기에 나옵니다.</p></div>'
+            '<ul class="c3d-notes"></ul></div>'
+            '</div>'
+            f'<p class="small muted">장면 {len(sc)}개 · 넷 {rep["nets"]}개 · 부품 정보 {rep["info"]}개. 만들기: <span class="mono">hardware/pcb/src/model3d.py</span> '
+            '(page.py가 부름). 모양을 모르는 곳(제로 윗면 부품, 잭 다리, W502 경로, RP2040 칩 자리)은 상자·점선 칸으로 두고 정보에 "추정"이라 적었습니다.</p>'
+            '<p class="small circ-top"><a href="#circuit-parts">파트 목록으로 ↑</a></p></section>')
 
 
 def kicad_steps():
@@ -484,7 +516,11 @@ def build():
              f'<div class="kf"><b>{n_cab}가닥</b><span>선 (표 {n_rows}줄, 젠더 X701 포함) · 자르는 길이 = CAD 경로 + 20</span></div>'
              f'<div class="kf"><b>{CHK[0]} · {CHK[1]} · {CHK[2]}</b><span>연결 오류 · 글자 겹침 · 기판 배선 검사 ({n_sheets}장 자동 검사)</span></div>'
              '</div>')
-    chips = [("circuit-sys", "시스템", "SCH-01"), ("circuit-sb", "센서 기판 SB", "×7"), ("circuit-mb", "제어 기판 MB", "×7"), ("circuit-end", "끝 부속 EL·ER", "×2"),
+    m3d, m3rep = M3.build()
+    m3p = M3.check(m3d)
+    if m3p:
+        print("page: model3d problems:", len(m3p), m3p[:5])
+    chips = [("circuit-3d", "3D 모델", "%d장면" % len(m3d["scenes"])), ("circuit-sys", "시스템", "SCH-01"), ("circuit-sb", "센서 기판 SB", "×7"), ("circuit-mb", "제어 기판 MB", "×7"), ("circuit-end", "끝 부속 EL·ER", "×2"),
              ("circuit-ped", "페달 PB·PS", "×1"), ("circuit-pwr", "전원", "CU"), ("circuit-aud", "오디오", "CU"), ("circuit-ts", "터치스크린", "CU"),
              ("circuit-arrive", "받으면 확인", str(len(CHECKS))), ("circuit-kicad", "KiCad로", "8단계"), ("circuit-files", "파일 받기", "CSV · ZIP")]
     p.append('<nav class="circ-chips" id="circuit-parts" aria-label="회로 파트">' + "".join(
@@ -492,6 +528,7 @@ def build():
     p.append('<p class="small muted">도면 색: 초록 선 = 배선, 갈색 테두리 = 부품, 파란 상자 = 산 모듈, 점선 갈색 = 케이블, 노란 △ = 처음 글 사양 대비 바꾼 곳(번호는 맨 아래 표). '
              '"&gt;&gt;" = 맞물린 커넥터(KiCad에서는 연결이 아니라 양쪽에 같은 넷 이름). 도면은 "2배·3배"로 페이지 안에서 확대해 옆으로 넘겨 봅니다. '
              f'USB 선 길이: {E(usb_txt)}.</p>')
+    p.append(model3d_section(m3d, m3rep))
     p += body_parts
     p.append('<section class="circ-part" id="circuit-arrive" aria-labelledby="circuit-arrive-h"><h3 id="circuit-arrive-h"><span class="no">I</span>부품이 오면 먼저 확인할 것</h3>'
              + table(["항목", "확인"], CHECKS) + '<p class="small circ-top"><a href="#circuit-parts">파트 목록으로 ↑</a></p></section>')
@@ -520,10 +557,14 @@ def build():
     frag = "\n".join(p)
     with open(os.path.join(OUT, "circuit.html"), "w", encoding="utf-8") as f:
         f.write(frag)
+    with open(os.path.join(HERE, "circuit3d.css"), encoding="utf-8") as f:
+        css3d = f.read()
+    with open(os.path.join(HERE, "circuit3d.js"), encoding="utf-8") as f:
+        js3d = f.read()
     with open(os.path.join(OUT, "circuit.css"), "w", encoding="utf-8") as f:
-        f.write(CSS)
+        f.write(CSS + css3d)
     with open(os.path.join(OUT, "circuit.js"), "w", encoding="utf-8") as f:
-        f.write(JS)
+        f.write(JS + js3d)
     # runtime assets: CSVs + ZIP (base64 text) into docs/report/toccata-v4/fin/circuit/
     assets = []
     for fname, _ in FILES:
@@ -539,6 +580,8 @@ def build():
     with open(fz, "w", encoding="ascii") as f:
         f.write(base64.b64encode(buf.getvalue()).decode("ascii"))
     assets.append("fin/circuit/" + ZIPNAME + ".b64.txt")
+    shutil.copyfile(M3.OUT, os.path.join(FIN, "circuit3d.json"))
+    assets.append("fin/circuit/circuit3d.json")
     sheet_assets = ["sch/" + v["file"] for v in SHEETS_JSON.values()]
     with open(os.path.join(OUT, "assets.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(sheet_assets + assets) + "\n")
