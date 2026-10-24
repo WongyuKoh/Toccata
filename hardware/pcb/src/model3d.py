@@ -9,6 +9,7 @@ No new geometry is made up here. Every board outline, hole, pad, part and wire i
     EL / ER strands of BRD-02 (straight, as drawn)
   * part bodies and heights: CAD spec hardware/mechanical/cad/spec/electronics_modules.json (MB, Zero, mux, ribbon, USB plug, SB, EL / ER,
     DRV5055 in the sensor-bar pockets) and keyaction_features_frame.json (J701 pocket)
+  * frame F|F# fin + keel through the MB slot: W1 model hardware/mechanical/key-action-v4/model/geometry.json (side outlines)
   * centre unit: netlist/cad_centre.json (CAD outlines, boxes, wire centre lines, fixing points) and harness.py (conductor colours)
 Where a source only gives an envelope (Zero top parts, modules, jacks) the model shows the envelope. Places that depend on the received
 part (PJ-313 legs, the W502 path, the RP2040 chip spot on the Zero) are drawn and marked '추정'.
@@ -18,6 +19,7 @@ Coordinates: mm, z up from the desk. Module scene = module-local x (world x = 47
 JSON objects (short keys, the viewer src/circuit3d.js builds the meshes):
   {k:'b', b:[x0,y0,z0,x1,y1,z1]}                box          {k:'c', a:'x'|'y'|'z', p:[u,v], r, s:[s0,s1]}   cylinder
   {k:'t', p:[[x,y,z]..], r}                     tube         {k:'e', p:[[x,y]..] | [[[x,y]..]..], z:[z0,z1]}  prism (outline + holes)
+                                                             {k:'e', ax:'x', p:[[y,z]..], z:[x0,x1]}       side outline extruded along x
   {k:'B', p:[[x,y]..], z:[z0,z1], h:[[x,y]..], m:[[x,y,d]..]}  perfboard: outline, lattice holes (texture), drilled holes
   {k:'p', p:[x,y], z:[z0,z1], s:'b'|'t'|'bt'}   pad + solder     {k:'l', p:[x,y,z], t}                         label
   common: c colour, i info key, g layer (board / part / pad / wire / cable / ctx), n net, o opacity, w '주석 맨선' | '피복 가닥' ...
@@ -36,6 +38,7 @@ REPO = os.path.normpath(os.path.join(ROOT, "..", ".."))
 NL = os.path.join(ROOT, "netlist")
 OUT = os.path.join(ROOT, "page", "circuit3d.json")
 SPEC = os.path.join(REPO, "hardware", "mechanical", "cad", "spec")
+W1_GEOM = os.path.join(REPO, "hardware", "mechanical", "key-action-v4", "model", "geometry.json")
 sys.path.insert(0, HERE)
 
 import boards2 as B2   # noqa: E402
@@ -56,7 +59,7 @@ C = dict(perf="#c8a45a", perf_side="#a8863f", pcb_blue="#2a5caa", pcb_green="#2f
          usb="#2b2b2b", shell="#b8bec6", cable="#3a3a3a", jack="#202124", hall="#1d1d1f", lead="#c0c6cc", ctx="#7d858f",
          bar="#6b8fb5", screw="#5a5f66", xt60="#e0b020", fuse="#d9473a", battery="#24427a", pi="#2e7d32", hub="#1f2227",
          dongle="#eceef1", amp="#2a5caa", buck="#2a5caa", heat="#9aa3ad", ffc="#b8862f", ply="#d9b98b", printed="#7d858f",
-         wire_wht="#e6e8ec", shrink_red="#c0392b", shrink_blu="#1f5fbf")
+         wire_wht="#e6e8ec", shrink_red="#c0392b", shrink_blu="#1f5fbf", frame="#8f9bb0")
 BANDS = {"1k": ["#7a4a1e", "#111", "#c0392b"], "100k": ["#7a4a1e", "#111", "#e8c61a"], "100": ["#7a4a1e", "#111", "#7a4a1e"]}
 
 
@@ -143,6 +146,30 @@ def load_jack_spec():
     with open(os.path.join(SPEC, "keyaction_features_frame.json"), encoding="utf-8") as f:
         d = json.load(f)
     return d["cheeks"]["headphone_jack"]
+
+
+def load_fin():
+    """W1 frame pieces that pass through the MB front slot (x81.92~84.72): the F|F# fin (foot plate from the floor to the top plate,
+    then hung over the Zero to the rear wall) and its keel to the balance rail. Side outlines (y, z) at module-local x."""
+    with open(W1_GEOM, encoding="utf-8") as f:
+        g = json.load(f)
+    sl = S.MB["slot"]
+    out = []
+    for p in g["parts"]:
+        if p.get("body") == "fixed" and p.get("part", "").startswith("fin") and sl[0] - 0.6 < p["x"][0] and p["x"][1] < sl[1] + 0.6:
+            out.append(dict(name=p["part"], x=p["x"], side=simplify_yz(p["side"])))
+    return out
+
+
+def simplify_yz(pts):
+    """drop collinear points of a side outline (the W1 export samples flat edges every 0.5 mm)."""
+    out = []
+    n = len(pts)
+    for i, b in enumerate(pts):
+        a, c = pts[i - 1], pts[(i + 1) % n]
+        if (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]) != 0:
+            out.append([r2(b[0]), r2(b[1])])
+    return out
 
 
 def bx(b):
@@ -403,14 +430,33 @@ def scene_module(SP, BOM):
     sc.label((70.48, 110.0, 6.5), "리본 W101 (16심)", 0)
     # ---------------------------------------------------------------- MB (z9.0~10.6)
     mb_scene_parts(sc, SP, X0=0.0, detail=True)
+    # ---------------------------------------------------------------- frame F|F# fin + keel through the MB front slot (context)
+    for f in load_fin():
+        keel = "keel" in f["name"]
+        sc.add(k="e", ax="x", p=f["side"], z=[r2(f["x"][0]), r2(f["x"][1])], c=C["frame"], i="CTX-KEEL" if keel else "CTX-FIN", g="ctx",
+               o=0.7 if keel else 0.42)
+    sc.label((83.3, 160.0, 24.0), "F|F# 핀 (프레임)", 1)
+    sl, kp = S.MB["slot"], S.MB["keep"]
+    info("CTX-FIN", "F|F# 핀 (프레임 세로판, 두께 1.6) — MB 앞 홈을 지나감", [
+        "F와 F# 건반 사이의 프레임 보강판. 핀 발 y148.6~170.7은 바닥(z3)에서 윗판(z68.85)까지 서고, y170.7 뒤로는 z21.5 위로 떠서 제로와 USB 플러그 위를 지나 뒷벽(y209)까지 갑니다.",
+        "이 핀을 기판 높이 아래까지 내린 이유 (W1 r4.1, 물리 M2): 기판 위 D#~G# 6건반 화음 자리가 196 N/mm로 물러 1.2~1.4 m/s에서 노치가 0.22~0.24 들림 → 핀을 내려 492 N/mm, 들림 0.135 / 0.062 (백 / 흑).",
+        "그래서 MB에 앞이 열린 홈 x%.2f~%.2f × y%.1f~%.1f (핀 양옆 0.60)를 두고, 금지 구역 x%.2f~%.2f × y≤%.1f에는 부품·패드·배선이 없습니다. "
+        "왼쪽·오른쪽을 잇는 아랫면 선은 y174.86 이상(제로 밑)으로만 건넙니다 (BRD-08)." % (sl[0], sl[1], sl[2], sl[3], kp[0], kp[1], kp[3]),
+        "기판은 위·앞·뒤로 넣을 수 없어 바닥 구멍으로 밑에서 곧게 올려 넣습니다 (W1 r4.4 고침 2b).",
+        "출처: key-action-v4 DESIGN.md · model/geometry.json (fin)"])
+    info("CTX-KEEL", "F|F# 핀 킬 (홈 안, 밸런스 레일 뒷면까지)", [
+        "y144.5~148.6 × z3~19.3: 핀 발을 바닥 대신 밸런스 레일 뒷면(y144.5)에 붙여 화음 자리 강성 492 N/mm를 냅니다 (r4.5 고침 2).",
+        "기판 홈 앞쪽 끝(y145.5)을 지나므로 홈은 기판 앞 가장자리까지 열려 있습니다.", "출처: model/geometry.json (fin keel)"])
     sc.view("모듈 전체", [0, 58, 4, 165, 236, 22], az=-28, el=42, default=True)
     sc.view("SB 확대", [0, 58, 4, 165, 80, 15], az=-20, el=48)
     sc.view("SB 아랫면", [0, 58, 4, 165, 80, 15], az=-20, el=-52)
     sc.view("MB 확대", [46, 144, 4, 118, 200, 20], az=-30, el=45)
     sc.view("MB 아랫면", [46, 144, 4, 118, 200, 20], az=-30, el=-55)
     sc.view("MB 위", [46, 144, 4, 118, 200, 20], az=0, el=89)
+    sc.view("F|F# 핀 · 홈", [62, 138, 2, 106, 212, 34], az=-18, el=26)
     sc.note("ID 점퍼는 O1 = JP301 닫음, R301~R303 100 kΩ와 J302 EXT는 O1·O7에만 (O7은 R301만). 다른 모듈은 같은 자리를 비웁니다.")
-    sc.note("센서 바·받침 리브·매단 보스는 위치만 흐리게(주변 출력물). 센서가 기판보다 떠 있는 것은 바의 홈 안에 눕혀 있기 때문입니다.")
+    sc.note("센서 바·받침 리브·매단 보스·F|F# 핀은 위치만 흐리게(주변 출력물). 센서가 기판보다 떠 있는 것은 바의 홈 안에 눕혀 있기 때문입니다.")
+    sc.note("MB 앞 홈은 프레임의 F|F# 핀(건반 F와 F# 사이 보강판)과 킬이 지나는 자리입니다 — 핀을 누르면 이유가 나옵니다. '주변 출력물'을 끄면 숨겨집니다.")
     return sc
 
 

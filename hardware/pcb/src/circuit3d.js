@@ -185,11 +185,13 @@
     }
     return c;
   }
-  function prismGeo(polys, z0, z1) {
+  function prismGeo(polys, z0, z1, ax) {
     var sh = shapesOf(polys);
     if (!sh.length) return null;
     var g = new T.ExtrudeGeometry(sh, { depth: Math.max(0.05, z1 - z0), bevelEnabled: false, curveSegments: 6 });
     g.translate(0, 0, z0);
+    // ax 'x': the outline is a side view (y, z) extruded along x -> (u, v, w) = (x', y', z') becomes model (w, u, v)
+    if (ax === 'x') g.applyMatrix4(new T.Matrix4().set(0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1));
     return g;
   }
   function boardMesh(o) {
@@ -258,7 +260,7 @@
       if (o.k === 'b') { m = new T.Mesh(boxGeo(o.b)); grow(o.b); }
       else if (o.k === 'c') { m = new T.Mesh(cylGeo(o)); }
       else if (o.k === 't') { m = new T.Mesh(tubeGeo(o.p, o.r)); }
-      else if (o.k === 'e') { var g = prismGeo(o.p, o.z[0], o.z[1]); if (!g) return; m = new T.Mesh(g); }
+      else if (o.k === 'e') { var g = prismGeo(o.p, o.z[0], o.z[1], o.ax); if (!g) return; m = new T.Mesh(g); }
       else if (o.k === 'B') { m = boardMesh(o); }
       else if (o.k === 'p') { m = padGroup(o); }
       if (!m) return;
