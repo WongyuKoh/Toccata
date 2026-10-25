@@ -16,3 +16,11 @@ archive/hardware/bom/final-bom/site_pre_L2/
 # one-file download of stl/print (rebuilt from the committed STLs)
 hardware/mechanical/cad/Toccata_출력STL_전체.zip
 최종본/04_3D출력_STL/Toccata_출력STL_전체.zip
+
+# Raspberry Pi runtime: keep device choices and generated recordings local.
+.venv/
+.env
+/config/midi.json
+/data/
+/logs/
+/project.json

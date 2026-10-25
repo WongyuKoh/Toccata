@@ -41,7 +41,7 @@ hardware/     기구·PCB·BOM 작업 원본
   bom/          최종 재료 페이지 생성기·데이터 (final-bom/), 주문용 엑셀 생성기 (final-bom/build_order_xlsx.py)
 archive/      지난 설계·보고서·목록 (원래 경로 앞에 archive/를 붙인 곳)
 firmware/     RP2040-Zero 펌웨어 (키 스캔, 벨로시티, USB-MIDI) — 아직 비어 있음
-sw/           라즈베리파이 소프트웨어 (FluidSynth, 터치 메뉴) 및 이후 리듬게임 — 아직 비어 있음
+sw/           라즈베리파이 USB MIDI 개발 도구 · FluidSynth 선택 실행 (터치 메뉴·리듬게임은 이후 구현)
 ```
 
 ## 핵심 사양 (v4 확정본 · 2026-10-02)
@@ -62,6 +62,18 @@ sw/           라즈베리파이 소프트웨어 (FluidSynth, 터치 메뉴) 및
 
 > 옥타브 모듈 1개가 곧 완결된 12키 USB-MIDI 키보드입니다. 첫 모듈에서 2단계(음원 테스트)를 시작합니다.
 > 이전 상용급 설계(v0.3, 600~1,100만원)는 [archive/docs](archive/docs/)에 보관.
+
+## 라즈베리파이 MIDI 개발
+
+맥의 최신 작업은 `design/v3-fastener-changes` 브랜치에 있습니다. 라즈베리파이에서 같은 브랜치를 clone해 개발합니다.
+
+```bash
+./sw/setup-midi.sh
+./sw/toccata-midi list
+./sw/toccata-midi monitor
+```
+
+MIDI 입력 확인, 피아노 음원 실행, 오디오 장치 설정, Mac → GitHub → Pi 업데이트 방법은 **[sw/README.md](sw/README.md)**를 참고하세요. 부팅 자동 실행은 기본적으로 꺼져 있습니다.
 
 ## 라이선스
 
