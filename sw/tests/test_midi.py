@@ -205,6 +205,24 @@ class MonitorTests(unittest.TestCase):
         self.assertEqual(len(ports), 2)
         self.assertTrue(all(port.closed for port in ports))
 
+    def test_main_sigterm_is_successful_shutdown_and_closes_input(self):
+        port = Input()
+        class Backend:
+            def get_input_names(self):
+                return ["Toccata O1"]
+            def open_input(self, _name):
+                return port
+        original_monitor = midi.monitor
+        previous = signal.getsignal(signal.SIGTERM)
+        def send_sigterm(_duration):
+            signal.raise_signal(signal.SIGTERM)
+        def run_monitor(backend, selectors, duration):
+            original_monitor(backend, selectors, duration, sleep=send_sigterm, emit=lambda *args, **kw: None)
+        with patch.object(midi, "midi_backend", return_value=Backend()), patch.object(midi, "monitor", side_effect=run_monitor):
+            self.assertEqual(midi.main(["monitor"]), 0)
+        self.assertTrue(port.closed)
+        self.assertEqual(signal.getsignal(signal.SIGTERM), previous)
+
 
 @unittest.skipUnless(importlib.util.find_spec("mido"), "Install sw/requirements-midi.txt to test real MIDI files")
 class DemoTests(unittest.TestCase):

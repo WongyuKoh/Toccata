@@ -307,8 +307,9 @@ def main(argv=None):
         return 0
     except KeyboardInterrupt:
         return 130
-    except Interrupted as exc:
-        return 128 + exc.signum
+    except Interrupted:
+        # A systemd stop is a normal shutdown; monitor() has closed its inputs.
+        return 0
     except (MidiError, OSError, RuntimeError, subprocess.TimeoutExpired) as exc:
         print(f"오류: {exc}", file=sys.stderr)
         return 1
