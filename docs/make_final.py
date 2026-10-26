@@ -71,6 +71,7 @@ COPIES = [  # (source, destination under 최종본) — folders are copied whole
     (f"{CAD}/stl/print", "04_3D출력_STL/본출력"),
     (f"{CAD}/stl/print_extra", "04_3D출력_STL/선택·대안·예비"),
     (f"{CAD}/Toccata_출력STL_전체.zip", "04_3D출력_STL/Toccata_출력STL_전체.zip"),
+    (f"{CAD}/Toccata_한옥타브_출력STL.zip", "04_3D출력_STL/Toccata_한옥타브_출력STL.zip"),
     (f"{CAD}/Toccata_전체조립.3mf", "04_3D출력_STL/전체조립_보기용/Toccata_전체조립.3mf"),
     (f"{CAD}/Toccata_전체조립.glb", "04_3D출력_STL/전체조립_보기용/Toccata_전체조립.glb"),
     (f"{CAD}/README.md", "05_조립·제작/01_CAD_출력·조립_안내.md"),

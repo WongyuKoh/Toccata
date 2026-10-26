@@ -12,6 +12,7 @@ Outputs (../):
                                                  jigs for the BE163 control / PED boards from src/perfboard_jigs.py; optional
                                                  prints -> stl/print_extra/)
   Toccata_출력STL_전체.zip                        everything in stl/print in one file
+  Toccata_한옥타브_출력STL.zip                    one octave module (+ tools, MB jig), names carrying per-octave counts
   stl/assembly/<그룹>.stl                        every part in world coordinates (open them together)
   stl/assembly/Toccata_전체조립.stl               the whole instrument in one file
   stl/annotated/<폴더>/<부품이름>_치수.stl         part + dimension lines + numbers (for looking, not printing)
@@ -289,6 +290,69 @@ def write_print_zip():
     return zp
 
 
+# One octave module for a first-module print (the seven modules O1..O7 are the same shapes): (file stem in stl/print,
+# prints per octave, stem in the zip when the full-set name would mislead). Plus the key-action tools and the MB jig.
+OCTAVE_PRINTS = (
+    [("백건_" + n, 1, None) for n in ("C", "D", "E", "F", "G", "A", "B")]
+    + [("흑건_C#·D#", 2, None), ("흑건_F#", 1, None), ("흑건_G#", 1, None), ("흑건_A#·A#0", 1, "흑건_A#")]
+    + [("레버캐리어_" + n, 1, None) for n in ("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B")]
+    + [("프레임_모듈", 1, None), ("센서바", 1, None), ("가림판띠", 1, None), ("레버봉끝마개", 1, None)]
+    + [("패드바_칸%d" % i, 1, None) for i in (1, 2, 3, 4)]
+    + [("공구_벤치지그받침_T1a", 1, None), ("공구_높이블록_T1b", 1, None), ("공구_캡스턴벤치게이지_T2", 1, None),
+       ("공구_밸런스핀높이게이지_T3", 1, None), ("P-MB_제어기판지그_MB7장", 1, "P-MB_제어기판지그")]
+)
+
+
+def write_octave_zip(rows):
+    """one octave module from stl/print, file names carrying the per-octave counts, plus a short list."""
+    by_stem = collections.defaultdict(list)
+    for r in rows:
+        m = re.match(r"stl/print/([^/]+)/(.+)__\d+개\.stl$", r["file"].replace(os.sep, "/"))
+        if m:
+            by_stem[m.group(2)].append((m.group(1), r))
+    top = "Toccata_한옥타브_출력STL"
+    lines, parts, tools, grams = [], 0, 0, [0.0, 0.0]
+    entries = []
+    for stem, qty, new in OCTAVE_PRINTS:
+        hits = by_stem.get(stem, [])
+        if len(hits) != 1:
+            raise SystemExit("octave zip: '%s' matches %d files in stl/print" % (stem, len(hits)))
+        folder, r = hits[0]
+        name = "%s__%d개.stl" % (new or stem, qty)
+        is_tool = folder.startswith(("06_", "09_"))
+        tools += qty if is_tool else 0
+        parts += 0 if is_tool else qty
+        grams[is_tool] += qty * r["mass_g_solid_petg"]
+        entries.append((os.path.join(OUT, r["file"]), "%s/%s/%s" % (top, folder, name)))
+        lines.append("  %d개  %5.1f g  %-9s  %s/%s" % (qty, r["mass_g_solid_petg"], r.get("material", ""), folder, name))
+    readme = "\n".join([
+        "Toccata 한 옥타브 출력 STL — 옥타브 모듈 1개(건반 12개)",
+        "",
+        "옥타브 모듈 7개(O1~O7)는 모양이 같아 이 묶음을 어느 옥타브로 써도 됩니다.",
+        "파일 이름 끝 __N개가 한 옥타브에 뽑을 개수입니다.",
+        "- 흑건_C#·D#: C#과 D#이 같은 모양이라 2개.",
+        "- 흑건_A#: 전체 목록의 '흑건_A#·A#0'과 같은 파일(한 옥타브에는 A#만).",
+        "- P-MB_제어기판지그: 전체 목록의 'P-MB_제어기판지그_MB7장'과 같은 파일(지그 하나로 MB를 모두 자름).",
+        "",
+        "악기 부품 %d개, 출력 공구·기판 지그 %d개." % (parts, tools),
+        "속 꽉 채움 질량: 부품 %.0f g + 공구·지그 %.0f g. 실제 출력은 채움 %%만큼 적고, 프레임 서포트 약 88 g이 따로 듭니다." % tuple(grams),
+        "뽑는 방향·서포트·재료: 최종본/05_조립·제작/01_CAD_출력·조립_안내.md '출력 목록' (원본 hardware/mechanical/cad/README.md).",
+        "",
+        "들어 있지 않은 것: 끝 부속(A0·A#0·B0·C8), 본체·스피커·터치스크린 출력물, 예비 건반, 대안 패드바(PORON 6T용),",
+        "단계 0 시편(첫 모듈의 조립 시험 21에 쓰는 받침 빗은 00_단계0_시험출력/C17a.stl).",
+        "",
+        "파일 (한 옥타브 개수, 개당 속 꽉 채움 질량, 재료, 폴더/이름):",
+    ] + lines) + "\n"
+    zp = os.path.join(OUT, "Toccata_한옥타브_출력STL.zip")
+    if os.path.exists(zp):
+        os.remove(zp)
+    with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
+        z.writestr(top + "/읽어보기.txt", readme)
+        for full, arc in entries:
+            z.write(full, arc)
+    return zp
+
+
 # ------------------------------------------------------------------ assembly files
 def write_assembly(parts):
     by = collections.OrderedDict()
@@ -374,6 +438,7 @@ def main():
         shutil.rmtree(os.path.join(OUT, "stl", d), ignore_errors=True)
     rows = write_print(parts)
     write_print_zip()
+    write_octave_zip(rows)
     files = write_assembly(parts)
     ondesk = [p for p in parts if p.note not in ("offdesk", "altview")]      # pedal on the floor / folded-screen view
     write_3mf(ondesk, os.path.join(OUT, "Toccata_전체조립.3mf"))
