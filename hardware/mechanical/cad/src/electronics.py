@@ -644,8 +644,7 @@ SW_LUGS = {}
 
 # ------------------------------------------------------------------ hub, LiFePO4 battery + XT60
 
-BAT_LEAD_YZ = (275.0, 34.0)    # assumed XT60 lead exit on the battery's +x end face - check on the real pack
-BAT_DC_YZ = (299.0, 34.0)      # assumed DC charge lead exit on the same face
+BAT_LEAD_YZ = (275.0, 31.5)    # assumed XT60 lead exit on the battery's +x end face (mid-height of the 2026-10-26 pack) - check on the real pack
 
 
 def hub_bank_parts(R, out):
@@ -661,28 +660,27 @@ def hub_bank_parts(R, out):
                  "바닥에 뒤판에 붙여 모듈 선은 -y 면으로; 추정: 아래 포트 10개를 앞면(y%.0f, -y 쪽) x%.1f+22i, z%.1f에, B 포트 y%.0f z%.1f (뒤쪽), "
                  "DC 잭 y%.0f z%.1f (앞쪽) - 끝면 안 자리는 받은 허브로 확인; 포트 0·1(화면 뚜껑 아래)은 비움"
                  % (HUB_X0, HUB_Y, HUB_PORT_X[0], HUB_Z, C25_B_PORT[0], C25_B_PORT[1], HUB_DC_YZ[0], HUB_DC_YZ[1]))
-    # ---- 2026-10-07 (user): LiFePO4 12.8 V 6 Ah pack on the centre floor in the printed frame; XT60 pair + DC charge connector on its top
+    # ---- 2026-10-07 (user): LiFePO4 12.8 V 6 Ah pack on the centre floor in the printed frame; XT60 pair on its top
+    # 2026-10-26 (user): KC 4S1P 140 x 70 x 40, one XT60 F lead for charge + discharge, in a 5 deep pocket of the centre bottom (top z51.5)
     b = CC["BAT-LFP"]
     pc = L2["centre"].get("power_2026_10_07", {})
     rt = pc.get("runtime_h", [3.5, 4.4])
-    out.add("BAT-LFP", "LiFePO4 배터리 12.8 V 6 Ah (Turmera 4S1P 32700, 76.8 Wh, 140×72×35)", "LiFePO4 battery pack 12.8 V 6 Ah 140x72x35", G_BAT,
+    out.add("BAT-LFP", "LiFePO4 배터리 12.8 V 6 Ah (KC 4S1P 32700, 76.8 Wh, 140×70×40)", "LiFePO4 battery pack 12.8 V 6 Ah 140x70x40", G_BAT,
             ccbox("BAT-LFP"), BAT_BLUE,
-            SRC + " centre_contents BAT-LFP (x%.0f~%.0f y%.1f~%.1f z%.1f~%.1f, 셀을 눕혀 바닥 위 - 배터리 틀 CU-BATFRAME 안) + centre.power_2026_10_07 "
-            "(사용자 2026-10-07 상품 정보: 140 × 35 × 72, BMS 4S 40 A / 100 A, 출력 XT60 선, 충전 DC 5.5×2.1 선)" % b,
-            note="추정: 상자 하나로; 무게 약 %.1f kg (%s); 선 두 개는 +x 끝면에서 나온다고 가정 - XT60 선 y%.0f z%.0f, DC 충전 선 y%.0f z%.0f에서 나와 선 꺾는 "
-                 "자리 Z-BAT-LEADS로 위로 꺾여 윗면의 커넥터로; 버스 12.8 V (10.0~14.6 V), 앰프 약 8 W/채널, 사용 시간 약 %.1f~%.1f시간 - 받은 배터리로 "
-                 "선이 나오는 면·높이·길이 확인" % (pc.get("mass_kg_est", 0.9), pc.get("mass_note", "추정"), BAT_LEAD_YZ[0], BAT_LEAD_YZ[1], BAT_DC_YZ[0],
-                                              BAT_DC_YZ[1], rt[0], rt[1]), material="LiFePO4 팩")
+            SRC + " centre_contents BAT-LFP (x%.0f~%.0f y%.1f~%.1f z%.1f~%.1f, 셀을 눕혀 가운데 아랫판의 깊이 5 홈 안 - 배터리 틀 CU-BATFRAME 안) + "
+            "centre.power_2026_10_07.pack_2026_10_26 (사용자 2026-10-26: 쿠팡 9766601860 금강에너지솔루션 KC 인증 4S1P 12.8 V 6 Ah, A타입 70 × 40 × 140, "
+            "입출력 공통 XT60(F) 선 하나)" % b,
+            note="추정: 상자 하나로; 무게 약 %.2f kg (%s); XT60 선은 +x 끝면 y%.0f z%.1f에서 나온다고 가정 - 선 꺾는 자리 Z-BAT-LEADS로 위로 꺾여 윗면의 "
+                 "XT60 짝으로 (홈 바닥 z%.1f에서 5 넘게 위면 홈 벽에 걸리지 않음); 충전 잭이 따로 없어 XT60 짝을 뽑고 충전기 XT60 수를 꽂아 충전; 버스 12.8 V "
+                 "(10.0~14.6 V), 앰프 약 8 W/채널, 사용 시간 약 %.1f~%.1f시간 - 받은 배터리로 선이 나오는 면·높이·길이 확인"
+                 % (pc.get("mass_kg_est", 0.9), pc.get("mass_note", "추정"), BAT_LEAD_YZ[0], BAT_LEAD_YZ[1], b[4], rt[0], rt[1]), material="LiFePO4 팩")
     xt = CC["C-XT60"]
     out.add("C-XT60", "XT60 짝 (배터리 암 + 버스 수, 배터리 윗면에 눕힘)", "XT60 mated pair (battery F + bus M) lying on the battery top", G_CAB,
             ccbox("C-XT60"), XT60_YELLOW, SRC + " centre_contents C-XT60 (x%.0f~%.0f y%.0f~%.0f z%.2f~%.2f, 배터리 윗면) + centre.power_2026_10_07" % xt,
             note="추정: 짝 맞춘 겉모양 31 × 16 × 8.2 한 상자로; 배터리 쪽 암(+x, 선은 C-BAT-LEAD)과 버스 쪽 수(-x, 선은 C-PWR-IN이 -x로 나와 배터리 앞 "
-                 "모서리를 넘어 앞 공간 위 퓨즈 홀더 -x 끝으로); 뚜껑 밑 %.2f; 충전 때는 뽑지 않음 - 12 V 전원 장치로 시험할 때만 뚜껑 L을 들고 뽑아 전원 장치의 XT60 암을 꽂음" % (Z_LIDU - xt[5]))
-    dc = CC["C-DC"]
-    out.add("C-DC", "DC 5.5×2.1 충전 커넥터 (배터리 충전 선 끝, 배터리 윗면에 눕힘)", "DC 5.5x2.1 charge connector on the battery top", G_CAB,
-            ccbox("C-DC"), BLACK_PLASTIC, SRC + " centre_contents C-DC (x%.0f~%.0f y%.0f~%.1f z%.1f~%.1f) + centre.power_2026_10_07 charging" % dc,
-            note="추정: 겉모양 30 × 9.5 × 8.5 상자로 (높이 8.85 이하이면 윗면에 들어감 - 받은 배터리로 확인); 충전: 스위치를 끄고 뚜껑 L을 들어 여기에 "
-                 "LiFePO4 충전기를 꽂음 (XT60은 그대로); 뚜껑 밑 %.2f" % (Z_LIDU - dc[5]))
+                 "모서리를 넘어 앞 공간 위 퓨즈 홀더 -x 끝으로); 뚜껑 밑 %.2f; 충전 (2026-10-26 KC 팩, 충전 잭 없음): 스위치를 끄고 뚜껑 L을 들어 짝을 뽑고 "
+                 "14.6 V LiFePO4 충전기의 XT60 수를 배터리 암에 꽂음, 다 차면 다시 짝을 꽂음; 12 V 전원 장치로 시험할 때는 전원 장치의 XT60 암을 버스 쪽 수에 "
+                 "꽂음" % (Z_LIDU - xt[5]))
 
 
 def c25_geom(pi):
@@ -832,14 +830,10 @@ def pwr_paths():
     dc = HUB_DC
     ly, lz = BAT_LEAD_YZ
     P = {}
-    # battery leads (the pack's own): +x end face -> lead-turn zone Z-BAT-LEADS (x424..434, over the PED board level) -> up onto the
-    # pack top -> XT60 F back (+x) / DC charge connector
+    # battery lead (the pack's own, 2026-10-26 one XT60 lead for charge + discharge): +x end face -> lead-turn zone Z-BAT-LEADS (x424..434,
+    # over the PED board level) -> up onto the pack top -> XT60 F back (+x)
     P["BAT"] = [fillet3([(bt[1] + e, ly, lz), (BAT_LEAD_X, ly, lz), (BAT_LEAD_X, ly, xz), (BAT_LEAD_X, xy, xz), (xt[1] + e, xy, xz)],
                         [0, 3.0, 4.0, 4.0, 0])]
-    dcb = CC["C-DC"]
-    dy_, dz_ = (dcb[2] + dcb[3]) / 2.0, (dcb[4] + dcb[5]) / 2.0
-    P["DC"] = [fillet3([(bt[1] + e, BAT_DC_YZ[0], BAT_DC_YZ[1]), (BAT_LEAD_X, BAT_DC_YZ[0], BAT_DC_YZ[1]), (BAT_LEAD_X, BAT_DC_YZ[0], dz_),
-                        (BAT_LEAD_X, dy_, dz_), (dcb[1] + e, dy_, dz_)], [0, 3.0, 4.0, 4.0, 0])]
     # 2026-10-07 ATC/ATO holder (lying on the frame's fuse shelf, wire axis x): each end = 12 AWG stub lead bent R15 toward +y (about 24 mm),
     # a soldered + heat-shrunk splice (12 long), then the 16 AWG harness lead
     # IN: holder -x end -> R15 to +y (in front of the battery top edge) -> splice -> up over the battery front edge -> +x into the XT60 M
@@ -902,13 +896,9 @@ def power_parts(out):
     zl = CC["Z-BAT-LEADS"]
     out.add("C-BAT-LEAD", "배터리 XT60 선 (팩 +x 끝 → 윗면의 XT60 암, 배터리에 딸림)", "battery XT60 lead (pack +x end to the XT60 female on top)", G_CAB,
             tb("BAT"), WIRE_RED, src + " + BAT-LFP / C-XT60 / Z-BAT-LEADS",
-            note="추정: 두 가닥을 Ø3 한 줄로; 팩 +x 끝면(y%.0f z%.0f 가정)에서 나와 선 꺾는 자리 Z-BAT-LEADS (x%.0f~%.0f, z%.0f 위)에서 x%.0f로 위로 꺾여 "
+            note="추정: 두 가닥을 Ø3 한 줄로; 팩 +x 끝면(y%.0f z%.1f 가정)에서 나와 선 꺾는 자리 Z-BAT-LEADS (x%.0f~%.0f, z%.0f 위)에서 x%.0f로 위로 꺾여 "
                  "배터리 윗면의 XT60 암 뒤(+x 끝 x%.0f)로 들어감; 약 %.0f mm - 선이 나오는 면·높이·길이는 받은 배터리로 확인"
                  % (BAT_LEAD_YZ[0], BAT_LEAD_YZ[1], zl[0], zl[1], zl[4], BAT_LEAD_X, CC["C-XT60"][1], ln["PWR-BAT"]))
-    out.add("C-BAT-DC", "배터리 충전 선 (팩 +x 끝 → 윗면의 DC 5.5×2.1 커넥터, 배터리에 딸림)", "battery charge lead (pack +x end to the DC connector on top)",
-            G_CAB, tb("DC"), COLORS["cable"], src + " + BAT-LFP / C-DC / Z-BAT-LEADS",
-            note="추정: Ø3 한 줄로; 팩 +x 끝면(y%.0f z%.0f 가정)에서 나와 XT60 선 옆(y%.0f)에서 위로 꺾여 윗면의 DC 커넥터 +x 끝(x%.0f)으로; 약 %.0f mm"
-                 % (BAT_DC_YZ[0], BAT_DC_YZ[1], BAT_DC_YZ[0], CC["C-DC"][1], ln["PWR-DC"]))
     sp = "이음 (12 AWG와 16 AWG를 납땜 + 수축 튜브, %.0f × Ø%.1f 추정)" % SPLICE
     out.add("C-PWR-IN", "전원선 XT60 수 → 퓨즈 홀더 (12 AWG 꼬리 + 이음 + 16 AWG)", "power lead XT60 male to the fuse holder (12 AWG stub, splice, 16 AWG)",
             G_CAB, tb("IN"), WIRE_RED, src + " + centre.power_2026_10_07.fuse_holder",

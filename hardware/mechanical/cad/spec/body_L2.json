@@ -1377,16 +1377,16 @@
     3.5,
     4.4
    ],
-   "mass_kg_est": 0.9,
-   "mass_note": "상품 설명 약 900 g - 받은 배터리로 잼",
-   "layout": "배터리 x284~424 y251~323 z16.5~51.5 (바닥 위, 받침 바닥 없음) + 출력 배터리 틀 CU-BATFRAME (벽 1.5 × 14, 둘레 0.5, +x 끝은 모서리 8만 남기고 열림, 끈 구멍 22 × 3 앞·뒤 벽 아래, 앞에 퓨즈 선반 x397~434.6 - ATC/ATO 홀더를 앞 공간 위에 눕혀 끼움). 선 두 개(XT60·DC)는 +x 끝면에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30~뚜껑)에서 위로 꺾여 배터리 윗면(z51.5~61.35)의 XT60 짝·DC 충전 커넥터로. PED 보드는 90° 돌려 x426.5~476.5 y244~314 (z23.1 이하, 선 자리 밑). 뒤판 탭은 x427~451 하나로 (나사 (431.5, 321) · (446.5, 321)), J501 받침 왼쪽 끝 x449 → 450",
-   "charging": "스위치를 끄고 뚜껑 L을 들어 배터리 윗면의 DC 5.5×2.1 충전 선에 충전기를 꽂음 - XT60은 뽑지 않음. 12 V 전원 장치로 시험할 때만 XT60을 뽑고 전원 장치의 XT60 암을 꽂음",
+   "mass_kg_est": 0.65,
+   "mass_note": "추정 - 32700 셀 4개 약 0.56 kg + BMS·수축 포장 (상품 설명에 무게 없음) - 받은 배터리로 잼",
+   "layout": "배터리 x284~424 y251~321 z11.5~51.5 (2026-10-26 KC 팩 140 × 70 × 40: 가운데 아랫판의 깊이 5 홈 안, 바닥 z11.5) + 출력 배터리 틀 CU-BATFRAME (벽 1.5 × 14, 둘레 0.5, +x 끝은 모서리 8만 남기고 열림, 끈 구멍 22 × 3 앞·뒤 벽 아래 + 아랫판 끈 골, 앞에 퓨즈 선반 x397~434.6 - ATC/ATO 홀더를 앞 공간 위에 눕혀 끼움). XT60 선은 +x 끝면에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30~뚜껑)에서 위로 꺾여 배터리 윗면(z51.5~61.35)의 XT60 짝으로. PED 보드는 90° 돌려 x426.5~476.5 y244~314 (z23.1 이하, 선 자리 밑). 뒤판 탭은 x427~451 하나로 (나사 (431.5, 321) · (446.5, 321)), J501 받침 왼쪽 끝 x449 → 450",
+   "charging": "스위치를 끄고 뚜껑 L을 들어 배터리 윗면의 XT60 짝을 뽑고, 14.6 V LiFePO4 충전기의 XT60 수를 배터리 XT60 암에 꽂음. 다 차면 충전기를 빼고 XT60 짝을 다시 꽂음. 12 V 전원 장치로 시험할 때도 같은 자리: XT60 짝을 뽑고 전원 장치의 XT60 암을 버스 쪽 수에 꽂음",
    "on_arrival": [
-    "선(XT60·DC)이 나오는 면과 높이 (가정: +x 끝면, y275 / y299, z34)",
-    "DC 충전 커넥터 겉모양 (높이 8.85 이하면 배터리 윗면에 눕힘)",
-    "배터리 크기·무게 (140 × 72 × 35, 약 900 g)",
-    "끈(L79)이 배터리 밑·위로 감기는지",
-    "선 길이 (XT60 선 경로 약 50 mm, DC 선 약 45 mm)",
+    "선(XT60)이 나오는 면과 높이 (가정: +x 끝면, y275 z31.5 - 홈 바닥 z11.5에서 5 이상 위면 홈 벽에 걸리지 않음)",
+    "배터리 크기·무게 (70 × 40 × 140, 0.65 kg 추정) - 높이 41.6까지는 XT60 짝이 뚜껑 밑에 들어감",
+    "XT60 선 길이 (경로 약 45 mm)와 암·수 (배터리 쪽 암)",
+    "충전기 끝이 XT60 수인지, 출력 14.6 V",
+    "끈(L79)이 홈 바닥의 끈 골로 배터리 밑을 지나 위로 감기는지",
     "퓨즈 홀더 크기 (40.1 × 11.1 × 33.8)와 꼭지 위치·지름 (Ø8, 칼날 쪽 끝에서 7.5 가정) - 받침 2개 (Ø8.3, 위 입구 6.8)에 눌러 끼워지는지",
     "덮개 뽑을 자리: 뚜껑 L을 들고 홀더를 받침에서 빼서 돌렸을 때 덮개가 위로 약 20 빠지는지, 끈 고리가 걸리지 않는지",
     "퓨즈: 5 A ATO (표준 칼날) - 미니(ATM)·맥시가 아님",
@@ -1400,6 +1400,13 @@
     "service": "뚜껑 L(x260~501)을 들고 홀더를 위로 들어 받침 2개에서 빼고 (꼭지가 눌러 끼워짐), 선 축으로 90° 돌려 덮개를 위로 해서 뽑음 → 퓨즈 교체 → 덮개 끼우고 되돌려 받침에 눌러 넣음. 홀더 위는 뚜껑까지 비어 있음",
     "assumed": "추정 (받은 홀더로 확인): 꼭지 축이 칼날 쪽 끝에서 7.5 (아래 몸통 15의 가운데), 꼭지 길이 7.05 (몸통 26), 덮개 끝 폭 16",
     "leads": "12 AWG (바깥 Ø4.2)는 양 끝 꼭지에서 x로 나와 R15로 +y로 꺾임 (호 약 24 mm), 몸통 끝에서 약 24~36 mm에 16 AWG와 이음 (납땜 + 수축 튜브, 길이 12, Ø6.5 모델)"
+   },
+   "pack_2026_10_26": {
+    "decision": "사용자 2026-10-26: 빨리 오는 국내 팩으로 바꿈 - 쿠팡 9766601860 'kc인증 12v 인산철배터리 … 4S1P 12.8V 6AH 국내생산' (판매 금강에너지솔루션, 111,000원). LiFePO4 32700 6,000 mAh 4S1P, A타입(직사각형) 70 × 40 × 140, 공칭 12.8 V, 만충 14.6 V, 입출력 공통 XT60(F) 선 하나 (따로 충전 잭 없음), KC 인증",
+    "fit": "10/7 팩(140 × 72 × 35)보다 폭 2 작고 높이 5 큼 - 가운데 아랫판(출력)에 깊이 5 홈 (x283.5~424.5 y250.5~321.5, 바닥 z11.5 = PETG 6.5 남음)을 파서 윗면을 z51.5 그대로 둠 → XT60 짝·퓨즈 선반·뒤 줄은 그대로. 끈 L79가 팩 밑을 지나도록 홈 바닥에 끈 골 22 × 2.5 (x304~326)를 앞뒤 벽 밖까지",
+    "feet": "가운데 유닛 왼쪽 고무발 2개 (292, 262)·(292, 320)은 홈 밑이라 8호 13 나사 끝(z15)이 홈 바닥(z11.5)을 뚫음 → 이 2개는 나사 없이 MS 폴리머로 붙임",
+    "charging": "스위치를 끄고 뚜껑 L을 들어 배터리 윗면의 XT60 짝을 뽑고, 14.6 V LiFePO4 충전기의 XT60 수를 배터리 XT60 암에 꽂음. 다 차면 충전기를 빼고 XT60 짝을 다시 꽂음",
+    "charger": "쿠팡 9355171374 '12V 인산철 파워뱅크 충전기 14.6V 3A 벽걸이 타입 어댑터 XT60 XT90 겸용' (센티넬트레이딩, 24,000원 + 배송 3,000원, KC 인증 완료) - 6 Ah를 약 2~2.5시간에; 끝이 XT60 수로 보임 (사진) - 받으면 확인"
    }
   }
  },
@@ -1419,20 +1426,20 @@
   },
   {
    "id": "BAT-LFP",
-   "name": "LiFePO4 pack Turmera 12.8 V 6 Ah 4S1P 32700 (76.8 Wh) 140x72x35 lying on the floor, XT60 lead + DC 5.5x2.1 charge lead at the +x end (assumed)",
+   "name": "LiFePO4 pack KC 12.8 V 6 Ah 4S1P 32700 (76.8 Wh, 금강에너지솔루션 2026-10-26) 140x70x40 lying in a 5 mm pocket of the printed centre bottom (floor z11.5, top z51.5 as before), one XT60 F lead for charge + discharge at the +x end (assumed)",
    "bbox_x0x1y0y1z0z1": [
     284.0,
     424.0,
     251.0,
-    323.0,
-    16.5,
+    321.0,
+    11.5,
     51.5
    ],
    "kind": "item"
   },
   {
    "id": "C-XT60",
-   "name": "XT60 mated pair 31x16x8.2 lying on top of the battery (battery F from +x, bus-side M lead to the fuse holder on the frame's fuse shelf)",
+   "name": "XT60 mated pair 31x16x8.2 lying on top of the battery (battery F from +x, bus-side M lead to the fuse holder on the frame's fuse shelf); unplugged to charge (the charger's XT60 M goes into the battery F)",
    "bbox_x0x1y0y1z0z1": [
     392.0,
     423.0,
@@ -1444,21 +1451,8 @@
    "kind": "item"
   },
   {
-   "id": "C-DC",
-   "name": "DC 5.5x2.1 charge connector (female, on the pack's charge lead) lying on top of the battery, envelope 30x9.5x8.5 (assumed)",
-   "bbox_x0x1y0y1z0z1": [
-    392.0,
-    422.0,
-    304.0,
-    313.5,
-    51.5,
-    60.0
-   ],
-   "kind": "item"
-  },
-  {
    "id": "Z-BAT-LEADS",
-   "name": "battery lead-turn zone at the +x end: XT60 + DC leads leave the end face and bend up into the space over the pack (above the PED board level)",
+   "name": "battery lead-turn zone at the +x end: the XT60 lead leaves the end face and bends up into the space over the pack (above the PED board level)",
    "bbox_x0x1y0y1z0z1": [
     424.0,
     434.0,

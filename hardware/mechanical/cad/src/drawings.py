@@ -1629,7 +1629,7 @@ def sheet_D04(M):
 D01_ITEMS = [
     (r"CU-PLY-END-[LR]$", "가운데 유닛 끝벽 L·R (ㄴ자, 출력)"), (r"CU-PLY-BOTTOM$", "가운데 유닛 아랫판 (흡기 Ø8)"),
     (r"CU-PLY-BACK$", "가운데 유닛 뒤판 (I/O 창, 환기 Ø8)"), (r"SEAM-POSTRAIL-\d$", None), (r"SEAM-INS-\d$|CU-M3X10-\d$", "화면 뚜껑 나사 자리 (M3 인서트 + M3×10)"),
-    (r"CU-MAG-PLY-", "뚜껑 자석 Ø8×3 (뒤판·끝벽 쪽)"), (r"BAT-LFP$", None), (r"CU-BATFRAME$", None), (r"^C-XT60$|^C-DC$", "XT60 짝 (전원, 빨간 수축 튜브)·DC 충전 커넥터 (배터리 윗면)"),
+    (r"CU-MAG-PLY-", "뚜껑 자석 Ø8×3 (뒤판·끝벽 쪽)"), (r"BAT-LFP$", None), (r"CU-BATFRAME$", None), (r"^C-XT60$", "XT60 짝 (전원, 빨간 수축 튜브, 배터리 윗면 - 충전 때 뽑음)"),
     (r"PR-BACKPLATE$", None), (r"CU-E-FUSE$", None), (r"CU-E-SWITCH$", None),
     (r"CU-E-J501BOARD$|CU-E-J501$", None), (r"CU-E-PEDBOARD$", None), (r"CU-E-PEDZERO$", None), (r"CU-E-BUCK$", None),
     (r"CU-E-J702BOARD$|CU-E-J702$", None), (r"CU-E-PI5$", None), (r"CU-E-PI5-.+", "Pi 5 포트 (RJ45·USB-A·DISP1)"),
@@ -1916,7 +1916,7 @@ def ply_spots(M, fps):
         (PR-BACKPLATE), sliced 0.3 above the bottom-ply top -> centre bottom ply, top face
       * 둥근머리 D3 x2: the D3.4 bracket holes of PR-HUBSHELF (teardrop, roof up: centre = lowest point + d/2), sliced 0.3 in front
         of the back ply -> centre back ply, inner face
-      * 고무발 8호 13 x14: the FOOT-xx centres -> the bottom plies, underside
+      * 고무발 8호 13 x12: the FOOT-xx centres -> the bottom plies, underside (2026-10-26: the 2 feet under the battery pocket are glued)
     -> {ply id: [dict(kind, what, u, v, fi)]}"""
     import body
     out = collections.defaultdict(list)
@@ -1938,11 +1938,15 @@ def ply_spots(M, fps):
                 put("csk", what, (h["cu"], h["cv"], body.Z_BOT), 2, 1)
     for h in hole_list(sec(M.by["PR-HUBSHELF"].solid, "y", body.YBI - 0.3)):
         put("shelf", "허브 선반 받침", (h["cu"], body.YBI, h["v0"] + h["w"] / 2.0), 1, 0)
+    glued = [tuple(xy) for xy in body.GLUED_FEET]
     for p in M.rear:
         if p.id.startswith("FOOT-"):
             b = M.bb(p)
-            put("foot", "고무발", ((b[0] + b[3]) / 2.0, (b[1] + b[4]) / 2.0, b[5]), 2, 0)
-    want = {"csk": 6, "shelf": 2, "foot": 14}
+            c = ((b[0] + b[3]) / 2.0, (b[1] + b[4]) / 2.0)
+            if any(abs(c[0] - g[0]) < 0.01 and abs(c[1] - g[1]) < 0.01 for g in glued):
+                continue
+            put("foot", "고무발", (c[0], c[1], b[5]), 2, 0)
+    want = {"csk": 6, "shelf": 2, "foot": 14 - len(glued)}
     if dict(found) != want:
         raise DrawingCheckError("D06: screw spots %s, expected %s" % (dict(found), want))
     return out

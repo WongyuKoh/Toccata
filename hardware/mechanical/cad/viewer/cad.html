@@ -1,14 +1,14 @@
 <section class="page" id="p-cad" hidden>
 <h2>3D 모델</h2>
-<p class="lede">설계도와 같은 CAD 입체 1,467개를 조립한 자리 그대로 띄운 모델입니다. 출력 STL, 도면, 이 모델은 모두 같은 생성기(<code>hardware/mechanical/cad/src</code>)에서 나오므로 치수가 같습니다. 부품을 누르면 이름·크기·재료·출력 파일이 나오고, 건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다.</p>
+<p class="lede">설계도와 같은 CAD 입체 1,465개를 조립한 자리 그대로 띄운 모델입니다. 출력 STL, 도면, 이 모델은 모두 같은 생성기(<code>hardware/mechanical/cad/src</code>)에서 나오므로 치수가 같습니다. 부품을 누르면 이름·크기·재료·출력 파일이 나오고, 건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다.</p>
 <div class="kfs">
-<div class="kf"><b>1,461</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
+<div class="kf"><b>1,459</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
 <div class="kf"><b>88</b><span>건반 (백 52 · 흑 36)</span></div>
 <div class="kf"><b>1254 × 342.5</b><span>전체 가로 × 깊이 mm</span></div>
 <div class="kf"><b>z189.23</b><span>가장 높은 점 (화면 25°)</span></div>
 <div class="kf"><b>z144.65 · 40°</b><span>스피커 윗면 · 앞판</span></div>
 <div class="kf"><b>308개</b><span>출력 부품 (90개 파일)</span></div>
-<div class="kf"><b>94</b><span>전자 부품·케이블</span></div>
+<div class="kf"><b>92</b><span>전자 부품·케이블</span></div>
 </div>
 <div class="cadv" id="cad-viewer">
 <div class="cadmain">
@@ -40,11 +40,11 @@
 <button type="button" class="cadset" data-cad-set="7"><span>스피커 L 통</span><em class="mono">20</em></button>
 <button type="button" class="cadset" data-cad-set="8"><span>스피커 R 통</span><em class="mono">20</em></button>
 <button type="button" class="cadset" data-cad-set="9"><span>가운데 유닛 전체</span><em class="mono">69</em></button>
-<button type="button" class="cadset" data-cad-set="10"><span>배터리·전원 12.8 V (퓨즈·스위치·강압)</span><em class="mono">17</em></button>
+<button type="button" class="cadset" data-cad-set="10"><span>배터리·전원 12.8 V (퓨즈·스위치·강압)</span><em class="mono">15</em></button>
 <button type="button" class="cadset" data-cad-set="11"><span>소리: 앰프·동글·스피커선·XT60</span><em class="mono">21</em></button>
 <button type="button" class="cadset" data-cad-set="12"><span>Pi 5·USB 허브·페달 보드</span><em class="mono">28</em></button>
 <button type="button" class="cadset" data-cad-set="13"><span>터치스크린 (25°)</span><em class="mono">20</em></button>
-<button type="button" class="cadset" data-cad-set="14"><span>케이블 전체</span><em class="mono">41</em></button>
+<button type="button" class="cadset" data-cad-set="14"><span>케이블 전체</span><em class="mono">39</em></button>
 <button type="button" class="cadset" data-cad-set="15"><span>옛 합판 10장 (10/16부터 출력)</span><em class="mono">10</em></button>
 <button type="button" class="cadset" data-cad-set="16"><span>고무발·이음 볼트·방진 브래킷</span><em class="mono">44</em></button>
 <button type="button" class="cadset cadset-sec" data-cad-set="17"><span>건반 액션 옆 단면 (D4, x575.75)</span><em>단면</em></button>
@@ -55,7 +55,7 @@
 <details class="cadbox"><summary>종류·모듈 층</summary><div class="cadchips" role="group" aria-label="종류">
 <button type="button" class="cadchip" data-cad-kind="print" aria-pressed="true">출력 <span class="mono">304</span></button>
 <button type="button" class="cadchip" data-cad-kind="bought" aria-pressed="true">구매 <span class="mono">651</span></button>
-<button type="button" class="cadchip" data-cad-kind="electronics" aria-pressed="true">전자 <span class="mono">94</span></button>
+<button type="button" class="cadchip" data-cad-kind="electronics" aria-pressed="true">전자 <span class="mono">92</span></button>
 <button type="button" class="cadchip" data-cad-kind="consumable" aria-pressed="true">소모품 <span class="mono">412</span></button>
 <button type="button" class="cadchip" data-cad-kind="plywood" aria-pressed="true">합판 <span class="mono">0</span></button>
 </div><div class="cadchips" role="group" aria-label="건반 모듈 층 (O1~O7, 끝 부속)">
@@ -124,7 +124,7 @@
 <label><input type="checkbox" data-cad-g="64" checked><span>스피커 유닛</span><em class="mono">2</em></label>
 <p class="cadgh">전자 부품·케이블</p>
 <label><input type="checkbox" data-cad-g="52" checked><span>O1 전자부</span><em class="mono">4</em></label>
-<label><input type="checkbox" data-cad-g="53" checked><span>케이블</span><em class="mono">38</em></label>
+<label><input type="checkbox" data-cad-g="53" checked><span>케이블</span><em class="mono">36</em></label>
 <label><input type="checkbox" data-cad-g="54" checked><span>O2 전자부</span><em class="mono">4</em></label>
 <label><input type="checkbox" data-cad-g="55" checked><span>O3 전자부</span><em class="mono">4</em></label>
 <label><input type="checkbox" data-cad-g="56" checked><span>O4 전자부</span><em class="mono">4</em></label>
@@ -151,7 +151,7 @@
 <tr><td><code>hardware/mechanical/cad/viewer/parts.json</code></td><td>이 탭의 부품표 (외곽, 출력 파일·개수, 메모, 분해·단면·누르기 자료)</td></tr>
 </tbody></table></div>
 <div class="cadsave"><button type="button" class="cadtog" id="cad-save">3D 모델 저장 (GLB를 zip으로)</button><span class="small muted" id="cad-save-msg">Toccata_assembly.zip · 약 2.7 MB</span></div>
-<details class="spec cadest"><summary>받은 부품을 재서 확인할 추정 치수 (78)</summary>
+<details class="spec cadest"><summary>받은 부품을 재서 확인할 추정 치수 (75)</summary>
 <p class="small muted">구매품·전자 부품 가운데 판매처에 치수가 없어 모델에서 정한 값입니다. 받은 부품을 재 보고 다르면 <code>hardware/mechanical/cad/spec/*.json</code>이나 생성기의 값을 고친 뒤 다시 만듭니다. 출력 부품의 치수는 정해진 값이라 이 목록에 없습니다.</p><ul class="small">
 <li><b>M4 열압입 인서트 L69</b> — 바깥 Ø6 × 길이 4를 앞판의 구멍 Ø5.6 × 6.5에 인두로 면까지 넣음 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음), 나사산 안지름 Ø3.3로 모델; M4×12(L70, 모델에 없음)는 유닛 플랜지 4 + EVA 가스켓 3을 지나 5 들어가 인서트 4를 지나 1 더 나감 - 끝은 구멍 바닥 1.5 위라 구멍 안 (가스켓 3이 약 2로 눌리면 약 6 들어가 바닥까지 약 0.5 - M4×12 이하만 씀; M4×14면 7 들어가 구멍 깊이 6.5를 넘어 밀폐면 2.78을 뚫음) (같은 부품 8개)</li>
 <li><b>유닛 EVA 가스켓 3T L</b> — 안쪽 Ø94·바깥 105×105, 나사 자리 4-Ø4.8 PCD115 - EVA 3T 자투리를 칼로 재단, 앞판 바깥면 위(법선 0~3) (같은 부품 2개)</li>
@@ -163,7 +163,6 @@
 <li><b>고무 슬리브 = 연료 호스 OD8 ID4.5</b> — 연료 호스 OD8 ID4.5를 13.0 길이로 잘라 출력 끝벽의 Ø8 구멍에 끼움 (바깥면과 같은 높이, 구멍 Ø8 그대로라 꽉 낌) - 가운데 쪽으로 1.5 나와 나사 머리를 받음; 틈 3은 건너지 않음 (나사를 빼면 EVA 띠가 슬리브에 걸리지 않고 스피커가 곧게 들림), 나사 몸통 Ø4는 EVA 띠 Ø10 구멍을 지남 (같은 부품 4개)</li>
 <li><b>M4 황동 열압입 인서트</b> — 바깥 Ø6 × 길이 6를 출력 옆판 구멍 Ø5.6 × 6.5에 인두로 이음면까지 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음, 밑 0.5 mm는 나사 끝 자리), 나사산 안지름 Ø3.3로 모델 (손잡이볼트 Ø4와 겹침 = 나사산 물림); 구멍 바닥 뒤 PETG 5.0 (밀폐 규칙 ≥ 1.5); 상자를 붙이기 전에 넣음 - 인서트가 비뚤면 손잡이볼트가 끝벽 슬리브 축에서 벗어남 (같은 부품 4개)</li>
 <li><b>피스고무발 28×5</b> — 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 스피커 아랫판은 밀폐 상자 바닥이므로 나사 구멍에 MS 폴리머를 한 방울 넣고 조임 (16 mm 이상이면 상자 안으로 뚫림) (같은 부품 8개)</li>
-<li><b>피스고무발 28×5</b> — 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 배터리 틀 귀 접시 8호 13 (278, 257), 끝 z7.5 - 축 사이 14.9, 나사산 사이 나무 10.7 (check_body: 반대 면 나사 ≥ 4) (같은 부품 2개)</li>
 <li><b>피스고무발 28×5</b> — 머리 자리 Ø9 깊이 2로 표시, 8호 13 mm 이하로 아랫판(11.5)에 고정 - 끝이 z15.0, 판 윗면보다 1.5 아래. 위에서 오는 나사 중 가장 가까운 것: 뒤판 탭 접시 8호 13 (446.5, 321), 끝 z7.5 - 축 사이 174.8, 나사산 사이 나무 170.6 (check_body: 반대 면 나사 ≥ 4) (같은 부품 4개)</li>
 <li><b>네오디뮴 자석 Ø8×3 N35</b> — 출력 뒤판 (자리는 출력에 있음) 윗모서리 Ø8 × 3.2 자리 바닥에 순간접착제, 윗면이 윗모서리보다 0.2 아래 (같은 부품 4개)</li>
 <li><b>네오디뮴 자석 Ø8×3 N35</b> — 출력 뚜껑 밑면 Ø8 × 3.2 자리(출력에 있음)에 순간접착제 (0.2 들어감) → 짝 자석과 틈 0.4, 극은 서로 당기게 (같은 부품 6개)</li>
@@ -208,11 +207,9 @@
 <li><b>USB-C 케이블 W208</b> — PED Zero USB-C(축 x458.14)의 곧은 플러그 y219.0~244.0가 -y로, y217.5에서 +x로 꺾여 올라 앞 공간 줄 y227 z37를 달려 x731에서 묶음 위로 내려와 허브 포트 2(x740.5)로; 길이 363.5 mm (사양 399, 표준 0.5 m, 여유 136) - 경로는 보기용</li>
 <li><b>USB 허브 업스트림 선 C25</b> — A 머리 13 × 15 × 9 (포트 면 x629.5부터) + 뿌리 Ø8 × 8 + 주름 Ø6.5 × 8 (사진 비례, A 쉘 12 × 4.5 기준), B 몸 20 × 16 × 13, 선 OD 4; 길이: A 41.0 (쉘 12 포함) + 선 169.0 + B 40.0 (쉘 10 포함) = 250 (제품 250) - 남는 선은 선반 위 납작한 U자(z56.5, x709까지, 화면 뚜껑 이음 레일 x711 앞)로, 케이블 타이 없이 눕힘. &#x27;상향&#x27;은 혀가 위인 보통 가로 포트에서 위 - Pi 5 USB-A 2단은 두 포트가 같은 방향이라 위로 감 (받으면 먼저 Pi에 꽂아 위로 가는지 확인 - 아래로 꺾이는 선은 어느 포트에서도 머리가 바닥 z16.5에 닿아 못 씀)</li>
 <li><b>NEXTU 710U3 10포트 유전원 USB 허브</b> — 아래 포트 10개를 앞면(y282, -y 쪽) x696.5+22i, z28.5에, B 포트 y319 z28.5 (뒤쪽), DC 잭 y293 z28.5 (앞쪽) - 끝면 안 자리는 받은 허브로 확인; 포트 0·1(화면 뚜껑 아래)은 비움</li>
-<li><b>LiFePO4 배터리 12.8 V 6 Ah</b> — 상자 하나로; 무게 약 0.9 kg (상품 설명 약 900 g - 받은 배터리로 잼); 선 두 개는 +x 끝면에서 나온다고 가정 - XT60 선 y275 z34, DC 충전 선 y299 z34에서 나와 선 꺾는 자리 Z-BAT-LEADS로 위로 꺾여 윗면의 커넥터로; 버스 12.8 V (10.0~14.6 V), 앰프 약 8 W/채널, 사용 시간 약 3.5~4.4시간 - 받은 배터리로 선이 나오는 면·높이·길이 확인</li>
-<li><b>XT60 짝</b> — 짝 맞춘 겉모양 31 × 16 × 8.2 한 상자로; 배터리 쪽 암(+x, 선은 C-BAT-LEAD)과 버스 쪽 수(-x, 선은 C-PWR-IN이 -x로 나와 배터리 앞 모서리를 넘어 앞 공간 위 퓨즈 홀더 -x 끝으로); 뚜껑 밑 1.65; 충전 때는 뽑지 않음 - 12 V 전원 장치로 시험할 때만 뚜껑 L을 들고 뽑아 전원 장치의 XT60 암을 꽂음</li>
-<li><b>DC 5.5×2.1 충전 커넥터</b> — 겉모양 30 × 9.5 × 8.5 상자로 (높이 8.85 이하이면 윗면에 들어감 - 받은 배터리로 확인); 충전: 스위치를 끄고 뚜껑 L을 들어 여기에 LiFePO4 충전기를 꽂음 (XT60은 그대로); 뚜껑 밑 1.35</li>
-<li><b>배터리 XT60 선</b> — 두 가닥을 Ø3 한 줄로; 팩 +x 끝면(y275 z34 가정)에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30 위)에서 x429로 위로 꺾여 배터리 윗면의 XT60 암 뒤(+x 끝 x423)로 들어감; 약 37 mm - 선이 나오는 면·높이·길이는 받은 배터리로 확인</li>
-<li><b>배터리 충전 선</b> — Ø3 한 줄로; 팩 +x 끝면(y299 z34 가정)에서 나와 XT60 선 옆(y299)에서 위로 꺾여 윗면의 DC 커넥터 +x 끝(x422)으로; 약 36 mm</li>
+<li><b>LiFePO4 배터리 12.8 V 6 Ah</b> — 상자 하나로; 무게 약 0.65 kg (추정 - 32700 셀 4개 약 0.56 kg + BMS·수축 포장 (상품 설명에 무게 없음) - 받은 배터리로 잼); XT60 선은 +x 끝면 y275 z31.5에서 나온다고 가정 - 선 꺾는 자리 Z-BAT-LEADS로 위로 꺾여 윗면의 XT60 짝으로 (홈 바닥 z11.5에서 5 넘게 위면 홈 벽에 걸리지 않음); 충전 잭이 따로 없어 XT60 짝을 뽑고 충전기 XT60 수를 꽂아 충전; 버스 12.8 V (10.0~14.6 V), 앰프 약 8 W/채널, 사용 시간 약 3.5~4.4시간 - 받은 배터리로 선이 나오는 면·높이·길이 확인</li>
+<li><b>XT60 짝</b> — 짝 맞춘 겉모양 31 × 16 × 8.2 한 상자로; 배터리 쪽 암(+x, 선은 C-BAT-LEAD)과 버스 쪽 수(-x, 선은 C-PWR-IN이 -x로 나와 배터리 앞 모서리를 넘어 앞 공간 위 퓨즈 홀더 -x 끝으로); 뚜껑 밑 1.65; 충전 (2026-10-26 KC 팩, 충전 잭 없음): 스위치를 끄고 뚜껑 L을 들어 짝을 뽑고 14.6 V LiFePO4 충전기의 XT60 수를 배터리 암에 꽂음, 다 차면 다시 짝을 꽂음; 12 V 전원 장치로 시험할 때는 전원 장치의 XT60 암을 버스 쪽 수에 꽂음</li>
+<li><b>배터리 XT60 선</b> — 두 가닥을 Ø3 한 줄로; 팩 +x 끝면(y275 z31.5 가정)에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30 위)에서 x429로 위로 꺾여 배터리 윗면의 XT60 암 뒤(+x 끝 x423)로 들어감; 약 39 mm - 선이 나오는 면·높이·길이는 받은 배터리로 확인</li>
 <li><b>전원선 XT60 수 → 퓨즈 홀더</b> — 홀더 -x 끝 꼭지(x397)에서 12 AWG (Ø4.2)가 x로 나와 R15로 +y로 꺾임 (약 24 mm), x379.85 y238.2에서 이음 (12 AWG와 16 AWG를 납땜 + 수축 튜브, 12 × Ø6.5 추정), 16 AWG가 올라 배터리 앞 모서리 위를 넘어 y263에서 +x로 꺾여 XT60 수 뒤끝(x392)으로; 홀더 끝에서 약 58 mm (이음 끝까지 36 - 30 안쪽에서 이음 시작) - 하네스 수 선은 이 길이 + 10으로 잘라 둠 (스피커 집게에 닿지 않음, check_electronics.py); 빨강만 퓨즈로, 검정은 같이 따라가 KCD1로 (한 줄로 그림)</li>
 <li><b>전원선 퓨즈 홀더 → KCD1 입력 단자</b> — 홀더 +x 끝 꼭지(x437.1)에서 12 AWG가 R15로 +y로 꺾여 (약 24 mm) x454.25에서 이음 (12 AWG와 16 AWG를 납땜 + 수축 튜브, 12 × Ø6.5 추정), 16 AWG가 PED 보드 위(z50 → 38, 선 꺾는 자리 x424~434 밖)로 뒤로 가 x443.2에서 KCD1 아래 단자(z33.9) 끝에 납땜; 약 110 mm</li>
 <li><b>12.8 V 선 KCD1 → 강압 입력 + 앰프 전원</b> — KCD1 위 단자(z43.1)에서 두 갈래 - (1) 강압 -x 끝면 입력 단자(x477.5 y306 z36.5), (2) 위로 올라 뒤 줄 y325.0 z53 (뒤판을 따라, 강압 윗면 z50.5 위 1, 뚜껑 이음 레일 밑 0.85)을 x733까지 가서 앰프 -x 끝면 전원 단자(y313 z52); 12.8 V (10.0~14.6 V, 2026-10-07 전 20 V); 약 364 mm</li>

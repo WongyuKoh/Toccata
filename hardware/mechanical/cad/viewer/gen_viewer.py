@@ -385,7 +385,7 @@ def focus_sets(parts, idx):
         ("스피커 L 통", grp("스피커 파트 L") + exist(["SPK-L", "C-SPKPIG-L"]), None),
         ("스피커 R 통", grp("스피커 파트 R") + exist(["SPK-R", "C-SPKPIG-R"]), None),
         ("가운데 유닛 전체", grp("가운데 유닛", "CU 칸 출력물", "CU 칸 전자부", "배터리 칸"), None),
-        ("배터리·전원 12.8 V (퓨즈·스위치·강압)", exist(["BAT-LFP", "CU-BATFRAME", "C-XT60", "C-DC", "C-BAT-LEAD", "C-BAT-DC", "C-PWR-IN",
+        ("배터리·전원 12.8 V (퓨즈·스위치·강압)", exist(["BAT-LFP", "CU-BATFRAME", "C-XT60", "C-BAT-LEAD", "C-PWR-IN",
                                                       "CU-E-FUSE", "C-PWR-FUSE", "CU-E-SWITCH", "C-PWR-BUS", "CU-E-BUCK", "C-PWR-5V"])
          + rx(r"^CU-POST-BUCK-"), None),
         ("소리: 앰프·동글·스피커선·XT60", exist(["CU-E-AMP", "CU-E-DONGLE", "CU-E-J702BOARD", "CU-E-J702", "C-SPK-L", "C-SPK-R", "C-XT60F-L",
