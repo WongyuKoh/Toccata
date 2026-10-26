@@ -13,6 +13,7 @@ Outputs (../):
                                                  prints -> stl/print_extra/)
   Toccata_출력STL_전체.zip                        everything in stl/print in one file
   Toccata_한옥타브_출력STL.zip                    one octave module (+ tools, MB jig), names carrying per-octave counts
+  Toccata_한옥타브_P1S4대.zip                     the same split into one folder per printer / run for four Bambu P1S
   stl/assembly/<그룹>.stl                        every part in world coordinates (open them together)
   stl/assembly/Toccata_전체조립.stl               the whole instrument in one file
   stl/annotated/<폴더>/<부품이름>_치수.stl         part + dimension lines + numbers (for looking, not printing)
@@ -291,34 +292,65 @@ def write_print_zip():
 
 
 # One octave module for a first-module print (the seven modules O1..O7 are the same shapes): (file stem in stl/print,
-# prints per octave, stem in the zip when the full-set name would mislead). Plus the key-action tools and the MB jig.
+# prints per octave, stem in the zip when the full-set name would mislead, (printer, run) in P1S_RUNS). Plus the
+# key-action tools and the MB jig.
 OCTAVE_PRINTS = (
-    [("백건_" + n, 1, None) for n in ("C", "D", "E", "F", "G", "A", "B")]
-    + [("흑건_C#·D#", 2, None), ("흑건_F#", 1, None), ("흑건_G#", 1, None), ("흑건_A#·A#0", 1, "흑건_A#")]
-    + [("레버캐리어_" + n, 1, None) for n in ("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B")]
-    + [("프레임_모듈", 1, None), ("센서바", 1, None), ("가림판띠", 1, None), ("레버봉끝마개", 1, None)]
-    + [("패드바_칸%d" % i, 1, None) for i in (1, 2, 3, 4)]
-    + [("공구_벤치지그받침_T1a", 1, None), ("공구_높이블록_T1b", 1, None), ("공구_캡스턴벤치게이지_T2", 1, None),
-       ("공구_밸런스핀높이게이지_T3", 1, None), ("P-MB_제어기판지그_MB7장", 1, "P-MB_제어기판지그")]
+    [("백건_" + n, 1, None, (2, 1)) for n in ("C", "D", "E", "F", "G", "A", "B")]
+    + [("흑건_C#·D#", 2, None, (3, 1)), ("흑건_F#", 1, None, (3, 1)), ("흑건_G#", 1, None, (3, 1)),
+       ("흑건_A#·A#0", 1, "흑건_A#", (3, 1))]
+    + [("레버캐리어_" + n, 1, None, (4, 1)) for n in ("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B")]
+    + [("프레임_모듈", 1, None, (1, 1)), ("센서바", 1, None, (4, 1)), ("가림판띠", 1, None, (3, 1)),
+       ("레버봉끝마개", 1, None, (4, 1))]
+    + [("패드바_칸%d" % i, 1, None, (3, 1)) for i in (1, 2, 3, 4)]
+    + [("공구_벤치지그받침_T1a", 1, None, (4, 2)), ("공구_높이블록_T1b", 1, None, (4, 2)),
+       ("공구_캡스턴벤치게이지_T2", 1, None, (3, 2)), ("공구_밸런스핀높이게이지_T3", 1, None, (3, 2)),
+       ("P-MB_제어기판지그_MB7장", 1, "P-MB_제어기판지그", (4, 2))]
 )
 
+# The user's four Bambu P1S (256 x 256 bed, 2026-10-26). One filament colour per printer, so nothing is swapped, and
+# one set of print settings per run, so a run folder can be dropped in and auto-arranged as it is. Hours are the
+# DESIGN 15 g/h estimate; the slicer is the reference. (printer, run): (colour, bed sheet, hours, label, settings)
+P1S_RUNS = {
+    (1, 1): ("회색", "텍스처 PEI", "약 27", "프레임",
+             "0.2 mm · 트리 서포트: 윗판 밑은 프레임 바닥·선반에서 올라오게, 키퍼 훅·매단 위치 핀 밑도 · 가장 먼저 시작"),
+    (2, 1): ("흰색", "매끈한 PEI + 풀", "약 10", "백건", "0.2 mm · 트리 서포트는 숨은 빔·꼬리(y146~199) 밑만"),
+    (3, 1): ("검정", "매끈한 PEI + 풀", "약 7", "흑건·가림판띠·패드바",
+             "0.2 mm · 트리 서포트: 흑건은 윗면 뒤끝 턱·빔·꼬리 밑만, 패드바는 뒤 계단·잎 혀 밑"
+             "(윗 틈 0.2, 인터페이스 1층), 가림판띠는 없음"),
+    (3, 2): ("검정", "매끈한 PEI + 풀", "약 3", "T2·T3 게이지", "0.1 mm · 채움 100 % · 서포트 없음"),
+    (4, 1): ("회색", "텍스처 PEI", "약 4.5", "캐리어·센서바·마개",
+             "0.2 mm · 서포트 끔(캐리어의 떼는 지지대는 파일에 들어 있음) · 마개는 Ø4 × 1.2라 작아 떨어지기 쉬움"),
+    (4, 2): ("회색", "텍스처 PEI", "약 5.5", "공구·기판지그",
+             "0.2 mm · 서포트 없음 · T1b(10 × 34, 높이 50.6)는 넘어지지 않게 브림"),
+}
+P1S_BED, P1S_GAP = 256.0, 10.0
 
-def write_octave_zip(rows):
-    """one octave module from stl/print, file names carrying the per-octave counts, plus a short list."""
+
+def octave_entries(rows):
+    """OCTAVE_PRINTS against the print rows: (stl/print folder, zip file name, qty, row, (printer, run))."""
     by_stem = collections.defaultdict(list)
     for r in rows:
         m = re.match(r"stl/print/([^/]+)/(.+)__\d+개\.stl$", r["file"].replace(os.sep, "/"))
         if m:
             by_stem[m.group(2)].append((m.group(1), r))
-    top = "Toccata_한옥타브_출력STL"
-    lines, parts, tools, grams = [], 0, 0, [0.0, 0.0]
-    entries = []
-    for stem, qty, new in OCTAVE_PRINTS:
+    out = []
+    for stem, qty, new, run in OCTAVE_PRINTS:
         hits = by_stem.get(stem, [])
         if len(hits) != 1:
             raise SystemExit("octave zip: '%s' matches %d files in stl/print" % (stem, len(hits)))
+        if run not in P1S_RUNS:
+            raise SystemExit("octave zip: '%s' is on printer run %s, which P1S_RUNS lacks" % (stem, run))
         folder, r = hits[0]
-        name = "%s__%d개.stl" % (new or stem, qty)
+        out.append((folder, "%s__%d개.stl" % (new or stem, qty), qty, r, run))
+    return out
+
+
+def write_octave_zip(rows):
+    """one octave module from stl/print, file names carrying the per-octave counts, plus a short list."""
+    top = "Toccata_한옥타브_출력STL"
+    lines, parts, tools, grams = [], 0, 0, [0.0, 0.0]
+    entries = []
+    for folder, name, qty, r, _run in octave_entries(rows):
         is_tool = folder.startswith(("06_", "09_"))
         tools += qty if is_tool else 0
         parts += 0 if is_tool else qty
@@ -349,6 +381,53 @@ def write_octave_zip(rows):
     with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr(top + "/읽어보기.txt", readme)
         for full, arc in entries:
+            z.write(full, arc)
+    return zp
+
+
+def write_p1s_zip(rows):
+    """the same octave split over four P1S: a folder per printer, a folder per run when a printer runs more than once."""
+    top = "Toccata_한옥타브_P1S4대"
+    entries = octave_entries(rows)
+    runs_of = collections.Counter(printer for printer, _run in P1S_RUNS)
+    files, body, fill = [], [], []
+    for (printer, run), (colour, sheet, hours, label, settings) in sorted(P1S_RUNS.items()):
+        pdir = "프린터%d_%s_%d회" % (printer, colour, runs_of[printer])
+        rdir = pdir if runs_of[printer] == 1 else "%s/%d회차_%s" % (pdir, run, label)
+        mine = [e for e in entries if e[4] == (printer, run)]
+        # bed share of the parts' footprints with a gap all round: auto-arrange keeps a run on one plate well below 100 %
+        share = sum(q * (r["size_mm"][0] + P1S_GAP) * (r["size_mm"][1] + P1S_GAP) for _f, _n, q, r, _ in mine) / P1S_BED ** 2
+        fill.append(share)
+        if run == 1:
+            body += ["", "%s — %s 필라멘트, %s, %d회" % (pdir, colour, sheet, runs_of[printer])]
+        body.append("  %d회차 %s: %s시간, 출력 %d개, 판 면적 약 %.0f %%" % (run, label, hours, sum(e[2] for e in mine), 100 * share))
+        body.append("    %s" % settings)
+        for _folder, name, _qty, r, _run in mine:
+            files.append((os.path.join(OUT, r["file"]), "%s/%s/%s" % (top, rdir, name)))
+            body.append("    - %s" % name)
+    readme = "\n".join([
+        "Toccata 한 옥타브 — 뱀부 P1S 4대 묶음",
+        "",
+        "프린터마다 필라멘트 한 색이라 갈아 끼울 일이 없습니다. 폴더 하나(두 번 뽑는 프린터는 회차 폴더 하나)가",
+        "판 하나 = 1회 출력이고, 회차마다 층 높이·서포트 설정이 하나로 같습니다.",
+        "모두 끝나는 데 약 27시간(프린터1의 프레임)이고, 다른 프린터는 약 10시간 안에 끝납니다.",
+        "시간은 설계 문서의 시간당 15 g 어림이고, 실제 시간은 슬라이서 값이 기준입니다.",
+        "",
+        "뱀부 스튜디오에서:",
+        "1. 폴더의 STL을 모두 끌어다 놓습니다. 이름 끝 __2개(흑건_C#·D#)는 오른쪽 클릭 → 인스턴스 수 설정으로 2개로.",
+        "2. 자동 배열(A). 회차마다 부품 바닥에 %.0f mm씩 둘레를 두어도 판 면적의 %.0f~%.0f %%라 판 하나에 들어갑니다."
+        % (P1S_GAP, 100 * min(fill), 100 * max(fill)),
+        "   그래도 판이 하나 더 생기면 그 판까지 뽑으면 됩니다(그 프린터의 회차가 하나 늘어남).",
+        "3. 자동 방향(Auto orient)은 누르지 않습니다. STL이 이미 베드에 놓을 방향이고, 건반은 윗면이 베드에 닿아야 합니다.",
+        "4. PETG. P1S는 앞문이나 윗덮개를 열고 뽑습니다(노즐 위에서 필라멘트가 미리 녹아 막히는 heat creep 방지).",
+        "5. 방향·서포트 자세한 설명: 최종본/05_조립·제작/01_CAD_출력·조립_안내.md '출력 목록'.",
+    ] + body) + "\n"
+    zp = os.path.join(OUT, "Toccata_한옥타브_P1S4대.zip")
+    if os.path.exists(zp):
+        os.remove(zp)
+    with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
+        z.writestr(top + "/읽어보기.txt", readme)
+        for full, arc in files:
             z.write(full, arc)
     return zp
 
@@ -439,6 +518,7 @@ def main():
     rows = write_print(parts)
     write_print_zip()
     write_octave_zip(rows)
+    write_p1s_zip(rows)
     files = write_assembly(parts)
     ondesk = [p for p in parts if p.note not in ("offdesk", "altview")]      # pedal on the floor / folded-screen view
     write_3mf(ondesk, os.path.join(OUT, "Toccata_전체조립.3mf"))
