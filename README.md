@@ -40,7 +40,7 @@ hardware/     기구·PCB·BOM 작업 원본
   pcb/          회로도, 기판 배치, 넷리스트
   bom/          최종 재료 페이지 생성기·데이터 (final-bom/), 주문용 엑셀 생성기 (final-bom/build_order_xlsx.py)
 archive/      지난 설계·보고서·목록 (원래 경로 앞에 archive/를 붙인 곳)
-firmware/     RP2040-Zero 펌웨어 (키 스캔, 벨로시티, USB-MIDI) — 아직 비어 있음
+firmware/     RP2040-Zero 옥타브 기판 펌웨어 (먹스 스캔, 벨로시티, USB-MIDI) — 보드 시험 전
 sw/           라즈베리파이 USB MIDI 개발 도구 · FluidSynth 선택 실행 (터치 메뉴·리듬게임은 이후 구현)
 ```
 

@@ -17,6 +17,10 @@ archive/hardware/bom/final-bom/site_pre_L2/
 hardware/mechanical/cad/Toccata_출력STL_전체.zip
 최종본/04_3D출력_STL/Toccata_출력STL_전체.zip
 
+# firmware build outputs (firmware/README.md); the flashable UF2 is kept in firmware/dist/
+firmware/build/
+firmware/test/test_keys
+
 # Raspberry Pi runtime: keep device choices and generated recordings local.
 .venv/
 .env
