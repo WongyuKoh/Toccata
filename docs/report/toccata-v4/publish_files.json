@@ -2,12 +2,12 @@
  "generated": "2026-10-08",
  "page": {
   "path": "index.html",
-  "bytes": 1283381
+  "bytes": 1342844
  },
- "count": 335,
- "count_with_page": 336,
- "total_bytes": 55917045,
- "total_mb": 53.33,
+ "count": 345,
+ "count_with_page": 346,
+ "total_bytes": 59153493,
+ "total_mb": 56.41,
  "limits": {
   "per_file_mb": 15,
   "per_publish_files": 255,
@@ -33,6 +33,7 @@
   "fin/dwg": 13,
   "fin/loc": 5,
   "fin/parts": 126,
+  "fin/parts3d": 10,
   "fin/prep": 1,
   "fin/sim": 2,
   "img/a12": 4,
@@ -346,6 +347,16 @@
    "fin/parts/all_dxf.zip.b64.txt",
    "fin/parts/all_stl.zip.b64.txt",
    "fin/parts/index.json",
+   "fin/parts3d/g-01.json",
+   "fin/parts3d/g-02.json",
+   "fin/parts3d/g-03.json",
+   "fin/parts3d/g-04.json",
+   "fin/parts3d/g-05.json",
+   "fin/parts3d/g-06.json",
+   "fin/parts3d/g-07.json",
+   "fin/parts3d/g-09.json",
+   "fin/parts3d/g-ex.json",
+   "fin/parts3d/index.json",
    "fin/prep/lines.json",
    "fin/sim/keyaction.json",
    "fin/sim/system.json",
@@ -374,7 +385,9 @@
    "img/bom/i027.jpg",
    "img/bom/i028.jpg",
    "img/bom/i029.jpg",
-   "img/bom/i031.jpg",
+   "img/bom/i031.jpg"
+  ],
+  [
    "img/bom/i032.jpg",
    "img/bom/i033.jpg",
    "img/bom/i034.jpg",
@@ -384,9 +397,7 @@
    "img/bom/i040.jpg",
    "img/bom/i041.jpg",
    "img/bom/i042.jpg",
-   "img/bom/i043.jpg"
-  ],
-  [
+   "img/bom/i043.jpg",
    "img/bom/i044.jpg",
    "img/bom/i045.jpg",
    "img/bom/i046.jpg",
@@ -488,7 +499,8 @@
    "bytes": 3887312,
    "owners": [
     "hardware/mechanical/cad/viewer/gen_viewer.py",
-    "index.html"
+    "index.html",
+    "src/tabs/partdwg"
    ]
   },
   {
@@ -2170,6 +2182,77 @@
    "path": "fin/parts/index.json",
    "bytes": 191980,
    "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-01.json",
+   "bytes": 344926,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-02.json",
+   "bytes": 395124,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-03.json",
+   "bytes": 194130,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-04.json",
+   "bytes": 334945,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-05.json",
+   "bytes": 645733,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-06.json",
+   "bytes": 476719,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-07.json",
+   "bytes": 52190,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-09.json",
+   "bytes": 152159,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/g-ex.json",
+   "bytes": 601470,
+   "owners": [
+    "src/tabs/partdwg"
+   ]
+  },
+  {
+   "path": "fin/parts3d/index.json",
+   "bytes": 39052,
+   "owners": [
+    "index.html",
     "src/tabs/partdwg"
    ]
   },

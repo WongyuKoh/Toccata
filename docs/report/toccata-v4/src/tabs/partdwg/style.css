@@ -62,7 +62,39 @@
 #p-partdwg .partdwg-vbody img{display:block;width:100%;height:auto;max-width:none;margin:0 auto}
 #p-partdwg .partdwg-vbody.z2 img{width:200%}
 #p-partdwg .partdwg-vbody.z4 img{width:400%}
+/* 3D (2026-10-30): overview card '출력 단위 3D' + viewer modes (script.js V3) */
+#p-partdwg .partdwg-ov{margin:14px 0 6px;padding:14px 16px}
+#p-partdwg .partdwg-ovhead h3{margin:0 0 4px}
+#p-partdwg .partdwg-ovhead p{margin:0 0 10px}
+#p-partdwg .partdwg-ovstage{position:relative;height:clamp(300px,56vh,560px);border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:var(--card);touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+#p-partdwg .partdwg-v3c{position:absolute;inset:0;width:100%;height:100%;display:block}
+#p-partdwg .partdwg-v3load{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--ink-2);font-size:13.5px}
+#p-partdwg .partdwg-v3load[hidden]{display:none}
+#p-partdwg .partdwg-ovbar{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:10px 0 4px}
+#p-partdwg .partdwg-ovbar button,#p-partdwg .partdwg-v3btns button{font:inherit;font-size:13px;min-height:40px;padding:6px 12px;border:1px solid var(--rule-2);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+#p-partdwg .partdwg-ovbar button[aria-pressed="true"],#p-partdwg .partdwg-v3btns button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#p-partdwg .partdwg-ovbar button[disabled],#p-partdwg .partdwg-v3btns button[disabled]{opacity:.5;cursor:default}
+#p-partdwg .partdwg-ovleg{display:flex;flex-wrap:wrap;gap:4px 14px;margin:6px 0;color:var(--ink-2)}
+#p-partdwg .partdwg-sw{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+#p-partdwg .partdwg-sw i,#p-partdwg .partdwg-aid{display:inline-block;width:11px;height:11px;border-radius:3px;border:1px solid var(--rule-2);vertical-align:-1px}
+#p-partdwg .partdwg-sw i.buy{background:var(--rule)}
+#p-partdwg .partdwg-aid{background:var(--amber);margin-right:4px}
+#p-partdwg .partdwg-ovinfo{margin:6px 0 0;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;min-height:40px}
+#p-partdwg .partdwg-ovact{display:inline-flex;flex-wrap:wrap;gap:6px}
+#p-partdwg .partdwg-ovact .partdwg-btn,#p-partdwg .partdwg-v3info .partdwg-btn{min-height:36px;padding:5px 10px;font-size:12.5px}
+#p-partdwg .partdwg-mode{display:inline-flex;flex-wrap:wrap;gap:4px}
+#p-partdwg .partdwg-vbar button[disabled]{opacity:.45;cursor:not-allowed}
+#p-partdwg .partdwg-vbody[hidden],#p-partdwg .partdwg-zoom[hidden],#p-partdwg .partdwg-vopen[hidden],#p-partdwg .partdwg-v3d[hidden],#p-partdwg .partdwg-v3btns button[hidden]{display:none}
+#p-partdwg .partdwg-v3d{flex:1;position:relative;overflow:hidden;background:var(--card);touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#p-partdwg .partdwg-v3info{position:absolute;left:12px;top:12px;max-width:min(680px,calc(100% - 24px));padding:8px 11px;border-radius:8px;background:var(--card);border:1px solid var(--rule);box-shadow:var(--shadow);color:var(--ink);line-height:1.5;cursor:auto}
+#p-partdwg .partdwg-v3info:empty{display:none}
+#p-partdwg .partdwg-v3btns{position:absolute;right:12px;bottom:12px;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+#p-partdwg .partdwg-ovbar .partdwg-v3hint{flex:1 1 220px;min-width:0}
+#p-partdwg .partdwg-v3d .partdwg-v3hint{position:absolute;left:12px;bottom:14px;margin:0;color:var(--ink-3);pointer-events:none;max-width:calc(100% - 330px)}
 @media (max-width:560px){
+  #p-partdwg .partdwg-ov{padding:12px}
+  #p-partdwg .partdwg-ovstage{height:clamp(240px,78vw,420px)}
+  #p-partdwg .partdwg-v3d .partdwg-v3hint{display:none}
   #p-partdwg .partdwg-grid{grid-template-columns:minmax(0,1fr)}
   #p-partdwg .partdwg-vbar{padding-inline:10px}
   #p-partdwg .partdwg-vopen{flex-basis:100%}
@@ -74,6 +106,10 @@
   #p-partdwg .partdwg-allbtns .partdwg-btn,
   #p-partdwg .partdwg-act .partdwg-btn,
   #p-partdwg .partdwg-vbar button,
+  #p-partdwg .partdwg-ovbar button,
+  #p-partdwg .partdwg-v3btns button,
+  #p-partdwg .partdwg-ovact .partdwg-btn,
+  #p-partdwg .partdwg-v3info .partdwg-btn,
   #p-partdwg .partdwg-search input{min-height:44px}
   #p-partdwg .partdwg-vopen{display:inline-flex;align-items:center;min-height:44px}
   #p-partdwg .partdwg-card details.spec summary{min-height:44px;display:flex;align-items:center}

@@ -2769,6 +2769,12 @@ def package_all(rows):
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     codes = [a for a in argv if not a.startswith("--")]
+    if "--tab" in argv:     # 2026-10-30: only the tab fragment + fin/parts3d, from fin/parts/index.json and verify.json (no sheets)
+        idx = json.load(open(os.path.join(FIN, "index.json"), encoding="utf-8"))
+        write_tab(idx)
+        write_meta(idx, json.load(open(os.path.join(PDIR, "verify.json"), encoding="utf-8")), idx["parts"])
+        print("tab + 3D meshes rebuilt from fin/parts/index.json (%d parts)" % len(idx["parts"]))
+        return [], []
     t0 = time.time()
     ctx = Ctx()
     print("collect %.1fs" % (time.time() - t0))
@@ -2830,7 +2836,8 @@ def write_tab(idx, checks=None):
     w('<section class="page" id="p-partdwg" hidden>')
     w('<h2>부품 도면·출력 파일</h2>')
     w('<p class="lede">출력하는 파일마다, 그리고 합판 조각마다 치수 도면을 한 장씩 만들었습니다. 모든 선과 숫자는 출력 파일(STL)과 CAD 입체에서 직접 쟀습니다. '
-      '카드의 <b>파일 받기</b>를 누르면 STL·DXF·SVG·구멍표·좌표표가 든 zip 하나를 받습니다. DXF는 1:1(mm)이라 CAD에 바로 불러올 수 있습니다.</p>')
+      '카드의 <b>파일 받기</b>를 누르면 STL·DXF·SVG·구멍표·좌표표가 든 zip 하나를 받습니다. DXF는 1:1(mm)이라 CAD에 바로 불러올 수 있습니다. '
+      '카드의 <b>3D</b>를 누르면 그 STL 하나가 베드에 놓인 모양(= 한 번에 뽑는 단위)과 악기 안에 들어가는 자리를 3D로 봅니다.</p>')
     w('<div class="kfs">')
     for big, small in (("%d장" % len(rows), "도면 (출력 파일 %d + 합판 조각 %d)" % (len(rows) - len(ply), len(ply))),
                        ("%d파일 · %d개" % (len(inst), n_inst), "악기에 들어가는 출력물 (01~05, 07)"),
@@ -2839,6 +2846,20 @@ def write_tab(idx, checks=None):
                        ("%d조각" % len(ply), "합판 (오꾸메 11.5T 400 × 1200 한 장)"),
                        ("%d파일" % len(extra), "선택·대안·예비 (stl/print_extra)")):
         w('<div class="kf"><b>%s</b><span>%s</span></div>' % (e(big), e(small).replace("%%", "%")))
+    w('</div>')
+    # 3D overview (2026-10-30): the instrument painted by print file (script.js V3, fin/parts3d by part_meshes.py)
+    w('<div class="card partdwg-ov" id="partdwg-ov">')
+    w('<div class="partdwg-ovhead"><h3>출력 단위 3D</h3><p class="small muted">악기 전체를 <b>출력 파일(STL)마다 다른 색</b>으로 칠했습니다. '
+      '색은 묶음(건반·레버·프레임 …)마다 계열이 같고 파일마다 밝기가 다릅니다. 같은 파일을 여러 개 뽑는 조각은 같은 색이고, 회색 반투명은 사서 쓰는 부품입니다. '
+      '조각을 누르면 어떤 파일을 몇 개 뽑는지 나오고, 위의 묶음 거르기를 고르면 그 묶음만 칠합니다. <b>벌려 보기</b>는 겹쳐 있는 출력물 '
+      '(바닥틀 · 가이드탭 · 레버틀 · 레버 · 건반, 뚜껑)을 위로 띄워 나눠 보여 줍니다.</p></div>')
+    w('<div class="partdwg-ovstage" id="partdwg-ovstage" role="img" aria-label="악기 전체 3D, 출력 파일마다 다른 색">'
+      '<p class="partdwg-v3load">3D 모델을 불러오는 중…</p></div>')
+    w('<div class="partdwg-ovbar"><button type="button" data-v3="ex" aria-pressed="false">벌려 보기</button>'
+      '<button type="button" data-v3="buy" aria-pressed="true">산 부품</button><button type="button" data-v3="home">처음 시점</button>'
+      '<span class="small muted partdwg-v3hint"></span></div>')
+    w('<div class="partdwg-ovleg small"></div>')
+    w('<div class="partdwg-ovinfo small" aria-live="polite">조각을 누르면 그 조각을 뽑는 출력 파일이 나옵니다.</div>')
     w('</div>')
     w('<div class="note"><b>읽는 법.</b> 3각법입니다: 평면도(위에서) 아래에 정면도(앞에서), 그 오른쪽에 우측면도(오른쪽에서)가 있습니다. '
       '보이는 선은 실선, 숨은 선은 점선입니다. 파란 숫자는 <b>부품 기준 좌표</b>로, 원점은 도면 자세에서 가장 작은 모서리(0, 0, 0)입니다. '
@@ -2887,8 +2908,9 @@ def write_tab(idx, checks=None):
             mass += " (출력 약 %s g)" % fnum(r["mass_g_print_est"], 0)
         if r["kind"] == "ply":
             mass = "부피 %s cm³" % fnum(r["volume_cm3"], 1)
-        w('<article class="partdwg-card" id="partdwg-%s" data-g="%s" data-q="%s" data-code="%s" data-name="%s" data-file="%s" data-svg="%s" data-zip="%s" data-zipname="%s" data-zipbytes="%d">'
-          % (r["code"], r["group"], e(q), r["code"], e(r["name"]), e(r["file"] or ""), e(r["svg"]), e(r["zip"]), e(r["zip_name"]), r["bytes"]["zip"]))
+        w('<article class="partdwg-card" id="partdwg-%s" data-g="%s" data-q="%s" data-code="%s" data-name="%s" data-file="%s" data-svg="%s" data-zip="%s" data-zipname="%s" data-zipbytes="%d" data-place="%d">'
+          % (r["code"], r["group"], e(q), r["code"], e(r["name"]), e(r["file"] or ""), e(r["svg"]), e(r["zip"]), e(r["zip_name"]), r["bytes"]["zip"],
+             1 if r["ids"] else 0))
         w('<button type="button" class="partdwg-thumb" data-act="view" aria-label="%s %s 도면 크게 보기"><img src="%s" alt="%s %s 부품도 (%s, %s)" loading="lazy" decoding="async"></button>'
           % (r["code"], e(r["name"]), e(r["svg"]), r["code"], e(r["name"]), r["sheet"], r["scale"]))
         w('<div class="partdwg-body">')
@@ -2900,7 +2922,9 @@ def write_tab(idx, checks=None):
         if r["note"]:
             w('<details class="spec"><summary>%s</summary><p class="small">%s</p></details>' % ("가공 메모" if r["kind"] == "ply" else "출력 메모", e(r["note"])))
         w('<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button>'
-          '<button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip %s</span></button></div>' % _kb(r["bytes"]["zip"]))
+          '<button type="button" class="partdwg-btn" data-act="v3d" aria-label="%s %s 3D로 보기">3D</button>'
+          '<button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip %s</span></button></div>'
+          % (r["code"], e(r["name"]), _kb(r["bytes"]["zip"])))
         w('<p class="small partdwg-msg" aria-live="polite"></p>')
         w('</div></article>')
     w('</div>')
@@ -2909,12 +2933,19 @@ def write_tab(idx, checks=None):
     # viewer
     w('<div class="partdwg-viewer" id="partdwg-viewer" hidden role="dialog" aria-modal="true" aria-labelledby="partdwg-vtitle">')
     w('<div class="partdwg-vbar"><b id="partdwg-vtitle"></b>'
+      '<span class="partdwg-mode" role="group" aria-label="보기"><button type="button" data-m="dwg" aria-pressed="true">도면</button>'
+      '<button type="button" data-m="print" aria-pressed="false">3D 출력 모양</button><button type="button" data-m="place" aria-pressed="false">3D 조립 자리</button></span>'
       '<span class="partdwg-zoom" role="group" aria-label="확대"><button type="button" data-z="1" aria-pressed="true">맞춤</button>'
       '<button type="button" data-z="2" aria-pressed="false">2배</button><button type="button" data-z="4" aria-pressed="false">4배</button></span>'
       '<span class="partdwg-vnav"><button type="button" data-v="prev" aria-label="이전 도면">이전</button><button type="button" data-v="next" aria-label="다음 도면">다음</button></span>'
       '<a class="partdwg-vopen" id="partdwg-vopen" href="#" target="_blank" rel="noopener">새 탭에서 SVG ↗</a>'
       '<button type="button" class="partdwg-vclose" data-v="close">닫기</button></div>')
     w('<div class="partdwg-vbody" id="partdwg-vbody"><img id="partdwg-vimg" alt=""></div>')
+    w('<div class="partdwg-v3d" id="partdwg-v3d" hidden role="img" aria-label="부품 3D">'
+      '<p class="partdwg-v3load">3D 모델을 불러오는 중…</p><div class="partdwg-v3info small" aria-live="polite"></div>'
+      '<div class="partdwg-v3btns"><button type="button" data-v3="home">처음 시점</button>'
+      '<button type="button" data-v3="ex" aria-pressed="false">벌려 보기</button><button type="button" data-v3="buy" aria-pressed="true">산 부품</button></div>'
+      '<p class="partdwg-v3hint small"></p></div>')
     w('</div>')
     w('<p class="small muted">원본: hardware/mechanical/cad/src/part_sheets.py (출력 파일 + build_all.collect() 입체) → hardware/mechanical/cad/drawings/parts/ (svg · dxf · data). '
       '%s 기준.</p>' % DATE)
@@ -2925,6 +2956,8 @@ def write_tab(idx, checks=None):
     for r in rows:
         assets += [r["svg"], r["zip"]]
     assets += [idx["all_stl"]["path"], idx["all_dxf"]["path"], "fin/parts/index.json"]
+    import part_meshes
+    assets += part_meshes.assets(part_meshes.build(idx)) + ["cad/toccata.glb.b64.txt"]      # 3D views (2026-10-30)
     open(os.path.join(TAB, "assets.txt"), "w", encoding="utf-8").write("\n".join(assets) + "\n")
     return len(out)
 
@@ -2955,6 +2988,13 @@ def write_meta(idx, ver, rows):
         "(e) islands standing in a pocket are measured and part of the group key: P-05-16 H8 '사각 38x36 +섬' (island 20.4x18 at x37.1~57.5, y3.55~21.55) is split from its empty twin (the reviewer's '20.4x18 pocket' is that solid island, the opening itself is 38x36). "
         "(f) pattern notes print sizes to 0.01 (P-03-01 'H3 Ø1.95 x12', was 'Ø2 x11 · Ø1.9'). (g) the duplicate filter only drops a void seen along two axes when the boxes cover each other (> half of the bigger extent): the key hollows that used to vanish behind a small front pocket are listed. (h) pieces thinner than 0.25 and slivers of voids that open elsewhere are counted in a note ('짧은 경사 조각'), not numbered. ",
         "PUBLISH: the page must declare capabilities {downloads: true} for the zip buttons (claude.use('downloads') -> save({filename:'*.zip', data: Blob})); without it the buttons show the file name/size and a note.",
+        "3D (2026-10-30, user: '부품 도면을 보는 곳에도 3D 모델링을 둬서 3D 프린팅을 어떤 단위로 하는 건지 볼 수 있게'): the viewer has three modes "
+        "(도면 / 3D 출력 모양 = the STL on the 256 x 256 P1S bed as it prints, print aids such as the key combs and the bed posts in orange / "
+        "3D 조립 자리 = the instrument with this file's instances in blue), every card has a 3D button, and the overview card '출력 단위 3D' paints "
+        "the whole instrument by print file (hue per folder, lightness per file; group chips filter it; 벌려 보기 lifts the stacked prints). "
+        "Data: fin/parts3d/g-<group>.json + index.json from part_meshes.py (run by write_tab; ids printed in pieces, CU-PLY-BOTTOM / CU-PLY-BACK, "
+        "are drawn from their piece STLs placed by body.lap_pieces), assembly = the 04 tab's cad/toccata.glb.b64.txt. "
+        "python3 part_sheets.py --tab rebuilds only the fragment + meshes from fin/parts/index.json (seconds).",
         "Assets: %d files in fin/parts (%s MB): per part <code>.svg (sheet, lazy <img>) + <code>.zip.b64.txt (STL exact bytes + DXF + SVG + hole CSV + readme), all_stl.zip.b64.txt (= hardware/mechanical/cad/Toccata_출력STL_전체.zip, matches stl/print: %s), all_dxf.zip.b64.txt, index.json."
         % (len(os.listdir(FIN)), fnum(total / 1048576.0, 1), idx["all_stl"]["matches_stl_print"]),
         "CHECKS (independent, trimesh instead of manifold3d; drawings/parts/verify.json): %d/%d parts pass. bbox of the STL in drawing pose vs sheet size: %d parts, max err %s mm; "
@@ -2977,7 +3017,8 @@ def write_meta(idx, ver, rows):
         "tools/jigs have no world coords; plywood sheets reuse drawings.py D06 logic (flat_piece, piece_memo, ply_spots, ply_jigs).",
     ]
     meta = dict(tab="partdwg", notes=" ".join(notes), capabilities={"downloads": True},
-                api="window.toccata.partdwg = {open(code), codeOf(file)}", index="fin/parts/index.json",
+                api="window.toccata.partdwg = {open(code, mode), codeOf(file)}; mode 'dwg' (default) | 'print' | 'place'",
+                index="fin/parts/index.json",
                 checks=dict(totals=t, failures=fails, overlaps=ovl))
     json.dump(meta, open(os.path.join(TAB, "meta.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     return meta
