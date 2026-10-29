@@ -789,7 +789,7 @@ def sheet_E01(M, Hh):
     sh.text(x1 + 2, y0 + 1.0, "z 화면 유리", T_SMALL, cls="tm")
     sh.chk("화면 받침 위 끝 z", cr[5], man_bb("TS-CRADLE")[5], "manifest TS-CRADLE")
     sh.chk("스피커 윗면 z", body.SPK_ZT, man_bb("SPKL-PLY-TOP")[5], "manifest SPKL-PLY-TOP")
-    sh.chk("건반 바닥 윗면(모듈 윗판) z", fr[5], man_bb("O4-FRAME")[5], "manifest O4-FRAME")
+    sh.chk("건반 바닥 윗면(모듈 윗판) z", fr[5], man_bb("O4-CAGE")[5], "manifest O4-CAGE (A12 레버틀 = 윗판)")
     sh.chk("흰 건반 윗면 z", wkb[5], man_bb("O4-KEY-C")[5], "manifest O4-KEY-C")
     sh.chk("검은 건반 윗면 z", bkb[5], man_bb("O4-KEY-Cs")[5], "manifest O4-KEY-Cs")
     # driver centres, grille edges, screen
@@ -835,7 +835,7 @@ def sheet_E01(M, Hh):
     if jh:
         sh.callouts_v([va.P(jh["cu"] - jh["w"] / 2, jh["cv"]) + ("J701 구멍 %s\n중심 x%s z%s" % (sz_txt(jh), fnum(jh["cu"]), fnum(jh["cv"])),)],
                       ax1 + 4, 1, ay0, ay1, size=T_SMALL)
-    sh.chk("볼 L 폭", ck["L"][1] - ck["L"][0], 15.8, "keyaction 볼 두께 (EL-FRAME 단면 z60)")
+    sh.chk("볼 L 폭", ck["L"][1] - ck["L"][0], 15.32, "geometry.json cheek x-16~-0.68 (EL-FRAME 바닥틀 단면 z60; A12부터 끝 핀은 레버틀)")
 
     # ---- detail B: O4 key fronts (1:1)
     o4 = M.bb(M.by["O4-FRAME"])
@@ -1168,7 +1168,7 @@ def sheet_E05(M, Hh):
     sh.text(x1 + 1, y0 - 3.5, "y", T_SMALL, cls="tm")
     co = callouts_for(v, vis, [("SPKL-PLY-TOP", "스피커 L 윗판 (z%s)" % fnum(body.SPK_ZT)), ("SPKR-GRILLE", "스피커 R 그릴 (앞판 %s°)" % fnum(body.ANGLE)),
                                ("LID-L", "뚜껑 L (출력, 자석)"), ("LID-R", "뚜껑 R (출력, 자석)"), ("CU-SCREENLID", "화면 뚜껑 (출력)"),
-                               ("TS-E-SCREEN", "화면 (25°)"), (r"O\d-FRAME$", "모듈 윗판 z%s" % fnum(M.bb(M.by["O4-FRAME"])[5])),
+                               ("TS-E-SCREEN", "화면 (25°)"), (r"O\d-CAGE$", "모듈 윗판 z%s" % fnum(M.bb(M.by["O4-CAGE"])[5])),
                                ([p.id for p in key_parts(M, True)], "흰 건반"), ([p.id for p in key_parts(M, False)], "검은 건반")])
     sh.callouts_h(co, y1 + 24.0, 1, x0, x1, size=T_NOTE)
     sh.chk("화면 뚜껑 x 시작", seams[1], man_bb("CU-SCREENLID")[0], "manifest CU-SCREENLID")
@@ -1636,7 +1636,7 @@ def sheet_I03(M, Hh):
     sh.text(ax0, ay0 - 5.0, "A-A  y%s — 홀 센서 줄 (뒤로 y%s까지)" % (fnum(yA), fnum(body.MOD_REAR)), T_HEAD - 0.6, bold=True)
     ords_h(sh, vA, [m[1] for m in module_x(M)] + [1238.0], 1, gap=2.0)
     sb = M.bb(M.by["O4-SENSORBAR"])
-    zsA = [0.0, 3.0, sb[2], sb[5], M.bb(M.by["O4-KEY-C"])[2], M.bb(M.by["O4-KEY-C"])[5], M.bb(M.by["O4-FRAME"])[5]]
+    zsA = [0.0, 3.0, sb[2], sb[5], M.bb(M.by["O4-KEY-C"])[2], M.bb(M.by["O4-KEY-C"])[5], M.bb(M.by["O4-CAGE"])[5]]
     ords_v(sh, vA, zsA, -1, gap=2.0)
     # B-B main
     wB = (-24.0, 1246.0, -3.0, 196.0)
@@ -1741,14 +1741,14 @@ def sheet_I04(M, Hh):
     ys = [0.0, mg[1] / 2 + mg[4] / 2, (rod[1] + rod[4]) / 2, (lrod[1] + lrod[4]) / 2, key[4], body.MOD_REAR, body.Y0, body.DUCT_Y[1],
           body.YBI, body.YB, TS.AX_Y]
     ords_h(sh, v, ys, 1, gap=2.0)
-    zs = [0.0, 3.0, sb[2], key[5], (rod[2] + rod[5]) / 2, (lrod[2] + lrod[5]) / 2, M.bb(M.by["O4-FRAME"])[5], body.Z_BOT, body.Z_LIDU, TS.AX_Z,
+    zs = [0.0, 3.0, sb[2], key[5], (rod[2] + rod[5]) / 2, (lrod[2] + lrod[5]) / 2, M.bb(M.by["O4-CAGE"])[5], body.Z_BOT, body.Z_LIDU, TS.AX_Z,
           M.bb(M.by["TS-CRADLE"])[5]]
     ords_v(sh, v, zs, -1, gap=2.0)
     v.centre_mark(TS.AX_Y, TS.AX_Z, 3.0)
     co = callouts_for(v, vis, [
         ("O4-KEY-D", "흰 건반 D4 (PETG)"), ("O4-MAGNET-D", "자석 Ø5×2 (홀 센서 위)"), ("O4-SENSORBAR", "센서 바"), ("O4-E-SB", "센서 기판 SB"),
         ("O4-B-keyrodSUS304D4", "건반 봉 Ø4 (밸런스 축)"), ("O4-LEVER-D", "레버 캐리어"), ("O4-STEEL-D", "강철 블록 9×19×40"),
-        ("O4-SPRING-D", "비틀림 스프링"), ("O4-B-leverrodD4SUS304x151629", "레버 봉 Ø4"), ("O4-FRAME", "모듈 프레임 (윗판 z72.85)"),
+        ("O4-SPRING-D", "비틀림 스프링"), ("O4-B-leverrodD4SUS304x151629", "레버 봉 Ø4"), (["O4-FRAME", "O4-CAGE"], "모듈 프레임 = 바닥틀 + 레버틀 (윗판 z72.85, A12)"),
         (r"O4-PADBAR-", "패드 바"), ("O4-B-upstoppad-D", "업스톱 패드"), ("O4-CURTAIN", "가림판 띠"), ("O4-EVA", "EVA 3T"),
         ("O4-E-MB", "제어 기판 MB"), ("O4-C-USB", "USB-C 선"), ("O4-CAPSTAN-D", "캡스턴 M3×6"), (r"O4-B-balancepinD2-D", "밸런스 핀 Ø2"),
         ("CU-SCREENLID", "화면 뚜껑"), ("TS-CRADLE", "화면 받침"), ("TS-E-SCREEN", "화면"), ("CU-E-PI5", "Pi 5"), ("CU-PLY-BOTTOM", "아랫판 (오꾸메)"),
@@ -1844,10 +1844,10 @@ def sheet_I05(M, Hh):
     co_b = callouts_for(vb, item_map(itb), [("O4-E-SB", "센서 기판 SB (홀 센서 12)"), ("O4-SENSORBAR", "센서 바"), ("O4-E-MB", "제어 기판 MB"),
                                            ("O4-E-ZERO", "RP2040-Zero"), ("O4-E-MUX", "4067 먹스"), ("O4-C-RIBBON", "16심 리본 W104"),
                                            ("O4-C-USB", "USB-C W204"), ("O4-B-keyrodSUS304D4", "건반 봉 Ø4"), (r"O4-B-balancepinD2-", "밸런스 핀 Ø2 ×12"),
-                                           ("O4-FRAME", "프레임"), ("O4-EVA", "EVA 3T")])
+                                           (["O4-FRAME", "O4-CAGE"], "프레임 (바닥틀 + 레버틀)"), ("O4-EVA", "EVA 3T")])
     sh.callouts_h(co_b, vb.rect[3] + 18.0, 1, vb.rect[0] - 10, vb.rect[2] + 40, size=T_SMALL)
     co_a = callouts_for(va, item_map(ita), [("O4-LEVER-E", "레버 캐리어 ×12"), ("O4-STEEL-E", "강철 블록 ×12"), ("O4-SPRING-E", "비틀림 스프링 ×12"),
-                                           ("O4-B-leverrodD4SUS304x151629", "레버 봉 Ø4"), ("O4-FRAME", "프레임 (윗판 z72.85는 잘려 나감)")])
+                                           ("O4-B-leverrodD4SUS304x151629", "레버 봉 Ø4"), (["O4-FRAME", "O4-CAGE"], "프레임 (윗판 z72.85는 잘려 나감)")])
     sh.callouts_h(co_a, va.rect[3] + 18.0, 1, va.rect[0] - 10, va.rect[2] + 30, size=T_SMALL)
     # parts table of one module
     g = collections.OrderedDict()

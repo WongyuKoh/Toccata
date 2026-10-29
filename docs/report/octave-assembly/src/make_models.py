@@ -28,13 +28,16 @@ def has(*keys):
     return lambda i: any(k in i for k in keys)
 
 
-FRAME = has("O4-FRAME")
+FRAME = has("O4-FRAME", "O4-CAGE", "O4-TAB-")          # A12 (2026-10-29): bed + lever cage + guide tabs
+BED = has("O4-FRAME")
+CAGE = has("O4-CAGE")
+TABS = has("O4-TAB-")
 PINS = has("balancepin")
 KEYROD = has("keyrodSUS")
 FELTS = has("whitefrontfelt", "blackfrontfelt", "keeperfelt")
 BOARD = has("O4-E-MB", "O4-E-ZERO", "O4-E-MUX", "controlboardscrew")
 SENSOR = has("O4-E-SB", "O4-SENSORBAR", "SBSCREW")
-LEVER = has("O4-LEVER-", "O4-STEEL-", "O4-FELTSTRIP-", "O4-SPRING-")
+LEVER = has("O4-LEVER-", "O4-LEVERCOVER-", "O4-STEEL-", "O4-FELTSTRIP-", "O4-SPRING-")
 LEVROD = has("leverrodD4", "O4-PLUG")
 KEYPART = has("O4-KEY-", "O4-CAPSTAN-", "O4-NUT-", "O4-MAGNET-", "O4-RESTFELT-")
 BLACK = lambda i: i.endswith("s") and KEYPART(i)
@@ -54,11 +57,11 @@ STEPS = {
     "s1_frame": (lambda i: FRAME(i) or PINS(i) or KEYROD(i) or FELTS(i), lambda i: PINS(i) or KEYROD(i) or FELTS(i), (), FRONT),
     "s2_board": (lambda i: FRAME(i) or BOARD(i), BOARD, (), BELOW),
     "s3_sensor": (lambda i: FRAME(i) or PINS(i) or KEYROD(i) or FELTS(i) or SENSOR(i), SENSOR, (), FRONT),
-    "s4_levers": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i), LEVER, ("O4-FRAME",), REAR),
-    "s5_levrod": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i) or LEVROD(i), LEVROD, ("O4-FRAME",), SIDE),
+    "s4_levers": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i), LEVER, ("O4-FRAME", "O4-CAGE"), REAR),
+    "s5_levrod": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i) or LEVROD(i), LEVROD, ("O4-FRAME", "O4-CAGE"), SIDE),
     "s6_black": (lambda i: not (WHITE(i) or PADS(i) or CURTAIN(i) or EVA(i)), BLACK, (), FRONT),
     "s7_white": (lambda i: not (PADS(i) or CURTAIN(i) or EVA(i)), WHITE, (), FRONT),
-    "s8_pads": (lambda i: not (CURTAIN(i) or EVA(i)), PADS, ("O4-FRAME",), REAR),
+    "s8_pads": (lambda i: not (CURTAIN(i) or EVA(i)), PADS, ("O4-FRAME", "O4-CAGE"), REAR),
     "s9_curtain": (lambda i: not EVA(i), CURTAIN, (), FRONT),
     "s10_done": (ALL, EVA, (), BELOW),
 }
@@ -69,13 +72,15 @@ def sub(prefix, note):
 
 
 KEYP = ("KEY", "CAPSTAN", "NUT", "MAGNET", "RESTFELT")
-LEVP = ("LEVER", "STEEL", "FELTSTRIP", "SPRING")
+LEVP = ("LEVER", "LEVERCOVER", "STEEL", "FELTSTRIP", "SPRING")
 KEY_EX = {"MAGNET": (0, 0, -14), "CAPSTAN": (0, 0, 16), "NUT": (16, 0, 0), "RESTFELT": (0, 0, -12)}
-LEV_EX = {"STEEL": (0, 0, -30), "FELTSTRIP": (0, 0, -50), "SPRING": (18, 0, 0)}
+LEV_EX = {"STEEL": (0, 0, -30), "FELTSTRIP": (0, 0, -50), "SPRING": (18, 0, 0), "LEVERCOVER": (16, 0, -30)}
 SUBS = {
     "k_white": (sub(KEYP, "D"), KEY_EX, (265, -235, -150, 35, 110, 28)),
     "k_black": (sub(KEYP, "Ds"), KEY_EX, (270, -170, -150, 49, 120, 30)),
     "l_lever": (sub(LEVP, "D"), LEV_EX, (230, 70, -60, 40, 175, 10)),
+    # A12 frame in three prints: bed, guide tabs lifted 28, lever cage lifted 48
+    "s0_split": (FRAME, {"CAGE": (0, 0, 48), "TAB": (0, 0, 28)}, (-170, -250, 300, 85, 110, 35)),
 }
 
 

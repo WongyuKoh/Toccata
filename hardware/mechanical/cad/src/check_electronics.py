@@ -53,7 +53,7 @@ EXPECTED = [
     (r"^C-XT60M-", r"^C-XT60F-", "XT60 수·암 짝맞춤 (면 닿음)", 0.5),
     # electronics x key action
     (r"-E-MB$", r"-B-controlboardscrew", "M3×6 나사 몸통이 기판 구멍 Ø3.2를 지남 (다각형 근사)", None),
-    (r"-E-MB$", r"-FRAME$", "프레임 위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0 (의도, 다각형 근사)", None),
+    (r"-E-MB$", r"-FRAME$|-CAGE$", "프레임 위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0 (의도, 다각형 근사; A12 뒤 핀은 레버틀)", None),
     # electronics x body
     (r"^SPK-[LR]$", r"^SPK[LR]-(BAFFLE|GASKET)$", "바스켓 Ø94가 앞판 구멍·가스켓 구멍 Ø94를 지남 (같은 원 - 다각형 근사)", 5.0),
     (r"^C-XT60F-", r"^XT60-CLIP-", "XT60 암이 집게 홈에 끼움 (면 닿음)", 0.5),

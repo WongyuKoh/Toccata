@@ -391,6 +391,51 @@ def lever_solid(parts, note, engrave=None, collars=None):
     return clean(diff(m, cuts))
 
 
+def _lever_cover_items(parts):
+    """A12: the far (+x) carrier side wall in front of the web (y < 190.3) with the +x snap lips (top y153..163 behind the
+    front cap, top y184..190, bottom y165..176.5). Lying on the -x wall the carrier printed this wall as a 40 mm roof
+    over the steel pocket, the lips hanging under it (the old breakaway rib held its middle)."""
+    wall = [p for p in parts if p["part"].startswith("carrier side wall R")][0]
+    core = [p for p in parts if p["part"].startswith("carrier core")][0]
+    xm = (core["x"][0] + core["x"][1]) / 2.0
+    items = [prism_x(wall["side_rigid0"], *wall["x"]) ^ box(wall["x"][0] - 1, wall["x"][1] + 1, 140.0, COVER_Y1, 0.0, 80.0)]
+    for p in parts:
+        if (p["part"].startswith("carrier top snap lip R") or p["part"] == "bottom lip") and p["x"][0] > xm:
+            m = prism_x(p["side_rigid0"], *p["x"])
+            if "y150-163" in p["part"]:
+                m = m ^ box(p["x"][0] - 1, p["x"][1] + 1, COVER_CAP_Y, 200.0, 0.0, 80.0)   # the front cap y150..153 stays on the body
+            items.append(m)
+    return items
+
+
+COVER_Y1 = 190.3       # cover ends at the +x web (y190.3..203.25), which stays on the body with the hub
+COVER_CAP_Y = 153.0    # front cap (full width, y150..153) stays on the body
+
+
+def lever_cover_solid(parts):
+    """A12 lever cover = carrier +x wall + its lips, lever angle 0 (side_rigid0), module coordinates."""
+    return clean(union(_lever_cover_items(parts)))
+
+
+_COVER_CANON = []
+
+
+def lever_cover_print():
+    """the one print shape of every lever cover: the module lever C cover (the carrier section is common to every lever,
+    P11; the end-part levers come back from their rest pose 0.005..0.009 off it, lever_normalize)."""
+    if not _COVER_CANON:
+        _COVER_CANON.append(lever_cover_solid([p for p in G["parts"] if p["body"] == "lever C"]))
+    return _COVER_CANON[0]
+
+
+def lever_body_solid(parts, note, engrave=None, collars=None):
+    """A12 lever carrier body = lever_solid minus the cover: the steel pocket is open on +x, so the body prints on its
+    -x wall with nothing over the pocket (no breakaway rib)."""
+    m = lever_solid(parts, note, engrave=engrave, collars=collars)
+    ADJUST.add("A12")
+    return clean(diff(m, [union(_lever_cover_items(parts))]))
+
+
 def lever_print_support(parts):
     """DESIGN 15 '강철 칸 안에 지지대 1개(z 틈 0.2)': breakaway rib across the pocket at mid-span (y169.4..170.6), from the
     near (-x, bed) side wall up to 0.2 under the far wall, z33.5..51.5; 0.4-wide root for the first 0.6 so it snaps off.
@@ -620,7 +665,8 @@ PAD_LABELS = {"패드바_칸1": "1 C·C#·D", "패드바_칸2": "2 D#·E·F", "�
 
 
 def pad_label(nm, x0, x1):
-    """bay name debossed 0.4 in the bar top face z68.85 over y148.5..160 (spec ka2; reads from above)."""
+    """bay name debossed 0.4 in the bar top face over y148.5..160 (spec ka2; reads from above). A12: the top face is
+    the seat plane z67.35 (was z68.85)."""
     s_ = PAD_LABELS.get(nm)
     if not s_:
         return None
@@ -635,7 +681,7 @@ def pad_label(nm, x0, x1):
     k = min(1.0, ((x1 - x0) - 2) / (b[3] - b[0]), 9.0 / (b[4] - b[1]))
     if k < 1.0:
         t = text_xy(s_, size * k, 0.6, 0, 0, 0, "center", "center", heavy=True)
-    return t.translate(((x0 + x1) / 2, 154.25, 68.85 - 0.4))
+    return t.translate(((x0 + x1) / 2, 154.25, PAD_SEAT_A12 - 0.4))
 
 
 PAD_NORMAL = {"w": tuple(G["key_points"]["white D"]["pad_face"]["normal"]),
@@ -650,15 +696,41 @@ def thicker_wedge(s, extra):
     return [((y - n[0] * extra, z - n[1] * extra) if z in lo else (y, z)) for (y, z) in s]
 
 
+def padbar_a12_poly(p):
+    """A12 (2026-10-29): a pad bar that prints with no support, top face on the bed. The bar top is one plane, the
+    plate seat z67.35 (the old front part stood 1.5 higher, at the plate's z68.85, which left the seat part hanging
+    1.5 over the bed). The front part (in front of the lower step y165.5) is 1.0 thick so it stays 1.55 above the
+    lever fingernail tab at ff; it no longer touches the plate - only the seat part over the pads does. The leaf
+    tongue moves up 0.9 so its top is flush with the bar top in the printed (free) state; its tip nub reaches down
+    to the rail lip as before, and the plate has a 0.6 groove over the leaf travel (frame_split)."""
+    n, s = p["part"], p["side"]
+    ys = [q[0] for q in s]
+    if n == "pad bar" or n.startswith("pad bar (edge strip, front"):
+        y_low = min(q[0] for q in s if abs(q[1] - PAD_SEAT_A12 + 1.5) < 1e-6)
+        yf, yr = min(ys), max(ys)
+        zt, zf, zb = PAD_SEAT_A12, PAD_SEAT_A12 - PAD_FRONT_T, PAD_SEAT_A12 - 1.5
+        return [(yf, zf), (y_low, zf), (y_low, zb), (yr, zb), (yr, zt), (yf, zt)]
+    if n.startswith("pad bar grip"):
+        return [(min(ys), PAD_SEAT_A12 - 2.5), (max(ys), PAD_SEAT_A12 - 2.5), (max(ys), PAD_SEAT_A12), (min(ys), PAD_SEAT_A12)]
+    if n.startswith("pad bar leaf"):
+        return [(y, z) if z < PAD_SEAT_A12 - 1.75 else (y, z + 0.9) for (y, z) in s]
+    return s
+
+
+PAD_SEAT_A12 = 67.35       # plate underside over the pads (solved z_seat)
+PAD_FRONT_T = 1.0          # A12 front part of the bar
+
+
 def padbar_solids(fx, ranges, names, free=True, wedge_extra=0.0):
     """split the pad-bar prisms into bars by x range; the installed (0.3 lifted) leaf tongue is
-    printed straight: tip dropped back by the 0.3 preload (P13)."""
+    printed straight: tip dropped back by the 0.3 preload (P13). A12: flat top, leaf flush with it."""
     out = {}
     for (x0, x1), nm in zip(ranges, names):
         items, leaves, slots = [], [], []
         for p in fx.get("padbar", []):
             if p["x"][0] >= x0 - 0.01 and p["x"][1] <= x1 + 0.01:
-                s = p["side"]
+                s = padbar_a12_poly(p)
+                ADJUST.add("A12")
                 if p["part"].startswith("pad wedge") and wedge_extra:
                     s = thicker_wedge(s, wedge_extra)
                 if p["part"].startswith("pad bar leaf"):
@@ -702,3 +774,330 @@ def dovetail_female(face_x, yc, z0, z1, root=6.0, tip=9.0, depth=4.0, clr=0.2):
     r, t = root + 2 * clr, tip + 2 * clr
     pts = [(face_x - 0.01, yc - r / 2), (face_x + depth + clr, yc - t / 2), (face_x + depth + clr, yc + t / 2), (face_x - 0.01, yc + r / 2)]
     return prism_z(pts, z0 - 0.01, z1)
+
+
+# ------------------------------------------------------------------ A12 (2026-10-29): prints with no support
+# The user printed one octave and found the supports hard to get off (under the frame's top plate ~88 g per module,
+# in the lever pocket, under the pad bar seat). A12 splits the parts so that every face prints on the bed, as a
+# wall or as a short bridge:
+#   frame  -> bed (floor, rails, balance rail; printed upright) + cage (top plate, fins, rear wall, shelf; printed on its
+#             back) + guide tabs (tab + keeper hook, printed on the side, glued into sockets in the bed)
+#   lever  -> body + cover (the +x wall with its lips), bonded with the steel (lever_body_solid / lever_cover_solid)
+#   pad bar -> one flat top plane, leaf flush with it (padbar_a12_poly)
+#   keys   -> unchanged (one piece is the strongest), a tear-off comb under the hidden beam (key_print_support)
+from cadlib import _cs, _seg  # noqa: E402
+
+CAGE_RX = [r"^fin$", r"^fin boss$", r"^fin keel", r"^top plate", r"^pad bar rail$", r"^pad bar rail lip$", r"^rear wall",
+           r"^spring groove boss", r"^rear shelf$", r"^shelf rib$", r"^control-board boss.*shelf rib"]
+TAB_RX = r"^(tab |keeper hook )"
+A12 = {
+    "clr": 0.15,          # side clearance: cage fin feet in the bed slots, tab tenons in their sockets
+    "tenon": 5.0,         # guide-tab tenon depth into the white front rail / black tab base
+    "tenon_key": 1.0,     # tenon starts 1.0 behind the tab front, so a tab only goes in the right way round
+    "slot_h": 2.5,        # bed ribs either side of a cage fin foot, z5 -> 7.5
+    "usb_open": (76.45, 91.55),   # rear-wall USB-C opening narrowed to the shelf gap (plug envelope x77.75..90.25)
+    "groove": 0.6,        # pad-bar leaf groove in the plate underside over the leaf travel
+    "gap": 0.2,           # air gap of the print-only tear-off supports (comb, posts) to the part
+}
+# cage -> bed screws, modules only (M3 x 10 self-tapping from under the bed floor; glue may be used as well):
+#   'wall' = D boss on the rear wall under the shelf, between shelf ribs; 'fin' = pointed boss on fins 2 and 4
+CAGE_SCREWS = [(29.0, 203.0, "wall"), (143.0, 203.0, "wall"), (41.66, 160.5, "fin"), (123.925, 160.5, "fin")]
+SCREW = {"boss_d": 6.4, "pilot": 2.5, "clear": 3.4, "top": 14.0}
+
+
+def _ccw(pts):
+    a = sum(pts[i][0] * pts[(i + 1) % len(pts)][1] - pts[(i + 1) % len(pts)][0] * pts[i][1] for i in range(len(pts)))
+    return pts if a > 0 else pts[::-1]
+
+
+def _point_shape(cx, cy, r, ux, uy):
+    """circle (cx, cy, r) + a 45 deg point toward the unit direction (ux, uy) (polygon, counter-clockwise)."""
+    n = _seg(2 * r)
+    pts = [(cx + r * math.cos(2 * math.pi * i / n), cy + r * math.sin(2 * math.pi * i / n)) for i in range(n)]
+    px, py = -uy, ux
+    s = r / math.sqrt(2)
+    tri = _ccw([(cx + ux * s + px * s, cy + uy * s + py * s), (cx + ux * s - px * s, cy + uy * s - py * s),
+                (cx + ux * r * math.sqrt(2), cy + uy * r * math.sqrt(2))])
+    return max((_cs(_ccw(pts)) + _cs(tri)).to_polygons(), key=len)
+
+
+def teardrop_x_apex(cy, cz, x0, x1, d, apex=(-1.0, 0.0)):
+    """cylinder / hole along x with a 45 deg point toward apex = (dy, dz): the cage prints with -y up."""
+    return prism_x(_point_shape(cy, cz, d / 2.0, apex[0], apex[1]), x0, x1)
+
+
+def pointed_z(cx, cy, z0, z1, d, tip=(0.0, 1.0), cut=None):
+    """cylinder along z with a 45 deg point toward tip = (dx, dy), so it prints lying on its side; cut = largest distance
+    of the point from the axis (a locating pin that must still enter its round hole)."""
+    m = prism_z(_point_shape(cx, cy, d / 2.0, tip[0], tip[1]), z0, z1)
+    if cut is not None:
+        big = 50.0
+        if abs(tip[1]) > 0.5:
+            yb = cy + tip[1] * cut
+            m = m ^ box(cx - big, cx + big, min(yb, cy - big), max(yb, cy + big), z0 - 1, z1 + 1)
+        else:
+            xb = cx + tip[0] * cut
+            m = m ^ box(min(xb, cx - big), max(xb, cx + big), cy - big, cy + big, z0 - 1, z1 + 1)
+    return m
+
+
+def _upper_z(polys, y):
+    """highest z of the (y, z) polygons on the vertical line y (None if no polygon spans y)."""
+    best = None
+    for pts in polys:
+        for i in range(len(pts)):
+            (ya, za), (yb, zb) = pts[i], pts[(i + 1) % len(pts)]
+            if min(ya, yb) - 1e-9 <= y <= max(ya, yb) + 1e-9 and abs(yb - ya) > 1e-9:
+                z = za + (zb - za) * (y - ya) / (yb - ya)
+                best = z if best is None else max(best, z)
+    return best
+
+
+def key_print_support(parts, black):
+    """A12 tear-off comb under the hidden beam and the thin tail of a key printed top face down (print file only, not
+    in the assembly): a 0.8 blade on the beam axis plus cross ribs every 8 mm (beam width - 1.0), standing on the bed
+    with a 0.2 air gap under the beam (+ for a black key a 1.2 pad under the 0.6 skin step behind y144.3). Nothing is
+    fused to the key, so the comb lifts off in one piece."""
+    by = {p["part"]: p for p in parts}
+    beam = [p for p in parts if p["part"] == "beam"][0]
+    tail = [p for p in parts if p["part"] == "thin tail"]
+    polys = [beam["side_rest"]] + [t["side_rest"] for t in tail]
+    zbed = max(q[1] for p in parts if p["part"].startswith("skin") for q in poly(p, "rest"))
+    gap = A12["gap"]
+    y0, y1 = 147.3, max(q[0] for pts in polys for q in pts) - 1.0
+    cx = (beam["x"][0] + beam["x"][1]) / 2.0
+    w = beam["x"][1] - beam["x"][0]
+    ys = [y0 + i * 0.25 for i in range(int((y1 - y0) / 0.25) + 1)] + [y1]
+    # highest beam / tail top within +-0.5 of each sample (the beam -> thin tail step near y192.4 is vertical)
+    top = lambda y: max(z for z in (_upper_z(polys, y + d) for d in (-0.5, -0.25, 0.0, 0.25, 0.5)) if z is not None)
+    lo = [(y, top(y) + gap) for y in ys]
+    blade = prism_x(_ccw(lo + [(y1, zbed), (y0, zbed)]), cx - 0.4, cx + 0.4)
+    ribs = []
+    yr = y0 + 2.0
+    while yr < y1 - 1.0:
+        zr = max(top(yr - 0.4), top(yr + 0.4)) + gap
+        ribs.append(box(cx - (w - 1.0) / 2, cx + (w - 1.0) / 2, yr - 0.4, yr + 0.4, zr, zbed))
+        yr += 8.0
+    out = [blade] + ribs
+    if black and "skin" in by:
+        sk = poly(by["skin"], "rest")
+        z_step = min(q[1] for q in sk if q[0] > 144.0 and q[1] > 54.0)          # skin top behind y144.3 (54.1)
+        out.append(box(by["skin"]["x"][0] + 0.5, by["skin"]["x"][1] - 0.5, 144.5, 146.8, z_step + gap, zbed))
+    return union(out)
+
+
+def _is_cage(name):
+    return any(re.search(r, name) for r in CAGE_RX)
+
+
+def _cage_poly(p):
+    """fin outlines on the cage: the +y facing steps would hang when the cage prints on its back -> 45 deg slope
+    (F|F# fin: foot z3 to y170.7 then z21.5 = a gusset down to the keel; end fins: notch over the dovetail block)."""
+    s = [tuple(q) for q in p["side"]]
+    if p["part"] != "fin":
+        return s
+    out = []
+    for i, (y, z) in enumerate(s):
+        nxt = s[(i + 1) % len(s)]
+        if abs(nxt[0] - y) < 1e-9 and z < 6.0 and (round(y, 3), round(nxt[1], 3)) in ((170.7, 21.5), (196.7, 19.0)):
+            out.append((y - (nxt[1] - z), z))
+            continue
+        if (round(y, 3), round(z, 3)) == (167.5, 68.85):
+            out.append((168.0, 68.85))     # fin top steps up at the plate step y168 (the model's 0.5 slope left a sliver under the plate)
+            continue
+        out.append((y, z))
+    return out
+
+
+def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
+    """A12 frame in three kinds of part, unit (local) coordinates, assembled pose:
+      bed   : floor, white front rail, black stop rails / tab bases, sensor-bar post + ledges, balance rail, dovetails,
+              front board bosses, cheek (end parts), sockets for the guide tabs, slot ribs for the cage fin feet
+      cage  : top plate (+ pad-bar rails), fins (+ lever-rod bosses), rear wall, rear shelf + ribs, rear board bosses
+      tabs  : [(note, 'white'|'black', solid)] tab + keeper hook (hook as wide as the tab) + tenon
+      posts : print-only tear-off posts under the two front board bosses (they hang off the balance rail)
+    The geometry is the monolithic frame's (frame_solid) apart from the joint features and the print slopes."""
+    clr = A12["clr"]
+    bed_adds, cage_adds, bed_cuts, cage_cuts, tabs = [], [], [], [], []
+    has_female = False
+    tab_by, hook_by = {}, {}
+    for p in fx["frame"]:
+        n = p["part"]
+        if n.startswith("control-board locating pin"):
+            continue
+        if re.search(TAB_RX, n):
+            if n.startswith("keeper hook"):
+                hook_by[n.split(" ", 2)[2]] = p
+            else:
+                tab_by[n.split(" ", 1)[1]] = p
+            continue
+        if "dovetail" in n and "female" in n:
+            has_female = True
+            continue
+        if not _is_cage(n):
+            bed_adds.append(prism_x(p["side"], *p["x"]))
+            continue
+        ys = [q[0] for q in p["side"]]
+        zs = [q[1] for q in p["side"]]
+        if n.startswith("control-board boss"):
+            # rear board bosses hung off one shelf rib: carried back to the rear wall so they stand on it in print
+            cage_adds.append(box(p["x"][0], p["x"][1], min(ys), 209.0 + 0.01, min(zs), max(zs)))
+        elif n == "fin boss":
+            # lever-rod boss, pointed toward +y (down on the bed when the cage prints on its back)
+            cage_adds.append(teardrop_x_apex((max(ys) + min(ys)) / 2, (max(zs) + min(zs)) / 2, p["x"][0], p["x"][1],
+                                             max(ys) - min(ys), apex=(1.0, 0.0)))
+        elif n.startswith("rear wall") and side is None and abs(min(zs) - 21.0) < 1e-6:
+            # wall over the USB-C opening x74..94 z5..21: opening narrowed to the shelf gap, so the shelf and the shelf
+            # ribs beside it stand on the wall (the first layers of the cage)
+            cage_adds.append(prism_x(p["side"], *p["x"]))
+            uo = A12["usb_open"]
+            cage_adds.append(box(p["x"][0], uo[0], min(ys), max(ys), 5.0, 21.0 + 0.01))
+            cage_adds.append(box(uo[1], p["x"][1], min(ys), max(ys), 5.0, 21.0 + 0.01))
+        else:
+            cage_adds.append(prism_x(_cage_poly(p), *p["x"]))
+    males = [p for p in fx["frame"] if "dovetail male root" in p["part"]]
+    if males:
+        bed_adds += dovetail_male_at(max(p["x"][1] for p in males))
+    if has_female:
+        x0b, x1b, y0b, y1b, z0b, z1b = REAR_FEMALE_BLOCK
+        bed_adds.append(box(x0b, x1b, y0b, y1b, z0b, z1b))
+        bed_cuts += dovetail_female_at(0.0)
+        ADJUST.add("A6")
+    # control-board pins and screw bores: front pair on the bed (rail bracket), rear pair on the cage (shelf rib)
+    for c in [q for q in plan if q["part"].startswith("control-board locating pin")]:
+        cx, cy = c["circle"][0], c["circle"][1]
+        if cy < 170.0:
+            bed_adds.append(cyl_z(cx, cy, 7.8, 10.7, FEAT["cb_pin_d"]))
+        else:
+            # lies sideways on the cage's back: pointed toward +y, point cut at r1.45 (board hole D3.0)
+            cage_adds.append(pointed_z(cx, cy, 7.8, 10.7, FEAT["cb_pin_d"], tip=(0.0, 1.0), cut=1.45))
+    for c in [q for q in plan if q["part"].startswith("control-board screw")]:
+        cx, cy = c["circle"][0], c["circle"][1]
+        if cy < 170.0:
+            bed_cuts.append(cyl_z(cx, cy, 10.0, FEAT["cb_screw_top"], FEAT["cb_screw_bore"]))
+        else:
+            cage_cuts.append(pointed_z(cx, cy, 10.0, FEAT["cb_screw_top"], FEAT["cb_screw_bore"], tip=(0.0, -1.0)))
+    for p in fx.get("female", []):
+        if p["part"].startswith("fin boss bore"):
+            cage_cuts.append(teardrop_x_apex(L_AXIS[0], L_AXIS[1], p["x"][0] - 0.01, p["x"][1] + 0.01, FEAT["fin_bore_print"]))
+        else:
+            cage_cuts.append(prism_x(p["side"], *p["x"]))
+            if p["part"].startswith("spring groove cut"):
+                ys = [q[0] for q in p["side"]]
+                zs = [q[1] for q in p["side"]]
+                cage_cuts.append(box(p["x"][0], p["x"][1], 209.0 - 0.01, max(ys), min(zs) - FEAT["groove_ext"], min(zs) + 0.01))
+                ADJUST.add("A2")
+    for p in fx["bought"]:
+        if p["part"].startswith("balance pin D2"):
+            ys = [q[0] for q in p["side"]]
+            zs = [q[1] for q in p["side"]]
+            bed_cuts.append(cyl_z((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5, FEAT["bal_pin_hole_d"]))
+    for (sx, sy) in FEAT["sb_screws"]:
+        bed_cuts.append(cyl_z(sx, sy, 2.99, 7.01, FEAT["sb_pilot_d"]))
+    # hairline seams rail web <-> fin (as frame_solid), on the cage
+    rails = [p for p in fx["frame"] if p["part"] == "pad bar rail"]
+    fins = [p for p in fx["frame"] if p["part"] == "fin"]
+    for r in rails:
+        ry, rz = [q[0] for q in r["side"]], [q[1] for q in r["side"]]
+        for f_ in fins:
+            fy, fz = [q[0] for q in f_["side"]], [q[1] for q in f_["side"]]
+            for (a0, a1) in ((r["x"][1], f_["x"][0]), (f_["x"][1], r["x"][0])):
+                if 1e-6 < a1 - a0 < 0.2:
+                    y0_, y1_ = max(min(ry), min(fy)), min(max(ry), max(fy))
+                    z0_, z1_ = max(min(rz), min(fz)), min(max(rz), max(fz))
+                    if y1_ > y0_ and z1_ > z0_:
+                        cage_adds.append(box(a0 - 0.01, a1 + 0.01, y0_ + 0.01, y1_ + 0.01, z0_ + 0.01, z1_ - 0.01))
+    # ---- guide tabs (tab + keeper hook as wide as the tab + tenon), printed on the side; sockets in the bed
+    for key, t in tab_by.items():
+        ys, zs = [q[0] for q in t["side"]], [q[1] for q in t["side"]]
+        ty0, ty1, tz0, tz1 = min(ys), max(ys), min(zs), max(zs)
+        h = hook_by[key]
+        hy0 = min(q[0] for q in h["side"])
+        hz0 = min(q[1] for q in h["side"] if q[0] < ty0 - 0.5)          # hook underside z28.6
+        fillet = any(abs(q[0] - (ty0 - 0.3)) < 1e-6 for q in h["side"])  # white: (14.5, 28.6)-(14.8, 27.7) root fillet
+        zt0, yk = tz0 - A12["tenon"], ty0 + A12["tenon_key"]
+        pts = [(yk, zt0), (ty1, zt0), (ty1, tz1), (hy0, tz1), (hy0, hz0)]
+        pts += [(ty0 - 0.3, hz0), (ty0, hz0 - 0.9)] if fillet else [(ty0, hz0)]
+        pts += [(ty0, tz0), (yk, tz0)]
+        # one print file per colour: width to 0.1 (black tabs are 6.89..6.90 in the model), same centre
+        xc, wt = (t["x"][0] + t["x"][1]) / 2.0, round(t["x"][1] - t["x"][0], 1)
+        tx0, tx1 = xc - wt / 2.0, xc + wt / 2.0
+        tabs.append((key, "black" if tz0 > 11.5 else "white", prism_x(_ccw(pts), tx0, tx1)))
+        bed_cuts.append(box(tx0 - clr, tx1 + clr, yk - clr, ty1 + clr, zt0 - 0.3, tz0 + 0.01))
+    # ---- slot ribs on the bed either side of each cage fin foot standing on the floor (not the F|F# fin over the hatch)
+    floors = [p for p in fx["frame"] if p["part"].startswith("floor")]
+    fl0, fl1 = min(p["x"][0] for p in floors), max(p["x"][1] for p in floors)
+    for f_ in fins:
+        pf = _cage_poly(f_)
+        if abs(min(q[1] for q in pf) - 5.0) > 1e-6:
+            continue
+        foot = [q[0] for q in pf if abs(q[1] - 5.0) < 1e-6]
+        for (xa, xb) in ((f_["x"][0] - clr - 1.0, f_["x"][0] - clr), (f_["x"][1] + clr, f_["x"][1] + clr + 1.0)):
+            if xa < fl0 + 0.2 or xb > fl1 - 0.2:
+                continue                                   # unit edge: the neighbour's fin (or nothing) is there
+            bed_adds.append(box(xa, xb, min(foot) + 1.0, min(max(foot), 195.0), 5.0 - 0.01, 5.0 + A12["slot_h"]))
+    # ---- cage -> bed screws (modules)
+    if side is None:
+        for (sx, sy, kind) in CAGE_SCREWS:
+            r = SCREW["boss_d"] / 2.0
+            if kind == "wall":
+                cage_adds.append(union([cyl_z(sx, sy, 5.0, SCREW["top"], SCREW["boss_d"]), box(sx - r, sx + r, sy, 209.0 + 0.01, 5.0, SCREW["top"])]))
+            else:
+                cage_adds.append(pointed_z(sx, sy, 5.0, SCREW["top"], SCREW["boss_d"], tip=(0.0, 1.0)))
+                bed_cuts.append(box(sx - r - 1.5, sx + r + 1.5, sy - r - 0.5, sy + r * math.sqrt(2) + 0.5, 4.98, 5.0 + A12["slot_h"] + 0.1))
+            cage_cuts.append(pointed_z(sx, sy, 5.0 - 0.01, SCREW["top"] - 1.0, SCREW["pilot"], tip=(0.0, -1.0)))
+            bed_cuts.append(cyl_z(sx, sy, 2.9, 5.1, SCREW["clear"]))
+    # ---- pad-bar leaf grooves in the plate underside over the leaf travel (A12 leaf is flush with the bar top)
+    for p in fx.get("padbar", []):
+        if p["part"].startswith("pad bar leaf"):
+            cage_cuts.append(box(p["x"][0] - 0.2, p["x"][1] + 0.2, 167.9, 183.4, PAD_SEAT_A12 - 0.01, PAD_SEAT_A12 + A12["groove"]))
+    # ---- print-only tear-off posts under the front board bosses (and the locating pin hanging under one of them)
+    posts = []
+    for c in [q for q in plan if q["part"].startswith("control-board boss") and q["circle"][1] < 170.0]:
+        cx = c["circle"][0]
+        x0p, x1p, y0p, y1p = cx - 2.6, cx + 2.6, 145.0, 151.6
+        ztop = 10.6 - A12["gap"]
+        ring = diff(box(x0p, x1p, y0p, y1p, 3.0, ztop), [box(x0p + 0.8, x1p - 0.8, y0p + 0.8, y1p - 0.8, 2.9, ztop + 0.1)])
+        extra = []
+        for q in plan:
+            if q["part"].startswith("control-board locating pin") and abs(q["circle"][0] - cx) < 1.0 and q["circle"][1] < 170.0:
+                px, py = q["circle"][0], q["circle"][1]
+                extra += [cyl_z(px, py, 3.0, 7.8 - A12["gap"], 2.0), box(x0p + 0.4, x1p - 0.4, py - 0.3, py + 0.3, 3.0, 6.0)]
+        posts.append(union([ring] + extra))
+    if side is not None:
+        # end parts: the rear wall stops 0.4 short of the end fin by the cheek; on the cage's back that fin end would
+        # hang 3 mm over the bed -> carry the wall out to the fin's outer face (it sits in the cheek recess)
+        walls = [p for p in fx["frame"] if p["part"].startswith("rear wall")]
+        rw0, rw1 = min(p["x"][0] for p in walls), max(p["x"][1] for p in walls)
+        fx0, fx1 = min(p["x"][0] for p in fins), max(p["x"][1] for p in fins)
+        if fx0 < rw0:
+            cage_adds.append(box(fx0, rw0 + 0.01, 208.99, 212.0, 5.0, 72.85))
+        if fx1 > rw1:
+            cage_adds.append(box(rw1 - 0.01, fx1, 208.99, 212.0, 5.0, 72.85))
+    bed = union(bed_adds + list(extra_adds))
+    cage = union(cage_adds)
+    if side is not None:
+        # end parts: the cheek stays whole on the bed (its outer face and top are the instrument's end panel); the cage
+        # stops at the outer face of its end fin, which with the plate edge and the rod boss sits in a recess in the cheek
+        fx0 = min(p["x"][0] for p in fins)
+        fx1 = max(p["x"][1] for p in fins)
+        cheek = [p for p in fx["frame"] if p["part"] == "cheek"]
+        if cheek and cheek[0]["x"][0] < fx0 + 1.0:
+            cage = cage ^ box(fx0, 1e3, -1e3, 1e3, -1e3, 1e3)
+        elif cheek:
+            cage = cage ^ box(-1e3, fx1, -1e3, 1e3, -1e3, 1e3)
+        # recess = one box over the cheek's inner face: from the cage's end fin face (+ clr) to just past the cheek face,
+        # plate front - clr .. rear face, floor top z5 .. top (open at the top and the back; 0.15 joint line there)
+        y0r = min(min(q[0] for q in p["side"]) for p in fx["frame"] if p["part"].startswith("top plate")) - clr
+        if cheek and cheek[0]["x"][0] < fx0 + 1.0:
+            rx0, rx1 = fx0 - clr, cheek[0]["x"][1] + 0.001
+        elif cheek:
+            rx0, rx1 = cheek[0]["x"][0] - 0.001, fx1 + clr
+        else:
+            rx0 = rx1 = 0.0
+        if rx1 > rx0:
+            bed = bed - box(rx0, rx1, y0r, 213.0, 5.0, 74.0)
+    bed = clean(diff(bed, bed_cuts + list(extra_cuts)))
+    cage = clean(diff(cage, cage_cuts))
+    ADJUST.add("A12")
+    return {"bed": bed, "cage": cage, "tabs": tabs, "posts": posts}

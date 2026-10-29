@@ -4,12 +4,12 @@ import itertools, re, sys, json
 from keyaction_parts import build_unit, G
 notes=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
 EXPECTED = [
-    (r"-LEVER-|-FRAME|-PLUG", r"leverrod", "Ø3.9 출력 구멍 → Ø4.0 드릴 (S11, P22) / 마개 압입"),
-    (r"-FRAME", r"-PLUG", "마개 Ø4.0 압입 (D18)"),
+    (r"-LEVER-|-CAGE|-PLUG", r"leverrod", "Ø3.9 출력 구멍 → Ø4.0 드릴 (S11, P22) / 마개 압입"),
+    (r"-CAGE", r"-PLUG", "마개 Ø4.0 압입 (D18)"),
     (r"-KEY-", r"-CAPSTAN-", "캡스턴 나사가 Ø2.8 자가 잠김 구멍에 나사산을 냄 (D02)"),
-    (r"-LEVER-", r"-STEEL-", "레버 쉼 각 회전 계산 오차 (< 0.001 mm)"),
+    (r"-LEVER-|-LEVERCOVER-", r"-STEEL-", "레버 쉼 각 회전 계산 오차 (< 0.001 mm)"),
     (r"-LEVER-", r"-FELTSTRIP-", "펠트 띠가 아래 립 끝면과 맞닿음"),
-    (r"-FRAME", r"controlboard", "위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0"),
+    (r"-FRAME|-CAGE", r"controlboard", "위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0"),
     (r"-FRAME", r"SBSCREW", "센서 바 M3×10이 Ø2.75 자리에 나사산을 냄 (P36)"),
     (r"-FRAME", r"balancepin", "밸런스 핀 Ø2.0 ↔ 출력 구멍 Ø1.95 가벼운 압입 (P32)"),
     (r"-FRAME", r"keyrod", "봉 받침 R2.05 ↔ 봉 Ø4 다각형 근사 오차 (< 0.01 mm3)"),

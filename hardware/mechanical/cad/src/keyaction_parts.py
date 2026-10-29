@@ -4,9 +4,9 @@ x = 47 + 164.5 (k-1), right end part x1198.5..1238)."""
 import re
 
 from cadlib import teardrop_y, diff, box, clean, cyl_x, cyl_z, prism_x, union, orient, rot_x, rot_y, to_bed
-from keyaction import (lever_print_support, lever_normalize, BLACK, FEAT, G, L_AXIS, bodies_of, classify, curtain_solid, fixed_groups, frame_solid,
-                       key_bought, key_solid, lever_bought, lever_rest_angle, lever_solid, padbar_solids,
-                       plug_solid, rotate_about_L, sensorbar_solid, spring_solid)
+from keyaction import (lever_normalize, BLACK, FEAT, G, L_AXIS, bodies_of, classify, curtain_solid, fixed_groups, frame_split,
+                       key_bought, key_print_support, key_solid, lever_body_solid, lever_bought, lever_cover_print, lever_cover_solid, lever_rest_angle,
+                       padbar_solids, plug_solid, rotate_about_L, sensorbar_solid, spring_solid, A12, CAGE_SCREWS, SCREW)
 from parts import COLORS, Part
 
 MODULE_W = 164.5          # P01
@@ -24,6 +24,9 @@ R_PAD = rot_y(180)        # top face on the bed, wedges up
 R_CURTAIN = rot_x(90)     # wide face on the bed, hook lip up
 R_PLUG = rot_y(-90)       # end face on the bed
 R_NONE = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+R_CAGE = rot_x(-90)       # A12 lever cage: rear wall (y212) on the bed, -y up
+R_TAB = rot_y(-90)        # A12 guide tab: -x side on the bed
+R_COVER = rot_y(90)       # A12 lever cover: outer (+x) face on the bed, lips up
 
 
 def bed(m, R):
@@ -105,10 +108,12 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
             group="%s %s" % (label, "흑건" if black else "백건"), solid=T(k), color=COLORS["black_key" if black else "white_key"],
             material="PETG " + ("검정" if black else "흰색"),
             print_name=pname, print_folder="01_건반",
-            print_solid=bed(k, R_KEY),
-            print_note=("윗면(z55.5)을 매끈한 PEI에 대고 뒤집어 출력. 트리 서포트는 윗면 뒤끝 턱·숨은 빔·꼬리(y144.5~199) 밑만. "
-                        if black else "윗면(z43.5)을 매끈한 PEI에 대고 뒤집어 출력. 트리 서포트는 숨은 빔·꼬리(y146~199) 밑만. ")
-                       + "노치 R2.55·핀 홈에 부싱 천 0.5T(i068)를 붙임. 자석 Ø5×2 N35(i098) 압입 + 순간접착제, "
+            print_solid=bed(union([k, key_print_support(bp, black)]), R_KEY),
+            print_note=("윗면(z55.5)을 매끈한 PEI에 대고 뒤집어 출력. " if black else "윗면(z43.5)을 매끈한 PEI에 대고 뒤집어 출력. ")
+                       + "슬라이서 서포트 끔: 숨은 빔·꼬리(y147~198) 밑의 떼는 빗(가운데 날 0.8 + 8 mm마다 가로 날)"
+                       + ("과 윗면 뒤끝 턱(y144.5~146.8) 밑 받침" if black else "")
+                       + "이 파일에 들어 있고 건반과 0.2 떨어져 붙지 않음 - 출력 뒤 손으로 들어냄 (A12). "
+                         "노치 R2.55·핀 홈에 부싱 천 0.5T(i068)를 붙임. 자석 Ø5×2 N35(i098) 압입 + 순간접착제, "
                          "캡스턴 M3×6 버튼헤드(i014) + M3 너트(i011)를 +x 옆 홈으로 (DESIGN 15, D02)",
             source=SRC))
         for nm, m in key_bought(bp, parts, note).items():
@@ -123,17 +128,30 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
         if lb:
             lb = lever_normalize(lb)
             ang = lever_rest_angle(lb)
-            lv = lever_solid(lb, note, engrave=note, collars=COLL.get(note))
+            lv = lever_body_solid(lb, note, engrave=note, collars=COLL.get(note))
+            cv = lever_cover_solid(lb)
             out.append(Part(
                 id="%s-LEVER-%s" % (tag, note.replace("#", "s")), name_ko="레버 캐리어 %s" % wname,
                 name_en="lever carrier " + wname, kind="print", group="%s 레버" % label,
                 solid=T(rotate_about_L(lv, ang)), color=COLORS["lever"], material="PETG",
                 print_name="레버캐리어_" + note, print_folder="02_레버캐리어",
-                print_solid=bed(union([lv, lever_print_support(lb)]), R_LEVER),
-                print_note="−x 옆면을 베드에 눕혀 출력(칼라는 모두 +x 쪽, A5), 음 이름 새김(Arial Black, 0.4)이 위. "
-                           "강철 칸 가운데(y169.4~170.6)의 떼는 지지대는 파일에 들어 있음(먼 옆벽과 0.2 틈, 뿌리 0.4): "
-                           "떼어 내고 사포질한 뒤 접착. 허브 구멍 Ø3.9로 출력 → Ø4.0 드릴(i126). 강철 블록은 강철 띠 9T×19(i119)를 "
-                           "40 −0.1/−0.3으로 잘라(칸 길이 40.0, 두께 8.9~9.1만) MS 폴리머로 접착 (DESIGN 15, D07)",
+                print_solid=bed(lv, R_LEVER),
+                print_note="−x 옆면을 베드에 눕혀 출력(칼라는 모두 +x 쪽, A5), 음 이름 새김(Arial Black, 0.4)이 위. 서포트 없음: "
+                           "강철 칸의 +x 벽은 레버 덮개(따로 출력)라 칸 위가 열려 있음 (A12, 옛 떼는 지지대 없음). "
+                           "허브 구멍 Ø3.9로 출력 → Ø4.0 드릴(i126). 강철 블록은 강철 띠 9T×19(i119)를 40 −0.1/−0.3으로 잘라"
+                           "(칸 길이 40.0, 두께 8.9~9.1만) 두 19×40 면에 MS 폴리머를 바르고 +x 쪽에서 칸에 넣은 뒤 레버 덮개를 덮어 "
+                           "고무줄로 눌러 24 h (DESIGN 15, D07)",
+                source=SRC))
+            out.append(Part(
+                id="%s-LEVERCOVER-%s" % (tag, note.replace("#", "s")), name_ko="레버 덮개 %s (+x 옆벽 + 립)" % wname,
+                name_en="lever cover " + wname, kind="print", group="%s 레버" % label,
+                solid=T(rotate_about_L(cv, ang)), color=COLORS["lever"], material="PETG",
+                print_name="레버덮개", print_folder="02_레버캐리어",
+                print_solid=bed(lever_cover_print(), R_COVER),
+                print_note="바깥면(+x)을 베드에, 립 3개(위 앞·위 뒤·아래)가 위. 서포트 없음, 층 0.1 mm 권장(판 0.7). 레버 캐리어의 +x 옆벽을 "
+                           "따로 뽑은 것 (A12): 강철을 넣은 칸 위에 덮어 강철 +x 면과 MS 폴리머로 붙임 - 위 앞 립 앞끝이 캐리어 앞 뚜껑(y153)에, "
+                           "위 뒤 립 뒤끝이 칸 뒷벽(y190)에 닿아 자리가 잡힘. 앞끝 0.8과 뒤끝은 캐리어 앞벽·뒷벽 옆면에 같이 붙음. "
+                           "모든 레버 덮개가 같은 모양",
                 source=SRC))
             for nm, m in lever_bought(lb, "rest").items():
                 if nm == "steel":
@@ -160,20 +178,44 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
                             name_en="torsion spring MISUMI C-UA90R5-3-0.5 " + wname, kind="bought",
                             group="%s 구매품" % label, solid=T(sp), color=COLORS["spring"], source=ssrc))
 
-    # ---- frame (+ printed sub parts)
+    # ---- frame (+ printed sub parts). A12 (2026-10-29): the frame is three kinds of print - bed, lever cage, guide tabs
     ea, ec = cheek_features(side) if side else ([], [])
-    fr = frame_solid(fx, plan, extra_cuts=ec, extra_adds=ea)
-    fname = {"module": "프레임_모듈", "left": "끝부속프레임_왼쪽", "right": "끝부속프레임_오른쪽"}[side or "module"]
-    out.append(Part(id="%s-FRAME" % tag, name_ko={"module": "프레임 (모듈)", "left": "끝 부속 프레임 왼쪽 (A0~B0, 볼 포함)",
-                                                  "right": "끝 부속 프레임 오른쪽 (C8, 볼 포함)"}[side or "module"],
-                    name_en="frame " + (side or "module"), kind="print", group="%s 프레임" % label, solid=T(fr),
-                    color=COLORS["frame"], material="PETG 회색", print_name=fname, print_folder="03_프레임",
-                    print_solid=bed(fr, R_NONE),
-                    print_note="바로 세워 출력. 윗판 밑(y146.5~209)은 바닥·선반에서 올라오는 트리 서포트. 키퍼 훅 밑(y11~15 · y77~81, "
-                               "z28.6)과 매단 위치 핀도 서포트. 핀 보스 구멍 Ø3.9 눈물방울 → Ø4.0 드릴. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 "
-                               "Ø1.9~2.0 드릴로 다듬고 핀 압입. 서포트 약 88 g (DESIGN 15)"
-                               + (". 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid로 약 200 g 절약" if side else ""),
-                    source=SRC))
+    FS = frame_split(fx, plan, extra_cuts=ec, extra_adds=ea, side=side)
+    unit_ko = {"module": "모듈", "left": "끝부속_왼쪽", "right": "끝부속_오른쪽"}[side or "module"]
+    unit_name = {"module": "(모듈)", "left": "끝 부속 왼쪽 (A0~B0, 볼 포함)", "right": "끝 부속 오른쪽 (C8, 볼 포함)"}[side or "module"]
+    joint = ("레버틀을 바닥틀에 얹을 때: 핀 발이 바닥틀의 홈 둑 사이에 들어가고, 바닥 밑에서 M3×10 자가 탭 나사 4개"
+             "(앞 핀 2·3번 발, 뒤 선반 밑 2)로 조임 - 나사만으로 떼었다 붙였다 할 수 있고, 본드(MS 폴리머)를 같이 바르면 더 단단함"
+             if side is None else
+             "레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - "
+             "볼 홈 면과 바닥에 MS 폴리머를 발라 붙임")
+    out.append(Part(id="%s-FRAME" % tag, name_ko="프레임 바닥틀 %s" % unit_name, name_en="frame bed " + (side or "module"),
+                    kind="print", group="%s 프레임" % label, solid=T(FS["bed"]), color=COLORS["frame"], material="PETG 회색",
+                    print_name="프레임_바닥틀_" + unit_ko, print_folder="03_프레임",
+                    print_solid=bed(union([FS["bed"]] + FS["posts"]), R_NONE),
+                    print_note="바로 세워(바닥면을 베드에) 출력, 슬라이서 서포트 끔 (A12). 내민 면은 짧은 다리뿐: 밸런스 레일 밑 리본 길 지붕(23), "
+                               "암 도브테일 홈 천장, 센서 바 턱 1.5" + ("" if side else
+                               ". 기판 앞 보스 2개(레일 뒷면에 매달림) 밑의 떼는 기둥은 파일에 들어 있음(0.2 떨어져 붙지 않음) - 기판 구멍 쪽에서 손으로 뺌") +
+                               ". 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. "
+                               + joint + (". 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid" if side else ""),
+                    source=SRC, note="A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"))
+    out.append(Part(id="%s-CAGE" % tag, name_ko="프레임 레버틀 %s" % unit_name, name_en="frame lever cage " + (side or "module"),
+                    kind="print", group="%s 프레임" % label, solid=T(FS["cage"]), color=COLORS["frame"], material="PETG 회색",
+                    print_name="프레임_레버틀_" + unit_ko, print_folder="03_프레임",
+                    print_solid=bed(FS["cage"], R_CAGE),
+                    print_note="뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 "
+                               "있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 "
+                               "문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 %s" % ("67.5" if side is None else "65.5"),
+                    source=SRC, note="A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"))
+    for note, kind, ts in FS["tabs"]:
+        wname = notes_world.get(note, note)
+        out.append(Part(id="%s-TAB-%s" % (tag, note.replace("#", "s")), name_ko="가이드 탭 %s (%s)" % ("흑건" if kind == "black" else "백건", wname),
+                        name_en="guide tab " + wname, kind="print", group="%s 프레임" % label, solid=T(ts), color=COLORS["frame"],
+                        material="PETG 회색", print_name="프레임_가이드탭_" + ("흑건" if kind == "black" else "백건"), print_folder="03_프레임",
+                        print_solid=bed(ts, R_TAB),
+                        print_note="옆면을 베드에 눕혀 출력 (서포트 없음, 키퍼 훅이 판 안에 있음). 키퍼 훅은 탭 폭 전체(설계 5.2 → 탭 폭)로 넓힘 - "
+                                   "키퍼 펠트 2T(5.2 폭)는 훅 밑 가운데에 붙임. 촉(깊이 5)은 앞 1.0이 짧아 거꾸로 꽂히지 않음: 바닥틀 자리에 "
+                                   "순간접착제를 한 방울 넣고 끝까지 꽂음 (A12; 옛 프레임의 탭 + 훅, 훅 밑 서포트가 없어짐). 부러지면 탭만 다시 뽑아 바꿈",
+                        source=SRC, note="A12"))
     sbm = sensorbar_solid(fx, side)
     out.append(Part(id="%s-SENSORBAR" % tag, name_ko="센서 바" + ("" if side is None else (" 끝 부속 " + {"left": "왼쪽", "right": "오른쪽"}[side])),
                     name_en="sensor bar", kind="print", group="%s 프레임" % label, solid=T(sbm), color=COLORS["sensorbar"],
@@ -214,8 +256,8 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
         out.append(Part(id="%s-PADBAR-%s" % (tag, nm.split("_")[-1]), name_ko=nm.replace("_", " "), name_en="pad bar",
                         kind="print", group="%s 프레임" % label, solid=T(inst[nm]), color=COLORS["padbar"], material="PETG",
                         print_name=nm, print_folder="04_센서바·패드바·가림판·마개", print_solid=bed(free5[nm], R_PAD),
-                        print_note="윗면을 베드에(쐐기가 위). 뒤 계단(y167~185)은 베드에서 1.5 떠 있으니 그 밑과 잎 혀 밑에 서포트"
-                                   "(윗 틈 0.2, 인터페이스 1층; 이 면은 윗판 자리 z67.35라 매끈하게). 잎 혀는 자유 상태(설치 때 0.3 눌림)로 "
+                        print_note="윗면(한 평면 z67.35 = 윗판 자리)을 베드에, 쐐기·잎 혀 돌기가 위. 서포트 없음 (A12: 윗면 계단을 없애고 앞부분을 "
+                                   "1.0 두께로 내림, 잎 혀를 윗면과 같은 높이로 올림 - 윗판 밑 0.6 홈이 혀 길을 비움). 잎 혀는 자유 상태(설치 때 0.3 눌림)로 "
                                    "출력, 둘레 틈 0.6. 칸 이름은 윗면에 0.4 새김 (P13, DESIGN 15). 쐐기는 구매 목록의 PORON 5T(i124) + 펠트 1T 기준 "
                                    "(설계 6T보다 쐐기를 패드 면 법선으로 1.0 두껍게 - 패드 면은 같음; 조립 모델은 설계 6T로 그림)",
                         source=SRC))
@@ -286,9 +328,11 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
     # BOM i061 cut pieces: module 163.5 x 211, end parts 63 x 211 / 39.5 x 211 (whole footprint incl. the cheek);
     # the module sheet is cut open under the control-board hatch so the board stays serviceable from below
     if side is None:
-        eva = diff(box(0.5, 164.0, 0.5, 211.5, 0.0, 3.0), [box(46.25, 118.25, 144.5, 196.5, -1, 4)] + EVA_DOVE_NOTCH)
+        eva = diff(box(0.5, 164.0, 0.5, 211.5, 0.0, 3.0), [box(46.25, 118.25, 144.5, 196.5, -1, 4)] + EVA_DOVE_NOTCH
+                   + [cyl_z(sx, sy, -1, 4, 7.0) for (sx, sy, _k) in CAGE_SCREWS])
         enote = ("163.5 × 211, 기판 구멍 자리(x46.25~118.25 y144.5~196.5)와 왼쪽 끝 암 도브테일 홈 밑 두 곳"
-                 "(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감")
+                 "(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 "
+                 "(%s)도 뚫음" % ", ".join("x%.1f y%.1f" % (sx, sy) for (sx, sy, _k) in CAGE_SCREWS))
     elif side == "left":
         eva = box(-16.0, 47.0, 0.5, 211.5, 0.0, 3.0)
         enote = "63 × 211 (볼 포함): 볼 밑의 잭 넣는 홈·선 홈·너트 홈을 덮음"

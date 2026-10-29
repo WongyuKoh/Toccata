@@ -75,7 +75,7 @@
    "label": "건반 바닥 윗면(모듈 윗판) z",
    "printed": 72.85000000149012,
    "ref": 72.85,
-   "src": "manifest O4-FRAME",
+   "src": "manifest O4-CAGE (A12 레버틀 = 윗판)",
    "ok": true
   },
   {
@@ -97,9 +97,9 @@
   {
    "sheet": "E01",
    "label": "볼 L 폭",
-   "printed": 15.799999997019768,
-   "ref": 15.8,
-   "src": "keyaction 볼 두께 (EL-FRAME 단면 z60)",
+   "printed": 15.320000000298023,
+   "ref": 15.32,
+   "src": "geometry.json cheek x-16~-0.68 (EL-FRAME 바닥틀 단면 z60; A12부터 끝 핀은 레버틀)",
    "ok": true
   },
   {
@@ -217,8 +217,8 @@
   {
    "sheet": "E06",
    "label": "아랫판 흡기 구멍 수",
-   "printed": 40.0,
-   "ref": 40.0,
+   "printed": 39.0,
+   "ref": 39.0,
    "src": "body.BOT_HOLES_BUCK + BOT_HOLES_PI",
    "ok": true
   },

@@ -618,8 +618,8 @@ def print_plan(misses):
     para = (f'<p>악기 출력물은 {tot["files"]}파일 {tot["parts"]}개이고, 속을 100 % 채운 PETG(1.27 g/cm³)로 계산하면 '
             f'{tot["mass"] / 1000:.2f} kg입니다(01~04 건반 액션 {ka / 1000:.2f} kg, 05 본체 {body / 1000:.2f} kg, '
             f'07 터치스크린 {ts / 1000:.2f} kg). 공구·지그(06 · 08 · 09)는 {toolm:,.0f} g입니다. 실제로는 벽 3줄 + 채움 25~40 %로 '
-            '뽑으므로 이보다 훨씬 적게 들고, 정확한 g과 시간은 슬라이서 값을 봅니다. 건반 액션 프레임은 윗판 밑 트리 서포트가 '
-            '모듈마다 약 88 g 더 듭니다. 필라멘트는 PETG 흰색 2 kg(i087·i088), 검정 5 kg(i089), 여유 1 kg(i090)을 준비했습니다.</p>')
+            '뽑으므로 이보다 훨씬 적게 들고, 정확한 g과 시간은 슬라이서 값을 봅니다. 서포트는 슬라이서에서 모두 끕니다(2026-10-29: '
+            '프레임·레버·패드 바를 서포트 없이 나오게 나눔, <a href="#build-a12">아래</a>). 필라멘트는 PETG 흰색 2 kg(i087·i088), 검정 5 kg(i089), 여유 1 kg(i090)을 준비했습니다.</p>')
     bed = ('<div class="note warn"><b>베드 크기.</b> ' + (f'220 × 220 베드에 들어가지 않는 악기 부품이 있어 256 × 256 베드(예: P2S)가 필요합니다: {big_txt}. ' if big_txt else '')
            + (f'세워서 뽑는 부품은 높이도 그만큼 필요합니다: {tall_txt}. ' if tall_txt else '')
            + '나머지 악기 부품은 220 × 220 베드에 들어갑니다.'
@@ -699,8 +699,9 @@ def tab_build(pm, items, misses):
     out.append('<div class="note"><b>패드 바는 5T용을 뽑습니다.</b> <code>stl/print/04</code>의 패드 바는 구매한 PORON 5T(i124)에 맞춰 '
                '쐐기를 1.0 두껍게 만든 것입니다(패드 면 위치는 설계와 같음). <code>stl/print_extra</code>의 ‘대안_패드바_PORON6T용’은 '
                '6T를 쓸 때만 뽑습니다.</div>')
+    out.append(A12_HTML)
     if orient:
-        out.append('<h4 class="sub4">건반 액션 부품의 출력 방향과 서포트</h4>' + tidy_html(orient))
+        out.append('<h4 class="sub4">건반 액션 부품의 출력 방향 (설계서 15장 원문 — 서포트 칸은 위 A12로 바뀜)</h4>' + tidy_html(orient))
     out.append(PLY_HTML)
     out.append(PCB_HTML.replace("__GAPNOTE__", ('<div class="note warn"><b>아직 준비처가 없는 물건:</b> ' + gap_txt + '. 센서 기판을 납땜하기 전에 구해야 합니다.</div>') if gap_txt else '<p>센서 기판 SB 띠(161.6 × 15.24, 7개)·끝 부속 EL·ER 띠·J702·J501·페달 센서 조각은 가진 양면 만능기판(i081)에서 자릅니다. SB 띠는 길이 161.6 mm라 162 mm보다 긴 방향이 있는 판에서 자릅니다.</p>'))
     out.append(tidy_html(module))
@@ -711,6 +712,24 @@ def tab_build(pm, items, misses):
     out.append('<p class="small muted">끝 부속(A0·A#0·B0, C8)의 치수는 <a href="#dwg10">02 설계도의 도면 10</a>에 있습니다.</p>')
     out.append("</section>")
     return "\n".join(out), tot
+
+
+A12_HTML = """<h3 id="build-a12">서포트 없는 출력 구조 (2026-10-29)</h3>
+<p>한 옥타브를 뽑아 보니 서포트를 떼기 어려워(프레임 윗판 밑 모듈마다 약 88 g이 핀 사이 좁은 칸 안에, 레버 강철 칸 속 떼는 지지대, 패드 바 자리 밑) 부품을 나눴습니다. 모든 면이 베드 위 벽이나 짧은 다리로 나오고, 슬라이서 서포트는 끕니다. 기능 치수(건반·레버 자리, 패드 면, 봉 위치)는 그대로입니다.</p>
+<ul class="flow">
+<li><b>프레임 = 바닥틀 + 레버틀 + 가이드 탭</b> (<code>03_프레임</code>). 바닥틀(바닥·앞 레일·밸런스 레일·도브테일)은 바로 세워, 레버틀(윗판·패드 바 레일·핀 5장·봉 보스·뒷벽·뒤 선반)은 뒷벽 바깥면을 베드에 눕혀 뽑습니다. 레버틀은 윗판↔핀 이음이 한 층 안에 들어가 옛 바로 세운 출력(층간)보다 강합니다. 핀 발이 바닥틀 홈 둑 사이에 들어가고, 모듈은 바닥 밑 M3×10 4개로 조입니다(본드를 같이 써도 됨; 나사만이면 레버째 들어낼 수 있음). 끝 부속은 볼이 바닥틀에 남고 레버틀이 볼 안쪽 홈에 MS 폴리머로 붙습니다. 가이드 탭(키퍼 훅 포함, 백 52 · 흑 36)은 옆으로 눕혀 뽑아 바닥틀 자리에 순간접착제로 꽂습니다.</li>
+<li><b>레버 = 캐리어 + 덮개</b> (<code>02_레버캐리어/레버덮개__88개</code>). 강철 칸의 +x 옆벽과 립을 덮개로 따로 뽑아, 강철을 MS 폴리머로 붙일 때 같이 덮어 붙입니다. 옛 칸 속 떼는 지지대와 사포질이 없어집니다.</li>
+<li><b>패드 바 윗면 한 평면</b> — 앞부분을 1.0 두께로 내리고 잎 혀를 윗면 높이로 올림(윗판 밑에 혀 길 홈 0.6). 레버 손톱 턱과 ff에서 1.56(규칙 1.3 이상).</li>
+<li><b>건반은 한 몸 그대로</b> — 숨은 빔 밑의 떼는 빗(0.2 떨어짐)이 출력 파일에 들어 있어 손으로 들어냅니다. 바닥틀의 기판 앞 보스 밑 떼는 기둥도 같습니다.</li>
+</ul>
+<figure class="sheet"><img src="img/a12/before_frame_section.webp" alt="옛 한 몸 프레임의 x20 단면, 윗판 밑과 키퍼 훅 밑의 서포트 자리를 빨강으로 칠한 그림" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>옛 한 몸 프레임을 바로 세워 뽑을 때 서포트가 들어가는 자리(x20 단면, 빨강). 윗판 밑 서포트가 핀 사이 좁은 칸 안에 갇혀 떼기 어려웠습니다.</figcaption></figure>
+<div class="grid g3">
+<figure class="sheet"><img src="img/a12/frame_split.webp" alt="바닥틀, 가이드 탭, 레버틀을 벌려 본 그림" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>새 프레임: 바닥틀(회색) + 가이드 탭 12(주황) + 레버틀(파랑).</figcaption></figure>
+<figure class="sheet"><img src="img/a12/cage_print.webp" alt="레버틀을 뒷벽 바깥면이 베드에 닿게 눕힌 출력 자세" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>레버틀 출력 자세: 뒷벽이 베드, 핀·윗판·선반이 모두 세워진 벽.</figcaption></figure>
+<figure class="sheet"><img src="img/a12/lever_split.webp" alt="레버 캐리어 몸통, 강철 블록, 덮개를 벌려 본 그림" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>레버: 캐리어(연두) + 강철 + 덮개(진초록). 강철을 붙일 때 덮개도 함께.</figcaption></figure>
+</div>
+<p class="small muted">CAD: <code>hardware/mechanical/cad/README.md</code> 부록 A12, <code>keyaction.frame_split</code> · <code>lever_cover_solid</code> · <code>padbar_a12_poly</code> · <code>key_print_support</code>. 확인: 쉼 자세 겹침 0, 레버 쉼~ff ↔ 레버틀 0.055(옛 프레임과 같은 축 놀음), 건반 ↔ 바닥틀 1.41 이상, 건반 ↔ 가이드 탭 0.55.</p>
+"""
 
 
 PLY_HTML = """<h3 id="build-ply">판 (2026-10-16부터 모두 출력, 합판 없음)</h3>
