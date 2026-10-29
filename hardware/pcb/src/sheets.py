@@ -27,7 +27,7 @@ BATT = dict(
     v_nom=12.8, v_min=10.0, v_max=14.6,   # bus range: BMS low-voltage cut (typ.) .. charger end voltage
     wh=76.8, usable=0.9,                   # 12.8 V x 6 Ah; about 90 % usable
     buck_min_v=7.0,                        # XL4016 at 5.1 V out, 3-5 A: VIN >= VOUT + about 2 V (research/power.md 2)
-    amp_pvcc=(8, 26),                      # TPA3110D2 recommended PVCC
+    amp_pvcc=(4.5, 26),                    # TPA3118D2 PVCC (△32 HW-720; the board is labelled 12-28 V)
     amp_w_ch=8.0, amp_w_ch_20v=20.0,       # 8 ohm BTL, 1 % THD: about 8 W/ch at 12.8 V, about 20 W/ch at 20 V
     amp_eff=0.8,                           # amp input = output / 0.8 at clipping (efficiency incl. idle, conservative)
     fuse_a=5.0,
@@ -901,7 +901,7 @@ def sch06():
     # 12.8 V to amp (sheet 7)
     s.wire((bx, vy), (bx + 55, vy))
     s.pwr(bx + 55, vy, "+12V8")
-    s.text(bx + 58, vy + 0.8, "→ SCH-07 A702 VCC (W602)", "notes", size=2.0)
+    s.text(bx + 58, vy + 0.8, "→ SCH-07 A702 DC 잭 (W602c)", "notes", size=2.0)
     o1, o2 = s.pin("A602", 3), s.pin("A602", 4)
     s.wire(o2, (o2[0] + 7.5, o2[1]))
     s.pwr(o2[0] + 7.5, o2[1], "GND")
@@ -916,7 +916,7 @@ def sch06():
     px0 = o1[0] + 45
     s.place(pl, "P601", "USB-C 측면 꺾임 (C24 BT663)", px0, 55, val_at=(0, 23.5), part="A 끝을 잘라 2선 → Pi 5 USB-C (W603)", part_at=(0, 25.8),
             meta=dict(bomkey="C24"))
-    s.place(pl2, "P602", "DC 플러그 (허브 어댑터 선)", px0, 95, val_at=(0, 23.5), part="→ 허브 DC 입력 (W604, L17 부속)", part_at=(0, 25.8),
+    s.place(pl2, "P602", "일자 DC 플러그 (허브 어댑터 선)", px0, 95, val_at=(0, 23.5), part="→ 허브 DC 입력 (W604, L17 부속)", part_at=(0, 25.8),
             meta=dict(bomkey="HUBDC"))
     xa = o1[0] + 30
     for ref in ("P601", "P602"):
@@ -970,7 +970,7 @@ def sch06():
     s.para(190, 135, [
         "주",
         f"1. BT601 {T['model']}({T['wh']} Wh), BMS 내장(받으면 확인). 버스 {T['v_min']:.1f}~{T['v_max']:.1f} V: 강압은 5.1 V에 약 {T['buck_min_v']:.0f} V 이상,",
-        f"    앰프 PVCC {T['amp_pvcc'][0]}~{T['amp_pvcc'][1]} V라 범위 전체에서 동작하고 BMS 저전압 차단(보통 약 {T['v_min']:.0f} V)까지 켜져 있다. XT60은 모양으로 극성이 정해진다.",
+        f"    앰프 칩 PVCC {T['amp_pvcc'][0]}~{T['amp_pvcc'][1]} V(HW-720 표기 12~28 V)라 범위 전체에서 동작하고 BMS 저전압 차단(보통 약 {T['v_min']:.0f} V)까지 켜져 있다. XT60은 모양으로 극성이 정해진다.",
         "2. 충전은 스위치를 끄고 LiFePO4 충전기(14.4 V)를 팩 DC 5.5×2.1 입력에(XT60은 꽂아 둔 채). 충전기가 부하 동시 사용을 밝히지 않으면 충전하며 연주하지 않는다.",
         "    벤치 시험: 전지 대신 12 V SMPS(XT60 암 L81)를 X606에 — 둘을 함께 꽂지 않는다. SMPS 쪽 선 극성은 멀티미터로 먼저 확인.",
         f"3. F601 5 A ATO 블레이드(사용자 보유 홀더, 12 AWG 꼬리 둘 다 홀더 끝에서 {HN.STUB12} mm로 잘라 16 AWG에 납땜 + 수축): X606 바로 뒤 + 선. 전지는 단락 전류가 커서 퓨즈 + BMS가 막는다.",
@@ -996,14 +996,15 @@ SHEETS.append(sch06)
 # ------------------------------------------------------------------ SCH-07
 def sch07():
     s = Sheet("SCH-07", 7, TOTAL, "오디오 (CU)",
-              "Pi 5 → USB 동글(DAC) → 왼쪽 볼 헤드폰 잭(노멀 접점) → 앰프 입력 잭 → 약 93 Hz RC → XH-A232 (TPA3110) → XT60 → 스피커 2개. 헤드폰을 꽂으면 앰프 입력이 끊긴다(R15).",
+              "Pi 5 → USB 동글(DAC) → 왼쪽 볼 헤드폰 잭(노멀 접점) → 앰프 입력 잭 → 약 80~93 Hz RC → HW-720 (TPA3118D2) → XT60 → 스피커 2개. 헤드폰을 꽂으면 앰프 입력이 끊긴다(R15).",
               "CU 오디오", qty="CU × 1", basis="v4 W1+ · R25 · R33", **REV_E)
     e = {}
     plug = sym_plug()
     # dongle block with its 3.5 mm jack contacts (T,R,S)
     dg = sym_box("Apple_USB-C_dongle", [], [("T", "L"), ("R", "R"), ("S", "GND")], width=26, cls="mod", rows=3)
     s.place(dg, "A701", "Apple USB-C → 3.5 mm (MW2Q3)", 18, 40, val_at=(0, 23.5), part="USB DAC · 헤드폰 앰프 (L51)", part_at=(0, 25.8))
-    s.cable((31, 40), (31, 31), text="USB-C → X701 젠더(IH190) → Pi 5 USB-A (허브 거치지 않음)", at=(18, 28.5), anchor="start")
+    s.cable((31, 40), (31, 31), text="USB-C → X701 일자 젠더 → Pi 5 USB-A (허브 거치지 않음)", at=(18, 28.5), anchor="start")
+    s.chg(14.4, 27.6, 31)      # △31 (2026-10-26): straight gender instead of the IH190 right-angle one
     s.place(plug, "P701", "W701 플러그", 80, 40, mirror=True, ref_at=(-9, -2.2), val_at=(-9, 19.5))
     s.mate("A701", "P701", at=(64.5, 36.5))
     for nm, net in (("T", "DAC_L"), ("R", "DAC_R"), ("S", "AGND")):
@@ -1074,11 +1075,13 @@ def sch07():
         exp_add(e, "AGND", f"{rr}.2")
         s.text(252, ly + 17.5, "1 µF ×2 병렬 = 2 µF 직렬, 1 kΩ 병렬", "notes", size=1.9)
     # amp
-    amp = sym_box("XH-A232", [("1", "L"), ("2", "G"), ("3", "R"), None, ("4", "VCC"), ("5", "GND")],
-                  [("6", "L+"), ("7", "L-"), None, ("8", "R+"), ("9", "R-")], width=24, cls="mod", rows=6)
+    # △32 (2026-10-26): the user's HW-720 (TPA3118D2) - XH 3P input INR / GND / INL, DC 5.5x2.1 jack, screw terminals OUTL / OUTR
+    amp = sym_box("HW-720", [("1", "INR"), ("2", "GND"), ("3", "INL"), None, ("4", "DC+"), ("5", "DC-")],
+                  [("6", "OUTL+"), ("7", "OUTL-"), None, ("8", "OUTR+"), ("9", "OUTR-")], width=24, cls="mod", rows=6)
     ax, ay = 348, 40
-    s.place(amp, "A702", "XH-A232 (HW-404)", ax, ay, val_at=(0, 38.5), part="TPA3110 · BTL: 스피커 − 선을 GND에 묶지 않음", part_at=(-12, 40.8))
-    for pin, net in (("1", "AMP_IN_L"), ("3", "AMP_IN_R")):
+    s.place(amp, "A702", "HW-720 (사용자 보유)", ax, ay, val_at=(0, 38.5), part="TPA3118D2 · BTL: 스피커 − 선을 GND에 묶지 않음", part_at=(-12, 40.8))
+    s.chg(ax + 27.5, ay - 2.5, 32)
+    for pin, net in (("3", "AMP_IN_L"), ("1", "AMP_IN_R")):
         x, y = s.pin("A702", pin)
         s.wire((x, y), (x - 7.5, y))
         s.label(x - 7.5, y, net, "L")
@@ -1130,13 +1133,13 @@ def sch07():
         "1. 동글 A701은 젠더 X701로 Pi 5 USB-A에 직결(허브 경유 금지). ALSA hw:CARD=<이름>,DEV=0, 48 kHz 전용(D7).",
         "2. J701(왼쪽 볼): 동글 신호가 T·R 스프링으로, TN·RN 노멀이 앰프로. 헤드폰을 꽂으면 노멀이 떨어진다(R15).",
         "    ‘PJ-313’ 이름만으로 노멀 접점·핀 번호가 보장되지 않는다 → 도착 즉시 통전 검사(플러그 없음: T–TN, R–RN 닫힘).",
-        "3. HPF: 1 µF ×2 병렬(2 µF) 직렬 + 1 kΩ 병렬. 앰프(36 dB, 입력 9 kΩ)와 겹쳐 실제 fc ≈ 93 Hz.",
-        "    80 Hz가 꼭 필요하면 1 kΩ → 1.2 kΩ (구매). △10 AGND: 잭 슬리브·1 kΩ는 앰프 IN G 단자로만 모은다.",
-        f"4. XH-A232는 36 dB 출고. △17 PVCC {BATT['v_nom']} V(전지): 8 Ω에서 1 % THD 약 {BATT['amp_w_ch']:.0f} W/ch,",
-        "    입력 약 0.13 Vrms면 최대 출력. 동글은 0.5~1 Vrms라 소프트웨어 상한 필수 — 최대 출력 약 8 W/ch(입력 약 0.13 Vrms)에서",
-        "    찌그러지지 않게 상한을 정한다. ALSA Headphone·FluidSynth synth.gain 상한 + synth.limiter. 스피커 25 W 보호(D18).",
+        "3. HPF: 1 µF ×2 병렬(2 µF) 직렬 + 1 kΩ 병렬. 보드 입력(볼륨 + 이득 저항, 미공개)과 겹쳐 fc ≈ 80~93 Hz.",
+        "    △10 AGND: 잭 슬리브·1 kΩ는 앰프 XH GND 핀으로만 모은다.",
+        f"4. △32 A702 = HW-720(TPA3118D2), 이득은 보드 저항으로 정해져 미공개. △17 PVCC {BATT['v_nom']} V(전지): 8 Ω에서 약 {BATT['amp_w_ch']:.0f} W/ch.",
+        "    동글은 0.5~1 Vrms라 소프트웨어 음량 상한 필수 — 최대 출력에서 찌그러지지 않게 ALSA Headphone·FluidSynth synth.gain 상한 + synth.limiter.",
+        "    보드 볼륨(칩 앞): 뚜껑을 열고 노브를 꽂아 낮게 시작해 한 번 맞춘 뒤 노브를 뺀다(꽂아 두면 z62.5 > 뚜껑 밑 z61.35). 스피커 25 W 보호(D18).",
         "5. XT60(△18, 전지와 같은 커넥터): KiCad 패드 1 = −, 2 = + (실물 +/− 표시로 확인). 좌우 같은 방향으로 납땜해 위상을 맞춘다.",
-        "6. BTL: L−·R−를 GND나 서로에 묶지 않는다. 스피커선은 쌍마다 꼬고 리본·EXT 선에서 30 mm 이상(D14).",
+        "6. BTL: OUTL−·OUTR−를 GND나 서로에 묶지 않는다. 스피커선은 쌍마다 꼬고 리본·EXT 선에서 30 mm 이상(D14).",
         "7. 스피커 Re를 잰다: 6~7 Ω = 8 Ω 유닛, 3~3.5 Ω면 4 Ω 판매분(출력·발열 재검토).",
         "8. △18 잘못 꽂기 방지: 커넥터가 모두 XT60이라 전지·벤치 12 V를 스피커 XT60에 꽂을 수 있다 → 12.8 V DC가",
         "    BTL 출력·보이스 코일에 걸림(6.2 Ω에 약 2 A, 스피커 과열). 전원 XT60(팩 리드·W601·벤치 L81) = 빨강 수축,",
@@ -1692,7 +1695,7 @@ def sch01():
     cab([(110, 150), (125, 150)], "X701", (112, 148.5))
     blk(185, 140, 42, 22, "J701 헤드폰 잭 (EL 볼)", ["PJ-313 노멀 접점", "헤드폰 꽂으면 스피커 끔"])
     cab([(171, 148), (185, 148)], "W701", (173, 146.5))
-    blk(241, 140, 50, 22, "CU 트레이", ["J702 앰프 입력 잭", "2 µF + 1 kΩ HPF (D18)", "A702 XH-A232 (TPA3110)"])
+    blk(241, 140, 50, 22, "CU 트레이", ["J702 앰프 입력 잭", "2 µF + 1 kΩ HPF (D18)", "A702 HW-720 (TPA3118D2)"])
     cab([(227, 150), (241, 150)], "W702", (229, 148.5))
     blk(310, 140, 38, 12, "LS701 왼쪽", ["CW-100B25 8 Ω"], "body")
     blk(310, 156, 38, 12, "LS702 오른쪽", ["CW-100B25 8 Ω"], "body")

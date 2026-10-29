@@ -12,6 +12,8 @@ import math
 import os
 import re
 
+from manifold3d import Manifold
+
 from cadlib import (clean, box, cyl_x, cyl_y, cyl_z, diff, empty, hexagon_z, prism_x, prism_y, prism_z,
                     teardrop_x, text_xy, union, orient, rot_x, rot_y, rot_z, matmul)
 
@@ -108,6 +110,123 @@ def plan_circle(plan, name):
 # ------------------------------------------------------------------ keys
 KEY_BOUGHT = (r"^capstan head$", r"^rest felt$")
 
+# A11 (2026-10-26, user: 실제 백건반은 끝이 둥글다): geometry.json keys are square boxes; the printed keys are cut to
+# an envelope with rounded front corners (plan) and rounded top edges. Only material comes off, so no clearance
+# shrinks. The top-edge round starts on the top face with a 45 deg flat: printed top face down it never overhangs
+# past 45 deg.
+KEY_ROUND = {
+    "white_corner": 2.0,   # plan radius, the two front corners of the white head skin (y0)
+    "white_front": 1.0,    # plan radius, the front-face corners under the lip (front wall y1.5), up to 0.3 under the skin
+    "black_corner": 1.5,   # plan radius, the black key's front corners above the white tops (slanted front)
+    "black_low": 1.0,      # plan radius, the black key's lower front corners (z < 43.5, between the white tails)
+    "top_edge": 0.8,       # the exposed top edges: front and sides (head and tail)
+}
+_FAR = 260.0               # y past every key's back end
+_EPS = 0.001               # white-key envelope offset off the flat key faces (coplanar faces left zero-area seams)
+
+
+def _rim(rt, n=6):
+    """top-edge profile [(u, w)] from the top face to the side: u = in from the side, w = down from the top."""
+    c = rt * (1.0 - math.sqrt(0.5))
+    pts = [(2.0 * c, 0.0)]
+    for i in range(n + 1):
+        f = math.radians(45.0 * (1.0 - i / float(n)))
+        pts.append((rt - rt * math.cos(f), rt - rt * math.sin(f)))
+    return pts                                                         # ends at (0, rt) on the side
+
+
+def _ring(cx, cy, a0, a1, rc, prof, n=16):
+    """points of a plan corner (centre cx, cy, radius rc, angles a0..a1 deg) swept with prof [(u, z)]."""
+    out = []
+    for i in range(n + 1):
+        a = math.radians(a0 + (a1 - a0) * i / float(n))
+        for (u, z) in prof:
+            out.append((cx + (rc - u) * math.cos(a), cy + (rc - u) * math.sin(a), z))
+    return out
+
+
+def _rimmed(a0, a1, zt, zb, rim):
+    """(a, z) section a0..a1 x zb..zt, both top corners rounded by rim (counter-clockwise)."""
+    return ([(a0, zb), (a1, zb)] + [(a1 - u, zt - w) for (u, w) in reversed(rim)]
+            + [(a0 + u, zt - w) for (u, w) in rim])
+
+
+def _front_rounded(x0, x1, y0, y1, r, n=16):
+    """(x, y) rectangle with only its two front (y0) corners rounded by r (counter-clockwise)."""
+    arc = lambda cx, a0: [(cx + r * math.cos(math.radians(a0 + 90.0 * i / n)), y0 + r + r * math.sin(math.radians(a0 + 90.0 * i / n)))
+                          for i in range(n + 1)]
+    return arc(x1 - r, 270.0) + [(x1, y1), (x0, y1)] + arc(x0 + r, 180.0)
+
+
+def _corner_cut(x, y, r, side, n=16):
+    """(x, y) region outside an R r round at a key's front corner (side face x, front face y, material at +y and,
+    side = 1, at +x / side = -1, at -x), reaching 1 mm past both faces (counter-clockwise)."""
+    q = ([(-1.0, -1.0), (r, -1.0), (r, 0.0)]
+         + [(r + r * math.cos(math.radians(270.0 - 90.0 * i / n)), r + r * math.sin(math.radians(270.0 - 90.0 * i / n)))
+            for i in range(1, n)]
+         + [(0.0, r), (-1.0, r)])
+    q = [(x + side * u, y + v) for (u, v) in q]
+    return q if side > 0 else q[::-1]
+
+
+def key_rounding(parts):
+    """(envelope, cuts): a printed key = (its prisms - cuts) ^ envelope (A11), from the key's own skin / wall prisms.
+    Built in the key's own x (0 = its leftmost wall, values rounded) so keys of one shape get the same hull and still
+    share one print file. Every envelope face that is not a round lies outside the key or on a key face it ends with:
+    an envelope edge drawn across a flat key face left zero-area triangles that opened seams in the STL."""
+    by = {p["part"]: p for p in parts}
+    rim = _rim(KEY_ROUND["top_edge"])
+    if "skin head" in by:                                              # white key: head + tail
+        xr = by["skin head"]["x"][0]
+        lx = lambda x: round(x - xr, 6)
+        hx0, hx1 = map(lx, by["skin head"]["x"])
+        tx0, tx1 = map(lx, by["skin tail"]["x"])
+        hs = poly(by["skin head"], "rest")
+        yf, yr = min(q[0] for q in hs), max(q[0] for q in hs)          # 0 / 50
+        zs, zt = min(q[1] for q in hs), max(q[1] for q in hs)          # 41.5 / 43.5
+        yw = min(q[0] for q in poly(by["front wall"], "rest"))        # 1.5, front face under the lip
+        rc, e = KEY_ROUND["white_corner"], _EPS
+        # the envelope stands _EPS off the key's flat faces (sides, top, lip front): no face of it lies in a key face
+        prof = [(u - e, zt + e - w) for (u, w) in rim] + [(-e, -5.0)]  # full height: the walls stand 1.5 behind the lip
+        # the head's rear step edge (under the black key's front) stays square: rounding it too left near-coincident
+        # vertices where it met the side round and the tail's side
+        pts = (_ring(hx0 + rc, yf + rc, 180.0, 270.0, rc + e, prof) + _ring(hx1 - rc, yf + rc, 270.0, 360.0, rc + e, prof)
+               + [(hx0 + u, yr + e, z) for (u, z) in prof] + [(hx1 - u, yr + e, z) for (u, z) in prof])
+        head = Manifold.hull_points(pts)
+        ye = max(q[0] for q in poly(by["skin tail"], "rest"))         # 147, the skin's back end
+        tail = prism_y(_rimmed(tx0 - e, tx1 + e, zt + e, -5.0, rim), yr - 5.0, ye + 1.0)
+        env = union([head, tail, box(tx0 - 20.0, tx1 + 20.0, ye + 0.5, _FAR, -5.0, zt + 1.0)])
+        # front-face corners under the lip: cut up to 0.3 under the skin so the cut never meets the lip's underside
+        # plane z41.5 (that 0.3 sits 1.5 behind the lip's front, out of sight)
+        rw, zc = KEY_ROUND["white_front"], zs - 0.3
+        cuts = [prism_z(_corner_cut(hx0, yw, rw, 1), 20.0, zc), prism_z(_corner_cut(hx1, yw, rw, -1), 20.0, zc)]
+        return env.translate((xr, 0.0, 0.0)), [c.translate((xr, 0.0, 0.0)) for c in cuts]
+    sk = by["skin"]                                                    # black key
+    xr = by["wall L low"]["x"][0]
+    lx = lambda x: round(x - xr, 6)
+    bx0, bx1 = map(lx, sk["x"])
+    zt = max(q[1] for q in poly(sk, "rest"))                           # 55.5
+    lx0, lx1 = 0.0, lx(by["wall R low"]["x"][1])
+    zl = max(q[1] for q in poly(by["wall L low"], "rest"))            # 43.5, the white tops
+    fw = poly(by["front wall"], "rest")
+    ya = min(q[0] for q in fw if abs(q[1] - zl) < 1e-6)               # slanted front face y54.2 at z43.5 ...
+    yb = min(q[0] for q in fw if abs(q[1] - zt) < 1e-6)               # ... y55.2 at z55.5
+    slant = lambda z: ya + (yb - ya) * (z - zl) / (zt - zl)
+    rc, rt = KEY_ROUND["black_corner"], KEY_ROUND["top_edge"]
+    z0 = zl - 0.5
+    top = [(u, zt - w) for (u, w) in rim]
+    cyt, cyb = slant(zt - rt) + rc, slant(z0) + rc
+    pts = (_ring(bx0 + rc, cyt, 180.0, 270.0, rc, top) + _ring(bx1 - rc, cyt, 270.0, 360.0, rc, top)
+           + _ring(bx0 + rc, cyb, 180.0, 270.0, rc, [(0.0, z0)]) + _ring(bx1 - rc, cyb, 270.0, 360.0, rc, [(0.0, z0)])
+           + [(bx0 + u, _FAR, z) for (u, z) in top + [(0.0, z0)]] + [(bx1 - u, _FAR, z) for (u, z) in top + [(0.0, z0)]])
+    upper = Manifold.hull_points(pts)
+    rl = KEY_ROUND["black_low"]
+    lower = prism_z(_front_rounded(lx0, lx1, ya, ya + rl + 1.0, rl), -5.0, zl)
+    ys = max(q[0] for q in poly(sk, "rest") if q[1] > zt - 1e-6)     # 144.3: the skin steps down under the curtain
+    keep = [box(lx0 - 20.0, lx1 + 20.0, ya + rl + 1.0, _FAR, -5.0, zl),   # the hidden tail (some sit off the walls in x)
+            box(lx0 - 20.0, lx1 + 20.0, ys, _FAR, -5.0, zt + 1.0)]      # rear wall / step under the curtain
+    return union([upper, lower] + keep).translate((xr, 0.0, 0.0)), []
+
 
 def key_points(parts, fixed, note):
     """magnet / balance pin / capstan centres (x, y) from the prisms: magnet boss centre at y67 (P29),
@@ -131,7 +250,8 @@ def key_points(parts, fixed, note):
 
 def key_solid(parts, fixed, note):
     """printed key (PETG) in module/end-part coordinates, design pose (side_rest)."""
-    m = union(prisms(parts, "rest", KEY_BOUGHT))
+    env, rcuts = key_rounding(parts)                                   # A11 rounded corners
+    m = diff(union(prisms(parts, "rest", KEY_BOUGHT)), rcuts) ^ env
     cuts = []
     mag, pin, cap = key_points(parts, fixed, note)
     z_under = 23.5                                                     # S02 key underside

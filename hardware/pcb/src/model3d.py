@@ -948,13 +948,17 @@ def scene_all(SP, CAD, JK):
         key = wid_of.get(pid, pid)
         if key not in INFO:
             info(key, name, [p.get("note", "")[:400], "CAD %s · 상자 x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f" % tuple([pid] + [p["bbox"][j] for j in (0, 3, 1, 4, 2, 5)])])
+        if pid == "CU-E-AMP" and CAD["points"].get("amp"):
+            amp_detail(sc, CAD["points"]["amp"], key)
+            continue
         if pid in tube_ids:
             grp, cols = tube_ids[pid]
             g1, g2 = (grp.split(".") + [None])[:2]
             polys = CAD["paths"]["PWR"][g1] if g2 is None else [CAD["paths"][g1][g2]]
             if grp == "BUS":
                 pair_tube(sc, [tuple(q) for q in polys[0]], 0.75, [PAIR["red"]], "W602b")
-                pair_tube(sc, [tuple(q) for q in polys[1]], 0.75, [PAIR["red"], PAIR["blk"]], "W602c")
+                for q in polys[1:]:                     # back lane + (△32) the flat leg under the HW-720 to its DC jack pins
+                    pair_tube(sc, [tuple(r) for r in q], 0.75, [PAIR["red"], PAIR["blk"]], "W602c")
             elif grp == "5V":
                 pair_tube(sc, [tuple(q) for q in polys[0]], 0.75, [PAIR[c] for c in cols], "W603")
                 pair_tube(sc, [tuple(q) for q in polys[1]], 0.75, [PAIR[c] for c in cols], "W604")
@@ -981,17 +985,21 @@ def scene_all(SP, CAD, JK):
         x = hub["ports_x"][port]
         sc.box([x - 6.0, 248.0, hub["port_z"] - 3.5, x + 6.0, hub["bbox"][2], hub["port_z"] + 3.5], C["usb"], i="W208" if t == "PED" else
                "W20%s" % t[1:], g="cable")
-    pi = parts["CU-E-PI5-USBA2"]["bbox"]
-    face, ys, za = pi[3], (pi[1] + pi[4]) / 2.0, 26.5
-    sc.box([face, ys - 7.5, za - 4.5, face + 13.0, ys + 7.5, za + 4.5], C["usb"], i="C-USB-UPSTREAM", g="cable")
-    sc.cyl("z", (face + 8.5, ys), 4.0, (za + 4.5, za + 12.5), C["usb"], i="C-USB-UPSTREAM", g="cable")
-    xb1, xd, xf = hub["bbox"][0] - 20.0, hub["bbox"][0] - 36.0, parts["C-USB-UPSTREAM"]["bbox"][3] - 2.0
-    sc.tube([(face + 8.5, ys, za + 12.5), (face + 8.5, ys, 56.5), (face + 22.0, 303.0, 56.5), (xf, 303.0, 56.5), (xf, 319.0, 56.5),
-             (xd, 319.0, 56.5), (xd, 319.0, 28.5), (xb1 - 10.0, 319.0, 28.5)], 2.0, C["cable"], i="C-USB-UPSTREAM", g="cable")
-    sc.cyl("x", (319.0, 28.5), 3.5, (xb1 - 10.0, xb1), C["usb"], i="C-USB-UPSTREAM", g="cable")
-    sc.box([xb1, 311.0, 22.0, hub["bbox"][0], 327.0, 35.0], C["usb"], i="C-USB-UPSTREAM", g="cable")
-    for pid, lab in (("BAT-LFP", "BT601 LiFePO4 12.8 V"), ("CU-E-FUSE", "F601 5 A"), ("CU-E-SWITCH", "SW601"), ("CU-E-BUCK", "A601 XL4016 5.1 V"),
-                     ("CU-E-PI5", "Pi 5"), ("PB-E-HUB", "허브 710U3"), ("CU-E-AMP", "A701 TPA3110"), ("CU-E-DONGLE", "동글")):
+    # C25: up-angled A head in the Pi's lower GPIO-side port -> CAD centre line (cad_centre.json paths.C25) -> straight B into the hub
+    c5 = CAD["points"]["c25"]
+    face, ys, za = c5["face"], c5["ys"], c5["za"]
+    hx, hw, ht = c5["a_head"]
+    sc.box([face, ys - hw / 2, za - ht / 2, face + hx, ys + hw / 2, za + ht / 2], C["usb"], i="C-USB-UPSTREAM", g="cable")
+    sc.cyl("z", (c5["xr"], ys), c5["a_boss"][0] / 2, (za + ht / 2, c5["z_top"]), C["usb"], i="C-USB-UPSTREAM", g="cable")
+    sc.tube([tuple(q) for q in CAD["paths"]["C25"]], c5["d"] / 2, C["cable"], i="C-USB-UPSTREAM", g="cable")
+    (by, bz), bb = c5["b_port"], c5["b_body"]
+    sc.cyl("x", (by, bz), c5["b_boot"][1] / 2, (c5["x_b0"], c5["x_b1"]), C["usb"], i="C-USB-UPSTREAM", g="cable")
+    sc.box([c5["x_b1"], by - bb[1] / 2, bz - bb[2] / 2, hub["bbox"][0], by + bb[1] / 2, bz + bb[2] / 2], C["usb"], i="C-USB-UPSTREAM", g="cable")
+    # W604 hub DC: straight plug on the jack axis (2026-10-26), CAD box = jack face -> end of the boot
+    dc, (dy, dz) = hub["dc"], hub["dc_yz"]
+    sc.cyl("x", (dy, dz), (dc[3] - dc[2]) / 2, (dc[0], dc[1]), C["usb"], i="W604", g="cable")
+    for pid, lab in (("BAT-LFP", "BT601 LiFePO4 12.8 V"), ("CU-E-FUSE", "F601 5 A"), ("CU-E-SWITCH", "SW601"), ("CU-E-BUCK", "A602 XL4016 5.1 V"),
+                     ("CU-E-PI5", "Pi 5"), ("PB-E-HUB", "허브 710U3"), ("CU-E-AMP", "A702 HW-720"), ("CU-E-DONGLE", "동글")):
         b = parts[pid]["bbox"]
         sc.label(((b[0] + b[3]) / 2, (b[1] + b[4]) / 2, b[5] + 4.0), lab, 0)
     # ---- detailed small boards in place
@@ -1020,6 +1028,24 @@ def scene_all(SP, CAD, JK):
     sc.note("가운데 유닛 뚜껑 · 화면 · 스피커 통은 빼고, 아랫판 · 끝벽 · 뒤판 · 배터리 틀 · 기둥만 흐리게 보입니다. 선은 CAD의 선 중심선 (빨강 + 검정 두 가닥은 옆으로 나란히).")
     sc.note("화면 DSI · 화면 전원선(W606~W608)은 뚜껑 위 화면으로 올라가므로 여기서는 뺐습니다(04 3D 모델에 있음). USB 선은 지름 3.5 어림, 허브 쪽 플러그는 상자.")
     return sc
+
+
+AMP_COL = {"OUTL": "#2f6fd6", "OUTR": "#2f6fd6", "DC": "#202124", "IC": "#1d1d1f", "CD": "#2b2b2b", "J35": "#2e8b57", "XH": "#f2f2f2",
+           "POT": "#b8bec6"}
+
+
+def amp_detail(sc, a, key):
+    """△32 HW-720 from the CAD part boxes (cad_centre.json points.amp): board, terminals, DC jack, coils, chip, caps, XH input, pot shaft."""
+    x0, y1, z0 = a["x0"], a["y1"], a["z0"]
+    w, d, t = a["pcb"]
+    zt = z0 + t
+    sc.box([x0, y1 - d, z0, x0 + w, y1, zt], C["amp"], i=key)
+    for k, (u0, u1, v0, v1, h) in a["boxes"].items():
+        sc.box([x0 + u0, y1 - v1, zt, x0 + u1, y1 - v0, zt + h], AMP_COL.get(k, "#5b5f66"), i=key)
+    for u, v in a["caps"]:
+        sc.cyl("z", (x0 + u, y1 - v), a["cap"][0] / 2, (zt, zt + a["cap"][1]), "#3a3a3a", i=key)
+    u0, u1, va, ha, dd = a["shaft"]
+    sc.cyl("x", (y1 - va, zt + ha), dd / 2, (x0 + u0, x0 + u1), "#c0c6cc", i=key)
 
 
 # ====================================================================== build

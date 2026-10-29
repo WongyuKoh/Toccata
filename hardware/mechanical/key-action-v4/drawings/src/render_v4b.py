@@ -1765,7 +1765,9 @@ def ep_plan(v, P, E):
     for k in keys:
         kp = [p for p in parts if p["body"] == k]
         black = "#" in k
-        top = [rect(p["x"][0], p["x"][1], bb_pose(p)[0], bb_pose(p)[1]) for p in kp
+        rr = {"skin head": "white", "skin": "black", "wall L low": "black_low", "wall R low": "black_low", "front wall low": "black_low"}
+        top = [kit.round_front(rect(p["x"][0], p["x"][1], bb_pose(p)[0], bb_pose(p)[1]), kit.KEY_R[rr[p["part"]]])   # CAD A11
+               if p["part"] in rr else rect(p["x"][0], p["x"][1], bb_pose(p)[0], bb_pose(p)[1]) for p in kp
                if p["part"] in (("skin", "wall L low", "wall R low", "front wall low") if black else ("skin head", "skin tail"))]
         fill_rings(v, union_rings(top, res=0.05), "m-black" if black else "m-key")
         for p in kp:
@@ -2279,7 +2281,8 @@ def sheet_end_parts():
     base = os.path.join(OUT, "d10_end_parts")
     ch_l, ch_r = EP["left"]["cheek"], EP["right"]["cheek"]
     page(rows_, base, f"도면 10. 끝 부속 평면 — 왼쪽 A0·A#0·B0 ({F(dn('A02'))} + 볼 쪽 {F(-ch_l[0])}), 오른쪽 C8 ({F(dns('A03', 'ref')[1])} + 볼 쪽 {F(ch_r[1] - dns('A03', 'ref')[1])})",
-         "왼쪽: x = 0 A0 왼쪽 경계 (전체 좌표와 같음) · 오른쪽: 로컬 x = 0 C8 왼쪽 경계 · y = 0 백건 앞끝 · 단위 mm · 숫자 = geometry.json end_parts (괄호 = 치수표 번호)")
+         "왼쪽: x = 0 A0 왼쪽 경계 (전체 좌표와 같음) · 오른쪽: 로컬 x = 0 C8 왼쪽 경계 · y = 0 백건 앞끝 · 단위 mm · 숫자 = geometry.json end_parts (괄호 = 치수표 번호)"
+         f" · 건반 앞 모서리는 출력 모양대로 둥글게 (CAD A11: 백건 R{F(kit.KEY_R['white'])}, 흑건 R{F(kit.KEY_R['black'])})")
     rec(10, base, "끝 부속 (왼쪽 A0·A#0·B0, 오른쪽 C8) 평면",
         f"끝 부속 두 개의 평면(모듈과 같은 높이에서 잘라 위에서 봄): 건반·레버(모듈과 같은 캐리어+강철+스프링)·핀·보스·밸런스 레일·가림판 띠·볼(x{F(ch_l[0])}~{F(ch_l[1])} / {F(ch_r[0])}~{F(ch_r[1])}), "
         "윗판·패드 바·레일·패드는 가상선. 위는 레버·핀·패드 바·레일 x, 아래는 폭. 이음 쪽에 도브테일(D09: 왼쪽 수, 오른쪽 암 홈)과 이웃 모듈 끝 핀·보스(가상선). "

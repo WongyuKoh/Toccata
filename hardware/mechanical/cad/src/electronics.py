@@ -146,13 +146,21 @@ C25_B_SHELL = 10.0                     # B shell inside the receptacle (counted 
 C25_B_BODY = (20.0, 16.0, 13.0)        # straight B overmold outside the port: along -x, y, z
 C25_B_BOOT = (10.0, 7.0)               # boot length, D
 C25_LOOP_Z = 56.5                      # flat slack loop over the hub shelf (tube z54.5..58.5: 1.1 under the screen leads TS-C-PWR z59.6)
-C25_OUT_Y = 303.0                      # loop out-leg y (the return leg runs at the B port y)
+C25_OUT_Y = 297.0                      # loop out-leg y (the return leg runs at the B port y); 2026-10-26 303 -> 297 with the Pi 9 forward (the A head
+                                       # now rises at y300 - the wider U keeps the loop x<=709 in front of the seam rail)
 C25_R = {"rise": 7.0, "skew": 10.0, "u": 8.0, "drop": 6.0}
 # ---- hub 5 V DC jack: same -x end face as the upstream B port (W1 10/1, product photo), in front of it
 HUB_DC_YZ = (293.0, 28.5)
-HUB_DC = (674.5, 686.5, 287.0, 299.0, 23.5, 33.5)        # right-angle DC plug head 12 x 12 x 10 on the hub -x end face, lead leaves +z
-HUB_DC_STRAIGHT = (10.0, 5.0, 3.0)     # straight-plug what-if: body D, lead bend R behind it, lead D (check_electronics.py reports the max length)
-HUB_DC_STRAIGHT_MAX = 32.0             # longest straight plug (jack face -> end of moulding / boot) that clears the IH190 gender by 0.5 (checked)
+HUB_DC_STRAIGHT = (10.0, 5.0, 3.0)     # straight DC plug: body D, lead bend R behind it, lead D (check_electronics.py reports the max length)
+# 2026-10-26 (user: both straight): the Pi moved 9 toward the keys (spec centre.pi_move_2026_10_26), so the hub DC is a STRAIGHT plug
+# on the jack axis - modelled 30 from the jack face to the end of the moulding / boot (typical 5.5 x 2.1 adapter-cord plug), the lead
+# bent straight up R5 behind it; HUB_DC is its bounding box
+HUB_DC_PLUG_L = 30.0
+HUB_DC = (HUB_X0 - HUB_DC_PLUG_L, HUB_X0, HUB_DC_YZ[0] - HUB_DC_STRAIGHT[0] / 2, HUB_DC_YZ[0] + HUB_DC_STRAIGHT[0] / 2,
+          HUB_DC_YZ[1] - HUB_DC_STRAIGHT[0] / 2, HUB_DC_YZ[1] + HUB_DC_STRAIGHT[0] / 2)
+HUB_DC_STRAIGHT_MAX = 37.0             # longest straight plug (jack face -> end of moulding / boot) that clears the Pi-side gender / C25 head by 0.5 (checked;
+                                       # 16.5 before the 10/26 Pi move)
+GENDER_STRAIGHT_MAX = 26.5             # longest straight gender outside the Pi port that keeps the dongle head / lead >= 0.5 off the rest (checked; 21 before)
 TOUCH = 0.05              # tube ends stop 0.05 short of the face they plug into (touch, no overlap)
 
 LENGTHS = {}
@@ -475,7 +483,8 @@ def pi_parts(out):
     pcb = board(x0, x1, y0, y1, zb0, zb1, holes)
     hdr = box(x0 + 32.5 - 25.4, x0 + 32.5 + 25.4, y1 - 3.5 - 2.54, y1 - 3.5 + 2.54, zb1, zb1 + 8.5)
     hs = box(x0 + 21.5, x0 + 36.5, y0 + 17.5, y0 + 32.5, zb1, zb1 + 8.0)
-    hd = TS.PI5["hdmi"]                                         # micro-HDMI x2 (estimated, W1 rev 3: x562~585 y262~269.5 top z27.3)
+    hd = TS.PI5["hdmi"]                                         # micro-HDMI x2 (estimated, W1 rev 3: x562~585 y253~260.5 top z27.3 since the 10/26 Pi move)
+    assert abs(hd["y"][0] - y0) < 0.01 and abs(TS.PI5["board_y"][0] - y0) < 0.01, ("touchscreen numbers.json pi5 vs spec CU-E-PI5", hd, y0)
     hdmi = [box(xc - PI_HDMI_W / 2, xc + PI_HDMI_W / 2, hd["y"][0], hd["y"][1], zb1 - 0.01, hd["top_z"]) for xc in PI_HDMI_XC]
     out.add("CU-E-PI5", "라즈베리파이 5 2GB", "Raspberry Pi 5 2GB", G_CU, union([pcb, hdr, hs] + hdmi), PI5_GREEN,
             SRC + " centre_contents CU-E-PI5 (x%.0f~%.0f y%.0f~%.0f z%.1f~%.1f, 6 mm 받침 위, USB/RJ45 끝 +x, GPIO 가장자리 +y); "
@@ -500,51 +509,138 @@ def pi_parts(out):
             ccbox("CU-E-PI5-DISP1"), BLACK_PLASTIC,
             SRC + " centre_contents CU-E-PI5-DISP1 (x%.0f~%.0f y%.0f~%.0f z%.1f~%.1f, DSI 리본이 화면 뚜껑으로 곧게 올라감 - Z-DSI)" % d,
             note="추정: 둘 중 -x 쪽 커넥터를 CAM/DISP 1로 표시(보드 글씨로 확인), 높이 4.0; 화면 DSI 리본(TS-C-DSI)이 입구 x589(−x 쪽)로 2.7 꽂힘, "
-                 "리본은 Z-DSI x582~600 y262~280 z28.1~61.35 안의 기둥 x583으로 내려옴")
+                 "리본은 Z-DSI x%.0f~%.0f y%.0f~%.0f z%.1f~%.2f 안의 기둥 x583으로 내려옴" % CC["Z-DSI"])
     return {"face": face, "y_s1": ports["USBA1"], "y_s2": ports["USBA2"], "zb1": zb1, "z_lo": zb1 + PI_USBA_LO_DZ, "z_up": zb1 + 16.4 - 4.0}
 
 
-DONGLE_SOCK = (650.0, 21.75, 262.1, 25.0, 10.5)     # socket axis x, z (lying on the floor), front end y, length, D
+DONGLE_SOCK = (650.0, 21.75, 252.0, 25.0, 10.5)     # socket axis x, z (lying on the floor), front end y, length, D (10/26: 8 forward with the
+                                                    # Pi, +y end y277 = 0.75 in front of the dongle head - the head bottom z25.75 is under its top z27)
+# 2026-10-26 (user): STRAIGHT USB-C(F) -> USB-A(M) gender instead of the IH190 left-angle one. Envelope from a typical short straight
+# gender (25.6 x 15.6 x 7.8 overall incl. the 12 long A plug -> 13.6 outside the port; 14 modelled): outside length, width (y), thickness (z)
+GENDER_STRAIGHT = (14.0, 15.6, 7.8)
+GENDER_AXIS_Z = 28.75                                   # lower USB-A port of stack 1 (same axis as the old gender socket)
+DONGLE_HEAD = (24.0, 6.5, 8.5, 6.0)                      # Apple USB-C plug + head: length incl. plug, plug depth in the socket, width, thick
+
+
+def dongle_geom(face, ys, gl=None):
+    """straight gender + Apple dongle: head straight on in +x, its ~7 cm lead drops to the floor right behind it, runs +y as a slack
+    loop and back under the gender into the 3.5 mm socket lying on the floor in front (axis y, W701 plug toward -y). gl: what-if
+    outside length of the gender (default GENDER_STRAIGHT[0])."""
+    gl0, gw, gt = GENDER_STRAIGHT
+    gl = gl0 if gl is None else gl
+    hl, hin, hw, ht = DONGLE_HEAD
+    zc = GENDER_AXIS_Z
+    gx1 = face + gl
+    gender = box(face, gx1, ys - gw / 2.0, ys + gw / 2.0, zc - gt / 2.0, zc + gt / 2.0)
+    hx0, hx1 = gx1 - hin, gx1 - hin + hl
+    head = box(hx0, hx1, ys - hw / 2.0, ys + hw / 2.0, zc - ht / 2.0, zc + ht / 2.0)
+    sx, sz, sy0, sl, sd = DONGLE_SOCK
+    sock = cyl_y(sx, sz, sy0, sy0 + sl, sd)
+    zf = Z_BOT + 1.5 + 0.05
+    xd = hx1 + 4.5                                       # the lead drops here (hub DC plug from x674.5)
+    yl = 304.0                                           # slack loop on the floor toward +y
+    path = [(hx1 - 0.5, ys, zc), (xd, ys, zc), (xd, ys, zf), (xd, yl, zf), (sx, yl, zf), (sx, sy0 + sl + 3.5, sz), (sx, sy0 + sl + 0.5, sz)]
+    loop = tube(fillet3(path, [0, 3.0, 3.0, 5.0, 5.0, 3.0, 0]), 3.0)
+    return gender, head, sock, loop, path
 
 
 def dongle_parts(out, pi):
     face, ys = pi["face"], pi["y_s1"]
     g = CC["CU-E-GENDER"]
-    out.add("CU-E-GENDER", "IH190 USB-C(F)→USB-A(M) ㄱ자 젠더 (L52)", "Coms IH190 left-angle gender (L52)", G_CU, ccbox("CU-E-GENDER"),
-            BLACK_PLASTIC, SRC + " centre_contents CU-E-GENDER (x%.1f~%.1f y%.0f~%.0f z%.1f~%.1f, USB-A 2단 1의 아래 포트); " % g
-            + SRC_R + " usb_dongle (gender 18×16×6.5)",
-            note="추정: RJ45 옆 USB-A 2단(중심 y%.0f)의 아래 포트에 꽂음 (A 플러그 면 x%.1f = 포트 면); C 소켓이 -y를 향함" % (ys, face))
-    gy0 = g[2]
-    hz0, hz1 = 25.75, 31.75
-    head = box(632.0, 640.5, gy0 - 17.5, gy0 + 6.5, hz0, hz1)                         # 17.5 outside + 6.5 plug in the gender
-    sx, sz, sy0, sl, sd = DONGLE_SOCK
-    sock = cyl_y(sx, sz, sy0, sy0 + sl, sd)
-    hx = (632.0 + 640.5) / 2.0
-    zf = Z_BOT + 1.5 + 0.05
-    loop = tube(fillet3([(hx, gy0 - 17.0, (hz0 + hz1) / 2.0), (hx, 263.6, 27.0), (hx, 263.6, zf), (hx, 300.0, zf), (sx, 300.0, zf),
-                         (sx, 300.0, sz), (sx, sy0 + sl + 0.5, sz)], [0, 1.5, 1.4, 5.0, 5.0, 5.0, 0]), 3.0)
+    gender, head, sock, loop, path = dongle_geom(face, ys)
+    gb = gender.bounding_box()
+    assert all(abs(a - b) < 0.01 for a, b in zip((gb[0], gb[3], gb[1], gb[4], gb[2], gb[5]), g)), (gb, g)
+    gl, gw, gt = GENDER_STRAIGHT
+    out.add("CU-E-GENDER", "USB-C(F)→USB-A(M) 일자 젠더 (L52)", "straight USB-C(F) to USB-A(M) gender (L52)", G_CU, ccbox("CU-E-GENDER"),
+            BLACK_PLASTIC, SRC + " centre_contents CU-E-GENDER (x%.1f~%.1f y%.1f~%.1f z%.2f~%.2f, USB-A 2단 1의 아래 포트); " % g
+            + "2026-10-26 사용자: ㄱ자 IH190 대신 일자 젠더",
+            note="사양과 다름(작은 고침): 2026-10-26 사용자 '일자 커넥터를 써야' - Coms IH190 ㄱ자(C 소켓 -y) 대신 일자 젠더(C 소켓 +x); 추정: 흔한 짧은 일자 "
+                 "젠더(전체 25.6 × 15.6 × 7.8, A 플러그 12)로 포트 밖 %.0f × %.1f × %.1f; RJ45 옆 USB-A 2단(중심 y%.0f)의 아래 포트(축 z%.2f)에 꽂음 (A 플러그 면 "
+                 "x%.1f = 포트 면) - 포트 밖 길이가 %.0f를 넘으면 동글 선이 허브 DC 플러그에 가까워짐 (check_electronics.py가 최대 길이를 잼)"
+                 % (gl, gw, gt, ys, GENDER_AXIS_Z, face, GENDER_STRAIGHT_MAX))
     d = CC["CU-E-DONGLE"]
+    hl, hin, hw, ht = DONGLE_HEAD
+    sx, sz, sy0, sl, sd = DONGLE_SOCK
     out.add("CU-E-DONGLE", "Apple USB-C → 3.5 mm 어댑터 (L51)", "Apple USB-C to 3.5 mm adapter (L51)", G_CU, union([head, sock, loop]),
             WHITE_PLASTIC,
-            SRC + " centre_contents CU-E-DONGLE (x%.1f~%.1f y%.1f~%.0f z%.1f~%.1f, 바닥에 눕힘, 소켓 -y) + Z-DONGLE-PLUG (W701 3.5 mm 플러그 "
-            "x644~656 y222~262.1); " % d + SRC_R + " usb_dongle (head 8.5×6×24 incl. plug, jack head ~Ø10.5×25, cable ~7 cm)",
-            note="추정: 머리 8.5 × 6 × 24 (6.5는 젠더 C 소켓 안)가 젠더에서 -y로, 약 7 cm 선이 바닥(z16.5)으로 내려가 젠더·머리 밑을 +y로 지나 "
-                 "x%.0f에서 -y로 돌아 3.5 mm 소켓 머리(Ø%.1f × %.0f, 축 x%.0f z%.2f, 앞 끝 y%.1f - 바닥에 닿음)의 +y 끝에 들어감; "
-                 "W701은 소켓 -y 끝에 꽂힘 (모델에 없음, Z-DONGLE-PLUG 비움)" % (sx, sd, sl, sx, sz, sy0))
+            SRC + " centre_contents CU-E-DONGLE (x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f, 바닥에 눕힘, 소켓 -y) + Z-DONGLE-PLUG (W701 3.5 mm 플러그 "
+            "x644~656 y222~%.1f); " % (d + (sy0,)) + SRC_R + " usb_dongle (head 8.5×6×24 incl. plug, jack head ~Ø10.5×25, cable ~7 cm)",
+            note="2026-10-26 일자 젠더에 맞춰 바꿈: 머리 %.1f × %.0f × %.0f (%.1f는 젠더 C 소켓 안)가 젠더에서 +x로 곧게 (끝 x%.1f), 약 7 cm 선이 머리 끝 "
+                 "바로 뒤 x%.1f에서 바닥(z16.5)으로 내려가 +y로 y%.0f까지 느슨하게 돌았다가 젠더·머리 밑을 지나 x%.0f에서 -y로 3.5 mm 소켓 머리"
+                 "(Ø%.1f × %.0f, 축 x%.0f z%.2f, 앞 끝 y%.1f - 바닥에 닿음, 2026-10-26 Pi와 함께 8 앞으로 - 머리 밑에서 0.75 앞)의 +y 끝에 들어감 (선 경로 약 %.0f mm); "
+                 "W701은 소켓 -y 끝에 꽂힘 (모델에 없음, Z-DONGLE-PLUG 비움)"
+                 % (hw, ht, hl, hin, path[0][0] + 0.5, path[1][0], path[3][1], sx, sd, sl, sx, sz, sy0, path_len(path)))
+
+
+# ---- 2026-10-26 (user): HW-720 amplifier (the user's own board; same layout as the XH-M312 V4 TPA3118D2 board, product drawing 66 x 53,
+# 86 to the knob end, 16 high to the knob top). Board coordinates: u from the -x edge, v from the back (+y) edge; part boxes (u0, u1, v0, v1,
+# height above the PCB top) placed from the user's photo and the product drawing (estimates - measure the received board)
+AMP_PCB = (66.0, 53.0, 1.6)
+AMP_X0 = 746.0                     # -x edge: the left parts (terminals, DC jack, up to 11 high) stay 15 right of the seam rail x711..731
+AMP_Y1 = YBI - 0.5                 # back edge 0.5 in front of the back ply (y330.5); the front edge y277.5 overhangs the shelf (tongue under it)
+AMP_Z0 = BODY.Z_SHELF_TOP + BODY.AMP_PAD_H          # board bottom on the shelf pads
+AMP_BOXES = {
+    "OUTL": (0.4, 9.5, 6.6, 17.5, 10.0),     # 2P screw terminal, 5 mm pitch, wires enter from -x
+    "DC": (0.0, 14.2, 18.8, 29.6, 11.0),     # DC-005 5.5 x 2.1 jack, plug side -x (12.8 V soldered to its pins underneath)
+    "OUTR": (0.4, 9.5, 32.9, 45.6, 10.0),
+    "L1": (10.0, 20.5, 1.0, 11.5, 6.0), "L2": (21.0, 31.5, 1.0, 11.5, 6.0),     # "100" 10 uH power inductors
+    "L3": (10.0, 20.5, 39.5, 50.0, 6.0), "L4": (21.0, 31.5, 39.5, 50.0, 6.0),
+    "IC": (32.0, 54.0, 12.0, 30.0, 2.0),     # TPA3118D2 + small parts
+    "CD": (36.0, 48.0, 31.0, 37.0, 6.0),     # lying electrolytic
+    "J35": (54.5, 66.0, 6.6, 14.6, 6.0),     # 3.5 mm input jack (unused)
+    "XH": (60.5, 66.0, 18.0, 29.5, 7.0),     # XH 3P input INR / GND / INL (W707)
+    "POT": (57.5, 67.0, 33.0, 44.5, 11.4),   # volume pot body (overhangs the edge by 1)
+}
+AMP_CAPS = [(43.0, 6.0), (43.0, 44.5)]       # 330 uF 35 V, D10 x 10.5
+AMP_DC_Y = AMP_Y1 - (AMP_BOXES["DC"][2] + AMP_BOXES["DC"][3]) / 2.0     # DC jack centre y (the 12.8 V pair runs under the board here)
+AMP_CAP = (10.0, 10.5)
+AMP_SHAFT = (67.0, 79.0, 38.5, 7.4, 6.0)     # pot shaft u0, u1, v axis, axis height above the PCB top, D (knob D14 x 17 kept off)
+AMP_KNOB_TOP = 16.0                          # knob top above the board bottom (product drawing H16)
+AMP_HOLE_IN = 3.5                            # M3 holes 3.5 in from each edge (photo)
+
+
+def amp_uv(u, v):
+    return AMP_X0 + u, AMP_Y1 - v
+
+
+def amp_solid():
+    """HW-720 board + its part boxes (world), knob removed (shaft only)."""
+    zt = AMP_Z0 + AMP_PCB[2]
+    holes = [(x, y, 3.2) for (x, y) in BODY.AMP_HOLES]
+    sol = [board(AMP_X0, AMP_X0 + AMP_PCB[0], AMP_Y1 - AMP_PCB[1], AMP_Y1, AMP_Z0, zt, holes)]
+    for u0, u1, v0, v1, h in AMP_BOXES.values():
+        sol.append(box(AMP_X0 + u0, AMP_X0 + u1, AMP_Y1 - v1, AMP_Y1 - v0, zt - 0.01, zt + h))
+    for u, v in AMP_CAPS:
+        x, y = amp_uv(u, v)
+        sol.append(cyl_z(x, y, zt - 0.01, zt + AMP_CAP[1], AMP_CAP[0]))
+    u0, u1, va, ha, d = AMP_SHAFT
+    sol.append(cyl_x(AMP_Y1 - va, zt + ha, AMP_X0 + u0 - 0.01, AMP_X0 + u1, d))
+    return union(sol)
+
+
+def amp_terminal(key):
+    """(x, y, z) where the speaker pair enters a screw terminal (the -x face, clamp centre 4.5 over the PCB)."""
+    u0, u1, v0, v1, h = AMP_BOXES[key]
+    x, y = amp_uv(u0, (v0 + v1) / 2.0)
+    return x, y, AMP_Z0 + AMP_PCB[2] + 4.5
 
 
 def board_parts(M, F, out):
     d = F["cheeks"]["headphone_jack"]["jack_dims"]
-    # ---- XH-A232 amp on the shelf pads
-    x0, x1, y0, y1, z0, z1 = CC["CU-E-AMP"]
-    amp_b = board(x0, x1, y0, y1, z0, z0 + 1.6, [(x, y, 3.2) for (x, y) in BODY.AMP_HOLES])
-    amp_e = notched_envelope(x0, x1, y0, y1, z0 + 1.6, z1, 7.0)
-    out.add("CU-E-AMP", "XH-A232 (HW-404) TPA3110 2×15 W 앰프 보드", "XH-A232 (HW-404) TPA3110D2 amplifier board", G_CU,
-            union([amp_b, amp_e]), COLORS["pcb_blue"],
-            SRC + " centre_contents CU-E-AMP (x%.0f~%.0f y%.0f~%.0f z%.1f~%.1f, 선반 위 2 mm 받침); " % CC["CU-E-AMP"] + SRC_R + " amp_xh_a232 (L53)",
-            note="추정: 부품은 모서리 7×7(나사 자리)을 뺀 한 덩어리 z%.1f~%.1f; 구멍 Ø3.2는 body.py 선반의 앰프 받침 자리 (%s) - 받은 보드로 확인; "
-                 "전원 단자·스피커 L 단자는 -x 끝(y313 / y318), 스피커 R 단자는 +x 끝(y293)으로 가정"
-                 % (z0 + 1.6, z1, " · ".join("%.1f,%.1f" % p for p in BODY.AMP_HOLES)))
+    # ---- HW-720 amp (2026-10-26, the user's own board instead of the XH-A232) on the shelf pads
+    out.add("CU-E-AMP", "HW-720 앰프 보드 (XH-M312 V4, TPA3118D2, 사용자 보유)", "HW-720 amplifier board (XH-M312 V4 layout, TPA3118D2)", G_CU,
+            amp_solid(), COLORS["pcb_blue"],
+            SRC + " centre_contents CU-E-AMP (x%.1f~%.1f y%.1f~%.1f z%.1f~%.1f, 선반 위 %.0f mm 받침) + centre.amp_2026_10_26; "
+            % (CC["CU-E-AMP"] + (BODY.AMP_PAD_H,)) + "사용자 사진 + 같은 배치 XH-M312 상품 도면 (66 × 53, 노브까지 86, 높이 16)",
+            note="2026-10-26 사용자: XH-A232 대신 가진 HW-720; 판 %.0f × %.0f (x%.1f~%.1f, y%.1f~%.1f, 뒤판 안쪽 면과 %.1f), 받침 %.0f mm 위 z%.1f; "
+                 "추정 (사진, 같은 배치 XH-M312 V4): M3 구멍 4개 모서리에서 3.5 (간격 %.0f × %.0f, %s), 부품 자리·높이 - 왼쪽(-x) 끝: 스피커 단자 OUTL(뒤)·DC 잭"
+                 "(가운데, 12.8 V를 잭 핀에 밑에서 납땜)·OUTR(앞), 오른쪽(+x) 끝: 3.5 mm 잭(안 씀)·XH 3핀 입력 INR·GND·INL(W707)·볼륨(노브는 빼서 보관 - 노브 "
+                 "꼭대기가 판 밑면 위 16이라 꽂아 두면 z%.1f로 뚜껑 밑 z%.2f에 닿음; 축만 x%.1f까지); 가장 높은 부품 z%.1f (뚜껑 밑까지 %.2f) - 받으면 구멍 간격·"
+                 "부품 높이를 재서 확인"
+                 % (AMP_PCB[0], AMP_PCB[1], AMP_X0, AMP_X0 + AMP_PCB[0], AMP_Y1 - AMP_PCB[1], AMP_Y1, YBI - AMP_Y1, BODY.AMP_PAD_H, AMP_Z0,
+                    BODY.AMP_HOLES[1][0] - BODY.AMP_HOLES[0][0], BODY.AMP_HOLES[0][1] - BODY.AMP_HOLES[2][1],
+                    " · ".join("%.1f,%.1f" % p for p in BODY.AMP_HOLES), AMP_Z0 + AMP_KNOB_TOP, Z_LIDU,
+                    AMP_X0 + AMP_SHAFT[1], CC["CU-E-AMP"][5], Z_LIDU - CC["CU-E-AMP"][5]))
     # ---- XL4016 buck
     x0, x1, y0, y1, z0, z1 = CC["CU-E-BUCK"]
     bh = [(x0 + 3.2, y0 + 3.2, 3.2), (x1 - 3.2, y0 + 3.2, 3.2), (x0 + 3.2, y1 - 3.2, 3.2), (x1 - 3.2, y1 - 3.2, 3.2)]
@@ -644,7 +740,8 @@ SW_LUGS = {}
 
 # ------------------------------------------------------------------ hub, LiFePO4 battery + XT60
 
-BAT_LEAD_YZ = (275.0, 31.5)    # assumed XT60 lead exit on the battery's +x end face (mid-height of the 2026-10-26 pack) - check on the real pack
+BAT_LEAD_YZ = (275.0, 34.0)    # assumed XT60 lead exit on the battery's +x end face - check on the real pack
+BAT_DC_YZ = (299.0, 34.0)      # assumed DC charge lead exit on the same face
 
 
 def hub_bank_parts(R, out):
@@ -660,27 +757,30 @@ def hub_bank_parts(R, out):
                  "바닥에 뒤판에 붙여 모듈 선은 -y 면으로; 추정: 아래 포트 10개를 앞면(y%.0f, -y 쪽) x%.1f+22i, z%.1f에, B 포트 y%.0f z%.1f (뒤쪽), "
                  "DC 잭 y%.0f z%.1f (앞쪽) - 끝면 안 자리는 받은 허브로 확인; 포트 0·1(화면 뚜껑 아래)은 비움"
                  % (HUB_X0, HUB_Y, HUB_PORT_X[0], HUB_Z, C25_B_PORT[0], C25_B_PORT[1], HUB_DC_YZ[0], HUB_DC_YZ[1]))
-    # ---- 2026-10-07 (user): LiFePO4 12.8 V 6 Ah pack on the centre floor in the printed frame; XT60 pair on its top
-    # 2026-10-26 (user): KC 4S1P 140 x 70 x 40, one XT60 F lead for charge + discharge, in a 5 deep pocket of the centre bottom (top z51.5)
+    # ---- 2026-10-07 (user): LiFePO4 12.8 V 6 Ah pack on the centre floor in the printed frame; XT60 pair + DC charge connector on its top
     b = CC["BAT-LFP"]
     pc = L2["centre"].get("power_2026_10_07", {})
     rt = pc.get("runtime_h", [3.5, 4.4])
-    out.add("BAT-LFP", "LiFePO4 배터리 12.8 V 6 Ah (KC 4S1P 32700, 76.8 Wh, 140×70×40)", "LiFePO4 battery pack 12.8 V 6 Ah 140x70x40", G_BAT,
+    out.add("BAT-LFP", "LiFePO4 배터리 12.8 V 6 Ah (4S1P 32700 '10Ah DCXT60-3A', 76.8 Wh, 140×72×35)", "LiFePO4 battery pack 12.8 V 6 Ah 140x72x35",
+            G_BAT,
             ccbox("BAT-LFP"), BAT_BLUE,
-            SRC + " centre_contents BAT-LFP (x%.0f~%.0f y%.1f~%.1f z%.1f~%.1f, 셀을 눕혀 가운데 아랫판의 깊이 5 홈 안 - 배터리 틀 CU-BATFRAME 안) + "
-            "centre.power_2026_10_07.pack_2026_10_26 (사용자 2026-10-26: 쿠팡 9766601860 금강에너지솔루션 KC 인증 4S1P 12.8 V 6 Ah, A타입 70 × 40 × 140, "
-            "입출력 공통 XT60(F) 선 하나)" % b,
-            note="추정: 상자 하나로; 무게 약 %.2f kg (%s); XT60 선은 +x 끝면 y%.0f z%.1f에서 나온다고 가정 - 선 꺾는 자리 Z-BAT-LEADS로 위로 꺾여 윗면의 "
-                 "XT60 짝으로 (홈 바닥 z%.1f에서 5 넘게 위면 홈 벽에 걸리지 않음); 충전 잭이 따로 없어 XT60 짝을 뽑고 충전기 XT60 수를 꽂아 충전; 버스 12.8 V "
-                 "(10.0~14.6 V), 앰프 약 8 W/채널, 사용 시간 약 %.1f~%.1f시간 - 받은 배터리로 선이 나오는 면·높이·길이 확인"
-                 % (pc.get("mass_kg_est", 0.9), pc.get("mass_note", "추정"), BAT_LEAD_YZ[0], BAT_LEAD_YZ[1], b[4], rt[0], rt[1]), material="LiFePO4 팩")
+            SRC + " centre_contents BAT-LFP (x%.0f~%.0f y%.1f~%.1f z%.1f~%.1f, 셀을 눕혀 바닥 위 - 배터리 틀 CU-BATFRAME 안) + centre.power_2026_10_07 "
+            "(사용자 2026-10-07 상품 정보: 140 × 35 × 72, BMS 4S 40 A / 100 A, 출력 XT60 선, 충전 DC 5.5×2.1 선) + pack_2026_10_26 (같은 꼴의 4S1P "
+            "'12.8V 10Ah DCXT60-3A', 3 A 충전기 포함)" % b,
+            note="추정: 상자 하나로; 무게 약 %.1f kg (%s); 선 두 개는 +x 끝면에서 나온다고 가정 - XT60 선 y%.0f z%.0f, DC 충전 선 y%.0f z%.0f에서 나와 선 꺾는 "
+                 "자리 Z-BAT-LEADS로 위로 꺾여 윗면의 커넥터로; 버스 12.8 V (10.0~14.6 V), 앰프 약 8 W/채널, 사용 시간 약 %.1f~%.1f시간 - 받은 배터리로 "
+                 "선이 나오는 면·높이·길이 확인" % (pc.get("mass_kg_est", 0.9), pc.get("mass_note", "추정"), BAT_LEAD_YZ[0], BAT_LEAD_YZ[1], BAT_DC_YZ[0],
+                                              BAT_DC_YZ[1], rt[0], rt[1]), material="LiFePO4 팩")
     xt = CC["C-XT60"]
     out.add("C-XT60", "XT60 짝 (배터리 암 + 버스 수, 배터리 윗면에 눕힘)", "XT60 mated pair (battery F + bus M) lying on the battery top", G_CAB,
             ccbox("C-XT60"), XT60_YELLOW, SRC + " centre_contents C-XT60 (x%.0f~%.0f y%.0f~%.0f z%.2f~%.2f, 배터리 윗면) + centre.power_2026_10_07" % xt,
             note="추정: 짝 맞춘 겉모양 31 × 16 × 8.2 한 상자로; 배터리 쪽 암(+x, 선은 C-BAT-LEAD)과 버스 쪽 수(-x, 선은 C-PWR-IN이 -x로 나와 배터리 앞 "
-                 "모서리를 넘어 앞 공간 위 퓨즈 홀더 -x 끝으로); 뚜껑 밑 %.2f; 충전 (2026-10-26 KC 팩, 충전 잭 없음): 스위치를 끄고 뚜껑 L을 들어 짝을 뽑고 "
-                 "14.6 V LiFePO4 충전기의 XT60 수를 배터리 암에 꽂음, 다 차면 다시 짝을 꽂음; 12 V 전원 장치로 시험할 때는 전원 장치의 XT60 암을 버스 쪽 수에 "
-                 "꽂음" % (Z_LIDU - xt[5]))
+                 "모서리를 넘어 앞 공간 위 퓨즈 홀더 -x 끝으로); 뚜껑 밑 %.2f; 충전 때는 뽑지 않음 - 12 V 전원 장치로 시험할 때만 뚜껑 L을 들고 뽑아 전원 장치의 XT60 암을 꽂음" % (Z_LIDU - xt[5]))
+    dc = CC["C-DC"]
+    out.add("C-DC", "DC 5.5×2.1 충전 커넥터 (배터리 충전 선 끝, 배터리 윗면에 눕힘)", "DC 5.5x2.1 charge connector on the battery top", G_CAB,
+            ccbox("C-DC"), BLACK_PLASTIC, SRC + " centre_contents C-DC (x%.0f~%.0f y%.0f~%.1f z%.1f~%.1f) + centre.power_2026_10_07 charging" % dc,
+            note="추정: 겉모양 30 × 9.5 × 8.5 상자로 (높이 8.85 이하이면 윗면에 들어감 - 받은 배터리로 확인); 충전: 스위치를 끄고 뚜껑 L을 들어 여기에 "
+                 "LiFePO4 충전기를 꽂음 (XT60은 그대로); 뚜껑 밑 %.2f" % (Z_LIDU - dc[5]))
 
 
 def c25_geom(pi):
@@ -714,7 +814,7 @@ def c25_geom(pi):
     return {"face": face, "ys": ys, "za": za, "xr": xr, "z_top": z_top, "x_b0": x_b0, "x_b1": x_b1, "xd": xd, "x_far": x_far, "pts": P,
             "a_len": a_len, "b_len": b_len, "cable": path_len(P) - 1.0, "len": a_len + path_len(P) - 1.0 + b_len,
             "zones": {"Z-C25-A": (face, face + hx, ys - hw / 2, ys + hw / 2, za - ht / 2, z_top),
-                      "Z-C25-LOOP": (xr - UP_D / 2, x_far + UP_D / 2, C25_OUT_Y - UP_D / 2, by + UP_D / 2,
+                      "Z-C25-LOOP": (xr - UP_D / 2, x_far + UP_D / 2, min(C25_OUT_Y, ys) - UP_D / 2, by + UP_D / 2,
                                      z_top - 0.5 - UP_D / 2, C25_LOOP_Z + UP_D / 2),
                       "Z-C25-DROP": (xd - UP_D / 2, x_b0, by - UP_D / 2, by + UP_D / 2, bz - UP_D / 2, C25_LOOP_Z + UP_D / 2),
                       "Z-C25-B": (x_b0, HUB_X0, by - C25_B_BODY[1] / 2, by + C25_B_BODY[1] / 2, bz - C25_B_BODY[2] / 2, bz + C25_B_BODY[2] / 2)}}
@@ -830,10 +930,14 @@ def pwr_paths():
     dc = HUB_DC
     ly, lz = BAT_LEAD_YZ
     P = {}
-    # battery lead (the pack's own, 2026-10-26 one XT60 lead for charge + discharge): +x end face -> lead-turn zone Z-BAT-LEADS (x424..434,
-    # over the PED board level) -> up onto the pack top -> XT60 F back (+x)
+    # battery leads (the pack's own): +x end face -> lead-turn zone Z-BAT-LEADS (x424..434, over the PED board level) -> up onto the
+    # pack top -> XT60 F back (+x) / DC charge connector
     P["BAT"] = [fillet3([(bt[1] + e, ly, lz), (BAT_LEAD_X, ly, lz), (BAT_LEAD_X, ly, xz), (BAT_LEAD_X, xy, xz), (xt[1] + e, xy, xz)],
                         [0, 3.0, 4.0, 4.0, 0])]
+    dcb = CC["C-DC"]
+    dy_, dz_ = (dcb[2] + dcb[3]) / 2.0, (dcb[4] + dcb[5]) / 2.0
+    P["DC"] = [fillet3([(bt[1] + e, BAT_DC_YZ[0], BAT_DC_YZ[1]), (BAT_LEAD_X, BAT_DC_YZ[0], BAT_DC_YZ[1]), (BAT_LEAD_X, BAT_DC_YZ[0], dz_),
+                        (BAT_LEAD_X, dy_, dz_), (dcb[1] + e, dy_, dz_)], [0, 3.0, 4.0, 4.0, 0])]
     # 2026-10-07 ATC/ATO holder (lying on the frame's fuse shelf, wire axis x): each end = 12 AWG stub lead bent R15 toward +y (about 24 mm),
     # a soldered + heat-shrunk splice (12 long), then the 16 AWG harness lead
     # IN: holder -x end -> R15 to +y (in front of the battery top edge) -> splice -> up over the battery front edge -> +x into the XT60 M
@@ -853,15 +957,21 @@ def pwr_paths():
     # KCD1 output lug (upper) -> buck IN (-x end face, y306) + 12.8 V feed along the back lane to the amp (-x end face, y313)
     s0 = (kx, ky - e, kout)
     P["BUS"] = [fillet3([s0, (kx, 313.5, kout), (450.0, 306.0, 38.0), (bk[0] - e, 306.0, 36.5)], [0, 2.5, 4.0, 0]),
-                fillet3([s0, (kx, 314.5, kout + 2.0), (kx, 314.5, 51.0), (443.0, BACK_LANE_BUS_Y, 53.0), (733.0, BACK_LANE_BUS_Y, 53.0), (733.0, 313.0, 52.0),
-                         (amp[0] - e, 313.0, 52.0)], [0, 1.5, 3.0, 4.0, 3.0, 3.0, 0])]
+                fillet3([s0, (kx, 314.5, kout + 2.0), (kx, 314.5, 51.0), (443.0, BACK_LANE_BUS_Y, 53.0), (733.0, BACK_LANE_BUS_Y, 53.0),
+                         (733.0, AMP_DC_Y, 52.0), (AMP_X0 - 3.0, AMP_DC_Y, AMP_FEED_Z)], [0, 1.5, 3.0, 4.0, 3.0, 3.0, 0]),
+                # 2026-10-26 HW-720: the pair runs flat under the board (between the shelf top and the board bottom) to the DC jack pins
+                [(AMP_X0 - 3.0, AMP_DC_Y, AMP_FEED_Z), (AMP_X0 + AMP_DC_PIN_U, AMP_DC_Y, AMP_FEED_Z)]]
     # buck OUT (front face, x529.5) -> C24 (BT663) side-angled USB-C at the Pi -y edge (lead leaves -x through the collar) + hub 5 V DC
     # (right-angle plug on the hub -x end face, lead leaves +z); both ends run 1 mm into the collar / plug head (one part with them)
     o = (529.5, bk[2] - e, 36.0)
-    xdc, ydc = (dc[0] + dc[1]) / 2.0, (dc[2] + dc[3]) / 2.0
-    P["5V"] = [fillet3([o, (529.5, 283.0, 36.0), (529.5, 262.0, 36.0), (537.0, cl[2], 28.0), (cl[0] + 1.0, cl[2], cl[3])], [0, 3.0, 5.0, 4.0, 0]),
-               fillet3([o, (529.5, 285.0, 40.0), (529.5, 285.0, 48.5), (xdc - 8.0, 285.0, 48.5), (xdc, ydc, 48.5), (xdc, ydc, dc[5] - 1.0)],
-                       [0, 2.0, 3.0, 4.0, 4.0, 0])]
+    # 2026-10-26: straight hub DC plug - the lead comes down R4 at xt (R5 behind the plug end) and runs 1 mm into the plug's -x end
+    yj, zj = HUB_DC_YZ
+    sr = HUB_DC_STRAIGHT[1]
+    xe = dc[0]
+    xt = xe - sr
+    P["5V"] = [fillet3([o, (529.5, 283.0, 36.0), (529.5, CC["CU-E-PI5"][2], 36.0), (537.0, cl[2], 28.0), (cl[0] + 1.0, cl[2], cl[3])], [0, 3.0, 5.0, 4.0, 0]),
+               fillet3([o, (529.5, 285.0, 40.0), (529.5, 285.0, 48.5), (xt - 8.0, 285.0, 48.5), (xt, yj, 48.5), (xt, yj, zj), (xe + 1.0, yj, zj)],
+                       [0, 2.0, 3.0, 4.0, 4.0, sr, 0])]
     return P
 
 
@@ -870,7 +980,10 @@ AWG12_D = 4.2                  # ATC/ATO holder leads 12 AWG (OD about 4.2, user
 FH_BEND = 15.0                 # 12 AWG bend radius (centre line) >= 15 (user)
 SPLICE = (12.0, 6.5)           # 12 AWG -> 16 AWG splice: soldered + heat-shrunk sleeve length, D (estimate)
 IN_SPLICE_Z = 56.5             # the IN splice rises to z56.5 at its +y end (battery top edge y251 z51.5 -> sleeve 2.1 over it)
-PWR_LEG_D = {"IN": [AWG12_D, SPLICE[1], PWR_D], "FUSE": [AWG12_D, SPLICE[1], PWR_D]}   # per-polyline D (12 AWG, splice, 16 AWG)
+PWR_LEG_D = {"IN": [AWG12_D, SPLICE[1], PWR_D], "FUSE": [AWG12_D, SPLICE[1], PWR_D],   # per-polyline D (12 AWG, splice, 16 AWG)
+             "BUS": [PWR_D, PWR_D, 2.2]}      # 2026-10-26: the amp feed's last leg under the HW-720 = one 18 AWG wire thick (the pair lies flat)
+AMP_DC_PIN_U = 8.0             # HW-720 DC jack pins (u from the -x edge) where the 12.8 V pair is soldered underneath
+AMP_FEED_Z = 45.35             # under-board leg axis: shelf top z43.5 .. board bottom z46.5 (D2.2: 0.75 over the shelf, 0.05 under the board)
 BACK_LANE_BUS_Y = 325.0        # 12.8 V amp feed along the back ply (Z-SPKLEAD-L from y323.5: 0.5 behind the battery top edge y323)
 SPKL_LANE_Y = 328.5            # amp -> XT60 L lead along the back ply (0.5 behind the 12.8 V feed, 1.0 in front of the back ply y331)
 
@@ -878,8 +991,9 @@ SPKL_LANE_Y = 328.5            # amp -> XT60 L lead along the back ply (0.5 behi
 # C24 Coms BT663 (purchase list v4, 10/1): USB-C plug angled to the SIDE (the lead leaves along the wide face), 20 cm, A end cut off,
 # red / black to the buck output. Head photo-scaled from the 8.25 C shell (estimate): 14 along the exit direction x 12 along the
 # insertion x 7 thick; the C shell (6.5) is inside the Pi receptacle (USB-C centre x553.2 = 11.2 from the Pi end x542, axis z25.7).
-C24_HEAD = (546.0, 560.0, 250.0, 262.0, 22.2, 29.2)      # inside the spec keep-out Z-PI-PWR x546~560 y249~262 z22~31
-C24_COLLAR = (542.5, 546.0, 254.0, 25.7, 4.5)            # strain-relief collar x0, x1, y, z, D - the lead leaves -x (toward the buck)
+_PI_Y0 = CC["CU-E-PI5"][2]                                # Pi -y edge (y253 since the 10/26 move; was 262)
+C24_HEAD = (546.0, 560.0, _PI_Y0 - 12.0, _PI_Y0, 22.2, 29.2)      # inside the spec keep-out Z-PI-PWR x546~560 y241~253 z22~31
+C24_COLLAR = (542.5, 546.0, _PI_Y0 - 8.0, 25.7, 4.5)              # strain-relief collar x0, x1, y, z, D - the lead leaves -x (toward the buck)
 
 
 def power_parts(out):
@@ -896,9 +1010,13 @@ def power_parts(out):
     zl = CC["Z-BAT-LEADS"]
     out.add("C-BAT-LEAD", "배터리 XT60 선 (팩 +x 끝 → 윗면의 XT60 암, 배터리에 딸림)", "battery XT60 lead (pack +x end to the XT60 female on top)", G_CAB,
             tb("BAT"), WIRE_RED, src + " + BAT-LFP / C-XT60 / Z-BAT-LEADS",
-            note="추정: 두 가닥을 Ø3 한 줄로; 팩 +x 끝면(y%.0f z%.1f 가정)에서 나와 선 꺾는 자리 Z-BAT-LEADS (x%.0f~%.0f, z%.0f 위)에서 x%.0f로 위로 꺾여 "
+            note="추정: 두 가닥을 Ø3 한 줄로; 팩 +x 끝면(y%.0f z%.0f 가정)에서 나와 선 꺾는 자리 Z-BAT-LEADS (x%.0f~%.0f, z%.0f 위)에서 x%.0f로 위로 꺾여 "
                  "배터리 윗면의 XT60 암 뒤(+x 끝 x%.0f)로 들어감; 약 %.0f mm - 선이 나오는 면·높이·길이는 받은 배터리로 확인"
                  % (BAT_LEAD_YZ[0], BAT_LEAD_YZ[1], zl[0], zl[1], zl[4], BAT_LEAD_X, CC["C-XT60"][1], ln["PWR-BAT"]))
+    out.add("C-BAT-DC", "배터리 충전 선 (팩 +x 끝 → 윗면의 DC 5.5×2.1 커넥터, 배터리에 딸림)", "battery charge lead (pack +x end to the DC connector on top)",
+            G_CAB, tb("DC"), COLORS["cable"], src + " + BAT-LFP / C-DC / Z-BAT-LEADS",
+            note="추정: Ø3 한 줄로; 팩 +x 끝면(y%.0f z%.0f 가정)에서 나와 XT60 선 옆(y%.0f)에서 위로 꺾여 윗면의 DC 커넥터 +x 끝(x%.0f)으로; 약 %.0f mm"
+                 % (BAT_DC_YZ[0], BAT_DC_YZ[1], BAT_DC_YZ[0], CC["C-DC"][1], ln["PWR-DC"]))
     sp = "이음 (12 AWG와 16 AWG를 납땜 + 수축 튜브, %.0f × Ø%.1f 추정)" % SPLICE
     out.add("C-PWR-IN", "전원선 XT60 수 → 퓨즈 홀더 (12 AWG 꼬리 + 이음 + 16 AWG)", "power lead XT60 male to the fuse holder (12 AWG stub, splice, 16 AWG)",
             G_CAB, tb("IN"), WIRE_RED, src + " + centre.power_2026_10_07.fuse_holder",
@@ -920,23 +1038,23 @@ def power_parts(out):
     h = C24_HEAD
     cl = C24_COLLAR
     mt = union([box(*h), cyl_x(cl[2], cl[3], cl[0], cl[1] + 0.01, cl[4])])
-    dc = box(*HUB_DC)
+    dc = cyl_x(HUB_DC_YZ[0], HUB_DC_YZ[1], HUB_DC[0], HUB_DC[1], HUB_DC_STRAIGHT[0])
     l_pi = path_len(pwr_paths()["5V"][0])
-    out.add("C-PWR-5V", "5.1 V 선 강압 → Pi 5 (C24 BT663 측면 꺾임 USB-C) + 허브 DC (ㄱ자 DC 플러그, 허브 -x 끝면)",
-            "5.1 V harness: buck to Pi 5 (C24 BT663 side-angled USB-C) and hub DC (right-angle plug, hub -x end face)", G_CAB,
+    out.add("C-PWR-5V", "5.1 V 선 강압 → Pi 5 (C24 BT663 측면 꺾임 USB-C) + 허브 DC (일자 DC 플러그, 허브 -x 끝면)",
+            "5.1 V harness: buck to Pi 5 (C24 BT663 side-angled USB-C) and hub DC (straight plug, hub -x end face)", G_CAB,
             union([tb("5V"), mt, dc]), WIRE_RED,
-            src + " + Z-PI-PWR (x546~560 y249~262 z22~31) + 구매 목록 v4 C24 ([BT663] Coms USB-C 측면꺾임 20 cm, A 쪽을 잘라 빨강·검정을 강압 출력에) "
-                  "/ L17 허브 DC (딸린 5 V 어댑터 선의 플러그 쪽)",
+            src + " + Z-PI-PWR (x%.0f~%.0f y%.0f~%.0f z%.0f~%.0f) + 구매 목록 v4 C24 ([BT663] Coms USB-C 측면꺾임 20 cm, A 쪽을 잘라 빨강·검정을 강압 출력에) "
+                  "/ L17 허브 DC (딸린 5 V 어댑터 선의 플러그 쪽)" % CC["Z-PI-PWR"],
             note="사양과 다름(작은 고침): W1 10/1 - 허브 DC를 +x 끝면(Z-HUB-DC)에서 업스트림 B 포트와 같은 -x 끝면으로 옮겨 선반 앞 줄(Z-PWR-LANE)을 쓰지 않음; "
                  "추정: 강압 앞면 출력 단자(x529.5 z36)에서 두 갈래 - (1) J702 기판 위(z36)를 지나 Pi -y 가장자리의 C24 측면 꺾임 USB-C 머리 "
                  "%.0f×%.0f×%.0f (x%.0f~%.0f y%.0f~%.0f z%.1f~%.1f, 사양 지킴 자리 Z-PI-PWR 14×13×9 안) + 꼬리 Ø%.1f (x%.1f~%.0f) - 선이 -x(강압 쪽)로 "
                  "나오게 꽂음 (USB-C는 뒤집으면 +x), 강압 단자까지 경로 약 %.0f mm - 20 cm 선의 A 쪽을 자를 때 30~40 mm 여유만 남김; (2) y285 z48.5 "
-                 "(Pi USB-A 위 6.5, Z-DSI y280 뒤 3.5)를 x%.1f까지 가서 허브 -x 끝면의 ㄱ자 DC 플러그 머리 12×12×10 (x%.1f~%.1f y%.0f~%.0f z%.1f~%.1f, "
-                 "잭 y%.0f z%.1f, 선이 위로 나옴)로 내려옴; 곧은 DC 플러그는 잭 면에서 몰드 끝까지 %.0f mm 이하이고 선을 바로 위로 R%.0f로 꺾을 때만 "
-                 "들어감 (그보다 길면 Pi 쪽 젠더 IH190 x647.5에 닿음, check_electronics.py); 전체 약 %.0f mm"
+                 "(Pi USB-A 위 6.5)를 x%.1f까지 가서 R%.0f로 내려와 허브 -x 끝면의 일자 DC 플러그 (2026-10-26 사용자: 둘 다 일자 - Pi를 건반 쪽으로 9 옮겨 들어감; "
+                 "몸 Ø%.0f × %.0f, x%.1f~%.1f, 잭 축 y%.0f z%.1f) 뒤끝으로 들어감; 추정: 딸린 어댑터 선의 흔한 곧은 플러그(잭 면에서 몰드·부트 끝까지 %.0f) - "
+                 "%.1f mm까지 들어감 (더 길면 Pi 쪽 일자 젠더·C25 머리에 닿음, check_electronics.py), 선은 플러그 바로 뒤에서 R%.0f로 위로; 전체 약 %.0f mm"
                  % (h[1] - h[0], h[3] - h[2], h[5] - h[4], h[0], h[1], h[2], h[3], h[4], h[5], cl[4], cl[0], cl[1], l_pi,
-                    (HUB_DC[0] + HUB_DC[1]) / 2.0, HUB_DC[0], HUB_DC[1], HUB_DC[2], HUB_DC[3], HUB_DC[4], HUB_DC[5], HUB_DC_YZ[0], HUB_DC_YZ[1],
-                    HUB_DC_STRAIGHT_MAX, HUB_DC_STRAIGHT[1], ln["PWR-5V"]))
+                    HUB_DC[0] - HUB_DC_STRAIGHT[1], 4.0, HUB_DC_STRAIGHT[0], HUB_DC_PLUG_L, HUB_DC[0], HUB_DC[1], HUB_DC_YZ[0], HUB_DC_YZ[1],
+                    HUB_DC_PLUG_L, HUB_DC_STRAIGHT_MAX, HUB_DC_STRAIGHT[1], ln["PWR-5V"]))
 
 
 # ------------------------------------------------------------------ XT60 pairs (end-wall clips) + speaker leads
@@ -999,6 +1117,8 @@ def xt60_parts(R, out):
 SPKL_WALL_Y = BODY.END_HOLE_YZ["L"][0]   # 244: C-SPK-L leaves the left end wall here, over the XT60 clip plate (2026-10-07: was y256 in front of the power bank)
 SPKL_HIGH_Z = 56.5             # front part of C-SPK-L: 1.5 over the XT60 clip plate / collar top z53.5 (tube z55..58), in front of the battery (y>=251)
 SPKL_DROP = 6.0                # C-SPK-L drops to the XT60 male back this far past it (+x)
+SPKR_TURN_X = 738.0            # C-SPK-R (2026-10-26): out of the HW-720 OUTR terminal (-x edge) it turns down here (8 off the board, 7 right of the seam rail)
+SPKR_LANE = (274.5, 48.5)      # C-SPK-R front lane y, z: 3 in front of the board edge y277.5, 1 in front of the shelf tongue, over the hub plug zone
 
 
 def spk_lead_paths(P):
@@ -1013,11 +1133,16 @@ def spk_lead_paths(P):
     # 2026-10-07: the battery (x284.., y250.5.., top z51.5) fills the old diagonal in front of the power bank, so the lead stays on the
     # wall: out of clip E1 (y262) it rises to z56.5, runs over the XT60 clip plate (top z53.5) to y244, then +x over the clip and the
     # XT60 male to x311.8 and drops to the male's back end
-    pl = fillet3([(amp[0] - e, 318.0, 52.0), (737.0, 318.0, 52.0), (737.0, SPKL_LANE_Y, 53.0), (xw, SPKL_LANE_Y, 53.0), (xw, 262.0, 53.0),
+    tlx, tly, tlz = amp_terminal("OUTL")
+    pl = fillet3([(tlx - e, tly, tlz), (737.0, tly, tlz), (737.0, SPKL_LANE_Y, 53.0), (xw, SPKL_LANE_Y, 53.0), (xw, 262.0, 53.0),
                   (xw, 254.0, SPKL_HIGH_Z), (xw, SPKL_WALL_Y, SPKL_HIGH_Z), (xd, SPKL_WALL_Y, SPKL_HIGH_Z), (xd, L["yc"], L["zc"]), tipL],
                  [0, 3.0, 3.0, 8.0, 3.0, 3.0, 5.0, 4.0, 3.0, 0])
-    xr = Rr["mal"][0] - 16.0                                 # R: the lead leaves the shelf lane 16 before the male and eases down to its axis
-    pr = fillet3([(amp[1] + e, 293.0, 49.5), (xr, 293.0, 49.5), (xr + 8.0, Rr["yc"], Rr["zc"]), tipR], [0, 4.0, 3.0, 0])
+    # R (2026-10-26 HW-720: OUTR is on the amp's -x edge): out of the terminal to -x, down in front of the board to the front lane y274.5
+    # (in front of the shelf tongue, over the hub plug zone where the unused spec Z-PWR-LANE was), +x to 12 before the XT60 male, up to its axis
+    trx, try_, trz = amp_terminal("OUTR")
+    xr = Rr["mal"][0] - 12.0
+    pr = fillet3([(trx - e, try_, trz), (SPKR_TURN_X, try_, trz), (SPKR_TURN_X, SPKR_LANE[0], SPKR_LANE[1]), (xr, SPKR_LANE[0], SPKR_LANE[1]),
+                  (xr + 8.0, Rr["yc"], Rr["zc"]), tipR], [0, 3.0, 4.0, 4.0, 3.0, 0])
     return {"L": pl, "R": pr}
 
 

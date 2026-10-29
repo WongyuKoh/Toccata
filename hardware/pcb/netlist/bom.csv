@@ -79,7 +79,7 @@ SCH-05,PB,A501-HDR,1×9 ×2,"핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2
 SCH-05,PB,JP504,닫음 (브리지),SolderJumper_2_Bridged,1,1,1,,Jumper:SolderJumper_2_Bridged,Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm (만능기판: 두 구멍 납땜),,,납땜 브리지 (부품 없음)
 SCH-05,PB,TP501,,TestPoint,1,1,1,,Connector:TestPoint,TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm,,,구멍 패드 (부품 없음)
 SCH-05,PB,TP502,,TestPoint,1,1,1,,Connector:TestPoint,TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm,,,구멍 패드 (부품 없음)
-SCH-06,CU,BT601,LiFePO4 12.8 V 6 Ah,"Turmera LiFePO4 12.8 V 4S1P 32700 (계산 6 Ah · 76.8 Wh), BMS 4S 40 A, 출력 XT60 암 리드 + DC 5.5×2.1 충전 리드, 140 × 72 × 35 mm",1,1,1,,"Device:Battery (1 = +, 2 = −; Value = LiFePO4 12.8V 6Ah)",보드 밖 (Exclude from board) — 전지 팩 (BMS 내장),u01,사용자 구매 (쿠팡),가진 것
+SCH-06,CU,BT601,LiFePO4 12.8 V 6 Ah,"LiFePO4 12.8 V 4S1P 32700 '12.8V 10Ah DCXT60-3A' 세트 (표기 10 Ah, 계산 6 Ah · 76.8 Wh), BMS 4S 40 A, 출력 XT60 암 리드 + DC 5.5×2.1 충전 리드, 3 A LiFePO4 충전기 포함 (DC 5.5×2.1), 140 × 35 × 72 mm (눕혀 140 × 72 × 35), 약 0.9 kg",1,1,1,,"Device:Battery (1 = +, 2 = −; Value = LiFePO4 12.8V 6Ah)",보드 밖 (Exclude from board) — 전지 팩 (BMS 내장),u01,사용자 구매 (쿠팡 9669099122 옵션 04),가진 것
 SCH-06,CU,X605,XT60 암,AMASS XT60 암 — BT601 팩 리드 끝에 달려 옴 (따로 사지 않음),1,1,1,,"Connector:Conn_01x02_Socket (1 = −, 2 = +)","Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical (패드 1 = −, 실물 표시로 확인) · 보드 밖 (Exclude from board) — 팩 리드",,BT601과 함께,BT601 팩 리드에 달려 옴 (따로 사지 않음)
 SCH-06,CU,X606,XT60 수,"AMASS XT60-M 16 AWG 실리콘 선 10 cm — W601 전지 하네스 (리드 40 mm로 자름 + 홀더 꼬리 36 mm, 이은 전체 68 mm 이하, 빨강 수축)",1,1,1,,"Connector:Conn_01x02_Pin (1 = −, 2 = +)","Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical (패드 1 = −, 실물 표시로 확인) · 보드 밖 (Exclude from board) — W601 하네스",L80,엘레파츠 12779718,가진 것
 SCH-06,CU,F601,5 A ATO 블레이드,"ATO 표준 블레이드 퓨즈 5 A (주황, 32 V DC) — 켤 때 끊기면 7.5 A (갈색)",1,1,1,,Device:Fuse (Value = 5A ATO),"보드 밖 (Exclude from board) — ATC/ATO 블레이드 인라인 홀더 (사용자 보유, 선 사이)",u05,사용자 보유 (퓨즈 세트),가진 것
@@ -87,7 +87,7 @@ SCH-06,CU,F601-HLD,ATC/ATO 인라인,"ATC/ATO 블레이드 인라인 퓨즈 홀�
 SCH-06,CU,SW601,KCD1-104,"KCD1-104 로커 스위치 (4핀 2회로 ON-OFF, 패널 구멍 19 × 13, 두 회로 나란히)",1,1,1,,"Switch:SW_DPST (1–2 회로 A, 3–4 회로 B — 두 회로 나란히)",보드 밖 (Exclude from board) — 뒤판 출력물 패널 구멍 19 × 13,u03,사용자 보유 (디바이스마트 1788과 같은 품번),가진 것
 SCH-06,CU,A602,XL4016 강압 → 5.1 V,XL4016 강압 모듈 XH-M401 (HAM6415) → 5.1 V,1,1,1,,"Toccata:XL4016_Buck (1 IN+, 2 IN−, 3 OUT+, 4 OUT−)",보드 밖 (Exclude from board),L58,아이씨뱅큐 P017179502,가진 것
 SCH-06,CU,P601,USB-C 측면 꺾임 (C24 BT663),Coms BT663 USB-A → C 측면 꺾임 20 cm (A 끝을 잘라 빨강·검정을 강압 출력에),1,1,1,,"Connector:USB_C_Plug_USB2.0 (A4 VBUS, A1 GND만 사용 — A5·B5·A6·A7·S1에 NC 표시)",보드 밖 (Exclude from board) — C24 BT663 플러그,C24,엘레파츠 8105815,가진 것
-SCH-06,CU,P602,DC 플러그 (허브 어댑터 선),"허브 5 V 어댑터 선의 플러그 쪽 (곧은 플러그는 잭 면에서 32 mm 이하일 때만, 아니면 ㄱ자 DC 플러그 선)",1,1,1,,"Connector_Generic:Conn_01x02 (1 = 중심 +, 2 = 슬리브)",보드 밖 (Exclude from board) — 허브 어댑터 선,L17 부속,허브와 함께,허브에 딸린 5 V 어댑터 선의 플러그 쪽
+SCH-06,CU,P602,일자 DC 플러그 (허브 어댑터 선),"허브 5 V 어댑터 선의 플러그 쪽 — 딸린 일자 DC 플러그 그대로 (잭 면 → 부트 끝 37 mm 이하, CAD 30; 바로 뒤에서 선을 R5로 위로)",1,1,1,,"Connector_Generic:Conn_01x02 (1 = 중심 +, 2 = 슬리브)",보드 밖 (Exclude from board) — 허브 어댑터 선,L17 부속,허브와 함께,허브에 딸린 5 V 어댑터 선의 플러그 쪽
 SCH-06,CU,TP601,,TestPoint,1,1,1,,Connector:TestPoint,TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm,,,구멍 패드 (부품 없음)
 SCH-06,CU,TP602,,TestPoint,1,1,1,,Connector:TestPoint,TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm,,,구멍 패드 (부품 없음)
 SCH-06,CU,TP603,,TestPoint,1,1,1,,Connector:TestPoint,TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm,,,구멍 패드 (부품 없음)
@@ -98,7 +98,7 @@ SCH-06,CU,X602,M/M 끝,"실리콘 점퍼 26 AWG 20 cm M/M 빨강 1 + 검정 1 (W
 SCH-06,CU,X603,M/M 끝,W607 다른 끝 — X602와 같은 점퍼 (따로 사지 않음),1,1,1,,"Connector_Generic:Conn_01x02 (1 = 빨강 5 V, 2 = 검정 GND)",보드 밖 (Exclude from board) — 점퍼 선 끝 (1핀 ×2),,,W607 다른 끝 (같은 점퍼)
 SCH-06,CU,X604,2.54 3핀 (동봉선),화면 동봉 전원선 W608의 2.54 3핀 하우징 (A605에 들어 있음),1,1,1,,"Connector_Generic:Conn_01x03 (1 = 빨강 5 V, 2 = 빈 칸 NC, 3 = 검정 GND)",보드 밖 (Exclude from board) — 동봉 전원선 끝,v4touch,A605와 함께,A605 화면에 동봉된 전원선
 SCH-06,CU,P604,MX1.25 2핀,"W608 다른 끝 — MX1.25 2핀 플러그 (X604와 같은 선, 따로 사지 않음)",1,1,1,,"Connector_Generic:Conn_01x02 (1 = 5 V, 2 = GND — 우리 번호, 빨강 = 1)",보드 밖 (Exclude from board) — 동봉 전원선 끝,,,W608 다른 끝 (동봉선)
-SCH-06,CU,A605,Waveshare 7-DSI-TOUCH-C,"Waveshare 7-DSI-TOUCH-C 7인치 DSI 정전식 터치 1024×600 IPS (약 2.15 W, 동봉: 전원선 MX1.25 2핀 → 2.54 3핀, 22핀 200 mm 리본 2)",1,1,1,,"Toccata:Waveshare_7-DSI-TOUCH-C (1 = 5V, 2 = GND: MX1.25 2핀. DSI 22핀은 선 목록 W605)",보드 밖 (Exclude from board) — 화면 모듈,v4touch,G마켓 해외직구 4783965807,가진 것
+SCH-06,CU,A605,Waveshare 7-DSI-TOUCH-C,"Waveshare 7-DSI-TOUCH-C 7인치 DSI 정전식 터치 1024×600 IPS (약 2.15 W, 동봉: 전원선 MX1.25 2핀 → 2.54 3핀, 22핀 200 mm 리본 2)",1,1,1,,"Toccata:Waveshare_7-DSI-TOUCH-C (1 = 5V, 2 = GND: MX1.25 2핀. DSI 22핀은 선 목록 W605)",보드 밖 (Exclude from board) — 화면 모듈,v4touch,G마켓 해외직구 4783965807,사비 구매 · AliExpress
 SCH-07,CU,A701,Apple USB-C → 3.5 mm (MW2Q3),Apple USB-C → 3.5 mm 헤드폰 어댑터 MW2Q3KH/A,1,1,1,,"Toccata:USB_Audio_Dongle (T, R, S)",보드 밖 (Exclude from board),L51,쿠팡 (Apple 정품),학교 지원 구매 · 쿠팡
 SCH-07,CU,P701,W701 플러그,Plug_TRS,1,1,1,,Connector_Audio:AudioPlug3,보드 밖 (Exclude from board),,,케이블 끝 플러그 (선과 함께)
 SCH-07,"J701 (볼 포켓, 기판 없음)",J701,PJ-313 헤드폰 잭,"GEC PJ-313 3.5 mm 스테레오 잭 (5핀 T·TN·R·RN·S, 노멀 접점, PCB형)",1,1,1,,"Connector_Audio:AudioJack3_SwitchTR (핀 번호 = T, TN, R, RN, S)",직접 만듦 Toccata:Jack_3.5mm_PJ-313 — 패드 이름을 T/TN/R/RN/S로 (통전 검사로 확인),L15,디바이스마트 2674,학교 지원 구매 · 디바이스마트
@@ -110,7 +110,7 @@ SCH-07,J702 기판,R701,1k,"탄소피막 1/4 W 5 % 1 kΩ (리드형, 갈·검·�
 SCH-07,J702 기판,C703,1µ,리드형 적층 세라믹 1 µF 50 V X7R (몸통 105),1,1,1,,Device:C,Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm (리드 간격 실측),L56,아이씨뱅큐 P014159115,학교 지원 구매 · 아이씨뱅큐
 SCH-07,J702 기판,C704,1µ,리드형 적층 세라믹 1 µF 50 V X7R (몸통 105),1,1,1,,Device:C,Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm (리드 간격 실측),L56,아이씨뱅큐 P014159115,학교 지원 구매 · 아이씨뱅큐
 SCH-07,J702 기판,R702,1k,"탄소피막 1/4 W 5 % 1 kΩ (리드형, 갈·검·빨·금)",1,1,1,,Device:R,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,L29,사용자 보유 (ABCO CFR 같은 값),가진 것
-SCH-07,CU,A702,XH-A232 (HW-404),XH-A232 (HW-404) TPA3110 2 × 15 W 앰프 보드 (12.8 V에서 약 8 W/ch),1,1,1,,"Toccata:XH-A232 (1 L, 2 G, 3 R, 4 VCC, 5 GND, 6 L+, 7 L−, 8 R+, 9 R−)",보드 밖 (Exclude from board),L53,아이씨뱅큐 P017179248,가진 것
+SCH-07,CU,A702,HW-720 (사용자 보유),"HW-720 앰프 보드 (XH-M312 V4 배치, TPA3118D2, 66 × 53) — 전원 DC 5.5×2.1 잭(밑에서 잭 다리에 납땜), 입력 XH 3P INR·GND·INL, 출력 5 mm 2P 나사 단자 OUTL·OUTR (BTL), 볼륨 노브(빼서 보관); 12.8 V·8 Ω에서 약 8 W/ch",1,1,1,,"Toccata:HW-720 (XH 3P: 1 INR, 2 GND, 3 INL · DC 잭: 4 DC+ 가운데, 5 DC− 슬리브 · 단자: 6 OUTL+, 7 OUTL−, 8 OUTR+, 9 OUTR−)",보드 밖 (Exclude from board),L53,사용자 보유 (사지 않음),가진 것
 SCH-07,CU,X703,XT60 수 SPK,"AMASS XT60-M 16 AWG 10 cm (앰프 쪽 스피커 리드, 파랑 수축 + SPK)",1,1,1,,"Connector:Conn_01x02_Pin (1 = −, 2 = +)","Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical (패드 1 = −, 실물 표시로 확인) · 보드 밖 (Exclude from board) — 앰프 쪽 스피커 리드",L80,엘레파츠 12779718,가진 것
 SCH-07,CU,X704,XT60 암 SPK,"AMASS XT60-F 16 AWG 10 cm (스피커 꼬리선, 파랑 수축 + SPK)",1,1,1,,"Connector:Conn_01x02_Socket (1 = −, 2 = +)","Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical (패드 1 = −, 실물 표시로 확인) · 보드 밖 (Exclude from board) — 스피커 피그테일",L81,엘레파츠 12779719,가진 것
 SCH-07,CU,LS701,CW-100B25 8 Ω (왼쪽),삼미 CW-100B25 4인치 8 Ω 25 W,1,1,1,,Device:Speaker (핀 1 = +),보드 밖 (Exclude from board),L07,쿠팡,학교 지원 구매 · 쿠팡
@@ -126,7 +126,7 @@ SCH-05,J501 조각,PCB-J501,25 × 24 (9 × 9 구멍),"양면 만능기판 12 × 
 SCH-05,PS,PCB-PS,7 × 5 구멍 (17.78 × 12.7),"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",1,1,1,12 × 18 자투리,—,로컬 구멍·배선 BRD-07,L22,메카솔루션 540645,가진 것
 SCH-07,J702 기판,PCB-J702,30 × 25 (12 × 10 구멍),"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",1,1,1,12 × 18 기판 자투리,—,"x505~535 × y255~280, 나사 Ø3.2 (508, 258)·(532, 277), 구멍·배선 BRD-07",L22,메카솔루션 540645,가진 것
 SCH-06,CU,A604,NEXTU 710U3,"NEXTU 710U3 유전원 USB 허브 (10포트, 5 V DC 입력)",1,1,1,,—,보드 밖 (Exclude from board) — 허브 (SCH-01 블록),L17,다나와,가진 것
-SCH-07,CU,X701,IH190 젠더,Coms IH190 USB-C(F) → USB-A(M) ㄱ자 젠더,1,1,1,,—,보드 밖 (Exclude from board) — 동글 → Pi USB-A,L52,엘레파츠 11043038,가진 것
+SCH-07,CU,X701,일자 젠더,"USB-C(F) → USB-A(M) 일자 젠더 — 짧은형, 포트 밖 26.5 mm 이하 (CAD 14; 치수 미공개라 받으면 잼)",1,1,1,,—,보드 밖 (Exclude from board) — 동글 → Pi USB-A,L52,미정 — 예: 디바이스마트 Coms IF353 / BT781,가진 것
 SCH-01,CU,W201~W208,USB-A → C 1 m ×2 · 0.5 m ×6,"USB-A → C 데이터선 — Coms NA993 1 m ×2 (W201·W202), Coms HB466 50 cm ×6 (W203~W208; W205·W206은 CAD 0.3 m 자리라 남는 선을 묶음) (C 쪽 몰드 ≤ 12.5 × 7.6 × 25)",8,1,8,W201·W202 1 m · W203·W204·W205·W206·W207 0.5 m · W208 0.5 m,—,보드 밖 (Exclude from board) — 선,C04,엘레파츠 4313490 · 12185313 (사비),사비 구매 · 엘레파츠
 SCH-01,CU,W209,USB-A → B 25 cm,Coms NA977 USB-A(상향 꺾임) → B 25 cm (허브 업스트림),1,1,1,,—,보드 밖 (Exclude from board) — 선,C25,엘레파츠 4314354,가진 것
 SCH-06,CU,W605,FFC 22P 300 B형,GUOCONN 0.5*22P*300*B FFC 22핀 0.5 mm 300 mm 반대면(B형),1,1,1,A형은 보험 (같은 수),—,보드 밖 (Exclude from board) — 선,v4touch,엘레파츠 18622271,가진 것

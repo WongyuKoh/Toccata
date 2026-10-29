@@ -1232,7 +1232,7 @@ def sheet_E06(M, Hh):
     for f in fc:
         v.centre_mark(f[0], f[1], 2.0)
     sh.chk("고무발 가운데 x (가운데 유닛 가운데)", [f for f in fc if abs(f[0] - 611) < 1][0][0], body.L2["feet"]["positions_xy"]["centre"][1][0], "spec feet.positions_xy")
-    co = callouts_for(v, vis, [(r"FOOT-\d+$", "고무발 28×5 ×%d (8호 13 나사; 배터리 홈 밑 %d개는 MS 폴리머)" % (len(fs), len(body.GLUED_FEET))), ("CU-PLY-BOTTOM", "가운데 유닛 아랫판 (흡기 Ø8)"),
+    co = callouts_for(v, vis, [(r"FOOT-\d+$", "고무발 28×5 ×%d (8호 13 나사)" % len(fs)), ("CU-PLY-BOTTOM", "가운데 유닛 아랫판 (흡기 Ø8)"),
                                ("SPKL-PLY-BOTTOM", "스피커 L 아랫판"), ("SPKR-PLY-BOTTOM", "스피커 R 아랫판"), (r"O\d-EVA$", "모듈 EVA 3T"),
                                (r"SPK[LR]-DUCTFORMER$", "케이블 통로 (밑이 열림, 책상이 바닥)"), (r"BRK2-[LR]$", "방진 브래킷"),
                                ("EL-EVA", "끝 부속 EVA"), (r"O\d-C-USB$", "모듈 USB-C 선 (통로 안)")])
@@ -1262,8 +1262,7 @@ def sheet_E06(M, Hh):
             rows.append(("강압 컨버터 밑 " if key == "buck" else "Pi 5 밑 ") + t)
     sh.chk("아랫판 흡기 구멍 수", len(hs), len(body.BOT_HOLES_BUCK) + len(body.BOT_HOLES_PI), "body.BOT_HOLES_BUCK + BOT_HOLES_PI")
     rows.append("고무발 28×5 중심 (x, y): " + " · ".join("(%s, %s)" % (fnum(f[0]), fnum(f[1])) for f in fc))
-    rows.append("발 나사 8호 13 mm (머리 자리 Ø%s × 깊이 %s, 끝이 판 윗면 1.5 아래) - 배터리 홈 밑 %s는 나사 없이 MS 폴리머"
-                % (fnum(body.FOOT_SEAT[0]), fnum(body.FOOT_SEAT[1]), " · ".join("(%s, %s)" % (fnum(x), fnum(y)) for (x, y) in body.GLUED_FEET)))
+    rows.append("발 나사 8호 13 mm (머리 자리 Ø%s × 깊이 %s, 끝이 판 윗면 1.5 아래)" % (fnum(body.FOOT_SEAT[0]), fnum(body.FOOT_SEAT[1])))
     ords_h(sh, v2, sorted(xo), 1, gap=2.0)
     ords_v(sh, v2, sorted(yo), 1, gap=1.0)
     D.notes_box(sh, 16, b1 + 22.0, 330, "아랫면 구멍과 발 (판 단면에서 잼, 중심 (x, y))", rows, size=T_SMALL - 0.2)
@@ -1569,7 +1568,7 @@ def sheet_I02(M, Hh):
         zs += [b[2], b[5]]
     ords_v(sh, v2, zs, -1, gap=2.0)
     co = callouts_for(v2, item_map(cut), [("BAT-LFP", "LiFePO4 12.8 V 6 Ah"), ("CU-BATFRAME", "배터리 틀"), ("CU-E-BUCK", "XL4016 강압"),
-                                         ("CU-E-PI5", "Pi 5"), ("PB-E-HUB", "USB 허브"), ("CU-E-AMP", "TPA3110 앰프"), ("PR-HUBSHELF", "허브 위 선반"),
+                                         ("CU-E-PI5", "Pi 5"), ("PB-E-HUB", "USB 허브"), ("CU-E-AMP", "HW-720 앰프"), ("PR-HUBSHELF", "허브 위 선반"),
                                          ("CU-PLY-BOTTOM", "아랫판 오꾸메"), ("CU-PLY-END-L", "끝벽 L (출력)"), ("CU-PLY-END-R", "끝벽 R (출력)"),
                                          (r"FOOT-\d+$", "고무발"), ("CU-E-PEDBOARD", "PED 기판")])
     sh.callouts_h(co, b1 + 12.0, 1, a0, a1, size=T_SMALL)

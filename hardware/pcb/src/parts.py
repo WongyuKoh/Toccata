@@ -58,10 +58,11 @@ def mux_pin(name):
 # Rev D (2026-10-07): the HUSB238 PD trigger (A601) is gone; power comes from BT601, a LiFePO4 pack with an XT60 lead.
 # XL4016 buck module (XH-M401): screw terminals
 BUCK = [(1, "IN+"), (2, "IN-"), (3, "OUT+"), (4, "OUT-")]
-# XH-A232 (HW-404) TPA3110 amp board
-AMP_IN = [(1, "L"), (2, "G"), (3, "R")]
-AMP_PWR = [(4, "VCC"), (5, "GND")]
-AMP_OUT = [(6, "L+"), (7, "L-"), (8, "R+"), (9, "R-")]   # silkscreen order along the top edge
+# HW-720 (XH-M312 V4 layout, TPA3118D2) amp board, the user's own (△32, 2026-10-26): XH 3P input in silkscreen order, DC 5.5x2.1 jack,
+# two 2P 5 mm screw terminals OUTL / OUTR (+ / - per the silkscreen - check on the board)
+AMP_IN = [(1, "INR"), (2, "GND"), (3, "INL")]
+AMP_PWR = [(4, "DC+"), (5, "DC-")]
+AMP_OUT = [(6, "OUTL+"), (7, "OUTL-"), (8, "OUTR+"), (9, "OUTR-")]
 
 # BOM codes = the "code" column of the FINAL purchase data (hardware/bom/final-bom/data.json, plan C 2026-10-08).
 # (code, description, where it comes from). The purchase STATE (학교 / 사비 / 보유) is read by purchase.py.
@@ -91,7 +92,9 @@ BOM = {
     "PEDAL": ("L43", "듀로 서스테인 페달 (스위치형 → 홀센서 개조)", "피아노모아"),
     "MAG5": ("L21", "네오디뮴 Ø5×2 N35 (센서 자석)", "대건상사 (dgmagnet)"),
     # power (R33, 2026-10-07)
-    "BATT": ("u01", "Turmera LiFePO4 12.8 V 4S1P 32700 (계산 6 Ah · 76.8 Wh), BMS 4S 40 A, 출력 XT60 암 리드 + DC 5.5×2.1 충전 리드, 140 × 72 × 35 mm", "사용자 구매 (쿠팡)"),
+    # 2026-10-26: same 4S1P 32700 form, leads and size as the 10/7 pack, bought as the '12.8V 10Ah DCXT60-3A' set (3 A charger included)
+    "BATT": ("u01", "LiFePO4 12.8 V 4S1P 32700 '12.8V 10Ah DCXT60-3A' 세트 (표기 10 Ah, 계산 6 Ah · 76.8 Wh), BMS 4S 40 A, 출력 XT60 암 리드 + DC 5.5×2.1 충전 리드, "
+                    "3 A LiFePO4 충전기 포함 (DC 5.5×2.1), 140 × 35 × 72 mm (눕혀 140 × 72 × 35), 약 0.9 kg", "사용자 구매 (쿠팡 9669099122 옵션 04)"),
     "XT60F": ("", "AMASS XT60 암 — BT601 팩 리드 끝에 달려 옴 (따로 사지 않음)", "BT601과 함께"),
     "XT60M": ("L80", "AMASS XT60-M 16 AWG 실리콘 선 10 cm — W601 전지 하네스 (리드 %d mm로 자름 + 홀더 꼬리 %d mm, 이은 전체 %d mm 이하, 빨강 수축)"
               % (_HN.LEAD_W601, _HN.STUB12, _HN.W601_MAX), "엘레파츠 12779718"),
@@ -101,14 +104,17 @@ BOM = {
     "SW": ("u03", "KCD1-104 로커 스위치 (4핀 2회로 ON-OFF, 패널 구멍 19 × 13, 두 회로 나란히)", "사용자 보유 (디바이스마트 1788과 같은 품번)"),
     "BUCK": ("L58", "XL4016 강압 모듈 XH-M401 (HAM6415) → 5.1 V", "아이씨뱅큐 P017179502"),
     "C24": ("C24", "Coms BT663 USB-A → C 측면 꺾임 20 cm (A 끝을 잘라 빨강·검정을 강압 출력에)", "엘레파츠 8105815"),
-    "HUBDC": ("L17 부속", "허브 5 V 어댑터 선의 플러그 쪽 (곧은 플러그는 잭 면에서 32 mm 이하일 때만, 아니면 ㄱ자 DC 플러그 선)", "허브와 함께"),
+    "HUBDC": ("L17 부속", "허브 5 V 어댑터 선의 플러그 쪽 — 딸린 일자 DC 플러그 그대로 (잭 면 → 부트 끝 %.0f mm 이하, CAD 30; 바로 뒤에서 선을 R5로 위로)"
+              % _HN.HUB_DC_MAX, "허브와 함께"),
     "PI5": ("L01", "Raspberry Pi 5 2GB", "아이씨뱅큐 P016286897"),
     "HUB": ("L17", "NEXTU 710U3 유전원 USB 허브 (10포트, 5 V DC 입력)", "다나와"),
     "USBAC": ("C04", "USB-A → C 데이터선 — Coms NA993 1 m ×2 (W201·W202), Coms HB466 50 cm ×6 (W203~W208; W205·W206은 CAD 0.3 m 자리라 남는 선을 묶음) (C 쪽 몰드 ≤ 12.5 × 7.6 × 25)", "엘레파츠 4313490 · 12185313 (사비)"),
     "C25": ("C25", "Coms NA977 USB-A(상향 꺾임) → B 25 cm (허브 업스트림)", "엘레파츠 4314354"),
     "DONGLE": ("L51", "Apple USB-C → 3.5 mm 헤드폰 어댑터 MW2Q3KH/A", "쿠팡 (Apple 정품)"),
-    "GENDER": ("L52", "Coms IH190 USB-C(F) → USB-A(M) ㄱ자 젠더", "엘레파츠 11043038"),
-    "AMP": ("L53", "XH-A232 (HW-404) TPA3110 2 × 15 W 앰프 보드 (12.8 V에서 약 8 W/ch)", "아이씨뱅큐 P017179248"),
+    "GENDER": ("L52", "USB-C(F) → USB-A(M) 일자 젠더 — 짧은형, 포트 밖 %.1f mm 이하 (CAD 14; 치수 미공개라 받으면 잼)" % _HN.GENDER_MAX,
+               "미정 — 예: 디바이스마트 Coms IF353 / BT781"),
+    "AMP": ("L53", "HW-720 앰프 보드 (XH-M312 V4 배치, TPA3118D2, 66 × 53) — 전원 DC 5.5×2.1 잭(밑에서 잭 다리에 납땜), 입력 XH 3P INR·GND·INL, "
+                   "출력 5 mm 2P 나사 단자 OUTL·OUTR (BTL), 볼륨 노브(빼서 보관); 12.8 V·8 Ω에서 약 8 W/ch", "사용자 보유 (사지 않음)"),
     # △18 (2026-10-07): speaker joints use the same XT60 as the battery -> L80 ×3 (W601 + 2), L81 ×3 (bench adapter + 2)
     "XT60M_SPK": ("L80", "AMASS XT60-M 16 AWG 10 cm (앰프 쪽 스피커 리드, 파랑 수축 + SPK)", "엘레파츠 12779718"),
     "XT60F_SPK": ("L81", "AMASS XT60-F 16 AWG 10 cm (스피커 꼬리선, 파랑 수축 + SPK)", "엘레파츠 12779719"),

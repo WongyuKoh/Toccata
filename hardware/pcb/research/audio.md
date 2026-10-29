@@ -2,6 +2,8 @@
 
 > **2026-10-07 개정 D (△17):** 앰프 PVCC가 20 V에서 LiFePO4 전지 버스 12.8 V(10.0~14.6 V)로 바뀌었습니다. 8 Ω에서 1 % THD 약 8 W/ch(20 V 때 약 20 W), 최대 출력 입력 약 0.13 Vrms, 음량 상한은 약 4 dB 낮춥니다 — 계산은 `power.md` 0.3. 아래 20 V 수치는 조사 당시 기록입니다.
 
+> **2026-10-26 △32:** 앰프 A702가 XH-A232에서 사용자가 가진 **HW-720**(XH-M312 V4 배치, TPA3118D2, DC 5.5×2.1 잭, XH 3P 입력 INR·GND·INL, 나사 단자 OUTL·OUTR, 볼륨 노브)으로 바뀌었습니다. 이득은 미공개(보드 저항)라 아래 XH-A232의 36 dB·입력 9 kΩ·0.13 Vrms 수치와 이득 확인 절차는 더 이상 쓰지 않습니다 — 회로는 `README.md` △32, SCH-07 주 3·4. 아래는 조사 당시 기록입니다.
+
 Research date 2026-09-28. Scope: XH-A232 amp, PJ-313 jack, Apple USB-C dongle, XT30U, CW-100B25, and the 80 Hz input HPF.
 Confidence: **H** = primary source (datasheet or clear photo), **M** = consistent secondary sources, **L** = inference only. Nothing in the repo was edited.
 

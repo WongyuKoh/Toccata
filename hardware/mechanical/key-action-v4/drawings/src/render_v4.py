@@ -1107,13 +1107,13 @@ def sheet_plan():
         for g in plan_all("torsion spring groove"):
             hpoly(v, [tuple(q) for q in g["poly"]], "void")
     # ---- keys (black keys reach above the cut: section; white keys below it: seen)
-    for nm in WHITE:
-        hpoly(v, ppoly(f"key {nm} body"), "m-key")
+    for nm in WHITE:                        # CAD A11: front corners rounded as printed
+        hpoly(v, kit.round_front(ppoly(f"key {nm} body"), kit.KEY_R["white"]), "m-key")
     for nm in BLACK:
-        hpoly(v, ppoly(f"key {nm} body"), "m-black")
+        hpoly(v, kit.round_front(ppoly(f"key {nm} body"), kit.KEY_R["black_low"]), "m-black")
         sk = part(f"key {nm}", "skin")
         y0, y1, _, _ = bbox(pts(sk))
-        v.poly(rect(sk["x"][0], sk["x"][1], y0, y1), cls="faint")
+        v.poly(kit.round_front(rect(sk["x"][0], sk["x"][1], y0, y1), kit.KEY_R["black"]), cls="faint")
     for p in fixed():                       # curtain strip (cut; above the white keys) segments reaching below the cut (white-key x only)
         if p["part"] == "cover curtain":
             z0, z1 = z_range(p)
@@ -1264,7 +1264,8 @@ def sheet_plan():
     scalebar(v, 200.0, -40.5, 20)
     base = os.path.join(OUT, "d03_octave_plan")
     page([[v]], base, f"도면 3. 옥타브 모듈 평면도 (C~B, z{F(zc)} 평면 단면)",
-         "x = 0 C 왼쪽 명목 경계, y = 0 백건 앞끝 · 단위 mm · 숫자 = geometry.json plan·dims (괄호 = 치수표 번호) · 레버·핀·패드 바 x는 위, y 좌표는 왼쪽")
+         "x = 0 C 왼쪽 명목 경계, y = 0 백건 앞끝 · 단위 mm · 숫자 = geometry.json plan·dims (괄호 = 치수표 번호) · 레버·핀·패드 바 x는 위, y 좌표는 왼쪽"
+         f" · 건반 앞 모서리는 출력 모양대로 둥글게 (CAD A11: 백건 R{F(kit.KEY_R['white'])}, 흑건 R{F(kit.KEY_R['black'])} / 아래 R{F(kit.KEY_R['black_low'])})")
     SHEETS.append(dict(n=3, title_ko="옥타브 모듈 평면도",
                        caption_ko=f"C~B 모듈을 z{F(zc)}(레버 윗면과 업스톱 패드 면 사이)에서 잘라 위에서 본 평면. 건반·레버(캐리어 + 윗 립 사이 강철)·핀·보스·뒷벽(스프링 다리 홈)·가림판 띠는 실선, "
                                   "윗판·패드 바 4개·업스톱 패드 12개는 보라 가상선(r4: 레일·손나사·위치 핀 없음), 밸런스 레일·봉 받침·센서 바·캡스턴·자석·핀·리브는 파란 숨은선, "
@@ -1878,7 +1879,9 @@ def key_part_sheet(black):
                 continue
             y0, y1, _, _ = bbox(pts(p))
             w2.poly(rect(y0, y1, T(p["x"][1]), T(p["x"][0])), cls="m-lead" if p["part"].startswith("mass") else "faintfill")
-        sk = [rect(bbox(pts(p))[0], bbox(pts(p))[1], T(p["x"][1]), T(p["x"][0])) for p in kparts if p["part"] in order]
+        rf_ = kit.KEY_R["black" if black else "white"]                          # CAD A11: rounded front corners
+        sk = [(kit.round_front if p["part"] in ("skin head", "skin") else lambda q, r, axis: q)(
+              rect(bbox(pts(p))[0], bbox(pts(p))[1], T(p["x"][1]), T(p["x"][0])), rf_, axis=0) for p in kparts if p["part"] in order]
         stroke_rings(w2, union_rings(sk, res=0.03), "out")
         c = pcirc(f"{key} capstan")
         w2.circle(c[1], T(c[0]), c[2], cls="m-steel")
@@ -1992,7 +1995,10 @@ def key_part_sheet(black):
     lb = _labels()
     title = f"도면 {n_sheet}. {'흑건' if black else '백건'} 부품도 — {nm} 기준 ({len(names)}종)"
     sub = (f"PETG 한 덩어리, 윗면을 베드에 대고 뒤집어 출력 (서포트 = 숨은 빔·꼬리 밑만, DESIGN 14장) · 단위 mm · 숫자 = geometry.json · "
-           f"캡스턴 {lb['cap']} + 너트 트랩 (D02), 자석 {lb['magnet']} 압입 + CA (P29), 노치·핀 홈 부싱 천 {F(dn('D01'))}T (D01, P32)" + (" · 추 칸·납 없음 (r4, D13 삭제)" if black else ""))
+           f"캡스턴 {lb['cap']} + 너트 트랩 (D02), 자석 {lb['magnet']} 압입 + CA (P29), 노치·핀 홈 부싱 천 {F(dn('D01'))}T (D01, P32)" + (" · 추 칸·납 없음 (r4, D13 삭제)" if black else "")
+           + (f" · 출력 건반 모서리 (CAD A11): 앞 모서리 R{F(kit.KEY_R['black'])} (아래 R{F(kit.KEY_R['black_low'])}), " if black else
+              f" · 출력 건반 모서리 (CAD A11): 앞 모서리 R{F(kit.KEY_R['white'])}, ")
+           + f"드러난 윗모서리 R{F(kit.KEY_R['top'])} — 평면 투영에 그림, 단면은 설계 모델 그대로")
     base = os.path.join(OUT, f"d{n_sheet:02d}_{'black' if black else 'white'}_key_part")
     page(rows_, base, title, sub)
     SHEETS.append(dict(n=n_sheet, title_ko=f"{'흑건' if black else '백건'} 부품도",

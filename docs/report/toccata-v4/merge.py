@@ -16,6 +16,7 @@ Final structure (2026-10-08, materials bought; the page shows only the final des
                                       touchscreen / lids / service steps from cad/README.md, + module steps,
                                       key removal and adjustment from src/progress.html p-build
   check     10 검증·남은 위험         src/progress.html p-check   (남은 문제·단계 0 시험·남은 위험; 합니다체)
+  asm       11 한 옥타브 조립         src/tabs/asm/               (src/tabs/asm/build_section.py from docs/report/octave-assembly)
 
 Fragment contract (src/tabs/<id>/): section.html (one <section class="page" id="p-<id>" hidden>), style.css (scoped to
 #p-<id>), script.js (one IIFE), assets.txt (runtime files relative to this folder), meta.json.
@@ -801,8 +802,8 @@ FINAL_ONLY = True  # kept for older notes; the page has only the final structure
 FINAL_TABS = [("summary", "요약", "한눈에 보기"), ("circuit", "01", "회로도"), ("dwg", "02", "설계도"),
               ("partdwg", "03", "부품 도면·출력 파일"), ("cad", "04", "3D 모델"), ("sim", "05", "동작 시뮬레이션"),
               ("parts", "06", "부품·사용처"), ("prep", "07", "준비 체크"), ("design", "08", "건반 액션 원리"),
-              ("build", "09", "출력·조립"), ("check", "10", "검증·남은 위험")]
-FRAG_TABS = ("dwg", "partdwg", "sim", "parts", "prep")
+              ("build", "09", "출력·조립"), ("check", "10", "검증·남은 위험"), ("asm", "11", "한 옥타브 조립")]
+FRAG_TABS = ("dwg", "partdwg", "sim", "parts", "prep", "asm")
 
 # old tabs and anchors -> new ones (links in the page are rewritten; the router maps old hashes the same way)
 HASH_ALIAS = {"overview": "summary", "drawings": "dwg", "rear": "dwg", "buy": "parts", "cost": "parts",
@@ -1089,7 +1090,8 @@ def build(check=False):
     bundle_js = BUNDLE_JS.replace("__MAP__", json.dumps(bundled, ensure_ascii=False, sort_keys=True))
     scripts = [("router", bundle_js + ROUTER_JS % json.dumps(HASH_ALIAS) + NAVH_JS), ("circuit", circ["js"]),
                ("dwg", frags["dwg"]["js"]), ("partdwg", frags["partdwg"]["js"]), ("cad", cad["js"]),
-               ("sim", frags["sim"]["js"]), ("parts", frags["parts"]["js"]), ("prep", frags["prep"]["js"])]
+               ("sim", frags["sim"]["js"]), ("parts", frags["parts"]["js"]), ("prep", frags["prep"]["js"]),
+               ("asm", frags["asm"]["js"])]
     page = (HEAD + f"<style>{css}</style>\n" + header + "\n" + nav + '\n<main class="wrap">\n' + main + "\n</main>\n" + foot
             + "".join(f"\n<script>/* {name} */\n{js.strip()}\n</script>" for name, js in scripts if js.strip()) + "\n")
     out = os.path.join(HERE, "index.html")

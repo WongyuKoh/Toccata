@@ -24,6 +24,26 @@ def _cad():
 CAD = _cad()
 LEN = dict(CAD["lengths"]) if CAD else {}
 PTS = dict(CAD["points"]) if CAD else {}
+# 2026-10-26 Pi 5 9 forward (CAD spec centre.pi_move_2026_10_26): straight Pi-side gender + the hub cord's own straight DC plug
+HUB_DC_MAX = PTS.get("hub", {}).get("dc_straight_max", 37.0)          # jack face -> end of the boot (CAD models 30)
+GENDER_MAX = PTS.get("gender", {}).get("max_out", 26.5)                # straight gender outside the Pi port (CAD models 14)
+_dz = PTS.get("hp_route", {}).get("dongle_plug_zone")
+DONGLE_PLUG_MAX = round(_dz[3] - _dz[2], 1) if _dz else 30.0          # W701 plug moulding: plug zone y222 .. dongle socket front
+
+
+def _ts_numbers():
+    """touchscreen rev 3 design lengths (DSI ribbon, screen power wire), shifted with the Pi by the CAD side (shift_pi.py)."""
+    p = os.path.normpath(os.path.join(HERE, "..", "..", "mechanical", "touchscreen", "rev3", "design", "numbers.json"))
+    try:
+        with open(p, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+_TSN = _ts_numbers()
+DSI_DESIGN = (_TSN.get("ribbon", {}).get("total"), _TSN.get("ribbon", {}).get("margin"), _TSN.get("ribbon", {}).get("cable", 300.0))
+TS_PWR_DESIGN = _TSN.get("power_wire", {}).get("total")
 
 
 def L(key, default=None):
@@ -92,12 +112,27 @@ W702_PATH = L("HP-W702")                      # about 779
 W701_CUT = int(math.ceil(((W701_PATH or 905) + 20 + 50) / 50.0) * 50)            # 1000
 W707_FROM = 1500 - W701_CUT                    # the rest of the 1.5 m half behind the plug (minus the plug itself) -> W707 300
 
-# XH-A232 pads: research/audio.md 1.1 (product photo) - L+ L- R+ R- in one row on ONE edge, VCC/GND on the opposite edge, input P1 at
-# the other edge's left. The CAD (electronics.py) assumes L at the -x end and R at the +x end, so one speaker lead (and maybe the power
-# pair) is up to one board length (54 mm) longer than modelled -> 50 mm more on W602c, W703, W705 until the CAD places the pads.
-AMP_MARGIN = 50
-AMP_NOTE = ("앰프 단자 자리는 받은 보드로 확인: 스피커 L+·L−·R+·R− 4개는 한 가장자리에 한 줄, VCC·GND는 반대 가장자리(research/audio.md 1.1). "
-            "CAD는 L·R 단자를 앰프 양 끝에 두고 길이를 쟀으므로 50 mm를 더 잘랐다 — 남는 선은 앰프 옆에서 묶는다.")
+# 2026-10-26 (△32): A702 = the user's HW-720 (XH-M312 V4 layout, TPA3118D2). The CAD places its parts from the photo and the product
+# drawing: -x edge OUTL (back) / DC jack / OUTR (front), +x edge 3.5 mm jack (unused) / XH 3P input INR·GND·INL / volume pot. The leads
+# are measured to those spots, so the 50 mm XH-A232 pad allowance is gone.
+AMP_NOTE = ("앰프 단자 자리는 사진·같은 배치(XH-M312 V4) 상품 도면으로 잡은 CAD 추정 — 가진 HW-720으로 재 보고 다르면 다시 계산한다.")
+_AMP = PTS.get("amp", {})
+
+
+def _w707_path():
+    """W707 is not modelled: right-angle route (upper bound) from the J702 board's output pads (back edge, board top) to the amp's XH 3P
+    header (centre, top of the housing)."""
+    jb, a = PTS.get("j702_board", {}).get("box"), _AMP
+    if not jb or not a:
+        return None
+    u0, u1, v0, v1, h = a["boxes"]["XH"]
+    xh = (a["x0"] + (u0 + u1) / 2.0, a["y1"] - (v0 + v1) / 2.0, a["z0"] + a["pcb"][2] + h)
+    j = ((jb[0] + jb[1]) / 2.0, jb[3], jb[5])
+    return round(sum(abs(p - q) for p, q in zip(xh, j)), 1)
+
+
+W707_PATH = _w707_path()
+W707_CUT = int(math.ceil(((W707_PATH or 350) + 20 + 50) / 10.0) * 10)       # route + 20 (strip + slack) + 50 (estimate), up to 10 mm
 
 
 def H(**k):
@@ -188,22 +223,24 @@ HARNESS = [
       cond=[(1, "red", "+12V8", "2", "IN+")], path=L("PWR-BUS-BUCK"), path_src="CAD C-PWR-BUS 갈래 1",
       cut_txt=str(cut(L("PWR-BUS-BUCK"))), notes=["스위치 출력 단자 한 곳에서 W602b·W602c 두 선이 나간다."]),
     H(id="W602c", part="pwr", title="스위치 → 앰프 전원 (+ ★ → 앰프 GND)", cable="16 AWG 빨강 + 검정, 꼬아서", bom="SPKW",
-      a=("SW601-2 · ★", "빨강 = KCD1 출력, 검정 = 강압 IN− (★)"), b=("A702 VCC · GND", "앰프 전원 단자"),
-      cond=[(1, "red", "+12V8", "2", "VCC"), (2, "blk", "GND", "★", "GND")],
-      path=L("PWR-BUS-AMP"), path_src="CAD C-PWR-BUS 갈래 2 (뒤판 따라 y325 z53, x443 → 733)",
-      cut_txt="빨강 %s · 검정 %s (앰프 단자 여유 %d 포함)"
-              % (cut(L("PWR-BUS-AMP")) + AMP_MARGIN, (cut(L("PWR-BUS-AMP", 0) - 34.5 + 19.0) + AMP_MARGIN) if LEN else "약 380", AMP_MARGIN),
-      notes=["검정 선은 CAD에 따로 그려져 있지 않다(한 줄로 그림). ★에서 위로 올라가 x≈478부터 빨강을 따라간다.", AMP_NOTE]),
+      a=("SW601-2 · ★", "빨강 = KCD1 출력, 검정 = 강압 IN− (★)"), b=("A702 DC 잭 다리 (밑면)", "HW-720 DC 5.5×2.1 잭: 가운데 핀 = +, 슬리브 = −"),
+      cond=[(1, "red", "+12V8", "2", "DC+ (가운데)"), (2, "blk", "GND", "★", "DC− (슬리브)")],
+      path=L("PWR-BUS-AMP"), path_src="CAD C-PWR-BUS 갈래 2 (뒤판 따라 y325 z53, x443 → 733 → 앰프 밑 3 mm 틈 z45.35로 DC 잭 다리)",
+      cut_txt="빨강 %s · 검정 %s" % (cut(L("PWR-BUS-AMP")), cut(L("PWR-BUS-AMP", 0) - 34.5 + 19.0)) if LEN else "약 360",
+      notes=["검정 선은 CAD에 따로 그려져 있지 않다(한 줄로 그림). ★에서 위로 올라가 x≈478부터 빨강을 따라간다.",
+             "DC 플러그는 사지 않는다: 두 선을 보드 밑 3 mm 틈으로 넣어 DC 잭 다리에 납땜한다(보드를 받침에 놓기 전에). 가운데 핀 = +를 멀티미터로 확인.",
+             AMP_NOTE]),
     H(id="W603", part="pwr", title="5.1 V → Pi 5 (C24 측면 꺾임 USB-C)", cable="Coms BT663 20 cm, A 끝을 잘라 빨강·검정만", bom="C24",
       a=("A602 OUT+ · OUT−", "강압 출력 나사 단자"), b=("P601", "USB-C 측면 꺾임 → Pi 5 전원 포트"),
       cond=[(1, "red", "+5V1 (VBUS)", "OUT+", "A4"), (2, "blk", "GND", "OUT−", "A1")],
       path=L("PWR-5V-PI"), path_src="CAD C-PWR-5V 갈래 1 (선이 −x로 나오게 꽂음)", cut_txt="플러그 머리에서 약 %s mm 남기고 A 쪽을 자름 (경로 + 30~40)" % (cut(L("PWR-5V-PI"), 35) if LEN else "80"),
       notes=["데이터선(흰·초록)은 짧게 잘라 따로 수축 튜브로 막는다.", "빨강 = + 인지 멀티미터로 확인한 뒤 단자에 물린다."]),
-    H(id="W604", part="pwr", title="5.1 V → 허브 DC", cable="허브 5 V 어댑터 선의 플러그 쪽 (ㄱ자 DC 플러그)", bom="HUBDC",
+    H(id="W604", part="pwr", title="5.1 V → 허브 DC", cable="허브 5 V 어댑터 선의 플러그 쪽 (딸린 일자 DC 플러그)", bom="HUBDC",
       a=("A602 OUT+ · OUT−", "강압 출력 나사 단자 (W603과 같은 단자)"), b=("P602", "DC 플러그 → 허브 −x 끝면 잭"),
       cond=[(1, "red", "+5V1 (중심 +)", "OUT+", "중심"), (2, "blk", "GND", "OUT−", "슬리브")],
-      path=L("PWR-5V-HUB"), path_src="CAD C-PWR-5V 갈래 2 (y285 z48.5 → 허브 끝면)", cut_txt=str(cut(L("PWR-5V-HUB"))),
-      notes=["곧은 플러그는 잭 면에서 몰드 끝까지 %s mm 이하일 때만 들어간다(CAD 확인). 길면 ㄱ자 DC 플러그 선." % (PTS.get("hub", {}).get("dc_straight_max", 32)),
+      path=L("PWR-5V-HUB"), path_src="CAD C-PWR-5V 갈래 2 (y285 z48.5 → 플러그 뒤에서 R5로 내려 허브 −x 끝면 잭 축 y293 z28.5)", cut_txt=str(cut(L("PWR-5V-HUB"))),
+      notes=["딸린 일자 DC 플러그를 그대로 쓴다(ㄱ자 DC 플러그 선 필요 없음): 잭 면에서 부트 끝까지 %.0f mm 이하(CAD 30), 바로 뒤에서 선을 R5로 위로 굽힌다. "
+             "더 길면 Pi 쪽 젠더·C25 머리에 닿는다 — 받으면 잰다." % HUB_DC_MAX,
              "중심 = + 인지 멀티미터로 확인."]),
     # ------------------------------------------------------------------ audio
     H(id="W701", part="aud", title="동글 → 헤드폰 잭 (AUX 반쪽 ①)", cable="Coms BC256 3 m를 반으로 자른 1.5 m (차폐 3심)", bom="TRS15",
@@ -214,31 +251,34 @@ HARNESS = [
       cut_txt="1.5 m 반쪽을 플러그 뒤끝(선이 몰드에서 나오는 곳)에서 %.1f m로 자름 (경로 %.0f + 벗김·여유 20 + 추정 여유 50) — 남는 약 %.2f m에서 W707"
               % (W701_CUT / 1000.0, W701_PATH or 905, (W707_FROM - 40) / 1000.0),
       notes=["끝 부속 쪽 끝을 J701에 납땜, 가운데 쪽 플러그만 남긴다.", "속선 색은 플러그 팁·링과 통전으로 맞춘다.",
-             "자르기 전에 실제 경로(볼 홈 → 통로 → 동글)에 대 보고, 모자라면 W707을 다른 선에서 만든다(W701이 먼저)."]),
+             "자르기 전에 실제 경로(볼 홈 → 통로 → 동글)에 대 보고, 모자라면 W707을 다른 선에서 만든다(W701이 먼저).",
+             "동글 쪽 플러그는 몰드(플러그 끝 → 선이 나오는 곳)가 %.0f mm 이하여야 한다(플러그 자리 y222 → 동글 소켓 앞끝, 2026-10-26 Pi 9 mm 앞으로)." % DONGLE_PLUG_MAX]),
     H(id="W702", part="aud", title="헤드폰 잭 노멀 → 앰프 입력 잭 (AUX 반쪽 ②)", cable="BC256 반쪽 1.5 m", bom="TRS15",
       a=("J701", "PJ-313 TN · RN · S"), b=("P702", "3.5 mm 플러그 → J702"),
       cond=[(1, "wht", "HP_TN_L (팁)", "TN", "T"), (2, "red", "HP_RN_R (링)", "RN", "R"), (3, "shd", "AGND (슬리브)", "S", "S")],
       path=W702_PATH, path_src="CAD 경로(직각, 위쪽 어림): J701 다리 → 볼 홈 → 통로 바닥 y222 → x520 → J702 플러그 뒤끝 y222 z25.6 = %.0f mm" % (W702_PATH or 779),
       cut_txt="1.5 m 반쪽 그대로 (남는 약 %.1f m는 통로에서 묶음)" % ((1460 - (W702_PATH or 779)) / 1000.0),
       notes=["헤드폰을 꽂으면 TN·RN이 떨어져 앰프 입력이 끊긴다(R15)."]),
-    H(id="W707", part="aud", title="J702 기판 → 앰프 입력 (L · G · R)", cable="W701을 자르고 남는 약 %.2f m 차폐 3심에서 300" % ((W707_FROM - 40) / 1000.0), bom="TRS15",
-      a=("J702 기판", "AMP_IN_L · AGND · AMP_IN_R 패드"), b=("A702 IN", "앰프 입력 L · G · R"),
-      cond=[(1, "wht", "AMP_IN_L", "L", "1 L"), (2, "shd", "AGND", "G", "2 G"), (3, "red", "AMP_IN_R", "R", "3 R")],
-      path=None, path_src="추정: J702 기판(x520 y268) → 앰프 입력 P1, 직선 약 226 (P1 자리 = 받은 보드)",
-      cut_txt="약 300 (W701 자른 나머지에서; 앰프 입력 P1 자리는 받은 보드로 확인)",
-      notes=["SCH-07의 AMP_IN_L/R·AGND를 잇는 선(rev E에서 선 번호를 줌).", "차폐(AGND)는 앰프 IN G 한쪽에서만 GND와 만난다(△10)."]),
-    H(id="W703", part="aud", title="앰프 L± → XT60 수 SPK (L)", cable="16 AWG 2심 (18 AWG도 됨) + XT60-M 리드 100", bom="SPKW · XT60M_SPK",
-      a=("A702 L+ · L−", "앰프 스피커 단자 L+·L− (받은 보드로 자리 확인)"), b=("X703", "XT60 수 SPK → 끝벽 집게 L"),
-      cond=[(1, "red", "SPK_L_P", "L+", "2 (+)"), (2, "blk", "SPK_L_N", "L−", "1 (−)")],
-      path=L("SPK-L"), path_src="CAD C-SPK-L (뒤 줄 y328.5 → 끝벽 L을 따라 앞으로, 끝 100은 XT60 리드)",
-      cut_txt="앰프 선 %s (앰프 단자 여유 %d 포함) + XT60 리드 100 그대로" % ((cut(L("SPK-L", 0) - 100) + AMP_MARGIN) if LEN else "약 580", AMP_MARGIN),
+    H(id="W707", part="aud", title="J702 기판 → 앰프 XH 입력 (INL · GND · INR)", cable="W701을 자르고 남는 약 %.2f m 차폐 3심에서 %d" % ((W707_FROM - 40) / 1000.0, W707_CUT),
+      bom="TRS15",
+      a=("J702 기판", "AMP_IN_L · AGND · AMP_IN_R 패드"), b=("A702 XH 3P", "앰프 오른쪽(+x) 끝 XH 3핀 INR · GND · INL — XH 3P 하우징 또는 핀에 납땜"),
+      cond=[(1, "wht", "AMP_IN_L", "L", "3 INL"), (2, "shd", "AGND", "G", "2 GND"), (3, "red", "AMP_IN_R", "R", "1 INR")],
+      path=W707_PATH, path_src="추정(CAD에 선 없음, 직각 = 위쪽 어림): J702 출력 패드 → 앰프 XH 3P(x809 y307) = %.0f mm" % (W707_PATH or 350),
+      cut_txt="%d (W701 나머지 %.2f m에서, 경로 + 70)" % (W707_CUT, (W707_FROM - 40) / 1000.0),
+      notes=["SCH-07의 AMP_IN_L/R·AGND를 잇는 선(rev E에서 선 번호를 줌).", "차폐(AGND)는 앰프 XH GND 한쪽에서만 GND와 만난다(△10).",
+             "XH 핀 순서 INR · GND · INL은 보드 실크 — L·R이 J702 패드 순서와 반대이니 바꿔 꽂지 않게 표시한다."]),
+    H(id="W703", part="aud", title="앰프 OUTL → XT60 수 SPK (L)", cable="16 AWG 2심 (18 AWG도 됨) + XT60-M 리드 100", bom="SPKW · XT60M_SPK",
+      a=("A702 OUTL", "앰프 왼쪽(−x) 끝 뒤 나사 단자 OUTL (+ · −는 실크로 확인)"), b=("X703", "XT60 수 SPK → 끝벽 집게 L"),
+      cond=[(1, "red", "SPK_L_P", "OUTL+", "2 (+)"), (2, "blk", "SPK_L_N", "OUTL−", "1 (−)")],
+      path=L("SPK-L"), path_src="CAD C-SPK-L (OUTL에서 −x → 뒤 줄 y328.5 → 끝벽 L을 따라 앞으로, 끝 100은 XT60 리드)",
+      cut_txt="앰프 선 %s + XT60 리드 100 그대로" % (cut(L("SPK-L", 0) - 100) if LEN else "약 530"),
       shrink="파랑 + ‘SPK’",
       splices=[("S-L", "앰프 선 ↔ XT60-M 16 AWG 리드")], notes=["쌍마다 꼬고 리본·EXT 선에서 30 mm 이상 떨어뜨린다(D14).", AMP_NOTE]),
-    H(id="W705", part="aud", title="앰프 R± → XT60 수 SPK (R)", cable="16 AWG 2심 짧은 토막 + XT60-M 리드 100", bom="SPKW · XT60M_SPK",
-      a=("A702 R+ · R−", "앰프 스피커 단자 R+·R− (받은 보드로 자리 확인)"), b=("X705", "XT60 수 SPK → 끝벽 집게 R"),
-      cond=[(1, "red", "SPK_R_P", "R+", "2 (+)"), (2, "blk", "SPK_R_N", "R−", "1 (−)")],
-      path=L("SPK-R"), path_src="CAD C-SPK-R (선반 위 y293 z49.5)",
-      cut_txt="앰프 선 %s (앰프 단자 여유 %d 포함) + XT60 리드 100" % ((cut(L("SPK-R", 0) - 100) + AMP_MARGIN) if LEN else "90", AMP_MARGIN),
+    H(id="W705", part="aud", title="앰프 OUTR → XT60 수 SPK (R)", cable="16 AWG 2심 (18 AWG도 됨) + XT60-M 리드 100", bom="SPKW · XT60M_SPK",
+      a=("A702 OUTR", "앰프 왼쪽(−x) 끝 앞 나사 단자 OUTR (+ · −는 실크로 확인)"), b=("X705", "XT60 수 SPK → 끝벽 집게 R"),
+      cond=[(1, "red", "SPK_R_P", "OUTR+", "2 (+)"), (2, "blk", "SPK_R_N", "OUTR−", "1 (−)")],
+      path=L("SPK-R"), path_src="CAD C-SPK-R (OUTR에서 −x → x738에서 앞 줄 y274.5 z48.5로 내려 +x → XT60 수 R)",
+      cut_txt="앰프 선 %s + XT60 리드 100" % (cut(L("SPK-R", 0) - 100) if LEN else "약 130"),
       shrink="파랑 + ‘SPK’", splices=[("S-R", "앰프 선 ↔ XT60-M 리드")], notes=["좌우 같은 방향(+ = 빨강)으로 납땜해 위상을 맞춘다.", AMP_NOTE]),
     H(id="W704", part="aud", title="스피커 꼬리선 L (XT60 암 SPK)", cable="XT60-F 16 AWG 리드 100 + 상자 안 짧은 선", bom="XT60F_SPK · SPKW",
       a=("X704", "XT60 암 SPK (끝벽 집게 L 안)"), b=("LS701", "CW-100B25 단자 + · −"),
@@ -264,7 +304,8 @@ HARNESS = [
     H(id="W608", part="ts", title="화면 동봉 전원선", cable="Waveshare 동봉 MX1.25 2핀 → 2.54 3핀", bom="DPWR", kind="buy",
       a=("X604", "2.54 3핀 하우징 (1 빨강 · 2 빈 칸 · 3 검정)"), b=("P604", "MX1.25 2핀 → 화면 A605"),
       cond=[(1, "red", "+5V_PI", "1", "1"), (2, "blk", "GND", "3", "2")], path=L("TS_POWER"),
-      path_src="CAD TS-C-PWR (화면 MX1.25 → … → Pi 핀 2·6 전체, 있는 길이 500~550)", cut_txt="자르지 않음",
+      path_src="CAD TS-C-PWR (화면 MX1.25 → … → Pi 핀 2·6 전체, 있는 길이 500~550)" + (" · 설계 합계 %.2f (화면 rev3 numbers.json, 듀폰·여유 포함)" % TS_PWR_DESIGN if TS_PWR_DESIGN else ""),
+      cut_txt="자르지 않음",
       notes=["3핀 하우징 배열은 받은 뒤 통전 검사로 확인한 뒤 점퍼를 꽂는다."]),
 ]
 
@@ -273,9 +314,9 @@ _SHORT = {
     "W101~W107": "180 × 7", "W401": "350 + 50", "W403": "150", "W411": "300 + 50", "W413": "150", "W501": "3 m (끝만 자름)",
     "W502": "80", "W601": "리드 %d + 꼬리 %d (전체 ≤ %d)" % (LEAD_W601, STUB12, W601_MAX), "W602a": "꼬리 %d + %d" % (STUB12, W602A_16),
     "W602j": "30 × 2", "W602b": str(cut(L("PWR-BUS-BUCK"))),
-    "W602c": "%s / %s" % (cut(L("PWR-BUS-AMP")) + AMP_MARGIN, cut(L("PWR-BUS-AMP", 0) - 34.5 + 19.0) + AMP_MARGIN),
-    "W603": "%s 남김" % cut(L("PWR-5V-PI"), 35), "W604": str(cut(L("PWR-5V-HUB"))), "W701": "%.1f m (플러그 뒤)" % (W701_CUT / 1000.0), "W702": "1.5 m", "W707": "약 300",
-    "W703": "%s + 리드 100" % (cut(L("SPK-L", 0) - 100) + AMP_MARGIN), "W705": "%s + 리드 100" % (cut(L("SPK-R", 0) - 100) + AMP_MARGIN),
+    "W602c": "%s / %s" % (cut(L("PWR-BUS-AMP")), cut(L("PWR-BUS-AMP", 0) - 34.5 + 19.0)),
+    "W603": "%s 남김" % cut(L("PWR-5V-PI"), 35), "W604": str(cut(L("PWR-5V-HUB"))), "W701": "%.1f m (플러그 뒤)" % (W701_CUT / 1000.0), "W702": "1.5 m", "W707": "%d (추정)" % W707_CUT,
+    "W703": "%s + 리드 100" % cut(L("SPK-L", 0) - 100), "W705": "%s + 리드 100" % cut(L("SPK-R", 0) - 100),
     "W704": "리드 100 + %s" % cut(L("PIG-L", 0) - 100), "W706": "리드 100 + %s" % cut(L("PIG-R", 0) - 100),
     "W606": "20 cm", "W607": "20 cm", "W608": "동봉",
 } if LEN else {}
@@ -344,9 +385,11 @@ BOUGHT += [
     dict(id="W209", part="pwr", cable="Coms NA977 USB-A(상향 꺾임) → B 25 cm (C25)", bom="C25", a="Pi 5 USB-A (GPIO 쪽 2단의 아래)",
          b="허브 업스트림 B (−x 끝면)", path="%.0f (커넥터 포함 제품 길이)" % L("UPSTREAM", 250), note="위 포트는 머리에 가려 비움"),
     dict(id="W605", part="ts", cable="GUOCONN FFC 22핀 0.5 mm 300 mm B형 (A형은 보험)", bom="FFC22B", a="Pi 5 CAM/DISP 1",
-         b="A605 DSI 22핀", path="%.1f (+ 뚜껑 밑 말아 접기 9.4 = %.1f)" % (L("DSI", 0), L("DSI_WITH_LID_ROLL", 0)), note="22심 1 ↔ 1"),
-    dict(id="X701", part="aud", cable="Coms IH190 USB-C(F) → USB-A(M) ㄱ자 젠더", bom="GENDER", a="동글 A701", b="Pi 5 USB-A (RJ45 옆 2단의 아래)",
-         path="—", note="허브를 거치지 않음 (D7)", adapter=True),
+         b="A605 DSI 22핀", path="%.1f (+ 뚜껑 밑 말아 접기 9.4 = %.1f)" % (L("DSI", 0), L("DSI_WITH_LID_ROLL", 0)),
+         note="22심 1 ↔ 1" + (" · 설계 길이 %.1f (접기·꽂힘 포함, 화면 rev3 numbers.json) → %.0f mm 선에서 여유 %.1f" % (DSI_DESIGN[0], DSI_DESIGN[2], DSI_DESIGN[1]) if DSI_DESIGN[0] else "")),
+    dict(id="X701", part="aud", cable="USB-C(F) → USB-A(M) 일자 젠더 (포트 밖 %.1f mm 이하)" % GENDER_MAX, bom="GENDER", a="동글 A701",
+         b="Pi 5 USB-A (RJ45 옆 2단의 아래)", path="—",
+         note="허브를 거치지 않음 (D7). 동글은 젠더에 곧게(+x, 허브 쪽) 꽂고, 동글 선은 머리 바로 뒤에서 바닥으로 내려 젠더 밑을 지남", adapter=True),
 ]
 
 # hub NEXTU 710U3: 10 ports, ONE of them charge-only, an ON/OFF switch per port (final_items i093). Ports 0 and 1 are left free so a

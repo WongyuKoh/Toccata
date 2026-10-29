@@ -26,7 +26,7 @@ Summary of what changed versus the brief (2026-09-28; items 1–2 are history si
 BT601 LiFePO4 12.8 V 6 Ah (76.8 Wh, BMS 내장 — 받으면 확인), 팩 리드 끝 XT60 암 = X605
   ⇄ X606 XT60 수 (W601 하네스, L80, 16 AWG 10 cm): 빨강 → F601 홀더 선, 검정 → ★ 강압 IN−
   → F601 5 A T (0218005.MXP, BU914 홀더) → SW601 KCD1-101A → +12V8 버스 (10.0~14.6 V)
-  → A602 XL4016 IN+ (5.1 V → Pi 5 · 허브 · 화면)   /   A702 XH-A232 (TPA3110) VCC
+  → A602 XL4016 IN+ (5.1 V → Pi 5 · 허브 · 화면)   /   A702 HW-720 (TPA3118D2) DC 잭 다리 (△32, 2026-10-26)
 넷: VBAT = 전지 + → XT60 → 퓨즈, VBAT_F = 퓨즈 → 스위치, +12V8 = 스위치 뒤 (전원 심볼)
 ```
 

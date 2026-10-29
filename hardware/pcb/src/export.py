@@ -63,7 +63,7 @@ KICAD = [
     ("XT60-F", None, "XT60F", "Connector:Conn_01x02_Socket (1 = −, 2 = +)", "Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical (패드 1 = −, 실물 표시로 확인) · " + EXCL + " — 팩 리드"),
     ("XT60-M", None, "XT60M", "Connector:Conn_01x02_Pin (1 = −, 2 = +)", "Connector_AMASS:AMASS_XT60-M_1x02_P7.20mm_Vertical (패드 1 = −, 실물 표시로 확인) · " + EXCL + " — W601 하네스"),
     ("XL4016_module", None, "BUCK", "Toccata:XL4016_Buck (1 IN+, 2 IN−, 3 OUT+, 4 OUT−)", EXCL),
-    ("XH-A232", None, "AMP", "Toccata:XH-A232 (1 L, 2 G, 3 R, 4 VCC, 5 GND, 6 L+, 7 L−, 8 R+, 9 R−)", EXCL),
+    ("HW-720", None, "AMP", "Toccata:HW-720 (XH 3P: 1 INR, 2 GND, 3 INL · DC 잭: 4 DC+ 가운데, 5 DC− 슬리브 · 단자: 6 OUTL+, 7 OUTL−, 8 OUTR+, 9 OUTR−)", EXCL),
     ("Apple_USB-C_dongle", None, "DONGLE", "Toccata:USB_Audio_Dongle (T, R, S)", EXCL),
     # △16 (rev C) R31 screen harness — every part is off-board (cable ends and bought modules)
     ("RPi5_Header", None, "PI5", "Toccata:RaspberryPi5 유닛 B = 40핀 헤더 (2 = 5V, 6 = GND만 그림; 4 = 5V 안 씀)", EXCL + " — Pi 5 보드"),
@@ -131,7 +131,7 @@ EXTRA = [
     ("SCH-05", "PS", "PCB-PS", "7 × 5 구멍 (17.78 × 12.7)", "PERF1218", 1, 1, "12 × 18 자투리", "—", "로컬 구멍·배선 BRD-07"),
     ("SCH-07", "J702 기판", "PCB-J702", "30 × 25 (12 × 10 구멍)", "PERF1218", 1, 1, "12 × 18 기판 자투리", "—", "x505~535 × y255~280, 나사 Ø3.2 (508, 258)·(532, 277), 구멍·배선 BRD-07"),
     ("SCH-06", "CU", "A604", "NEXTU 710U3", "HUB", 1, 1, "", "—", EXCL + " — 허브 (SCH-01 블록)"),
-    ("SCH-07", "CU", "X701", "IH190 젠더", "GENDER", 1, 1, "", "—", EXCL + " — 동글 → Pi USB-A"),
+    ("SCH-07", "CU", "X701", "일자 젠더", "GENDER", 1, 1, "", "—", EXCL + " — 동글 → Pi USB-A"),
     ("SCH-01", "CU", "W201~W208", "USB-A → C " + " · ".join("%s ×%d" % (HN.m_txt(m), sum(1 for v in HN.USB_BUY.values() if v == m))
                                                          for m in sorted(set(HN.USB_BUY.values()), reverse=True)), "USBAC", 1, 8, HN.usb_group_txt() + " · W208 " + HN.m_txt(HN.USB_BUY.get("PED", 0.5)), "—", EXCL + " — 선"),
     ("SCH-01", "CU", "W209", "USB-A → B 25 cm", "C25", 1, 1, "", "—", EXCL + " — 선"),
@@ -335,7 +335,7 @@ def check_refs(built, bom_rows):
             continue
         txt = open(path, encoding="utf-8").read()
         for t in re.findall(r">([^<]*)</text>", txt):
-            # refdes = prefix + sheet number x 100 + n (2xx..7xx); product names like XH-A232 or Coms BT663 are not refdes
+            # refdes = prefix + sheet number x 100 + n (2xx..7xx); product names like HW-720 or Coms BT663 are not refdes
             for tok in re.findall(r"(?<![\w-])(?:A|BT|C|F|J|JP|LS|P|R|SW|TP|U|X)[2-7]\d{2}\b", t):
                 if tok in ("BT663",):
                     continue

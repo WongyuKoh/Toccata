@@ -440,10 +440,8 @@ def check_wood_screws(by, C):
             bad_seat.append("%s %s" % (r["label"], at))
         print("       %-40s %-16s %s%-14s face %6.1f  tip %6.1f  bite %4.1f  to the opposite face %4.1f" % (
             r["label"], r["ply"], ax, "(%.1f, %.1f)" % at, r["face"], r["tip"], bite, gap))
-    nf_ = 14 - len(body.GLUED_FEET)                  # 2026-10-26: the 2 feet under the battery pocket are glued, no screw
-    true("wood screws: %d (feet %d + %d glued, battery frame 4, back-plate tab 2, hub shelf 2, heat-set insert holes 4 in the printed pod panels); "
-         "entry faces measured on the panels = wood_screws" % (len(rows), nf_, len(body.GLUED_FEET)), not bad_face and len(rows) == 12 + nf_,
-         "; ".join(bad_face) or "all")
+    true("wood screws: %d (feet 14, battery frame 4, back-plate tab 2, hub shelf 2, heat-set insert holes 4 in the printed pod panels); entry faces measured on the panels = "
+         "wood_screws" % len(rows), not bad_face and len(rows) == 26, "; ".join(bad_face) or "all")
     true("wood screws: every head seat on its solid (csk cone open, ear / tab round the head, flush top on the panel; foot seat D9 x 2; "
          "shelf seat D6.5 x 4; pilot depth)", not bad_seat, "; ".join(bad_seat) or "all")
     gmin, rmin = min(tips, key=lambda t: t[0])
@@ -584,7 +582,7 @@ def check_drill_reduction(P, by, C):
     held_k = sum(vol(back, B_(x - d / 2 - 3, x + d / 2 + 3, YBI, YB, z - d / 2 - 3, z + d / 2 + 3)) for (x, z) in body.BACK_HOLES)
     want_k = len(body.BACK_HOLES) * ((d + 6) ** 2 - a1) * T
     sh = by["PR-HUBSHELF"].solid
-    shelf_top = (sh ^ B_(805, 895, YBI - 2.5, YBI, 0, 60)).bounding_box()[5]     # the strip glued to the back ply (not the amp pads)
+    shelf_top = (sh ^ B_(body.AMP_TONGUE[1] + 3.0, 895, YBI - 2.5, YBI, 0, 60)).bounding_box()[5]     # the strip glued to the back ply (not the amp pads, x<=812 since 10/26)
     mag_bot = body.Z_LIDU - body.MAG[2]
     zc = body.BACK_HOLES[0][1]
     gap_mag = min(math.hypot(x - mx, 0) for (x, z) in body.BACK_HOLES for s_ in "LR" for mx in body.MAG_BACK_X[s_])
@@ -618,7 +616,7 @@ def check_drill_reduction(P, by, C):
     n_m = len(body.MAG_BACK_X["L"]) + len(body.MAG_BACK_X["R"])
     true("drilling left in the plywood: %d D8 vent holes (back %d, bottom %d) + %d D8 x %.1f back-ply top-edge magnet seats = %d (was about 624: "
          "lid slots 96 + 200 and 6 seats + end walls 2 x (XT60 9 + sleeves 2 + magnet 1) + pod inner panels 2 x 3 + back 64 + 4 seats + bottom 224)"
-         % (n_k, len(body.BACK_HOLES), len(hs), n_m, body.MAG[2], n_k + n_m), n_k + n_m == 54)
+         % (n_k, len(body.BACK_HOLES), len(hs), n_m, body.MAG[2], n_k + n_m), n_k + n_m == 53)   # 54 before the 10/26 Pi move (one Pi vent gave way to a foot)
 
 
 def run_checks(P, by, K, C, E=None):
@@ -1056,8 +1054,7 @@ def run_checks(P, by, K, C, E=None):
     v = cc["CU-BATFRAME"]
     fr = by["CU-BATFRAME"].solid
     chk("CU-BATFRAME bbox = spec", fr.bounding_box(), (v[0], v[2], v[4], v[1], v[3], v[5]))
-    pk_ = cc["BAT-LFP"]                                                 # 2026-10-26 KC pack 140 x 70 x 40 in the bottom pocket
-    bt = body.BF_BOX                                                    # the corral keeps the 10/7 140 x 72 box (frame print unchanged)
+    bt = cc["BAT-LFP"]
     g_, w_, rt = body.BF_GAP, body.BF_WALL, body.BF_RETURN
     zt_ = body.Z_BOT + body.BF_H
     inner = B_(bt[0] - g_ + 0.01, bt[1] + g_ - 0.01, bt[2] - g_ + 0.01, bt[3] + g_ - 0.01, body.Z_BOT - 1, 80)
@@ -1065,51 +1062,28 @@ def run_checks(P, by, K, C, E=None):
                 [B_(bt[0] - g_ - 0.05, bt[1] + g_ + 0.05, bt[2] - g_ - 0.05, bt[3] + g_ + 0.05, 0, 100)])
     wall_v = vol(fr, ring)
     open_x = vol(fr, B_(bt[1], bt[1] + g_ + w_ + 0.5, bt[2] - g_ + rt + 0.05, bt[3] + g_ - rt - 0.05, body.Z_BOT, 80))
-    true("battery frame: corral box x%.0f~%.0f y%.1f~%.1f (10/7 pack size) free inside the corral (gap %.1f), walls %.1f x %.0f round it (z%.1f~%.1f), "
-         "+x end open y%.0f~%.0f between %.0f mm corner returns, nothing of the bottom inside the pack %s (no tray floor: the pack sits in the "
-         "bottom's pocket)"
-         % (bt[0], bt[1], bt[2], bt[3], g_, w_, body.BF_H, body.Z_BOT, zt_, bt[2] - g_ + rt, bt[3] + g_ - rt, rt,
-            "x%.0f~%.0f y%.0f~%.0f z%.1f~%.1f" % tuple(pk_)),
+    true("battery frame: pack box x%.0f~%.0f y%.1f~%.1f free inside the corral (gap %.1f), walls %.1f x %.0f round it (z%.1f~%.1f), +x end open "
+         "y%.0f~%.0f between %.0f mm corner returns, nothing over the pack (no tray floor: the pack sits on the ply)"
+         % (bt[0], bt[1], bt[2], bt[3], g_, w_, body.BF_H, body.Z_BOT, zt_, bt[2] - g_ + rt, bt[3] + g_ - rt, rt),
          vol(fr, inner) < TOL and wall_v > 0.9 * ((2 * (bt[1] - bt[0] + 2 * g_ + 2 * w_) + (bt[3] - bt[2] + 2 * g_)) * w_ * (zt_ - body.Z_BOT - 4.0)) - 400.0
-         and open_x < TOL and vol(by["CU-PLY-BOTTOM"].solid, B_(pk_[0], pk_[1], pk_[2], pk_[3], pk_[4] + 0.01, pk_[5])) < TOL,
+         and open_x < TOL and vol(by["CU-PLY-BOTTOM"].solid, B_(bt[0], bt[1], bt[2], bt[3], bt[4] + 0.01, bt[5])) < TOL,
          "wall %.0f mm3, +x end %.2f" % (wall_v, open_x))
-    # 2026-10-26: pocket 0.5 round the pack, floor z11.5 (6.5 of PETG left), strap channel under it out past the walls; the feet under the
-    # pocket are glued (no pilot from below); the left piece of the bottom prints bottom face down (pocket open upward, no support)
-    bo_ = by["CU-PLY-BOTTOM"]
-    px0, px1, py0, py1, pz = body.BAT_POCKET
-    sy0, sy1 = bt[2] - g_ - w_ - body.STRAP_OUT, bt[3] + g_ + w_ + body.STRAP_OUT
-    sx0_, sx1_ = body.BF_STRAP_X
-    pocket_free = vol(bo_.solid, B_(px0 + 0.02, px1 - 0.02, py0 + 0.02, py1 - 0.02, pz + 0.02, body.Z_BOT + 1))
-    fz_ = pz - body.STRAP_TROUGH                                         # below the strap channel: solid all over the pocket
-    floor_v = vol(bo_.solid, B_(px0 + 1, px1 - 1, py0 + 1, py1 - 1, body.ZB + 0.02, fz_ - 0.02))
-    floor_full = (px1 - px0 - 2) * (py1 - py0 - 2) * (fz_ - body.ZB - 0.04)
-    trough_v = vol(bo_.solid, B_(sx0_ + 0.02, sx1_ - 0.02, sy0 + 0.02, sy1 - 0.02, pz - body.STRAP_TROUGH + 0.02, body.Z_BOT + 1))
-    walls_ok = all(vol(bo_.solid, B_(a_, b_, c_, d_, pz + 0.5, body.Z_BOT - 0.5)) > 0.9 * (b_ - a_) * (d_ - c_) * (body.Z_BOT - pz - 1.0)
-                   for (a_, b_, c_, d_) in ((px0 - 3, px0 - 0.02, py0 + 1, py1 - 1), (px1 + 0.02, px1 + 3, py0 + 1, py1 - 1)))
-    glued = body.GLUED_FEET
-    pil_glued = [xy for xy in glued if vol(bo_.solid, cyl_z(xy[0], xy[1], body.ZB - 0.01, pz - 0.5, 3.0)) < 0.98 * math.pi * 1.5 ** 2 * (pz - 0.5 - body.ZB)]
-    screws_ok = all(not (px0 - 3 < r_["at"][0] < px1 + 3 and py0 - 3 < r_["at"][1] < py1 + 3 and r_["tip"] > pz - 1.0)
-                    for r_ in body.wood_screws() if r_["ply"] == "CU-PLY-BOTTOM")
-    lp_ = [m_ for nm_, m_ in bo_.print_pieces if nm_.endswith("_왼쪽")]
-    lb_ = lp_[0].bounding_box() if len(lp_) == 1 else None
-    big_ = 1e4
-    bed_a = vol(lp_[0], B_(-big_, big_, -big_, big_, lb_[2] - 0.1, lb_[2] + 0.4)) / 0.4 if lb_ else 0.0     # first-layer area
-    top_a = vol(lp_[0], B_(-big_, big_, -big_, big_, lb_[5] - 0.4, lb_[5] + 0.1)) / 0.4 if lb_ else 0.0     # last-layer area
-    true("centre bottom battery pocket x%.1f~%.1f y%.1f~%.1f, %.1f deep (floor z%.1f, %.1f of PETG under it, walls kept round it); strap channel "
-         "%.0f x %.1f under it (x%.0f~%.0f, y%.1f~%.1f past the corral walls); feet %s glued (no pilot), no screw tip within 1 of the pocket floor; "
-         "left piece prints bottom face down (first layer > last layer by the pocket)"
-         % (px0, px1, py0, py1, body.Z_BOT - pz, pz, pz - body.ZB, sx1_ - sx0_, body.STRAP_TROUGH, sx0_, sx1_, sy0, sy1,
-            " · ".join("(%.0f, %.0f)" % xy for xy in glued)),
-         pocket_free < TOL and floor_v > 0.97 * floor_full and trough_v < TOL and walls_ok and len(glued) == 2 and not pil_glued and screws_ok
-         and pz - body.ZB >= 6.0 and bed_a > top_a + 0.8 * (px1 - px0) * (py1 - py0),
-         "pocket %.2f, floor %.0f / %.0f, trough %.2f, walls %s, glued-feet pilots %s, screws %s, left piece bed / top layer %.0f / %.0f mm2"
-         % (pocket_free, floor_v, floor_full, trough_v, walls_ok, pil_glued, screws_ok, bed_a, top_a))
     sx0, sx1 = body.BF_STRAP_X
     oy0, oy1 = bt[2] - g_ - w_, bt[3] + g_ + w_
     true("battery frame: strap slots %.0f x %.0f open through the front and back walls (x%.0f~%.0f) for the 20 mm velcro L79 under / over the pack"
          % (sx1 - sx0, body.BF_STRAP_H, sx0, sx1),
          vol(fr, B_(sx0 + 0.05, sx1 - 0.05, oy0 - 0.1, oy0 + w_ + 0.1, body.Z_BOT + 0.05, body.Z_BOT + body.BF_STRAP_H - 0.05)) < TOL
          and vol(fr, B_(sx0 + 0.05, sx1 - 0.05, oy1 - w_ - 0.1, oy1 + 0.1, body.Z_BOT + 0.05, body.Z_BOT + body.BF_STRAP_H - 0.05)) < TOL)
+    # 2026-10-26: strap channel in the bottom under the pack, out past the walls (the velcro does not lift the pack)
+    bo_ = by["CU-PLY-BOTTOM"].solid
+    cz0 = body.Z_BOT - body.STRAP_TROUGH
+    cy0, cy1 = oy0 - body.STRAP_OUT, oy1 + body.STRAP_OUT
+    ch_free = vol(bo_, B_(sx0 + 0.02, sx1 - 0.02, cy0 + 0.02, cy1 - 0.02, cz0 + 0.02, body.Z_BOT + 1))
+    ch_floor = vol(bo_, B_(sx0 + 0.5, sx1 - 0.5, cy0 + 0.5, cy1 - 0.5, body.ZB + 0.02, cz0 - 0.02))
+    ch_full = (sx1 - sx0 - 1) * (cy1 - cy0 - 1) * (cz0 - body.ZB - 0.04)
+    true("bottom strap channel %.0f x %.1f under the pack (x%.0f~%.0f, y%.1f~%.1f = %.0f past the corral walls), %.1f of PETG under it"
+         % (sx1 - sx0, body.STRAP_TROUGH, sx0, sx1, cy0, cy1, body.STRAP_OUT, cz0 - body.ZB),
+         ch_free < TOL and ch_floor > 0.97 * ch_full, "free %.2f, floor %.0f / %.0f" % (ch_free, ch_floor, ch_full))
     fu = cc["CU-E-FUSE"]
     ay, az = body.FH_AXIS
     sx_ = body.FS_SADDLE_X
@@ -1145,7 +1119,8 @@ def run_checks(P, by, K, C, E=None):
          "- prints without support" % (low[2], a_[0], a_[1], b_[0], b_[1], sb2[0], sb2[1], sa_[0], sa_[1]),
          low[2] >= 27.0 and abs(abs(b_[1] - a_[1]) - abs(b_[0] - a_[0])) < 1e-6 and abs(abs(sb2[1] - sa_[1]) - abs(sb2[0] - sa_[0])) < 1e-6 and under_ok)
     sh, b1 = cc["PR-HUBSHELF"], cc["PR-SHELFBRK-1"]
-    exp["PR-HUBSHELF"] = (sh[0], sh[2], sh[4], sh[1], YBI, b1[5])     # shelf back strip + brackets reach the back ply (spec boxes: to y330 at 43 deg)
+    exp["PR-HUBSHELF"] = (sh[0], min(sh[2], body.AMP_TONGUE[2]), sh[4], sh[1], YBI, b1[5])     # shelf back strip + brackets reach the back ply (spec boxes:
+                                                                                               # to y330 at 43 deg); 10/26 tongue under the HW-720 front pads
     for i in (1, 2):
         r = cc["PR-SEAMRAIL-%d" % i]
         exp["SEAM-POSTRAIL-%d" % i] = (r[0], r[2], cc["PR-SEAMPOST-%d" % i][4], r[1], YBI, r[5])   # rail to the back ply

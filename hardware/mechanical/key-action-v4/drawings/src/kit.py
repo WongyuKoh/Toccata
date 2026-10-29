@@ -142,6 +142,32 @@ def rect(u0, u1, v0, v1):
     return [(u0, v0), (u1, v0), (u1, v1), (u0, v1)]
 
 
+# CAD A11 (2026-10-26, user: 실제 백건반은 끝이 둥글다): the printed keys are cut to rounded front corners
+# (hardware/mechanical/cad/src/keyaction.py KEY_ROUND); the plan views draw the key outlines with the same radii.
+KEY_R = {"white": 2.0, "black": 1.5, "black_low": 1.0, "top": 0.8}
+
+
+def round_front(poly, r, axis=1, n=12):
+    """poly with its front corners (the vertices at the minimum of coordinate `axis`) rounded by r."""
+    P = [tuple(map(float, q)) for q in poly]
+    front = min(q[axis] for q in P)
+    out = []
+    for i, q in enumerate(P):
+        if abs(q[axis] - front) > 1e-6:
+            out.append(q)
+            continue
+        a, b = np.subtract(P[i - 1], q), np.subtract(P[(i + 1) % len(P)], q)
+        a, b = a / np.linalg.norm(a), b / np.linalg.norm(b)
+        half = math.acos(max(-1.0, min(1.0, float(a @ b)))) / 2.0
+        t = r / math.tan(half)
+        c = np.add(q, (a + b) / np.linalg.norm(a + b) * r / math.sin(half))
+        s0, s1 = np.add(q, a * t) - c, np.add(q, b * t) - c
+        a0, a1 = math.atan2(s0[1], s0[0]), math.atan2(s1[1], s1[0])
+        da = (a1 - a0 + math.pi) % (2 * math.pi) - math.pi
+        out += [(c[0] + r * math.cos(a0 + da * k / n), c[1] + r * math.sin(a0 + da * k / n)) for k in range(n + 1)]
+    return out
+
+
 def arc_pts(c, r, a0, a1, n=16):
     return [(c[0] + r * math.cos(math.radians(a0 + (a1 - a0) * i / n)),
              c[1] + r * math.sin(math.radians(a0 + (a1 - a0) * i / n))) for i in range(n + 1)]
@@ -507,7 +533,10 @@ def page(rows, out_base, title, subtitle="", width_px=1500, gap_px=8, margin_px=
            f'<rect x="0" y="0" width="{maxw:.1f}" height="{total_h:.1f}" fill="#ffffff"/>'
            + "".join(txt) + "".join(parts) + "</svg>")
     open(out_base + ".svg", "w").write(svg)
-    import resvg_py
+    try:
+        import resvg_py
+    except ImportError:                     # the repo keeps only the SVGs
+        return svg
     open(out_base + ".png", "wb").write(bytes(resvg_py.svg_to_bytes(svg_string=svg, background="#ffffff", width=1800)))
     return svg
 

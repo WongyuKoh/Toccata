@@ -1294,8 +1294,8 @@
    "top_z": 72.85,
    "hinge_line": "x방향, 뚜껑 앞 모서리 근처 (축 y216~218, z76 권장 — 이 범위면 접은 7인치가 뚜껑 뒤 끝을 1.5 이하로 넘음)",
    "folded": "7인치 화면을 뒤로 접으면 z73~약 98, 스피커 윗면 z144.65 아래. 경첩에서 약 125 필요 → 경첩 축이 y216~218이면 y341~343까지 (뚜껑 뒤 끝 342.5 안 또는 0.5 이하). L1식 받침(141.7)이면 뒤로 15~17 튀어나옴 (운반할 때만, 뒤에 아무것도 없음)",
-   "dsi": "Pi DISP1 (x589~592, y263~278)에서 곧게 위로 (지킴 구역 x582~600, y262~280). 뚜껑 리본 구멍 권장 x580~602, y224~236 (W1이 정함)",
-   "gpio_power": "Pi GPIO 2/6 (x546~562, y312~320)에서 위로",
+   "dsi": "Pi DISP1 (x589~592, y254~269)에서 곧게 위로 (지킴 구역 x582~600, y253~271). 뚜껑 리본 구멍 권장 x580~602, y224~236 (W1이 정함) - 2026-10-26 Pi를 건반 쪽으로 9 옮김",
+   "gpio_power": "Pi GPIO 2/6 (x546~562, y303~311)에서 위로 - 2026-10-26 Pi를 건반 쪽으로 9 옮김",
    "vents": "화면 뒤 배기 홈 y300~325 (접으면 덮임 — 운반 상태라 전원 끔)",
    "rule": "화면·경첩·받침에 자석 금지 (D14). 뚜껑은 가운데 유닛 벽·레일·기둥에만 얹힘 (모듈에 힘이 가지 않음)"
   },
@@ -1377,16 +1377,18 @@
     3.5,
     4.4
    ],
-   "mass_kg_est": 0.65,
-   "mass_note": "추정 - 32700 셀 4개 약 0.56 kg + BMS·수축 포장 (상품 설명에 무게 없음) - 받은 배터리로 잼",
-   "layout": "배터리 x284~424 y251~321 z11.5~51.5 (2026-10-26 KC 팩 140 × 70 × 40: 가운데 아랫판의 깊이 5 홈 안, 바닥 z11.5) + 출력 배터리 틀 CU-BATFRAME (벽 1.5 × 14, 둘레 0.5, +x 끝은 모서리 8만 남기고 열림, 끈 구멍 22 × 3 앞·뒤 벽 아래 + 아랫판 끈 골, 앞에 퓨즈 선반 x397~434.6 - ATC/ATO 홀더를 앞 공간 위에 눕혀 끼움). XT60 선은 +x 끝면에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30~뚜껑)에서 위로 꺾여 배터리 윗면(z51.5~61.35)의 XT60 짝으로. PED 보드는 90° 돌려 x426.5~476.5 y244~314 (z23.1 이하, 선 자리 밑). 뒤판 탭은 x427~451 하나로 (나사 (431.5, 321) · (446.5, 321)), J501 받침 왼쪽 끝 x449 → 450",
-   "charging": "스위치를 끄고 뚜껑 L을 들어 배터리 윗면의 XT60 짝을 뽑고, 14.6 V LiFePO4 충전기의 XT60 수를 배터리 XT60 암에 꽂음. 다 차면 충전기를 빼고 XT60 짝을 다시 꽂음. 12 V 전원 장치로 시험할 때도 같은 자리: XT60 짝을 뽑고 전원 장치의 XT60 암을 버스 쪽 수에 꽂음",
+   "mass_kg_est": 0.9,
+   "mass_note": "상품 설명 약 900 g - 받은 배터리로 잼",
+   "layout": "배터리 x284~424 y251~323 z16.5~51.5 (바닥 위, 받침 바닥 없음) + 출력 배터리 틀 CU-BATFRAME (벽 1.5 × 14, 둘레 0.5, +x 끝은 모서리 8만 남기고 열림, 끈 구멍 22 × 3 앞·뒤 벽 아래, 앞에 퓨즈 선반 x397~434.6 - ATC/ATO 홀더를 앞 공간 위에 눕혀 끼움). 선 두 개(XT60·DC)는 +x 끝면에서 나와 선 꺾는 자리 Z-BAT-LEADS (x424~434, z30~뚜껑)에서 위로 꺾여 배터리 윗면(z51.5~61.35)의 XT60 짝·DC 충전 커넥터로. PED 보드는 90° 돌려 x426.5~476.5 y244~314 (z23.1 이하, 선 자리 밑). 뒤판 탭은 x427~451 하나로 (나사 (431.5, 321) · (446.5, 321)), J501 받침 왼쪽 끝 x449 → 450",
+   "charging": "스위치를 끄고 뚜껑 L을 들어 배터리 윗면의 DC 5.5×2.1 충전 선에 세트의 3 A LiFePO4 충전기를 꽂음 - XT60은 뽑지 않음. 12 V 전원 장치로 시험할 때만 XT60을 뽑고 전원 장치의 XT60 암을 꽂음",
    "on_arrival": [
-    "선(XT60)이 나오는 면과 높이 (가정: +x 끝면, y275 z31.5 - 홈 바닥 z11.5에서 5 이상 위면 홈 벽에 걸리지 않음)",
-    "배터리 크기·무게 (70 × 40 × 140, 0.65 kg 추정) - 높이 41.6까지는 XT60 짝이 뚜껑 밑에 들어감",
-    "XT60 선 길이 (경로 약 45 mm)와 암·수 (배터리 쪽 암)",
-    "충전기 끝이 XT60 수인지, 출력 14.6 V",
-    "끈(L79)이 홈 바닥의 끈 골로 배터리 밑을 지나 위로 감기는지",
+    "선(XT60·DC)이 나오는 면과 높이 (가정: +x 끝면, y275 / y299, z34)",
+    "DC 충전 커넥터 겉모양 (높이 8.85 이하면 배터리 윗면에 눕힘)",
+    "세트 충전기 출력 14.6 V (LiFePO4 4S) 표기와 플러그가 DC 5.5×2.1로 배터리 충전 선에 맞는지",
+    "끈(L79)이 바닥 판의 끈 골로 배터리 밑을 지나 위로 감기는지",
+    "배터리 크기·무게 (140 × 72 × 35, 약 900 g)",
+    "끈(L79)이 배터리 밑·위로 감기는지",
+    "선 길이 (XT60 선 경로 약 50 mm, DC 선 약 45 mm)",
     "퓨즈 홀더 크기 (40.1 × 11.1 × 33.8)와 꼭지 위치·지름 (Ø8, 칼날 쪽 끝에서 7.5 가정) - 받침 2개 (Ø8.3, 위 입구 6.8)에 눌러 끼워지는지",
     "덮개 뽑을 자리: 뚜껑 L을 들고 홀더를 받침에서 빼서 돌렸을 때 덮개가 위로 약 20 빠지는지, 끈 고리가 걸리지 않는지",
     "퓨즈: 5 A ATO (표준 칼날) - 미니(ATM)·맥시가 아님",
@@ -1402,12 +1404,41 @@
     "leads": "12 AWG (바깥 Ø4.2)는 양 끝 꼭지에서 x로 나와 R15로 +y로 꺾임 (호 약 24 mm), 몸통 끝에서 약 24~36 mm에 16 AWG와 이음 (납땜 + 수축 튜브, 길이 12, Ø6.5 모델)"
    },
    "pack_2026_10_26": {
-    "decision": "사용자 2026-10-26: 빨리 오는 국내 팩으로 바꿈 - 쿠팡 9766601860 'kc인증 12v 인산철배터리 … 4S1P 12.8V 6AH 국내생산' (판매 금강에너지솔루션, 111,000원). LiFePO4 32700 6,000 mAh 4S1P, A타입(직사각형) 70 × 40 × 140, 공칭 12.8 V, 만충 14.6 V, 입출력 공통 XT60(F) 선 하나 (따로 충전 잭 없음), KC 인증",
-    "fit": "10/7 팩(140 × 72 × 35)보다 폭 2 작고 높이 5 큼 - 가운데 아랫판(출력)에 깊이 5 홈 (x283.5~424.5 y250.5~321.5, 바닥 z11.5 = PETG 6.5 남음)을 파서 윗면을 z51.5 그대로 둠 → XT60 짝·퓨즈 선반·뒤 줄은 그대로. 끈 L79가 팩 밑을 지나도록 홈 바닥에 끈 골 22 × 2.5 (x304~326)를 앞뒤 벽 밖까지",
-    "feet": "가운데 유닛 왼쪽 고무발 2개 (292, 262)·(292, 320)은 홈 밑이라 8호 13 나사 끝(z15)이 홈 바닥(z11.5)을 뚫음 → 이 2개는 나사 없이 MS 폴리머로 붙임",
-    "charging": "스위치를 끄고 뚜껑 L을 들어 배터리 윗면의 XT60 짝을 뽑고, 14.6 V LiFePO4 충전기의 XT60 수를 배터리 XT60 암에 꽂음. 다 차면 충전기를 빼고 XT60 짝을 다시 꽂음",
-    "charger": "쿠팡 9355171374 '12V 인산철 파워뱅크 충전기 14.6V 3A 벽걸이 타입 어댑터 XT60 XT90 겸용' (센티넬트레이딩, 24,000원 + 배송 3,000원, KC 인증 완료) - 6 Ah를 약 2~2.5시간에; 끝이 XT60 수로 보임 (사진) - 받으면 확인"
+    "decision": "사용자 2026-10-26: 쿠팡 9669099122 옵션 04 '12V 전원 배터리 LiFePO4 고용량 32700 … 4S1P - 12.8V 10Ah DCXT60-3A' (판매자 월드셀러샵몰 70,500원, 11/12 도착 - 같은 상품 쿠쿠스토어4호는 44,400원·11/23) - 10/7 Turmera와 같은 꼴: 32700 4S1P (표기 10 Ah, 계산 6 Ah 76.8 Wh), 140 × 35 × 72, 약 900 g, BMS 40 A, 출력 XT60 선 + 충전 입력 DC 5.5×2.1 선, 3 A LiFePO4 충전기 포함. 같은 날 잠깐 고른 KC 70 × 40 × 140 팩(충전 방법 불분명)과 4S2P 140 × 75 × 72(가운데 유닛 안 높이 44.85에 안 들어감)는 뺌",
+    "charger": "세트에 든 3 A 충전기 (DC 5.5×2.1 플러그) - 받으면 출력 14.6 V (LiFePO4 4S) 표기 확인",
+    "strap_channel": "바닥 판에 끈 골 22 × 2.5 (x304~326, 틀 벽 밖까지) - 벨크로 L79가 배터리 밑을 지나도 배터리가 뜨지 않음 (뜨면 XT60 짝 윗면이 뚜껑 밑 1.65 여유를 넘음)"
    }
+  },
+  "pi_move_2026_10_26": {
+   "dy": -9.0,
+   "why": "사용자 2026-10-26: '옮기는 쪽으로 다시 설계해줘' - Pi 쪽 일자 젠더(i034)와 허브 DC 일자 플러그를 둘 다 쓰려고 Pi 5를 건반 쪽(-y)으로 9 옮김. 동글 머리(USB-A 2단 1 축)가 허브 DC 잭 축 y293에서 비켜 곧은 DC 플러그가 들어감",
+   "limit": "9가 최대: C24 측면 꺾임 USB-C 머리(Pi -y 가장자리, 12 앞으로 나옴)가 앞 공간 줄 y241(아랫판 앞 모서리, 그 앞 z27 밑은 선만)에 닿음. 허브는 뒤판·선반 때문에 못 옮김",
+   "moved": [
+    "CU-E-GENDER",
+    "CU-E-PI5",
+    "CU-E-PI5-DISP1",
+    "CU-E-PI5-RJ45",
+    "CU-E-PI5-USBA1",
+    "CU-E-PI5-USBA2",
+    "Z-DSI",
+    "Z-GPIO-LEAD",
+    "Z-PI-PWR",
+    "Z-UP-PLUG",
+    "CU-E-DONGLE (socket 9 forward)",
+    "Z-DONGLE-PLUG (back end)",
+    "bottom vents under the Pi (middle bottom piece)",
+    "touchscreen numbers.json pi5 / ribbon / power_wire",
+    "CU-POST-PI 1~4 (glue spots only)"
+   ],
+   "reprint": "가운데 아랫판 가운데 조각(통풍 구멍 27개, 하나는 가운데 고무발 자리라 뺌)만 다시 출력; Pi 받침 기둥 4개는 같은 모양 - 붙이는 자리만 9 앞으로"
+  },
+  "amp_2026_10_26": {
+   "decision": "사용자 2026-10-01·10-26: XH-A232 대신 가진 HW-720 (사진·같은 배치 XH-M312 V4 상품 도면: 66 × 53, 노브까지 86, 높이 16, TPA3118D2, DC 5.5×2.1 잭, 12~28 V 표기)",
+   "place": "허브 선반 x746~812, 뒷면 y330.5, 받침 3 mm (판 밑면 z46.5); 앞 구멍 y281이 선반 앞끝 밖이라 선반에 혀 x742~812 y277~282",
+   "wiring": "12.8 V 버스: DC 잭 핀에 밑에서 납땜 (선 쌍이 판 밑 3 mm 틈으로); 스피커 L: 뒤 단자 OUTL → 뒤 줄; 스피커 R: 앞 단자 OUTR → 앞 줄 y274.5 → XT60 R; 입력 W707 → XH 3핀 INR·GND·INL (오른쪽 끝)",
+   "knob": "노브를 꽂아 두면 꼭대기 z62.5 > 뚜껑 밑 z61.35 → 뺀 채로 두고, 음량을 맞출 때만 뚜껑을 열고 꽂음",
+   "measure": "받으면(가진 보드) 구멍 간격(59 × 46 추정)·구멍 지름·볼륨 몸통 높이·밑면 핀 길이(3 mm 받침보다 길면 자름)를 재서 고침",
+   "spec": "Z-PWR-LANE (10/1부터 안 씀) 지움 - 그 자리(y274~281.5)를 스피커 R 선 앞 줄이 씀; Z-SPKLEAD-R을 새 길로"
   }
  },
  "centre_contents": [
@@ -1426,20 +1457,20 @@
   },
   {
    "id": "BAT-LFP",
-   "name": "LiFePO4 pack KC 12.8 V 6 Ah 4S1P 32700 (76.8 Wh, 금강에너지솔루션 2026-10-26) 140x70x40 lying in a 5 mm pocket of the printed centre bottom (floor z11.5, top z51.5 as before), one XT60 F lead for charge + discharge at the +x end (assumed)",
+   "name": "LiFePO4 pack 12.8 V 6 Ah 4S1P 32700 (76.8 Wh; 2026-10-26 Coupang 9669099122 option 04 '12.8V 10Ah DCXT60-3A', same 140x35x72 form as the 10/7 Turmera) lying on the floor, XT60 lead + DC 5.5x2.1 charge lead at the +x end (assumed)",
    "bbox_x0x1y0y1z0z1": [
     284.0,
     424.0,
     251.0,
-    321.0,
-    11.5,
+    323.0,
+    16.5,
     51.5
    ],
    "kind": "item"
   },
   {
    "id": "C-XT60",
-   "name": "XT60 mated pair 31x16x8.2 lying on top of the battery (battery F from +x, bus-side M lead to the fuse holder on the frame's fuse shelf); unplugged to charge (the charger's XT60 M goes into the battery F)",
+   "name": "XT60 mated pair 31x16x8.2 lying on top of the battery (battery F from +x, bus-side M lead to the fuse holder on the frame's fuse shelf)",
    "bbox_x0x1y0y1z0z1": [
     392.0,
     423.0,
@@ -1451,8 +1482,21 @@
    "kind": "item"
   },
   {
+   "id": "C-DC",
+   "name": "DC 5.5x2.1 charge connector (female, on the pack's charge lead) lying on top of the battery, envelope 30x9.5x8.5 (assumed)",
+   "bbox_x0x1y0y1z0z1": [
+    392.0,
+    422.0,
+    304.0,
+    313.5,
+    51.5,
+    60.0
+   ],
+   "kind": "item"
+  },
+  {
    "id": "Z-BAT-LEADS",
-   "name": "battery lead-turn zone at the +x end: the XT60 lead leaves the end face and bends up into the space over the pack (above the PED board level)",
+   "name": "battery lead-turn zone at the +x end: XT60 + DC leads leave the end face and bend up into the space over the pack (above the PED board level)",
    "bbox_x0x1y0y1z0z1": [
     424.0,
     434.0,
@@ -1686,12 +1730,12 @@
   },
   {
    "id": "CU-E-PI5",
-   "name": "Raspberry Pi 5 on 6 mm standoffs (USB/RJ45 end +x, GPIO edge +y)",
+   "name": "Raspberry Pi 5 on 6 mm standoffs (USB/RJ45 end +x, GPIO edge +y); 2026-10-26 moved 9 toward the keys (-y) so the straight gender and a straight hub DC plug both fit",
    "bbox_x0x1y0y1z0z1": [
     542.0,
     627.0,
-    262.0,
-    318.0,
+    253.0,
+    309.0,
     22.5,
     32.6
    ],
@@ -1703,8 +1747,8 @@
    "bbox_x0x1y0y1z0z1": [
     608.3,
     629.5,
-    264.2,
-    280.2,
+    255.2,
+    271.2,
     24.1,
     37.6
    ],
@@ -1712,12 +1756,12 @@
   },
   {
    "id": "CU-E-PI5-USBA1",
-   "name": "Pi 5 USB-A stack 1 (lower port: IH190 gender + dongle)",
+   "name": "Pi 5 USB-A stack 1 (lower port: straight gender + dongle)",
    "bbox_x0x1y0y1z0z1": [
     612.0,
     629.5,
-    283.8,
-    298.2,
+    274.8,
+    289.2,
     24.1,
     40.5
    ],
@@ -1725,12 +1769,12 @@
   },
   {
    "id": "CU-E-PI5-USBA2",
-   "name": "Pi 5 USB-A stack 2 (upper port: hub upstream W209)",
+   "name": "Pi 5 USB-A stack 2 (lower port: hub upstream C25)",
    "bbox_x0x1y0y1z0z1": [
     612.0,
     629.5,
-    301.8,
-    316.2,
+    292.8,
+    307.2,
     24.1,
     40.5
    ],
@@ -1742,8 +1786,8 @@
    "bbox_x0x1y0y1z0z1": [
     589.0,
     592.0,
-    263.0,
-    278.0,
+    254.0,
+    269.0,
     24.1,
     28.1
    ],
@@ -1751,12 +1795,12 @@
   },
   {
    "id": "Z-PI-PWR",
-   "name": "MT666 right-angle USB-C pigtail into the Pi USB-C (-y edge)",
+   "name": "C24 side-angled USB-C head into the Pi USB-C (-y edge); 2026-10-26 Pi 9 toward the keys, front clipped at the front-zone line y241",
    "bbox_x0x1y0y1z0z1": [
     546.0,
     560.0,
-    249.0,
-    262.0,
+    241.0,
+    253.0,
     22.0,
     31.0
    ],
@@ -1768,8 +1812,8 @@
    "bbox_x0x1y0y1z0z1": [
     582.0,
     600.0,
-    262.0,
-    280.0,
+    253.0,
+    271.0,
     28.1,
     61.35
    ],
@@ -1781,8 +1825,8 @@
    "bbox_x0x1y0y1z0z1": [
     546.0,
     562.0,
-    312.0,
-    320.0,
+    303.0,
+    311.0,
     32.6,
     61.35
    ],
@@ -1790,38 +1834,38 @@
   },
   {
    "id": "CU-E-GENDER",
-   "name": "Coms IH190 right-angle gender in USB-A stack 1 (lower)",
+   "name": "straight USB-C(F)->USB-A(M) gender in USB-A stack 1 (lower), C socket +x (2026-10-26 user: straight instead of the IH190 right-angle one)",
    "bbox_x0x1y0y1z0z1": [
     629.5,
-    647.5,
-    283.0,
-    299.0,
-    25.5,
-    32.0
+    643.5,
+    274.2,
+    289.8,
+    24.85,
+    32.65
    ],
    "kind": "item"
   },
   {
    "id": "CU-E-DONGLE",
-   "name": "Apple USB-C -> 3.5 mm adapter (L51) lying on the floor, socket -y",
+   "name": "Apple USB-C -> 3.5 mm adapter (L51): head straight on in +x from the straight gender, lead drops to the floor and loops, socket lying on the floor, socket -y",
    "bbox_x0x1y0y1z0z1": [
-    632.0,
-    667.5,
-    262.1,
-    305.0,
+    637.0,
+    667.0,
+    252.0,
+    305.5,
     16.5,
-    31.8
+    31.75
    ],
    "kind": "item"
   },
   {
    "id": "Z-DONGLE-PLUG",
-   "name": "3.5 mm plug of W701 into the dongle socket, cable drops into the duct",
+   "name": "3.5 mm plug of W701 into the dongle socket, cable drops into the duct (2026-10-26: socket 8 forward with the Pi - plug moulding <= 30 before the cable turns down)",
    "bbox_x0x1y0y1z0z1": [
     644.0,
     656.0,
     222.0,
-    262.1,
+    252.0,
     17.0,
     29.0
    ],
@@ -1833,8 +1877,8 @@
    "bbox_x0x1y0y1z0z1": [
     629.5,
     654.5,
-    301.0,
-    317.0,
+    292.0,
+    308.0,
     32.5,
     40.5
    ],
@@ -1959,27 +2003,27 @@
   },
   {
    "id": "CU-E-AMP",
-   "name": "XH-A232 TPA3110 amp 54x46x14 on 2 mm pads on the shelf",
+   "name": "HW-720 amp (user's own, XH-M312 V4 layout, TPA3118D2) 66x53 on 3 mm pads on the shelf + tongue; knob off, pot shaft to x825 (2026-10-26, was XH-A232 54x46)",
    "bbox_x0x1y0y1z0z1": [
-    742.0,
-    796.0,
-    283.0,
-    329.0,
-    45.5,
+    746.0,
+    825.0,
+    277.5,
+    330.5,
+    46.5,
     59.5
    ],
    "kind": "item"
   },
   {
    "id": "Z-SPKLEAD-R",
-   "name": "amp -> XT60 R speaker lead over the shelf (2026-10-07: ends at x915.5, the XT60 male starts at x916.2)",
+   "name": "amp -> XT60 R speaker lead: out of the HW-720 OUTR terminal (-x edge), down at x738 to the front lane y274.5 z48.5 in front of the board, +x to the XT60 R (2026-10-26)",
    "bbox_x0x1y0y1z0z1": [
-    796.0,
+    735.0,
     915.5,
-    286.0,
-    296.0,
-    45.0,
-    52.0
+    272.5,
+    293.0,
+    46.6,
+    54.5
    ],
    "kind": "zone"
   },
@@ -2032,19 +2076,6 @@
     330.0,
     51.0,
     55.0
-   ],
-   "kind": "zone"
-  },
-  {
-   "id": "Z-PWR-LANE",
-   "name": "front-of-shelf lane: 5 V buck -> hub DC, 12.8 V to the amp (unused since W1 10/1)",
-   "bbox_x0x1y0y1z0z1": [
-    731.0,
-    935.0,
-    274.0,
-    281.5,
-    45.0,
-    52.0
    ],
    "kind": "zone"
   },

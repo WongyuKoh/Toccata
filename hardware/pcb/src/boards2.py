@@ -401,7 +401,7 @@ C_RED = ("C-PWR-IN", "C-PWR-FUSE", "C-PWR-BUS", "C-PWR-5V", "C-BAT-LEAD")
 C_SPK = ("C-SPK-L", "C-SPK-R", "C-SPKPIG-L", "C-SPKPIG-R")
 LABELS04 = {   # refdes shown on the parts (id -> text)
     "BAT-LFP": "BT601 LiFePO4", "C-XT60": "X605⇄X606", "CU-E-FUSE": "F601", "CU-E-SWITCH": "SW601", "CU-E-BUCK": "A602 XL4016",
-    "CU-E-PI5": "A603 Pi 5", "PB-E-HUB": "A604 허브", "CU-E-AMP": "A702 XH-A232", "CU-E-PEDBOARD": "PB", "CU-E-J702BOARD": "J702",
+    "CU-E-PI5": "A603 Pi 5", "PB-E-HUB": "A604 허브", "CU-E-AMP": "A702 HW-720", "CU-E-PEDBOARD": "PB", "CU-E-J702BOARD": "J702",
     "CU-E-J501BOARD": "J501", "CU-E-DONGLE": "A701", "CU-E-GENDER": "X701", "C-XT60F-L": "X704", "C-XT60M-L": "X703",
     "C-XT60F-R": "X706", "C-XT60M-R": "X705", "C-DC": "DC 충전",
 }
@@ -524,7 +524,7 @@ def brd04():
               ("W702 자리", (520.0, 232.0))]
     for t, (x, y) in w_over:
         s.text(X1(x), Y1(y) - 0.9, t, "cabt", "middle", size=1.8, check=False)
-    for pid, at in (("BAT-LFP", None), ("CU-E-PI5", (585.0, 292.0)), ("PB-E-HUB", (865.0, 316.0)), ("CU-E-AMP", (769.0, 306.0)),
+    for pid, at in (("BAT-LFP", None), ("CU-E-PI5", (585.0, 292.0)), ("PB-E-HUB", (865.0, 316.0)), ("CU-E-AMP", (785.0, 291.0)),
                     ("CU-E-BUCK", None), ("C-XT60F-L", (283.0, 262.0)), ("C-XT60F-R", (939.0, 309.0))):
         if pid in parts:
             b = parts[pid]["bbox"]
@@ -534,8 +534,12 @@ def brd04():
     s.text(X1(611), Y1(ry0) + 7.2, "점선 = CAD에 모델이 없는 선 (W707 경로 추정)", "notes", "middle", size=1.8, check=False)
     jb = parts.get("CU-E-J702BOARD", {}).get("bbox")
     ab = parts.get("CU-E-AMP", {}).get("bbox")
+    am = cad["points"].get("amp")
     if jb and ab:
         p0, p1 = (jb[3], (jb[1] + jb[4]) / 2), (ab[0], (ab[1] + ab[4]) / 2)
+        if am:                                  # △32 HW-720: W707 lands on the XH 3P header at the +x edge
+            u0, u1, v0, v1, _h = am["boxes"]["XH"]
+            p1 = (am["x0"] + (u0 + u1) / 2, am["y1"] - (v0 + v1) / 2)
         o.append(f'<path d="M{X1(p0[0]):.2f},{Y1(p0[1]):.2f} L{X1(p0[0]+20):.2f},{Y1(p0[1]):.2f} L{X1(p1[0]-20):.2f},{Y1(p1[1]):.2f} L{X1(p1[0]):.2f},{Y1(p1[1]):.2f}" '
                  'fill="none" stroke="#2e8b57" stroke-width=".5" stroke-dasharray="1.6 .9"/>')
         s.text(X1((p0[0] + p1[0]) / 2), Y1((p0[1] + p1[1]) / 2) - 1.2, "W707", "cabt", "middle", size=1.8, check=False)
@@ -617,8 +621,8 @@ def brd04():
         "3. 스위치 SW601 단자 4개는 x433.75 / 443.25 두 열(위에서 보면 겹침). 1·2 = 회로 A(x443.25), 3·4 = 회로 B — 통전으로 짝을 확인한 뒤 W602j로 나란히.",
         "4. 전원 XT60(X605⇄X606)은 빨강 수축, 스피커 XT60(X703~X706)은 파랑 수축 + ‘SPK’. W601은 홀더 −x 끝에서 XT60 뒤끝까지",
         f"    {HN.W601_MAX} mm 이하(꼬리 {HN.STUB12} + 리드 {HN.LEAD_W601} − 겹침 10) → 왼쪽 스피커 XT60(직선 {HN.W601_NEED_L:.1f} mm)에 닿지 않는다.",
-        "5. 앰프 A702 단자: CAD는 스피커 L 단자를 −x 끝, R 단자를 +x 끝에 두었지만 실물은 L+·L−·R+·R−가 한 가장자리에 한 줄,",
-        "    VCC·GND는 반대 가장자리(research/audio.md 1.1). 그래서 W602c·W703·W705는 50 mm 더 자른다 — 단자 자리는 받은 보드로 확인.",
+        "5. △32 앰프 A702 HW-720: 왼쪽(−x) 끝에 OUTL(뒤)·DC 잭·OUTR(앞), 오른쪽 끝에 XH 3P 입력(W707)·볼륨. W602c는 보드 밑 3 mm 틈으로 DC 잭 다리에,",
+        "    W705는 x738에서 앞 줄 y274.5로 내려 XT60 R로. 단자 자리는 사진·상품 도면 추정 — 가진 보드로 재서 확인.",
         "6. PB(페달 보드) 자리는 BRD-03, J702·J501·J701·PS 작은 기판은 BRD-07, 선 만드는 법·핀은 BRD-05·06.",
     ], size=1.95, lh=2.75)
     s.frame()
@@ -737,7 +741,7 @@ def brd05():
     yj = s.table(jx0 - 4.0, jy0, ["J702 기판", "→ 이어지는 곳"], jrows, [34, 32], title="J702 기판 연결 (구멍·배선 = BRD-07)", rh=2.9)
     s.para(jx0 - 4.0, yj + 3.5, [
         "1 µF 두 개(나란히)는 잭 T·R 다리 쪽과 출력 패드 사이에 직렬.",
-        "1 kΩ은 출력 → AGND. W707 = 패드 L · G · R → 앰프 IN.",
+        "1 kΩ은 출력 → AGND. W707 = 패드 L · G · R → 앰프 XH INL · GND · INR.",
     ], "notes", size=1.8, lh=2.5)
     h_, S2 = 0.0, 1.0
     s.para(14.0, yt + 4.0, [

@@ -101,12 +101,20 @@ def refresh(verbose=True):
     res["paths"]["PIG"] = {k: _pl(v) for k, v in E.pig_paths(X).items()}
     plan = E.cable_plan()
     res["paths"]["USB"] = {t: _pl(plan[t]) for t in ("O%d" % k for k in range(1, 8))}
+    # C25 hub upstream (Coms NA977): centre line + head / B plug sizes from electronics.c25_geom() (module state C25, filled by collect())
+    g = getattr(E, "C25", None)
+    if g:
+        res["paths"]["C25"] = _pl(g["pts"])
+        res["points"]["c25"] = dict({k: _r(g[k]) for k in ("face", "ys", "za", "xr", "z_top", "x_b0", "x_b1", "len")},
+                                    a_head=list(E.C25_A_HEAD), a_boss=list(E.C25_A_BOSS), b_port=list(E.C25_B_PORT),
+                                    b_body=list(E.C25_B_BODY), b_boot=list(E.C25_B_BOOT), d=_r(E.UP_D))
     res["lengths"] = {k: _r(v, 1) for k, v in E.LENGTHS.items()}
     res["lengths"].update({"USB-" + t: _r(v, 1) for t, v in plan["_len"].items()})
     # standard cable length chosen per module / PED in the CAD (spec cable_duct.cables std_m: 1.0 / 0.5 / 0.3 m)
     res["points"]["usb_std_m"] = {t: float(c["std_m"]) for t, c in E.CABLE_SPEC.items()}
     res["points"]["usb_start_x"] = {t: _r(plan[t][0][0]) for t in ("O%d" % k for k in range(1, 8))}
-    res["lengths"].update({"PWR-BUS-BUCK": _r(E.path_len(P["BUS"][0]), 1), "PWR-BUS-AMP": _r(E.path_len(P["BUS"][1]), 1),
+    # amp feed = back-lane leg + (2026-10-26 HW-720) the flat leg under the board to the DC jack pins
+    res["lengths"].update({"PWR-BUS-BUCK": _r(E.path_len(P["BUS"][0]), 1), "PWR-BUS-AMP": _r(sum(E.path_len(q) for q in P["BUS"][1:]), 1),
                            "PWR-5V-PI": _r(E.path_len(P["5V"][0]), 1), "PWR-5V-HUB": _r(E.path_len(P["5V"][1]), 1)})
     mm = E.mismate()
     res["points"]["mismate"] = {"anchor": [_r(v) for v in mm["anchor"]], "cut": _r(mm["cut"], 1),
@@ -114,6 +122,15 @@ def refresh(verbose=True):
     res["points"]["sw_lugs"] = {k: _r(v) for k, v in E.SW_LUGS.items()}
     res["points"]["fuse_axis"] = [_r(v) for v in B.FH_AXIS]
     res["points"]["amp_holes"] = [[_r(a), _r(b)] for a, b in B.AMP_HOLES]
+    # HW-720 amp (2026-10-26): board + part boxes (u from the -x edge, v from the back edge, height over the PCB top) for the 3D model
+    # and the W707 estimate; speaker terminals where the CAD leads enter
+    if hasattr(E, "AMP_BOXES"):
+        res["points"]["amp"] = {"x0": _r(E.AMP_X0), "y1": _r(E.AMP_Y1), "z0": _r(E.AMP_Z0), "pcb": [_r(v) for v in E.AMP_PCB],
+                                "boxes": {k: [_r(v) for v in b] for k, b in E.AMP_BOXES.items()},
+                                "caps": [[_r(u), _r(v)] for u, v in E.AMP_CAPS], "cap": [_r(v) for v in E.AMP_CAP],
+                                "shaft": [_r(v) for v in E.AMP_SHAFT], "dc_y": _r(E.AMP_DC_Y), "dc_pin_u": _r(E.AMP_DC_PIN_U),
+                                "knob_top": _r(E.AMP_KNOB_TOP), "pad_h": _r(B.AMP_PAD_H),
+                                "terminals": {k: [_r(v) for v in E.amp_terminal(k)] for k in ("OUTL", "OUTR")}}
     bk = E.CC["CU-E-BUCK"]
     res["points"]["buck_holes"] = [[_r(bk[0] + 3.2), _r(bk[2] + 3.2)], [_r(bk[1] - 3.2), _r(bk[2] + 3.2)],
                                    [_r(bk[0] + 3.2), _r(bk[3] - 3.2)], [_r(bk[1] - 3.2), _r(bk[3] - 3.2)]]
@@ -131,6 +148,9 @@ def refresh(verbose=True):
                             "ports_x": [_r(v) for v in E.HUB_PORT_X], "port_z": _r(E.HUB_Z), "port_map": E.HUB_PORT,
                             "dc": [_r(v) for v in E.HUB_DC], "dc_yz": [_r(v) for v in E.HUB_DC_YZ],
                             "dc_straight_max": _r(getattr(E, "HUB_DC_STRAIGHT_MAX", float("nan")), 1)}
+    # Pi-side gender X701 (2026-10-26: straight, CAD box GENDER_STRAIGHT) and the longest one that still clears the dongle head / lead
+    res["points"]["gender"] = {"max_out": _r(getattr(E, "GENDER_STRAIGHT_MAX", float("nan")), 1),
+                               "model": [_r(v) for v in getattr(E, "GENDER_STRAIGHT", ())]}
     res["points"]["xt60_pose"] = {s: {"fem": [_r(v) for v in X[s]["fem"]], "mal": [_r(v) for v in X[s]["mal"]],
                                       "yc": _r(X[s]["yc"]), "zc": _r(X[s]["zc"])} for s in "LR"}
     res["points"]["c24_head"] = [_r(v) for v in E.C24_HEAD]
@@ -171,6 +191,7 @@ def refresh(verbose=True):
         for k, v in hp.items():
             res["lengths"]["HP-" + k] = _r(sum(math.dist(a, b) for a, b in zip(v, v[1:])), 1)
         res["points"]["hp_route"] = {"j701_legs": [_r(cx), _r(ym), _r(zl)], "groove": list(groove), "floor_z": zf, "run_y": _r(dzp[2]),
+                                     "dongle_plug_zone": [_r(v) for v in dzp],
                                      "dongle_plug": [_r(sx), _r(dzp[2]), _r(sz)], "j702_plug": [_r(j7x), _r(jzp[2]), _r(j7z)]}
     except Exception as ex:          # pragma: no cover
         if verbose:
