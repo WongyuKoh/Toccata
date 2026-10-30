@@ -607,7 +607,7 @@ def touch_fold(parts):
         cs = sol.transform(R).slice(0.0)
         return [[(float(a), float(c)) for a, c in ring] for ring in cs.to_polygons()]
     byid = {p.id: p for p in parts}
-    for pid in ("TS-CRADLE", "TS-E-SCREEN", "TS-WINCOVER"):
+    for pid in ("TS-CRADLE", "TS-LEDGE-L", "TS-E-SCREEN", "TS-WINCOVER"):
         p = byid[pid]
         rg = section(p.solid, xs)
         uw = [[[r(v, 3) for v in TS.inv(y, z, TS.TILT_USE)] for y, z in ring] for ring in rg]

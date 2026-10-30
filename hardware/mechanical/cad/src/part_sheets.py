@@ -1846,15 +1846,8 @@ def draw_views(sh, L, A, ctx_map, it):
             continue
         if angle_mark(sh, boxes[nm], p, q, a_) is not None:
             nang[nm] += 1
-    # hole tags (view along the hole axis): holes on one axis line share one tag; each tag goes to the first free spot
-    # around its hole (registered, so the layout check sees them)
-    forced = 0
-    for c in A["tag_clusters"]:
-        vb = boxes[c["view"]]
-        if place_text(sh, tag_cands(sh, vb, c, TS), c["label"], TS, xmax=L["vx1"], cls="tr") < 0:
-            forced += 1
-    dx["tags_forced"] = forced
-    # section lines in the views + section blocks
+    # section lines in the views + their letters before the hole tags: a letter has five spots beside its arrow, a tag
+    # has many (2026-10-30: the black keys' H8~H10/H18 tag took the only free spot of the B letter)
     for i, (s, ks, bx, by) in enumerate(L["secs"]):
         let = SEC_LET[i]
         s["let"] = let
@@ -1894,28 +1887,43 @@ def draw_views(sh, L, A, ctx_map, it):
                          (tip[0] + 1.0, tip[1] - 1.0, "start"), (tip[0] + 1.0, tip[1] + 0.78 * TL + 1.0, "start"),
                          (tip[0] + sg_ * 2.0, tip[1] + 0.3 * TL, "start" if sg_ > 0 else "end")]
             place_text(sh, cands, let, TL, xmax=L["vx1"] + 2.0, bold=True)
-        # block
+    # hole tags (view along the hole axis): holes on one axis line share one tag; each tag goes to the first free spot
+    # around its hole (registered, so the layout check sees them)
+    forced = 0
+    for c in A["tag_clusters"]:
+        vb = boxes[c["view"]]
+        if place_text(sh, tag_cands(sh, vb, c, TS), c["label"], TS, xmax=L["vx1"], cls="tr") < 0:
+            forced += 1
+    dx["tags_forced"] = forced
+    # section blocks: every block's label line is reserved first, then the walls / gaps (two most common of each) go where their
+    # text fits (2026-10-30 A14: a wall of the window cover's A-A block landed on the B-B label placed after it)
+    blocks = []
+    for i, (s, ks, bx, by) in enumerate(L["secs"]):
+        let, ax, c = s["let"], s["axis"], s["c"]
         a, b = s["size"]
         vbs = VBox(ks, a, b, bx + 8.0, by + 8.0)
+        lab = "%s-%s 단면 (%s = %s)%s" % (let, let, ax, fnum(c, 2), "" if ks == k else "  %s" % sc_txt(ks))
+        y_lab = vbs.Y + vbs.h + 6.5
+        sh.tboxes.append(((vbs.X, y_lab - 0.78 * TL, vbs.X + text_w(lab, TL), y_lab + 3.8), "_reserve"))
+        blocks.append((s, ks, vbs, lab, y_lab))
+    for s, ks, vbs, lab, y_lab in blocks:
         d = []
         for P in s["polys"]:
             d.append("M" + " ".join("%.2f %.2f" % vbs.P(u, v) for u, v in P) + "Z")
         sh.add("geo", '<path class="psec" fill-rule="evenodd" d="%s"/>' % "".join(d))
-        lab = "%s-%s 단면 (%s = %s)%s" % (let, let, ax, fnum(c, 2), "" if ks == k else "  %s" % sc_txt(ks))
-        y_lab = vbs.Y + vbs.h + 6.5
-        # reserve the label line, then the walls / gaps (two most common of each) where their text fits
-        sh.tboxes.append(((vbs.X, y_lab - 0.78 * TL, vbs.X + text_w(lab, TL), y_lab + 3.8), "_reserve"))
         for kind, lst in (("wall", s["walls"][:2]), ("gap", s["gaps"][:2])):
             for w_, wt, (p_, q_) in lst:
                 if w_ * ks < 0.4:
                     continue
                 dim_across(sh, vbs.P(*p_), vbs.P(*q_), fnum(w_, 2), size=TS)
-        sh.tboxes = [t for t in sh.tboxes if t[1] != "_reserve"]
+    sh.tboxes = [t for t in sh.tboxes if t[1] != "_reserve"]
+    for s, ks, vbs, lab, y_lab in blocks:
         sh.text(vbs.X, y_lab, lab, TL, bold=True)
-        iu, iv = PLANE_AX[ax]
+        iu, iv = PLANE_AX[s["axis"]]
         sh.text(vbs.X, y_lab + 3.5, "그림 왼쪽 아래 = %s %s · %s %s (부품 기준)" % (AX[iu], fnum(s["off"][0], 2), AX[iv], fnum(s["off"][1], 2)),
                 TS - 0.2, cls="tm")
-        dx["secs"].append(dict(let=let, axis=ax, c=c, ks=ks, polys=s["polys"], size=(a, b), off=s["off"]))
+        a, b = s["size"]
+        dx["secs"].append(dict(let=s["let"], axis=s["axis"], c=s["c"], ks=ks, polys=s["polys"], size=(a, b), off=s["off"]))
     return dx, boxes
 
 
@@ -2989,7 +2997,7 @@ def write_meta(idx, ver, rows):
         "(f) pattern notes print sizes to 0.01 (P-03-01 'H3 Ø1.95 x12', was 'Ø2 x11 · Ø1.9'). (g) the duplicate filter only drops a void seen along two axes when the boxes cover each other (> half of the bigger extent): the key hollows that used to vanish behind a small front pocket are listed. (h) pieces thinner than 0.25 and slivers of voids that open elsewhere are counted in a note ('짧은 경사 조각'), not numbered. ",
         "PUBLISH: the page must declare capabilities {downloads: true} for the zip buttons (claude.use('downloads') -> save({filename:'*.zip', data: Blob})); without it the buttons show the file name/size and a note.",
         "3D (2026-10-30, user: '부품 도면을 보는 곳에도 3D 모델링을 둬서 3D 프린팅을 어떤 단위로 하는 건지 볼 수 있게'): the viewer has three modes "
-        "(도면 / 3D 출력 모양 = the STL on the 256 x 256 P1S bed as it prints, print aids such as the key combs and the bed posts in orange / "
+        "(도면 / 3D 출력 모양 = the STL on the 256 x 256 P1S bed as it prints; orange = the faces Bambu Studio's support touches (A13: only the key tails, tree support from the plate; check_support.py) / "
         "3D 조립 자리 = the instrument with this file's instances in blue), every card has a 3D button, and the overview card '출력 단위 3D' paints "
         "the whole instrument by print file (hue per folder, lightness per file; group chips filter it; 벌려 보기 lifts the stacked prints). "
         "Data: fin/parts3d/g-<group>.json + index.json from part_meshes.py (run by write_tab; ids printed in pieces, CU-PLY-BOTTOM / CU-PLY-BACK, "

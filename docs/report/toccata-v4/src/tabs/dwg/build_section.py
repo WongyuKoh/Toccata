@@ -278,7 +278,7 @@ def main():
     out.append('<div class="dwg-grp" data-grp="int" id="dwg-g-int" hidden><h3><span class="no">I</span>내부</h3>'
                '<p class="small muted">뚜껑을 뗀 평면과 단면입니다. 단면의 잘린 면은 빗금이고, 그 뒤는 보이는 그대로입니다.</p>%s</div>' % "".join(g_int))
     out.append('<div class="dwg-grp" data-grp="ka" id="dwg-g-ka" hidden><h3><span class="no">KA</span>건반 액션 부품도 (W1+ r4.5)</h3>'
-               '<p class="small muted">좌표 모델 geometry.json에서 그린 도면입니다. 실선은 쉬는 자세, 주황 점선은 끝까지 누른 자세입니다.</p>%s</div>' % "".join(g_ka))
+               '<p class="small muted">좌표 모델 geometry.json에서 그린 도면입니다. 실선은 쉬는 자세, 주황 점선은 끝까지 누른 자세입니다. 출력 파일은 이 도면에 CAD 조정(부록 A1~A13)을 더한 것입니다 — 예: A13(2026-10-30)부터 건반에 캡스턴 너트 트랩이 없고 캡스턴이 빔의 Ø2.7에 바로 들어가며, 바닥틀의 제어 기판은 기둥 위에 위에서 조입니다. 뽑을 모양은 <a href="#partdwg">03 탭</a> 부품 도면이 기준입니다.</p>%s</div>' % "".join(g_ka))
     out.append('<div class="dwg-grp" data-grp="rear" id="dwg-g-rear" hidden><h3><span class="no">D</span>뒷부분 (L2 · 스피커 앞판 40° · 터치스크린 3판)</h3>'
                '<p class="small muted">맞춤·2배는 PNG, 3배는 SVG를 보여 줍니다 (선명함).</p>%s</div>' % "".join(g_rear))
     out.append('<div class="dwg-grp" data-grp="ren" id="dwg-g-ren" hidden><h3><span class="no">R</span>렌더</h3>'

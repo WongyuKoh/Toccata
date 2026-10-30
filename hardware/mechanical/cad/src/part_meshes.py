@@ -4,10 +4,10 @@ Every sheet in fin/parts/index.json has one print STL. Each STL is welded, quant
 and written as base64 into one JSON file per folder: fin/parts3d/g-<group>.json
     {"v": 1, "parts": {code: {"b": [x0, y0, z0, x1, y1, z1], "p": b64 uint16 xyz, "i": b64 indices, "i4": bool,
                               "nv": vertices, "nt": triangles, "na": triangles of the part itself}}}
-Separate bodies that are print aids come after the part's own triangles (index >= na), so the page can colour them
-apart: the tear-off comb under every key and the black-key step pad (A12 key_print_support), and the posts under the
-bed's front board bosses. The largest body is the part; a smaller body counts as an aid only below AID_MAX of its
-volume (a file with two real bodies would stop the build).
+Triangles from index na on are coloured apart by the page ("sup" says what they are): since A13 (2026-10-30) the faces
+that Bambu Studio's support touches - the key tails' underside (tree support from the build plate, check_support.TREE_OK)
+or, in a print that still needs support, its overhangs ("need"). The A12 print aids (tear-off comb, bed posts) are gone;
+a second body in a file below AID_MAX of the main volume would still be put there (a bigger one stops the build).
 
 fin/parts3d/index.json
     files   code -> mesh file
@@ -24,6 +24,7 @@ usage: python3 hardware/mechanical/cad/src/part_meshes.py   (~10 s; part_sheets.
 import base64
 import collections
 import json
+import math
 import os
 import sys
 
@@ -49,7 +50,25 @@ def b64(a):
     return base64.b64encode(np.ascontiguousarray(a).tobytes()).decode("ascii")
 
 
-def mesh_entry(path):
+def support_faces(m, rel):
+    """A13: faces that face the bed flatter than Bambu's 30 deg threshold, above the first layer, where check_support
+    still finds overhangs - the key tails (Bambu tree support from the plate) or a print that still needs support."""
+    import check_support as CS
+    M = CS.load(stl_path(rel))
+    need, tree = CS.split_tree(rel, CS.overhangs(M))
+    need, _br = CS.split_bridges(rel, need)
+    if not (need or tree):
+        return None, None
+    n, c = m.face_normals, m.triangles_center
+    down = (n[:, 2] < -math.cos(math.radians(CS.ANGLE)) + 1e-6) & (c[:, 2] > m.bounds[0][2] + 0.25)
+    boxes = [b for _z, _a, b in (need or tree)]
+    near = np.zeros(len(c), bool)
+    for (x0, y0, x1, y1) in boxes:
+        near |= (c[:, 0] > x0 - 0.6) & (c[:, 0] < x1 + 0.6) & (c[:, 1] > y0 - 0.6) & (c[:, 1] < y1 + 0.6)
+    return down & near, ("need" if need else "tree")
+
+
+def mesh_entry(path, rel=None):
     m = trimesh.load(path, process=True)
     lab = graph.connected_component_labels(m.face_adjacency, node_count=len(m.faces))
     n = int(lab.max()) + 1
@@ -59,7 +78,11 @@ def mesh_entry(path):
         if k != main and vols[k] > AID_MAX * vols[main]:
             raise SystemExit("part_meshes: %s has a second body of %.0f mm3 (main %.0f) - not a print aid"
                              % (path, vols[k], vols[main]))
-    order = np.argsort(lab != main, kind="stable")          # the part's own faces first, then the aids
+    late = lab != main                                       # print aids (none since A13)
+    sup, kind = support_faces(m, rel) if rel else (None, None)
+    if sup is not None:
+        late = late | sup                                    # faces the slicer's support touches
+    order = np.argsort(late, kind="stable")                  # the part's own faces first, then aids / support faces
     F = m.faces[order]
     lo, hi = m.bounds
     ext = np.where(hi - lo > 0, hi - lo, 1.0)
@@ -67,7 +90,7 @@ def mesh_entry(path):
     i4 = len(m.vertices) > 65535
     idx = F.astype("<u4" if i4 else "<u2")
     return dict(b=[round(float(v), 4) for v in list(lo) + list(hi)], p=b64(q), i=b64(idx), i4=i4,
-                nv=int(len(m.vertices)), nt=int(len(F)), na=int(np.sum(lab == main)))
+                nv=int(len(m.vertices)), nt=int(len(F)), na=int(np.sum(~late)), sup=kind)
 
 
 def world_xf(code):
@@ -161,7 +184,8 @@ def build(idx=None):
     files, xf, aids, meta = {}, {}, {}, {}
     ids_of = collections.defaultdict(list)
     for r in idx["parts"]:
-        e = mesh_entry(stl_path(r["file"]))
+        rel = r["file"] if not r["file"].startswith("hardware/") else os.path.relpath(os.path.join(REPO, r["file"]), CAD)
+        e = mesh_entry(stl_path(r["file"]), rel)
         g = r["group"]
         groups.setdefault(g, {})[r["code"]] = e
         files[r["code"]] = "%s/g-%s.json" % (OUT_REL, g.lower())

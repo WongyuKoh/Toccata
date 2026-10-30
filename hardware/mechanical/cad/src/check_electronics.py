@@ -847,12 +847,12 @@ def main():
         NP["fold"]["glass_top"][0]), P["TS-E-SCREEN-FOLD"].note == "altview" and fs is not None and abs(fs[1] - NP["fold"]["glass_bottom"][0]) < EPS
         and abs(fs[4] - NP["fold"]["glass_top"][0]) < EPS and abs(bb(P["TS-E-SCREEN-FOLD"])[5] - NP["fold"]["glass_bottom"][1]) < EPS, fmt(fs) if fs else "")
     import body as _bd
-    crl = _bd.cradle_local()
+    crl = _bd.cradle_local() + _bd.ledge_local()                      # A14: the glass sits on the glued strips TS-LEDGE-L/R
     scl = E.screen_local()
     side = scl.min_gap(crl ^ box(TS.WALLS["side_inner_xr"] - 0.01, 90, 1.0, 100.0, -2, TS.BOSS["face_w"] - 0.1), 1.0)
     top = scl.min_gap(crl ^ box(-90, 90, TS.WALLS["top_u"][0] - 0.01, 104, -2, 9), 1.0)
     tabg = (scl ^ box(TS.NOTCH["feature_xr"][0] - 0.1, TS.NOTCH["feature_xr"][1] + 0.1, -2, 0.0, -2, 9)).min_gap(crl, 3.0)
-    chk("C-1/C-3 display in the cradle: no overlap; glass bottom on the bottom wall u0 and back on the 4 bosses w8 (shift 0.05 overlaps); side gap %.2f "
+    chk("C-1/C-3 display in the cradle: no overlap; glass bottom on the bottom wall u0 (A14: the glass-seat strips) and back on the 4 bosses w8 (shift 0.05 overlaps); side gap %.2f "
         "(0.3), top gap %.2f (0.5); bottom-edge feature in the notch %.2f clear (W1 2.0, margins x %.2f / %.2f)"
         % (side, top, tabg, TS.NOTCH["feature_xr"][0] - TS.NOTCH["xr"][0], TS.NOTCH["xr"][1] - TS.NOTCH["feature_xr"][1]),
         (scl ^ crl).volume() <= TOL and (scl.translate((0, -0.05, 0)) ^ crl).volume() > 0.05 and (scl.translate((0, 0, 0.05)) ^ crl).volume() > 0.05
@@ -908,7 +908,7 @@ def main():
     cov_u = Bb["TS-WINCOVER"].solid
     hp = TS.place(box(TS.HOLD_PAD["xr"][0], TS.HOLD_PAD["xr"][1], TS.HOLD_PAD["u"][0], TS.HOLD_PAD["u"][1], TS.HOLD_PAD["w"][0], TS.HOLD_PAD["w"][1]))
     chk("TS-C-DSI in the cradle: under the hold pad gap %.2f (= 0.3), clear of the cradle / window cover / clip / lid (no overlap)" % rib.min_gap(hp, 1.0),
-        abs(rib.min_gap(hp, 1.0) - 0.3) < 0.02 and all((rib ^ Bb[i].solid).volume() <= TOL for i in ("TS-CRADLE", "TS-WINCOVER", "TS-RCLIP", "CU-SCREENLID"))
+        abs(rib.min_gap(hp, 1.0) - 0.3) < 0.02 and all((rib ^ Bb[i].solid).volume() <= TOL for i in ("TS-CRADLE", "TS-LEDGE-L", "TS-LEDGE-R", "TS-WINCOVER", "TS-RCLIP", "CU-SCREENLID"))
         and (rib ^ cov_u).volume() <= TOL)
     pw = TS.PWIRE
     for tag, pin in (("RED", "gpio_pin2"), ("BLK", "gpio_pin6")):

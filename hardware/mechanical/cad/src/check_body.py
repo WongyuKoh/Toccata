@@ -37,7 +37,7 @@ sys.path.insert(0, HERE)
 
 import body  # noqa: E402
 import touchscreen_rev3 as TS  # noqa: E402  (rev 3 numbers / poses, the same module body.py builds from)
-from cadlib import box, cyl_x, cyl_y, cyl_z, diff, mesh_arrays, orient, prism_x, tidy, union  # noqa: E402
+from cadlib import box, cyl_x, cyl_y, cyl_z, diff, mesh_arrays, orient, prism_x, prism_z, tidy, union  # noqa: E402
 
 TOL = 0.01
 SPEC = json.load(open(os.path.join(HERE, "..", "spec", "body_L2.json")))
@@ -1497,7 +1497,8 @@ def run_checks_r31(P, by, K, C, E=None):
         % (cp["x"][0], cp["x"][1], cp["y"][0], cp["y"][1], zlu, zp, TS.CLIP["pin_hole_d"], TS.CLIP["pin_hole_depth"], " · ".join("(%.2f, %.2f)" % tuple(q) for q in pins)),
         (float(full(lid, diff(B_(cp["x"][0] + 0.05, cp["x"][1] - 0.05, cp["y"][0] + 0.05, cp["y"][1] - 0.05, zlu + 0.01, zp), [cyl_z(x, y, zlu, zp, 3.3) for (x, y) in pins]))),)
         + tuple(vol(lid, cyl_z(x, y, zlu - 0.1, zlu + TS.CLIP["pin_hole_depth"] - 0.01, TS.CLIP["pin_hole_d"] - 0.1)) for (x, y) in pins)
-        + tuple(float(full(lid, cyl_z(x, y, zlu + TS.CLIP["pin_hole_depth"] + 0.01, zp, 3.0))) for (x, y) in pins), (1, 0, 0, 1, 1))
+        + tuple(float(full(lid, cyl_z(x, y, zlu + TS.CLIP["pin_hole_depth"] + (TS.CLIP["pin_hole_d"] - 1.1) / 2.0 + 0.01, zp, 3.0)))
+                for (x, y) in pins), (1, 0, 0, 1, 1))     # A13: the holes end in a 45 deg point (D1.1 flat) - solid above that
     chk("A-6 8 vent slots 34 x 4 (x564~598 / 624~658, y300~325, pitch 7) open through the plate z%.2f~%.2f" % (zp, zlt),
         (sum(vol(lid, B_(a + 0.05, b - 0.05, c + 0.05, d - 0.05, zp + 0.01, zlt + 0.1)) for (a, b, c, d) in body.SLID_SLOTS), float(len(body.SLID_SLOTS))), (0, 8))
     ls = TS.LID_SCREW
@@ -1515,25 +1516,21 @@ def run_checks_r31(P, by, K, C, E=None):
     at6 = ls["lid_t"] - (10.0 - body.INS3[2])
     true("A-7 counterbore rule: depth = lid thickness at the screw %.1f - (10 - insert %.1f) = %.1f = built %.1f (the old 6.0 would put the tip on the hole "
          "bottom z%.2f: 0 clearance)" % (ls["lid_t"], body.INS3[2], at6, body.SLID_CB[1], zlu - body.INS3[3]), abs(at6 - body.SLID_CB[1]) < 1e-9)
-    # rib rule (spec A header): every rib box is solid except where it crosses the ribbon hole; the x651 rib stops at the hole wall
-    rib_boxes = [(rx_ - 1.0, rx_ + 1.0, body.Y0 + body.SLID_WALL, body.YB - body.SLID_WALL) for rx_ in body.SLID_RIB_X] + \
-                [(body.SLID_X[0] + body.SLID_WALL, body.SLID_X[1] - body.SLID_WALL, ry_ - 1.0, ry_ + 1.0) for ry_ in body.SLID_RIB_Y]
+    # A13 (2026-10-30): the ribbed underside (cells open toward the print bed = 38 x 48 ceilings) became one slab z61.35..69.85 - the
+    # spec's rib rule is met by construction; check the slab is solid everywhere except the ribbon hole, leg pocket, vent slots,
+    # screw holes and clip pin holes
     hole_cut = B_(rx0 - 1.05, rx1 + 1.05, ry0 - 1.05, ry1 + 1.05, zlu - 1, zlt + 1)
     pk_cut = prism_x(body.pocket_cut_poly(), pk["x"][0], pk["x"][1])
-    rib_missing = []
-    for (a, b, c, d) in rib_boxes:
-        rb_ = diff(B_(a + 0.02, b - 0.02, c + 0.02, d - 0.02, zlu + 0.02, zp - 0.02), [hole_cut, pk_cut])
-        miss = rb_.volume() - vol(lid, rb_)
-        if miss > 0.01:
-            rib_missing.append("x%.0f~%.0f y%.0f~%.0f %.2f mm3" % (a, b, c, d, miss))
-    x651 = [vol(lid, B_(650.05, 651.95, y0_, y1_, zlu + 0.05, zp - 0.05)) for (y0_, y1_) in ((217.5, 226.5), (ry0 + 0.01, ry1 - 0.01), (236.6, 248.5))]
-    true("A rib rule: ribs x%s / y%s solid everywhere (merged into the hinge blocks, hole wall, clip pad, pocket block), none inside the hole; x651 stops "
-         "at the hole wall (rib y217~226.55 %.1f / in the hole %.2f / at the clip pad %.1f mm3); clip pin holes %.2f / %.2f from the x651 rib"
-         % ("/".join("%.0f" % v for v in body.SLID_RIB_X), "/".join("%.0f" % v for v in body.SLID_RIB_Y), x651[0], x651[1], x651[2],
-            min(abs(px - 651.0) - 1.0 - TS.CLIP["pin_hole_d"] / 2 for (px, py) in pins), max(abs(px - 651.0) - 1.0 - TS.CLIP["pin_hole_d"] / 2 for (px, py) in pins)),
-         not rib_missing and x651[1] < TOL and x651[0] > 0.98 * 1.9 * 9.0 * 8.4 and x651[2] > 0.98 * 1.9 * 11.9 * 8.4, "; ".join(rib_missing))
+    free = [hole_cut, pk_cut] + [B_(a - 0.05, b + 0.05, c - 0.05, d + 0.05, zlu - 1, zlt + 1) for (a, b, c, d) in body.SLID_SLOTS] \
+        + [cyl_z(sx_, sy_, zlu - 1, zlt + 1, 3.8) for (sx_, sy_) in body.SLID_SCREWS] + [cyl_z(x, y, zlu - 1, zp + 1, 3.6) for (x, y) in pins] \
+        + [cyl_z(sx_, sy_, zlt - body.SLID_CB[1] - 0.05, zlt + 1, body.SLID_CB[0] + 0.1) for (sx_, sy_) in body.SLID_SCREWS]
+    slab = diff(B_(body.SLID_X[0] + 0.02, body.SLID_X[1] - 0.02, body.Y0 + 0.02, body.YB - 0.02, zlu + 0.02, zp - 0.02), free)
+    miss = slab.volume() - vol(lid, slab)
+    true("A13 slab: the underside z%.2f~%.2f is solid over x%.1f~%.1f y%.0f~%.1f except the ribbon hole, leg pocket, 8 vent slots, 4 screw holes "
+         "(+ their D6.5 counterbores) and 2 clip pin holes (spec rib rule met: every rib line lies in the slab) - missing %.3f mm3"
+         % (zlu, zp, body.SLID_X[0], body.SLID_X[1], body.Y0, body.YB, miss), miss < 0.05, "")
     q = by["CU-SCREENLID"].print_solid.bounding_box()
-    chk("A-9 lid printed rib face down (z%.2f on the bed): bed 219 x %.1f x 25.5 (top z86.85 = cheek top)" % (zlu, body.YB - body.Y0),
+    chk("A-9 lid printed slab face down (z%.2f on the bed): bed 219 x %.1f x 25.5 (top z86.85 = cheek top)" % (zlu, body.YB - body.Y0),
         (q[3] - q[0], q[4] - q[1], q[5] - q[2], float(vol(by["CU-SCREENLID"].print_solid, B_(q[0], q[3], q[1], q[4], 0, 0.3)) > 0.3 * 0.3 * 219 * 128.5 * 0.3)),
         (219.0, body.YB - body.Y0, 25.5, 1))
     true("A-8 / D14: no magnet in or under the screen lid, cradle or leg (x501..721)", not [p.id for p in P if "MAG" in p.id and 501 <= p.solid.bounding_box()[0] <= 721])
@@ -1541,6 +1538,7 @@ def run_checks_r31(P, by, K, C, E=None):
     # ---------------- C. cradle (local frame + placed)
     print("   --  C. cradle (xr / u / w frame)")
     crl = body.cradle_local()
+    led = body.ledge_local()
     X0, X1 = TS.CR_XR
     U0, U1 = TS.CR_U
     W0, W1 = TS.CR_W
@@ -1552,8 +1550,15 @@ def run_checks_r31(P, by, K, C, E=None):
         (bod[0], bod[3], bod[1], bod[4], bod[2], bod[5], cb_[1], cb_[5]), (X0, X1, U0, U1, W0, W1, TS.EAR["min_u"], TS.LCLIP["back_w"]))
     chk("C-1 walls: glass pocket xr+-83.35 u0~101.5 w-1~8 empty (glass on the bottom wall u0, top gap 0.5, side gaps 0.3); walls full",
         (vol(crl, B_(-IX + 0.01, IX - 0.01, 0.01, TS.WALLS["top_u"][0] - 0.01, W0 - 0.1, TS.BOSS["face_w"] - 0.01)),
-         float(full(crl, B_(-85.3, -83.4, 1, 100, -0.95, 15.95))), float(full(crl, B_(-80, -70, -2.45, -0.05, -0.95, 13.9))),
-         float(full(crl, B_(-80, -70, 101.55, 103.45, -0.95, 15.95)))), (0, 1, 1, 1))
+         float(full(crl, B_(-85.3, -83.4, 1, 100, -0.95, 15.95))), float(full(crl, B_(-80, -70, -2.45, -0.05, body.LEDGE_W + 0.05, 13.9))),
+         float(full(led, B_(-80, -70, -2.45, -0.05, -0.95, body.LEDGE_W - body.LEDGE_GAP - 0.05))),
+         float(full(crl, B_(-80, -70, 101.55, 103.45, -0.95, 15.95)))), (0, 1, 1, 1, 1))
+    nt_ = TS.NOTCH
+    chk("A14 glass-seat strips TS-LEDGE (the bottom wall in front of w%.0f): u-2.5~0 (seat u0 = the cradle's inner face), glue gap %.2f to the bottom "
+        "wall w8 and the side walls, the notch xr%.0f~%.0f between the two, no overlap with the cradle" % (body.LEDGE_W, body.LEDGE_GAP, nt_["xr"][0], nt_["xr"][1]),
+        (led.bounding_box()[1], led.bounding_box()[4], led.bounding_box()[2], led.bounding_box()[5], body.LEDGE_W - led.bounding_box()[5],
+         IX - led.bounding_box()[3], vol(led, B_(nt_["xr"][0] + 0.01, nt_["xr"][1] - 0.01, U0 - 0.1, 0.1, W0 - 0.1, 9)), len(led.decompose()), vol(led, crl),
+         round(crl.min_gap(led, 0.5), 3)), (U0, 0.0, W0, body.LEDGE_W - body.LEDGE_GAP, body.LEDGE_GAP, body.LEDGE_GAP, 0, 2, 0, body.LEDGE_GAP), tol=0.002)
     chk("C-2 back plate w%.1f~%.1f solid, 0.4 behind the screen's back emboss (w%.1f)" % (PLI, PLO, TS.BODY_T + TS.SC["emboss"]["h"]),
         (float(full(crl, B_(-50, -30, 40, 60, PLI + 0.01, PLO - 0.01))), PLI - (TS.BODY_T + TS.SC["emboss"]["h"])), (1, 0.4))
     bo = TS.BOSS
@@ -1577,21 +1582,43 @@ def run_checks_r31(P, by, K, C, E=None):
     nt, gr, wn, hp = TS.NOTCH, TS.GROOVE, TS.INSP, TS.HOLD_PAD
     chk("C-1 bottom-wall notch xr48~66 u-2.5~0 w-1~8 through; C-8 open groove xr25.75~44.95 u-2.5~3 w8~16; C-5 window xr15.5~45 u33~69 through the plate; "
         "C-7 hold pad xr26.75~39.45 u8~16 w8.6~10.5",
-        (vol(crl, B_(nt["xr"][0] + 0.01, nt["xr"][1] - 0.01, U0 - 0.1, 0.1, W0 - 0.1, nt["w"][1] - 0.01)),
+        (vol(union([crl, led]), B_(nt["xr"][0] + 0.01, nt["xr"][1] - 0.01, U0 - 0.1, 0.1, W0 - 0.1, nt["w"][1] - 0.01)),
          float(full(crl, B_(nt["xr"][0] + 0.1, nt["xr"][1] - 0.1, U0 + 0.1, -0.1, nt["w"][1] + 0.1, 13.0))),
          vol(crl, B_(gr["xr"][0] + 0.01, gr["xr"][1] - 0.01, U0 - 0.1, gr["u"][1] - 0.01, gr["w"][0] + 0.01, W1 + 0.1)),
          vol(crl, B_(wn["xr"][0] + 0.01, wn["xr"][1] - 0.01, wn["u"][0] + 0.01, wn["u"][1] - 0.01, PLI - 0.1, PLO + 0.1)),
          float(full(crl, B_(hp["xr"][0] + 0.01, hp["xr"][1] - 0.01, hp["u"][0] + 0.01, hp["u"][1] - 0.01, hp["w"][0] + 0.01, PLI)))), (0, 1, 0, 0, 1))
     ch = TS.CHANNEL
-    chk("C-9 cross ribs u24 / u80 (2 thick, w13~16), cut at the leg channel xr+-7.3; channel walls xr+-5.3~7.3 to the top wall",
-        tuple(float(full(crl, B_(-80, -8, u - 0.95, u + 0.95, PLO + 0.01, W1 - 0.01))) + float(full(crl, B_(8, 80, u - 0.95, u + 0.95, PLO + 0.01, W1 - 0.01)))
-              for u in TS.CROSS_RIBS_U)
-        + (vol(crl, B_(-5.0, 5.0, 20, 26, PLO + 0.01, W1 + 1)), float(full(crl, B_(-7.25, -5.35, 40, 100, PLO + 0.01, W1 - 0.01)))), (2, 2, 0, 1))
+    rfo = body.RIB_FOOT
+    rib_ok = []
+    for u in TS.CROSS_RIBS_U:                                          # A14: 2 thick at w16, 45 deg underside (u24 leans to -u, u80 has a foot to +u)
+        top = (u - 1 - rfo, u + 1 - rfo) if u < 50 else (u - 1, u + 1)
+        root = (u - 1 - rfo, u + 1) if u < 50 else (u - 1, u + 1 + rfo)
+        air = [(root[1] + 0.05, PLO + 0.05), (root[1] + 3.0, PLO + 0.05), (root[1] + 3.0, W1 - 0.05), (top[1] + 0.1, W1 - 0.05)]
+        for (xa, xb) in ((-58, -12), (50, 58)):                        # clear of the pads, the clevis and the window ring
+            rib_ok += [float(full(crl, B_(xa, xb, top[0] + 0.05, top[1] - 0.05, W1 - 0.3, W1 - 0.01))),
+                       float(full(crl, B_(xa, xb, root[0] + 0.05, root[1] - 0.3, PLO + 0.01, PLO + 0.2))), vol(crl ^ B_(xa, xb, -5, 110, -5, 30), prism_x(air, xa, xb))]
+    chk("C-9 cross ribs u24 / u80 (2 thick at w16), cut at the leg channel xr+-7.3 and round the window; A14 45 deg undersides (u24: root u20~25, top "
+        "u20~22, away from the leg-axle path; u80: foot to u84); channel walls xr+-5.3~7.3 to the top wall",
+        tuple(rib_ok) + (vol(crl, B_(-5.0, 5.0, 20, 26, PLO + 0.01, W1 + 1)), float(full(crl, B_(-7.25, -5.35, 40, 100, PLO + 0.01, W1 - 0.01)))),
+        (1, 1, 0) * 4 + (0, 1))
     chk("C-9 window rib ring 1.8 outside the window (2 thick); 4 back pads 16 x 16 w13~16 with the 45 deg chamfer on the +u face (lands 16 x 13 when folded)",
         (float(full(crl, B_(wn["xr"][0] - 3.75, wn["xr"][0] - 1.85, 40, 60, PLO + 0.01, W1 - 0.01))),
          vol(crl, B_(wn["xr"][0] - 1.75, wn["xr"][0] - 0.05, 40, 60, PLO + 0.01, W1 + 1)))
         + tuple(float(full(crl, B_(pd["xr"][0] + 0.05, pd["xr"][1] - 0.05, pd["u"][0] + 0.05, pd["u"][1] - body.PAD_CH - 0.05, PLO + 0.01, W1 - 0.01))) for pd in TS.PADS),
         (1, 0, 1, 1, 1, 1))
+    wg = body.win_pts()
+    wtop = min(q[1] for q in wg)
+    flat = [q[0] for q in wg if abs(q[1] - wtop) < 1e-6]
+    gz = body.win_pts(body.WIN_RING[0])
+    gt = min(q[1] for q in gz)
+    gxt = [q[0] for q in gz if abs(q[1] - gt) < 1e-6]
+    chk("A14 window: 45 deg gable over u%.0f up to a %.1f flat at u%.2f (bridge < 10), gable open through the plate; ring lower edge with a 45 deg foot "
+        "to u%.1f; over the flat the ring / rib lean 45 deg out of the flange zone (nothing at w13 inside u%.2f, nothing at w15.9 inside u%.2f)"
+        % (wn["u"][0], body.WIN_FLAT, wtop, wn["u"][1] + sum(body.WIN_RING) + W1 - PLO, gt, gt - (W1 - 0.1 - PLO)),
+        (max(flat) - min(flat), wtop, vol(crl, prism_z(body.win_pts(-0.01), PLI - 0.1, PLO + 0.1)),
+         float(full(crl, B_(wn["xr"][0] - 3.7, wn["xr"][1] + 3.7, wn["u"][1] + 3.85, wn["u"][1] + 3.85 + 2.8, PLO + 0.02, PLO + 0.1))),
+         vol(crl, B_(min(gxt) + 0.05, max(gxt) - 0.05, gt + 0.05, wtop, PLO + 0.01, PLO + 0.05)),
+         vol(crl, B_(min(gxt) + 0.05, max(gxt) - 0.05, gt - (W1 - 0.1 - PLO) + 0.05, wtop, W1 - 0.15, W1 - 0.05))), (body.WIN_FLAT, 22.75, 0, 1, 0, 0), tol=0.011)
     ax_head = cyl_x(TS.LEG_PIVOT_UW[0], TS.LEG_PIVOT_UW[1], TS.LG["axle"]["L"] * 0 + TS.CLEVIS["near"][0] - TS.LG["axle"]["L"] - TS.LG["axle"]["head_h"],
                     TS.CLEVIS["near"][0], TS.LG["axle"]["head_d"])
     ribs_only = crl.trim_by_plane((0, 0, 1), PLO + 0.01).trim_by_plane((-1, 0, 0), -(TS.CLEVIS["near"][0] - 0.01))
@@ -1678,8 +1705,8 @@ def run_checks_r31(P, by, K, C, E=None):
     axl = body.m3_button_x(pu, pw, TS.CLEVIS["near"][0], TS.LG["axle"]["L"], +1)
     m25 = union([union([cyl_z(xr, u, bo["seat_w"], bo["seat_w"] + body.M25_HEAD[1], body.M25_HEAD[0]), cyl_z(xr, u, bo["seat_w"] - body.M25_LEN, bo["seat_w"], 2.5)])
                  for xr in bo["xr"] for u in bo["u"]])
-    mov_l = union([crl, body.cover_local(), EL.screen_local(), lgl, axl, m25])
-    moving_ids = {"TS-CRADLE", "TS-WINCOVER", "TS-LEG", "TS-M3X20-LEG", "TS-E-SCREEN"} | {"TS-M25-%d" % k for k in range(1, 5)}
+    mov_l = union([crl, led, body.cover_local(), EL.screen_local(), lgl, axl, m25])
+    moving_ids = {"TS-CRADLE", "TS-LEDGE-L", "TS-LEDGE-R", "TS-WINCOVER", "TS-LEG", "TS-M3X20-LEG", "TS-E-SCREEN"} | {"TS-M25-%d" % k for k in range(1, 5)}
     statics = [p for p in P + list(K) + list(E or []) if p.note not in ("offdesk", "altview") and p.id not in moving_ids and not p.id.startswith("TS-C-")]
     near = statics                                                      # every static part; the per-angle bbox test does the culling
     reach = set()
@@ -1697,7 +1724,7 @@ def run_checks_r31(P, by, K, C, E=None):
         kvol += vol(m, keep)
         miny = min(miny, mb[1])
     R31_INFO.update(sweep_min_y=miny, sweep_hits=worst)
-    true("C-16 swing 22..90 deg (1 deg steps): cradle + cover + screen + stowed leg + axle + M2.5 never cut a static part (%d body / key action / "
+    true("C-16 swing 22..90 deg (1 deg steps): cradle + glass-seat strips + cover + screen + stowed leg + axle + M2.5 never cut a static part (%d body / key action / "
          "electronics parts tested - lid, Pi, cables, pods, modules; %d inside the swept box: %s)" % (len(near), len(reach), ", ".join(sorted(reach))),
          not worst, "; ".join(worst[:6]))
     chk("C-16 nothing of the touchscreen over the modules (y<=%.0f with z>=%.2f) at any angle 22..90; front-most y over the swing (numbers sweep_min_y %.2f)"
@@ -1762,22 +1789,31 @@ def run_checks_r31(P, by, K, C, E=None):
     print("   --  E. small parts and screws")
     cov = by["TS-WINCOVER"].solid
     cvl = body.cover_local()
-    chk("E-1 window cover: no overlap with the cradle; flange on the plate back w13 (shift -0.05 w overlaps); plug 0.2 inside the window; bumps in the grooves",
+    chk("E-1 window cover: no overlap with the cradle; A14 45 deg flange seats on the window's back edge (shift -0.05 w overlaps); plug 0.2 inside "
+        "the gabled window; bumps in the side-wall grooves",
         (vol(cov, cr), float(vol(TS.place(cvl.translate((0, 0, -0.05)), 25.0), cr) > 0.05),
-         (cvl ^ B_(-100, 100, -100, 200, PLI - 0.1, PLO - 0.01)).min_gap(crl ^ B_(10, 50, 28, 75, PLI - 0.1, PLO), 0.5),
-         vol(cvl, crl)), (0, 1, 0.2, 0), tol=0.011)
-    tx0, tx1 = body.COVER_TABS
+         (cvl ^ B_(-100, 100, -100, 200, PLI - 0.1, PLO - TS.INSP["cover"]["plug_under"] - 0.01)).min_gap(crl ^ B_(10, 50, 18, 75, PLI - 0.1, PLO), 0.5),
+         vol(cvl, crl), round(cvl.min_gap(crl, 0.5), 3)), (0, 1, 0.2, 0, 0.0), tol=0.011)
+    ta_, tb_ = body.COVER_TABS
     bt_, bh_, sl_ = body.COVER_BEAM
-    ubf, utf = TS.INSP["u"][0] + TS.INSP["cover"]["plug_under"], TS.INSP["u"][1] - TS.INSP["cover"]["plug_under"]
+    xlf, xhf = TS.INSP["xr"][0] + TS.INSP["cover"]["plug_under"], TS.INSP["xr"][1] - TS.INSP["cover"]["plug_under"]
     beam_ok = []
-    for (b0_, b1_, r0_, r1_) in ((ubf, ubf + bt_, ubf + bt_, ubf + 2.0), (utf - bt_, utf, utf - 2.0, utf - bt_)):
-        beam_ok += [float(full(cvl, B_(tx0 + 0.02, tx1 - 0.02, b0_ + 0.02, b1_ - 0.02, PLI + 0.02, PLI + bh_ - 0.02))),
-                    vol(cvl, B_(tx0 + 0.01, tx1 + 0.99, r0_ + 0.01, r1_ - 0.01, PLI - 0.1, PLO - 0.01)),            # behind the beam
-                    vol(cvl, B_(tx1 + 0.01, tx1 + 0.99, ubf - 0.5 if b0_ < 50 else utf - 2.0, ubf + 2.0 if b0_ < 50 else utf + 0.5, PLI - 0.1, PLO - 0.01)),
-                    vol(cvl, B_(tx0 + 0.01, tx1 - 0.01, b0_ + 0.01, b1_ - 0.01, PLI + bh_ + 0.01, PLO - 0.01))]   # slot under the flange
-    chk("E-1 cover snap beams along xr (root xr%.0f, free end xr%.0f, %.1f x %.1f, slot %.1f under the flange) free on 3 sides; interference %.2f -> strain %.2f %% (<= 2.5)"
-        % (tx0, tx1, bt_, bh_, sl_, body.COVER_SNAP[0], body.COVER_SNAP[1] * 100),
+    for (b0_, b1_, r0_, r1_, e0_, e1_) in ((xlf, xlf + bt_, xlf + bt_, xlf + 2.0, xlf - 0.5, xlf + 2.0), (xhf - bt_, xhf, xhf - 2.0, xhf - bt_, xhf - 2.0, xhf + 0.5)):
+        beam_ok += [float(full(cvl, B_(b0_ + 0.02, b1_ - 0.02, ta_ + 0.02, tb_ - 0.02, PLI + 0.02, PLI + bh_ - 0.02))),
+                    vol(cvl, B_(r0_ + 0.01, r1_ - 0.01, ta_ + 0.01, tb_ + 0.99, PLI - 0.1, PLO - 0.01)),            # behind the beam
+                    vol(cvl, B_(e0_, e1_, tb_ + 0.01, tb_ + 0.99, PLI - 0.1, PLO - 0.01)),                          # past the free end
+                    vol(cvl, B_(b0_ + 0.01, b1_ - 0.01, ta_ + 0.01, tb_ - 0.01, PLI + bh_ + 0.01, PLO - 0.01))]     # slot under the flange
+    chk("E-1 cover snap beams along u on the side faces (root u%.0f, free end u%.0f, %.1f x %.1f, slot %.1f under the flange) free on 3 sides; interference %.2f -> strain %.2f %% (<= 2.5)"
+        % (ta_, tb_, bt_, bh_, sl_, body.COVER_SNAP[0], body.COVER_SNAP[1] * 100),
         tuple(beam_ok) + (float(body.COVER_SNAP[1] <= 0.025),), (1, 0, 0, 0, 1, 0, 0, 0, 1))
+    dmo = TS.INSP["cover"]["dome"]
+    hh = body.DOME_HIP
+    chk("A14 cover dome: hollow to w%.1f + 45 deg hip roof to a %.1f x %.1f flat at w%.2f (outer w%.2f), the ribbon-fold box xr%.2f~%.2f u%.2f~%.2f w10.4~%.1f still empty"
+        % (dmo["inner_to_w"], dmo["xr"][1] - dmo["xr"][0] - 2 * hh, dmo["u"][1] - dmo["u"][0] - 2 * hh, dmo["inner_to_w"] + hh, cvl.bounding_box()[5],
+           dmo["xr"][0], dmo["xr"][1], dmo["u"][0], dmo["u"][1], dmo["inner_to_w"]),
+        (vol(cvl, B_(dmo["xr"][0] + 0.01, dmo["xr"][1] - 0.01, dmo["u"][0] + 0.01, dmo["u"][1] - 0.01, PLI - 0.05, dmo["inner_to_w"])),
+         vol(cvl, B_(dmo["xr"][0] + hh + 0.01, dmo["xr"][1] - hh - 0.01, dmo["u"][0] + hh + 0.01, dmo["u"][1] - hh - 0.01, PLI, dmo["inner_to_w"] + hh - 0.01)),
+         cvl.bounding_box()[5]), (0, 0, dmo["inner_to_w"] + hh + 1.2), tol=0.011)
     rc = by["TS-RCLIP"].solid
     rb = rc.bounding_box()
     chk("E-2 ribbon clip 30 x 12 x 3 at z%.2f~%.2f, pins D3 x 4.5 in the D3.1 x 5 holes (no overlap, tip 0.5 + clamp 0.3 short), clamp gap 0.3 under the pad (= FFC)"
@@ -1806,10 +1842,11 @@ def run_checks_r31(P, by, K, C, E=None):
     ts = [p for p in P if p.id.startswith("TS-")]
     alt = sorted(p.id for p in ts if p.note == "altview")
     chk("F folded state = separate 'altview' parts in group '터치스크린 (접은 상태, 별도 보기)' (excluded from the one-file assembly / 3MF / GLB)",
-        (float(alt == ["TS-CRADLE-FOLD", "TS-LEG-FOLD", "TS-SCREENCOVER", "TS-WINCOVER-FOLD"]), float(all(by[i].group == "터치스크린 (접은 상태, 별도 보기)" for i in alt))), (1, 1))
-    chk("G printed touchscreen parts in 07_터치스크린 (cradle, leg, window cover, clip; the optional screen cover in stl/print_extra), the lid in 05_본체출력물",
+        (float(alt == ["TS-CRADLE-FOLD", "TS-LEDGE-FOLD", "TS-LEG-FOLD", "TS-SCREENCOVER", "TS-WINCOVER-FOLD"]), float(all(by[i].group == "터치스크린 (접은 상태, 별도 보기)" for i in alt))), (1, 1))
+    chk("G printed touchscreen parts in 07_터치스크린 (cradle, A14 glass-seat strips, leg, window cover, clip; the optional screen cover in stl/print_extra), "
+        "the lid in 05_본체출력물",
         (float(all(p.print_folder == ("@extra/선택_화면덮개" if p.id == "TS-SCREENCOVER" else "07_터치스크린") for p in ts if p.kind == "print")), float(by["CU-SCREENLID"].print_folder == "05_본체출력물"),
-         sum(1 for p in ts if p.kind == "print" and p.print_solid is not None)), (1, 1, 5))
+         sum(1 for p in ts if p.kind == "print" and p.print_solid is not None)), (1, 1, 7))
     use = [p for p in ts if p.note != "altview"]
     kv = sum(vol(p.solid, keep) for p in use)
     ub = union_bb(use)

@@ -322,7 +322,7 @@
           g.addGroup(0, e.na * 3, 0);
           if (e.nt > e.na) g.addGroup(e.na * 3, (e.nt - e.na) * 3, 1);
           g.computeBoundingBox(); g.computeBoundingSphere();
-          g.userData = { b: b, aids: e.nt - e.na };
+          g.userData = { b: b, aids: e.nt - e.na, sup: e.sup || null };
           return g;
         });
         geoP[code].catch(function () { delete geoP[code]; });
@@ -763,11 +763,13 @@
       s.add(new TH.LineSegments(gg, new TH.LineBasicMaterial({ color: 0x5b6370 })));
       return s;
     }
-    function aidText(code, n) {
-      if (!n) return '';
-      var g = IX.parts[code].g;
-      return '<br><span class="partdwg-aid"></span>주황 = 출력 뒤 손으로 떼어내는 ' +
-        (g === '01' || g === 'EX' ? '빗(건반 밑, 0.2 mm 떨어져 붙지 않음)' : g === '03' ? '기둥(앞 기판 보스 밑, 0.2 mm 떨어짐)' : '출력 보조') + ' — 슬라이서 서포트는 끕니다';
+    function aidText(code, n, sup) {           // A13: the orange faces are where Bambu Studio's support touches the print
+      if (!n) return '<br>서포트 없음 — Bambu Studio 기본 설정(서포트 문턱 30°)에서 서포트가 생기지 않는 모양 (A13)';
+      if (sup === 'tree') {
+        return '<br><span class="partdwg-aid"></span>주황 = Bambu 트리 서포트가 닿는 면: 숨은 꼬리(빔)만 바닥에서 떠 있어(위에 레버) 여기만 '
+          + '빌드 플레이트에서 올라오는 트리 서포트가 받침 — 서포트 켬 · 트리(자동) · 빌드 플레이트에서만, 출력 뒤 한 덩어리로 떨어짐';
+      }
+      return '<br><span class="partdwg-aid"></span>주황 = 아직 서포트가 생기는 면 (A13에서 남은 부품 — 출력 메모 참고)';
     }
     function showPrint(card) {
       var code = card.getAttribute('data-code');
@@ -791,7 +793,7 @@
         loading(dStage, '');
         if (dInfo) dInfo.innerHTML = '<b>STL 하나 = 한 번에 뽑는 단위</b> · 베드에 놓인 그대로 · 출력 크기 <span class="mono">' +
           ex.map(f1).join(' × ') + '</span> mm (베드 256 × 256) · 이 STL을 <b>' + p.q + '개</b> 출력' +
-          (p.ids.length ? '' : ' · 조립에 들어가지 않는 출력물(공구·지그·예비)') + aidText(code, g.userData.aids);
+          (p.ids.length ? '' : ' · 조립에 들어가지 않는 출력물(공구·지그·예비)') + aidText(code, g.userData.aids, g.userData.sup);
       }).catch(fail);
     }
     function showPlace(card) {

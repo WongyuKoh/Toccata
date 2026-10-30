@@ -3,9 +3,9 @@ end parts, world coordinates (A02..A04: left end part x0..47 + cheek x-16..0, mo
 x = 47 + 164.5 (k-1), right end part x1198.5..1238)."""
 import re
 
-from cadlib import teardrop_y, diff, box, clean, cyl_x, cyl_z, prism_x, union, orient, rot_x, rot_y, to_bed
+from cadlib import teardrop_y, diff, box, clean, cyl_x, cyl_z, prism_x, prism_y, union, orient, rot_x, rot_y, to_bed
 from keyaction import (lever_normalize, BLACK, FEAT, G, L_AXIS, bodies_of, classify, curtain_solid, fixed_groups, frame_split,
-                       key_bought, key_print_support, key_solid, lever_body_solid, lever_bought, lever_cover_print, lever_cover_solid, lever_rest_angle,
+                       key_bought, key_solid, lever_body_solid, lever_bought, lever_cover_print, lever_cover_solid, lever_rest_angle,
                        padbar_solids, plug_solid, rotate_about_L, sensorbar_solid, spring_solid, A12, CAGE_SCREWS, SCREW)
 from parts import COLORS, Part
 
@@ -61,6 +61,12 @@ def collar_plan(side):
     return out
 
 
+def _roof_y(x0, x1, y0, y1, z):
+    """A13: 45 deg gable over a pocket / channel running along y whose flat top at z faced the bed."""
+    xm = (x0 + x1) / 2.0
+    return prism_y([(x0, z - 0.01), (x1, z - 0.01), (xm, z + (x1 - x0) / 2.0)], y0, y1)
+
+
 def cheek_features(side):
     """left cheek: PJ-313 headphone-jack pocket (spec ka2 cheeks.headphone_jack); both cheeks: floor bridge to the
     key-area floor and two M3 bolt seats for the anti-vibration bracket at z12 (spec ka2 bracket.proposal_v4)."""
@@ -71,17 +77,21 @@ def cheek_features(side):
         cuts.append(teardrop_y(cx, 20.0, -0.5, 2.51, 5.2))
         cuts.append(box(-11.49, -5.19, 2.5, 14.2, 17.4, 22.6))
         cuts.append(box(-11.49, -5.19, 2.5, 14.2, 2.5, 17.41))
+        cuts.append(_roof_y(-11.49, -5.19, 2.5, 14.2, 22.6))       # A13: 45 deg roof over the jack pocket (was flat)
         # wire channel for the two C14 AUX cables (W701/W702, about D3.5 each) to the cheek rear face, open below
         cuts.append(box(-12.6, -4.1, 14.19, 212.5, 2.5, 7.5))
+        cuts.append(_roof_y(-12.6, -4.1, 14.19, 212.5, 7.5))       # A13: 45 deg roof (the flat top was 8.5 x 198)
         bolts = [-11.80, -4.88]     # A7: centred on the cheek (x-8.34), 1.4 walls outside the 5.6 nut pockets
     else:
         adds.append(box(23.29, 24.19, 0.0, 212.0, 3.0, 5.0))
         bolts = [28.38, 35.30]      # A7: world 1226.88 / 1233.80, centred on the cheek (local 31.84)
     for bx in bolts:
         cuts.append(teardrop_y(bx, 12.0, 199.0, 212.5, 3.4))   # 2026-10-07: to y199 for M3x20 (was y203 for M3x16) - tip y200.6, 1.6 clear
-        # M3 nut pocket AF 5.5 + 0.1, thickness 2.4 + 0.2 (same rule as the key nut traps), dropped in from below;
-        # roof z15.2 >= 12 + 3.175 so the nut sits on the bolt axis
-        cuts.append(box(bx - 2.8, bx + 2.8, 204.95, 207.55, 2.5, 15.2))
+        # M3 nut pocket AF 5.5 + 0.1, thickness 2.4 + 0.2 (same rule as the key nut traps), dropped in from below.
+        # A13: 90 deg V roof (was flat at z15.2, a ceiling in the print) - the nut (a corner up) rests on the two
+        # slopes with its side corners, which holds it on the bolt axis z12 (V apex 12 + 2.75 + 1.59 = 16.34)
+        cuts.append(box(bx - 2.8, bx + 2.8, 204.95, 207.55, 2.5, 13.55))
+        cuts.append(prism_y([(bx - 2.8, 13.54), (bx + 2.8, 13.54), (bx, 16.34)], 204.95, 207.55))
     return adds, cuts
 
 
@@ -108,13 +118,14 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
             group="%s %s" % (label, "흑건" if black else "백건"), solid=T(k), color=COLORS["black_key" if black else "white_key"],
             material="PETG " + ("검정" if black else "흰색"),
             print_name=pname, print_folder="01_건반",
-            print_solid=bed(union([k, key_print_support(bp, black)]), R_KEY),
+            print_solid=bed(k, R_KEY),
             print_note=("윗면(z55.5)을 매끈한 PEI에 대고 뒤집어 출력. " if black else "윗면(z43.5)을 매끈한 PEI에 대고 뒤집어 출력. ")
-                       + "슬라이서 서포트 끔: 숨은 빔·꼬리(y147~198) 밑의 떼는 빗(가운데 날 0.8 + 8 mm마다 가로 날)"
-                       + ("과 윗면 뒤끝 턱(y144.5~146.8) 밑 받침" if black else "")
-                       + "이 파일에 들어 있고 건반과 0.2 떨어져 붙지 않음 - 출력 뒤 손으로 들어냄 (A12). "
+                       + "서포트: Bambu Studio 서포트 켬, 트리(자동), '빌드 플레이트에서만' - 숨은 빔·꼬리(y146~199)만 바닥에서 "
+                         "%s mm 떠 있어(위에 레버가 0.7 위) 트리 서포트가 그 밑에만 생기고 한 덩어리로 떨어짐. 건반 안쪽의 천장"
+                         "(앞 멈춤 바닥, 걸쇠 가로대, 밸런스 블록 위 칸)은 45° V로 채워 서포트가 생기지 않음 (A13). "
                          "노치 R2.55·핀 홈에 부싱 천 0.5T(i068)를 붙임. 자석 Ø5×2 N35(i098) 압입 + 순간접착제, "
-                         "캡스턴 M3×6 버튼헤드(i014) + M3 너트(i011)를 +x 옆 홈으로 (DESIGN 15, D02)",
+                         "캡스턴 M3×6 버튼헤드(i014)는 빔의 Ø2.7 구멍에 바로 돌려 넣음 - 너트 없음 (A13, DESIGN 15, D02)"
+                         % ("27" if black else "15"),
             source=SRC))
         for nm, m in key_bought(bp, parts, note).items():
             kind = {"capstan": "bought", "nut": "bought", "magnet": "bought", "rest felt": "consumable"}[nm]
@@ -191,10 +202,11 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
     out.append(Part(id="%s-FRAME" % tag, name_ko="프레임 바닥틀 %s" % unit_name, name_en="frame bed " + (side or "module"),
                     kind="print", group="%s 프레임" % label, solid=T(FS["bed"]), color=COLORS["frame"], material="PETG 회색",
                     print_name="프레임_바닥틀_" + unit_ko, print_folder="03_프레임",
-                    print_solid=bed(union([FS["bed"]] + FS["posts"]), R_NONE),
-                    print_note="바로 세워(바닥면을 베드에) 출력, 슬라이서 서포트 끔 (A12). 내민 면은 짧은 다리뿐: 밸런스 레일 밑 리본 길 지붕(23), "
-                               "암 도브테일 홈 천장, 센서 바 턱 1.5" + ("" if side else
-                               ". 기판 앞 보스 2개(레일 뒷면에 매달림) 밑의 떼는 기둥은 파일에 들어 있음(0.2 떨어져 붙지 않음) - 기판 구멍 쪽에서 손으로 뺌") +
+                    print_solid=bed(FS["bed"], R_NONE),
+                    print_note="바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, "
+                               "암 도브테일 홈은 45° 지붕" + ("" if side else
+                               ", 기판 자리는 바닥이 막혀 기판이 기둥 4개 위에 올라감 (위에서 M3×6 나사 2개 + 위치 핀 2개)")
+                               + (", 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕" if side else "") + "). " +
                                ". 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. "
                                + joint + (". 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid" if side else ""),
                     source=SRC, note="A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"))
@@ -291,6 +303,10 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
             kind = "consumable"
         elif n.startswith("control-board screw"):
             ko = "스텐 렌치볼트 M3 × 6 (제어 기판, i059)"
+            # A13: screwed from above through the board (z9.0..10.6) into the post's pilot - head on the board
+            sx = (p["x"][0] + p["x"][1]) / 2
+            sy = sum(q[0] for q in p["side"]) / len(p["side"])
+            m = union([cyl_z(sx, sy, 10.6, 13.6, 5.5), cyl_z(sx, sy, 4.6, 10.61, 3.0)])
         elif n.startswith("control board"):
             ko, col, kind = "제어 기판 (만능기판 70×50, 1.6T)", "pcb_perf", "electronics"
             holes = [cyl_z(c["circle"][0], c["circle"][1], 8.0, 12.0, 3.0) for c in plan if c["part"].startswith("control-board locating pin")]
@@ -328,11 +344,11 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
     # BOM i061 cut pieces: module 163.5 x 211, end parts 63 x 211 / 39.5 x 211 (whole footprint incl. the cheek);
     # the module sheet is cut open under the control-board hatch so the board stays serviceable from below
     if side is None:
-        eva = diff(box(0.5, 164.0, 0.5, 211.5, 0.0, 3.0), [box(46.25, 118.25, 144.5, 196.5, -1, 4)] + EVA_DOVE_NOTCH
+        eva = diff(box(0.5, 164.0, 0.5, 211.5, 0.0, 3.0), EVA_DOVE_NOTCH
                    + [cyl_z(sx, sy, -1, 4, 7.0) for (sx, sy, _k) in CAGE_SCREWS])
-        enote = ("163.5 × 211, 기판 구멍 자리(x46.25~118.25 y144.5~196.5)와 왼쪽 끝 암 도브테일 홈 밑 두 곳"
-                 "(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 "
-                 "(%s)도 뚫음" % ", ".join("x%.1f y%.1f" % (sx, sy) for (sx, sy, _k) in CAGE_SCREWS))
+        enote = ("163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 "
+                 "밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (%s)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+                 % ", ".join("x%.1f y%.1f" % (sx, sy) for (sx, sy, _k) in CAGE_SCREWS))
     elif side == "left":
         eva = box(-16.0, 47.0, 0.5, 211.5, 0.0, 3.0)
         enote = "63 × 211 (볼 포함): 볼 밑의 잭 넣는 홈·선 홈·너트 홈을 덮음"

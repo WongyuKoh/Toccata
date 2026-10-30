@@ -185,7 +185,8 @@ for f in glob.glob(os.path.join(CAD, "stl", "print", "*", "*.stl")):
     else:
         pf["inst_files"] += 1
         pf["inst_parts"] += q
-check(pf == {"inst_files": 90, "inst_parts": 308, "tools": 4, "jigs": 2}, f"stl/print {pf}")   # 10/16 A안: + 판 10장 (12 파일), - 합판 지그 7
+# 10/16 A안: + 판 10장 (12 파일), - 합판 지그 7; 10/29 A12: + 레버틀 3 파일 (9), 가이드 탭 2 파일 (88), 레버 덮개 1 파일 (88)
+check(pf == {"inst_files": 98, "inst_parts": 495, "tools": 4, "jigs": 2}, f"stl/print {pf}")
 S0 = load(rp("hardware", "mechanical", "key-action-v4", "printables", "stage0", "stage0_geometry.json"))
 s0_files = len(glob.glob(rp("hardware", "mechanical", "key-action-v4", "printables", "stage0", "stl", "*.stl")))
 s0_pieces = sum(p["qty"] for p in S0["parts"])
@@ -197,7 +198,7 @@ check("약 8 W/ch" in row17, "amp 8 W/ch at 12.8 V")
 check(not any(it["id"] in ("i096", "i057") for it in items), "plywood sheet and wood glue dropped (10/16 A안)")
 
 # ------------------------------------------------------------------ CAD solids (optional, ~4 s)
-n_cad = 1467
+n_cad = 1567                                       # 10/29 A12 +185 (레버틀 9, 가이드 탭 88, 레버 덮개 88), 10/30 A13 -88 (캡스턴 너트), A14 +3 (유리 턱 띠 L·R + 접은 보기)
 SCREEN_UP_TOP = 189.23                             # CAD value (max z of the TS-* solids in the use pose); re-measured below
 if "--no-cad" not in sys.argv:
     sys.path.insert(0, os.path.join(CAD, "src"))
@@ -205,14 +206,14 @@ if "--no-cad" not in sys.argv:
     import build_all  # noqa: E402  (collect() only; build_all.main() would wipe stl/print)
     parts = build_all.collect()
     n_cad = len(parts)
-    check(n_cad == 1467, f"CAD parts {n_cad}")
+    check(n_cad == 1567, f"CAD parts {n_cad}")
     P = {p.id: p for p in parts}
     use = [p for p in parts if not (p.note or "").startswith("altview") and p.id != "PEDAL-DAMPER"]
     bb = [p.solid.bounding_box() for p in use]
     x0, y0 = min(b[0] for b in bb), min(b[1] for b in bb)
     x1, y1 = max(b[3] for b in bb), max(b[4] for b in bb)
     check((round(x0, 2), round(x1, 2), round(y0, 2), round(y1, 2)) == (-16.0, 1238.0, 0.0, 342.5), f"CAD footprint {x0} {x1} {y0} {y1}")
-    for pid in ("LID-L", "LID-R", "O1-FRAME", "O7-FRAME"):
+    for pid in ("LID-L", "LID-R", "O1-CAGE", "O7-CAGE"):           # A12: the top plate is on the lever cage
         check(abs(P[pid].solid.bounding_box()[5] - LID_TOP) < 0.01, f"{pid} top z")
     check(abs(P["SPKL-PLY-SIDEOUT"].solid.bounding_box()[5] - spk_top) < 0.01, "speaker top z")
     check(abs(P["TS-CRADLE-FOLD"].solid.bounding_box()[5] - fold_top) < 0.01, "folded screen top z")
@@ -312,7 +313,7 @@ def need_str(it):
 
 NEXT = [
     ("10/12 주 ~ 11/8", "단계 0 재료 시험",
-     f"시편 {len(S0['parts'])}종 {s0_pieces}개(key-action-v4/printables/stage0)와 출력 공구 {pf['tools']}개를 먼저 뽑고 시험 {len(s0_tests)}가지와 확인 {len(s0_extra)}가지(밸런스 핀 압입·캡스턴 너트·펠트 두께)를 합니다. 9가지는 첫 모듈로 합니다."),
+     f"시편 {len(S0['parts'])}종 {s0_pieces}개(key-action-v4/printables/stage0)와 출력 공구 {pf['tools']}개를 먼저 뽑고 시험 {len(s0_tests)}가지와 확인 {len(s0_extra)}가지(밸런스 핀 압입·캡스턴 박기·펠트 두께; 캡스턴은 A13부터 너트 없이 첫 건반 빔에서)를 합니다. 9가지는 첫 모듈로 합니다."),
     ("11/1 무렵", "첫 옥타브 모듈 O4",
      "모듈 1개(출력 약 47시간)를 뽑아 조립·납땜하고 PC로 첫 소리를 냅니다. 시험 21(첫 모듈 정하중)을 통과하면 나머지를 뽑습니다."),
     ("10/26 ~ 12/6", "나머지 출력 약 380시간",

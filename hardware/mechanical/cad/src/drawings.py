@@ -1188,6 +1188,8 @@ def pose_parts(theta):
     from parts import Part
     out = [Part(id="TS-CRADLE@%g" % theta, name_ko="화면 받침(크래들)", name_en="", kind="print", group="터치스크린",
                 solid=TS.place(body.cradle_local(), theta), material="PETG"),
+           Part(id="TS-LEDGE@%g" % theta, name_ko="화면 받침 유리 턱 띠", name_en="", kind="print", group="터치스크린",
+                solid=TS.place(body.ledge_local(), theta), material="PETG"),
            Part(id="TS-E-SCREEN@%g" % theta, name_ko="Waveshare 7-DSI-TOUCH-C", name_en="", kind="electronics", group="터치스크린",
                 solid=TS.place(E.screen_local(), theta))]
     return out
@@ -1199,7 +1201,7 @@ def sheet_D05(M):
     sh = Sheet("D05", "1:1")
     X = TS.XC
     xe = sum(TS.hinge_x("left", "ear")) / 2.0
-    moving = {"TS-CRADLE", "TS-E-SCREEN", "TS-LEG", "TS-WINCOVER", "TS-M3X20-LEG", "TS-C-DSI", "TS-C-PWR-RED", "TS-C-PWR-BLK"} | \
+    moving = {"TS-CRADLE", "TS-LEDGE-L", "TS-LEDGE-R", "TS-E-SCREEN", "TS-LEG", "TS-WINCOVER", "TS-M3X20-LEG", "TS-C-DSI", "TS-C-PWR-RED", "TS-C-PWR-BLK"} | \
         {"TS-M25-%d" % k for k in range(1, 5)}
     fixed = [p for p in M.rear if p.id not in moving]
     use = [M.by[i] for i in sorted(moving) if i in M.by]
@@ -1247,15 +1249,17 @@ def sheet_D05(M):
     sh.ordinates_h([(vu.Px(y), y1, fnum(y)) for y in (212.0, keep[0], cb[1], AX[0], leg_a[0], cb[4], leg_t[0], body.YB)], y1 + 3, 1, lo=x0, hi=x1 + 8)
     sh.ordinates_v([(vu.Py(z), None, fnum(z)) for z in (body.Z_LIDU, body.Z_LID, AX[1], ac[1], cb[5])], x0 - 1, -1, lo=y0, hi=y1)
     co = []
-    fr = min((pp for pl in polys(dict((p.id, cs) for p, cs in its_u)["TS-CRADLE"]) for pp in pl), key=lambda t: t[0])
+    cru = dict((p.id, cs) for p, cs in its_u)
+    crp = [pp for k in ("TS-CRADLE", "TS-LEDGE-L", "TS-LEDGE-R") if k in cru for pl in polys(cru[k]) for pp in pl]     # A14: the glued glass-seat strips too
+    fr = min(crp, key=lambda t: t[0])
     co.append(pt_label(vu, AX, "경첩 축 M3×20 (y%s, z%s)" % (fnum(AX[0]), fnum(AX[1]))))
     co.append(pt_label(vu, ac, "화면 보이는 영역 가운데 z%s" % fnum(ac[1], 1)))
     co.append(pt_label(vu, leg_a, "받침다리 축 (y%s, z%s)" % (fnum(leg_a[0]), fnum(leg_a[1]))))
     co.append(pt_label(vu, leg_t, "다리 발끝 (y%s, z%s), 수평 아래 %s°" % (fnum(leg_t[0]), fnum(leg_t[1]), fnum(TS.LEG_ANGLE))))
-    topp = max((pp for pl in polys(dict((p.id, cs) for p, cs in its_u)["TS-CRADLE"]) for pp in pl), key=lambda t: t[1])
+    topp = max(crp, key=lambda t: t[1])
     co.append(pt_label(vu, (topp[0], cb[5]), "가장 높은 곳 z%s (받침 위 끝)" % fnum(cb[5])))
     co.append(pt_label(vu, (cb[1], fr[1]), "가장 앞 y%s (모듈 쪽 지킴선 y%s까지 %s)" % (fnum(cb[1]), fnum(keep[0]), fnum(cb[1] - keep[0]))))
-    names = {"TS-CRADLE": "화면 받침 (출력)", "TS-E-SCREEN": "화면 Waveshare 7-DSI-TOUCH-C", "TS-LEG": "받침다리 (출력)",
+    names = {"TS-CRADLE": "화면 받침 (출력)", "TS-LEDGE-L": "유리 턱 띠 (출력, 붙임)", "TS-E-SCREEN": "화면 Waveshare 7-DSI-TOUCH-C", "TS-LEG": "받침다리 (출력)",
              "CU-SCREENLID": "화면 뚜껑 (출력, 윗면 z72.85)"}
     for p, cs in its_u:
         if p.id in names:
@@ -1276,9 +1280,11 @@ def sheet_D05(M):
     hc = tuple(TS.HG["heel_contact_yz"])
     sh.ordinates_h([(vh.Px(y), hy1, fnum(y)) for y in (212.0, keep[0], hb[1], hc[0], AX[0], hb[4])], hy1 + 3, 1, lo=hx0, hi=hx1 + 8)
     sh.ordinates_v([(vh.Py(z), None, fnum(z)) for z in (body.Z_LID, hc[1], AX[1], hb[5])], hx0 - 1, -1, lo=hy0, hi=hy1)
-    frh = min((pp for pl in polys(dict((p.id, cs) for p, cs in its_h)[heel[0].id]) for pp in pl), key=lambda t: t[0])
-    toph = max((pp for pl in polys(dict((p.id, cs) for p, cs in its_h)[heel[0].id]) for pp in pl), key=lambda t: t[1])
-    bkh = max((pp for pl in polys(dict((p.id, cs) for p, cs in its_h)[heel[0].id]) for pp in pl), key=lambda t: t[0])
+    crh = dict((p.id, cs) for p, cs in its_h)
+    hp_ = [pp for p in heel[:2] if p.id in crh for pl in polys(crh[p.id]) for pp in pl]
+    frh = min(hp_, key=lambda t: t[0])
+    toph = max(hp_, key=lambda t: t[1])
+    bkh = max(hp_, key=lambda t: t[0])
     co = [pt_label(vh, AX, "경첩 축"),
           pt_label(vh, hc, "뒤꿈치가 멈춤 블록에 닿음 (y%s, z%s)" % (fnum(hc[0]), fnum(hc[1]))),
           pt_label(vh, (toph[0], hb[5]), "가장 높은 곳 z%s" % fnum(hb[5])),
@@ -2670,7 +2676,7 @@ def main(parts=None, codes=None, png=True, render=True, verbose=True):
     return [p for _, p in done]
 
 
-TS_MOVING = ("TS-CRADLE", "TS-E-SCREEN", "TS-LEG", "TS-WINCOVER", "TS-M3X20-LEG", "TS-C-DSI", "TS-C-PWR-RED", "TS-C-PWR-BLK",
+TS_MOVING = ("TS-CRADLE", "TS-LEDGE-L", "TS-LEDGE-R", "TS-E-SCREEN", "TS-LEG", "TS-WINCOVER", "TS-M3X20-LEG", "TS-C-DSI", "TS-C-PWR-RED", "TS-C-PWR-BLK",
              "TS-M25-1", "TS-M25-2", "TS-M25-3", "TS-M25-4")
 # cameras: eye (x, y, z) -> look-at (x, y, z), world mm
 RENDERS = [

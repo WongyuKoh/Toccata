@@ -65,9 +65,14 @@
 "scale": 10.0,
 "sections": [
 {
-"axis": "x",
+"axis": "y",
 "c": 3.5,
 "let": "A"
+},
+{
+"axis": "x",
+"c": 3.5,
+"let": "B"
 }
 ],
 "ords": {
@@ -182,5 +187,5 @@ true
 "col_overflow": 0.0,
 "table_cut": 0,
 "ords_missing": 0,
-"t": 0.06
+"t": 0.05
 }

@@ -72,14 +72,19 @@
 <rect class="frame" x="10" y="10" width="400" height="277"/>
 <g id="geo">
 <path class="ph2" d="M28.50 118.50 38.50 118.50 38.50 108.50 28.50 108.50"/>
+<path class="pv" d="M32.66 39.42 A2.100 2.100 0 1 1 35.35 36.50"/>
+<path class="pv" d="M32.66 39.42 A2.099 2.099 0 0 0 34.65 39.26"/>
+<path class="pv" d="M35.16 38.79 A2.100 2.100 0 0 0 35.35 36.50"/>
 <circle class="pv" cx="33.50" cy="113.50" r="2.100"/>
-<circle class="pv" cx="33.50" cy="37.50" r="2.100"/>
-<path class="pv" d="M28.50 145.50 28.50 28.50 48.50 28.50 48.50 145.50 28.50 145.50"/>
-<path class="ph2" d="M31.40 155.50 31.40 160.00 35.60 160.00 35.60 155.50"/>
+<circle class="pv" cx="33.50" cy="113.50" r="2.090"/>
+<circle class="pv" cx="33.50" cy="113.50" r="0.600"/>
+<path class="pv" d="M32.66 39.42 32.66 39.42M34.65 39.26 34.92 39.04 35.16 38.79M35.16 38.79 35.16 38.79M35.35 36.50 35.35 36.50M28.50 145.50 28.50 28.50 48.50 28.50 48.50 145.50 28.50 145.50"/>
+<path class="ph2" d="M31.40 161.50 31.40 155.50M31.40 160.00 35.60 160.00M32.90 161.50 31.41 160.00M34.10 161.50 35.59 160.00M35.60 161.50 35.60 155.50"/>
 <path class="pv" d="M28.50 161.50 48.50 161.50 48.50 155.50 28.50 155.50 28.50 200.35 38.50 200.35 38.50 161.50"/>
-<path class="ph2" d="M92.41 155.50 92.41 160.00 96.59 160.00 96.59 155.50M168.41 155.50 168.41 160.00 172.59 160.00 172.59 155.50"/>
+<path class="ph2" d="M92.41 155.50 92.41 160.00 96.59 160.00 96.59 155.50M168.41 161.50 168.41 155.50M172.59 161.50 172.59 155.50M93.90 161.50 92.42 160.00M95.10 161.50 96.58 160.00"/>
 <path class="pv" d="M89.50 161.50 89.50 200.35 99.50 200.35 99.50 161.50M62.50 161.50 62.50 155.50 179.50 155.50 179.50 161.50 62.50 161.50"/>
-<path class="psec" fill-rule="evenodd" d="M109.50 26.00 189.50 26.00 189.50 20.00 182.59 20.00 182.59 24.50 178.41 24.50 178.41 20.00 106.59 20.00 106.59 24.50 102.41 24.50 102.41 20.00 72.50 20.00 72.50 26.00 99.50 26.00 99.50 64.85 109.50 64.85Z"/>
+<path class="psec" fill-rule="evenodd" d="M109.50 26.00 178.41 26.00 178.41 20.00 106.59 20.00 106.59 24.50 106.58 24.50 105.10 26.00 103.90 26.00 102.42 24.50 102.41 24.50 102.41 20.00 72.50 20.00 72.50 26.00 99.50 26.00 99.50 64.85 109.50 64.85ZM189.50 20.00 182.59 20.00 182.59 26.00 189.50 26.00Z"/>
+<path class="psec" fill-rule="evenodd" d="M82.50 94.85 92.50 94.85 92.50 88.85 79.60 88.85 79.60 93.35 79.59 93.35 78.10 94.85 76.90 94.85 75.41 93.35 75.40 93.35 75.40 88.85 72.50 88.85 72.50 133.70 82.50 133.70Z"/>
 </g>
 <g id="over">
 <path class="pcut" d="M33.500 149.500 L33.500 24.500"/>
@@ -87,6 +92,11 @@
 <path class="seca" d="M30.000 148.000 L31.600 147.520 L31.600 148.480 Z"/>
 <path class="secl" d="M33.500 26.000 L30.000 26.000"/>
 <path class="seca" d="M30.000 26.000 L31.600 25.520 L31.600 26.480 Z"/>
+<path class="pcut" d="M24.500 113.500 L52.500 113.500"/>
+<path class="secl" d="M26.000 113.500 L26.000 110.000"/>
+<path class="seca" d="M26.000 110.000 L26.480 111.600 L25.520 111.600 Z"/>
+<path class="secl" d="M51.000 113.500 L51.000 110.000"/>
+<path class="seca" d="M51.000 110.000 L51.480 111.600 L50.520 111.600 Z"/>
 <path class="grid2" d="M257.000 10.000 L257.000 287.000"/>
 <rect class="grid" x="260.000" y="231.400" width="150.000" height="55.600"/>
 <path class="grid" d="M260.000 242.400 L410.000 242.400"/>
@@ -101,10 +111,10 @@
 <path class="grid2" d="M260.000 272.400 L410.000 272.400"/>
 <path class="grid2" d="M260.000 281.000 L410.000 281.000"/>
 <rect class="pbed" x="260.000" y="34.580" width="34.000" height="34.000"/>
-<path class="pfoot" fill-rule="evenodd" d="M278.33 43.81 275.67 43.81 275.67 59.35 278.33 59.35Z"/>
+<path class="pfoot" fill-rule="evenodd" d="M276.27 58.42 276.22 58.41 276.18 58.39 276.15 58.36 276.12 58.33 276.09 58.29 276.07 58.24 276.06 58.20 276.06 58.15 276.06 58.11 276.07 58.06 276.09 58.02 276.12 57.98 276.15 57.95 276.18 57.92 276.22 57.90 276.27 57.88 276.31 57.88 276.36 57.88 276.40 57.88 276.45 57.90 276.49 57.92 276.52 57.95 276.56 57.98 276.58 58.02 276.60 58.06 276.61 58.11 276.61 58.15 276.61 58.20 276.60 58.24 276.58 58.29 276.56 58.33 276.52 58.36 276.49 58.39 276.45 58.41 276.40 58.42 276.36 58.43 276.31 58.43ZM278.33 43.81 275.67 43.81 275.67 59.35 278.33 59.35Z"/>
 <path class="pfoot" fill-rule="evenodd" d="M310.70 59.37 305.35 59.37 305.35 38.58 300.00 38.58 300.00 62.58 310.70 62.58Z"/>
 <path class="vis" d="M298.000 62.980 L312.702 62.980"/>
-<rect class="grid" x="260.000" y="84.047" width="150.000" height="9.900"/>
+<rect class="grid" x="260.000" y="84.047" width="150.000" height="13.200"/>
 <path class="grid2" d="M268.000 84.047 L268.000 87.347"/>
 <path class="grid2" d="M290.000 84.047 L290.000 87.347"/>
 <path class="grid2" d="M324.000 84.047 L324.000 87.347"/>
@@ -122,6 +132,12 @@
 <path class="grid2" d="M324.000 90.647 L324.000 93.947"/>
 <path class="grid2" d="M329.000 90.647 L329.000 93.947"/>
 <path class="grid2" d="M363.000 90.647 L363.000 93.947"/>
+<path class="grid2" d="M260.000 93.947 L410.000 93.947"/>
+<path class="grid2" d="M268.000 93.947 L268.000 97.247"/>
+<path class="grid2" d="M290.000 93.947 L290.000 97.247"/>
+<path class="grid2" d="M324.000 93.947 L324.000 97.247"/>
+<path class="grid2" d="M329.000 93.947 L329.000 97.247"/>
+<path class="grid2" d="M363.000 93.947 L363.000 97.247"/>
 </g>
 <g id="dim">
 <path class="ex" d="M28.500 201.150 L28.500 207.550"/>
@@ -164,15 +180,24 @@
 <circle class="ah" cx="27.500" cy="161.500" r="0.350"/>
 <path class="dm" d="M27.500 200.350 L26.000 200.350 L23.000 200.350 L22.000 200.350"/>
 <circle class="ah" cx="27.500" cy="200.350" r="0.350"/>
-<path class="dm" d="M116.167 29.200 L116.167 16.800"/>
-<path class="ah" d="M116.167 26.000 L116.647 27.600 L115.687 27.600 Z"/>
-<path class="ah" d="M116.167 20.000 L115.687 18.400 L116.647 18.400 Z"/>
+<path class="dm" d="M115.242 29.200 L115.242 16.800"/>
+<path class="ah" d="M115.242 26.000 L115.722 27.600 L114.762 27.600 Z"/>
+<path class="ah" d="M115.242 20.000 L114.762 18.400 L115.722 18.400 Z"/>
 <path class="dm" d="M96.300 29.237 L112.700 29.237"/>
 <path class="ah" d="M99.500 29.237 L97.900 29.717 L97.900 28.757 Z"/>
 <path class="ah" d="M109.500 29.237 L111.100 28.757 L111.100 29.717 Z"/>
-<path class="dm" d="M185.793 21.125 L175.207 21.125"/>
-<path class="ah" d="M182.593 21.125 L184.193 20.645 L184.193 21.605 Z"/>
-<path class="ah" d="M178.407 21.125 L176.807 21.605 L176.807 20.645 Z"/>
+<path class="dm" d="M175.207 25.000 L185.793 25.000"/>
+<path class="ah" d="M178.407 25.000 L176.807 25.480 L176.807 24.520 Z"/>
+<path class="ah" d="M182.593 25.000 L184.193 24.520 L184.193 25.480 Z"/>
+<path class="dm" d="M69.300 100.062 L85.700 100.062"/>
+<path class="ah" d="M72.500 100.062 L70.900 100.542 L70.900 99.582 Z"/>
+<path class="ah" d="M82.500 100.062 L84.100 99.582 L84.100 100.542 Z"/>
+<path class="dm" d="M83.500 98.050 L83.500 85.650"/>
+<path class="ah" d="M83.500 94.850 L83.980 96.450 L83.020 96.450 Z"/>
+<path class="ah" d="M83.500 88.850 L83.020 87.250 L83.980 87.250 Z"/>
+<path class="dm" d="M82.800 89.975 L72.200 89.975"/>
+<path class="ah" d="M79.600 89.975 L81.200 89.495 L81.200 90.455 Z"/>
+<path class="ah" d="M75.400 89.975 L73.800 90.455 L73.800 89.495 Z"/>
 </g>
 <g id="text">
 <text class="t h tb" x="28.500" y="151.700" font-size="2.80" text-anchor="start">평면도 (위에서)</text>
@@ -193,15 +218,22 @@
 <text class="t h td" x="21.400" y="162.325" font-size="2.50" text-anchor="end">38.85</text>
 <text class="t h td" x="21.400" y="201.175" font-size="2.50" text-anchor="end">0</text>
 <text class="t tm" x="50.000" y="14.000" font-size="2.15" text-anchor="start">x 좌표</text>
-<text class="t h tr" x="35.612" y="111.388" font-size="2.15" text-anchor="start">H1</text>
-<text class="t h tr" x="35.612" y="35.388" font-size="2.15" text-anchor="start">H1</text>
 <text class="t h tb" x="29.000" y="147.000" font-size="2.80" text-anchor="end">A</text>
 <text class="t h tb" x="29.000" y="25.000" font-size="2.80" text-anchor="end">A</text>
-<text class="t h td" x="116.167" y="15.600" font-size="2.15" text-anchor="middle">6</text>
+<text class="t h tb" x="27.200" y="110.900" font-size="2.80" text-anchor="start">B</text>
+<text class="t h tb" x="52.200" y="110.900" font-size="2.80" text-anchor="start">B</text>
+<text class="t h tr" x="35.612" y="35.388" font-size="2.15" text-anchor="start">H1</text>
+<text class="t h tr" x="35.612" y="111.388" font-size="2.15" text-anchor="start">H2/H3</text>
+<text class="t h td" x="115.242" y="15.600" font-size="2.15" text-anchor="middle">6</text>
 <text class="t h td" x="113.500" y="29.990" font-size="2.15" text-anchor="start">10</text>
-<text class="t h td" x="174.407" y="21.878" font-size="2.15" text-anchor="end">4.19</text>
+<text class="t h td" x="186.593" y="25.753" font-size="2.15" text-anchor="start">4.19</text>
+<text class="t h td" x="86.500" y="100.815" font-size="2.15" text-anchor="start">10</text>
+<text class="t h td" x="83.500" y="84.450" font-size="2.15" text-anchor="middle">6</text>
+<text class="t h td" x="71.400" y="90.727" font-size="2.15" text-anchor="end">4.2</text>
 <text class="t h tb" x="72.500" y="71.350" font-size="2.80" text-anchor="start">A-A 단면 (x = 5)</text>
 <text class="t h tm" x="72.500" y="74.850" font-size="1.95" text-anchor="start">그림 왼쪽 아래 = y 0 · z 0 (부품 기준)</text>
+<text class="t h tb" x="72.500" y="140.200" font-size="2.80" text-anchor="start">B-B 단면 (y = 32)</text>
+<text class="t h tm" x="72.500" y="143.700" font-size="1.95" text-anchor="start">그림 왼쪽 아래 = x 0 · z 0 (부품 기준)</text>
 <text class="t tb" x="262.500" y="239.000" font-size="4.60" text-anchor="start">Toccata 부품도</text>
 <text class="t tb" x="407.500" y="239.400" font-size="5.40" text-anchor="end">P-05-24</text>
 <text class="t tb" x="262.500" y="248.000" font-size="3.60" text-anchor="start">뚜껑이음레일기둥 2</text>
@@ -242,20 +274,29 @@
 <text class="t tb" x="364.000" y="86.377" font-size="2.00" text-anchor="start">월드 (입구 중심)</text>
 <text class="t" x="261.000" y="89.677" font-size="2.00" text-anchor="start">H1</text>
 <text class="t" x="269.000" y="89.677" font-size="2.00" text-anchor="start">Ø4.2</text>
-<text class="t" x="291.000" y="89.677" font-size="2.00" text-anchor="start">+z 면에서 4.5 막힘 (z 40.35~44.85)</text>
-<text class="t" x="326.500" y="89.677" font-size="2.00" text-anchor="middle">2</text>
-<text class="t" x="330.000" y="89.677" font-size="2.00" text-anchor="start">x 5 · y 32</text>
-<text class="t" x="364.000" y="89.677" font-size="2.00" text-anchor="start">716, 246, 61.35</text>
-<text class="t" x="261.000" y="92.977" font-size="2.00" text-anchor="start"></text>
-<text class="t" x="269.000" y="92.977" font-size="2.00" text-anchor="start"></text>
-<text class="t" x="291.000" y="92.977" font-size="2.00" text-anchor="start"></text>
-<text class="t" x="326.500" y="92.977" font-size="2.00" text-anchor="middle"></text>
-<text class="t" x="330.000" y="92.977" font-size="2.00" text-anchor="start">x 5 · y 108</text>
-<text class="t" x="364.000" y="92.977" font-size="2.00" text-anchor="start">716, 322, 61.35</text>
-<text class="t tb" x="260.000" y="97.947" font-size="2.70" text-anchor="start">치수 메모</text>
-<text class="t" x="260.000" y="101.621" font-size="2.30" text-anchor="start">· 월드 좌표 = 부품 기준 + (711, 214, 16.5) — 기준 개체 SEAM-POSTRAIL-2</text>
-<text class="t" x="260.000" y="104.795" font-size="2.30" text-anchor="start">· 모서리 좌표 10개 전부 시트에 있음 (좌표 CSV · DXF에도 같음)</text>
-<text class="t" x="260.000" y="107.969" font-size="2.30" text-anchor="start">· A-A 단면 벽 두께: 6 · 10 · 6.91 · 1.5</text>
-<text class="t" x="260.000" y="111.143" font-size="2.30" text-anchor="start">· A-A 단면 홈·틈 폭: 4.19</text>
+<text class="t" x="291.000" y="89.677" font-size="2.00" text-anchor="start">z 38.85~44.85 열림</text>
+<text class="t" x="326.500" y="89.677" font-size="2.00" text-anchor="middle">1</text>
+<text class="t" x="330.000" y="89.677" font-size="2.00" text-anchor="start">x 5 · y 108</text>
+<text class="t" x="364.000" y="89.677" font-size="2.00" text-anchor="start">716, 322, 55.35</text>
+<text class="t" x="261.000" y="92.977" font-size="2.00" text-anchor="start">H2</text>
+<text class="t" x="269.000" y="92.977" font-size="2.00" text-anchor="start">Ø4.2</text>
+<text class="t" x="291.000" y="92.977" font-size="2.00" text-anchor="start">z 40.35~44.85 열림</text>
+<text class="t" x="326.500" y="92.977" font-size="2.00" text-anchor="middle">1</text>
+<text class="t" x="330.000" y="92.977" font-size="2.00" text-anchor="start">x 5 · y 32</text>
+<text class="t" x="364.000" y="92.977" font-size="2.00" text-anchor="start">716, 246, 56.85</text>
+<text class="t" x="261.000" y="96.277" font-size="2.00" text-anchor="start">H3</text>
+<text class="t" x="269.000" y="96.277" font-size="2.00" text-anchor="start">원뿔 Ø1.2→Ø4.2</text>
+<text class="t" x="291.000" y="96.277" font-size="2.00" text-anchor="start">+z 면에서 1.5 막힘 (z 38.85~40.35)</text>
+<text class="t" x="326.500" y="96.277" font-size="2.00" text-anchor="middle">1</text>
+<text class="t" x="330.000" y="96.277" font-size="2.00" text-anchor="start">x 5 · y 32</text>
+<text class="t" x="364.000" y="96.277" font-size="2.00" text-anchor="start">716, 246, 56.85</text>
+<text class="t tb" x="260.000" y="101.247" font-size="2.70" text-anchor="start">치수 메모</text>
+<text class="t" x="260.000" y="104.921" font-size="2.30" text-anchor="start">· 월드 좌표 = 부품 기준 + (711, 214, 16.5) — 기준 개체 SEAM-POSTRAIL-2</text>
+<text class="t" x="260.000" y="108.095" font-size="2.30" text-anchor="start">· 모서리 좌표 10개 전부 시트에 있음 (좌표 CSV · DXF에도 같음)</text>
+<text class="t" x="260.000" y="111.269" font-size="2.30" text-anchor="start">· 한 꼬리표 = 같은 축 위에 겹친 구멍 (계단·원뿔+구멍·깊이 구간; 표에는 따로): H2/H3</text>
+<text class="t" x="260.000" y="114.443" font-size="2.30" text-anchor="start">· A-A 단면 벽 두께: 6 · 10 · 6.91</text>
+<text class="t" x="260.000" y="117.617" font-size="2.30" text-anchor="start">· A-A 단면 홈·틈 폭: 4.19</text>
+<text class="t" x="260.000" y="120.791" font-size="2.30" text-anchor="start">· B-B 단면 벽 두께: 10 · 6 · 2.9 · 12.9</text>
+<text class="t" x="260.000" y="123.965" font-size="2.30" text-anchor="start">· B-B 단면 홈·틈 폭: 4.2</text>
 </g>
 </svg>

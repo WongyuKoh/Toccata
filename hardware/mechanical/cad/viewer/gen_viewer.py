@@ -301,9 +301,10 @@ def key_sets(parts, idx):
             continue
         pre, s = m.group(1), m.group(2)
         black = p.name_ko.startswith("흑건")
-        kk = [idx[i] for i in ("%s-KEY-%s" % (pre, s), "%s-CAPSTAN-%s" % (pre, s), "%s-NUT-%s" % (pre, s), "%s-MAGNET-%s" % (pre, s)) if i in idx]
+        # key + capstan + magnet (A13, 2026-10-30: no capstan nut - the screw taps straight into the beam)
+        kk = [idx[i] for i in ("%s-KEY-%s" % (pre, s), "%s-CAPSTAN-%s" % (pre, s), "%s-MAGNET-%s" % (pre, s)) if i in idx]
         ll = [idx[i] for i in ("%s-LEVER-%s" % (pre, s), "%s-STEEL-%s" % (pre, s), "%s-FELTSTRIP-%s" % (pre, s), "%s-SPRING-%s" % (pre, s)) if i in idx]
-        assert len(kk) == 4 and len(ll) == 4, p.id
+        assert len(kk) == 3 and len(ll) == 4, p.id
         out.append({"n": p.name_ko.split()[-1], "b": 1 if black else 0, "k": kk, "l": ll})
     out.sort(key=lambda r: min(parts[i].solid.bounding_box()[0] for i in r["k"][:1]))
     return out
@@ -375,7 +376,7 @@ def focus_sets(parts, idx):
     one_key = exist(["O4-KEY-C", "O4-CAPSTAN-C", "O4-NUT-C", "O4-MAGNET-C", "O4-RESTFELT-C", "O4-LEVER-C", "O4-STEEL-C", "O4-FELTSTRIP-C",
                      "O4-SPRING-C", "O4-B-keeperfelt-C", "O4-B-balancepinD2-C", "O4-B-upstoppad-C"])
     sets = [
-        ("건반 하나 (C4: 건반·레버·부속 12개)", one_key, "front34"),
+        ("건반 하나 (C4: 건반·레버·부속 %d개)" % len(one_key), one_key, "front34"),
         ("옥타브 모듈 O4 (C4~B4)", [i for g in by_group if re.match(r"^O4 ", g) for i in by_group[g]], None),
         ("왼쪽 끝 부속 (A0~B0)", [i for g in by_group if g.startswith("끝 부속 왼쪽") for i in by_group[g]], None),
         ("오른쪽 끝 부속 (C8)", [i for g in by_group if g.startswith("끝 부속 오른쪽") for i in by_group[g]], None),

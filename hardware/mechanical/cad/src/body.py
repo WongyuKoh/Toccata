@@ -52,7 +52,7 @@ import re
 
 from manifold3d import CrossSection, FillRule, JoinType, Manifold
 
-from cadlib import box, clean, cyl_x, cyl_y, cyl_z, diff, mirror_x, orient, prism_x, prism_y, prism_z, rot_x, rot_y, to_bed, union
+from cadlib import box, clean, cone_z, cyl_x, cyl_y, cyl_z, diff, mirror_x, orient, prism_x, prism_y, prism_z, rot_x, rot_y, to_bed, union
 from parts import COLORS, Part
 import touchscreen_rev3 as TS
 
@@ -335,6 +335,11 @@ def hole(axis, c1, c2, a0, a1, d, apex=None):
     return _prism(axis, tear_pts(c1, c2, d, apex), a0, a1)
 
 
+def cone_y(cx, cz, y0, y1, d0, d1):
+    """A13: cone along +y from y0 (D d0) to y1 (D d1) - the pointed end of a blind hole that opens on the print bed."""
+    return Manifold.cylinder(y1 - y0, d0 / 2.0, d1 / 2.0, _nseg(max(d0, d1))).rotate((-90, 0, 0)).translate((cx, y0, cz))
+
+
 def slot_hole(axis, p, q, a0, a1, d, apex=None):
     """hull of two (teardrop) circles at p and q (2D points in the axis plane)."""
     return _prism(axis, _hull2d(tear_pts(p[0], p[1], d, apex) + tear_pts(q[0], q[1], d, apex)), a0, a1)
@@ -604,6 +609,10 @@ def speaker_parts(S, out):
     cuts = [cyl_y(0.0, 0.0, -1.0, T + 1.5, SP["driver"].get("cutout_d", 94.0))]
     cuts += [cyl_y(px, pz, -0.5, DRV_INSERT[1], DRV_INSERT[0]) for (px, pz) in DRV_PIL]
     cuts += [cyl_y(hx, hz, -0.5, 9.0, 3.4) for (hx, hz) in GR_HOLES]
+    # A13: the baffle prints outer face down, so these blind holes open on the bed and their flat ends were ceilings ->
+    # 45 deg pointed ends with a D2.0 / D1.4 flat left (a one-layer micro-bridge); box interior stays 0.98 / 1.15 away
+    cuts += [cone_y(px, pz, DRV_INSERT[1] - 0.01, DRV_INSERT[1] + 1.8, DRV_INSERT[0], 2.0) for (px, pz) in DRV_PIL]
+    cuts += [cone_y(hx, hz, 9.0 - 0.01, 10.0, 3.4, 1.4) for (hx, hz) in GR_HOLES]
     baf = diff(baf, [sl(c, DRV_X["L"]) for c in cuts])
     bp = " ".join("(%.2f,%.2f)" % p for p in BAFFLE_POLY)
     for side in "LR":
@@ -882,10 +891,10 @@ def bracket(F, out):
                              "L1 그대로; 판 z8~14; 세운 핀 Ø6 z14~24 L x0.5 / R x1221.5, y230) + printed_parts BRK2 (22 × 24 × 16); "
                        + SRC_F + " cheeks + bracket.proposal_v4 (그로밋 웹 1.6)",
                 note=brk_note(side, opened),
-                print_name="방진브래킷2_" + side, R=R_NONE,
-                print_note="밑면(z8)을 베드에, 핀이 위로 서도록 출력(서포트 없음). 그로밋 자리·웹 구멍(y 방향)은 눈물방울(꼭짓점 위) - 자리 밑 바닥은 "
-                           "0.75 (베드 위 첫 3~4층, 그대로 둠), 자리 윗부분은 3 mm 내민 지붕. 벽 4줄 + 채움 "
-                           "40 % (핀은 꽉). 그로밋을 웹에 끼우고 M3×20 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
+                print_name="방진브래킷2_" + side, R=rot_y(90) if side == "L" else rot_y(-90),
+                print_note="A13: 옆으로 눕혀(바깥 옆면을 베드에) 출력 - 핀(Ø6 × 10)이 층과 나란히 누워 굽힘에 강하고, 그로밋 자리·웹 구멍은 세로가 되어 "
+                           "천장이 없음 (예전처럼 밑면을 베드에 두면 그로밋 자리 위 3 mm 지붕에 서포트가 생김). 벽 4줄 + 채움 40 % (핀은 꽉). "
+                           "그로밋을 웹에 끼우고 M3×20 볼트 ×2를 볼의 너트에 조인 뒤(스피커를 올리기 전) 스피커 소켓을 핀에 내려 끼움",
                 dims=dims)
         seats = sorted(BRK_SEAT_X[side])
         for i, hxc in enumerate(seats):
@@ -1317,8 +1326,9 @@ def screen_lid(out):
     x0, x1 = SLID_X
     zp = Z_LID - SLID_PLATE
     kp = TS.KNUCKLE
-    add = [box(x0, x1, Y0, YB, zp, Z_LID),
-           diff(box(x0, x1, Y0, YB, Z_LIDU, zp + 0.01), [box(x0 + SLID_WALL, x1 - SLID_WALL, Y0 + SLID_WALL, YB - SLID_WALL, Z_LIDU - 0.01, zp + 0.02)])]
+    # A13: the cells between the ribs were open toward the print bed (ribbed face down), so the plate over each cell was a
+    # 38 x 48 ceiling -> the whole lid is one slab z61.35..72.85 (the cells held nothing; the clip only puts its pins in the pad)
+    add = [box(x0, x1, Y0, YB, zp, Z_LID), box(x0, x1, Y0, YB, Z_LIDU, zp + 0.01)]
     for rx in SLID_RIB_X:
         add.append(box(rx - SLID_RIB / 2, rx + SLID_RIB / 2, Y0 + SLID_WALL - 0.01, YB - SLID_WALL + 0.01, Z_LIDU, zp + 0.01))
     for ry in SLID_RIB_Y:
@@ -1355,11 +1365,13 @@ def screen_lid(out):
     cuts = [chamfer_front_top(x0, x1)]
     for (sx, sy) in SLID_SCREWS:
         cuts += [cyl_z(sx, sy, Z_LIDU - 0.01, Z_LID + 0.01, TS.LID_SCREW["hole_d"]), cyl_z(sx, sy, Z_LID - SLID_CB[1], Z_LID + 0.01, SLID_CB[0])]
-    cuts += [box(a, b, c, d, zp - 0.01, Z_LID + 0.01) for (a, b, c, d) in SLID_SLOTS]
+    cuts += [box(a, b, c, d, Z_LIDU - 0.01, Z_LID + 0.01) for (a, b, c, d) in SLID_SLOTS]          # A13: through the slab
     cuts.append(prism_x(ribbon_hole_poly(ry0, ry1, Z_LIDU, Z_LID, TS.HOLE["edge_R"]), rx0, rx1))
     cuts.append(prism_x(pocket_cut_poly(), TS.POCKET["x"][0], TS.POCKET["x"][1]))
     for (px, py) in TS.CLIP["pins"]:
         cuts.append(cyl_z(px, py, Z_LIDU - 0.01, Z_LIDU + TS.CLIP["pin_hole_depth"], TS.CLIP["pin_hole_d"]))
+        zt = Z_LIDU + TS.CLIP["pin_hole_depth"]                  # A13: pointed end (the hole opens on the print bed)
+        cuts.append(cone_z(px, py, zt - 0.01, zt + (TS.CLIP["pin_hole_d"] - 1.1) / 2.0, TS.CLIP["pin_hole_d"], 1.1))
     for s in KN_SIDES:                                       # M3x20 axle: near cheek D3.3 clearance, far cheek D2.5 tapped (teardrop, apex up = +z)
         for ck, d in (("near_cheek", 3.3), ("far_cheek", 2.5)):
             a, b = TS.hinge_x(s, ck)
@@ -1438,7 +1450,13 @@ def seam_rails(out):
         px0, px1 = (xs, xs + POST) if i == 0 else (xs - POST, xs)          # post under the front insert
         rz0 = Z_LIDU - RAIL_T
         m = union([box(xs - RAIL_W / 2, xs + RAIL_W / 2, Y0, YBI, rz0, Z_LIDU), box(px0, px1, 241.0, 251.0, Z_BOT, rz0 + 0.01)])
-        m = diff(m, [cyl_z(sx, sy, Z_LIDU - INS3[3], Z_LIDU + 0.01, INS3_HOLE) for (sx_, sy) in SLID_SCREWS if abs(sx_ - sx) < 1e-6])
+        ins = [(sx, sy) for (sx_, sy) in SLID_SCREWS if abs(sx_ - sx) < 1e-6]
+        zb = Z_LIDU - INS3[3]
+        # A13: the rail prints top face down, the insert holes open on the bed: over the post a 45 deg pointed end (D1.2 flat),
+        # in the 6 mm rail alone a through hole (the insert melts into the top 4)
+        m = diff(m, [cyl_z(sx, sy, zb, Z_LIDU + 0.01, INS3_HOLE) for (sx, sy) in ins]
+                 + [cone_z(sx, sy, zb - 1.5, zb + 0.01, 1.2, INS3_HOLE) if 241.0 < sy < 251.0 else cyl_z(sx, sy, rz0 - 0.01, zb + 0.01, INS3_HOLE)
+                    for (sx, sy) in ins])
         spec_post = CC["PR-SEAMPOST-%d" % (i + 1)]
         out.add("SEAM-POSTRAIL-%d" % (i + 1), "뚜껑 이음 레일 + 기둥 %d (출력, x%.0f 이음)" % (i + 1, xs), "lid seam rail + post %d (printed)" % (i + 1),
                 "print", G_CUP, m, COLORS["printed_body"], PETG,
@@ -1483,7 +1501,7 @@ M3_HEAD = (TS.LG["axle"]["head_d"], TS.LG["axle"]["head_h"])   # ISO 7380 M3 but
 M25_HEAD = (4.5, 1.8)        # 추정: M2.5x6 button / pan head (spec table: M2.5x6 x4)
 M25_LEN = 6.0
 PAD_CH = 3.0                 # 45 deg chamfer on the +u (bed-side in print) face of the 4 back pads = rib height w13..16
-COVER_TABS = (18.0, 24.0)    # cover snap beams xr range: root at xr18 (plug body), free end xr24 (clear of the ZIF, ribbon lane, wire lane)
+COVER_TABS = (48.0, 54.0)    # cover snap beams u range (A14: on the window's straight side walls xr15.5 / 45): root u48 (plug body), free end u54
 COVER_BEAM = (1.0, 2.0, 0.5)  # snap beam along xr: thickness (u, bends in the print layer plane), height (w10.5..12.5), slot under the flange
 COVER_BUMP = (0.4, 3.0)      # bump near the beam's free end: out (u) beyond the plug face, length along xr (xr20.8..23.8, 0.2 short of the end)
 COVER_BUMP_W = (0.4, 0.05)   # bump profile along w: 45 deg lead-in rise, flat; then a 45 deg removal ramp (ramp >= 0.2 from the groove top corner)
@@ -1497,6 +1515,14 @@ BOSS_CB_CAP = 3.10           # M2.5 counterbore D5.5 teardrop cut flat at 3.10 f
 SCREEN_COVER = (173.0, 108.0, 3.0)
 EAR_INTO_WALL = 0.05         # ear attachment face pushed 0.05 into the bottom wall (no coincident faces)
 PLI, PLO = TS.PLATE_W        # 10.5 / 13 back plate
+# A14 (2026-10-30): the 07 prints by Bambu Studio's rules too (tree supports under every ceiling, 30 deg, bridges <= 10 mm need none).
+# The cradle stands on its top edge (print z = -u), so every face that looks to +u is a roof and the bottom wall is the top of the print.
+LEDGE_W = 8.0                # the bottom wall in front of w8 (the glass seat, a 166.7 x 9 roof over the pocket) is the glued strip pair TS-LEDGE
+LEDGE_GAP = 0.05             # glue gap of the strips to the bottom wall's front face (w8) and to the side walls
+RIB_FOOT = 3.0               # 45 deg cross-rib undersides: the u24 rib leans away from the leg-axle path (root u20~25, top u20~22), u80 gets a foot to u84
+WIN_FLAT = 9.0               # window top: 45 deg gable over u33 up to a 9 flat at u22.75 (the straight top was a 29.5 bridge)
+WIN_RING = (1.8, 2.0)        # rib ring round the window: gap (cover flange 1.5 + 0.3), thickness
+DOME_HIP = 2.35              # cover dome: 45 deg hip roof over the w15.2 hollow up to a 9 x 9 flat (13.7 was a bridge over 10 mm)
 
 
 def ear_poly():
@@ -1537,37 +1563,95 @@ def tear_cap_pts(c1, c2, d, apex, cap):
     return _hull2d(pts)
 
 
+def _offset_convex(pts, d):
+    """miter offset of a convex polygon (either winding) by d (> 0 = outward)."""
+    n = len(pts)
+    s = 1.0 if sum(pts[i][0] * pts[(i + 1) % n][1] - pts[(i + 1) % n][0] * pts[i][1] for i in range(n)) > 0 else -1.0
+    ln = []
+    for i in range(n):
+        (x0, y0), (x1, y1) = pts[i], pts[(i + 1) % n]
+        L = math.hypot(x1 - x0, y1 - y0)
+        ln.append((x0 + s * (y1 - y0) / L * d, y0 - s * (x1 - x0) / L * d, x1 - x0, y1 - y0))
+    out = []
+    for i in range(n):
+        px, py, dx, dy = ln[i - 1]
+        qx, qy, ex, ey = ln[i]
+        t = ((qx - px) * ey - (qy - py) * ex) / (dx * ey - dy * ex)
+        out.append((px + dx * t, py + dy * t))
+    return out
+
+
+def win_pts(off=0.0):
+    """A14 inspection window (xr, u): xr15.5~45 u33~69 with a 45 deg gable over u33 up to the WIN_FLAT top at u22.75 - the cradle prints on
+    its top edge (z = -u) and the straight window top was a 29.5 bridge, over Bambu Studio's 10 mm 'max bridge length'; off > 0 = outward."""
+    wx0, wx1 = TS.INSP["xr"]
+    wu0, wu1 = TS.INSP["u"]
+    g = (wx1 - wx0 - WIN_FLAT) / 2.0
+    pts = [(wx0, wu1), (wx1, wu1), (wx1, wu0), (wx1 - g, wu0 - g), (wx0 + g, wu0 - g), (wx0, wu0)]
+    return _offset_convex(pts, off) if off else pts
+
+
 def cradle_local():
-    """C-1..C-15 in the cradle frame (x = xr, y = u, z = w)."""
+    """C-1..C-15 in the cradle frame (x = xr, y = u, z = w). A14: printed on its top edge with no support - the glass seat in front of w8 is
+    the strip pair ledge_local(), and every face looking to +u (down in print) is a 45 deg slope or a bridge under 10 mm."""
     X0, X1 = TS.CR_XR
     U0, U1 = TS.CR_U
     W0, W1 = TS.CR_W
     IX = TS.WALLS["side_inner_xr"]                                     # 83.35
     IU0, IU1 = TS.WALLS["bottom_u"][1], TS.WALLS["top_u"][0]           # 0 / 101.5
-    rt = TS.RIB_T
-    add = [diff(box(X0, X1, U0, U1, W0, W1), [box(-IX, IX, IU0, IU1, W0 - 0.01, PLI), box(-IX, IX, IU0, IU1, PLO, W1 + 0.01)])]
+    # the front cavity runs on through the bottom wall in front of w8 (A14: that part is TS-LEDGE)
+    front = prism_x([(U0 - 0.01, W0 - 0.01), (IU1, W0 - 0.01), (IU1, PLI), (IU0, PLI), (IU0, LEDGE_W), (U0 - 0.01, LEDGE_W)], -IX, IX)
+    add = [diff(box(X0, X1, U0, U1, W0, W1), [front, box(-IX, IX, IU0, IU1, PLO, W1 + 0.01)])]
+    # A14: 45 deg gussets under the bottom wall (the top of the print) in front of the plate (w8~10.5) and behind it (w13~16)
+    add.append(prism_x([(IU0 - 0.01, LEDGE_W + 0.01), (IU0 - 0.01, PLI + 0.01), (IU0 + PLI - LEDGE_W - 0.01, PLI + 0.01)], -IX - 0.01, IX + 0.01))
+    add.append(prism_x([(IU0 - 0.01, PLO - 0.01), (IU0 - 0.01, W1 - 0.01), (IU0 + W1 - PLO - 0.01, PLO - 0.01)], -IX - 0.01, IX + 0.01))
     cw0, cw1 = TS.CHANNEL["xr_walls"][0][0], TS.CHANNEL["xr_walls"][1][1]       # -7.3 / 7.3: cross ribs cut at the leg channel
-    for ur in TS.CROSS_RIBS_U:
-        add.append(box(-IX - 0.01, cw0, ur - rt / 2, ur + rt / 2, PLO - 0.01, W1))
-        add.append(box(cw1, IX + 0.01, ur - rt / 2, ur + rt / 2, PLO - 0.01, W1))
+    back = []
+    for ur in TS.CROSS_RIBS_U:                                         # A14: 45 deg rib undersides (RIB_FOOT)
+        if ur < 50:
+            pr = [(ur - 1 - RIB_FOOT, PLO - 0.01), (ur + 1, PLO - 0.01), (ur + 1 - RIB_FOOT, W1), (ur - 1 - RIB_FOOT, W1)]
+        else:
+            pr = [(ur - 1, PLO - 0.01), (ur + 1 + RIB_FOOT, PLO - 0.01), (ur + 1, W1), (ur - 1, W1)]
+        back += [prism_x(pr, -IX - 0.01, cw0), prism_x(pr, cw1, IX + 0.01)]
     for (a, b) in TS.CHANNEL["xr_walls"]:                             # channel walls start 0.5 inside the clevis cheeks (same shape, no
         add.append(box(a, b, TS.CHANNEL["u"][0] + 0.5, IU1 + 0.01, PLO - 0.01, W1))   # coplanar face with the cheek's u26.2 edge)
     wx0, wx1 = TS.INSP["xr"]
-    wu0, wu1 = TS.INSP["u"]
-    g, t = 1.8, 2.0                                                    # rib ring 1.8 outside the window (cover ledge 1.5 + 0.3), 2 thick
-    add.append(diff(box(wx0 - g - t, wx1 + g + t, wu0 - g - t, wu1 + g + t, PLO - 0.01, W1), [box(wx0 - g, wx1 + g, wu0 - g, wu1 + g, PLO - 0.02, W1 + 0.01)]))
+    g, t = WIN_RING                                                    # rib ring 1.8 outside the window (cover flange 1.5 + 0.3), 2 thick
+    back.append(prism_z(win_pts(g + t), PLO - 0.01, W1))
+    wl = TS.INSP["u"][1] + g + t                                       # 72.8: 45 deg foot under the ring's lower edge
+    back.append(prism_x([(wl - 0.01, PLO - 0.01), (wl - 0.01, W1 - 0.01), (wl + W1 - PLO - 0.01, PLO - 0.01)], wx0 - g - t - 0.5, wx1 + g + t + 0.5))
+    fz = win_pts(g)                                                    # nothing of the ring / u24 rib inside the flange zone; over the gable's
+    ut = min(q[1] for q in fz)                                         # flat the zone's edge leans 45 deg out (a ring top there was a 3 deep roof)
+    xt = [q[0] for q in fz if abs(q[1] - ut) < 1e-6]
+    keep = [prism_z(fz, PLO - 0.02, W1 + 0.02),
+            prism_x([(ut + 0.02, PLO - 0.02), (ut + 30.0, PLO - 0.02), (ut + 30.0, W1 + 0.02), (ut - (W1 - PLO) - 0.02, W1 + 0.02)], min(xt) - 0.5, max(xt) + 0.5)]
+    add.append(diff(union(back), keep))
     for pd in TS.PADS:                                                 # pads with the 45 deg chamfer on the +u face (support-free)
         u0p, u1p = pd["u"]
         add.append(prism_x([(u0p, PLO - 0.01), (u1p, PLO - 0.01), (u1p, PLO), (u1p - PAD_CH, W1), (u0p, W1)], pd["xr"][0], pd["xr"][1]))
     bw0, bw1 = TS.BOSS["w"]
     fw = TS.BOSS["fill_to_side_wall"]
+    hw = fw["width_u"] / 2
     for xr in TS.BOSS["xr"]:
         fx = next(r for r in fw["xr"] if r[0] <= xr <= r[1])
+        fa, fb = fx[0] - (0.01 if fx[0] < 0 else 0), fx[1] + (0.01 if fx[1] > 0 else 0)
         for u in TS.BOSS["u"]:
             add.append(cyl_z(xr, u, bw0, bw1, TS.BOSS["d"]))
-            add.append(box(fx[0] - (0.01 if fx[0] < 0 else 0), fx[1] + (0.01 if fx[1] > 0 else 0), u - fw["width_u"] / 2, u + fw["width_u"] / 2, bw0, bw1))
+            add.append(box(fa, fb, u - hw, u + hw, bw0, bw1))
+            # A14: boss + side-wall block stand 2.5 (front) / 3 (back) off the plate: sheared 45 deg gussets under them; the top pair's run
+            # on to the top wall (u101.5, 50 deg)
+            sf = IU1 + 0.01 - (u + hw) if u > 50 else PLI - bw0
+            sb = IU1 + 0.01 - (u + hw) if u > 50 else bw1 - PLO
+
+            def foot(w0_, du):
+                return union([cyl_z(xr, u + du, w0_, w0_ + 0.01, TS.BOSS["d"]), box(fa, fb, u + du - hw, u + du + hw, w0_, w0_ + 0.01)])
+            # (the hulls start 0.3 inside the boss faces w8 / w16 on the same 45 deg line: a foot slab flush with a face left the STL open)
+            add.append(Manifold.batch_hull([foot(bw0 + 0.3, 0.3 * sf / (PLI - bw0)), foot(PLI, sf)]))
+            add.append(Manifold.batch_hull([foot(bw1 - 0.31, 0.3 * sb / (bw1 - PLO)), foot(PLO - 0.01, sb)]))
     hp = TS.HOLD_PAD
     add.append(box(hp["xr"][0], hp["xr"][1], hp["u"][0], hp["u"][1], hp["w"][0], PLI + 0.01))
+    add.append(prism_x([(hp["u"][1] - 0.01, hp["w"][0] + 0.01), (hp["u"][1] - 0.01, PLI + 0.01), (hp["u"][1] + PLI - hp["w"][0] - 0.01, PLI + 0.01)],
+                       hp["xr"][0], hp["xr"][1]))                       # A14: 45 deg foot under the hold pad (1.9 off the plate)
     ep = ear_poly()
     for s in KN_SIDES:
         e0, e1 = TS.HG[s]["ear"]
@@ -1580,22 +1664,21 @@ def cradle_local():
     for (a, b) in cl["xr_bodies"]:
         add.append(prism_x(bt, a, b))
     lip = cl["catch"]
-    add.append(box(cl["xr_bodies"][0][1] - 0.01, cl["xr_bodies"][0][1] + lip, cl["u"][0], cl["u"][1], cl["catch_from_w"], bw))
-    add.append(box(cl["xr_bodies"][1][0] - lip, cl["xr_bodies"][1][0] + 0.01, cl["u"][0], cl["u"][1], cl["catch_from_w"], bw))
+    # catch lips 0.01 inside the clip body's u ends and top (A14: flush faces left the float STL open there)
+    add.append(box(cl["xr_bodies"][0][1] - 0.01, cl["xr_bodies"][0][1] + lip, cl["u"][0] + 0.01, cl["u"][1] - 0.01, cl["catch_from_w"], bw - 0.01))
+    add.append(box(cl["xr_bodies"][1][0] - lip, cl["xr_bodies"][1][0] + 0.01, cl["u"][0] + 0.01, cl["u"][1] - 0.01, cl["catch_from_w"], bw - 0.01))
     cr = union(add)
 
     ap_w = (0, -1)                                                     # teardrop apex: -u = up in the print (top edge on the bed)
     ap_x = (-1, 0)
     cuts = []
     gr = TS.GROOVE
-    cuts.append(box(gr["xr"][0], gr["xr"][1], U0 - 0.01, gr["u"][1], gr["w"][0], W1 + 0.01))
-    nt = TS.NOTCH
-    cuts.append(box(nt["xr"][0], nt["xr"][1], U0 - 0.01, nt["u"][1] + 0.01, W0 - 0.01, nt["w"][1]))
-    cuts.append(box(wx0, wx1, wu0, wu1, PLI - 0.01, PLO + 0.01))
-    tx0, tx1 = COVER_TABS
+    cuts.append(box(gr["xr"][0], gr["xr"][1], U0 - 0.01, gr["u"][1], gr["w"][0] - 0.01, W1 + 0.01))
+    cuts.append(prism_z(win_pts(), PLI - 0.01, PLO + 0.01))
+    ta, tb = COVER_TABS
     gd, gh = COVER_GROOVE
-    cuts.append(box(tx0 - 0.4, tx1 + 0.4, wu0 - gd, wu0 + 0.01, PLI - 0.01, PLI + gh))          # cover latch grooves (window walls)
-    cuts.append(box(tx0 - 0.4, tx1 + 0.4, wu1 - 0.01, wu1 + gd, PLI - 0.01, PLI + gh))
+    cuts.append(box(wx0 - gd, wx0 + 0.01, ta - 0.4, tb + 0.4, PLI - 0.01, PLI + gh))           # cover latch grooves (window side walls)
+    cuts.append(box(wx1 - 0.01, wx1 + gd, ta - 0.4, tb + 0.4, PLI - 0.01, PLI + gh))
     for xr in TS.BOSS["xr"]:
         for u in TS.BOSS["u"]:
             cuts.append(hole("z", xr, u, TS.BOSS["face_w"] - 0.01, W1 + 0.01, TS.BOSS["hole_d"], apex=ap_w))
@@ -1611,34 +1694,53 @@ def cradle_local():
     return diff(cr, cuts)
 
 
+def ledge_local(side=None):
+    """A14 glass-seat strips: the bottom wall in front of w8 (u-2.5~0, w-1~8), cut off the cradle because on the cradle's top edge it was a
+    166.7 x 9 roof; the bottom-wall notch xr48~66 is the gap between the two. Glued (i071) to the bottom wall's front face w8, 0.05 glue gap
+    there and at the side walls; printed with the glass-seat face u0 on the bed (2.5 high)."""
+    U0, W0 = TS.CR_U[0], TS.CR_W[0]
+    IX = TS.WALLS["side_inner_xr"]
+    u1 = TS.WALLS["bottom_u"][1]
+    nt = TS.NOTCH
+    pcs = {"L": box(-IX + LEDGE_GAP, nt["xr"][0], U0, u1, W0, LEDGE_W - LEDGE_GAP), "R": box(nt["xr"][1], IX - LEDGE_GAP, U0, u1, W0, LEDGE_W - LEDGE_GAP)}
+    return pcs[side] if side else union(list(pcs.values()))
+
+
 def cover_local():
-    """E-1 inspection-window cover: plug (window - 0.2, plate 2.5), flange (window + 1.5, 2 thick on w13), dome over the ribbon fold
-    (inside xr26.25..39.95 u36.95..50.65 to w15.2, skin 1.2), 2 snap beams along xr (root xr18 in the plug body, free end xr24, 1.0 thick
-    in u, w10.5..12.5 with a 0.5 slot under the flange) whose end bumps (0.4 out, 45 deg lead-in and 45 deg removal ramp) catch the
-    plate's window-wall grooves. Bending is in u = in the print layer plane; 0.2 interference at the bump centre xr22.3, 4.3 from the root, gives about 1.6 % strain (COVER_SNAP)."""
-    wx0, wx1 = TS.INSP["xr"]
-    wu0, wu1 = TS.INSP["u"]
+    """E-1 inspection-window cover on the A14 gabled window: plug = window - 0.2 (plate 2.5); 45 deg flange from the plug edge at w12.8 out to
+    window + 1.5 at w14.5 + rim to w15 (it seats on the window's back edge); dome over the ribbon fold: hollow xr26.25..39.95 u36.95..50.65 to
+    w15.2 and a 45 deg hip roof on to a 9 x 9 flat at w17.55, skin 1.2; 2 snap beams along u on the plug's side faces (root u48 in the plug body,
+    free end u54, 1.0 thick in xr, w10.5..12.5 with a 0.5 slot under the flange) whose end bumps (0.4 out, 45 deg lead-in and 45 deg removal
+    ramp) catch grooves in the window's side walls. Bending is in xr = in the print layer plane; 0.2 interference at the bump centre u52.3,
+    4.3 from the root, gives about 1.6 % strain (COVER_SNAP). Printed plug face down, the only roofs are the 9 x 9 hip flat and the 7 x 2.3
+    slots over the beams - bridges under Bambu Studio's 10 mm."""
     cv = TS.INSP["cover"]
     fl, fit, t = cv["flange"], cv["plug_under"], cv["t"]
     dm = cv["dome"]
     sk = 1.2
-    plug = box(wx0 + fit, wx1 - fit, wu0 + fit, wu1 - fit, PLI, PLO + 0.01)
-    flange = box(wx0 - fl, wx1 + fl, wu0 - fl, wu1 + fl, PLO, PLO + t)
-    dome = box(dm["xr"][0] - sk, dm["xr"][1] + sk, dm["u"][0] - sk, dm["u"][1] + sk, PLO, dm["inner_to_w"] + sk)
-    hollow = box(dm["xr"][0], dm["xr"][1], dm["u"][0], dm["u"][1], PLI - 0.1, dm["inner_to_w"])
-    tx0, tx1 = COVER_TABS
+    P, F = win_pts(-fit), win_pts(fl)
+    wc0, wc1 = PLO - fit, PLO + fl                                      # 45 deg flange: the plug outline at w12.8 -> window + 1.5 at w14.5
+    plug = prism_z(P, PLI, PLO + 0.01)
+    flange = union([Manifold.batch_hull([prism_z(P, wc0, wc0 + 0.01), prism_z(F, wc1 - 0.01, wc1)]), prism_z(F, wc1 - 0.01, PLO + t)])
+    (x0, x1), (u0, u1), wi = dm["xr"], dm["u"], dm["inner_to_w"]
+    h = DOME_HIP
+    hollow = union([box(x0, x1, u0, u1, PLI - 0.1, wi),
+                    Manifold.batch_hull([box(x0, x1, u0, u1, wi - 0.01, wi), box(x0 + h, x1 - h, u0 + h, u1 - h, wi + h - 0.01, wi + h)])])
+    dome = Manifold.batch_hull([box(x0 - sk, x1 + sk, u0 - sk, u1 + sk, PLO, wi + sk),
+                                box(x0 - sk + h, x1 + sk - h, u0 - sk + h, u1 + sk - h, wi + sk + h - 0.01, wi + sk + h)])
+    ta, tb = COVER_TABS
     bt, bht, slot = COVER_BEAM
     bo, bl = COVER_BUMP
     lead, flat = COVER_BUMP_W
-    ub, ut = wu0 + fit, wu1 - fit                                         # plug u faces 33.2 / 68.8
-    rel = [box(tx0, tx1 + 1.0, ub - 0.01, ub + 2.0, PLI - 0.01, PLO), box(tx0, tx1 + 1.0, ut - 2.0, ut + 0.01, PLI - 0.01, PLO)]
-    w_top = PLI + bht                                                     # beam top w12.5, slot w12.5..13 under the flange
-    beams = [box(tx0 - 0.01, tx1, ub, ub + bt, PLI, w_top), box(tx0 - 0.01, tx1, ut - bt, ut, PLI, w_top)]
+    xl, xh = TS.INSP["xr"][0] + fit, TS.INSP["xr"][1] - fit             # plug side faces xr15.7 / 44.8
+    rel = [box(xl - 0.31, xl + 2.0, ta, tb + 1.0, PLI - 0.01, PLO), box(xh - 2.0, xh + 0.31, ta, tb + 1.0, PLI - 0.01, PLO)]
+    w_top = PLI + bht                                                   # beam top w12.5, slot w12.5..13 under the flange
+    beams = [box(xl, xl + bt, ta - 0.01, tb, PLI, w_top), box(xh - bt, xh, ta - 0.01, tb, PLI, w_top)]
     wb = PLI + COVER_BUMP_LIFT
     wl, wf, wt = wb + lead, wb + lead + flat, wb + 2 * lead + flat       # 10.95 / 11.00 / 11.40
-    bump_lo = [(ub + 0.3, wb), (ub + 0.3, wt), (ub, wt), (ub - bo, wf), (ub - bo, wl), (ub, wb)]        # 0.3 into the beam (no 0.01 slivers)
-    bump_hi = [(ut - 0.3, wb), (ut, wb), (ut + bo, wl), (ut + bo, wf), (ut, wt), (ut - 0.3, wt)]
-    bumps = [prism_x(_hull2d(bp), tx1 - bl - 0.2, tx1 - 0.2) for bp in (bump_lo, bump_hi)]
+    bump_l = [(xl + 0.3, wb), (xl + 0.3, wt), (xl, wt), (xl - bo, wf), (xl - bo, wl), (xl, wb)]        # 0.3 into the beam (no 0.01 slivers)
+    bump_h = [(xh - 0.3, wb), (xh, wb), (xh + bo, wl), (xh + bo, wf), (xh, wt), (xh - 0.3, wt)]
+    bumps = [prism_y(_hull2d(bp), tb - bl - 0.2, tb - 0.2) for bp in (bump_l, bump_h)]
     return union([diff(union([plug, flange, dome]), [hollow] + rel)] + beams + bumps)
 
 
@@ -1684,15 +1786,20 @@ def touch_parts(out):
             COLORS["printed_body"], "PETG", source=src_c,
             note=("사양과 다름(작은 고침): ① 뒤 패드 4개의 +u 면(출력 때 베드 쪽 아래로 향함)을 45° × %.0f 모따기 - 사양 C-17 '패드는 45° 모따기로 "
                   "서포트 없이'; 접혔을 때 받침 발에 얹히는 면은 16 × %.0f (u%.0f~%.0f · u%.0f~%.0f), 뒤 발의 턱(y322.05)과 1.5 이상; ② 다리 클립 몸 "
-                  "u%.0f~%.0f의 +u 쪽에 45° 받침(w%.2f → u%.2f에서 뒷판)을 붙임 - 같은 이유, 접은 다리·뚜껑과 닿지 않음; ③ 점검창 벽(뒷판, 창 아래·위 "
-                  "가장자리) xr%.0f~%.0f에 덮개 걸쇠 홈 %.1f × 앞쪽 %.1f - 사양 E-1 '걸쇠 2개(모양은 CAD 재량)'의 짝; ④ 귀 붙는 면을 아래 벽 안으로 "
+                  "u%.0f~%.0f의 +u 쪽에 45° 받침(w%.2f → u%.2f에서 뒷판)을 붙임 - 같은 이유, 접은 다리·뚜껑과 닿지 않음; ③ 점검창 옆벽(뒷판, xr15.5 · 45) "
+                  "u%.0f~%.0f에 덮개 걸쇠 홈 %.1f × 앞쪽 %.1f - 사양 E-1 '걸쇠 2개(모양은 CAD 재량)'의 짝; ④ 귀 붙는 면을 아래 벽 안으로 "
                   "%.2f 넣음(면 겹침 없이 한 몸); ⑤ 아래 뒤 모서리 모따기 C%.0f → C%.1f - C%.0f면 90°에서 경첩 볼과 %.2f (W1 3D 모델도 0.541, 0.59는 2D 값), "
                   "C%.1f로 사양 C-10의 %.2f 이상을 지킴; ⑥ 보스 Ø%.1f 자리파기 물방울 꼭짓점을 축에서 %.1f로 평평하게 자름 - 보스가 R4라 꼭짓점(%.2f)까지 "
-                  "파면 살이 %.2f만 남음, 자르면 %.1f (평평한 천장 폭 %.2f 브리지). "
+                  "파면 살이 %.2f만 남음, 자르면 %.1f (평평한 천장 폭 %.2f 브리지); ⑦ A14 (Bambu Studio 서포트 기준 - 윗변을 베드에 세운 출력에서 +u를 보는 면은 "
+                  "모두 천장): 아래 벽의 w%.0f 앞(유리가 얹히는 턱, 166.7 × 9 천장)을 떼어 따로 뽑아 붙이는 유리 턱 띠 TS-LEDGE로, 남은 아래 벽 밑(뒷판 앞 "
+                  "w8~10.5 · 뒤 w13~16)·가로 갈비 밑·창 둘레 갈비 아래 변·보스와 옆벽 채움 밑·누름 패드 밑에 45° 받침, u24 갈비는 다리 축 길에서 "
+                  "멀어지게 기울임(뿌리 u20~25, 위 u20~22), u80 갈비는 발을 u84까지; 점검창 위에 45° 박공(맨 위 u22.75, 폭 %.0f 다리 - Bambu 기본 "
+                  "'최대 브리지 길이' 10 mm 안), 창 둘레 갈비는 박공을 따라 돌고 박공 위 가운데는 45°로 눕힘(덮개 턱과 1.8); 덮개 걸쇠 홈은 창 옆벽 "
+                  "u%.0f~%.0f로 옮김. "
                   "그대로: 바깥 xr±85.35 (x%.2f~%.2f) u-2.5~103.5 w-1~16; 아래 벽 안쪽 u0(유리 얹힘), 위 벽 u101.5(위 틈 0.5), 옆벽 안쪽 xr±83.35(틈 0.3); "
                   "뒷판 w%.1f~%.1f; 보스 Ø8 (xr±77, u6.5 · 94.5) w8~16 + 옆벽까지 폭 8 채움, 구멍 Ø%.1f, 뒤(w16)에서 Ø%.1f 자리파기 → 머리 자리 w%.0f; "
-                  "아래 벽 홈 xr48~66 u-2.5~0 w-1~8; 점검창 xr15.5~45 u33~69 + 둘레 갈비 1.8 밖; 누름 패드 xr26.75~39.45 u8~16 w8.6~10.5; 아래 트인 홈 "
-                  "xr25.75~44.95 u-2.5~3 w8~16; 가로 갈비 u%s (다리 길 xr±7.3에서 끊음); 다리 길 벽 xr±5.3~7.3 u26.2~; 귀 x%.1f~%.1f · %.1f~%.1f "
+                  "아래 벽 홈 xr48~66 u-2.5~0 w-1~8 (A14: 유리 턱 띠 두 조각 사이); 점검창 xr15.5~45 u33~69 (+ A14 박공) + 둘레 갈비 1.8 밖; 누름 패드 xr26.75~39.45 u8~16 w8.6~10.5; 아래 트인 홈 "
+                  "xr25.75~44.95 u-2.5~3 w8~16; 가로 갈비 u%s (다리 길 xr±7.3과 점검창 둘레에서 끊음); 다리 길 벽 xr±5.3~7.3 u26.2~; 귀 x%.1f~%.1f · %.1f~%.1f "
                   "(옆모양 = numbers.json ear.profile_uw, 축 (u%.0f, w%.0f) Ø3.3, 뒤꿈치 (u%.2f, w%.2f)); 다리 걸이 가까운 볼 xr%.1f~%.1f Ø3.3 · 먼 볼 "
                   "xr%.1f~%.1f Ø2.5 (×6 막힘 = 볼 폭 6이라 관통), 축 (u%.0f, w%.1f) R%.1f, +u 쪽 밑면 45° (뒷판 w13에서 u%.2f, t03 B-B u38.87); 다리 클립 xr±5.3~8.5 u%.0f~%.0f, 걸림 0.8 (w%.2f~%.2f); "
                   "25°에서 가장 앞 y%.2f, 가장 높은 z%.2f, 가장 뒤 y%.2f"
@@ -1701,7 +1808,7 @@ def touch_parts(out):
                      COVER_GROOVE[1], EAR_INTO_WALL, TS.CHAMFER_C2, CR_C2, TS.CHAMFER_C2, C2_GAP_AT_C2, CR_C2,
                      TS.CR["rib_relief_at_cheeks"]["gap_after"], TS.BOSS["cbore_d"], BOSS_CB_CAP, TS.BOSS["cbore_d"] / 2 * math.sqrt(2.0),
                      TS.BOSS["d"] / 2 - TS.BOSS["cbore_d"] / 2 * math.sqrt(2.0), TS.BOSS["d"] / 2 - BOSS_CB_CAP,
-                     2 * (TS.BOSS["cbore_d"] / 2 * math.sqrt(2.0) - BOSS_CB_CAP), TS.XC + TS.CR_XR[0], TS.XC + TS.CR_XR[1], PLI, PLO, TS.BOSS["hole_d"], TS.BOSS["cbore_d"],
+                     2 * (TS.BOSS["cbore_d"] / 2 * math.sqrt(2.0) - BOSS_CB_CAP), LEDGE_W, WIN_FLAT, COVER_TABS[0] - 0.4, COVER_TABS[1] + 0.4, TS.XC + TS.CR_XR[0], TS.XC + TS.CR_XR[1], PLI, PLO, TS.BOSS["hole_d"], TS.BOSS["cbore_d"],
                      TS.BOSS["seat_w"], "·".join("%.0f" % u for u in TS.CROSS_RIBS_U), TS.hinge_x("left", "ear")[0], TS.hinge_x("left", "ear")[1],
                      TS.hinge_x("right", "ear")[0], TS.hinge_x("right", "ear")[1], TS.AX_U, TS.AX_W, TS.EAR["heel_uw"][0], TS.EAR["heel_uw"][1],
                      TS.CLEVIS["near"][0], TS.CLEVIS["near"][1], TS.CLEVIS["far"][0], TS.CLEVIS["far"][1], pu, pw, TS.CLEVIS["R"], CLEVIS_END_U, cl["u"][0],
@@ -1709,11 +1816,13 @@ def touch_parts(out):
             print_name="화면받침_크래들", R=TS.print_R_top_down(th), folder=FOLDER_TS,
             print_note="윗변(u103.5 면)을 베드에 세워 출력, 귀가 위 (높이 약 0, 사양 119.76). 귀 축·다리 걸이 구멍(x 방향)과 보스 구멍(w 방향)은 "
                        "물방울(꼭짓점 위)로 뽑고 드릴로 다듬음(귀·가까운 볼 Ø3.3, 먼 볼 Ø2.5, 보스 Ø2.8; 보스 자리파기 Ø5.5는 물방울 위를 평평하게 자른 모양, "
-                       "%.2f 브리지). 다리 걸이 볼(밑면 45°, 뒷판에서 u38.87)·다리 클립·뒤 패드는 45° 면이라 서포트 없음; 가로 갈비·창 둘레 갈비·보스는 3 mm 이하 짧은 내민 면. 아래 벽(u−2.5~0)의 앞 턱 w−1~10.5(유리가 얹히는 면)는 출력 때 "
-                       "지붕이 되므로 그 밑(유리 주머니 안, 앞이 트여 떼기 쉬움)에만 트리 서포트. 약 0 g, 약 3.7시간(W1 추정)" % (2 * (TS.BOSS["cbore_d"] / 2 * math.sqrt(2.0) - BOSS_CB_CAP),),
+                       "%.2f 브리지). 서포트 끔 (A14, Bambu Studio 기준): +u를 보는 면(출력 때 아래)은 모두 45° - 다리 걸이 볼(밑면 45°, 뒷판에서 "
+                       "u38.87)·다리 클립·뒤 패드, 아래 벽·가로 갈비·창 둘레 갈비 아래 변·보스·누름 패드 밑의 45° 받침; 천장은 점검창 박공 맨 위 "
+                       "폭 9 다리 하나(10 mm 안이라 서포트 없음)와 2 mm 안의 구멍 꼭대기뿐. 유리가 얹히는 앞 턱은 따로 뽑는 유리 턱 띠(같은 폴더). "
+                       "약 0 g, 약 3.7시간(W1 추정)" % (2 * (TS.BOSS["cbore_d"] / 2 * math.sqrt(2.0) - BOSS_CB_CAP),),
             dims=[("x", TS.XC + TS.CR_XR[0], TS.XC + TS.CR_XR[1], "받침 폭 170.7 (유리 166.1 + 틈 0.3 + 옆벽 2)", 0),
                   ("x", TS.XC + TS.BOSS["xr"][0], TS.XC + TS.BOSS["xr"][1], "M2.5 보스 154 (화면 구멍)", 1),
-                  ("x", TS.XC + TS.INSP["xr"][0], TS.XC + TS.INSP["xr"][1], "점검창 29.5 (u33~69)", 2),
+                  ("x", TS.XC + TS.INSP["xr"][0], TS.XC + TS.INSP["xr"][1], "점검창 29.5 (u22.75~69, 위 45° 박공 · 맨 위 9)", 2),
                   ("x", TS.hinge_x("left", "ear")[0], TS.hinge_x("right", "ear")[1], "경첩 귀 8 두 개 (x542.8~550.8 · 671.2~679.2)", 3),
                   ("x", TS.XC + TS.GROOVE["xr"][0], TS.XC + TS.GROOVE["xr"][1], "아래 트인 홈 19.2 (리본 + 전원선)", 4),
                   ("x", TS.XC + TS.NOTCH["xr"][0], TS.XC + TS.NOTCH["xr"][1], "아래 벽 홈 18 (화면 돌기)", 5),
@@ -1754,27 +1863,49 @@ def touch_parts(out):
     src_v = TS.SRC_SPEC + " C-5 (창 xr15.5~45 u33~69) + E-1 (끼움부 = 창 − 0.2, 두께 = 뒷판 2.5, 턱 1.5 크게 두께 2, 볼록 자리 안 w15.2, 걸쇠 2개) + t05"
     out.add("TS-WINCOVER", "점검창 덮개 (리본 접힘 자리 볼록)", "inspection-window cover (domed over the ribbon fold)", "print", G_TS, cov,
             COLORS["printed_body"], "PETG", source=src_v,
-            note="사양 그대로: 끼움부 xr%.1f~%.1f u%.1f~%.1f w%.1f~%.1f, 턱 xr%.1f~%.1f u%.1f~%.1f w%.0f~%.0f, 볼록 자리 안 xr%.2f~%.2f u%.2f~%.2f (w%.1f까지, 살 1.2 → "
-                 "바깥 w%.1f); 추정(사양 E-1 '걸쇠 2개, 모양은 CAD 재량'): 걸쇠 = 끼움부 아래·위 끝의 xr 방향 탄성 보 2개 (뿌리 xr%.0f = 끼움부 몸, "
-                 "자유 끝 xr%.0f, 두께 %.1f (u) × 높이 %.1f (w%.1f~%.1f), 뒤·끝 틈 1, 턱 밑 틈 %.1f) 끝 쪽 xr%.1f~%.1f의 돌기 %.1f (45° 들어가는 경사 + 45° 빼는 경사, "
-                 "높이 w%.2f~%.2f)가 뒷판 창 벽 홈 %.1f × %.1f에 걸림; 끼움 %.1f, 휨은 출력 층 안(u) 방향, 변형률 약 %.1f%% (PETG 항복 3~4%%보다 작게) - "
-                 "처음 안(뒷판 쪽 w 방향 혀, 길이 2.1)은 약 6.8%%라 금 갈 위험으로 바꿈"
-                 % (TS.INSP["xr"][0] + cvd["plug_under"], TS.INSP["xr"][1] - cvd["plug_under"], TS.INSP["u"][0] + cvd["plug_under"],
-                    TS.INSP["u"][1] - cvd["plug_under"], PLI, PLO, TS.INSP["xr"][0] - cvd["flange"], TS.INSP["xr"][1] + cvd["flange"],
-                    TS.INSP["u"][0] - cvd["flange"], TS.INSP["u"][1] + cvd["flange"], PLO, PLO + cvd["t"], cvd["dome"]["xr"][0], cvd["dome"]["xr"][1],
-                    cvd["dome"]["u"][0], cvd["dome"]["u"][1], cvd["dome"]["inner_to_w"], cvd["dome"]["inner_to_w"] + 1.2, COVER_TABS[0], COVER_TABS[1],
-                    COVER_BEAM[0], COVER_BEAM[1], PLI, PLI + COVER_BEAM[1], COVER_BEAM[2], COVER_TABS[1] - 0.2 - COVER_BUMP[1], COVER_TABS[1] - 0.2,
-                    COVER_BUMP[0], PLI + COVER_BUMP_LIFT, PLI + COVER_BUMP_LIFT + 2 * COVER_BUMP_W[0] + COVER_BUMP_W[1], COVER_GROOVE[0], COVER_GROOVE[1], COVER_SNAP[0],
-                    COVER_SNAP[1] * 100.0),
+            note="사양 그대로: 끼움부 = 창 - %.1f (두께 = 뒷판 w%.1f~%.1f), 턱 = 창 + %.1f (w%.0f까지), 볼록 자리 안 xr%.2f~%.2f u%.2f~%.2f w%.1f까지, 살 1.2; "
+                 "A14 (Bambu Studio 서포트 기준, 끼움부 면을 베드에): 창이 위 45° 박공(맨 위 u22.75, 폭 %.0f)이라 끼움부·턱도 같은 육각; 턱 밑면은 "
+                 "끼움부 가장자리 w%.1f에서 창 + %.1f의 w%.1f까지 45° 모따기(창 뒤 모서리에 선으로 얹힘, 턱 1.7 처마가 없어짐) + w%.0f까지 테; 볼록 자리 "
+                 "천장 w%.1f 위에 45° 지붕을 올려 맨 위 9 × 9 다리(w%.2f, 바깥 w%.2f) - 13.7 다리는 Bambu 기본 '최대 브리지 길이' 10 mm를 넘음; "
+                 "추정(사양 E-1 '걸쇠 2개, 모양은 CAD 재량'): 걸쇠 = 끼움부 왼·오른 옆면의 u 방향 탄성 보 2개 (뿌리 u%.0f = 끼움부 몸, 자유 끝 u%.0f, "
+                 "두께 %.1f (xr) × 높이 %.1f (w%.1f~%.1f), 뒤·끝 틈 1, 턱 밑 틈 %.1f) 끝 쪽 u%.1f~%.1f의 돌기 %.1f (45° 들어가는 경사 + 45° 빼는 경사, "
+                 "높이 w%.2f~%.2f)가 창 옆벽 홈 %.1f × %.1f에 걸림; 끼움 %.1f, 휨은 출력 층 안(xr) 방향, 변형률 약 %.1f%% (PETG 항복 3~4%%보다 작게)"
+                 % (cvd["plug_under"], PLI, PLO, cvd["flange"], PLO + cvd["t"], cvd["dome"]["xr"][0], cvd["dome"]["xr"][1], cvd["dome"]["u"][0],
+                    cvd["dome"]["u"][1], cvd["dome"]["inner_to_w"], WIN_FLAT, PLO - cvd["plug_under"], cvd["flange"], PLO + cvd["flange"], PLO + cvd["t"],
+                    cvd["dome"]["inner_to_w"], cvd["dome"]["inner_to_w"] + DOME_HIP, cvd["dome"]["inner_to_w"] + DOME_HIP + 1.2, COVER_TABS[0],
+                    COVER_TABS[1], COVER_BEAM[0], COVER_BEAM[1], PLI, PLI + COVER_BEAM[1], COVER_BEAM[2], COVER_TABS[1] - 0.2 - COVER_BUMP[1],
+                    COVER_TABS[1] - 0.2, COVER_BUMP[0], PLI + COVER_BUMP_LIFT, PLI + COVER_BUMP_LIFT + 2 * COVER_BUMP_W[0] + COVER_BUMP_W[1], COVER_GROOVE[0],
+                    COVER_GROOVE[1], COVER_SNAP[0], COVER_SNAP[1] * 100.0),
             print_name="점검창덮개", R=TS.print_R_w_down(th), folder=FOLDER_TS,
-            print_note="끼움부 면(w10.5, 볼록 자리 속이 열린 면)을 베드에, 턱·볼록 자리가 위. 턱은 끼움부보다 1.7 내밀어 짧은 내민 면, 볼록 자리 천장은 "
-                       "13.7 브리지, 걸쇠 보 위 턱은 2 × 7 브리지 - 서포트 없음. 걸쇠 보는 벽 2줄(0.42) 이상으로 꽉 채움. 약 0 g",
+            print_note="끼움부 면(w10.5, 볼록 자리 속이 열린 면)을 베드에, 턱·볼록 자리가 위. 서포트 끔 (A14): 턱 밑면 45°, 천장은 볼록 자리 지붕 맨 위 "
+                       "9 × 9와 걸쇠 보 위 홈 7 × 2.3 다리뿐(Bambu 기본 최대 브리지 10 mm 안). 걸쇠 보는 벽 2줄(0.42) 이상으로 꽉 채움. 약 0 g",
             dims=[("x", TS.XC + TS.INSP["xr"][0] - cvd["flange"], TS.XC + TS.INSP["xr"][1] + cvd["flange"], "턱 32.5 (창 29.5 + 1.5씩)", 0),
-                  ("x", TS.XC + cvd["dome"]["xr"][0] - 1.2, TS.XC + cvd["dome"]["xr"][1] + 1.2, "볼록 16.1", 1)])
+                  ("x", TS.XC + cvd["dome"]["xr"][0] - 1.2, TS.XC + cvd["dome"]["xr"][1] + 1.2, "볼록 16.1 (지붕 맨 위 9 × 9)", 1)])
     p = out[-1]
     p.print_note = p.print_note.replace("약 0 g", "약 %.0f g" % (p.solid.volume() / 1000.0 * 1.27))
     out.add("TS-WINCOVER-FOLD", "점검창 덮개 - 접은 상태", "inspection-window cover, folded", "print", G_TSF, TS.place(cvl, TS.TILT_FOLD),
             COLORS["printed_body"], "PETG", source=src_v, note=ALT, print_name="점검창덮개", folder=FOLDER_TS, no_print=True)
+
+    # ---- A14 glass-seat strips (the bottom wall in front of w8, cut off the cradle): left / right of the bottom-wall notch
+    nt = TS.NOTCH
+    IX = TS.WALLS["side_inner_xr"]
+    src_e = (TS.SRC_SPEC + " C-1 (아래 벽 u-2.5~0, 안쪽 면 u0에 유리 아래 끝이 얹힘; 아래 벽 홈 xr48~66 w-1~8) - A14에서 받침 아래 벽의 w%.0f 앞을 떼어 낸 조각"
+             % LEDGE_W)
+    for sd, ko, en, xa, xb in (("L", "왼쪽", "left", -IX + LEDGE_GAP, nt["xr"][0]), ("R", "오른쪽", "right", nt["xr"][1], IX - LEDGE_GAP)):
+        out.add("TS-LEDGE-" + sd, "화면 받침 유리 턱 띠 %s (붙임)" % ko, "cradle glass-seat strip, %s (glued)" % en, "print", G_TS,
+                TS.place(ledge_local(sd), th), COLORS["printed_body"], "PETG", source=src_e,
+                note="A14: 받침을 윗변으로 세워 뽑으면 아래 벽의 앞 턱(유리가 얹히는 면, 166.7 × 9)이 맨 위 천장이라 따로 뽑음. %s 띠 xr%.2f~%.2f (%.2f; "
+                     "두 띠 사이가 아래 벽 홈 xr%.0f~%.0f), u%.1f~0, w%.0f~%.2f - 받침 아래 벽 앞면(w%.0f)·옆벽 안쪽 면과 붙임 틈 %.2f. 붙이기: 화면을 받침에 "
+                     "나사로 고정한 뒤 띠를 유리 아래 끝에 대고(유리 = 위치 지그) 받침을 책상에 세워 바닥면(u-2.5)을 맞춘 채 w8 면·옆벽 쪽 끝에 세메다인 "
+                     "슈퍼X(i071)를 얇게 - 24시간 굳힘"
+                     % (ko, xa, xb, xb - xa, nt["xr"][0], nt["xr"][1], TS.CR_U[0], TS.CR_W[0], LEDGE_W - LEDGE_GAP, LEDGE_W, LEDGE_GAP),
+                print_name="화면받침_유리턱띠_" + ko, R=TS.print_R_top_down(th), folder=FOLDER_TS,
+                print_note="유리가 얹히는 면(u0)을 베드에 눕혀 출력(높이 2.5). 서포트 없음. 약 0 g",
+                dims=[("x", TS.XC + xa, TS.XC + xb, "%s %.2f" % (ko, xb - xa), 0)])
+        p = out[-1]
+        p.print_note = p.print_note.replace("약 0 g", "약 %.0f g" % (p.solid.volume() / 1000.0 * 1.27))
+    out.add("TS-LEDGE-FOLD", "화면 받침 유리 턱 띠 - 접은 상태", "cradle glass-seat strips, folded", "print", G_TSF, TS.place(ledge_local(), TS.TILT_FOLD),
+            COLORS["printed_body"], "PETG", source=src_e, note=ALT, print_name="화면받침_유리턱띠", folder=FOLDER_TS, no_print=True)
 
     # ---- ribbon clip under the lid
     rc = rclip_world()
@@ -1943,8 +2074,8 @@ def hub_shelf(out):
     cuts = [cyl_z(x, y, sh[4] - 0.01, zt + AMP_PAD_H + 0.01, 2.7) for (x, y) in AMP_HOLES]
     for b in (b1, b2):
         cx = (b[0] + b[1]) / 2.0
-        cb_ = diff(hole("y", cx, SHELF_SCREW_Z, b[2] - 0.01, b[2] + SHELF_SEAT[1], SHELF_SEAT[0], apex=(0, 1)),
-                   [box(cx - 5.0, cx + 5.0, b[2] - 1.0, b[2] + 5.0, b[5] - 0.8, b[5] + 2.0)])
+        # A13: the teardrop tip runs out through the bracket top (a 1.2 slit) - the old cap 0.8 under the top was a 2.8 flat ceiling
+        cb_ = hole("y", cx, SHELF_SCREW_Z, b[2] - 0.01, b[2] + SHELF_SEAT[1], SHELF_SEAT[0], apex=(0, 1))
         cuts += [hole("y", cx, SHELF_SCREW_Z, b[2] - 0.01, YBI + 0.01, 3.4, apex=(0, 1)), cb_]      # head seat capped 0.8 under the top z50
         # head / driver relief groove in the shelf top in front of the bracket (review 2026-10-01: the D6 head on the z46 axis reaches
         # z43.0, 0.5 below the shelf top z43.5, and scraped the shelf for ~12 mm while the screw was driven)
@@ -1958,7 +2089,7 @@ def hub_shelf(out):
                  "12.8 V 선이 지나감), 앞 받침 2개(y281)가 선반 앞끝 y282 밖이라 앰프 밑에 혀 x%.0f~%.0f y%.0f~282 (허브 플러그 자리 z34.5 위); "
                  "추정: 선반 뒤 %.0f mm(y%.0f~%.0f)를 뒤판까지 이어 한 몸, 앰프 구멍 Ø2.7 관통 (HW-720 구멍 모서리에서 3.5, 간격 59 × 46 - 사진 추정, "
                  "받은 보드로 재서 옮김); 받침마다 뒤판으로 Ø3 × 12~13 둥근머리 목재 나사 (머리 Ø6 이하; "
-                 "x%s z%.0f, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지를 윗면 0.8 아래 z49.2에서 자름 → 뒤판 물림 %.0f (M3 × 12, L78) / %.0f (13 mm), "
+                 "x%s z%.0f, 구멍 Ø3.4, 머리 자리 Ø6.5 × 4 눈물방울 - 꼭지가 받침 윗면으로 트여 나옴 (A13: 평평한 천장 없음) → 뒤판 물림 %.0f (M3 × 12, L78) / %.0f (13 mm), "
                  "끝에서 뒤판 바깥면까지 %.1f / %.1f); 머리(아래 끝 z%.1f)가 선반 "
                  "윗면 z%.1f보다 낮아 받침 앞 선반 윗면에 머리·드라이버 길 홈 %.0f × %.1f (y%.0f~%.0f, 바닥 %.1f 남음) - 나사를 조일 때 머리가 선반을 긁지 않음. "
                  "8호(Ø4.2, 머리 Ø8)는 10 × 8 받침에 들어가지 않음; 허브 윗면 z40.5와 1 mm (처지면 허브가 받침)"

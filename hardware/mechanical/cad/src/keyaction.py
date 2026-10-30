@@ -264,17 +264,12 @@ def key_solid(parts, fixed, note):
         cuts.append(box(pin[0] - w / 2, pin[0] + w / 2, y0 - 1.0, y1, zb - 1.0, zb + FEAT["pin_groove_depth"]))
     if cap:
         cx, cy = cap[0], cap[1]
-        beam = [p for p in parts if p["part"] == "beam"][0]
-        bx0, bx1 = beam["x"]
-        z0n, z1n = FEAT["nut_z"]
-        af = FEAT["nut_af"]
-        # D2.8 self-locking bore above the nut, D3.3 tip clearance below it (D02, spec ka1)
-        cuts.append(cyl_z(cx, cy, FEAT["cap_hole_z"][0] - 0.01, FEAT["cap_hole_z"][1], FEAT["cap_hole_d"]))
-        cuts.append(cyl_z(cx, cy, FEAT["cap_tip_z"][0], FEAT["cap_tip_z"][1] + 0.01, FEAT["cap_tip_d"]))
-        # nut trap: hex pocket (AF 5.6, flats facing +-y) centred on the screw + side slot out of the +x beam face
-        cuts.append(hexagon_z(cx, cy, z0n, z1n, af, rot=30))
-        cuts.append(box(cx, bx1 + 1.0, cy - af / 2, cy + af / 2, z0n, z1n))
-    return clean(diff(m, cuts))
+        # A13: the capstan M3 taps straight into the beam (D2.7 from the nut-trap floor up through the top); the nut
+        # trap's floor faced the bed in the turned-over print (a ceiling inside a side slot). D3.3 tip clearance below.
+        cuts.append(cyl_z(cx, cy, FEAT["nut_z"][0], 31.0, A13["self_tap_d"]))
+        cuts.append(cyl_z(cx, cy, FEAT["cap_tip_z"][0], FEAT["nut_z"][0] + 0.01, FEAT["cap_tip_d"]))
+    m = union([m] + key_a13_adds(parts))
+    return clean(diff(m, cuts + key_a13_cuts(parts)))
 
 
 def key_bought(parts, fixed, note):
@@ -285,7 +280,6 @@ def key_bought(parts, fixed, note):
     if head and cap:
         h = head[0]
         out["capstan"] = union([prism_x(h["side_rest"], *h["x"]), cyl_z(cap[0], cap[1], 23.3, 29.36, 3.0)])
-        out["nut"] = hexagon_z(cap[0], cap[1], FEAT["nut_z"][0] + 0.1, FEAT["nut_z"][0] + 2.5, 5.5, rot=30)
     if mag:
         out["magnet"] = cyl_z(mag[0], mag[1], 23.5, 25.5, 5.0)
     felt = [p for p in parts if p["part"] == "rest felt"]
@@ -376,7 +370,7 @@ def lever_solid(parts, note, engrave=None, collars=None):
         bx0 = min(p["x"][0] for p in cps)
         bx1 = max(p["x"][1] for p in cps)
     bore = cyl_x(L_AXIS[0], L_AXIS[1], bx0 - 1, bx1 + 1, FEAT["hub_bore_print"])
-    cuts = [pocket, bore]
+    cuts = [pocket, bore, lever_a13_cut(parts)]
     if engrave:
         # note name on the outer +x face of the web (3.8 thick there; the 0.7 pocket wall carries the bond line):
         # centre (y194.8, z36.8), size 3.2, 0.4 deep, reads upright from +x (spec ka1)
@@ -934,15 +928,14 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
         if "dovetail" in n and "female" in n:
             has_female = True
             continue
+        if n.startswith("control-board boss"):
+            continue                                   # A13: the board sits on posts on the hatch floor (a13_board)
         if not _is_cage(n):
             bed_adds.append(prism_x(p["side"], *p["x"]))
             continue
         ys = [q[0] for q in p["side"]]
         zs = [q[1] for q in p["side"]]
-        if n.startswith("control-board boss"):
-            # rear board bosses hung off one shelf rib: carried back to the rear wall so they stand on it in print
-            cage_adds.append(box(p["x"][0], p["x"][1], min(ys), 209.0 + 0.01, min(zs), max(zs)))
-        elif n == "fin boss":
+        if n == "fin boss":
             # lever-rod boss, pointed toward +y (down on the bed when the cage prints on its back)
             cage_adds.append(teardrop_x_apex((max(ys) + min(ys)) / 2, (max(zs) + min(zs)) / 2, p["x"][0], p["x"][1],
                                              max(ys) - min(ys), apex=(1.0, 0.0)))
@@ -963,20 +956,10 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
         bed_adds.append(box(x0b, x1b, y0b, y1b, z0b, z1b))
         bed_cuts += dovetail_female_at(0.0)
         ADJUST.add("A6")
-    # control-board pins and screw bores: front pair on the bed (rail bracket), rear pair on the cage (shelf rib)
-    for c in [q for q in plan if q["part"].startswith("control-board locating pin")]:
-        cx, cy = c["circle"][0], c["circle"][1]
-        if cy < 170.0:
-            bed_adds.append(cyl_z(cx, cy, 7.8, 10.7, FEAT["cb_pin_d"]))
-        else:
-            # lies sideways on the cage's back: pointed toward +y, point cut at r1.45 (board hole D3.0)
-            cage_adds.append(pointed_z(cx, cy, 7.8, 10.7, FEAT["cb_pin_d"], tip=(0.0, 1.0), cut=1.45))
-    for c in [q for q in plan if q["part"].startswith("control-board screw")]:
-        cx, cy = c["circle"][0], c["circle"][1]
-        if cy < 170.0:
-            bed_cuts.append(cyl_z(cx, cy, 10.0, FEAT["cb_screw_top"], FEAT["cb_screw_bore"]))
-        else:
-            cage_cuts.append(pointed_z(cx, cy, 10.0, FEAT["cb_screw_top"], FEAT["cb_screw_bore"], tip=(0.0, -1.0)))
+    # control board: A13 posts on the closed hatch floor, screws from above (a13_board)
+    a13_adds, a13_cuts = a13_board(fx, plan)
+    bed_adds += a13_adds
+    bed_cuts += a13_cuts
     for p in fx.get("female", []):
         if p["part"].startswith("fin boss bore"):
             cage_cuts.append(teardrop_x_apex(L_AXIS[0], L_AXIS[1], p["x"][0] - 0.01, p["x"][1] + 0.01, FEAT["fin_bore_print"]))
@@ -1051,19 +1034,7 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
     for p in fx.get("padbar", []):
         if p["part"].startswith("pad bar leaf"):
             cage_cuts.append(box(p["x"][0] - 0.2, p["x"][1] + 0.2, 167.9, 183.4, PAD_SEAT_A12 - 0.01, PAD_SEAT_A12 + A12["groove"]))
-    # ---- print-only tear-off posts under the front board bosses (and the locating pin hanging under one of them)
-    posts = []
-    for c in [q for q in plan if q["part"].startswith("control-board boss") and q["circle"][1] < 170.0]:
-        cx = c["circle"][0]
-        x0p, x1p, y0p, y1p = cx - 2.6, cx + 2.6, 145.0, 151.6
-        ztop = 10.6 - A12["gap"]
-        ring = diff(box(x0p, x1p, y0p, y1p, 3.0, ztop), [box(x0p + 0.8, x1p - 0.8, y0p + 0.8, y1p - 0.8, 2.9, ztop + 0.1)])
-        extra = []
-        for q in plan:
-            if q["part"].startswith("control-board locating pin") and abs(q["circle"][0] - cx) < 1.0 and q["circle"][1] < 170.0:
-                px, py = q["circle"][0], q["circle"][1]
-                extra += [cyl_z(px, py, 3.0, 7.8 - A12["gap"], 2.0), box(x0p + 0.4, x1p - 0.4, py - 0.3, py + 0.3, 3.0, 6.0)]
-        posts.append(union([ring] + extra))
+    posts = []                                           # A13: no print-only posts (the bosses they held are gone)
     if side is not None:
         # end parts: the rear wall stops 0.4 short of the end fin by the cheek; on the cage's back that fin end would
         # hang 3 mm over the bed -> carry the wall out to the fin's outer face (it sits in the cheek recess)
@@ -1097,7 +1068,202 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
             rx0 = rx1 = 0.0
         if rx1 > rx0:
             bed = bed - box(rx0, rx1, y0r, 213.0, 5.0, 74.0)
+    bed, lane_cuts = a13_lanes(fx, bed)
+    bed_cuts += lane_cuts + (a13_dovetail_roofs() if has_female else [])
+    hatch = a13_hatch(fx)
+    if hatch is not None:
+        bed = union([bed, box(*hatch)])
+        cage = cage - box(hatch[0], hatch[1], hatch[2], hatch[3], -1.0, hatch[5])    # F|F# fin + keel stand on it
     bed = clean(diff(bed, bed_cuts + list(extra_cuts)))
     cage = clean(diff(cage, cage_cuts))
     ADJUST.add("A12")
     return {"bed": bed, "cage": cage, "tabs": tabs, "posts": posts}
+
+
+# ------------------------------------------------------------------ A13 (2026-10-30): no ceilings for the slicer
+# After A12 the user: "아치 같이 바닥이 없고 천장이 있는 부분은 다 서포트가 생성이 될거야 ... 서포트는 트리 형태로 생성" - Bambu
+# Studio grows tree supports under every ceiling, short bridges and the tops of small holes included, and a support
+# body modelled into the STL (A12 combs / posts) does not stop it. A13 removes the ceilings themselves: each one gets
+# a 45 deg roof in the print pose, or the part changes so the ceiling goes away (check_support.py checks every STL).
+# The one ceiling that stays is outside: the key tail (beam + thin tail, y146..199) hangs 15 mm (white) / 27 mm
+# (black) above the bed because the lever sits 0.7 above it - Bambu's tree support from the build plate holds it and
+# comes off in one piece (print note + 03 tab 3D).
+A13 = {"self_tap_d": 2.7}       # capstan M3 straight into the PETG beam (no nut trap: its floor was a ceiling)
+
+
+def cone_x(cy, cz, x0, x1, d0, d1):
+    """cone along +x from x0 (diameter d0) to x1 (d1)."""
+    h = x1 - x0
+    return Manifold.cylinder(h, d0 / 2.0, d1 / 2.0, 48).rotate((0, 90, 0)).translate((x0, cy, cz))
+
+
+def _v_fill(x0, x1, y0, y1, z):
+    """two 45 deg triangles standing on a floor at z between walls x0 / x1 (full height at the walls, nothing at the
+    middle): turned over for the print, the floor's underside then rises 45 deg from both walls instead of hanging.
+    They reach 0.01 into the walls: a face flush with a wall is coplanar for the boolean, which then meshes the same key
+    differently at different x (C# / D# no longer one print file, A0 non-manifold once written as float STL)."""
+    x0, x1 = x0 - 0.01, x1 + 0.01
+    h = (x1 - x0) / 2.0
+    xc = (x0 + x1) / 2.0
+    return [prism_y([(x0, z - 0.01), (x0, z + h), (xc, z - 0.01)], y0, y1),
+            prism_y([(x1, z - 0.01), (xc, z - 0.01), (x1, z + h)], y0, y1)]
+
+
+def _fill_ends(parts, x0, x1, y0, y1, z, h):
+    """y ends of a V fill: 0.01 into the part it butts against (front wall, rear wall), 0.01 short of a free end (the
+    floor's / block's own face) - never flush, for the same reason as in _v_fill."""
+    def solid(y):
+        for p in parts:
+            s = p.get("side_rest") or p["side"]
+            if (p["x"][0] < x1 - 0.05 and p["x"][1] > x0 + 0.05 and min(q[0] for q in s) < y < max(q[0] for q in s)
+                    and min(q[1] for q in s) < z + h and max(q[1] for q in s) > z + 0.05):
+                return True
+        return False
+    return (y0 - 0.01 if solid(y0 - 0.05) else y0 + 0.01), (y1 + 0.01 if solid(y1 + 0.05) else y1 - 0.01)
+
+
+def key_a13_adds(parts):
+    """V fills under the floors that face the bed in the turned-over print: the down-stop floor of the front box and the two
+    pockets over the balance block."""
+    by = {}
+    for p in parts:
+        by.setdefault(p["part"], []).append(p)
+
+    def yz(p):
+        s = p["side_rest"]
+        return min(q[0] for q in s), max(q[0] for q in s), min(q[1] for q in s), max(q[1] for q in s)
+    walls = by.get("head wall L", []) + by.get("head wall R", []) + by.get("wall L low", []) + by.get("wall R low", [])
+    adds = []
+    # (the keeper crossbar stays a plain 8.6 bridge between the guide ribs: the keeper felt 2T under the hook leaves 1.5 above
+    # it, no room for a roof - a bridge anchored at both ends, under Bambu's default 10 mm 'max bridge length': no support)
+    for nm in ("down-stop floor", "stop floor"):
+        for p in by.get(nm, []):
+            y0, y1, _z0, z1 = yz(p)
+            lo = max([w["x"][1] for w in walls if w["x"][1] <= p["x"][0] + 0.5] or [p["x"][0]])
+            hi = min([w["x"][0] for w in walls if w["x"][0] >= p["x"][1] - 0.5] or [p["x"][1]])
+            adds += _v_fill(lo, hi, *_fill_ends(parts, lo, hi, y0, y1, z1, (hi - lo) / 2.0), z1)
+    blk = by.get("balance block", [])
+    web = by.get("block web", [])
+    rear = by.get("rear wall", [])
+    if blk and web:
+        b = blk[0]
+        y0, _y1, _z0, z1 = yz(b)
+        ry0 = min(yz(r)[0] for r in rear) if rear else yz(b)[1]
+        inner = [w for w in by.get("tail wall L", []) + by.get("tail wall R", []) + by.get("wall L low", []) + by.get("wall R low", [])]
+        lo = max(w["x"][1] for w in inner if w["x"][1] <= web[0]["x"][0])
+        hi = min(w["x"][0] for w in inner if w["x"][0] >= web[0]["x"][1])
+        for a, c in ((lo, web[0]["x"][0]), (web[0]["x"][1], hi)):
+            adds += _v_fill(a, c, *_fill_ends(parts, a, c, y0, ry0, z1, (c - a) / 2.0), z1)
+    return adds
+
+
+def key_a13_cuts(parts):
+    """black keys: the skin steps 55.5 -> 54.1 at y144.3 (under the curtain); turned over, the step's 2.7 mm left a
+    ledge 1.4 above the bed -> the rear end of the top becomes one 45 deg bevel from y142.9 (z55.5 -> 54.1 at y144.3,
+    the old step height, and on down to the end)."""
+    sk = [p for p in parts if p["part"] == "skin"]
+    if not sk:
+        return []
+    pts = sk[0]["side_rest"]
+    zt = max(q[1] for q in pts)
+    lows = [q for q in pts if q[1] < zt - 0.3 and q[1] > zt - 2.0]
+    if not lows:
+        return []
+    ys = min(q[0] for q in lows)                        # 144.3
+    drop = zt - max(q[1] for q in lows)                 # 1.4
+    y0 = ys - drop
+    x0, x1 = min(p["x"][0] for p in parts) - 1.0, max(p["x"][1] for p in parts) + 1.0
+    return [prism_x([(y0, zt + 1.0), (y0, zt), (y0 + 20.0, zt - 20.0), (y0 + 20.0, zt + 1.0)], x0, x1)]
+
+
+def lever_a13_cut(parts):
+    """the spring chamber between the hub cheeks: its roof (the +x cheek's inner face, over the coil) is a ceiling in
+    the print (-x face down) -> 45 deg cone from D6.7 (coil OD 6.0 + 0.35) to the D3.9 bore, 1.4 into the +x cheek."""
+    hubs = sorted([p for p in parts if p["part"] == "hub"], key=lambda p: p["x"][0])
+    x_in = hubs[-1]["x"][0]
+    d0, d1 = 6.7, FEAT["hub_bore_print"]
+    return cone_x(L_AXIS[0], L_AXIS[1], x_in - 0.01, x_in + (d0 - d1) / 2.0, d0 + 0.02, d1)
+
+
+ADJUST.add("A13")
+
+
+# A13 bed: the board was screwed from below onto four D6 bosses hung over an open hatch (two off the balance rail, two
+# off the cage shelf): in the print their undersides faced the bed with nothing under them (A12 posts held two of
+# them). Now the hatch has a floor and the board sits on four D6.4 posts standing on it, screwed from above
+# (M3x6 into D2.5 pilots, the D2.8 pins through the other two holes); the lever cage comes off with 4 screws when
+# the board needs service. The 16-core ribbon runs on that floor and through the lane under the balance rail.
+A13_BOARD = {"post_d": 6.4, "z_board": 9.0, "pilot": 2.5, "pilot_z0": 4.0, "pin_top": 11.6}
+A13_LANE = {"side_z": 6.5, "angle": 40.0}     # lane roof: 1.5 walls, then 40 deg (Bambu's default threshold is 30)
+
+
+def a13_hatch(fx):
+    """(x0, x1, y0, y1, z0, z1) of the board hatch between the floor pieces in front of / behind it, or None."""
+    front = [p for p in fx["frame"] if p["part"].startswith("floor (in front of the board hatch)")]
+    back = [p for p in fx["frame"] if p["part"].startswith("floor (behind the board hatch)")]
+    if not (front and back):
+        return None
+    fy = max(max(q[0] for q in p["side"]) for p in front)
+    by = min(min(q[0] for q in p["side"]) for p in back)
+    zs = [q[1] for p in front for q in p["side"]]
+    x0 = min(p["x"][0] for p in back)
+    x1 = max(p["x"][1] for p in back)
+    return (x0, x1, fy - 0.01, by + 0.01, min(zs), max(zs))
+
+
+def a13_board(fx, plan):
+    """posts for the control board on the hatch floor: screw posts with D2.5 pilots, pin posts with D2.8 pins."""
+    adds, cuts = [], []
+    if a13_hatch(fx) is None:
+        return adds, cuts
+    b = A13_BOARD
+    z_floor = a13_hatch(fx)[5]
+    for c in plan:
+        nm = c["part"]
+        if not (nm.startswith("control-board screw") or nm.startswith("control-board locating pin")):
+            continue
+        cx, cy = c["circle"][0], c["circle"][1]
+        adds.append(cyl_z(cx, cy, z_floor - 0.01, b["z_board"], b["post_d"]))
+        if nm.startswith("control-board screw"):
+            cuts.append(cyl_z(cx, cy, b["pilot_z0"], b["z_board"] + 0.01, b["pilot"]))
+        else:
+            adds.append(cyl_z(cx, cy, b["z_board"] - 0.01, b["pin_top"], FEAT["cb_pin_d"]))
+    return adds, cuts
+
+
+def a13_lanes(fx, bed):
+    """balance-rail lanes (rail sections lowered to z10 over the floor, with the key-rod cradles between them): the
+    lane roof z10 spanned up to 23 mm -> walls 1.5 then a 40 deg pointed roof. Returns (bed with the lane envelope
+    filled to z10, roof cuts)."""
+    secs = sorted([p for p in fx["frame"] if p["part"].startswith("balance rail") and min(q[1] for q in p["side"]) > 9.0],
+                  key=lambda p: p["x"][0])
+    lanes = []
+    for p in secs:
+        if lanes and p["x"][0] - lanes[-1][1] < 1.2:          # cradle (about 1.1) between two lowered sections
+            lanes[-1][1] = p["x"][1]
+        else:
+            lanes.append([p["x"][0], p["x"][1], min(q[0] for q in p["side"]), max(q[0] for q in p["side"]),
+                          min(q[1] for q in p["side"])])
+    fills, cuts = [], []
+    t = math.tan(math.radians(A13_LANE["angle"]))
+    for (xa, xb, y0, y1, zr) in lanes:
+        zs = A13_LANE["side_z"]
+        xm = (xa + xb) / 2.0
+        # no face flush with the full-height neighbours or the rail faces (coplanar booleans left T-junctions in the end
+        # parts' STL): the fill reaches 0.01 into the neighbours and stops 0.01 inside the rail's front / back, the cut
+        # stays 0.01 off the neighbours
+        fills.append(box(xa - 0.01, xb + 0.01, y0 + 0.01, y1 - 0.01, 5.0 - 0.01, zr + 0.01))
+        xa, xb = xa + 0.01, xb - 0.01
+        cuts.append(prism_y([(xa, 4.9), (xa, zs), (xm, zs + (xb - xa) / 2.0 * t), (xb, zs), (xb, 4.9)], y0 - 0.5, y1 + 0.5))
+    return (union([bed] + fills) if fills else bed), cuts
+
+
+def a13_dovetail_roofs():
+    """the female dovetail grooves open at the unit's end face (x0) and below; their tops were ceilings (under the
+    white front rail / the rear block) -> 45 deg roof rising to the open face (the male tongue stays below)."""
+    out = []
+    for poly, (z0, z1) in DOVE_F.values():
+        ys = [q[1] for q in poly]
+        d = max(q[0] for q in poly)
+        out.append(prism_y([(d + 0.01, z1 - 0.01), (-0.02, z1 + d + 0.03), (-0.02, z1 - 0.01)], min(ys) - 0.01, max(ys) + 0.01))
+    return out

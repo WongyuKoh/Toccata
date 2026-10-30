@@ -39,7 +39,7 @@ BOARD = has("O4-E-MB", "O4-E-ZERO", "O4-E-MUX", "controlboardscrew")
 SENSOR = has("O4-E-SB", "O4-SENSORBAR", "SBSCREW")
 LEVER = has("O4-LEVER-", "O4-LEVERCOVER-", "O4-STEEL-", "O4-FELTSTRIP-", "O4-SPRING-")
 LEVROD = has("leverrodD4", "O4-PLUG")
-KEYPART = has("O4-KEY-", "O4-CAPSTAN-", "O4-NUT-", "O4-MAGNET-", "O4-RESTFELT-")
+KEYPART = has("O4-KEY-", "O4-CAPSTAN-", "O4-MAGNET-", "O4-RESTFELT-")          # A13: no capstan nut
 BLACK = lambda i: i.endswith("s") and KEYPART(i)
 WHITE = lambda i: (not i.endswith("s")) and KEYPART(i)
 PADS = has("PADBAR", "upstoppad")
@@ -55,7 +55,8 @@ SIDE = (-230, 430, 260, 80, 150, 30)
 # figure: (shown, new = full colour, ghost ids, camera)
 STEPS = {
     "s1_frame": (lambda i: FRAME(i) or PINS(i) or KEYROD(i) or FELTS(i), lambda i: PINS(i) or KEYROD(i) or FELTS(i), (), FRONT),
-    "s2_board": (lambda i: FRAME(i) or BOARD(i), BOARD, (), BELOW),
+    # A13 (2026-10-30): the board sits on 4 posts on the closed hatch floor, screwed from above before the lever cage goes on
+    "s2_board": (lambda i: BED(i) or TABS(i) or PINS(i) or KEYROD(i) or FELTS(i) or BOARD(i), BOARD, (), REAR),
     "s3_sensor": (lambda i: FRAME(i) or PINS(i) or KEYROD(i) or FELTS(i) or SENSOR(i), SENSOR, (), FRONT),
     "s4_levers": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i), LEVER, ("O4-FRAME", "O4-CAGE"), REAR),
     "s5_levrod": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i) or LEVROD(i), LEVROD, ("O4-FRAME", "O4-CAGE"), SIDE),

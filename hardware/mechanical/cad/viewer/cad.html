@@ -1,13 +1,13 @@
 <section class="page" id="p-cad" hidden>
 <h2>3D 모델</h2>
-<p class="lede">설계도와 같은 CAD 입체 1,652개를 조립한 자리 그대로 띄운 모델입니다. 출력 STL, 도면, 이 모델은 모두 같은 생성기(<code>hardware/mechanical/cad/src</code>)에서 나오므로 치수가 같습니다. 부품을 누르면 이름·크기·재료·출력 파일이 나오고, 건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다.</p>
+<p class="lede">설계도와 같은 CAD 입체 1,567개를 조립한 자리 그대로 띄운 모델입니다. 출력 STL, 도면, 이 모델은 모두 같은 생성기(<code>hardware/mechanical/cad/src</code>)에서 나오므로 치수가 같습니다. 부품을 누르면 이름·크기·재료·출력 파일이 나오고, 건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다.</p>
 <div class="kfs">
-<div class="kf"><b>1,646</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
+<div class="kf"><b>1,560</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
 <div class="kf"><b>88</b><span>건반 (백 52 · 흑 36)</span></div>
 <div class="kf"><b>1254 × 342.5</b><span>전체 가로 × 깊이 mm</span></div>
 <div class="kf"><b>z189.23</b><span>가장 높은 점 (화면 25°)</span></div>
 <div class="kf"><b>z144.65 · 40°</b><span>스피커 윗면 · 앞판</span></div>
-<div class="kf"><b>493개</b><span>출력 부품 (96개 파일)</span></div>
+<div class="kf"><b>495개</b><span>출력 부품 (98개 파일)</span></div>
 <div class="kf"><b>94</b><span>전자 부품·케이블</span></div>
 </div>
 <div class="cadv" id="cad-viewer">
@@ -24,16 +24,16 @@
 </div><div class="seg cadseg" role="group" aria-label="투영"><button type="button" data-cad-proj="persp" aria-pressed="true">원근</button><button type="button" data-cad-proj="ortho" aria-pressed="false">정투영</button></div></div>
 <div class="cadbar"><button type="button" class="cadtog" id="cad-inside" aria-pressed="false">내부 보기</button><button type="button" class="cadtog" id="cad-fold" aria-pressed="false">화면 접기</button><button type="button" class="cadtog" id="cad-press" aria-pressed="true">건반 누르기</button><button type="button" class="cadtog" id="cad-scale">한 옥타브 차례로</button><button type="button" class="cadtog" id="cad-edges" aria-pressed="true">모서리 선</button><button type="button" class="cadtog" id="cad-dims" aria-pressed="false">치수</button><label class="cadrange" for="cad-explode"><span>분해</span><input type="range" id="cad-explode" min="0" max="100" step="1" value="0"><output id="cad-explode-out" for="cad-explode">0 %</output></label></div>
 <div class="cadbar cadsecbar"><span class="cadlbl" id="cad-l-sec">단면</span><div class="seg cadseg" role="group" aria-labelledby="cad-l-sec"><button type="button" data-cad-sec="off" aria-pressed="true">끔</button><button type="button" data-cad-sec="x" aria-pressed="false">x 가로</button><button type="button" data-cad-sec="y" aria-pressed="false">y 깊이</button><button type="button" data-cad-sec="z" aria-pressed="false">z 높이</button></div><input type="range" id="cad-sec" min="-16" max="1238" step="0.25" value="575.75" aria-label="단면 위치 (mm)" disabled><output id="cad-sec-out" for="cad-sec">끔</output><label class="cadchk"><input type="checkbox" id="cad-sec-flip"> 반대쪽 남김</label><button type="button" class="cadtog" id="cad-sec-look" disabled>자른 면 보기</button></div>
-<div class="cadstage" id="cad-stage"><canvas tabindex="0" aria-label="Toccata 전체 조립 3D. 끌어서 돌리고, 휠이나 두 손가락으로 확대합니다. 화살표 키 = 돌리기, Shift+화살표 = 옮기기, + − = 확대."></canvas><svg class="cadover" aria-hidden="true"></svg><div class="cadload" role="status" aria-live="polite"><p class="cadload-t">이 탭을 열면 3D 모델(약 3.9 MB)을 불러옵니다.</p><div class="cadprog" aria-hidden="true"><i></i></div><button type="button" class="cadtog cadretry" hidden>다시 시도</button></div><div class="cadfocus" hidden><span class="cadfocus-t"></span><button type="button" class="cadfocus-x">모두 보기</button></div><div class="cadviewlbl" aria-live="polite"></div><div class="cadhint">끌기 = 돌리기 · 오른쪽 끌기·두 손가락 = 옮기기 · 휠·모으기 = 확대 · 누르기 = 부품 정보</div></div>
+<div class="cadstage" id="cad-stage"><canvas tabindex="0" aria-label="Toccata 전체 조립 3D. 끌어서 돌리고, 휠이나 두 손가락으로 확대합니다. 화살표 키 = 돌리기, Shift+화살표 = 옮기기, + − = 확대."></canvas><svg class="cadover" aria-hidden="true"></svg><div class="cadload" role="status" aria-live="polite"><p class="cadload-t">이 탭을 열면 3D 모델(약 4 MB)을 불러옵니다.</p><div class="cadprog" aria-hidden="true"><i></i></div><button type="button" class="cadtog cadretry" hidden>다시 시도</button></div><div class="cadfocus" hidden><span class="cadfocus-t"></span><button type="button" class="cadfocus-x">모두 보기</button></div><div class="cadviewlbl" aria-live="polite"></div><div class="cadhint">끌기 = 돌리기 · 오른쪽 끌기·두 손가락 = 옮기기 · 휠·모으기 = 확대 · 누르기 = 부품 정보</div></div>
 <p class="small muted cadnote">좌표: x 가로 (0 = A0 왼쪽 끝), y 흰 건반 앞 끝에서 뒤로, z 책상에서 위로, 단위 mm. 정투영에서는 오른쪽 아래 막대가 실제 길이입니다. 단면에서 잘린 면은 붉게 칠해집니다. 건반은 1 N으로 끝까지 눌러 멈춘 자세(백건 4.05°, 흑건 6.08°, 건반 봉 축 y141 z21.5)까지 내려가고, 레버는 레버 봉 축(y203.25 z33.5)을 중심으로 11.84° / 9.52° 올라갑니다 (레버 각은 건반 각에 비례하게 그림). 화면 접기는 경첩 축(y226.55 z81.35)을 중심으로 65° 돌린 뒤 접은 상태 입체로 바꿉니다 (선택 부품인 화면 덮개와 화면 선은 접은 상태에서 그리지 않음).</p>
 </div>
 <div class="cadside">
 <div class="cadinfo" aria-live="polite"><p class="cadempty">부품을 누르면 이름·크기·재료·출력 파일이 여기에 나옵니다.</p></div>
 <details class="cadbox" open><summary>부분별로 보기</summary><div class="cadsets">
-<button type="button" class="cadset" data-cad-set="0"><span>건반 하나 (C4: 건반·레버·부속 12개)</span><em class="mono">12</em></button>
-<button type="button" class="cadset" data-cad-set="1"><span>옥타브 모듈 O4 (C4~B4)</span><em class="mono">194</em></button>
-<button type="button" class="cadset" data-cad-set="2"><span>왼쪽 끝 부속 (A0~B0)</span><em class="mono">57</em></button>
-<button type="button" class="cadset" data-cad-set="3"><span>오른쪽 끝 부속 (C8)</span><em class="mono">27</em></button>
+<button type="button" class="cadset" data-cad-set="0"><span>건반 하나 (C4: 건반·레버·부속 11개)</span><em class="mono">11</em></button>
+<button type="button" class="cadset" data-cad-set="1"><span>옥타브 모듈 O4 (C4~B4)</span><em class="mono">182</em></button>
+<button type="button" class="cadset" data-cad-set="2"><span>왼쪽 끝 부속 (A0~B0)</span><em class="mono">54</em></button>
+<button type="button" class="cadset" data-cad-set="3"><span>오른쪽 끝 부속 (C8)</span><em class="mono">26</em></button>
 <button type="button" class="cadset" data-cad-set="4"><span>센서 바·센서 기판·건반 자석</span><em class="mono">124</em></button>
 <button type="button" class="cadset" data-cad-set="5"><span>제어 기판 MB × 7 (RP2040-Zero·먹스)</span><em class="mono">42</em></button>
 <button type="button" class="cadset" data-cad-set="6"><span>레버·토션 스프링·강철 블록</span><em class="mono">361</em></button>
@@ -43,7 +43,7 @@
 <button type="button" class="cadset" data-cad-set="10"><span>배터리·전원 12.8 V (퓨즈·스위치·강압)</span><em class="mono">17</em></button>
 <button type="button" class="cadset" data-cad-set="11"><span>소리: 앰프·동글·스피커선·XT60</span><em class="mono">21</em></button>
 <button type="button" class="cadset" data-cad-set="12"><span>Pi 5·USB 허브·페달 보드</span><em class="mono">28</em></button>
-<button type="button" class="cadset" data-cad-set="13"><span>터치스크린 (25°)</span><em class="mono">20</em></button>
+<button type="button" class="cadset" data-cad-set="13"><span>터치스크린 (25°)</span><em class="mono">22</em></button>
 <button type="button" class="cadset" data-cad-set="14"><span>케이블 전체</span><em class="mono">41</em></button>
 <button type="button" class="cadset" data-cad-set="15"><span>옛 합판 10장 (10/16부터 출력)</span><em class="mono">10</em></button>
 <button type="button" class="cadset" data-cad-set="16"><span>고무발·이음 볼트·방진 브래킷</span><em class="mono">44</em></button>
@@ -53,8 +53,8 @@
 <button type="button" class="cadset cadset-sec" data-cad-set="20"><span>가운데 유닛 평면 단면 (z45)</span><em>단면</em></button>
 </div></details>
 <details class="cadbox"><summary>종류·모듈 층</summary><div class="cadchips" role="group" aria-label="종류">
-<button type="button" class="cadchip" data-cad-kind="print" aria-pressed="true">출력 <span class="mono">489</span></button>
-<button type="button" class="cadchip" data-cad-kind="bought" aria-pressed="true">구매 <span class="mono">651</span></button>
+<button type="button" class="cadchip" data-cad-kind="print" aria-pressed="true">출력 <span class="mono">491</span></button>
+<button type="button" class="cadchip" data-cad-kind="bought" aria-pressed="true">구매 <span class="mono">563</span></button>
 <button type="button" class="cadchip" data-cad-kind="electronics" aria-pressed="true">전자 <span class="mono">94</span></button>
 <button type="button" class="cadchip" data-cad-kind="consumable" aria-pressed="true">소모품 <span class="mono">412</span></button>
 <button type="button" class="cadchip" data-cad-kind="plywood" aria-pressed="true">합판 <span class="mono">0</span></button>
@@ -63,54 +63,54 @@
 <button type="button" class="cadchip" data-cad-layer="흑건" aria-pressed="true">흑건 <span class="mono">36</span></button>
 <button type="button" class="cadchip" data-cad-layer="레버" aria-pressed="true">레버 <span class="mono">176</span></button>
 <button type="button" class="cadchip" data-cad-layer="프레임" aria-pressed="true">프레임 <span class="mono">163</span></button>
-<button type="button" class="cadchip" data-cad-layer="구매품" aria-pressed="true">구매품 <span class="mono">984</span></button>
+<button type="button" class="cadchip" data-cad-layer="구매품" aria-pressed="true">구매품 <span class="mono">896</span></button>
 <button type="button" class="cadchip" data-cad-layer="전자부" aria-pressed="true">전자부 <span class="mono">49</span></button>
 </div></details>
 <details class="cadbox"><summary>그룹 (65)</summary><div class="cadgtools"><button type="button" data-cad-gall>모두 켬</button><button type="button" data-cad-gnone>모두 끔</button><button type="button" data-cad-gshow>숨긴 부품 다시</button></div><div class="cadglist">
 <p class="cadgh">건반 모듈 O1~O7</p>
 <label><input type="checkbox" data-cad-g="0" checked><span>O1 백건</span><em class="mono">7</em></label>
-<label><input type="checkbox" data-cad-g="1" checked><span>O1 구매품</span><em class="mono">133</em></label>
+<label><input type="checkbox" data-cad-g="1" checked><span>O1 구매품</span><em class="mono">121</em></label>
 <label><input type="checkbox" data-cad-g="2" checked><span>O1 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="3" checked><span>O1 흑건</span><em class="mono">5</em></label>
 <label><input type="checkbox" data-cad-g="4" checked><span>O1 프레임</span><em class="mono">21</em></label>
 <label><input type="checkbox" data-cad-g="5" checked><span>O2 백건</span><em class="mono">7</em></label>
-<label><input type="checkbox" data-cad-g="6" checked><span>O2 구매품</span><em class="mono">133</em></label>
+<label><input type="checkbox" data-cad-g="6" checked><span>O2 구매품</span><em class="mono">121</em></label>
 <label><input type="checkbox" data-cad-g="7" checked><span>O2 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="8" checked><span>O2 흑건</span><em class="mono">5</em></label>
 <label><input type="checkbox" data-cad-g="9" checked><span>O2 프레임</span><em class="mono">21</em></label>
 <label><input type="checkbox" data-cad-g="10" checked><span>O3 백건</span><em class="mono">7</em></label>
-<label><input type="checkbox" data-cad-g="11" checked><span>O3 구매품</span><em class="mono">133</em></label>
+<label><input type="checkbox" data-cad-g="11" checked><span>O3 구매품</span><em class="mono">121</em></label>
 <label><input type="checkbox" data-cad-g="12" checked><span>O3 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="13" checked><span>O3 흑건</span><em class="mono">5</em></label>
 <label><input type="checkbox" data-cad-g="14" checked><span>O3 프레임</span><em class="mono">21</em></label>
 <label><input type="checkbox" data-cad-g="15" checked><span>O4 백건</span><em class="mono">7</em></label>
-<label><input type="checkbox" data-cad-g="16" checked><span>O4 구매품</span><em class="mono">133</em></label>
+<label><input type="checkbox" data-cad-g="16" checked><span>O4 구매품</span><em class="mono">121</em></label>
 <label><input type="checkbox" data-cad-g="17" checked><span>O4 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="18" checked><span>O4 흑건</span><em class="mono">5</em></label>
 <label><input type="checkbox" data-cad-g="19" checked><span>O4 프레임</span><em class="mono">21</em></label>
 <label><input type="checkbox" data-cad-g="20" checked><span>O5 백건</span><em class="mono">7</em></label>
-<label><input type="checkbox" data-cad-g="21" checked><span>O5 구매품</span><em class="mono">133</em></label>
+<label><input type="checkbox" data-cad-g="21" checked><span>O5 구매품</span><em class="mono">121</em></label>
 <label><input type="checkbox" data-cad-g="22" checked><span>O5 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="23" checked><span>O5 흑건</span><em class="mono">5</em></label>
 <label><input type="checkbox" data-cad-g="24" checked><span>O5 프레임</span><em class="mono">21</em></label>
 <label><input type="checkbox" data-cad-g="25" checked><span>O6 백건</span><em class="mono">7</em></label>
-<label><input type="checkbox" data-cad-g="26" checked><span>O6 구매품</span><em class="mono">133</em></label>
+<label><input type="checkbox" data-cad-g="26" checked><span>O6 구매품</span><em class="mono">121</em></label>
 <label><input type="checkbox" data-cad-g="27" checked><span>O6 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="28" checked><span>O6 흑건</span><em class="mono">5</em></label>
 <label><input type="checkbox" data-cad-g="29" checked><span>O6 프레임</span><em class="mono">21</em></label>
 <label><input type="checkbox" data-cad-g="30" checked><span>O7 백건</span><em class="mono">7</em></label>
-<label><input type="checkbox" data-cad-g="31" checked><span>O7 구매품</span><em class="mono">133</em></label>
+<label><input type="checkbox" data-cad-g="31" checked><span>O7 구매품</span><em class="mono">121</em></label>
 <label><input type="checkbox" data-cad-g="32" checked><span>O7 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="33" checked><span>O7 흑건</span><em class="mono">5</em></label>
 <label><input type="checkbox" data-cad-g="34" checked><span>O7 프레임</span><em class="mono">21</em></label>
 <p class="cadgh">끝 부속 (A0~B0, C8)</p>
 <label><input type="checkbox" data-cad-g="35" checked><span>끝 부속 왼쪽 백건</span><em class="mono">2</em></label>
-<label><input type="checkbox" data-cad-g="36" checked><span>끝 부속 왼쪽 구매품</span><em class="mono">37</em></label>
+<label><input type="checkbox" data-cad-g="36" checked><span>끝 부속 왼쪽 구매품</span><em class="mono">34</em></label>
 <label><input type="checkbox" data-cad-g="37" checked><span>끝 부속 왼쪽 레버</span><em class="mono">6</em></label>
 <label><input type="checkbox" data-cad-g="38" checked><span>끝 부속 왼쪽 흑건</span><em class="mono">1</em></label>
 <label><input type="checkbox" data-cad-g="39" checked><span>끝 부속 왼쪽 프레임</span><em class="mono">9</em></label>
 <label><input type="checkbox" data-cad-g="40" checked><span>끝 부속 오른쪽 백건</span><em class="mono">1</em></label>
-<label><input type="checkbox" data-cad-g="41" checked><span>끝 부속 오른쪽 구매품</span><em class="mono">16</em></label>
+<label><input type="checkbox" data-cad-g="41" checked><span>끝 부속 오른쪽 구매품</span><em class="mono">15</em></label>
 <label><input type="checkbox" data-cad-g="42" checked><span>끝 부속 오른쪽 레버</span><em class="mono">2</em></label>
 <label><input type="checkbox" data-cad-g="43" checked><span>끝 부속 오른쪽 프레임</span><em class="mono">7</em></label>
 <p class="cadgh">뒷바 (스피커·가운데 유닛)</p>
@@ -135,7 +135,7 @@
 <label><input type="checkbox" data-cad-g="61" checked><span>끝 부속 오른쪽 전자부</span><em class="mono">1</em></label>
 <label><input type="checkbox" data-cad-g="62" checked><span>CU 칸 전자부</span><em class="mono">18</em></label>
 <p class="cadgh">터치스크린</p>
-<label><input type="checkbox" data-cad-g="50" checked><span>터치스크린</span><em class="mono">15</em></label>
+<label><input type="checkbox" data-cad-g="50" checked><span>터치스크린</span><em class="mono">17</em></label>
 <p class="cadgh">바닥 (기본 숨김)</p>
 <label><input type="checkbox" data-cad-g="65"><span>댐퍼 페달 (바닥)</span><em class="mono">1</em></label>
 </div></details>
@@ -143,14 +143,14 @@
 </div>
 <h3 id="cad-files">파일</h3>
 <div class="tbl cadfiles"><table><thead><tr><th>파일 (저장소)</th><th>무엇</th></tr></thead><tbody>
-<tr><td><code>hardware/mechanical/cad/viewer/toccata_viewer.glb</code></td><td>이 탭의 3D 모델 (부품마다 노드 1개, 이름 = 부품 id, 2.9 MB). 다른 GLB 뷰어에서도 실제 크기(m)로 열립니다.</td></tr>
+<tr><td><code>hardware/mechanical/cad/viewer/toccata_viewer.glb</code></td><td>이 탭의 3D 모델 (부품마다 노드 1개, 이름 = 부품 id, 3 MB). 다른 GLB 뷰어에서도 실제 크기(m)로 열립니다.</td></tr>
 <tr><td><code>hardware/mechanical/cad/Toccata_전체조립.3mf</code></td><td>색·이름이 붙은 전체 조립 (슬라이서·3D 뷰어용)</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/assembly/</code></td><td>그룹별 조립 STL과 Toccata_전체조립.stl (조립 좌표, mm)</td></tr>
-<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL 96개 파일 · 부품 493개 (파일 이름 끝 = 출력 개수, 베드에 놓인 방향)</td></tr>
+<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL 98개 파일 · 부품 495개 (파일 이름 끝 = 출력 개수, 베드에 놓인 방향)</td></tr>
 <tr><td><code>hardware/mechanical/cad/manifest.json</code></td><td>부품마다 id·이름·종류·그룹·외곽·출력 파일</td></tr>
 <tr><td><code>hardware/mechanical/cad/viewer/parts.json</code></td><td>이 탭의 부품표 (외곽, 출력 파일·개수, 메모, 분해·단면·누르기 자료)</td></tr>
 </tbody></table></div>
-<div class="cadsave"><button type="button" class="cadtog" id="cad-save">3D 모델 저장 (GLB를 zip으로)</button><span class="small muted" id="cad-save-msg">Toccata_assembly.zip · 약 2.9 MB</span></div>
+<div class="cadsave"><button type="button" class="cadtog" id="cad-save">3D 모델 저장 (GLB를 zip으로)</button><span class="small muted" id="cad-save-msg">Toccata_assembly.zip · 약 3 MB</span></div>
 <details class="spec cadest"><summary>받은 부품을 재서 확인할 추정 치수 (77)</summary>
 <p class="small muted">구매품·전자 부품 가운데 판매처에 치수가 없어 모델에서 정한 값입니다. 받은 부품을 재 보고 다르면 <code>hardware/mechanical/cad/spec/*.json</code>이나 생성기의 값을 고친 뒤 다시 만듭니다. 출력 부품의 치수는 정해진 값이라 이 목록에 없습니다.</p><ul class="small">
 <li><b>M4 열압입 인서트 L69</b> — 바깥 Ø6 × 길이 4를 앞판의 구멍 Ø5.6 × 6.5에 인두로 면까지 넣음 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음), 나사산 안지름 Ø3.3로 모델; M4×12(L70, 모델에 없음)는 유닛 플랜지 4 + EVA 가스켓 3을 지나 5 들어가 인서트 4를 지나 1 더 나감 - 끝은 구멍 바닥 1.5 위라 구멍 안 (가스켓 3이 약 2로 눌리면 약 6 들어가 바닥까지 약 0.5 - M4×12 이하만 씀; M4×14면 7 들어가 구멍 깊이 6.5를 넘어 밀폐면 2.78을 뚫음) (같은 부품 8개)</li>
