@@ -61,10 +61,11 @@ def support_faces(m, rel):
         return None, None
     n, c = m.face_normals, m.triangles_center
     down = (n[:, 2] < -math.cos(math.radians(CS.ANGLE)) + 1e-6) & (c[:, 2] > m.bounds[0][2] + 0.25)
-    boxes = [b for _z, _a, b in (need or tree)]
     near = np.zeros(len(c), bool)
-    for (x0, y0, x1, y1) in boxes:
-        near |= (c[:, 0] > x0 - 0.6) & (c[:, 0] < x1 + 0.6) & (c[:, 1] > y0 - 0.6) & (c[:, 1] < y1 + 0.6)
+    zc = c[:, 2] - m.bounds[0][2]
+    for z, _a, (x0, y0, x1, y1), _h in (need or tree):       # A15: by layer too (the nut slot's ceiling is over the tail's box)
+        near |= ((c[:, 0] > x0 - 0.6) & (c[:, 0] < x1 + 0.6) & (c[:, 1] > y0 - 0.6) & (c[:, 1] < y1 + 0.6)
+                 & (np.abs(zc - z) < 0.6))
     return down & near, ("need" if need else "tree")
 
 

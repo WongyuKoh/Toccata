@@ -161,9 +161,9 @@ html { scroll-behavior: smooth }
   <p class="lead" style="max-width:72ch">3D 프린팅한 한 옥타브(건반 12개)를 프레임 하나에 조립해 첫 소리를 내기까지의 순서입니다. 옥타브 모듈 7개는 모양이 같아 이 순서를 어느 옥타브에나 씁니다. 단계 그림은 CAD 조립 모델(O4 = C4~B4)을 그대로 띄운 3D 모델이라 돌려 보고 키워 볼 수 있고, 부품을 누르면 이름이 나옵니다. 숫자는 설계서·CAD 값 그대로입니다(mm, x = 모듈 왼쪽에서, y = 백건 앞끝에서 뒤로, z = 책상에서).</p>
   <div class="facts">
     <span>출력 <b class="num">57</b>개 + 공구·지그 <b class="num">5</b>개</span>
-    <span>구매품 <b class="num">약 130</b>개 (모듈 1개)</span>
+    <span>구매품 <b class="num">약 140</b>개 (모듈 1개)</span>
     <span>모듈 무게 <b class="num">약 1.37 kg</b></span>
-    <span>기준 <b>CAD 2026-10-30</b> (Bambu 기준 서포트 정리 A13)</span>
+    <span>기준 <b>CAD 2026-10-30</b> (Bambu 기준 서포트 정리 A13 · 캡스턴 너트 A15)</span>
   </div>
   <div class="progress"><span id="progTxt">0 / 17 단계 끝냄</span><div class="bar"><i id="progBar"></i></div><button id="reset" class="chk" style="border:0;background:none;padding:0;text-decoration:underline">체크 지우기</button></div>
 </header>
@@ -243,7 +243,7 @@ html { scroll-behavior: smooth }
   <h3>구매품·소모품</h3>
   <div class="parts">
     <div class="part"><img src="photo/i014.webp" alt="" loading="lazy"><span class="nm">캡스턴 M3×6 버튼헤드</span><span class="qty">12개</span><span class="id">i014</span></div>
-    
+    <div class="part"><img src="photo/i011.webp" alt="" loading="lazy"><span class="nm">M3 육각너트</span><span class="qty">12개</span><span class="id">i011</span></div>
     <div class="part"><img src="photo/i098.webp" alt="" loading="lazy"><span class="nm">네오디뮴 자석 Ø5×2 N35</span><span class="qty">12개</span><span class="id">i098</span></div>
     <div class="part"><img src="photo/i121.webp" alt="" loading="lazy"><span class="nm">밸런스 핀 Ø2×12</span><span class="qty">12개 + T1a용 1</span><span class="id">i121</span></div>
     <div class="part"><img src="photo/i123.webp" alt="" loading="lazy"><span class="nm">미스미 토션스프링 C-UA90R5-3-0.5</span><span class="qty">12개</span><span class="id">i123</span></div>
@@ -286,7 +286,7 @@ html { scroll-behavior: smooth }
     <li><b>패드 바</b>: 잎 혀(0.6 × 1.6 × 8)는 일부러 0.3 아래로 처지게 출력했으니 펴지 않습니다. 윗면은 한 평면입니다.</li>
     <li><b>Ø4.0 드릴</b>: 레버 캐리어 허브 12곳, 레버틀 핀 보스의 레버 봉 구멍(눈물방울 Ø3.9). 낮은 속도로 곧게 뚫어 PETG가 녹아 붙지 않게 합니다.</li>
     <li>밸런스 핀 구멍(Ø1.95, 막힌 구멍)은 핀이 전혀 안 들어갈 때만 Ø1.9~2.0으로 다듬습니다. 가볍게 끼는 압입이 정상입니다.</li>
-    <li>캡스턴 M3×6이 건반 꼬리 빔의 Ø2.7 구멍에 손으로 두세 바퀴 들어가는지 확인합니다(너트 없음 — A13: 너트 홈 바닥이 출력 때 천장이었음).</li>
+    <li>M3 너트를 건반 꼬리 +x 옆 홈(맞변 5.6 × 2.8)에 하나 넣어 보아 끝까지 들어가는지 확인합니다. 홈 천장은 구멍 없는 0.4 막입니다(A15: 서포트 없이 출력, 캡스턴 끝이 처음 들어갈 때 뚫음).</li>
   </ol>
   <div class="dwgs"><button data-d="d08_frame.svg">08 프레임</button><button data-d="d07_lever_carrier_steel.svg">07 레버 캐리어</button></div>
 </section>
@@ -356,16 +356,16 @@ html { scroll-behavior: smooth }
 
 <section id="s5" data-step>
   <div class="sh"><span class="badge">05</span><h2>건반 부품 붙이기</h2><label class="chk"><input type="checkbox" id="c-s5">끝냄</label></div>
-  <div class="need"><span>건반 <b>12</b></span><span>자석 <b>12</b></span><span>캡스턴 <b>12</b></span><span>쉼 펠트 <b>12</b></span><span>부싱 천</span></div>
+  <div class="need"><span>건반 <b>12</b></span><span>자석 <b>12</b></span><span>캡스턴 + 너트 <b>12</b></span><span>쉼 펠트 <b>12</b></span><span>부싱 천</span></div>
   <div class="split">
     <ol class="do">
       <li><b>부싱 천</b> 0.5T를 노치(R2.55) 안쪽과 밸런스 핀 홈 양쪽 벽에 붙입니다. 천이 접혀 겹치지 않게 합니다.</li>
       <li><b>자석</b> Ø5×2를 건반 밑 자리(y67, 센서 줄 바로 위)에 눌러 넣고 순간접착제 한 방울. 12개 모두 <b>같은 극이 아래</b>로 오게 합니다(S극이 센서 쪽이면 누를 때 값이 올라감). 자석 하나를 기준으로 정해 아래쪽 면에 매직으로 점을 찍어 두면 헷갈리지 않습니다.</li>
-      <li><b>캡스턴</b>: 버튼헤드 M3×6을 머리가 위로 오게 꼬리 숨은 빔의 Ø2.7 구멍에 바로 돌려 넣습니다(PETG에 나사산을 냄, 너트 없음). 높이는 06단계에서 맞추니 몇 바퀴만 걸어 둡니다.</li>
+      <li><b>캡스턴</b>: M3 너트를 꼬리 숨은 빔의 +x 옆 홈에 밀어 넣고, 버튼헤드 M3×6을 머리가 위로 오게 위 Ø2.8 구멍으로 돌려 너트에 겁니다. 나사 끝이 홈 밑 0.4 막에 닿으면 조금 더 돌려 뚫습니다(빡빡하면 Ø3 드릴을 손으로 밑에서). 높이는 06단계에서 맞추니 몇 바퀴만 걸어 둡니다.</li>
       <li><b>쉼 펠트</b>: 꼬리 밑 끝(y196.3~199)에 종이 펀칭 2장 + 쉼 펠트(1T 바탕 위 0.5T)를 겹쳐 붙입니다. 06단계에서 펀칭을 더하거나 빼므로 펀칭은 떼어 낼 수 있게 약하게 붙입니다(붙이는 방법은 설계서에 정해져 있지 않음). F·F#은 USB 홈을 넘지 않는 좁은 펠트입니다.</li>
     </ol>
     <div class="figs" style="grid-template-columns:1fr 1fr">
-      <figure><div class="v3d" data-v3d="k_white"><img src="img/k_white.webp" alt="백건 D 분해도, 밑에서" loading="lazy"></div><figcaption>백건 D(밑에서): 자석, 캡스턴, 쉼 펠트.</figcaption></figure>
+      <figure><div class="v3d" data-v3d="k_white"><img src="img/k_white.webp" alt="백건 D 분해도, 밑에서" loading="lazy"></div><figcaption>백건 D(밑에서): 자석, 캡스턴, 너트(+x 옆), 쉼 펠트.</figcaption></figure>
       <figure><div class="v3d" data-v3d="k_black"><img src="img/k_black.webp" alt="흑건 D# 분해도, 밑에서" loading="lazy"></div><figcaption>흑건 D#: 같은 부품, 같은 자리.</figcaption></figure>
     </div>
   </div>

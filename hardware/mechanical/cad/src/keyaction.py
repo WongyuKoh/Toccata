@@ -263,11 +263,7 @@ def key_solid(parts, fixed, note):
         zb = 22.3                                                      # block underside (drawing 5)
         cuts.append(box(pin[0] - w / 2, pin[0] + w / 2, y0 - 1.0, y1, zb - 1.0, zb + FEAT["pin_groove_depth"]))
     if cap:
-        cx, cy = cap[0], cap[1]
-        # A13: the capstan M3 taps straight into the beam (D2.7 from the nut-trap floor up through the top); the nut
-        # trap's floor faced the bed in the turned-over print (a ceiling inside a side slot). D3.3 tip clearance below.
-        cuts.append(cyl_z(cx, cy, FEAT["nut_z"][0], 31.0, A13["self_tap_d"]))
-        cuts.append(cyl_z(cx, cy, FEAT["cap_tip_z"][0], FEAT["nut_z"][0] + 0.01, FEAT["cap_tip_d"]))
+        cuts += key_a15_nut_slot(parts, cap)
     m = union([m] + key_a13_adds(parts))
     return clean(diff(m, cuts + key_a13_cuts(parts)))
 
@@ -280,6 +276,9 @@ def key_bought(parts, fixed, note):
     if head and cap:
         h = head[0]
         out["capstan"] = union([prism_x(h["side_rest"], *h["x"]), cyl_z(cap[0], cap[1], 23.3, 29.36, 3.0)])
+        # A15: the nut rests on the slot's lower face (the lever pushes the capstan down), 0.05 off it in the model
+        z0n = A15["slot_z"][0] + 0.05
+        out["nut"] = hexagon_z(cap[0], cap[1], z0n, z0n + A15["nut_m"], A15["nut_s"], rot=30)
     if mag:
         out["magnet"] = cyl_z(mag[0], mag[1], 23.5, 25.5, 5.0)
     felt = [p for p in parts if p["part"] == "rest felt"]
@@ -1088,7 +1087,7 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
 # The one ceiling that stays is outside: the key tail (beam + thin tail, y146..199) hangs 15 mm (white) / 27 mm
 # (black) above the bed because the lever sits 0.7 above it - Bambu's tree support from the build plate holds it and
 # comes off in one piece (print note + 03 tab 3D).
-A13 = {"self_tap_d": 2.7}       # capstan M3 straight into the PETG beam (no nut trap: its floor was a ceiling)
+A13 = {"self_tap_d": 2.7}       # capstan M3 straight into the PETG beam (no nut trap: its floor was a ceiling); A15 brings the nut back
 
 
 def cone_x(cy, cz, x0, x1, d0, d1):
@@ -1186,6 +1185,33 @@ def lever_a13_cut(parts):
 
 
 ADJUST.add("A13")
+
+
+# ------------------------------------------------------------------ A15 (2026-10-30): capstan nut back, under a sacrificial bridge
+# After A13 the user: "너트는 사용하는데, 기존 구조의 경우 서포트 처리가 어려워. 서포트 처리가 쉬우면서 너트를 사용하는 구조를
+# 디자인해줘". The A12 nut trap (D02: side slot open to +x, AF 5.6) was a ceiling in the turned-over print whose middle had the D3.3
+# tip hole through it: the hole's rim hung free, so Bambu grew tree support into the slot, hard to get out. A15 keeps the side slot
+# and the nut but stops the tip hole 0.4 (two layers) short of the slot: the first layer over the slot is a plain bridge 5.6 long
+# between the two flats (anchored on both, open end at +x), under Bambu's 'max bridge length' 10 - no support. Screwing the capstan
+# down the first time, its tip breaks the membrane (it would sit 0.05 inside it at the drawn height). Slot 2.8 tall = nut 2.4 + 0.4
+# for bridge sag; every face sits on a 0.2 layer line of both prints (43.5 - z, 55.5 - z). The D2.8 self-locking bore (D02) is back.
+# The closed end is a flat wall 3.2 from the axis (the nut's corner, 5.5 / sqrt 3 = 3.175, stops it on the axis) instead of D02's
+# hex V: a plain rectangle to bridge, and one straight pocket on the part sheets (the V's sloped walls split it into slivers).
+A15 = {"slot_z": (23.5, 26.3), "membrane": 0.4, "slot_af": 5.6, "slot_end": 3.2, "nut_s": 5.5, "nut_m": 2.4}
+
+
+def key_a15_nut_slot(parts, cap):
+    """capstan cuts of the hidden beam: D2.8 bore above the nut, side-open slot (flat closed end), 0.4 membrane, D3.3 tip hole below."""
+    cx, cy = cap
+    bx1 = [p for p in parts if p["part"] == "beam"][0]["x"][1]
+    z0, z1 = A15["slot_z"]
+    af = A15["slot_af"]
+    return [cyl_z(cx, cy, z1 - 0.01, 31.0, FEAT["cap_hole_d"]),
+            box(cx - A15["slot_end"], bx1 + 1.0, cy - af / 2, cy + af / 2, z0, z1),   # nut flats on the +-y walls, out of the +x face
+            cyl_z(cx, cy, FEAT["cap_tip_z"][0], z0 - A15["membrane"], FEAT["cap_tip_d"])]
+
+
+ADJUST.add("A15")
 
 
 # A13 bed: the board was screwed from below onto four D6 bosses hung over an open hatch (two off the balance rail, two

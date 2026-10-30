@@ -14,9 +14,12 @@ lane at 40). Overhang pieces of consecutive layers that touch form one region:
   - every other region needs support - a ceiling, a bridge, a slope flatter than 30 deg (thin in each layer but
     stacked over many layers).
 TREE_OK: the key tails (beam + thin tail, y146..199) hang over the bed by design (the lever is 0.7 above them);
-Bambu's tree support from the build plate holds them - counted apart, not a failure.
+Bambu's tree support from the build plate holds their outer undersides - counted apart, not a failure. A15: only up to
+the thin tail's underside (print z 18.7 white / 30.7 black); a ceiling higher up sits inside the beam (the capstan nut
+slot), where a tree would have to grow into the slot, so it is judged like any other ceiling.
 BRIDGE_OK: bridges anchored at both ends and under Bambu's 10 mm 'max bridge length' (the key crossbar; A14: the 07 cradle's
-window-gable flat, the window cover's hip-roof flat and the slots over its snap beams) - counted apart, not a failure.
+window-gable flat, the window cover's hip-roof flat and the slots over its snap beams; A15: the capstan nut slot's ceiling,
+5.6 between the flats, with no hole in it) - counted apart, not a failure.
 
 usage: python3 check_support.py [--json out.json] [--all] [name filters...]
        exit 1 if any print needs support; --all also lists the pieces of every file
@@ -39,9 +42,10 @@ STEP = LAYER / math.tan(math.radians(ANGLE))
 MIN_AREA = 0.05                                # mm2 per piece and layer
 TOL = 0.02                                     # facet noise of chamfers / teardrops
 NARROW = 2.0                                   # micro-bridge width (one or two layers)
-# (file prefix, print-frame y from which the key tail starts): white keys start at y0, black ones at y54.2
-TREE_OK = (("stl/print/01_건반/백건_", 145.9), ("stl/print/01_건반/흑건_", 91.7),
-           ("stl/print_extra/예비_건반/백건_", 145.9), ("stl/print_extra/예비_건반/흑건_", 91.7))
+# (file prefix, print-frame y from which the key tail starts, highest print z of its outer undersides): white keys start
+# at y0, black ones at y54.2; beam underside z15.1 / 16.1, thin tail z18.7 (white; black +12)
+TREE_OK = (("stl/print/01_건반/백건_", 145.9, 19.0), ("stl/print/01_건반/흑건_", 91.7, 31.0),
+           ("stl/print_extra/예비_건반/백건_", 145.9, 19.0), ("stl/print_extra/예비_건반/흑건_", 91.7, 31.0))
 
 
 def load(path):
@@ -58,8 +62,9 @@ def _touch(a, b, g=0.5):
 
 
 def overhangs(M, layer=LAYER, step=STEP, narrow=False):
-    """[(z, area, (x0, y0, x1, y1))] of the layer pieces that hang out past the layer below (print frame, bed z = min)
-    and need support; narrow=True returns the micro-bridge pieces instead."""
+    """[(z, area, (x0, y0, x1, y1), holes)] of the layer pieces that hang out past the layer below (print frame, bed z = min)
+    and need support; narrow=True returns the micro-bridge pieces instead. holes = inner contours of the piece (A15: a
+    bridge with a hole in it leaves the hole's rim hanging, so BRIDGE_OK takes only hole-free pieces)."""
     b = M.bounding_box()
     z0, z1 = b[2], b[5]
     pcs, prev = [], None
@@ -73,7 +78,8 @@ def overhangs(M, layer=LAYER, step=STEP, narrow=False):
                     a = piece.area()
                     if a >= MIN_AREA:
                         thin = piece.offset(-NARROW / 2.0, JoinType.Round).is_empty()
-                        pcs.append((k, round(z - z0, 2), round(a, 3), tuple(round(v, 2) for v in piece.bounds()), thin))
+                        pcs.append((k, round(z - z0, 2), round(a, 3), tuple(round(v, 2) for v in piece.bounds()), thin,
+                                    piece.num_contour() - 1))
         prev = cs
     up = list(range(len(pcs)))
 
@@ -95,7 +101,7 @@ def overhangs(M, layer=LAYER, step=STEP, narrow=False):
     for ix in groups.values():
         micro = len({pcs[i][0] for i in ix}) <= 2 and all(pcs[i][4] for i in ix)
         if micro == narrow:
-            out += [pcs[i][1:4] for i in ix]
+            out += [pcs[i][1:4] + (pcs[i][5],) for i in ix]
     return sorted(out)
 
 
@@ -103,8 +109,14 @@ def overhangs(M, layer=LAYER, step=STEP, narrow=False):
 # Bambu Studio's default 'max bridge length' 10 mm get no support - the key's keeper crossbar (8.6 between the guide ribs; the keeper felt
 # over it leaves no room for a roof), white keys y10.5..14, black keys y76.5..80 - 54.2; A14: the 07 cradle's window gable flat (9 at u22.75,
 # the plate 2.5 thick), the window cover's hip-roof flat (9 x 9) and the slots over its two snap beams (7 x 2.3).
+# A15: the capstan nut slot's ceiling (the 0.4 membrane over the slot, first layer print z20.0 white / 32.0 black): the bridge
+# runs in y between the hex flats (5.6, y188.34 +- 2.8 white, 180.31 - 54.2 +- 2.8 black), so the y window holds the span;
+# its x width is the slot's length out to the open +x face (~7).
+_NUT_W, _NUT_B = (-1.0, 40.0, 19.9, 20.3), (-1.0, 40.0, 31.9, 32.3)
 BRIDGE_OK = (("stl/print/01_건반/백건_", 10.3, 14.2, 9.0, None), ("stl/print/01_건반/흑건_", 22.1, 26.0, 9.0, None),
              ("stl/print_extra/예비_건반/백건_", 10.3, 14.2, 9.0, None), ("stl/print_extra/예비_건반/흑건_", 22.1, 26.0, 9.0, None),
+             ("stl/print/01_건반/백건_", 185.4, 191.3, 7.5, _NUT_W), ("stl/print/01_건반/흑건_", 123.3, 128.9, 7.5, _NUT_B),
+             ("stl/print_extra/예비_건반/백건_", 185.4, 191.3, 7.5, _NUT_W), ("stl/print_extra/예비_건반/흑건_", 123.3, 128.9, 7.5, _NUT_B),
              ("stl/print/07_터치스크린/화면받침_크래들", 7.5, 10.5, 9.2, (110.9, 120.3, 80.0, 81.8)),
              ("stl/print/07_터치스크린/점검창덮개", 26.5, 34.0, 2.6, (0.5, 32.0, 2.4, 3.2)),
              ("stl/print/07_터치스크린/점검창덮개", 17.8, 27.3, 9.2, (8.6, 18.2, 6.8, 7.6)))
@@ -115,16 +127,17 @@ def split_bridges(rel, ov):
     ok = []
     for pre, y0, y1, w, win in BRIDGE_OK:
         if rel.startswith(pre):
-            ok += [o for o in ov if o not in ok and o[2][1] >= y0 and o[2][3] <= y1 and o[2][2] - o[2][0] <= w
+            ok += [o for o in ov if o not in ok and o[3] == 0 and o[2][1] >= y0 and o[2][3] <= y1 and o[2][2] - o[2][0] <= w
                    and (win is None or (win[0] <= o[2][0] and o[2][2] <= win[1] and win[2] <= o[0] <= win[3]))]
     return [o for o in ov if o not in ok], ok
 
 
 def split_tree(rel, ov):
     """(pieces that need support, pieces of the key tail that Bambu's tree support from the plate holds)."""
-    for pre, y0 in TREE_OK:
+    for pre, y0, z1 in TREE_OK:
         if rel.startswith(pre):
-            return [o for o in ov if o[2][1] < y0], [o for o in ov if o[2][1] >= y0]
+            held = [o for o in ov if o[2][1] >= y0 and o[0] <= z1]
+            return [o for o in ov if o not in held], held
     return ov, []
 
 
@@ -157,15 +170,15 @@ def main(argv):
         need, tr = split_tree(rel, overhangs(M))
         need, br = split_bridges(rel, need)
         micro = overhangs(M, narrow=True)
-        res[rel] = dict(area=round(sum(a for _z, a, _b in need), 2), pieces=len(need), worst=sorted(need, key=lambda t: -t[1])[:12],
-                        tree_area=round(sum(a for _z, a, _b in tr), 2), micro=len(micro), bridges=len(br))
+        res[rel] = dict(area=round(sum(o[1] for o in need), 2), pieces=len(need), worst=sorted(need, key=lambda t: -t[1])[:12],
+                        tree_area=round(sum(o[1] for o in tr), 2), micro=len(micro), bridges=len(br))
         bad += bool(need)
         tree += bool(tr)
         if need or show_all:
             print("%-62s %4d pieces %9.2f mm2%s" % (rel, len(need), res[rel]["area"],
                                                     "  (+ tree %.0f mm2)" % res[rel]["tree_area"] if tr else ""))
-            for z, a, bb in res[rel]["worst"][:6 if not show_all else 12]:
-                print("      z%7.2f  %8.2f mm2  x%.1f~%.1f y%.1f~%.1f" % (z, a, bb[0], bb[2], bb[1], bb[3]))
+            for z, a, bb, nh in res[rel]["worst"][:6 if not show_all else 12]:
+                print("      z%7.2f  %8.2f mm2  x%.1f~%.1f y%.1f~%.1f%s" % (z, a, bb[0], bb[2], bb[1], bb[3], "  (%d holes)" % nh if nh else ""))
     print("check_support: %d files, %d need support, %d key tails on Bambu tree support (layer %.2f, %g deg = %.3f mm a layer)"
           % (len(res), bad, tree, LAYER, ANGLE, STEP))
     if out_json:

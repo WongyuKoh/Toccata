@@ -760,7 +760,8 @@ def c08():
     yc = MET["white"]["y_cap"]
     zc = P["z_c"]
     z_head_bot = zc - P["cap_k"]
-    zt0, zt1 = 23.8, 26.4                    # nut trap void (key_body mass model)
+    zt0, zt1 = 23.5, 26.3                    # nut trap void = CAD A15 slot (2.8 tall; was key_body 23.8..26.4)
+    mem = 0.4                                # A15: the tip hole stops 0.4 short -> the slot ceiling is a hole-free bridge
     variants = [(5.6, 2.8), (5.7, 2.8), (5.8, 2.8), (5.6, 2.7), (5.6, 2.9)]
     s = HDR
     base_t = 3.0
@@ -775,15 +776,16 @@ def c08():
         xc = X0 + P["beam_w"] / 2
         body += box(X0, X0 + P["beam_w"], 3.0, 23.0, base_t - 0.01, Z(zb0))
         cuts += cyl(xc, 13.0, -1, base_t + 0.01, 7.0)                       # capstan head / hex key access
-        cuts += cyl(xc, 13.0, Z(zt0) - 0.01, Z(zb0) + 1, 3.3)                 # screw tip clearance below the nut
+        cuts += cyl(xc, 13.0, Z(zt0) + mem, Z(zb0) + 1, 3.3)                  # screw tip clearance below the nut, past the membrane
         cuts += cyl(xc, 13.0, base_t - 0.01, Z(zt1) + 0.01, dh, 32)           # self-locking hole (above the nut)
-        cuts += box(xc - wn / 2, X0 + P["beam_w"] + 1, 13.0 - wn / 2, 13.0 + wn / 2, Z(zt1), Z(zt0))   # side-open nut slot
+        cuts += box(xc - 3.2, X0 + P["beam_w"] + 1, 13.0 - wn / 2, 13.0 + wn / 2, Z(zt1), Z(zt0))   # side-open nut slot; A15: closed end 3.2 from the axis
+        # (was xc - wn/2 = 2.8: the nut's corner, 3.175 from its centre, held it 0.375 off the screw axis)
         cuts += text_(str(k + 1), xc, 24.6, base_t, size=2.2)
     s += diff(uni(body), cuts)
-    part("C08a", "캡스턴 너트 트랩 빔 쿠폰 (5종)", "C", s, "건반처럼 뒤집어 (빔 윗면 = 바탕 판을 베드에); 너트 홈 천장은 5.6~5.8 브리지",
-         "빔 폭 %.1f, z%.1f~%.1f (캡스턴 자리), 너트 홈 z%.1f~%.1f 옆에서 열림: 1) %s" % (P["beam_w"], zb0, zcap, zt0, zt1,
+    part("C08a", "캡스턴 너트 트랩 빔 쿠폰 (5종)", "C", s, "건반처럼 뒤집어 (빔 윗면 = 바탕 판을 베드에); 너트 홈 천장은 구멍 없는 0.4 막 = 5.6~5.8 다리 (A15)",
+         "빔 폭 %.1f, z%.1f~%.1f (캡스턴 자리), 너트 홈 z%.1f~%.1f 옆에서 열림, 밑 막 %.1f: 1) %s" % (P["beam_w"], zb0, zcap, zt0, zt1, mem,
                                                                                 ", ".join("%d) 홈 %s / 구멍 Ø%s" % (i + 1, f_(w, 1), f_(d, 1)) for i, (w, d) in enumerate(variants))[3:]),
-         "M3 너트를 옆에서 끼우고 M3×6 버튼헤드를 위 Ø구멍으로 돌려 넣어 자가 잠김 토크·유지를 본다", settings=LIKE_KEY)
+         "M3 너트를 옆에서 끼우고 M3×6 버튼헤드를 위 Ø구멍으로 돌려 넣어(끝이 막을 뚫음) 자가 잠김 토크·유지를 본다", settings=LIKE_KEY)
     adj = MET.get("adjust", {})
     return dict(y_cap=yc, z_head_top=zc, z_head_bot=z_head_bot, trap=(zt0, zt1), variants=variants, pitch=0.5, eighth=0.0625, adjust=adj)
 
@@ -1679,7 +1681,9 @@ def write_md(R, T, ver):
     a("모델(D02): M3 육각 너트를 옆에서 끼우고, 위 Ø2.8 자가 잠김 구멍으로 M3×6 ISO 7380 버튼헤드를 돌려 머리 꼭대기 z%s. 1/8회전 = %s mm → DW 백 +%s / 흑 +%s g, 바닥 캡 높이 +%s / +%s mm. C08a는 빔(폭 %s, z%s~%s)의 너트 홈 폭·잠김 구멍 5가지다: %s."
       % (f_(c8["z_head_top"], 1), f_(c8["eighth"], 4), f_(adj["white_0.125"]["dDW"], 2), f_(adj["black_0.125"]["dDW"], 2), f_(adj["white_0.125"]["dcap"], 2), f_(adj["black_0.125"]["dcap"], 2),
          f_(P["beam_w"], 1), f_(P["beam_z"][0], 1), f_(P["beam_z_cap"], 1), ", ".join("%d) 홈 %s / Ø%s" % (i + 1, f_(w, 1), f_(d, 1)) for i, (w, d) in enumerate(c8["variants"]))))
-    a("1. 너트를 옆 홈에 손가락으로 밀어 넣는다. 쿠폰을 뒤집어 두드려도 빠지지 않아야 한다.")
+    a("> **2026-10-30 (CAD A15): 건반 너트 홈은 C08a와 같은 모양입니다.** A13에서 뺐던 캡스턴 너트를 되살렸습니다. 홈은 z%s~%s(높이 %s), 닫힌 끝은 축에서 3.2 평평한 벽(너트 꼭짓점이 닿아 축에 섬 - 예전 쿠폰은 2.8이라 너트가 0.375 비켜 있었음), 그 밑 0.4 막이 홈 천장을 구멍 없는 다리로 만들어 서포트가 없고, 나사 끝 구멍 Ø3.3은 막 밑에서 시작합니다. 아래 2에서 나사 끝이 막을 뚫는지(빡빡하면 Ø3 드릴을 손으로 밑에서)와 다리가 처져 너트가 안 들어가지 않는지도 봅니다."
+      % (f_(c8["trap"][0], 1), f_(c8["trap"][1], 1), f_(c8["trap"][1] - c8["trap"][0], 1)))
+    a("1. 너트를 옆 홈에 손가락으로 밀어 넣는다(다리 처짐으로 막히면 홈 높이를 적어 둔다). 쿠폰을 뒤집어 두드려도 빠지지 않아야 한다.")
     a("2. 버튼헤드를 바탕 판 쪽(Ø7 구멍)에서 2.0 육각 렌치로 돌려 넣는다. 렌치 긴 팔 끝(축에서 40 mm)에 실로 C14 추 컵을 달고 물을 부어 나사가 돌기 시작하는 무게 m을 잰다: 토크 = m × 0.00981 × 40 N·mm.")
     a("3. 1/8회전씩 8번(1회전) 돌려 머리 높이 변화를 캘리퍼로 잰다: 0.50 ± 0.05 mm. 20번 풀고 조인 뒤 2를 다시 한다.")
     a("**제안 합격: 너트 유지, 토크 3~40 N·mm(처음·20번 뒤 모두)**(3 아래면 진동에 돌 수 있음, 40 위면 2.0 렌치가 헛돌고 PETG 나사산이 뭉개짐). 고른 홈 폭·구멍 지름을 건반 파일과 모델 `key_body` ‘nut trap’에 넣는다.")

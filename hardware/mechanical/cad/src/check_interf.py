@@ -6,7 +6,7 @@ notes=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
 EXPECTED = [
     (r"-LEVER-|-CAGE|-PLUG", r"leverrod", "Ø3.9 출력 구멍 → Ø4.0 드릴 (S11, P22) / 마개 압입"),
     (r"-CAGE", r"-PLUG", "마개 Ø4.0 압입 (D18)"),
-    (r"-KEY-", r"-CAPSTAN-", "캡스턴 나사가 빔의 Ø2.7 구멍에 나사산을 냄 (A13: 너트 없음; D02는 Ø2.8)"),
+    (r"-KEY-", r"-CAPSTAN-", "캡스턴 나사가 빔의 Ø2.8 잠김 구멍에 나사산을 내고 너트 홈 밑 0.4 막을 뚫음 (A15, D02)"),
     (r"-LEVER-|-LEVERCOVER-", r"-STEEL-", "레버 쉼 각 회전 계산 오차 (< 0.001 mm)"),
     (r"-LEVER-", r"-FELTSTRIP-", "펠트 띠가 아래 립 끝면과 맞닿음"),
     (r"-FRAME|-CAGE", r"controlboard", "위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0"),

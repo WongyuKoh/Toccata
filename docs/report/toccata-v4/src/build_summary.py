@@ -198,7 +198,7 @@ check("약 8 W/ch" in row17, "amp 8 W/ch at 12.8 V")
 check(not any(it["id"] in ("i096", "i057") for it in items), "plywood sheet and wood glue dropped (10/16 A안)")
 
 # ------------------------------------------------------------------ CAD solids (optional, ~4 s)
-n_cad = 1567                                       # 10/29 A12 +185 (레버틀 9, 가이드 탭 88, 레버 덮개 88), 10/30 A13 -88 (캡스턴 너트), A14 +3 (유리 턱 띠 L·R + 접은 보기)
+n_cad = 1655                                       # 10/29 A12 +185 (레버틀 9, 가이드 탭 88, 레버 덮개 88), 10/30 A13 -88 (캡스턴 너트), A14 +3 (유리 턱 띠 L·R + 접은 보기), A15 +88 (캡스턴 너트 되살림)
 SCREEN_UP_TOP = 189.23                             # CAD value (max z of the TS-* solids in the use pose); re-measured below
 if "--no-cad" not in sys.argv:
     sys.path.insert(0, os.path.join(CAD, "src"))
@@ -206,7 +206,7 @@ if "--no-cad" not in sys.argv:
     import build_all  # noqa: E402  (collect() only; build_all.main() would wipe stl/print)
     parts = build_all.collect()
     n_cad = len(parts)
-    check(n_cad == 1567, f"CAD parts {n_cad}")
+    check(n_cad == 1655, f"CAD parts {n_cad}")
     P = {p.id: p for p in parts}
     use = [p for p in parts if not (p.note or "").startswith("altview") and p.id != "PEDAL-DAMPER"]
     bb = [p.solid.bounding_box() for p in use]
@@ -313,7 +313,7 @@ def need_str(it):
 
 NEXT = [
     ("10/12 주 ~ 11/8", "단계 0 재료 시험",
-     f"시편 {len(S0['parts'])}종 {s0_pieces}개(key-action-v4/printables/stage0)와 출력 공구 {pf['tools']}개를 먼저 뽑고 시험 {len(s0_tests)}가지와 확인 {len(s0_extra)}가지(밸런스 핀 압입·캡스턴 박기·펠트 두께; 캡스턴은 A13부터 너트 없이 첫 건반 빔에서)를 합니다. 9가지는 첫 모듈로 합니다."),
+     f"시편 {len(S0['parts'])}종 {s0_pieces}개(key-action-v4/printables/stage0)와 출력 공구 {pf['tools']}개를 먼저 뽑고 시험 {len(s0_tests)}가지와 확인 {len(s0_extra)}가지(밸런스 핀 압입·캡스턴 박기·펠트 두께; 캡스턴 너트 홈은 A15부터 C08a 쿠폰과 같은 막 홈 - 막 뚫기는 첫 건반에서)를 합니다. 9가지는 첫 모듈로 합니다."),
     ("11/1 무렵", "첫 옥타브 모듈 O4",
      "모듈 1개(출력 약 47시간)를 뽑아 조립·납땜하고 PC로 첫 소리를 냅니다. 시험 21(첫 모듈 정하중)을 통과하면 나머지를 뽑습니다."),
     ("10/26 ~ 12/6", "나머지 출력 약 380시간",
