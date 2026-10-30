@@ -552,9 +552,12 @@ def main(parts=None):
                    "max_err_mm": round(st["max_err"], 4)}
     with open(os.path.join(HERE, "parts.json"), "w", encoding="utf-8") as fh:
         json.dump(data, fh, ensure_ascii=False, separators=(",", ":"))
+    import asm_graph                      # 2026-10-30: contact graph for the 조립 순서 보기 player (viewer/asm.json)
+    asm = asm_graph.main(parts, data)
     with open(os.path.join(HERE, "assets.json"), "w", encoding="utf-8") as fh:
         json.dump({"glb": "hardware/mechanical/cad/viewer/" + GLB_NAME, "parts": "hardware/mechanical/cad/viewer/parts.json",
                    "publish": {"cad/parts.json": "hardware/mechanical/cad/viewer/parts.json",
+                               "cad/asm.json": "hardware/mechanical/cad/viewer/asm.json (asm_graph.py: which parts touch / are fastened, coming-in directions)",
                                "cad/toccata.glb.b64.txt": "base64 text of hardware/mechanical/cad/viewer/" + GLB_NAME},
                    "page": {"section": "hardware/mechanical/cad/viewer/cad.html", "css": "hardware/mechanical/cad/viewer/cad.css",
                             "js": "hardware/mechanical/cad/viewer/cad.js"},
@@ -566,7 +569,7 @@ def main(parts=None):
                           "waits for the model, ghosts the rest at 15 %, frames the camera, shows label + 모두 보기. Also clear(), ready(), "
                           "parts() -> Promise<[{id, name, kind, group, bbox, file, folder, qty, material, bom, note}]>, press(id), sets. "
                           "window.toccata.three = shared Promise for three.js r128."}, fh, ensure_ascii=False, indent=1)
-    write_html(parts, man, data, groups, st)
+    write_html(parts, man, data, groups, st, asm)
     print("parts %d  groups %d  glb %.2f MB (b64 %.2f MB, %d meshes, %d unique shapes, %d tris, max err %.4f mm)  parts.json %.0f KB  fold check %.3f mm"
           % (len(parts), len(groups), st["bytes"] / 1e6, b64 / 1e6, st["meshes"], st["unique"], st["tris"], st["max_err"],
              os.path.getsize(os.path.join(HERE, "parts.json")) / 1e3, data["fold"]["check_mm"]))
@@ -574,7 +577,7 @@ def main(parts=None):
 
 
 # ------------------------------------------------------------------ the section
-def write_html(parts, man, data, groups, st):
+def write_html(parts, man, data, groups, st, asm=None):
     recs = data["parts"]
     on = [r for r in recs if not r.get("a") and not r.get("o")]
     kinds = collections.Counter(r["k"] for r in on)
@@ -591,7 +594,8 @@ def write_html(parts, man, data, groups, st):
     a('<h2>3D 모델</h2>')
     a('<p class="lede">설계도와 같은 CAD 입체 %s개를 조립한 자리 그대로 띄운 모델입니다. 출력 STL, 도면, 이 모델은 모두 같은 생성기'
       '(<code>hardware/mechanical/cad/src</code>)에서 나오므로 치수가 같습니다. 부품을 누르면 이름·크기·재료·출력 파일이 나오고, '
-      '건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다.</p>' % format(len(recs), ","))
+      '건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다. 오른쪽 <b>조립 순서 보기</b>는 '
+      '고른 부품에서 시작해 닿거나 나사·핀으로 이어진 부품을 하나씩 제자리에 넣어 보여 줍니다.</p>' % format(len(recs), ","))
     a('<div class="kfs">')
     for b_, s_ in [(format(len(on), ","), "조립 부품 (페달·접은 화면 제외)"), ("%d" % len(data["keys"]), "건반 (백 %d · 흑 %d)" % (n_white, n_black)),
                    ("%s × %s" % (f(box[3] - box[0]), f(box[4] - box[1])), "전체 가로 × 깊이 mm"),
@@ -646,6 +650,33 @@ def write_html(parts, man, data, groups, st):
     a('</div>')  # cadmain
     a('<div class="cadside">')
     a('<div class="cadinfo" aria-live="polite"><p class="cadempty">부품을 누르면 이름·크기·재료·출력 파일이 여기에 나옵니다.</p></div>')
+    st_ = (asm or {}).get("stats", {})
+    a('<details class="cadbox cadasm" open><summary>조립 순서 보기</summary>')
+    a('<p class="cadasm-help">3D에서 부품을 하나 누르고 <b>조립 시작</b>을 누르세요. 그 부품만 남기고 지운 뒤, 닿거나 나사·핀으로 이어진 부품이 '
+      '하나씩 들어오는 방향에서 날아와 제자리에 붙습니다. 붙은 부품에 다시 이어진 부품을 차례로 따라가면 끝에는 고른 범위 전체가 조립됩니다. '
+      '파란 부품은 지금 붙는 자리, 주황 부품은 지금 들어오는 부품입니다.</p>')
+    a('<div class="cadasm-start"><span class="cadlbl">시작</span><b class="cadasm-name">3D에서 부품을 누르세요</b></div>')
+    a('<div class="seg cadseg cadasm-scope" role="group" aria-label="조립 범위"><button type="button" data-asm-scope="mod" aria-pressed="true">'
+      '같은 모듈</button><button type="button" data-asm-scope="all" aria-pressed="false">악기 전체</button></div>')
+    a('<div class="cadasm-ctl"><button type="button" class="cadtog cadasm-go" data-asm="go">조립 시작</button>'
+      '<button type="button" class="cadtog" data-asm="exit" disabled>끝내기</button></div>')
+    a('<div class="cadasm-ctl" role="group" aria-label="단계 조작"><button type="button" class="cadtog" data-asm="first" disabled aria-label="처음으로">처음</button>'
+      '<button type="button" class="cadtog" data-asm="prev" disabled aria-label="한 부품 뒤로">◀</button>'
+      '<button type="button" class="cadtog cadasm-play" data-asm="play" disabled aria-label="재생">▶ 재생</button>'
+      '<button type="button" class="cadtog" data-asm="next" disabled aria-label="한 부품 앞으로">▶|</button>'
+      '<button type="button" class="cadtog" data-asm="last" disabled aria-label="끝까지">끝</button></div>')
+    a('<div class="cadasm-ctl"><label class="cadchk"><span>빠르기</span><select data-asm-speed aria-label="빠르기">'
+      + "".join('<option value="%s"%s>%s×</option>' % (v, " selected" if v == "1" else "", v) for v in ("0.5", "1", "2", "4", "8", "16", "32"))
+      + '</select></label><label class="cadchk"><input type="checkbox" data-asm-follow checked>카메라 따라가기</label></div>')
+    a('<input type="range" class="cadasm-scrub" min="1" max="1" value="1" step="1" disabled aria-label="조립 단계">')
+    a('<div class="cadasm-now" aria-live="polite"></div>')
+    a('<ol class="cadasm-list" hidden></ol>')
+    if st_:
+        a('<p class="cadasm-src">연결 %s개 (나사·핀 %s · 끼움 %s · 맞닿음 %s · 틈 %s mm 안 %s) — CAD 입체끼리 닿거나 겹치거나 %s mm 안에 있는 부품을 '
+          '잇고, 들어오는 방향은 그 방향으로 밀어도 상대 부품에 걸리지 않는 쪽입니다(<code>viewer/asm_graph.py</code>).</p>'
+          % (format(st_["edges"], ","), st_["kinds"][0], st_["kinds"][1], format(st_["kinds"][2], ","), f((asm or {}).get("gap", 0.65)), st_["kinds"][3],
+             f((asm or {}).get("gap", 0.65))))
+    a('</details>')
     a('<details class="cadbox" open><summary>부분별로 보기</summary><div class="cadsets">')
     for i, s in enumerate(data["sets"]):
         if "sec" in s:
@@ -685,7 +716,9 @@ def write_html(parts, man, data, groups, st):
                  ("hardware/mechanical/cad/stl/assembly/", "그룹별 조립 STL과 Toccata_전체조립.stl (조립 좌표, mm)"),
                  ("hardware/mechanical/cad/stl/print/", "출력용 STL %d개 파일 · 부품 %d개 (파일 이름 끝 = 출력 개수, 베드에 놓인 방향)" % (n_files, n_print)),
                  ("hardware/mechanical/cad/manifest.json", "부품마다 id·이름·종류·그룹·외곽·출력 파일"),
-                 ("hardware/mechanical/cad/viewer/parts.json", "이 탭의 부품표 (외곽, 출력 파일·개수, 메모, 분해·단면·누르기 자료)")]:
+                 ("hardware/mechanical/cad/viewer/parts.json", "이 탭의 부품표 (외곽, 출력 파일·개수, 메모, 분해·단면·누르기 자료)"),
+                 ("hardware/mechanical/cad/viewer/asm.json", "조립 순서 보기 자료: 닿거나 겹치거나 나사·핀으로 이어진 부품 쌍, 이음 방식·이유, 부품마다 들어오는 방향 "
+                  "(viewer/asm_graph.py가 CAD 입체에서 계산)")]:
         a('<tr><td><code>%s</code></td><td>%s</td></tr>' % (esc(k), esc(v)))
     a('</tbody></table></div>')
     a('<div class="cadsave"><button type="button" class="cadtog" id="cad-save">3D 모델 저장 (GLB를 zip으로)</button>'

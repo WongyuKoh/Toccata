@@ -92,6 +92,32 @@
 #p-cad .cadglist label span{flex:1;min-width:0}
 #p-cad .cadglist label em{font-style:normal;font-size:11px;color:var(--ink-3)}
 #p-cad .cadglist input{accent-color:var(--blue)}
+/* 조립 순서 보기 */
+#p-cad .cadasm{border-color:var(--blue)}
+#p-cad .cadasm-help,#p-cad .cadasm-src{font-size:12.5px;line-height:1.5;color:var(--ink-2);margin:2px 0 8px}
+#p-cad .cadasm-src{font-size:11.5px;color:var(--ink-3);margin:8px 0 4px}
+#p-cad .cadasm-src code{font-size:11px}
+#p-cad .cadasm-start{display:flex;align-items:baseline;gap:8px;font-size:13px;margin:0 0 6px;min-width:0}
+#p-cad .cadasm-name{min-width:0;overflow-wrap:anywhere;word-break:keep-all}
+#p-cad .cadasm-scope{margin:0 0 6px}
+#p-cad .cadasm-ctl{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:0 0 6px}
+#p-cad .cadasm-ctl .cadtog{padding:4px 9px}
+#p-cad .cadasm-go{background:var(--blue);color:#fff;border-color:var(--blue)}
+#p-cad .cadasm-go:hover:not(:disabled){filter:brightness(1.08)}
+#p-cad .cadasm-ctl select{font:inherit;font-size:12.5px;border:1px solid var(--rule-2);background:var(--card);color:var(--ink);border-radius:7px;padding:3px 6px;min-height:32px}
+#p-cad .cadasm-scrub{width:100%;accent-color:#d9822b;margin:2px 0 6px}
+#p-cad .cadasm-now{font-size:12.5px;line-height:1.45;min-height:3.6em;padding:6px 8px;border-radius:8px;background:var(--paper);border:1px solid var(--rule)}
+#p-cad .cadasm-now:empty{display:none}
+#p-cad .cadasm-now b{margin-right:6px}
+#p-cad .cadasm-now span{display:block;font-weight:600;margin-top:2px;overflow-wrap:anywhere}
+#p-cad .cadasm-now small{display:block;font-size:11.5px;color:var(--ink-2);margin-top:2px;overflow-wrap:anywhere}
+#p-cad .cadasm-list{margin:8px 0 2px;padding-left:2.6em;font-size:12px;max-height:260px;overflow:auto}
+#p-cad .cadasm-list li{margin:0}
+#p-cad .cadasm-list li::marker{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+#p-cad .cadasm-list button{font:inherit;text-align:left;width:100%;border:0;background:transparent;color:var(--ink-2);padding:3px 4px;border-radius:5px;cursor:pointer;min-height:28px}
+#p-cad .cadasm-list button:hover{background:var(--paper)}
+#p-cad .cadasm-list li.is-done button{color:var(--ink)}
+#p-cad .cadasm-list li.is-now button{background:color-mix(in srgb,#d9822b 16%,transparent);color:var(--ink);font-weight:600}
 #p-cad .cadfiles code{word-break:break-all;font-size:12.5px}
 #p-cad .cadsave{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:8px 0 14px}
 #p-cad .cadest ul{padding-left:1.2em}
@@ -102,6 +128,7 @@
 }
 @media (pointer:coarse){
   #p-cad .cadtog,#p-cad .cadseg button,#p-cad .cadset,#p-cad .cadchip,#p-cad .cadacts button,#p-cad .cadgtools button,#p-cad .cadchk{min-height:44px}
+  #p-cad .cadasm-list button,#p-cad .cadasm-ctl select{min-height:44px}
   #p-cad .cadglist label{min-height:40px}
   #p-cad .cadfocus-x{min-height:40px}
 }

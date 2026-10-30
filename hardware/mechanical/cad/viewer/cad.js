@@ -19,17 +19,21 @@
      ready()        Promise resolved when the model is on screen (does not open the tab by itself)
      parts()        Promise<array of {id, name, kind, group, bbox:[x0,y0,z0,x1,y1,z1], file, folder, qty, material, bom:[[itemId, code, title]], note}>
      press(id)      press the key of that part id (key, lever, capstan ... of one note), e.g. press('O4-KEY-C')
+     assemble(id, scope)  open the tab and play 조립 순서 보기 from that part ('mod' its module, 'all' the instrument)
      sets           [{title, ids}] = the 부분별로 보기 list (filled when ready)
      _q             optional: a script that runs before this one may push [sel, label, opts] arrays into
                     window.toccata.cad._q; they are replayed through focus() once the model is ready.
-   window.toccata.three  shared Promise that loads three.js r128 once (other tabs may reuse it). */
+   window.toccata.three  shared Promise that loads three.js r128 once (other tabs may reuse it).
+   조립 순서 보기 (2026-10-30): cad/asm.json (viewer/asm_graph.py) lists which parts touch, overlap or are fastened and the
+   direction each comes in from; starting at a picked part the walk adds the parts connected to those already in place,
+   one at a time, each flying in along its direction (breadth first, bigger neighbours first). */
 (function () {
   'use strict';
   var sec = document.getElementById('p-cad');
   if (!sec) return;
   var NS = window.toccata = window.toccata || {};
   var THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-  var PARTS_URL = 'cad/parts.json', GLB_URL = 'cad/toccata.glb.b64.txt';
+  var PARTS_URL = 'cad/parts.json', GLB_URL = 'cad/toccata.glb.b64.txt', ASM_URL = 'cad/asm.json';
   var FOV = 30, TAN = Math.tan(FOV / 2 * Math.PI / 180);
   var mqReduce = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
   function reduced() { return !!(mqReduce && mqReduce.matches); }
@@ -77,6 +81,18 @@
   api.ready = function () { return waitReady(); };
   api.parts = function () { return waitReady().then(function () { return D.parts.map(function (p, i) { return rec(i); }); }); };
   api.press = function (id) { return waitReady().then(function () { var i = idIndex[id]; if (i != null && keyOf[i] != null) pressKey(keyOf[i]); }); };
+  api.assemble = function (id, scope) {     // 조립 순서 보기 from one part id ('mod' = its module, 'all' = the whole instrument)
+    return openTab().then(function () { start(); return waitReady(); }).then(function () {
+      var i = idIndex[id];
+      if (i == null) return false;
+      if (scope === 'all' || scope === 'mod') {
+        AS.scope = scope;
+        sec.querySelectorAll('[data-asm-scope]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-asm-scope') === scope ? 'true' : 'false'); });
+      }
+      select(i); asmStart(i);
+      return true;
+    });
+  };
   api.sets = [];
   delete api._q;
 
@@ -242,6 +258,7 @@
     try { buildMeshes(parseGLB(glbBytes)); } catch (e) { fail(e); return; }
     loaded = true; loading = false;
     wireUi();
+    wireAsm();
     applySection();
     refresh();
     setView('front34', { anim: false });
@@ -322,7 +339,8 @@
                                       clippingPlanes: [plane], polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1 });
     if (mode === 'g') { m.transparent = true; m.opacity = 0.15; m.depthWrite = false; }
     else m.onBeforeCompile = capTint;
-    if (mode === 's') { m.emissive = new T.Color(0x1f5fbf); m.emissiveIntensity = 0.5; }
+    if (mode === 's' || mode === 'p') { m.emissive = new T.Color(0x1f5fbf); m.emissiveIntensity = mode === 'p' ? 0.6 : 0.5; }
+    if (mode === 'a') { m.emissive = new T.Color(0xd9822b); m.emissiveIntensity = 0.75; }
     mats[k] = m;
     return m;
   }
@@ -356,6 +374,7 @@
 
   // ---------------------------------------------------------------- visibility + materials
   function shown(i) {
+    if (AS.on) return AS.pos[i] != null && (AS.pos[i] < AS.k || (AS.pos[i] === AS.k && AS.t > 0));
     var p = D.parts[i];
     var inFocus = S.focus && S.focus[i];
     if (p.a) return S.fold >= 1 && !optOf[i] && !(S.inside && p.in && !inFocus);
@@ -372,7 +391,7 @@
       var m = meshes[i], vis = shown(i);
       m.visible = vis;
       if (!vis) continue;
-      var mode = i === S.sel ? 's' : (S.focus && !S.focus[i] ? 'g' : 'n');
+      var mode = AS.on ? (i === AS.cur ? 'a' : (i === AS.pc ? 'p' : (i === S.sel ? 's' : 'n'))) : (i === S.sel ? 's' : (S.focus && !S.focus[i] ? 'g' : 'n'));
       m.material = mat(D.parts[i].c, mode);
       if (m.userData.e) m.userData.e.visible = S.edges && mode !== 'g';
     }
@@ -406,9 +425,11 @@
       FD.move.forEach(function (j) { rotOf[j] = cr; });
       rotOf[FD.leg.i] = comp(cr, rotX(FD.leg.ang * g1, FD.leg.pivot[0], FD.leg.pivot[1]));
     }
+    var mo = AS.on ? asmOffset() : null;
     for (i = 0; i < n; i++) {
       var b = base[i], e = D.parts[i].e, A = rotOf[i];
       var ex = e ? e[0] * s : 0, ey = e ? e[1] * s : 0, ez = e ? e[2] * s : 0;
+      if (mo && i === AS.cur) { ex += mo[0]; ey += mo[1]; ez += mo[2]; }
       var c = A ? A.c : 1, sn = A ? A.s : 0, ty = A ? A.ty : 0, tz = A ? A.tz : 0;
       meshes[i].matrix.set(1, 0, 0, b[0] + ex,
                            0, c, -sn, c * b[1] - sn * b[2] + ty + ey,
@@ -559,6 +580,7 @@
       while (scaleRun.next < scaleRun.list.length && now >= scaleRun.t0 + scaleRun.next * 170) { pressKey(scaleRun.list[scaleRun.next], now); scaleRun.next++; }
       if (scaleRun.next >= scaleRun.list.length) scaleRun = null; else more = true;
     }
+    if (AS.on && AS.playing) { asmAdvance(dt, now); more = true; }
     if (presses.length) {
       presses = presses.filter(function (pr) {
         var u = now - pr.t0, r = reduced();
@@ -677,6 +699,7 @@
   // ---------------------------------------------------------------- focus
   function focusIdx(list, label, opts) {
     opts = opts || {};
+    if (AS.on) asmExit();
     sec.querySelectorAll('.cadset').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
     if (!list.length) {
       S.focus = null; refresh();
@@ -711,6 +734,7 @@
   function select(i) {
     S.sel = i;
     refresh();
+    asmUi();
     if (i < 0) { infoBox.innerHTML = '<p class="cadempty">부품을 누르면 이름·크기·재료·출력 파일이 여기에 나옵니다.</p>'; return; }
     var p = D.parts[i], b = p.b, h = '';
     h += '<div><span class="cadkd cadkd-' + p.k + '">' + esc(KIND[p.k] || p.k) + '</span><span class="cadkd">' + esc(D.groups[p.g].n) + '</span></div>';
@@ -735,7 +759,9 @@
     h += '<div class="cadacts"><button type="button" data-cad-act="zoom">가까이</button><button type="button" data-cad-act="iso">이것만 보기</button>';
     if (p.f && p.q > 1) h += '<button type="button" data-cad-act="same">같은 파일 ' + p.q + '개</button>';
     if (keyOf[i] != null) h += '<button type="button" data-cad-act="press">눌러 보기</button>';
-    h += '<button type="button" data-cad-act="group">이 그룹만</button><button type="button" data-cad-act="hide">숨기기</button></div>';
+    h += '<button type="button" data-cad-act="group">이 그룹만</button><button type="button" data-cad-act="hide">숨기기</button>';
+    if (!p.a) h += '<button type="button" data-cad-act="asm">이 부품부터 조립 보기</button>';
+    h += '</div>';
     infoBox.innerHTML = h;
   }
   infoBox.addEventListener('click', function (e) {
@@ -748,7 +774,233 @@
     else if (a === 'press') pressKey(keyOf[i]);
     else if (a === 'group') focusIdx(D.parts.map(function (q, j) { return j; }).filter(function (j) { return D.parts[j].g === p.g; }), D.groups[p.g].n);
     else if (a === 'hide') { hidden[i] = true; select(-1); }
+    else if (a === 'asm') asmStart(i);
   });
+
+  // ---------------------------------------------------------------- 조립 순서 보기 (cad/asm.json)
+  var AS = { on: false, G: null, loading: null, seq: [], par: [], via: [], pos: {}, k: 0, t: 0, cur: -1, pc: -1,
+             playing: false, speed: 1, scope: 'mod', start: -1, follow: true, camAt: 0 };
+  var asmBox = sec.querySelector('.cadasm');
+  var STEP_MS = 1100, MOVE = 0.68;            // one part at 1x: fly in for 68 %, then hold with the colours on
+  var KNAME = ['나사·핀으로 체결', '끼워 맞춤', '맞닿음', '틈', '떨어져 놓임'];
+  function asmEl(q) { return asmBox ? asmBox.querySelector(q) : null; }
+  function asmLoad() {
+    if (AS.G) return Promise.resolve(AS.G);
+    if (!AS.loading) {
+      AS.loading = getJSON(ASM_URL).then(function (g) {
+        if (g.n !== D.parts.length) throw new Error('조립 자료(asm.json)가 3D 모델과 맞지 않습니다');
+        var n = D.parts.length, adj = [], vol = [], i;
+        for (i = 0; i < n; i++) { var b = D.parts[i].b; adj.push([]); vol.push((b[3] - b[0]) * (b[4] - b[1]) * (b[5] - b[2])); }
+        g.e.forEach(function (e, ei) { adj[e[0]].push(ei); adj[e[1]].push(ei); });
+        adj.forEach(function (l, u) {
+          l.sort(function (a, b) { return vol[other(g.e[b], u)] - vol[other(g.e[a], u)]; });   // bigger neighbours first
+        });
+        g.adj = adj; AS.G = g;
+        return g;
+      }).catch(function (e) { AS.loading = null; throw e; });
+    }
+    return AS.loading;
+  }
+  function other(e, u) { return e[0] === u ? e[1] : e[0]; }
+  function asmBuild(start) {
+    var G = AS.G, m0 = G.m[start], all = AS.scope === 'all';
+    function ok(i) { return G.m[i] >= 0 && (all || G.m[i] === m0); }
+    var seq = [start], par = [-1], via = [-1], seen = {}, q, i;
+    seen[start] = 1;
+    for (q = 0; q < seq.length; q++) {
+      var u = seq[q];
+      G.adj[u].forEach(function (ei) {
+        var v = other(G.e[ei], u);
+        if (seen[v] || !ok(v)) return;
+        seen[v] = 1; seq.push(v); par.push(u); via.push(ei);
+      });
+    }
+    // parts of the range whose links run through parts outside it: next to the closest part already in place
+    var rest = [];
+    for (i = 0; i < D.parts.length; i++) if (!seen[i] && ok(i)) rest.push(i);
+    function ctr(j) { var b = D.parts[j].b; return [(b[0] + b[3]) / 2, (b[1] + b[4]) / 2, (b[2] + b[5]) / 2]; }
+    while (rest.length) {
+      var best = null;
+      rest.forEach(function (r, ri) {
+        var cr = ctr(r);
+        seq.forEach(function (s_) {
+          var cs = ctr(s_), d = (cr[0] - cs[0]) * (cr[0] - cs[0]) + (cr[1] - cs[1]) * (cr[1] - cs[1]) + (cr[2] - cs[2]) * (cr[2] - cs[2]);
+          if (!best || d < best[0]) best = [d, ri, s_];
+        });
+      });
+      var rr = rest.splice(best[1], 1)[0];
+      seq.push(rr); par.push(best[2]); via.push(-1);
+    }
+    AS.seq = seq; AS.par = par; AS.via = via; AS.pos = {};
+    seq.forEach(function (j, k) { AS.pos[j] = k; });
+  }
+  function asmDir(k) {          // model-space unit vector the k-th part comes in from
+    var G = AS.G, ei = AS.via[k], v = AS.seq[k];
+    if (ei >= 0) { var e = G.e[ei]; return G.d[e[0] === v ? e[5] : e[6]]; }
+    var b = D.parts[v].b, pb = D.parts[AS.par[k]].b, d = [(b[0] + b[3] - pb[0] - pb[3]) / 2, (b[1] + b[4] - pb[1] - pb[4]) / 2, (b[2] + b[5] - pb[2] - pb[5]) / 2];
+    var L = Math.hypot(d[0], d[1], d[2]);
+    return L > 1e-6 ? [d[0] / L, d[1] / L, d[2] / L] : [0, 0, 1];
+  }
+  function travel(i) { var b = D.parts[i].b; return Math.max(30, Math.min(180, 0.5 * Math.hypot(b[3] - b[0], b[4] - b[1], b[5] - b[2]) + 30)); }
+  function asmOffset() {
+    if (AS.cur < 0) return null;
+    var u = Math.min(1, AS.t / MOVE), k = reduced() ? 1 : 1 - Math.pow(1 - u, 3);
+    if (k >= 1) return null;
+    var d = asmDir(AS.k), L = travel(AS.cur) * (1 - k);
+    return [d[0] * L, d[1] * L, d[2] * L];
+  }
+  function dirWord(d) {
+    var nm = [['오른쪽', '왼쪽'], ['뒤', '앞'], ['위', '아래']], ax = [0, 1, 2].sort(function (a, b) { return Math.abs(d[b]) - Math.abs(d[a]); });
+    var w = nm[ax[0]][d[ax[0]] > 0 ? 0 : 1];
+    if (Math.abs(d[ax[1]]) > 0.35) w += '·' + nm[ax[1]][d[ax[1]] > 0 ? 0 : 1];
+    return w + '에서';
+  }
+  function stepText(k) {
+    var G = AS.G, v = AS.seq[k], p = D.parts[v];
+    if (k === 0) return { a: '시작: ' + p.n, b: '이 부품만 남기고 나머지는 지웠습니다. 이어진 부품이 하나씩 붙습니다.' };
+    var pp = D.parts[AS.par[k]], ei = AS.via[k], how, why = '';
+    if (ei < 0) how = '고른 범위 밖 부품을 거쳐 이어짐 — 가장 가까운 부품 곁에 놓음';
+    else {
+      var e = G.e[ei];
+      how = KNAME[e[2]] + (e[2] === 3 ? ' ' + e[3] + ' mm' : e[2] === 4 ? ' (가장 가까운 부품과 ' + Math.round(e[3]) + ' mm)' : '');
+      if (e[4] >= 0) why = G.r[e[4]];
+    }
+    return { a: p.n + ' → ' + pp.n, b: how + ' · ' + dirWord(asmDir(k)) + ' 들어옴' + (why ? ' · ' + why : '') };
+  }
+  function asmCam(force, now) {
+    if (!AS.follow || !AS.on) return;
+    now = now || performance.now();
+    if (AS.speed >= 8) {                      // fast: one framing of the whole range, no chasing
+      if (force) fitCam(boxOf(AS.seq), cam.az, cam.el, 1.15, true);
+      return;
+    }
+    if (!force && now - AS.camAt < (AS.speed <= 1 ? 0 : 450)) return;
+    AS.camAt = now;
+    var list = [AS.seq[Math.min(AS.k, AS.seq.length - 1)]];
+    if (AS.par[AS.k] >= 0) list.push(AS.par[AS.k]);
+    var bx = boxOf(list);
+    if (AS.cur >= 0) {                        // include where the moving part starts
+      var d = asmDir(AS.k), L = travel(AS.cur), b = D.parts[AS.cur].b;
+      bx.expandByPoint(m2t(b[0] + d[0] * L, b[1] + d[1] * L, b[2] + d[2] * L));
+      bx.expandByPoint(m2t(b[3] + d[0] * L, b[4] + d[1] * L, b[5] + d[2] * L));
+    }
+    fitCam(bx, cam.az, cam.el, 1.5, true);
+  }
+  function asmSet(k, t) {      // k = parts already in place (1 = only the start part), t = progress of the next one
+    var n = AS.seq.length;
+    AS.k = Math.max(1, Math.min(n, k));
+    AS.t = AS.k >= n ? 0 : Math.max(0, Math.min(1, t || 0));
+    AS.cur = AS.k < n ? AS.seq[AS.k] : -1;
+    AS.pc = AS.k < n ? AS.par[AS.k] : -1;
+    poseDirty = true;
+    refresh();
+    asmUi();
+  }
+  function asmAdvance(dt, now) {
+    var n = AS.seq.length;
+    if (AS.k >= n) { AS.playing = false; asmUi(); return; }
+    var was = AS.t;
+    AS.t += dt * AS.speed / STEP_MS;
+    if (was <= 0 && AS.t > 0) { refresh(); asmCam(false, now); }
+    poseDirty = true;
+    while (AS.t >= 1 && AS.k < n) {
+      AS.k++; AS.t -= 1;
+      if (AS.k >= n) { AS.t = 0; AS.playing = false; }
+      AS.cur = AS.k < n ? AS.seq[AS.k] : -1;
+      AS.pc = AS.k < n ? AS.par[AS.k] : -1;
+      if (AS.t > 1) AS.t = 0.999;             // very fast: the parts in between were placed this frame
+      refresh(); asmUi(); asmCam(false, now);
+    }
+  }
+  function asmStart(i) {
+    if (i == null || i < 0) { asmMsg('먼저 3D에서 부품을 하나 누르세요.'); return; }
+    if (D.parts[i].a) { asmMsg('접은 상태 보기 부품은 조립 순서에 없습니다. 펴진 화면의 부품을 고르세요.'); return; }
+    asmMsg('연결 자료를 불러오는 중…');
+    asmLoad().then(function () {
+      if (AS.G.m[i] < 0) { asmMsg('이 부품은 조립 순서에 없습니다.'); return; }
+      S.focus = null; chip.hidden = true;
+      sec.querySelectorAll('.cadset').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      if (S.fold > 0 || S.foldT > 0) { setFold(false); S.fold = 0; }
+      if (S.ex || S.exT) {
+        S.ex = S.exT = 0;
+        var ex = sec.querySelector('#cad-explode'), exo = sec.querySelector('#cad-explode-out');
+        if (ex) ex.value = 0; if (exo) exo.textContent = '0 %';
+      }
+      presses = []; scaleRun = null;
+      AS.on = true; AS.start = i;
+      asmBuild(i);
+      AS.playing = !reduced();
+      asmSet(1, 0);
+      AS.camAt = 0;
+      if (AS.follow) {
+        if (AS.speed >= 8) asmCam(true);
+        else fitCam(boxOf([i].concat(AS.seq.slice(1, 12))), cam.az, cam.el, 1.6, true);
+      }
+      invalidate();
+    }).catch(function (e) { asmMsg('연결 자료를 받지 못했습니다: ' + (e && e.message || e)); });
+  }
+  function asmExit() {
+    if (!AS.on) return;
+    AS.on = false; AS.playing = false; AS.cur = AS.pc = -1;
+    poseDirty = true;
+    refresh(); asmUi();
+  }
+  function asmMsg(t) { var el = asmEl('.cadasm-now'); if (el) el.textContent = t; }
+  function asmUi() {
+    if (!asmBox) return;
+    var n = AS.seq.length, on = AS.on;
+    var sel = S.sel >= 0 ? D.parts[S.sel] : null;
+    asmEl('.cadasm-name').textContent = on ? D.parts[AS.start].n : (sel ? sel.n : '3D에서 부품을 누르세요');
+    var go = asmEl('[data-asm="go"]');
+    go.textContent = on ? (sel && S.sel !== AS.start ? '고른 부품부터 다시' : '처음부터 다시') : '조립 시작';
+    go.disabled = !on && !sel;
+    asmBox.querySelectorAll('[data-asm]').forEach(function (b) { if (b !== go) b.disabled = !on; });
+    var pl = asmEl('[data-asm="play"]');
+    pl.textContent = AS.playing ? '❚❚ 멈춤' : '▶ 재생';
+    pl.setAttribute('aria-label', AS.playing ? '멈춤' : '재생');
+    var sc = asmEl('.cadasm-scrub');
+    sc.disabled = !on; sc.max = Math.max(1, n); sc.value = on ? AS.k : 1;
+    var list = asmEl('.cadasm-list');
+    if (!on) { list.hidden = true; list.innerHTML = ''; if (AS.G) asmMsg(''); return; }
+    var k = Math.min(AS.k, n - 1), st = stepText(k);
+    asmEl('.cadasm-now').innerHTML = '<b class="mono">' + Math.min(AS.k + (AS.k < n && AS.t > 0 ? 1 : 0), n) + ' / ' + n + '</b> ' +
+      (AS.k >= n ? '조립 끝 — 고른 범위의 부품 ' + n + '개가 모두 붙었습니다.' : '<span>' + esc(st.a) + '</span><small>' + esc(st.b) + '</small>');
+    var a0 = Math.max(0, k - 4), a1 = Math.min(n, a0 + 10), h = '';
+    for (var j = a0; j < a1; j++) {
+      var cls = j < AS.k ? 'is-done' : (j === AS.k ? 'is-now' : '');
+      h += '<li value="' + (j + 1) + '" class="' + cls + '"><button type="button" data-asm-k="' + j + '">' + esc(D.parts[AS.seq[j]].n) + '</button></li>';
+    }
+    list.innerHTML = h; list.hidden = false;
+  }
+  function wireAsm() {
+    if (!asmBox) return;
+    asmBox.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('[data-asm], [data-asm-scope], [data-asm-k]');
+      if (!b || b.disabled) return;
+      var a = b.getAttribute('data-asm'), n = AS.seq.length;
+      if (b.hasAttribute('data-asm-scope')) {
+        AS.scope = b.getAttribute('data-asm-scope');
+        asmBox.querySelectorAll('[data-asm-scope]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        if (AS.on) asmStart(AS.start);
+        return;
+      }
+      if (b.hasAttribute('data-asm-k')) { AS.playing = false; asmSet(+b.getAttribute('data-asm-k') || 1, 0); asmCam(true); invalidate(); return; }
+      if (a === 'go') asmStart(S.sel >= 0 ? S.sel : AS.start);
+      else if (a === 'exit') asmExit();
+      else if (a === 'play') {
+        if (AS.k >= n) asmSet(1, 0);
+        AS.playing = !AS.playing; asmUi(); invalidate();
+      } else if (a === 'first') { AS.playing = false; asmSet(1, 0); asmCam(true); }
+      else if (a === 'prev') { AS.playing = false; asmSet(AS.t > 0 ? AS.k : AS.k - 1, 0); asmCam(true); }
+      else if (a === 'next') { AS.playing = false; asmSet(AS.k + 1, 0); asmCam(true); }
+      else if (a === 'last') { AS.playing = false; asmSet(n, 0); if (AS.follow) fitCam(boxOf(AS.seq), cam.az, cam.el, 1.15, true); }
+      invalidate();
+    });
+    asmEl('.cadasm-scrub').addEventListener('input', function (e) { AS.playing = false; asmSet(+e.target.value, 0); invalidate(); });
+    asmEl('[data-asm-speed]').addEventListener('change', function (e) { AS.speed = +e.target.value || 1; AS.camAt = 0; if (AS.on && AS.speed >= 8) asmCam(true); });
+    asmEl('[data-asm-follow]').addEventListener('change', function (e) { AS.follow = e.target.checked; if (AS.follow && AS.on) asmCam(true); });
+    asmUi();
+  }
 
   // ---------------------------------------------------------------- picking + key press
   var ray = null;
@@ -799,7 +1051,7 @@
       });
     });
     sec.querySelector('#cad-inside').addEventListener('click', function () { setInside(!S.inside); });
-    sec.querySelector('#cad-fold').addEventListener('click', function () { setFold(S.foldT < 1); });
+    sec.querySelector('#cad-fold').addEventListener('click', function () { asmExit(); setFold(S.foldT < 1); });
     var pb = sec.querySelector('#cad-press');
     pb.addEventListener('click', function () { S.press = !S.press; pb.setAttribute('aria-pressed', S.press ? 'true' : 'false'); });
     sec.querySelector('#cad-scale').addEventListener('click', function () {
@@ -814,7 +1066,7 @@
     var db = sec.querySelector('#cad-dims');
     db.addEventListener('click', function () { S.dims = !S.dims; db.setAttribute('aria-pressed', S.dims ? 'true' : 'false'); invalidate(); });
     var ex = sec.querySelector('#cad-explode'), exo = sec.querySelector('#cad-explode-out');
-    ex.addEventListener('input', function () { S.exT = (+ex.value) / 100; exo.textContent = ex.value + ' %'; invalidate(); });
+    ex.addEventListener('input', function () { asmExit(); S.exT = (+ex.value) / 100; exo.textContent = ex.value + ' %'; invalidate(); });
     sec.querySelectorAll('[data-cad-sec]').forEach(function (b) {
       b.addEventListener('click', function () { var a = b.getAttribute('data-cad-sec'); setSection(a === 'off' ? null : a); });
     });
@@ -945,7 +1197,7 @@
   function onTap(x, y) {
     var i = pick(x, y);
     select(i);
-    if (i >= 0 && S.press && keyOf[i] != null) pressKey(keyOf[i]);
+    if (i >= 0 && S.press && keyOf[i] != null && !AS.on) pressKey(keyOf[i]);
   }
   function pan(dx, dy) {
     var wh = size(), wpp = 2 * cam.dist * TAN / wh[1], B = basis(cam.az, cam.el);

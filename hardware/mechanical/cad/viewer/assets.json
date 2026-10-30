@@ -3,6 +3,7 @@
  "parts": "hardware/mechanical/cad/viewer/parts.json",
  "publish": {
   "cad/parts.json": "hardware/mechanical/cad/viewer/parts.json",
+  "cad/asm.json": "hardware/mechanical/cad/viewer/asm.json (asm_graph.py: which parts touch / are fastened, coming-in directions)",
   "cad/toccata.glb.b64.txt": "base64 text of hardware/mechanical/cad/viewer/toccata_viewer.glb"
  },
  "page": {

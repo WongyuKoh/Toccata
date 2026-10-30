@@ -187,6 +187,7 @@ def sync_cad_assets():
     dst = os.path.join(HERE, "cad")
     os.makedirs(dst, exist_ok=True)
     shutil.copyfile(os.path.join(CAD, "viewer", "parts.json"), os.path.join(dst, "parts.json"))
+    shutil.copyfile(os.path.join(CAD, "viewer", "asm.json"), os.path.join(dst, "asm.json"))      # 조립 순서 보기 (asm_graph.py)
     glb = os.path.join(CAD, "Toccata_전체조립.glb")
     aj = os.path.join(CAD, "viewer", "assets.json")
     if os.path.exists(aj):
@@ -1045,7 +1046,7 @@ def build(check=False):
                css=read(os.path.join(CAD, "viewer", "cad.css")), js=read(os.path.join(CAD, "viewer", "cad.js")),
                owner="hardware/mechanical/cad/viewer/gen_viewer.py")
     owners["p-cad"] = cad["owner"]
-    add_assets(["cad/parts.json", "cad/toccata.glb.b64.txt"], cad["owner"])
+    add_assets(["cad/parts.json", "cad/asm.json", "cad/toccata.glb.b64.txt"], cad["owner"])
     # --- fragments
     frags = {}
     for t in FRAG_TABS:
