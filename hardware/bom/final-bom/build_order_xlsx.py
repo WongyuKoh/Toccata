@@ -253,7 +253,8 @@ if BUDGET:
             put(r, c, None, fill=fill_band)
         put(r, 4, formula, f_sub, WON, R, fill=fill_band)
         put(r, 5, note, f_small, fill=fill_band, al=Alignment(vertical="center"))
-    assert school_total <= BUDGET, school_total
+    if school_total > BUDGET:      # 10/16 A안 onward the school order is over the cap on purpose (the user's choice, school-budget note)
+        print("note: school items %d > budget %d (over by %d)" % (school_total, BUDGET, school_total - BUDGET))
 r += 2
 for line in [
     f"· 이 목록에 없는 것: 최종 재료 페이지에서 끈 품목 {n_off}가지(이미 가진 부품·공구, 설계에서 빠진 것)와 무료 소프트웨어(FluidSynth, Salamander 피아노 음원 — 다운로드).",

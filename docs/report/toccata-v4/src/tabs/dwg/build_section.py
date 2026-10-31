@@ -58,7 +58,7 @@ NEW = [
      "패드 바는 조립 모델(설계 6T) 크기로 그렸고, 뽑는 STL은 구매한 PORON 5T + 펠트 1T에 맞춰 쐐기가 1.0 두껍습니다 (패드 면 위치는 같음, 도면 안 ※ 주)."),
     ("I05", "I05_module_plan.svg", "건반 모듈 내부 평면 (O4)", "1:1", "A2", "건반·레버를 뺀 모듈 안, 모듈 부품 수량",
      "O4 모듈 (x540.5~709)을 위에서 본 내부입니다 (1:1). ①은 건반을 빼고 z54에서 자른 레버·스프링·강철, ②는 레버도 빼고 z30에서 자른 센서 바·센서 기판·제어 기판·"
-     "RP2040-Zero·4067·리본·USB입니다. 오른쪽 표는 모듈 하나의 부품 수량입니다."),
+     "RP2040-Zero·4067·리본·USB입니다 — 제어 기판은 80 × 120을 통째로 밸런스 레일 밑 바닥에 눕힘 (A16). 오른쪽 표는 모듈 하나의 부품 수량입니다."),
 ]
 KA = [
     # n, file, name, index text (short, own text: never cut from the caption), caption
@@ -278,7 +278,7 @@ def main():
     out.append('<div class="dwg-grp" data-grp="int" id="dwg-g-int" hidden><h3><span class="no">I</span>내부</h3>'
                '<p class="small muted">뚜껑을 뗀 평면과 단면입니다. 단면의 잘린 면은 빗금이고, 그 뒤는 보이는 그대로입니다.</p>%s</div>' % "".join(g_int))
     out.append('<div class="dwg-grp" data-grp="ka" id="dwg-g-ka" hidden><h3><span class="no">KA</span>건반 액션 부품도 (W1+ r4.5)</h3>'
-               '<p class="small muted">좌표 모델 geometry.json에서 그린 도면입니다. 실선은 쉬는 자세, 주황 점선은 끝까지 누른 자세입니다. 출력 파일은 이 도면에 CAD 조정(부록 A1~A15)을 더한 것입니다 — 예: A15(2026-10-30)부터 캡스턴 너트 홈 천장이 구멍 없는 0.4 막이라 서포트 없이 뽑히고(나사 끝이 처음 들어갈 때 뚫음), 바닥틀의 제어 기판은 기둥 위에 위에서 조입니다. 뽑을 모양은 <a href="#partdwg">03 탭</a> 부품 도면이 기준입니다.</p>%s</div>' % "".join(g_ka))
+               '<p class="small muted">좌표 모델 geometry.json에서 그린 도면입니다. 실선은 쉬는 자세, 주황 점선은 끝까지 누른 자세입니다. 출력 파일은 이 도면에 CAD 조정(부록 A1~A16)을 더한 것입니다 — 예: A15(2026-10-30)부터 캡스턴 너트 홈 천장이 구멍 없는 0.4 막이라 서포트 없이 뽑히고(나사 끝이 처음 들어갈 때 뚫음), A16(2026-10-31)부터 제어 기판은 80 × 120을 통째로 바닥에 눕히고 밸런스 레일을 따로 출력해 그 위에 얹습니다(이 도면의 기판 자리·한 몸 레일과 다름). 뽑을 모양은 <a href="#partdwg">03 탭</a> 부품 도면이 기준입니다.</p>%s</div>' % "".join(g_ka))
     out.append('<div class="dwg-grp" data-grp="rear" id="dwg-g-rear" hidden><h3><span class="no">D</span>뒷부분 (L2 · 스피커 앞판 40° · 터치스크린 3판)</h3>'
                '<p class="small muted">맞춤·2배는 PNG, 3배는 SVG를 보여 줍니다 (선명함).</p>%s</div>' % "".join(g_rear))
     out.append('<div class="dwg-grp" data-grp="ren" id="dwg-g-ren" hidden><h3><span class="no">R</span>렌더</h3>'

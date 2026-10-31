@@ -9,7 +9,8 @@ No new geometry is made up here. Every board outline, hole, pad, part and wire i
     EL / ER strands of BRD-02 (straight, as drawn)
   * part bodies and heights: CAD spec hardware/mechanical/cad/spec/electronics_modules.json (MB, Zero, mux, ribbon, USB plug, SB, EL / ER,
     DRV5055 in the sensor-bar pockets) and keyaction_features_frame.json (J701 pocket)
-  * frame F|F# fin + keel through the MB slot: W1 model hardware/mechanical/key-action-v4/model/geometry.json (side outlines)
+  * module frame context (△33 = CAD A16): the separate balance rail on the MB strip, fins 2 / 4 and the F|F# fin over the board, the
+    floor ribs under it - sheets.MB (same numbers as spec mb_board keepouts / cad/src/keyaction.py A16)
   * centre unit: netlist/cad_centre.json (CAD outlines, boxes, wire centre lines, fixing points) and harness.py (conductor colours)
 Where a source only gives an envelope (Zero top parts, modules, jacks) the model shows the envelope. Places that depend on the received
 part (PJ-313 legs, the W502 path, the RP2040 chip spot on the Zero) are drawn and marked '추정'.
@@ -38,7 +39,6 @@ REPO = os.path.normpath(os.path.join(ROOT, "..", ".."))
 NL = os.path.join(ROOT, "netlist")
 OUT = os.path.join(ROOT, "page", "circuit3d.json")
 SPEC = os.path.join(REPO, "hardware", "mechanical", "cad", "spec")
-W1_GEOM = os.path.join(REPO, "hardware", "mechanical", "key-action-v4", "model", "geometry.json")
 sys.path.insert(0, HERE)
 
 import boards2 as B2   # noqa: E402
@@ -146,30 +146,6 @@ def load_jack_spec():
     with open(os.path.join(SPEC, "keyaction_features_frame.json"), encoding="utf-8") as f:
         d = json.load(f)
     return d["cheeks"]["headphone_jack"]
-
-
-def load_fin():
-    """W1 frame pieces that pass through the MB front slot (x81.92~84.72): the F|F# fin (foot plate from the floor to the top plate,
-    then hung over the Zero to the rear wall) and its keel to the balance rail. Side outlines (y, z) at module-local x."""
-    with open(W1_GEOM, encoding="utf-8") as f:
-        g = json.load(f)
-    sl = S.MB["slot"]
-    out = []
-    for p in g["parts"]:
-        if p.get("body") == "fixed" and p.get("part", "").startswith("fin") and sl[0] - 0.6 < p["x"][0] and p["x"][1] < sl[1] + 0.6:
-            out.append(dict(name=p["part"], x=p["x"], side=simplify_yz(p["side"])))
-    return out
-
-
-def simplify_yz(pts):
-    """drop collinear points of a side outline (the W1 export samples flat edges every 0.5 mm)."""
-    out = []
-    n = len(pts)
-    for i, b in enumerate(pts):
-        a, c = pts[i - 1], pts[(i + 1) % n]
-        if (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]) != 0:
-            out.append([r2(b[0]), r2(b[1])])
-    return out
 
 
 def bx(b):
@@ -411,110 +387,137 @@ def scene_module(SP, BOM):
     # ---------------------------------------------------------------- ribbon W101 (flat on the floor) + strands into J201 / J301
     rb = SP["ribbon"]["boxes"]
     xr0, xr1 = rb[1]["x"]
-    for b in rb[1:3]:
-        x0, y0_, z0, x1, y1_, z1 = bx(b)
-        sc.box([x0, y0_, z0, x1, y1_, z1], C["ribbon"], i="W101~W107", g="cable")
-        sc.box([x0, y0_, z1, x0 + 0.9, y1_, z1 + 0.02], C["ribbon_red"], i="W101~W107", g="cable")
+    x0_, y0_, z0_, x1_, y1_, z1_ = bx(rb[1])                     # flat on the floor, through the front-rib gap to the board edge
+    sc.box([x0_, y0_, z0_, x1_, y1_, z1_], C["ribbon"], i="W101~W107", g="cable")
+    sc.box([x0_, y0_, z1_, x0_ + 0.9, y1_, z1_ + 0.02], C["ribbon_red"], i="W101~W107", g="cable")
     zf = rb[1]["z"][1] - 0.45
+    yf = rb[1]["y"][1]                                           # y96.0: the last ~6 mm are split into strands
+    zb_mb = SP["mb_board"]["boxes"][0]["z"][0]
+    zt_mb = SP["mb_board"]["boxes"][0]["z"][1]
     for n in range(1, 17):
         cx = xr0 + 0.635 + 1.27 * (n - 1)
         net = S.RIBBON[n - 1]
+        colr = C["ribbon"] if n > 1 else C["ribbon_red"]
         # SB end: J201 pad (from below) -> folds down through the rib gap to the flat ribbon at y77.5
         px, py = 61.59 + 2.54 * ((n - 1) // 2), (72.08 if n % 2 else 74.62)
-        sc.tube([(px, py, zb0), (px, py, zb0 - 0.7), (cx, 76.0, zf + 0.6), (cx, 77.5, zf)], 0.22, C["ribbon"] if n > 1 else C["ribbon_red"],
-                i="W101~W107", g="cable", n=net)
-        # MB end: last ~6 mm split, shifted -0.31, soldered into J301 from below
-        qx, qy = S.RIB_X0 + 2.54 * ((n - 1) // 2), S.RIB_Y[(n - 1) % 2]
-        sc.tube([(cx, 144.5, zf), (cx - 0.31, 145.6, zf + 0.3), (qx, qy - 1.2, 7.6), (qx, qy, 9.0)], 0.22,
-                C["ribbon"] if n > 1 else C["ribbon_red"], i="W101~W107", g="cable", n=net)
-    sc.label((70.48, 110.0, 6.5), "리본 W101 (16심)", 0)
-    # ---------------------------------------------------------------- MB (z9.0~10.6)
+        sc.tube([(px, py, zb0), (px, py, zb0 - 0.7), (cx, 76.0, zf + 0.6), (cx, 77.5, zf)], 0.22, colr, i="W101~W107", g="cable", n=net)
+        # MB end: split strands shifted -0.93 (J301 centre x69.55), into the J301 holes from below, soldered on the top (<= z10.0);
+        # back-row strands pass between the front-row pads (half-pitch lanes x + 1.27)
+        qx, qy = S.mb_pad_xy("J301", n)
+        if n % 2:
+            pts = [(cx, yf, zf), (cx - 0.93, yf + 1.0, zf), (qx, qy - 1.0, 5.6), (qx, qy, zb_mb), (qx, qy, zt_mb + 0.9)]
+        else:
+            pts = [(cx, yf, zf), (cx - 0.93, yf + 1.0, zf), (qx + 1.27, qy - 3.2, 5.6), (qx + 1.27, qy - 1.3, 5.75), (qx, qy, zb_mb),
+                   (qx, qy, zt_mb + 0.9)]
+        sc.tube(pts, 0.22, colr, i="W101~W107", g="cable", n=net)
+    sc.label((70.48, 86.0, 6.5), "리본 W101 (16심)", 0)
+    # ---------------------------------------------------------------- MB (whole 80 x 120 board on the floor ribs, z7.0~8.6)
     mb_scene_parts(sc, SP, X0=0.0, detail=True)
-    # ---------------------------------------------------------------- frame F|F# fin + keel through the MB front slot (context)
-    for f in load_fin():
-        keel = "keel" in f["name"]
-        sc.add(k="e", ax="x", p=f["side"], z=[r2(f["x"][0]), r2(f["x"][1])], c=C["frame"], i="CTX-KEEL" if keel else "CTX-FIN", g="ctx",
-               o=0.7 if keel else 0.42)
-    sc.label((83.3, 160.0, 24.0), "F|F# 핀 (프레임)", 1)
-    sl, kp = S.MB["slot"], S.MB["keep"]
-    info("CTX-FIN", "F|F# 핀 (프레임 세로판, 두께 1.6) — MB 앞 홈을 지나감", [
-        "F와 F# 건반 사이의 프레임 보강판. 핀 발 y148.6~170.7은 바닥(z3)에서 윗판(z68.85)까지 서고, y170.7 뒤로는 z21.5 위로 떠서 제로와 USB 플러그 위를 지나 뒷벽(y209)까지 갑니다.",
-        "이 핀을 기판 높이 아래까지 내린 이유 (W1 r4.1, 물리 M2): 기판 위 D#~G# 6건반 화음 자리가 196 N/mm로 물러 1.2~1.4 m/s에서 노치가 0.22~0.24 들림 → 핀을 내려 492 N/mm, 들림 0.135 / 0.062 (백 / 흑).",
-        "그래서 MB에 앞이 열린 홈 x%.2f~%.2f × y%.1f~%.1f (핀 양옆 0.60)를 두고, 금지 구역 x%.2f~%.2f × y≤%.1f에는 부품·패드·배선이 없습니다. "
-        "왼쪽·오른쪽을 잇는 아랫면 선은 y174.86 이상(제로 밑)으로만 건넙니다 (BRD-08)." % (sl[0], sl[1], sl[2], sl[3], kp[0], kp[1], kp[3]),
-        "기판은 위·앞·뒤로 넣을 수 없어 바닥 구멍으로 밑에서 곧게 올려 넣습니다 (W1 r4.4 고침 2b).",
-        "출처: key-action-v4 DESIGN.md · model/geometry.json (fin)"])
-    info("CTX-KEEL", "F|F# 핀 킬 (홈 안, 밸런스 레일 뒷면까지)", [
-        "y144.5~148.6 × z3~19.3: 핀 발을 바닥 대신 밸런스 레일 뒷면(y144.5)에 붙여 화음 자리 강성 492 N/mm를 냅니다 (r4.5 고침 2).",
-        "기판 홈 앞쪽 끝(y145.5)을 지나므로 홈은 기판 앞 가장자리까지 열려 있습니다.", "출처: model/geometry.json (fin keel)"])
-    sc.view("모듈 전체", [0, 58, 4, 165, 236, 22], az=-28, el=42, default=True)
+    # ---------------------------------------------------------------- frame context (CAD A16): rail on the strip, fins, floor ribs
+    rx0, rx1, ry0, ry1, rz0, rz1 = S.MB["rail"]
+    sc.box([rx0, ry0, rz0, rx1, ry1, rz1], C["frame"], i="CTX-RAIL", g="ctx", o=0.30)
+    sc.label(((rx0 + rx1) / 2, (ry0 + ry1) / 2, rz1 + 0.5), "밸런스 레일 (따로 출력)", 1)
+    info("CTX-RAIL", "밸런스 레일 (따로 출력한 출력물, 윤곽만) — MB 맨 띠 위", [
+        "x%.2f~%.2f × y%.1f~%.1f × z%.1f~%.1f: 밑면 z%.1f = 기판 윗면. 기판의 맨 띠(y132.0~144.8, 줄 j 14~19 — 부품·패드·윗면 선 없음)에 얹혀 기판을 눌러 잡습니다."
+        % (rx0, rx1, ry0, ry1, rz0, rz1, rz0),
+        "M3×6 2개는 레일 양 끝(x11.2 / 154.2, 기판 밖)에서 위로부터 조입니다 — 기판에는 나사·구멍이 없습니다.",
+        "레일 윗면·밸런스 핀 자리는 그대로이고 건반 동작은 바뀌지 않습니다 (CAD keyaction.py A16).",
+        "출처: CAD A16 · spec/electronics_modules.json mb_board"])
+    fy0, fy1 = S.MB["fin_y"]
+    for (a0, a1) in S.MB["fins"]:
+        sc.box([a0, fy0, S.MB["fin_z"], a1, fy1, 30.0], C["frame"], i="CTX-FIN", g="ctx", o=0.35)
+    info("CTX-FIN", "프레임 핀 2 · 4 (레버틀 세로판, 아랫부분만)", [
+        "x40.76~42.56 · x123.03~124.83: 기판 뒤 구역 위(y%.1f~%.1f)에서 밑변 z%.1f — 그 밑 기판 윗면 열 i 4·5 · 36·37에는 부품이 없습니다 (아랫면 선은 됨)."
+        % (fy0, fy1, S.MB["fin_z"]),
+        "y%.1f 뒤로는 다시 바닥에 섭니다. 위쪽(레버틀)은 생략." % fy1, "출처: CAD keyaction.py A16 (a16_cage_cuts)"])
+    fa, fb, fc, fd, fz = S.MB["ffs"]
+    sc.box([fa, fc, fz, fb, fd, 30.0], C["frame"], i="CTX-FFS", g="ctx", o=0.35)
+    sc.label(((fa + fb) / 2, 186.0, 30.5), "F|F# 핀 (밑변 z%.1f)" % fz, 1)
+    info("CTX-FFS", "F|F# 핀 (프레임 세로판, 아랫부분만) — 제로·USB 플러그 위", [
+        "x%.2f~%.2f × y%.1f~%.1f: 밑변 z%.1f로 제로(윗면 부품 ≤ z%.1f)와 USB 플러그 몰드(≤ z%.1f) 위를 지나 뒷벽까지 갑니다."
+        % (fa, fb, fc, fd, fz, SP["zero"]["boxes"][2]["z"][1], SP["usb_plug"]["boxes"][0]["z"][1]),
+        "이전(W1 r4.5)에는 기판 앞 홈으로 바닥까지 내려와 킬로 레일에 붙었습니다 — A16에서 레일을 따로 출력하고 기판을 바닥에 놓으면서 들어 올림.",
+        "출처: CAD keyaction.py A16 (ffs)"])
+    for (a0, a1, b0, b1) in S.MB["ribs"]:
+        sc.box([a0, b0, 5.0, a1, b1, zb_mb], C["ctx"], i="CTX-MBRIB", g="ctx", o=0.45)
+    info("CTX-MBRIB", "MB 받침 리브 (모듈 바닥틀, z%.1f~%.1f)" % (S.MB["floor"], zb_mb), [
+        "기판 밑면(z%.1f)을 받침. 앞 리브(리본 틈 x59.5~81.5), 뒤 리브, 옆 리브 2, 레일 밑 띠 리브(틈 x92.0~114.0 하나)." % zb_mb,
+        "리브 위에는 납땜·아랫면 선이 없습니다. 앞 구역 ↔ 뒤 구역 선 %d가닥은 띠 리브 틈으로만 지납니다 (BRD-08)." % MR.stats()["gap"],
+        "기판 밑은 바닥(z%.1f)까지 %.1f — 다리·핀 끝 ≤ 1.0, 선은 리본 가닥(약 0.9, 두 가닥이 직각으로 겹쳐도 1.8)." % (S.MB["floor"], zb_mb - S.MB["floor"]),
+        "출처: CAD keyaction.py A16 (a16_bed)"])
+    sc.view("모듈 전체", [0, 58, 4, 165, 212, 30], az=-28, el=42, default=True)
     sc.view("SB 확대", [0, 58, 4, 165, 80, 15], az=-20, el=48)
     sc.view("SB 아랫면", [0, 58, 4, 165, 80, 15], az=-20, el=-52)
-    sc.view("MB 확대", [46, 144, 4, 118, 200, 20], az=-30, el=45)
-    sc.view("MB 아랫면", [46, 144, 4, 118, 200, 20], az=-30, el=-55)
-    sc.view("MB 위", [46, 144, 4, 118, 200, 20], az=0, el=89)
-    sc.view("F|F# 핀 · 홈", [62, 138, 2, 106, 212, 34], az=-18, el=26)
+    sc.view("MB 확대", [20, 90, 4, 145, 178, 20], az=-30, el=45)
+    sc.view("MB 아랫면", [20, 90, 4, 145, 178, 20], az=-30, el=-55)
+    sc.view("MB 위", [20, 90, 4, 145, 178, 20], az=0, el=89)
+    sc.view("레일 · 핀 (주변)", [20, 88, 2, 145, 212, 32], az=-22, el=26)
     sc.note("ID 점퍼는 O1 = JP301 닫음, R301~R303 100 kΩ와 J302 EXT는 O1·O7에만 (O7은 R301만). 다른 모듈은 같은 자리를 비웁니다.")
-    sc.note("센서 바·받침 리브·매단 보스·F|F# 핀은 위치만 흐리게(주변 출력물). 센서가 기판보다 떠 있는 것은 바의 홈 안에 눕혀 있기 때문입니다.")
-    sc.note("MB 앞 홈은 프레임의 F|F# 핀(건반 F와 F# 사이 보강판)과 킬이 지나는 자리입니다 — 핀을 누르면 이유가 나옵니다. '주변 출력물'을 끄면 숨겨집니다.")
+    sc.note("센서 바·받침 리브·밸런스 레일·프레임 핀은 위치만 흐리게(주변 출력물). 센서가 기판보다 떠 있는 것은 바의 홈 안에 눕혀 있기 때문입니다.")
+    sc.note("MB는 80 × 120 한 장을 통째로 모듈 바닥 자리에 놓고, 따로 출력한 밸런스 레일이 맨 띠를 눌러 잡습니다(△33) — 레일·핀을 누르면 이유가 나옵니다. "
+            "'주변 출력물'을 끄면 숨겨집니다.")
     return sc
 
 
 def mb_scene_parts(sc, SP, X0=0.0, detail=True):
-    """the control board MB of one module (O1 parts list): board, Zero, mux, headers, J301 / J302 pads, R30x, JP, TP, C301, screws, USB
-    plug + EXT lead, underside wiring."""
+    """the control board MB of one module (O1 parts list): board, Zero, mux, headers, J301 / J302 pads, R30x, JP, TP, C301, USB plug +
+    EXT lead, underside wiring (△33: the whole 80 x 120 board on the module floor)."""
     def X(x):
         return x + X0
     mbb = SP["mb_board"]["boxes"]
     z0, z1 = mbb[0]["z"]
-    sl = S.MB["slot"]
-    outline = [(S.MB["x0"], S.MB["y0"]), (sl[0], S.MB["y0"]), (sl[0], sl[3]), (sl[1], sl[3]), (sl[1], S.MB["y0"]), (S.MB["x1"], S.MB["y0"]),
-               (S.MB["x1"], S.MB["y1"]), (S.MB["x0"], S.MB["y1"])]
-    holes = lattice([S.lat(-11 + i) for i in range(27)], [148.19 + 2.54 * j for j in range(19)],
-                    lambda x, y: not (S.MB["keep"][0] - 0.6 < x < S.MB["keep"][1] + 0.6 and y < S.MB["keep"][3] + 0.6)
-                    and min(math.hypot(x - a, y - b) for a, b, _ in S.MB["standoffs"]) > 2.4)
-    mh = [(a, b, 3.2 if "M3" in t else 3.0) for a, b, t in S.MB["standoffs"]]
-    sc.board([(X(x), y) for x, y in outline], (z0, z1), [(X(x), y) for x, y in holes], C["perf"], "PCB-MB", mholes=[(X(a), b, d) for a, b, d in mh])
-    info("PCB-MB", "제어 기판 MB (Coms BE163에서 자른 70 × 50 × 1.6)", [
-        "모듈마다 1장 (×7). 모든 구멍이 RP2040-Zero 핀 격자 x = 76.52 + 2.54 i, y = 173.59 + 2.54 j 위.",
-        "앞 홈 x81.92~84.72 × y≤172 (F|F# 핀 발·킬이 지나감), 금지 구역 x81.22~85.42 × y≤173.2.",
-        "고정: 매단 Ø6 보스 4개 — M3×6 ISO 7380 2개를 밑에서 (50, 149)·(114.5, 192.5), 위치 핀 2개 (114.5, 149)·(50, 192.5).",
+    outline = rect(S.MB["x0"], S.MB["y0"], S.MB["x1"], S.MB["y1"])
+    holes = lattice([S.lat(i) for i in range(S.LAT_N[0])], [S.latj(j) for j in range(S.LAT_N[1])])
+    sc.board([(X(x), y) for x, y in outline], (z0, z1), [(X(x), y) for x, y in holes], C["perf"], "PCB-MB")
+    info("PCB-MB", "제어 기판 MB (양면 만능기판 80 × 120 × 1.6 통째로)", [
+        "모듈마다 1장 (×7). 자르지 않고 구멍도 뚫지 않습니다 — 모듈 바닥 자리(받침 리브 z%g~%g, 가장자리 턱)에 놓고 따로 출력한 밸런스 레일이 맨 띠(y132.0~144.8)를 눌러 잡습니다 (△33)."
+        % (S.MB["floor"], z0),
+        "외곽 x%.2f~%.2f × y%.1f~%.1f. 격자 x = 30.18 + 2.54 i, y = 96.47 + 2.54 j (BE163 30 × 42 구멍, 가운데 가정) — 부품은 i 1~40 · j 1~28만이라 28 × 40 구멍 판도 같은 배치."
+        % (S.MB["x0"], S.MB["x1"], S.MB["y0"], S.MB["y1"]),
+        "앞 구역(J301·먹스) 부품 ≤ z17.27, 뒤 구역(제로·J302·R30x·JP·TP) ≤ z20.9. 아랫면은 바닥까지 %.1f — 다리 끝 ≤ 1.0, 선은 리본 가닥(겹쳐도 1.8)."
+        % (z0 - S.MB["floor"]),
         "도면 BRD-01 (윗면), BRD-08 (아랫면 배선), SCH-03"])
-    sc.label((X(82.0), 143.0, z1), "MB 제어 기판", 0)
+    sc.label((X(82.25), 91.0, z1), "MB 제어 기판", 0)
     pads, _nets = MR.pads_and_nets()
-    # ---- Zero A301 on header pins (PCB z11.9~12.9)
+    # ---- Zero A301 on standard headers with the 2.5 mold (PCB z11.1~12.1)
     zb = SP["zero"]["boxes"]
     sc.box(shift(bx(zb[0]), X0), C["pcb_blue"], i="A301")
-    sc.box(shift(bx(zb[1]), X0), C["kapton"], i="A301", o=0.85)
+    sc.box(shift(bx(zb[1]), X0), C["chip"], i="A301", o=0.8)
     sc.box(shift(bx(zb[2]), X0), C["pcb_blue"], i="A301", o=0.18)
     sc.box(shift(bx(zb[3]), X0), C["shell"], i="A301")
+    zt = zb[0]["z"][1]
     cx, cy = (zb[2]["x"][0] + zb[2]["x"][1]) / 2.0, (zb[2]["y"][0] + zb[2]["y"][1]) / 2.0 - 1.5
-    sc.box([X(cx - 3.5), cy - 3.5, 12.9, X(cx + 3.5), cy + 3.5, 13.8], C["chip"], i="A301-CHIP")
-    info("A301-CHIP", "RP2040 칩 (자리 어림)", ["제로 윗면 부품(RP2040·플래시·BOOT/RESET·LED)은 높이 한계 z16.3 상자(흐린 파랑) 안에 있습니다. 칩 자리는 어림입니다."])
-    sc.label((X(84.0), 184.0, 16.8), "A301 RP2040-Zero", 1)
+    sc.box([X(cx - 3.5), cy - 3.5, zt, X(cx + 3.5), cy + 3.5, zt + 0.9], C["chip"], i="A301-CHIP")
+    info("A301-CHIP", "RP2040 칩 (자리 어림)", ["제로 윗면 부품(RP2040·플래시·BOOT/RESET·LED)은 높이 한계 z%.1f 상자(흐린 파랑) 안에 있습니다. 칩 자리는 어림입니다."
+                                             % zb[2]["z"][1]])
+    for xc in (S.zero_hole(1)[0], S.zero_hole(10)[0]):             # 1x9 header molds (2.5) under the Zero
+        sc.box([X(xc - 1.27), S.zero_hole(9)[1] - 1.27, z1, X(xc + 1.27), S.zero_hole(1)[1] + 1.27, zb[0]["z"][0]], C["header"], i="A301-HDR")
+    info("A301-HDR", "제로 핀 헤더 1×9 ×2 (몰드 2.5 그대로)", ["몰드 z%.1f~%.1f이 제로를 받칩니다(밑면 칩과 기판 사이 %.1f). 꼬리는 기판 밑 1.0 이하로 자릅니다."
+                                                        % (z1, zb[0]["z"][0], zb[1]["z"][0] - z1),
+                                                        "구매 목록 SE7 (bom.csv A301-HDR)"])
+    sc.label((X(83.5), 158.0, 15.6), "A301 RP2040-Zero", 1)
     # ---- mux A302 (header spacers, module PCB, chip)
     mx = SP["mux"]["boxes"]
     sc.box(shift(bx(mx[0]), X0), C["header"], i="A302")
     sc.box(shift(bx(mx[1]), X0), C["header"], i="A302")
     sc.box(shift(bx(mx[2]), X0), C["pcb_green"], i="A302")
     sc.box(shift(bx(mx[3]), X0), C["chip"], i="A302")
-    sc.label((X(63.8), 172.0, 17.2), "A302 4067 먹스", 1)
+    sc.label((X(102.6), 109.2, 14.8), "A302 4067 먹스", 1)
     # ---- pins of the two modules, pads, other parts
+    zpin = (z0 - S.MB["tails"], SP["zero_headers"]["boxes"][0]["z"][1])
     for (k, m), (ref, num, net) in sorted(pads.items()):
         x, y = MR.X(k), MR.Y(m)
         nn = None if net == "NC" else net
         pid = "%s.%s" % (ref, num)
         if ref == "A301":
             if int(num) <= 18:
-                sc.box([X(x) - 0.32, y - 0.32, 7.0, X(x) + 0.32, y + 0.32, 16.3], C["pin"], i=pid, n=nn)
-            else:
-                pid = pid                                                 # bottom row 19~23: no header, empty hole
+                sc.box([X(x) - 0.32, y - 0.32, zpin[0], X(x) + 0.32, y + 0.32, zpin[1]], C["pin"], i=pid, n=nn)
             sc.pad(X(x), y, (z0, z1), nn, pid, "b" if int(num) <= 18 else "")
         elif ref == "A302":
-            sc.box([X(x) - 0.32, y - 0.32, 7.6, X(x) + 0.32, y + 0.32, 19.1], C["pin"], i=pid, n=nn)
+            sc.box([X(x) - 0.32, y - 0.32, zpin[0], X(x) + 0.32, y + 0.32, zpin[1]], C["pin"], i=pid, n=nn)
             sc.pad(X(x), y, (z0, z1), nn, pid, "b")
         elif ref in ("J301", "J302"):
-            sc.pad(X(x), y, (z0, z1), nn, pid, "b")
+            sc.pad(X(x), y, (z0, z1), nn, pid, "bt")              # strands / lead soldered on the top, board wires below
         elif ref.startswith("R30"):
             sc.pad(X(x), y, (z0, z1), nn, pid, "b" if ref in ("R301", "R302", "R303") else "")
         elif ref.startswith("JP"):
@@ -529,46 +532,65 @@ def mb_scene_parts(sc, SP, X0=0.0, detail=True):
         if ref in ("R301", "R302", "R303"):
             resistor(sc, ref, (X(x), y), (X(x + 7.62), y), z1, "100k", zb=z0)
     # ID jumpers: O1 = JP301 closed (solder bridge on the underside)
-    for ref, (x, y) in S.JP_POS.items():
-        closed = ref == "JP301"
-        if closed:
-            sc.box([X(x) - 0.4, y - 0.55, z0 - 0.55, X(x + 2.54) + 0.4, y + 0.55, z0], C["solder"], i=ref)
-    # C301 1206 across the mux GND / VCC header tails (underside)
+    for ref, (sig, gnd) in S.JP_PADS.items():
+        if ref == "JP301":
+            xa, xb_ = sorted((sig[0], gnd[0]))
+            sc.box([X(xa) - 0.4, sig[1] - 0.55, z0 - 0.55, X(xb_) + 0.4, sig[1] + 0.55, z0], C["solder"], i=ref)
+    # C301 1206 across the mux GND / VCC header tails (underside, flat against the board)
     g_, v_ = S.mux_hole("GND"), S.mux_hole("VCC")
-    chip1206(sc, "C301", (X(g_[0]), g_[1]), (X(v_[0]), v_[1]), z0 - 0.25)
-    # screws from below + locating pins (frame) + hung bosses (context)
-    for (a, b, t) in S.MB["standoffs"]:
-        if "M3" in t:
-            sc.cyl("z", (X(a), b), 2.85, (7.35, z0), C["screw"], i="L35")
-            sc.cyl("z", (X(a), b), 1.4, (z0, 15.0), C["screw"], i="L35", g="ctx", o=0.5)
-        else:
-            sc.cyl("z", (X(a), b), 1.4, (7.8, 17.0), C["ctx"], i="CTX-PIN", g="ctx", o=0.5)
-    info("L35", "M3×6 ISO 7380 (유두 렌치볼트) — MB 고정", ["밑에서 매단 보스(Ø2.5 막힌 구멍, z15.4까지 탭)에. 머리 Ø5.7 × 1.65 (z7.35~9.0).", "구매 목록 L35"])
-    info("CTX-PIN", "위치 핀 Ø2.8 (프레임)", ["매단 보스에서 내려와 기판 Ø3.0 구멍에 들어감 (끝 z7.8)."])
-    for (a0, a1, b0, b1) in S.MB["boss_rects"]:
-        sc.box([X(a0), b0, 10.6, X(a1), b1, 17.0], C["ctx"], i="CTX-BOSS", g="ctx", o=0.18)
-    info("CTX-BOSS", "매단 보스 받침 (프레임, W1 r4.5)", ["기판 위 Ø6 보스 4개의 받침 6 × 7.5. 둘레 1.3은 부품 없음 (모서리 x≤54.3 · x≥110.2)."])
-    # USB plug + cable stub
+    chip1206(sc, "C301", (X(g_[0]), g_[1]), (X(v_[0]), v_[1]), z0)
+    # USB plug + cable stub (straight +y out of the rear-wall opening)
+    up = SP["usb_plug"]["boxes"][0]
+    ucx, ucz = (up["x"][0] + up["x"][1]) / 2.0, (up["z"][0] + up["z"][1]) / 2.0
     sc.box(shift(bx(SP["usb_plug_shell"]["boxes"][0]), X0), C["shell"], i="W201")
-    sc.box(shift(bx(SP["usb_plug"]["boxes"][0]), X0), C["usb"], i="W201", g="cable")
-    sc.cyl("y", (X(84.0), 14.5), 1.75, (221.8, 234.0), C["cable"], i="W201", g="cable")
-    sc.label((X(84.0), 226.0, 19.5), "W201 USB → 허브", 1)
-    # EXT lead (O1 / O7): six strands down from J302, -x under the board, then +y under the USB plug to the rear wall
+    sc.box(shift(bx(up), X0), C["usb"], i="W201", g="cable")
+    sc.cyl("y", (X(ucx), ucz), 1.75, (up["y"][1], 214.0), C["cable"], i="W201", g="cable")
+    sc.label((X(ucx), 203.0, 19.0), "W201 USB → 허브", 1)
+    # EXT lead (O1 / O7): six strands soldered into J302 from the top, flat to the rear edge, over the rear lip (z8.5) to the floor,
+    # -x behind the board, then +y under the USB plug (z9.9) out of the rear-wall opening (spec ext_lead)
     for n in range(1, 7):
-        x = S.EXT_X0 + 2.54 * (n - 1)
         net = pin_net("MB", "J302", n) or ""
-        xe = 86.0 + 0.55 * (n - 1)
-        sc.tube([(X(x), S.EXT_Y, z0), (X(x), S.EXT_Y, 6.4), (X(x) - 0.4, S.EXT_Y + 0.6, 6.0), (X(xe), S.EXT_Y + 0.6, 6.0), (X(xe), 212.0, 6.0)],
-                0.27, "#7e889a", i="W403", g="cable", n=net)
-    # underside wiring (BRD-08 / wiring_MB.csv): insulated single-core, joins only at pads
-    zu = z0 - 0.42
+        sc.tube([(X(x), y, z) for x, y, z in ext_lead_route(n)] + [(X(84.6 + 0.55 * (n - 1)), 214.0, 5.4)], 0.27, "#7e889a", i="W403", g="cable", n=net)
+    # underside wiring (BRD-08 / wiring_MB.csv): single 2651 ribbon strands (OD ~0.9), joins only at pads
+    zu = z0 - 0.47
     for k, r in enumerate(read_csv("wiring_MB.csv")):
         poly = parse_path(r["경로 (꺾인 점, 모듈 좌표)"])
         wid = "MBW-%s" % r["번호"]
-        strand(sc, down_ends([(X(x), y) for x, y in poly], zu - 0.07 * (k % 3), z0), r["넷"], wid, r=0.3)
+        strand(sc, down_ends([(X(x), y) for x, y in poly], zu - 0.04 * (k % 3), z0), r["넷"], wid, r=0.42)
         info(wid, "MB 아랫면 선 %s: %s → %s" % (r["번호"], r["시작"], r["끝"]),
-             ["넷 %s · 피복 단선 %s mm · 꺾임 %s" % (r["넷"], r["길이 (mm)"], r["꺾임 수"]), "경로: " + r["경로 (꺾인 점, 모듈 좌표)"],
+             ["넷 %s · 리본 가닥 %s mm · 꺾임 %s" % (r["넷"], r["길이 (mm)"], r["꺾임 수"]), "경로: " + r["경로 (꺾인 점, 모듈 좌표)"],
               "wiring_MB.csv · BRD-08"])
+
+
+def ext_lead_route(n):
+    """module part of EXT lead conductor n (J302 pin n, module-local): top joint -> flat over the board -> over the rear edge and the rear
+    lip (y173.6~174.6, top z8.5) -> down behind it to the floor -> -x behind the board -> +y under the USB plug to the rear-wall opening
+    y212 (spec ext_lead boxes)."""
+    z1, zl, yb1 = S.MB["zt"], S.MB["lips"][0], S.MB["y1"]
+    x = S.EXT_X0 + 2.54 * (n - 1)
+    xe = 84.6 + 0.55 * (n - 1)
+    ye = 176.4 + 0.45 * (n - 1)
+    return [(x, S.EXT_Y, z1 + 0.3), (x, S.EXT_Y + 0.6, z1 + 0.65), (x, yb1 - 0.4, z1 + 0.65), (x, 174.9, zl + 0.6), (x, 175.3, 6.2),
+            (x, ye - 0.6, 5.5), (x - 0.6, ye, 5.4), (xe + 0.6, ye, 5.4), (xe, ye + 0.6, 5.4), (xe, 212.0, 5.4)]
+
+
+def ext_lead_lengths():
+    """(min, max) path of the six EXT conductors for O1 / O7: ext_lead_route + the duct-floor run of cad/src/electronics.py ext_floor_path
+    (read-only copy of its numbers: bundle at module x86.5, y212 z6.5 -> y213.5 -> y217 z1.5 -> +-8 x, y226 -> XH plug end face at
+    x69.4 + 1.5 (O1) / 1160 - 1.5 (O7), y231)."""
+    def plen(p):
+        return sum(math.dist(a, b) for a, b in zip(p, p[1:]))
+    out = {}
+    for tag, k, sgn, xh in (("O1", 1, -1, 69.4 + 1.5), ("O7", 7, 1, 1160.0 - 1.5)):
+        X0 = X_O1 + MODULE_W * (k - 1)
+        x = X0 + 86.5
+        duct = [(x, 212.0, 6.5), (x, 213.5, 6.5), (x, 217.0, 1.5), (x + sgn * 8.0, 226.0, 1.5), (xh, 231.0, 1.5)]
+        ls = []
+        for n in range(1, 7):
+            m = ext_lead_route(n)
+            ls.append(plen(m) + math.dist(m[-1], (86.5, 212.0, 6.5)) + plen(duct))
+        out[tag] = (round(min(ls), 1), round(max(ls), 1))
+    return out
 
 
 def shift(b, dx):
@@ -658,7 +680,7 @@ def scene_pedal():
     holes = lattice([B2.pb_x(j) for j in range(20)], [B2.pb_y(i) for i in range(28)],
                     lambda x, y: min(math.hypot(x - a, y - b) for a, b, _, _ in B2.PB_HOLES) > 2.2)
     sc.board(rect(bx0, by0, bx1, by1), (z0, z1), holes, C["perf"], "PCB-PB", mholes=[(a, b, d) for a, b, d, _ in B2.PB_HOLES])
-    info("PCB-PB", "PED 페달 보드 PB (BE163에서 자른 70 × 50)", [
+    info("PCB-PB", "PED 페달 보드 PB (8 × 12 양면 기판에서 자른 70 × 50)", [
         "가운데 유닛 바닥 5 mm 기둥 위 (z21.5~23.1). 격자 x = 475.23 − 2.54 j, y = 245.27 + 2.54 i (지그 P-PED).",
         "A501 RP2040-Zero (180° 돌림, USB-C −y) · R501 1 kΩ · R502 100 kΩ · R503 100 Ω × 5 = 20 Ω · C501 100 nF · JP504 닫음.",
         "도면 BRD-03, SCH-05"])
@@ -888,7 +910,7 @@ def scene_all(SP, CAD, JK):
         sc.box(shift(bx(SP["usb_plug"]["boxes"][0]), X0), C["usb"], i="W20%d" % k, g="cable")
         for hid in ("hall_C", "hall_Cs", "hall_D", "hall_Ds", "hall_E", "hall_F", "hall_Fs", "hall_G", "hall_Gs", "hall_A", "hall_As", "hall_B"):
             sc.box(shift(bx(SP[hid]["boxes"][0]), X0), C["hall"], i="U201")
-        sc.label((X0 + 82.0, 140.0, 12.0), tag, 0)
+        sc.label((X0 + 82.0, 122.0, 15.0), tag, 0)
         if tag in ("O1", "O7"):
             for b in SP["ext_lead"]["boxes"]:
                 sc.box(shift(bx(b), X0), "#7e889a", i="W403" if tag == "O1" else "W413", g="cable")
@@ -920,10 +942,16 @@ def scene_all(SP, CAD, JK):
     for w, cc in (("W701", C["wire_wht"]), ("W702", "#c8ccd4")):
         pts = CAD["paths"]["HP"][w]
         sc.tube([tuple(p) for p in pts], 1.75, cc, i=w, g="cable")
-    # ---- USB cables (CAD centre lines)
+    # ---- USB cables (CAD centre lines). △33 (A16) moved the module plug into the module (tail y195.48, axis z13.2); a centre line saved
+    # before that starts at the old tail (y~221) -> joined to the new tail with the straight +y run the spec describes
+    up = SP["usb_plug"]["boxes"][0]
     for k in range(1, 8):
-        pts = CAD["paths"]["USB"]["O%d" % k]
-        sc.tube([tuple(p) for p in pts], 1.75, C["cable"], i="W20%d" % k, g="cable")
+        X0 = X_O1 + MODULE_W * (k - 1)
+        pts = [tuple(p) for p in CAD["paths"]["USB"]["O%d" % k]]
+        tail = (X0 + (up["x"][0] + up["x"][1]) / 2.0, up["y"][1], (up["z"][0] + up["z"][1]) / 2.0)
+        if pts and pts[0][1] > tail[1] + 1.0:
+            pts = [tail, (tail[0], tail[1] + 4.0, tail[2])] + pts
+        sc.tube(pts, 1.75, C["cable"], i="W20%d" % k, g="cable")
     # ---- centre-unit parts (CAD outlines); the three small boards come from the detail scenes
     # the three small boards come from the detail scenes; the screen leads (DSI FFC, 5 V / GND) rise to the screen on the lid - the CAD
     # gives them only as top-view outlines, so they are left out here (04 3D 모델 has them); W208 / C25 are drawn from their CAD route below
@@ -1058,7 +1086,8 @@ def build(write=True):
         CAD = json.load(f)
     bom = bom_info()
     cable_info()
-    info("W101~W107", "W101~W107 센서 리본 (16심 28 AWG, 1.27 피치)", ["SB J201 → MB J301, 두 끝 모두 아랫면 납땜. 자르는 길이 180 (경로 85, 남는 95는 차선 안에서 접음).",
+    info("W101~W107", "W101~W107 센서 리본 (16심 28 AWG, 1.27 피치)", ["SB J201 → MB J301, 두 끝 모두 아랫면에서 꽂음. 자르는 길이 70 (경로 약 30): "
+                                                                     "SB·리본·MB를 작업대에서 한 묶음으로 납땜하고 남는 약 35는 기판 앞 검은 건반 탭 받침 사이 바닥에 평평하게 접어 둠 (△33).",
                                                                      "1번 심(빨간 줄) = 3V3, 2·15 = GND, 3~14 = HALL_C~B, 16 = 3V3 (△12).", "구매 목록 C05"])
     info("BAT-LEAD", "BT601 팩 XT60 선 (배터리에 딸림)", ["팩 +x 끝면 → 선 꺾는 자리 → 팩 윗면 XT60 암 X605 (빨강 수축)."])
     info("BAT-DC", "BT601 충전 선 (배터리에 딸림)", ["팩 +x 끝면 → 팩 윗면 DC 5.5 × 2.1 충전 입력 (14.4 V)."])
@@ -1085,9 +1114,63 @@ def build(write=True):
     return data, rep
 
 
-def check(data):
-    """every pad / wire net is a real net of the netlist (or None), every info key the viewer will ask for exists."""
+def spec_check():
+    """the MB placement of the drawings (sheets.py) against the CAD spec electronics_modules.json (A16): outline, Zero, receptacle, mux pin
+    rows, J301 / J302 pads, R30x rows - the two sources must agree (the CAD places its boxes from the same numbers)."""
+    SP = load_spec()
     probs = []
+
+    def near(a, b, tol=0.02):
+        return abs(a - b) <= tol
+    mb = SP["mb_board"]["boxes"][0]
+    if not (near(mb["x"][0], S.MB["x0"]) and near(mb["x"][1], S.MB["x1"]) and near(mb["y"][0], S.MB["y0"]) and near(mb["y"][1], S.MB["y1"])
+            and near(mb["z"][0], S.MB["zb"]) and near(mb["z"][1], S.MB["zt"])):
+        probs.append("MB outline: spec %s / sheets %s" % (mb, S.MBX["board"]))
+    z = SP["zero"]["boxes"][0]
+    if not (near(z["x"][0], S.ZX) and near(z["y"][1], S.ZY)):
+        probs.append("Zero PCB: spec x%.2f y%.2f / sheets x%.2f y%.2f" % (z["x"][0], z["y"][1], S.ZX, S.ZY))
+    rc = SP["zero"]["boxes"][3]
+    if not (near(rc["x"][0], S.USB_RX[0]) and near(rc["x"][1], S.USB_RX[1]) and near(rc["y"][1], S.USB_RY[1])):
+        probs.append("USB-C receptacle: spec %s / sheets %s" % (rc, S.MBX["usb"]))
+    for hb, n in ((SP["zero_headers"]["boxes"][0], 1), (SP["zero_headers"]["boxes"][1], 10)):
+        if not near((hb["x"][0] + hb["x"][1]) / 2.0, S.zero_hole(n)[0]):
+            probs.append("Zero header column x: spec %.2f / sheets %.2f" % ((hb["x"][0] + hb["x"][1]) / 2.0, S.zero_hole(n)[0]))
+    pins = SP["mux"].get("pins", {})
+    for row, names in (("channel_row", ["C%d" % i for i in range(16)]), ("control_row", ["GND", "VCC", "EN", "S0", "S1", "S2", "S3", "SIG"])):
+        r = pins.get(row)
+        if not r:
+            probs.append("spec mux pins.%s missing" % row)
+            continue
+        for x, nm in zip(r["x"], names):
+            px, py = S.mux_hole(nm)
+            if not (near(x, px) and near(r["y"], py)):
+                probs.append("mux %s: spec (%.2f, %.2f) / sheets (%.2f, %.2f)" % (nm, x, r["y"], px, py))
+    jb = SP["j301_pads"]["boxes"][0]
+    x1_, y1_ = S.mb_pad_xy("J301", 1)
+    x16, y16 = S.mb_pad_xy("J301", 16)
+    if not (near(jb["x"][0] + 0.9, x1_) and near(jb["x"][1] - 0.9, x16) and near(jb["y"][0] + 0.9, y1_) and near(jb["y"][1] - 0.9, y16)):
+        probs.append("J301 pads: spec %s / sheets (%.2f, %.2f)~(%.2f, %.2f)" % (jb, x1_, y1_, x16, y16))
+    eb = SP["j302_pads"]["boxes"][0]
+    if not (near(eb["x"][0] + 0.9, S.EXT_X0) and near(eb["x"][1] - 0.9, S.EXT_X0 + 5 * 2.54) and near((eb["y"][0] + eb["y"][1]) / 2.0, S.EXT_Y)):
+        probs.append("J302 pads: spec %s / sheets x%.2f y%.2f" % (eb, S.EXT_X0, S.EXT_Y))
+    for b, ref in zip(SP["r30x"]["boxes"], ("R301", "R302", "R303")):
+        x, y = S.R_EXT[ref]
+        if not near((b["y"][0] + b["y"][1]) / 2.0, y) or not (x < b["x"][0] and b["x"][1] < x + 7.62):
+            probs.append("%s: spec %s / sheets (%.2f, %.2f)" % (ref, b, x, y))
+    # EXT lead path lengths quoted by harness.py (W403 / W413 cut lengths) = the drawn route
+    el = ext_lead_lengths()
+    for tag in ("O1", "O7"):
+        if any(abs(a - b) > 0.5 for a, b in zip(el[tag], HN.EXT_PATH[tag])):
+            probs.append("EXT lead %s path %s, harness.EXT_PATH says %s" % (tag, el[tag], HN.EXT_PATH[tag]))
+        if HN.EXT_CUT[tag] < el[tag][1] + 10.0:
+            probs.append("EXT lead %s cut %d < longest path %.1f + strip 5 + spare 5" % (tag, HN.EXT_CUT[tag], el[tag][1]))
+    return probs
+
+
+def check(data):
+    """every pad / wire net is a real net of the netlist (or None), every info key the viewer will ask for exists, and the MB placement
+    agrees with the CAD spec (spec_check)."""
+    probs = spec_check()
     real = {r["넷"] for r in NET_ROWS}
     for s in data["scenes"]:
         for o in s["objs"]:

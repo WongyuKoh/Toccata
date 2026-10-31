@@ -54,7 +54,7 @@ def check(cond, msg):
 # ------------------------------------------------------------------ purchases (plan C, ordered 2026-10-08)
 FI = load(os.path.join(V4, "data", "final_items.json"))
 T = FI["totals"]
-EXPECT = {"school_items": 215852, "school_ship": 28700, "personal": 342631, "total": 587183, "budget_school": 200000}   # 10/16 A안 (+PETG 4, +세메다인 1)
+EXPECT = {"school_items": 215852, "school_ship": 28700, "personal": 356771, "total": 601323, "budget_school": 200000}   # 10/16 A안 (+PETG 4, +세메다인 1); 10/31 A16 +만능기판 4장 14,140
 for k, v in EXPECT.items():
     check(T[k] == v, f"totals.{k} = {T[k]} (expected {v})")
 check(T["school_items"] + T["school_ship"] + T["personal"] == T["total"], "school + ship + personal != total")
@@ -70,7 +70,7 @@ for it in items:
 cnt = {k: len(v) for k, v in by_src.items()}
 check(cnt == FI["counts"]["by_source"], f"source counts {cnt} != counts.by_source {FI['counts']['by_source']}")
 check(cnt.get("school") == T["school_lines"] == 29, "school lines")   # 10/14: L66 엘레파츠, SE4 디바이스마트 (학교, 한도 7,852원 초과)
-check(cnt.get("personal") == T["personal_lines"] == 19, "personal lines")   # 10/14: + USB NA993 i022, HB466 i226, touchscreen i202 (AliExpress); 10/16: - 합판 i096, 목공본드 i057
+check(cnt.get("personal") == T["personal_lines"] == 20, "personal lines")   # 10/14: + USB NA993 i022, HB466 i226, touchscreen i202 (AliExpress); 10/16: - 합판 i096, 목공본드 i057; 10/31 A16: + 만능기판 8 × 12 i228
 check(sum(it["ordered"]["amount"] for it in by_src["school"]) == T["school_items"], "school item amounts != school_items")
 check(sum(it["ordered"]["amount"] for it in by_src["personal"]) == T["personal_items"], "personal item amounts != personal_items")
 n_check = sum(1 for it in items if not it["optional"])
@@ -186,7 +186,7 @@ for f in glob.glob(os.path.join(CAD, "stl", "print", "*", "*.stl")):
         pf["inst_files"] += 1
         pf["inst_parts"] += q
 # 10/16 A안: + 판 10장 (12 파일), - 합판 지그 7; 10/29 A12: + 레버틀 3 파일 (9), 가이드 탭 2 파일 (88), 레버 덮개 1 파일 (88)
-check(pf == {"inst_files": 98, "inst_parts": 495, "tools": 4, "jigs": 2}, f"stl/print {pf}")
+check(pf == {"inst_files": 99, "inst_parts": 502, "tools": 4, "jigs": 1}, f"stl/print {pf}")   # 10/31 A16: + 밸런스레일 7, − 기판 지그 P-MB
 S0 = load(rp("hardware", "mechanical", "key-action-v4", "printables", "stage0", "stage0_geometry.json"))
 s0_files = len(glob.glob(rp("hardware", "mechanical", "key-action-v4", "printables", "stage0", "stl", "*.stl")))
 s0_pieces = sum(p["qty"] for p in S0["parts"])
@@ -198,7 +198,7 @@ check("약 8 W/ch" in row17, "amp 8 W/ch at 12.8 V")
 check(not any(it["id"] in ("i096", "i057") for it in items), "plywood sheet and wood glue dropped (10/16 A안)")
 
 # ------------------------------------------------------------------ CAD solids (optional, ~4 s)
-n_cad = 1655                                       # 10/29 A12 +185 (레버틀 9, 가이드 탭 88, 레버 덮개 88), 10/30 A13 -88 (캡스턴 너트), A14 +3 (유리 턱 띠 L·R + 접은 보기), A15 +88 (캡스턴 너트 되살림)
+n_cad = 1662                                       # 10/29 A12 +185 (레버틀 9, 가이드 탭 88, 레버 덮개 88), 10/30 A13 -88 (캡스턴 너트), A14 +3 (유리 턱 띠 L·R + 접은 보기), A15 +88 (캡스턴 너트 되살림), 10/31 A16 +7 (밸런스 레일; 레일 나사 14 = 옛 기판 나사 14)
 SCREEN_UP_TOP = 189.23                             # CAD value (max z of the TS-* solids in the use pose); re-measured below
 if "--no-cad" not in sys.argv:
     sys.path.insert(0, os.path.join(CAD, "src"))
@@ -206,7 +206,7 @@ if "--no-cad" not in sys.argv:
     import build_all  # noqa: E402  (collect() only; build_all.main() would wipe stl/print)
     parts = build_all.collect()
     n_cad = len(parts)
-    check(n_cad == 1655, f"CAD parts {n_cad}")
+    check(n_cad == 1662, f"CAD parts {n_cad}")
     P = {p.id: p for p in parts}
     use = [p for p in parts if not (p.note or "").startswith("altview") and p.id != "PEDAL-DAMPER"]
     bb = [p.solid.bounding_box() for p in use]

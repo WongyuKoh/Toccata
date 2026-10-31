@@ -794,7 +794,8 @@ A12 = {
 }
 # cage -> bed screws, modules only (M3 x 10 self-tapping from under the bed floor; glue may be used as well):
 #   'wall' = D boss on the rear wall under the shelf, between shelf ribs; 'fin' = pointed boss on fins 2 and 4
-CAGE_SCREWS = [(29.0, 203.0, "wall"), (143.0, 203.0, "wall"), (41.66, 160.5, "fin"), (123.925, 160.5, "fin")]
+#   (A16: the fin bosses moved from y160.5 to y186.0 - the fins stand on the floor only behind the 80 x 120 board, y >= 174.9)
+CAGE_SCREWS = [(29.0, 203.0, "wall"), (143.0, 203.0, "wall"), (41.66, 186.0, "fin"), (123.925, 186.0, "fin")]
 SCREW = {"boss_d": 6.4, "pilot": 2.5, "clear": 3.4, "top": 14.0}
 
 
@@ -929,6 +930,8 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
             continue
         if n.startswith("control-board boss"):
             continue                                   # A13: the board sits on posts on the hatch floor (a13_board)
+        if side is None and a16_is_rail(p):
+            continue                                   # A16: the balance rail is its own print (a16_rail), laid on the board
         if not _is_cage(n):
             bed_adds.append(prism_x(p["side"], *p["x"]))
             continue
@@ -955,10 +958,10 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
         bed_adds.append(box(x0b, x1b, y0b, y1b, z0b, z1b))
         bed_cuts += dovetail_female_at(0.0)
         ADJUST.add("A6")
-    # control board: A13 posts on the closed hatch floor, screws from above (a13_board)
-    a13_adds, a13_cuts = a13_board(fx, plan)
-    bed_adds += a13_adds
-    bed_cuts += a13_cuts
+    # control board: A16 (modules) the whole board in a pocket on the floor under the separate rail; the end parts have none
+    a16_adds, a16_cuts = a16_bed() if side is None else ([], [])
+    bed_adds += a16_adds
+    bed_cuts += a16_cuts
     for p in fx.get("female", []):
         if p["part"].startswith("fin boss bore"):
             cage_cuts.append(teardrop_x_apex(L_AXIS[0], L_AXIS[1], p["x"][0] - 0.01, p["x"][1] + 0.01, FEAT["fin_bore_print"]))
@@ -970,7 +973,7 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
                 cage_cuts.append(box(p["x"][0], p["x"][1], 209.0 - 0.01, max(ys), min(zs) - FEAT["groove_ext"], min(zs) + 0.01))
                 ADJUST.add("A2")
     for p in fx["bought"]:
-        if p["part"].startswith("balance pin D2"):
+        if p["part"].startswith("balance pin D2") and side is not None:      # A16: in the module the pins go into the rail print
             ys = [q[0] for q in p["side"]]
             zs = [q[1] for q in p["side"]]
             bed_cuts.append(cyl_z((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5, FEAT["bal_pin_hole_d"]))
@@ -1014,10 +1017,15 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
         if abs(min(q[1] for q in pf) - 5.0) > 1e-6:
             continue
         foot = [q[0] for q in pf if abs(q[1] - 5.0) < 1e-6]
+        ya, yb = min(foot) + 1.0, min(max(foot), 195.0)
+        if side is None and A16["board"][0] < f_["x"][0] and f_["x"][1] < A16["board"][1]:
+            ya = max(ya, A16["fin_y1"] + 1.0)              # A16: fins 2 / 4 stand on the floor only behind the board
+        if yb - ya < 1.0:
+            continue
         for (xa, xb) in ((f_["x"][0] - clr - 1.0, f_["x"][0] - clr), (f_["x"][1] + clr, f_["x"][1] + clr + 1.0)):
             if xa < fl0 + 0.2 or xb > fl1 - 0.2:
                 continue                                   # unit edge: the neighbour's fin (or nothing) is there
-            bed_adds.append(box(xa, xb, min(foot) + 1.0, min(max(foot), 195.0), 5.0 - 0.01, 5.0 + A12["slot_h"]))
+            bed_adds.append(box(xa, xb, ya, yb, 5.0 - 0.01, 5.0 + A12["slot_h"]))
     # ---- cage -> bed screws (modules)
     if side is None:
         for (sx, sy, kind) in CAGE_SCREWS:
@@ -1067,7 +1075,11 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
             rx0 = rx1 = 0.0
         if rx1 > rx0:
             bed = bed - box(rx0, rx1, y0r, 213.0, 5.0, 74.0)
-    bed, lane_cuts = a13_lanes(fx, bed)
+    if side is None:
+        lane_cuts = []                                 # A16: no ribbon lane - the rail left the bed, the ribbon stays in front of it
+        cage_cuts += a16_cage_cuts(fins)
+    else:
+        bed, lane_cuts = a13_lanes(fx, bed)
     bed_cuts += lane_cuts + (a13_dovetail_roofs() if has_female else [])
     hatch = a13_hatch(fx)
     if hatch is not None:
@@ -1076,7 +1088,7 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
     bed = clean(diff(bed, bed_cuts + list(extra_cuts)))
     cage = clean(diff(cage, cage_cuts))
     ADJUST.add("A12")
-    return {"bed": bed, "cage": cage, "tabs": tabs, "posts": posts}
+    return {"bed": bed, "cage": cage, "tabs": tabs, "posts": posts, "rail": a16_rail(fx) if side is None else None}
 
 
 # ------------------------------------------------------------------ A13 (2026-10-30): no ceilings for the slicer
@@ -1293,3 +1305,97 @@ def a13_dovetail_roofs():
         d = max(q[0] for q in poly)
         out.append(prism_y([(d + 0.01, z1 - 0.01), (-0.02, z1 + d + 0.03), (-0.02, z1 - 0.01)], min(ys) - 0.01, max(ys) + 0.01))
     return out
+
+
+# ------------------------------------------------------------------ A16 (2026-10-31): the whole 80 x 120 board on the floor
+# The user: "80 120 으로 설계를 다시 만들어줄 수 있어? 지금 뒤쪽에 기판이 있는데, 기판을 바닥으로 내려도 돼" - no more cutting the
+# BE163 sheets into 70 x 50 pieces. No 80-deep free floor exists in a module (sensor bar y59..77.5, black tab bases to y93, balance
+# rail y132.3..144.5, cage fin feet from y152), so the board lies on the floor from the tab bases back (y93.3..173.3) and runs UNDER
+# the balance rail: the rail leaves the bed and is printed on its own (flat bottom z8.6 = board top), laid on the board's bare strip
+# and on two end pads, 2 x M3x6 from above in deep counterbores (the screws the board used before). The bed keeps the rail's end
+# walls and the rod end posts, and gets support ribs under the board (z5..7.0: a ribbon gap at the front, one wire gap under the
+# rail) and edge lips. Fins 2 / 4 stop at z9.5 over the board, the F|F# fin at z18 (over the Zero and the USB plug), and the cage
+# screws of fins 2 / 4 move behind the board. Keys, rod, pins and every rail surface the keys touch are where they were.
+A16 = {
+    "board": (22.25, 142.25, 93.3, 173.3),   # MB outline = spec/electronics_modules.json mb_board
+    "rib_top": 7.0,                          # board underside: 2.0 over the floor - two crossing ribbon strands (0.9 each) fit under it
+    "board_top": 8.6,                        # = rail underside
+    "lip_top": 8.5,                          # edge lips: 0.1 under the board top (the USB plug passes over the rear lip at z9.9)
+    "lip_clr": 0.3,
+    "rail_x": (1.45, 163.05),                # separate rail between the end walls x0.3..1.3 / x163.2..164.2 (0.15 each side)
+    "pads": ((1.29, 21.85), (142.65, 163.21)),   # rail end pads (z5..8.1) beside the board
+    "rail_lip": (1.0, 0.15, 10.6),           # lips in front of / behind the pads: thickness, clearance to the rail, top z
+    "front_gap": (59.5, 81.5),               # front rib / lip gap: the ribbon from SB J201 goes under the board edge
+    "wire_gap": (92.0, 114.0),               # strip-rib gap: the wires between the front and rear zones cross here (underside)
+    "rail_screws": ((11.2, 140.6), (154.2, 140.6)),   # M3x6 from above: counterbore D6.2 floor z10.1, D3.4 through, D2.5 pilot
+    "cb": (6.2, 10.1), "pilot": (2.5, 3.5),     # counterbore D, floor z (rail 1.5 under the head); pilot D, bottom z
+    "fin_y1": 174.9,                         # fins 2 / 4 stand on the floor again from here (rear lip 173.6..174.6)
+    "fin_z": 9.5,                            # fins 2 / 4 lower edge over the board
+    "ffs": (82.41, 84.23, 18.0),             # F|F# fin (+ keel): x, lower edge z (USB plug top 17.5)
+}
+
+
+def a16_is_rail(p):
+    """a section of the balance rail that leaves the module bed (the end walls x0.3..1.3 / x163.2..164.2 stay)."""
+    return p["part"].startswith("balance rail") and p["x"][0] >= 1.29 and p["x"][1] <= 163.21
+
+
+def a16_rail(fx):
+    """the separate balance rail: the model's rail sections (top, cradles, pockets) cut flat at z8.6, the lowered lane
+    sections filled, balance-pin press holes and two counterbored M3x6 holes."""
+    x0, x1 = A16["rail_x"]
+    zb = A16["board_top"]
+    secs = [prism_x(p["side"], p["x"][0], p["x"][1]) for p in fx["frame"] if a16_is_rail(p)]
+    m = union([box(x0, x1, 132.31, 144.49, zb, 18.0)] + secs) ^ box(x0, x1, 132.0, 145.0, zb, 30.0)
+    cuts = []
+    for p in fx["bought"]:
+        if p["part"].startswith("balance pin D2"):
+            ys = [q[0] for q in p["side"]]
+            zs = [q[1] for q in p["side"]]
+            cuts.append(cyl_z((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5, FEAT["bal_pin_hole_d"]))
+    d_cb, z_cb = A16["cb"]
+    for (sx, sy) in A16["rail_screws"]:
+        cuts += [cyl_z(sx, sy, zb - 0.1, z_cb + 0.1, SCREW["clear"]), cyl_z(sx, sy, z_cb, 21.0, d_cb)]
+    return clean(diff(m, cuts))
+
+
+def a16_bed():
+    """(adds, cuts) of the module bed: rail end pads + lips, board support ribs, board edge lips, rail screw pilots."""
+    bx0, bx1, by0, by1 = A16["board"]
+    zr, zl, zb = A16["rib_top"], A16["lip_top"], A16["board_top"]
+    c = A16["lip_clr"]
+    g0, g1 = A16["front_gap"]
+    w0, w1 = A16["wire_gap"]
+    t, lc, lz = A16["rail_lip"]
+    adds = []
+    for (a, b) in A16["pads"]:
+        adds += [box(a, b, 132.31, 144.49, 4.99, zb),
+                 box(a, b, 132.3 - lc - t, 132.3 - lc, 4.99, lz), box(a, b, 144.5 + lc, 144.5 + lc + t, 4.99, lz)]
+    # support ribs under the board margins / under the rail strip (no solder joints there, spec mb_board keepouts)
+    adds += [box(bx0 + 0.2, g0, by0 + 0.2, 95.4, 4.99, zr), box(g1, bx1 - 0.2, by0 + 0.2, 95.4, 4.99, zr),
+             box(bx0 + 0.2, bx1 - 0.2, 171.2, by1 - 0.2, 4.99, zr),
+             box(bx0 + 0.2, 28.8, by0 + 0.19, by1 - 0.19, 4.99, zr), box(135.7, bx1 - 0.2, by0 + 0.19, by1 - 0.19, 4.99, zr),
+             box(28.79, w0, 132.8, 144.0, 4.99, zr), box(w1, 135.71, 132.8, 144.0, 4.99, zr)]
+    # edge lips (0.3 clearance): the front one stops 0.01 short of the black tab bases' rear face y93
+    adds += [box(bx0, g0, by0 - c - 1.0, by0 - c - 0.01, 4.99, zl), box(g1, bx1, by0 - c - 1.0, by0 - c - 0.01, 4.99, zl),
+             box(bx0, bx1, by1 + c, by1 + c + 1.0, 4.99, zl),
+             box(bx0 - c - 1.0, bx0 - c, by0 - c - 1.0, by1 + c + 1.0, 4.99, zl),
+             box(bx1 + c, bx1 + c + 1.0, by0 - c - 1.0, by1 + c + 1.0, 4.99, zl)]
+    dp, zp = A16["pilot"]
+    cuts = [cyl_z(sx, sy, zp, zb + 0.01, dp) for (sx, sy) in A16["rail_screws"]]
+    return adds, cuts
+
+
+def a16_cage_cuts(fins):
+    """fins 2 / 4 lifted to z9.5 over the board (y < 174.9), the F|F# fin and its keel to z18 (whole length)."""
+    bx0, bx1 = A16["board"][0], A16["board"][1]
+    cuts = []
+    for xs in sorted({(round(f["x"][0], 2), round(f["x"][1], 2)) for f in fins}):
+        if bx0 < xs[0] and xs[1] < bx1 and not (A16["ffs"][0] <= xs[0] and xs[1] <= A16["ffs"][1]):
+            cuts.append(box(xs[0] - 0.01, xs[1] + 0.01, 144.0, A16["fin_y1"], 2.0, A16["fin_z"]))
+    x0, x1, z = A16["ffs"]
+    cuts.append(box(x0, x1, 144.0, 209.0, 2.0, z))
+    return cuts
+
+
+ADJUST.add("A16")

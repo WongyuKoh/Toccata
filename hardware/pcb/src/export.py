@@ -77,7 +77,7 @@ KICAD = [
 # fitted only on some boards (MB variants)
 FIT = {"R301": "O1·O7", "R302": "O1", "R303": "O1", "R304": "없음 (비움)",
        "JP301": "O1·O3·O5·O7 닫음", "JP302": "O2·O3·O6·O7 닫음", "JP303": "O4~O7 닫음", "JP304": "모두 열림 (PB는 JP504)",
-       "J302": "O1·O7만 L66 모듈 쪽 리드(W403·W413)를 아랫면에서 납땜, O2~O6 비움"}
+       "J302": "O1·O7만 L66 모듈 쪽 리드(W403·W413)를 윗면에서 납땜 (△33), O2~O6 비움"}
 FIT_COUNT = {"R301": 2, "R302": 1, "R303": 1, "R304": 0}
 
 
@@ -123,10 +123,11 @@ def board_of(sheet, ref):
 EXTRA = [
     # (sheet, board, ref, value, BOM key, per board, boards, fit, KiCad symbol, footprint)
     ("SCH-02", "SB", "PCB-SB", "161.6 × 15.24 6행", "PERF1218", 1, 7, "12 × 18 기판을 띠로 자름", "—", "Edge.Cuts x1.0~162.6 × y60.65~75.89 (BRD-02)"),
-    ("SCH-03", "MB", "PCB-MB", "70 × 50", "PERF", 1, 7, "BE163 한 장에서 두 조각 (지그 P-MB)", "—", "Edge.Cuts x47.25~117.25 × y145.5~195.5, 홈 x81.92~84.72 × y≤172 (BRD-01)"),
+    ("SCH-03", "MB", "PCB-MB", "80 × 120 통째로", "PERFW", 1, 7, "가진 BE163 4장 + 8 × 12 양면 3장 (SE8b; 28 × 40 구멍 판도 가운데 기준 같은 배치), 자르지 않음",
+     "—", "Edge.Cuts x22.25~142.25 × y93.3~173.3 (판 그대로, 구멍·홈 없음) · 격자 x = 30.18 + 2.54i, y = 96.47 + 2.54j (BRD-01)"),
     ("SCH-04", "EL", "PCB-EL", "45.5 × 15.24 6행", "PERF1218", 1, 1, "12 × 18 기판 띠", "—", "Edge.Cuts x1.0~46.5 (BRD-02)"),
     ("SCH-04", "ER", "PCB-ER", "22.0 × 15.24 6행", "PERF1218", 1, 1, "12 × 18 기판 띠", "—", "Edge.Cuts x1.0~23.0 (BRD-02)"),
-    ("SCH-05", "PB", "PCB-PB", "70 × 50", "PERF", 1, 1, "BE163 조각 (지그 P-PED)", "—", "Edge.Cuts x426.5~476.5 × y244~314, 90° 돌림 (BRD-03)"),
+    ("SCH-05", "PB", "PCB-PB", "70 × 50", "PERF", 1, 1, "8 × 12 양면 1장(SE8b)에서 자른 조각 (지그 P-PED)", "—", "Edge.Cuts x426.5~476.5 × y244~314, 90° 돌림 (BRD-03)"),
     ("SCH-05", "J501 조각", "PCB-J501", "25 × 24 (9 × 9 구멍)", "PERF1218", 1, 1, "12 × 18 기판 자투리", "—", "x450~475 × y316.5~340.5, 구멍·패드 BRD-07"),
     ("SCH-05", "PS", "PCB-PS", "7 × 5 구멍 (17.78 × 12.7)", "PERF1218", 1, 1, "12 × 18 자투리", "—", "로컬 구멍·배선 BRD-07"),
     ("SCH-07", "J702 기판", "PCB-J702", "30 × 25 (12 × 10 구멍)", "PERF1218", 1, 1, "12 × 18 기판 자투리", "—", "x505~535 × y255~280, 나사 Ø3.2 (508, 258)·(532, 277), 구멍·배선 BRD-07"),
@@ -173,8 +174,9 @@ def export(built):
                              FIT.get(ref, ""), ks, fp, code, shop, st])
             if key == "ZERO":
                 c2, d2, sh2 = P.BOM["HDRZ"]
+                mold = "몰드 그대로 (2.5, △33)" if s.code == "SCH-03" else "몰드 뺌"
                 bom_rows.append([s.code, brd, ref + "-HDR", "1×9 ×2", d2, n, 18, n * 18,
-                                 "좌·우 열만 (아래 줄 없음), 몰드 뺌", "—", "Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조)", c2, sh2,
+                                 "좌·우 열만 (아래 줄 없음), " + mold, "—", "Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조)", c2, sh2,
                                  PU.status("HDRZ")["text"]])
             if key == "MUX":
                 c2, d2, sh2 = P.BOM["HDR"]
@@ -219,31 +221,8 @@ def export(built):
 
 
 def mb_coord(ref, num, net):
-    if ref == "A301":
-        return S.zero_hole(int(num))
-    if ref == "A302":
-        name = dict(P.MUX_CH + P.MUX_CTRL)[int(num)]
-        return S.mux_hole(name)
-    if ref == "J301":
-        n = int(num)
-        return S.RIB_X0 + 2.54 * ((n - 1) // 2), S.RIB_Y[(n - 1) % 2]
-    if ref == "J302":
-        return S.EXT_X0 + 2.54 * (int(num) - 1), S.EXT_Y
-    if ref in S.JP_POS:
-        x, y = S.JP_POS[ref]
-        return (x + 2.54, y) if net == "GND" else (x, y)
-    if ref in S.R_EXT:
-        x, y = S.R_EXT[ref]
-        return (x, y) if num == "1" else (x + 7.62, y)
-    if ref in S.TP_POS:
-        return S.TP_POS[ref]
-    return None
-
-
-def crosses_slot(ca, cb):
-    """True if a straight link would pass over the W1 r4.3 keep-out (x81.22~85.42, y<=173.2)."""
-    kx0, kx1, _, ky1 = S.MB["keep"]
-    return min(ca[0], cb[0]) < kx1 and max(ca[0], cb[0]) > kx0 and min(ca[1], cb[1]) < ky1
+    """MB pad xy (BRD-01, △33 whole 80 x 120 board): sheets.mb_pad_xy, the one place that derives MB pad coordinates."""
+    return S.mb_pad_xy(ref, num, net)
 
 
 def wiring_mb(built):

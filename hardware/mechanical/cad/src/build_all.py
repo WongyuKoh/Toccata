@@ -9,10 +9,11 @@ Outputs (../):
   stl/print/<NN_폴더>/<부품이름>__<수량>개.stl   print-ready, lying on the bed, one file per distinct shape
                                                  (06_출력공구 = key-action tools, 08_합판지그 = plywood drilling jigs from
                                                  src/plywood_jigs.py, guide cad/jigs/README.md; 09_기판지그 = perfboard cut / drill
-                                                 jigs for the BE163 control / PED boards from src/perfboard_jigs.py; optional
+                                                 jig for the BE163 PED board from src/perfboard_jigs.py - A16: the control boards
+                                                 are whole sheets, no jig; optional
                                                  prints -> stl/print_extra/)
   Toccata_출력STL_전체.zip                        everything in stl/print in one file
-  Toccata_한옥타브_출력STL.zip                    one octave module (+ tools, MB jig), names carrying per-octave counts
+  Toccata_한옥타브_출력STL.zip                    one octave module (+ tools), names carrying per-octave counts
   Toccata_한옥타브_P1S4대.zip                     the same split into one folder per printer / run for four Bambu P1S
   stl/assembly/<그룹>.stl                        every part in world coordinates (open them together)
   stl/assembly/Toccata_전체조립.stl               the whole instrument in one file
@@ -293,7 +294,7 @@ def write_print_zip():
 
 # One octave module for a first-module print (the seven modules O1..O7 are the same shapes): (file stem in stl/print,
 # prints per octave, stem in the zip when the full-set name would mislead, (printer, run) in P1S_RUNS). Plus the
-# key-action tools and the MB jig.
+# key-action tools (A16: the MB jig is gone - the control board is a whole sheet).
 OCTAVE_PRINTS = (
     [("백건_" + n, 1, None, (2, 1)) for n in ("C", "D", "E", "F", "G", "A", "B")]
     + [("흑건_C#·D#", 2, None, (3, 1)), ("흑건_F#", 1, None, (3, 1)), ("흑건_G#", 1, None, (3, 1)),
@@ -302,11 +303,10 @@ OCTAVE_PRINTS = (
     + [("레버덮개", 12, None, (4, 1))]
     + [("프레임_바닥틀_모듈", 1, None, (1, 1)), ("프레임_가이드탭_백건", 7, None, (1, 1)), ("프레임_가이드탭_흑건", 5, None, (1, 1)),
        ("프레임_레버틀_모듈", 1, None, (1, 2)), ("센서바", 1, None, (4, 1)), ("가림판띠", 1, None, (3, 1)),
-       ("레버봉끝마개", 1, None, (4, 1))]
+       ("레버봉끝마개", 1, None, (4, 1)), ("밸런스레일", 1, None, (4, 1))]
     + [("패드바_칸%d" % i, 1, None, (3, 1)) for i in (1, 2, 3, 4)]
     + [("공구_벤치지그받침_T1a", 1, None, (4, 2)), ("공구_높이블록_T1b", 1, None, (4, 2)),
-       ("공구_캡스턴벤치게이지_T2", 1, None, (3, 2)), ("공구_밸런스핀높이게이지_T3", 1, None, (3, 2)),
-       ("P-MB_제어기판지그_MB7장", 1, "P-MB_제어기판지그", (4, 2))]
+       ("공구_캡스턴벤치게이지_T2", 1, None, (3, 2)), ("공구_밸런스핀높이게이지_T3", 1, None, (3, 2))]
 )
 
 # The user's four Bambu P1S (256 x 256 bed, 2026-10-26). One filament colour per printer, so nothing is swapped, and
@@ -314,17 +314,17 @@ OCTAVE_PRINTS = (
 # DESIGN 15 g/h estimate; the slicer is the reference. (printer, run): (colour, bed sheet, hours, label, settings)
 P1S_RUNS = {
     (1, 1): ("회색", "텍스처 PEI", "약 9", "바닥틀·가이드탭",
-             "0.2 mm · 서포트 없음 (A13: 천장이 없는 모양 - 기판 자리 바닥이 막혔고 리본 길·도브테일 홈은 뾰족 지붕) · 가장 먼저 시작"),
+             "0.2 mm · 서포트 없음 (A13: 천장이 없는 모양 - 도브테일 홈은 뾰족 지붕; A16: 밸런스 레일은 4번 프린터에서 따로, 기판 자리는 받침 리브·턱) · 가장 먼저 시작"),
     (1, 2): ("회색", "텍스처 PEI", "약 9", "레버틀",
              "0.2 mm · 서포트 없음 · 뒷벽 바깥면이 베드에 닿게 놓인 그대로 (A12) · 넓은 첫 층이라 브림 3 mm"),
     (2, 1): ("흰색", "매끈한 PEI + 풀", "약 10", "백건", "0.2 mm · 서포트 켬: 트리(자동) · 빌드 플레이트에서만 - 숨은 꼬리(빔) 밑에만 생김, 나머지는 천장 없음 (A13)"),
     (3, 1): ("검정", "매끈한 PEI + 풀", "약 7", "흑건·가림판띠·패드바",
              "0.2 mm · 서포트 켬: 트리(자동) · 빌드 플레이트에서만 - 흑건 숨은 꼬리 밑에만 생김 (A13); 패드바·가림판띠는 서포트 없음 - 판 하나에 섞여도 그 둘에는 서포트가 생기지 않음"),
     (3, 2): ("검정", "매끈한 PEI + 풀", "약 3", "T2·T3 게이지", "0.1 mm · 채움 100 % · 서포트 없음"),
-    (4, 1): ("회색", "텍스처 PEI", "약 5", "캐리어·덮개·센서바·마개",
+    (4, 1): ("회색", "텍스처 PEI", "약 5.5", "캐리어·덮개·센서바·마개·밸런스 레일",
              "0.2 mm · 서포트 없음 (A12: 강철 칸 위가 열려 있고 +x 벽은 레버 덮개로 따로; A13: 스프링 칸 지붕 45° 원뿔) · 덮개는 판 0.7이라 0.1 mm 층이면 더 고움 · "
-             "마개는 Ø4 × 1.2라 작아 떨어지기 쉬움"),
-    (4, 2): ("회색", "텍스처 PEI", "약 5.5", "공구·기판지그",
+             "마개는 Ø4 × 1.2라 작아 떨어지기 쉬움 · 밸런스 레일은 밑면을 베드에 (A16)"),
+    (4, 2): ("회색", "텍스처 PEI", "약 5.5", "공구",
              "0.2 mm · 서포트 없음 · T1b(10 × 34, 높이 50.6)는 넘어지지 않게 브림"),
 }
 P1S_BED, P1S_GAP = 256.0, 10.0
@@ -368,9 +368,8 @@ def write_octave_zip(rows):
         "파일 이름 끝 __N개가 한 옥타브에 뽑을 개수입니다.",
         "- 흑건_C#·D#: C#과 D#이 같은 모양이라 2개.",
         "- 흑건_A#: 전체 목록의 '흑건_A#·A#0'과 같은 파일(한 옥타브에는 A#만).",
-        "- P-MB_제어기판지그: 전체 목록의 'P-MB_제어기판지그_MB7장'과 같은 파일(지그 하나로 MB를 모두 자름).",
         "",
-        "악기 부품 %d개, 출력 공구·기판 지그 %d개." % (parts, tools),
+        "악기 부품 %d개, 출력 공구 %d개 (제어 기판은 BE163 80 × 120을 통째로 써서 기판 지그가 없음, A16)." % (parts, tools),
         "속 꽉 채움 질량: 부품 %.0f g + 공구·지그 %.0f g. 실제 출력은 채움 %%만큼 적습니다. 서포트: 건반만 켬(트리 자동, 빌드 플레이트에서만 -"
         " 숨은 꼬리 밑), 나머지는 서포트 없는 모양이라 끔 (A13: 천장·다리·구멍 꼭대기를 45° 지붕으로; A12 빗·기둥 없음)." % tuple(grams),
         "뽑는 방향·서포트·재료: 최종본/05_조립·제작/01_CAD_출력·조립_안내.md '출력 목록' (원본 hardware/mechanical/cad/README.md).",

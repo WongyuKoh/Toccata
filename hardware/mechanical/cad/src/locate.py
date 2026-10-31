@@ -315,7 +315,7 @@ HOST_FOR_DERIVED = {
     "i220": (r"PR-HUBSHELF$", "허브 선반 받침 2곳 → 가운데 뒤판 안쪽 면"),
     "i052": (r"SPK-[LR]$", "스피커 상자 안 전체 (유닛 뒤 10 mm와 폴 벤트 축은 비움)"),
     "i050": (r"(CU-POST-PI-\d|TS-M25-\d)$", "Pi 5 받침 기둥 4 + 화면 네 귀 4"),
-    "i059": (r"(O\d-B-controlboardscrew.*|CU-POST-(BUCK|J702|PED)-\d|PR-HUBSHELF)$", "제어 기판 14 + 강압 4·J702 2·페달 보드 2·앰프 4"),
+    "i059": (r"(O\d-RAILSCREW\d|CU-POST-(BUCK|J702|PED)-\d|PR-HUBSHELF)$", "밸런스 레일 14 (A16, 예전 제어 기판 나사) + 강압 4·J702 2·페달 보드 2·앰프 4"),
 }
 
 

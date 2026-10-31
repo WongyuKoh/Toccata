@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Self-check for perfboard_jigs.py (build_all writes them to stl/print/09_기판지그).
+"""Self-check for perfboard_jigs.py (build_all writes it to stl/print/09_기판지그; A16: only the PED jig P-PED is left).
 
   python3 src/check_perfboard_jigs.py      # writes the jigs to a temp dir and checks those STLs
 
 (1) every STL: watertight, one body, on z = 0, size
 (2) guide bores MEASURED BACK FROM THE STL (section at mid plate, least-squares circle) in the use frame vs the fixing points:
-    centre <= 0.05, D = bit + 0.2; and the same points measured from the electronics.py model boards (O1..O7-E-MB holes,
-    CU-E-PEDBOARD holes) <= 0.05
-(3) registration pins measured from the STL: on a grid hole centre (<= 0.02; MB grid = BRD-01 x 76.52 + 2.54 i, y 173.59 + 2.54 j),
-    D0.9 in the D1.0 hole, >= 2.0 from every cut line / the slot window, clear of the bores
-(4) cut edges: plate section = the board outline (0..70 x 0..50, <= 0.02); MB slot window = the slot (sides, end, open to the front)
-(5) BE163 layout: two 70 x 50 pieces (MB + MB, MB + PED) on the 30 x 42 grid with a waste strip >= 1.0 between the cuts
+    centre <= 0.05, D = bit + 0.2; and the same points measured from the electronics.py model board (CU-E-PEDBOARD holes) <= 0.05
+(3) registration pins measured from the STL: on a grid hole centre (<= 0.02), D0.9 in the D1.0 hole, >= 2.0 from every cut line,
+    clear of the bores
+(4) cut edges: plate section = the board outline (0..70 x 0..50, <= 0.02)
+(5) BE163 layout: two 70 x 50 pieces on the 30 x 42 grid with a waste strip >= 1.0 between the cuts (one PED + one spare)
 """
 import math
 import os
@@ -64,7 +63,7 @@ def model_holes():
     import electronics as E
     parts = {p.id: p for p in E.build()}
     out = {}
-    for pid, key in (("O1-E-MB", "P-MB"), ("CU-E-PEDBOARD", "P-PED")):
+    for pid, key in (("CU-E-PEDBOARD", "P-PED"),):
         m = parts[pid].solid
         bb = m.bounding_box()
         cs = m.slice((bb[2] + bb[5]) / 2.0)
@@ -134,13 +133,11 @@ def main():
         errs = []
         for h in s["holes"]:
             wx, wy = h["world"]
-            if key == "P-MB":
-                wx = wx - s["origin"][0] + bb[0]                         # O1 module offset (board x0 in the world)
             near = min(hs, key=lambda c: math.hypot(c[0] - wx, c[1] - wy))
             errs.append((math.hypot(near[0] - wx, near[1] - wy), abs(near[2] - h["bit"])))
         ok(all(e <= TOL and dd <= 0.1 for e, dd in errs) and len(hs) == 4,
            "%s fixing points = the holes measured from the electronics.py board (%s): max %.3f, D within %.2f" % (
-               key, "O1-E-MB" if key == "P-MB" else "CU-E-PEDBOARD", max(e for e, _ in errs), max(d_ for _, d_ in errs)))
+               key, "CU-E-PEDBOARD", max(e for e, _ in errs), max(d_ for _, d_ in errs)))
         # (3) pins
         ps = U.slice(-PB.PIN_L / 2.0).to_polygons()
         pins = [circle_fit(p) for p in ps]
@@ -160,31 +157,23 @@ def main():
             bore = min(math.hypot(cu - h["u"], cv - h["v"]) - (h["bit"] + PB.BORE_CLR) / 2 for h in s["holes"])
             if edge < PB.MIN_PIN_EDGE - 1e-6 or bore < PB.MIN_PIN_BORE - 1e-6:
                 bad.append("(%.2f,%.2f) edge %.2f bore %.2f" % (cu, cv, edge, bore))
-        if key == "P-MB":
-            gx = [u + s["origin"][0] for u in us]
-            gy = [v + s["origin"][1] for v in vs]
-            on_brd = all(abs(((x - 76.52) / PB.PITCH) - round((x - 76.52) / PB.PITCH)) < 1e-6 for x in gx) and \
-                all(abs(((y - 173.59) / PB.PITCH) - round((y - 173.59) / PB.PITCH)) < 1e-6 for y in gy)
-        else:
-            on_brd = True
+        on_brd = True
         ok(len(pins) == len(PB.pin_nodes(s)) >= 4 and not offg and not bad and on_brd,
            "%s registration pins D%.1f x %.1f (into the D%.1f holes): %d on grid hole centres (<= 0.02)%s, >= %.1f from cut lines / slot, "
            ">= %.1f from the bores: %s" % (key, PB.PIN_D, PB.PIN_L, PB.SHEET["hole_d"], len(pins),
-                                            " = BRD-01 grid x 76.52 + 2.54 i, y 173.59 + 2.54 j" if key == "P-MB" else " (outline edges u0 / v0 mid-gap)",
+                                            " (outline edges u0 / v0 mid-gap)",
                                             PB.MIN_PIN_EDGE, PB.MIN_PIN_BORE, " ".join("(%.2f,%.2f)" % (c[0], c[1]) for c in pins))
            + ("  " + "; ".join(offg + bad) if offg or bad else ""))
         ok(PB.PIN_L < PB.SHEET["t"], "%s pins %.1f long < board %.1f (do not poke through)" % (key, PB.PIN_L, PB.SHEET["t"]))
     # (5) sheet layout
-    for a, b_ in (("P-MB", "P-MB"), ("P-MB", "P-PED")):
+    for a, b_ in (("P-PED", "P-PED"),):
         L = PB.sheet_layout(S[a], S[b_])
         ok(L["fits"] and L["strip"] >= 1.0,
            "BE163 %s x %s (%d x %d holes): %s + %s fit - columns %d of %d (first column %.2f from the left cut, sheet margin about %.2f), rows %d + %d spare + %d = %d "
            "of %d (waste strip %.2f between the two cuts)" % (PB.SHEET["w"], PB.SHEET["h"], PB.SHEET["cols"], PB.SHEET["rows"], a, b_, L["cols_used"],
                                                              PB.SHEET["cols"], L["a"]["u_first"], L["margin_u"], L["a"]["rows"], L["gap_rows"], L["b"]["rows"],
                                                              L["rows_used"], PB.SHEET["rows"], L["strip"]))
-    n_sheets = math.ceil((S["P-MB"]["qty_boards"] + S["P-PED"]["qty_boards"]) / 2)
-    print(".. boards: MB %d + PED %d = %d pieces -> %d BE163 sheets (2 per sheet)" % (S["P-MB"]["qty_boards"], S["P-PED"]["qty_boards"],
-                                                                                     S["P-MB"]["qty_boards"] + S["P-PED"]["qty_boards"], n_sheets))
+    print(".. boards (A16): MB 7 whole sheets (no jig) + PED %d piece -> 1 more sheet, its second 70 x 50 is a spare" % S["P-PED"]["qty_boards"])
     print()
     print("checks: %d OK, %d failed" % (N_OK[0], len(FAIL)))
     if FAIL:

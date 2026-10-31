@@ -14,7 +14,8 @@ Sources (the only numeric sources):
   spec/electronics_rearbar.json   rear-bar electronics, speakers, damper pedal (envelope SIZES)
   spec/keyaction_features_frame.json  left-cheek headphone-jack pocket (J701) + the PJ-313 envelope used for J701 / J501 / J702
 
-Cable routing (my design inside the spec zones, see the part notes): module USB-C plug (y196.8..221.8, axis z14.5) -> R8 turn to x
+Cable routing (my design inside the spec zones, see the part notes): module USB-C plug (A16: y170.5..195.5, axis z13.2, straight out
+of the module's rear-wall opening; before y196.8..221.8, axis z14.5) -> R8 turn to x
 at y229.5 in front of the bundle -> slope to the cable's level -> jog into the bundle y237.5 (4 levels z2.25 / 6.25 / 10.25 /
 14.25, one cable per level wherever they run side by side; the cable that leaves first is always the top one) -> at the hub port x
 rise straight up behind the front zone and turn +y into the USB-A plug (y247..282, z28.5). O5 / O6 (short runs) use a front-high
@@ -119,10 +120,15 @@ Z_BOT = BODY.Z_BOT                                                              
 Z_LIDU = BODY.Z_LIDU                                                            # 61.35 lid underside
 
 CABLE_OD = 3.5            # NA993 USB-A to C (module spec usb_cable assumed 3.5)
-MODULE_PLUG_L = 25.0      # USB-C overmold envelope along y (electronics_modules usb_plug y196.8..221.8)
+_MI = {i["id"]: i for i in _load("electronics_modules.json")["module_items"]}
+_PB = _MI["usb_plug"]["boxes"][0]
+_RC = [b for b in _MI["zero"]["boxes"] if b["label"].startswith("USB-C receptacle")][0]
+RCPT_X = (_RC["x"][0] + _RC["x"][1]) / 2.0    # Zero USB-C receptacle centre, module-local x (A16: 83.38, before 84.00)
+RCPT_Z = (_RC["z"][0] + _RC["z"][1]) / 2.0    # its axis z in the module (A16: 13.2, before 14.5)
+MODULE_PLUG_L = _PB["y"][1] - _PB["y"][0]     # USB-C overmold envelope along y (electronics_modules usb_plug, 25)
 HUB_PLUG_L = 35.0         # USB-A plug + boot (spec Z-HUB-PLUGS y247..282)
-PLUG_Y1 = 221.8           # module plug tail
-PLUG_Z = 14.5             # module plug axis
+PLUG_Y1 = _PB["y"][1]     # module plug tail (A16: y195.48 inside the module, before 221.8 in the duct)
+PLUG_Z = (_PB["z"][0] + _PB["z"][1]) / 2.0   # module plug axis (A16: 13.2)
 BUNDLE_Y = 237.5          # bundle axis y: 1.75 in front of the pod / centre bottom-ply front edge y241 (cable r 1.75)
 LEVEL_Z = {"O4": 2.25, "O2": 6.25, "O7": 6.25, "O1": 10.25, "O3": 14.25}    # pitch 4.0 = OD 3.5 + 0.5
 FRONT_LANE = (226.0, 24.0)  # y, z of the front-high lane (O5, O6): 2.45 behind the plug tails, 8.25 over the bundle top
@@ -299,7 +305,7 @@ def board_with_cuts(item, dx=0.0):
 # ------------------------------------------------------------------ module USB cable plan (bundle in the duct -> hub)
 
 def module_plug_x(k):
-    return X_O1 + MODULE_W * (k - 1) + 84.0
+    return X_O1 + MODULE_W * (k - 1) + RCPT_X
 
 
 def hub_plug(xh):
@@ -380,11 +386,12 @@ def module_parts(M, out, plan):
         tag = "O%d" % k
 
         mb = it["mb_board"]
-        out.add("%s-E-MB" % tag, "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) %s" % tag,
-                "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) " + tag, g, board_with_cuts(mb, X0), COLORS["pcb_perf"],
+        out.add("%s-E-MB" % tag, "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) %s" % tag,
+                "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) " + tag, g, board_with_cuts(mb, X0), COLORS["pcb_perf"],
                 SRC_M + " mb_board; " + mb["source"], material="FR4 만능기판",
-                note="2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - "
-                     "출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼")
+                note="2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 "
+                     "눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 "
+                     "눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼")
 
         sb = it["sb_board"]
         out.add("%s-E-SB" % tag, "센서 기판 SB (6행 양면 도트 띠 161.6 × 15.24 × 1.6) %s" % tag,
@@ -395,8 +402,8 @@ def module_parts(M, out, plan):
         z = it["zero"]
         out.add("%s-E-ZERO" % tag, "RP2040-Zero (A301), 핀 헤더로 세움 %s" % tag, "RP2040-Zero (A301) " + tag, g,
                 union([bx(b, X0) for b in z["boxes"]]), COLORS["pcb_blue"], SRC_M + " zero; " + z["source"],
-                note="추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); "
-                     "핀 헤더 1×9 ×2는 작은 부품이라 뺌")
+                note="A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x%.2f z%.1f; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 "
+                     "덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌" % (RCPT_X, RCPT_Z))
 
         mx = it["mux"]
         mxb = [b for b in mx["boxes"] if "SSOP" not in b["label"]]
@@ -408,12 +415,13 @@ def module_parts(M, out, plan):
         rb = it["ribbon"]
         out.add("%s-C-RIBBON" % tag, "16심 리본 W10%d (SB J201 → MB J301)" % k, "16-core ribbon W10%d" % k, G_CAB,
                 union([bx(b, X0) for b in rb["boxes"]]), COLORS["cable"], SRC_M + " ribbon; " + rb["source"],
-                note="남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)")
+                note="남는 길이(자른 길이 %d − 경로 %d)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
+                     % (rb["cut_length_mm"], rb["path_length_mm"]))
 
         if tag in it["ext_lead"]["modules"]:
             el = it["ext_lead"]
             wid = {"O1": "W403", "O7": "W413"}[tag]
-            out.add("%s-C-EXT" % tag, "EXT 연장선 %s (L66 모듈 쪽 150 mm, 6심 22 AWG)" % wid, "EXT lead %s" % wid, G_CAB,
+            out.add("%s-C-EXT" % tag, "EXT 연장선 %s (L66 모듈 쪽 %d mm, 6심)" % (wid, {"O1": 160, "O7": 150}[tag]), "EXT lead %s" % wid, G_CAB,
                     diff(union([bx(b, X0) for b in el["boxes"]] + [tube(ext_floor_path(tag, X0), 3.0)]),
                          [bx(b, X0) for b in mb["boxes"]]), COLORS["cable"],
                     SRC_M + " ext_lead + xh_left/xh_right (mated XH on the duct floor); " + el["source"] + "; " + SRC
@@ -443,7 +451,7 @@ def module_parts(M, out, plan):
         out.add("%s-C-USB" % tag, "USB-C 케이블 W20%d (Coms NA993 계열 %.1f m, %s → 허브 포트 %d)" % (k, cs["std_m"], tag, port),
                 "USB cable W20%d %s to hub port %d" % (k, tag, port), G_CAB, union([plug, tube(plan[tag], CABLE_OD), hub_plug(xh)]),
                 COLORS["cable"],
-                SRC_M + " usb_plug (y196.8~221.8, 축 z14.5); " + SRC + " cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / "
+                SRC_M + " usb_plug (y%.1f~%.1f, 축 z%.1f, A16) ; " % (PLUG_Y1 - MODULE_PLUG_L, PLUG_Y1, PLUG_Z) + SRC + " cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / "
                 "port_map, cables %s: path %d mm, %.1f m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS"
                 % (cs["cable"], cs["path_mm"], cs["std_m"]),
                 note=dev + "추정: 케이블 OD 3.5; %s; 길이 = 플러그 %.0f + 경로 %.1f + 허브 플러그 %.0f = %.1f mm (사양 %d, 표준 %.1f m, 여유 %.0f ≥ 40) "
@@ -672,9 +680,9 @@ def board_parts(M, F, out):
     out.add("CU-E-PEDZERO", "RP2040-Zero (PED 보드, 페달용)", "RP2040-Zero on the PED board", G_CU, union([ped_rot(b) for b in z["boxes"]]),
             COLORS["pcb_blue"], SRC + " centre_contents CU-E-PEDZERO (x%.0f~%.0f y%.0f~%.1f z%.1f~%.1f, USB-C -y); " % CC["CU-E-PEDZERO"] + SRC_M
             + " zero (same part / stack as the MB)",
-            note="추정: MB의 Zero 배치(핀 헤더 1.3 틈)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x%.2f z%.1f)" %
-                 (zx0 + (lx1 - 84.0), 14.5 - lz0 + zz0))
-    ped_axis = (zx0 + (lx1 - 84.0), 14.5 - lz0 + zz0)
+            note="추정: MB의 Zero 배치(밑면 칩이 기판 위 캡톤에 닿는 쌓임)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x%.2f z%.1f)" %
+                 (zx0 + (lx1 - RCPT_X), RCPT_Z - lz0 + zz0))
+    ped_axis = (zx0 + (lx1 - RCPT_X), RCPT_Z - lz0 + zz0)
     # ---- J702 amp input jack board + PJ-313 facing -y
     x0, x1, y0, y1, z0, z1 = CC["CU-E-J702BOARD"]
     jh = [(x0 + 3.0, y0 + 3.0, 3.2), (x1 - 3.0, y1 - 3.0, 3.2)]

@@ -508,7 +508,8 @@ def main():
         allowed.append(cyl_x(ey, ez, ta, tb, body.END_HOLE_D))                     # end-wall tunnel D19 (slack coil)
     for k in range(1, 8):
         X0 = 47.0 + 164.5 * (k - 1)
-        allowed.append(box(X0 + 77.75, X0 + 90.25, 196.8, 212.01, 10.7, 18.3))
+        # A16: the plug sits inside the module now (y170.5..195.5) and the cable leaves straight out of the rear-wall opening
+        allowed.append(box(X0 + E.RCPT_X - 6.25, X0 + E.RCPT_X + 6.25, E.PLUG_Y1 - E.MODULE_PLUG_L, 212.01, E.PLUG_Z - 3.8, E.PLUG_Z + 3.8))
     ALLOWED = union(allowed)
     cab = [p for p in onsite if re.match(r"^(C-|O\d-C-USB|O\d-C-EXT|EL-C-LEAD|ER-C-LEAD|CU-E-|PB-E-|BAT-)", p.id)]
     outside = []
@@ -818,7 +819,9 @@ def main():
     for k in range(1, 8):
         X0 = 47 + 164.5 * (k - 1)
         b = bb(P["O%d-E-MB" % k])
-        chk("O%d-E-MB at local x47.25..117.25 (module electronics unchanged)" % k, abs(b[0] - X0 - 47.25) < EPS and abs(b[3] - X0 - 117.25) < EPS, fmt(b))
+        chk("O%d-E-MB = the whole 80 x 120 board at local x22.25..142.25 y93.3..173.3 z7.0..8.6 (A16)" % k,
+            abs(b[0] - X0 - 22.25) < EPS and abs(b[3] - X0 - 142.25) < EPS and abs(b[1] - 93.3) < EPS and abs(b[4] - 173.3) < EPS
+            and abs(b[2] - 7.0) < EPS and abs(b[5] - 8.6) < EPS, fmt(b))
     keyside = [p.id for p in onsite if bb(p)[4] < 212.0 + EPS and not re.match(r"^(O\d|EL|ER)-", p.id)]
     chk("only module / end-part electronics live in y<212", not keyside, ", ".join(keyside) or "none")
     allb = [p for p in K + Ep + B if p.note != "offdesk"]

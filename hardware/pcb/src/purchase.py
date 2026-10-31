@@ -21,7 +21,7 @@ FINAL_ITEMS = os.path.join(ROOT, "docs", "report", "toccata-v4", "data", "final_
 KEY_IDS = {
     "DRV5055": ["i004"], "C100n": ["i006"], "C10u": ["i007"], "C1u": ["i010"], "R1k": ["i029"], "R1k1206": ["i008"],
     "R100k": ["i031"], "R100": ["i032"], "ZERO": ["i084"], "MUX": ["i085"], "HDR": ["i005"], "HDRZ": ["i005"],
-    "PERF": ["u06"], "PERF1218": ["i081"], "RIBBON": ["i023"], "RIBBONW": ["i024"], "JSTXH": ["i101"], "PJ313": ["i033"],
+    "PERFW": ["u06", "i228"], "PERF": ["i228"], "PERF1218": ["i081"], "RIBBON": ["i023"], "RIBBONW": ["i024"], "JSTXH": ["i101"], "PJ313": ["i033"],
     "TRS3M": ["i013"], "TRS15": ["i038"], "PEDAL": ["i109"], "MAG5": ["i098"], "XT60M": ["i224"], "XT60M_SPK": ["i224"],
     "XT60F_SPK": ["i225"], "XT60F_BENCH": ["i225"], "FUSEH": ["u04"], "FUSE": ["u05"], "SW": ["u03"], "BUCK": ["i003"], "BATT": ["u01"],
     "C24": ["i021"], "PI5": ["i001"], "HUB": ["i093"], "USBAC": ["i022"], "DONGLE": ["i111"], "GENDER": ["i034"],

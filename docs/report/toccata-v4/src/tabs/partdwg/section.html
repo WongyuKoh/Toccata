@@ -3,9 +3,9 @@
 <p class="lede">출력하는 파일마다, 그리고 합판 조각마다 치수 도면을 한 장씩 만들었습니다. 모든 선과 숫자는 출력 파일(STL)과 CAD 입체에서 직접 쟀습니다. 카드의 <b>파일 받기</b>를 누르면 STL·DXF·SVG·구멍표·좌표표가 든 zip 하나를 받습니다. DXF는 1:1(mm)이라 CAD에 바로 불러올 수 있습니다. 카드의 <b>3D</b>를 누르면 그 STL 하나가 베드에 놓인 모양(= 한 번에 뽑는 단위)과 악기 안에 들어가는 자리를 3D로 봅니다.</p>
 <div class="kfs">
 <div class="kf"><b>125장</b><span>도면 (출력 파일 125 + 합판 조각 0)</span></div>
-<div class="kf"><b>98파일 · 495개</b><span>악기에 들어가는 출력물 (01~05, 07)</span></div>
-<div class="kf"><b>12.45 kg</b><span>악기 출력물 PETG 합계 (속 100 % 계산값)</span></div>
-<div class="kf"><b>6파일</b><span>공구·지그 (06 · 08 · 09), 지그 출력 약 48분 · 27 g 추정</span></div>
+<div class="kf"><b>99파일 · 502개</b><span>악기에 들어가는 출력물 (01~05, 07)</span></div>
+<div class="kf"><b>12.46 kg</b><span>악기 출력물 PETG 합계 (속 100 % 계산값)</span></div>
+<div class="kf"><b>5파일</b><span>공구·지그 (06 · 08 · 09), 지그 출력 약 24분 · 13 g 추정</span></div>
 <div class="kf"><b>0조각</b><span>합판 (오꾸메 11.5T 400 × 1200 한 장)</span></div>
 <div class="kf"><b>21파일</b><span>선택·대안·예비 (stl/print_extra)</span></div>
 </div>
@@ -19,20 +19,20 @@
 <div class="note"><b>읽는 법.</b> 3각법입니다: 평면도(위에서) 아래에 정면도(앞에서), 그 오른쪽에 우측면도(오른쪽에서)가 있습니다. 보이는 선은 실선, 숨은 선은 점선입니다. 파란 숫자는 <b>부품 기준 좌표</b>로, 원점은 도면 자세에서 가장 작은 모서리(0, 0, 0)입니다. 도면 자세는 악기 안에 놓인 자세입니다(기울어 붙는 부품은 기울기를 빼고 그리고 각도를 적음). 구멍표의 <b>월드 좌표</b>는 악기 전체 좌표 (x 가로, 0 = A0 왼쪽 끝 · y 흰 건반 앞 끝에서 뒤로 · z 책상에서 위로)입니다. 출력할 때 베드에 놓는 자세는 각 도면 오른쪽 위 그림에 있습니다. 같은 축 위에 겹친 구멍(계단 구멍, 원뿔+구멍)은 꼬리표 하나에 함께 적습니다(예: H1/H3). 시트에 자리가 모자라 뺀 모서리 좌표는 개수를 시트 메모에 적었고, zip의 <b>좌표 CSV</b>와 DXF 레이어 <b>DIM_MORE</b>에 전부 있습니다. DXF의 숨은 선은 HIDDEN 점선 레이어입니다.</div>
 <div class="card partdwg-all"><div><b>한 번에 받기</b><p class="small muted">출력할 파일 전부(stl/print, 104개)와 도면 DXF 전부(125개)입니다.</p></div>
 <div class="partdwg-allbtns">
-<button type="button" class="partdwg-btn" data-act="dl" data-zip="fin/parts/all_stl.zip.b64.txt" data-zipname="Toccata_출력STL_전체.zip" data-zipbytes="2926557">전체 STL zip <span class="mono">2.8 MB</span></button>
-<button type="button" class="partdwg-btn" data-act="dl" data-zip="fin/parts/all_dxf.zip.b64.txt" data-zipname="Toccata_부품도면_DXF_전체.zip" data-zipbytes="2665474">전체 DXF zip <span class="mono">2.5 MB</span></button>
+<button type="button" class="partdwg-btn" data-act="dl" data-zip="fin/parts/all_stl.zip.b64.txt" data-zipname="Toccata_출력STL_전체.zip" data-zipbytes="2843702">전체 STL zip <span class="mono">2.7 MB</span></button>
+<button type="button" class="partdwg-btn" data-act="dl" data-zip="fin/parts/all_dxf.zip.b64.txt" data-zipname="Toccata_부품도면_DXF_전체.zip" data-zipbytes="2644542">전체 DXF zip <span class="mono">2.5 MB</span></button>
 </div><p class="small partdwg-msg" aria-live="polite"></p></div>
 <div class="partdwg-tools">
 <div class="partdwg-chips" role="group" aria-label="묶음으로 거르기">
 <button type="button" data-g="all" aria-pressed="true">전체 <span class="n">125</span></button>
 <button type="button" data-g="01" aria-pressed="false">01 건반 <span class="n">14</span></button>
 <button type="button" data-g="02" aria-pressed="false">02 레버 캐리어 <span class="n">17</span></button>
-<button type="button" data-g="03" aria-pressed="false">03 프레임 <span class="n">8</span></button>
+<button type="button" data-g="03" aria-pressed="false">03 프레임 <span class="n">9</span></button>
 <button type="button" data-g="04" aria-pressed="false">04 센서 바·패드 바·가림판·마개 <span class="n">13</span></button>
 <button type="button" data-g="05" aria-pressed="false">05 본체 출력물 <span class="n">40</span></button>
 <button type="button" data-g="06" aria-pressed="false">06 출력 공구 <span class="n">4</span></button>
 <button type="button" data-g="07" aria-pressed="false">07 터치스크린 <span class="n">6</span></button>
-<button type="button" data-g="09" aria-pressed="false">09 기판 지그 <span class="n">2</span></button>
+<button type="button" data-g="09" aria-pressed="false">09 기판 지그 <span class="n">1</span></button>
 <button type="button" data-g="EX" aria-pressed="false">선택·대안·예비 <span class="n">21</span></button>
 </div>
 <label class="partdwg-search"><span class="partdwg-sr">부품 찾기</span><input type="search" id="partdwg-q" autocomplete="off" placeholder="이름·번호·파일 찾기 (예: 백건, P-05, XT60)"></label>
@@ -41,7 +41,7 @@
 <div id="partdwg-list">
 <h3 class="partdwg-gh" data-g="01">01 건반 <span class="small muted">stl/print/01_건반 · 14장</span></h3>
 <div class="partdwg-grid" data-g="01">
-<article class="partdwg-card" id="partdwg-P-01-01" data-g="01" data-q="p-01-01 백건 c 백건c hardware/mechanical/cad/stl/print/01_건반/백건_c__7개.stl petg 흰색 o1-key-c o2-key-c o3-key-c o4-key-c o5-key-c o6-key-c o7-key-c" data-code="P-01-01" data-name="백건 C" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_C__7개.stl" data-svg="fin/parts/P-01-01.svg" data-zip="fin/parts/P-01-01.zip.b64.txt" data-zipname="Toccata_P-01-01_백건_C.zip" data-zipbytes="59613" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-01" data-g="01" data-q="p-01-01 백건 c 백건c hardware/mechanical/cad/stl/print/01_건반/백건_c__7개.stl petg 흰색 o1-key-c o2-key-c o3-key-c o4-key-c o5-key-c o6-key-c o7-key-c" data-code="P-01-01" data-name="백건 C" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_C__7개.stl" data-svg="fin/parts/P-01-01.svg" data-zip="fin/parts/P-01-01.zip.b64.txt" data-zipname="Toccata_P-01-01_백건_C.zip" data-zipbytes="59618" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-01 백건 C 도면 크게 보기"><img src="fin/parts/P-01-01.svg" alt="P-01-01 백건 C 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-01 · A2 1:1</div>
@@ -52,7 +52,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-01 백건 C 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-02" data-g="01" data-q="p-01-02 백건 d 백건d hardware/mechanical/cad/stl/print/01_건반/백건_d__7개.stl petg 흰색 o1-key-d o2-key-d o3-key-d o4-key-d o5-key-d o6-key-d o7-key-d" data-code="P-01-02" data-name="백건 D" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_D__7개.stl" data-svg="fin/parts/P-01-02.svg" data-zip="fin/parts/P-01-02.zip.b64.txt" data-zipname="Toccata_P-01-02_백건_D.zip" data-zipbytes="59986" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-02" data-g="01" data-q="p-01-02 백건 d 백건d hardware/mechanical/cad/stl/print/01_건반/백건_d__7개.stl petg 흰색 o1-key-d o2-key-d o3-key-d o4-key-d o5-key-d o6-key-d o7-key-d" data-code="P-01-02" data-name="백건 D" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_D__7개.stl" data-svg="fin/parts/P-01-02.svg" data-zip="fin/parts/P-01-02.zip.b64.txt" data-zipname="Toccata_P-01-02_백건_D.zip" data-zipbytes="59988" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-02 백건 D 도면 크게 보기"><img src="fin/parts/P-01-02.svg" alt="P-01-02 백건 D 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-02 · A2 1:1</div>
@@ -63,7 +63,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-02 백건 D 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 59 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-03" data-g="01" data-q="p-01-03 백건 e 백건e hardware/mechanical/cad/stl/print/01_건반/백건_e__7개.stl petg 흰색 o1-key-e o2-key-e o3-key-e o4-key-e o5-key-e o6-key-e o7-key-e" data-code="P-01-03" data-name="백건 E" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_E__7개.stl" data-svg="fin/parts/P-01-03.svg" data-zip="fin/parts/P-01-03.zip.b64.txt" data-zipname="Toccata_P-01-03_백건_E.zip" data-zipbytes="59635" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-03" data-g="01" data-q="p-01-03 백건 e 백건e hardware/mechanical/cad/stl/print/01_건반/백건_e__7개.stl petg 흰색 o1-key-e o2-key-e o3-key-e o4-key-e o5-key-e o6-key-e o7-key-e" data-code="P-01-03" data-name="백건 E" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_E__7개.stl" data-svg="fin/parts/P-01-03.svg" data-zip="fin/parts/P-01-03.zip.b64.txt" data-zipname="Toccata_P-01-03_백건_E.zip" data-zipbytes="59636" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-03 백건 E 도면 크게 보기"><img src="fin/parts/P-01-03.svg" alt="P-01-03 백건 E 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-03 · A2 1:1</div>
@@ -74,7 +74,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-03 백건 E 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-04" data-g="01" data-q="p-01-04 백건 f 백건f hardware/mechanical/cad/stl/print/01_건반/백건_f__7개.stl petg 흰색 o1-key-f o2-key-f o3-key-f o4-key-f o5-key-f o6-key-f o7-key-f" data-code="P-01-04" data-name="백건 F" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_F__7개.stl" data-svg="fin/parts/P-01-04.svg" data-zip="fin/parts/P-01-04.zip.b64.txt" data-zipname="Toccata_P-01-04_백건_F.zip" data-zipbytes="60412" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-04" data-g="01" data-q="p-01-04 백건 f 백건f hardware/mechanical/cad/stl/print/01_건반/백건_f__7개.stl petg 흰색 o1-key-f o2-key-f o3-key-f o4-key-f o5-key-f o6-key-f o7-key-f" data-code="P-01-04" data-name="백건 F" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_F__7개.stl" data-svg="fin/parts/P-01-04.svg" data-zip="fin/parts/P-01-04.zip.b64.txt" data-zipname="Toccata_P-01-04_백건_F.zip" data-zipbytes="60420" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-04 백건 F 도면 크게 보기"><img src="fin/parts/P-01-04.svg" alt="P-01-04 백건 F 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-04 · A2 1:1</div>
@@ -96,7 +96,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-05 백건 G 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 59 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-06" data-g="01" data-q="p-01-06 백건 a 백건a hardware/mechanical/cad/stl/print/01_건반/백건_a__7개.stl petg 흰색 o1-key-a o2-key-a o3-key-a o4-key-a o5-key-a o6-key-a o7-key-a" data-code="P-01-06" data-name="백건 A" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_A__7개.stl" data-svg="fin/parts/P-01-06.svg" data-zip="fin/parts/P-01-06.zip.b64.txt" data-zipname="Toccata_P-01-06_백건_A.zip" data-zipbytes="59729" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-06" data-g="01" data-q="p-01-06 백건 a 백건a hardware/mechanical/cad/stl/print/01_건반/백건_a__7개.stl petg 흰색 o1-key-a o2-key-a o3-key-a o4-key-a o5-key-a o6-key-a o7-key-a" data-code="P-01-06" data-name="백건 A" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_A__7개.stl" data-svg="fin/parts/P-01-06.svg" data-zip="fin/parts/P-01-06.zip.b64.txt" data-zipname="Toccata_P-01-06_백건_A.zip" data-zipbytes="59726" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-06 백건 A 도면 크게 보기"><img src="fin/parts/P-01-06.svg" alt="P-01-06 백건 A 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-06 · A2 1:1</div>
@@ -107,7 +107,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-06 백건 A 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-07" data-g="01" data-q="p-01-07 백건 b 백건b hardware/mechanical/cad/stl/print/01_건반/백건_b__7개.stl petg 흰색 o1-key-b o2-key-b o3-key-b o4-key-b o5-key-b o6-key-b o7-key-b" data-code="P-01-07" data-name="백건 B" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_B__7개.stl" data-svg="fin/parts/P-01-07.svg" data-zip="fin/parts/P-01-07.zip.b64.txt" data-zipname="Toccata_P-01-07_백건_B.zip" data-zipbytes="59469" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-07" data-g="01" data-q="p-01-07 백건 b 백건b hardware/mechanical/cad/stl/print/01_건반/백건_b__7개.stl petg 흰색 o1-key-b o2-key-b o3-key-b o4-key-b o5-key-b o6-key-b o7-key-b" data-code="P-01-07" data-name="백건 B" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_B__7개.stl" data-svg="fin/parts/P-01-07.svg" data-zip="fin/parts/P-01-07.zip.b64.txt" data-zipname="Toccata_P-01-07_백건_B.zip" data-zipbytes="59470" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-07 백건 B 도면 크게 보기"><img src="fin/parts/P-01-07.svg" alt="P-01-07 백건 B 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-07 · A2 1:1</div>
@@ -118,7 +118,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-07 백건 B 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-08" data-g="01" data-q="p-01-08 백건 a0 백건a0 hardware/mechanical/cad/stl/print/01_건반/백건_a0__1개.stl petg 흰색 el-key-a0" data-code="P-01-08" data-name="백건 A0" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_A0__1개.stl" data-svg="fin/parts/P-01-08.svg" data-zip="fin/parts/P-01-08.zip.b64.txt" data-zipname="Toccata_P-01-08_백건_A0.zip" data-zipbytes="59678" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-08" data-g="01" data-q="p-01-08 백건 a0 백건a0 hardware/mechanical/cad/stl/print/01_건반/백건_a0__1개.stl petg 흰색 el-key-a0" data-code="P-01-08" data-name="백건 A0" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_A0__1개.stl" data-svg="fin/parts/P-01-08.svg" data-zip="fin/parts/P-01-08.zip.b64.txt" data-zipname="Toccata_P-01-08_백건_A0.zip" data-zipbytes="59680" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-08 백건 A0 도면 크게 보기"><img src="fin/parts/P-01-08.svg" alt="P-01-08 백건 A0 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-08 · A2 1:1</div>
@@ -129,7 +129,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-08 백건 A0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-09" data-g="01" data-q="p-01-09 백건 b0 백건b0 hardware/mechanical/cad/stl/print/01_건반/백건_b0__1개.stl petg 흰색 el-key-b0" data-code="P-01-09" data-name="백건 B0" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_B0__1개.stl" data-svg="fin/parts/P-01-09.svg" data-zip="fin/parts/P-01-09.zip.b64.txt" data-zipname="Toccata_P-01-09_백건_B0.zip" data-zipbytes="59411" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-09" data-g="01" data-q="p-01-09 백건 b0 백건b0 hardware/mechanical/cad/stl/print/01_건반/백건_b0__1개.stl petg 흰색 el-key-b0" data-code="P-01-09" data-name="백건 B0" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_B0__1개.stl" data-svg="fin/parts/P-01-09.svg" data-zip="fin/parts/P-01-09.zip.b64.txt" data-zipname="Toccata_P-01-09_백건_B0.zip" data-zipbytes="59410" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-09 백건 B0 도면 크게 보기"><img src="fin/parts/P-01-09.svg" alt="P-01-09 백건 B0 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-09 · A2 1:1</div>
@@ -140,7 +140,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-09 백건 B0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-10" data-g="01" data-q="p-01-10 백건 c8 백건c8 hardware/mechanical/cad/stl/print/01_건반/백건_c8__1개.stl petg 흰색 er-key-c8" data-code="P-01-10" data-name="백건 C8" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_C8__1개.stl" data-svg="fin/parts/P-01-10.svg" data-zip="fin/parts/P-01-10.zip.b64.txt" data-zipname="Toccata_P-01-10_백건_C8.zip" data-zipbytes="58798" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-10" data-g="01" data-q="p-01-10 백건 c8 백건c8 hardware/mechanical/cad/stl/print/01_건반/백건_c8__1개.stl petg 흰색 er-key-c8" data-code="P-01-10" data-name="백건 C8" data-file="hardware/mechanical/cad/stl/print/01_건반/백건_C8__1개.stl" data-svg="fin/parts/P-01-10.svg" data-zip="fin/parts/P-01-10.zip.b64.txt" data-zipname="Toccata_P-01-10_백건_C8.zip" data-zipbytes="58800" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-10 백건 C8 도면 크게 보기"><img src="fin/parts/P-01-10.svg" alt="P-01-10 백건 C8 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-10 · A2 1:1</div>
@@ -162,7 +162,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-11 흑건 C#·D# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-12" data-g="01" data-q="p-01-12 흑건 f# 흑건f# hardware/mechanical/cad/stl/print/01_건반/흑건_f#__7개.stl petg 검정 o1-key-fs o2-key-fs o3-key-fs o4-key-fs o5-key-fs o6-key-fs o7-key-fs" data-code="P-01-12" data-name="흑건 F#" data-file="hardware/mechanical/cad/stl/print/01_건반/흑건_F#__7개.stl" data-svg="fin/parts/P-01-12.svg" data-zip="fin/parts/P-01-12.zip.b64.txt" data-zipname="Toccata_P-01-12_흑건_Fs.zip" data-zipbytes="60003" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-12" data-g="01" data-q="p-01-12 흑건 f# 흑건f# hardware/mechanical/cad/stl/print/01_건반/흑건_f#__7개.stl petg 검정 o1-key-fs o2-key-fs o3-key-fs o4-key-fs o5-key-fs o6-key-fs o7-key-fs" data-code="P-01-12" data-name="흑건 F#" data-file="hardware/mechanical/cad/stl/print/01_건반/흑건_F#__7개.stl" data-svg="fin/parts/P-01-12.svg" data-zip="fin/parts/P-01-12.zip.b64.txt" data-zipname="Toccata_P-01-12_흑건_Fs.zip" data-zipbytes="60000" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-12 흑건 F# 도면 크게 보기"><img src="fin/parts/P-01-12.svg" alt="P-01-12 흑건 F# 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-12 · A3 1:1</div>
@@ -173,7 +173,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-12 흑건 F# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 59 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-13" data-g="01" data-q="p-01-13 흑건 g# 흑건g# hardware/mechanical/cad/stl/print/01_건반/흑건_g#__7개.stl petg 검정 o1-key-gs o2-key-gs o3-key-gs o4-key-gs o5-key-gs o6-key-gs o7-key-gs" data-code="P-01-13" data-name="흑건 G#" data-file="hardware/mechanical/cad/stl/print/01_건반/흑건_G#__7개.stl" data-svg="fin/parts/P-01-13.svg" data-zip="fin/parts/P-01-13.zip.b64.txt" data-zipname="Toccata_P-01-13_흑건_Gs.zip" data-zipbytes="58918" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-13" data-g="01" data-q="p-01-13 흑건 g# 흑건g# hardware/mechanical/cad/stl/print/01_건반/흑건_g#__7개.stl petg 검정 o1-key-gs o2-key-gs o3-key-gs o4-key-gs o5-key-gs o6-key-gs o7-key-gs" data-code="P-01-13" data-name="흑건 G#" data-file="hardware/mechanical/cad/stl/print/01_건반/흑건_G#__7개.stl" data-svg="fin/parts/P-01-13.svg" data-zip="fin/parts/P-01-13.zip.b64.txt" data-zipname="Toccata_P-01-13_흑건_Gs.zip" data-zipbytes="58920" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-13 흑건 G# 도면 크게 보기"><img src="fin/parts/P-01-13.svg" alt="P-01-13 흑건 G# 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-13 · A3 1:1</div>
@@ -184,7 +184,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-01-13 흑건 G# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-01-14" data-g="01" data-q="p-01-14 흑건 a#·a#0 흑건a#·a#0 hardware/mechanical/cad/stl/print/01_건반/흑건_a#·a#0__8개.stl petg 검정 o1-key-as o2-key-as o3-key-as o4-key-as o5-key-as o6-key-as o7-key-as el-key-as0" data-code="P-01-14" data-name="흑건 A#·A#0" data-file="hardware/mechanical/cad/stl/print/01_건반/흑건_A#·A#0__8개.stl" data-svg="fin/parts/P-01-14.svg" data-zip="fin/parts/P-01-14.zip.b64.txt" data-zipname="Toccata_P-01-14_흑건_As-As0.zip" data-zipbytes="59517" data-place="1">
+<article class="partdwg-card" id="partdwg-P-01-14" data-g="01" data-q="p-01-14 흑건 a#·a#0 흑건a#·a#0 hardware/mechanical/cad/stl/print/01_건반/흑건_a#·a#0__8개.stl petg 검정 o1-key-as o2-key-as o3-key-as o4-key-as o5-key-as o6-key-as o7-key-as el-key-as0" data-code="P-01-14" data-name="흑건 A#·A#0" data-file="hardware/mechanical/cad/stl/print/01_건반/흑건_A#·A#0__8개.stl" data-svg="fin/parts/P-01-14.svg" data-zip="fin/parts/P-01-14.zip.b64.txt" data-zipname="Toccata_P-01-14_흑건_As-As0.zip" data-zipbytes="59523" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-01-14 흑건 A#·A#0 도면 크게 보기"><img src="fin/parts/P-01-14.svg" alt="P-01-14 흑건 A#·A#0 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-01-14 · A3 1:1</div>
@@ -209,7 +209,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-01 레버캐리어 C 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 63 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-02" data-g="02" data-q="p-02-02 레버캐리어 c# 레버캐리어c# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_c#__7개.stl petg o1-lever-cs o2-lever-cs o3-lever-cs o4-lever-cs o5-lever-cs o6-lever-cs o7-lever-cs" data-code="P-02-02" data-name="레버캐리어 C#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_C#__7개.stl" data-svg="fin/parts/P-02-02.svg" data-zip="fin/parts/P-02-02.zip.b64.txt" data-zipname="Toccata_P-02-02_레버캐리어_Cs.zip" data-zipbytes="77777" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-02" data-g="02" data-q="p-02-02 레버캐리어 c# 레버캐리어c# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_c#__7개.stl petg o1-lever-cs o2-lever-cs o3-lever-cs o4-lever-cs o5-lever-cs o6-lever-cs o7-lever-cs" data-code="P-02-02" data-name="레버캐리어 C#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_C#__7개.stl" data-svg="fin/parts/P-02-02.svg" data-zip="fin/parts/P-02-02.zip.b64.txt" data-zipname="Toccata_P-02-02_레버캐리어_Cs.zip" data-zipbytes="77778" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-02 레버캐리어 C# 도면 크게 보기"><img src="fin/parts/P-02-02.svg" alt="P-02-02 레버캐리어 C# 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-02 · A3 2:1</div>
@@ -220,7 +220,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-02 레버캐리어 C# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 76 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-03" data-g="02" data-q="p-02-03 레버캐리어 d 레버캐리어d hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_d__7개.stl petg o1-lever-d o2-lever-d o3-lever-d o4-lever-d o5-lever-d o6-lever-d o7-lever-d" data-code="P-02-03" data-name="레버캐리어 D" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_D__7개.stl" data-svg="fin/parts/P-02-03.svg" data-zip="fin/parts/P-02-03.zip.b64.txt" data-zipname="Toccata_P-02-03_레버캐리어_D.zip" data-zipbytes="57646" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-03" data-g="02" data-q="p-02-03 레버캐리어 d 레버캐리어d hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_d__7개.stl petg o1-lever-d o2-lever-d o3-lever-d o4-lever-d o5-lever-d o6-lever-d o7-lever-d" data-code="P-02-03" data-name="레버캐리어 D" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_D__7개.stl" data-svg="fin/parts/P-02-03.svg" data-zip="fin/parts/P-02-03.zip.b64.txt" data-zipname="Toccata_P-02-03_레버캐리어_D.zip" data-zipbytes="57647" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-03 레버캐리어 D 도면 크게 보기"><img src="fin/parts/P-02-03.svg" alt="P-02-03 레버캐리어 D 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-03 · A3 2:1</div>
@@ -231,7 +231,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-03 레버캐리어 D 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 56 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-04" data-g="02" data-q="p-02-04 레버캐리어 d# 레버캐리어d# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_d#__7개.stl petg o1-lever-ds o2-lever-ds o3-lever-ds o4-lever-ds o5-lever-ds o6-lever-ds o7-lever-ds" data-code="P-02-04" data-name="레버캐리어 D#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_D#__7개.stl" data-svg="fin/parts/P-02-04.svg" data-zip="fin/parts/P-02-04.zip.b64.txt" data-zipname="Toccata_P-02-04_레버캐리어_Ds.zip" data-zipbytes="75139" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-04" data-g="02" data-q="p-02-04 레버캐리어 d# 레버캐리어d# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_d#__7개.stl petg o1-lever-ds o2-lever-ds o3-lever-ds o4-lever-ds o5-lever-ds o6-lever-ds o7-lever-ds" data-code="P-02-04" data-name="레버캐리어 D#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_D#__7개.stl" data-svg="fin/parts/P-02-04.svg" data-zip="fin/parts/P-02-04.zip.b64.txt" data-zipname="Toccata_P-02-04_레버캐리어_Ds.zip" data-zipbytes="75143" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-04 레버캐리어 D# 도면 크게 보기"><img src="fin/parts/P-02-04.svg" alt="P-02-04 레버캐리어 D# 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-04 · A3 2:1</div>
@@ -242,7 +242,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-04 레버캐리어 D# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 73 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-05" data-g="02" data-q="p-02-05 레버캐리어 e 레버캐리어e hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_e__7개.stl petg o1-lever-e o2-lever-e o3-lever-e o4-lever-e o5-lever-e o6-lever-e o7-lever-e" data-code="P-02-05" data-name="레버캐리어 E" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_E__7개.stl" data-svg="fin/parts/P-02-05.svg" data-zip="fin/parts/P-02-05.zip.b64.txt" data-zipname="Toccata_P-02-05_레버캐리어_E.zip" data-zipbytes="63966" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-05" data-g="02" data-q="p-02-05 레버캐리어 e 레버캐리어e hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_e__7개.stl petg o1-lever-e o2-lever-e o3-lever-e o4-lever-e o5-lever-e o6-lever-e o7-lever-e" data-code="P-02-05" data-name="레버캐리어 E" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_E__7개.stl" data-svg="fin/parts/P-02-05.svg" data-zip="fin/parts/P-02-05.zip.b64.txt" data-zipname="Toccata_P-02-05_레버캐리어_E.zip" data-zipbytes="63968" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-05 레버캐리어 E 도면 크게 보기"><img src="fin/parts/P-02-05.svg" alt="P-02-05 레버캐리어 E 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-05 · A3 2:1</div>
@@ -253,7 +253,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-05 레버캐리어 E 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 62 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-06" data-g="02" data-q="p-02-06 레버캐리어 f 레버캐리어f hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_f__7개.stl petg o1-lever-f o2-lever-f o3-lever-f o4-lever-f o5-lever-f o6-lever-f o7-lever-f" data-code="P-02-06" data-name="레버캐리어 F" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_F__7개.stl" data-svg="fin/parts/P-02-06.svg" data-zip="fin/parts/P-02-06.zip.b64.txt" data-zipname="Toccata_P-02-06_레버캐리어_F.zip" data-zipbytes="59241" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-06" data-g="02" data-q="p-02-06 레버캐리어 f 레버캐리어f hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_f__7개.stl petg o1-lever-f o2-lever-f o3-lever-f o4-lever-f o5-lever-f o6-lever-f o7-lever-f" data-code="P-02-06" data-name="레버캐리어 F" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_F__7개.stl" data-svg="fin/parts/P-02-06.svg" data-zip="fin/parts/P-02-06.zip.b64.txt" data-zipname="Toccata_P-02-06_레버캐리어_F.zip" data-zipbytes="59242" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-06 레버캐리어 F 도면 크게 보기"><img src="fin/parts/P-02-06.svg" alt="P-02-06 레버캐리어 F 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-06 · A3 2:1</div>
@@ -264,7 +264,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-06 레버캐리어 F 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-07" data-g="02" data-q="p-02-07 레버캐리어 f# 레버캐리어f# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_f#__7개.stl petg o1-lever-fs o2-lever-fs o3-lever-fs o4-lever-fs o5-lever-fs o6-lever-fs o7-lever-fs" data-code="P-02-07" data-name="레버캐리어 F#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_F#__7개.stl" data-svg="fin/parts/P-02-07.svg" data-zip="fin/parts/P-02-07.zip.b64.txt" data-zipname="Toccata_P-02-07_레버캐리어_Fs.zip" data-zipbytes="76531" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-07" data-g="02" data-q="p-02-07 레버캐리어 f# 레버캐리어f# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_f#__7개.stl petg o1-lever-fs o2-lever-fs o3-lever-fs o4-lever-fs o5-lever-fs o6-lever-fs o7-lever-fs" data-code="P-02-07" data-name="레버캐리어 F#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_F#__7개.stl" data-svg="fin/parts/P-02-07.svg" data-zip="fin/parts/P-02-07.zip.b64.txt" data-zipname="Toccata_P-02-07_레버캐리어_Fs.zip" data-zipbytes="76528" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-07 레버캐리어 F# 도면 크게 보기"><img src="fin/parts/P-02-07.svg" alt="P-02-07 레버캐리어 F# 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-07 · A3 2:1</div>
@@ -275,7 +275,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-07 레버캐리어 F# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 75 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-08" data-g="02" data-q="p-02-08 레버캐리어 g 레버캐리어g hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_g__7개.stl petg o1-lever-g o2-lever-g o3-lever-g o4-lever-g o5-lever-g o6-lever-g o7-lever-g" data-code="P-02-08" data-name="레버캐리어 G" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_G__7개.stl" data-svg="fin/parts/P-02-08.svg" data-zip="fin/parts/P-02-08.zip.b64.txt" data-zipname="Toccata_P-02-08_레버캐리어_G.zip" data-zipbytes="65182" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-08" data-g="02" data-q="p-02-08 레버캐리어 g 레버캐리어g hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_g__7개.stl petg o1-lever-g o2-lever-g o3-lever-g o4-lever-g o5-lever-g o6-lever-g o7-lever-g" data-code="P-02-08" data-name="레버캐리어 G" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_G__7개.stl" data-svg="fin/parts/P-02-08.svg" data-zip="fin/parts/P-02-08.zip.b64.txt" data-zipname="Toccata_P-02-08_레버캐리어_G.zip" data-zipbytes="65183" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-08 레버캐리어 G 도면 크게 보기"><img src="fin/parts/P-02-08.svg" alt="P-02-08 레버캐리어 G 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-08 · A3 2:1</div>
@@ -286,7 +286,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-08 레버캐리어 G 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 64 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-09" data-g="02" data-q="p-02-09 레버캐리어 g# 레버캐리어g# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_g#__7개.stl petg o1-lever-gs o2-lever-gs o3-lever-gs o4-lever-gs o5-lever-gs o6-lever-gs o7-lever-gs" data-code="P-02-09" data-name="레버캐리어 G#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_G#__7개.stl" data-svg="fin/parts/P-02-09.svg" data-zip="fin/parts/P-02-09.zip.b64.txt" data-zipname="Toccata_P-02-09_레버캐리어_Gs.zip" data-zipbytes="75096" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-09" data-g="02" data-q="p-02-09 레버캐리어 g# 레버캐리어g# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_g#__7개.stl petg o1-lever-gs o2-lever-gs o3-lever-gs o4-lever-gs o5-lever-gs o6-lever-gs o7-lever-gs" data-code="P-02-09" data-name="레버캐리어 G#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_G#__7개.stl" data-svg="fin/parts/P-02-09.svg" data-zip="fin/parts/P-02-09.zip.b64.txt" data-zipname="Toccata_P-02-09_레버캐리어_Gs.zip" data-zipbytes="75100" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-09 레버캐리어 G# 도면 크게 보기"><img src="fin/parts/P-02-09.svg" alt="P-02-09 레버캐리어 G# 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-09 · A3 2:1</div>
@@ -297,7 +297,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-09 레버캐리어 G# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 73 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-10" data-g="02" data-q="p-02-10 레버캐리어 a 레버캐리어a hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a__7개.stl petg o1-lever-a o2-lever-a o3-lever-a o4-lever-a o5-lever-a o6-lever-a o7-lever-a" data-code="P-02-10" data-name="레버캐리어 A" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A__7개.stl" data-svg="fin/parts/P-02-10.svg" data-zip="fin/parts/P-02-10.zip.b64.txt" data-zipname="Toccata_P-02-10_레버캐리어_A.zip" data-zipbytes="61561" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-10" data-g="02" data-q="p-02-10 레버캐리어 a 레버캐리어a hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a__7개.stl petg o1-lever-a o2-lever-a o3-lever-a o4-lever-a o5-lever-a o6-lever-a o7-lever-a" data-code="P-02-10" data-name="레버캐리어 A" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A__7개.stl" data-svg="fin/parts/P-02-10.svg" data-zip="fin/parts/P-02-10.zip.b64.txt" data-zipname="Toccata_P-02-10_레버캐리어_A.zip" data-zipbytes="61564" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-10 레버캐리어 A 도면 크게 보기"><img src="fin/parts/P-02-10.svg" alt="P-02-10 레버캐리어 A 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-10 · A3 2:1</div>
@@ -308,7 +308,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-10 레버캐리어 A 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 60 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-11" data-g="02" data-q="p-02-11 레버캐리어 a# 레버캐리어a# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a#__7개.stl petg o1-lever-as o2-lever-as o3-lever-as o4-lever-as o5-lever-as o6-lever-as o7-lever-as" data-code="P-02-11" data-name="레버캐리어 A#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A#__7개.stl" data-svg="fin/parts/P-02-11.svg" data-zip="fin/parts/P-02-11.zip.b64.txt" data-zipname="Toccata_P-02-11_레버캐리어_As.zip" data-zipbytes="75483" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-11" data-g="02" data-q="p-02-11 레버캐리어 a# 레버캐리어a# hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a#__7개.stl petg o1-lever-as o2-lever-as o3-lever-as o4-lever-as o5-lever-as o6-lever-as o7-lever-as" data-code="P-02-11" data-name="레버캐리어 A#" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A#__7개.stl" data-svg="fin/parts/P-02-11.svg" data-zip="fin/parts/P-02-11.zip.b64.txt" data-zipname="Toccata_P-02-11_레버캐리어_As.zip" data-zipbytes="75482" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-11 레버캐리어 A# 도면 크게 보기"><img src="fin/parts/P-02-11.svg" alt="P-02-11 레버캐리어 A# 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-11 · A3 2:1</div>
@@ -330,7 +330,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-12 레버캐리어 B 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-13" data-g="02" data-q="p-02-13 레버캐리어 a0 레버캐리어a0 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a0__1개.stl petg el-lever-a0" data-code="P-02-13" data-name="레버캐리어 A0" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A0__1개.stl" data-svg="fin/parts/P-02-13.svg" data-zip="fin/parts/P-02-13.zip.b64.txt" data-zipname="Toccata_P-02-13_레버캐리어_A0.zip" data-zipbytes="68220" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-13" data-g="02" data-q="p-02-13 레버캐리어 a0 레버캐리어a0 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a0__1개.stl petg el-lever-a0" data-code="P-02-13" data-name="레버캐리어 A0" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A0__1개.stl" data-svg="fin/parts/P-02-13.svg" data-zip="fin/parts/P-02-13.zip.b64.txt" data-zipname="Toccata_P-02-13_레버캐리어_A0.zip" data-zipbytes="68222" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-13 레버캐리어 A0 도면 크게 보기"><img src="fin/parts/P-02-13.svg" alt="P-02-13 레버캐리어 A0 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-13 · A3 2:1</div>
@@ -341,7 +341,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-13 레버캐리어 A0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 67 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-14" data-g="02" data-q="p-02-14 레버캐리어 a#0 레버캐리어a#0 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a#0__1개.stl petg el-lever-as0" data-code="P-02-14" data-name="레버캐리어 A#0" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A#0__1개.stl" data-svg="fin/parts/P-02-14.svg" data-zip="fin/parts/P-02-14.zip.b64.txt" data-zipname="Toccata_P-02-14_레버캐리어_As0.zip" data-zipbytes="84219" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-14" data-g="02" data-q="p-02-14 레버캐리어 a#0 레버캐리어a#0 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_a#0__1개.stl petg el-lever-as0" data-code="P-02-14" data-name="레버캐리어 A#0" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_A#0__1개.stl" data-svg="fin/parts/P-02-14.svg" data-zip="fin/parts/P-02-14.zip.b64.txt" data-zipname="Toccata_P-02-14_레버캐리어_As0.zip" data-zipbytes="84220" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-14 레버캐리어 A#0 도면 크게 보기"><img src="fin/parts/P-02-14.svg" alt="P-02-14 레버캐리어 A#0 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-14 · A3 2:1</div>
@@ -352,7 +352,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-14 레버캐리어 A#0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 82 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-15" data-g="02" data-q="p-02-15 레버캐리어 b0 레버캐리어b0 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_b0__1개.stl petg el-lever-b0" data-code="P-02-15" data-name="레버캐리어 B0" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_B0__1개.stl" data-svg="fin/parts/P-02-15.svg" data-zip="fin/parts/P-02-15.zip.b64.txt" data-zipname="Toccata_P-02-15_레버캐리어_B0.zip" data-zipbytes="66297" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-15" data-g="02" data-q="p-02-15 레버캐리어 b0 레버캐리어b0 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_b0__1개.stl petg el-lever-b0" data-code="P-02-15" data-name="레버캐리어 B0" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_B0__1개.stl" data-svg="fin/parts/P-02-15.svg" data-zip="fin/parts/P-02-15.zip.b64.txt" data-zipname="Toccata_P-02-15_레버캐리어_B0.zip" data-zipbytes="66280" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-15 레버캐리어 B0 도면 크게 보기"><img src="fin/parts/P-02-15.svg" alt="P-02-15 레버캐리어 B0 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-15 · A3 2:1</div>
@@ -363,7 +363,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-02-15 레버캐리어 B0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 65 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-02-16" data-g="02" data-q="p-02-16 레버캐리어 c8 레버캐리어c8 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_c8__1개.stl petg er-lever-c8" data-code="P-02-16" data-name="레버캐리어 C8" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_C8__1개.stl" data-svg="fin/parts/P-02-16.svg" data-zip="fin/parts/P-02-16.zip.b64.txt" data-zipname="Toccata_P-02-16_레버캐리어_C8.zip" data-zipbytes="70279" data-place="1">
+<article class="partdwg-card" id="partdwg-P-02-16" data-g="02" data-q="p-02-16 레버캐리어 c8 레버캐리어c8 hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_c8__1개.stl petg er-lever-c8" data-code="P-02-16" data-name="레버캐리어 C8" data-file="hardware/mechanical/cad/stl/print/02_레버캐리어/레버캐리어_C8__1개.stl" data-svg="fin/parts/P-02-16.svg" data-zip="fin/parts/P-02-16.zip.b64.txt" data-zipname="Toccata_P-02-16_레버캐리어_C8.zip" data-zipbytes="70262" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-02-16 레버캐리어 C8 도면 크게 보기"><img src="fin/parts/P-02-16.svg" alt="P-02-16 레버캐리어 C8 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-02-16 · A3 2:1</div>
@@ -386,100 +386,111 @@
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
 </div>
-<h3 class="partdwg-gh" data-g="03">03 프레임 <span class="small muted">stl/print/03_프레임 · 8장</span></h3>
+<h3 class="partdwg-gh" data-g="03">03 프레임 <span class="small muted">stl/print/03_프레임 · 9장</span></h3>
 <div class="partdwg-grid" data-g="03">
-<article class="partdwg-card" id="partdwg-P-03-01" data-g="03" data-q="p-03-01 프레임 바닥틀 모듈 프레임바닥틀모듈 hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl petg 회색 o1-frame o2-frame o3-frame o4-frame o5-frame o6-frame o7-frame" data-code="P-03-01" data-name="프레임 바닥틀 모듈" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl" data-svg="fin/parts/P-03-01.svg" data-zip="fin/parts/P-03-01.zip.b64.txt" data-zipname="Toccata_P-03-01_프레임_바닥틀_모듈.zip" data-zipbytes="117068" data-place="1">
+<article class="partdwg-card" id="partdwg-P-03-01" data-g="03" data-q="p-03-01 프레임 바닥틀 모듈 프레임바닥틀모듈 hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl petg 회색 o1-frame o2-frame o3-frame o4-frame o5-frame o6-frame o7-frame" data-code="P-03-01" data-name="프레임 바닥틀 모듈" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl" data-svg="fin/parts/P-03-01.svg" data-zip="fin/parts/P-03-01.zip.b64.txt" data-zipname="Toccata_P-03-01_프레임_바닥틀_모듈.zip" data-zipbytes="83538" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-01 프레임 바닥틀 모듈 도면 크게 보기"><img src="fin/parts/P-03-01.svg" alt="P-03-01 프레임 바닥틀 모듈 부품도 (A1, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-03-01 · A1 1:1</div>
 <h4>프레임 바닥틀 모듈</h4>
-<dl class="partdwg-dl"><dt>수량</dt><dd>7개</dd><dt>크기</dt><dd class="mono">168.5 × 212 × 18</dd><dt>질량</dt><dd>161.1 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>34</dd></dl>
+<dl class="partdwg-dl"><dt>수량</dt><dd>7개</dd><dt>크기</dt><dd class="mono">168.5 × 212 × 18</dd><dt>질량</dt><dd>138 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>21</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl</div>
-<details class="spec"><summary>출력 메모</summary><p class="small">바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 기판 자리는 바닥이 막혀 기판이 기둥 4개 위에 올라감 (위에서 M3×6 나사 2개 + 위치 핀 2개)). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 핀 발이 바닥틀의 홈 둑 사이에 들어가고, 바닥 밑에서 M3×10 자가 탭 나사 4개(앞 핀 2·3번 발, 뒤 선반 밑 2)로 조임 - 나사만으로 떼었다 붙였다 할 수 있고, 본드(MS 폴리머)를 같이 바르면 더 단단함</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-01 프레임 바닥틀 모듈 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 114 KB</span></button></div>
+<details class="spec"><summary>출력 메모</summary><p class="small">바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 암 도브테일 홈은 45° 지붕). A16: 밸런스 레일은 따로 출력(03 밸런스레일) - 바닥틀에는 레일 양 끝벽·봉 끝 기둥과 레일 받침 2곳(z5~8.6, 앞뒤 턱, M3×6 자리 Ø2.5)만 남음. 80 × 120 기판 자리 x22.25~142.25 × y93.3~173.3: 받침 리브 z5~7.0(앞은 리본 틈 x59.5~81.5, 레일 밑은 배선 틈 x92~114)와 둘레 턱 z8.5(틈 0.3). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 레버틀을 바닥틀에 얹을 때: 핀 발이 바닥틀의 홈 둑 사이에 들어가고, 바닥 밑에서 M3×10 자가 탭 나사 4개(핀 2·4번 발 y186, 뒤 선반 밑 2)로 조임 - 나사만으로 떼었다 붙였다 할 수 있고, 본드(MS 폴리머)를 같이 바르면 더 단단함</p></details>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-01 프레임 바닥틀 모듈 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 82 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-03-02" data-g="03" data-q="p-03-02 프레임 레버틀 모듈 프레임레버틀모듈 hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_모듈__7개.stl petg 회색 o1-cage o2-cage o3-cage o4-cage o5-cage o6-cage o7-cage" data-code="P-03-02" data-name="프레임 레버틀 모듈" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_모듈__7개.stl" data-svg="fin/parts/P-03-02.svg" data-zip="fin/parts/P-03-02.zip.b64.txt" data-zipname="Toccata_P-03-02_프레임_레버틀_모듈.zip" data-zipbytes="111094" data-place="1">
+<article class="partdwg-card" id="partdwg-P-03-02" data-g="03" data-q="p-03-02 프레임 레버틀 모듈 프레임레버틀모듈 hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_모듈__7개.stl petg 회색 o1-cage o2-cage o3-cage o4-cage o5-cage o6-cage o7-cage" data-code="P-03-02" data-name="프레임 레버틀 모듈" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_모듈__7개.stl" data-svg="fin/parts/P-03-02.svg" data-zip="fin/parts/P-03-02.zip.b64.txt" data-zipname="Toccata_P-03-02_프레임_레버틀_모듈.zip" data-zipbytes="112010" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-02 프레임 레버틀 모듈 도면 크게 보기"><img src="fin/parts/P-03-02.svg" alt="P-03-02 프레임 레버틀 모듈 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-03-02 · A2 1:1</div>
 <h4>프레임 레버틀 모듈</h4>
-<dl class="partdwg-dl"><dt>수량</dt><dd>7개</dd><dt>크기</dt><dd class="mono">164.5 × 67.5 × 67.85</dd><dt>질량</dt><dd>182 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>29</dd></dl>
+<dl class="partdwg-dl"><dt>수량</dt><dd>7개</dd><dt>크기</dt><dd class="mono">164.5 × 67.5 × 67.85</dd><dt>질량</dt><dd>181.1 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>29</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_모듈__7개.stl</div>
-<details class="spec"><summary>출력 메모</summary><p class="small">뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 67.5</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-02 프레임 레버틀 모듈 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 108 KB</span></button></div>
+<details class="spec"><summary>출력 메모</summary><p class="small">뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 67.5. A16: 핀 2·4번은 기판 위(y174.9 앞)에서 밑변이 z9.5, F|F# 핀은 제로·USB 플러그 위로 z18부터</p></details>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-02 프레임 레버틀 모듈 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 109 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-03-03" data-g="03" data-q="p-03-03 프레임 가이드탭 백건 프레임가이드탭백건 hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_백건__52개.stl petg 회색 o1-tab-c o1-tab-d o1-tab-e o1-tab-f o1-tab-g o1-tab-a o1-tab-b o2-tab-c" data-code="P-03-03" data-name="프레임 가이드탭 백건" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_백건__52개.stl" data-svg="fin/parts/P-03-03.svg" data-zip="fin/parts/P-03-03.zip.b64.txt" data-zipname="Toccata_P-03-03_프레임_가이드탭_백건.zip" data-zipbytes="17488" data-place="1">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-03 프레임 가이드탭 백건 도면 크게 보기"><img src="fin/parts/P-03-03.svg" alt="P-03-03 프레임 가이드탭 백건 부품도 (A3, 5:1)" loading="lazy" decoding="async"></button>
+<article class="partdwg-card" id="partdwg-P-03-03" data-g="03" data-q="p-03-03 밸런스레일 밸런스레일 hardware/mechanical/cad/stl/print/03_프레임/밸런스레일__7개.stl petg 회색 o1-rail o2-rail o3-rail o4-rail o5-rail o6-rail o7-rail" data-code="P-03-03" data-name="밸런스레일" data-file="hardware/mechanical/cad/stl/print/03_프레임/밸런스레일__7개.stl" data-svg="fin/parts/P-03-03.svg" data-zip="fin/parts/P-03-03.zip.b64.txt" data-zipname="Toccata_P-03-03_밸런스레일.zip" data-zipbytes="57431" data-place="1">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-03 밸런스레일 도면 크게 보기"><img src="fin/parts/P-03-03.svg" alt="P-03-03 밸런스레일 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
-<div class="partdwg-code mono">P-03-03 · A3 5:1</div>
+<div class="partdwg-code mono">P-03-03 · A3 1:1</div>
+<h4>밸런스레일</h4>
+<dl class="partdwg-dl"><dt>수량</dt><dd>7개</dd><dt>크기</dt><dd class="mono">161.6 × 12.2 × 11.9</dd><dt>질량</dt><dd>24.9 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>16</dd></dl>
+<div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/밸런스레일__7개.stl</div>
+<details class="spec"><summary>출력 메모</summary><p class="small">밑면(z8.6)을 베드에 바로 세워 출력, 서포트 없음 (A16: 봉 받침 판·밸런스 핀 구멍·나사 자리가 모두 위로 열림). 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 80 × 120 제어 기판을 바닥틀 자리에 놓은 뒤 양 끝벽 사이(틈 0.15)·받침 턱 사이에 내려놓고, 양 끝의 깊은 구멍(Ø6.2, 바닥 z10.1)으로 M3×6(i059) 2개를 받침에 자가 탭 - 레일 밑면이 기판의 빈 띠(y132.3~144.5)를 눌러 기판도 같이 잡힘</p></details>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-03 밸런스레일 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 56 KB</span></button></div>
+<p class="small partdwg-msg" aria-live="polite"></p>
+</div></article>
+<article class="partdwg-card" id="partdwg-P-03-04" data-g="03" data-q="p-03-04 프레임 가이드탭 백건 프레임가이드탭백건 hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_백건__52개.stl petg 회색 o1-tab-c o1-tab-d o1-tab-e o1-tab-f o1-tab-g o1-tab-a o1-tab-b o2-tab-c" data-code="P-03-04" data-name="프레임 가이드탭 백건" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_백건__52개.stl" data-svg="fin/parts/P-03-04.svg" data-zip="fin/parts/P-03-04.zip.b64.txt" data-zipname="Toccata_P-03-04_프레임_가이드탭_백건.zip" data-zipbytes="17490" data-place="1">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-04 프레임 가이드탭 백건 도면 크게 보기"><img src="fin/parts/P-03-04.svg" alt="P-03-04 프레임 가이드탭 백건 부품도 (A3, 5:1)" loading="lazy" decoding="async"></button>
+<div class="partdwg-body">
+<div class="partdwg-code mono">P-03-04 · A3 5:1</div>
 <h4>프레임 가이드탭 백건</h4>
 <dl class="partdwg-dl"><dt>수량</dt><dd>52개</dd><dt>크기</dt><dd class="mono">7.5 × 13.5 × 23.83</dd><dt>질량</dt><dd>2.3 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>0</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_백건__52개.stl</div>
 <details class="spec"><summary>출력 메모</summary><p class="small">옆면을 베드에 눕혀 출력 (서포트 없음, 키퍼 훅이 판 안에 있음). 키퍼 훅은 탭 폭 전체(설계 5.2 → 탭 폭)로 넓힘 - 키퍼 펠트 2T(5.2 폭)는 훅 밑 가운데에 붙임. 촉(깊이 5)은 앞 1.0이 짧아 거꾸로 꽂히지 않음: 바닥틀 자리에 순간접착제를 한 방울 넣고 끝까지 꽂음 (A12; 옛 프레임의 탭 + 훅, 훅 밑 서포트가 없어짐). 부러지면 탭만 다시 뽑아 바꿈</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-03 프레임 가이드탭 백건 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 17 KB</span></button></div>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-04 프레임 가이드탭 백건 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 17 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-03-04" data-g="03" data-q="p-03-04 프레임 가이드탭 흑건 프레임가이드탭흑건 hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_흑건__36개.stl petg 회색 o1-tab-cs o1-tab-ds o1-tab-fs o1-tab-gs o1-tab-as o2-tab-cs o2-tab-ds o2-tab-fs" data-code="P-03-04" data-name="프레임 가이드탭 흑건" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_흑건__36개.stl" data-svg="fin/parts/P-03-04.svg" data-zip="fin/parts/P-03-04.zip.b64.txt" data-zipname="Toccata_P-03-04_프레임_가이드탭_흑건.zip" data-zipbytes="17353" data-place="1">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-04 프레임 가이드탭 흑건 도면 크게 보기"><img src="fin/parts/P-03-04.svg" alt="P-03-04 프레임 가이드탭 흑건 부품도 (A3, 5:1)" loading="lazy" decoding="async"></button>
+<article class="partdwg-card" id="partdwg-P-03-05" data-g="03" data-q="p-03-05 프레임 가이드탭 흑건 프레임가이드탭흑건 hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_흑건__36개.stl petg 회색 o1-tab-cs o1-tab-ds o1-tab-fs o1-tab-gs o1-tab-as o2-tab-cs o2-tab-ds o2-tab-fs" data-code="P-03-05" data-name="프레임 가이드탭 흑건" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_흑건__36개.stl" data-svg="fin/parts/P-03-05.svg" data-zip="fin/parts/P-03-05.zip.b64.txt" data-zipname="Toccata_P-03-05_프레임_가이드탭_흑건.zip" data-zipbytes="17352" data-place="1">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-05 프레임 가이드탭 흑건 도면 크게 보기"><img src="fin/parts/P-03-05.svg" alt="P-03-05 프레임 가이드탭 흑건 부품도 (A3, 5:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
-<div class="partdwg-code mono">P-03-04 · A3 5:1</div>
+<div class="partdwg-code mono">P-03-05 · A3 5:1</div>
 <h4>프레임 가이드탭 흑건</h4>
 <dl class="partdwg-dl"><dt>수량</dt><dd>36개</dd><dt>크기</dt><dd class="mono">6.9 × 13.5 × 23</dd><dt>질량</dt><dd>2.1 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>0</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_흑건__36개.stl</div>
 <details class="spec"><summary>출력 메모</summary><p class="small">옆면을 베드에 눕혀 출력 (서포트 없음, 키퍼 훅이 판 안에 있음). 키퍼 훅은 탭 폭 전체(설계 5.2 → 탭 폭)로 넓힘 - 키퍼 펠트 2T(5.2 폭)는 훅 밑 가운데에 붙임. 촉(깊이 5)은 앞 1.0이 짧아 거꾸로 꽂히지 않음: 바닥틀 자리에 순간접착제를 한 방울 넣고 끝까지 꽂음 (A12; 옛 프레임의 탭 + 훅, 훅 밑 서포트가 없어짐). 부러지면 탭만 다시 뽑아 바꿈</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-04 프레임 가이드탭 흑건 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 17 KB</span></button></div>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-05 프레임 가이드탭 흑건 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 17 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-03-05" data-g="03" data-q="p-03-05 프레임 바닥틀 끝부속 왼쪽 프레임바닥틀끝부속왼쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_왼쪽__1개.stl petg 회색 el-frame" data-code="P-03-05" data-name="프레임 바닥틀 끝부속 왼쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_왼쪽__1개.stl" data-svg="fin/parts/P-03-05.svg" data-zip="fin/parts/P-03-05.zip.b64.txt" data-zipname="Toccata_P-03-05_프레임_바닥틀_끝부속_왼쪽.zip" data-zipbytes="65849" data-place="1">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-05 프레임 바닥틀 끝부속 왼쪽 도면 크게 보기"><img src="fin/parts/P-03-05.svg" alt="P-03-05 프레임 바닥틀 끝부속 왼쪽 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
+<article class="partdwg-card" id="partdwg-P-03-06" data-g="03" data-q="p-03-06 프레임 바닥틀 끝부속 왼쪽 프레임바닥틀끝부속왼쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_왼쪽__1개.stl petg 회색 el-frame" data-code="P-03-06" data-name="프레임 바닥틀 끝부속 왼쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_왼쪽__1개.stl" data-svg="fin/parts/P-03-06.svg" data-zip="fin/parts/P-03-06.zip.b64.txt" data-zipname="Toccata_P-03-06_프레임_바닥틀_끝부속_왼쪽.zip" data-zipbytes="65841" data-place="1">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-06 프레임 바닥틀 끝부속 왼쪽 도면 크게 보기"><img src="fin/parts/P-03-06.svg" alt="P-03-06 프레임 바닥틀 끝부속 왼쪽 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
-<div class="partdwg-code mono">P-03-05 · A2 1:1</div>
+<div class="partdwg-code mono">P-03-06 · A2 1:1</div>
 <h4>프레임 바닥틀 끝부속 왼쪽</h4>
 <dl class="partdwg-dl"><dt>수량</dt><dd>1개</dd><dt>크기</dt><dd class="mono">67 × 212 × 69.85</dd><dt>질량</dt><dd>310.5 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>15</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_왼쪽__1개.stl</div>
-<details class="spec"><summary>출력 메모</summary><p class="small">바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-05 프레임 바닥틀 끝부속 왼쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 64 KB</span></button></div>
+<details class="spec"><summary>출력 메모</summary><p class="small">바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid</p></details>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-06 프레임 바닥틀 끝부속 왼쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 64 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-03-06" data-g="03" data-q="p-03-06 프레임 레버틀 끝부속 왼쪽 프레임레버틀끝부속왼쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_왼쪽__1개.stl petg 회색 el-cage" data-code="P-03-06" data-name="프레임 레버틀 끝부속 왼쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_왼쪽__1개.stl" data-svg="fin/parts/P-03-06.svg" data-zip="fin/parts/P-03-06.zip.b64.txt" data-zipname="Toccata_P-03-06_프레임_레버틀_끝부속_왼쪽.zip" data-zipbytes="44256" data-place="1">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-06 프레임 레버틀 끝부속 왼쪽 도면 크게 보기"><img src="fin/parts/P-03-06.svg" alt="P-03-06 프레임 레버틀 끝부속 왼쪽 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
+<article class="partdwg-card" id="partdwg-P-03-07" data-g="03" data-q="p-03-07 프레임 레버틀 끝부속 왼쪽 프레임레버틀끝부속왼쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_왼쪽__1개.stl petg 회색 el-cage" data-code="P-03-07" data-name="프레임 레버틀 끝부속 왼쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_왼쪽__1개.stl" data-svg="fin/parts/P-03-07.svg" data-zip="fin/parts/P-03-07.zip.b64.txt" data-zipname="Toccata_P-03-07_프레임_레버틀_끝부속_왼쪽.zip" data-zipbytes="44260" data-place="1">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-07 프레임 레버틀 끝부속 왼쪽 도면 크게 보기"><img src="fin/parts/P-03-07.svg" alt="P-03-07 프레임 레버틀 끝부속 왼쪽 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
-<div class="partdwg-code mono">P-03-06 · A3 1:1</div>
+<div class="partdwg-code mono">P-03-07 · A3 1:1</div>
 <h4>프레임 레버틀 끝부속 왼쪽</h4>
 <dl class="partdwg-dl"><dt>수량</dt><dd>1개</dd><dt>크기</dt><dd class="mono">48.6 × 65.5 × 67.85</dd><dt>질량</dt><dd>55 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>5</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_왼쪽__1개.stl</div>
 <details class="spec"><summary>출력 메모</summary><p class="small">뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 65.5</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-06 프레임 레버틀 끝부속 왼쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 43 KB</span></button></div>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-07 프레임 레버틀 끝부속 왼쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 43 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-03-07" data-g="03" data-q="p-03-07 프레임 바닥틀 끝부속 오른쪽 프레임바닥틀끝부속오른쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_오른쪽__1개.stl petg 회색 er-frame" data-code="P-03-07" data-name="프레임 바닥틀 끝부속 오른쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_오른쪽__1개.stl" data-svg="fin/parts/P-03-07.svg" data-zip="fin/parts/P-03-07.zip.b64.txt" data-zipname="Toccata_P-03-07_프레임_바닥틀_끝부속_오른쪽.zip" data-zipbytes="52152" data-place="1">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-07 프레임 바닥틀 끝부속 오른쪽 도면 크게 보기"><img src="fin/parts/P-03-07.svg" alt="P-03-07 프레임 바닥틀 끝부속 오른쪽 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
+<article class="partdwg-card" id="partdwg-P-03-08" data-g="03" data-q="p-03-08 프레임 바닥틀 끝부속 오른쪽 프레임바닥틀끝부속오른쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_오른쪽__1개.stl petg 회색 er-frame" data-code="P-03-08" data-name="프레임 바닥틀 끝부속 오른쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_오른쪽__1개.stl" data-svg="fin/parts/P-03-08.svg" data-zip="fin/parts/P-03-08.zip.b64.txt" data-zipname="Toccata_P-03-08_프레임_바닥틀_끝부속_오른쪽.zip" data-zipbytes="52147" data-place="1">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-08 프레임 바닥틀 끝부속 오른쪽 도면 크게 보기"><img src="fin/parts/P-03-08.svg" alt="P-03-08 프레임 바닥틀 끝부속 오른쪽 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
-<div class="partdwg-code mono">P-03-07 · A2 1:1</div>
+<div class="partdwg-code mono">P-03-08 · A2 1:1</div>
 <h4>프레임 바닥틀 끝부속 오른쪽</h4>
 <dl class="partdwg-dl"><dt>수량</dt><dd>1개</dd><dt>크기</dt><dd class="mono">39.5 × 212 × 69.85</dd><dt>질량</dt><dd>303.8 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>11</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_오른쪽__1개.stl</div>
-<details class="spec"><summary>출력 메모</summary><p class="small">바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-07 프레임 바닥틀 끝부속 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 51 KB</span></button></div>
+<details class="spec"><summary>출력 메모</summary><p class="small">바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid</p></details>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-08 프레임 바닥틀 끝부속 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 51 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-03-08" data-g="03" data-q="p-03-08 프레임 레버틀 끝부속 오른쪽 프레임레버틀끝부속오른쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_오른쪽__1개.stl petg 회색 er-cage" data-code="P-03-08" data-name="프레임 레버틀 끝부속 오른쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_오른쪽__1개.stl" data-svg="fin/parts/P-03-08.svg" data-zip="fin/parts/P-03-08.zip.b64.txt" data-zipname="Toccata_P-03-08_프레임_레버틀_끝부속_오른쪽.zip" data-zipbytes="41464" data-place="1">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-08 프레임 레버틀 끝부속 오른쪽 도면 크게 보기"><img src="fin/parts/P-03-08.svg" alt="P-03-08 프레임 레버틀 끝부속 오른쪽 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
+<article class="partdwg-card" id="partdwg-P-03-09" data-g="03" data-q="p-03-09 프레임 레버틀 끝부속 오른쪽 프레임레버틀끝부속오른쪽 hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_오른쪽__1개.stl petg 회색 er-cage" data-code="P-03-09" data-name="프레임 레버틀 끝부속 오른쪽" data-file="hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_오른쪽__1개.stl" data-svg="fin/parts/P-03-09.svg" data-zip="fin/parts/P-03-09.zip.b64.txt" data-zipname="Toccata_P-03-09_프레임_레버틀_끝부속_오른쪽.zip" data-zipbytes="41461" data-place="1">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-03-09 프레임 레버틀 끝부속 오른쪽 도면 크게 보기"><img src="fin/parts/P-03-09.svg" alt="P-03-09 프레임 레버틀 끝부속 오른쪽 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
-<div class="partdwg-code mono">P-03-08 · A3 1:1</div>
+<div class="partdwg-code mono">P-03-09 · A3 1:1</div>
 <h4>프레임 레버틀 끝부속 오른쪽</h4>
 <dl class="partdwg-dl"><dt>수량</dt><dd>1개</dd><dt>크기</dt><dd class="mono">24.9 × 65.5 × 67.85</dd><dt>질량</dt><dd>34.3 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>3</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_오른쪽__1개.stl</div>
 <details class="spec"><summary>출력 메모</summary><p class="small">뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 65.5</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-08 프레임 레버틀 끝부속 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 40 KB</span></button></div>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-03-09 프레임 레버틀 끝부속 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 40 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
 </div>
 <h3 class="partdwg-gh" data-g="04">04 센서 바·패드 바·가림판·마개 <span class="small muted">stl/print/04_센서바·패드바·가림판·마개 · 13장</span></h3>
 <div class="partdwg-grid" data-g="04">
-<article class="partdwg-card" id="partdwg-P-04-01" data-g="04" data-q="p-04-01 센서바 센서바 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바__7개.stl petg 회색 o1-sensorbar o2-sensorbar o3-sensorbar o4-sensorbar o5-sensorbar o6-sensorbar o7-sensorbar" data-code="P-04-01" data-name="센서바" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바__7개.stl" data-svg="fin/parts/P-04-01.svg" data-zip="fin/parts/P-04-01.zip.b64.txt" data-zipname="Toccata_P-04-01_센서바.zip" data-zipbytes="72718" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-01" data-g="04" data-q="p-04-01 센서바 센서바 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바__7개.stl petg 회색 o1-sensorbar o2-sensorbar o3-sensorbar o4-sensorbar o5-sensorbar o6-sensorbar o7-sensorbar" data-code="P-04-01" data-name="센서바" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바__7개.stl" data-svg="fin/parts/P-04-01.svg" data-zip="fin/parts/P-04-01.zip.b64.txt" data-zipname="Toccata_P-04-01_센서바.zip" data-zipbytes="72717" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-01 센서바 도면 크게 보기"><img src="fin/parts/P-04-01.svg" alt="P-04-01 센서바 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-01 · A3 1:1</div>
@@ -490,7 +501,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-01 센서바 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 71 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-02" data-g="04" data-q="p-04-02 가림판띠 가림판띠 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠__7개.stl petg 검정 o1-curtain o2-curtain o3-curtain o4-curtain o5-curtain o6-curtain o7-curtain" data-code="P-04-02" data-name="가림판띠" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠__7개.stl" data-svg="fin/parts/P-04-02.svg" data-zip="fin/parts/P-04-02.zip.b64.txt" data-zipname="Toccata_P-04-02_가림판띠.zip" data-zipbytes="19031" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-02" data-g="04" data-q="p-04-02 가림판띠 가림판띠 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠__7개.stl petg 검정 o1-curtain o2-curtain o3-curtain o4-curtain o5-curtain o6-curtain o7-curtain" data-code="P-04-02" data-name="가림판띠" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠__7개.stl" data-svg="fin/parts/P-04-02.svg" data-zip="fin/parts/P-04-02.zip.b64.txt" data-zipname="Toccata_P-04-02_가림판띠.zip" data-zipbytes="19029" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-02 가림판띠 도면 크게 보기"><img src="fin/parts/P-04-02.svg" alt="P-04-02 가림판띠 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-02 · A3 1:1</div>
@@ -501,7 +512,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-02 가림판띠 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 19 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-03" data-g="04" data-q="p-04-03 레버봉끝마개 레버봉끝마개 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/레버봉끝마개__9개.stl petg o1-plug o2-plug o3-plug o4-plug o5-plug o6-plug o7-plug el-plug" data-code="P-04-03" data-name="레버봉끝마개" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/레버봉끝마개__9개.stl" data-svg="fin/parts/P-04-03.svg" data-zip="fin/parts/P-04-03.zip.b64.txt" data-zipname="Toccata_P-04-03_레버봉끝마개.zip" data-zipbytes="18868" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-03" data-g="04" data-q="p-04-03 레버봉끝마개 레버봉끝마개 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/레버봉끝마개__9개.stl petg o1-plug o2-plug o3-plug o4-plug o5-plug o6-plug o7-plug el-plug" data-code="P-04-03" data-name="레버봉끝마개" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/레버봉끝마개__9개.stl" data-svg="fin/parts/P-04-03.svg" data-zip="fin/parts/P-04-03.zip.b64.txt" data-zipname="Toccata_P-04-03_레버봉끝마개.zip" data-zipbytes="18864" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-03 레버봉끝마개 도면 크게 보기"><img src="fin/parts/P-04-03.svg" alt="P-04-03 레버봉끝마개 부품도 (A3, 10:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-03 · A3 10:1</div>
@@ -512,7 +523,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-03 레버봉끝마개 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 18 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-04" data-g="04" data-q="p-04-04 패드바 칸1 패드바칸1 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸1__7개.stl petg o1-padbar-칸1 o2-padbar-칸1 o3-padbar-칸1 o4-padbar-칸1 o5-padbar-칸1 o6-padbar-칸1 o7-padbar-칸1" data-code="P-04-04" data-name="패드바 칸1" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸1__7개.stl" data-svg="fin/parts/P-04-04.svg" data-zip="fin/parts/P-04-04.zip.b64.txt" data-zipname="Toccata_P-04-04_패드바_칸1.zip" data-zipbytes="71196" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-04" data-g="04" data-q="p-04-04 패드바 칸1 패드바칸1 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸1__7개.stl petg o1-padbar-칸1 o2-padbar-칸1 o3-padbar-칸1 o4-padbar-칸1 o5-padbar-칸1 o6-padbar-칸1 o7-padbar-칸1" data-code="P-04-04" data-name="패드바 칸1" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸1__7개.stl" data-svg="fin/parts/P-04-04.svg" data-zip="fin/parts/P-04-04.zip.b64.txt" data-zipname="Toccata_P-04-04_패드바_칸1.zip" data-zipbytes="71198" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-04 패드바 칸1 도면 크게 보기"><img src="fin/parts/P-04-04.svg" alt="P-04-04 패드바 칸1 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-04 · A3 2:1</div>
@@ -523,7 +534,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-04 패드바 칸1 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 70 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-05" data-g="04" data-q="p-04-05 패드바 칸2 패드바칸2 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸2__7개.stl petg o1-padbar-칸2 o2-padbar-칸2 o3-padbar-칸2 o4-padbar-칸2 o5-padbar-칸2 o6-padbar-칸2 o7-padbar-칸2" data-code="P-04-05" data-name="패드바 칸2" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸2__7개.stl" data-svg="fin/parts/P-04-05.svg" data-zip="fin/parts/P-04-05.zip.b64.txt" data-zipname="Toccata_P-04-05_패드바_칸2.zip" data-zipbytes="71899" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-05" data-g="04" data-q="p-04-05 패드바 칸2 패드바칸2 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸2__7개.stl petg o1-padbar-칸2 o2-padbar-칸2 o3-padbar-칸2 o4-padbar-칸2 o5-padbar-칸2 o6-padbar-칸2 o7-padbar-칸2" data-code="P-04-05" data-name="패드바 칸2" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸2__7개.stl" data-svg="fin/parts/P-04-05.svg" data-zip="fin/parts/P-04-05.zip.b64.txt" data-zipname="Toccata_P-04-05_패드바_칸2.zip" data-zipbytes="71900" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-05 패드바 칸2 도면 크게 보기"><img src="fin/parts/P-04-05.svg" alt="P-04-05 패드바 칸2 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-05 · A3 2:1</div>
@@ -534,7 +545,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-05 패드바 칸2 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 70 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-06" data-g="04" data-q="p-04-06 패드바 칸3 패드바칸3 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸3__7개.stl petg o1-padbar-칸3 o2-padbar-칸3 o3-padbar-칸3 o4-padbar-칸3 o5-padbar-칸3 o6-padbar-칸3 o7-padbar-칸3" data-code="P-04-06" data-name="패드바 칸3" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸3__7개.stl" data-svg="fin/parts/P-04-06.svg" data-zip="fin/parts/P-04-06.zip.b64.txt" data-zipname="Toccata_P-04-06_패드바_칸3.zip" data-zipbytes="93681" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-06" data-g="04" data-q="p-04-06 패드바 칸3 패드바칸3 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸3__7개.stl petg o1-padbar-칸3 o2-padbar-칸3 o3-padbar-칸3 o4-padbar-칸3 o5-padbar-칸3 o6-padbar-칸3 o7-padbar-칸3" data-code="P-04-06" data-name="패드바 칸3" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_칸3__7개.stl" data-svg="fin/parts/P-04-06.svg" data-zip="fin/parts/P-04-06.zip.b64.txt" data-zipname="Toccata_P-04-06_패드바_칸3.zip" data-zipbytes="93682" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-06 패드바 칸3 도면 크게 보기"><img src="fin/parts/P-04-06.svg" alt="P-04-06 패드바 칸3 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-06 · A3 2:1</div>
@@ -556,7 +567,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-07 패드바 칸4 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 68 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-08" data-g="04" data-q="p-04-08 센서바 왼쪽 센서바왼쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_왼쪽__1개.stl petg 회색 el-sensorbar" data-code="P-04-08" data-name="센서바 왼쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_왼쪽__1개.stl" data-svg="fin/parts/P-04-08.svg" data-zip="fin/parts/P-04-08.zip.b64.txt" data-zipname="Toccata_P-04-08_센서바_왼쪽.zip" data-zipbytes="34306" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-08" data-g="04" data-q="p-04-08 센서바 왼쪽 센서바왼쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_왼쪽__1개.stl petg 회색 el-sensorbar" data-code="P-04-08" data-name="센서바 왼쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_왼쪽__1개.stl" data-svg="fin/parts/P-04-08.svg" data-zip="fin/parts/P-04-08.zip.b64.txt" data-zipname="Toccata_P-04-08_센서바_왼쪽.zip" data-zipbytes="34307" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-08 센서바 왼쪽 도면 크게 보기"><img src="fin/parts/P-04-08.svg" alt="P-04-08 센서바 왼쪽 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-08 · A3 2:1</div>
@@ -567,7 +578,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-08 센서바 왼쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 34 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-09" data-g="04" data-q="p-04-09 가림판띠 왼쪽 가림판띠왼쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_왼쪽__1개.stl petg 검정 el-curtain" data-code="P-04-09" data-name="가림판띠 왼쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_왼쪽__1개.stl" data-svg="fin/parts/P-04-09.svg" data-zip="fin/parts/P-04-09.zip.b64.txt" data-zipname="Toccata_P-04-09_가림판띠_왼쪽.zip" data-zipbytes="16556" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-09" data-g="04" data-q="p-04-09 가림판띠 왼쪽 가림판띠왼쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_왼쪽__1개.stl petg 검정 el-curtain" data-code="P-04-09" data-name="가림판띠 왼쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_왼쪽__1개.stl" data-svg="fin/parts/P-04-09.svg" data-zip="fin/parts/P-04-09.zip.b64.txt" data-zipname="Toccata_P-04-09_가림판띠_왼쪽.zip" data-zipbytes="16557" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-09 가림판띠 왼쪽 도면 크게 보기"><img src="fin/parts/P-04-09.svg" alt="P-04-09 가림판띠 왼쪽 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-09 · A3 2:1</div>
@@ -589,7 +600,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-10 패드바 끝부속 왼쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 80 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-11" data-g="04" data-q="p-04-11 센서바 오른쪽 센서바오른쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_오른쪽__1개.stl petg 회색 er-sensorbar" data-code="P-04-11" data-name="센서바 오른쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_오른쪽__1개.stl" data-svg="fin/parts/P-04-11.svg" data-zip="fin/parts/P-04-11.zip.b64.txt" data-zipname="Toccata_P-04-11_센서바_오른쪽.zip" data-zipbytes="25107" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-11" data-g="04" data-q="p-04-11 센서바 오른쪽 센서바오른쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_오른쪽__1개.stl petg 회색 er-sensorbar" data-code="P-04-11" data-name="센서바 오른쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바_오른쪽__1개.stl" data-svg="fin/parts/P-04-11.svg" data-zip="fin/parts/P-04-11.zip.b64.txt" data-zipname="Toccata_P-04-11_센서바_오른쪽.zip" data-zipbytes="25108" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-11 센서바 오른쪽 도면 크게 보기"><img src="fin/parts/P-04-11.svg" alt="P-04-11 센서바 오른쪽 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-11 · A3 2:1</div>
@@ -600,7 +611,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-11 센서바 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 25 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-12" data-g="04" data-q="p-04-12 가림판띠 오른쪽 가림판띠오른쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_오른쪽__1개.stl petg 검정 er-curtain" data-code="P-04-12" data-name="가림판띠 오른쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_오른쪽__1개.stl" data-svg="fin/parts/P-04-12.svg" data-zip="fin/parts/P-04-12.zip.b64.txt" data-zipname="Toccata_P-04-12_가림판띠_오른쪽.zip" data-zipbytes="15668" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-12" data-g="04" data-q="p-04-12 가림판띠 오른쪽 가림판띠오른쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_오른쪽__1개.stl petg 검정 er-curtain" data-code="P-04-12" data-name="가림판띠 오른쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠_오른쪽__1개.stl" data-svg="fin/parts/P-04-12.svg" data-zip="fin/parts/P-04-12.zip.b64.txt" data-zipname="Toccata_P-04-12_가림판띠_오른쪽.zip" data-zipbytes="15671" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-12 가림판띠 오른쪽 도면 크게 보기"><img src="fin/parts/P-04-12.svg" alt="P-04-12 가림판띠 오른쪽 부품도 (A3, 5:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-12 · A3 5:1</div>
@@ -611,7 +622,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-04-12 가림판띠 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 15 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-04-13" data-g="04" data-q="p-04-13 패드바 끝부속 오른쪽 패드바끝부속오른쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_끝부속_오른쪽__1개.stl petg er-padbar-오른쪽" data-code="P-04-13" data-name="패드바 끝부속 오른쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_끝부속_오른쪽__1개.stl" data-svg="fin/parts/P-04-13.svg" data-zip="fin/parts/P-04-13.zip.b64.txt" data-zipname="Toccata_P-04-13_패드바_끝부속_오른쪽.zip" data-zipbytes="48833" data-place="1">
+<article class="partdwg-card" id="partdwg-P-04-13" data-g="04" data-q="p-04-13 패드바 끝부속 오른쪽 패드바끝부속오른쪽 hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_끝부속_오른쪽__1개.stl petg er-padbar-오른쪽" data-code="P-04-13" data-name="패드바 끝부속 오른쪽" data-file="hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/패드바_끝부속_오른쪽__1개.stl" data-svg="fin/parts/P-04-13.svg" data-zip="fin/parts/P-04-13.zip.b64.txt" data-zipname="Toccata_P-04-13_패드바_끝부속_오른쪽.zip" data-zipbytes="48831" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-04-13 패드바 끝부속 오른쪽 도면 크게 보기"><img src="fin/parts/P-04-13.svg" alt="P-04-13 패드바 끝부속 오른쪽 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-04-13 · A3 2:1</div>
@@ -625,7 +636,7 @@
 </div>
 <h3 class="partdwg-gh" data-g="05">05 본체 출력물 <span class="small muted">stl/print/05_본체출력물 · 40장</span></h3>
 <div class="partdwg-grid" data-g="05">
-<article class="partdwg-card" id="partdwg-P-05-01" data-g="05" data-q="p-05-01 스피커바깥옆판 l 스피커바깥옆판l hardware/mechanical/cad/stl/print/05_본체출력물/스피커바깥옆판_l__1개.stl petg 회색 spkl-ply-sideout" data-code="P-05-01" data-name="스피커바깥옆판 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커바깥옆판_L__1개.stl" data-svg="fin/parts/P-05-01.svg" data-zip="fin/parts/P-05-01.zip.b64.txt" data-zipname="Toccata_P-05-01_스피커바깥옆판_L.zip" data-zipbytes="17723" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-01" data-g="05" data-q="p-05-01 스피커바깥옆판 l 스피커바깥옆판l hardware/mechanical/cad/stl/print/05_본체출력물/스피커바깥옆판_l__1개.stl petg 회색 spkl-ply-sideout" data-code="P-05-01" data-name="스피커바깥옆판 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커바깥옆판_L__1개.stl" data-svg="fin/parts/P-05-01.svg" data-zip="fin/parts/P-05-01.zip.b64.txt" data-zipname="Toccata_P-05-01_스피커바깥옆판_L.zip" data-zipbytes="17721" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-01 스피커바깥옆판 L 도면 크게 보기"><img src="fin/parts/P-05-01.svg" alt="P-05-01 스피커바깥옆판 L 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-01 · A2 1:1</div>
@@ -636,7 +647,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-01 스피커바깥옆판 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 17 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-02" data-g="05" data-q="p-05-02 스피커안쪽옆판 l 스피커안쪽옆판l hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_l__1개.stl petg 회색 spkl-ply-sidein" data-code="P-05-02" data-name="스피커안쪽옆판 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_L__1개.stl" data-svg="fin/parts/P-05-02.svg" data-zip="fin/parts/P-05-02.zip.b64.txt" data-zipname="Toccata_P-05-02_스피커안쪽옆판_L.zip" data-zipbytes="29306" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-02" data-g="05" data-q="p-05-02 스피커안쪽옆판 l 스피커안쪽옆판l hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_l__1개.stl petg 회색 spkl-ply-sidein" data-code="P-05-02" data-name="스피커안쪽옆판 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_L__1개.stl" data-svg="fin/parts/P-05-02.svg" data-zip="fin/parts/P-05-02.zip.b64.txt" data-zipname="Toccata_P-05-02_스피커안쪽옆판_L.zip" data-zipbytes="29179" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-02 스피커안쪽옆판 L 도면 크게 보기"><img src="fin/parts/P-05-02.svg" alt="P-05-02 스피커안쪽옆판 L 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-02 · A2 1:1</div>
@@ -644,10 +655,10 @@
 <dl class="partdwg-dl"><dt>수량</dt><dd>1개</dd><dt>크기</dt><dd class="mono">11.5 × 128.5 × 139.65</dd><dt>질량</dt><dd>193 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>3</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_L__1개.stl</div>
 <details class="spec"><summary>출력 메모</summary><p class="small">상자 안쪽 면을 베드에, 이음면(인서트 구멍 면)이 위로 (128.5 × 139.65 × 11.5, 256 판에 들어감). 구멍은 모두 세로라 서포트 없음, 인서트 구멍 바닥은 막힌 면 (브리지 없음). **밀폐 상자 벽: 벽 5줄 이상 + 윗·아랫면 5층 + 채움 40 % 이상 (또는 100 %)**, PETG 0.2 mm. 인서트 2개는 출력 후 인두(약 240 °C)로 이음면까지 곧게 눌러 넣음 (상자를 붙이기 전). 상자 둘레 이음은 MS 폴리머 (PETG에는 목공본드가 잘 붙지 않음). 약 117 g · 약 2시간 56분 (P2S 어림, 슬라이서 값이 기준)</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-02 스피커안쪽옆판 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 29 KB</span></button></div>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-02 스피커안쪽옆판 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 28 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-03" data-g="05" data-q="p-05-03 스피커뒤판 l·r 스피커뒤판l·r hardware/mechanical/cad/stl/print/05_본체출력물/스피커뒤판_l·r__2개.stl petg 회색 spkl-ply-back spkr-ply-back" data-code="P-05-03" data-name="스피커뒤판 L·R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커뒤판_L·R__2개.stl" data-svg="fin/parts/P-05-03.svg" data-zip="fin/parts/P-05-03.zip.b64.txt" data-zipname="Toccata_P-05-03_스피커뒤판_L-R.zip" data-zipbytes="15816" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-03" data-g="05" data-q="p-05-03 스피커뒤판 l·r 스피커뒤판l·r hardware/mechanical/cad/stl/print/05_본체출력물/스피커뒤판_l·r__2개.stl petg 회색 spkl-ply-back spkr-ply-back" data-code="P-05-03" data-name="스피커뒤판 L·R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커뒤판_L·R__2개.stl" data-svg="fin/parts/P-05-03.svg" data-zip="fin/parts/P-05-03.zip.b64.txt" data-zipname="Toccata_P-05-03_스피커뒤판_L-R.zip" data-zipbytes="15812" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-03 스피커뒤판 L·R 도면 크게 보기"><img src="fin/parts/P-05-03.svg" alt="P-05-03 스피커뒤판 L·R 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-03 · A2 1:1</div>
@@ -658,7 +669,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-03 스피커뒤판 L·R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 15 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-04" data-g="05" data-q="p-05-04 스피커윗판 l·r 스피커윗판l·r hardware/mechanical/cad/stl/print/05_본체출력물/스피커윗판_l·r__2개.stl petg 회색 spkl-ply-top spkr-ply-top" data-code="P-05-04" data-name="스피커윗판 L·R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커윗판_L·R__2개.stl" data-svg="fin/parts/P-05-04.svg" data-zip="fin/parts/P-05-04.zip.b64.txt" data-zipname="Toccata_P-05-04_스피커윗판_L-R.zip" data-zipbytes="15812" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-04" data-g="05" data-q="p-05-04 스피커윗판 l·r 스피커윗판l·r hardware/mechanical/cad/stl/print/05_본체출력물/스피커윗판_l·r__2개.stl petg 회색 spkl-ply-top spkr-ply-top" data-code="P-05-04" data-name="스피커윗판 L·R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커윗판_L·R__2개.stl" data-svg="fin/parts/P-05-04.svg" data-zip="fin/parts/P-05-04.zip.b64.txt" data-zipname="Toccata_P-05-04_스피커윗판_L-R.zip" data-zipbytes="15808" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-04 스피커윗판 L·R 도면 크게 보기"><img src="fin/parts/P-05-04.svg" alt="P-05-04 스피커윗판 L·R 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-04 · A2 1:1</div>
@@ -691,7 +702,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-06 스피커바깥옆판 R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 17 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-07" data-g="05" data-q="p-05-07 스피커안쪽옆판 r 스피커안쪽옆판r hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_r__1개.stl petg 회색 spkr-ply-sidein" data-code="P-05-07" data-name="스피커안쪽옆판 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_R__1개.stl" data-svg="fin/parts/P-05-07.svg" data-zip="fin/parts/P-05-07.zip.b64.txt" data-zipname="Toccata_P-05-07_스피커안쪽옆판_R.zip" data-zipbytes="29150" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-07" data-g="05" data-q="p-05-07 스피커안쪽옆판 r 스피커안쪽옆판r hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_r__1개.stl petg 회색 spkr-ply-sidein" data-code="P-05-07" data-name="스피커안쪽옆판 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커안쪽옆판_R__1개.stl" data-svg="fin/parts/P-05-07.svg" data-zip="fin/parts/P-05-07.zip.b64.txt" data-zipname="Toccata_P-05-07_스피커안쪽옆판_R.zip" data-zipbytes="29149" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-07 스피커안쪽옆판 R 도면 크게 보기"><img src="fin/parts/P-05-07.svg" alt="P-05-07 스피커안쪽옆판 R 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-07 · A2 1:1</div>
@@ -702,7 +713,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-07 스피커안쪽옆판 R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 28 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-08" data-g="05" data-q="p-05-08 스피커아랫판 r 스피커아랫판r hardware/mechanical/cad/stl/print/05_본체출력물/스피커아랫판_r__1개.stl petg 회색 spkr-ply-bottom" data-code="P-05-08" data-name="스피커아랫판 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커아랫판_R__1개.stl" data-svg="fin/parts/P-05-08.svg" data-zip="fin/parts/P-05-08.zip.b64.txt" data-zipname="Toccata_P-05-08_스피커아랫판_R.zip" data-zipbytes="45255" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-08" data-g="05" data-q="p-05-08 스피커아랫판 r 스피커아랫판r hardware/mechanical/cad/stl/print/05_본체출력물/스피커아랫판_r__1개.stl petg 회색 spkr-ply-bottom" data-code="P-05-08" data-name="스피커아랫판 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커아랫판_R__1개.stl" data-svg="fin/parts/P-05-08.svg" data-zip="fin/parts/P-05-08.zip.b64.txt" data-zipname="Toccata_P-05-08_스피커아랫판_R.zip" data-zipbytes="45252" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-08 스피커아랫판 R 도면 크게 보기"><img src="fin/parts/P-05-08.svg" alt="P-05-08 스피커아랫판 R 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-08 · A2 1:1</div>
@@ -713,7 +724,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-08 스피커아랫판 R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 44 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-09" data-g="05" data-q="p-05-09 스피커앞판 경사배플 l 스피커앞판경사배플l hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_l__1개.stl petg (검정 또는 회색) spkl-baffle" data-code="P-05-09" data-name="스피커앞판 경사배플 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_L__1개.stl" data-svg="fin/parts/P-05-09.svg" data-zip="fin/parts/P-05-09.zip.b64.txt" data-zipname="Toccata_P-05-09_스피커앞판_경사배플_L.zip" data-zipbytes="65559" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-09" data-g="05" data-q="p-05-09 스피커앞판 경사배플 l 스피커앞판경사배플l hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_l__1개.stl petg (검정 또는 회색) spkl-baffle" data-code="P-05-09" data-name="스피커앞판 경사배플 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_L__1개.stl" data-svg="fin/parts/P-05-09.svg" data-zip="fin/parts/P-05-09.zip.b64.txt" data-zipname="Toccata_P-05-09_스피커앞판_경사배플_L.zip" data-zipbytes="65555" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-09 스피커앞판 경사배플 L 도면 크게 보기"><img src="fin/parts/P-05-09.svg" alt="P-05-09 스피커앞판 경사배플 L 부품도 (A1, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-09 · A1 1:1</div>
@@ -724,7 +735,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-09 스피커앞판 경사배플 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 64 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-10" data-g="05" data-q="p-05-10 스피커앞판 경사배플 r 스피커앞판경사배플r hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_r__1개.stl petg (검정 또는 회색) spkr-baffle" data-code="P-05-10" data-name="스피커앞판 경사배플 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_R__1개.stl" data-svg="fin/parts/P-05-10.svg" data-zip="fin/parts/P-05-10.zip.b64.txt" data-zipname="Toccata_P-05-10_스피커앞판_경사배플_R.zip" data-zipbytes="65835" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-10" data-g="05" data-q="p-05-10 스피커앞판 경사배플 r 스피커앞판경사배플r hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_r__1개.stl petg (검정 또는 회색) spkr-baffle" data-code="P-05-10" data-name="스피커앞판 경사배플 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커앞판_경사배플_R__1개.stl" data-svg="fin/parts/P-05-10.svg" data-zip="fin/parts/P-05-10.zip.b64.txt" data-zipname="Toccata_P-05-10_스피커앞판_경사배플_R.zip" data-zipbytes="65833" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-10 스피커앞판 경사배플 R 도면 크게 보기"><img src="fin/parts/P-05-10.svg" alt="P-05-10 스피커앞판 경사배플 R 부품도 (A1, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-10 · A1 1:1</div>
@@ -735,7 +746,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-10 스피커앞판 경사배플 R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 64 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-11" data-g="05" data-q="p-05-11 스피커그릴 경사 스피커그릴경사 hardware/mechanical/cad/stl/print/05_본체출력물/스피커그릴_경사__2개.stl petg 회색 또는 검정 spkl-grille spkr-grille" data-code="P-05-11" data-name="스피커그릴 경사" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커그릴_경사__2개.stl" data-svg="fin/parts/P-05-11.svg" data-zip="fin/parts/P-05-11.zip.b64.txt" data-zipname="Toccata_P-05-11_스피커그릴_경사.zip" data-zipbytes="79595" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-11" data-g="05" data-q="p-05-11 스피커그릴 경사 스피커그릴경사 hardware/mechanical/cad/stl/print/05_본체출력물/스피커그릴_경사__2개.stl petg 회색 또는 검정 spkl-grille spkr-grille" data-code="P-05-11" data-name="스피커그릴 경사" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커그릴_경사__2개.stl" data-svg="fin/parts/P-05-11.svg" data-zip="fin/parts/P-05-11.zip.b64.txt" data-zipname="Toccata_P-05-11_스피커그릴_경사.zip" data-zipbytes="79596" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-11 스피커그릴 경사 도면 크게 보기"><img src="fin/parts/P-05-11.svg" alt="P-05-11 스피커그릴 경사 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-11 · A2 1:1</div>
@@ -746,7 +757,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-11 스피커그릴 경사 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 78 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-12" data-g="05" data-q="p-05-12 스피커통로틀 스피커통로틀 hardware/mechanical/cad/stl/print/05_본체출력물/스피커통로틀__2개.stl petg 회색 spkl-ductformer spkr-ductformer" data-code="P-05-12" data-name="스피커통로틀" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커통로틀__2개.stl" data-svg="fin/parts/P-05-12.svg" data-zip="fin/parts/P-05-12.zip.b64.txt" data-zipname="Toccata_P-05-12_스피커통로틀.zip" data-zipbytes="17128" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-12" data-g="05" data-q="p-05-12 스피커통로틀 스피커통로틀 hardware/mechanical/cad/stl/print/05_본체출력물/스피커통로틀__2개.stl petg 회색 spkl-ductformer spkr-ductformer" data-code="P-05-12" data-name="스피커통로틀" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/스피커통로틀__2개.stl" data-svg="fin/parts/P-05-12.svg" data-zip="fin/parts/P-05-12.zip.b64.txt" data-zipname="Toccata_P-05-12_스피커통로틀.zip" data-zipbytes="17124" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-12 스피커통로틀 도면 크게 보기"><img src="fin/parts/P-05-12.svg" alt="P-05-12 스피커통로틀 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-12 · A2 1:1</div>
@@ -757,7 +768,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-12 스피커통로틀 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 17 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-13" data-g="05" data-q="p-05-13 통로옆마개 통로옆마개 hardware/mechanical/cad/stl/print/05_본체출력물/통로옆마개__2개.stl petg 회색 duct-cap-l duct-cap-r" data-code="P-05-13" data-name="통로옆마개" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/통로옆마개__2개.stl" data-svg="fin/parts/P-05-13.svg" data-zip="fin/parts/P-05-13.zip.b64.txt" data-zipname="Toccata_P-05-13_통로옆마개.zip" data-zipbytes="15395" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-13" data-g="05" data-q="p-05-13 통로옆마개 통로옆마개 hardware/mechanical/cad/stl/print/05_본체출력물/통로옆마개__2개.stl petg 회색 duct-cap-l duct-cap-r" data-code="P-05-13" data-name="통로옆마개" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/통로옆마개__2개.stl" data-svg="fin/parts/P-05-13.svg" data-zip="fin/parts/P-05-13.zip.b64.txt" data-zipname="Toccata_P-05-13_통로옆마개.zip" data-zipbytes="15394" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-13 통로옆마개 도면 크게 보기"><img src="fin/parts/P-05-13.svg" alt="P-05-13 통로옆마개 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-13 · A3 2:1</div>
@@ -768,7 +779,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-13 통로옆마개 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 15 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-14" data-g="05" data-q="p-05-14 핀소켓 둥근 핀소켓둥근 hardware/mechanical/cad/stl/print/05_본체출력물/핀소켓_둥근__1개.stl petg 회색 pod-socket-l" data-code="P-05-14" data-name="핀소켓 둥근" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/핀소켓_둥근__1개.stl" data-svg="fin/parts/P-05-14.svg" data-zip="fin/parts/P-05-14.zip.b64.txt" data-zipname="Toccata_P-05-14_핀소켓_둥근.zip" data-zipbytes="17899" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-14" data-g="05" data-q="p-05-14 핀소켓 둥근 핀소켓둥근 hardware/mechanical/cad/stl/print/05_본체출력물/핀소켓_둥근__1개.stl petg 회색 pod-socket-l" data-code="P-05-14" data-name="핀소켓 둥근" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/핀소켓_둥근__1개.stl" data-svg="fin/parts/P-05-14.svg" data-zip="fin/parts/P-05-14.zip.b64.txt" data-zipname="Toccata_P-05-14_핀소켓_둥근.zip" data-zipbytes="17894" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-14 핀소켓 둥근 도면 크게 보기"><img src="fin/parts/P-05-14.svg" alt="P-05-14 핀소켓 둥근 부품도 (A3, 5:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-14 · A3 5:1</div>
@@ -790,7 +801,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-15 핀소켓 긴구멍 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 19 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-16" data-g="05" data-q="p-05-16 방진브래킷2 l 방진브래킷2l hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_l__1개.stl petg 회색 brk2-l" data-code="P-05-16" data-name="방진브래킷2 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_L__1개.stl" data-svg="fin/parts/P-05-16.svg" data-zip="fin/parts/P-05-16.zip.b64.txt" data-zipname="Toccata_P-05-16_방진브래킷2_L.zip" data-zipbytes="30969" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-16" data-g="05" data-q="p-05-16 방진브래킷2 l 방진브래킷2l hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_l__1개.stl petg 회색 brk2-l" data-code="P-05-16" data-name="방진브래킷2 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_L__1개.stl" data-svg="fin/parts/P-05-16.svg" data-zip="fin/parts/P-05-16.zip.b64.txt" data-zipname="Toccata_P-05-16_방진브래킷2_L.zip" data-zipbytes="30968" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-16 방진브래킷2 L 도면 크게 보기"><img src="fin/parts/P-05-16.svg" alt="P-05-16 방진브래킷2 L 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-16 · A3 2:1</div>
@@ -801,7 +812,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-16 방진브래킷2 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 30 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-17" data-g="05" data-q="p-05-17 방진브래킷2 r 방진브래킷2r hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_r__1개.stl petg 회색 brk2-r" data-code="P-05-17" data-name="방진브래킷2 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_R__1개.stl" data-svg="fin/parts/P-05-17.svg" data-zip="fin/parts/P-05-17.zip.b64.txt" data-zipname="Toccata_P-05-17_방진브래킷2_R.zip" data-zipbytes="31026" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-17" data-g="05" data-q="p-05-17 방진브래킷2 r 방진브래킷2r hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_r__1개.stl petg 회색 brk2-r" data-code="P-05-17" data-name="방진브래킷2 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/방진브래킷2_R__1개.stl" data-svg="fin/parts/P-05-17.svg" data-zip="fin/parts/P-05-17.zip.b64.txt" data-zipname="Toccata_P-05-17_방진브래킷2_R.zip" data-zipbytes="31024" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-17 방진브래킷2 R 도면 크게 보기"><img src="fin/parts/P-05-17.svg" alt="P-05-17 방진브래킷2 R 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-17 · A3 2:1</div>
@@ -812,7 +823,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-17 방진브래킷2 R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 30 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-18" data-g="05" data-q="p-05-18 끝벽 l 끝벽l hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_l__1개.stl petg 회색 cu-ply-end-l" data-code="P-05-18" data-name="끝벽 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_L__1개.stl" data-svg="fin/parts/P-05-18.svg" data-zip="fin/parts/P-05-18.zip.b64.txt" data-zipname="Toccata_P-05-18_끝벽_L.zip" data-zipbytes="35726" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-18" data-g="05" data-q="p-05-18 끝벽 l 끝벽l hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_l__1개.stl petg 회색 cu-ply-end-l" data-code="P-05-18" data-name="끝벽 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_L__1개.stl" data-svg="fin/parts/P-05-18.svg" data-zip="fin/parts/P-05-18.zip.b64.txt" data-zipname="Toccata_P-05-18_끝벽_L.zip" data-zipbytes="35722" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-18 끝벽 L 도면 크게 보기"><img src="fin/parts/P-05-18.svg" alt="P-05-18 끝벽 L 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-18 · A3 1:1</div>
@@ -823,7 +834,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-18 끝벽 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 35 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-19" data-g="05" data-q="p-05-19 끝벽 r 끝벽r hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_r__1개.stl petg 회색 cu-ply-end-r" data-code="P-05-19" data-name="끝벽 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_R__1개.stl" data-svg="fin/parts/P-05-19.svg" data-zip="fin/parts/P-05-19.zip.b64.txt" data-zipname="Toccata_P-05-19_끝벽_R.zip" data-zipbytes="36839" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-19" data-g="05" data-q="p-05-19 끝벽 r 끝벽r hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_r__1개.stl petg 회색 cu-ply-end-r" data-code="P-05-19" data-name="끝벽 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/끝벽_R__1개.stl" data-svg="fin/parts/P-05-19.svg" data-zip="fin/parts/P-05-19.zip.b64.txt" data-zipname="Toccata_P-05-19_끝벽_R.zip" data-zipbytes="36834" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-19 끝벽 R 도면 크게 보기"><img src="fin/parts/P-05-19.svg" alt="P-05-19 끝벽 R 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-19 · A3 1:1</div>
@@ -845,7 +856,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-20 뚜껑 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 31 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-21" data-g="05" data-q="p-05-21 뚜껑 r 뚜껑r hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑_r__1개.stl petg 회색 lid-r" data-code="P-05-21" data-name="뚜껑 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑_R__1개.stl" data-svg="fin/parts/P-05-21.svg" data-zip="fin/parts/P-05-21.zip.b64.txt" data-zipname="Toccata_P-05-21_뚜껑_R.zip" data-zipbytes="33071" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-21" data-g="05" data-q="p-05-21 뚜껑 r 뚜껑r hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑_r__1개.stl petg 회색 lid-r" data-code="P-05-21" data-name="뚜껑 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑_R__1개.stl" data-svg="fin/parts/P-05-21.svg" data-zip="fin/parts/P-05-21.zip.b64.txt" data-zipname="Toccata_P-05-21_뚜껑_R.zip" data-zipbytes="33067" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-21 뚜껑 R 도면 크게 보기"><img src="fin/parts/P-05-21.svg" alt="P-05-21 뚜껑 R 부품도 (A1, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-21 · A1 1:1</div>
@@ -856,7 +867,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-21 뚜껑 R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 32 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-22" data-g="05" data-q="p-05-22 cu화면뚜껑 터치3판 cu화면뚜껑터치3판 hardware/mechanical/cad/stl/print/05_본체출력물/cu화면뚜껑_터치3판__1개.stl petg cu-screenlid" data-code="P-05-22" data-name="CU화면뚜껑 터치3판" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/CU화면뚜껑_터치3판__1개.stl" data-svg="fin/parts/P-05-22.svg" data-zip="fin/parts/P-05-22.zip.b64.txt" data-zipname="Toccata_P-05-22_CU화면뚜껑_터치3판.zip" data-zipbytes="73402" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-22" data-g="05" data-q="p-05-22 cu화면뚜껑 터치3판 cu화면뚜껑터치3판 hardware/mechanical/cad/stl/print/05_본체출력물/cu화면뚜껑_터치3판__1개.stl petg cu-screenlid" data-code="P-05-22" data-name="CU화면뚜껑 터치3판" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/CU화면뚜껑_터치3판__1개.stl" data-svg="fin/parts/P-05-22.svg" data-zip="fin/parts/P-05-22.zip.b64.txt" data-zipname="Toccata_P-05-22_CU화면뚜껑_터치3판.zip" data-zipbytes="73401" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-22 CU화면뚜껑 터치3판 도면 크게 보기"><img src="fin/parts/P-05-22.svg" alt="P-05-22 CU화면뚜껑 터치3판 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-22 · A2 1:1</div>
@@ -867,7 +878,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-22 CU화면뚜껑 터치3판 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 72 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-23" data-g="05" data-q="p-05-23 뚜껑이음레일기둥 1 뚜껑이음레일기둥1 hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_1__1개.stl petg 회색 seam-postrail-1" data-code="P-05-23" data-name="뚜껑이음레일기둥 1" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_1__1개.stl" data-svg="fin/parts/P-05-23.svg" data-zip="fin/parts/P-05-23.zip.b64.txt" data-zipname="Toccata_P-05-23_뚜껑이음레일기둥_1.zip" data-zipbytes="24494" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-23" data-g="05" data-q="p-05-23 뚜껑이음레일기둥 1 뚜껑이음레일기둥1 hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_1__1개.stl petg 회색 seam-postrail-1" data-code="P-05-23" data-name="뚜껑이음레일기둥 1" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_1__1개.stl" data-svg="fin/parts/P-05-23.svg" data-zip="fin/parts/P-05-23.zip.b64.txt" data-zipname="Toccata_P-05-23_뚜껑이음레일기둥_1.zip" data-zipbytes="24491" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-23 뚜껑이음레일기둥 1 도면 크게 보기"><img src="fin/parts/P-05-23.svg" alt="P-05-23 뚜껑이음레일기둥 1 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-23 · A3 1:1</div>
@@ -878,7 +889,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-23 뚜껑이음레일기둥 1 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 24 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-24" data-g="05" data-q="p-05-24 뚜껑이음레일기둥 2 뚜껑이음레일기둥2 hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_2__1개.stl petg 회색 seam-postrail-2" data-code="P-05-24" data-name="뚜껑이음레일기둥 2" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_2__1개.stl" data-svg="fin/parts/P-05-24.svg" data-zip="fin/parts/P-05-24.zip.b64.txt" data-zipname="Toccata_P-05-24_뚜껑이음레일기둥_2.zip" data-zipbytes="25146" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-24" data-g="05" data-q="p-05-24 뚜껑이음레일기둥 2 뚜껑이음레일기둥2 hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_2__1개.stl petg 회색 seam-postrail-2" data-code="P-05-24" data-name="뚜껑이음레일기둥 2" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뚜껑이음레일기둥_2__1개.stl" data-svg="fin/parts/P-05-24.svg" data-zip="fin/parts/P-05-24.zip.b64.txt" data-zipname="Toccata_P-05-24_뚜껑이음레일기둥_2.zip" data-zipbytes="25143" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-24 뚜껑이음레일기둥 2 도면 크게 보기"><img src="fin/parts/P-05-24.svg" alt="P-05-24 뚜껑이음레일기둥 2 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-24 · A3 1:1</div>
@@ -889,7 +900,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-24 뚜껑이음레일기둥 2 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 25 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-25" data-g="05" data-q="p-05-25 뒤판출력물 io 뒤판출력물io hardware/mechanical/cad/stl/print/05_본체출력물/뒤판출력물_io__1개.stl petg 회색 pr-backplate" data-code="P-05-25" data-name="뒤판출력물 IO" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뒤판출력물_IO__1개.stl" data-svg="fin/parts/P-05-25.svg" data-zip="fin/parts/P-05-25.zip.b64.txt" data-zipname="Toccata_P-05-25_뒤판출력물_IO.zip" data-zipbytes="56683" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-25" data-g="05" data-q="p-05-25 뒤판출력물 io 뒤판출력물io hardware/mechanical/cad/stl/print/05_본체출력물/뒤판출력물_io__1개.stl petg 회색 pr-backplate" data-code="P-05-25" data-name="뒤판출력물 IO" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/뒤판출력물_IO__1개.stl" data-svg="fin/parts/P-05-25.svg" data-zip="fin/parts/P-05-25.zip.b64.txt" data-zipname="Toccata_P-05-25_뒤판출력물_IO.zip" data-zipbytes="56680" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-25 뒤판출력물 IO 도면 크게 보기"><img src="fin/parts/P-05-25.svg" alt="P-05-25 뒤판출력물 IO 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-25 · A3 1:1</div>
@@ -900,7 +911,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-25 뒤판출력물 IO 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 55 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-26" data-g="05" data-q="p-05-26 허브선반 허브선반 hardware/mechanical/cad/stl/print/05_본체출력물/허브선반__1개.stl petg 회색 pr-hubshelf" data-code="P-05-26" data-name="허브선반" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/허브선반__1개.stl" data-svg="fin/parts/P-05-26.svg" data-zip="fin/parts/P-05-26.zip.b64.txt" data-zipname="Toccata_P-05-26_허브선반.zip" data-zipbytes="58308" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-26" data-g="05" data-q="p-05-26 허브선반 허브선반 hardware/mechanical/cad/stl/print/05_본체출력물/허브선반__1개.stl petg 회색 pr-hubshelf" data-code="P-05-26" data-name="허브선반" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/허브선반__1개.stl" data-svg="fin/parts/P-05-26.svg" data-zip="fin/parts/P-05-26.zip.b64.txt" data-zipname="Toccata_P-05-26_허브선반.zip" data-zipbytes="58303" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-26 허브선반 도면 크게 보기"><img src="fin/parts/P-05-26.svg" alt="P-05-26 허브선반 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-26 · A2 1:1</div>
@@ -911,7 +922,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-26 허브선반 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-27" data-g="05" data-q="p-05-27 배터리틀 배터리틀 hardware/mechanical/cad/stl/print/05_본체출력물/배터리틀__1개.stl petg 회색 cu-batframe" data-code="P-05-27" data-name="배터리틀" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/배터리틀__1개.stl" data-svg="fin/parts/P-05-27.svg" data-zip="fin/parts/P-05-27.zip.b64.txt" data-zipname="Toccata_P-05-27_배터리틀.zip" data-zipbytes="100968" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-27" data-g="05" data-q="p-05-27 배터리틀 배터리틀 hardware/mechanical/cad/stl/print/05_본체출력물/배터리틀__1개.stl petg 회색 cu-batframe" data-code="P-05-27" data-name="배터리틀" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/배터리틀__1개.stl" data-svg="fin/parts/P-05-27.svg" data-zip="fin/parts/P-05-27.zip.b64.txt" data-zipname="Toccata_P-05-27_배터리틀.zip" data-zipbytes="100965" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-27 배터리틀 도면 크게 보기"><img src="fin/parts/P-05-27.svg" alt="P-05-27 배터리틀 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-27 · A2 1:1</div>
@@ -922,7 +933,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-27 배터리틀 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 99 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-28" data-g="05" data-q="p-05-28 xt60집게 l xt60집게l hardware/mechanical/cad/stl/print/05_본체출력물/xt60집게_l__1개.stl petg 회색 xt60-clip-l" data-code="P-05-28" data-name="XT60집게 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/XT60집게_L__1개.stl" data-svg="fin/parts/P-05-28.svg" data-zip="fin/parts/P-05-28.zip.b64.txt" data-zipname="Toccata_P-05-28_XT60집게_L.zip" data-zipbytes="32107" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-28" data-g="05" data-q="p-05-28 xt60집게 l xt60집게l hardware/mechanical/cad/stl/print/05_본체출력물/xt60집게_l__1개.stl petg 회색 xt60-clip-l" data-code="P-05-28" data-name="XT60집게 L" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/XT60집게_L__1개.stl" data-svg="fin/parts/P-05-28.svg" data-zip="fin/parts/P-05-28.zip.b64.txt" data-zipname="Toccata_P-05-28_XT60집게_L.zip" data-zipbytes="32106" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-28 XT60집게 L 도면 크게 보기"><img src="fin/parts/P-05-28.svg" alt="P-05-28 XT60집게 L 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-28 · A3 2:1</div>
@@ -933,7 +944,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-28 XT60집게 L 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 31 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-29" data-g="05" data-q="p-05-29 xt60집게 r xt60집게r hardware/mechanical/cad/stl/print/05_본체출력물/xt60집게_r__1개.stl petg 회색 xt60-clip-r" data-code="P-05-29" data-name="XT60집게 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/XT60집게_R__1개.stl" data-svg="fin/parts/P-05-29.svg" data-zip="fin/parts/P-05-29.zip.b64.txt" data-zipname="Toccata_P-05-29_XT60집게_R.zip" data-zipbytes="32417" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-29" data-g="05" data-q="p-05-29 xt60집게 r xt60집게r hardware/mechanical/cad/stl/print/05_본체출력물/xt60집게_r__1개.stl petg 회색 xt60-clip-r" data-code="P-05-29" data-name="XT60집게 R" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/XT60집게_R__1개.stl" data-svg="fin/parts/P-05-29.svg" data-zip="fin/parts/P-05-29.zip.b64.txt" data-zipname="Toccata_P-05-29_XT60집게_R.zip" data-zipbytes="32413" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-29 XT60집게 R 도면 크게 보기"><img src="fin/parts/P-05-29.svg" alt="P-05-29 XT60집게 R 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-29 · A3 2:1</div>
@@ -944,7 +955,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-29 XT60집게 R 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 32 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-30" data-g="05" data-q="p-05-30 보드받침기둥 pi ø6 6mm 보드받침기둥piø66mm hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_pi_ø6_6mm__4개.stl petg 회색 cu-post-pi-1 cu-post-pi-2 cu-post-pi-3 cu-post-pi-4" data-code="P-05-30" data-name="보드받침기둥 Pi Ø6 6mm" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_Pi_Ø6_6mm__4개.stl" data-svg="fin/parts/P-05-30.svg" data-zip="fin/parts/P-05-30.zip.b64.txt" data-zipname="Toccata_P-05-30_보드받침기둥_Pi_Ø6_6mm.zip" data-zipbytes="18940" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-30" data-g="05" data-q="p-05-30 보드받침기둥 pi ø6 6mm 보드받침기둥piø66mm hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_pi_ø6_6mm__4개.stl petg 회색 cu-post-pi-1 cu-post-pi-2 cu-post-pi-3 cu-post-pi-4" data-code="P-05-30" data-name="보드받침기둥 Pi Ø6 6mm" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_Pi_Ø6_6mm__4개.stl" data-svg="fin/parts/P-05-30.svg" data-zip="fin/parts/P-05-30.zip.b64.txt" data-zipname="Toccata_P-05-30_보드받침기둥_Pi_Ø6_6mm.zip" data-zipbytes="19354" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-30 보드받침기둥 Pi Ø6 6mm 도면 크게 보기"><img src="fin/parts/P-05-30.svg" alt="P-05-30 보드받침기둥 Pi Ø6 6mm 부품도 (A3, 10:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-30 · A3 10:1</div>
@@ -952,10 +963,10 @@
 <dl class="partdwg-dl"><dt>수량</dt><dd>4개</dd><dt>크기</dt><dd class="mono">6 × 5.99 × 6</dd><dt>질량</dt><dd>0.2 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>1</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_Pi_Ø6_6mm__4개.stl</div>
 <details class="spec"><summary>출력 메모</summary><p class="small">밑면을 베드에 세워 출력, 채움 100 %. 서포트 없음</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-30 보드받침기둥 Pi Ø6 6mm 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 18 KB</span></button></div>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-30 보드받침기둥 Pi Ø6 6mm 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 19 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-31" data-g="05" data-q="p-05-31 보드받침기둥 나사 ø7 5mm 보드받침기둥나사ø75mm hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_나사_ø7_5mm__6개.stl petg 회색 cu-post-buck-1 cu-post-buck-2 cu-post-buck-3 cu-post-buck-4 cu-post-j702-1 cu-post-j702-2" data-code="P-05-31" data-name="보드받침기둥 나사 Ø7 5mm" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl" data-svg="fin/parts/P-05-31.svg" data-zip="fin/parts/P-05-31.zip.b64.txt" data-zipname="Toccata_P-05-31_보드받침기둥_나사_Ø7_5mm.zip" data-zipbytes="20317" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-31" data-g="05" data-q="p-05-31 보드받침기둥 나사 ø7 5mm 보드받침기둥나사ø75mm hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_나사_ø7_5mm__6개.stl petg 회색 cu-post-buck-1 cu-post-buck-2 cu-post-buck-3 cu-post-buck-4 cu-post-j702-1 cu-post-j702-2" data-code="P-05-31" data-name="보드받침기둥 나사 Ø7 5mm" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl" data-svg="fin/parts/P-05-31.svg" data-zip="fin/parts/P-05-31.zip.b64.txt" data-zipname="Toccata_P-05-31_보드받침기둥_나사_Ø7_5mm.zip" data-zipbytes="19838" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-31 보드받침기둥 나사 Ø7 5mm 도면 크게 보기"><img src="fin/parts/P-05-31.svg" alt="P-05-31 보드받침기둥 나사 Ø7 5mm 부품도 (A3, 10:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-31 · A3 10:1</div>
@@ -963,10 +974,10 @@
 <dl class="partdwg-dl"><dt>수량</dt><dd>6개</dd><dt>크기</dt><dd class="mono">7 × 7 × 5</dd><dt>질량</dt><dd>0.2 g</dd><dt>재료</dt><dd>PETG 회색</dd><dt>구멍·포켓</dt><dd>1</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_나사_Ø7_5mm__6개.stl</div>
 <details class="spec"><summary>출력 메모</summary><p class="small">밑면을 베드에 세워 출력, 채움 100 %. 서포트 없음</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-31 보드받침기둥 나사 Ø7 5mm 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 20 KB</span></button></div>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-31 보드받침기둥 나사 Ø7 5mm 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 19 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-32" data-g="05" data-q="p-05-32 보드받침기둥 ped ø6 5mm 보드받침기둥pedø65mm hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_ped_ø6_5mm__2개.stl petg 회색 cu-post-ped-1 cu-post-ped-2" data-code="P-05-32" data-name="보드받침기둥 PED Ø6 5mm" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_PED_Ø6_5mm__2개.stl" data-svg="fin/parts/P-05-32.svg" data-zip="fin/parts/P-05-32.zip.b64.txt" data-zipname="Toccata_P-05-32_보드받침기둥_PED_Ø6_5mm.zip" data-zipbytes="19071" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-32" data-g="05" data-q="p-05-32 보드받침기둥 ped ø6 5mm 보드받침기둥pedø65mm hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_ped_ø6_5mm__2개.stl petg 회색 cu-post-ped-1 cu-post-ped-2" data-code="P-05-32" data-name="보드받침기둥 PED Ø6 5mm" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/보드받침기둥_PED_Ø6_5mm__2개.stl" data-svg="fin/parts/P-05-32.svg" data-zip="fin/parts/P-05-32.zip.b64.txt" data-zipname="Toccata_P-05-32_보드받침기둥_PED_Ø6_5mm.zip" data-zipbytes="19561" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-32 보드받침기둥 PED Ø6 5mm 도면 크게 보기"><img src="fin/parts/P-05-32.svg" alt="P-05-32 보드받침기둥 PED Ø6 5mm 부품도 (A3, 10:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-32 · A3 10:1</div>
@@ -988,7 +999,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-33 보드받침기둥 PED Ø6 5mm 핀 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 19 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-34" data-g="05" data-q="p-05-34 케이블집게 케이블집게 hardware/mechanical/cad/stl/print/05_본체출력물/케이블집게__8개.stl petg 회색 cable-clip-l1 cable-clip-l2 cable-clip-l3 cable-clip-r1 cable-clip-r2 cable-clip-r3 cable-clip-e1 cable-clip-e2" data-code="P-05-34" data-name="케이블집게" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/케이블집게__8개.stl" data-svg="fin/parts/P-05-34.svg" data-zip="fin/parts/P-05-34.zip.b64.txt" data-zipname="Toccata_P-05-34_케이블집게.zip" data-zipbytes="16518" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-34" data-g="05" data-q="p-05-34 케이블집게 케이블집게 hardware/mechanical/cad/stl/print/05_본체출력물/케이블집게__8개.stl petg 회색 cable-clip-l1 cable-clip-l2 cable-clip-l3 cable-clip-r1 cable-clip-r2 cable-clip-r3 cable-clip-e1 cable-clip-e2" data-code="P-05-34" data-name="케이블집게" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/케이블집게__8개.stl" data-svg="fin/parts/P-05-34.svg" data-zip="fin/parts/P-05-34.zip.b64.txt" data-zipname="Toccata_P-05-34_케이블집게.zip" data-zipbytes="16516" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-34 케이블집게 도면 크게 보기"><img src="fin/parts/P-05-34.svg" alt="P-05-34 케이블집게 부품도 (A3, 5:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-34 · A3 5:1</div>
@@ -1010,7 +1021,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-35 가운데아랫판 1 왼쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 91 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-36" data-g="05" data-q="p-05-36 가운데아랫판 2 가운데 가운데아랫판2가운데 hardware/mechanical/cad/stl/print/05_본체출력물/가운데아랫판_2_가운데__1개.stl petg 회색 cu-ply-bottom" data-code="P-05-36" data-name="가운데아랫판 2 가운데" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/가운데아랫판_2_가운데__1개.stl" data-svg="fin/parts/P-05-36.svg" data-zip="fin/parts/P-05-36.zip.b64.txt" data-zipname="Toccata_P-05-36_가운데아랫판_2_가운데.zip" data-zipbytes="159914" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-36" data-g="05" data-q="p-05-36 가운데아랫판 2 가운데 가운데아랫판2가운데 hardware/mechanical/cad/stl/print/05_본체출력물/가운데아랫판_2_가운데__1개.stl petg 회색 cu-ply-bottom" data-code="P-05-36" data-name="가운데아랫판 2 가운데" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/가운데아랫판_2_가운데__1개.stl" data-svg="fin/parts/P-05-36.svg" data-zip="fin/parts/P-05-36.zip.b64.txt" data-zipname="Toccata_P-05-36_가운데아랫판_2_가운데.zip" data-zipbytes="159916" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-36 가운데아랫판 2 가운데 도면 크게 보기"><img src="fin/parts/P-05-36.svg" alt="P-05-36 가운데아랫판 2 가운데 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-36 · A2 1:1</div>
@@ -1032,7 +1043,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-37 가운데아랫판 3 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 34 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-38" data-g="05" data-q="p-05-38 가운데뒤판 1 왼쪽 가운데뒤판1왼쪽 hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_1_왼쪽__1개.stl petg 회색 cu-ply-back" data-code="P-05-38" data-name="가운데뒤판 1 왼쪽" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_1_왼쪽__1개.stl" data-svg="fin/parts/P-05-38.svg" data-zip="fin/parts/P-05-38.zip.b64.txt" data-zipname="Toccata_P-05-38_가운데뒤판_1_왼쪽.zip" data-zipbytes="24233" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-38" data-g="05" data-q="p-05-38 가운데뒤판 1 왼쪽 가운데뒤판1왼쪽 hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_1_왼쪽__1개.stl petg 회색 cu-ply-back" data-code="P-05-38" data-name="가운데뒤판 1 왼쪽" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_1_왼쪽__1개.stl" data-svg="fin/parts/P-05-38.svg" data-zip="fin/parts/P-05-38.zip.b64.txt" data-zipname="Toccata_P-05-38_가운데뒤판_1_왼쪽.zip" data-zipbytes="24232" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-38 가운데뒤판 1 왼쪽 도면 크게 보기"><img src="fin/parts/P-05-38.svg" alt="P-05-38 가운데뒤판 1 왼쪽 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-38 · A2 1:1</div>
@@ -1054,7 +1065,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-05-39 가운데뒤판 2 가운데 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 21 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-05-40" data-g="05" data-q="p-05-40 가운데뒤판 3 오른쪽 가운데뒤판3오른쪽 hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_3_오른쪽__1개.stl petg 회색 cu-ply-back" data-code="P-05-40" data-name="가운데뒤판 3 오른쪽" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_3_오른쪽__1개.stl" data-svg="fin/parts/P-05-40.svg" data-zip="fin/parts/P-05-40.zip.b64.txt" data-zipname="Toccata_P-05-40_가운데뒤판_3_오른쪽.zip" data-zipbytes="59803" data-place="1">
+<article class="partdwg-card" id="partdwg-P-05-40" data-g="05" data-q="p-05-40 가운데뒤판 3 오른쪽 가운데뒤판3오른쪽 hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_3_오른쪽__1개.stl petg 회색 cu-ply-back" data-code="P-05-40" data-name="가운데뒤판 3 오른쪽" data-file="hardware/mechanical/cad/stl/print/05_본체출력물/가운데뒤판_3_오른쪽__1개.stl" data-svg="fin/parts/P-05-40.svg" data-zip="fin/parts/P-05-40.zip.b64.txt" data-zipname="Toccata_P-05-40_가운데뒤판_3_오른쪽.zip" data-zipbytes="59802" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-05-40 가운데뒤판 3 오른쪽 도면 크게 보기"><img src="fin/parts/P-05-40.svg" alt="P-05-40 가운데뒤판 3 오른쪽 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-05-40 · A2 1:1</div>
@@ -1068,7 +1079,7 @@
 </div>
 <h3 class="partdwg-gh" data-g="06">06 출력 공구 <span class="small muted">건반 액션 조립 공구 · 4장</span></h3>
 <div class="partdwg-grid" data-g="06">
-<article class="partdwg-card" id="partdwg-P-06-01" data-g="06" data-q="p-06-01 공구 벤치지그받침 t1a 공구벤치지그받침t1a hardware/mechanical/cad/stl/print/06_출력공구/공구_벤치지그받침_t1a__1개.stl petg " data-code="P-06-01" data-name="공구 벤치지그받침 T1a" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_벤치지그받침_T1a__1개.stl" data-svg="fin/parts/P-06-01.svg" data-zip="fin/parts/P-06-01.zip.b64.txt" data-zipname="Toccata_P-06-01_공구_벤치지그받침_T1a.zip" data-zipbytes="624331" data-place="0">
+<article class="partdwg-card" id="partdwg-P-06-01" data-g="06" data-q="p-06-01 공구 벤치지그받침 t1a 공구벤치지그받침t1a hardware/mechanical/cad/stl/print/06_출력공구/공구_벤치지그받침_t1a__1개.stl petg " data-code="P-06-01" data-name="공구 벤치지그받침 T1a" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_벤치지그받침_T1a__1개.stl" data-svg="fin/parts/P-06-01.svg" data-zip="fin/parts/P-06-01.zip.b64.txt" data-zipname="Toccata_P-06-01_공구_벤치지그받침_T1a.zip" data-zipbytes="624329" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-06-01 공구 벤치지그받침 T1a 도면 크게 보기"><img src="fin/parts/P-06-01.svg" alt="P-06-01 공구 벤치지그받침 T1a 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-06-01 · A2 1:1</div>
@@ -1079,7 +1090,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-06-01 공구 벤치지그받침 T1a 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 610 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-06-02" data-g="06" data-q="p-06-02 공구 높이블록 t1b 공구높이블록t1b hardware/mechanical/cad/stl/print/06_출력공구/공구_높이블록_t1b__1개.stl petg " data-code="P-06-02" data-name="공구 높이블록 T1b" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_높이블록_T1b__1개.stl" data-svg="fin/parts/P-06-02.svg" data-zip="fin/parts/P-06-02.zip.b64.txt" data-zipname="Toccata_P-06-02_공구_높이블록_T1b.zip" data-zipbytes="161559" data-place="0">
+<article class="partdwg-card" id="partdwg-P-06-02" data-g="06" data-q="p-06-02 공구 높이블록 t1b 공구높이블록t1b hardware/mechanical/cad/stl/print/06_출력공구/공구_높이블록_t1b__1개.stl petg " data-code="P-06-02" data-name="공구 높이블록 T1b" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_높이블록_T1b__1개.stl" data-svg="fin/parts/P-06-02.svg" data-zip="fin/parts/P-06-02.zip.b64.txt" data-zipname="Toccata_P-06-02_공구_높이블록_T1b.zip" data-zipbytes="161555" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-06-02 공구 높이블록 T1b 도면 크게 보기"><img src="fin/parts/P-06-02.svg" alt="P-06-02 공구 높이블록 T1b 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-06-02 · A3 2:1</div>
@@ -1090,7 +1101,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-06-02 공구 높이블록 T1b 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 158 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-06-03" data-g="06" data-q="p-06-03 공구 캡스턴벤치게이지 t2 공구캡스턴벤치게이지t2 hardware/mechanical/cad/stl/print/06_출력공구/공구_캡스턴벤치게이지_t2__1개.stl petg " data-code="P-06-03" data-name="공구 캡스턴벤치게이지 T2" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_캡스턴벤치게이지_T2__1개.stl" data-svg="fin/parts/P-06-03.svg" data-zip="fin/parts/P-06-03.zip.b64.txt" data-zipname="Toccata_P-06-03_공구_캡스턴벤치게이지_T2.zip" data-zipbytes="248055" data-place="0">
+<article class="partdwg-card" id="partdwg-P-06-03" data-g="06" data-q="p-06-03 공구 캡스턴벤치게이지 t2 공구캡스턴벤치게이지t2 hardware/mechanical/cad/stl/print/06_출력공구/공구_캡스턴벤치게이지_t2__1개.stl petg " data-code="P-06-03" data-name="공구 캡스턴벤치게이지 T2" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_캡스턴벤치게이지_T2__1개.stl" data-svg="fin/parts/P-06-03.svg" data-zip="fin/parts/P-06-03.zip.b64.txt" data-zipname="Toccata_P-06-03_공구_캡스턴벤치게이지_T2.zip" data-zipbytes="248058" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-06-03 공구 캡스턴벤치게이지 T2 도면 크게 보기"><img src="fin/parts/P-06-03.svg" alt="P-06-03 공구 캡스턴벤치게이지 T2 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-06-03 · A3 1:1</div>
@@ -1101,7 +1112,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-06-03 공구 캡스턴벤치게이지 T2 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 242 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-06-04" data-g="06" data-q="p-06-04 공구 밸런스핀높이게이지 t3 공구밸런스핀높이게이지t3 hardware/mechanical/cad/stl/print/06_출력공구/공구_밸런스핀높이게이지_t3__1개.stl petg " data-code="P-06-04" data-name="공구 밸런스핀높이게이지 T3" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_밸런스핀높이게이지_T3__1개.stl" data-svg="fin/parts/P-06-04.svg" data-zip="fin/parts/P-06-04.zip.b64.txt" data-zipname="Toccata_P-06-04_공구_밸런스핀높이게이지_T3.zip" data-zipbytes="172866" data-place="0">
+<article class="partdwg-card" id="partdwg-P-06-04" data-g="06" data-q="p-06-04 공구 밸런스핀높이게이지 t3 공구밸런스핀높이게이지t3 hardware/mechanical/cad/stl/print/06_출력공구/공구_밸런스핀높이게이지_t3__1개.stl petg " data-code="P-06-04" data-name="공구 밸런스핀높이게이지 T3" data-file="hardware/mechanical/cad/stl/print/06_출력공구/공구_밸런스핀높이게이지_T3__1개.stl" data-svg="fin/parts/P-06-04.svg" data-zip="fin/parts/P-06-04.zip.b64.txt" data-zipname="Toccata_P-06-04_공구_밸런스핀높이게이지_T3.zip" data-zipbytes="172868" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-06-04 공구 밸런스핀높이게이지 T3 도면 크게 보기"><img src="fin/parts/P-06-04.svg" alt="P-06-04 공구 밸런스핀높이게이지 T3 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-06-04 · A3 2:1</div>
@@ -1115,7 +1126,7 @@
 </div>
 <h3 class="partdwg-gh" data-g="07">07 터치스크린 <span class="small muted">stl/print/07_터치스크린 · 6장</span></h3>
 <div class="partdwg-grid" data-g="07">
-<article class="partdwg-card" id="partdwg-P-07-01" data-g="07" data-q="p-07-01 화면받침 크래들 화면받침크래들 hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_크래들__1개.stl petg ts-cradle" data-code="P-07-01" data-name="화면받침 크래들" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_크래들__1개.stl" data-svg="fin/parts/P-07-01.svg" data-zip="fin/parts/P-07-01.zip.b64.txt" data-zipname="Toccata_P-07-01_화면받침_크래들.zip" data-zipbytes="97988" data-place="1">
+<article class="partdwg-card" id="partdwg-P-07-01" data-g="07" data-q="p-07-01 화면받침 크래들 화면받침크래들 hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_크래들__1개.stl petg ts-cradle" data-code="P-07-01" data-name="화면받침 크래들" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_크래들__1개.stl" data-svg="fin/parts/P-07-01.svg" data-zip="fin/parts/P-07-01.zip.b64.txt" data-zipname="Toccata_P-07-01_화면받침_크래들.zip" data-zipbytes="97986" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-07-01 화면받침 크래들 도면 크게 보기"><img src="fin/parts/P-07-01.svg" alt="P-07-01 화면받침 크래들 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-07-01 · A3 1:1</div>
@@ -1126,7 +1137,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-07-01 화면받침 크래들 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 96 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-07-02" data-g="07" data-q="p-07-02 받침다리 받침다리 hardware/mechanical/cad/stl/print/07_터치스크린/받침다리__1개.stl petg ts-leg" data-code="P-07-02" data-name="받침다리" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/받침다리__1개.stl" data-svg="fin/parts/P-07-02.svg" data-zip="fin/parts/P-07-02.zip.b64.txt" data-zipname="Toccata_P-07-02_받침다리.zip" data-zipbytes="24110" data-place="1">
+<article class="partdwg-card" id="partdwg-P-07-02" data-g="07" data-q="p-07-02 받침다리 받침다리 hardware/mechanical/cad/stl/print/07_터치스크린/받침다리__1개.stl petg ts-leg" data-code="P-07-02" data-name="받침다리" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/받침다리__1개.stl" data-svg="fin/parts/P-07-02.svg" data-zip="fin/parts/P-07-02.zip.b64.txt" data-zipname="Toccata_P-07-02_받침다리.zip" data-zipbytes="24111" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-07-02 받침다리 도면 크게 보기"><img src="fin/parts/P-07-02.svg" alt="P-07-02 받침다리 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-07-02 · A3 2:1</div>
@@ -1148,7 +1159,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-07-03 점검창덮개 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 28 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-07-04" data-g="07" data-q="p-07-04 화면받침 유리턱띠 왼쪽 화면받침유리턱띠왼쪽 hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_유리턱띠_왼쪽__1개.stl petg ts-ledge-l" data-code="P-07-04" data-name="화면받침 유리턱띠 왼쪽" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_유리턱띠_왼쪽__1개.stl" data-svg="fin/parts/P-07-04.svg" data-zip="fin/parts/P-07-04.zip.b64.txt" data-zipname="Toccata_P-07-04_화면받침_유리턱띠_왼쪽.zip" data-zipbytes="15216" data-place="1">
+<article class="partdwg-card" id="partdwg-P-07-04" data-g="07" data-q="p-07-04 화면받침 유리턱띠 왼쪽 화면받침유리턱띠왼쪽 hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_유리턱띠_왼쪽__1개.stl petg ts-ledge-l" data-code="P-07-04" data-name="화면받침 유리턱띠 왼쪽" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_유리턱띠_왼쪽__1개.stl" data-svg="fin/parts/P-07-04.svg" data-zip="fin/parts/P-07-04.zip.b64.txt" data-zipname="Toccata_P-07-04_화면받침_유리턱띠_왼쪽.zip" data-zipbytes="15217" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-07-04 화면받침 유리턱띠 왼쪽 도면 크게 보기"><img src="fin/parts/P-07-04.svg" alt="P-07-04 화면받침 유리턱띠 왼쪽 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-07-04 · A3 1:1</div>
@@ -1170,7 +1181,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-07-05 화면받침 유리턱띠 오른쪽 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 15 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-07-06" data-g="07" data-q="p-07-06 리본클립 리본클립 hardware/mechanical/cad/stl/print/07_터치스크린/리본클립__1개.stl petg ts-rclip" data-code="P-07-06" data-name="리본클립" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/리본클립__1개.stl" data-svg="fin/parts/P-07-06.svg" data-zip="fin/parts/P-07-06.zip.b64.txt" data-zipname="Toccata_P-07-06_리본클립.zip" data-zipbytes="20301" data-place="1">
+<article class="partdwg-card" id="partdwg-P-07-06" data-g="07" data-q="p-07-06 리본클립 리본클립 hardware/mechanical/cad/stl/print/07_터치스크린/리본클립__1개.stl petg ts-rclip" data-code="P-07-06" data-name="리본클립" data-file="hardware/mechanical/cad/stl/print/07_터치스크린/리본클립__1개.stl" data-svg="fin/parts/P-07-06.svg" data-zip="fin/parts/P-07-06.zip.b64.txt" data-zipname="Toccata_P-07-06_리본클립.zip" data-zipbytes="20303" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-07-06 리본클립 도면 크게 보기"><img src="fin/parts/P-07-06.svg" alt="P-07-06 리본클립 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-07-06 · A3 2:1</div>
@@ -1182,34 +1193,23 @@
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
 </div>
-<h3 class="partdwg-gh" data-g="09">09 기판 지그 <span class="small muted">BE163 만능기판 자르기·뚫기 지그 · 2장</span></h3>
+<h3 class="partdwg-gh" data-g="09">09 기판 지그 <span class="small muted">BE163 만능기판 자르기·뚫기 지그 · 1장</span></h3>
 <div class="partdwg-grid" data-g="09">
-<article class="partdwg-card" id="partdwg-P-09-01" data-g="09" data-q="p-09-01 p-mb 제어기판지그 mb7장 p-mb제어기판지그mb7장 hardware/mechanical/cad/stl/print/09_기판지그/p-mb_제어기판지그_mb7장__1개.stl petg " data-code="P-09-01" data-name="P-MB 제어기판지그 MB7장" data-file="hardware/mechanical/cad/stl/print/09_기판지그/P-MB_제어기판지그_MB7장__1개.stl" data-svg="fin/parts/P-09-01.svg" data-zip="fin/parts/P-09-01.zip.b64.txt" data-zipname="Toccata_P-09-01_P-MB_제어기판지그_MB7장.zip" data-zipbytes="138122" data-place="0">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-09-01 P-MB 제어기판지그 MB7장 도면 크게 보기"><img src="fin/parts/P-09-01.svg" alt="P-09-01 P-MB 제어기판지그 MB7장 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
+<article class="partdwg-card" id="partdwg-P-09-01" data-g="09" data-q="p-09-01 p-ped 페달기판지그 ped1장 p-ped페달기판지그ped1장 hardware/mechanical/cad/stl/print/09_기판지그/p-ped_페달기판지그_ped1장__1개.stl petg " data-code="P-09-01" data-name="P-PED 페달기판지그 PED1장" data-file="hardware/mechanical/cad/stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl" data-svg="fin/parts/P-09-01.svg" data-zip="fin/parts/P-09-01.zip.b64.txt" data-zipname="Toccata_P-09-01_P-PED_페달기판지그_PED1장.zip" data-zipbytes="121074" data-place="0">
+<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-09-01 P-PED 페달기판지그 PED1장 도면 크게 보기"><img src="fin/parts/P-09-01.svg" alt="P-09-01 P-PED 페달기판지그 PED1장 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-09-01 · A3 1:1</div>
-<h4>P-MB 제어기판지그 MB7장</h4>
-<dl class="partdwg-dl"><dt>수량</dt><dd>1개</dd><dt>크기</dt><dd class="mono">70 × 50 × 6.2</dd><dt>질량</dt><dd>21.5 g (출력 약 14 g)</dd><dt>재료</dt><dd>PETG</dd><dt>구멍·포켓</dt><dd>8</dd></dl>
-<div class="partdwg-file mono">hardware/mechanical/cad/stl/print/09_기판지그/P-MB_제어기판지그_MB7장__1개.stl</div>
-<details class="spec"><summary>출력 메모</summary><p class="small">제어 기판 MB 7장을 BE163에서 자르고 뚫는 지그 (악기당 1개): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 홈 창 2.8 × 26.5의 세 변도 긋기, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md &#x27;기판 지그&#x27;). PETG 0.2 mm, 서포트 없음, STL 방향 그대로</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-09-01 P-MB 제어기판지그 MB7장 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 135 KB</span></button></div>
-<p class="small partdwg-msg" aria-live="polite"></p>
-</div></article>
-<article class="partdwg-card" id="partdwg-P-09-02" data-g="09" data-q="p-09-02 p-ped 페달기판지그 ped1장 p-ped페달기판지그ped1장 hardware/mechanical/cad/stl/print/09_기판지그/p-ped_페달기판지그_ped1장__1개.stl petg " data-code="P-09-02" data-name="P-PED 페달기판지그 PED1장" data-file="hardware/mechanical/cad/stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl" data-svg="fin/parts/P-09-02.svg" data-zip="fin/parts/P-09-02.zip.b64.txt" data-zipname="Toccata_P-09-02_P-PED_페달기판지그_PED1장.zip" data-zipbytes="120753" data-place="0">
-<button type="button" class="partdwg-thumb" data-act="view" aria-label="P-09-02 P-PED 페달기판지그 PED1장 도면 크게 보기"><img src="fin/parts/P-09-02.svg" alt="P-09-02 P-PED 페달기판지그 PED1장 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
-<div class="partdwg-body">
-<div class="partdwg-code mono">P-09-02 · A3 1:1</div>
 <h4>P-PED 페달기판지그 PED1장</h4>
 <dl class="partdwg-dl"><dt>수량</dt><dd>1개</dd><dt>크기</dt><dd class="mono">70 × 50 × 6.2</dd><dt>질량</dt><dd>21.9 g (출력 약 13 g)</dd><dt>재료</dt><dd>PETG</dd><dt>구멍·포켓</dt><dd>8</dd></dl>
 <div class="partdwg-file mono">hardware/mechanical/cad/stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl</div>
-<details class="spec"><summary>출력 메모</summary><p class="small">PED 페달 보드 1장용 지그: MB 지그와 같은 방법 (홈 없음), 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2 (cad/jigs/README.md &#x27;기판 지그&#x27;). PETG 0.2 mm, 서포트 없음, STL 방향 그대로</p></details>
-<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-09-02 P-PED 페달기판지그 PED1장 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 118 KB</span></button></div>
+<details class="spec"><summary>출력 메모</summary><p class="small">PED 페달 보드 1장용 지그: 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md &#x27;기판 지그&#x27;). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로</p></details>
+<div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-09-01 P-PED 페달기판지그 PED1장 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 118 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
 </div>
 <h3 class="partdwg-gh" data-g="EX">선택·대안·예비 <span class="small muted">stl/print_extra — 구매 목록대로면 뽑지 않음 (예비 건반은 필요할 때) · 21장</span></h3>
 <div class="partdwg-grid" data-g="EX">
-<article class="partdwg-card" id="partdwg-P-EX-01" data-g="EX" data-q="p-ex-01 백건 c 백건c hardware/mechanical/cad/stl/print_extra/예비_건반/백건_c__1개.stl petg 흰색 " data-code="P-EX-01" data-name="백건 C" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_C__1개.stl" data-svg="fin/parts/P-EX-01.svg" data-zip="fin/parts/P-EX-01.zip.b64.txt" data-zipname="Toccata_P-EX-01_백건_C.zip" data-zipbytes="58248" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-01" data-g="EX" data-q="p-ex-01 백건 c 백건c hardware/mechanical/cad/stl/print_extra/예비_건반/백건_c__1개.stl petg 흰색 " data-code="P-EX-01" data-name="백건 C" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_C__1개.stl" data-svg="fin/parts/P-EX-01.svg" data-zip="fin/parts/P-EX-01.zip.b64.txt" data-zipname="Toccata_P-EX-01_백건_C.zip" data-zipbytes="58244" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-01 백건 C 도면 크게 보기"><img src="fin/parts/P-EX-01.svg" alt="P-EX-01 백건 C 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-01 · A2 1:1 · 선택</div>
@@ -1220,7 +1220,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-01 백건 C 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-02" data-g="EX" data-q="p-ex-02 백건 d 백건d hardware/mechanical/cad/stl/print_extra/예비_건반/백건_d__1개.stl petg 흰색 " data-code="P-EX-02" data-name="백건 D" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_D__1개.stl" data-svg="fin/parts/P-EX-02.svg" data-zip="fin/parts/P-EX-02.zip.b64.txt" data-zipname="Toccata_P-EX-02_백건_D.zip" data-zipbytes="58612" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-02" data-g="EX" data-q="p-ex-02 백건 d 백건d hardware/mechanical/cad/stl/print_extra/예비_건반/백건_d__1개.stl petg 흰색 " data-code="P-EX-02" data-name="백건 D" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_D__1개.stl" data-svg="fin/parts/P-EX-02.svg" data-zip="fin/parts/P-EX-02.zip.b64.txt" data-zipname="Toccata_P-EX-02_백건_D.zip" data-zipbytes="58609" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-02 백건 D 도면 크게 보기"><img src="fin/parts/P-EX-02.svg" alt="P-EX-02 백건 D 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-02 · A2 1:1 · 선택</div>
@@ -1242,7 +1242,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-03 백건 E 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-04" data-g="EX" data-q="p-ex-04 백건 f 백건f hardware/mechanical/cad/stl/print_extra/예비_건반/백건_f__1개.stl petg 흰색 " data-code="P-EX-04" data-name="백건 F" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_F__1개.stl" data-svg="fin/parts/P-EX-04.svg" data-zip="fin/parts/P-EX-04.zip.b64.txt" data-zipname="Toccata_P-EX-04_백건_F.zip" data-zipbytes="59047" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-04" data-g="EX" data-q="p-ex-04 백건 f 백건f hardware/mechanical/cad/stl/print_extra/예비_건반/백건_f__1개.stl petg 흰색 " data-code="P-EX-04" data-name="백건 F" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_F__1개.stl" data-svg="fin/parts/P-EX-04.svg" data-zip="fin/parts/P-EX-04.zip.b64.txt" data-zipname="Toccata_P-EX-04_백건_F.zip" data-zipbytes="59043" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-04 백건 F 도면 크게 보기"><img src="fin/parts/P-EX-04.svg" alt="P-EX-04 백건 F 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-04 · A2 1:1 · 선택</div>
@@ -1253,7 +1253,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-04 백건 F 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 58 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-05" data-g="EX" data-q="p-ex-05 백건 g 백건g hardware/mechanical/cad/stl/print_extra/예비_건반/백건_g__1개.stl petg 흰색 " data-code="P-EX-05" data-name="백건 G" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_G__1개.stl" data-svg="fin/parts/P-EX-05.svg" data-zip="fin/parts/P-EX-05.zip.b64.txt" data-zipname="Toccata_P-EX-05_백건_G.zip" data-zipbytes="58782" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-05" data-g="EX" data-q="p-ex-05 백건 g 백건g hardware/mechanical/cad/stl/print_extra/예비_건반/백건_g__1개.stl petg 흰색 " data-code="P-EX-05" data-name="백건 G" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_G__1개.stl" data-svg="fin/parts/P-EX-05.svg" data-zip="fin/parts/P-EX-05.zip.b64.txt" data-zipname="Toccata_P-EX-05_백건_G.zip" data-zipbytes="58777" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-05 백건 G 도면 크게 보기"><img src="fin/parts/P-EX-05.svg" alt="P-EX-05 백건 G 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-05 · A2 1:1 · 선택</div>
@@ -1264,7 +1264,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-05 백건 G 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-06" data-g="EX" data-q="p-ex-06 백건 a 백건a hardware/mechanical/cad/stl/print_extra/예비_건반/백건_a__1개.stl petg 흰색 " data-code="P-EX-06" data-name="백건 A" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_A__1개.stl" data-svg="fin/parts/P-EX-06.svg" data-zip="fin/parts/P-EX-06.zip.b64.txt" data-zipname="Toccata_P-EX-06_백건_A.zip" data-zipbytes="58355" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-06" data-g="EX" data-q="p-ex-06 백건 a 백건a hardware/mechanical/cad/stl/print_extra/예비_건반/백건_a__1개.stl petg 흰색 " data-code="P-EX-06" data-name="백건 A" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_A__1개.stl" data-svg="fin/parts/P-EX-06.svg" data-zip="fin/parts/P-EX-06.zip.b64.txt" data-zipname="Toccata_P-EX-06_백건_A.zip" data-zipbytes="58351" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-06 백건 A 도면 크게 보기"><img src="fin/parts/P-EX-06.svg" alt="P-EX-06 백건 A 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-06 · A2 1:1 · 선택</div>
@@ -1275,7 +1275,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-06 백건 A 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-07" data-g="EX" data-q="p-ex-07 백건 b 백건b hardware/mechanical/cad/stl/print_extra/예비_건반/백건_b__1개.stl petg 흰색 " data-code="P-EX-07" data-name="백건 B" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_B__1개.stl" data-svg="fin/parts/P-EX-07.svg" data-zip="fin/parts/P-EX-07.zip.b64.txt" data-zipname="Toccata_P-EX-07_백건_B.zip" data-zipbytes="58098" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-07" data-g="EX" data-q="p-ex-07 백건 b 백건b hardware/mechanical/cad/stl/print_extra/예비_건반/백건_b__1개.stl petg 흰색 " data-code="P-EX-07" data-name="백건 B" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_B__1개.stl" data-svg="fin/parts/P-EX-07.svg" data-zip="fin/parts/P-EX-07.zip.b64.txt" data-zipname="Toccata_P-EX-07_백건_B.zip" data-zipbytes="58092" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-07 백건 B 도면 크게 보기"><img src="fin/parts/P-EX-07.svg" alt="P-EX-07 백건 B 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-07 · A2 1:1 · 선택</div>
@@ -1286,7 +1286,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-07 백건 B 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-08" data-g="EX" data-q="p-ex-08 백건 a0 백건a0 hardware/mechanical/cad/stl/print_extra/예비_건반/백건_a0__1개.stl petg 흰색 " data-code="P-EX-08" data-name="백건 A0" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_A0__1개.stl" data-svg="fin/parts/P-EX-08.svg" data-zip="fin/parts/P-EX-08.zip.b64.txt" data-zipname="Toccata_P-EX-08_백건_A0.zip" data-zipbytes="58371" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-08" data-g="EX" data-q="p-ex-08 백건 a0 백건a0 hardware/mechanical/cad/stl/print_extra/예비_건반/백건_a0__1개.stl petg 흰색 " data-code="P-EX-08" data-name="백건 A0" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_A0__1개.stl" data-svg="fin/parts/P-EX-08.svg" data-zip="fin/parts/P-EX-08.zip.b64.txt" data-zipname="Toccata_P-EX-08_백건_A0.zip" data-zipbytes="58374" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-08 백건 A0 도면 크게 보기"><img src="fin/parts/P-EX-08.svg" alt="P-EX-08 백건 A0 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-08 · A2 1:1 · 선택</div>
@@ -1297,7 +1297,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-08 백건 A0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-09" data-g="EX" data-q="p-ex-09 백건 b0 백건b0 hardware/mechanical/cad/stl/print_extra/예비_건반/백건_b0__1개.stl petg 흰색 " data-code="P-EX-09" data-name="백건 B0" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_B0__1개.stl" data-svg="fin/parts/P-EX-09.svg" data-zip="fin/parts/P-EX-09.zip.b64.txt" data-zipname="Toccata_P-EX-09_백건_B0.zip" data-zipbytes="58104" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-09" data-g="EX" data-q="p-ex-09 백건 b0 백건b0 hardware/mechanical/cad/stl/print_extra/예비_건반/백건_b0__1개.stl petg 흰색 " data-code="P-EX-09" data-name="백건 B0" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_B0__1개.stl" data-svg="fin/parts/P-EX-09.svg" data-zip="fin/parts/P-EX-09.zip.b64.txt" data-zipname="Toccata_P-EX-09_백건_B0.zip" data-zipbytes="58105" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-09 백건 B0 도면 크게 보기"><img src="fin/parts/P-EX-09.svg" alt="P-EX-09 백건 B0 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-09 · A2 1:1 · 선택</div>
@@ -1308,7 +1308,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-09 백건 B0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-10" data-g="EX" data-q="p-ex-10 백건 c8 백건c8 hardware/mechanical/cad/stl/print_extra/예비_건반/백건_c8__1개.stl petg 흰색 " data-code="P-EX-10" data-name="백건 C8" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_C8__1개.stl" data-svg="fin/parts/P-EX-10.svg" data-zip="fin/parts/P-EX-10.zip.b64.txt" data-zipname="Toccata_P-EX-10_백건_C8.zip" data-zipbytes="57494" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-10" data-g="EX" data-q="p-ex-10 백건 c8 백건c8 hardware/mechanical/cad/stl/print_extra/예비_건반/백건_c8__1개.stl petg 흰색 " data-code="P-EX-10" data-name="백건 C8" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/백건_C8__1개.stl" data-svg="fin/parts/P-EX-10.svg" data-zip="fin/parts/P-EX-10.zip.b64.txt" data-zipname="Toccata_P-EX-10_백건_C8.zip" data-zipbytes="57496" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-10 백건 C8 도면 크게 보기"><img src="fin/parts/P-EX-10.svg" alt="P-EX-10 백건 C8 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-10 · A2 1:1 · 선택</div>
@@ -1319,7 +1319,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-10 백건 C8 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 56 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-11" data-g="EX" data-q="p-ex-11 흑건 c#·d# 흑건c#·d# hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_c#·d#__2개.stl petg 검정 " data-code="P-EX-11" data-name="흑건 C#·D#" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_C#·D#__2개.stl" data-svg="fin/parts/P-EX-11.svg" data-zip="fin/parts/P-EX-11.zip.b64.txt" data-zipname="Toccata_P-EX-11_흑건_Cs-Ds.zip" data-zipbytes="57477" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-11" data-g="EX" data-q="p-ex-11 흑건 c#·d# 흑건c#·d# hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_c#·d#__2개.stl petg 검정 " data-code="P-EX-11" data-name="흑건 C#·D#" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_C#·D#__2개.stl" data-svg="fin/parts/P-EX-11.svg" data-zip="fin/parts/P-EX-11.zip.b64.txt" data-zipname="Toccata_P-EX-11_흑건_Cs-Ds.zip" data-zipbytes="57474" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-11 흑건 C#·D# 도면 크게 보기"><img src="fin/parts/P-EX-11.svg" alt="P-EX-11 흑건 C#·D# 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-11 · A3 1:1 · 선택</div>
@@ -1330,7 +1330,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-11 흑건 C#·D# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 56 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-12" data-g="EX" data-q="p-ex-12 흑건 f# 흑건f# hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_f#__1개.stl petg 검정 " data-code="P-EX-12" data-name="흑건 F#" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_F#__1개.stl" data-svg="fin/parts/P-EX-12.svg" data-zip="fin/parts/P-EX-12.zip.b64.txt" data-zipname="Toccata_P-EX-12_흑건_Fs.zip" data-zipbytes="58608" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-12" data-g="EX" data-q="p-ex-12 흑건 f# 흑건f# hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_f#__1개.stl petg 검정 " data-code="P-EX-12" data-name="흑건 F#" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_F#__1개.stl" data-svg="fin/parts/P-EX-12.svg" data-zip="fin/parts/P-EX-12.zip.b64.txt" data-zipname="Toccata_P-EX-12_흑건_Fs.zip" data-zipbytes="58604" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-12 흑건 F# 도면 크게 보기"><img src="fin/parts/P-EX-12.svg" alt="P-EX-12 흑건 F# 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-12 · A3 1:1 · 선택</div>
@@ -1341,7 +1341,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-12 흑건 F# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-13" data-g="EX" data-q="p-ex-13 흑건 g# 흑건g# hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_g#__1개.stl petg 검정 " data-code="P-EX-13" data-name="흑건 G#" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_G#__1개.stl" data-svg="fin/parts/P-EX-13.svg" data-zip="fin/parts/P-EX-13.zip.b64.txt" data-zipname="Toccata_P-EX-13_흑건_Gs.zip" data-zipbytes="57536" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-13" data-g="EX" data-q="p-ex-13 흑건 g# 흑건g# hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_g#__1개.stl petg 검정 " data-code="P-EX-13" data-name="흑건 G#" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_G#__1개.stl" data-svg="fin/parts/P-EX-13.svg" data-zip="fin/parts/P-EX-13.zip.b64.txt" data-zipname="Toccata_P-EX-13_흑건_Gs.zip" data-zipbytes="57534" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-13 흑건 G# 도면 크게 보기"><img src="fin/parts/P-EX-13.svg" alt="P-EX-13 흑건 G# 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-13 · A3 1:1 · 선택</div>
@@ -1352,7 +1352,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-13 흑건 G# 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 56 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-14" data-g="EX" data-q="p-ex-14 흑건 a#·a#0 흑건a#·a#0 hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_a#·a#0__2개.stl petg 검정 " data-code="P-EX-14" data-name="흑건 A#·A#0" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_A#·A#0__2개.stl" data-svg="fin/parts/P-EX-14.svg" data-zip="fin/parts/P-EX-14.zip.b64.txt" data-zipname="Toccata_P-EX-14_흑건_As-As0.zip" data-zipbytes="58126" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-14" data-g="EX" data-q="p-ex-14 흑건 a#·a#0 흑건a#·a#0 hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_a#·a#0__2개.stl petg 검정 " data-code="P-EX-14" data-name="흑건 A#·A#0" data-file="hardware/mechanical/cad/stl/print_extra/예비_건반/흑건_A#·A#0__2개.stl" data-svg="fin/parts/P-EX-14.svg" data-zip="fin/parts/P-EX-14.zip.b64.txt" data-zipname="Toccata_P-EX-14_흑건_As-As0.zip" data-zipbytes="58122" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-14 흑건 A#·A#0 도면 크게 보기"><img src="fin/parts/P-EX-14.svg" alt="P-EX-14 흑건 A#·A#0 부품도 (A3, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-14 · A3 1:1 · 선택</div>
@@ -1363,7 +1363,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-14 흑건 A#·A#0 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 57 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-15" data-g="EX" data-q="p-ex-15 패드바 칸1 poron6t용 패드바칸1poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_칸1_poron6t용__7개.stl petg " data-code="P-EX-15" data-name="패드바 칸1 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_칸1_PORON6T용__7개.stl" data-svg="fin/parts/P-EX-15.svg" data-zip="fin/parts/P-EX-15.zip.b64.txt" data-zipname="Toccata_P-EX-15_패드바_칸1_PORON6T용.zip" data-zipbytes="70286" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-15" data-g="EX" data-q="p-ex-15 패드바 칸1 poron6t용 패드바칸1poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_칸1_poron6t용__7개.stl petg " data-code="P-EX-15" data-name="패드바 칸1 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_칸1_PORON6T용__7개.stl" data-svg="fin/parts/P-EX-15.svg" data-zip="fin/parts/P-EX-15.zip.b64.txt" data-zipname="Toccata_P-EX-15_패드바_칸1_PORON6T용.zip" data-zipbytes="70285" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-15 패드바 칸1 PORON6T용 도면 크게 보기"><img src="fin/parts/P-EX-15.svg" alt="P-EX-15 패드바 칸1 PORON6T용 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-15 · A3 2:1 · 선택</div>
@@ -1374,7 +1374,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-15 패드바 칸1 PORON6T용 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 69 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-16" data-g="EX" data-q="p-ex-16 패드바 칸2 poron6t용 패드바칸2poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_칸2_poron6t용__7개.stl petg " data-code="P-EX-16" data-name="패드바 칸2 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_칸2_PORON6T용__7개.stl" data-svg="fin/parts/P-EX-16.svg" data-zip="fin/parts/P-EX-16.zip.b64.txt" data-zipname="Toccata_P-EX-16_패드바_칸2_PORON6T용.zip" data-zipbytes="71050" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-16" data-g="EX" data-q="p-ex-16 패드바 칸2 poron6t용 패드바칸2poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_칸2_poron6t용__7개.stl petg " data-code="P-EX-16" data-name="패드바 칸2 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_칸2_PORON6T용__7개.stl" data-svg="fin/parts/P-EX-16.svg" data-zip="fin/parts/P-EX-16.zip.b64.txt" data-zipname="Toccata_P-EX-16_패드바_칸2_PORON6T용.zip" data-zipbytes="71048" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-16 패드바 칸2 PORON6T용 도면 크게 보기"><img src="fin/parts/P-EX-16.svg" alt="P-EX-16 패드바 칸2 PORON6T용 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-16 · A3 2:1 · 선택</div>
@@ -1385,7 +1385,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-16 패드바 칸2 PORON6T용 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 69 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-17" data-g="EX" data-q="p-ex-17 패드바 칸3 poron6t용 패드바칸3poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_칸3_poron6t용__7개.stl petg " data-code="P-EX-17" data-name="패드바 칸3 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_칸3_PORON6T용__7개.stl" data-svg="fin/parts/P-EX-17.svg" data-zip="fin/parts/P-EX-17.zip.b64.txt" data-zipname="Toccata_P-EX-17_패드바_칸3_PORON6T용.zip" data-zipbytes="93083" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-17" data-g="EX" data-q="p-ex-17 패드바 칸3 poron6t용 패드바칸3poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_칸3_poron6t용__7개.stl petg " data-code="P-EX-17" data-name="패드바 칸3 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_칸3_PORON6T용__7개.stl" data-svg="fin/parts/P-EX-17.svg" data-zip="fin/parts/P-EX-17.zip.b64.txt" data-zipname="Toccata_P-EX-17_패드바_칸3_PORON6T용.zip" data-zipbytes="93082" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-17 패드바 칸3 PORON6T용 도면 크게 보기"><img src="fin/parts/P-EX-17.svg" alt="P-EX-17 패드바 칸3 PORON6T용 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-17 · A3 2:1 · 선택</div>
@@ -1407,7 +1407,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-18 패드바 칸4 PORON6T용 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 67 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-19" data-g="EX" data-q="p-ex-19 패드바 끝부속 왼쪽 poron6t용 패드바끝부속왼쪽poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_끝부속_왼쪽_poron6t용__1개.stl petg " data-code="P-EX-19" data-name="패드바 끝부속 왼쪽 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_끝부속_왼쪽_PORON6T용__1개.stl" data-svg="fin/parts/P-EX-19.svg" data-zip="fin/parts/P-EX-19.zip.b64.txt" data-zipname="Toccata_P-EX-19_패드바_끝부속_왼쪽_PORON6T용.zip" data-zipbytes="80937" data-place="0">
+<article class="partdwg-card" id="partdwg-P-EX-19" data-g="EX" data-q="p-ex-19 패드바 끝부속 왼쪽 poron6t용 패드바끝부속왼쪽poron6t용 hardware/mechanical/cad/stl/print_extra/대안_패드바_poron6t용/패드바_끝부속_왼쪽_poron6t용__1개.stl petg " data-code="P-EX-19" data-name="패드바 끝부속 왼쪽 PORON6T용" data-file="hardware/mechanical/cad/stl/print_extra/대안_패드바_PORON6T용/패드바_끝부속_왼쪽_PORON6T용__1개.stl" data-svg="fin/parts/P-EX-19.svg" data-zip="fin/parts/P-EX-19.zip.b64.txt" data-zipname="Toccata_P-EX-19_패드바_끝부속_왼쪽_PORON6T용.zip" data-zipbytes="80931" data-place="0">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-19 패드바 끝부속 왼쪽 PORON6T용 도면 크게 보기"><img src="fin/parts/P-EX-19.svg" alt="P-EX-19 패드바 끝부속 왼쪽 PORON6T용 부품도 (A3, 2:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-19 · A3 2:1 · 선택</div>
@@ -1429,7 +1429,7 @@
 <div class="partdwg-act"><button type="button" class="partdwg-btn" data-act="view">도면 크게</button><button type="button" class="partdwg-btn" data-act="v3d" aria-label="P-EX-20 패드바 끝부속 오른쪽 PORON6T용 3D로 보기">3D</button><button type="button" class="partdwg-btn pri" data-act="dl">파일 받기 <span class="mono">.zip 47 KB</span></button></div>
 <p class="small partdwg-msg" aria-live="polite"></p>
 </div></article>
-<article class="partdwg-card" id="partdwg-P-EX-21" data-g="EX" data-q="p-ex-21 화면덮개 선택 화면덮개선택 hardware/mechanical/cad/stl/print_extra/선택_화면덮개/화면덮개_선택__1개.stl petg ts-screencover" data-code="P-EX-21" data-name="화면덮개 선택" data-file="hardware/mechanical/cad/stl/print_extra/선택_화면덮개/화면덮개_선택__1개.stl" data-svg="fin/parts/P-EX-21.svg" data-zip="fin/parts/P-EX-21.zip.b64.txt" data-zipname="Toccata_P-EX-21_화면덮개_선택.zip" data-zipbytes="14901" data-place="1">
+<article class="partdwg-card" id="partdwg-P-EX-21" data-g="EX" data-q="p-ex-21 화면덮개 선택 화면덮개선택 hardware/mechanical/cad/stl/print_extra/선택_화면덮개/화면덮개_선택__1개.stl petg ts-screencover" data-code="P-EX-21" data-name="화면덮개 선택" data-file="hardware/mechanical/cad/stl/print_extra/선택_화면덮개/화면덮개_선택__1개.stl" data-svg="fin/parts/P-EX-21.svg" data-zip="fin/parts/P-EX-21.zip.b64.txt" data-zipname="Toccata_P-EX-21_화면덮개_선택.zip" data-zipbytes="14908" data-place="1">
 <button type="button" class="partdwg-thumb" data-act="view" aria-label="P-EX-21 화면덮개 선택 도면 크게 보기"><img src="fin/parts/P-EX-21.svg" alt="P-EX-21 화면덮개 선택 부품도 (A2, 1:1)" loading="lazy" decoding="async"></button>
 <div class="partdwg-body">
 <div class="partdwg-code mono">P-EX-21 · A2 1:1 · 선택</div>

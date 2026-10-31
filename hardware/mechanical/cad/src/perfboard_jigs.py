@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
-"""Toccata - printed perfboard jigs for cutting / drilling the control boards (MB x7) and the PED board out of Coms BE163 sheets
+"""Toccata - printed perfboard jig for cutting / drilling the PED board out of a Coms BE163 sheet
 (new 2026-10-07, user: no 5x7 perfboards - their own BE163 double-sided 80 x 120, 30 x 42 holes at 2.54, ~1.6 thick; one sheet
-gives two 70 x 50 pieces). How to use: cad/jigs/README.md section '기판 지그'.
+gives two 70 x 50 pieces). A16 (2026-10-31, user: "80 120 으로 설계를 다시"): the 7 control boards MB use a whole sheet each, uncut
+and undrilled, on the module floor (keyaction.py A16) - the MB jig P-MB is gone; only the PED piece is still cut.
+How to use: cad/jigs/README.md section '기판 지그'.
 
     build()                                  # -> [{name, solid, qty, required, note, key}] for build_all.py -> stl/print/09_기판지그/
     python3 src/perfboard_jigs.py            # table (size, rough grams / minutes) + the BE163 sheet layout
     python3 src/check_perfboard_jigs.py      # pins on grid holes, bores at the fixing points, cut edges on the outline, layout
 
-Each jig is a 5 mm plate the size of the board outline, laid on the sheet's top face. Short pins (D0.9 x 1.2) under it drop into
+The jig is a 5 mm plate the size of the board outline, laid on the sheet's top face. Short pins (D0.9 x 1.2) under it drop into
 existing grid holes, so the plate registers on the 2.54 grid exactly where the design puts it. Its four side faces ARE the cut lines
-(score with a craft knife along them, then snap), the MB plate has the fin slot as a window open to the front edge (score the two
-sides and the end), and guide bores (bit + 0.2, as the plywood jigs) go through the plate at the 4 fixing points.
+(score with a craft knife along them, then snap), and guide bores (bit + 0.2, as the plywood jigs) go through the plate at the 4
+fixing points.
 
 Numbers come from the models, not typed again:
-  MB  spec/electronics_modules.json mb_board (= key-action-v4 geometry.json 'control board' P23): outline x47.25~117.25 y145.5~195.5,
-      slot x81.918~84.718 y145.5~172.0, screw holes D3.2 (50.0, 149.0) (114.5, 192.5), locating-pin holes D3.0 (114.5, 149.0)
-      (50.0, 192.5), hole grid x = 76.52 + 2.54 i, y = 173.59 + 2.54 j (BRD-01, on the RP2040-Zero pins)
   PED electronics.py CU-E-PEDBOARD (x426.5~476.5 y244~314, turned 90 deg): screws D3.2 at (x0+4, y0+4) (x1-4, y1-4), pins D3.0
       at the other corners; no circuit grid -> the two outline edges at the Zero end / left side sit mid-gap (1.27 from the holes)
 
 Use frame (u, v, w): u along the 70 side, v along the 50 side, w = 0 the sheet's top face, +w up through the plate (toward the drill).
-MB: (u, v) = (x - 47.25, y - 145.5) - the board lies as in the module (top up, slot at the front v = 0).
 PED: (u, v) = (y - 244, 476.5 - x) - the Zero end (USB-C, -y in the world) is u = 0.
 Print frame: plate top (labels) on the bed, pins up - no supports.
 """
@@ -52,30 +50,6 @@ MIN_PIN_EDGE = 2.0                   # pin centre >= 2.0 from any cut line / win
 MIN_PIN_BORE = 2.5                   # pin centre >= bore radius + 2.5 from a guide bore
 
 R_PRINT = rot_x(180.0)               # use-top face on the bed, pins up
-
-
-def _mb():
-    M = json.load(open(os.path.join(SPEC, "electronics_modules.json"), encoding="utf-8"))
-    mb = {i["id"]: i for i in M["module_items"]}["mb_board"]
-    xs = [v for b in mb["boxes"] for v in b["x"]]
-    ys = [v for b in mb["boxes"] for v in b["y"]]
-    ox, oy = min(xs), min(ys)                                   # 47.25, 145.5
-    slot = next(b for b in mb["boxes"] if "behind the fin slot" in b["label"])
-    sx0, sx1, sy1 = slot["x"][0], slot["x"][1], slot["y"][0]    # 81.918, 84.718, 172.0
-    holes = []
-    for c in mb["cylinders"]:
-        kind = "screw" if "screw" in c["label"] else "pin"
-        holes.append(dict(u=c["center"][0] - ox, v=c["center"][1] - oy, bit=c["d"], kind=kind,
-                          world=(c["center"][0], c["center"][1])))
-    g = mb["hole_grid"]
-    gx0 = float(g["x"].split("+")[0])                            # 76.52 + 2.54 i
-    gy0 = float(g["y"].split("+")[0])                            # 173.59 + 2.54 j
-    gu0 = (gx0 - ox) % PITCH                                     # first grid u inside the board (1.33)
-    gv0 = (gy0 - oy) % PITCH                                     # 0.15
-    return dict(key="P-MB", name="P-MB_제어기판지그_MB7장", title="제어 기판 MB 지그", qty_boards=7,
-                size=(max(xs) - ox, max(ys) - oy), origin=(ox, oy), grid0=(gu0, gv0),
-                slot=(sx0 - ox, sx1 - ox, 0.0, sy1 - oy), holes=holes,
-                src="spec/electronics_modules.json mb_board (geometry.json P23 control board + slot, BRD-01 grid)")
 
 
 def _ped():
@@ -133,15 +107,9 @@ def _label_polys(spec):
 
     def eng(s, size, u, v, rot=0.0, heavy=False):
         t.append(text_xy(s, size, dep, x=u, y=v, z=top - ENGRAVE, halign="center", valign="center", rot=rot, heavy=heavy))
-    if spec["key"] == "P-MB":
-        eng("MB", 6.0, W * 0.22, H * 0.64, heavy=True)
-        eng("제어기판 7장", 3.6, W * 0.22, H * 0.40)
-        eng("BE163", 3.4, W * 0.76, H * 0.64, heavy=True)
-        eng("▼앞 (홈)", 3.6, W * 0.76, H * 0.40)
-    else:
-        eng("PED", 6.0, W * 0.5, H * 0.64, heavy=True)
-        eng("◀USB 끝", 3.6, W * 0.25, H * 0.40)
-        eng("BE163", 3.4, W * 0.72, H * 0.40, heavy=True)
+    eng("PED", 6.0, W * 0.5, H * 0.64, heavy=True)
+    eng("◀USB 끝", 3.6, W * 0.25, H * 0.40)
+    eng("BE163", 3.4, W * 0.72, H * 0.40, heavy=True)
     return t
 
 
@@ -201,15 +169,12 @@ def sheet_layout(spec_a, spec_b):
 
 
 def specs():
-    return [_mb(), _ped()]
+    return [_ped()]                  # A16: the control boards MB use whole sheets, no jig
 
 
 def _note(spec):
-    if spec["key"] == "P-MB":
-        return ("제어 기판 MB 7장을 BE163에서 자르고 뚫는 지그 (악기당 1개): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 홈 창 2.8 × 26.5의 "
-                "세 변도 긋기, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로")
-    return ("PED 페달 보드 1장용 지그: MB 지그와 같은 방법 (홈 없음), 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2 (cad/jigs/README.md '기판 지그'). "
-            "PETG 0.2 mm, 서포트 없음, STL 방향 그대로")
+    return ("PED 페달 보드 1장용 지그: 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 "
+            "뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로")
 
 
 def build():
@@ -251,7 +216,7 @@ if __name__ == "__main__":
         print("%-6s %-28s %5.1f x %5.1f x %4.1f  ~%4.1f g ~%3.0f min  grid %d x %d (u0 %.2f v0 %.2f)  pins %s" % (
             s["key"], s["name"], b[3], b[4], b[5], g, mi, len(us), len(vs), us[0], vs[0],
             " ".join("(%.2f,%.2f)" % (u, v) for u, v, _i, _j in pin_nodes(s))))
-    for a, b in ((S[0], S[0]), (S[0], S[1])):
+    for a, b in ((S[0], S[0]),):
         L = sheet_layout(a, b)
         print("sheet %s + %s: rows %d (+%d spare, strip %.2f) of %d, cols %d of %d, fits %s" % (
             a["key"], b["key"], L["rows_used"], L["gap_rows"], L["strip"], SHEET["rows"], L["cols_used"], SHEET["cols"], L["fits"]))

@@ -28,14 +28,15 @@ def has(*keys):
     return lambda i: any(k in i for k in keys)
 
 
-FRAME = has("O4-FRAME", "O4-CAGE", "O4-TAB-")          # A12 (2026-10-29): bed + lever cage + guide tabs
+FRAME = has("O4-FRAME", "O4-CAGE", "O4-TAB-", "O4-RAIL")   # A12 (2026-10-29): bed + lever cage + guide tabs; A16: + the separate balance rail
 BED = has("O4-FRAME")
 CAGE = has("O4-CAGE")
 TABS = has("O4-TAB-")
 PINS = has("balancepin")
 KEYROD = has("keyrodSUS")
 FELTS = has("whitefrontfelt", "blackfrontfelt", "keeperfelt")
-BOARD = has("O4-E-MB", "O4-E-ZERO", "O4-E-MUX", "controlboardscrew")
+BOARD = has("O4-E-MB", "O4-E-ZERO", "O4-E-MUX")
+RAIL = has("O4-RAIL")                                   # A16: the rail print + its two M3x6 (O4-RAILSCREW1/2)
 SENSOR = has("O4-E-SB", "O4-SENSORBAR", "SBSCREW")
 LEVER = has("O4-LEVER-", "O4-LEVERCOVER-", "O4-STEEL-", "O4-FELTSTRIP-", "O4-SPRING-")
 LEVROD = has("leverrodD4", "O4-PLUG")
@@ -54,9 +55,12 @@ SIDE = (-230, 430, 260, 80, 150, 30)
 
 # figure: (shown, new = full colour, ghost ids, camera)
 STEPS = {
-    "s1_frame": (lambda i: FRAME(i) or PINS(i) or KEYROD(i) or FELTS(i), lambda i: PINS(i) or KEYROD(i) or FELTS(i), (), FRONT),
-    # A13 (2026-10-30): the board sits on 4 posts on the closed hatch floor, screwed from above before the lever cage goes on
-    "s2_board": (lambda i: BED(i) or TABS(i) or PINS(i) or KEYROD(i) or FELTS(i) or BOARD(i), BOARD, (), REAR),
+    # A16 (2026-10-31): the pins go into the separate rail on the bench; the rod waits for step 08
+    "s1_frame": (lambda i: BED(i) or TABS(i) or (RAIL(i) and "SCREW" not in i) or PINS(i) or FELTS(i),
+                 lambda i: (RAIL(i) and "SCREW" not in i) or PINS(i) or FELTS(i), (), FRONT),
+    # A16: the whole 80 x 120 board in its floor pocket, the rail laid over it (2 x M3x6), the key rod on the rail, then the cage
+    "s2_board": (lambda i: BED(i) or TABS(i) or PINS(i) or KEYROD(i) or FELTS(i) or BOARD(i) or RAIL(i),
+                 lambda i: BOARD(i) or RAIL(i) or KEYROD(i), (), REAR),
     "s3_sensor": (lambda i: FRAME(i) or PINS(i) or KEYROD(i) or FELTS(i) or SENSOR(i), SENSOR, (), FRONT),
     "s4_levers": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i), LEVER, ("O4-FRAME", "O4-CAGE"), REAR),
     "s5_levrod": (lambda i: FRAME(i) or BOARD(i) or SENSOR(i) or LEVER(i) or LEVROD(i), LEVROD, ("O4-FRAME", "O4-CAGE"), SIDE),
@@ -80,8 +84,9 @@ SUBS = {
     "k_white": (sub(KEYP, "D"), KEY_EX, (265, -235, -150, 35, 110, 28)),
     "k_black": (sub(KEYP, "Ds"), KEY_EX, (270, -170, -150, 49, 120, 30)),
     "l_lever": (sub(LEVP, "D"), LEV_EX, (230, 70, -60, 40, 175, 10)),
-    # A12 frame in three prints: bed, guide tabs lifted 28, lever cage lifted 48
-    "s0_split": (FRAME, {"CAGE": (0, 0, 48), "TAB": (0, 0, 28)}, (-170, -250, 300, 85, 110, 35)),
+    # A12 frame in three prints: bed, guide tabs lifted 28, lever cage lifted 48 (A16: + the balance rail lifted 18)
+    "s0_split": (FRAME, {"CAGE": (0, 0, 48), "TAB": (0, 0, 28), "RAIL": (0, 0, 18), "RAILSCREW1": (0, 0, 18), "RAILSCREW2": (0, 0, 18)},
+                 (-170, -250, 300, 85, 110, 35)),
 }
 
 

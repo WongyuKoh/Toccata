@@ -1,7 +1,7 @@
 {
  "meta": {
   "task": "c1 electronics inside the key modules and end parts",
-  "version": "v4 W1+ r4.5 key action, circuit W1 rev B (BRD-01/BRD-02 2026-09-29)",
+  "version": "v4 W1+ r4.5 key action, circuit W1 rev B (BRD-01/BRD-02 2026-09-29) | A16 2026-10-31: whole 80 x 120 MB on the module floor under the separate balance rail",
   "units": "mm",
   "coords": "module_items: module local x (0 = C left boundary; world x = 47 + 164.5*(k-1) + x for octave module Ok), y from the white-key front lip, z from the desk. end_items: part=\"left\" -> local x = world x (left end part x0..47); part=\"right\" -> world x = 1198.5 + x; coords=\"world\" items are already world.",
   "box": "{x:[min,max], y:[..], z:[..], label}; optional show:false on a box = small detail; cut:true = subtract from its parent item",
@@ -14,201 +14,219 @@
  "module_items": [
   {
    "id": "mb_board",
-   "name_ko": "제어 기판 MB (5×7 양면 만능기판, 70×50×1.6)",
-   "name_en": "control board MB (5x7 cm double-sided perfboard cut 70x50x1.6)",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로)",
+   "name_en": "control board MB (a whole Coms BE163 double-sided perfboard 80x120x1.6)",
    "bom_id": "SE8 (bom.csv SCH-03 MB)",
    "boxes": [
     {
      "x": [
-      47.25,
-      81.918
+      22.25,
+      142.25
      ],
      "y": [
-      145.5,
-      195.5
+      93.3,
+      173.3
      ],
      "z": [
-      9.0,
-      10.6
+      7.0,
+      8.6
      ],
-     "label": "board, left of the fin slot"
-    },
-    {
-     "x": [
-      81.918,
-      84.718
-     ],
-     "y": [
-      172.0,
-      195.5
-     ],
-     "z": [
-      9.0,
-      10.6
-     ],
-     "label": "board strip behind the fin slot (slot x81.918..84.718 y145.5..172.0 cut out, open to the front edge)"
-    },
-    {
-     "x": [
-      84.718,
-      117.25
-     ],
-     "y": [
-      145.5,
-      195.5
-     ],
-     "z": [
-      9.0,
-      10.6
-     ],
-     "label": "board, right of the fin slot"
+     "label": "whole board on the floor ribs z5..7.0 (y93.3 = 0.3 behind the black tab bases); the separate balance rail sits on its bare strip"
     }
    ],
-   "cylinders": [
-    {
-     "axis": "z",
-     "center": [
-      50.0,
-      149.0
-     ],
-     "d": 3.2,
-     "range": [
-      9.0,
-      10.6
-     ],
-     "label": "M3 screw hole D3.2 (screw M3x6 L35 from below into the hung boss)",
-     "cut": true
-    },
-    {
-     "axis": "z",
-     "center": [
-      114.5,
-      192.5
-     ],
-     "d": 3.2,
-     "range": [
-      9.0,
-      10.6
-     ],
-     "label": "M3 screw hole D3.2",
-     "cut": true
-    },
-    {
-     "axis": "z",
-     "center": [
-      114.5,
-      149.0
-     ],
-     "d": 3.0,
-     "range": [
-      9.0,
-      10.6
-     ],
-     "label": "locating-pin hole D3.0 (frame pin D2.8)",
-     "cut": true
-    },
-    {
-     "axis": "z",
-     "center": [
-      50.0,
-      192.5
-     ],
-     "d": 3.0,
-     "range": [
-      9.0,
-      10.6
-     ],
-     "label": "locating-pin hole D3.0 (frame pin D2.8)",
-     "cut": true
-    }
-   ],
+   "cylinders": [],
    "show": true,
-   "source": "key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
    "assumed": false,
    "hole_grid": {
-    "x": "76.52 + 2.54 i",
-    "y": "173.59 + 2.54 j",
+    "x": "30.18 + 2.54 i (i = 0..41)",
+    "y": "96.47 + 2.54 j (j = 0..29)",
     "d": 1.0,
-    "note": "all part holes lie on the RP2040-Zero pin grid; cut the perfboard to this grid (BRD-01 note 1)"
+    "note": "BE163 30 x 42 holes assumed centred on the board (margins 7.93 / 3.17). Parts use i = 1..40, j = 1..28 only, so a 28 x 40 board (same lattice about the centre x82.25 y133.3) takes the same layout"
    },
    "keepouts": [
     {
      "x": [
-      81.218,
-      85.418
+      22.25,
+      142.25
      ],
      "y": [
-      145.5,
-      173.2
+      132.0,
+      144.8
      ],
      "z": [
-      9.0,
-      20.0
+      8.6,
+      19.0
      ],
-     "label": "no parts / pads / wires (W1 r4.3); only the Zero PCB overhangs y172.0..173.2 above z11.9"
+     "label": "balance rail on the board (y132.3..144.5 + 0.3): no parts, pads or top wires - rows j = 14..19 unused"
     },
     {
      "x": [
-      47.25,
-      117.25
+      22.45,
+      142.05
      ],
      "y": [
-      145.8,
-      194.5
+      93.5,
+      95.4
      ],
      "z": [
-      10.6,
-      20.0
+      5.0,
+      7.0
      ],
-     "label": "component height zone <= z20 (BRD-01 note 3)"
+     "label": "underside: front support rib (gap x59.5..81.5 for the ribbon) - no joints / wires on it"
     },
     {
      "x": [
-      54.3,
-      110.2
+      22.45,
+      142.05
      ],
      "y": [
-      194.5,
-      195.5
+      171.2,
+      173.1
      ],
      "z": [
-      10.6,
-      16.7
+      5.0,
+      7.0
      ],
-     "label": "rear strip <= z16.7 (geometry \"board components, rear strip\")"
+     "label": "underside: rear support rib"
     },
     {
      "x": [
-      47.0,
-      53.0
+      22.45,
+      28.8
+     ],
+     "y": [
+      93.5,
+      173.1
+     ],
+     "z": [
+      5.0,
+      7.0
+     ],
+     "label": "underside: left support rib (board margin 7.93)"
+    },
+    {
+     "x": [
+      135.7,
+      142.05
+     ],
+     "y": [
+      93.5,
+      173.1
+     ],
+     "z": [
+      5.0,
+      7.0
+     ],
+     "label": "underside: right support rib"
+    },
+    {
+     "x": [
+      28.8,
+      135.7
+     ],
+     "y": [
+      132.8,
+      144.0
+     ],
+     "z": [
+      5.0,
+      7.0
+     ],
+     "label": "underside: rib under the rail strip; wires cross only in its gap x92.0..114.0"
+    },
+    {
+     "x": [
+      22.25,
+      142.25
+     ],
+     "y": [
+      93.3,
+      173.3
+     ],
+     "z": [
+      6.0,
+      7.0
+     ],
+     "label": "underside: every lead / pin trimmed to <= 1.0 below the board (z >= 6.0); wires = strands of the 2651 ribbon (OD ~0.9), two crossing = 1.8 < the 2.0 gap"
+    },
+    {
+     "x": [
+      39.3,
+      44.0
+     ],
+     "y": [
+      144.8,
+      173.3
+     ],
+     "z": [
+      8.6,
+      9.5
+     ],
+     "label": "cage fin 2 trimmed to z9.5 over the board: no top parts in columns i = 4, 5 behind the rail"
+    },
+    {
+     "x": [
+      121.6,
+      126.3
+     ],
+     "y": [
+      144.8,
+      173.3
+     ],
+     "z": [
+      8.6,
+      9.5
+     ],
+     "label": "cage fin 4 trimmed to z9.5 over the board: no top parts in columns i = 36, 37 behind the rail"
+    },
+    {
+     "x": [
+      82.42,
+      84.22
      ],
      "y": [
       144.5,
-      152.0
+      209.0
      ],
      "z": [
-      10.6,
-      17.0
+      8.6,
+      18.0
      ],
-     "label": "hung boss D6 zone + 1.3 ring: no parts (x<=54.3 / x>=110.2)"
+     "label": "F|F# fin raised to z18.0 over the Zero and the USB plug"
     },
     {
      "x": [
-      47.25,
-      117.25
+      22.25,
+      142.25
      ],
      "y": [
-      145.5,
-      195.5
+      93.3,
+      132.0
      ],
      "z": [
-      7.0,
-      9.0
+      8.6,
+      17.27
      ],
-     "label": "underside: header tails <= 2.0, C301, wiring, screw heads z7.35..9.0"
+     "label": "front zone: parts <= z17.27 (lowest key underside z17.77 = black key at full over-travel, -0.5)"
+    },
+    {
+     "x": [
+      22.25,
+      142.25
+     ],
+     "y": [
+      144.8,
+      173.3
+     ],
+     "z": [
+      8.6,
+      20.9
+     ],
+     "label": "rear zone: parts <= z20.9 (key tails z21.4 at the release overshoot)"
     }
    ],
-   "note": "Inserted from below through the floor hatch x46.25..118.25 y144.5..196.5 (x78.53..89.47 to y197.8). Board top z10.6 = underside of the 4 hung D6 bosses."
+   "note": "A16 (2026-10-31): laid in its pocket (2.0 over the floor ribs' base z5 - room for two crossing underside strands) on the module floor before the balance rail - edge lips (0.3 clearance) hold it in x / y, the rail's bare strip holds it down; no screws, no drilling, no cutting. Front zone y96..130 (J301 ribbon, mux), rear zone y147..168 (Zero, J302, R30x, jumpers, test points); wires cross under the rail in the rib gap x92..114."
   },
   {
    "id": "mb_screws",
@@ -216,194 +234,142 @@
    "name_en": "control-board screws M3x6 ISO 7380 x2",
    "bom_id": "L35",
    "boxes": [],
-   "cylinders": [
-    {
-     "axis": "z",
-     "center": [
-      50.0,
-      149.0
-     ],
-     "d": 5.7,
-     "range": [
-      7.35,
-      9.0
-     ],
-     "label": "button head D5.7 x 1.65 (under the board)"
-    },
-    {
-     "axis": "z",
-     "center": [
-      50.0,
-      149.0
-     ],
-     "d": 3.0,
-     "range": [
-      9.0,
-      15.0
-     ],
-     "label": "shank M3, tip z15.0 (boss bore D2.5 to z15.4)"
-    },
-    {
-     "axis": "z",
-     "center": [
-      114.5,
-      192.5
-     ],
-     "d": 5.7,
-     "range": [
-      7.35,
-      9.0
-     ],
-     "label": "button head D5.7 x 1.65"
-    },
-    {
-     "axis": "z",
-     "center": [
-      114.5,
-      192.5
-     ],
-     "d": 3.0,
-     "range": [
-      9.0,
-      15.0
-     ],
-     "label": "shank M3, tip z15.0"
-    }
-   ],
-   "show": true,
+   "cylinders": [],
+   "show": false,
    "source": "key-action-v4/model/geometry.json parts \"control-board screw M3x6 head D5.7 x 3.0 envelope\"; circuit_r44.screw; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 8",
-   "assumed": false
+   "assumed": false,
+   "note": "A16: none - the board is held by the pocket lips and the balance rail; the 14 M3x6 (L35) now fix the 7 balance rails"
   },
   {
    "id": "zero",
-   "name_ko": "RP2040-Zero (A301), 핀 헤더로 세움",
-   "name_en": "RP2040-Zero (A301) on pin headers, mold removed",
+   "name_ko": "RP2040-Zero (A301), 핀 헤더(몰드 그대로)로 세움",
+   "name_en": "RP2040-Zero (A301) on pin headers, mold kept",
    "bom_id": "SEV2 (PP-A799-2); bom.csv A301",
    "boxes": [
     {
      "x": [
-      75.14,
-      93.14
+      74.52,
+      92.52
      ],
      "y": [
-      172.0,
-      195.5
+      145.68,
+      169.18
      ],
      "z": [
-      11.9,
-      12.9
+      11.1,
+      12.1
      ],
-     "label": "Zero PCB 18.0 x 23.5 x 1.0 (edge y195.5 = USB side, +y)"
+     "label": "Zero PCB 18.0 x 23.5 x 1.0 on the 2.5 header molds (edge y169.18 = USB side, +y)"
     },
     {
      "x": [
-      77.2,
-      91.1
+      76.58,
+      90.48
      ],
      "y": [
-      172.5,
-      195.0
+      146.18,
+      168.68
      ],
      "z": [
-      10.6,
-      11.9
+      9.8,
+      11.1
      ],
-     "label": "underside chips/crystal/LDO on Kapton (C11), fills the 1.3 gap between the pin rows",
+     "label": "underside chips/crystal/LDO, 1.2 above the board (no Kapton needed)",
      "assumed": true
     },
     {
      "x": [
-      75.64,
-      92.64
+      75.02,
+      92.02
      ],
      "y": [
-      172.5,
-      189.5
+      146.18,
+      163.18
      ],
      "z": [
-      12.9,
-      16.3
+      12.1,
+      15.5
      ],
-     "label": "top components envelope (RP2040, flash, BOOT/RESET, LED) <= z16.3",
+     "label": "top components envelope (RP2040, flash, BOOT/RESET, LED) <= z15.0",
      "assumed": true
     },
     {
      "x": [
-      79.53,
-      88.47
+      78.91,
+      87.85
      ],
      "y": [
-      189.5,
-      196.8
+      163.18,
+      170.48
      ],
      "z": [
-      12.9,
-      16.1
+      12.1,
+      15.3
      ],
-     "label": "USB-C receptacle 8.94 x 7.3 x 3.2 (centre x84.00 z14.5), protrudes ~1.3 past the Zero edge"
+     "label": "USB-C receptacle 8.94 x 7.3 x 3.2 (centre x83.38 z13.7), protrudes ~1.3 past the Zero edge"
     }
    ],
    "cylinders": [],
    "show": true,
-   "source": "key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
    "assumed": false,
    "envelope": {
     "x": [
-     75.14,
-     93.14
+     74.52,
+     92.52
     ],
     "y": [
-     172.0,
-     195.5
+     145.68,
+     170.48
     ],
     "z": [
-     10.6,
-     16.3
+     8.6,
+     15.5
     ],
-    "label": "design envelope (geometry.json)"
+    "label": "design envelope (A16)"
    },
-   "assumed_note": "split of the envelope into underside/top component boxes is proposed (only the PCB z, envelope heights and the receptacle are specified); receptacle overhang 1.3 is \"1.0~1.5, check on the real part\" (BRD-01 note 3)"
+   "assumed_note": "split of the envelope into underside/top component boxes is proposed; receptacle overhang 1.3 is '1.0~1.5, check on the real part'"
   },
   {
    "id": "zero_headers",
-   "name_ko": "RP2040-Zero 핀 헤더 1×9 ×2 (몰드 뺌)",
-   "name_en": "RP2040-Zero pin headers 1x9 x2 (plastic removed)",
+   "name_ko": "RP2040-Zero 핀 헤더 1×9 ×2 (몰드 2.5 그대로)",
+   "name_en": "RP2040-Zero pin headers 1x9 x2 (plastic mold kept)",
    "bom_id": "SE7 (bom.csv A301-HDR)",
    "boxes": [
     {
      "x": [
-      76.2,
-      76.84
+      75.58,
+      76.22
      ],
      "y": [
-      173.27,
-      194.23
+      146.95,
+      167.91
      ],
      "z": [
-      7.0,
-      16.3
+      6.0,
+      17.1
      ],
-     "label": "1x9 header pins 0.64 sq at x76.52, y173.59..193.91 (2.54), tails cut <=2.0 below the board, tops <= z16.3"
+     "label": "1x9 header pins 0.64 sq at x75.90, y147.27..167.59 (2.54): mold z8.1..10.6 under the Zero, tails cut to <= 1.0 below the board (z6.0)"
     },
     {
      "x": [
-      91.44,
-      92.08
+      90.82,
+      91.46
      ],
      "y": [
-      173.27,
-      194.23
+      146.95,
+      167.91
      ],
      "z": [
-      7.0,
-      16.3
+      6.0,
+      17.1
      ],
-     "label": "1x9 header pins 0.64 sq at x91.76, y173.59..193.91 (2.54), tails cut <=2.0 below the board, tops <= z16.3"
+     "label": "1x9 header pins 0.64 sq at x91.14, y147.27..167.59 (2.54), same"
     }
    ],
    "cylinders": [],
    "show": false,
-   "source": "hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,3 + table (left/right rows only, no bottom row GP9..13); rp2040_zero_pads.csv holes x1.38/16.62 from the left edge, y1.59..21.91 from the USB edge; hardware/bom/final-bom/data.json SE7 11.5 mm pins",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SE7 11.5 mm pins (tail 3.0 / mold 2.5 / top 6.0)",
    "assumed": false
   },
   {
@@ -414,38 +380,38 @@
    "boxes": [
     {
      "x": [
-      77.75,
-      90.25
+      77.13,
+      89.63
      ],
      "y": [
-      196.8,
-      221.8
+      170.48,
+      195.48
      ],
      "z": [
-      10.7,
-      18.3
+      9.9,
+      17.5
      ],
-     "label": "overmold envelope limit 12.5 x 25 x 7.6 (plug face y196.8, centre x84.0 z14.5); NA993 mold ~11.3 wide x ~19.5 long (photo estimate)"
+     "label": "overmold envelope limit 12.5 x 25 x 7.6 (plug face y170.48, centre x83.38 z13.7); NA993 mold ~11.3 wide x ~19.5 long"
     }
    ],
    "cylinders": [],
    "show": true,
-   "source": "key-action-v4/model/geometry.json parts \"USB-C plug envelope (z10.7-18.3)\" + plan \"USB plug\"; circuit_r44.usb (y196.8..221.8, slot 76.45..91.55); hardware/bom/final-bom/data.json C04 specs (몰드 한계 12.5 x 7.6 x 25); hardware/pcb/netlist/cables.csv W201..W207",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json C04 specs (몰드 한계 12.5 x 7.6 x 25)",
    "assumed": false,
    "envelope": {
     "x": [
-     77.75,
-     90.25
+     77.13,
+     89.63
     ],
     "y": [
-     196.8,
-     221.8
+     170.48,
+     195.48
     ],
     "z": [
-     10.7,
-     18.3
+     9.9,
+     17.5
     ],
-    "label": "design envelope"
+    "label": "design envelope (A16)"
    }
   },
   {
@@ -456,23 +422,23 @@
    "boxes": [
     {
      "x": [
-      79.875,
-      88.125
+      79.255,
+      87.505
      ],
      "y": [
-      190.1,
-      196.8
+      163.78,
+      170.48
      ],
      "z": [
-      13.3,
-      15.7
+      12.5,
+      14.9
      ],
      "label": "USB-C plug shell 8.25 x 2.4, ~6.7 deep inside the receptacle"
     }
    ],
    "cylinders": [],
    "show": false,
-   "source": "USB Type-C spec plug shell 8.25 x 2.4 (standard); position = receptacle x79.53..88.47 z12.9..16.1",
+   "source": "USB Type-C spec plug shell 8.25 x 2.4 (standard); position = receptacle (A16)",
    "assumed": true
   },
   {
@@ -485,43 +451,21 @@
     {
      "axis": "y",
      "center": [
-      84.0,
-      14.5
+      83.38,
+      13.7
      ],
      "d": 3.5,
      "range": [
-      221.8,
-      221.8
+      195.48,
+      195.48
      ],
-     "label": "cable exits the overmold at y221.8 (OD 3.5 assumed: NA993 OD not published)"
+     "label": "cable exits the overmold at y195.48, runs straight +y under the rear shelf and out of the rear-wall opening (OD 3.5 assumed)"
     }
    ],
    "show": true,
-   "source": "circuit_r44.usb passage [215,258,22], bend 25.0, passage_spare 11.2 (key-action-v4/model/geometry.json); docs/report/toccata-build-v3.html drawing 7 (R27) polylines \"USB 케이블 O1..O7\" and \"CU 트레이 케이블 입구\" (world x540..700, centre ~620); cables.csv W201..W207 1 m",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); cad/src/electronics.py cable_path (duct routing unchanged)",
    "assumed": true,
-   "sweeps": [
-    {
-     "type": "arc",
-     "plane": "xy",
-     "z": 14.5,
-     "d": 3.5,
-     "R": 25.0,
-     "center": "[84.0 + 25*s, 221.8]",
-     "from": [
-      84.0,
-      221.8
-     ],
-     "to": "[84.0 + 25*s, 246.8]",
-     "label": "bend R25 in the cable passage (y215..258, z0..22); s = +1 for O1..O3 (toward +x), s = -1 for O4..O7 (toward -x)"
-    },
-    {
-     "type": "line",
-     "d": 3.5,
-     "from": "[84.0 + 25*s, 246.8, 14.5]",
-     "to": "world x ~620 (CU tray inlet x540..700), y246.8, lying on the passage floor after ~50 mm",
-     "label": "run along x in the passage to the hub"
-    }
-   ],
+   "sweeps": [],
    "assumed_note": "OD 3.5 and the run height are proposals; direction per module from v3 drawing 7 (cables converge on the CU inlet at world x~620)"
   },
   {
@@ -532,63 +476,63 @@
    "boxes": [
     {
      "x": [
-      54.93,
-      57.47
+      82.25,
+      122.89
      ],
      "y": [
-      152.0,
-      192.64
+      100.28,
+      102.82
      ],
      "z": [
-      10.6,
-      13.1
+      8.6,
+      11.1
      ],
-     "label": "1x16 header plastic spacer 2.54 x 40.64 x 2.5 (channel row x56.20)",
+     "label": "1x16 header plastic spacer 40.64 x 2.54 x 2.5 (channel row y101.55)",
      "assumed": true
     },
     {
      "x": [
-      70.17,
-      72.71
+      92.41,
+      112.73
      ],
      "y": [
-      162.16,
-      182.48
+      115.52,
+      118.06
      ],
      "z": [
-      10.6,
-      13.1
+      8.6,
+      11.1
      ],
-     "label": "1x8 header plastic spacer 2.54 x 20.32 x 2.5 (control row x71.44, y163.43..181.21)",
+     "label": "1x8 header plastic spacer 20.32 x 2.54 x 2.5 (control row y116.79, x93.68..111.46)",
      "assumed": true
     },
     {
      "x": [
-      54.93,
-      72.71
+      82.25,
+      122.89
      ],
      "y": [
-      152.0,
-      192.64
+      100.28,
+      118.06
      ],
      "z": [
-      13.1,
+      11.1,
+      12.7
+     ],
+     "label": "module PCB 40.64 x 17.78 x 1.6 (C0 at the left, C15 at the right)"
+    },
+    {
+     "x": [
+      98.47,
+      106.67
+     ],
+     "y": [
+      105.27,
+      113.07
+     ],
+     "z": [
+      12.7,
       14.7
-     ],
-     "label": "module PCB 17.78 x 40.64 x 1.6 (C0 at the front, C15 at the rear)"
-    },
-    {
-     "x": [
-      59.92,
-      67.72
-     ],
-     "y": [
-      168.22,
-      176.42
-     ],
-     "z": [
-      14.7,
-      16.7
      ],
      "label": "CD74HC4067 SSOP-24 (5.3 x 8.2 body, 7.8 over leads, <= 2.0 tall) + 0.1 uF / 10 k on top",
      "assumed": true
@@ -596,57 +540,57 @@
    ],
    "cylinders": [],
    "show": true,
-   "source": "key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "assumed": false,
    "envelope": {
     "x": [
-     54.93,
-     72.71
+     82.25,
+     122.89
     ],
     "y": [
-     152.0,
-     192.64
+     100.28,
+     118.06
     ],
     "z": [
-     10.6,
-     20.0
+     8.6,
+     17.1
     ],
-    "label": "design envelope (geometry.json)"
+    "label": "design envelope (A16)"
    },
    "pins": {
     "channel_row": {
-     "x": 56.2,
-     "y": [
-      153.27,
-      155.81,
-      158.35,
-      160.89,
-      163.43,
-      165.97,
-      168.51,
-      171.05,
-      173.59,
-      176.13,
-      178.67,
-      181.21,
-      183.75,
-      186.29,
-      188.83,
-      191.37
+     "y": 101.55,
+     "x": [
+      83.52,
+      86.06,
+      88.6,
+      91.14,
+      93.68,
+      96.22,
+      98.76,
+      101.3,
+      103.84,
+      106.38,
+      108.92,
+      111.46,
+      114.0,
+      116.54,
+      119.08,
+      121.62
      ],
      "names": "C0..C15"
     },
     "control_row": {
-     "x": 71.44,
-     "y": [
-      163.43,
-      165.97,
-      168.51,
-      171.05,
-      173.59,
-      176.13,
-      178.67,
-      181.21
+     "y": 116.79,
+     "x": [
+      93.68,
+      96.22,
+      98.76,
+      101.3,
+      103.84,
+      106.38,
+      108.92,
+      111.46
      ],
      "names": "GND,VCC,EN,S0,S1,S2,S3,SIG"
     }
@@ -661,38 +605,38 @@
    "boxes": [
     {
      "x": [
-      55.88,
-      56.52
+      83.2,
+      121.94
      ],
      "y": [
-      152.95,
-      191.69
+      101.23,
+      101.87
      ],
      "z": [
-      7.6,
-      19.1
+      6.0,
+      17.1
      ],
-     "label": "1x16 pins 0.64 sq: tail 3.0 through the board (z7.6), top 6.0 above the mold (z19.1)"
+     "label": "1x16 pins 0.64 sq: tail cut to <= 1.0 below the board (z6.0), top 6.0 above the mold (z17.1)"
     },
     {
      "x": [
-      71.12,
-      71.76
+      93.36,
+      111.78
      ],
      "y": [
-      163.11,
-      181.53
+      116.47,
+      117.11
      ],
      "z": [
-      7.6,
-      19.1
+      6.0,
+      17.1
      ],
      "label": "1x8 pins"
     }
    ],
    "cylinders": [],
    "show": false,
-   "source": "hardware/bom/final-bom/data.json SE7 (11.5 mm, 1-mold); pin rows from wiring_MB.csv; z from the standard 3.0/2.5/6.0 split",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SE7 (11.5 mm, 1-mold)",
    "assumed": true
   },
   {
@@ -703,23 +647,23 @@
    "boxes": [
     {
      "x": [
-      60.38,
-      79.96
+      59.76,
+      79.34
      ],
      "y": [
-      147.29,
-      151.63
+      98.11,
+      102.45
      ],
      "z": [
-      10.6,
-      12.0
+      8.6,
+      10.0
      ],
-     "label": "pads/solder x61.28..79.06 at y148.19 (odd, front) / y150.73 (even)"
+     "label": "pads/solder x60.66..78.44 at y99.01 (odd, front) / y101.55 (even), ribbon strands from below"
     }
    ],
    "cylinders": [],
    "show": false,
-   "source": "key-action-v4/model/geometry.json parts \"board part: J301 ribbon 2x8 pads\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
    "assumed": false
   },
   {
@@ -750,78 +694,63 @@
      ],
      "y": [
       77.5,
-      132.3
+      96.0
      ],
      "z": [
       5.0,
       5.89
      ],
-     "label": "flat on the floor, centred x70.48"
+     "label": "flat on the floor, centred x70.48, through the front-rib gap x59.5..81.5 under the board edge y93.3"
     },
     {
      "x": [
-      60.32,
+      59.76,
       80.64
      ],
      "y": [
-      132.3,
-      144.5
+      96.0,
+      102.45
      ],
      "z": [
       5.0,
-      5.89
+      7.0
      ],
-     "label": "through the lane under the balance rail (lane x59.0..82.0, z5..10)"
-    },
-    {
-     "x": [
-      60.01,
-      80.64
-     ],
-     "y": [
-      144.5,
-      151.63
-     ],
-     "z": [
-      5.0,
-      9.0
-     ],
-     "label": "under the control board (z5..9); last ~6 mm split into strands and shifted -0.31 into J301 (centre x70.17)"
+     "label": "under the board (z5..7.0); last ~6 mm split into strands into J301 from below (J301 centre x69.55, -0.93 from the ribbon centre)"
     }
    ],
    "cylinders": [],
    "show": true,
-   "source": "key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
    "assumed": false,
-   "path_length_mm": 85,
-   "cut_length_mm": 180,
-   "note": "cables.csv lists ~180 mm per ribbon; the laid path is ~85 mm - the rest is slack for soldering the MB outside the hatch before it is lifted in (BRD-01 note 8), folded under the board / on the floor (not modelled)"
+   "path_length_mm": 30,
+   "cut_length_mm": 70,
+   "note": "A16: laid path ~30 mm (J201 -> floor -> under the board front edge -> J301). Cut 70: SB, ribbon and MB are soldered as one harness on the bench; the slack lies folded flat on the floor between the black tab bases (x53.3..86.6, y79..93) in front of the board"
   },
   {
    "id": "j302_pads",
    "name_ko": "J302 EXT 1×6 패드",
-   "name_en": "J302 EXT 1x6 pads (lead soldered from the underside)",
+   "name_en": "J302 EXT 1x6 pads (lead soldered from the top, comes over the rear edge)",
    "bom_id": "bom.csv J302",
    "boxes": [
     {
      "x": [
-      93.4,
-      107.9
+      97.86,
+      112.36
      ],
      "y": [
-      193.01,
-      194.81
+      166.69,
+      168.49
      ],
      "z": [
-      10.6,
-      12.0
+      8.6,
+      10.0
      ],
-     "label": "pads x94.30..107.00 at y193.91"
+     "label": "pads x98.76..111.46 at y167.59"
     }
    ],
    "cylinders": [],
    "show": false,
-   "source": "key-action-v4/model/geometry.json parts \"board part: J302 EXT 1x6 pads\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
    "assumed": false
   },
   {
@@ -832,53 +761,53 @@
    "boxes": [
     {
      "x": [
-      102.58,
-      108.88
+      104.5,
+      110.8
      ],
      "y": [
-      152.02,
-      154.52
+      163.8,
+      166.3
      ],
      "z": [
-      10.6,
-      13.1
+      8.6,
+      11.1
      ],
-     "label": "R301 100k lying flat, body D2.5 x 6.3 between holes x101.92/109.54 (fitted on O1,O7)"
+     "label": "R301 100k lying flat, body D2.5 x 6.3 between holes x103.84/111.46, y165.05 (fitted on O1,O7)"
     },
     {
      "x": [
-      102.58,
-      108.88
+      104.5,
+      110.8
      ],
      "y": [
-      157.1,
-      159.6
+      158.72,
+      161.22
      ],
      "z": [
-      10.6,
-      13.1
+      8.6,
+      11.1
      ],
-     "label": "R302 100k lying flat, body D2.5 x 6.3 between holes x101.92/109.54 (fitted on O1)"
+     "label": "R302 100k lying flat, body D2.5 x 6.3 between holes x103.84/111.46, y159.97 (fitted on O1)"
     },
     {
      "x": [
-      102.58,
-      108.88
+      104.5,
+      110.8
      ],
      "y": [
-      162.18,
-      164.68
+      153.64,
+      156.14
      ],
      "z": [
-      10.6,
-      13.1
+      8.6,
+      11.1
      ],
-     "label": "R303 100k lying flat, body D2.5 x 6.3 between holes x101.92/109.54 (fitted on O1)"
+     "label": "R303 100k lying flat, body D2.5 x 6.3 between holes x103.84/111.46, y154.89 (fitted on O1)"
     }
    ],
    "cylinders": [],
    "show": false,
-   "source": "hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table + note 9 (R301 laid flat, short leads); bom.csv R301 O1/O7, R302/R303 O1, R304 none; DIN0207 D2.5 x 6.3",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); bom.csv R301 O1/O7, R302/R303 O1, R304 none; DIN0207 D2.5 x 6.3",
    "assumed": false,
    "modules": [
     "O1",
@@ -887,50 +816,95 @@
   },
   {
    "id": "ext_lead",
-   "name_ko": "EXT 연장선 W403 / W413 (L66 모듈 쪽 150 mm, 6심 22 AWG)",
-   "name_en": "EXT lead W403 / W413 (L66 module-side 150 mm, 6 x 22 AWG silicone)",
+   "name_ko": "EXT 연장선 W403 / W413 (L66 모듈 쪽 O1 160 · O7 150 mm, 6심)",
+   "name_en": "EXT lead W403 / W413 (L66 module side O1 160 / O7 150 mm, 6 wires)",
    "bom_id": "L66",
    "boxes": [
     {
      "x": [
-      88.0,
-      107.64
+      97.5,
+      112.5
      ],
      "y": [
-      192.9,
-      195.4
+      166.99,
+      173.3
      ],
      "z": [
-      5.0,
-      7.0
+      8.6,
+      10.1
      ],
-     "label": "6 wires leave J302 from the underside and run -x under the board, below the Zero header tails (z7.0), to x<=91"
+     "label": "6 wires soldered into J302 from the top, flat over the board to its rear edge"
     },
     {
      "x": [
-      82.0,
-      91.0
+      97.5,
+      112.5
      ],
      "y": [
-      195.4,
+      173.3,
+      174.6
+     ],
+     "z": [
+      8.5,
+      10.1
+     ],
+     "label": "over the rear edge and the rear lip (lip top z8.5)"
+    },
+    {
+     "x": [
+      97.5,
+      112.5
+     ],
+     "y": [
+      174.6,
+      177.0
+     ],
+     "z": [
+      5.0,
+      10.1
+     ],
+     "label": "down behind the rear lip to the floor"
+    },
+    {
+     "x": [
+      84.0,
+      112.5
+     ],
+     "y": [
+      175.0,
+      179.0
+     ],
+     "z": [
+      5.0,
+      6.6
+     ],
+     "label": "along the floor -x behind the board"
+    },
+    {
+     "x": [
+      84.0,
+      89.0
+     ],
+     "y": [
+      175.0,
       212.0
      ],
      "z": [
       5.0,
-      10.7
+      9.4
      ],
-     "label": "under the USB plug (z5..10.7), through the rear-wall opening x74..94 z5..21 into the cable passage"
+     "label": "under the USB plug (z9.9), through the rear-wall opening x76.45..91.55 into the cable duct"
     }
    ],
    "cylinders": [],
    "show": true,
-   "source": "hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 6; circuit_r43.ext_path (under_board 4.0, under_plug 5.7); circuit_r44.usb.wall_open [74,94,5,21]; cables.csv W403/W413; hardware/bom/final-bom/data.json L66",
+   "source": "user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); circuit_r44.usb.wall_open [74,94,5,21]; cables.csv W403/W413; hardware/bom/final-bom/data.json L66",
    "assumed": true,
    "modules": [
     "O1",
     "O7"
    ],
-   "assumed_note": "wire bundle cross-section (~8 x 2) and its exact x inside the stated bands are proposals"
+   "assumed_note": "wire bundle cross-section (~9 x 1.5 flat) and its exact x inside the stated bands are proposals"
   },
   {
    "id": "sb_board",

@@ -11,8 +11,9 @@ EXPECTED = [
     (r"-LEVER-", r"-FELTSTRIP-", "펠트 띠가 아래 립 끝면과 맞닿음"),
     (r"-FRAME|-CAGE", r"controlboard", "위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0"),
     (r"-FRAME", r"SBSCREW", "센서 바 M3×10이 Ø2.75 자리에 나사산을 냄 (P36)"),
-    (r"-FRAME", r"balancepin", "밸런스 핀 Ø2.0 ↔ 출력 구멍 Ø1.95 가벼운 압입 (P32)"),
-    (r"-FRAME", r"keyrod", "봉 받침 R2.05 ↔ 봉 Ø4 다각형 근사 오차 (< 0.01 mm3)"),
+    (r"-FRAME|-RAIL$", r"balancepin", "밸런스 핀 Ø2.0 ↔ 출력 구멍 Ø1.95 가벼운 압입 (P32; A16 모듈은 따로 출력한 레일)"),
+    (r"-FRAME|-RAIL$", r"keyrod", "봉 받침 R2.05 ↔ 봉 Ø4 다각형 근사 오차 (< 0.01 mm3)"),
+    (r"-FRAME", r"RAILSCREW", "밸런스 레일 M3×6이 받침의 Ø2.5 자리에 나사산을 냄 (A16)"),
 ]
 def unit(tag):
     if tag=='O1': return build_unit(G['parts'],G['plan'],'O1',0.0,'O1',{n:n+'1' for n in notes},None)

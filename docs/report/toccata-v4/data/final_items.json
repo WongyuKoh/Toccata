@@ -1,13 +1,13 @@
 {
  "version": 1,
- "generated": "2026-10-30",
+ "generated": "2026-10-31",
  "about": "Toccata 최종 재료 목록 — 완성된 악기에 들어가는 모든 물건과 설계가 쓰는 개수 (build_items.py)",
  "sources": {
   "data": "hardware/bom/final-bom/data.json",
   "state": "hardware/bom/final-bom/state_main.json",
   "xlsx": "최종본/01_구매목록/Toccata_학교_사비_구매목록_2026-10-08.xlsx",
   "circuit": "hardware/pcb/netlist/bom.csv, cables.csv (회로 개정 E)",
-  "cad": "hardware/mechanical/cad/src build_all.collect() (1655 parts, 1159 non-print)",
+  "cad": "hardware/mechanical/cad/src build_all.collect() (1662 parts, 1159 non-print)",
   "cad_readme": "hardware/mechanical/cad/README.md"
  },
  "legend": {
@@ -45,17 +45,17 @@
   "school_items": 215852,
   "school_ship": 28700,
   "school_ship_calc": 28700,
-  "personal_items": 315031,
-  "personal_ship": 27600,
-  "personal": 342631,
-  "total": 587183,
+  "personal_items": 326471,
+  "personal_ship": 30300,
+  "personal": 356771,
+  "total": 601323,
   "school_lines": 29,
-  "personal_lines": 19,
+  "personal_lines": 20,
   "xlsx": {
    "school_items": 215852,
    "school_ship": 28700,
-   "personal": 342631,
-   "total": 587183
+   "personal": 356771,
+   "total": 601323
   },
   "budget_school": 200000,
   "school_left": -15852
@@ -196,6 +196,12 @@
     "note": ""
    },
    {
+    "store": "디바이스마트",
+    "items": 11440,
+    "fee": 2700,
+    "note": ""
+   },
+   {
     "store": "11번가",
     "items": 8750,
     "fee": 0,
@@ -225,13 +231,13 @@
  "counts": {
   "by_source": {
    "school": 29,
-   "personal": 19,
+   "personal": 20,
    "owned": 53,
    "tool": 21
   },
   "by_cat": {
    "건반 액션": 14,
-   "센서·MCU·기판": 18,
+   "센서·MCU·기판": 19,
    "제어·전원": 15,
    "오디오": 9,
    "터치스크린": 8,
@@ -241,8 +247,8 @@
    "페달": 2,
    "공구": 21
   },
-  "total": 122,
-  "checklist": 120
+  "total": 123,
+  "checklist": 121
  },
  "items": [
   {
@@ -2721,7 +2727,7 @@
    "unit": "쌍",
    "need_note": "EL ↔ O1 (X401/X402) + ER ↔ O7 (X411/X412) = 2쌍 (CAD C-XH 2 + EXT 2)",
    "pack_note": "2쌍 모두 사용",
-   "where": "끝 부속 EL ↔ 모듈 O1, ER ↔ O7을 뒤 케이블 통로에서 잇는 6핀 짝입니다. 모듈 쪽 약 150 mm(W403·W413, 제어 기판 J302에 납땜), 끝 부속 쪽 약 50 mm로 잘라 씁니다.",
+   "where": "끝 부속 EL ↔ 모듈 O1, ER ↔ O7을 뒤 케이블 통로에서 잇는 6핀 짝입니다. 모듈 쪽 O1 약 160 mm(W403)·O7 약 150 mm(W413) — 제어 기판 J302 윗면에 납땜(A16) — , 끝 부속 쪽 약 50 mm로 잘라 씁니다.",
    "specs": [
     [
      "커넥터",
@@ -2733,7 +2739,7 @@
     ],
     [
      "자르는 길이",
-     "모듈 쪽 약 150, 끝 부속 쪽 약 50 mm로 잘라 쓴다(남는 선은 버림)"
+     "모듈 쪽 O1 약 160 · O7 약 150, 끝 부속 쪽 약 50 mm로 잘라 쓴다(남는 선은 버림)"
     ]
    ],
    "ident": "6핀 JST-XH 호환 하우징이 달린 짧은 선 2가닥(플러그 1 + 소켓 1)이 한 쌍입니다.",
@@ -2748,7 +2754,8 @@
     ],
     "count": 4,
     "name_contains": [
-     "EXT 연장선 (L66 모듈 쪽 150 mm, 6심 22 AWG)",
+     "EXT 연장선 (L66 모듈 쪽 160 mm, 6심)",
+     "EXT 연장선 (L66 모듈 쪽 150 mm, 6심)",
      "JST-XH 6P 짝 X401/X402 (EL ↔ , 뒤 케이블 통로)",
      "JST-XH 6P 짝 X411/X412 (ER ↔ , 뒤 케이블 통로)"
     ],
@@ -3234,6 +3241,70 @@
    "store_url": "https://www.eleparts.co.kr/goods/view?no=12185313"
   },
   {
+   "id": "i228",
+   "code": "SE8b",
+   "name": "양면 만능기판 8 × 12 cm 2.54 mm (Voltly VLT-PCB009)",
+   "full_name": "[Voltly] PCB 양면 만능기판 8X12CM 2.54mm [VLT-PCB009]",
+   "cat": "센서·MCU·기판",
+   "source": "personal",
+   "source_ko": "사비 구매",
+   "role": "부품",
+   "optional": false,
+   "ordered": {
+    "sheet": "사비 구매",
+    "qty": 4,
+    "unit_price": 2860,
+    "amount": 11440,
+    "store": "디바이스마트",
+    "url": "https://www.devicemart.co.kr/goods/view?no=15960078",
+    "units": 4
+   },
+   "qty_need": 4,
+   "unit": "장",
+   "need_note": "A16 (10/31): 제어 기판 MB 7장 − 가진 BE163 4장(u06) = 3장 + 페달 보드 PED 70 × 50 조각 1장 = 4장 (CAD O1~O7-E-MB 80 × 120 + CU-E-PEDBOARD)",
+   "pack_note": "4장 모두 사용",
+   "where": "제어 기판 MB 3장은 자르지 않고 통째로 모듈 바닥틀 자리(x22.25~142.25 × y93.3~173.3, 받침 리브 위)에 눕히고, 따로 출력한 밸런스 레일이 판의 빈 띠(y132.3~144.5)를 위에서 눌러 잡습니다. 나사·구멍이 없습니다. 1장은 지그 P-PED로 70 × 50을 잘라 페달 보드로 쓰고, 남는 반쪽은 예비입니다.",
+   "specs": [
+    [
+     "크기",
+     "80 × 120 mm (8 × 12 cm), 양면, 2.54 mm 간격"
+    ],
+    [
+     "구멍 수",
+     "페이지에 없음 - 30 × 42(BE163)든 28 × 40이든 같은 배치 (판 가운데 기준, 가장자리 한 줄을 비움)"
+    ],
+    [
+     "두께",
+     "페이지에 없음 (보통 1.6) - 받으면 잼"
+    ]
+   ],
+   "ident": "초록색 8 × 12 cm 양면 만능기판 (Voltly). 가진 BE163과 같은 크기입니다.",
+   "img": null,
+   "img_note": null,
+   "cad_match": {
+    "ids": [
+     "O5-E-MB",
+     "O6-E-MB",
+     "O7-E-MB",
+     "CU-E-PEDBOARD"
+    ],
+    "count": 4,
+    "name_contains": [
+     "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로)",
+     "PED 페달 보드 (BE163 만능기판에서 자른 70×50)"
+    ],
+    "rules": [
+     "O[5-7]-E-MB",
+     "CU-E-PEDBOARD"
+    ]
+   },
+   "sch_refs": [],
+   "sch_qty": null,
+   "check_on_arrival": "크기 80 × 120인지, 구멍 수(30 × 42 또는 28 × 40)와 두께(약 1.6)를 잽니다. 부품은 판 가운데 기준 격자에서 가장자리 한 줄을 비우므로 28 × 40이어도 같은 자리에 들어갑니다.",
+   "replaces": null,
+   "store_url": "https://www.devicemart.co.kr/goods/view?no=15960078"
+  },
+  {
    "id": "i005",
    "code": "SE7",
    "name": "핀헤더 1 × 40 (2.54 mm)",
@@ -3248,7 +3319,7 @@
    "unit": "줄",
    "need_note": "먹스 7 × (1×16 + 1×8) = 168핀 + RP2040-Zero 8 × (1×9 × 2) = 144핀 = 312핀, 자를 때 버리는 핀까지 9줄 (bom.csv A302-HDR·A301-HDR·A501-HDR)",
    "pack_note": "",
-   "where": "제어 기판에 먹스 모듈과 RP2040-Zero를 세워 납땜하는 핀입니다. 제로용은 플라스틱 몰드를 빼고 좌·우 줄만 씁니다.",
+   "where": "제어 기판에 먹스 모듈과 RP2040-Zero를 세워 납땜하는 핀입니다. 제로용은 좌·우 줄만 씁니다 - A16(10/31)부터 모듈 제어 기판의 제로는 플라스틱 몰드를 그대로 둡니다(페달 보드 제로는 그대로 몰드를 뺌). 기판 밑으로 나온 끝은 1.0 mm 이하로 자릅니다.",
    "specs": [
     [
      "형태",
@@ -3538,9 +3609,9 @@
    "ordered": null,
    "qty_need": 4,
    "unit": "장",
-   "need_note": "제어 기판 MB 7 + 페달 보드 1 = 70 × 50 조각 8개 = 한 장에 2조각 × 4장 (CAD E-MB 7 + CU-E-PEDBOARD 1)",
+   "need_note": "A16 (10/31): 제어 기판 MB 7장을 80 × 120 통째로 씀 - 가진 4장 = MB 4장, 나머지 MB 3장 + 페달 보드 1장은 새로 사는 8 × 12 4장(i228) (CAD O1~O7-E-MB)",
    "pack_note": "",
-   "where": "출력 지그 09_기판지그(P-MB·P-PED)로 70 × 50 조각을 한 장에 두 개씩 긋고 꺾어 제어 기판 7장과 페달 보드 1장을 만듭니다. 고정 구멍(나사 Ø3.2, 핀 Ø3.0)도 지그로 뚫습니다.",
+   "where": "제어 기판 MB 4장으로 자르지 않고 통째로 씁니다(A16). 모듈 바닥틀 자리(x22.25~142.25 × y93.3~173.3)의 받침 리브 위에 놓고, 따로 출력한 밸런스 레일이 판의 빈 띠(y132.3~144.5)를 위에서 눌러 잡습니다. 나사·구멍 뚫기가 없습니다.",
    "specs": [
     [
      "크기",
@@ -3551,8 +3622,8 @@
      "30 × 42, 2.54 mm 간격, 양면"
     ],
     [
-     "자르는 조각",
-     "70 × 50 (MB는 홈 2.8 × 26.5)"
+     "쓰는 법",
+     "통째로 (A16) - 레일 밑 띠 y132.3~144.5에는 부품·배선 없음"
     ]
    ],
    "ident": "80 × 120 양면 만능기판입니다.",
@@ -3563,25 +3634,19 @@
      "O1-E-MB",
      "O2-E-MB",
      "O3-E-MB",
-     "O4-E-MB",
-     "O5-E-MB",
-     "O6-E-MB",
-     "O7-E-MB",
-     "CU-E-PEDBOARD"
+     "O4-E-MB"
     ],
-    "count": 8,
+    "count": 4,
     "name_contains": [
-     "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6)",
-     "PED 페달 보드 (BE163 만능기판에서 자른 70×50)"
+     "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로)"
     ],
     "rules": [
-     "O\\d-E-MB",
-     "CU-E-PEDBOARD"
+     "O[1-4]-E-MB"
     ]
    },
    "sch_refs": [],
    "sch_qty": null,
-   "check_on_arrival": "4장 이상 있는지, 두께가 1.6 안팎인지 봅니다. 한 장에서 두 조각을 쓰고 남는 띠는 약 5 mm 폭뿐입니다.",
+   "check_on_arrival": "4장 있는지, 두께가 1.6 안팎인지 봅니다.",
    "replaces": "i082",
    "store_url": null
   },
@@ -6358,9 +6423,9 @@
    "ordered": null,
    "qty_need": 26,
    "unit": "개",
-   "need_note": "모듈 제어 기판 7 × 2 = 14 + 앰프 4 + 강압 4 + J702 기판 2 + 페달 보드 2 = 26 (CAD controlboardscrew 14, 나머지 12는 CAD README 보드 나사 표)",
+   "need_note": "모듈 밸런스 레일 7 × 2 = 14 + 앰프 4 + 강압 4 + J702 기판 2 + 페달 보드 2 = 26 (CAD RAILSCREW 14, 나머지 12는 CAD README 보드 나사 표; A16 전에는 제어 기판 나사 14)",
    "pack_note": "",
-   "where": "모듈 제어 기판을 밑에서 매단 보스에 2개씩 조이고, 가운데 유닛의 앰프(선반 받침)·강압 모듈·J702 기판·페달 보드를 5 mm 받침 기둥에 자가 탭으로 조입니다.",
+   "where": "모듈마다 따로 출력한 밸런스 레일 양 끝의 깊은 구멍(Ø6.2)에 2개씩 넣어 바닥틀 받침에 자가 탭으로 조이고(A16), 가운데 유닛의 앰프(선반 받침)·강압 모듈·J702 기판·페달 보드를 5 mm 받침 기둥에 자가 탭으로 조입니다.",
    "specs": [
     [
      "규격",
@@ -6376,7 +6441,7 @@
     ],
     [
      "체결",
-     "모듈: 보스 Ø2.5 막힌 구멍 (기판 1.6 + 보스 4.4 물림). 가운데 유닛: 5 mm 받침 기둥 관통 구멍"
+     "모듈: 밸런스 레일 깊은 구멍 Ø6.2(바닥 z10.1) → 레일 1.5 + 바닥틀 받침 Ø2.5 막힌 구멍 4.5 물림 (A16). 가운데 유닛: 5 mm 받침 기둥 관통 구멍"
     ],
     [
      "위치",
@@ -6388,27 +6453,27 @@
    "img_note": "같은 종류 예시 사진 (받은 물건과 모양이 다를 수 있음)",
    "cad_match": {
     "ids": [
-     "O1-B-controlboardscrewM3x6headD57",
-     "O1-B-controlboardscrewM3x6headD57-2",
-     "O2-B-controlboardscrewM3x6headD57",
-     "O2-B-controlboardscrewM3x6headD57-2",
-     "O3-B-controlboardscrewM3x6headD57",
-     "O3-B-controlboardscrewM3x6headD57-2",
-     "O4-B-controlboardscrewM3x6headD57",
-     "O4-B-controlboardscrewM3x6headD57-2",
-     "O5-B-controlboardscrewM3x6headD57",
-     "O5-B-controlboardscrewM3x6headD57-2",
-     "O6-B-controlboardscrewM3x6headD57",
-     "O6-B-controlboardscrewM3x6headD57-2",
-     "O7-B-controlboardscrewM3x6headD57",
-     "O7-B-controlboardscrewM3x6headD57-2"
+     "O1-RAILSCREW1",
+     "O1-RAILSCREW2",
+     "O2-RAILSCREW1",
+     "O2-RAILSCREW2",
+     "O3-RAILSCREW1",
+     "O3-RAILSCREW2",
+     "O4-RAILSCREW1",
+     "O4-RAILSCREW2",
+     "O5-RAILSCREW1",
+     "O5-RAILSCREW2",
+     "O6-RAILSCREW1",
+     "O6-RAILSCREW2",
+     "O7-RAILSCREW1",
+     "O7-RAILSCREW2"
     ],
     "count": 14,
     "name_contains": [
-     "스텐 렌치볼트 M3 × 6 (제어 기판, i059)"
+     "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)"
     ],
     "rules": [
-     "O\\d-B-controlboardscrew.*"
+     "O\\d-RAILSCREW\\d"
     ]
    },
    "sch_refs": [],
@@ -7135,9 +7200,9 @@
    "ordered": null,
    "qty_need": 1,
    "unit": "롤",
-   "need_note": "RP2040-Zero 8장 밑 + 리본 누름 패드",
+   "need_note": "페달 보드 RP2040-Zero 밑 + 리본 누름 패드 (A16: 모듈 제로 7장은 몰드 헤더 위라 필요 없음, 붙여도 됨)",
    "pack_note": "",
-   "where": "RP2040-Zero 8개 밑(제로 밑면과 만능기판 사이 절연)과 화면 받침 안 리본 누름 패드 자리에 붙입니다.",
+   "where": "페달 보드 RP2040-Zero 밑(제로 밑면과 만능기판 사이 절연)과 화면 받침 안 리본 누름 패드 자리에 붙입니다. 모듈 제어 기판의 제로 7장은 몰드(2.5)가 그대로인 헤더 위라 밑면 부품이 판에서 1.2 떠 있습니다(A16).",
    "specs": [
     [
      "재질",
@@ -8377,7 +8442,7 @@
    "unit": "벌",
    "need_note": "cad/jigs/README.md '기판 지그'",
    "pack_note": "",
-   "where": "만능기판 조각 8장의 고정 구멍(나사 Ø3.2 × 2, 위치 핀 Ø3.0 × 2)을 기판 지그(09)로 뚫습니다.",
+   "where": "페달 보드 조각 1장의 고정 구멍(나사 Ø3.2 × 2, 위치 핀 Ø3.0 × 2)을 기판 지그(09 P-PED)로 뚫습니다. 제어 기판 MB 7장은 통째로 써서 뚫지 않습니다(A16).",
    "specs": [],
    "ident": "",
    "img": null,
@@ -8473,7 +8538,7 @@
    "unit": "벌",
    "need_note": "cad/jigs/README.md",
    "pack_note": "",
-   "where": "기판 지그를 대고 만능기판을 긋고 꺾으며, 제어 기판 홈 2.8 × 26.5를 끊습니다. 펠트·폼·EVA도 자릅니다.",
+   "where": "기판 지그 P-PED를 대고 페달 보드 조각을 긋고 꺾습니다(제어 기판은 자르지 않음, A16). 펠트·폼·EVA도 자릅니다.",
    "specs": [],
    "ident": "",
    "img": null,
@@ -8798,7 +8863,7 @@
   {
    "level": "낮음",
    "id": "img",
-   "text": "사진이 없는 줄: i226, i021, i222, i224, i225, i203, i204, i205, i206, i207, i208, i219, i220, i221, i214, i211, i213, i216. 상품 사진을 새로 받지 않았습니다. 나사·자석·흡음솜·흑연 등 13줄은 같은 종류의 예시 사진입니다(img_note)."
+   "text": "사진이 없는 줄: i226, i228, i021, i222, i224, i225, i203, i204, i205, i206, i207, i208, i219, i220, i221, i214, i211, i213, i216. 상품 사진을 새로 받지 않았습니다. 나사·자석·흡음솜·흑연 등 13줄은 같은 종류의 예시 사진입니다(img_note)."
   }
  ],
  "checks": {
@@ -8925,8 +8990,14 @@
    },
    {
     "id": "u06",
-    "expected": 8,
-    "cad": 8,
+    "expected": 4,
+    "cad": 4,
+    "ok": true
+   },
+   {
+    "id": "i228",
+    "expected": 4,
+    "cad": 4,
     "ok": true
    },
    {
@@ -9053,6 +9124,7 @@
   "cad_uncovered": [],
   "unmatched_images": [
    "i226",
+   "i228",
    "i021",
    "i222",
    "i224",

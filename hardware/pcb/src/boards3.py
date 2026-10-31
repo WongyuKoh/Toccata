@@ -3,7 +3,8 @@
   BRD-07  small boards: J702 amp-input board (30 x 25), J501 pedal-jack scrap (25 x 24), PS pedal sensor scrap (7 x 5 holes) - every
           hole on the 2.54 lattice with model / local coordinates, the routed underside wires and a route check against SCH-05 / SCH-07;
           J701 headphone jack (no board: it sits in the left cheek pocket of the CAD and the two AUX halves are soldered to its legs).
-  BRD-08  control board MB underside wiring (seen from below = mirror image of BRD-01), routes from mbroute.py + check.
+  BRD-08  control board MB underside wiring (seen from below = mirror image of BRD-01; △33 whole 80 x 120 board on the module
+          floor), routes from mbroute.py + check.
   SB      OUT -> J201 point-to-point list (wiring_SB.csv) and the routes drawn on BRD-02.
 
 PJ-313 legs are not on the 2.54 lattice (SHOU HAN PJ-313 5JCJ drawing: legs at 1.8 / 3.2 / 3.5 mm steps, two locating pegs D1.0 6.0
@@ -684,12 +685,14 @@ def brd08():
     from sch import Sheet
     import mbroute as MR
     r, rows, probs = MR.get()
+    st = MR.stats()
     s = Sheet("BRD-08", 15, TOTAL, "제어 기판 아랫면 배선 (MB · 아래에서 봄 — 좌우 거울상)",
-              "BRD-01 기판을 뒤집어 본 그림(왼쪽·오른쪽이 바뀜). 피복 단선 %d가닥: 패드에서 시작해 1.27 격자 위로만, 납땜 패드 위는 지나지 않음. 경로 = netlist/wiring_MB.csv." % len(rows),
+              "BRD-01 기판을 뒤집어 본 그림(왼쪽·오른쪽이 바뀜). 리본 가닥 %d가닥: 패드에서 시작해 1.27 격자 위로만 — 납땜 패드·받침 리브·리본 자리를 "
+              "지나지 않고, 앞↔뒤 선은 띠 리브 틈으로. 경로 = netlist/wiring_MB.csv." % len(rows),
               "MB", qty="MB × 7", basis="BRD-01 · SCH-03 · mbroute.py", **REV_E)
     s.board_check = list(probs)
-    SC = 3.0
-    ox, oy = 22.0, 34.0
+    SC = 2.0
+    ox, oy = 26.0, 40.0
     x0, x1, y0, y1 = MR.BOARD
 
     def X(x):                     # mirrored: world +x to the LEFT
@@ -698,110 +701,171 @@ def brd08():
     def Y(y):
         return oy + (y1 - y) * SC
     o = s.out["body"]
-    o.append(f'<rect x="{X(x1):.2f}" y="{Y(y1):.2f}" width="{(x1-x0)*SC:.2f}" height="{(y1-y0)*SC:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
-    # slot (cut) + keep-out
-    kx0, kx1, ky0, ky1 = S.MB["keep"]
-    o.append(f'<rect x="{X(kx1):.2f}" y="{Y(ky1):.2f}" width="{(kx1-kx0)*SC:.2f}" height="{(ky1-ky0)*SC:.2f}" fill="#fde2d8" stroke="#c2410c" stroke-width=".3" stroke-dasharray="1.2 .8"/>')
-    sx0, sx1, sy0, sy1 = S.MB["slot"]
-    o.append(f'<rect x="{X(sx1):.2f}" y="{Y(sy1):.2f}" width="{(sx1-sx0)*SC:.2f}" height="{(sy1-sy0)*SC:.2f}" fill="#fff" stroke="#c2410c" stroke-width=".45"/>')
+    S.mb_frame_draw(s, X, Y, top=False)
+    s.chg(X(x1) + 4.5, Y(y1) + 4.5, 33)
+    # flat ribbon + strand fan under the front edge (no wires) and the strand lanes between the J301 front-row pads
+    rx0, rx1, ry1 = S.MB["ribbon"]
+    o.append(f'<rect x="{X(rx1):.2f}" y="{Y(ry1):.2f}" width="{(rx1-rx0)*SC:.2f}" height="{(ry1-y0)*SC:.2f}" fill="#c9d0da" fill-opacity=".75" '
+             f'stroke="#6b7690" stroke-width=".3"/>')
+    for (k, m) in sorted(MR.strand_lanes()):
+        xl, yl = MR.X(k), MR.Y(m)
+        o.append(f'<line x1="{X(xl):.2f}" y1="{Y(yl)+1.6:.2f}" x2="{X(xl):.2f}" y2="{Y(yl)-1.6:.2f}" stroke="#6b7690" stroke-width=".9" '
+                 f'stroke-opacity=".55" stroke-linecap="round"/>')
+    S._tx(s, X((rx0 + rx1) / 2), Y(y0) - 2.4, "리본·가닥 자리 (선 없음)", "notes", "middle", fs=1.7)
     # part outlines on the other side (faint): Zero, mux, resistors
     zx0, zy1 = S.ZERO_ORIGIN
-    o.append(f'<rect x="{X(zx0+18):.2f}" y="{Y(zy1):.2f}" width="{18*SC:.2f}" height="{23.5*SC:.2f}" rx="3" fill="none" stroke="#1f2a44" stroke-width=".35" stroke-dasharray="2 1" stroke-opacity=".5"/>')
+    o.append(f'<rect x="{X(zx0+18):.2f}" y="{Y(zy1):.2f}" width="{18*SC:.2f}" height="{23.5*SC:.2f}" rx="2" fill="none" stroke="#1f2a44" '
+             f'stroke-width=".35" stroke-dasharray="2 1" stroke-opacity=".5"/>')
     mx0, my0 = S.MUX_ORIGIN
-    o.append(f'<rect x="{X(mx0+17.78):.2f}" y="{Y(my0+40.64):.2f}" width="{17.78*SC:.2f}" height="{40.64*SC:.2f}" rx="1" fill="none" stroke="#1f5fbf" stroke-width=".35" stroke-dasharray="2 1" stroke-opacity=".5"/>')
-    s.text(X(zx0 + 9), Y(zy1) + 6.0, "A301 (윗면)", "notes", "middle", size=1.9, check=False)
-    s.text(X(mx0 + 8.9), Y(my0 + 20), "A302 (윗면)", "notes", "middle", size=1.9, check=False)
-    # screw heads / pins (underside)
-    for (a, b) in MR.SCREWS:
-        o.append(f'<circle cx="{X(a):.2f}" cy="{Y(b):.2f}" r="{2.85*SC:.2f}" fill="#c9d0da" fill-opacity=".45" stroke="#6b7690" stroke-width=".35" stroke-dasharray="1.2 .7"/>')
-        o.append(f'<circle cx="{X(a):.2f}" cy="{Y(b):.2f}" r="{1.6*SC:.2f}" fill="#fff" stroke="#1d2433" stroke-width=".35"/>')
-        s.text(X(a), Y(b) + (10.6 if b < 170 else -9.6), "M3×6 머리 Ø5.7", "notes", "middle", size=1.8, check=False)
-    for (a, b) in MR.PINS:
-        o.append(f'<circle cx="{X(a):.2f}" cy="{Y(b):.2f}" r="{1.5*SC:.2f}" fill="#fff" stroke="#1d2433" stroke-width=".35"/>')
-        s.text(X(a), Y(b) + (7.4 if b < 170 else -6.2), "위치 핀", "notes", "middle", size=1.8, check=False)
-    # lattice holes
-    for k in range(MR.kx(x0), MR.kx(x1) + 1):
-        for m in range(MR.my(y0), MR.my(y1) + 1):
-            if k % 2 == 0 and m % 2 == 0:
-                x, y = MR.X(k), MR.Y(m)
-                if x0 + 0.6 < x < x1 - 0.6 and y0 + 0.6 < y < y1 - 0.6 and not (sx0 <= x <= sx1 and y <= sy1):
-                    o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".38" fill="#b9cdb6"/>')
+    o.append(f'<rect x="{X(mx0+S.MUX_W):.2f}" y="{Y(my0+S.MUX_D):.2f}" width="{S.MUX_W*SC:.2f}" height="{S.MUX_D*SC:.2f}" rx="1" fill="none" '
+             f'stroke="#1f5fbf" stroke-width=".35" stroke-dasharray="2 1" stroke-opacity=".5"/>')
+    S._tx(s, X(zx0 + 9), Y(zy1 - 6.0), "A301 (윗면)", "notes", "middle", fs=1.7)
+    S._tx(s, X(mx0 + 30.5), Y(my0 + 10.8), "A302 (윗면)", "notes", "middle", fs=1.7)
     # wires
     for w in rows:
         d = " ".join("%.2f,%.2f" % (X(x), Y(y)) for x, y in w["pts"])
-        o.append(f'<polyline points="{d}" fill="none" stroke="{ncol(w["net"])}" stroke-width=".55" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".9"/>')
-    # pads (soldered)
+        o.append(f'<polyline points="{d}" fill="none" stroke="{ncol(w["net"])}" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".9"/>')
+    # pads (soldered) / empty holes of the Zero bottom row
     for (k, m), (ref, num, net) in r.pads.items():
-        if not MR.soldered((ref, num, net)):
-            continue
         x, y = MR.X(k), MR.Y(m)
+        if not MR.soldered((ref, num, net)):
+            o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".7" fill="#fff" stroke="#8a96ab" stroke-width=".25" stroke-dasharray=".5 .4"/>')
+            continue
         c = ncol(net) if net != "NC" else "#fff"
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="1.25" fill="{c}" stroke="#1f2a44" stroke-width=".3"/>')
-    # wire numbers at the middle of the longest segment
-    for w in rows:
-        segs = list(zip(w["pts"], w["pts"][1:]))
-        a, b = max(segs, key=lambda t: abs(t[0][0] - t[1][0]) + abs(t[0][1] - t[1][1]))
-        mx_, my_ = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2
-        o.append(f'<rect x="{X(mx_)-1.9:.2f}" y="{Y(my_)-1.3:.2f}" width="3.8" height="2.4" rx=".6" fill="#fff" fill-opacity=".9" stroke="{ncol(w["net"])}" stroke-width=".25"/>')
-        s.text(X(mx_), Y(my_) + 0.6, str(w["no"]), "pinnum", "middle", size=1.6, check=False)
-    # pin names for the module columns (mirrored side)
+        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".95" fill="{c}" stroke="#1f2a44" stroke-width=".3"/>')
+    # C301 1206 across the mux GND / VCC tails; JP solder-bridge places (dashed, closed per board ID)
+    g_, v_ = S.mux_hole("GND"), S.mux_hole("VCC")
+    o.append(f'<rect x="{X(v_[0])-0.4:.2f}" y="{Y(g_[1])-0.9:.2f}" width="{(v_[0]-g_[0])*SC+0.8:.2f}" height="1.8" rx=".3" fill="#b98b5a" '
+             f'fill-opacity=".85" stroke="#8a5a00" stroke-width=".25"/>')
+    S._tx(s, X(g_[0]) - 1.6, Y(g_[1]) - 1.7, "C301", "pinname", "start", fs=1.4)
+    for ref, (sig, gnd) in S.JP_PADS.items():
+        o.append(f'<rect x="{min(X(sig[0]), X(gnd[0]))-0.3:.2f}" y="{Y(sig[1])-0.8:.2f}" width="{abs(sig[0]-gnd[0])*SC+0.6:.2f}" height="1.6" rx=".6" '
+                 f'fill="none" stroke="#8a96ab" stroke-width=".3" stroke-dasharray=".6 .4"/>')
+    # labels first (their boxes are kept clear by the wire numbers below)
+    from sch import text_w
+    placed = [(X(MR.X(k)) - 1.1, Y(MR.Y(m)) - 1.1, X(MR.X(k)) + 1.1, Y(MR.Y(m)) + 1.1) for (k, m) in r.pads]
+
+    def T(x, y, txt, cls, anchor="start", fs=1.4):
+        S._tx(s, x, y, txt, cls, anchor, fs=fs)
+        w = text_w(str(txt), fs)
+        x0_ = x if anchor == "start" else (x - w if anchor == "end" else x - w / 2)
+        placed.append((x0_, y - fs * 0.78, x0_ + w, y + fs * 0.2))
+    # pin names (mirrored side)
     import parts as P
     names = dict(P.RP2040_ZERO)
     for n in range(1, 19):
         x, y = S.zero_hole(n)
-        side = 2.0 if n <= 9 else -2.0                      # mirror: the left column (1~9) is on the RIGHT in this view
-        s.text(X(x) + side, Y(y) - 1.5, names[n], "pinname", "start" if side > 0 else "end", size=1.5, check=False)
+        side = 1.6 if n <= 9 else -1.6                      # mirror: the left column (1~9) is on the RIGHT in this view
+        T(X(x) + side, Y(y) - 1.0, names[n], "pinname", "start" if side > 0 else "end", fs=1.4)
     for nm in ["C%d" % i for i in range(16)] + ["GND", "VCC", "EN", "S0", "S1", "S2", "S3", "SIG"]:
         x, y = S.mux_hole(nm)
-        side = -2.0 if nm.startswith("C") else 2.0
-        s.text(X(x) + side, Y(y) - 1.5, nm, "pinname", "end" if side < 0 else "start", size=1.5, check=False)
-    for i in range(16):
-        x, y = S.RIB_X0 + 2.54 * (i // 2), S.RIB_Y[i % 2]
-        s.text(X(x), Y(y) + (4.4 if i % 2 == 0 else -2.4), str(i + 1), "pinnum", "middle", size=1.5, check=False)
-    s.text(X(S.RIB_X0 + 8.89), Y(y0) + 9.0, "J301 리본 (1 = 앞줄, 이 그림에서는 오른쪽 끝)", "cabt", "middle", size=1.9, check=False)
+        T(X(x), Y(y) + (-1.6 if nm.startswith("C") else 2.9), nm, "pinname", "middle", fs=1.35)
+    for n in range(1, 17):
+        x, y = S.mb_pad_xy("J301", n)
+        T(X(x) + 1.25, Y(y) + (1.9 if n % 2 else -1.0), str(n), "pinnum", "start", fs=1.35)
+    T(X(S.RIB_X0) + 2.2, Y(S.RIB_Y[0]) + 0.6, "J301 (1 = 앞줄, 이 그림에서는 오른쪽 끝)", "cabt", "start", fs=1.6)
     for i in range(6):
-        s.text(X(S.EXT_X0 + 2.54 * i), Y(S.EXT_Y) - 2.4, str(i + 1), "pinnum", "middle", size=1.5, check=False)
-    s.text(X(S.EXT_X0 + 6.35), Y(y1) - 2.2, "J302 EXT (1 = GND)", "cabt", "middle", size=1.9, check=False)
-    for ref, (x, y) in S.JP_POS.items():
-        s.text(X(x + 2.54) - 2.2, Y(y) + 0.6, ref, "pinname", "end", size=1.5, check=False)
+        T(X(S.EXT_X0 + 2.54 * i), Y(S.EXT_Y) - 1.5, str(i + 1), "pinnum", "middle", fs=1.35)
+    T(X(S.EXT_X0 + 6.35), Y(S.EXT_Y) - 3.6, "J302 EXT (1 = GND, 선은 윗면에서)", "cabt", "middle", fs=1.6)
+    for ref, (sig, gnd) in S.JP_PADS.items():
+        T((X(sig[0]) + X(gnd[0])) / 2, Y(gnd[1]) + 2.7, ref, "pinname", "middle", fs=1.3)
     for ref, (x, y) in S.R_EXT.items():
-        s.text(X(x + 7.62) - 2.0, Y(y) + 0.6, ref + ".2", "pinname", "end", size=1.5, check=False)
-        s.text(X(x) + 2.0, Y(y) + 0.6, ref + ".1", "pinname", "start", size=1.5, check=False)
+        T(X(x + 3.81), Y(y) - 1.0, ref + (" (비움)" if ref == "R304" else ""), "pinname", "middle", fs=1.35)
     for ref, (x, y) in S.TP_POS.items():
-        s.text(X(x), Y(y) - 2.0, ref, "pinname", "middle", size=1.3, check=False)
-    # rulers
-    for x in (47.25, 56.20, 61.28, 71.44, 76.52, 81.22, 85.42, 91.76, 101.92, 109.54, 117.25):
-        s.line(X(x), Y(y0) + 2.0, X(x), Y(y0) + 4.0, "bodyl", "text")
-        s.text(X(x), Y(y0) + 6.2, "x%g" % x, "tblm", "middle", size=1.5, check=False)
-    for y in (145.5, 148.19, 153.27, 163.43, 173.59, 183.75, 193.91, 195.5):
-        s.line(X(x0) + 2.0, Y(y), X(x0) + 4.0, Y(y), "bodyl", "text")
-        s.text(X(x0) + 4.8, Y(y) + 0.6, "y%g" % y, "tblm", "start", size=1.5, check=False)
-    s.text(X(x1), Y(y1) - 6.5, "뒤 (+y, USB 쪽) · 아래에서 봄: 모델 +x가 왼쪽", "notes", "start", size=2.0, check=False)
-    s.text(X(x1), Y(y0) + 13.0, "앞 (연주자 쪽, −y) · 리본이 들어옴", "notes", "start", size=2.0, check=False)
+        T(X(x), Y(y) - 1.6, ref, "pinname", "middle", fs=1.25)
+    # wire numbers: a free spot on the wire (longest segment first), boxes kept clear of each other and of the pads
+    bw, bh = 3.4, 2.1
+    for w in rows:
+        segs = sorted(zip(w["pts"], w["pts"][1:]), key=lambda t: -(abs(t[0][0] - t[1][0]) + abs(t[0][1] - t[1][1])))
+        spot = None
+        for a, b in segs:
+            for f in (0.5, 0.3, 0.7, 0.4, 0.6, 0.15, 0.85, 0.22, 0.78):
+                mx_, my_ = a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f
+                bx_ = (X(mx_) - bw / 2, Y(my_) - bh / 2, X(mx_) + bw / 2, Y(my_) + bh / 2)
+                if not any(bx_[0] < q[2] and q[0] < bx_[2] and bx_[1] < q[3] and q[1] < bx_[3] for q in placed):
+                    spot = (mx_, my_, bx_)
+                    break
+            if spot:
+                break
+        lead = None
+        if spot is None:                      # short wire: the number beside it with a short leader
+            a, b = segs[0]
+            mx_, my_ = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2
+            vert = abs(a[0] - b[0]) < 0.01
+            offs = [(d * (bw / 2 + 1.2), 0.0) for d in (1, -1)] if vert else [(0.0, d * (bh / 2 + 1.2)) for d in (1, -1)]
+            offs += [(d * (bw / 2 + 1.2), e * (bh / 2 + 1.0)) for d in (1, -1) for e in (1, -1)]
+            for dx, dy in offs + [(d * (bw + 2.6), 0.0) for d in (1, -1)]:
+                cx_, cy_ = X(mx_) + dx, Y(my_) + dy
+                bx_ = (cx_ - bw / 2, cy_ - bh / 2, cx_ + bw / 2, cy_ + bh / 2)
+                if not any(bx_[0] < q[2] and q[0] < bx_[2] and bx_[1] < q[3] and q[1] < bx_[3] for q in placed):
+                    lead = (X(mx_), Y(my_), cx_, cy_)
+                    break
+            if lead is None:
+                cx_, cy_ = X(mx_), Y(my_)
+                bx_ = (cx_ - bw / 2, cy_ - bh / 2, cx_ + bw / 2, cy_ + bh / 2)
+            spot = (None, None, bx_)
+        _, _, bx_ = spot
+        cxn, cyn = (bx_[0] + bx_[2]) / 2, (bx_[1] + bx_[3]) / 2
+        placed.append(bx_)
+        if lead:
+            o.append(f'<line x1="{lead[0]:.2f}" y1="{lead[1]:.2f}" x2="{cxn:.2f}" y2="{cyn:.2f}" stroke="{ncol(w["net"])}" stroke-width=".2"/>')
+        o.append(f'<rect x="{bx_[0]:.2f}" y="{bx_[1]:.2f}" width="{bw}" height="{bh}" rx=".5" fill="#fff" fill-opacity=".92" stroke="{ncol(w["net"])}" stroke-width=".25"/>')
+        S._tx(s, cxn, cyn + 0.55, str(w["no"]), "pinnum", "middle", fs=1.45)
+    gx0, gx1 = S.MB["gap"]
+    S._tx(s, X(gx1) - 1.0, Y(135.6), "← 띠 리브 틈 x%.1f~%.1f: 앞↔뒤 %d가닥" % (gx0, gx1, st["gap"]), "notes", "end", fs=1.7)
+    S._tx(s, X(x1) + 4.0, Y(141.6), "띠 리브 (아랫면) — 위는 밸런스 레일 맨 띠", "notes", "start", fs=1.7)
+    # rulers (mirrored)
+    for x in (22.25, 30.18, 60.66, 74.52, 82.25, 92.0, 114.0, 122.89, 142.25):
+        s.line(X(x), Y(y0) + 1.0, X(x), Y(y0) + 3.4, "bodyl", "text")
+        S._tx(s, X(x), Y(y0) + 5.8, "x%g" % x, "tblm", "middle", fs=1.6)
+    for y in (93.3, 99.01, 101.55, 116.79, 132.8, 144.0, 147.27, 167.59, 173.3):
+        s.line(X(x1) - 1.0, Y(y), X(x1) - 3.2, Y(y), "bodyl", "text")
+        S._tx(s, X(x1) - 3.8, Y(y) + 0.6, "y%g" % y, "tblm", "end", fs=1.6)
+    S._tx(s, X(x1), Y(y1) - 4.5, "뒤 (+y, USB 쪽) · 아래에서 봄: 모델 +x가 왼쪽", "notes", "start", fs=2.0)
+    S._tx(s, X(x1), Y(y0) + 10.0, "앞 (연주자 쪽, −y) · 리본이 앞 리브 틈으로 들어옴", "notes", "start", fs=2.0)
     # wire table (two columns)
     tr = [[str(w["no"]), w["net"], w["a"], w["b"], "%.1f" % w["length"], str(w["bends"])] for w in rows]
     half = (len(tr) + 1) // 2
     cols = ["번호", "넷", "시작", "끝", "길이", "꺾임"]
-    wd = [8, 17, 17, 17, 10, 8]
-    yt = s.table(250, 24, cols, tr[:half], wd, title="아랫면 배선 %d가닥 (꺾인 점 좌표 = wiring_MB.csv)" % len(rows), mono_cols=(0, 1, 2, 3, 4, 5), rh=2.75)
-    s.table(332, 28.2, cols, tr[half:], wd, mono_cols=(0, 1, 2, 3, 4, 5), rh=2.75)
-    s.para(14.0, 200.0, [
+    wd = [7, 14, 15, 15, 9, 6]
+    yt = s.table(272, 24, cols, tr[:half], wd, title="아랫면 배선 %d가닥 (꺾인 점 = wiring_MB.csv)" % len(rows), mono_cols=(0, 1, 2, 3, 4, 5), rh=2.75)
+    s.table(342, 28.2, cols, tr[half:], wd, mono_cols=(0, 1, 2, 3, 4, 5), rh=2.75)
+    ncross = len([n for n, u in _slot_users(r).items() if len(u) > 1])
+    s.para(272, yt + 5.0, [
         "주",
-        "배선 검사: SCH-03 넷 %d개를 모두 잇고, 납땜 패드 위·W1 금지 구역·나사 머리·위치 핀·JP 브리지·C301 자리를 지나지 않으며, 두 선이 한 칸을 같이 쓰지 않음 (문제 %d)"
-        % (len(r.nets), len(probs)),
-        "1. 선: 피복 단선(리본 가닥 또는 0.5 mm 랩 선). 꺾인 점은 모두 1.27 격자 위(구멍 사이 반 칸 또는 빈 구멍). 납땜할 패드 위는 지나지 않는다 — 빈 구멍 위는 지나도 된다.",
-        "    선끼리 직각으로 겹치는 곳은 피복이라 괜찮다(같은 칸을 나란히 쓰지 않음). 같은 넷의 여러 선은 패드에서만 만난다.",
-        "2. W1 금지 구역(x81.22~85.42, y≤173.2)과 홈은 제로 밑 y≥174.86에서만 건넌다(MUX_S0·EXT 등). C301은 먹스 GND–VCC 핀 사이 아랫면 1206.",
-        "3. JP301~JP303은 O 번호에 맞춰 납땜 브리지(BRD-01 표), JP304는 열림. 브리지 자리(두 구멍 사이)에는 선이 없다.",
-        "4. 순서: C301 → 짧은 선(ID·JP·EXT 풀다운 GND) → 먹스–리본 12가닥 → 긴 선(EXT·MUX·3V3·GND) → J301 리본·J302 리드 → 확인(3V3–GND 단락 없음, 표의 넷마다 통전).",
-        "5. 이 그림은 아래에서 본 것: 왼쪽·오른쪽이 BRD-01과 반대. 패드 이름(A301 핀·먹스 핀·J301 번호)을 보고 맞춘다. 모듈 7장 모두 같은 배선.",
-        "6. EXT4(먹스 C15)는 지금 어느 보드도 쓰지 않는다(R304 비움, XH 5번 빈 칸): %s번 선은 넣어도 되고 빼도 된다. EXT2·EXT3은 O1만 쓰지만 7장을 같게 만든다."
-        % "·".join(str(w["no"]) for w in rows if w["net"] == "EXT4"),
+        "배선 검사: SCH-03 넷 %d개를 모두 잇고, 납땜 패드 위·받침 리브·리본 자리·" % len(r.nets),
+        "가닥 줄·JP 브리지·C301·가장자리 0.8을 지나지 않으며, 두 선이 한 칸을 같이 쓰지 않음 (문제 %d)." % len(probs),
+        "합계 %.1f mm (한 장), 직각으로 겹치는 곳 %d." % (st["length"], ncross),
+        "1. 선: 2651 16심 리본에서 가른 가닥(바깥 지름 약 0.9). 기판 밑은 바닥까지 2.0(z5~7.0) — 다리·핀 끝",
+        "    ≤ 1.0, 직각으로 겹치는 곳도 두 겹 1.8 < 2.0. 가닥: SE12 리본 1 m 추가분(가닥 16 m) + C05 남는 약 0.86 m",
+        "    (W10x를 70으로 — 가닥 약 14 m) ≥ MB 7장 약 15 m(벗김 포함) + SB 약 5 m + W502. 새로 살 선 없음.",
+        "    꺾인 점은 모두 1.27 격자 위. 납땜할 패드 위는 지나지 않는다 — 빈 구멍 위는 된다.",
+        "2. 받침 리브(회색) 위에는 선·납땜이 없다. 앞 구역(J301·먹스) ↔ 뒤 구역(제로·J302·",
+        "    R30x·JP·TP) %d가닥은 띠 리브 틈 x%.1f~%.1f만 지난다." % (st["gap"], gx0, gx1),
+        "3. J301: 리본이 앞 리브 틈으로 들어와 아랫면에서 구멍에 꽂힌다. 리본·가닥 자리(y ≤ 98.3)에는",
+        "    선이 없고, 뒷줄로 가는 가닥이 지나는 반 칸 줄(굵은 회색, y99.01)로는 선을 세로로 두지 않는다.",
+        "    J301 선은 앞(−y)으로 나가지 않고 리본 가닥과는 직각으로만 겹친다(0.9 + 0.9 = 1.8 < 2.0).",
+        "4. C301은 먹스 GND–VCC 꼬리 사이 1206. JP301~JP303은 O 번호대로 두 구멍 브리지(BRD-01),",
+        "    JP304는 열림 — 브리지 자리(점선)에는 선이 없다.",
+        "5. 순서: C301 → 짧은 선(ID·JP·EXT 풀다운 GND) → J301–먹스 12가닥 → 긴 선(EXT·MUX·3V3·GND)",
+        "    → 다리 끝 ≤ 1.0 → 확인(3V3–GND 단락 없음, 넷마다 통전) → SB·리본을 J301에(묶음).",
+        "6. 아래에서 본 그림: 왼쪽·오른쪽이 BRD-01과 반대. 패드 이름을 보고 맞춘다. 7장 모두 같은 배선.",
+        "7. EXT4(먹스 C15)는 지금 어느 보드도 쓰지 않는다(R304 비움, XH 5번 빈 칸): %s번 선은" % "·".join(str(w["no"]) for w in rows if w["net"] == "EXT4"),
+        "    넣어도 되고 빼도 된다. EXT2·EXT3은 O1만 쓰지만 7장을 같게 만든다.",
     ], size=1.95, lh=2.7)
-    s.regions["mbu"] = (14.0, 24.0, 244.0, 196.0)
+    s.regions["mbu"] = (9.0, 20.0, 270.0, 222.0)
     s.frame()
     s.expected = {}
     return s
+
+
+def _slot_users(r):
+    import mbroute as MR
+    use = {}
+    for wid, w in enumerate(r.wires):
+        for (n, ax) in MR.slots_of(w["path"]):
+            use.setdefault(n, set()).add(wid)
+    return use
 
 
 def wiring_mb_rows():

@@ -31,12 +31,12 @@ SCH-03,MB,A302,CD74HC4067 16채널 먹스 모듈,"CD74HC4067 16채널 먹스 모
 SCH-03,MB,A302-HDR,1×16 + 1×8,핀헤더 1×40 2.54 mm 11.5 mm 1단 몰드 (잘라 씀) — 먹스 모듈 1×16 + 1×8,7,24,168,모듈에 수 헤더가 들어 있으면 안 삼,—,Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조),SE7,아이씨뱅큐 P005666127,가진 것
 SCH-03,MB,C301,100n,Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R,7,1,7,,Device:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,SE4,디바이스마트 14991278,학교 지원 구매 · 디바이스마트
 SCH-03,MB,A301,RP2040-Zero,"RP2040-Zero 호환 (파츠파츠 PP-A799-2, Waveshare 배치)",7,1,7,,dj505/RP2040-Zero-KiCAD : RP2040-Zero (3V3 핀을 power_out으로),"dj505/RP2040-Zero-KiCAD 풋프린트를 복사해 드릴만 1.0 mm로 (핀 헤더용, 패드 번호는 dj505 심볼과 같음 — 다른 라이브러리 풋프린트는 번호가 다를 수 있어 쓰지 않음)",SEV2,파츠파츠 2383,사비 구매 · 파츠파츠
-SCH-03,MB,A301-HDR,1×9 ×2,"핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2, 몰드 뺌 (먹스 168 + 제로 144 = 312핀 → 1×40 9줄)",7,18,126,"좌·우 열만 (아래 줄 없음), 몰드 뺌",—,Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조),SE7,아이씨뱅큐 P005666127,가진 것
+SCH-03,MB,A301-HDR,1×9 ×2,"핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2 (MB 7장은 몰드 그대로, PB는 몰드 뺌) (먹스 168 + 제로 144 = 312핀 → 1×40 9줄)",7,18,126,"좌·우 열만 (아래 줄 없음), 몰드 그대로 (2.5, △33)",—,Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조),SE7,아이씨뱅큐 P005666127,가진 것
 SCH-03,MB,JP304,열림,SolderJumper_2_Open,7,1,7,모두 열림 (PB는 JP504),Jumper:SolderJumper_2_Open,Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지),,,납땜 브리지 (부품 없음)
 SCH-03,MB,JP301,,SolderJumper_2_Open,7,1,7,O1·O3·O5·O7 닫음,Jumper:SolderJumper_2_Open,Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지),,,납땜 브리지 (부품 없음)
 SCH-03,MB,JP302,,SolderJumper_2_Open,7,1,7,O2·O3·O6·O7 닫음,Jumper:SolderJumper_2_Open,Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지),,,납땜 브리지 (부품 없음)
 SCH-03,MB,JP303,,SolderJumper_2_Open,7,1,7,O4~O7 닫음,Jumper:SolderJumper_2_Open,Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지),,,납땜 브리지 (부품 없음)
-SCH-03,MB,J302,EXT 패드 1×6 (2.54),패드만 — Adafruit 4876 플러그 선(모듈 쪽)을 아랫면에서 직접 납땜 (헤더 없음),7,1,7,"O1·O7만 L66 모듈 쪽 리드(W403·W413)를 아랫면에서 납땜, O2~O6 비움",Connector_Generic:Conn_01x06,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical (패드만),,,패드만 (부품 없음)
+SCH-03,MB,J302,EXT 패드 1×6 (2.54),"패드만 — Adafruit 4876 플러그 선(모듈 쪽)을 윗면에서 직접 납땜 (헤더 없음, △33)",7,1,7,"O1·O7만 L66 모듈 쪽 리드(W403·W413)를 윗면에서 납땜 (△33), O2~O6 비움",Connector_Generic:Conn_01x06,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical (패드만),,,패드만 (부품 없음)
 SCH-03,MB,R301,100k,"탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)",7,1,2,O1·O7,Device:R,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,L29,사용자 보유 (ABCO CFR 같은 값),가진 것
 SCH-03,MB,R302,100k,"탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)",7,1,1,O1,Device:R,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,L29,사용자 보유 (ABCO CFR 같은 값),가진 것
 SCH-03,MB,R303,100k,"탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·금)",7,1,1,O1,Device:R,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,L29,사용자 보유 (ABCO CFR 같은 값),가진 것
@@ -55,15 +55,15 @@ SCH-04,EL,R403,1k,Yageo RC1206JR-071KL 1206 1 kΩ 5 % 1/4 W (10개 단위),1,1,1
 SCH-04,EL,C403,100n,Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R,1,1,1,,Device:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,SE4,디바이스마트 14991278,학교 지원 구매 · 디바이스마트
 SCH-04,EL,C404,10µ,Samsung CL31A106KOHNNNE 1206 10 µF 16 V X5R (낱개),1,1,1,,Device:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,L67,엘레파츠 2675965,학교 지원 구매 · 엘레파츠
 SCH-04,EL,J401,리드선 패드 ×5,Conn_pads,1,1,1,,"Connector_Generic:Conn_01x0N (J401 = 01x05, J411 = 01x03)",Connector_PinHeader_2.54mm:PinHeader_1x05 / 1x03_P2.54mm_Vertical (패드만),,,패드만 (부품 없음)
-SCH-04,EL,X401,JST-XH 6P (끝 부속 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 150 · 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
-SCH-04,EL,X402,JST-XH 6P (모듈 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 150 · 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
+SCH-04,EL,X401,JST-XH 6P (끝 부속 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 O1 160 · O7 150, 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
+SCH-04,EL,X402,JST-XH 6P (모듈 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 O1 160 · O7 150, 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
 SCH-04,ER,U411,DRV5055A2QLPG,"TI DRV5055A2QLPG, TO-92-3 (LPG)",1,1,1,,Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG),Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정,L20,아이씨뱅큐 P018076669,학교 지원 구매 · 아이씨뱅큐
 SCH-04,ER,R411,1k,Yageo RC1206JR-071KL 1206 1 kΩ 5 % 1/4 W (10개 단위),1,1,1,,Device:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder (아랫면),L68,아이씨뱅큐 P011433924,학교 지원 구매 · 아이씨뱅큐
 SCH-04,ER,C411,100n,Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R,1,1,1,,Device:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,SE4,디바이스마트 14991278,학교 지원 구매 · 디바이스마트
 SCH-04,ER,C412,10µ,Samsung CL31A106KOHNNNE 1206 10 µF 16 V X5R (낱개),1,1,1,,Device:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,L67,엘레파츠 2675965,학교 지원 구매 · 엘레파츠
 SCH-04,ER,J411,리드선 패드 ×3,Conn_pads,1,1,1,,"Connector_Generic:Conn_01x0N (J401 = 01x05, J411 = 01x03)",Connector_PinHeader_2.54mm:PinHeader_1x05 / 1x03_P2.54mm_Vertical (패드만),,,패드만 (부품 없음)
-SCH-04,ER,X411,JST-XH 6P (끝 부속 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 150 · 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
-SCH-04,ER,X412,JST-XH 6P (모듈 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 150 · 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
+SCH-04,ER,X411,JST-XH 6P (끝 부속 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 O1 160 · O7 150, 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
+SCH-04,ER,X412,JST-XH 6P (모듈 쪽),"Adafruit 4876 JST-XH 호환 6핀 짝 (플러그 선 + 소켓 선, 각 약 20 cm, 26 AWG) — 모듈 쪽 O1 160 · O7 150, 끝 부속 쪽 50으로 자름",1,1,1,,Connector_Generic:Conn_01x06,보드 밖 (Exclude from board) — 선 대 선 커넥터,L66,엘레파츠 19324904,학교 지원 구매 · 엘레파츠
 SCH-05,PS,U551,DRV5055A2QLPG,"TI DRV5055A2QLPG, TO-92-3 (LPG)",1,1,1,,Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG),Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정,L20,아이씨뱅큐 P018076669,학교 지원 구매 · 아이씨뱅큐
 SCH-05,PS,C551,100n,Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R,1,1,1,,Device:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,SE4,디바이스마트 14991278,학교 지원 구매 · 디바이스마트
 SCH-05,PS,R551,1k,"탄소피막 1/4 W 5 % 1 kΩ (리드형, 갈·검·빨·금)",1,1,1,,Device:R,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,L29,사용자 보유 (ABCO CFR 같은 값),가진 것
@@ -75,7 +75,7 @@ SCH-05,PB,R502,100k,"탄소피막 1/4 W 5 % 100 kΩ (리드형, 갈·검·노·�
 SCH-05,PB,R503,20Ω,"탄소피막 1/4 W 5 % 100 Ω (리드형, 갈·검·갈·금)",1,5,5,,Device:R (Value 20R = 100 Ω ×5 병렬),Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal ×5,L29,사용자 보유 (ABCO CFR 같은 값),가진 것
 SCH-05,PB,C501,100n,Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R,1,1,1,,Device:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,SE4,디바이스마트 14991278,학교 지원 구매 · 디바이스마트
 SCH-05,PB,A501,RP2040-Zero,"RP2040-Zero 호환 (파츠파츠 PP-A799-2, Waveshare 배치)",1,1,1,,dj505/RP2040-Zero-KiCAD : RP2040-Zero (3V3 핀을 power_out으로),"dj505/RP2040-Zero-KiCAD 풋프린트를 복사해 드릴만 1.0 mm로 (핀 헤더용, 패드 번호는 dj505 심볼과 같음 — 다른 라이브러리 풋프린트는 번호가 다를 수 있어 쓰지 않음)",SEV2,파츠파츠 2383,사비 구매 · 파츠파츠
-SCH-05,PB,A501-HDR,1×9 ×2,"핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2, 몰드 뺌 (먹스 168 + 제로 144 = 312핀 → 1×40 9줄)",1,18,18,"좌·우 열만 (아래 줄 없음), 몰드 뺌",—,Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조),SE7,아이씨뱅큐 P005666127,가진 것
+SCH-05,PB,A501-HDR,1×9 ×2,"핀헤더 1×40 2.54 mm — RP2040-Zero용 1×9 ×2 (MB 7장은 몰드 그대로, PB는 몰드 뺌) (먹스 168 + 제로 144 = 312핀 → 1×40 9줄)",1,18,18,"좌·우 열만 (아래 줄 없음), 몰드 뺌",—,Connector_PinHeader_2.54mm (풋프린트는 A 줄 참조),SE7,아이씨뱅큐 P005666127,가진 것
 SCH-05,PB,JP504,닫음 (브리지),SolderJumper_2_Bridged,1,1,1,,Jumper:SolderJumper_2_Bridged,Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm (만능기판: 두 구멍 납땜),,,납땜 브리지 (부품 없음)
 SCH-05,PB,TP501,,TestPoint,1,1,1,,Connector:TestPoint,TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm,,,구멍 패드 (부품 없음)
 SCH-05,PB,TP502,,TestPoint,1,1,1,,Connector:TestPoint,TestPoint:TestPoint_THTPad_D1.5mm_Drill0.7mm,,,구멍 패드 (부품 없음)
@@ -118,10 +118,10 @@ SCH-07,CU,X705,XT60 수 SPK,"AMASS XT60-M 16 AWG 10 cm (앰프 쪽 스피커 리
 SCH-07,CU,X706,XT60 암 SPK,"AMASS XT60-F 16 AWG 10 cm (스피커 꼬리선, 파랑 수축 + SPK)",1,1,1,,"Connector:Conn_01x02_Socket (1 = −, 2 = +)","Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical (패드 1 = −, 실물 표시로 확인) · 보드 밖 (Exclude from board) — 스피커 피그테일",L81,엘레파츠 12779719,가진 것
 SCH-07,CU,LS702,CW-100B25 8 Ω (오른쪽),삼미 CW-100B25 4인치 8 Ω 25 W,1,1,1,,Device:Speaker (핀 1 = +),보드 밖 (Exclude from board),L07,쿠팡,학교 지원 구매 · 쿠팡
 SCH-02,SB,PCB-SB,161.6 × 15.24 6행,"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",7,1,7,12 × 18 기판을 띠로 자름,—,Edge.Cuts x1.0~162.6 × y60.65~75.89 (BRD-02),L22,메카솔루션 540645,가진 것
-SCH-03,MB,PCB-MB,70 × 50,Coms BE163 양면 만능기판 80 × 120 (30 × 42 구멍)에서 자른 70 × 50 조각 (지그 09_기판지그),7,1,7,BE163 한 장에서 두 조각 (지그 P-MB),—,"Edge.Cuts x47.25~117.25 × y145.5~195.5, 홈 x81.92~84.72 × y≤172 (BRD-01)",u06,사용자 보유 BE163 4장,가진 것
+SCH-03,MB,PCB-MB,80 × 120 통째로,"Coms BE163 양면 만능기판 80 × 120 (30 × 42 구멍) 통째로 — 자르지 않음, 고정 구멍 없음",7,1,7,"가진 BE163 4장 + 8 × 12 양면 3장 (SE8b; 28 × 40 구멍 판도 가운데 기준 같은 배치), 자르지 않음",—,"Edge.Cuts x22.25~142.25 × y93.3~173.3 (판 그대로, 구멍·홈 없음) · 격자 x = 30.18 + 2.54i, y = 96.47 + 2.54j (BRD-01)",u06 · SE8b,사용자 보유 BE163 4장 (u06) + 디바이스마트 Voltly VLT-PCB009 8 × 12 cm 양면 2.54 3장 (SE8b i228),가진 것 / 사비 구매 · 디바이스마트
 SCH-04,EL,PCB-EL,45.5 × 15.24 6행,"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",1,1,1,12 × 18 기판 띠,—,Edge.Cuts x1.0~46.5 (BRD-02),L22,메카솔루션 540645,가진 것
 SCH-04,ER,PCB-ER,22.0 × 15.24 6행,"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",1,1,1,12 × 18 기판 띠,—,Edge.Cuts x1.0~23.0 (BRD-02),L22,메카솔루션 540645,가진 것
-SCH-05,PB,PCB-PB,70 × 50,Coms BE163 양면 만능기판 80 × 120 (30 × 42 구멍)에서 자른 70 × 50 조각 (지그 09_기판지그),1,1,1,BE163 조각 (지그 P-PED),—,"Edge.Cuts x426.5~476.5 × y244~314, 90° 돌림 (BRD-03)",u06,사용자 보유 BE163 4장,가진 것
+SCH-05,PB,PCB-PB,70 × 50,"8 × 12 cm 양면 만능기판 (Voltly VLT-PCB009)에서 자른 70 × 50 조각 (지그 09_기판지그 P-PED), 남는 반쪽은 예비",1,1,1,8 × 12 양면 1장(SE8b)에서 자른 조각 (지그 P-PED),—,"Edge.Cuts x426.5~476.5 × y244~314, 90° 돌림 (BRD-03)",SE8b,"디바이스마트 Voltly VLT-PCB009 (SE8b i228, 4장 중 1장)",사비 구매 · 디바이스마트
 SCH-05,J501 조각,PCB-J501,25 × 24 (9 × 9 구멍),"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",1,1,1,12 × 18 기판 자투리,—,"x450~475 × y316.5~340.5, 구멍·패드 BRD-07",L22,메카솔루션 540645,가진 것
 SCH-05,PS,PCB-PS,7 × 5 구멍 (17.78 × 12.7),"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",1,1,1,12 × 18 자투리,—,로컬 구멍·배선 BRD-07,L22,메카솔루션 540645,가진 것
 SCH-07,J702 기판,PCB-J702,30 × 25 (12 × 10 구멍),"양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리",1,1,1,12 × 18 기판 자투리,—,"x505~535 × y255~280, 나사 Ø3.2 (508, 258)·(532, 277), 구멍·배선 BRD-07",L22,메카솔루션 540645,가진 것

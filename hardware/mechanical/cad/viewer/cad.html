@@ -1,13 +1,13 @@
 <section class="page" id="p-cad" hidden>
 <h2>3D 모델</h2>
-<p class="lede">설계도와 같은 CAD 입체 1,655개를 조립한 자리 그대로 띄운 모델입니다. 출력 STL, 도면, 이 모델은 모두 같은 생성기(<code>hardware/mechanical/cad/src</code>)에서 나오므로 치수가 같습니다. 부품을 누르면 이름·크기·재료·출력 파일이 나오고, 건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다. 오른쪽 <b>조립 순서 보기</b>는 고른 부품에서 시작해 닿거나 나사·핀으로 이어진 부품을 하나씩 제자리에 넣어 보여 줍니다.</p>
+<p class="lede">설계도와 같은 CAD 입체 1,662개를 조립한 자리 그대로 띄운 모델입니다. 출력 STL, 도면, 이 모델은 모두 같은 생성기(<code>hardware/mechanical/cad/src</code>)에서 나오므로 치수가 같습니다. 부품을 누르면 이름·크기·재료·출력 파일이 나오고, 건반을 누르면 설계 각도대로 내려갑니다. 단면, 분해, 내부 보기, 화면 접기로 안쪽을 볼 수 있습니다. 오른쪽 <b>조립 순서 보기</b>는 고른 부품에서 시작해 닿거나 나사·핀으로 이어진 부품을 하나씩 제자리에 넣어 보여 줍니다.</p>
 <div class="kfs">
-<div class="kf"><b>1,648</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
+<div class="kf"><b>1,655</b><span>조립 부품 (페달·접은 화면 제외)</span></div>
 <div class="kf"><b>88</b><span>건반 (백 52 · 흑 36)</span></div>
 <div class="kf"><b>1254 × 342.5</b><span>전체 가로 × 깊이 mm</span></div>
 <div class="kf"><b>z189.23</b><span>가장 높은 점 (화면 25°)</span></div>
 <div class="kf"><b>z144.65 · 40°</b><span>스피커 윗면 · 앞판</span></div>
-<div class="kf"><b>495개</b><span>출력 부품 (98개 파일)</span></div>
+<div class="kf"><b>502개</b><span>출력 부품 (99개 파일)</span></div>
 <div class="kf"><b>94</b><span>전자 부품·케이블</span></div>
 </div>
 <div class="cadv" id="cad-viewer">
@@ -39,15 +39,15 @@
 <input type="range" class="cadasm-scrub" min="1" max="1" value="1" step="1" disabled aria-label="조립 단계">
 <div class="cadasm-now" aria-live="polite"></div>
 <ol class="cadasm-list" hidden></ol>
-<p class="cadasm-src">연결 3,092개 (나사·핀 493 · 끼움 154 · 맞닿음 1,443 · 틈 0.65 mm 안 1001) — CAD 입체끼리 닿거나 겹치거나 0.65 mm 안에 있는 부품을 잇고, 들어오는 방향은 그 방향으로 밀어도 상대 부품에 걸리지 않는 쪽입니다(<code>viewer/asm_graph.py</code>).</p>
+<p class="cadasm-src">연결 3,102개 (나사·핀 493 · 끼움 154 · 맞닿음 1,455 · 틈 0.65 mm 안 999) — CAD 입체끼리 닿거나 겹치거나 0.65 mm 안에 있는 부품을 잇고, 들어오는 방향은 그 방향으로 밀어도 상대 부품에 걸리지 않는 쪽입니다(<code>viewer/asm_graph.py</code>).</p>
 </details>
 <details class="cadbox" open><summary>부분별로 보기</summary><div class="cadsets">
 <button type="button" class="cadset" data-cad-set="0"><span>건반 하나 (C4: 건반·레버·부속 12개)</span><em class="mono">12</em></button>
-<button type="button" class="cadset" data-cad-set="1"><span>옥타브 모듈 O4 (C4~B4)</span><em class="mono">194</em></button>
+<button type="button" class="cadset" data-cad-set="1"><span>옥타브 모듈 O4 (C4~B4)</span><em class="mono">195</em></button>
 <button type="button" class="cadset" data-cad-set="2"><span>왼쪽 끝 부속 (A0~B0)</span><em class="mono">57</em></button>
 <button type="button" class="cadset" data-cad-set="3"><span>오른쪽 끝 부속 (C8)</span><em class="mono">27</em></button>
 <button type="button" class="cadset" data-cad-set="4"><span>센서 바·센서 기판·건반 자석</span><em class="mono">124</em></button>
-<button type="button" class="cadset" data-cad-set="5"><span>제어 기판 MB × 7 (RP2040-Zero·먹스)</span><em class="mono">42</em></button>
+<button type="button" class="cadset" data-cad-set="5"><span>제어 기판 MB × 7 (RP2040-Zero·먹스)</span><em class="mono">28</em></button>
 <button type="button" class="cadset" data-cad-set="6"><span>레버·토션 스프링·강철 블록</span><em class="mono">361</em></button>
 <button type="button" class="cadset" data-cad-set="7"><span>스피커 L 통</span><em class="mono">20</em></button>
 <button type="button" class="cadset" data-cad-set="8"><span>스피커 R 통</span><em class="mono">20</em></button>
@@ -65,7 +65,7 @@
 <button type="button" class="cadset cadset-sec" data-cad-set="20"><span>가운데 유닛 평면 단면 (z45)</span><em>단면</em></button>
 </div></details>
 <details class="cadbox"><summary>종류·모듈 층</summary><div class="cadchips" role="group" aria-label="종류">
-<button type="button" class="cadchip" data-cad-kind="print" aria-pressed="true">출력 <span class="mono">491</span></button>
+<button type="button" class="cadchip" data-cad-kind="print" aria-pressed="true">출력 <span class="mono">498</span></button>
 <button type="button" class="cadchip" data-cad-kind="bought" aria-pressed="true">구매 <span class="mono">651</span></button>
 <button type="button" class="cadchip" data-cad-kind="electronics" aria-pressed="true">전자 <span class="mono">94</span></button>
 <button type="button" class="cadchip" data-cad-kind="consumable" aria-pressed="true">소모품 <span class="mono">412</span></button>
@@ -74,7 +74,7 @@
 <button type="button" class="cadchip" data-cad-layer="백건" aria-pressed="true">백건 <span class="mono">52</span></button>
 <button type="button" class="cadchip" data-cad-layer="흑건" aria-pressed="true">흑건 <span class="mono">36</span></button>
 <button type="button" class="cadchip" data-cad-layer="레버" aria-pressed="true">레버 <span class="mono">176</span></button>
-<button type="button" class="cadchip" data-cad-layer="프레임" aria-pressed="true">프레임 <span class="mono">163</span></button>
+<button type="button" class="cadchip" data-cad-layer="프레임" aria-pressed="true">프레임 <span class="mono">170</span></button>
 <button type="button" class="cadchip" data-cad-layer="구매품" aria-pressed="true">구매품 <span class="mono">984</span></button>
 <button type="button" class="cadchip" data-cad-layer="전자부" aria-pressed="true">전자부 <span class="mono">49</span></button>
 </div></details>
@@ -84,37 +84,37 @@
 <label><input type="checkbox" data-cad-g="1" checked><span>O1 구매품</span><em class="mono">133</em></label>
 <label><input type="checkbox" data-cad-g="2" checked><span>O1 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="3" checked><span>O1 흑건</span><em class="mono">5</em></label>
-<label><input type="checkbox" data-cad-g="4" checked><span>O1 프레임</span><em class="mono">21</em></label>
+<label><input type="checkbox" data-cad-g="4" checked><span>O1 프레임</span><em class="mono">22</em></label>
 <label><input type="checkbox" data-cad-g="5" checked><span>O2 백건</span><em class="mono">7</em></label>
 <label><input type="checkbox" data-cad-g="6" checked><span>O2 구매품</span><em class="mono">133</em></label>
 <label><input type="checkbox" data-cad-g="7" checked><span>O2 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="8" checked><span>O2 흑건</span><em class="mono">5</em></label>
-<label><input type="checkbox" data-cad-g="9" checked><span>O2 프레임</span><em class="mono">21</em></label>
+<label><input type="checkbox" data-cad-g="9" checked><span>O2 프레임</span><em class="mono">22</em></label>
 <label><input type="checkbox" data-cad-g="10" checked><span>O3 백건</span><em class="mono">7</em></label>
 <label><input type="checkbox" data-cad-g="11" checked><span>O3 구매품</span><em class="mono">133</em></label>
 <label><input type="checkbox" data-cad-g="12" checked><span>O3 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="13" checked><span>O3 흑건</span><em class="mono">5</em></label>
-<label><input type="checkbox" data-cad-g="14" checked><span>O3 프레임</span><em class="mono">21</em></label>
+<label><input type="checkbox" data-cad-g="14" checked><span>O3 프레임</span><em class="mono">22</em></label>
 <label><input type="checkbox" data-cad-g="15" checked><span>O4 백건</span><em class="mono">7</em></label>
 <label><input type="checkbox" data-cad-g="16" checked><span>O4 구매품</span><em class="mono">133</em></label>
 <label><input type="checkbox" data-cad-g="17" checked><span>O4 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="18" checked><span>O4 흑건</span><em class="mono">5</em></label>
-<label><input type="checkbox" data-cad-g="19" checked><span>O4 프레임</span><em class="mono">21</em></label>
+<label><input type="checkbox" data-cad-g="19" checked><span>O4 프레임</span><em class="mono">22</em></label>
 <label><input type="checkbox" data-cad-g="20" checked><span>O5 백건</span><em class="mono">7</em></label>
 <label><input type="checkbox" data-cad-g="21" checked><span>O5 구매품</span><em class="mono">133</em></label>
 <label><input type="checkbox" data-cad-g="22" checked><span>O5 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="23" checked><span>O5 흑건</span><em class="mono">5</em></label>
-<label><input type="checkbox" data-cad-g="24" checked><span>O5 프레임</span><em class="mono">21</em></label>
+<label><input type="checkbox" data-cad-g="24" checked><span>O5 프레임</span><em class="mono">22</em></label>
 <label><input type="checkbox" data-cad-g="25" checked><span>O6 백건</span><em class="mono">7</em></label>
 <label><input type="checkbox" data-cad-g="26" checked><span>O6 구매품</span><em class="mono">133</em></label>
 <label><input type="checkbox" data-cad-g="27" checked><span>O6 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="28" checked><span>O6 흑건</span><em class="mono">5</em></label>
-<label><input type="checkbox" data-cad-g="29" checked><span>O6 프레임</span><em class="mono">21</em></label>
+<label><input type="checkbox" data-cad-g="29" checked><span>O6 프레임</span><em class="mono">22</em></label>
 <label><input type="checkbox" data-cad-g="30" checked><span>O7 백건</span><em class="mono">7</em></label>
 <label><input type="checkbox" data-cad-g="31" checked><span>O7 구매품</span><em class="mono">133</em></label>
 <label><input type="checkbox" data-cad-g="32" checked><span>O7 레버</span><em class="mono">24</em></label>
 <label><input type="checkbox" data-cad-g="33" checked><span>O7 흑건</span><em class="mono">5</em></label>
-<label><input type="checkbox" data-cad-g="34" checked><span>O7 프레임</span><em class="mono">21</em></label>
+<label><input type="checkbox" data-cad-g="34" checked><span>O7 프레임</span><em class="mono">22</em></label>
 <p class="cadgh">끝 부속 (A0~B0, C8)</p>
 <label><input type="checkbox" data-cad-g="35" checked><span>끝 부속 왼쪽 백건</span><em class="mono">2</em></label>
 <label><input type="checkbox" data-cad-g="36" checked><span>끝 부속 왼쪽 구매품</span><em class="mono">37</em></label>
@@ -158,7 +158,7 @@
 <tr><td><code>hardware/mechanical/cad/viewer/toccata_viewer.glb</code></td><td>이 탭의 3D 모델 (부품마다 노드 1개, 이름 = 부품 id, 3 MB). 다른 GLB 뷰어에서도 실제 크기(m)로 열립니다.</td></tr>
 <tr><td><code>hardware/mechanical/cad/Toccata_전체조립.3mf</code></td><td>색·이름이 붙은 전체 조립 (슬라이서·3D 뷰어용)</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/assembly/</code></td><td>그룹별 조립 STL과 Toccata_전체조립.stl (조립 좌표, mm)</td></tr>
-<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL 98개 파일 · 부품 495개 (파일 이름 끝 = 출력 개수, 베드에 놓인 방향)</td></tr>
+<tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL 99개 파일 · 부품 502개 (파일 이름 끝 = 출력 개수, 베드에 놓인 방향)</td></tr>
 <tr><td><code>hardware/mechanical/cad/manifest.json</code></td><td>부품마다 id·이름·종류·그룹·외곽·출력 파일</td></tr>
 <tr><td><code>hardware/mechanical/cad/viewer/parts.json</code></td><td>이 탭의 부품표 (외곽, 출력 파일·개수, 메모, 분해·단면·누르기 자료)</td></tr>
 <tr><td><code>hardware/mechanical/cad/viewer/asm.json</code></td><td>조립 순서 보기 자료: 닿거나 겹치거나 나사·핀으로 이어진 부품 쌍, 이음 방식·이유, 부품마다 들어오는 방향 (viewer/asm_graph.py가 CAD 입체에서 계산)</td></tr>
@@ -185,17 +185,17 @@
 <li><b>M3×10 둥근머리 렌치볼트</b> — 머리 Ø5.7 × 1.65 (ISO 7380), 자리파기 바닥 z67.35, 몸통 z57.35~67.35 → 인서트에 4.0 물림 (같은 부품 4개)</li>
 <li><b>M2.5×6 둥근머리 나사</b> — 머리 Ø4.5 × 1.8; 몸통 w5~11 → 화면 구멍(w8부터)에 3 물림; 구멍 깊이는 받은 화면에서 잼 (사양 G-2: 물림 = min(깊이 − 0.5, 4), 얕으면 와셔); xr-77 u6.5 (같은 부품 4개)</li>
 <li><b>센서 기판 SB</b> — U홈이 왼쪽 끝으로 열림 (spec assumed: U-slot opening direction (to the left edge) inferred from &quot;U홈&quot; with the centre 2.0 from the edge) (같은 부품 7개)</li>
-<li><b>RP2040-Zero</b> — 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌 (같은 부품 7개)</li>
+<li><b>RP2040-Zero</b> — 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌 (같은 부품 7개)</li>
 <li><b>CD74HC4067 16채널 먹스 모듈</b> — 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented) (같은 부품 7개)</li>
 <li><b>EXT 연장선 W403</b> — 묶음 단면 약 8×2와 띠 안의 x 위치 (spec assumed; spec 상자 y195.4~가 MB 끝 y195.5와 0.1 겹쳐 MB 자리를 뺌); 뒷벽 구멍(y212)부터 XH 짝까지는 지름 3 선으로 L2 통로(y212~241, 스피커 밑) 바닥(z0~3)에 눕힘 - 경로는 보기용</li>
-<li><b>USB-C 케이블 W201</b> — 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z10.25로 옮긴 뒤 묶음 y237.5의 3층 z10.25로 들어가 허브 포트 x784.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 680.1 + 허브 플러그 35 = 740.1 mm (사양 769, 표준 1.0 m, 여유 260 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
-<li><b>USB-C 케이블 W202</b> — 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x806.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 542.1 + 허브 플러그 35 = 602.1 mm (사양 627, 표준 1.0 m, 여유 398 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
-<li><b>USB-C 케이블 W203</b> — 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z14.25로 옮긴 뒤 묶음 y237.5의 4층 z14.25로 들어가 허브 포트 x762.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 326.4 + 허브 플러그 35 = 386.4 mm (사양 418, 표준 0.5 m, 여유 114 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
-<li><b>USB-C 케이블 W204</b> — 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z2.25로 옮긴 뒤 묶음 y237.5의 1층 z2.25로 들어가 허브 포트 x828.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 240.7 + 허브 플러그 35 = 300.7 mm (사양 320, 표준 0.5 m, 여유 199 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
-<li><b>USB-C 케이블 W205</b> — 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x850.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 86.8 + 허브 플러그 35 = 146.8 mm (사양 177, 표준 0.3 m, 여유 153 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
-<li><b>USB-C 케이블 W206</b> — 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x872.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 106.3 + 허브 플러그 35 = 166.3 mm (사양 197, 표준 0.3 m, 여유 134 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
+<li><b>USB-C 케이블 W201</b> — 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z10.25로 옮긴 뒤 묶음 y237.5의 3층 z10.25로 들어가 허브 포트 x784.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 706.9 + 허브 플러그 35 = 766.9 mm (사양 769, 표준 1.0 m, 여유 233 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
+<li><b>USB-C 케이블 W202</b> — 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x806.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 568.8 + 허브 플러그 35 = 628.8 mm (사양 627, 표준 1.0 m, 여유 371 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
+<li><b>USB-C 케이블 W203</b> — 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z14.25로 옮긴 뒤 묶음 y237.5의 4층 z14.25로 들어가 허브 포트 x762.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 353.3 + 허브 플러그 35 = 413.3 mm (사양 418, 표준 0.5 m, 여유 87 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
+<li><b>USB-C 케이블 W204</b> — 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z2.25로 옮긴 뒤 묶음 y237.5의 1층 z2.25로 들어가 허브 포트 x828.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 267.3 + 허브 플러그 35 = 327.3 mm (사양 320, 표준 0.5 m, 여유 173 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
+<li><b>USB-C 케이블 W205</b> — 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x850.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 114.2 + 허브 플러그 35 = 174.2 mm (사양 177, 표준 0.3 m, 여유 126 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
+<li><b>USB-C 케이블 W206</b> — 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x872.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 132.5 + 허브 플러그 35 = 192.5 mm (사양 197, 표준 0.3 m, 여유 108 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
 <li><b>EXT 연장선 W413</b> — 묶음 단면 약 8×2와 띠 안의 x 위치 (spec assumed; spec 상자 y195.4~가 MB 끝 y195.5와 0.1 겹쳐 MB 자리를 뺌); 뒷벽 구멍(y212)부터 XH 짝까지는 지름 3 선으로 L2 통로(y212~241, 스피커 밑) 바닥(z0~3)에 눕힘 - 경로는 보기용</li>
-<li><b>USB-C 케이블 W207</b> — 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x894.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 254.6 + 허브 플러그 35 = 314.6 mm (사양 339, 표준 0.5 m, 여유 185 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
+<li><b>USB-C 케이블 W207</b> — 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x894.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 280.0 + 허브 플러그 35 = 340.0 mm (사양 339, 표준 0.5 m, 여유 160 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)</li>
 <li><b>끝 부속 센서 기판 EL</b> — U홈 Ø3.4가 왼쪽 끝으로 열림 (spec assumed)</li>
 <li><b>끝 부속 센서 기판 ER</b> — U홈 Ø3.4가 왼쪽 끝으로 열림 (spec assumed)</li>
 <li><b>EL 리드 W401</b> — 뒷벽 노치(y212)에서 통로 바닥으로 내려 XH 짝 끝면까지 지름 2 선으로 표시 (실제는 폭 6.35 리본 띠) - 경로는 보기용</li>
@@ -209,7 +209,7 @@
 <li><b>USB-C(F)→USB-A(M) 일자 젠더</b> — 흔한 짧은 일자 젠더(전체 25.6 × 15.6 × 7.8, A 플러그 12)로 포트 밖 14 × 15.6 × 7.8; RJ45 옆 USB-A 2단(중심 y282)의 아래 포트(축 z28.75)에 꽂음 (A 플러그 면 x629.5 = 포트 면) - 포트 밖 길이가 26를 넘으면 동글 선이 허브 DC 플러그에 가까워짐 (check_electronics.py가 최대 길이를 잼)</li>
 <li><b>XL4016 강압 모듈 XH-M401</b> — 방열판 2·코일·캐패시터를 모서리 6.5×6.5를 뺀 한 덩어리(z23.1~50.5)로 표시, 구멍 Ø3.2 모서리에서 3.2 (body.py CU-POST-BUCK 자리); 입력 단자 -x 끝(x477.5 y306), 출력 단자 앞면(-y, x529.5) 가정; 입력은 12.8 V 버스 (10.0~14.6 V, XL4016 입력 8~40 V 안)</li>
 <li><b>PED 페달 보드</b> — 나사 구멍 Ø3.2 (x430.5 y248 · x472.5 y310), 위치 핀 구멍 Ø3.0 (x472.5 y248 · x430.5 y310) - body.py CU-POST-PED 자리</li>
-<li><b>RP2040-Zero</b> — MB의 Zero 배치(핀 헤더 1.3 틈)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x458.14 z27.0)</li>
+<li><b>RP2040-Zero</b> — MB의 Zero 배치(밑면 칩이 기판 위 캡톤에 닿는 쌓임)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x458.14 z27.0)</li>
 <li><b>앰프 입력 잭 기판</b> — 구멍 Ø3.2 두 곳 (body.py CU-POST-J702 자리); RC 부품은 작아서 뺌</li>
 <li><b>앰프 입력 잭 PJ-313</b> — 몸체 y257.5~269, 코 Ø5가 기판 앞끝 y255까지, 축 z25.6 - W702 플러그는 모델에 없음 (Z-J702-PLUG 비움)</li>
 <li><b>ATC/ATO 칼날형 인라인 퓨즈 홀더 + 5 A ATO 퓨즈</b> — 꼭지 축이 칼날 쪽 끝에서 7.5, 꼭지 길이 7.05, 덮개 끝 폭 - 받은 홀더로 확인; 선은 양끝에서 x로: C-PWR-IN (-x 끝, XT60 수에서) / C-PWR-FUSE (+x 끝, KCD1로)</li>

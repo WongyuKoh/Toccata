@@ -52,14 +52,14 @@
  "all_stl": {
   "path": "fin/parts/all_stl.zip.b64.txt",
   "name": "Toccata_출력STL_전체.zip",
-  "bytes": 2926557,
+  "bytes": 2843702,
   "files": 104,
   "matches_stl_print": true
  },
  "all_dxf": {
   "path": "fin/parts/all_dxf.zip.b64.txt",
   "name": "Toccata_부품도면_DXF_전체.zip",
-  "bytes": 2665474,
+  "bytes": 2644542,
   "files": 125
  },
  "by_file": {
@@ -96,12 +96,13 @@
   "hardware/mechanical/cad/stl/print/02_레버캐리어/레버덮개__88개.stl": "P-02-17",
   "hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl": "P-03-01",
   "hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_모듈__7개.stl": "P-03-02",
-  "hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_백건__52개.stl": "P-03-03",
-  "hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_흑건__36개.stl": "P-03-04",
-  "hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_왼쪽__1개.stl": "P-03-05",
-  "hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_왼쪽__1개.stl": "P-03-06",
-  "hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_오른쪽__1개.stl": "P-03-07",
-  "hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_오른쪽__1개.stl": "P-03-08",
+  "hardware/mechanical/cad/stl/print/03_프레임/밸런스레일__7개.stl": "P-03-03",
+  "hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_백건__52개.stl": "P-03-04",
+  "hardware/mechanical/cad/stl/print/03_프레임/프레임_가이드탭_흑건__36개.stl": "P-03-05",
+  "hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_왼쪽__1개.stl": "P-03-06",
+  "hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_왼쪽__1개.stl": "P-03-07",
+  "hardware/mechanical/cad/stl/print/03_프레임/프레임_바닥틀_끝부속_오른쪽__1개.stl": "P-03-08",
+  "hardware/mechanical/cad/stl/print/03_프레임/프레임_레버틀_끝부속_오른쪽__1개.stl": "P-03-09",
   "hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/센서바__7개.stl": "P-04-01",
   "hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/가림판띠__7개.stl": "P-04-02",
   "hardware/mechanical/cad/stl/print/04_센서바·패드바·가림판·마개/레버봉끝마개__9개.stl": "P-04-03",
@@ -165,8 +166,7 @@
   "hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_유리턱띠_왼쪽__1개.stl": "P-07-04",
   "hardware/mechanical/cad/stl/print/07_터치스크린/화면받침_유리턱띠_오른쪽__1개.stl": "P-07-05",
   "hardware/mechanical/cad/stl/print/07_터치스크린/리본클립__1개.stl": "P-07-06",
-  "hardware/mechanical/cad/stl/print/09_기판지그/P-MB_제어기판지그_MB7장__1개.stl": "P-09-01",
-  "hardware/mechanical/cad/stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl": "P-09-02",
+  "hardware/mechanical/cad/stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl": "P-09-01",
   "hardware/mechanical/cad/stl/print_extra/예비_건반/백건_C__1개.stl": "P-EX-01",
   "hardware/mechanical/cad/stl/print_extra/예비_건반/백건_D__1개.stl": "P-EX-02",
   "hardware/mechanical/cad/stl/print_extra/예비_건반/백건_E__1개.stl": "P-EX-03",
@@ -232,8 +232,8 @@
    "zip_name": "Toccata_P-01-01_백건_C.zip",
    "bytes": {
     "svg": 56598,
-    "zip": 59613,
-    "zip_b64": 79484,
+    "zip": 59618,
+    "zip_b64": 79492,
     "stl": 93184,
     "dxf": 158508
    },
@@ -285,7 +285,7 @@
    "zip_name": "Toccata_P-01-02_백건_D.zip",
    "bytes": {
     "svg": 56816,
-    "zip": 59986,
+    "zip": 59988,
     "zip_b64": 79984,
     "stl": 93784,
     "dxf": 159321
@@ -338,7 +338,7 @@
    "zip_name": "Toccata_P-01-03_백건_E.zip",
    "bytes": {
     "svg": 56274,
-    "zip": 59635,
+    "zip": 59636,
     "zip_b64": 79516,
     "stl": 93984,
     "dxf": 157860
@@ -391,8 +391,8 @@
    "zip_name": "Toccata_P-01-04_백건_F.zip",
    "bytes": {
     "svg": 56666,
-    "zip": 60412,
-    "zip_b64": 80552,
+    "zip": 60420,
+    "zip_b64": 80560,
     "stl": 94084,
     "dxf": 160206
    },
@@ -497,8 +497,8 @@
    "zip_name": "Toccata_P-01-06_백건_A.zip",
    "bytes": {
     "svg": 56895,
-    "zip": 59729,
-    "zip_b64": 79640,
+    "zip": 59726,
+    "zip_b64": 79636,
     "stl": 93784,
     "dxf": 159564
    },
@@ -550,8 +550,8 @@
    "zip_name": "Toccata_P-01-07_백건_B.zip",
    "bytes": {
     "svg": 56254,
-    "zip": 59469,
-    "zip_b64": 79292,
+    "zip": 59470,
+    "zip_b64": 79296,
     "stl": 93384,
     "dxf": 155926
    },
@@ -597,8 +597,8 @@
    "zip_name": "Toccata_P-01-08_백건_A0.zip",
    "bytes": {
     "svg": 56497,
-    "zip": 59678,
-    "zip_b64": 79572,
+    "zip": 59680,
+    "zip_b64": 79576,
     "stl": 93184,
     "dxf": 159420
    },
@@ -644,7 +644,7 @@
    "zip_name": "Toccata_P-01-09_백건_B0.zip",
    "bytes": {
     "svg": 55972,
-    "zip": 59411,
+    "zip": 59410,
     "zip_b64": 79216,
     "stl": 93384,
     "dxf": 155749
@@ -691,7 +691,7 @@
    "zip_name": "Toccata_P-01-10_백건_C8.zip",
    "bytes": {
     "svg": 55342,
-    "zip": 58798,
+    "zip": 58800,
     "zip_b64": 78400,
     "stl": 93484,
     "dxf": 155489
@@ -804,8 +804,8 @@
    "zip_name": "Toccata_P-01-12_흑건_Fs.zip",
    "bytes": {
     "svg": 61643,
-    "zip": 60003,
-    "zip_b64": 80004,
+    "zip": 60000,
+    "zip_b64": 80000,
     "stl": 86584,
     "dxf": 160498
    },
@@ -857,10 +857,10 @@
    "zip_name": "Toccata_P-01-13_흑건_Gs.zip",
    "bytes": {
     "svg": 61154,
-    "zip": 58918,
+    "zip": 58920,
     "zip_b64": 78560,
     "stl": 85484,
-    "dxf": 154993
+    "dxf": 154995
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -911,10 +911,10 @@
    "zip_name": "Toccata_P-01-14_흑건_As-As0.zip",
    "bytes": {
     "svg": 61456,
-    "zip": 59517,
-    "zip_b64": 79356,
+    "zip": 59523,
+    "zip_b64": 79364,
     "stl": 85884,
-    "dxf": 157480
+    "dxf": 157482
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -1017,10 +1017,10 @@
    "zip_name": "Toccata_P-02-02_레버캐리어_Cs.zip",
    "bytes": {
     "svg": 49656,
-    "zip": 77777,
+    "zip": 77778,
     "zip_b64": 103704,
     "stl": 151384,
-    "dxf": 177949
+    "dxf": 177951
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -1070,7 +1070,7 @@
    "zip_name": "Toccata_P-02-03_레버캐리어_D.zip",
    "bytes": {
     "svg": 46719,
-    "zip": 57646,
+    "zip": 57647,
     "zip_b64": 76864,
     "stl": 78584,
     "dxf": 163356
@@ -1123,8 +1123,8 @@
    "zip_name": "Toccata_P-02-04_레버캐리어_Ds.zip",
    "bytes": {
     "svg": 50111,
-    "zip": 75139,
-    "zip_b64": 100188,
+    "zip": 75143,
+    "zip_b64": 100192,
     "stl": 140684,
     "dxf": 181817
    },
@@ -1176,8 +1176,8 @@
    "zip_name": "Toccata_P-02-05_레버캐리어_E.zip",
    "bytes": {
     "svg": 48735,
-    "zip": 63966,
-    "zip_b64": 85288,
+    "zip": 63968,
+    "zip_b64": 85292,
     "stl": 101284,
     "dxf": 176232
    },
@@ -1229,8 +1229,8 @@
    "zip_name": "Toccata_P-02-06_레버캐리어_F.zip",
    "bytes": {
     "svg": 46137,
-    "zip": 59241,
-    "zip_b64": 78988,
+    "zip": 59242,
+    "zip_b64": 78992,
     "stl": 87184,
     "dxf": 165349
    },
@@ -1282,8 +1282,8 @@
    "zip_name": "Toccata_P-02-07_레버캐리어_Fs.zip",
    "bytes": {
     "svg": 49509,
-    "zip": 76531,
-    "zip_b64": 102044,
+    "zip": 76528,
+    "zip_b64": 102040,
     "stl": 149284,
     "dxf": 183238
    },
@@ -1335,7 +1335,7 @@
    "zip_name": "Toccata_P-02-08_레버캐리어_G.zip",
    "bytes": {
     "svg": 48138,
-    "zip": 65182,
+    "zip": 65183,
     "zip_b64": 86912,
     "stl": 103184,
     "dxf": 171941
@@ -1388,8 +1388,8 @@
    "zip_name": "Toccata_P-02-09_레버캐리어_Gs.zip",
    "bytes": {
     "svg": 48465,
-    "zip": 75096,
-    "zip_b64": 100128,
+    "zip": 75100,
+    "zip_b64": 100136,
     "stl": 143684,
     "dxf": 171326
    },
@@ -1441,8 +1441,8 @@
    "zip_name": "Toccata_P-02-10_레버캐리어_A.zip",
    "bytes": {
     "svg": 47612,
-    "zip": 61561,
-    "zip_b64": 82084,
+    "zip": 61564,
+    "zip_b64": 82088,
     "stl": 94584,
     "dxf": 165827
    },
@@ -1494,7 +1494,7 @@
    "zip_name": "Toccata_P-02-11_레버캐리어_As.zip",
    "bytes": {
     "svg": 49466,
-    "zip": 75483,
+    "zip": 75482,
     "zip_b64": 100644,
     "stl": 145884,
     "dxf": 174543
@@ -1594,10 +1594,10 @@
    "zip_name": "Toccata_P-02-13_레버캐리어_A0.zip",
    "bytes": {
     "svg": 47519,
-    "zip": 68220,
-    "zip_b64": 90960,
+    "zip": 68222,
+    "zip_b64": 90964,
     "stl": 108684,
-    "dxf": 172272
+    "dxf": 172270
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -1641,10 +1641,10 @@
    "zip_name": "Toccata_P-02-14_레버캐리어_As0.zip",
    "bytes": {
     "svg": 51304,
-    "zip": 84219,
-    "zip_b64": 112292,
+    "zip": 84220,
+    "zip_b64": 112296,
     "stl": 162584,
-    "dxf": 186960
+    "dxf": 186958
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -1687,11 +1687,11 @@
    "zip": "fin/parts/P-02-15.zip.b64.txt",
    "zip_name": "Toccata_P-02-15_레버캐리어_B0.zip",
    "bytes": {
-    "svg": 46985,
-    "zip": 66297,
-    "zip_b64": 88396,
+    "svg": 47018,
+    "zip": 66280,
+    "zip_b64": 88376,
     "stl": 99484,
-    "dxf": 171115
+    "dxf": 171047
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -1734,11 +1734,11 @@
    "zip": "fin/parts/P-02-16.zip.b64.txt",
    "zip_name": "Toccata_P-02-16_레버캐리어_C8.zip",
    "bytes": {
-    "svg": 47021,
-    "zip": 70279,
-    "zip_b64": 93708,
+    "svg": 47054,
+    "zip": 70262,
+    "zip_b64": 93684,
     "stl": 111984,
-    "dxf": 170973
+    "dxf": 170905
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -1872,7 +1872,7 @@
     "zip": 19381,
     "zip_b64": 25844,
     "stl": 5584,
-    "dxf": 71867
+    "dxf": 71865
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -1902,11 +1902,11 @@
     212.0,
     18.0
    ],
-   "mass_g": 161.1,
+   "mass_g": 138.0,
    "mass_g_print_est": null,
    "print_min_est": null,
-   "volume_cm3": 126.89,
-   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 기판 자리는 바닥이 막혀 기판이 기둥 4개 위에 올라감 (위에서 M3×6 나사 2개 + 위치 핀 2개)). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 핀 발이 바닥틀의 홈 둑 사이에 들어가고, 바닥 밑에서 M3×10 자가 탭 나사 4개(앞 핀 2·3번 발, 뒤 선반 밑 2)로 조임 - 나사만으로 떼었다 붙였다 할 수 있고, 본드(MS 폴리머)를 같이 바르면 더 단단함",
+   "volume_cm3": 108.68,
+   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 암 도브테일 홈은 45° 지붕). A16: 밸런스 레일은 따로 출력(03 밸런스레일) - 바닥틀에는 레일 양 끝벽·봉 끝 기둥과 레일 받침 2곳(z5~8.6, 앞뒤 턱, M3×6 자리 Ø2.5)만 남음. 80 × 120 기판 자리 x22.25~142.25 × y93.3~173.3: 받침 리브 z5~7.0(앞은 리본 틈 x59.5~81.5, 레일 밑은 배선 틈 x92~114)와 둘레 턱 z8.5(틈 0.3). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 레버틀을 바닥틀에 얹을 때: 핀 발이 바닥틀의 홈 둑 사이에 들어가고, 바닥 밑에서 M3×10 자가 탭 나사 4개(핀 2·4번 발 y186, 뒤 선반 밑 2)로 조임 - 나사만으로 떼었다 붙였다 할 수 있고, 본드(MS 폴리머)를 같이 바르면 더 단단함",
    "extra": false,
    "ids": [
     "O1-FRAME",
@@ -1921,16 +1921,16 @@
    "zip": "fin/parts/P-03-01.zip.b64.txt",
    "zip_name": "Toccata_P-03-01_프레임_바닥틀_모듈.zip",
    "bytes": {
-    "svg": 80660,
-    "zip": 117068,
-    "zip_b64": 156092,
-    "stl": 281684,
-    "dxf": 410905
+    "svg": 72622,
+    "zip": 83538,
+    "zip_b64": 111384,
+    "stl": 125184,
+    "dxf": 367335
    },
    "sheet": "A1",
    "scale": "1:1",
-   "holes": 34,
-   "hole_groups": 9,
+   "holes": 21,
+   "hole_groups": 7,
    "sections": 2
   },
   {
@@ -1955,11 +1955,11 @@
     67.5,
     67.85
    ],
-   "mass_g": 182.0,
+   "mass_g": 181.1,
    "mass_g_print_est": null,
    "print_min_est": null,
-   "volume_cm3": 143.33,
-   "note": "뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 67.5",
+   "volume_cm3": 142.64,
+   "note": "뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 67.5. A16: 핀 2·4번은 기판 위(y174.9 앞)에서 밑변이 z9.5, F|F# 핀은 제로·USB 플러그 위로 z18부터",
    "extra": false,
    "ids": [
     "O1-CAGE",
@@ -1974,11 +1974,11 @@
    "zip": "fin/parts/P-03-02.zip.b64.txt",
    "zip_name": "Toccata_P-03-02_프레임_레버틀_모듈.zip",
    "bytes": {
-    "svg": 81912,
-    "zip": 111094,
-    "zip_b64": 148128,
+    "svg": 82906,
+    "zip": 112010,
+    "zip_b64": 149348,
     "stl": 275084,
-    "dxf": 422851
+    "dxf": 428486
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -1988,6 +1988,59 @@
   },
   {
    "code": "P-03-03",
+   "name": "밸런스레일",
+   "kind": "print",
+   "group": "03",
+   "group_ko": "03 프레임",
+   "folder": "03_프레임",
+   "qty": 7,
+   "qty_txt": "7개",
+   "material": "PETG 회색",
+   "file": "hardware/mechanical/cad/stl/print/03_프레임/밸런스레일__7개.stl",
+   "stl_name": "밸런스레일__7개.stl",
+   "size_mm": [
+    161.6,
+    12.2,
+    11.9
+   ],
+   "draw_ext": [
+    161.6,
+    12.2,
+    11.9
+   ],
+   "mass_g": 24.9,
+   "mass_g_print_est": null,
+   "print_min_est": null,
+   "volume_cm3": 19.59,
+   "note": "밑면(z8.6)을 베드에 바로 세워 출력, 서포트 없음 (A16: 봉 받침 판·밸런스 핀 구멍·나사 자리가 모두 위로 열림). 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 80 × 120 제어 기판을 바닥틀 자리에 놓은 뒤 양 끝벽 사이(틈 0.15)·받침 턱 사이에 내려놓고, 양 끝의 깊은 구멍(Ø6.2, 바닥 z10.1)으로 M3×6(i059) 2개를 받침에 자가 탭 - 레일 밑면이 기판의 빈 띠(y132.3~144.5)를 눌러 기판도 같이 잡힘",
+   "extra": false,
+   "ids": [
+    "O1-RAIL",
+    "O2-RAIL",
+    "O3-RAIL",
+    "O4-RAIL",
+    "O5-RAIL",
+    "O6-RAIL",
+    "O7-RAIL"
+   ],
+   "svg": "fin/parts/P-03-03.svg",
+   "zip": "fin/parts/P-03-03.zip.b64.txt",
+   "zip_name": "Toccata_P-03-03_밸런스레일.zip",
+   "bytes": {
+    "svg": 41658,
+    "zip": 57431,
+    "zip_b64": 76576,
+    "stl": 152184,
+    "dxf": 147798
+   },
+   "sheet": "A3",
+   "scale": "1:1",
+   "holes": 16,
+   "hole_groups": 3,
+   "sections": 2
+  },
+  {
+   "code": "P-03-04",
    "name": "프레임 가이드탭 백건",
    "kind": "print",
    "group": "03",
@@ -2068,15 +2121,15 @@
     "EL-TAB-B0",
     "ER-TAB-C8"
    ],
-   "svg": "fin/parts/P-03-03.svg",
-   "zip": "fin/parts/P-03-03.zip.b64.txt",
-   "zip_name": "Toccata_P-03-03_프레임_가이드탭_백건.zip",
+   "svg": "fin/parts/P-03-04.svg",
+   "zip": "fin/parts/P-03-04.zip.b64.txt",
+   "zip_name": "Toccata_P-03-04_프레임_가이드탭_백건.zip",
    "bytes": {
     "svg": 17592,
-    "zip": 17488,
+    "zip": 17490,
     "zip_b64": 23320,
     "stl": 1684,
-    "dxf": 64639
+    "dxf": 64637
    },
    "sheet": "A3",
    "scale": "5:1",
@@ -2085,7 +2138,7 @@
    "sections": 1
   },
   {
-   "code": "P-03-04",
+   "code": "P-03-05",
    "name": "프레임 가이드탭 흑건",
    "kind": "print",
    "group": "03",
@@ -2150,15 +2203,15 @@
     "O7-TAB-As",
     "EL-TAB-As0"
    ],
-   "svg": "fin/parts/P-03-04.svg",
-   "zip": "fin/parts/P-03-04.zip.b64.txt",
-   "zip_name": "Toccata_P-03-04_프레임_가이드탭_흑건.zip",
+   "svg": "fin/parts/P-03-05.svg",
+   "zip": "fin/parts/P-03-05.zip.b64.txt",
+   "zip_name": "Toccata_P-03-05_프레임_가이드탭_흑건.zip",
    "bytes": {
     "svg": 17597,
-    "zip": 17353,
-    "zip_b64": 23140,
+    "zip": 17352,
+    "zip_b64": 23136,
     "stl": 1684,
-    "dxf": 63841
+    "dxf": 63839
    },
    "sheet": "A3",
    "scale": "5:1",
@@ -2167,7 +2220,7 @@
    "sections": 1
   },
   {
-   "code": "P-03-05",
+   "code": "P-03-06",
    "name": "프레임 바닥틀 끝부속 왼쪽",
    "kind": "print",
    "group": "03",
@@ -2192,20 +2245,20 @@
    "mass_g_print_est": null,
    "print_min_est": null,
    "volume_cm3": 244.48,
-   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
+   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
    "extra": false,
    "ids": [
     "EL-FRAME"
    ],
-   "svg": "fin/parts/P-03-05.svg",
-   "zip": "fin/parts/P-03-05.zip.b64.txt",
-   "zip_name": "Toccata_P-03-05_프레임_바닥틀_끝부속_왼쪽.zip",
+   "svg": "fin/parts/P-03-06.svg",
+   "zip": "fin/parts/P-03-06.zip.b64.txt",
+   "zip_name": "Toccata_P-03-06_프레임_바닥틀_끝부속_왼쪽.zip",
    "bytes": {
-    "svg": 64953,
-    "zip": 65849,
-    "zip_b64": 87800,
+    "svg": 64951,
+    "zip": 65841,
+    "zip_b64": 87788,
     "stl": 104284,
-    "dxf": 242673
+    "dxf": 242671
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -2214,7 +2267,7 @@
    "sections": 2
   },
   {
-   "code": "P-03-06",
+   "code": "P-03-07",
    "name": "프레임 레버틀 끝부속 왼쪽",
    "kind": "print",
    "group": "03",
@@ -2244,15 +2297,15 @@
    "ids": [
     "EL-CAGE"
    ],
-   "svg": "fin/parts/P-03-06.svg",
-   "zip": "fin/parts/P-03-06.zip.b64.txt",
-   "zip_name": "Toccata_P-03-06_프레임_레버틀_끝부속_왼쪽.zip",
+   "svg": "fin/parts/P-03-07.svg",
+   "zip": "fin/parts/P-03-07.zip.b64.txt",
+   "zip_name": "Toccata_P-03-07_프레임_레버틀_끝부속_왼쪽.zip",
    "bytes": {
     "svg": 40738,
-    "zip": 44256,
-    "zip_b64": 59008,
+    "zip": 44260,
+    "zip_b64": 59016,
     "stl": 65284,
-    "dxf": 163736
+    "dxf": 163734
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -2261,7 +2314,7 @@
    "sections": 2
   },
   {
-   "code": "P-03-07",
+   "code": "P-03-08",
    "name": "프레임 바닥틀 끝부속 오른쪽",
    "kind": "print",
    "group": "03",
@@ -2286,20 +2339,20 @@
    "mass_g_print_est": null,
    "print_min_est": null,
    "volume_cm3": 239.19,
-   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
+   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
    "extra": false,
    "ids": [
     "ER-FRAME"
    ],
-   "svg": "fin/parts/P-03-07.svg",
-   "zip": "fin/parts/P-03-07.zip.b64.txt",
-   "zip_name": "Toccata_P-03-07_프레임_바닥틀_끝부속_오른쪽.zip",
+   "svg": "fin/parts/P-03-08.svg",
+   "zip": "fin/parts/P-03-08.zip.b64.txt",
+   "zip_name": "Toccata_P-03-08_프레임_바닥틀_끝부속_오른쪽.zip",
    "bytes": {
-    "svg": 50346,
-    "zip": 52152,
-    "zip_b64": 69536,
+    "svg": 50344,
+    "zip": 52147,
+    "zip_b64": 69532,
     "stl": 73284,
-    "dxf": 185195
+    "dxf": 185193
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -2308,7 +2361,7 @@
    "sections": 2
   },
   {
-   "code": "P-03-08",
+   "code": "P-03-09",
    "name": "프레임 레버틀 끝부속 오른쪽",
    "kind": "print",
    "group": "03",
@@ -2338,15 +2391,15 @@
    "ids": [
     "ER-CAGE"
    ],
-   "svg": "fin/parts/P-03-08.svg",
-   "zip": "fin/parts/P-03-08.zip.b64.txt",
-   "zip_name": "Toccata_P-03-08_프레임_레버틀_끝부속_오른쪽.zip",
+   "svg": "fin/parts/P-03-09.svg",
+   "zip": "fin/parts/P-03-09.zip.b64.txt",
+   "zip_name": "Toccata_P-03-09_프레임_레버틀_끝부속_오른쪽.zip",
    "bytes": {
-    "svg": 36272,
-    "zip": 41464,
-    "zip_b64": 55288,
+    "svg": 36276,
+    "zip": 41461,
+    "zip_b64": 55284,
     "stl": 58584,
-    "dxf": 149460
+    "dxf": 148992
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -2396,10 +2449,10 @@
    "zip_name": "Toccata_P-04-01_센서바.zip",
    "bytes": {
     "svg": 69184,
-    "zip": 72718,
-    "zip_b64": 96960,
+    "zip": 72717,
+    "zip_b64": 96956,
     "stl": 218684,
-    "dxf": 162317
+    "dxf": 162315
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -2449,10 +2502,10 @@
    "zip_name": "Toccata_P-04-02_가림판띠.zip",
    "bytes": {
     "svg": 19681,
-    "zip": 19031,
-    "zip_b64": 25376,
+    "zip": 19029,
+    "zip_b64": 25372,
     "stl": 8284,
-    "dxf": 80037
+    "dxf": 80035
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -2504,10 +2557,10 @@
    "zip_name": "Toccata_P-04-03_레버봉끝마개.zip",
    "bytes": {
     "svg": 16263,
-    "zip": 18868,
-    "zip_b64": 25160,
+    "zip": 18864,
+    "zip_b64": 25152,
     "stl": 3084,
-    "dxf": 80393
+    "dxf": 80391
    },
    "sheet": "A3",
    "scale": "10:1",
@@ -2557,10 +2610,10 @@
    "zip_name": "Toccata_P-04-04_패드바_칸1.zip",
    "bytes": {
     "svg": 33322,
-    "zip": 71196,
-    "zip_b64": 94928,
+    "zip": 71198,
+    "zip_b64": 94932,
     "stl": 171384,
-    "dxf": 145068
+    "dxf": 145066
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -2610,10 +2663,10 @@
    "zip_name": "Toccata_P-04-05_패드바_칸2.zip",
    "bytes": {
     "svg": 34155,
-    "zip": 71899,
+    "zip": 71900,
     "zip_b64": 95868,
     "stl": 177384,
-    "dxf": 151493
+    "dxf": 151495
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -2663,8 +2716,8 @@
    "zip_name": "Toccata_P-04-06_패드바_칸3.zip",
    "bytes": {
     "svg": 36006,
-    "zip": 93681,
-    "zip_b64": 124908,
+    "zip": 93682,
+    "zip_b64": 124912,
     "stl": 255884,
     "dxf": 160026
    },
@@ -2719,7 +2772,7 @@
     "zip": 69479,
     "zip_b64": 92640,
     "stl": 171484,
-    "dxf": 144836
+    "dxf": 144834
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -2763,10 +2816,10 @@
    "zip_name": "Toccata_P-04-08_센서바_왼쪽.zip",
    "bytes": {
     "svg": 38929,
-    "zip": 34306,
+    "zip": 34307,
     "zip_b64": 45744,
     "stl": 64484,
-    "dxf": 91083
+    "dxf": 91081
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -2810,10 +2863,10 @@
    "zip_name": "Toccata_P-04-09_가림판띠_왼쪽.zip",
    "bytes": {
     "svg": 16590,
-    "zip": 16556,
+    "zip": 16557,
     "zip_b64": 22076,
     "stl": 2684,
-    "dxf": 65627
+    "dxf": 65625
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -2860,7 +2913,7 @@
     "zip": 81959,
     "zip_b64": 109280,
     "stl": 204084,
-    "dxf": 159100
+    "dxf": 159098
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -2904,10 +2957,10 @@
    "zip_name": "Toccata_P-04-11_센서바_오른쪽.zip",
    "bytes": {
     "svg": 29586,
-    "zip": 25107,
-    "zip_b64": 33476,
+    "zip": 25108,
+    "zip_b64": 33480,
     "stl": 30084,
-    "dxf": 72776
+    "dxf": 72774
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -2951,10 +3004,10 @@
    "zip_name": "Toccata_P-04-12_가림판띠_오른쪽.zip",
    "bytes": {
     "svg": 15849,
-    "zip": 15668,
-    "zip_b64": 20892,
+    "zip": 15671,
+    "zip_b64": 20896,
     "stl": 1284,
-    "dxf": 60549
+    "dxf": 60547
    },
    "sheet": "A3",
    "scale": "5:1",
@@ -2998,8 +3051,8 @@
    "zip_name": "Toccata_P-04-13_패드바_끝부속_오른쪽.zip",
    "bytes": {
     "svg": 28636,
-    "zip": 48833,
-    "zip_b64": 65112,
+    "zip": 48831,
+    "zip_b64": 65108,
     "stl": 85184,
     "dxf": 118491
    },
@@ -3045,8 +3098,8 @@
    "zip_name": "Toccata_P-05-01_스피커바깥옆판_L.zip",
    "bytes": {
     "svg": 17089,
-    "zip": 17723,
-    "zip_b64": 23632,
+    "zip": 17721,
+    "zip_b64": 23628,
     "stl": 1484,
     "dxf": 66696
    },
@@ -3091,11 +3144,11 @@
    "zip": "fin/parts/P-05-02.zip.b64.txt",
    "zip_name": "Toccata_P-05-02_스피커안쪽옆판_L.zip",
    "bytes": {
-    "svg": 27008,
-    "zip": 29306,
-    "zip_b64": 39076,
+    "svg": 26780,
+    "zip": 29179,
+    "zip_b64": 38908,
     "stl": 32884,
-    "dxf": 84985
+    "dxf": 84879
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -3140,8 +3193,8 @@
    "zip_name": "Toccata_P-05-03_스피커뒤판_L-R.zip",
    "bytes": {
     "svg": 15161,
-    "zip": 15816,
-    "zip_b64": 21088,
+    "zip": 15812,
+    "zip_b64": 21084,
     "stl": 684,
     "dxf": 57546
    },
@@ -3188,8 +3241,8 @@
    "zip_name": "Toccata_P-05-04_스피커윗판_L-R.zip",
    "bytes": {
     "svg": 15541,
-    "zip": 15812,
-    "zip_b64": 21084,
+    "zip": 15808,
+    "zip_b64": 21080,
     "stl": 684,
     "dxf": 56726
    },
@@ -3329,7 +3382,7 @@
    "zip_name": "Toccata_P-05-07_스피커안쪽옆판_R.zip",
    "bytes": {
     "svg": 27260,
-    "zip": 29150,
+    "zip": 29149,
     "zip_b64": 38868,
     "stl": 32884,
     "dxf": 84517
@@ -3376,8 +3429,8 @@
    "zip_name": "Toccata_P-05-08_스피커아랫판_R.zip",
    "bytes": {
     "svg": 36223,
-    "zip": 45255,
-    "zip_b64": 60340,
+    "zip": 45252,
+    "zip_b64": 60336,
     "stl": 62684,
     "dxf": 117233
    },
@@ -3423,10 +3476,10 @@
    "zip_name": "Toccata_P-05-09_스피커앞판_경사배플_L.zip",
    "bytes": {
     "svg": 42677,
-    "zip": 65559,
-    "zip_b64": 87412,
+    "zip": 65555,
+    "zip_b64": 87408,
     "stl": 151684,
-    "dxf": 80418
+    "dxf": 80424
    },
    "sheet": "A1",
    "scale": "1:1",
@@ -3470,10 +3523,10 @@
    "zip_name": "Toccata_P-05-10_스피커앞판_경사배플_R.zip",
    "bytes": {
     "svg": 42347,
-    "zip": 65835,
+    "zip": 65833,
     "zip_b64": 87780,
     "stl": 151684,
-    "dxf": 79147
+    "dxf": 79149
    },
    "sheet": "A1",
    "scale": "1:1",
@@ -3518,10 +3571,10 @@
    "zip_name": "Toccata_P-05-11_스피커그릴_경사.zip",
    "bytes": {
     "svg": 67049,
-    "zip": 79595,
+    "zip": 79596,
     "zip_b64": 106128,
     "stl": 162884,
-    "dxf": 204098
+    "dxf": 204092
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -3566,10 +3619,10 @@
    "zip_name": "Toccata_P-05-12_스피커통로틀.zip",
    "bytes": {
     "svg": 17125,
-    "zip": 17128,
-    "zip_b64": 22840,
+    "zip": 17124,
+    "zip_b64": 22832,
     "stl": 1884,
-    "dxf": 67004
+    "dxf": 66998
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -3614,10 +3667,10 @@
    "zip_name": "Toccata_P-05-13_통로옆마개.zip",
    "bytes": {
     "svg": 15877,
-    "zip": 15395,
+    "zip": 15394,
     "zip_b64": 20528,
     "stl": 1084,
-    "dxf": 58692
+    "dxf": 58686
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -3661,10 +3714,10 @@
    "zip_name": "Toccata_P-05-14_핀소켓_둥근.zip",
    "bytes": {
     "svg": 17754,
-    "zip": 17899,
-    "zip_b64": 23868,
+    "zip": 17894,
+    "zip_b64": 23860,
     "stl": 12484,
-    "dxf": 56091
+    "dxf": 56085
    },
    "sheet": "A3",
    "scale": "5:1",
@@ -3711,7 +3764,7 @@
     "zip": 19735,
     "zip_b64": 26316,
     "stl": 12884,
-    "dxf": 58827
+    "dxf": 58821
    },
    "sheet": "A3",
    "scale": "5:1",
@@ -3755,10 +3808,10 @@
    "zip_name": "Toccata_P-05-16_방진브래킷2_L.zip",
    "bytes": {
     "svg": 28082,
-    "zip": 30969,
+    "zip": 30968,
     "zip_b64": 41292,
     "stl": 41884,
-    "dxf": 83870
+    "dxf": 83864
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -3802,10 +3855,10 @@
    "zip_name": "Toccata_P-05-17_방진브래킷2_R.zip",
    "bytes": {
     "svg": 28449,
-    "zip": 31026,
+    "zip": 31024,
     "zip_b64": 41368,
     "stl": 41884,
-    "dxf": 86373
+    "dxf": 86367
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -3849,10 +3902,10 @@
    "zip_name": "Toccata_P-05-18_끝벽_L.zip",
    "bytes": {
     "svg": 31814,
-    "zip": 35726,
-    "zip_b64": 47636,
+    "zip": 35722,
+    "zip_b64": 47632,
     "stl": 61084,
-    "dxf": 91005
+    "dxf": 90999
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -3896,10 +3949,10 @@
    "zip_name": "Toccata_P-05-19_끝벽_R.zip",
    "bytes": {
     "svg": 33402,
-    "zip": 36839,
-    "zip_b64": 49120,
+    "zip": 36834,
+    "zip_b64": 49112,
     "stl": 61084,
-    "dxf": 94661
+    "dxf": 94655
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -3946,7 +3999,7 @@
     "zip": 31376,
     "zip_b64": 41836,
     "stl": 50084,
-    "dxf": 90163
+    "dxf": 90161
    },
    "sheet": "A1",
    "scale": "1:1",
@@ -3990,10 +4043,10 @@
    "zip_name": "Toccata_P-05-21_뚜껑_R.zip",
    "bytes": {
     "svg": 31449,
-    "zip": 33071,
-    "zip_b64": 44096,
+    "zip": 33067,
+    "zip_b64": 44092,
     "stl": 54084,
-    "dxf": 102644
+    "dxf": 102642
    },
    "sheet": "A1",
    "scale": "1:1",
@@ -4037,10 +4090,10 @@
    "zip_name": "Toccata_P-05-22_CU화면뚜껑_터치3판.zip",
    "bytes": {
     "svg": 64946,
-    "zip": 73402,
-    "zip_b64": 97872,
+    "zip": 73401,
+    "zip_b64": 97868,
     "stl": 173384,
-    "dxf": 169357
+    "dxf": 169355
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4084,10 +4137,10 @@
    "zip_name": "Toccata_P-05-23_뚜껑이음레일기둥_1.zip",
    "bytes": {
     "svg": 24313,
-    "zip": 24494,
-    "zip_b64": 32660,
+    "zip": 24491,
+    "zip_b64": 32656,
     "stl": 29184,
-    "dxf": 70014
+    "dxf": 70012
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -4131,10 +4184,10 @@
    "zip_name": "Toccata_P-05-24_뚜껑이음레일기둥_2.zip",
    "bytes": {
     "svg": 24521,
-    "zip": 25146,
-    "zip_b64": 33528,
+    "zip": 25143,
+    "zip_b64": 33524,
     "stl": 30284,
-    "dxf": 70942
+    "dxf": 70940
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -4178,10 +4231,10 @@
    "zip_name": "Toccata_P-05-25_뒤판출력물_IO.zip",
    "bytes": {
     "svg": 46672,
-    "zip": 56683,
-    "zip_b64": 75580,
+    "zip": 56680,
+    "zip_b64": 75576,
     "stl": 85884,
-    "dxf": 156185
+    "dxf": 156183
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -4225,10 +4278,10 @@
    "zip_name": "Toccata_P-05-26_허브선반.zip",
    "bytes": {
     "svg": 44338,
-    "zip": 58308,
-    "zip_b64": 77744,
+    "zip": 58303,
+    "zip_b64": 77740,
     "stl": 109384,
-    "dxf": 152372
+    "dxf": 152370
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4272,10 +4325,10 @@
    "zip_name": "Toccata_P-05-27_배터리틀.zip",
    "bytes": {
     "svg": 61153,
-    "zip": 100968,
-    "zip_b64": 134624,
+    "zip": 100965,
+    "zip_b64": 134620,
     "stl": 196584,
-    "dxf": 218939
+    "dxf": 218937
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4319,10 +4372,10 @@
    "zip_name": "Toccata_P-05-28_XT60집게_L.zip",
    "bytes": {
     "svg": 26693,
-    "zip": 32107,
-    "zip_b64": 42812,
+    "zip": 32106,
+    "zip_b64": 42808,
     "stl": 45084,
-    "dxf": 89976
+    "dxf": 89974
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -4366,10 +4419,10 @@
    "zip_name": "Toccata_P-05-29_XT60집게_R.zip",
    "bytes": {
     "svg": 26975,
-    "zip": 32417,
-    "zip_b64": 43224,
+    "zip": 32413,
+    "zip_b64": 43220,
     "stl": 43884,
-    "dxf": 88305
+    "dxf": 88303
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -4415,17 +4468,17 @@
    "zip": "fin/parts/P-05-30.zip.b64.txt",
    "zip_name": "Toccata_P-05-30_보드받침기둥_Pi_Ø6_6mm.zip",
    "bytes": {
-    "svg": 18651,
-    "zip": 18940,
-    "zip_b64": 25256,
+    "svg": 20685,
+    "zip": 19354,
+    "zip_b64": 25808,
     "stl": 15484,
-    "dxf": 56734
+    "dxf": 57819
    },
    "sheet": "A3",
    "scale": "10:1",
    "holes": 1,
    "hole_groups": 1,
-   "sections": 1
+   "sections": 2
   },
   {
    "code": "P-05-31",
@@ -4467,17 +4520,17 @@
    "zip": "fin/parts/P-05-31.zip.b64.txt",
    "zip_name": "Toccata_P-05-31_보드받침기둥_나사_Ø7_5mm.zip",
    "bytes": {
-    "svg": 21249,
-    "zip": 20317,
-    "zip_b64": 27092,
+    "svg": 19229,
+    "zip": 19838,
+    "zip_b64": 26452,
     "stl": 17684,
-    "dxf": 58911
+    "dxf": 57704
    },
    "sheet": "A3",
    "scale": "10:1",
    "holes": 1,
    "hole_groups": 1,
-   "sections": 2
+   "sections": 1
   },
   {
    "code": "P-05-32",
@@ -4515,17 +4568,17 @@
    "zip": "fin/parts/P-05-32.zip.b64.txt",
    "zip_name": "Toccata_P-05-32_보드받침기둥_PED_Ø6_5mm.zip",
    "bytes": {
-    "svg": 18865,
-    "zip": 19071,
-    "zip_b64": 25428,
+    "svg": 20896,
+    "zip": 19561,
+    "zip_b64": 26084,
     "stl": 15684,
-    "dxf": 57036
+    "dxf": 58241
    },
    "sheet": "A3",
    "scale": "10:1",
    "holes": 1,
    "hole_groups": 1,
-   "sections": 1
+   "sections": 2
   },
   {
    "code": "P-05-33",
@@ -4567,7 +4620,7 @@
     "zip": 19717,
     "zip_b64": 26292,
     "stl": 15884,
-    "dxf": 64083
+    "dxf": 64081
    },
    "sheet": "A3",
    "scale": "10:1",
@@ -4618,10 +4671,10 @@
    "zip_name": "Toccata_P-05-34_케이블집게.zip",
    "bytes": {
     "svg": 17199,
-    "zip": 16518,
+    "zip": 16516,
     "zip_b64": 22024,
     "stl": 2684,
-    "dxf": 63825
+    "dxf": 63823
    },
    "sheet": "A3",
    "scale": "5:1",
@@ -4712,10 +4765,10 @@
    "zip_name": "Toccata_P-05-36_가운데아랫판_2_가운데.zip",
    "bytes": {
     "svg": 75991,
-    "zip": 159914,
-    "zip_b64": 213220,
+    "zip": 159916,
+    "zip_b64": 213224,
     "stl": 611684,
-    "dxf": 125293
+    "dxf": 125295
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4762,7 +4815,7 @@
     "zip": 34574,
     "zip_b64": 46100,
     "stl": 34484,
-    "dxf": 103802
+    "dxf": 103804
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4806,10 +4859,10 @@
    "zip_name": "Toccata_P-05-38_가운데뒤판_1_왼쪽.zip",
    "bytes": {
     "svg": 23247,
-    "zip": 24233,
+    "zip": 24232,
     "zip_b64": 32312,
     "stl": 24284,
-    "dxf": 71402
+    "dxf": 71404
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4856,7 +4909,7 @@
     "zip": 21034,
     "zip_b64": 28048,
     "stl": 9184,
-    "dxf": 68917
+    "dxf": 68919
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4900,10 +4953,10 @@
    "zip_name": "Toccata_P-05-40_가운데뒤판_3_오른쪽.zip",
    "bytes": {
     "svg": 40415,
-    "zip": 59803,
-    "zip_b64": 79740,
+    "zip": 59802,
+    "zip_b64": 79736,
     "stl": 177084,
-    "dxf": 82185
+    "dxf": 82187
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4945,10 +4998,10 @@
    "zip_name": "Toccata_P-06-01_공구_벤치지그받침_T1a.zip",
    "bytes": {
     "svg": 118734,
-    "zip": 624331,
-    "zip_b64": 832444,
+    "zip": 624329,
+    "zip_b64": 832440,
     "stl": 5535898,
-    "dxf": 617892
+    "dxf": 617890
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -4990,8 +5043,8 @@
    "zip_name": "Toccata_P-06-02_공구_높이블록_T1b.zip",
    "bytes": {
     "svg": 38821,
-    "zip": 161559,
-    "zip_b64": 215412,
+    "zip": 161555,
+    "zip_b64": 215408,
     "stl": 1154633,
     "dxf": 163606
    },
@@ -5035,10 +5088,10 @@
    "zip_name": "Toccata_P-06-03_공구_캡스턴벤치게이지_T2.zip",
    "bytes": {
     "svg": 53201,
-    "zip": 248055,
-    "zip_b64": 330740,
+    "zip": 248058,
+    "zip_b64": 330744,
     "stl": 1777456,
-    "dxf": 210040
+    "dxf": 210044
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -5080,10 +5133,10 @@
    "zip_name": "Toccata_P-06-04_공구_밸런스핀높이게이지_T3.zip",
    "bytes": {
     "svg": 41852,
-    "zip": 172866,
-    "zip_b64": 230488,
+    "zip": 172868,
+    "zip_b64": 230492,
     "stl": 1391382,
-    "dxf": 154566
+    "dxf": 154568
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -5127,8 +5180,8 @@
    "zip_name": "Toccata_P-07-01_화면받침_크래들.zip",
    "bytes": {
     "svg": 71449,
-    "zip": 97988,
-    "zip_b64": 130652,
+    "zip": 97986,
+    "zip_b64": 130648,
     "stl": 228484,
     "dxf": 225346
    },
@@ -5174,7 +5227,7 @@
    "zip_name": "Toccata_P-07-02_받침다리.zip",
    "bytes": {
     "svg": 21449,
-    "zip": 24110,
+    "zip": 24111,
     "zip_b64": 32148,
     "stl": 16084,
     "dxf": 69960
@@ -5268,8 +5321,8 @@
    "zip_name": "Toccata_P-07-04_화면받침_유리턱띠_왼쪽.zip",
    "bytes": {
     "svg": 15207,
-    "zip": 15216,
-    "zip_b64": 20288,
+    "zip": 15217,
+    "zip_b64": 20292,
     "stl": 684,
     "dxf": 56422
    },
@@ -5362,8 +5415,8 @@
    "zip_name": "Toccata_P-07-06_리본클립.zip",
    "bytes": {
     "svg": 19596,
-    "zip": 20301,
-    "zip_b64": 27068,
+    "zip": 20303,
+    "zip_b64": 27072,
     "stl": 12284,
     "dxf": 73460
    },
@@ -5375,51 +5428,6 @@
   },
   {
    "code": "P-09-01",
-   "name": "P-MB 제어기판지그 MB7장",
-   "kind": "print",
-   "group": "09",
-   "group_ko": "09 기판 지그",
-   "folder": "09_기판지그",
-   "qty": 1,
-   "qty_txt": "1개",
-   "material": "PETG",
-   "file": "hardware/mechanical/cad/stl/print/09_기판지그/P-MB_제어기판지그_MB7장__1개.stl",
-   "stl_name": "P-MB_제어기판지그_MB7장__1개.stl",
-   "size_mm": [
-    70.0,
-    50.0,
-    6.2
-   ],
-   "draw_ext": [
-    70.0,
-    50.0,
-    6.2
-   ],
-   "mass_g": 21.5,
-   "mass_g_print_est": 13.5,
-   "print_min_est": 24.0,
-   "volume_cm3": 16.91,
-   "note": "제어 기판 MB 7장을 BE163에서 자르고 뚫는 지그 (악기당 1개): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 홈 창 2.8 × 26.5의 세 변도 긋기, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
-   "extra": false,
-   "ids": [],
-   "svg": "fin/parts/P-09-01.svg",
-   "zip": "fin/parts/P-09-01.zip.b64.txt",
-   "zip_name": "Toccata_P-09-01_P-MB_제어기판지그_MB7장.zip",
-   "bytes": {
-    "svg": 58397,
-    "zip": 138122,
-    "zip_b64": 184164,
-    "stl": 331084,
-    "dxf": 222064
-   },
-   "sheet": "A3",
-   "scale": "1:1",
-   "holes": 8,
-   "hole_groups": 4,
-   "sections": 2
-  },
-  {
-   "code": "P-09-02",
    "name": "P-PED 페달기판지그 PED1장",
    "kind": "print",
    "group": "09",
@@ -5444,18 +5452,18 @@
    "mass_g_print_est": 13.3,
    "print_min_est": 24.0,
    "volume_cm3": 17.28,
-   "note": "PED 페달 보드 1장용 지그: MB 지그와 같은 방법 (홈 없음), 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2 (cad/jigs/README.md '기판 지그'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
+   "note": "PED 페달 보드 1장용 지그: 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
    "extra": false,
    "ids": [],
-   "svg": "fin/parts/P-09-02.svg",
-   "zip": "fin/parts/P-09-02.zip.b64.txt",
-   "zip_name": "Toccata_P-09-02_P-PED_페달기판지그_PED1장.zip",
+   "svg": "fin/parts/P-09-01.svg",
+   "zip": "fin/parts/P-09-01.zip.b64.txt",
+   "zip_name": "Toccata_P-09-01_P-PED_페달기판지그_PED1장.zip",
    "bytes": {
-    "svg": 49646,
-    "zip": 120753,
-    "zip_b64": 161004,
+    "svg": 49861,
+    "zip": 121074,
+    "zip_b64": 161432,
     "stl": 302584,
-    "dxf": 169991
+    "dxf": 170290
    },
    "sheet": "A3",
    "scale": "1:1",
@@ -5497,10 +5505,10 @@
    "zip_name": "Toccata_P-EX-01_백건_C.zip",
    "bytes": {
     "svg": 55550,
-    "zip": 58248,
-    "zip_b64": 77664,
+    "zip": 58244,
+    "zip_b64": 77660,
     "stl": 93184,
-    "dxf": 157756
+    "dxf": 157754
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -5542,10 +5550,10 @@
    "zip_name": "Toccata_P-EX-02_백건_D.zip",
    "bytes": {
     "svg": 55768,
-    "zip": 58612,
-    "zip_b64": 78152,
+    "zip": 58609,
+    "zip_b64": 78148,
     "stl": 93784,
-    "dxf": 158569
+    "dxf": 158567
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -5590,7 +5598,7 @@
     "zip": 58271,
     "zip_b64": 77696,
     "stl": 93984,
-    "dxf": 157108
+    "dxf": 157106
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -5632,10 +5640,10 @@
    "zip_name": "Toccata_P-EX-04_백건_F.zip",
    "bytes": {
     "svg": 55617,
-    "zip": 59047,
-    "zip_b64": 78732,
+    "zip": 59043,
+    "zip_b64": 78724,
     "stl": 94084,
-    "dxf": 159454
+    "dxf": 159452
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -5677,10 +5685,10 @@
    "zip_name": "Toccata_P-EX-05_백건_G.zip",
    "bytes": {
     "svg": 55989,
-    "zip": 58782,
-    "zip_b64": 78376,
+    "zip": 58777,
+    "zip_b64": 78372,
     "stl": 94584,
-    "dxf": 161361
+    "dxf": 161359
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -5722,10 +5730,10 @@
    "zip_name": "Toccata_P-EX-06_백건_A.zip",
    "bytes": {
     "svg": 55846,
-    "zip": 58355,
-    "zip_b64": 77808,
+    "zip": 58351,
+    "zip_b64": 77804,
     "stl": 93784,
-    "dxf": 158812
+    "dxf": 158810
    },
    "sheet": "A2",
    "scale": "1:1",
@@ -5767,8 +5775,8 @@
    "zip_name": "Toccata_P-EX-07_백건_B.zip",
    "bytes": {
     "svg": 55204,
-    "zip": 58098,
-    "zip_b64": 77464,
+    "zip": 58092,
+    "zip_b64": 77456,
     "stl": 93384,
     "dxf": 155172
    },
@@ -5812,8 +5820,8 @@
    "zip_name": "Toccata_P-EX-08_백건_A0.zip",
    "bytes": {
     "svg": 55700,
-    "zip": 58371,
-    "zip_b64": 77828,
+    "zip": 58374,
+    "zip_b64": 77832,
     "stl": 93184,
     "dxf": 158666
    },
@@ -5857,8 +5865,8 @@
    "zip_name": "Toccata_P-EX-09_백건_B0.zip",
    "bytes": {
     "svg": 55175,
-    "zip": 58104,
-    "zip_b64": 77472,
+    "zip": 58105,
+    "zip_b64": 77476,
     "stl": 93384,
     "dxf": 154995
    },
@@ -5902,8 +5910,8 @@
    "zip_name": "Toccata_P-EX-10_백건_C8.zip",
    "bytes": {
     "svg": 54545,
-    "zip": 57494,
-    "zip_b64": 76660,
+    "zip": 57496,
+    "zip_b64": 76664,
     "stl": 93484,
     "dxf": 154735
    },
@@ -5947,8 +5955,8 @@
    "zip_name": "Toccata_P-EX-11_흑건_Cs-Ds.zip",
    "bytes": {
     "svg": 60139,
-    "zip": 57477,
-    "zip_b64": 76636,
+    "zip": 57474,
+    "zip_b64": 76632,
     "stl": 85484,
     "dxf": 153177
    },
@@ -5992,8 +6000,8 @@
    "zip_name": "Toccata_P-EX-12_흑건_Fs.zip",
    "bytes": {
     "svg": 60503,
-    "zip": 58608,
-    "zip_b64": 78144,
+    "zip": 58604,
+    "zip_b64": 78140,
     "stl": 86584,
     "dxf": 159742
    },
@@ -6037,8 +6045,8 @@
    "zip_name": "Toccata_P-EX-13_흑건_Gs.zip",
    "bytes": {
     "svg": 60014,
-    "zip": 57536,
-    "zip_b64": 76716,
+    "zip": 57534,
+    "zip_b64": 76712,
     "stl": 85484,
     "dxf": 154239
    },
@@ -6082,8 +6090,8 @@
    "zip_name": "Toccata_P-EX-14_흑건_As-As0.zip",
    "bytes": {
     "svg": 60292,
-    "zip": 58126,
-    "zip_b64": 77504,
+    "zip": 58122,
+    "zip_b64": 77496,
     "stl": 85884,
     "dxf": 156726
    },
@@ -6127,10 +6135,10 @@
    "zip_name": "Toccata_P-EX-15_패드바_칸1_PORON6T용.zip",
    "bytes": {
     "svg": 32312,
-    "zip": 70286,
+    "zip": 70285,
     "zip_b64": 93716,
     "stl": 171384,
-    "dxf": 144902
+    "dxf": 144904
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -6172,10 +6180,10 @@
    "zip_name": "Toccata_P-EX-16_패드바_칸2_PORON6T용.zip",
    "bytes": {
     "svg": 33140,
-    "zip": 71050,
-    "zip_b64": 94736,
+    "zip": 71048,
+    "zip_b64": 94732,
     "stl": 177384,
-    "dxf": 151261
+    "dxf": 151259
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -6217,10 +6225,10 @@
    "zip_name": "Toccata_P-EX-17_패드바_칸3_PORON6T용.zip",
    "bytes": {
     "svg": 35191,
-    "zip": 93083,
+    "zip": 93082,
     "zip_b64": 124112,
     "stl": 255884,
-    "dxf": 161790
+    "dxf": 161792
    },
    "sheet": "A3",
    "scale": "2:1",
@@ -6307,8 +6315,8 @@
    "zip_name": "Toccata_P-EX-19_패드바_끝부속_왼쪽_PORON6T용.zip",
    "bytes": {
     "svg": 34019,
-    "zip": 80937,
-    "zip_b64": 107916,
+    "zip": 80931,
+    "zip_b64": 107908,
     "stl": 204084,
     "dxf": 157901
    },
@@ -6399,8 +6407,8 @@
    "zip_name": "Toccata_P-EX-21_화면덮개_선택.zip",
    "bytes": {
     "svg": 15065,
-    "zip": 14901,
-    "zip_b64": 19868,
+    "zip": 14908,
+    "zip_b64": 19880,
     "stl": 684,
     "dxf": 55585
    },

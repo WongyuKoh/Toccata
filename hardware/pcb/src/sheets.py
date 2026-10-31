@@ -329,7 +329,8 @@ def sch03(sig_r=None):
         net_end(s, px - L, py, nm, "L")
         exp_add(e, nm, f"J302.{i+1}")
         s.text(353, py + 0.8, ["GND (XH 1번)", "EXT1 → C12", "EXT2 → C13", "EXT3 → C14", "EXT4 → C15", "3V3 (XH 6번)"][i], "notes", size=2.0)
-    s.text(318, 68.5, "O1·O7만 Adafruit 4876 플러그 선 150 mm → XH 6P (SCH-04)", "notes", size=2.0)
+    import harness as _H
+    s.text(318, 68.5, "O1·O7만 Adafruit 4876 플러그 선 %d / %d mm → XH 6P (SCH-04)" % (_H.EXT_CUT["O1"], _H.EXT_CUT["O7"]), "notes", size=2.0)
     s.chg(338, 26.5, 6)
     s.chg(66, 26.5, 12)
     # EXT pull-downs (△8, review R4); the 1 kohm series resistors sit on EL/ER at the sensor (SCH-04)
@@ -380,14 +381,13 @@ def sch03(sig_r=None):
             title="RP2040-Zero 핀 배정 (패드 = dj505 KiCad 라이브러리 번호 / Waveshare 회로도 P1 번호)", mono_cols=(0, 1, 2))
     s.para(190, 132, [
         "주",
-        "1. 기판: Coms BE163(80 × 120)에서 자른 70 × 50 조각(지그 P-MB), x47.25~117.25 × y145.5~195.5, 모듈 바닥 구멍으로 밑에서 넣는다. 고정 4곳",
-        "    (50.0,149.0)(114.5,149.0)(50.0,192.5)(114.5,192.5) = 매단 보스 — 대각 2곳 M3×6(밑에서), 2곳 위치 핀 (BRD-01 주 8).",
-        "2. W1 r4.3: 앞 모서리에서 홈 x81.92~84.72 × y145.5~172.0을 따낸다(F|F# 핀 발·킬이 지나감, r4.5).",
-        "    W1 r4.3 금지 구역 x81.22~85.42 × y145.5~173.2에는 부품·배선·리본 패드를 두지 않는다 (제로 PCB만 y172~173.2에 걸침).",
-        "3. RP2040-Zero: x75.14~93.14, y172~195.5, USB-C +y (리셉터클 가운데 x84.00 = W1 선반 홈 가운데, BRD-01 주 1).",
-        "    밑면 부품 때문에 평평하게 붙지 않는다 → 안쪽 구멍에 핀 헤더(몰드 뺌),"
-        "    모듈은 밑면 부품 위(캡톤)에 얹혀 약 1.3 mm 높아진다. W1 r4.3이 뒤 선반에 USB 플러그 홈을 내 1.3 mm 확보(BRD-01 주).",
-        f"4. A302 먹스 모듈: W1 기판 홈(F|F# 핀 발이 지나감)을 피해 {MBX['mux'].split(' ×')[0]}에 세로로 → BRD-01 배치. J301 리본은 아랫면 납땜.",
+        f"1. △33 기판: 양면 만능기판 80 × 120 통째로(Coms BE163 30 × 42 구멍 — 자르지 않음, 구멍·나사 없음), {MBX['board']}.",
+        "    모듈 바닥 자리에 놓고 따로 출력한 밸런스 레일이 맨 띠 y132.0~144.8을 눌러 잡는다(CAD A16, BRD-01 주 2).",
+        "2. 앞 구역(J301·A302, 부품 ≤ z17.27)과 뒤 구역(A301·J302·R301~R304·JP·TP, ≤ z20.9) 사이 맨 띠(줄 j 14~19)에는 부품·패드가 없다.",
+        "    앞↔뒤 아랫면 선은 레일 밑 띠 리브의 틈 x92.0~114.0으로만(BRD-08). 기판 밑 2.0: 다리·핀 끝 ≤ 1.0, 아랫면 선은 리본 가닥.",
+        f"3. RP2040-Zero: {MBX['zero']}, USB-C +y (리셉터클 가운데 x83.38 → 플러그·케이블이 곧게 뒷벽 개구 x76.45~91.55로).",
+        "    몰드(2.5)가 그대로인 보통 핀 헤더로 세운다 — 밑면 칩·수정·LDO와 기판 사이 1.2 (캡톤 없음). 위로 F|F# 핀 밑변 z18.0.",
+        f"4. A302 먹스 모듈: 긴 쪽을 x로 눕혀 채널 줄을 앞에 ({MBX['mux']}) → BRD-01. J301 리본은 아랫면에서 꽂아 윗면 납땜, J302는 윗면 납땜.",
         "5. △2 C301 100 nF: 먹스 모듈 VCC–GND 헤더 핀 옆 (모듈 C1이 사진에 있으나 미확인 → 달아 둔다). EN은 GND에 직접.",
         "6. 펌웨어는 ID별 채널만 읽는다 (O1 C0~C14, O7 C0~C12, O2~O6 C0~C11). O2~O6은 J302·R301~R304 비움.",
         "    △8 끝 부속을 뽑으면 EXT가 떠서 유령 음이 난다 → 100 kΩ 풀다운(여기) + 1 kΩ 직렬(EL·ER 센서 옆, SCH-04).",
@@ -603,7 +603,7 @@ def sch05(ring_r="20"):
     s.text(108, 97.0, "W502: J501 → PB J502, 리본 가닥 4개 (BRD-06)", "cabt", size=2.0)
     s.chg(196.5, 36.5, 19)
     # --- PB board
-    s.box(188, 22, 208, 110, "PB — 페달 보드 70 × 50 (BE163 조각, CU 칸 안) — 자리: BRD-03")
+    s.box(188, 22, 208, 110, "PB — 페달 보드 70 × 50 (8 × 12 양면 기판 조각, CU 칸 안) — 자리: BRD-03")
     jp = sym_conn_pos("Conn_01x04", 5, [(1, 0), (3, 2), (2, 3), (4, 4)], side="R", width=9)
     s.place(jp, "J502", "W502 패드 1×4", 190, jt[1] - 2.5, ref_at=(0, -1.2), val_at=(0, 29.6), meta=dict(bomkey="PADS"))
     for n, nm in ((1, "T"), (3, "R"), (2, "TN"), (4, "S")):
@@ -1159,241 +1159,371 @@ def grid(i0, n, x0=0.63, p=2.54):
     return [x0 + p * (i0 + k) for k in range(n)]
 
 
-# board fixing (W1 r4.5): 4 hanging Ø6 bosses of the frame on the board top at these points; 2 × M3×6 from below
-# (ISO 7380 head Ø5.7 × 1.65 under the board), 2 locating pins. Heads keep 1.3 to the balance-rail rear face y144.5
-# and the shelf ribs (front face y196.8, x49.4~50.6 / x115.4~116.6); v3 P114 (49.75,148)… gave 0.75 / 1.05.
-MB = dict(x0=47.25, x1=117.25, y0=145.5, y1=195.5,
-          standoffs=[(50.0, 149.0, "M3×6 밑에서"), (114.5, 149.0, "위치 핀"), (50.0, 192.5, "위치 핀"), (114.5, 192.5, "M3×6 밑에서")],
-          slot=(81.92, 84.72, 145.5, 172.0), keep=(81.22, 85.42, 145.5, 173.2),
-          fin=(82.52, 84.12, 148.6, 170.7), keel=(82.52, 84.12, 144.5, 148.6),     # W1 r4.5: 1.6-wide foot + keel (P12), slot gap 0.60
-          boss_rects=[(47.0, 53.0, 144.5, 152.0), (111.5, 117.5, 144.5, 152.0), (47.0, 53.0, 189.5, 196.8), (111.5, 117.5, 189.5, 196.8)],
-          boss_keep=[(47.25, 54.3, 145.5, 153.3), (110.2, 117.25, 145.5, 153.3), (47.25, 54.3, 188.2, 195.5), (110.2, 117.25, 188.2, 195.5)],
-          floor_cut=(46.25, 118.25, 144.5, 196.5), rcpt_cut=(78.53, 89.47, 196.5, 197.8))   # W1 r4.5: floor opening under the board
-# RP2040-Zero left edge. Waveshare dimension drawing: USB-C receptacle 4.67 from the right edge (8.94 wide), i.e. 0.14 left
-# of centre -> the Zero sits at x75.14 so that the receptacle / plug is centred on the W1 r4.3 shelf slot (x84.0, 1.30 each side)
-ZX = 75.14
-USB_RX = (ZX + 18.0 - 4.67 - 8.94, ZX + 18.0 - 4.67)   # receptacle x (79.53, 88.47)
-USB_RY = (189.5, 196.8)                               # receptacle y: overhangs the Zero / board edge by about 1.3 (1.0~1.5)
-ZERO_ORIGIN = (ZX, 195.5)        # module-local (0,0) = top-left with USB edge at y=195.5, local +y -> board -y
-# every MB hole sits on the RP2040-Zero pin lattice: x = LAT_X + 2.54 i, y = 173.59 + 2.54 j
-LAT_X, LAT_Y = round(ZX + 1.38, 2), 173.59
+# ------------------------------------------------------------------ control board MB (△33, 2026-10-31 = CAD A16)
+# The user (2026-10-31): "80 120 으로 설계를 다시 만들어줄 수 있어? ... 기판을 바닥으로 내려도 돼". MB is now the WHOLE 80 x 120 double-sided
+# perfboard - uncut, undrilled, no screws - lying in a pocket on the module floor under the keys (CAD keyaction.py A16, spec
+# electronics_modules.json mb_board); the separately printed balance rail lies on its bare strip and holds it down. SCH-03 (the netlist)
+# is unchanged: only placement, routing, drawings, 3D model and texts. Module-local mm: x across, y from the white-key front lip, z from
+# the desk.
+MB = dict(x0=22.25, x1=142.25, y0=93.3, y1=173.3, zb=7.0, zt=8.6,      # outline; underside on the floor ribs z5~7.0 (2.0 over the
+          floor=5.0,                                                  # floor z5.0: room for two crossing ribbon strands), top z8.6
+          strip=(132.0, 144.8),                                       # balance rail y132.3~144.5 + 0.3: no parts, pads or top wires
+          rail=(1.45, 163.05, 132.3, 144.5, 8.6, 19.0),               # the separate rail print (context), bottom = board top
+          front=(93.3, 132.0), rear=(144.8, 173.3), zmax=(17.27, 20.9),   # zones and their part height limits (keys above)
+          # printed support ribs under the board (z5~7.0): no solder joint and no wire on them
+          ribs=[(22.45, 59.5, 93.5, 95.4), (81.5, 142.05, 93.5, 95.4),          # front rib, gap x59.5~81.5 for the ribbon
+                (22.45, 142.05, 171.2, 173.1),                                  # rear rib
+                (22.45, 28.8, 93.5, 173.1), (135.7, 142.05, 93.5, 173.1),       # side ribs
+                (28.8, 92.0, 132.8, 144.0), (114.0, 135.7, 132.8, 144.0)],      # rib under the rail strip, ONE crossing gap
+          front_gap=(59.5, 81.5), gap=(92.0, 114.0),
+          lips=(8.5, 0.3),                                            # edge lips of the pocket: top z8.5, 0.3 clearance
+          fins=[(40.76, 42.56), (123.03, 124.83)], fin_y=(144.5, 174.9), fin_z=9.5,   # cage fins 2 / 4 lowered over the board
+          ffs=(82.42, 84.22, 144.5, 209.0, 18.0),                     # F|F# fin over the Zero and the USB plug: x, y, lower edge z
+          ribbon=(59.0, 81.1, 98.3),                                  # flat ribbon + strand fan under the front edge: x0, x1, y<=
+          tails=1.0,                                                  # every lead / pin tail <= 1.0 below the board (z >= 6.0)
+          strand=0.9)                                                 # underside wire = a single 2651 ribbon strand (OD ~0.9)
+# hole lattice: BE163 30 x 42 holes, assumed centred (margins 7.93 / 3.17). Pads only on i = 1..40, j = 1..28, so a 28 x 40 board
+# (the 8 x 12 cm boards bought for the rest) gives the same layout about the board centre (82.25, 133.3).
+LAT_X, LAT_Y = 30.18, 96.47
+LAT_N = (42, 30)
+LAT_USE = (1, 40, 1, 28)
+ZONE_J = dict(front=(1, 13), strip=(14, 19), rear=(20, 28))
+FIN_I = (4, 5, 36, 37)                # no top-side part in these columns of the rear zone (fins 2 / 4 at z9.5)
 
 
 def lat(i):
     return round(LAT_X + 2.54 * i, 2)
 
 
-MUX_ORIGIN = (round(lat(-8) - 1.27, 2), 152.0)   # module corner = channel-row edge, C0 end (front); channel row lat(-8), control lat(-2)
-RIB_X0, RIB_Y = lat(-6), (148.19, 150.73)     # ribbon 2x8 block: odd row front, even row back
-EXT_X0, EXT_Y = lat(7), 193.91                # EXT 1x6 pads along x (rear, next to the USB tunnel)
-JP_POS = {"JP301": (lat(8), 181.21), "JP302": (lat(8), 178.67), "JP303": (lat(8), 176.13), "JP304": (lat(8), 173.59)}
-R_EXT = {f"R{300+n}": (lat(10), 153.27 + 5.08 * (n - 1)) for n in range(1, 5)}   # 100k pull-downs, lying along +x, 7.62 pitch
-TP_POS = {"TP301": (lat(8), 188.83), "TP302": (lat(9), 188.83), "TP303": (lat(10), 188.83)}
-RIB_C = RIB_X0 + 3.5 * 2.54                   # J301 centre (the ribbon itself runs centred on SB J201, x70.48)
+def latj(j):
+    return round(LAT_Y + 2.54 * j, 2)
+
+
+def lat_ij(x, y):
+    return int(round((x - LAT_X) / 2.54)), int(round((y - LAT_Y) / 2.54))
+
+
+# RP2040-Zero A301: USB-C toward +y, on standard headers WITH the 2.5 mold (PCB z11.1~12.1, underside chips 1.2 above the board)
+ZX, ZY = 74.52, 169.18               # left edge, USB edge
+ZERO_ORIGIN = (ZX, ZY)               # module-local (0,0) = top-left at the USB edge; local +y -> board -y
+USB_RX = (78.91, 87.85)              # receptacle 8.94 wide, 4.67 from the right edge (Waveshare): centre x83.38
+USB_RY = (163.18, 170.48)            # protrudes ~1.3 past the Zero edge (1.0~1.5, check on the part)
+PLUG = (77.13, 89.63, 170.48, 195.48, 9.9, 17.5)    # cable overmold limit 12.5 x 25 x 7.6 (centre x83.38 z13.7)
+WALL_OPEN = (76.45, 91.55)           # rear-wall opening: the USB cable and the EXT lead leave the module here
+# A302 4067 module: long axis +x, channel row in front (C0 at the left), control row behind it
+MUX_ORIGIN = (82.25, 100.28)         # module corner (C0 end, front edge)
+MUX_W, MUX_D = 40.64, 17.78
+RIB_X0, RIB_Y = lat(12), (latj(1), latj(2))       # J301 2x8: odd pins front row y99.01, even back row y101.55, x60.66~78.44
+RIB_C = round(RIB_X0 + 3.5 * 2.54, 2)             # J301 centre x69.55 (the ribbon runs centred x70.48 like SB J201)
+EXT_X0, EXT_Y = lat(27), latj(28)                 # J302 1x6 along x, pin 1 = GND at the left, soldered from the top
+# ID / PED jumpers: (signal pad, GND pad) - two-hole solder bridges on the underside
+JP_PADS = {"JP301": ((lat(26), latj(22)), (lat(27), latj(22))), "JP302": ((lat(26), latj(21)), (lat(27), latj(21))),
+           "JP303": ((lat(26), latj(20)), (lat(27), latj(20))), "JP304": ((lat(16), latj(20)), (lat(15), latj(20)))}
+R_EXT = {f"R{300+n}": (lat(29), latj(29 - 2 * n)) for n in range(1, 5)}   # 100k pull-downs lying flat, pin 1 left, 7.62 pitch
+TP_POS = {"TP301": (lat(14), latj(27)), "TP302": (lat(15), latj(27)), "TP303": (lat(16), latj(27))}
 
 
 def f2(v):
     return f"{v:.2f}"
 
 
-MBX = dict(mux=f"x{f2(MUX_ORIGIN[0])}~{f2(MUX_ORIGIN[0] + 17.78)} × y152.0~192.64",
-           rib=f"x{f2(RIB_X0)}~{f2(RIB_X0 + 7 * 2.54)} × y148.19/150.73",
-           ext=f"x{f2(EXT_X0)}~{f2(EXT_X0 + 5 * 2.54)} × y193.91",
-           zero=f"x{f2(ZX)}~{f2(ZX + 18)} × y172.0~195.5",
-           usb=f"x{f2(USB_RX[0])}~{f2(USB_RX[1])} × y{USB_RY[0]}~{USB_RY[1]}",
-           rext=f"x{f2(lat(10))}→{f2(lat(10) + 7.62)} × y153.27~168.51",
-           jp=f"x{f2(lat(8))}/{f2(lat(9))} × y173.59~181.21",
-           tp=f"x{f2(lat(8))}~{f2(lat(10))} × y188.83",
-           so="(50.0,149.0)(114.5,149.0)(50.0,192.5)(114.5,192.5)")
+MBX = dict(board=f"x{f2(MB['x0'])}~{f2(MB['x1'])} × y{MB['y0']}~{MB['y1']}",
+           mux=f"x{f2(MUX_ORIGIN[0])}~{f2(MUX_ORIGIN[0] + MUX_W)} × y{f2(MUX_ORIGIN[1])}~{f2(MUX_ORIGIN[1] + MUX_D)}",
+           rib=f"x{f2(RIB_X0)}~{f2(RIB_X0 + 7 * 2.54)} × y{f2(RIB_Y[0])}/{f2(RIB_Y[1])}",
+           ext=f"x{f2(EXT_X0)}~{f2(EXT_X0 + 5 * 2.54)} × y{f2(EXT_Y)}",
+           zero=f"x{f2(ZX)}~{f2(ZX + 18)} × y{f2(ZY - 23.5)}~{f2(ZY)}",
+           usb=f"x{f2(USB_RX[0])}~{f2(USB_RX[1])} × y{f2(USB_RY[0])}~{f2(USB_RY[1])}",
+           rext=f"x{f2(lat(29))}→{f2(lat(29) + 7.62)} × y{f2(latj(21))}~{f2(latj(27))}",
+           jp=f"x{f2(lat(26))}/{f2(lat(27))} × y{f2(latj(20))}~{f2(latj(22))} · JP304 x{f2(lat(16))}/{f2(lat(15))}",
+           tp=f"x{f2(lat(14))}~{f2(lat(16))} × y{f2(latj(27))}")
 
 
 def zero_hole(n):
     lx, ly = P.RP2040_HOLE[n]
-    return ZERO_ORIGIN[0] + lx, ZERO_ORIGIN[1] - ly
+    return round(ZERO_ORIGIN[0] + lx, 2), round(ZERO_ORIGIN[1] - ly, 2)
 
 
 def mux_hole(name):
+    """4067 module pin -> board xy: u along +x and w along +y from the module corner (channel row C0..C15, control row behind)."""
     n = P.mux_pin(name)
     if n <= 16:
         u, w = 1.27 + 2.54 * (n - 1), 1.27
     else:
         u, w = 11.43 + 2.54 * (n - 17), 16.51
-    return MUX_ORIGIN[0] + w, MUX_ORIGIN[1] + u
+    return round(MUX_ORIGIN[0] + u, 2), round(MUX_ORIGIN[1] + w, 2)
+
+
+def jp_hole(ref, net):
+    sig, gnd = JP_PADS[ref]
+    return gnd if net == "GND" else sig
+
+
+def mb_pad_xy(ref, num, net=None):
+    """board xy of one MB pad (SCH-03 ref / pin), None for parts without a pad (C301 sits across the mux GND / VCC tails)."""
+    if ref == "A301":
+        return zero_hole(int(num))
+    if ref == "A302":
+        return mux_hole(dict(P.MUX_CH + P.MUX_CTRL)[int(num)])
+    if ref == "J301":
+        n = int(num)
+        return round(RIB_X0 + 2.54 * ((n - 1) // 2), 2), RIB_Y[(n - 1) % 2]
+    if ref == "J302":
+        return round(EXT_X0 + 2.54 * (int(num) - 1), 2), EXT_Y
+    if ref in JP_PADS:
+        return jp_hole(ref, net)
+    if ref in R_EXT:
+        x, y = R_EXT[ref]
+        return (x, y) if str(num) == "1" else (round(x + 7.62, 2), y)
+    if ref in TP_POS:
+        return TP_POS[ref]
+    return None
+
+
+def _tx(s, x, y, txt, cls="pinname", anchor="start", fs=None, layer="text"):
+    """small label with an explicit font size (the sheet CSS classes have fixed sizes); not in the overlap check."""
+    import html as _h
+    a = "" if anchor == "start" else f' text-anchor="{anchor}"'
+    st = f' style="font-size:{fs}px"' if fs else ""
+    s.out[layer].append(f'<text x="{x:.2f}" y="{y:.2f}" class="{cls}"{a}{st}>{_h.escape(str(txt))}</text>')
+
+
+def _hatch(o, x0, y0, x1, y1, step=3.0, col="#c2410c", w=.25, op=.45):
+    """45 degree hatch lines clipped to a sheet rectangle (x0 < x1, y0 < y1)."""
+    h = y1 - y0
+    t = x0 - h
+    while t < x1:
+        ax, ay, bx, by = t, y1, t + h, y0
+        if ax < x0:
+            ay -= x0 - ax
+            ax = x0
+        if bx > x1:
+            by += bx - x1
+            bx = x1
+        if bx > ax:
+            o.append(f'<line x1="{ax:.2f}" y1="{ay:.2f}" x2="{bx:.2f}" y2="{by:.2f}" stroke="{col}" stroke-width="{w}" stroke-opacity="{op}"/>')
+        t += step
+
+
+def mb_frame_draw(s, X, Y, mirror=False, top=True):
+    """common MB context for BRD-01 (top view) / BRD-08 (underside, mirrored): board, lattice, rail strip, ribs, fins."""
+    o = s.out["body"]
+    x0b, x1b, y0b, y1b = MB["x0"], MB["x1"], MB["y0"], MB["y1"]
+
+    def R(a0, a1, b0, b1):                   # model rect -> sheet rect (x, y, w, h)
+        xa, xb = sorted((X(a0), X(a1)))
+        ya, yb = sorted((Y(b0), Y(b1)))
+        return xa, ya, xb - xa, yb - ya
+    x, y, w, h = R(x0b, x1b, y0b, y1b)
+    o.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
+    i0, i1, j0, j1 = LAT_USE
+    for i in range(LAT_N[0]):
+        for j in range(LAT_N[1]):
+            used = i0 <= i <= i1 and j0 <= j <= j1
+            o.append(f'<circle cx="{X(lat(i)):.2f}" cy="{Y(latj(j)):.2f}" r=".32" fill="{"#b9cdb6" if used else "#dbe7d8"}"/>')
+    # balance-rail strip (top side): hatched, no parts / pads / top wires; the rail outline itself dashed
+    sy0, sy1 = MB["strip"]
+    x, y, w, h = R(x0b, x1b, sy0, sy1)
+    o.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" fill="#fde2d8" fill-opacity=".55"/>')
+    _hatch(o, x, y, x + w, y + h)
+    rx0, rx1, ry0, ry1 = MB["rail"][:4]
+    ext = 4.0 / 2.0
+    x, y, w, h = R(max(rx0, x0b - ext), min(rx1, x1b + ext), ry0, ry1)
+    o.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" fill="none" stroke="#6b7690" stroke-width=".45" stroke-dasharray="2.4 1.2"/>')
+    # support ribs under the board (dashed = hidden on the top view)
+    dash_r = ' stroke-dasharray="1.6 .9"' if top else ""
+    op_r = .10 if top else .22
+    for (a0, a1, b0, b1) in MB["ribs"]:
+        x, y, w, h = R(a0, a1, b0, b1)
+        o.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" fill="#6b7690" fill-opacity="{op_r}" '
+                 f'stroke="#6b7690" stroke-width=".3"{dash_r}/>')
+    # frame fins over the board: fins 2 / 4 lowered to z9.5 behind the rail, the F|F# fin at z18.0
+    fy0, fy1 = MB["fin_y"]
+    dash_f = "" if top else ' stroke-dasharray="1.2 .7"'
+    op_f = .55 if top else .25
+    for (a0, a1) in MB["fins"]:
+        x, y, w, h = R(a0, a1, fy0, min(fy1, y1b + 7.8))
+        o.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" fill="#9aa6b8" fill-opacity="{op_f}" '
+                 f'stroke="#6b7690" stroke-width=".3"{dash_f}/>')
+    fa, fb, fc, fd, fz = MB["ffs"]
+    x, y, w, h = R(fa, fb, fc, min(fd, y1b + 7.8))
+    o.append(f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{h:.2f}" fill="#9aa6b8" fill-opacity=".22" stroke="#6b7690" '
+             f'stroke-width=".3" stroke-dasharray="1.6 .8"/>')
 
 
 def brd01():
+    import harness as _H
     s = Sheet("BRD-01", 8, TOTAL, "제어 기판 배치 (MB · 위에서 봄)",
-              "BE163에서 자른 70 × 50 조각 위 부품 자리와 구멍 좌표(모듈 좌표 mm). W1 r4.3~r4.5의 앞 홈·금지 구역·높이 구역·바닥 구멍·매단 보스를 지킨 배치. 배선은 netlist/wiring_MB.csv.",
-              "MB", qty="MB × 7", basis="v4 W1+ r4.5 P23", **REV_E)
-    S = 3.0
-    ox, oy = 28, 30
+              "양면 만능기판 80 × 120 통째로(자르지 않음, 구멍·나사 없음): 모듈 바닥 자리에 놓고 따로 출력한 밸런스 레일이 맨 띠를 눌러 잡는다(CAD A16). "
+              "부품 자리·구멍 좌표(모듈 좌표 mm). 아랫면 배선은 BRD-08.",
+              "MB", qty="MB × 7", basis="CAD A16 · W1 r4.5", **REV_E)
+    S_ = 2.0
+    ox, oy = 26.0, 40.0
+    x0b, y0b, y1b = MB["x0"], MB["y0"], MB["y1"]
+    YT = y1b + 8.0                     # top of the drawing (behind the board's rear edge)
 
     def X(x):
-        return ox + (x - MB["x0"]) * S
+        return ox + (x - x0b) * S_
 
     def Y(y):
-        return oy + (MB["y1"] - y) * S
+        return oy + (y1b - y) * S_
     o = s.out["body"]
-    # board
-    o.append(f'<rect x="{X(MB["x0"]):.2f}" y="{Y(MB["y1"]):.2f}" width="{70*S:.2f}" height="{50*S:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
-    # perfboard hole grid (approximate, 2.54)
-    for gx in [lat(-11 + i) for i in range(27)]:
-        for gy in [148.19 + 2.54 * j for j in range(19)]:
-            o.append(f'<circle cx="{X(gx):.2f}" cy="{Y(gy):.2f}" r=".35" fill="#b9cdb6"/>')
-    # keep-out + slot
-    kx0, kx1, ky0, ky1 = MB["keep"]
-    o.append(f'<rect x="{X(kx0):.2f}" y="{Y(ky1):.2f}" width="{(kx1-kx0)*S:.2f}" height="{(ky1-ky0)*S:.2f}" fill="#fde2d8" stroke="#c2410c" stroke-width=".3" stroke-dasharray="1.2 .8"/>')
-    sx0, sx1, sy0, sy1 = MB["slot"]
-    o.append(f'<rect x="{X(sx0):.2f}" y="{Y(sy1):.2f}" width="{(sx1-sx0)*S:.2f}" height="{(sy1-sy0)*S:.2f}" fill="#fff" stroke="#c2410c" stroke-width=".45"/>')
-    fx0, fx1, fy0, fy1 = MB["fin"]
-    o.append(f'<rect x="{X(fx0):.2f}" y="{Y(fy1):.2f}" width="{(fx1-fx0)*S:.2f}" height="{(fy1-fy0)*S:.2f}" fill="#c9d0da" stroke="#6b7690" stroke-width=".3"/>')
-    kx0_, kx1_, ky0_, ky1_ = MB["keel"]
-    o.append(f'<rect x="{X(kx0_):.2f}" y="{Y(ky1_):.2f}" width="{(kx1_-kx0_)*S:.2f}" height="{(ky1_-ky0_)*S:.2f}" fill="#9aa6b8" stroke="#6b7690" stroke-width=".3"/>')
-    # W1 r4.5 floor opening under the board (the board goes in from below)
-    cx0, cx1, cy0, cy1 = MB["floor_cut"]
-    rx0, rx1, _, ry1 = MB["rcpt_cut"]
-    pts = [(cx0, cy0), (cx1, cy0), (cx1, cy1), (rx1, cy1), (rx1, ry1), (rx0, ry1), (rx0, cy1), (cx0, cy1)]
-    o.append('<polygon points="' + " ".join(f"{X(a):.2f},{Y(b):.2f}" for a, b in pts) + '" fill="none" stroke="#6b7690" stroke-width=".3" stroke-dasharray="2 1"/>')
-    s.text(X(47.25), Y(145.5) + 27.5, "W1 홈 x81.92~84.72 × y145.5~172.0 (따냄) — F|F# 핀 발 y148.6~170.7 + 킬 y144.5~148.6(레일 뒷면에 붙음)이 지나감(회색)", "notes", size=2.1)
-    s.text(X(47.25), Y(145.5) + 36.2, "점선 테두리 = W1 r4.5 바닥 구멍 x46.25~118.25 × y144.5~196.5 (리셉터클 뒤 y197.8까지) — 기판을 밑에서 넣는다", "notes", size=2.1)
-    s.text(X(47.25), Y(145.5) + 30.4, "주황 = 금지 x81.22~85.42 × y145.5~173.2 (W1 r4.3): 부품·배선·패드 없음", "notes", size=2.1)
-    s.text(X(47.25), Y(145.5) + 33.3, "(y172.0~173.2에는 제로 PCB(z11.9 위)만 걸침 — 핀·패드·배선 없음)", "notes", size=2.1)
-    # W1 r4.5 boss brackets (hung from the rail rear face / shelf rib) + the component-free corners around them
-    for (a0, a1, b0, b1) in MB["boss_keep"]:
-        o.append(f'<rect x="{X(a0):.2f}" y="{Y(b1):.2f}" width="{(a1-a0)*S:.2f}" height="{(b1-b0)*S:.2f}" fill="#fde2d8" fill-opacity=".45" stroke="#c2410c" stroke-width=".25" stroke-dasharray="1 .7"/>')
-    for (a0, a1, b0, b1) in MB["boss_rects"]:
-        o.append(f'<rect x="{X(a0):.2f}" y="{Y(b1):.2f}" width="{(a1-a0)*S:.2f}" height="{(b1-b0)*S:.2f}" fill="#c9d0da" fill-opacity=".35" stroke="#6b7690" stroke-width=".3" stroke-dasharray="1.2 .7"/>')
-    # standoffs
-    s.chg(X(50.0), Y(149.0) - 12.0, 14)
-    for (x, y, t) in MB["standoffs"]:
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{3.0*S:.2f}" fill="#c9d0da" fill-opacity=".25" stroke="#6b7690" stroke-width=".35" stroke-dasharray="1.2 .7"/>')
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{(1.6 if "M3" in t else 1.5)*S:.2f}" fill="#fff" stroke="#1d2433" stroke-width=".35"/>')
-        s.text(X(x), (Y(195.5) - 4.2) if y > 170 else (Y(145.5) + 6.2), t, "notes", "middle", size=2.0)
-    # RP2040-Zero
+    mb_frame_draw(s, X, Y)
+    s.chg(X(x0b) + 4.5, Y(y1b) + 4.5, 33)
+    # ---- labels of the frame context
+    _tx(s, X(x0b) + 1.5, Y(139.9), "밸런스 레일 (따로 출력, 점선 y%.1f~%.1f · z%.1f~%.1f, M3×6 ×2는 기판 밖 x11.2 / 154.2)" % MB["rail"][2:], "notes", fs=1.9)
+    _tx(s, X(x0b) + 1.5, Y(137.1), "맨 띠 y132.0~144.8 (빗금, 줄 j 14~19): 부품·패드·윗면 선 없음 — 레일이 기판을 눌러 잡는다", "notes", fs=1.9)
+    _tx(s, X(103.0), Y(134.2), "띠 리브 틈 x92.0~114.0: 앞↔뒤 아랫면 선 (BRD-08)", "notes", "middle", fs=1.7)
+    _tx(s, X(x0b) + 1.5, Y(129.7), "앞 구역 j 1~13 (y99.01~129.49) · 부품 ≤ z17.27", "notes", fs=1.9)
+    _tx(s, X(44.0), Y(158.0), "뒤 구역 j 20~28", "notes", fs=1.9)
+    _tx(s, X(44.0), Y(156.3), "(y147.27~167.59)", "notes", fs=1.9)
+    _tx(s, X(44.0), Y(154.6), "부품 ≤ z20.9", "notes", fs=1.9)
+    _tx(s, X(x0b) + 1.5, Y(95.9), "받침 리브 (아랫면, 점선) — 납땜·선 없음, 모든 다리 끝 ≤ 1.0", "notes", fs=1.7)
+    for (a0, a1), nm in zip(MB["fins"], ("핀 2", "핀 4")):
+        anchor = "end" if a0 < 80 else "start"
+        _tx(s, X(a0) - 1.2 if a0 < 80 else X(a1) + 1.2, Y(178.4), f"{nm} 밑변 z{MB['fin_z']:.1f} (y144.5~174.9)", "notes", anchor, fs=1.8)
+        _tx(s, X(a0) - 1.2 if a0 < 80 else X(a1) + 1.2, Y(176.4), f"x{a0:.2f}~{a1:.2f} · 열 i {'4·5' if a0 < 80 else '36·37'} 윗면 부품 없음", "notes", anchor, fs=1.8)
+    fa, fb = MB["ffs"][:2]
+    _tx(s, X(90.4), Y(180.6), f"F|F# 핀 x{fa:.2f}~{fb:.2f} 밑변 z{MB['ffs'][4]:.1f} → y209 (제로·플러그 위)", "notes", fs=1.8)
+    # ---- RP2040-Zero A301 (on headers with the 2.5 mold), USB-C receptacle, cable plug stub
     zx0, zy0 = ZERO_ORIGIN
-    o.append(f'<rect x="{X(zx0):.2f}" y="{Y(zy0):.2f}" width="{18*S:.2f}" height="{23.5*S:.2f}" rx="3" fill="#1f2a44" fill-opacity=".10" stroke="#1f2a44" stroke-width=".45"/>')
-    o.append(f'<rect x="{X(USB_RX[0]):.2f}" y="{Y(USB_RY[1]):.2f}" width="{(USB_RX[1]-USB_RX[0])*S:.2f}" height="{(USB_RY[1]-USB_RY[0])*S:.2f}" fill="#c9d0da" stroke="#1f2a44" stroke-width=".3"/>')
-    s.text(X(zx0 + 9), Y(zy0 - 3.2), "USB-C", "notes", "middle", size=2.1)
-    s.chg(X(USB_RX[1]) + 4.5, Y(USB_RY[1]) + 3.0, 15)
-    s.text(X(zx0 + 9), Y(zy0 - 12), "A301 RP2040-Zero", "ref", "middle", size=2.7)
-    s.text(X(zx0 + 9), Y(zy0 - 14.8), "18 × 23.5, 핀 헤더로", "notes", "middle", size=2.0)
+    o.append(f'<rect x="{X(zx0):.2f}" y="{Y(zy0):.2f}" width="{18*S_:.2f}" height="{23.5*S_:.2f}" rx="2" fill="#1f2a44" fill-opacity=".08" stroke="#1f2a44" stroke-width=".45"/>')
+    px0, px1, py0, py1 = PLUG[:4]
+    o.append(f'<rect x="{X(px0):.2f}" y="{Y(YT):.2f}" width="{(px1-px0)*S_:.2f}" height="{(YT-py0)*S_:.2f}" fill="#2b2b2b" fill-opacity=".14" stroke="#2b2b2b" stroke-width=".35" stroke-dasharray="2 .8"/>')
+    o.append(f'<polyline points="{X(px0)-1:.2f},{Y(YT)+1.2:.2f} {X((px0+px1)/2):.2f},{Y(YT)-0.4:.2f} {X(px1)+1:.2f},{Y(YT)+1.2:.2f}" fill="none" stroke="#2b2b2b" stroke-width=".3"/>')
+    o.append(f'<rect x="{X(USB_RX[0]):.2f}" y="{Y(USB_RY[1]):.2f}" width="{(USB_RX[1]-USB_RX[0])*S_:.2f}" height="{(USB_RY[1]-USB_RY[0])*S_:.2f}" fill="#c9d0da" stroke="#1f2a44" stroke-width=".3"/>')
+    _tx(s, X(px0) - 1.2, Y(175.2), "USB 플러그 몰드 ≤ 12.5 × 7.6 × 25", "notes", "end", fs=1.8)
+    _tx(s, X(px0) - 1.2, Y(177.0), f"y{py0:.2f}~{py1:.2f} · z{PLUG[4]:g}~{PLUG[5]:g} → 뒷벽 개구 x{WALL_OPEN[0]:.2f}~{WALL_OPEN[1]:.2f}", "notes", "end", fs=1.8)
+    _tx(s, X(83.38), Y(166.6), "USB-C", "notes", "middle", fs=1.7)
+    s.text(X(zx0 + 9), Y(zy0 - 12.4), "A301", "ref", "middle", size=2.7, check=False)
+    _tx(s, X(zx0 + 9), Y(zy0 - 14.3), "RP2040-Zero", "notes", "middle", fs=1.8)
+    _tx(s, X(zx0 + 9), Y(zy0 - 16.0), "몰드 2.5 헤더 위", "notes", "middle", fs=1.7)
+    used = ("3V3", "GND", "GP26", "GP2", "GP3", "GP4", "GP5", "GP6", "GP7", "GP8", "GP14")
     for n, nm in P.RP2040_ZERO:
         x, y = zero_hole(n)
-        used = nm in ("3V3", "GND", "GP26", "GP2", "GP3", "GP4", "GP5", "GP6", "GP7", "GP8", "GP14")
-        fill = "#c2410c" if used else "#fff"
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{0.55*S:.2f}" fill="{fill}" stroke="#1f2a44" stroke-width=".3"/>')
+        if n >= 19:
+            o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".7" fill="#fff" stroke="#8a96ab" stroke-width=".25" stroke-dasharray=".5 .4"/>')
+            continue
+        fill = "#c2410c" if nm in used else "#fff"
+        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="1.05" fill="{fill}" stroke="#1f2a44" stroke-width=".3"/>')
         if n <= 9:
-            s.text(X(x) - 2.4, Y(y) + 0.8, f"{nm}", "pinname", "end", size=2.0, check=False)
-        elif n <= 18:
-            s.text(X(x) + 2.4, Y(y) + 0.8, f"{nm}", "pinname", "start", size=2.0, check=False)
+            _tx(s, X(x) - 1.8, Y(y) + 0.7, nm, "pinname", "end", fs=1.8)
         else:
-            s.text(X(x), Y(y) + 4.4, nm.replace("GP", ""), "pinname", "middle", size=1.8, check=False)
-    # mux module (rotated: long axis along y)
+            _tx(s, X(x) + 1.8, Y(y) + 0.7, nm, "pinname", "start", fs=1.8)
+    # ---- A302 4067 module (long axis along x, channel row in front)
     mx0, my0 = MUX_ORIGIN
-    o.append(f'<rect x="{X(mx0):.2f}" y="{Y(my0+40.64):.2f}" width="{17.78*S:.2f}" height="{40.64*S:.2f}" rx="1" fill="#1f5fbf" fill-opacity=".10" stroke="#1f5fbf" stroke-width=".45"/>')
-    for (u, w) in ((2.54, 15.24), (38.10, 15.24)):
-        o.append(f'<circle cx="{X(mx0+w):.2f}" cy="{Y(my0+u):.2f}" r="{1.65*S:.2f}" fill="none" stroke="#1f5fbf" stroke-width=".3"/>')
+    o.append(f'<rect x="{X(mx0):.2f}" y="{Y(my0+MUX_D):.2f}" width="{MUX_W*S_:.2f}" height="{MUX_D*S_:.2f}" rx="1" fill="#1f5fbf" fill-opacity=".08" stroke="#1f5fbf" stroke-width=".45"/>')
     for nm in [f"C{i}" for i in range(16)] + ["GND", "VCC", "EN", "S0", "S1", "S2", "S3", "SIG"]:
         x, y = mux_hole(nm)
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{0.55*S:.2f}" fill="#c2410c" stroke="#1f2a44" stroke-width=".3"/>')
+        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="1.05" fill="#c2410c" stroke="#1f2a44" stroke-width=".3"/>')
         if nm.startswith("C"):
-            s.text(X(x) + 2.3, Y(y) + 0.8, nm, "pinname", "start", size=1.9, check=False)
+            _tx(s, X(x), Y(y) - 2.0, nm, "pinname", "middle", fs=1.7)
         else:
-            s.text(X(x) - 2.3, Y(y) + 0.8, nm, "pinname", "end", size=1.9, check=False)
-    s.text(X(mx0 + 8.9), Y(my0 + 20), "A302", "ref", "middle", size=2.7)
-    s.text(X(mx0 + 8.9), Y(my0 + 20) + 3, "4067 모듈", "notes", "middle", size=2.0)
-    s.text(X(mx0 + 8.9), Y(my0 + 20) + 5.6, "40.64 × 17.78", "notes", "middle", size=2.0)
-    # ribbon 2x8 block
-    for i in range(16):
-        col, row = i // 2, i % 2
-        x, y = RIB_X0 + 2.54 * col, RIB_Y[row]
-        o.append(f'<rect x="{X(x)-0.9*S/1.2:.2f}" y="{Y(y)-0.9*S/1.2:.2f}" width="{1.5*S:.2f}" height="{1.5*S:.2f}" fill="#fff" stroke="#8a5a00" stroke-width=".35"/>')
-        s.text(X(x), Y(y) + (5.0 if row == 0 else -2.6), str(i + 1), "pinnum", "middle", size=1.9, check=False)
-    s.text(X(RIB_X0) - 2, Y(145.5) + 6.2, "J301 리본 2×8 (홀수 = 앞줄, 아랫면 납땜)", "cabt", size=2.1)
-    # EXT protection resistors (1/4 W lying, 7.62 pitch)
-    for ref, (x, y) in R_EXT.items():
-        o.append(f'<rect x="{X(x)+1.5:.2f}" y="{Y(y)-2.4:.2f}" width="{7.62*S-3:.2f}" height="4.8" rx="1" fill="#f3e3c3" stroke="#8a5a00" stroke-width=".3"/>')
-        for xx in (x, x + 7.62):
-            o.append(f'<circle cx="{X(xx):.2f}" cy="{Y(y):.2f}" r="{0.55*S:.2f}" fill="#c2410c" stroke="#1f2a44" stroke-width=".3"/>')
-        n = int(ref[1:]) - 300
-        s.text(X(x) - 2.6, Y(y) + 0.8, f"{ref} 100k EXT{n}", "pinname", "end", size=1.8, check=False)
-    s.text(X(lat(10)) - 2, Y(171.0), "R301~R304: O1은 1~3, O7은 1만", "notes", size=1.9)
-    # C301 on the bottom across mux GND/VCC header pins
+            _tx(s, X(x), Y(y) + 3.0, nm, "pinname", "middle", fs=1.7)
+    s.text(X(mx0 + 20.3), Y(my0 + 9.0) + 0.3, "A302 4067 모듈", "ref", "middle", size=2.7, check=False)
+    _tx(s, X(mx0 + 20.3), Y(my0 + 9.0) + 3.3, f"{MUX_W} × {MUX_D} · 채널 줄(C0~C15) 앞, 제어 줄 뒤", "notes", "middle", fs=1.8)
     gx_, gy_ = mux_hole("GND")
-    o.append(f'<rect x="{X(gx_)-1.4:.2f}" y="{Y(gy_+2.54)-0.6:.2f}" width="2.8" height="{2.54*S+1.2:.2f}" fill="none" stroke="#b86e00" stroke-width=".4" stroke-dasharray=".9 .5"/>')
-    s.text(X(gx_) - 2.4, Y(gy_ + 1.27) + 0.8, "C301 (아랫면)", "notes", "end", size=1.8)
+    vx_, _ = mux_hole("VCC")
+    o.append(f'<rect x="{X(gx_)-1.6:.2f}" y="{Y(gy_)-1.9:.2f}" width="{(vx_-gx_)*S_+3.2:.2f}" height="3.8" fill="none" stroke="#b86e00" stroke-width=".4" stroke-dasharray=".9 .5"/>')
+    _tx(s, X(gx_) - 1.6, Y(gy_) + 6.0, "C301 (아랫면, 점선)", "notes", "start", fs=1.7)
+    # ---- J301 ribbon 2x8 (soldered from below), the ribbon under the front edge
+    for n in range(1, 17):
+        x, y = mb_pad_xy("J301", n)
+        o.append(f'<rect x="{X(x)-1.2:.2f}" y="{Y(y)-1.2:.2f}" width="2.4" height="2.4" fill="#fff" stroke="#8a5a00" stroke-width=".35"/>')
+        _tx(s, X(x), Y(y) + (3.9 if n % 2 else -1.9), str(n), "pinnum", "middle", fs=1.6)
+    rb0, rb1 = 70.48 - 10.16, 70.48 + 10.16
+    o.append(f'<rect x="{X(rb0):.2f}" y="{Y(MB["ribbon"][2]):.2f}" width="{(rb1-rb0)*S_:.2f}" height="{(MB["ribbon"][2]-y0b)*S_:.2f}" fill="#c9d0da" fill-opacity=".35" stroke="#6b7690" stroke-width=".3" stroke-dasharray="1.4 .8"/>')
+    o.append(f'<rect x="{X(rb0):.2f}" y="{Y(y0b):.2f}" width="{(rb1-rb0)*S_:.2f}" height="{9.0:.2f}" fill="#c9d0da" fill-opacity=".7" stroke="#6b7690" stroke-width=".3"/>')
+    o.append(f'<line x1="{X(rb0):.2f}" y1="{Y(y0b)+0.4:.2f}" x2="{X(rb0):.2f}" y2="{Y(y0b)+9.0:.2f}" stroke="#c0392b" stroke-width=".8"/>')
+    _tx(s, X(70.48), Y(y0b) + 5.4, "리본 W10x ← SB J201 (바닥, 앞 리브 틈 x59.5~81.5)", "cabt", "middle", fs=1.8)
+    _tx(s, X(RIB_X0) - 2.2, Y(RIB_Y[0]) + 0.2, "J301", "ref", "end", fs=2.2)
+    _tx(s, X(RIB_X0) - 2.2, Y(RIB_Y[0]) + 2.6, "아랫면에서 꽂음", "notes", "end", fs=1.7)
+    # ---- EXT 100k pull-downs (lying flat, 7.62 pitch)
+    for ref, (x, y) in R_EXT.items():
+        extra = ' stroke-dasharray=".8 .5" fill-opacity=".4"' if ref == "R304" else ""
+        o.append(f'<rect x="{X(x)+1.6:.2f}" y="{Y(y)-1.25:.2f}" width="{7.62*S_-3.2:.2f}" height="2.5" rx=".8" fill="#f3e3c3" stroke="#8a5a00" '
+                 f'stroke-width=".3"{extra}/>')
+        for xx in (x, x + 7.62):
+            o.append(f'<circle cx="{X(xx):.2f}" cy="{Y(y):.2f}" r="1.05" fill="#c2410c" stroke="#1f2a44" stroke-width=".3"/>')
+        n = int(ref[1:]) - 300
+        _tx(s, X(x + 7.62) + 1.8, Y(y) + 0.7, f"{ref} EXT{n}" + (" 비움" if ref == "R304" else ""), "pinname", "start", fs=1.7)
+    # ---- ID / PED jumpers, test points
+    for ref, (sig, gnd) in JP_PADS.items():
+        o.append(f'<circle cx="{X(sig[0]):.2f}" cy="{Y(sig[1]):.2f}" r="1.05" fill="#c2410c" stroke="#1f2a44" stroke-width=".3"/>')
+        o.append(f'<circle cx="{X(gnd[0]):.2f}" cy="{Y(gnd[1]):.2f}" r="1.05" fill="#1d2433" stroke="#1f2a44" stroke-width=".3"/>')
+        if ref == "JP304":
+            _tx(s, X(gnd[0]) - 1.8, Y(gnd[1]) + 0.7, "JP304", "pinname", "end", fs=1.7)
+        else:
+            _tx(s, X(gnd[0]) + 1.8, Y(gnd[1]) + 0.7, ref, "pinname", "start", fs=1.7)
     for ref, (x, y) in TP_POS.items():
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{0.75*S:.2f}" fill="#fff" stroke="#1f5fbf" stroke-width=".5"/>')
-    s.text(X(lat(8)) - 2.5, Y(188.83) - 3.2, "TP301 3V3 · TP302 GND · TP303 SIG", "pinname", size=1.8, check=False)
-    # EXT pads
+        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="1.45" fill="#fff" stroke="#1f5fbf" stroke-width=".5"/>')
+    _tx(s, X(TP_POS["TP301"][0]) - 1.2, Y(TP_POS["TP301"][1]) - 2.3, "TP301 · 302 · 303", "pinname", "start", fs=1.7)
+    # ---- J302 EXT pads (O1 / O7), the lead from the top over the rear edge
     for i in range(6):
         x = EXT_X0 + 2.54 * i
-        o.append(f'<rect x="{X(x)-1.9:.2f}" y="{Y(EXT_Y)-1.9:.2f}" width="3.8" height="3.8" fill="#fff" stroke="#8a5a00" stroke-width=".35"/>')
-        s.text(X(x), Y(EXT_Y) - 3.0, str(i + 1), "pinnum", "middle", size=1.9, check=False)
-    s.text(X(EXT_X0 + 6.35), Y(EXT_Y) + 7.0, "J302 EXT 1×6 (1 GND … 6 3V3)", "cabt", "middle", size=2.0)
-    # jumpers
-    for ref, (x, y) in JP_POS.items():
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{0.55*S:.2f}" fill="#c2410c" stroke="#1f2a44" stroke-width=".3"/>')
-        o.append(f'<circle cx="{X(x+2.54):.2f}" cy="{Y(y):.2f}" r="{0.55*S:.2f}" fill="#1d2433" stroke="#1f2a44" stroke-width=".3"/>')
-        s.text(X(x + 2.54) + 2.6, Y(y) + 0.8, ref + {"JP301": " GP6", "JP302": " GP7", "JP303": " GP8", "JP304": " GP14 (PED만)"}[ref], "pinname", "start", size=1.9, check=False)
-    s.text(X(lat(8)) - 2, Y(183.75), "ID 점퍼: 두 구멍 납땜 브리지 (검정 = GND 쪽)", "notes", size=1.9)
-    # axes / dimensions
-    for x in (47.25, RIB_X0, ZX, 81.22, 85.42, ZX + 18, 117.25):
-        s.line(X(x), Y(145.5) + 8, X(x), Y(145.5) + 13, "bodyl", "text")
-        s.text(X(x), Y(145.5) + 16, f"x{x:g}", "tblm", "middle", size=1.8, check=False)
-    for y in (145.5, 148.6, 170.7, 173.2, 193.91, 195.5):
-        s.line(X(117.25) + 2, Y(y), X(117.25) + 5, Y(y), "bodyl", "text")
-        s.text(X(117.25) + 6, Y(y) + 0.7, f"y{y:g}", "tblm", size=1.8, check=False)
-    s.text(X(64), Y(195.5) - 4.5, "뒤 (+y, USB 쪽)", "notes", size=2.1)
-    s.text(X(47.25), Y(145.5) + 22, "앞 (연주자 쪽) · 리본이 앞에서 들어온다", "notes", size=2.1)
-    # placement table
-    rows = [["A301 RP2040-Zero", MBX["zero"], "USB-C +y", "좌·우 열 18핀 헤더(몰드 뺌), 아래 줄 없음"],
-            ["USB-C 리셉터클", MBX["usb"], "가운데 x84.00", "W1 선반 홈 x76.45~91.55 가운데"],
-            ["A302 4067 모듈", MBX["mux"], "C0 앞 · C15 뒤", f"채널 줄 x{f2(lat(-8))} · 제어 줄 x{f2(lat(-2))}"],
-            ["J301 리본 2×8", MBX["rib"], "1번 = 앞줄 왼쪽", "아랫면 납땜 · 리본 차선 x59~82"],
-            ["R301~R304", MBX["rext"], "누워서, 5.08 간격", "EXT 100k 풀다운"],
-            ["JP301~JP304", MBX["jp"], "왼쪽 = 신호", "ID0~2 · PED(열림)"],
-            ["TP301~303", MBX["tp"], "", "3V3 · GND · SIG"],
-            ["J302 EXT 1×6", MBX["ext"], "1 = 왼쪽", "O1·O7만 연장선(아랫면)"],
-            ["고정 4 (매단 보스)", MBX["so"], "", "M3×6 밑에서 2 · 위치 핀 2"]]
-    s.table(262, 30, ["부품", "자리 (모듈 좌표)", "방향", "메모"], rows, [26, 56, 22, 44], title="배치표 (모든 구멍 = 제로 핀 격자)")
-    s.para(262, 74, [
+        o.append(f'<rect x="{X(x)-1.3:.2f}" y="{Y(EXT_Y)-1.3:.2f}" width="2.6" height="2.6" fill="#fff" stroke="#8a5a00" stroke-width=".35"/>')
+        o.append(f'<line x1="{X(x):.2f}" y1="{Y(EXT_Y)-1.3:.2f}" x2="{X(x):.2f}" y2="{Y(y1b):.2f}" stroke="#7e889a" stroke-width=".45"/>')
+    s.cable((X(105.11), Y(y1b)), (X(105.11), Y(176.6)), (X(86.5), Y(176.6)), (X(86.5), Y(YT)))
+    _tx(s, X(106.4), Y(178.7), "W403·W413 (O1·O7) → 뒷벽 개구 (주 8)", "cabt", "start", fs=1.7)
+    _tx(s, X(EXT_X0 + 5 * 2.54) + 2.4, Y(EXT_Y) + 0.7, "J302 1 = GND … 6 = 3V3 (윗면 납땜)", "pinname", "start", fs=1.7)
+    # ---- rulers
+    for x in (22.25, 30.18, 60.66, 74.52, 82.25, 92.0, 114.0, 122.89, 142.25):
+        s.line(X(x), Y(y0b) + 9.6, X(x), Y(y0b) + 12.2, "bodyl", "text")
+        _tx(s, X(x), Y(y0b) + 14.6, f"x{x:g}", "tblm", "middle", fs=1.7)
+    for y in (93.3, 99.01, 101.55, 116.79, 132.0, 144.8, 147.27, 167.59, 173.3):
+        s.line(X(x0b) - 1.0, Y(y), X(x0b) - 3.2, Y(y), "bodyl", "text")
+        _tx(s, X(x0b) - 3.8, Y(y) + 0.6, f"y{y:g}", "tblm", "end", fs=1.7)
+    _tx(s, X(x0b), Y(YT) + 2.0, "뒤 (+y) — USB 케이블 · 뒷벽 쪽", "notes", fs=2.0)
+    _tx(s, X(x0b), Y(y0b) + 18.6, "앞 (−y, 연주자 쪽) — 기판 앞 모서리 y93.3 = 검은 건반 탭 받침 뒤 0.3", "notes", fs=2.0)
+    # ---- placement table + notes
+    rows = [["MB 기판", MBX["board"], "통째로 80 × 120", "구멍·나사 없음"],
+            ["A301 RP2040-Zero", MBX["zero"], "핀 i 18·24, j 20~28", "USB-C +y, 몰드 그대로"],
+            ["USB-C 리셉터클", MBX["usb"], "가운데 x83.38", "플러그 → 뒷벽 개구"],
+            ["A302 4067 모듈", MBX["mux"], "채널 j 2 · 제어 j 8", "C0 왼쪽, 채널 줄 앞"],
+            ["J301 리본 2×8", MBX["rib"], "i 12~19, j 1·2", "1 = 앞줄 왼쪽, 아랫면"],
+            ["J302 EXT 1×6", MBX["ext"], "i 27~32, j 28", "O1·O7, 윗면 납땜"],
+            ["R301~R304", MBX["rext"], "i 29→32, j 27~21", "누워서, R304 비움"],
+            ["JP301~JP303", f"x{f2(lat(26))}/{f2(lat(27))} × y{f2(latj(20))}~{f2(latj(22))}", "i 26·27, j 22~20", "왼쪽 = 신호(GP6~8)"],
+            ["JP304", f"x{f2(lat(16))}/{f2(lat(15))} × y{f2(latj(20))}", "i 16·15, j 20", "GP14, 열어 둠"],
+            ["TP301~303", MBX["tp"], "i 14~16, j 27", "3V3 · GND · SIG"],
+            ["C301 (아랫면)", f"x{f2(mux_hole('GND')[0])}~{f2(mux_hole('VCC')[0])} × y{f2(mux_hole('GND')[1])}", "먹스 GND–VCC", "1206 100 nF"]]
+    yt = s.table(272, 24, ["부품", "자리 (모듈 좌표)", "격자", "메모"], rows, [25, 46, 31, 36],
+                 title="배치표 (격자 x = 30.18 + 2.54·i, y = 96.47 + 2.54·j)")
+    s.para(272, yt + 5.5, [
         "주",
-        "1. 좌표 = 모듈 좌표(mm), 기판 70 × 50 (BE163 조각, 지그 P-MB). 모든 부품 구멍은 RP2040-Zero 핀 격자",
-        f"    x = {f2(LAT_X)} + 2.54·i, y = 173.59 + 2.54·j 위 — 만능기판을 이 격자에 맞춰 자른다.",
-        f"    △15 제로 왼쪽 모서리 x{f2(ZX)}: Waveshare 치수도에서 USB-C가 오른쪽 모서리에서 4.67(가운데보다 0.14 왼쪽)이라",
-        "    제로를 +0.14 옮겨 리셉터클·플러그 가운데를 W1 선반 홈 가운데 x84.00에 맞춘다(양옆 1.30 그대로).",
-        "2. W1 r4.3 금지 구역(주황, x81.22~85.42 × y≤173.2)과 홈. 제로 기판 앞 가장자리 y172.0은",
-        "    F|F# 핀 발 뒤끝 y170.7과 1.3 mm — 제로를 −y로 옮기지 않는다. 금지 구역의 y172.0~173.2에는",
-        "    제로 PCB(z11.9 위)만 걸친다: 그 안에 헤더 핀·패드·배선 없음(첫 핀 줄 y173.59, 아래 줄 GP9~13은 헤더 없음).",
-        "3. 제로는 밑면에 칩·수정·LDO가 있어 평평하게 안 붙는다 → 핀 헤더(몰드 뺌)로 밑면 부품 위(캡톤)에",
-        f"    얹는다: PCB z11.9~12.9, 윗면 부품 ≤ z16.3. USB-C 리셉터클 {MBX['usb']} z12.9~16.1(중심 z14.5),",
-        "    제로 가장자리 밖으로 약 1.3(1.0~1.5, 실물로 확인) 나온다 → 플러그 면 y약 196.8, 몰드 끝 y약 221.8.",
-        "    W1 r4.3은 뒤 선반에 플러그 위 홈(x76.45~91.55, 선반 밑면 z18.05)을 내 플러그(z10.7~18.3)와 1.3 mm.",
-        "    헤더 핀 끝: 제로 윗면 위로 나온 끝도 z16.3 이하(y194.5~195.5 띠만 z16.7), 기판 밑 끝은 2 mm 이하로 자른다.",
-        "    부품 높이: y145.8~194.5 ≤ z20, 뒤 띠 y194.5~195.5 ≤ z16.7. W1 r4.5는 기판 밑 바닥을 뚫었다(점선: x46.25~118.25 ×",
-        "    y144.5~196.5, 리셉터클 뒤 x78.53~89.47은 y197.8까지). 아랫면: 헤더 핀 끝 ≤ 2 mm, C301·배선, 나사 머리 1.65.",
-        "4. 빨간 원 = 배선 연결점, 빈 원 = 안 씀. 제로 아래 줄(GP9~13)은 헤더 없음.",
-        "5. 배선: 기판 아랫면, 피복 단선 — 선마다 경로·꺾인 점은 BRD-08(아래에서 본 그림)과 netlist/wiring_MB.csv.",
-        "    금지 구역(y≤173.2)은 제로 밑(y≥174.86, 핀 줄 사이 반 칸)에서만 건넌다. 납땜 패드 위는 지나지 않는다(검사).",
-        "6. O1·O7 EXT 연장선(W403·W413): J302 아랫면에서 납땜, 기판 밑(z5~9)으로 x≤91까지, USB 플러그 밑(z5~10.7)으로",
-        "    뒷벽 개구(x74~94 z5~21)를 지나 뒤 케이블 통로로 (W1 r4.3 경로).",
-        "7. J301도 아랫면에서 납땜: 리본은 기판 밑(z5~9)으로 평평하게 앞 모서리 y145.5를 지나 밸런스 레일 밑 차선",
-        f"    (x59~82, z5~10)으로 — 기판 위에서 접지 않는다. 리본은 차선 안에서 SB J201과 같은 중심 x70.48로 곧게 두고,",
-        f"    J301 쪽 끝 약 6 mm만 가닥을 갈라 {70.48 - RIB_C:.2f} 비껴 꽂는다(J301 중심 x{f2(RIB_C)}) → 차선 여유 1.32 / 1.36 그대로.",
-        "    회로 쪽 최소: 리본 한 겹(두께 약 0.9) → 차선 높이 ≥ 2.5, 폭 ≥ 20.32 + 2 × 1.3. W1 단계 0 시험 21(첫 모듈 정하중) 뒤 차선이 바뀌면 다시 정한다.",
-        "8. △14 기판 고정(W1 r4.5): 모듈을 뒤집어 기판을 바닥 구멍으로 곧게 올려 넣는다(넣는 길 최소 틈 0.60).",
-        "    받침 = 프레임에 매단 Ø6 보스 4개(점선 원, 밑면 z10.6 = 기판 윗면; 앞 2개는 밸런스 레일 뒷면, 뒤 2개는 리브·선반에 붙음).",
-        "    나사 2곳 (50.0,149.0)·(114.5,192.5): M3×6을 밑에서 기판 Ø3.2 구멍 → 보스로. 구매 목록 L35 버튼헤드(ISO 7380)",
-        "    머리 Ø5.7 × 1.65가 기판 밑 z7.35~9.0에(W1 외곽 Ø5.7 × 3.0): 레일 1.65, 리브 1.54(축 1.45), 기판 모서리 밖 0.10(바닥 구멍 안;",
-        "    DIN 912 Ø5.5면 기판 안). 보스 Ø2.5 막힌 구멍 z15.4까지 직접 탭.",
-        "    위치 핀 2곳 (114.5,149.0)·(50.0,192.5): Ø2.8 핀이 기판 Ø3.0 구멍으로(놀음 0.10).",
-        "    보스 받침(6 × 7.5 / 6 × 7.3, 밑면 z10.6)과 둘레 1.3(주황 모서리 x≤54.3 · x≥110.2)에는 부품 없음:",
-        "    4067 ↔ 받침 1.93, R301 리드 ↔ 받침 모서리 2.34.",
-        "    J301 리본·J302 리드는 기판을 넣기 전에 아랫면에서 납땜한다(W1 DESIGN 10장 1단계 — 넣은 뒤에는 인두가 PETG 리브·킬 2 mm 옆).",
-        "9. 건반을 뺀 칸의 레버가 떨어지는 곳(W1 r4.5): D#·G# = 매단 보스, E·F = 4067 모듈 위(13.25°), F#·G = 기판 윗면,",
-        "    O1·O7의 G = R301 위(0.40 N) → R301은 기판에 붙여 눕히고 리드를 짧게 납땜한다.",
-    ], size=2.1)
+        "1. 기판: 양면 만능기판 80 × 120을 자르지 않고 통째로 (Coms BE163 30 × 42 구멍 —",
+        "    가진 4장 + 8 × 12 양면 3장, 구매 목록 SE8b). 구멍을 뚫지 않고 나사도 없다. 외곽 x22.25~142.25 ×",
+        "    y93.3~173.3. 격자는 BE163 구멍이 판 가운데라고 가정(가장자리 7.93 / 3.17).",
+        "    부품은 i 1~40, j 1~28만 → 28 × 40 구멍 판도 가운데 (82.25, 133.3)에 맞추면 같은 배치.",
+        "    받으면 판 크기·구멍 수·첫 구멍 위치를 잰다.",
+        "2. 놓기 (CAD A16): 모듈 바닥 자리(받침 리브 z5~7.0 + 가장자리 턱 z8.5, 틈 0.3)에 내려놓고",
+        "    따로 출력한 밸런스 레일을 맨 띠 위에 얹어 M3×6 ×2(레일 양 끝, 기판 밖)로 조인다.",
+        "3. 높이: 기판 z7.0~8.6. 앞 구역 부품 ≤ z17.27(흑건 끝까지 눌렀을 때 건반 밑 z17.77 − 0.5; 먹스 핀 끝 z17.1),",
+        "    뒤 구역 ≤ z20.9(건반 꼬리 z21.4 − 0.5). 프레임 핀 2·4는 뒤 구역 위에서 밑변 z9.5 →",
+        "    열 i 4·5 · 36·37에는 윗면 부품 없음. F|F# 핀은 밑변 z18.0(제로 윗면 ≤ z15.5, 플러그 ≤ z17.5).",
+        "4. 아랫면: 바닥까지 2.0 (z5~7.0). 모든 다리·핀 끝을 1.0 이하로 자른다(z ≥ 6.0).",
+        "    받침 리브(점선) 위에는 납땜·선이 없다. 앞↔뒤 아랫면 선은 띠 리브의 틈 x92.0~114.0으로만.",
+        "    아랫면 선은 2651 리본 가닥(바깥 지름 약 0.9) — 직각으로 겹치는 곳도 두 겹 1.8 < 2.0 (BRD-08).",
+        "5. A301: USB-C +y, 왼쪽 핀 i 18 (1~9 = 5V·GND·3V3·GP29~26·GP15·GP14, USB 쪽부터),",
+        "    오른쪽 i 24 (10~18 = GP0~GP8), 줄 j 28 (y167.59) ~ 20. 몰드 2.5가 그대로인 보통 헤더 위:",
+        "    PCB z11.1~12.1, 밑면 칩·수정·LDO는 기판에서 1.2 떠 캡톤이 필요 없다. 아래 줄(GP9~13) 헤더 없음.",
+        "    리셉터클은 제로 가장자리 밖 약 1.3(1.0~1.5, 실물로 확인) → 플러그 면 y170.48.",
+        "6. A302: 긴 쪽을 x로, 채널 줄(C0~C15) 앞. C301 100 nF 1206은 아랫면 GND–VCC 꼬리 사이.",
+        "7. J301: 리본은 SB J201에서 바닥을 따라 와 앞 리브 틈으로 기판 앞 모서리 밑을 지나",
+        "    아랫면에서 구멍에 꽂고 윗면에서 납땜(이음 ≤ z10.0). 리본 가운데 x70.48, J301 가운데 x69.55 →",
+        "    끝 약 6 mm만 가닥을 갈라 −0.93 비껴 꽂는다. 리본 자리(y ≤ 98.3)에는 아랫면 선이 없다.",
+        "8. J302 (O1·O7만): 연장선 W403·W413을 윗면에서 납땜 → 기판 뒤 모서리·뒤 턱 위로 →",
+        f"    바닥 → 기판 뒤를 −x → USB 플러그 밑(z9.9 아래) → 뒷벽 개구 (자름 W403 {_H.EXT_CUT['O1']} · W413 {_H.EXT_CUT['O7']} mm, BRD-06).",
+        "9. R301~R304 100k: 붙여 눕힘(몸통 ≤ z11.1). O1·O7 = R301, O1은 R302·R303 더, R304는 비움.",
+        "    ID 점퍼: O 번호에 맞춰 JP301~JP303 두 구멍 납땜 브리지(아랫면, 검정 = GND 쪽). JP304는 열림.",
+        "10. 순서 (작업대): 아랫면 배선(BRD-08)·C301 → 헤더·모듈 → R30x·JP → SB·리본(70 mm)·MB를",
+        "    한 묶음으로 납땜 → 다리 끝 ≤ 1.0 확인 → 모듈 바닥 자리에 MB를 놓고 남는 리본은 기판 앞",
+        "    검은 건반 탭 받침 사이 바닥에 평평하게 접는다 → 밸런스 레일을 얹어 조인다.",
+        "11. 건반을 뺀 칸의 레버가 떨어지는 곳 (CAD A16 확인, O1, 레버 봉을 축으로 처음 닿을 때까지):",
+        "    C·B → 바닥틀 30.3°, C#·D·D#·E·G#·A·A# → 맨 기판 윗면 26~26.5° (y약 155.5),",
+        "    F·F# → 제로 헤더 핀 끝 16.3~16.8° (핀을 자르면 제로 윗면 부품 약 18°),",
+        "    G → R303 23.0° (O1만 — O7은 R301이 더 뒤라 안 닿음). 힘 약 0.4 N이라 문제없음:",
+        "    R30x는 기판에 붙여 눕히고 리드를 짧게 납땜한다.",
+    ], size=2.05)
     s.frame()
     s.expected = {}
     return s
@@ -1558,7 +1688,7 @@ def brd02():
         x, y = 61.59 + 2.54 * col, (72.08, 74.62)[row]
         o.append(f'<rect x="{X(x)-1.3:.2f}" y="{Y(y)-1.3:.2f}" width="2.6" height="2.6" fill="#fff" stroke="#8a5a00" stroke-width=".4"/>')
         s.text(X(x), Y(y) + 0.8, str(i + 1), "pinnum", "middle", size=1.6, check=False)
-    s.text(X(61.59), Y(75.89) - 6.5, "J201 리본 2×8 (x61.6~79.4, y72.08/74.62, 아랫면 납땜) → 뒤 받침 리브 틈 → 리본 차선 x59~82", "cabt", size=2.1)
+    s.text(X(61.59), Y(75.89) - 6.5, "J201 리본 2×8 (x61.6~79.4, y72.08/74.62, 아랫면 납땜) → 뒤 받침 리브 틈 → 바닥 → MB J301 (△33)", "cabt", size=2.1)
     # right ledge (W1 r4.5 P36): two inverted-L pieces, lip x161.5~163.0 over the bar end (z13.6~15.1), post x163.0~164.3 from the floor
     for (ya, yb) in ((59.0, 63.4), (70.6, 77.5)):
         o.append(f'<rect x="{X(161.5):.2f}" y="{Y(yb):.2f}" width="{1.5*S:.2f}" height="{(yb-ya)*S:.2f}" fill="#c9d0da" fill-opacity=".6" stroke="#6b7690" stroke-width=".3"/>')
@@ -1587,7 +1717,7 @@ def brd02():
         "    OUT 선은 모두 y70.81 줄, 짝수행은 핀 옆 반 칸 기둥에서 앞줄을 건너 y73.35로 1.27만. 받침 리브(점선 띠) 위에는 선이 없고 뒤 리브 띠는 틈 x59~82에서만 건넌다.",
         "    확인: J201.1·16 ↔ U201 핀 1 = 0 Ω, J201.2·15 ↔ U201 핀 2 = 0 Ω, J201 핀 n ↔ 센서 OUT = 0 Ω.",
         "6. 리본 16심은 아랫면에서 2×8 블록에 납땜(선 n = 핀 n, 15 = GND, 16 = 3V3). IDC 2×8 헤더로 바꿔도 번호가 같다.",
-        "    리본(중심 x70.48, x60.32~80.64)은 뒤 리브 틈 x59~82를 지난다(W1 r4.4에서 넓힘, 양옆 1.32 / 1.36 — 리본 차선과 같음).",
+        "    리본(중심 x70.48, x60.32~80.64)은 뒤 리브 틈 x59~82(양옆 1.32 / 1.36)로 바닥에 내려가 MB 앞 리브 틈 x59.5~81.5로 기판 밑에 들어간다(△33).",
     ], size=2.2)
     ep = _end_plans(s)
     s.regions["sb"] = (9.0, 20.0, 411.0, 166.5)

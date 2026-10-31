@@ -725,10 +725,10 @@
     212.0,
     18.0
    ],
-   "volume_cm3": 126.89,
-   "mass_g_solid_petg": 161.1,
+   "volume_cm3": 108.68,
+   "mass_g_solid_petg": 138.0,
    "material": "PETG 회색",
-   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 기판 자리는 바닥이 막혀 기판이 기둥 4개 위에 올라감 (위에서 M3×6 나사 2개 + 위치 핀 2개)). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 핀 발이 바닥틀의 홈 둑 사이에 들어가고, 바닥 밑에서 M3×10 자가 탭 나사 4개(앞 핀 2·3번 발, 뒤 선반 밑 2)로 조임 - 나사만으로 떼었다 붙였다 할 수 있고, 본드(MS 폴리머)를 같이 바르면 더 단단함",
+   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 암 도브테일 홈은 45° 지붕). A16: 밸런스 레일은 따로 출력(03 밸런스레일) - 바닥틀에는 레일 양 끝벽·봉 끝 기둥과 레일 받침 2곳(z5~8.6, 앞뒤 턱, M3×6 자리 Ø2.5)만 남음. 80 × 120 기판 자리 x22.25~142.25 × y93.3~173.3: 받침 리브 z5~7.0(앞은 리본 틈 x59.5~81.5, 레일 밑은 배선 틈 x92~114)와 둘레 턱 z8.5(틈 0.3). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 레버틀을 바닥틀에 얹을 때: 핀 발이 바닥틀의 홈 둑 사이에 들어가고, 바닥 밑에서 M3×10 자가 탭 나사 4개(핀 2·4번 발 y186, 뒤 선반 밑 2)로 조임 - 나사만으로 떼었다 붙였다 할 수 있고, 본드(MS 폴리머)를 같이 바르면 더 단단함",
    "ids": [
     "O1-FRAME",
     "O2-FRAME",
@@ -751,10 +751,10 @@
     67.85,
     67.5
    ],
-   "volume_cm3": 143.33,
-   "mass_g_solid_petg": 182.0,
+   "volume_cm3": 142.64,
+   "mass_g_solid_petg": 181.1,
    "material": "PETG 회색",
-   "note": "뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 67.5",
+   "note": "뒷벽 바깥면(y212)을 베드에 눕혀 출력 - 핀·윗판·선반이 모두 세워진 벽이 되어 서포트 없음 (A12). 윗판↔핀 이음이 한 층 안에 있어 층간이 아님(옛 바로 세운 출력보다 강함). 핀 보스 구멍 Ø3.9 눈물방울(뾰족 끝이 위) → Ø4.0 드릴. 넓은 첫 층이라 문 닫고 베드 70~80 °C, 모서리가 뜨면 브림 3 mm. 높이 67.5. A16: 핀 2·4번은 기판 위(y174.9 앞)에서 밑변이 z9.5, F|F# 핀은 제로·USB 플러그 위로 z18부터",
    "ids": [
     "O1-CAGE",
     "O2-CAGE",
@@ -765,6 +765,32 @@
     "O7-CAGE"
    ],
    "name_ko": "프레임 레버틀 모듈",
+   "extra": false
+  },
+  {
+   "file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "name": "밸런스레일",
+   "qty": 7,
+   "folder": "03_프레임",
+   "size_mm": [
+    161.6,
+    12.2,
+    11.9
+   ],
+   "volume_cm3": 19.59,
+   "mass_g_solid_petg": 24.9,
+   "material": "PETG 회색",
+   "note": "밑면(z8.6)을 베드에 바로 세워 출력, 서포트 없음 (A16: 봉 받침 판·밸런스 핀 구멍·나사 자리가 모두 위로 열림). 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 80 × 120 제어 기판을 바닥틀 자리에 놓은 뒤 양 끝벽 사이(틈 0.15)·받침 턱 사이에 내려놓고, 양 끝의 깊은 구멍(Ø6.2, 바닥 z10.1)으로 M3×6(i059) 2개를 받침에 자가 탭 - 레일 밑면이 기판의 빈 띠(y132.3~144.5)를 눌러 기판도 같이 잡힘",
+   "ids": [
+    "O1-RAIL",
+    "O2-RAIL",
+    "O3-RAIL",
+    "O4-RAIL",
+    "O5-RAIL",
+    "O6-RAIL",
+    "O7-RAIL"
+   ],
+   "name_ko": "밸런스레일",
    "extra": false
   },
   {
@@ -1190,7 +1216,7 @@
    "volume_cm3": 244.48,
    "mass_g_solid_petg": 310.5,
    "material": "PETG 회색",
-   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
+   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
    "ids": [
     "EL-FRAME"
    ],
@@ -1330,7 +1356,7 @@
    "volume_cm3": 239.19,
    "mass_g_solid_petg": 303.8,
    "material": "PETG 회색",
-   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). . 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
+   "note": "바로 세워(바닥면을 베드에) 출력, 서포트 없음 (A13: 천장이 없음 - 밸런스 레일 밑 리본 길은 40° 뾰족 지붕, 암 도브테일 홈은 45° 지붕, 볼의 잭 홈·선 홈은 45° 지붕, 너트 홈은 90° V 지붕). 가이드 탭 자리(깊이 5.3, 둘레 틈 0.15)에 가이드 탭을 순간접착제로. 밸런스 핀 구멍 Ø1.95(막힌 z11.3)는 Ø1.9~2.0 드릴로 다듬고 핀 압입. 레버틀을 바닥틀에 얹을 때: 끝 핀·윗판 끝·봉 보스·뒷벽 끝이 볼 안쪽 면의 홈(깊이 약 1.1)에 들어가고, 안쪽 핀 발은 바닥틀 홈 둑 사이에 들어감 - 볼 홈 면과 바닥에 MS 폴리머를 발라 붙임. 볼(cheek)은 속이 꽉 찬 덩어리: 벽 3줄 + 채움 15 % gyroid",
    "ids": [
     "ER-FRAME"
    ],
@@ -2572,28 +2598,6 @@
    "variant": true
   },
   {
-   "file": "stl/print/09_기판지그/P-MB_제어기판지그_MB7장__1개.stl",
-   "name": "P-MB_제어기판지그_MB7장",
-   "qty": 1,
-   "folder": "09_기판지그",
-   "size_mm": [
-    70.0,
-    50.0,
-    6.2
-   ],
-   "volume_cm3": 16.91,
-   "mass_g_solid_petg": 21.5,
-   "material": "PETG",
-   "note": "제어 기판 MB 7장을 BE163에서 자르고 뚫는 지그 (악기당 1개): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 홈 창 2.8 × 26.5의 세 변도 긋기, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
-   "ids": [],
-   "name_ko": "P-MB 제어기판지그 MB7장",
-   "variant": true,
-   "extra": false,
-   "pcbjig": "P-MB",
-   "mass_g_print_est": 13.5,
-   "print_min_est": 24.0
-  },
-  {
    "file": "stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl",
    "name": "P-PED_페달기판지그_PED1장",
    "qty": 1,
@@ -2606,7 +2610,7 @@
    "volume_cm3": 17.28,
    "mass_g_solid_petg": 21.9,
    "material": "PETG",
-   "note": "PED 페달 보드 1장용 지그: MB 지그와 같은 방법 (홈 없음), 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2 (cad/jigs/README.md '기판 지그'). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
+   "note": "PED 페달 보드 1장용 지그: 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
    "ids": [],
    "name_ko": "P-PED 페달기판지그 PED1장",
    "variant": true,
@@ -5369,7 +5373,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"
+   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일; A16 밸런스 레일은 따로)"
   },
   {
    "id": "O1-CAGE",
@@ -5390,6 +5394,26 @@
    "print_file": "stl/print/03_프레임/프레임_레버틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
    "note": "A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"
+  },
+  {
+   "id": "O1-RAIL",
+   "name_ko": "밸런스 레일 (모듈, 기판 위)",
+   "name_en": "balance rail (module, laid on the control board)",
+   "kind": "print",
+   "group": "O1 프레임",
+   "bbox": [
+    48.45,
+    132.3,
+    8.6,
+    210.05,
+    144.5,
+    20.5
+   ],
+   "color": "#9aa3ad",
+   "material": "PETG 회색",
+   "print_file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "source": "key-action-v4/model/geometry.json (r4.5)",
+   "note": "A16 (2026-10-31): 옛 바닥틀의 밸런스 레일을 떼어 따로 출력 - 윗면·봉 받침·밸런스 핀 자리는 그대로, 밑면만 z8.6(기판 윗면). 높이 10.4 (봉 받침 판 끝 z20.5까지 11.9)"
   },
   {
    "id": "O1-TAB-C",
@@ -6432,46 +6456,6 @@
    "note": ""
   },
   {
-   "id": "O1-B-controlboardscrewM3x6headD57",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O1 구매품",
-   "bbox": [
-    94.25,
-    146.255,
-    4.6,
-    99.75,
-    151.745,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
-   "id": "O1-B-controlboardscrewM3x6headD57-2",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O1 구매품",
-   "bbox": [
-    158.75,
-    189.755,
-    4.6,
-    164.25,
-    195.245,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
    "id": "O1-B-leverrodD4SUS304x151629",
    "name_ko": "레버 봉 SUS304 Ø4 (환봉 i067, 161.4 절단)",
    "name_en": "lever rod D4 SUS304 (x1.5-162.9)",
@@ -6732,6 +6716,46 @@
    "note": ""
   },
   {
+   "id": "O1-RAILSCREW1",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O1 구매품",
+   "bbox": [
+    55.35,
+    137.75,
+    4.1,
+    61.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
+   "id": "O1-RAILSCREW2",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O1 구매품",
+   "bbox": [
+    198.35,
+    137.75,
+    4.1,
+    204.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
    "id": "O1-EVA",
    "name_ko": "EVA 고밀도 폼 3T 바닥 (i061)",
    "name_en": "EVA bottom sheet 3T",
@@ -6749,7 +6773,7 @@
    "material": "",
    "print_file": null,
    "source": "S01 (DESIGN 5); BOM i061",
-   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y160.5, x123.9 y160.5)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y186.0, x123.9 y186.0)도 뚫음 (A16: 핀 나사 2곳은 y186). 기판 자리 구멍은 없음 (A16: 기판은 바닥틀 위, 밸런스 레일 밑)"
   },
   {
    "id": "O2-KEY-C",
@@ -9169,7 +9193,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"
+   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일; A16 밸런스 레일은 따로)"
   },
   {
    "id": "O2-CAGE",
@@ -9190,6 +9214,26 @@
    "print_file": "stl/print/03_프레임/프레임_레버틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
    "note": "A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"
+  },
+  {
+   "id": "O2-RAIL",
+   "name_ko": "밸런스 레일 (모듈, 기판 위)",
+   "name_en": "balance rail (module, laid on the control board)",
+   "kind": "print",
+   "group": "O2 프레임",
+   "bbox": [
+    212.95,
+    132.3,
+    8.6,
+    374.55,
+    144.5,
+    20.5
+   ],
+   "color": "#9aa3ad",
+   "material": "PETG 회색",
+   "print_file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "source": "key-action-v4/model/geometry.json (r4.5)",
+   "note": "A16 (2026-10-31): 옛 바닥틀의 밸런스 레일을 떼어 따로 출력 - 윗면·봉 받침·밸런스 핀 자리는 그대로, 밑면만 z8.6(기판 윗면). 높이 10.4 (봉 받침 판 끝 z20.5까지 11.9)"
   },
   {
    "id": "O2-TAB-C",
@@ -10232,46 +10276,6 @@
    "note": ""
   },
   {
-   "id": "O2-B-controlboardscrewM3x6headD57",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O2 구매품",
-   "bbox": [
-    258.75,
-    146.255,
-    4.6,
-    264.25,
-    151.745,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
-   "id": "O2-B-controlboardscrewM3x6headD57-2",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O2 구매품",
-   "bbox": [
-    323.25,
-    189.755,
-    4.6,
-    328.75,
-    195.245,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
    "id": "O2-B-leverrodD4SUS304x151629",
    "name_ko": "레버 봉 SUS304 Ø4 (환봉 i067, 161.4 절단)",
    "name_en": "lever rod D4 SUS304 (x1.5-162.9)",
@@ -10532,6 +10536,46 @@
    "note": ""
   },
   {
+   "id": "O2-RAILSCREW1",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O2 구매품",
+   "bbox": [
+    219.85,
+    137.75,
+    4.1,
+    225.55,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
+   "id": "O2-RAILSCREW2",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O2 구매품",
+   "bbox": [
+    362.85,
+    137.75,
+    4.1,
+    368.55,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
    "id": "O2-EVA",
    "name_ko": "EVA 고밀도 폼 3T 바닥 (i061)",
    "name_en": "EVA bottom sheet 3T",
@@ -10549,7 +10593,7 @@
    "material": "",
    "print_file": null,
    "source": "S01 (DESIGN 5); BOM i061",
-   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y160.5, x123.9 y160.5)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y186.0, x123.9 y186.0)도 뚫음 (A16: 핀 나사 2곳은 y186). 기판 자리 구멍은 없음 (A16: 기판은 바닥틀 위, 밸런스 레일 밑)"
   },
   {
    "id": "O3-KEY-C",
@@ -12969,7 +13013,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"
+   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일; A16 밸런스 레일은 따로)"
   },
   {
    "id": "O3-CAGE",
@@ -12990,6 +13034,26 @@
    "print_file": "stl/print/03_프레임/프레임_레버틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
    "note": "A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"
+  },
+  {
+   "id": "O3-RAIL",
+   "name_ko": "밸런스 레일 (모듈, 기판 위)",
+   "name_en": "balance rail (module, laid on the control board)",
+   "kind": "print",
+   "group": "O3 프레임",
+   "bbox": [
+    377.45,
+    132.3,
+    8.6,
+    539.05,
+    144.5,
+    20.5
+   ],
+   "color": "#9aa3ad",
+   "material": "PETG 회색",
+   "print_file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "source": "key-action-v4/model/geometry.json (r4.5)",
+   "note": "A16 (2026-10-31): 옛 바닥틀의 밸런스 레일을 떼어 따로 출력 - 윗면·봉 받침·밸런스 핀 자리는 그대로, 밑면만 z8.6(기판 윗면). 높이 10.4 (봉 받침 판 끝 z20.5까지 11.9)"
   },
   {
    "id": "O3-TAB-C",
@@ -14032,46 +14096,6 @@
    "note": ""
   },
   {
-   "id": "O3-B-controlboardscrewM3x6headD57",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O3 구매품",
-   "bbox": [
-    423.25,
-    146.255,
-    4.6,
-    428.75,
-    151.745,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
-   "id": "O3-B-controlboardscrewM3x6headD57-2",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O3 구매품",
-   "bbox": [
-    487.75,
-    189.755,
-    4.6,
-    493.25,
-    195.245,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
    "id": "O3-B-leverrodD4SUS304x151629",
    "name_ko": "레버 봉 SUS304 Ø4 (환봉 i067, 161.4 절단)",
    "name_en": "lever rod D4 SUS304 (x1.5-162.9)",
@@ -14332,6 +14356,46 @@
    "note": ""
   },
   {
+   "id": "O3-RAILSCREW1",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O3 구매품",
+   "bbox": [
+    384.35,
+    137.75,
+    4.1,
+    390.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
+   "id": "O3-RAILSCREW2",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O3 구매품",
+   "bbox": [
+    527.35,
+    137.75,
+    4.1,
+    533.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
    "id": "O3-EVA",
    "name_ko": "EVA 고밀도 폼 3T 바닥 (i061)",
    "name_en": "EVA bottom sheet 3T",
@@ -14349,7 +14413,7 @@
    "material": "",
    "print_file": null,
    "source": "S01 (DESIGN 5); BOM i061",
-   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y160.5, x123.9 y160.5)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y186.0, x123.9 y186.0)도 뚫음 (A16: 핀 나사 2곳은 y186). 기판 자리 구멍은 없음 (A16: 기판은 바닥틀 위, 밸런스 레일 밑)"
   },
   {
    "id": "O4-KEY-C",
@@ -16769,7 +16833,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"
+   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일; A16 밸런스 레일은 따로)"
   },
   {
    "id": "O4-CAGE",
@@ -16790,6 +16854,26 @@
    "print_file": "stl/print/03_프레임/프레임_레버틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
    "note": "A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"
+  },
+  {
+   "id": "O4-RAIL",
+   "name_ko": "밸런스 레일 (모듈, 기판 위)",
+   "name_en": "balance rail (module, laid on the control board)",
+   "kind": "print",
+   "group": "O4 프레임",
+   "bbox": [
+    541.95,
+    132.3,
+    8.6,
+    703.55,
+    144.5,
+    20.5
+   ],
+   "color": "#9aa3ad",
+   "material": "PETG 회색",
+   "print_file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "source": "key-action-v4/model/geometry.json (r4.5)",
+   "note": "A16 (2026-10-31): 옛 바닥틀의 밸런스 레일을 떼어 따로 출력 - 윗면·봉 받침·밸런스 핀 자리는 그대로, 밑면만 z8.6(기판 윗면). 높이 10.4 (봉 받침 판 끝 z20.5까지 11.9)"
   },
   {
    "id": "O4-TAB-C",
@@ -17832,46 +17916,6 @@
    "note": ""
   },
   {
-   "id": "O4-B-controlboardscrewM3x6headD57",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O4 구매품",
-   "bbox": [
-    587.75,
-    146.255,
-    4.6,
-    593.25,
-    151.745,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
-   "id": "O4-B-controlboardscrewM3x6headD57-2",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O4 구매품",
-   "bbox": [
-    652.25,
-    189.755,
-    4.6,
-    657.75,
-    195.245,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
    "id": "O4-B-leverrodD4SUS304x151629",
    "name_ko": "레버 봉 SUS304 Ø4 (환봉 i067, 161.4 절단)",
    "name_en": "lever rod D4 SUS304 (x1.5-162.9)",
@@ -18132,6 +18176,46 @@
    "note": ""
   },
   {
+   "id": "O4-RAILSCREW1",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O4 구매품",
+   "bbox": [
+    548.85,
+    137.75,
+    4.1,
+    554.55,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
+   "id": "O4-RAILSCREW2",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O4 구매품",
+   "bbox": [
+    691.85,
+    137.75,
+    4.1,
+    697.55,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
    "id": "O4-EVA",
    "name_ko": "EVA 고밀도 폼 3T 바닥 (i061)",
    "name_en": "EVA bottom sheet 3T",
@@ -18149,7 +18233,7 @@
    "material": "",
    "print_file": null,
    "source": "S01 (DESIGN 5); BOM i061",
-   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y160.5, x123.9 y160.5)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y186.0, x123.9 y186.0)도 뚫음 (A16: 핀 나사 2곳은 y186). 기판 자리 구멍은 없음 (A16: 기판은 바닥틀 위, 밸런스 레일 밑)"
   },
   {
    "id": "O5-KEY-C",
@@ -20569,7 +20653,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"
+   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일; A16 밸런스 레일은 따로)"
   },
   {
    "id": "O5-CAGE",
@@ -20590,6 +20674,26 @@
    "print_file": "stl/print/03_프레임/프레임_레버틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
    "note": "A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"
+  },
+  {
+   "id": "O5-RAIL",
+   "name_ko": "밸런스 레일 (모듈, 기판 위)",
+   "name_en": "balance rail (module, laid on the control board)",
+   "kind": "print",
+   "group": "O5 프레임",
+   "bbox": [
+    706.45,
+    132.3,
+    8.6,
+    868.05,
+    144.5,
+    20.5
+   ],
+   "color": "#9aa3ad",
+   "material": "PETG 회색",
+   "print_file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "source": "key-action-v4/model/geometry.json (r4.5)",
+   "note": "A16 (2026-10-31): 옛 바닥틀의 밸런스 레일을 떼어 따로 출력 - 윗면·봉 받침·밸런스 핀 자리는 그대로, 밑면만 z8.6(기판 윗면). 높이 10.4 (봉 받침 판 끝 z20.5까지 11.9)"
   },
   {
    "id": "O5-TAB-C",
@@ -21632,46 +21736,6 @@
    "note": ""
   },
   {
-   "id": "O5-B-controlboardscrewM3x6headD57",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O5 구매품",
-   "bbox": [
-    752.25,
-    146.255,
-    4.6,
-    757.75,
-    151.745,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
-   "id": "O5-B-controlboardscrewM3x6headD57-2",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O5 구매품",
-   "bbox": [
-    816.75,
-    189.755,
-    4.6,
-    822.25,
-    195.245,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
    "id": "O5-B-leverrodD4SUS304x151629",
    "name_ko": "레버 봉 SUS304 Ø4 (환봉 i067, 161.4 절단)",
    "name_en": "lever rod D4 SUS304 (x1.5-162.9)",
@@ -21932,6 +21996,46 @@
    "note": ""
   },
   {
+   "id": "O5-RAILSCREW1",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O5 구매품",
+   "bbox": [
+    713.35,
+    137.75,
+    4.1,
+    719.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
+   "id": "O5-RAILSCREW2",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O5 구매품",
+   "bbox": [
+    856.35,
+    137.75,
+    4.1,
+    862.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
    "id": "O5-EVA",
    "name_ko": "EVA 고밀도 폼 3T 바닥 (i061)",
    "name_en": "EVA bottom sheet 3T",
@@ -21949,7 +22053,7 @@
    "material": "",
    "print_file": null,
    "source": "S01 (DESIGN 5); BOM i061",
-   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y160.5, x123.9 y160.5)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y186.0, x123.9 y186.0)도 뚫음 (A16: 핀 나사 2곳은 y186). 기판 자리 구멍은 없음 (A16: 기판은 바닥틀 위, 밸런스 레일 밑)"
   },
   {
    "id": "O6-KEY-C",
@@ -24369,7 +24473,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"
+   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일; A16 밸런스 레일은 따로)"
   },
   {
    "id": "O6-CAGE",
@@ -24390,6 +24494,26 @@
    "print_file": "stl/print/03_프레임/프레임_레버틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
    "note": "A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"
+  },
+  {
+   "id": "O6-RAIL",
+   "name_ko": "밸런스 레일 (모듈, 기판 위)",
+   "name_en": "balance rail (module, laid on the control board)",
+   "kind": "print",
+   "group": "O6 프레임",
+   "bbox": [
+    870.95,
+    132.3,
+    8.6,
+    1032.55,
+    144.5,
+    20.5
+   ],
+   "color": "#9aa3ad",
+   "material": "PETG 회색",
+   "print_file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "source": "key-action-v4/model/geometry.json (r4.5)",
+   "note": "A16 (2026-10-31): 옛 바닥틀의 밸런스 레일을 떼어 따로 출력 - 윗면·봉 받침·밸런스 핀 자리는 그대로, 밑면만 z8.6(기판 윗면). 높이 10.4 (봉 받침 판 끝 z20.5까지 11.9)"
   },
   {
    "id": "O6-TAB-C",
@@ -25432,46 +25556,6 @@
    "note": ""
   },
   {
-   "id": "O6-B-controlboardscrewM3x6headD57",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O6 구매품",
-   "bbox": [
-    916.75,
-    146.255,
-    4.6,
-    922.25,
-    151.745,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
-   "id": "O6-B-controlboardscrewM3x6headD57-2",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O6 구매품",
-   "bbox": [
-    981.25,
-    189.755,
-    4.6,
-    986.75,
-    195.245,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
    "id": "O6-B-leverrodD4SUS304x151629",
    "name_ko": "레버 봉 SUS304 Ø4 (환봉 i067, 161.4 절단)",
    "name_en": "lever rod D4 SUS304 (x1.5-162.9)",
@@ -25732,6 +25816,46 @@
    "note": ""
   },
   {
+   "id": "O6-RAILSCREW1",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O6 구매품",
+   "bbox": [
+    877.85,
+    137.75,
+    4.1,
+    883.55,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
+   "id": "O6-RAILSCREW2",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O6 구매품",
+   "bbox": [
+    1020.85,
+    137.75,
+    4.1,
+    1026.55,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
    "id": "O6-EVA",
    "name_ko": "EVA 고밀도 폼 3T 바닥 (i061)",
    "name_en": "EVA bottom sheet 3T",
@@ -25749,7 +25873,7 @@
    "material": "",
    "print_file": null,
    "source": "S01 (DESIGN 5); BOM i061",
-   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y160.5, x123.9 y160.5)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y186.0, x123.9 y186.0)도 뚫음 (A16: 핀 나사 2곳은 y186). 기판 자리 구멍은 없음 (A16: 기판은 바닥틀 위, 밸런스 레일 밑)"
   },
   {
    "id": "O7-KEY-C",
@@ -28169,7 +28293,7 @@
    "material": "PETG 회색",
    "print_file": "stl/print/03_프레임/프레임_바닥틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일·밸런스 레일)"
+   "note": "A12: 옛 한 몸 프레임의 아래 반쪽 (바닥·레일; A16 밸런스 레일은 따로)"
   },
   {
    "id": "O7-CAGE",
@@ -28190,6 +28314,26 @@
    "print_file": "stl/print/03_프레임/프레임_레버틀_모듈__7개.stl",
    "source": "key-action-v4/model/geometry.json (r4.5)",
    "note": "A12: 옛 한 몸 프레임의 위 반쪽 (윗판·핀·뒷벽·선반)"
+  },
+  {
+   "id": "O7-RAIL",
+   "name_ko": "밸런스 레일 (모듈, 기판 위)",
+   "name_en": "balance rail (module, laid on the control board)",
+   "kind": "print",
+   "group": "O7 프레임",
+   "bbox": [
+    1035.45,
+    132.3,
+    8.6,
+    1197.05,
+    144.5,
+    20.5
+   ],
+   "color": "#9aa3ad",
+   "material": "PETG 회색",
+   "print_file": "stl/print/03_프레임/밸런스레일__7개.stl",
+   "source": "key-action-v4/model/geometry.json (r4.5)",
+   "note": "A16 (2026-10-31): 옛 바닥틀의 밸런스 레일을 떼어 따로 출력 - 윗면·봉 받침·밸런스 핀 자리는 그대로, 밑면만 z8.6(기판 윗면). 높이 10.4 (봉 받침 판 끝 z20.5까지 11.9)"
   },
   {
    "id": "O7-TAB-C",
@@ -29232,46 +29376,6 @@
    "note": ""
   },
   {
-   "id": "O7-B-controlboardscrewM3x6headD57",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O7 구매품",
-   "bbox": [
-    1081.25,
-    146.255,
-    4.6,
-    1086.75,
-    151.745,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
-   "id": "O7-B-controlboardscrewM3x6headD57-2",
-   "name_ko": "스텐 렌치볼트 M3 × 6 (제어 기판, i059)",
-   "name_en": "control-board screw M3x6 head D5.7 x 3.0 envelope (from below, under the board)",
-   "kind": "bought",
-   "group": "O7 구매품",
-   "bbox": [
-    1145.75,
-    189.755,
-    4.6,
-    1151.25,
-    195.245,
-    13.6
-   ],
-   "color": "#c0c6cc",
-   "material": "",
-   "print_file": null,
-   "source": "key-action-v4/model/geometry.json (r4.5)",
-   "note": ""
-  },
-  {
    "id": "O7-B-leverrodD4SUS304x151629",
    "name_ko": "레버 봉 SUS304 Ø4 (환봉 i067, 161.4 절단)",
    "name_en": "lever rod D4 SUS304 (x1.5-162.9)",
@@ -29532,6 +29636,46 @@
    "note": ""
   },
   {
+   "id": "O7-RAILSCREW1",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O7 구매품",
+   "bbox": [
+    1042.35,
+    137.75,
+    4.1,
+    1048.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
+   "id": "O7-RAILSCREW2",
+   "name_ko": "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)",
+   "name_en": "M3x6 button head screw (balance rail)",
+   "kind": "bought",
+   "group": "O7 구매품",
+   "bbox": [
+    1185.35,
+    137.75,
+    4.1,
+    1191.05,
+    143.45,
+    11.75
+   ],
+   "color": "#c0c6cc",
+   "material": "",
+   "print_file": null,
+   "source": "keyaction.py A16 rail_screws; BOM i059",
+   "note": "레일 양 끝의 깊은 구멍 Ø6.2(바닥 z10.1)에 머리, 레일 1.5 + 받침·바닥 4.5 물림 (끝 z4.1, 바닥 밑면 z3에서 1.1)"
+  },
+  {
    "id": "O7-EVA",
    "name_ko": "EVA 고밀도 폼 3T 바닥 (i061)",
    "name_en": "EVA bottom sheet 3T",
@@ -29549,7 +29693,7 @@
    "material": "",
    "print_file": null,
    "source": "S01 (DESIGN 5); BOM i061",
-   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y160.5, x123.9 y160.5)도 뚫음. A13: 기판 자리 구멍은 없음 (바닥틀이 막혀 기판은 위에서)"
+   "note": "163.5 × 211, 왼쪽 끝 암 도브테일 홈 밑 두 곳(x0.5~4.6 · y5.9~16.1, y197.4~207.6)을 오려 냄 — 이웃 모듈의 수 꼬리가 밑에서 들어감. A12: 레버틀 나사 머리 자리 Ø7 4곳 (x29.0 y203.0, x143.0 y203.0, x41.7 y186.0, x123.9 y186.0)도 뚫음 (A16: 핀 나사 2곳은 y186). 기판 자리 구멍은 없음 (A16: 기판은 바닥틀 위, 밸런스 레일 밑)"
   },
   {
    "id": "EL-KEY-A0",
@@ -34133,23 +34277,23 @@
   },
   {
    "id": "O1-E-MB",
-   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O1",
-   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O1",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) O1",
+   "name_en": "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) O1",
    "kind": "electronics",
    "group": "O1 전자부",
    "bbox": [
-    94.25,
-    145.5,
-    9.0,
-    164.25,
-    195.5,
-    10.6
+    69.25,
+    93.3,
+    7.0,
+    189.25,
+    173.3,
+    8.6
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
+   "source": "spec/electronics_modules.json mb_board; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
+   "note": "2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O1-E-SB",
@@ -34178,18 +34322,18 @@
    "kind": "electronics",
    "group": "O1 전자부",
    "bbox": [
-    122.14,
-    172.0,
-    10.6,
-    140.14,
-    196.8,
-    16.3
+    121.52,
+    145.68,
+    9.8,
+    139.52,
+    170.48,
+    15.5
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json zero; key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
-   "note": "추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
+   "source": "spec/electronics_modules.json zero; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
+   "note": "A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x83.38 z13.7; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
   },
   {
    "id": "O1-E-MUX",
@@ -34198,17 +34342,17 @@
    "kind": "electronics",
    "group": "O1 전자부",
    "bbox": [
-    101.93,
-    152.0,
-    10.6,
-    119.71,
-    192.64,
-    14.7
+    129.25,
+    100.28,
+    8.6,
+    169.89,
+    118.06,
+    12.7
    ],
    "color": "#2f7d4f",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json mux; key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "spec/electronics_modules.json mux; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "note": "추정: 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented)"
   },
   {
@@ -34218,37 +34362,37 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    107.01,
+    106.76,
     71.18,
     5.0,
     127.64,
-    151.63,
-    9.0
+    102.45,
+    7.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ribbon; key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
-   "note": "남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)"
+   "source": "spec/electronics_modules.json ribbon; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "note": "남는 길이(자른 길이 70 − 경로 30)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
   },
   {
    "id": "O1-C-EXT",
-   "name_ko": "EXT 연장선 W403 (L66 모듈 쪽 150 mm, 6심 22 AWG)",
+   "name_ko": "EXT 연장선 W403 (L66 모듈 쪽 160 mm, 6심)",
    "name_en": "EXT lead W403",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
     69.4,
-    192.9,
+    166.99,
     0.0,
-    154.64,
+    159.5,
     232.5,
-    10.7
+    10.1
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ext_lead + xh_left/xh_right (mated XH on the duct floor); hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 6; circuit_r43.ext_path (under_board 4.0, under_plug 5.7); circuit_r44.usb.wall_open [74,94,5,21]; cables.csv W403/W413; hardware/bom/final-bom/data.json L66; spec/body_L2.json cable_duct.other_leads (O1/O7 EXT leads 그대로 통로 바닥)",
+   "source": "spec/electronics_modules.json ext_lead + xh_left/xh_right (mated XH on the duct floor); user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); circuit_r44.usb.wall_open [74,94,5,21]; cables.csv W403/W413; hardware/bom/final-bom/data.json L66; spec/body_L2.json cable_duct.other_leads (O1/O7 EXT leads 그대로 통로 바닥)",
    "note": "추정: 묶음 단면 약 8×2와 띠 안의 x 위치 (spec assumed; spec 상자 y195.4~가 MB 끝 y195.5와 0.1 겹쳐 MB 자리를 뺌); 뒷벽 구멍(y212)부터 XH 짝까지는 지름 3 선으로 L2 통로(y212~241, 스피커 밑) 바닥(z0~3)에 눕힘 - 경로는 보기용"
   },
   {
@@ -34258,8 +34402,8 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    124.75,
-    196.8,
+    124.13,
+    170.48,
     8.5,
     792.5,
     282.0,
@@ -34268,28 +34412,28 @@
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json usb_plug (y196.8~221.8, 축 z14.5); spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O1 USB-C (W201): path 769 mm, 1.0 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
-   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z10.25로 옮긴 뒤 묶음 y237.5의 3층 z10.25로 들어가 허브 포트 x784.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 680.1 + 허브 플러그 35 = 740.1 mm (사양 769, 표준 1.0 m, 여유 260 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
+   "source": "spec/electronics_modules.json usb_plug (y170.5~195.5, 축 z13.7, A16) ; spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O1 USB-C (W201): path 769 mm, 1.0 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
+   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z10.25로 옮긴 뒤 묶음 y237.5의 3층 z10.25로 들어가 허브 포트 x784.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 706.9 + 허브 플러그 35 = 766.9 mm (사양 769, 표준 1.0 m, 여유 233 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
   },
   {
    "id": "O2-E-MB",
-   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O2",
-   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O2",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) O2",
+   "name_en": "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) O2",
    "kind": "electronics",
    "group": "O2 전자부",
    "bbox": [
-    258.75,
-    145.5,
-    9.0,
-    328.75,
-    195.5,
-    10.6
+    233.75,
+    93.3,
+    7.0,
+    353.75,
+    173.3,
+    8.6
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
+   "source": "spec/electronics_modules.json mb_board; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
+   "note": "2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O2-E-SB",
@@ -34318,18 +34462,18 @@
    "kind": "electronics",
    "group": "O2 전자부",
    "bbox": [
-    286.64,
-    172.0,
-    10.6,
-    304.64,
-    196.8,
-    16.3
+    286.02,
+    145.68,
+    9.8,
+    304.02,
+    170.48,
+    15.5
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json zero; key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
-   "note": "추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
+   "source": "spec/electronics_modules.json zero; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
+   "note": "A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x83.38 z13.7; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
   },
   {
    "id": "O2-E-MUX",
@@ -34338,17 +34482,17 @@
    "kind": "electronics",
    "group": "O2 전자부",
    "bbox": [
-    266.43,
-    152.0,
-    10.6,
-    284.21,
-    192.64,
-    14.7
+    293.75,
+    100.28,
+    8.6,
+    334.39,
+    118.06,
+    12.7
    ],
    "color": "#2f7d4f",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json mux; key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "spec/electronics_modules.json mux; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "note": "추정: 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented)"
   },
   {
@@ -34358,18 +34502,18 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    271.51,
+    271.26,
     71.18,
     5.0,
     292.14,
-    151.63,
-    9.0
+    102.45,
+    7.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ribbon; key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
-   "note": "남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)"
+   "source": "spec/electronics_modules.json ribbon; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "note": "남는 길이(자른 길이 70 − 경로 30)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
   },
   {
    "id": "O2-C-USB",
@@ -34378,8 +34522,8 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    289.25,
-    196.8,
+    288.63,
+    170.48,
     4.5,
     814.5,
     282.0,
@@ -34388,28 +34532,28 @@
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json usb_plug (y196.8~221.8, 축 z14.5); spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O2 USB-C (W202): path 627 mm, 1.0 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
-   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x806.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 542.1 + 허브 플러그 35 = 602.1 mm (사양 627, 표준 1.0 m, 여유 398 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
+   "source": "spec/electronics_modules.json usb_plug (y170.5~195.5, 축 z13.7, A16) ; spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O2 USB-C (W202): path 627 mm, 1.0 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
+   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x806.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 568.8 + 허브 플러그 35 = 628.8 mm (사양 627, 표준 1.0 m, 여유 371 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
   },
   {
    "id": "O3-E-MB",
-   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O3",
-   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O3",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) O3",
+   "name_en": "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) O3",
    "kind": "electronics",
    "group": "O3 전자부",
    "bbox": [
-    423.25,
-    145.5,
-    9.0,
-    493.25,
-    195.5,
-    10.6
+    398.25,
+    93.3,
+    7.0,
+    518.25,
+    173.3,
+    8.6
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
+   "source": "spec/electronics_modules.json mb_board; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
+   "note": "2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O3-E-SB",
@@ -34438,18 +34582,18 @@
    "kind": "electronics",
    "group": "O3 전자부",
    "bbox": [
-    451.14,
-    172.0,
-    10.6,
-    469.14,
-    196.8,
-    16.3
+    450.52,
+    145.68,
+    9.8,
+    468.52,
+    170.48,
+    15.5
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json zero; key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
-   "note": "추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
+   "source": "spec/electronics_modules.json zero; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
+   "note": "A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x83.38 z13.7; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
   },
   {
    "id": "O3-E-MUX",
@@ -34458,17 +34602,17 @@
    "kind": "electronics",
    "group": "O3 전자부",
    "bbox": [
-    430.93,
-    152.0,
-    10.6,
-    448.71,
-    192.64,
-    14.7
+    458.25,
+    100.28,
+    8.6,
+    498.89,
+    118.06,
+    12.7
    ],
    "color": "#2f7d4f",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json mux; key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "spec/electronics_modules.json mux; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "note": "추정: 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented)"
   },
   {
@@ -34478,18 +34622,18 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    436.01,
+    435.76,
     71.18,
     5.0,
     456.64,
-    151.63,
-    9.0
+    102.45,
+    7.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ribbon; key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
-   "note": "남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)"
+   "source": "spec/electronics_modules.json ribbon; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "note": "남는 길이(자른 길이 70 − 경로 30)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
   },
   {
    "id": "O3-C-USB",
@@ -34498,9 +34642,9 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    453.75,
-    196.8,
-    10.7,
+    453.13,
+    170.48,
+    9.9,
     770.5,
     282.0,
     32.5
@@ -34508,28 +34652,28 @@
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json usb_plug (y196.8~221.8, 축 z14.5); spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O3 USB-C (W203): path 418 mm, 0.5 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
-   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z14.25로 옮긴 뒤 묶음 y237.5의 4층 z14.25로 들어가 허브 포트 x762.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 326.4 + 허브 플러그 35 = 386.4 mm (사양 418, 표준 0.5 m, 여유 114 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
+   "source": "spec/electronics_modules.json usb_plug (y170.5~195.5, 축 z13.7, A16) ; spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O3 USB-C (W203): path 418 mm, 0.5 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
+   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z14.25로 옮긴 뒤 묶음 y237.5의 4층 z14.25로 들어가 허브 포트 x762.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 353.3 + 허브 플러그 35 = 413.3 mm (사양 418, 표준 0.5 m, 여유 87 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
   },
   {
    "id": "O4-E-MB",
-   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O4",
-   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O4",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) O4",
+   "name_en": "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) O4",
    "kind": "electronics",
    "group": "O4 전자부",
    "bbox": [
-    587.75,
-    145.5,
-    9.0,
-    657.75,
-    195.5,
-    10.6
+    562.75,
+    93.3,
+    7.0,
+    682.75,
+    173.3,
+    8.6
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
+   "source": "spec/electronics_modules.json mb_board; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
+   "note": "2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O4-E-SB",
@@ -34558,18 +34702,18 @@
    "kind": "electronics",
    "group": "O4 전자부",
    "bbox": [
-    615.64,
-    172.0,
-    10.6,
-    633.64,
-    196.8,
-    16.3
+    615.02,
+    145.68,
+    9.8,
+    633.02,
+    170.48,
+    15.5
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json zero; key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
-   "note": "추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
+   "source": "spec/electronics_modules.json zero; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
+   "note": "A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x83.38 z13.7; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
   },
   {
    "id": "O4-E-MUX",
@@ -34578,17 +34722,17 @@
    "kind": "electronics",
    "group": "O4 전자부",
    "bbox": [
-    595.43,
-    152.0,
-    10.6,
-    613.21,
-    192.64,
-    14.7
+    622.75,
+    100.28,
+    8.6,
+    663.39,
+    118.06,
+    12.7
    ],
    "color": "#2f7d4f",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json mux; key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "spec/electronics_modules.json mux; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "note": "추정: 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented)"
   },
   {
@@ -34598,18 +34742,18 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    600.51,
+    600.26,
     71.18,
     5.0,
     621.14,
-    151.63,
-    9.0
+    102.45,
+    7.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ribbon; key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
-   "note": "남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)"
+   "source": "spec/electronics_modules.json ribbon; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "note": "남는 길이(자른 길이 70 − 경로 30)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
   },
   {
    "id": "O4-C-USB",
@@ -34618,8 +34762,8 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    618.25,
-    196.8,
+    617.63,
+    170.48,
     0.5,
     836.5,
     282.0,
@@ -34628,28 +34772,28 @@
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json usb_plug (y196.8~221.8, 축 z14.5); spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O4 USB-C (W204): path 320 mm, 0.5 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
-   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z2.25로 옮긴 뒤 묶음 y237.5의 1층 z2.25로 들어가 허브 포트 x828.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 240.7 + 허브 플러그 35 = 300.7 mm (사양 320, 표준 0.5 m, 여유 199 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
+   "source": "spec/electronics_modules.json usb_plug (y170.5~195.5, 축 z13.7, A16) ; spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O4 USB-C (W204): path 320 mm, 0.5 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
+   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z2.25로 옮긴 뒤 묶음 y237.5의 1층 z2.25로 들어가 허브 포트 x828.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 267.3 + 허브 플러그 35 = 327.3 mm (사양 320, 표준 0.5 m, 여유 173 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
   },
   {
    "id": "O5-E-MB",
-   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O5",
-   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O5",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) O5",
+   "name_en": "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) O5",
    "kind": "electronics",
    "group": "O5 전자부",
    "bbox": [
-    752.25,
-    145.5,
-    9.0,
-    822.25,
-    195.5,
-    10.6
+    727.25,
+    93.3,
+    7.0,
+    847.25,
+    173.3,
+    8.6
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
+   "source": "spec/electronics_modules.json mb_board; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
+   "note": "2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O5-E-SB",
@@ -34678,18 +34822,18 @@
    "kind": "electronics",
    "group": "O5 전자부",
    "bbox": [
-    780.14,
-    172.0,
-    10.6,
-    798.14,
-    196.8,
-    16.3
+    779.52,
+    145.68,
+    9.8,
+    797.52,
+    170.48,
+    15.5
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json zero; key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
-   "note": "추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
+   "source": "spec/electronics_modules.json zero; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
+   "note": "A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x83.38 z13.7; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
   },
   {
    "id": "O5-E-MUX",
@@ -34698,17 +34842,17 @@
    "kind": "electronics",
    "group": "O5 전자부",
    "bbox": [
-    759.93,
-    152.0,
-    10.6,
-    777.71,
-    192.64,
-    14.7
+    787.25,
+    100.28,
+    8.6,
+    827.89,
+    118.06,
+    12.7
    ],
    "color": "#2f7d4f",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json mux; key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "spec/electronics_modules.json mux; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "note": "추정: 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented)"
   },
   {
@@ -34718,18 +34862,18 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    765.01,
+    764.76,
     71.18,
     5.0,
     785.64,
-    151.63,
-    9.0
+    102.45,
+    7.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ribbon; key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
-   "note": "남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)"
+   "source": "spec/electronics_modules.json ribbon; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "note": "남는 길이(자른 길이 70 − 경로 30)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
   },
   {
    "id": "O5-C-USB",
@@ -34738,9 +34882,9 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    782.75,
-    196.8,
-    10.7,
+    782.13,
+    170.48,
+    9.9,
     858.5,
     282.0,
     32.5
@@ -34748,28 +34892,28 @@
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json usb_plug (y196.8~221.8, 축 z14.5); spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O5 USB-C (W205): path 177 mm, 0.3 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
-   "note": "사양과 다름(작은 고침): 사양 선 'y236.8·z13 줄'이 아니라 묶음 위 앞쪽 줄 - 묶음에 넣으면 포트에서 위로 빠질 때 O5가 O2·O4 밑이어야 해서 5층이 필요한데 5층째(z18.25)는 J702·동글 3.5 mm 플러그 자리(z17~) 밑에 들어가지 않음; 짧은 선 O5·O6만 따로; 추정: 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x850.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 86.8 + 허브 플러그 35 = 146.8 mm (사양 177, 표준 0.3 m, 여유 153 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
+   "source": "spec/electronics_modules.json usb_plug (y170.5~195.5, 축 z13.7, A16) ; spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O5 USB-C (W205): path 177 mm, 0.3 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
+   "note": "사양과 다름(작은 고침): 사양 선 'y236.8·z13 줄'이 아니라 묶음 위 앞쪽 줄 - 묶음에 넣으면 포트에서 위로 빠질 때 O5가 O2·O4 밑이어야 해서 5층이 필요한데 5층째(z18.25)는 J702·동글 3.5 mm 플러그 자리(z17~) 밑에 들어가지 않음; 짧은 선 O5·O6만 따로; 추정: 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x850.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 114.2 + 허브 플러그 35 = 174.2 mm (사양 177, 표준 0.3 m, 여유 126 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
   },
   {
    "id": "O6-E-MB",
-   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O6",
-   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O6",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) O6",
+   "name_en": "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) O6",
    "kind": "electronics",
    "group": "O6 전자부",
    "bbox": [
-    916.75,
-    145.5,
-    9.0,
-    986.75,
-    195.5,
-    10.6
+    891.75,
+    93.3,
+    7.0,
+    1011.75,
+    173.3,
+    8.6
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
+   "source": "spec/electronics_modules.json mb_board; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
+   "note": "2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O6-E-SB",
@@ -34798,18 +34942,18 @@
    "kind": "electronics",
    "group": "O6 전자부",
    "bbox": [
-    944.64,
-    172.0,
-    10.6,
-    962.64,
-    196.8,
-    16.3
+    944.02,
+    145.68,
+    9.8,
+    962.02,
+    170.48,
+    15.5
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json zero; key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
-   "note": "추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
+   "source": "spec/electronics_modules.json zero; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
+   "note": "A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x83.38 z13.7; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
   },
   {
    "id": "O6-E-MUX",
@@ -34818,17 +34962,17 @@
    "kind": "electronics",
    "group": "O6 전자부",
    "bbox": [
-    924.43,
-    152.0,
-    10.6,
-    942.21,
-    192.64,
-    14.7
+    951.75,
+    100.28,
+    8.6,
+    992.39,
+    118.06,
+    12.7
    ],
    "color": "#2f7d4f",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json mux; key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "spec/electronics_modules.json mux; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "note": "추정: 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented)"
   },
   {
@@ -34838,18 +34982,18 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    929.51,
+    929.26,
     71.18,
     5.0,
     950.14,
-    151.63,
-    9.0
+    102.45,
+    7.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ribbon; key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
-   "note": "남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)"
+   "source": "spec/electronics_modules.json ribbon; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "note": "남는 길이(자른 길이 70 − 경로 30)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
   },
   {
    "id": "O6-C-USB",
@@ -34859,37 +35003,37 @@
    "group": "케이블",
    "bbox": [
     864.5,
-    196.8,
-    10.7,
-    959.75,
+    170.48,
+    9.9,
+    959.13,
     282.0,
     32.5
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json usb_plug (y196.8~221.8, 축 z14.5); spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O6 USB-C (W206): path 197 mm, 0.3 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
-   "note": "사양과 다름(작은 고침): 사양 선 'y236.8·z13 줄'이 아니라 묶음 위 앞쪽 줄 - 묶음에 넣으면 포트에서 위로 빠질 때 O5가 O2·O4 밑이어야 해서 5층이 필요한데 5층째(z18.25)는 J702·동글 3.5 mm 플러그 자리(z17~) 밑에 들어가지 않음; 짧은 선 O5·O6만 따로; 추정: 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x872.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 106.3 + 허브 플러그 35 = 166.3 mm (사양 197, 표준 0.3 m, 여유 134 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
+   "source": "spec/electronics_modules.json usb_plug (y170.5~195.5, 축 z13.7, A16) ; spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O6 USB-C (W206): path 197 mm, 0.3 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
+   "note": "사양과 다름(작은 고침): 사양 선 'y236.8·z13 줄'이 아니라 묶음 위 앞쪽 줄 - 묶음에 넣으면 포트에서 위로 빠질 때 O5가 O2·O4 밑이어야 해서 5층이 필요한데 5층째(z18.25)는 J702·동글 3.5 mm 플러그 자리(z17~) 밑에 들어가지 않음; 짧은 선 O5·O6만 따로; 추정: 케이블 OD 3.5; 짧은 선이라 묶음 위 앞쪽 줄 y226 z24를 달려(묶음 윗면 z16 위 8) 포트 x872.5에서 묶음을 넘어 +y; 길이 = 플러그 25 + 경로 132.5 + 허브 플러그 35 = 192.5 mm (사양 197, 표준 0.3 m, 여유 108 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
   },
   {
    "id": "O7-E-MB",
-   "name_ko": "제어 기판 MB (BE163 양면 만능기판에서 자른 70×50×1.6) O7",
-   "name_en": "control board MB (cut from a Coms BE163 perfboard, 70x50x1.6) O7",
+   "name_ko": "제어 기판 MB (Coms BE163 양면 만능기판 80×120×1.6 통째로) O7",
+   "name_en": "control board MB (a whole Coms BE163 perfboard, 80x120x1.6) O7",
    "kind": "electronics",
    "group": "O7 전자부",
    "bbox": [
-    1081.25,
-    145.5,
-    9.0,
-    1151.25,
-    195.5,
-    10.6
+    1056.25,
+    93.3,
+    7.0,
+    1176.25,
+    173.3,
+    8.6
    ],
    "color": "#c8a45a",
    "material": "FR4 만능기판",
    "print_file": null,
-   "source": "spec/electronics_modules.json mb_board; key-action-v4/model/geometry.json parts \"control board\" / \"control board (behind the fin slot)\" + plan \"control board\", \"stripboard slot (open to the front edge)\"; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 1,8; hardware/bom/final-bom/data.json SE8 specs",
-   "note": "2026-10-07 (사용자): 5×7 기판을 사지 않고 Coms BE163 양면 (80 × 120, 구멍 30 × 42) 한 장에서 두 조각씩 자름 - 출력 지그 09_기판지그 P-MB로 격자에 맞춰 외곽·홈을 긋고 나사 Ø3.2·핀 구멍 Ø3.0을 뚫음 (cad/jigs/README.md); 두께 약 1.6은 받은 판으로 잼"
+   "source": "spec/electronics_modules.json mb_board; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33)",
+   "note": "2026-10-31 (사용자: 80 120 으로 설계를 다시, 기판을 바닥으로 내려도 돼): BE163 80 × 120 한 장을 자르지 않고 모듈 바닥틀 자리에 눕힘 (x22.25~142.25 × y93.3~173.3, 받침 리브 z5~6.5 위, 둘레 턱 틈 0.3) - 따로 출력한 밸런스 레일이 빈 띠 y132.3~144.5를 눌러 잡음, 나사·구멍 없음 (A16); 두께 약 1.6은 받은 판으로 잼"
   },
   {
    "id": "O7-E-SB",
@@ -34918,18 +35062,18 @@
    "kind": "electronics",
    "group": "O7 전자부",
    "bbox": [
-    1109.14,
-    172.0,
-    10.6,
-    1127.14,
-    196.8,
-    16.3
+    1108.52,
+    145.68,
+    9.8,
+    1126.52,
+    170.48,
+    15.5
    ],
    "color": "#2a5caa",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json zero; key-action-v4/model/geometry.json parts \"board part: RP2040-Zero on pin headers (PCB z11.9-12.9, top parts <= z16.3)\", \"board part: USB-C receptacle\"; circuit_r44.zero / usb.rcpt; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) placement table + note 1(△15),3; hardware/pcb/netlist/rp2040_zero_pads.csv; hardware/bom/final-bom/data.json SEV2 18.0x23.5",
-   "note": "추정: 윗면 부품 덩어리 x75.64~92.64 y172.5~189.5 z≤16.3과 밑면 칩 덩어리 z10.6~11.9 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
+   "source": "spec/electronics_modules.json zero; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/netlist/rp2040_zero_pads.csv (pins x1.38 / 16.62, y1.59..21.91 from the USB edge)",
+   "note": "A16: 몰드(2.5)가 그대로인 핀 헤더 위 - PCB z10.6~11.6, USB-C 중심 x83.38 z13.7; 추정: 윗면 부품 덩어리 z≤15.0과 밑면 칩 덩어리 z9.3~10.6 (spec assumed 분할); 핀 헤더 1×9 ×2는 작은 부품이라 뺌"
   },
   {
    "id": "O7-E-MUX",
@@ -34938,17 +35082,17 @@
    "kind": "electronics",
    "group": "O7 전자부",
    "bbox": [
-    1088.93,
-    152.0,
-    10.6,
-    1106.71,
-    192.64,
-    14.7
+    1116.25,
+    100.28,
+    8.6,
+    1156.89,
+    118.06,
+    12.7
    ],
    "color": "#2f7d4f",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json mux; key-action-v4/model/geometry.json parts \"board part: CD74HC4067 module on pin headers (<= z20)\" x54.93..72.71 y152.0..192.64; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) table (channel row x56.20, control row x71.44); hardware/pcb/netlist/wiring_MB.csv (A302.1 y153.27 .. A302.16 y191.37; A302.17 GND y163.43 .. A302.24 SIG y181.21); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
+   "source": "spec/electronics_modules.json mux; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/bom/final-bom/data.json SEV2 PP-A324 40.6 x 17.8, rows 15.24, 2 x D3.3 holes",
    "note": "추정: 헤더 몰드 2.5 높이 (spec assumed: header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented)"
   },
   {
@@ -34958,37 +35102,37 @@
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    1094.01,
+    1093.76,
     71.18,
     5.0,
     1114.64,
-    151.63,
-    9.0
+    102.45,
+    7.0
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ribbon; key-action-v4/model/geometry.json plan \"16-core ribbon SB J201 -> lane (floor, centred x70.48)\", \"ribbon lane under the balance rail (z5-10)\", parts \"board part: J301 16-core ribbon under the board (z5-9)\"; circuit_r44.ribbon; hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B) J201 note; hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 7; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
-   "note": "남는 길이(자른 길이 180 − 경로 85)는 접어 둠, 모델에 없음 (spec note)"
+   "source": "spec/electronics_modules.json ribbon; user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); hardware/pcb/board/BRD-02_sensor_board_placement.svg J201 note; hardware/bom/final-bom/data.json C05 20.32 x 0.89",
+   "note": "남는 길이(자른 길이 70 − 경로 30)는 기판 앞 검은 건반 탭 받침 사이 바닥에 접어 둠, 모델에 없음 (spec note, A16)"
   },
   {
    "id": "O7-C-EXT",
-   "name_ko": "EXT 연장선 W413 (L66 모듈 쪽 150 mm, 6심 22 AWG)",
+   "name_ko": "EXT 연장선 W413 (L66 모듈 쪽 150 mm, 6심)",
    "name_en": "EXT lead W413",
    "kind": "electronics",
    "group": "케이블",
    "bbox": [
-    1116.0,
-    192.9,
+    1118.0,
+    166.99,
     0.0,
     1160.0,
     232.5,
-    10.7
+    10.1
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json ext_lead + xh_left/xh_right (mated XH on the duct floor); hardware/pcb/board/BRD-01_control_board_placement.svg (rev B) note 6; circuit_r43.ext_path (under_board 4.0, under_plug 5.7); circuit_r44.usb.wall_open [74,94,5,21]; cables.csv W403/W413; hardware/bom/final-bom/data.json L66; spec/body_L2.json cable_duct.other_leads (O1/O7 EXT leads 그대로 통로 바닥)",
+   "source": "spec/electronics_modules.json ext_lead + xh_left/xh_right (mated XH on the duct floor); user 2026-10-31 ('80 120 으로 설계를 다시 ... 기판을 바닥으로 내려도 돼'); cad/src/keyaction.py A16 (board pocket on the floor, balance rail printed separately and laid on the board); hardware/pcb/board/BRD-01 (△33); circuit_r44.usb.wall_open [74,94,5,21]; cables.csv W403/W413; hardware/bom/final-bom/data.json L66; spec/body_L2.json cable_duct.other_leads (O1/O7 EXT leads 그대로 통로 바닥)",
    "note": "추정: 묶음 단면 약 8×2와 띠 안의 x 위치 (spec assumed; spec 상자 y195.4~가 MB 끝 y195.5와 0.1 겹쳐 MB 자리를 뺌); 뒷벽 구멍(y212)부터 XH 짝까지는 지름 3 선으로 L2 통로(y212~241, 스피커 밑) 바닥(z0~3)에 눕힘 - 경로는 보기용"
   },
   {
@@ -34999,17 +35143,17 @@
    "group": "케이블",
    "bbox": [
     886.5,
-    196.8,
+    170.48,
     4.5,
-    1124.25,
+    1123.63,
     282.0,
     32.5
    ],
    "color": "#3a3a3a",
    "material": "",
    "print_file": null,
-   "source": "spec/electronics_modules.json usb_plug (y196.8~221.8, 축 z14.5); spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O7 USB-C (W207): path 339 mm, 0.5 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
-   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y221.8에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z14.5 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x894.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 254.6 + 허브 플러그 35 = 314.6 mm (사양 339, 표준 0.5 m, 여유 185 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
+   "source": "spec/electronics_modules.json usb_plug (y170.5~195.5, 축 z13.7, A16) ; spec/body_L2.json cable_duct (통로 y212~241 z0~27, hub ports_x / port_z 28.5 / port_map, cables O7 USB-C (W207): path 339 mm, 0.5 m) + centre_contents Z-HUB-PLUGS (USB-A 플러그+부트 35, y247~282) / Z-HUB-DROPS",
+   "note": "사양과 다름(작은 고침): 사양 선 '플러그 → R15 → y236.8·z13 줄 → 포트 x에서 올라감'은 나란히 달리는 선이 모두 한 자리에 겹침 → 묶음 y237.5 4층(z2.25·6.25·10.25·14.25, 0.5 틈), 굽힘은 통로 깊이 때문에 플러그 뒤 R8, 허브 쪽 R9.5 이하; 추정: 케이블 OD 3.5; 플러그 뒤 y195.5에서 R8로 꺾여 묶음 앞(y229.5)을 x로 달리며 z13.7 → z6.25로 옮긴 뒤 묶음 y237.5의 2층 z6.25로 들어가 허브 포트 x894.5에서 위로 서고 R9.5로 +y (묶음 맨 위라 다른 선을 넘지 않음); 길이 = 플러그 25 + 경로 280.0 + 허브 플러그 35 = 340.0 mm (사양 339, 표준 0.5 m, 여유 160 ≥ 40) - 선은 통로·앞 공간 안에서만 (배기 홈·건반 뒤 2 mm 틈으로 조금 보임), 경로는 보기용 (묶을 때는 끈·벨크로 - 지붕 밑 케이블 집게에는 끼우지 않음)"
   },
   {
    "id": "EL-E-BOARD",
@@ -35349,7 +35493,7 @@
    "material": "",
    "print_file": null,
    "source": "spec/body_L2.json centre_contents CU-E-PEDZERO (x449~467 y244~268.8 z23.1~28.8, USB-C -y); spec/electronics_modules.json zero (same part / stack as the MB)",
-   "note": "추정: MB의 Zero 배치(핀 헤더 1.3 틈)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x458.14 z27.0)"
+   "note": "추정: MB의 Zero 배치(밑면 칩이 기판 위 캡톤에 닿는 쌓임)를 180° 돌려 PED 보드 위에 (USB-C 리셉터클 -y, 중심 x458.14 z27.0)"
   },
   {
    "id": "CU-E-J702BOARD",
