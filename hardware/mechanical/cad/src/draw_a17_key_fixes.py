@@ -137,31 +137,29 @@ for col, a17 in enumerate((False, True)):
     else:
         note(ax, (CX + dx + 1.9, dz + 3.2 + 1.1), (CX + dx + 0.0, 23.6), "실제 ISO 7380: 둥근 머리 Ø5.7 × 1.65\n+ 2 mm 육각 구멍 (렌치 i065)", GRN)
 
-    # ---- 3: the nut slot in the print pose (turned over, bed at the bottom), side section through the axis
+    # ---- 3: the nut slot in the print pose (turned over, bed at the bottom), front section through the axis
     ax = fig.add_subplot(gs[2, col])
     flip = lambda q: (q[0], ZTOP - q[1])
-    draw(ax, k.transform(ROT_A).slice(CX).to_polygons(), KEYC, f=flip)
-    draw(ax, nut().transform(ROT_A).slice(CX).to_polygons(), NUTC, f=flip, z=4)
+    draw(ax, k.transform(ROT_B).slice(-CY).to_polygons(), KEYC, f=flip)
+    draw(ax, nut().transform(ROT_B).slice(-CY).to_polygons(), NUTC, f=flip, z=4)
     ax.axhline(0, color=INK, lw=1.4)
-    ax.text(177.3, 0.5, "베드 (윗면 z43.5를 PEI에, 뒤집어 출력)", fontsize=7.5, color=INK)
-    ys = np.linspace(181.6, 195.0, 9)
-    for y in ys:
-        ax.plot([y, y + (CY - y) * 0.15], [0, ZTOP - 27.5 - 0.05], color="#e3a35a", lw=1.0, zorder=1)
-    ax.text(186.0, 7.2, "꼬리 밑 트리 서포트\n(빌드 플레이트에서만)", fontsize=7.5, color=ORG, ha="center",
+    ax.text(BX0 - 5.6, 0.5, "베드 (윗면 z43.5를 PEI에, 뒤집어 출력)", fontsize=7.5, color=INK)
+    for x in np.linspace(BX0 + 0.4, BX1 - 0.4, 7):
+        ax.plot([x, x + (CX - x) * 0.2], [0, ZTOP - 27.5 - 0.05], color="#e3a35a", lw=1.0, zorder=1)
+    ax.text(CX, 7.2, "꼬리 밑 트리 서포트\n(빌드 플레이트에서만)", fontsize=7.5, color=ORG, ha="center",
             bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="none", alpha=0.85), zorder=3)
     zb = ZTOP - K.A15["slot_z"][0]
-    ax.add_patch(Polygon([(CY - 2.8, zb), (CY + 2.8, zb), (CY + 2.8, zb + 0.2), (CY - 2.8, zb + 0.2)], closed=True, fc=BLUE, ec=BLUE,
-                         zorder=6))
-    note(ax, (CY + 1.6, zb + 0.1), (194.5, 23.4), "홈 천장 = 구멍 없는 0.4 막\n5.6 다리 (A15 그대로)", BLUE)
+    x0 = CX - (K.A17["shoulder"] if a17 else K.A15["slot_end"])
+    ax.add_patch(Polygon([(x0, zb), (BX1, zb), (BX1, zb + 0.2), (x0, zb + 0.2)], closed=True, fc=BLUE, ec=BLUE, zorder=6))
+    note(ax, (CX + 2.6, zb + 0.1), (BX1 + 2.4, 23.4), "홈 천장 = 구멍 없는 0.4 막\n5.6 다리 (A15 그대로)", BLUE)
     if not a17:
-        ax.annotate("", xy=(CY, ZTOP - 26.5), xytext=(CY, 12.0), zorder=8,
-                    arrowprops=dict(arrowstyle="-|>", color=RED, lw=1.6))
-        note(ax, (CY - 0.2, 14.6), (181.0, 18.4), "Ø2.8 구멍이 꼬리 밑면에 열려 있음\n→ 트리 가지가 구멍을 타고\n홈까지 올라올 수 있음", RED)
+        note(ax, (BX0 + 0.4, ZTOP - 25.0), (BX0 - 1.8, 13.0), "홈은 +x 쪽만 열림\n→ 홈 속에 남은 것은\n한쪽으로만 꺼내야 함", RED)
     else:
-        ax.add_patch(Polygon([(CY - 1.4, ZTOP - 27.5), (CY + 1.4, ZTOP - 27.5), (CY + 1.4, ZTOP - 27.1), (CY - 1.4, ZTOP - 27.1)],
-                             closed=True, fc=GRN, ec=GRN, zorder=6))
-        note(ax, (CY - 0.6, ZTOP - 27.3), (181.0, 18.4), "구멍 입구도 0.4 막으로 닫음\n→ 바닥 서포트가 홈에 못 들어옴\n(캡스턴이 처음 들어갈 때 뚫음)", GRN)
-    frame(ax, "③ %s · 너트 홈, 출력 자세 (x%.3f 단면, 옆에서 봄)" % (tag, CX), tc, (176.5, 199.5), (-0.6, 25.0), "y (mm)", "출력 높이 (mm)")
+        ax.annotate("", xy=(CX - 1.2, ZTOP - 24.9), xytext=(BX0 - 4.6, ZTOP - 24.9), zorder=8,
+                    arrowprops=dict(arrowstyle="-|>", color=GRN, lw=1.8))
+        note(ax, (BX0 - 1.4, ZTOP - 24.9), (BX0 - 1.8, 13.0), "-x 쪽 폭 3 빼기 통로\n→ 2 mm 육각 렌치로\n반대쪽에서 밀어냄", GRN)
+    ax.text(CX, ZTOP - 27.5 - 0.35, "Ø2.8 구멍 (A15 그대로 열림)", fontsize=7, color=DIM, ha="center", va="top", zorder=21)
+    frame(ax, "③ %s · 너트 홈, 출력 자세 (y%.2f 단면, 앞에서 봄)" % (tag, CY), tc, (BX0 - 6.5, BX1 + 7.0), (-0.6, 25.0), "x (mm)", "출력 높이 (mm)")
 
     # ---- 4: plan at the nut (z24.9), seen from above in use
     ax = fig.add_subplot(gs[3, col])

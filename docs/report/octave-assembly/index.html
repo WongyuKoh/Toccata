@@ -76,7 +76,7 @@ section.done .badge { background: var(--ok) }
 .need { display: flex; flex-wrap: wrap; gap: 6px }
 .need span { font-size: 12.5px; padding: 2px 9px; border-radius: 999px; background: var(--dim-soft); color: var(--ink) }
 .need span b { font-family: var(--mono); font-weight: 600; color: var(--dim) }
-ol.do { margin: 0; padding-left: 22px; display: grid; gap: 7px; max-width: 72ch }
+ol.do { margin: 0; padding-left: 22px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 7px; max-width: 72ch }
 ol.do li::marker { font: 600 13px var(--mono); color: var(--dim) }
 ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 5px; max-width: 72ch }
 .note, .warn, .okbox { border-radius: 8px; padding: 10px 14px; font-size: 14px; max-width: 76ch }
@@ -286,7 +286,7 @@ html { scroll-behavior: smooth }
     <li><b>패드 바</b>: 잎 혀(0.6 × 1.6 × 8)는 일부러 0.3 아래로 처지게 출력했으니 펴지 않습니다. 윗면은 한 평면입니다.</li>
     <li><b>Ø4.0 드릴</b>: 레버 캐리어 허브 12곳, 레버틀 핀 보스의 레버 봉 구멍(눈물방울 Ø3.9). 낮은 속도로 곧게 뚫어 PETG가 녹아 붙지 않게 합니다.</li>
     <li>밸런스 핀 구멍(Ø1.95, 막힌 구멍)은 핀이 전혀 안 들어갈 때만 Ø1.9~2.0으로 다듬습니다. 가볍게 끼는 압입이 정상입니다.</li>
-    <li>M3 너트를 건반 꼬리 +x 옆 홈(맞변 5.6 × 2.8)에 하나 넣어 보아 안쪽 어깨까지 들어가는지 확인합니다. 홈은 빔을 관통해 반대쪽(−x)에 폭 3 빼기 통로가 있으니, 홈에 출력 찌꺼기나 서포트가 남았으면 2 mm 육각 렌치를 통로로 넣어 밀어냅니다. 홈 천장과 빔 윗면의 Ø2.8 구멍 입구는 구멍 없는 0.4 막입니다(A15·A17: 서포트 없이 출력, 캡스턴이 처음 들어갈 때 뚫음).</li>
+    <li>M3 너트를 건반 꼬리 +x 옆 홈(맞변 5.6 × 2.8)에 하나 넣어 보아 안쪽 어깨까지 들어가는지 확인합니다. 홈은 빔을 관통해 반대쪽(−x)에 폭 3 빼기 통로가 있으니, 홈에 출력 찌꺼기나 서포트가 남았으면 2 mm 육각 렌치를 통로로 넣어 밀어냅니다. 홈 천장은 구멍 없는 0.4 막입니다(A15: 서포트 없이 출력, 캡스턴 끝이 처음 들어갈 때 뚫음).</li>
   </ol>
   <div class="dwgs"><button data-d="d08_frame.svg">08 프레임</button><button data-d="d07_lever_carrier_steel.svg">07 레버 캐리어</button></div>
 </section>
@@ -361,7 +361,7 @@ html { scroll-behavior: smooth }
     <ol class="do">
       <li><b>부싱 천</b> 0.5T를 노치(R2.55) 안쪽과 밸런스 핀 홈 양쪽 벽에 붙입니다. 천이 접혀 겹치지 않게 합니다.</li>
       <li><b>자석</b> Ø5×2를 건반 밑 자리(y67, 센서 줄 바로 위)에 눌러 넣고 순간접착제 한 방울. 12개 모두 <b>같은 극이 아래</b>로 오게 합니다(S극이 센서 쪽이면 누를 때 값이 올라감). 자석 하나를 기준으로 정해 아래쪽 면에 매직으로 점을 찍어 두면 헷갈리지 않습니다.</li>
-      <li><b>캡스턴</b>: M3 너트를 꼬리 숨은 빔의 +x 옆 홈에 안쪽 어깨에 닿을 때까지 밀어 넣습니다(너트가 나사 축에 섬). 빔 윗면의 Ø2.8 구멍 자리는 0.4 막으로 덮여 있으니 송곳이나 Ø2.5 드릴을 손으로 돌려 먼저 뚫고, 버튼헤드 M3×6을 머리가 위로 오게 돌려 너트에 겁니다. 나사 끝이 홈 밑 0.4 막에 닿으면 조금 더 돌려 뚫습니다(빡빡하면 Ø3 드릴을 손으로 밑에서). 높이는 06단계에서 맞추니 몇 바퀴만 걸어 둡니다. 너트를 다시 빼야 하면 캡스턴을 풀고 반대쪽(−x) 빼기 통로로 2 mm 육각 렌치를 넣어 밉니다.</li>
+      <li><b>캡스턴</b>: M3 너트를 꼬리 숨은 빔의 +x 옆 홈에 안쪽 어깨에 닿을 때까지 밀어 넣습니다(너트가 나사 축에 섬). 버튼헤드 M3×6을 머리가 위로 오게 위 Ø2.8 구멍으로 돌려 너트에 겁니다. 나사 끝이 홈 밑 0.4 막에 닿으면 조금 더 돌려 뚫습니다(빡빡하면 Ø3 드릴을 손으로 밑에서). 높이는 06단계에서 맞추니 몇 바퀴만 걸어 둡니다. 너트를 다시 빼야 하면 캡스턴을 풀고 반대쪽(−x) 빼기 통로로 2 mm 육각 렌치를 넣어 밉니다.</li>
       <li><b>쉼 펠트</b>: 꼬리 밑 끝(y196.3~199)에 종이 펀칭 2장 + 쉼 펠트(1T 바탕 위 0.5T)를 겹쳐 붙입니다. 06단계에서 펀칭을 더하거나 빼므로 펀칭은 떼어 낼 수 있게 약하게 붙입니다(붙이는 방법은 설계서에 정해져 있지 않음). F·F#은 USB 홈을 넘지 않는 좁은 펠트입니다.</li>
     </ol>
     <div class="figs" style="grid-template-columns:1fr 1fr">

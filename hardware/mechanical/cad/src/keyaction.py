@@ -1408,12 +1408,11 @@ ADJUST.add("A16")
 # "건반에 꽂는 나사도 원형 나사지, 저런 모양이 아닌데" - the capstan was the head's side profile extruded over x (a loaf); it is now
 # the ISO 7380 M3 button head turned about the screw axis, with its 2 mm hex socket, on the D3 shank.
 # "너트를 넣는 부분 ... 서포트가 안생기게, 혹은 서포트를 쉽게 뺄 수 있는 구조로" - the A15 ceiling stays a hole-free 5.6 bridge (no
-# support at Bambu's defaults). Two insurances for settings that support bridges anyway: (1) the D2.8 bore stops 0.4 under the beam
-# top - printed turned over that face is the tail underside Bambu's tree holds from the plate, and an open bore let a branch climb
-# into the slot; the capstan pushes through the skin like through the lower membrane. (2) the slot runs through the beam: past the
-# nut a 3.0 push-out channel opens the -x face, so anything left in the slot (or the nut) is pushed out with the 2 mm hex key the
-# capstan takes. The nut stops on the channel's two shoulders (its edges reach y +-1.5 at 2.31 from the axis) instead of the end wall.
-A17 = {"step_lap": 0.01, "push_w": 3.0, "shoulder": 2.33, "bore_skin": 0.4, "socket_s": 2.0, "socket_t": 1.04, "shank_d": 3.0}
+# support at Bambu's defaults), and the slot runs through the beam: past the nut a 3.0 push-out channel opens the -x face, so anything
+# left in the slot (or the nut) is pushed out with the 2 mm hex key the capstan takes. The nut stops on the channel's two shoulders
+# (its edges reach y +-1.5 at 2.31 from the axis) instead of the end wall. (A 0.4 skin over the D2.8 bore's top end was tried the same
+# day and taken out again - user: "3번 변경(볼트 넣는 부분 막은거)은 다시 원상태(구멍 뚫린 상태)로 되돌려줘"; the bore is open as in A15.)
+A17 = {"step_lap": 0.01, "push_w": 3.0, "shoulder": 2.33, "socket_s": 2.0, "socket_t": 1.04, "shank_d": 3.0}
 
 
 def key_a17_parts(parts):
@@ -1435,15 +1434,14 @@ def key_a17_parts(parts):
 
 
 def key_a17_nut_slot(parts, cap):
-    """capstan cuts of the hidden beam: the D2.8 bore closed 0.4 under the beam top, the A15 slot (5.6 x 2.8, open to +x) from
-    the nut's stop shoulders, the 3.0 push-out channel through the -x face, the 0.4 membrane and the D3.3 tip hole below."""
+    """capstan cuts of the hidden beam: the D2.8 bore above the nut (open at the beam top, A15), the A15 slot (5.6 x 2.8, open to
+    +x) from the nut's stop shoulders, the 3.0 push-out channel through the -x face, the 0.4 membrane and the D3.3 tip hole below."""
     cx, cy = cap
     beam = [p for p in parts if p["part"] == "beam"][0]
     bx0, bx1 = beam["x"]
     z0, z1 = A15["slot_z"]
     af, w, sh = A15["slot_af"], A17["push_w"], A17["shoulder"]
-    top = _upper_z([poly(beam, "rest")], cy)                           # 27.5, the beam top over the slot
-    return [cyl_z(cx, cy, z1 - 0.01, top - A17["bore_skin"], FEAT["cap_hole_d"]),
+    return [cyl_z(cx, cy, z1 - 0.01, 31.0, FEAT["cap_hole_d"]),
             box(cx - sh, bx1 + 1.0, cy - af / 2, cy + af / 2, z0, z1),       # nut flats on the +-y walls, out of the +x face
             box(bx0 - 1.0, cx - sh + 0.01, cy - w / 2, cy + w / 2, z0, z1),  # push-out channel to the -x face
             cyl_z(cx, cy, FEAT["cap_tip_z"][0], z0 - A15["membrane"], FEAT["cap_tip_d"])]

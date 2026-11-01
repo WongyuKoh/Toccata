@@ -2,12 +2,12 @@
  "generated": "2026-10-08",
  "page": {
   "path": "index.html",
-  "bytes": 1397543
+  "bytes": 1396282
  },
  "count": 350,
  "count_with_page": 351,
- "total_bytes": 60375980,
- "total_mb": 57.58,
+ "total_bytes": 60318946,
+ "total_mb": 57.52,
  "limits": {
   "per_file_mb": 15,
   "per_publish_files": 255,
@@ -45,12 +45,12 @@
   {
    "bundle": "fin/bundle/loc-detail-items-1.json",
    "files": 45,
-   "bytes": 1420942
+   "bytes": 1420936
   },
   {
    "bundle": "fin/bundle/loc-detail-items-2.json",
    "files": 44,
-   "bytes": 1300417
+   "bytes": 1300380
   },
   {
    "bundle": "fin/bundle/loc-detail-prints-1.json",
@@ -60,12 +60,12 @@
   {
    "bundle": "fin/bundle/loc-detail-prints-2.json",
    "files": 28,
-   "bytes": 1435300
+   "bytes": 1435285
   },
   {
    "bundle": "fin/bundle/loc-detail-prints-3.json",
    "files": 38,
-   "bytes": 1431764
+   "bytes": 1431758
   },
   {
    "bundle": "fin/bundle/loc-detail-prints-4.json",
@@ -75,42 +75,42 @@
   {
    "bundle": "fin/bundle/loc-detail-other.json",
    "files": 10,
-   "bytes": 262852
+   "bytes": 262849
   },
   {
    "bundle": "fin/bundle/parts-zip-01.json",
    "files": 14,
-   "bytes": 1141439
+   "bytes": 1133923
   },
   {
    "bundle": "fin/bundle/parts-zip-02-1.json",
    "files": 15,
-   "bytes": 1374418
+   "bytes": 1374490
   },
   {
    "bundle": "fin/bundle/parts-zip-02-2.json",
    "files": 2,
-   "bytes": 119599
+   "bytes": 119627
   },
   {
    "bundle": "fin/bundle/parts-zip-03.json",
    "files": 9,
-   "bytes": 655708
+   "bytes": 655712
   },
   {
    "bundle": "fin/bundle/parts-zip-04.json",
    "files": 13,
-   "bytes": 852880
+   "bytes": 852876
   },
   {
    "bundle": "fin/bundle/parts-zip-05-1.json",
    "files": 27,
-   "bytes": 1381358
+   "bytes": 1381346
   },
   {
    "bundle": "fin/bundle/parts-zip-05-2.json",
    "files": 13,
-   "bytes": 736212
+   "bytes": 735488
   },
   {
    "bundle": "fin/bundle/parts-zip-06-1.json",
@@ -120,27 +120,27 @@
   {
    "bundle": "fin/bundle/parts-zip-06-2.json",
    "files": 1,
-   "bytes": 230528
+   "bytes": 230532
   },
   {
    "bundle": "fin/bundle/parts-zip-07.json",
    "files": 6,
-   "bytes": 268711
+   "bytes": 268671
   },
   {
    "bundle": "fin/bundle/parts-zip-09.json",
    "files": 1,
-   "bytes": 161476
+   "bytes": 161472
   },
   {
    "bundle": "fin/bundle/parts-zip-ex-1.json",
    "files": 16,
-   "bytes": 1292921
+   "bytes": 1290561
   },
   {
    "bundle": "fin/bundle/parts-zip-ex-2.json",
    "files": 5,
-   "bytes": 407788
+   "bytes": 407792
   }
  ],
  "bundled_sources": 323,
@@ -503,7 +503,7 @@
  "files": [
   {
    "path": "cad/asm.json",
-   "bytes": 81629,
+   "bytes": 81599,
    "owners": [
     "hardware/mechanical/cad/viewer/gen_viewer.py",
     "index.html"
@@ -511,7 +511,7 @@
   },
   {
    "path": "cad/parts.json",
-   "bytes": 569097,
+   "bytes": 568719,
    "owners": [
     "hardware/mechanical/cad/viewer/gen_viewer.py",
     "index.html"
@@ -519,7 +519,7 @@
   },
   {
    "path": "cad/toccata.glb.b64.txt",
-   "bytes": 4144220,
+   "bytes": 4144732,
    "owners": [
     "hardware/mechanical/cad/viewer/gen_viewer.py",
     "index.html",
@@ -678,7 +678,7 @@
   },
   {
    "path": "fin/asm/octave.json",
-   "bytes": 1363526,
+   "bytes": 1363910,
    "owners": [
     "index.html",
     "src/tabs/asm"
@@ -774,7 +774,7 @@
   },
   {
    "path": "fin/bundle/loc-detail-items-1.json",
-   "bytes": 1420942,
+   "bytes": 1420936,
    "owners": [
     "index.html",
     "merge.py (bundle of 45 files)"
@@ -782,7 +782,7 @@
   },
   {
    "path": "fin/bundle/loc-detail-items-2.json",
-   "bytes": 1300417,
+   "bytes": 1300380,
    "owners": [
     "index.html",
     "merge.py (bundle of 44 files)"
@@ -790,7 +790,7 @@
   },
   {
    "path": "fin/bundle/loc-detail-other.json",
-   "bytes": 262852,
+   "bytes": 262849,
    "owners": [
     "index.html",
     "merge.py (bundle of 10 files)"
@@ -806,7 +806,7 @@
   },
   {
    "path": "fin/bundle/loc-detail-prints-2.json",
-   "bytes": 1435300,
+   "bytes": 1435285,
    "owners": [
     "index.html",
     "merge.py (bundle of 28 files)"
@@ -814,7 +814,7 @@
   },
   {
    "path": "fin/bundle/loc-detail-prints-3.json",
-   "bytes": 1431764,
+   "bytes": 1431758,
    "owners": [
     "index.html",
     "merge.py (bundle of 38 files)"
@@ -830,7 +830,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-01.json",
-   "bytes": 1141439,
+   "bytes": 1133923,
    "owners": [
     "index.html",
     "merge.py (bundle of 14 files)"
@@ -838,7 +838,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-02-1.json",
-   "bytes": 1374418,
+   "bytes": 1374490,
    "owners": [
     "index.html",
     "merge.py (bundle of 15 files)"
@@ -846,7 +846,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-02-2.json",
-   "bytes": 119599,
+   "bytes": 119627,
    "owners": [
     "index.html",
     "merge.py (bundle of 2 files)"
@@ -854,7 +854,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-03.json",
-   "bytes": 655708,
+   "bytes": 655712,
    "owners": [
     "index.html",
     "merge.py (bundle of 9 files)"
@@ -862,7 +862,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-04.json",
-   "bytes": 852880,
+   "bytes": 852876,
    "owners": [
     "index.html",
     "merge.py (bundle of 13 files)"
@@ -870,7 +870,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-05-1.json",
-   "bytes": 1381358,
+   "bytes": 1381346,
    "owners": [
     "index.html",
     "merge.py (bundle of 27 files)"
@@ -878,7 +878,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-05-2.json",
-   "bytes": 736212,
+   "bytes": 735488,
    "owners": [
     "index.html",
     "merge.py (bundle of 13 files)"
@@ -894,7 +894,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-06-2.json",
-   "bytes": 230528,
+   "bytes": 230532,
    "owners": [
     "index.html",
     "merge.py (bundle of 1 files)"
@@ -902,7 +902,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-07.json",
-   "bytes": 268711,
+   "bytes": 268671,
    "owners": [
     "index.html",
     "merge.py (bundle of 6 files)"
@@ -910,7 +910,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-09.json",
-   "bytes": 161476,
+   "bytes": 161472,
    "owners": [
     "index.html",
     "merge.py (bundle of 1 files)"
@@ -918,7 +918,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-ex-1.json",
-   "bytes": 1292921,
+   "bytes": 1290561,
    "owners": [
     "index.html",
     "merge.py (bundle of 16 files)"
@@ -926,7 +926,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-ex-2.json",
-   "bytes": 407788,
+   "bytes": 407792,
    "owners": [
     "index.html",
     "merge.py (bundle of 5 files)"
@@ -1158,7 +1158,7 @@
   },
   {
    "path": "fin/dwg/I04_side_section.svg",
-   "bytes": 85348,
+   "bytes": 85285,
    "owners": [
     "index.html",
     "src/tabs/dwg"
@@ -1203,7 +1203,7 @@
   },
   {
    "path": "fin/loc/cards.json",
-   "bytes": 307836,
+   "bytes": 305142,
    "owners": [
     "index.html",
     "src/tabs/parts"
@@ -1211,7 +1211,7 @@
   },
   {
    "path": "fin/loc/overlays.json",
-   "bytes": 875705,
+   "bytes": 873059,
    "owners": [
     "index.html",
     "src/tabs/parts"
@@ -1219,7 +1219,7 @@
   },
   {
    "path": "fin/parts/P-01-01.svg",
-   "bytes": 60377,
+   "bytes": 59045,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1227,7 +1227,7 @@
   },
   {
    "path": "fin/parts/P-01-02.svg",
-   "bytes": 60563,
+   "bytes": 59235,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1235,7 +1235,7 @@
   },
   {
    "path": "fin/parts/P-01-03.svg",
-   "bytes": 60480,
+   "bytes": 59144,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1243,7 +1243,7 @@
   },
   {
    "path": "fin/parts/P-01-04.svg",
-   "bytes": 60448,
+   "bytes": 59115,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1251,7 +1251,7 @@
   },
   {
    "path": "fin/parts/P-01-05.svg",
-   "bytes": 60803,
+   "bytes": 59474,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1259,7 +1259,7 @@
   },
   {
    "path": "fin/parts/P-01-06.svg",
-   "bytes": 60556,
+   "bytes": 59220,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1267,7 +1267,7 @@
   },
   {
    "path": "fin/parts/P-01-07.svg",
-   "bytes": 60500,
+   "bytes": 59164,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1275,7 +1275,7 @@
   },
   {
    "path": "fin/parts/P-01-08.svg",
-   "bytes": 60276,
+   "bytes": 58943,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1283,7 +1283,7 @@
   },
   {
    "path": "fin/parts/P-01-09.svg",
-   "bytes": 60215,
+   "bytes": 58880,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1291,7 +1291,7 @@
   },
   {
    "path": "fin/parts/P-01-10.svg",
-   "bytes": 58346,
+   "bytes": 57016,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1299,7 +1299,7 @@
   },
   {
    "path": "fin/parts/P-01-11.svg",
-   "bytes": 64376,
+   "bytes": 63049,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1307,7 +1307,7 @@
   },
   {
    "path": "fin/parts/P-01-12.svg",
-   "bytes": 64503,
+   "bytes": 63316,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1315,7 +1315,7 @@
   },
   {
    "path": "fin/parts/P-01-13.svg",
-   "bytes": 64009,
+   "bytes": 62825,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1323,7 +1323,7 @@
   },
   {
    "path": "fin/parts/P-01-14.svg",
-   "bytes": 64395,
+   "bytes": 63127,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1443,7 +1443,7 @@
   },
   {
    "path": "fin/parts/P-02-15.svg",
-   "bytes": 47018,
+   "bytes": 46985,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1451,7 +1451,7 @@
   },
   {
    "path": "fin/parts/P-02-16.svg",
-   "bytes": 47054,
+   "bytes": 47021,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1723,7 +1723,7 @@
   },
   {
    "path": "fin/parts/P-05-11.svg",
-   "bytes": 67034,
+   "bytes": 67063,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1755,7 +1755,7 @@
   },
   {
    "path": "fin/parts/P-05-15.svg",
-   "bytes": 18546,
+   "bytes": 20544,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1779,7 +1779,7 @@
   },
   {
    "path": "fin/parts/P-05-18.svg",
-   "bytes": 32224,
+   "bytes": 31814,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1787,7 +1787,7 @@
   },
   {
    "path": "fin/parts/P-05-19.svg",
-   "bytes": 33402,
+   "bytes": 32963,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1811,7 +1811,7 @@
   },
   {
    "path": "fin/parts/P-05-22.svg",
-   "bytes": 65721,
+   "bytes": 64946,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1859,7 +1859,7 @@
   },
   {
    "path": "fin/parts/P-05-28.svg",
-   "bytes": 26693,
+   "bytes": 26286,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1875,7 +1875,7 @@
   },
   {
    "path": "fin/parts/P-05-30.svg",
-   "bytes": 20685,
+   "bytes": 18651,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1883,7 +1883,7 @@
   },
   {
    "path": "fin/parts/P-05-31.svg",
-   "bytes": 19229,
+   "bytes": 21249,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1891,7 +1891,7 @@
   },
   {
    "path": "fin/parts/P-05-32.svg",
-   "bytes": 20896,
+   "bytes": 18865,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2003,7 +2003,7 @@
   },
   {
    "path": "fin/parts/P-07-02.svg",
-   "bytes": 21515,
+   "bytes": 21449,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2051,7 +2051,7 @@
   },
   {
    "path": "fin/parts/P-EX-01.svg",
-   "bytes": 58890,
+   "bytes": 57831,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2059,7 +2059,7 @@
   },
   {
    "path": "fin/parts/P-EX-02.svg",
-   "bytes": 59076,
+   "bytes": 58021,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2067,7 +2067,7 @@
   },
   {
    "path": "fin/parts/P-EX-03.svg",
-   "bytes": 58993,
+   "bytes": 57930,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2075,7 +2075,7 @@
   },
   {
    "path": "fin/parts/P-EX-04.svg",
-   "bytes": 58960,
+   "bytes": 57900,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2083,7 +2083,7 @@
   },
   {
    "path": "fin/parts/P-EX-05.svg",
-   "bytes": 59315,
+   "bytes": 58259,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2091,7 +2091,7 @@
   },
   {
    "path": "fin/parts/P-EX-06.svg",
-   "bytes": 59068,
+   "bytes": 58005,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2099,7 +2099,7 @@
   },
   {
    "path": "fin/parts/P-EX-07.svg",
-   "bytes": 59011,
+   "bytes": 57948,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2107,7 +2107,7 @@
   },
   {
    "path": "fin/parts/P-EX-08.svg",
-   "bytes": 59040,
+   "bytes": 57980,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2115,7 +2115,7 @@
   },
   {
    "path": "fin/parts/P-EX-09.svg",
-   "bytes": 58979,
+   "bytes": 57917,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2123,7 +2123,7 @@
   },
   {
    "path": "fin/parts/P-EX-10.svg",
-   "bytes": 57110,
+   "bytes": 56053,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2131,7 +2131,7 @@
   },
   {
    "path": "fin/parts/P-EX-11.svg",
-   "bytes": 62688,
+   "bytes": 61647,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2139,7 +2139,7 @@
   },
   {
    "path": "fin/parts/P-EX-12.svg",
-   "bytes": 63054,
+   "bytes": 62010,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2147,7 +2147,7 @@
   },
   {
    "path": "fin/parts/P-EX-13.svg",
-   "bytes": 62560,
+   "bytes": 61519,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2155,7 +2155,7 @@
   },
   {
    "path": "fin/parts/P-EX-14.svg",
-   "bytes": 62838,
+   "bytes": 61797,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2219,7 +2219,7 @@
   },
   {
    "path": "fin/parts/all_dxf.zip.b64.txt",
-   "bytes": 3545948,
+   "bytes": 3543208,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2227,7 +2227,7 @@
   },
   {
    "path": "fin/parts/all_stl.zip.b64.txt",
-   "bytes": 3793096,
+   "bytes": 3793980,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2235,14 +2235,14 @@
   },
   {
    "path": "fin/parts/index.json",
-   "bytes": 205302,
+   "bytes": 202656,
    "owners": [
     "src/tabs/partdwg"
    ]
   },
   {
    "path": "fin/parts3d/g-01.json",
-   "bytes": 310642,
+   "bytes": 311090,
    "owners": [
     "src/tabs/partdwg"
    ]
@@ -2298,14 +2298,14 @@
   },
   {
    "path": "fin/parts3d/g-ex.json",
-   "bytes": 567263,
+   "bytes": 567711,
    "owners": [
     "src/tabs/partdwg"
    ]
   },
   {
    "path": "fin/parts3d/index.json",
-   "bytes": 38097,
+   "bytes": 38133,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2313,7 +2313,7 @@
   },
   {
    "path": "fin/prep/lines.json",
-   "bytes": 214771,
+   "bytes": 212077,
    "owners": [
     "index.html",
     "src/tabs/prep"
@@ -3684,7 +3684,7 @@
   },
   {
    "path": "data/final_items.json",
-   "bytes": 259684
+   "bytes": 259636
   },
   {
    "path": "data/mux_module_pins.csv",
