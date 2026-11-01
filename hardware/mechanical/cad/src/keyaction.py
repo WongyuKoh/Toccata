@@ -12,7 +12,7 @@ import math
 import os
 import re
 
-from manifold3d import Manifold
+from manifold3d import CrossSection, Manifold
 
 from cadlib import (clean, box, cyl_x, cyl_y, cyl_z, diff, empty, hexagon_z, prism_x, prism_y, prism_z,
                     teardrop_x, text_xy, union, orient, rot_x, rot_y, rot_z, matmul)
@@ -251,7 +251,7 @@ def key_points(parts, fixed, note):
 def key_solid(parts, fixed, note):
     """printed key (PETG) in module/end-part coordinates, design pose (side_rest)."""
     env, rcuts = key_rounding(parts)                                   # A11 rounded corners
-    m = diff(union(prisms(parts, "rest", KEY_BOUGHT)), rcuts) ^ env
+    m = diff(union(prisms(key_a17_parts(parts), "rest", KEY_BOUGHT)), rcuts) ^ env
     cuts = []
     mag, pin, cap = key_points(parts, fixed, note)
     z_under = 23.5                                                     # S02 key underside
@@ -263,19 +263,18 @@ def key_solid(parts, fixed, note):
         zb = 22.3                                                      # block underside (drawing 5)
         cuts.append(box(pin[0] - w / 2, pin[0] + w / 2, y0 - 1.0, y1, zb - 1.0, zb + FEAT["pin_groove_depth"]))
     if cap:
-        cuts += key_a15_nut_slot(parts, cap)
+        cuts += key_a17_nut_slot(parts, cap)
     m = union([m] + key_a13_adds(parts))
     return clean(diff(m, cuts + key_a13_cuts(parts)))
 
 
 def key_bought(parts, fixed, note):
-    """capstan screw (ISO 7380 head prism + M3 shank), M3 nut, magnet, felts - for the assembly."""
+    """capstan screw (ISO 7380 button head turned about its axis + M3 shank, A17), M3 nut, magnet, felts - for the assembly."""
     out = {}
     head = [p for p in parts if p["part"] == "capstan head"]
     mag, pin, cap = key_points(parts, fixed, note)
     if head and cap:
-        h = head[0]
-        out["capstan"] = union([prism_x(h["side_rest"], *h["x"]), cyl_z(cap[0], cap[1], 23.3, 29.36, 3.0)])
+        out["capstan"] = capstan_a17(head[0], cap)
         # A15: the nut rests on the slot's lower face (the lever pushes the capstan down), 0.05 off it in the model
         z0n = A15["slot_z"][0] + 0.05
         out["nut"] = hexagon_z(cap[0], cap[1], z0n, z0n + A15["nut_m"], A15["nut_s"], rot=30)
@@ -1399,3 +1398,70 @@ def a16_cage_cuts(fins):
 
 
 ADJUST.add("A16")
+
+
+# ------------------------------------------------------------------ A17 (2026-11-01): key slit, round capstan, nut slot insurance
+# The user, with a photo of a key: "건반에 작게, 세모형태로 갈라져있는 부분이 있는데, 그거는 왜 있는거야" - geometry.json's head walls end
+# on a slant (y48.5 at the underside z23.5 -> y50 at z40.9). Beside a black key the head steps in to the tail there, and the head
+# step (y48.8..50) does not reach the slant: its bottom 3.5 mm left a wedge 0.3 wide open through the wall (every white-key side
+# next to a black key). A17 starts the slant at the step (y48.81 at z23.5), so it lies inside the step and the wall is whole.
+# "건반에 꽂는 나사도 원형 나사지, 저런 모양이 아닌데" - the capstan was the head's side profile extruded over x (a loaf); it is now
+# the ISO 7380 M3 button head turned about the screw axis, with its 2 mm hex socket, on the D3 shank.
+# "너트를 넣는 부분 ... 서포트가 안생기게, 혹은 서포트를 쉽게 뺄 수 있는 구조로" - the A15 ceiling stays a hole-free 5.6 bridge (no
+# support at Bambu's defaults). Two insurances for settings that support bridges anyway: (1) the D2.8 bore stops 0.4 under the beam
+# top - printed turned over that face is the tail underside Bambu's tree holds from the plate, and an open bore let a branch climb
+# into the slot; the capstan pushes through the skin like through the lower membrane. (2) the slot runs through the beam: past the
+# nut a 3.0 push-out channel opens the -x face, so anything left in the slot (or the nut) is pushed out with the 2 mm hex key the
+# capstan takes. The nut stops on the channel's two shoulders (its edges reach y +-1.5 at 2.31 from the axis) instead of the end wall.
+A17 = {"step_lap": 0.01, "push_w": 3.0, "shoulder": 2.33, "bore_skin": 0.4, "socket_s": 2.0, "socket_t": 1.04, "shank_d": 3.0}
+
+
+def key_a17_parts(parts):
+    """the key's geometry.json prisms with each head wall's slanted rear end started at the head step on its side."""
+    steps = {p["part"][-1]: p for p in parts if p["part"].startswith("head step")}
+    out = []
+    for p in parts:
+        st = steps.get(p["part"][-1]) if p["part"].startswith("head wall") else None
+        if st is None or st["x"][1] < p["x"][0] or p["x"][1] < st["x"][0]:
+            out.append(p)
+            continue
+        k = "side" if "side" in p else "side_rest"
+        y0 = min(q[0] for q in poly(st, "rest"))                      # 48.8
+        zb = min(q[1] for q in p[k])                                   # 23.5
+        q = dict(p)
+        q[k] = [((y0 + A17["step_lap"]) if (abs(z - zb) < 1e-6 and y0 - 1.0 < y < y0) else y, z) for (y, z) in p[k]]
+        out.append(q)
+    return out
+
+
+def key_a17_nut_slot(parts, cap):
+    """capstan cuts of the hidden beam: the D2.8 bore closed 0.4 under the beam top, the A15 slot (5.6 x 2.8, open to +x) from
+    the nut's stop shoulders, the 3.0 push-out channel through the -x face, the 0.4 membrane and the D3.3 tip hole below."""
+    cx, cy = cap
+    beam = [p for p in parts if p["part"] == "beam"][0]
+    bx0, bx1 = beam["x"]
+    z0, z1 = A15["slot_z"]
+    af, w, sh = A15["slot_af"], A17["push_w"], A17["shoulder"]
+    top = _upper_z([poly(beam, "rest")], cy)                           # 27.5, the beam top over the slot
+    return [cyl_z(cx, cy, z1 - 0.01, top - A17["bore_skin"], FEAT["cap_hole_d"]),
+            box(cx - sh, bx1 + 1.0, cy - af / 2, cy + af / 2, z0, z1),       # nut flats on the +-y walls, out of the +x face
+            box(bx0 - 1.0, cx - sh + 0.01, cy - w / 2, cy + w / 2, z0, z1),  # push-out channel to the -x face
+            cyl_z(cx, cy, FEAT["cap_tip_z"][0], z0 - A15["membrane"], FEAT["cap_tip_d"])]
+
+
+def capstan_a17(head, cap):
+    """the capstan M3x6 ISO 7380: the geometry.json head profile turned about the screw axis (dk 5.7, k 1.65), a s2 hex
+    socket 1.04 deep, on the D3 shank down to z23.3."""
+    cx, cy = cap
+    pts = head["side_rest"]
+    rim = max(abs(y - cy) for (y, z) in pts)
+    zb = min(z for (y, z) in pts if abs(y - cy) > rim - 1e-6)           # 29.35, the bearing face
+    zt = max(z for (y, z) in pts)                                      # 31.0
+    arc = sorted({(round(y - cy, 4), z) for (y, z) in pts if y >= cy - 1e-6 and z >= zb - 1e-6}, key=lambda q: (q[1], -q[0]))
+    prof = [(0.0, zb)] + [(r, z) for (r, z) in arc if r > 1e-6] + [(0.0, zt)]
+    hd = Manifold.revolve(CrossSection([prof]), 48).translate((cx, cy, 0.0))
+    shank = cyl_z(cx, cy, 23.3, zb + 0.01, A17["shank_d"])
+    return diff(union([hd, shank]), [hexagon_z(cx, cy, zt - A17["socket_t"], zt + 0.01, A17["socket_s"])])
+
+
+ADJUST.add("A17")

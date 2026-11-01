@@ -111,12 +111,13 @@ def overhangs(M, layer=LAYER, step=STEP, narrow=False):
 # the plate 2.5 thick), the window cover's hip-roof flat (9 x 9) and the slots over its two snap beams (7 x 2.3).
 # A15: the capstan nut slot's ceiling (the 0.4 membrane over the slot, first layer print z20.0 white / 32.0 black): the bridge
 # runs in y between the hex flats (5.6, y188.34 +- 2.8 white, 180.31 - 54.2 +- 2.8 black), so the y window holds the span;
-# its x width is the slot's length out to the open +x face (~7).
+# its x width is the slot's length out to the open +x face (~7). A17: the slot runs through the beam (3.0 push-out channel to the
+# -x face, bridged between its own walls), so the piece spans the whole beam width, 8.0.
 _NUT_W, _NUT_B = (-1.0, 40.0, 19.9, 20.3), (-1.0, 40.0, 31.9, 32.3)
 BRIDGE_OK = (("stl/print/01_건반/백건_", 10.3, 14.2, 9.0, None), ("stl/print/01_건반/흑건_", 22.1, 26.0, 9.0, None),
              ("stl/print_extra/예비_건반/백건_", 10.3, 14.2, 9.0, None), ("stl/print_extra/예비_건반/흑건_", 22.1, 26.0, 9.0, None),
-             ("stl/print/01_건반/백건_", 185.4, 191.3, 7.5, _NUT_W), ("stl/print/01_건반/흑건_", 123.3, 128.9, 7.5, _NUT_B),
-             ("stl/print_extra/예비_건반/백건_", 185.4, 191.3, 7.5, _NUT_W), ("stl/print_extra/예비_건반/흑건_", 123.3, 128.9, 7.5, _NUT_B),
+             ("stl/print/01_건반/백건_", 185.4, 191.3, 8.2, _NUT_W), ("stl/print/01_건반/흑건_", 123.3, 128.9, 8.2, _NUT_B),
+             ("stl/print_extra/예비_건반/백건_", 185.4, 191.3, 8.2, _NUT_W), ("stl/print_extra/예비_건반/흑건_", 123.3, 128.9, 8.2, _NUT_B),
              ("stl/print/07_터치스크린/화면받침_크래들", 7.5, 10.5, 9.2, (110.9, 120.3, 80.0, 81.8)),
              ("stl/print/07_터치스크린/점검창덮개", 26.5, 34.0, 2.6, (0.5, 32.0, 2.4, 3.2)),
              ("stl/print/07_터치스크린/점검창덮개", 17.8, 27.3, 9.2, (8.6, 18.2, 6.8, 7.6)))

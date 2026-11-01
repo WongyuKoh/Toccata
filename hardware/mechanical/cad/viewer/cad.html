@@ -24,7 +24,7 @@
 </div><div class="seg cadseg" role="group" aria-label="투영"><button type="button" data-cad-proj="persp" aria-pressed="true">원근</button><button type="button" data-cad-proj="ortho" aria-pressed="false">정투영</button></div></div>
 <div class="cadbar"><button type="button" class="cadtog" id="cad-inside" aria-pressed="false">내부 보기</button><button type="button" class="cadtog" id="cad-fold" aria-pressed="false">화면 접기</button><button type="button" class="cadtog" id="cad-press" aria-pressed="true">건반 누르기</button><button type="button" class="cadtog" id="cad-scale">한 옥타브 차례로</button><button type="button" class="cadtog" id="cad-edges" aria-pressed="true">모서리 선</button><button type="button" class="cadtog" id="cad-dims" aria-pressed="false">치수</button><label class="cadrange" for="cad-explode"><span>분해</span><input type="range" id="cad-explode" min="0" max="100" step="1" value="0"><output id="cad-explode-out" for="cad-explode">0 %</output></label></div>
 <div class="cadbar cadsecbar"><span class="cadlbl" id="cad-l-sec">단면</span><div class="seg cadseg" role="group" aria-labelledby="cad-l-sec"><button type="button" data-cad-sec="off" aria-pressed="true">끔</button><button type="button" data-cad-sec="x" aria-pressed="false">x 가로</button><button type="button" data-cad-sec="y" aria-pressed="false">y 깊이</button><button type="button" data-cad-sec="z" aria-pressed="false">z 높이</button></div><input type="range" id="cad-sec" min="-16" max="1238" step="0.25" value="575.75" aria-label="단면 위치 (mm)" disabled><output id="cad-sec-out" for="cad-sec">끔</output><label class="cadchk"><input type="checkbox" id="cad-sec-flip"> 반대쪽 남김</label><button type="button" class="cadtog" id="cad-sec-look" disabled>자른 면 보기</button></div>
-<div class="cadstage" id="cad-stage"><canvas tabindex="0" aria-label="Toccata 전체 조립 3D. 끌어서 돌리고, 휠이나 두 손가락으로 확대합니다. 화살표 키 = 돌리기, Shift+화살표 = 옮기기, + − = 확대."></canvas><svg class="cadover" aria-hidden="true"></svg><div class="cadload" role="status" aria-live="polite"><p class="cadload-t">이 탭을 열면 3D 모델(약 4 MB)을 불러옵니다.</p><div class="cadprog" aria-hidden="true"><i></i></div><button type="button" class="cadtog cadretry" hidden>다시 시도</button></div><div class="cadfocus" hidden><span class="cadfocus-t"></span><button type="button" class="cadfocus-x">모두 보기</button></div><div class="cadviewlbl" aria-live="polite"></div><div class="cadhint">끌기 = 돌리기 · 오른쪽 끌기·두 손가락 = 옮기기 · 휠·모으기 = 확대 · 누르기 = 부품 정보</div></div>
+<div class="cadstage" id="cad-stage"><canvas tabindex="0" aria-label="Toccata 전체 조립 3D. 끌어서 돌리고, 휠이나 두 손가락으로 확대합니다. 화살표 키 = 돌리기, Shift+화살표 = 옮기기, + − = 확대."></canvas><svg class="cadover" aria-hidden="true"></svg><div class="cadload" role="status" aria-live="polite"><p class="cadload-t">이 탭을 열면 3D 모델(약 4.1 MB)을 불러옵니다.</p><div class="cadprog" aria-hidden="true"><i></i></div><button type="button" class="cadtog cadretry" hidden>다시 시도</button></div><div class="cadfocus" hidden><span class="cadfocus-t"></span><button type="button" class="cadfocus-x">모두 보기</button></div><div class="cadviewlbl" aria-live="polite"></div><div class="cadhint">끌기 = 돌리기 · 오른쪽 끌기·두 손가락 = 옮기기 · 휠·모으기 = 확대 · 누르기 = 부품 정보</div></div>
 <p class="small muted cadnote">좌표: x 가로 (0 = A0 왼쪽 끝), y 흰 건반 앞 끝에서 뒤로, z 책상에서 위로, 단위 mm. 정투영에서는 오른쪽 아래 막대가 실제 길이입니다. 단면에서 잘린 면은 붉게 칠해집니다. 건반은 1 N으로 끝까지 눌러 멈춘 자세(백건 4.05°, 흑건 6.08°, 건반 봉 축 y141 z21.5)까지 내려가고, 레버는 레버 봉 축(y203.25 z33.5)을 중심으로 11.84° / 9.52° 올라갑니다 (레버 각은 건반 각에 비례하게 그림). 화면 접기는 경첩 축(y226.55 z81.35)을 중심으로 65° 돌린 뒤 접은 상태 입체로 바꿉니다 (선택 부품인 화면 덮개와 화면 선은 접은 상태에서 그리지 않음).</p>
 </div>
 <div class="cadside">
@@ -39,7 +39,7 @@
 <input type="range" class="cadasm-scrub" min="1" max="1" value="1" step="1" disabled aria-label="조립 단계">
 <div class="cadasm-now" aria-live="polite"></div>
 <ol class="cadasm-list" hidden></ol>
-<p class="cadasm-src">연결 3,102개 (나사·핀 493 · 끼움 154 · 맞닿음 1,455 · 틈 0.65 mm 안 999) — CAD 입체끼리 닿거나 겹치거나 0.65 mm 안에 있는 부품을 잇고, 들어오는 방향은 그 방향으로 밀어도 상대 부품에 걸리지 않는 쪽입니다(<code>viewer/asm_graph.py</code>).</p>
+<p class="cadasm-src">연결 3,102개 (나사·핀 581 · 끼움 154 · 맞닿음 1,455 · 틈 0.65 mm 안 911) — CAD 입체끼리 닿거나 겹치거나 0.65 mm 안에 있는 부품을 잇고, 들어오는 방향은 그 방향으로 밀어도 상대 부품에 걸리지 않는 쪽입니다(<code>viewer/asm_graph.py</code>).</p>
 </details>
 <details class="cadbox" open><summary>부분별로 보기</summary><div class="cadsets">
 <button type="button" class="cadset" data-cad-set="0"><span>건반 하나 (C4: 건반·레버·부속 12개)</span><em class="mono">12</em></button>
@@ -155,7 +155,7 @@
 </div>
 <h3 id="cad-files">파일</h3>
 <div class="tbl cadfiles"><table><thead><tr><th>파일 (저장소)</th><th>무엇</th></tr></thead><tbody>
-<tr><td><code>hardware/mechanical/cad/viewer/toccata_viewer.glb</code></td><td>이 탭의 3D 모델 (부품마다 노드 1개, 이름 = 부품 id, 3 MB). 다른 GLB 뷰어에서도 실제 크기(m)로 열립니다.</td></tr>
+<tr><td><code>hardware/mechanical/cad/viewer/toccata_viewer.glb</code></td><td>이 탭의 3D 모델 (부품마다 노드 1개, 이름 = 부품 id, 3.1 MB). 다른 GLB 뷰어에서도 실제 크기(m)로 열립니다.</td></tr>
 <tr><td><code>hardware/mechanical/cad/Toccata_전체조립.3mf</code></td><td>색·이름이 붙은 전체 조립 (슬라이서·3D 뷰어용)</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/assembly/</code></td><td>그룹별 조립 STL과 Toccata_전체조립.stl (조립 좌표, mm)</td></tr>
 <tr><td><code>hardware/mechanical/cad/stl/print/</code></td><td>출력용 STL 99개 파일 · 부품 502개 (파일 이름 끝 = 출력 개수, 베드에 놓인 방향)</td></tr>
@@ -163,7 +163,7 @@
 <tr><td><code>hardware/mechanical/cad/viewer/parts.json</code></td><td>이 탭의 부품표 (외곽, 출력 파일·개수, 메모, 분해·단면·누르기 자료)</td></tr>
 <tr><td><code>hardware/mechanical/cad/viewer/asm.json</code></td><td>조립 순서 보기 자료: 닿거나 겹치거나 나사·핀으로 이어진 부품 쌍, 이음 방식·이유, 부품마다 들어오는 방향 (viewer/asm_graph.py가 CAD 입체에서 계산)</td></tr>
 </tbody></table></div>
-<div class="cadsave"><button type="button" class="cadtog" id="cad-save">3D 모델 저장 (GLB를 zip으로)</button><span class="small muted" id="cad-save-msg">Toccata_assembly.zip · 약 3 MB</span></div>
+<div class="cadsave"><button type="button" class="cadtog" id="cad-save">3D 모델 저장 (GLB를 zip으로)</button><span class="small muted" id="cad-save-msg">Toccata_assembly.zip · 약 3.1 MB</span></div>
 <details class="spec cadest"><summary>받은 부품을 재서 확인할 추정 치수 (77)</summary>
 <p class="small muted">구매품·전자 부품 가운데 판매처에 치수가 없어 모델에서 정한 값입니다. 받은 부품을 재 보고 다르면 <code>hardware/mechanical/cad/spec/*.json</code>이나 생성기의 값을 고친 뒤 다시 만듭니다. 출력 부품의 치수는 정해진 값이라 이 목록에 없습니다.</p><ul class="small">
 <li><b>M4 열압입 인서트 L69</b> — 바깥 Ø6 × 길이 4를 앞판의 구멍 Ø5.6 × 6.5에 인두로 면까지 넣음 (지름 0.4 물림 - 모델은 겹침으로 보여 줌, 더 밀어 넣지 않음), 나사산 안지름 Ø3.3로 모델; M4×12(L70, 모델에 없음)는 유닛 플랜지 4 + EVA 가스켓 3을 지나 5 들어가 인서트 4를 지나 1 더 나감 - 끝은 구멍 바닥 1.5 위라 구멍 안 (가스켓 3이 약 2로 눌리면 약 6 들어가 바닥까지 약 0.5 - M4×12 이하만 씀; M4×14면 7 들어가 구멍 깊이 6.5를 넘어 밀폐면 2.78을 뚫음) (같은 부품 8개)</li>

@@ -777,12 +777,14 @@ def c08():
         body += box(X0, X0 + P["beam_w"], 3.0, 23.0, base_t - 0.01, Z(zb0))
         cuts += cyl(xc, 13.0, -1, base_t + 0.01, 7.0)                       # capstan head / hex key access
         cuts += cyl(xc, 13.0, Z(zt0) + mem, Z(zb0) + 1, 3.3)                  # screw tip clearance below the nut, past the membrane
-        cuts += cyl(xc, 13.0, base_t - 0.01, Z(zt1) + 0.01, dh, 32)           # self-locking hole (above the nut)
-        cuts += box(xc - 3.2, X0 + P["beam_w"] + 1, 13.0 - wn / 2, 13.0 + wn / 2, Z(zt1), Z(zt0))   # side-open nut slot; A15: closed end 3.2 from the axis
-        # (was xc - wn/2 = 2.8: the nut's corner, 3.175 from its centre, held it 0.375 off the screw axis)
+        cuts += cyl(xc, 13.0, base_t + 0.4, Z(zt1) + 0.01, dh, 32)            # self-locking hole (above the nut); A17: 0.4 skin at the beam top
+        cuts += box(xc - 2.33, X0 + P["beam_w"] + 1, 13.0 - wn / 2, 13.0 + wn / 2, Z(zt1), Z(zt0))   # side-open nut slot from the stop shoulders
+        cuts += box(X0 - 1, xc - 2.33 + 0.01, 11.5, 14.5, Z(zt1), Z(zt0))      # A17: 3.0 push-out channel through the -x face
+        # (A15: closed end 3.2 from the axis; before that xc - wn/2 = 2.8 held the nut 0.375 off the screw axis; A17: the nut's edges stop on
+        # the channel's shoulders at y +-1.5, 2.31 from the axis)
         cuts += text_(str(k + 1), xc, 24.6, base_t, size=2.2)
     s += diff(uni(body), cuts)
-    part("C08a", "캡스턴 너트 트랩 빔 쿠폰 (5종)", "C", s, "건반처럼 뒤집어 (빔 윗면 = 바탕 판을 베드에); 너트 홈 천장은 구멍 없는 0.4 막 = 5.6~5.8 다리 (A15)",
+    part("C08a", "캡스턴 너트 트랩 빔 쿠폰 (5종)", "C", s, "건반처럼 뒤집어 (빔 윗면 = 바탕 판을 베드에); 너트 홈 천장은 구멍 없는 0.4 막 = 5.6~5.8 다리 (A15), 잠김 구멍 입구 0.4 막·−x 빼기 통로 폭 3 (A17)",
          "빔 폭 %.1f, z%.1f~%.1f (캡스턴 자리), 너트 홈 z%.1f~%.1f 옆에서 열림, 밑 막 %.1f: 1) %s" % (P["beam_w"], zb0, zcap, zt0, zt1, mem,
                                                                                 ", ".join("%d) 홈 %s / 구멍 Ø%s" % (i + 1, f_(w, 1), f_(d, 1)) for i, (w, d) in enumerate(variants))[3:]),
          "M3 너트를 옆에서 끼우고 M3×6 버튼헤드를 위 Ø구멍으로 돌려 넣어(끝이 막을 뚫음) 자가 잠김 토크·유지를 본다", settings=LIKE_KEY)
