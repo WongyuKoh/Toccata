@@ -40,7 +40,8 @@ KICAD = [
     ("Conn_02x08_Odd_Even", None, "RIBBON", "Connector_Generic:Conn_02x08_Odd_Even",
      "Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical (패드만, 리본 직접 납땜)"),
     ("Conn_01x06", None, "PADS6", "Connector_Generic:Conn_01x06", "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical (패드만)"),
-    ("JST_XH_6P", None, "JSTXH", "Connector_Generic:Conn_01x06", EXCL + " — 선 대 선 커넥터"),
+    ("XH254_5P", None, "JSTXH", "Connector_Generic:Conn_01x05", EXCL + " — 선 대 선 커넥터 (키트 헤더를 선 끝에 납땜 ⇄ 하우징 압착, △34)"),
+    ("XH254_3P", None, "JSTXH", "Connector_Generic:Conn_01x03", EXCL + " — 선 대 선 커넥터 (키트 헤더를 선 끝에 납땜 ⇄ 하우징 압착, △34)"),
     ("Conn_pads", None, "PADS", "Connector_Generic:Conn_01x0N (J401 = 01x05, J411 = 01x03)", "Connector_PinHeader_2.54mm:PinHeader_1x05 / 1x03_P2.54mm_Vertical (패드만)"),
     ("SolderJumper_2_Open", None, "JP", "Jumper:SolderJumper_2_Open", "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm (만능기판: 두 구멍 브리지)"),
     ("SolderJumper_2_Bridged", None, "JP", "Jumper:SolderJumper_2_Bridged", "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm (만능기판: 두 구멍 납땜)"),
@@ -77,7 +78,7 @@ KICAD = [
 # fitted only on some boards (MB variants)
 FIT = {"R301": "O1·O7", "R302": "O1", "R303": "O1", "R304": "없음 (비움)",
        "JP301": "O1·O3·O5·O7 닫음", "JP302": "O2·O3·O6·O7 닫음", "JP303": "O4~O7 닫음", "JP304": "모두 열림 (PB는 JP504)",
-       "J302": "O1·O7만 L66 모듈 쪽 리드(W403·W413)를 윗면에서 납땜 (△33), O2~O6 비움"}
+       "J302": "O1·O7만 EXT 선(W403·W413, 사용자 선)을 윗면에서 납땜 (△33) — O1 패드 5, O7 패드 3·4·5 비움 (△34), O2~O6 비움"}
 FIT_COUNT = {"R301": 2, "R302": 1, "R303": 1, "R304": 0}
 
 

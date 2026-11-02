@@ -542,8 +542,8 @@ def part_label(r):
         return "먹스 4067"
     if "PJ-313" in v:
         return "PJ-313 잭"
-    if "JST-XH" in v:
-        return "JST-XH"
+    if "XH2.54" in v or "JST-XH" in v:
+        return "XH2.54 커넥터"
     if re.fullmatch(r"[\d.]+\s*[nuµp]", v):
         return "콘덴서"
     if re.fullmatch(r"[\d.]+\s*[kM]?Ω?", v):

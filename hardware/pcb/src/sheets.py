@@ -19,7 +19,7 @@ REV_C = dict(rev="C", date="2026-10-01")
 # User decision 2026-10-07 (R33): USB-C PD (HUSB238 A601 + 65 W charger / PD power bank) -> LiFePO4 pack BT601.
 REV_D = dict(rev="D", date="2026-10-07")
 # ------------------------------------------------------------------ rev E (2026-10-08): final purchases (plan C) + physical sheets
-# BE163 board pieces, Adafruit 4876 EXT pair, KCD1-104 as two poles in parallel, ATO blade fuse holder, C24 Pi lead, J502 pads,
+# BE163 board pieces, XH2.54 kit EXT connectors (△34), KCD1-104 as two poles in parallel, ATO blade fuse holder, C24 Pi lead, J502 pads,
 # AUX halves, wire lengths from the CAD (cad_extract.py); new sheets BRD-03 (PED board) .. BRD-06 (signal harnesses).
 REV_E = dict(rev="E", date="2026-10-08")
 BATT = dict(
@@ -328,9 +328,9 @@ def sch03(sig_r=None):
         s.wire((px, py), (px - L, py))
         net_end(s, px - L, py, nm, "L")
         exp_add(e, nm, f"J302.{i+1}")
-        s.text(353, py + 0.8, ["GND (XH 1번)", "EXT1 → C12", "EXT2 → C13", "EXT3 → C14", "EXT4 → C15", "3V3 (XH 6번)"][i], "notes", size=2.0)
+        s.text(353, py + 0.8, ["GND (XH 1번)", "EXT1 → C12", "EXT2 → C13", "EXT3 → C14", "EXT4 → C15 (비움)", "3V3 (XH 끝번)"][i], "notes", size=2.0)
     import harness as _H
-    s.text(318, 68.5, "O1·O7만 Adafruit 4876 플러그 선 %d / %d mm → XH 6P (SCH-04)" % (_H.EXT_CUT["O1"], _H.EXT_CUT["O7"]), "notes", size=2.0)
+    s.text(318, 68.5, "O1·O7만 EXT 선 %d / %d mm → XH2.54 하우징 5P / 3P (SCH-04)" % (_H.EXT_CUT["O1"], _H.EXT_CUT["O7"]), "notes", size=2.0)
     s.chg(338, 26.5, 6)
     s.chg(66, 26.5, 12)
     # EXT pull-downs (△8, review R4); the 1 kohm series resistors sit on EL/ER at the sensor (SCH-04)
@@ -412,6 +412,7 @@ SHEETS.append(sch03)
 # ------------------------------------------------------------------ SCH-04
 def _end_board(s, e, y0, tag, keys, ubase, cbase, rbase, jref, xref, rail):
     """One end-part sensor board + harness. keys = [(key, net, ext_no)]."""
+    import harness as _H
     y3, yg, yc = y0 + 20, y0 + 70, y0 + 45
     hall, cap = sym_hall(), sym_C()
     xs0, dx = 45, 42.5
@@ -449,67 +450,54 @@ def _end_board(s, e, y0, tag, keys, ubase, cbase, rbase, jref, xref, rail):
     b = s.pin(cb, 2); s.wire(b, (b[0], yg))
     s.chg(xend + 10, yc + 15, 3)
     exp_add(e, rail, f"{cb}.1"); exp_add(e, "GND", f"{cb}.2")
-    # XH position map (△6): 1 = GND (black edge), 2..5 = EXT1..4, 6 = 3V3 (red edge) — same as J302 pads
+    # XH position map (△34, XH2.54 kit): 1 = GND, 2.. = the sensors in EXT order, last = 3V3 -> EL 5P, ER 3P.
+    # J302 pads keep the △6 order (1 GND, 2..5 EXT1..4, 6 3V3); unused EXT pads stay empty.
     mod = "O1" if tag == "L" else "O7"
     pre = "EL" if tag == "L" else "ER"
-    pos_map = {1: "GND", 6: rail}
-    pos_key = {1: "GND", 6: "3V3"}
-    for k, net, ext in keys:
-        pos_map[ext + 1] = net
-        pos_key[ext + 1] = k
-    rows, n = [], 0
-    for pos in range(1, 7):
-        if pos in pos_map:
-            n += 1
-            rows.append((n, pos_key[pos]))
-        else:
-            rows.append(None)
-    jb = sym_box("Conn_pads", [], rows, width=12, cls="body", pinlen=5, rows=6, top_pad=5)
+    pins = [("GND", "GND", 1)] + [(net, k, ext + 1) for k, net, ext in keys] + [(rail, "3V3", 6)]   # (net, label, J302 pad)
+    npin = len(pins)
+    rows = [(i + 1, lab) for i, (_, lab, _) in enumerate(pins)]
+    jb = sym_box("Conn_pads", [], rows, width=12, cls="body", pinlen=5, rows=npin, top_pad=5)
     jx = 190
-    s.place(jb, jref, f"리드선 패드 ×{n}", jx, y0 + 12.5, ref_at=(0, -2.2), val_at=(0, 38.5))
+    s.place(jb, jref, f"리드선 패드 ×{npin}", jx, y0 + 12.5, ref_at=(0, -2.2), val_at=(0, 5 * npin + 8.5))
     xa, xb = f"X{xref}", f"X{xref+1}"
-    s.place(sym_conn("JST_XH_6P", 6, side="L", width=6), xa, "JST-XH 6P (끝 부속 쪽)", 250, y0 + 15,
-            ref_at=(0, -2.2), val_at=(-20, 36.0))
-    s.place(sym_conn("JST_XH_6P", 6, side="R", width=6), xb, "JST-XH 6P (모듈 쪽)", 257.5, y0 + 15,
-            ref_at=(0, -2.2), val_at=(0, 39.0))
-    s.mate(xa, xb, at=(256.3, y0 + 15 + 30 + 2.2))
-    for pos in range(1, 7):
-        r = rows[pos - 1]
+    sym = f"XH254_{npin}P"
+    s.place(sym_conn(sym, npin, side="L", width=6), xa, f"XH2.54 {npin}P 헤더 (끝 부속 쪽)", 250, y0 + 15,
+            ref_at=(0, -2.2), val_at=(-20, 5 * npin + 6.0))
+    s.place(sym_conn(sym, npin, side="R", width=6), xb, f"XH2.54 {npin}P 하우징 (모듈 쪽)", 257.5, y0 + 15,
+            ref_at=(0, -2.2), val_at=(0, 5 * npin + 9.0))
+    s.mate(xa, xb, at=(256.3, y0 + 15 + 5 * npin + 2.2))
+    for pos, (net, lab, pad) in enumerate(pins, 1):
         tx, ty = s.pin(xa, pos)
-        if r is None:
-            s.nc(tx, ty)
-            exp_add(e, f"{pre}_EXT{pos-1}", f"{xa}.{pos}", f"{xb}.{pos}")
-            continue
-        jx_, jy_ = s.pin(jref, r[0])
+        jx_, jy_ = s.pin(jref, pos)
         s.wire((jx_, jy_), (tx, ty))
-        net = pos_map[pos]
         if net in POWER:
             s.pwr(jx_ + 25, jy_, net)
         else:
             s.label(jx_ + 3, jy_, net, "R")
-        exp_add(e, net, f"{jref}.{r[0]}", f"{xa}.{pos}", f"{xb}.{pos}")
+        exp_add(e, net, f"{jref}.{pos}", f"{xa}.{pos}", f"{xb}.{pos}")
     s.cable((jx + 22, y0 + 8.5), (jx + 55, y0 + 8.5), text=None)
-    s.text(jx + 22, y0 + 7.0, f"W{xref}: {n}심 {'350' if tag=='L' else '300'} mm", "cabt", size=2.2)
-    col = {1: "XH 1번", 6: "XH 6번"}
-    for pos in range(1, 7):
+    s.text(jx + 22, y0 + 7.0, f"W{xref}: 리본 {npin}심 {_H.EXT_END_CUT[pre]} mm", "cabt", size=2.2)
+    for pos, (net, lab, pad) in enumerate(pins, 1):
         bx, by = s.pin(xb, pos)
-        if pos in (1, 6):
+        if pad in (1, 6):
             s.wire((bx, by), (bx + 24, by))
-            s.pwr(bx + 24, by, "GND" if pos == 1 else rail)
-            s.text(bx + 30, by + 0.8, f"→ {mod} J302-{pos} {'GND' if pos == 1 else '3V3'} ({col[pos]})", "notes", size=2.0)
+            s.pwr(bx + 24, by, net)
+            s.text(bx + 30, by + 0.8, f"→ {mod} J302-{pad} {'GND' if pad == 1 else '3V3'} (XH {pos}번)", "notes", size=2.0)
         else:
-            nm = pos_map.get(pos, f"{pre}_EXT{pos-1}")
             s.wire((bx, by), (bx + 5, by))
-            s.glabel(bx + 5, by, nm, "R")
-            s.text(bx + 30, by + 0.8, f"→ {mod} J302-{pos} EXT{pos-1} = 먹스 C{10+pos}" + ("" if pos in pos_map else " (비움)"), "notes", size=2.0)
+            s.glabel(bx + 5, by, net, "R")
+            s.text(bx + 30, by + 0.8, f"→ {mod} J302-{pad} EXT{pad-1} = 먹스 C{10+pad} (XH {pos}번)", "notes", size=2.0)
+    unused = [str(q) for q in range(2, 6) if q not in [p_ for _, _, p_ in pins]]
+    s.text(299.5, y0 + 15 + 5 * npin + 5.0, f"{mod} J302 패드 {'·'.join(unused)} 비움 (EXT 미사용)", "notes", size=2.0)
     s.cable((267.5, y0 + 8.5), (297.5, y0 + 8.5))
-    s.text(267.5, y0 + 7.0, f"W{xref+2}: 6심 150 mm → {mod} 제어 기판 EXT (SCH-03 J302)", "cabt", size=2.2)
+    s.text(267.5, y0 + 7.0, f"W{xref+2}: {npin}심 {_H.EXT_CUT[mod]} mm → {mod} 제어 기판 EXT (SCH-03 J302)", "cabt", size=2.2)
     s.chg(248, y0 + 9, 6)
 
 
 def sch04():
     s = Sheet("SCH-04", 4, TOTAL, "끝 부속 센서 기판 (EL · ER) + EXT 연결",
-              "왼쪽 끝 부속 A0·A#0·B0 센서 3개는 O1, 오른쪽 C8 센서 1개는 O7 제어 기판의 EXT(먹스 C12~)로 읽는다. 파트 사이는 JST-XH 6핀 잠금 커넥터(R26).",
+              "왼쪽 끝 부속 A0·A#0·B0 센서 3개는 O1, 오른쪽 C8 센서 1개는 O7 제어 기판의 EXT(먹스 C12~)로 읽는다. 파트 사이는 XH2.54 커넥터(EL 5P · ER 3P, R26·△34).",
               "EL · ER", qty="EL × 1 · ER × 1", basis="v4 W1+ r4.5 끝 부속", **REV_E)
     e = {}
     s.box(14, 22, 380, 94, "EL — 왼쪽 끝 부속 센서 기판 (x1.0~46.5 × y60.65~75.89, 45.5 × 15.24 mm, 6행) — BRD-02 배치")
@@ -520,18 +508,18 @@ def sch04():
     s.para(15, 220, [
         "주  1. 끝 부속 센서도 SCH-02와 같다: DRV5055A2 + 100 nF(센서 옆). W1 자석 x: 왼쪽 부속(x0~47) A0 10.287, A#0 26.927, B0 40.141, 오른쪽 부속(로컬 x0~23.5) C8 11.75.",
         "        기판은 W1 r4.2 끝 부속 센서 바(왼 x0.5~46.5, 오른 x0.5~23.0) 안: EL x1.0~46.5, ER x1.0~23.0 (SB와 같은 6행 15.24). 리드 구멍 A0 13.33, A#0 31.11, B0 43.81, C8 15.87.",
-        "     2. 커넥터: Adafruit 4876 JST-XH 호환 6P 짝(각 약 20 cm, 26 AWG) — 플러그 선은 모듈 쪽 150, 소켓 선은 끝 부속 쪽 50으로 자름. ‘>>’ = 맞물림(KiCad 연결 아님 →",
+        "     2. △34 커넥터: XH2.54 DIY 키트(쿠팡 더모어샵) — 모듈 쪽 = 하우징(암, 사용자 선 끝에 단자 압착), 끝 부속 쪽 = 기판용 헤더(수)를 리본 끝에 납땜. ‘>>’ = 맞물림(KiCad 연결 아님 →",
         "        양쪽에 같은 넷 이름). +3V3_EL·+3V3_ER은 각각 O1·O7 제어 기판의 3V3 레일이다(프로젝트 전원 심볼로 추가).",
-        "     3. △6 XH 위치 = J302 EXT 패드 번호: 1 = GND, 2~5 = 먹스 C12~C15, 6 = 3V3. 선 색이 아니라 하우징 번호로 구분 —",
-        "        자르기 전에 양쪽에 번호 테이프, 납땜 뒤 끝에서 끝까지 통전 확인. 선 만들기·자르는 길이 = BRD-06.",
-        "     4. △3 C404·C412 10 µF: 3V3가 긴 선 끝(EL 150 + 350 mm, ER 150 + 300 mm)이라 벌크 콘덴서 추가.",
+        "     3. △34 XH 위치: EL 1 GND · 2 A0 · 3 A#0 · 4 B0 · 5 3V3, ER 1 GND · 2 C8 · 3 3V3. J302 패드는 △6 그대로(1 GND, 2~5 = 먹스 C12~C15, 6 = 3V3) —",
+        "        XH 마지막 번호(3V3) = J302 6번, 안 쓰는 EXT 패드는 비움. 펌웨어 그대로. 납땜 뒤 끝에서 끝까지 통전 확인. 선 만들기·자르는 길이 = BRD-06.",
+        "     4. △3 C404·C412 10 µF: 3V3가 긴 선 끝(EL 160 + 400 mm, ER 150 + 350 mm)이라 벌크 콘덴서 추가.",
         "     5. △8 R401~R403·R411 1 kΩ 1206 칩(아랫면, △13): 센서 바가 기판 윗면을 덮어 리드형 저항을 둘 자리가 없다 — OUT 구멍과 바로 뒤 행(y72.08) 사이.",
         "        센서 OUT 바로 뒤에서 약 0.6 m 선 용량을 떼어 낸다(TI: OUT에 C 직결 금지). MB의 100 kΩ 풀다운과 함께",
         "        끝 부속을 빼면 EXT = 0 V. 펌웨어: O1 C12~C14 → MIDI 21~23, O7 C12 → 108, 0.15 V 아래면 센서 없음.",
         "     6. W401·W411 길(W1 r4.4, r4.5 그대로): 패드(아랫면) → 기판 밑 → 뒤 받침 리브 틈 → 패드 줄 뒤 y77.39 안에서 EL x14.83~21.18 · ER x8.89~12.70으로 모음",
         "        → 바닥(건반 밑) → 끝 부속 밸런스 레일 밑 차선(z5~10; EL x13.53~22.48, ER x7.59~14.00) → 뒷벽 홈(z5~12) → 뒤 케이블 통로의 X401·X411.",
-        "        순서: 리본 가닥을 J401/J411에 납땜 → 기판·센서 바 고정 → 자유 끝을 리브 틈·차선·뒷벽 홈으로 꿴 뒤, 뒤 통로에서 L66 소켓 선(50 mm)과",
-        "        이어 열수축(C10). XH 하우징(폭 약 17)은 차선·홈을 못 지나므로 먼저 달지 않는다. 아랫면 칩·납땜 ≤ 1.8 mm(기판 밑 2.0).",
+        "        순서: 리본 가닥을 J401/J411에 납땜 → 기판·센서 바 고정 → 자유 끝을 리브 틈·차선·뒷벽 홈으로 꿴 뒤, 뒤 통로에서 XH2.54 헤더 꼬리에",
+        "        바로 납땜 + 열수축(C10, △34). 헤더(EL 5P 폭 약 15)는 차선·홈을 못 지나므로 먼저 달지 않는다. 아랫면 칩·납땜 ≤ 1.8 mm(기판 밑 2.0).",
     ], size=2.2)
     s.frame()
     s.expected = e

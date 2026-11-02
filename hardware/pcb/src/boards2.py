@@ -764,7 +764,7 @@ def brd05():
 def brd06():
     from sheets import TOTAL, REV_E
     s = Sheet("BRD-06", 13, TOTAL, "신호 하네스 (리본 · EXT · 페달 · 화면 전원)",
-              "센서 리본, 끝 부속 EXT 선(Adafruit 4876 짝), 페달 선, 화면 전원 점퍼. 핀 = 하우징 번호. 산 그대로 꽂는 선은 아래 표.",
+              "센서 리본, 끝 부속 EXT 선(XH2.54 키트 EL 5P · ER 3P, △34), 페달 선, 화면 전원 점퍼. 핀 = 하우징 번호. 산 그대로 꽂는 선은 아래 표.",
               "모듈 · 끝 부속 · PB · 화면", qty="전체", basis="harness.py", **REV_E)
     by = {h["id"]: h for h in HN.HARNESS}
     yl = 24.0
@@ -789,21 +789,21 @@ def brd06():
     # XH position table (EL / ER) on the free right side
     xr = []
     for tag, mod, keys in (("EL", "O1", [("A0", "EL_A0", 21), ("A#0", "EL_AS0", 22), ("B0", "EL_B0", 23)]), ("ER", "O7", [("C8", "ER_C8", 108)])):
-        pos = {1: ("GND", "—", "—"), 6: ("+3V3_" + tag, "—", "—")}
-        for k, (key, net, midi) in enumerate(keys):
-            pos[2 + k] = (net, f"C{12+k}", f"{key} = {midi}")
-        for n in range(1, 7):
-            net, ch, md = pos.get(n, ("(비움)", f"C{10+n}", "—"))
-            xr.append([tag if n == 1 else "", n, net, f"{mod} J302-{n}", ch, md])
+        # △34: XH 1 = GND, 2.. = sensors, last = 3V3 (EL 5P, ER 3P); J302 pads keep the △6 order, unused EXT pads empty
+        pos = [("GND", 1, "—", "—")] + [(net, 2 + k, f"C{12+k}", f"{key} = {midi}") for k, (key, net, midi) in enumerate(keys)] + [("+3V3_" + tag, 6, "—", "—")]
+        for n, (net, pad, ch, md) in enumerate(pos, 1):
+            xr.append([tag if n == 1 else "", n, net, f"{mod} J302-{pad}", ch, md])
+        xr.append(["", "—", "(비움)", f"{mod} J302-" + "·".join(str(q) for q in range(2, 6) if q not in [p_[1] for p_ in pos]), "—", "—"])
     s.table(214.0, yr + 2.0, ["끝", "XH", "넷", "제어 기판 패드", "먹스", "건반 = MIDI"], xr, [12, 10, 34, 34, 16, 36],
             title="EXT 커넥터 위치 (X401⇄X402 · X411⇄X412)", mono_cols=(1, 2, 3, 4), rh=2.9)
     hp = HN.HUB_PORTS
     s.text(14.0, yt2 + 4.0, "허브 포트 (−x 끝부터 0~9): " + " · ".join("%d = %s" % (v, k) for k, v in sorted(hp.items(), key=lambda kv: kv[1]))
            + " · 0·1 비움 (CAD cable_duct.hub.port_map)", "notes", size=2.0)
     s.para(14.0, yt2 + 8.5, [
-        "주  1. Adafruit 4876 한 쌍 = 플러그 선 + 소켓 선(각 약 20 cm, 26 AWG). 플러그 선 → 모듈 J302(O1 %d · O7 %d mm로 자름, 윗면 납땜 — △33), 소켓 선 → 끝 부속 리본(50 mm로 자름)."
+        "주  1. △34 EXT = XH2.54 DIY 키트(쿠팡 더모어샵). 모듈 쪽: 사용자 선(O1 5심 %d · O7 3심 %d mm) 한 끝에 단자 압착 → 하우징(암), 다른 끝 → J302 윗면 납땜(△33)."
         % (HN.EXT_CUT["O1"], HN.EXT_CUT["O7"]),
-        "    선 색은 판매처가 밝히지 않아 하우징 번호(1 = GND … 6 = 3V3)로만 잇는다. 자르기 전에 양쪽에 번호 테이프.",
+        "    끝 부속 쪽: 통로까지 뺀 리본 끝(EL %d · ER %d mm)을 기판용 헤더(수) 꼬리에 바로 납땜 + 수축 튜브. 하우징 번호 1 = GND … 끝번 = 3V3, 통전으로 확인."
+        % (HN.EXT_END_CUT["EL"], HN.EXT_END_CUT["ER"]),
         "2. 리본 가닥: 끝 1.5 mm 벗겨 납을 먹여 아랫면에서 꽂는다 — SB·EL·ER는 아랫면 납땜, 다리 끝 1 mm 아래로(기판 밑 2.0), MB J301은 윗면 납땜(△33). 가닥끼리 이음은 각각 수축 튜브.",
         "3. 허브 710U3: 10포트 중 1개는 충전 전용, 포트마다 ON/OFF 스위치. 충전 전용 포트(표시, 또는 Zero를 꽂아 장치로 안 보이는 포트)가",
         "    0·1번인지 확인 — 2~9번이면 그 보드를 1번(또는 0번)으로 옮기고 회로도 탭 '허브 포트 옮김' 표로 선 길이를 다시 본다. 쓰는 8개 포트 스위치를 켠다.",

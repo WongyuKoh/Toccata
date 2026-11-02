@@ -149,7 +149,11 @@ def H(**k):
 # duct floor -> XH plug end face. Path per conductor (min = 1 GND, max = 6 3V3), mm: spec electronics_modules ext_lead route as drawn by
 # model3d.py + cad/src/electronics.py ext_floor_path (model3d.spec_check() recomputes it and must agree within 0.5).
 EXT_PATH = {"O1": (137.5, 146.4), "O7": (113.1, 122.0)}
-EXT_CUT = {"O1": 160, "O7": 150}       # >= longest conductor + strip 5 + spare (O1 ~9, O7 keeps its 150); 4876 leads are ~200
+EXT_CUT = {"O1": 160, "O7": 150}       # >= longest conductor + strip 5 + spare (O1 ~9, O7 keeps its 150)
+# △34 (2026-11-02) EXT connector = XH2.54 DIY kit (Coupang 더모어샵, 2~5P housings + PCB headers + loose terminals, crimped by the user):
+# EL 5P / ER 3P, housing (female, crimped) on the live module side, PCB header soldered straight onto the ribbon end on the end-part side.
+# The 50 mm socket lead + splice of the 4876 pair is gone, so the end-part ribbon is cut 50 longer.
+EXT_END_CUT = {"EL": 400, "ER": 350}  # ribbon: circuit spec 350 / 300 + 50 to the header
 
 HARNESS = [
     # ------------------------------------------------------------------ signal: module ribbons
@@ -163,36 +167,39 @@ HARNESS = [
              "△33 SB·리본·MB는 작업대에서 한 묶음으로 납땜한다(경로 약 30, 자름 70). SB를 받침 리브에, MB를 바닥 자리에 놓은 뒤 남는 약 35는 "
              "MB 앞(y79~93, 검은 건반 탭 받침 사이) 바닥에 평평하게 접어 둔다."]),
     # ------------------------------------------------------------------ end parts
-    H(id="W401", part="end", title="EL 리드 (리본 5가닥) + X401 소켓 선", cable="2651-16P에서 5가닥 + Adafruit 4876 소켓 선(26 AWG) 50 mm",
-      bom="RIBBON · JSTXH", a=("J401", "EL 패드 1×5 (아랫면)"), b=("X401", "JST-XH 6P 소켓 (끝 부속 쪽)"),
+    H(id="W401", part="end", title="EL 리드 (리본 5가닥) → X401 헤더", cable="2651-16P에서 5가닥 → XH2.54 5P 헤더 꼬리에 직접 납땜",
+      bom="RIBBON · JSTXH", a=("J401", "EL 패드 1×5 (아랫면)"), b=("X401", "XH2.54 5P 헤더 (수, 끝 부속 쪽)"),
       cond=[(1, "rib", "GND", "1", "1"), (2, "rib", "EL_A0", "2", "2"), (3, "rib", "EL_AS0", "3", "3"), (4, "rib", "EL_B0", "4", "4"),
-            (5, "rib", "+3V3_EL", "5", "6")],
-      path=None, path_src="회로 사양 350 (리드 길: 패드 → 레일 밑 차선 EL x13.53~22.48 → 뒷벽 홈 → 통로 바닥)", cut_txt="리본 350 + 소켓 선 50",
-      splices=[("S-EL", "리본 가닥 ↔ 소켓 선 5가닥 (뒤 통로에서, 수축 튜브 각각)")],
-      notes=["XH 하우징(폭 약 17)은 차선·홈을 못 지나므로 리본을 먼저 꿰고 뒤 통로에서 소켓 선과 잇는다(SCH-04 주 6).",
-             "소켓 선 5번(빈 칸)은 잘라 낸다. 선 색은 받은 선으로 확인 — 위치 번호로만 잇는다."]),
-    H(id="W403", part="end", title="O1 EXT 플러그 선 (X402)", cable="Adafruit 4876 플러그 선 6심 26 AWG → %d mm로 자름" % EXT_CUT["O1"], bom="JSTXH",
-      a=("O1 J302", "MB EXT 패드 1×6 (윗면)"), b=("X402", "JST-XH 6P 플러그 (모듈 쪽)"),
+            (5, "rib", "+3V3_EL", "5", "5")],
+      path=None, path_src="회로 사양 350 + 헤더까지 50 (리드 길: 패드 → 레일 밑 차선 EL x13.53~22.48 → 뒷벽 홈 → 통로 바닥)", cut_txt="리본 %d" % EXT_END_CUT["EL"],
+      shrink="가닥마다 작은 수축 튜브 + 헤더 전체에 큰 수축 튜브",
+      notes=["△34 키트 헤더(기판용, 꼬리 약 3 mm)를 리본 끝에 바로 납땜해 선 끝 수 커넥터로 쓴다 — 이음(S-EL) 없음.",
+             "헤더(폭 약 15)는 차선·홈을 못 지나므로 리본을 먼저 꿰어 통로까지 뺀 뒤 납땜한다(SCH-04 주 6).",
+             "헤더 1번 = GND(하우징 걸림 턱 쪽 표시 확인), 5번 = 3V3. 납땜 뒤 J401 ↔ 헤더를 핀마다 통전 확인."]),
+    H(id="W403", part="end", title="O1 EXT 선 (X402 하우징)", cable="사용자 보유 선 5심 22~28 AWG(없으면 리본 남는 것 5가닥) → %d mm로 자름" % EXT_CUT["O1"],
+      bom="JSTXH", a=("O1 J302", "MB EXT 패드 1×6 (윗면, 5번 비움)"), b=("X402", "XH2.54 5P 하우징 + 단자 압착 (암, 모듈 쪽)"),
       cond=[(1, "gry", "GND", "1", "1"), (2, "gry", "EL_A0 (EXT1)", "2", "2"), (3, "gry", "EL_AS0 (EXT2)", "3", "3"),
-            (4, "gry", "EL_B0 (EXT3)", "4", "4"), (5, "gry", "EXT4 (비움)", "5", "5"), (6, "gry", "+3V3", "6", "6")],
+            (4, "gry", "EL_B0 (EXT3)", "4", "4"), (5, "gry", "+3V3", "6", "5")],
       path=EXT_PATH["O1"][1], path_src="CAD %.1f~%.1f: J302 윗면 → 뒤 턱 → 바닥 → 플러그 밑 → 뒷벽 개구 → 통로 → X402" % EXT_PATH["O1"],
       cut_txt="%d (경로 최대 %.0f + 벗김 5 + 여유 약 %.0f)" % (EXT_CUT["O1"], EXT_PATH["O1"][1], EXT_CUT["O1"] - EXT_PATH["O1"][1] - 5),
       notes=["J302는 윗면에서 납땜 — 선이 뒤에서 기판 뒤 모서리를 넘어 온다(BRD-01 주 8). SB·리본·MB 묶음과 함께 작업대에서.",
-             "1 = GND … 6 = 3V3. 선 색이 아니라 하우징 번호로 확인.",
-             "△33 기판이 바닥으로 내려가 경로가 길어짐(1 GND %.1f ~ 6 3V3 %.1f, J302 윗면 → 기판 뒤 모서리·뒤 턱 위 → 바닥 → −x → USB 플러그 밑 → 뒷벽 개구 → "
+             "△34 하우징 쪽 끝은 작업대에서 먼저 압착(2.5 mm 피치 오픈배럴 압착기, 단자를 하우징에 '딸깍' 끼움). 맨 끝을 통로 쪽에서 뒷벽 개구로 넣어 J302에 납땜한다.",
+             "3V3가 살아 있는 쪽이라 금속이 드러나지 않는 하우징(암)을 모듈 쪽에 둔다. J302 패드 5(EXT4)는 비운다 — 하우징 5번 = J302 6번(3V3).",
+             "△33 기판이 바닥으로 내려가 경로가 길어짐(1 GND %.1f ~ 3V3 %.1f, J302 윗면 → 기판 뒤 모서리·뒤 턱 위 → 바닥 → −x → USB 플러그 밑 → 뒷벽 개구 → "
              "통로 바닥 → X402 끝면; spec ext_lead + CAD electronics.ext_floor_path): 150으로 자르면 3V3 가닥에 남는 길이가 벗김까지 약 %.0f mm뿐이라 "
-             "%d으로 자른다 (4876 선은 약 200 mm)." % (EXT_PATH["O1"] + (150 - EXT_PATH["O1"][1], EXT_CUT["O1"]))]),
-    H(id="W411", part="end", title="ER 리드 (리본 3가닥) + X411 소켓 선", cable="2651-16P에서 3가닥 + Adafruit 4876 소켓 선 50 mm",
-      bom="RIBBON · JSTXH", a=("J411", "ER 패드 1×3 (아랫면)"), b=("X411", "JST-XH 6P 소켓 (끝 부속 쪽)"),
-      cond=[(1, "rib", "GND", "1", "1"), (2, "rib", "ER_C8", "2", "2"), (3, "rib", "+3V3_ER", "3", "6")],
-      path=None, path_src="회로 사양 300 (레일 밑 차선 ER x7.59~14.00 → 뒷벽 홈 → 통로)", cut_txt="리본 300 + 소켓 선 50",
-      splices=[("S-ER", "리본 가닥 ↔ 소켓 선 3가닥")], notes=["소켓 선 3·4·5번은 잘라 낸다."]),
-    H(id="W413", part="end", title="O7 EXT 플러그 선 (X412)", cable="Adafruit 4876 플러그 선 6심 → %d mm" % EXT_CUT["O7"], bom="JSTXH",
-      a=("O7 J302", "MB EXT 패드 1×6 (윗면)"), b=("X412", "JST-XH 6P 플러그"),
-      cond=[(1, "gry", "GND", "1", "1"), (2, "gry", "ER_C8 (EXT1)", "2", "2"), (3, "gry", "EXT2 (비움)", "3", "3"),
-            (4, "gry", "EXT3 (비움)", "4", "4"), (5, "gry", "EXT4 (비움)", "5", "5"), (6, "gry", "+3V3", "6", "6")],
+             "%d으로 자른다." % (EXT_PATH["O1"] + (150 - EXT_PATH["O1"][1], EXT_CUT["O1"]))]),
+    H(id="W411", part="end", title="ER 리드 (리본 3가닥) → X411 헤더", cable="2651-16P에서 3가닥 → XH2.54 3P 헤더 꼬리에 직접 납땜",
+      bom="RIBBON · JSTXH", a=("J411", "ER 패드 1×3 (아랫면)"), b=("X411", "XH2.54 3P 헤더 (수, 끝 부속 쪽)"),
+      cond=[(1, "rib", "GND", "1", "1"), (2, "rib", "ER_C8", "2", "2"), (3, "rib", "+3V3_ER", "3", "3")],
+      path=None, path_src="회로 사양 300 + 헤더까지 50 (레일 밑 차선 ER x7.59~14.00 → 뒷벽 홈 → 통로)", cut_txt="리본 %d" % EXT_END_CUT["ER"],
+      shrink="가닥마다 작은 수축 튜브 + 헤더 전체에 큰 수축 튜브",
+      notes=["△34 W401과 같은 방법: 통로까지 뺀 리본 끝에 3P 헤더를 바로 납땜(이음 S-ER 없음). 1 = GND, 3 = 3V3."]),
+    H(id="W413", part="end", title="O7 EXT 선 (X412 하우징)", cable="사용자 보유 선 3심 22~28 AWG(없으면 리본 남는 것 3가닥) → %d mm" % EXT_CUT["O7"],
+      bom="JSTXH", a=("O7 J302", "MB EXT 패드 1×6 (윗면, 3·4·5번 비움)"), b=("X412", "XH2.54 3P 하우징 + 단자 압착 (암)"),
+      cond=[(1, "gry", "GND", "1", "1"), (2, "gry", "ER_C8 (EXT1)", "2", "2"), (3, "gry", "+3V3", "6", "3")],
       path=EXT_PATH["O7"][1], path_src="CAD %.1f~%.1f: W403과 같은 길로 통로에서 +x → X412" % EXT_PATH["O7"],
-      cut_txt="%d (경로 최대 %.0f + 여유)" % (EXT_CUT["O7"], EXT_PATH["O7"][1]), notes=["O7은 R301(100 kΩ) 하나만 실장."]),
+      cut_txt="%d (경로 최대 %.0f + 여유)" % (EXT_CUT["O7"], EXT_PATH["O7"][1]),
+      notes=["O7은 R301(100 kΩ) 하나만 실장.", "△34 하우징 3번 = J302 6번(3V3). J302 패드 3·4·5는 비운다."]),
     # ------------------------------------------------------------------ pedal
     H(id="W501", part="ped", title="페달 선 (3 m 스테레오, 페달 쪽 잘라 납땜)", cable="Coms BC256 3.5 mm TRS 3 m", bom="TRS3M",
       a=("PS", "페달 안 센서 조각 (팁 → R551, 링 → VCC, 슬리브 → GND)"), b=("P501", "TRS 플러그 → J501"),

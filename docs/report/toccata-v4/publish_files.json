@@ -2,11 +2,11 @@
  "generated": "2026-10-08",
  "page": {
   "path": "index.html",
-  "bytes": 1396282
+  "bytes": 1398829
  },
  "count": 350,
  "count_with_page": 351,
- "total_bytes": 60318946,
+ "total_bytes": 60315867,
  "total_mb": 57.52,
  "limits": {
   "per_file_mb": 15,
@@ -50,7 +50,7 @@
   {
    "bundle": "fin/bundle/loc-detail-items-2.json",
    "files": 44,
-   "bytes": 1300380
+   "bytes": 1300414
   },
   {
    "bundle": "fin/bundle/loc-detail-prints-1.json",
@@ -782,7 +782,7 @@
   },
   {
    "path": "fin/bundle/loc-detail-items-2.json",
-   "bytes": 1300380,
+   "bytes": 1300414,
    "owners": [
     "index.html",
     "merge.py (bundle of 44 files)"
@@ -934,7 +934,7 @@
   },
   {
    "path": "fin/circuit/bom.csv",
-   "bytes": 35771,
+   "bytes": 36522,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -942,7 +942,7 @@
   },
   {
    "path": "fin/circuit/cables.csv",
-   "bytes": 3119,
+   "bytes": 3115,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -950,7 +950,7 @@
   },
   {
    "path": "fin/circuit/circuit3d.json",
-   "bytes": 349318,
+   "bytes": 349791,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -958,7 +958,7 @@
   },
   {
    "path": "fin/circuit/harness.csv",
-   "bytes": 22029,
+   "bytes": 21964,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -990,7 +990,7 @@
   },
   {
    "path": "fin/circuit/netlist.csv",
-   "bytes": 11109,
+   "bytes": 10893,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1038,7 +1038,7 @@
   },
   {
    "path": "fin/circuit/toccata-circuit-revE.zip.b64.txt",
-   "bytes": 337864,
+   "bytes": 337992,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1203,7 +1203,7 @@
   },
   {
    "path": "fin/loc/cards.json",
-   "bytes": 305142,
+   "bytes": 305866,
    "owners": [
     "index.html",
     "src/tabs/parts"
@@ -1211,7 +1211,7 @@
   },
   {
    "path": "fin/loc/overlays.json",
-   "bytes": 873059,
+   "bytes": 873215,
    "owners": [
     "index.html",
     "src/tabs/parts"
@@ -2313,7 +2313,7 @@
   },
   {
    "path": "fin/prep/lines.json",
-   "bytes": 212077,
+   "bytes": 212479,
    "owners": [
     "index.html",
     "src/tabs/prep"
@@ -2329,7 +2329,7 @@
   },
   {
    "path": "fin/sim/system.json",
-   "bytes": 113769,
+   "bytes": 113856,
    "owners": [
     "index.html",
     "src/tabs/sim"
@@ -3002,8 +3002,6 @@
    "path": "img/bom/i101.jpg",
    "bytes": 35760,
    "owners": [
-    "index.html",
-    "src/tabs/parts",
     "src/tabs/prep"
    ]
   },
@@ -3337,7 +3335,7 @@
   },
   {
    "path": "sch/BRD-06_signal_harness.svg",
-   "bytes": 42945,
+   "bytes": 40785,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3353,7 +3351,7 @@
   },
   {
    "path": "sch/BRD-08_control_board_underside.svg",
-   "bytes": 155596,
+   "bytes": 155611,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html",
@@ -3362,7 +3360,7 @@
   },
   {
    "path": "sch/SCH-01_system.svg",
-   "bytes": 34638,
+   "bytes": 34634,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3378,7 +3376,7 @@
   },
   {
    "path": "sch/SCH-03_control_board.svg",
-   "bytes": 58725,
+   "bytes": 58735,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3386,7 +3384,7 @@
   },
   {
    "path": "sch/SCH-04_end_parts.svg",
-   "bytes": 41701,
+   "bytes": 38291,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3684,7 +3682,7 @@
   },
   {
    "path": "data/final_items.json",
-   "bytes": 259636
+   "bytes": 260813
   },
   {
    "path": "data/mux_module_pins.csv",

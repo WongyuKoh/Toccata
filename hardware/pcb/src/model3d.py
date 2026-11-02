@@ -546,9 +546,9 @@ def mb_scene_parts(sc, SP, X0=0.0, detail=True):
     sc.box(shift(bx(up), X0), C["usb"], i="W201", g="cable")
     sc.cyl("y", (X(ucx), ucz), 1.75, (up["y"][1], 214.0), C["cable"], i="W201", g="cable")
     sc.label((X(ucx), 203.0, 19.0), "W201 USB → 허브", 1)
-    # EXT lead (O1 / O7): six strands soldered into J302 from the top, flat to the rear edge, over the rear lip (z8.5) to the floor,
+    # EXT lead (O1): five strands soldered into J302 from the top (pad 5 EXT4 empty, △34), flat to the rear edge, over the rear lip (z8.5) to the floor,
     # -x behind the board, then +y under the USB plug (z9.9) out of the rear-wall opening (spec ext_lead)
-    for n in range(1, 7):
+    for n in (1, 2, 3, 4, 6):
         net = pin_net("MB", "J302", n) or ""
         sc.tube([(X(x), y, z) for x, y, z in ext_lead_route(n)] + [(X(84.6 + 0.55 * (n - 1)), 214.0, 5.4)], 0.27, "#7e889a", i="W403", g="cable", n=net)
     # underside wiring (BRD-08 / wiring_MB.csv): single 2651 ribbon strands (OD ~0.9), joins only at pads
@@ -931,8 +931,8 @@ def scene_all(SP, CAD, JK):
         xm = (x0_ + x1_) / 2.0
         sc.tube([(xm, 212.0, 3.0), (xm, 216.0, 1.0), (b[0]["x"][0] - 1.0 if k_ == "EL" else b[0]["x"][1] + 1.0, 231.0, 1.0)], 1.0, C["ribbon"],
                 i="W401" if k_ == "EL" else "W411", g="cable")
-    info("XH-EL", "X401 ⇄ X402 JST-XH 6P (뒤 통로 바닥)", ["EL 리드 W401(소켓) ⇄ O1 EXT W403(플러그). 1 GND · 2~5 EXT1~4 · 6 3V3 (△6)."])
-    info("XH-ER", "X411 ⇄ X412 JST-XH 6P (뒤 통로 바닥)", ["ER 리드 W411(소켓) ⇄ O7 EXT W413(플러그)."])
+    info("XH-EL", "X401 ⇄ X402 XH2.54 5P (뒤 통로 바닥)", ["EL 리드 W401 끝 헤더(수) ⇄ O1 EXT W403 하우징(암, 압착). 1 GND · 2 A0 · 3 A#0 · 4 B0 · 5 3V3 (△34; J302 패드 1·2·3·4·6)."])
+    info("XH-ER", "X411 ⇄ X412 XH2.54 3P (뒤 통로 바닥)", ["ER 리드 W411 끝 헤더(수) ⇄ O7 EXT W413 하우징(암, 압착). 1 GND · 2 C8 · 3 3V3 (△34; J302 패드 1·2·6)."])
     # ---- headphone jack J701 (left cheek pocket) + AUX halves W701 / W702
     pk = JK["pocket"]
     cav = pk["body_cavity"]

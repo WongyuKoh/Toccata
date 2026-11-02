@@ -491,7 +491,7 @@ def system_data():
             x0 = 0.0 if side == "EL" else 47.0 + 164.5 * 7
             e.update(part=side, mb=f"O{mod}", sensor=kk[0], board=side, x_sensor=r(x0 + kk[2], 3), net=net,
                      path=[f"{kk[0]} OUT → {res} 1 kΩ (센서 옆, △8)", f"{eb['jref']}.{xpin} → 리드 {'W401' if side == 'EL' else 'W411'}",
-                           f"{'X401 ⇄ X402' if side == 'EL' else 'X411 ⇄ X412'} (JST-XH 6P) → 연장 {'W403' if side == 'EL' else 'W413'}",
+                           f"{'X401 ⇄ X402' if side == 'EL' else 'X411 ⇄ X412'} ({'XH2.54 5P' if side == 'EL' else 'XH2.54 3P'}) → 연장 {'W403' if side == 'EL' else 'W413'}",
                            f"O{mod} MB J302.{xpin} = {ext} (풀다운 {pd} 100 kΩ)"],
                      j_pin=xpin, ext=ext, mux_ch=ch, mb_route=mb_route(ext), ribbon=None)
         else:

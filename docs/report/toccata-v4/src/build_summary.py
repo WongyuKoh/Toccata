@@ -54,7 +54,7 @@ def check(cond, msg):
 # ------------------------------------------------------------------ purchases (plan C, ordered 2026-10-08)
 FI = load(os.path.join(V4, "data", "final_items.json"))
 T = FI["totals"]
-EXPECT = {"school_items": 215852, "school_ship": 28700, "personal": 356771, "total": 601323, "budget_school": 200000}   # 10/16 A안 (+PETG 4, +세메다인 1); 10/31 A16 +만능기판 4장 14,140
+EXPECT = {"school_items": 216652, "school_ship": 31200, "personal": 356771, "total": 604623, "budget_school": 200000}   # 10/16 A안 (+PETG 4, +세메다인 1); 10/31 A16 +만능기판 4장 14,140; 11/02 △34 XH2.54 키트 (+800 학교, +2,500 학교 배송)
 for k, v in EXPECT.items():
     check(T[k] == v, f"totals.{k} = {T[k]} (expected {v})")
 check(T["school_items"] + T["school_ship"] + T["personal"] == T["total"], "school + ship + personal != total")

@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generated": "2026-11-01",
+ "generated": "2026-11-02",
  "about": "Toccata 최종 재료 목록 — 완성된 악기에 들어가는 모든 물건과 설계가 쓰는 개수 (build_items.py)",
  "sources": {
   "data": "hardware/bom/final-bom/data.json",
@@ -42,23 +42,23 @@
   "공구"
  ],
  "totals": {
-  "school_items": 215852,
-  "school_ship": 28700,
-  "school_ship_calc": 28700,
+  "school_items": 216652,
+  "school_ship": 31200,
+  "school_ship_calc": 31200,
   "personal_items": 326471,
   "personal_ship": 30300,
   "personal": 356771,
-  "total": 601323,
+  "total": 604623,
   "school_lines": 29,
   "personal_lines": 20,
   "xlsx": {
-   "school_items": 215852,
-   "school_ship": 28700,
+   "school_items": 216652,
+   "school_ship": 31200,
    "personal": 356771,
-   "total": 601323
+   "total": 604623
   },
   "budget_school": 200000,
-  "school_left": -15852
+  "school_left": -16652
  },
  "shipping": {
   "school": [
@@ -75,13 +75,6 @@
     "fee": 3000,
     "rule": "3,000원",
     "basis": "쿠팡 검색 결과(10/8): 배송비 3,000원 — 학교 지원 주문(따로 결제, 배송비는 학교가 내고 20만 원 한도에 넣지 않음)"
-   },
-   {
-    "store": "엘레파츠 (학교)",
-    "items": 19058,
-    "fee": 3000,
-    "rule": "3,000원, 66,000원 이상 무료",
-    "basis": "엘레파츠: 공급가 6만 원 이상 무료 → 66,000원 — 학교 지원 주문(따로 결제, 배송비는 학교가 내고 20만 원 한도에 넣지 않음)"
    },
    {
     "store": "쿠팡 로켓 (학교)",
@@ -103,6 +96,13 @@
     "fee": 2700,
     "rule": "2,700원, 66,000원 이상 무료",
     "basis": "디바이스마트 직접 판매: 2,700원, VAT 포함 66,000원 이상 무료 — 학교 지원 주문(따로 결제, 배송비는 학교가 내고 20만 원 한도에 넣지 않음)"
+   },
+   {
+    "store": "엘레파츠 (학교)",
+    "items": 14598,
+    "fee": 3000,
+    "rule": "3,000원, 66,000원 이상 무료",
+    "basis": "엘레파츠: 공급가 6만 원 이상 무료 → 66,000원 — 학교 지원 주문(따로 결제, 배송비는 학교가 내고 20만 원 한도에 넣지 않음)"
    },
    {
     "store": "쿠팡·화성고무 (학교)",
@@ -131,6 +131,13 @@
     "fee": 3500,
     "rule": "3,500원, 350,000원 이상 무료",
     "basis": "디바이스마트 입점 판매자(댐퍼): 택배 3,500원, 350,000원 이상 무료 — 학교 지원 주문(따로 결제, 배송비는 학교가 내고 20만 원 한도에 넣지 않음)"
+   },
+   {
+    "store": "쿠팡·더모어샵 (학교)",
+    "items": 5260,
+    "fee": 2500,
+    "rule": "2,500원, 100,000원 이상 무료",
+    "basis": "쿠팡 상품 페이지 https://www.coupang.com/vp/products/7849731043 (11/2): 배송비 2,500원, 같은 판매자 상품 100,000원 이상 구매 시 무료배송(한진택배) — 학교 지원 주문(따로 결제, 배송비는 학교가 내고 20만 원 한도에 넣지 않음"
    },
    {
     "store": "쿠팡·흑연 (학교)",
@@ -2707,8 +2714,8 @@
   {
    "id": "i101",
    "code": "L66",
-   "name": "JST-XH 6핀 케이블 한 쌍 (Adafruit 4876)",
-   "full_name": "2.5mm Pitch 6-pin Cable Matching Pair - JST XH compatible (Adafruit 4876)",
+   "name": "XH2.54 커넥터 DIY 키트 (하우징·헤더 2~5P + 단자)",
+   "full_name": "Themoreshop XH2.54 전선 케이블 터미널 커넥터 핀 단자 DIY 소켓 세트",
    "cat": "센서·MCU·기판",
    "source": "school",
    "source_ko": "학교 지원 구매",
@@ -2716,34 +2723,38 @@
    "optional": false,
    "ordered": {
     "sheet": "학교 구매",
-    "qty": 2,
-    "unit_price": 2230,
-    "amount": 4460,
-    "store": "엘레파츠",
-    "url": "https://www.eleparts.co.kr/goods/view?no=19324904",
-    "units": 2
+    "qty": 1,
+    "unit_price": 5260,
+    "amount": 5260,
+    "store": "쿠팡",
+    "url": "https://www.coupang.com/vp/products/7849731043?itemId=21392608150&vendorItemId=88449313511",
+    "units": 1
    },
-   "qty_need": 2,
-   "unit": "쌍",
-   "need_note": "EL ↔ O1 (X401/X402) + ER ↔ O7 (X411/X412) = 2쌍 (CAD C-XH 2 + EXT 2)",
-   "pack_note": "2쌍 모두 사용",
-   "where": "끝 부속 EL ↔ 모듈 O1, ER ↔ O7을 뒤 케이블 통로에서 잇는 6핀 짝입니다. 모듈 쪽 O1 약 160 mm(W403)·O7 약 150 mm(W413) — 제어 기판 J302 윗면에 납땜(A16) — , 끝 부속 쪽 약 50 mm로 잘라 씁니다.",
+   "qty_need": 1,
+   "unit": "세트",
+   "need_note": "EL 5P (X401 헤더 + X402 하우징·단자 5) + ER 3P (X411 헤더 + X412 하우징·단자 3) = 키트 1세트 (△34, CAD C-XH 2 + EXT 2)",
+   "pack_note": "1세트 모두 사용",
+   "where": "끝 부속 EL ↔ 모듈 O1(5P), ER ↔ O7(3P)을 뒤 케이블 통로에서 잇는 커넥터를 이 키트로 만듭니다. 모듈 쪽은 사용자 선(O1 5심 160 mm W403 · O7 3심 150 mm W413) 끝에 단자를 압착해 하우징(암)에 끼우고 다른 끝을 제어 기판 J302 윗면에 납땜(A16), 끝 부속 쪽은 통로까지 뺀 리본 끝(EL 400 · ER 350 mm)을 기판용 헤더(수) 꼬리에 바로 납땜합니다.",
    "specs": [
     [
-     "커넥터",
-     "JST-XH 호환 6핀, 2.5 mm 피치 — 플러그 1 + 소켓 1"
+     "구성",
+     "XH2.54(2.54 mm 피치) 2P·3P·4P·5P 하우징, 같은 핀 수의 기판용 헤더(일자 핀), 낱개 압착 단자 — 상품 사진 기준"
     ],
     [
-     "선",
-     "각 약 20 cm, 26 AWG (설계 22 AWG; 센서 신호·3V3·GND라 충분)"
+     "쓰는 것",
+     "EL: 5P 하우징 1 + 5P 헤더 1 + 단자 5 · ER: 3P 하우징 1 + 3P 헤더 1 + 단자 3"
     ],
     [
-     "자르는 길이",
-     "모듈 쪽 O1 약 160 · O7 약 150, 끝 부속 쪽 약 50 mm로 잘라 쓴다(남는 선은 버림)"
+     "단자",
+     "오픈배럴 압착 단자 — 22~28 AWG 선, 2.5 mm 피치용 압착기로 압착"
+    ],
+    [
+     "주의",
+     "6P는 없음 — 5P면 충분(6핀 중 EXT4는 원래 비어 있음). 정품 JST XH(2.50 mm 피치)와 섞지 않음"
     ]
    ],
-   "ident": "6핀 JST-XH 호환 하우징이 달린 짧은 선 2가닥(플러그 1 + 소켓 1)이 한 쌍입니다.",
-   "img": "img/bom/i101.jpg",
+   "ident": "투명 칸막이 상자에 흰색 XH2.54 하우징·기판용 헤더(2~5핀)와 은색 낱개 단자가 칸마다 들어 있습니다.",
+   "img": null,
    "img_note": null,
    "cad_match": {
     "ids": [
@@ -2775,9 +2786,9 @@
     "W413"
    ],
    "sch_qty": null,
-   "check_on_arrival": "플러그 선 1 + 소켓 선 1이 한 쌍인지, 6핀인지 봅니다. 선은 26 AWG입니다(설계 22 AWG, 신호선이라 충분).",
+   "check_on_arrival": "5P·3P 하우징과 헤더가 있는지, 단자가 쓸 선(22~28 AWG)에 맞는지 봅니다. 압착기는 2.5 mm 피치 오픈배럴용 — 단자 2~3개를 연습 압착해 당겨 보고 하우징에 '딸깍' 걸리는지 확인합니다.",
    "replaces": null,
-   "store_url": "https://www.eleparts.co.kr/goods/view?no=19324904"
+   "store_url": "https://www.coupang.com/vp/products/7849731043?itemId=21392608150&vendorItemId=88449313511"
   },
   {
    "id": "i022",
@@ -8863,7 +8874,7 @@
   {
    "level": "낮음",
    "id": "img",
-   "text": "사진이 없는 줄: i226, i228, i021, i222, i224, i225, i203, i204, i205, i206, i207, i208, i219, i220, i221, i214, i211, i213, i216. 상품 사진을 새로 받지 않았습니다. 나사·자석·흡음솜·흑연 등 13줄은 같은 종류의 예시 사진입니다(img_note)."
+   "text": "사진이 없는 줄: i101, i226, i228, i021, i222, i224, i225, i203, i204, i205, i206, i207, i208, i219, i220, i221, i214, i211, i213, i216. 상품 사진을 새로 받지 않았습니다. 나사·자석·흡음솜·흑연 등 13줄은 같은 종류의 예시 사진입니다(img_note)."
   }
  ],
  "checks": {
@@ -9123,6 +9134,7 @@
   ],
   "cad_uncovered": [],
   "unmatched_images": [
+   "i101",
    "i226",
    "i228",
    "i021",
