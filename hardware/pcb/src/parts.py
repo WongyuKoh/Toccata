@@ -67,8 +67,8 @@ AMP_OUT = [(6, "OUTL+"), (7, "OUTL-"), (8, "OUTR+"), (9, "OUTR-")]
 # BOM codes = the "code" column of the FINAL purchase data (hardware/bom/final-bom/data.json, plan C 2026-10-08).
 # (code, description, where it comes from). The purchase STATE (학교 / 사비 / 보유) is read by purchase.py.
 BOM = {
-    "DRV5055": ("L20", "TI DRV5055A2QLPG, TO-92-3 (LPG)", "아이씨뱅큐 P018076669"),
-    "C100n": ("SE4", "Samsung CL31B104KCFNNNE 1206 100 nF 100 V X7R", "디바이스마트 14991278"),
+    "DRV5055": ("L20", "Winson WSH137-XPAN1, TO-92S (A등급, △35 — 옛 TI DRV5055A2QLPG와 핀 같음)", "디바이스마트 1272983"),
+    "C100n": ("SE4", "Walsin 1206 100 nF 50 V X7R 범용 (칩세라믹 3216 K급, 100개 단위)", "디바이스마트 8898"),
     "C10u": ("L67", "Samsung CL31A106KOHNNNE 1206 10 µF 16 V X5R (낱개)", "엘레파츠 2675965"),
     "C1u": ("L56", "리드형 적층 세라믹 1 µF 50 V X7R (몸통 105)", "아이씨뱅큐 P014159115"),
     "R1k": ("L29", "탄소피막 1/4 W 5 % 1 kΩ (리드형, 갈·검·빨·금)", "사용자 보유 (ABCO CFR 같은 값)"),

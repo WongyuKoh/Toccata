@@ -21,7 +21,8 @@ NAMES = {"sch01": "SCH-01_system", "sch02": "SCH-02_sensor_board", "sch03": "SCH
          "brd01": "BRD-01_control_board_placement", "brd02": "BRD-02_sensor_board_placement",
          "brd03": "BRD-03_pedal_board_placement", "brd04": "BRD-04_centre_unit_wiring",
          "brd05": "BRD-05_power_audio_harness", "brd06": "BRD-06_signal_harness",
-         "brd07": "BRD-07_small_boards", "brd08": "BRD-08_control_board_underside"}
+         "brd07": "BRD-07_small_boards", "brd08": "BRD-08_control_board_underside",
+         "brd09": "BRD-09_control_board_O1", "brd10": "BRD-10_control_board_O7", "brd11": "BRD-11_control_board_O2-O6"}
 
 
 def main():
@@ -76,7 +77,35 @@ def main():
                 pass
     with open(os.path.join(HERE, "..", "netlist", "sheets.json"), "w", encoding="utf-8") as f:
         json.dump(regions, f, ensure_ascii=False, indent=1)
+    write_hits(built)
     return built, bad
+
+
+def write_hits(built):
+    """netlist/sheethits.json: what can be clicked on each sheet in the page (page.py adds the texts).
+    Schematics: every wire segment and pin with the net the connectivity check found, part body boxes.
+    Boards with their own data (s.hits_custom, BRD-08): numbered wires, pads, part boxes. All in sheet mm (420 x 297).
+    Boards / wiring sheets BRD-01~07: s.hits_keys = click targets named by the 3D model's info keys (hitkeys.py)."""
+    r2 = lambda v: round(v, 2)  # noqa: E731
+    out = {}
+    for s, path in built:
+        h = {}
+        segs = [[r2(a), r2(b), r2(c), r2(d), n] for a, b, c, d, n in getattr(s, "hit_segs", []) if n]
+        pins = [[ref, num, name, r2(x), r2(y), n] for ref, num, name, x, y, n in getattr(s, "hit_pins", [])]
+        bodies = {}
+        for x0, y0, x1, y1, ref in s.bodies:
+            b = bodies.get(ref)
+            bodies[ref] = [min(x0, b[0]), min(y0, b[1]), max(x1, b[2]), max(y1, b[3])] if b else [x0, y0, x1, y1]
+        if segs or pins:
+            h.update(segs=segs, pins=pins, parts=[[ref] + [r2(v) for v in b] for ref, b in bodies.items()])
+        if getattr(s, "hits_custom", None):
+            h["board"] = s.hits_custom
+        if getattr(s, "hits_keys", None):           # BRD-01~07: where things are + which thing (hitkeys.py); texts come later
+            h["keys"] = s.hits_keys
+        if h:
+            out[s.code] = h
+    with open(os.path.join(HERE, "..", "netlist", "sheethits.json"), "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
 
 
 if __name__ == "__main__":

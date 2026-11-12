@@ -44,6 +44,46 @@
   #p-circuit .circ-chips a{font-size:13px;padding:6px 12px}
 }
 @media (prefers-reduced-motion:reduce){#p-circuit *{scroll-behavior:auto!important;transition:none!important}}
+/* ---- MB board kinds (BRD-09~11): three tabs, front + back crops ---- */
+#p-circuit .mbk{margin:6px 0 14px}
+#p-circuit .mbk-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 10px}
+#p-circuit .mbk-tabs button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border:1px solid var(--rule-2);border-radius:999px;
+  background:var(--card);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+#p-circuit .mbk-tabs button:hover{border-color:var(--blue)}
+#p-circuit .mbk-tabs button[aria-selected="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+#p-circuit .mbk-tabs button .q{font-family:var(--mono);font-size:11.5px;opacity:.7}
+#p-circuit .mbk-tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+#p-circuit .mbk-panel[hidden]{display:none}
+#p-circuit .mbk-diff{margin:4px 0 10px;padding-left:18px}
+#p-circuit .mbk-diff li{margin:2px 0}
+/* ---- sheet hits: click a wire / pad / part on a drawing (hits.py data, script below) ---- */
+#p-circuit .csheet[data-hits]{position:relative}
+#p-circuit .csheet[data-hits] .dwimg{position:relative}
+#p-circuit svg.hitov{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+#p-circuit .hitov polyline,#p-circuit .hitov circle{fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#p-circuit .hitov .halo{stroke:#fff}
+#p-circuit .hitov .sel{stroke-width:4px}
+#p-circuit .hitov .halo.sel{stroke-width:8px;stroke-opacity:.95}
+#p-circuit .hitov .net{stroke-width:3px;stroke-opacity:.5}
+#p-circuit .hitov .halo.net{stroke-width:6px;stroke-opacity:.6}
+#p-circuit .hitov .hov{stroke-width:3px;stroke-opacity:.75}
+#p-circuit .hitov .halo.hov{stroke-width:6px;stroke-opacity:.8}
+#p-circuit .hitov rect.box{fill:#1f5fbf;fill-opacity:.08;stroke:#1f5fbf;stroke-width:1.5px;stroke-dasharray:4 3;vector-effect:non-scaling-stroke}
+#p-circuit .hitov rect.box.hov{fill-opacity:.04}
+#p-circuit .hitpop{position:absolute;z-index:6;max-height:min(62vh,540px);overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--rule-2);border-radius:10px;
+  box-shadow:0 8px 28px rgba(16,24,32,.22);padding:10px 12px 8px;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+#p-circuit .hitpop[hidden]{display:none}
+#p-circuit .hitpop p{margin:0 0 4px}
+#p-circuit .hitpop .hit-t{font-size:14.5px;padding-right:30px}
+#p-circuit .hitpop ul{margin:2px 0 6px;padding-left:17px}
+#p-circuit .hitpop li{margin:2px 0;color:var(--ink-2)}
+#p-circuit .hitpop .hit-n{border-top:1px solid var(--rule);padding-top:6px;margin-top:4px}
+#p-circuit .hitpop .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+#p-circuit .hitpop .hitx{position:absolute;top:4px;right:4px;width:32px;height:32px;border:0;background:none;color:var(--ink-2);font:inherit;font-size:20px;line-height:1;cursor:pointer;border-radius:6px}
+#p-circuit .hitpop .hitx:hover{background:var(--rule)}
+#p-circuit .hitpop .hitx:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+#p-circuit .hittip{font-weight:600;color:var(--ink)}
+@media (pointer:coarse){#p-circuit .hitpop .hitx{width:44px;height:44px}}
 /* ---- 01 회로도 · 회로 3D 모델 (hardware/pcb/src/circuit3d.css; page tokens only) ---- */
 #p-circuit .c3d{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;align-items:start;margin:10px 0 6px}
 @media (max-width:980px){#p-circuit .c3d{grid-template-columns:minmax(0,1fr)}}
@@ -75,6 +115,8 @@
 #p-circuit .c3d-info ul{margin:4px 0 0;padding-left:18px}
 #p-circuit .c3d-info li{margin:2px 0;color:var(--ink-2)}
 #p-circuit .c3d-it{font-size:14.5px}
+#p-circuit .c3d-stage .c3d-pop{max-height:calc(100% - 16px);font-size:13px}
+#p-circuit .c3d-stage .c3d-pop .hit-n b{overflow-wrap:anywhere}
 #p-circuit .c3d-muted{color:var(--ink-3)}
 #p-circuit .c3d-sub{font-size:13px;color:var(--ink-2);margin:0}
 #p-circuit .c3d-notes{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}

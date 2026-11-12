@@ -13,8 +13,8 @@
  },
  "SCH-02": {
   "file": "SCH-02_sensor_board.svg",
-  "rev": "B",
-  "date": "2026-09-29",
+  "rev": "E",
+  "date": "2026-10-08",
   "title": "옥타브 센서 기판 (SB)",
   "regions": {},
   "checks": {
@@ -279,6 +279,81 @@
     20.0,
     270.0,
     222.0
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-09": {
+  "file": "BRD-09_control_board_O1.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "제어 기판 왼쪽 끝 기판 (O1) — 윗면 · 아랫면",
+  "regions": {
+   "front": [
+    11.0,
+    25.0,
+    210.0,
+    180.5
+   ],
+   "back": [
+    211.0,
+    25.0,
+    409.0,
+    180.5
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-10": {
+  "file": "BRD-10_control_board_O7.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "제어 기판 오른쪽 끝 기판 (O7) — 윗면 · 아랫면",
+  "regions": {
+   "front": [
+    11.0,
+    25.0,
+    210.0,
+    180.5
+   ],
+   "back": [
+    211.0,
+    25.0,
+    409.0,
+    180.5
+   ]
+  },
+  "checks": {
+   "errors": 0,
+   "overlaps": 0,
+   "board": 0
+  }
+ },
+ "BRD-11": {
+  "file": "BRD-11_control_board_O2-O6.svg",
+  "rev": "E",
+  "date": "2026-10-08",
+  "title": "제어 기판 가운데 기판 (O2~O6) — 윗면 · 아랫면",
+  "regions": {
+   "front": [
+    11.0,
+    25.0,
+    210.0,
+    180.5
+   ],
+   "back": [
+    211.0,
+    25.0,
+    409.0,
+    180.5
    ]
   },
   "checks": {

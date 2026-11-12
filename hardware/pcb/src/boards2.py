@@ -309,6 +309,29 @@ def brd03():
         "    J502.2–GND = 0 Ω, J502.4–GND = 0 Ω, J502.3–3V3 = 20 Ω (100 Ω ×5), J502.1–GND = 100 kΩ.",
         "    USB를 꽂은 뒤: 3V3 = 3.3 V, 페달을 꽂은 상태에서 J502.3 = 3.05 V 이상, 페달을 뺀 상태에서 GP26 ≈ 0 V.",
     ], size=2.0, lh=2.8)
+    # click data (hitkeys.py): pads, parts, underside wires, posts - keys of the 3D model (pads_PB.csv / wiring_PB.csv)
+    import hitkeys as HK
+    K = HK.Keys(s, X, Y, m="PED")
+    for n in range(1, 19):
+        x, y = pb_zero_pad(n)
+        K.pad(x, y, "A501.%d" % n, pin_net.get(f"A501.{n}"), r=1.2)
+    for ref, lst in PB_PADS.items():
+        if ref == "A501":
+            continue
+        base = "R503" if ref.startswith("R503") else ref
+        for pin, x, y in lst:
+            K.pad(x, y, "%s.%s" % (ref, pin), pin_net.get(f"{base}.{pin}"), r=1.3 if ref == "J502" else 1.05)
+        if ref.startswith(("R50", "C501", "JP504")):
+            (p1, xa, ya), (p2, xb, yb) = lst
+            K.box(min(xa, xb) - 0.5, min(ya, yb) - 0.5, max(xa, xb) + 0.5, max(ya, yb) + 0.5, key=base)
+    for net, routes in PB_ROUTES.items():
+        for k, poly in enumerate(routes):
+            K.wire(poly, "PBW-%s-%d" % (net, k + 1), net)
+    K.box(rx0, ry0, rx1, ry1, key="A501", q="USB-C 리셉터클 — W208 선이 꽂혀 허브 포트 2로 갑니다.")
+    K.box(zx0, zy0, zx1, zy1, key="A501")
+    for (hx, hy, d, t) in PB_HOLES:
+        K.box(hx - 3.0, hy - 3.0, hx + 3.0, hy + 3.0, key="CTX-POST", q="%s (Ø%.1f)" % (t, d))
+    K.box(x0b, y0b, x1b, y1b, key="PCB-PB")
     # ---------------- insets: J501 scrap (2 : 1) and the pedal sensor scrap PS (3 : 1)
     jb = HN.PTS.get("j501_board", [450.0, 475.0, 316.5, 340.5, 36.4, 38.0])
     jj = HN.PTS.get("j501", [459.5, 465.5, 328.5, 342.5, 38.0, 43.0])
@@ -335,6 +358,7 @@ def brd03():
         "TN·S는 둘 다 GND — 통전으로 T/TN/R/RN/S를 먼저 찾는다.",
         "조각은 잭 선반에 MS 폴리머(구멍 없음). 붙이기 전에 W502 납땜.",
     ], "notes", size=1.9, lh=2.6)
+    B3.small_keys(s, "j501", XJ, YJ)
     # PS scrap (same data as BRD-07): 7 x 5 holes, local frame (0, 0) = lower-left hole
     px0, py0, S3 = 172.0, 240.0, 3.0
     s.text(px0 - 4.0, py0 - 40.0, "PS 페달 안 센서 조각 (12 × 18 자투리 7 × 5 구멍) — 3 : 1, 위에서 봄 (구멍·배선 = BRD-07)", "noteb", size=2.3)
@@ -365,6 +389,7 @@ def brd03():
         "자석 Ø5×2 S극 아래, 눌렀을 때 약 4.5 mm · 뗐을 때 12 mm 이상(SCH-05 주 1).",
         "크기·구멍은 BRD-07대로 — 페달 바닥판에 붙일 자리만 현장에서 정한다(MS 폴리머).",
     ], "notes", size=1.9, lh=2.6)
+    B3.small_keys(s, "ps", XP, YP)
     s.frame()
     s.expected = {}
     return s
@@ -600,6 +625,38 @@ def brd04():
     for t, (x, y), (ddx, ddy) in w_det:
         s.text(X2(x) + ddx, Y2(y) + ddy, t, "cabt", "end" if ddx < 0 else ("start" if ddx > 0 else "middle"), size=2.0, check=False)
     s.text(X2(dx0) + 1.5, Y2(dy0) - 2.0, "앞 공간 y214~241 (위로 열림) · 아래쪽 = 연주자 쪽", "notes", size=1.8, check=False)
+    # ---------------- click data (hitkeys.py): every CAD part by its bounding box (small ones first, so a part lying on a larger one
+    # wins), every cable by its outline; the two red leads that the CAD draws as one part are split by their centre lines
+    import hitkeys as HK
+
+    def keys04(X, Y, box):
+        K = HK.Keys(s, X, Y, m="CU")
+        split = {"C-PWR-BUS": [("W602b", PW["PWR"]["BUS"][:1]), ("W602c", PW["PWR"]["BUS"][1:])],
+                 "C-PWR-5V": [("W603", PW["PWR"]["5V"][:1]), ("W604", PW["PWR"]["5V"][1:])]}
+        boxes = []
+        for pid, kind, polys, nm in items:
+            if pid in split:
+                for key, paths in split[pid]:
+                    for pth in paths:
+                        for piece in HK.clip_line([(q[0], q[1]) for q in pth], box):
+                            K.wire(piece, key)
+                continue
+            cp = _clip(polys, box)
+            if not cp:
+                continue
+            key = HK.cad_key(pid, kind)
+            if HK.cad_is_cable(pid):
+                for ring in cp:
+                    K.wire(list(ring) + [ring[0]], key)
+            else:
+                xs, ys = [p[0] for ring in cp for p in ring], [p[1] for ring in cp for p in ring]
+                boxes.append((kind in ("print", "plywood"), (max(xs) - min(xs)) * (max(ys) - min(ys)), min(xs), min(ys), max(xs), max(ys), key))
+        for ctx, _a, bx0, by0, bx1, by1, key in sorted(boxes):          # circuit parts first; printed / plywood context never wins over one
+            it = K.box(bx0, by0, bx1, by1, key=key)
+            if ctx:
+                it["lo"] = 1
+    keys04(X1, Y1, (rx0, rx1, ry0, ry1))
+    keys04(X2, Y2, (dx0, dx1, dy0, dy1))
     # ---------------- wire table
     by = {h["id"]: h for h in HN.HARNESS}
     rows = []
@@ -678,6 +735,19 @@ def strip(s, x, y0, w, h):
             o.append(f'<rect x="{bx:.2f}" y="{top+0.2:.2f}" width="4" height="{hh-0.4:.2f}" fill="{col}" fill-opacity=".35"/>')
     s.text(x, top + hh + 2.6, h["a"][1][:70], "notes", size=1.65, check=False)
     s.text(x + w, top + hh + 2.6, h["b"][1][:70], "notes", "end", size=1.65, check=False)
+    # click data (hitkeys.py): each conductor (its net, the pin at both ends), the two end boxes (the part there), the whole lead
+    import hitkeys as HK
+    K = HK.Keys(s)
+    msc = HK.lead_scope(h)
+    if not band:
+        for k, (num, col, net, pa, pb) in enumerate(cond):
+            yy = top + 1.0 + pitch * (k + 0.5)
+            K.swire([(x_a, yy), (x_b, yy)], key=h["id"], n=net, m=msc, t="%s %s번 심 (%s) · %s" % (h["id"], num, HN.COL[col][1], net),
+                    q="이 심: %s 쪽 %s → %s 쪽 %s" % (h["a"][0], pa, h["b"][0], pb))
+    for bx, (ref, desc), side in ((x, h["a"], "A"), (x + w - bw, h["b"], "B")):
+        ek = HK.end_key(ref)
+        K.sbox(bx, top, bx + bw, top + hh, key=ek, t=None if ek else ref, q="%s의 %s 쪽 끝 — %s: %s" % (h["id"], side, ref, desc))
+    K.sbox(x, y0, x + w, top + hh + 3.4, key=h["id"])
     return top + hh + 5.2
 
 
@@ -753,6 +823,9 @@ def brd05():
         "이음 목록",
     ] + ["    %s (%s) %s" % (a, h["id"], b) for h in HN.HARNESS if h["part"] in ("pwr", "aud") for a, b in h.get("splices", [])],
         size=1.95, lh=2.7)
+    import hitkeys as HK
+    HK.Keys(s).sbox(kx, ky, kx + 13.2 * S, ky + 19.2 * S, key="SW601",
+                    q="단자: 1·3 = 입력(퓨즈에서, W602a · W602j), 2·4 = 출력(강압 W602b · 앰프 W602c). 두 회로를 나란히 씁니다.")
     s.regions["switch"] = (232.0, ky - 8.0, 340.0, ky + 19.2 * 2.2 + 3.0)
     s.regions["j702"] = (338.0, jy0 - 2.0, 411.0, yj + 10.0)
     s.frame()

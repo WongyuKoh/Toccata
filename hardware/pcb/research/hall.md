@@ -166,3 +166,46 @@ KiCad: `Device:C` + `C_1206_3216Metric` for A, A' and B, or `Device:C_Polarized`
 - EUNSUNG 2651 datasheet: https://www.eleparts.co.kr/data/goods_attach/0/goodpdf4251_1784868576.pdf ; product https://www.eleparts.co.kr/goods/view?no=425
 - Waveshare RP2040-Zero (LDO rating): https://www.waveshare.com/rp2040-zero.htm ; schematic https://www.waveshare.com/w/upload/4/4c/RP2040_Zero.pdf
 - KiCad library checked locally: scratchpad/research/kicadlib/v8/Sensor_Magnetic.kicad_sym (DRV5055A2xLPGxQ1)
+
+---
+
+## 7. Replacement on 2026-11-04 (△35): Winson WSH137-XPAN1 + Walsin 100 nF 50 V
+
+Why: the 아이씨뱅큐 DRV5055A2QLPG order delivered only 2 parts. The user switched to a domestic-stock part with the same pins and body: 디바이스마트 no=1272983, 1,210원 incl. VAT, distributed by 디웰전자. The 100 nF also changed, to the 디바이스마트 no=8898 Walsin general-purpose 50 V part, ×200.
+
+Source: Winson WSH137 datasheet, 2017/12/22 (https://diwellhome.cafe24.com/web/data/hall/WSH137/WSH137.pdf). Min/max values are guaranteed only at 5 V and 25 °C. The 3.3 V values below are read from the datasheet graphs, so they are typical, not guaranteed.
+
+| | DRV5055A2QLPG (old) | WSH137-XPAN1 (now) |
+|---|---|---|
+| Package, pins | TO-92 LPG 3.9–4.1 × 3.05–3.25 × 1.42–1.62; 1 VCC · 2 GND · 3 OUT (marked face, left → right) | TO-92S 4.0 ± 0.15 × 3.15 ± 0.15 × 1.52 ± 0.1; 1 VDD · 2 GND · 3 OUT (same order). Marking 'W137' on the chamfered front face |
+| Hall element | 1.54 mm below the top (non-lead) edge, centred | 1.0 ± 0.05 mm below the top edge, centred, depth not published. On the magnet axis this means 0.54 mm off-axis: signal −0.4 % at rest to −1.6 % at the bottom (loop-integral model) |
+| Polarity | S pole on the marked face → OUT rises | same |
+| Supply | 3.0–3.63 V (guaranteed at 3.3 V) | 3.0–12 V. Specs only at 5 V. In the 3.0–3.6 V range the sensitivity rises steeply with VDD (graph: about 3.0 mV/G at 3.0 V, about 4.4 at 3.6 V) |
+| Ratiometric | yes (VQ = VCC/2, S ∝ VCC) | no (internal regulator). VDD drift and ripple reach the ADC reading. Per-key calibration absorbs the static part. Estimate: 10 mV of 3V3 ripple ≈ 7 codes near the bottom |
+| Sensitivity at 3.3 V | 28.5 / 30 / 31.5 mV/mT | about 33 mV/mT (fit of the 3.3 V Vout-vs-field graph: 0.0033 V/G + 1.7037 V). The sensitivity-vs-VDD graph suggests up to about 39 mV/mT. At 5 V: 4.0 / 4.5 / 5.0 mV/G |
+| Zero-field OUT | 1.59–1.71 V | about 1.70 V at 3.3 V. Grade A (XPAN1): 2.45–2.55 V at 5 V. Grade B (XPAN2): 2.40–2.60 V |
+| Linear range at 3.3 V | ±44 mT min | about ±31 mT (OUT about 0.6–2.75 V). Saturates about 0.3 / 3.2 V |
+| Noise | 6 mVpp (0.2 mTpp) | 7.5 mVpp at 5 V (about 0.17 mTpp) |
+| Current at 3.3 V | 2 / 4 mA (Rev C) | about 3 mA (graph). At 5 V: 3.0 typ / 5.0 max |
+| Output | push-pull ±1 mA. No bare C on OUT | emitter follower, abs. max 0.4 mA. "Do not apply any resistor load". The application circuit puts 0.01–0.1 µF straight on OUT |
+| Temperature | +0.12 %/°C, compensates NdFeB | offset ±0.5 mV/°C. Sensitivity flat at 10–30 °C, −1.4 % at 40 °C, −2.9 % at 50 °C. No magnet compensation |
+| Power-on time | 175 / 330 µs (Rev A) | not published. Firmware now waits 10 ms (`scan.c`) |
+
+What this means for the circuit (nets unchanged):
+- **Loads on OUT:**
+  - Octave sensors go straight to the 4067 mux, so no load.
+  - The EXT end parts and the pedal have 1 kΩ in series and a 100 kΩ pull-down (R301–R304, R502). 100 kΩ is the datasheet's own measurement condition, and the current (≤ 30 µA) is far below 0.4 mA.
+  - The 1 kΩ series resistors were added for the TI "no bare C" rule. They stay; they are harmless.
+- **Design ADC table (SCH-02):** about 1.70 V + 33 mV/mT, 12-bit ADC on 3.3 V.
+  - White: rest 2285 → rigid bottom 3007 (over-press max 3151); re-arm 2468; 1 N bottom 3036.
+  - Black: rest 2210 → 3116 (max 3392); re-arm 2368; 1 N bottom 3055.
+  - Spans are 722 / 906 codes (DRV5055: 655 / 824). The firmware rest band 1800–2600 still holds.
+  - The black over-press (31 mT, about 2.73 V) sits at the end of the linear range. A normal bottom (25 mT, about 2.51 V) is inside it.
+- **Pedal:** if PED_VCC sags towards 3.0 V, the sensitivity drops to about 30 mV/mT. The pedal is calibrated, so this is fine; check that it stays ≥ 3.05 V when plugged in.
+- **Arrival check:** power 1–2 parts at 3.3 V and check each of these:
+  - no magnet: OUT about 1.6–1.8 V
+  - S pole near the marked face: OUT rises
+  - in a black key at the bottom: below 2.75 V
+  - If the batch reads far from these values, recheck `KEY_*_SPAN_DESIGN` (only the initial guess; calibration learns the real bottom).
+
+**100 nF:** 디바이스마트 no=8898 "칩세라믹 3216사이즈 100nF K급 50V", Walsin, sold as "범용 스펙". In Walsin's numbering a 100 nF K 50 V 1206 is 1206B104K500CT, which is X7R. At 3.3 V the DC-bias loss is a few % at most, far above TI's ≥ 10 nF minimum. Buy 200 (97 used).

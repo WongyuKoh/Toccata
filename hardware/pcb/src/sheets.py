@@ -3,7 +3,7 @@ from sch import (Sheet, sym_R, sym_C, sym_hall, sym_box, sym_conn, sym_jumper, s
                  sym_switch, sym_switch_dpst, sym_speaker, sym_jack, sym_plug, sym_conn2, sym_tp, sym_conn_pos)
 import parts as P
 
-TOTAL = 15
+TOTAL = 18
 KEYS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 NET = {k: "HALL_" + k.replace("#", "S") for k in KEYS}           # HALL_C, HALL_CS, ...
 RIBBON = ["+3V3", "GND"] + ["HALL_" + k.replace("#", "S") for k in ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]] + ["GND", "+3V3"]
@@ -93,8 +93,8 @@ def exp_add(e, net, *pins):
 # ------------------------------------------------------------------ SCH-02
 def sch02():
     s = Sheet("SCH-02", 2, TOTAL, "옥타브 센서 기판 (SB)",
-              "건반 12개의 홀센서 DRV5055A2 + 디커플링. 모듈 O1~O7에 같은 기판 7장. 출력 12선 + 3V3·GND 2가닥씩을 리본 16심으로 제어 기판(SCH-03 J301)에 보낸다.",
-              "SB", qty="SB × 7", basis="v4 W1+ r4.5")
+              "건반 12개의 홀센서 WSH137-XPAN1 + 디커플링. 모듈 O1~O7에 같은 기판 7장. 출력 12선 + 3V3·GND 2가닥씩을 리본 16심으로 제어 기판(SCH-03 J301)에 보낸다.",
+              "SB", qty="SB × 7", basis="v4 W1+ r4.5", **REV_E)
     e = {}
     y3, yg = 37.5, 87.5  # noqa
     x0 = 37.5
@@ -110,7 +110,7 @@ def sch02():
         xs = x0 + i * dx
         u = f"U{201+i}"
         c = f"C{201+i}"
-        s.place(hall, u, "DRV5055A2QLPG", xs, 62.5, ref_at=(1.6, -8.4), val_at=None, hide_val=True,
+        s.place(hall, u, "WSH137-XPAN1", xs, 62.5, ref_at=(1.6, -8.4), val_at=None, hide_val=True,
                 meta=dict(key=k))
         s.text(xs - 4.8, 76.0, k, "noteb", size=2.8)
         vx, vy = s.pin(u, 1)
@@ -161,19 +161,19 @@ def sch02():
         rows.append([f"U{201+i}", k, f"{SENSOR_X[i]:.3f}", f"C{201+i}", NET[k], f"C{i}", f"{i+3}"])
     s.table(15, 102, ["센서", "건반", "센서 x (mm)", "100n", "넷", "MUX 채널", "리본 선"],
             rows, [14, 10, 20, 12, 22, 16, 13], title="센서 배치표 (모듈 좌표, 소자 열 y67.00)", mono_cols=(0, 2, 3, 4, 5, 6))
-    w1 = [["백건", "10.82 / 5.60 / 5.24", "4.3 / 21.9 / 25.4", "1.78 / 2.31 / 2.41", "2207 → 2862 (최대 2993)"],
-          ["흑건", "13.35 / 5.32 / 4.76", "2.4 / 24.6 / 31.3", "1.72 / 2.39 / 2.59", "2138 → 2962 (최대 3212)"]]
+    w1 = [["백건", "10.82 / 5.60 / 5.24", "4.3 / 21.9 / 25.4", "1.84 / 2.42 / 2.54", "2285 → 3007 (최대 3151)"],
+          ["흑건", "13.35 / 5.32 / 4.76", "2.4 / 24.6 / 31.3", "1.78 / 2.51 / 2.73", "2210 → 3116 (최대 3392)"]]
     s.table(130, 102, ["W1", "간격 쉼/강체 바닥/과다 mm", "자기장 mT", "OUT V", "ADC (쉼 → 강체 바닥)"], w1,
             [12, 46, 30, 30, 40], title="W1 자석·센서 (자석 Ø5×2 N35, 소자 열 y67 바로 위, S극 아래)", mono_cols=(1, 2, 3, 4))
-    s.text(130, 118.5, "W1 r4.5 좌표 모델(geometry.json 2026-09-29, 센서 값은 r4.3과 같음) S26·S30. 자기장은 원판 자석 축 위 식(Br 1.19 T) 근사 ±10 %. 최대 31 mT < A2 선형 ±44 mT.", "notes", size=1.9)
-    s.text(130, 121.3, "재무장선 = 자석 복귀 50 %(ADC 중간값이 아님 — ADC는 간격에 비선형). 흑은 1 N에서 강체 바닥보다 0.15 mm 위에 멈춤 → note-on 문턱은 흑 ≈2900 아래로.", "notes", size=1.9)
-    s.text(130, 124.1, "재무장(50 %) 백 8.21 mm · ADC ≈2373, 흑 9.34 mm · ≈2282. 1 N 정착 바닥 백 5.52 mm · ≈2890, 흑 5.47 mm · ≈2907.", "notes", size=1.9)
+    s.text(130, 118.5, "W1 r4.5 좌표 모델 S26·S30. 자기장 = 원판 자석 축 위 식(Br 1.19 T) ±10 %. OUT = WSH137 3.3 V 대표값 1.70 V + 33 mV/mT(△35).", "notes", size=1.9)
+    s.text(130, 121.3, "재무장선 = 자석 복귀 50 %(ADC 중간값이 아님 — ADC는 간격에 비선형). 흑은 1 N에서 강체 바닥보다 0.15 mm 위에 멈춤 → note-on 문턱은 흑 ≈3050 아래로.", "notes", size=1.9)
+    s.text(130, 124.1, "재무장(50 %) 백 8.21 mm · ADC ≈2468, 흑 9.34 mm · ≈2368. 1 N 정착 바닥 백 5.52 mm · ≈3036, 흑 5.47 mm · ≈3055.", "notes", size=1.9)
     s.text(130, 126.9, "ADC 코드 2560(E11) 이 행정 안에 있다 → 문턱을 10 LSB 이상 떼거나 보정표. 건반마다 부팅 때 쉼, 보통(1 N) 누름으로 바닥 학습.", "notes", size=1.9)
     s.para(15, 165, [
         "주",
-        "1. U201~U212: TI DRV5055A2QLPG (TO-92 LPG). 센서 x = W1 자석 보스 중심(모든 건반 같은 자리, 아래 표). 표시면을 위로 눕혀 센서 바 포켓에 넣고, 리드를 +x로 뺀 뒤 1.40~3.44 mm에서",
+        "1. U201~U212: Winson WSH137-XPAN1 (TO-92S, A등급; △35 — TI DRV5055A2QLPG와 핀·몸통 같음). 센서 x = W1 자석 보스 중심(모든 건반 같은 자리, 아래 표). 표시면을 위로 눕혀 센서 바 포켓에 넣고, 리드를 +x로 뺀 뒤 1.40~3.44 mm에서",
         "    2.54 간격으로 벌려 아래로 꺾어 기판 구멍(x = 0.63 + 2.54·i)에 꽂는다. 핀 1 VCC → y64.46, 핀 2 GND → y67.00, 핀 3 OUT → y69.54.",
-        "2. C201~C212: 1206 100 nF X7R (CL31B104KCFNNNE), 기판 아랫면 3V3–GND 패드 사이, 각 센서 핀 1·2 바로 옆.",
+        "2. C201~C212: 1206 100 nF X7R 50 V (Walsin 범용, 디바이스마트 8898), 기판 아랫면 3V3–GND 패드 사이, 각 센서 핀 1·2 바로 옆.",
         "    아랫면 부품·납땜·리드 끝 ≤ 1.8 mm (기판 밑 z7.0 − 바닥 z5.0 = 2.0, W1 r4.5 P36): 칩은 납작하게, 센서 리드는 납땜 뒤 1 mm 이하로 자른다.",
         "3. C213·C214: 10 µF 1206 16 V (버스 양 끝, 구매 목록 L67). △1 글 사양에는 있으나 구매 목록에 없던 부품. 두께 1.6 ± 0.2라 1.8 한계 안.",
         "4. 기판: 양면 도트 만능기판 x1.0~162.6 × y60.65~75.89 (6행; 바 끝 x162.9보다 0.3 짧게 → 오른쪽 턱 기둥 x163.0과 0.4). y64.46 = 3V3 버스, y67.00 = GND, y69.54 = OUT.",
@@ -424,7 +424,7 @@ def _end_board(s, e, y0, tag, keys, ubase, cbase, rbase, jref, xref, rail):
     for i, (k, net, ext) in enumerate(keys):
         xs = xs0 + dx * i
         u, c, r = f"U{ubase+i}", f"C{cbase+i}", f"R{rbase+i}"
-        s.place(hall, u, "DRV5055A2QLPG", xs, yc, ref_at=(1.6, -8.4), hide_val=True, meta=dict(key=k))
+        s.place(hall, u, "WSH137-XPAN1", xs, yc, ref_at=(1.6, -8.4), hide_val=True, meta=dict(key=k))
         s.text(xs - 4.8, yc + 13.5, k, "noteb", size=2.8)
         a = s.pin(u, 1); s.wire(a, (a[0], y3))
         b = s.pin(u, 2); s.wire(b, (b[0], yg))
@@ -506,7 +506,7 @@ def sch04():
     s.box(14, 120, 380, 94, "ER — 오른쪽 끝 부속 센서 기판 (로컬 x1.0~23.0 × y60.65~75.89, 22.0 × 15.24 mm, 6행) — BRD-02 배치")
     _end_board(s, e, 120, "R", [("C8", "ER_C8", 1)], 411, 411, 411, "J411", 411, "+3V3_ER")
     s.para(15, 220, [
-        "주  1. 끝 부속 센서도 SCH-02와 같다: DRV5055A2 + 100 nF(센서 옆). W1 자석 x: 왼쪽 부속(x0~47) A0 10.287, A#0 26.927, B0 40.141, 오른쪽 부속(로컬 x0~23.5) C8 11.75.",
+        "주  1. 끝 부속 센서도 SCH-02와 같다: WSH137-XPAN1 + 100 nF(센서 옆). W1 자석 x: 왼쪽 부속(x0~47) A0 10.287, A#0 26.927, B0 40.141, 오른쪽 부속(로컬 x0~23.5) C8 11.75.",
         "        기판은 W1 r4.2 끝 부속 센서 바(왼 x0.5~46.5, 오른 x0.5~23.0) 안: EL x1.0~46.5, ER x1.0~23.0 (SB와 같은 6행 15.24). 리드 구멍 A0 13.33, A#0 31.11, B0 43.81, C8 15.87.",
         "     2. △34 커넥터: XH2.54 DIY 키트(쿠팡 더모어샵) — 모듈 쪽 = 하우징(암, 사용자 선 끝에 단자 압착), 끝 부속 쪽 = 기판용 헤더(수)를 리본 끝에 납땜. ‘>>’ = 맞물림(KiCad 연결 아님 →",
         "        양쪽에 같은 넷 이름). +3V3_EL·+3V3_ER은 각각 O1·O7 제어 기판의 3V3 레일이다(프로젝트 전원 심볼로 추가).",
@@ -514,7 +514,7 @@ def sch04():
         "        XH 마지막 번호(3V3) = J302 6번, 안 쓰는 EXT 패드는 비움. 펌웨어 그대로. 납땜 뒤 끝에서 끝까지 통전 확인. 선 만들기·자르는 길이 = BRD-06.",
         "     4. △3 C404·C412 10 µF: 3V3가 긴 선 끝(EL 160 + 400 mm, ER 150 + 350 mm)이라 벌크 콘덴서 추가.",
         "     5. △8 R401~R403·R411 1 kΩ 1206 칩(아랫면, △13): 센서 바가 기판 윗면을 덮어 리드형 저항을 둘 자리가 없다 — OUT 구멍과 바로 뒤 행(y72.08) 사이.",
-        "        센서 OUT 바로 뒤에서 약 0.6 m 선 용량을 떼어 낸다(TI: OUT에 C 직결 금지). MB의 100 kΩ 풀다운과 함께",
+        "        센서 OUT 바로 뒤에서 약 0.6 m 선 용량을 떼어 낸다(DRV5055 때 넣음; WSH137은 C 직결도 되지만 그대로 둠). MB의 100 kΩ 풀다운과 함께",
         "        끝 부속을 빼면 EXT = 0 V. 펌웨어: O1 C12~C14 → MIDI 21~23, O7 C12 → 108, 0.15 V 아래면 센서 없음.",
         "     6. W401·W411 길(W1 r4.4, r4.5 그대로): 패드(아랫면) → 기판 밑 → 뒤 받침 리브 틈 → 패드 줄 뒤 y77.39 안에서 EL x14.83~21.18 · ER x8.89~12.70으로 모음",
         "        → 바닥(건반 밑) → 끝 부속 밸런스 레일 밑 차선(z5~10; EL x13.53~22.48, ER x7.59~14.00) → 뒷벽 홈(z5~12) → 뒤 케이블 통로의 X401·X411.",
@@ -537,7 +537,7 @@ def sch05(ring_r="20"):
     e = {}
     # --- pedal sensor (inside the pedal)
     s.box(14, 22, 88, 80, "PS — 페달 안 센서 (만능기판 자투리)")
-    s.place(sym_hall(), "U551", "DRV5055A2QLPG", 50, 60, ref_at=(-4.8, -9.2), hide_val=True)
+    s.place(sym_hall(), "U551", "WSH137-XPAN1", 50, 60, ref_at=(-4.8, -9.2), hide_val=True)
     s.text(38, 76.0, "표시면 위 · 자석 Ø5×2 S극 아래", "notes", size=2.0)
     s.place(sym_C(), "C551", "100n", 32.5, 60, ref_at=(-1.0, -7.2, "end"), val_at=(-1.0, 9.5, "end"))
     a1 = s.pin("U551", 1); c1 = s.pin("C551", 1)
@@ -661,15 +661,15 @@ def sch05(ring_r="20"):
     s.para(15, 142, [
         "주",
         "1. 페달(L43)의 마이크로스위치 배선을 떼고, 발판 밑면 발끝 쪽에 자석 Ø5×2(S극 아래)를 붙인다. 바로 아래 바닥판에 U551을 표시면이 위로 오게",
-        "    세워 붙인다. 간격: 눌렀을 때 약 4.5 mm, 뗐을 때 12 mm 이상 (약 36 → 2.4 mT, DRV5055A2 선형 범위 안). 발판이 강철이면 최대값 확인.",
+        "    세워 붙인다. 간격: 눌렀을 때 약 4.5 mm, 뗐을 때 12 mm 이상 (약 36 → 2.4 mT — WSH137 3.3 V 선형 약 ±31 mT를 넘어 밟은 끝은 눌림, 하프페달 구간은 선형). 발판이 강철이면 최대값 확인.",
         "2. W501: 3 m 스테레오 케이블(L50)의 한쪽 플러그를 잘라 팁 = 센서 OUT, 링 = VCC, 슬리브 = GND로 납땜, 케이블 타이로 당김 방지.",
         "3. W502: J501 조각 → PB J502 (1 T, 2 TN, 3 R, 4 S), 리본 가닥 4개(BRD-06). △9 TN을 GND에: 플러그가 없으면 팁이 GND에 붙어 0 V (RN은 안 씀).",
         "4. R501 1 kΩ + C501 100 nF: ADC 입력 RC (fc 약 1.6 kHz). △11 R502 100 kΩ 팁→GND (이전 글 사양의 'GP27로 뗀 쪽 전압 구동'은",
         "    GPIO가 0 / 3.3 V만 내므로 불가 → 고정 풀다운). 자석 S극이 표시면을 향해 누르면 OUT이 오른다. 0.15 V 아래 = 페달 없음 → CC64 = 0.",
         "5. △4 R503 20 Ω = 100 Ω ×5 병렬 (이전 사양 0 Ω, 구매 목록의 100 Ω 사용): 플러그를 꽂는 순간이나 TS(모노) 플러그로 링이 GND에 닿아도",
-        "    약 165 mA로 제한 → PED 보드가 리셋되지 않는다. 센서 쪽 3.05 V 이상인지 꽂은 상태로 확인 (DRV5055 최소 3.0 V).",
+        "    약 165 mA로 제한 → PED 보드가 리셋되지 않는다. 센서 쪽 3.05 V 이상인지 꽂은 상태로 확인 (WSH137 최소 3.0 V, 3.0 V 근처는 감도가 낮아짐).",
         "6. PED 보드 ID: GP6~GP8 비움(000), JP504 닫음(GP14 = GND) → USB 이름 'Toccata PED'. 소스테누토·소프트 입력 없음(R24).",
-        "7. △7 R551 1 kΩ: 센서 OUT 바로 뒤(페달 안). 3 m 케이블 용량(수백 pF)이 OUT에 바로 걸리지 않게 한다 (TI: OUT에 C 직결 금지).",
+        "7. △7 R551 1 kΩ: 센서 OUT 바로 뒤(페달 안). 3 m 케이블 용량(수백 pF)이 OUT에 바로 걸리지 않게 한다 (DRV5055 때 넣음; WSH137은 C 직결도 됨).",
         "8. P501은 W501 케이블 끝(PS 쪽 부품)이라 KiCad에서는 PS 프로젝트에 둔다. PED_VCC에는 PWR_FLAG.",
     ], size=2.2)
     s.frame()
@@ -1512,6 +1512,38 @@ def brd01():
         "    G → R303 23.0° (O1만 — O7은 R301이 더 뒤라 안 닿음). 힘 약 0.4 N이라 문제없음:",
         "    R30x는 기판에 붙여 눕히고 리드를 짧게 납땜한다.",
     ], size=2.05)
+    # ---- click data (page 'sheet hits'): pads and parts with the texts of BRD-08 (hits.py board_items; the underside wires are not drawn
+    # here, their numbers are BRD-08's), frame context and cables by key (hitkeys.py)
+    import hitkeys as HK
+    import mbroute as MR
+    rt, wires_, _pr = MR.get()
+
+    def hb(pts, pad=1.3):
+        xs, ys = [X(p[0]) for p in pts], [Y(p[1]) for p in pts]
+        return [HK.r2(min(xs) - pad), HK.r2(min(ys) - pad), HK.r2(max(xs) + pad), HK.r2(max(ys) + pad)]
+    hparts = [["A301"] + hb([(zx0, zy0), (zx0 + 18, zy0 - 23.5)], 0.0), ["A302"] + hb([(mx0, my0), (mx0 + MUX_W, my0 + MUX_D)], 0.0),
+              ["J301"] + hb([mb_pad_xy("J301", n) for n in range(1, 17)]), ["J302"] + hb([mb_pad_xy("J302", n) for n in range(1, 7)]),
+              ["C301"] + hb([(gx_, gy_), (vx_, gy_)], 1.0)]
+    hparts += [[ref] + hb([(x, y), (x + 7.62, y)]) for ref, (x, y) in R_EXT.items()]
+    hparts += [[ref] + hb([sig, gnd]) for ref, (sig, gnd) in JP_PADS.items()]
+    hparts += [[ref] + hb([(x, y)], 1.5) for ref, (x, y) in TP_POS.items()]
+    s.hits_custom = {
+        "wires": [dict(no=w["no"], net=w["net"], a=w["a"], b=w["b"], len=round(w["length"], 1), bends=w["bends"], pts=[]) for w in wires_],
+        "wires_hidden": "BRD-08",
+        "pads": [[ref, str(num), net, HK.r2(X(MR.X(i_))), HK.r2(Y(MR.Y(j_))), 1 if MR.soldered((ref, num, net)) else 0]
+                 for (i_, j_), (ref, num, net) in rt.pads.items()],
+        "parts": hparts,
+    }
+    K = HK.Keys(s, X, Y)
+    K.box(px0, py0, px1, YT, key="W201~W208", q="USB 플러그가 꽂힌 자리입니다. 선은 뒷벽 개구로 나가 허브로 갑니다 (모듈마다 W201~W207).")
+    K.swire([(X(105.11), Y(y1b)), (X(105.11), Y(176.6)), (X(86.5), Y(176.6)), (X(86.5), Y(YT))], key="W403",
+            q="EXT 선: O1은 W403 5가닥, O7은 W413 3가닥입니다. 다른 기판(O2~O6)에는 없습니다.")
+    K.box(rb0, y0b - 4.5, rb1, MB["ribbon"][2], key="W101~W107")
+    K.box(x0b, MB["strip"][0], MB["x1"], MB["strip"][1], key="CTX-RAIL")
+    for (a0, a1) in MB["fins"]:
+        K.box(a0, max(MB["fin_y"][0], y0b), a1, min(MB["fin_y"][1], YT), key="CTX-FIN")
+    K.box(MB["ffs"][0], MB["ffs"][2], MB["ffs"][1], min(MB["ffs"][3], YT), key="CTX-FFS")
+    K.box(x0b, y0b, MB["x1"], y1b, key="PCB-MB")
     s.frame()
     s.expected = {}
     return s
@@ -1599,6 +1631,28 @@ def _end_plans(s):
             wires.append(((end_col(xk), 72.08), (jx[1 + i], 74.62)))
         for (a1, a2) in wires:
             o.append(f'<line x1="{X(a1[0]):.2f}" y1="{Y(a1[1]):.2f}" x2="{X(a2[0]):.2f}" y2="{Y(a2[1]):.2f}" stroke="#1f5fbf" stroke-width=".35" stroke-dasharray="1.1 .6"/>')
+        # click data (hitkeys.py), nets inside the end part's own scope
+        import hitkeys as HK
+        K = HK.Keys(s, X, Y, m=tag)
+        rail = B["jnames"][-1]
+        for i, (u, k, xk, c, r) in enumerate(B["keys"]):
+            col = end_col(xk)
+            K.box(xk - 1.54, 65.0, xk + 1.61, 69.0, key=u, q="%s 건반" % k)
+            K.pad(col, 64.46, u + ".1", rail)
+            K.pad(col, 67.00, u + ".2", "GND")
+            K.pad(col, 69.54, u + ".3")
+            K.pad(col, 72.08, r + ".1", B["jnames"][1 + i], r=0.8)
+            K.sbox(X(col) - 0.9, Y(67.00) - 0.2, X(col) + 0.9, Y(67.00) + 2.54 * S + 0.2, key=c)
+            K.sbox(X(col) - 0.9, Y(72.08) - 0.2, X(col) + 0.9, Y(72.08) + 2.54 * S + 0.2, key=r)
+        K.sbox(X(8.25) - 1.2, Y(67.00) - 0.4, X(8.25) + 1.2, Y(67.00) + 2.54 * S + 0.4, key=B["bulk"])
+        for n, x in enumerate(jx, 1):
+            K.pad(x, 74.62, "%s.%d" % (B["jref"], n), B["jnames"][n - 1], r=1.3)
+        for i, ((a1, a2), net) in enumerate(zip(wires, ["GND", rail] + [B["jnames"][1 + j] for j in range(len(B["keys"]))])):
+            K.wire([a1, a2], "%sW-%d" % (tag, i + 1), net)
+        K.wire([(8.25, 64.46), (last, 64.46)], "BUS-%s-3V3" % tag, rail)
+        K.wire([(8.25, 67.00), (last, 67.00)], "BUS-%s-GND" % tag, "GND")
+        K.box(1.0, 60.65, B["x1"], 75.89, key="PCB-" + tag)
+        K.box(bx0, 59.0, bx1, 77.5, key="CTX-BAR-END")
         s.text(X(jx[0]) - 1.5, Y(75.89) - 6.0, f"{B['jref']} 리드 패드 ×{len(jx)} (1 GND … {len(jx)} 3V3)", "cabt", size=1.9, check=False)
         # mounting U-notches (same as SB)
         for (x, y, edge) in ((3.0, 61.9, 60.65), (3.0, 74.6, 75.89)):
@@ -1682,10 +1736,34 @@ def brd02():
         o.append(f'<rect x="{X(161.5):.2f}" y="{Y(yb):.2f}" width="{1.5*S:.2f}" height="{(yb-ya)*S:.2f}" fill="#c9d0da" fill-opacity=".6" stroke="#6b7690" stroke-width=".3"/>')
         o.append(f'<rect x="{X(163.0):.2f}" y="{Y(yb):.2f}" width="{1.3*S:.2f}" height="{(yb-ya)*S:.2f}" fill="#9aa6b8" stroke="#6b7690" stroke-width=".3"/>')
     s.text(X(164.3), Y(58.5) + 16.5, "오른쪽 턱(W1 r4.5 P36): 립 x161.5~163.0 z13.6~15.1(바 끝 위 1.4), 기둥 x163.0~164.3 — 바를 1.5 왼쪽에 놓고 오른쪽으로 밀어 넣은 뒤 왼쪽 M3", "notes", "end", size=2.0)
+    # click data (hitkeys.py): sensors, lead pads, capacitors, J201, buses; draw_sb_routes adds the wires and the ribs
+    import hitkeys as HK
+    K = HK.Keys(s, X, Y)
+    for i, (u, k, xk, col) in enumerate(tab):
+        K.box(xk - 1.54, 65.0, xk + 1.61, 69.0, key=u, q="%s 건반 · 리본 %d번 심 → 먹스 C%d" % (k, 3 + i, i))
+        for y, pin, net in ((64.46, "1", "+3V3"), (67.00, "2", "GND"), (69.54, "3", RIBBON[2 + i])):
+            K.pad(col, y, "%s.%s" % (u, pin), net)
+        K.sbox(X(col) - 0.9, Y(67.00) - 0.2, X(col) + 0.9, Y(67.00) + 2.54 * S + 0.2, key="C%d" % (201 + i))
+    for x, ref in ((8.25, "C213"), (158.11, "C214")):
+        K.sbox(X(x) - 1.2, Y(67.00) - 0.4, X(x) + 1.2, Y(67.00) + 2.54 * S + 0.4, key=ref)
+    for i in range(16):
+        K.pad(61.59 + 2.54 * (i // 2), (72.08, 74.62)[i % 2], "J201.%d" % (i + 1), RIBBON[i], r=1.3)
+    K.wire([(8.25, 64.46), (160.65, 64.46)], "BUS-SB-+3V3", "+3V3")
+    K.wire([(8.25, 67.00), (160.65, 67.00)], "BUS-SB-GND", "GND")
+    for (x, y) in ((3.0, 61.9), (3.0, 74.6)):
+        K.box(x - 1.7, y - 1.7, x + 1.7, y + 1.7, t="고정 U홈 (M3×10 자가 탭 나사 자리)",
+              d=["기판 왼쪽 끝의 앞·뒤에 Ø3.4 U홈이 하나씩 있습니다: (3.0, 61.9) · (3.0, 74.6).",
+                 "센서 바와 기판을 함께 M3×10 자가 탭 나사 2개로 프레임 받침에 고정합니다.", "오른쪽 끝은 나사 없이 프레임의 턱 밑으로 밀어 넣습니다."])
+    for (ya, yb) in ((59.0, 63.4), (70.6, 77.5)):
+        K.box(161.5, ya, 164.3, yb, t="오른쪽 턱 (프레임, W1 r4.5 P36)",
+              d=["립 x161.5~163.0 (z13.6~15.1, 센서 바 끝 위 1.4) + 바닥에서 올라온 기둥 x163.0~164.3.",
+                 "센서 바를 1.5 mm 왼쪽에 놓고 오른쪽으로 밀어 넣은 뒤 왼쪽 나사 2개로 고정합니다."])
     # OUT -> J201 wires (underside), from boards3.sb_rows() + route check
     import boards3
     boards3.draw_sb_routes(s, X, Y)
     s.board_check = ["SB: " + p for p in boards3.sb_check()]
+    K.box(1.0, 60.65, SB_X1, 75.89, key="PCB-SB",
+          q="회색 점선 띠 = 기판 밑의 받침 리브(프레임)입니다. 그 위로는 아랫면 선이 지나지 않고, 뒤 띠는 리본 틈 x59~82에서만 건넙니다.")
     # table
     rows = [[u, k, f"{xk:.3f}", f"{col:.2f}", f"C{201+i}", f"{col:.2f}"] for i, (u, k, xk, col) in enumerate(tab)]
     s.table(15, 118, ["센서", "건반", "소자 x", "리드 구멍 x (3행)", "100n", "100n 구멍 x"], rows, [16, 12, 18, 30, 14, 22],
@@ -1694,7 +1772,7 @@ def brd02():
         "주",
         "1. 기판 x1.0~162.6 × y60.65~75.89, 6행 2.54 간격(바 끝 x162.9보다 0.3 짧게 — 오른쪽 턱 기둥 x163.0과 0.4, 손으로 자른 공차 ±0.3).",
         "    색 원: 빨강 = 3V3(y64.46), 검정 = GND(y67.00), 파랑 = OUT(y69.54).",
-        "2. DRV5055는 표시면(모따기 면, '55A2' 인쇄)을 위로 눕혀 센서 바 포켓에 넣는다. 리드는 +x로 빼서",
+        "2. WSH137은 표시면(모따기 면, 'W137' 인쇄)을 위로 눕혀 센서 바 포켓에 넣는다. 리드는 +x로 빼서",
         "    1.40~3.44 mm 지점에서 2.54 간격으로 벌려 아래로 꺾는다 — 넓어지는 댐바 부분 아래에서 꺾을 것.",
         "    위에서 봐서 리드가 오른쪽(+x)이면 핀 1(VCC)이 앞(작은 y)이다 → y64.46. 가운데 GND, 뒤 OUT.",
         "3. 확인: 3.3 V를 주고 자석 없이 OUT 1.59~1.71 V, S극을 표시면에 가까이 하면 올라간다. 건반을 얹은 쉼 백 ≈1.78 · 흑 ≈1.72 V.",
@@ -1796,7 +1874,7 @@ def sch01():
     # PED
     blk(360, 72, 37, 22, "PB 페달 보드", ["RP2040-Zero", "'Toccata PED'"])
     cab([(378.5, 94), (378.5, 103), (350, 103)], "W208 " + HN.m_txt(HN.USB_BUY.get("PED", 0.5)), (362, 101.5))
-    blk(360, 118, 37, 18, "PS 댐퍼 페달", ["DRV5055 + 1 kΩ", "듀로 페달 개조"])
+    blk(360, 118, 37, 18, "PS 댐퍼 페달", ["WSH137 + 1 kΩ", "듀로 페달 개조"])
     cab([(378.5, 118), (378.5, 108)], None)
     s.text(380, 113, "W501 3 m → J501", "cabt", size=2.0)
     s.line(377, 110, 380, 106, "bodyl", "text")
@@ -1861,3 +1939,7 @@ SHEETS += [boards2.brd03, boards2.brd04, boards2.brd05, boards2.brd06]
 import boards3  # noqa: E402
 
 SHEETS += [boards3.brd07, boards3.brd08]
+
+import boards4  # noqa: E402  (BRD-09~11: MB per board kind, top + underside; imports this module lazily)
+
+SHEETS += [boards4.brd09, boards4.brd10, boards4.brd11]

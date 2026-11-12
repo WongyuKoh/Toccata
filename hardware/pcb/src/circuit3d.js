@@ -2,6 +2,8 @@
    Data: fin/circuit/circuit3d.json from src/model3d.py (boards, holes, pads, parts, wires; mm, z up from the desk).
    Only three.js r128 from cdnjs, loaded once through window.toccata.three (shared with 04 3D 모델). Orbit / pan / zoom, touch,
    picking, net highlight and layer toggles are written here. Loads when the 3D block first scrolls into view (or on its button).
+   Objects are merged into one mesh per material (restyle) and picked by a ray against their own triangles (pickAll); a click opens
+   the same popup as the drawings (.hitpop): what the thing is, what it connects to, where it sits (scope o.m), its net.
    Model -> three: the root group is turned -90 deg about x, so (x, y, z) model = (x, z, -y) three. */
 (function () {
   'use strict';
@@ -22,9 +24,9 @@
   var FOV = 30, TAN = Math.tan(FOV / 2 * Math.PI / 180);
 
   var T = null, D = null, renderer = null, camera = null, scene = null, root = null, raf = 0;
-  var S = { sc: -1, lay: { part: true, wire: true, cable: true, board: true, ctx: true, lab: true }, net: null, sel: null };
+  var S = { sc: -1, lay: { part: true, wire: true, cable: true, board: true, ctx: true, lab: true }, hot: null, sel: null };
   var cam = { tx: 0, ty: 0, tz: 0, dist: 300, az: -0.6, el: 0.7 };
-  var meshes = [], labels = [], picks = [];
+  var prims = [], batches = [], boards = [], labels = [];
   var started = false;
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -95,7 +97,7 @@
     var metal = !!METAL[c];
     var m = new T.MeshStandardMaterial({ color: new T.Color(c), roughness: metal ? 0.35 : 0.62, metalness: metal ? 0.55 : 0.0 });
     var op = o == null ? 1 : o;
-    if (state === 'dim') op = Math.min(op, 0.08);
+    if (state === 'dim') op = Math.min(op, 0.13);
     if (op < 1) { m.transparent = true; m.opacity = op; m.depthWrite = op > 0.5; }
     if (state === 'hot') { m.emissive = new T.Color(c); m.emissiveIntensity = 0.45; }
     if (state === 'sel') { m.emissive = new T.Color('#3b82f6'); m.emissiveIntensity = 0.55; }
@@ -194,128 +196,190 @@
     if (ax === 'x') g.applyMatrix4(new T.Matrix4().set(0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1));
     return g;
   }
+  // perfboards: geometry + hole texture in board-local coordinates, shared by every board of the same shape (7 SB, 7 MB)
+  var boardCache = {};
   function boardMesh(o) {
-    var sh = new T.Shape(o.p.map(function (q) { return new T.Vector2(q[0], q[1]); }));
-    (o.m || []).forEach(function (h) { var p = new T.Path(); p.absarc(h[0], h[1], h[2] / 2, 0, Math.PI * 2, true); sh.holes.push(p); });
-    var g = new T.ExtrudeGeometry(sh, { depth: o.z[1] - o.z[0], bevelEnabled: false, curveSegments: 16 });
-    g.translate(0, 0, o.z[0]);
     var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
     o.p.forEach(function (q) { x0 = Math.min(x0, q[0]); y0 = Math.min(y0, q[1]); x1 = Math.max(x1, q[0]); y1 = Math.max(y1, q[1]); });
-    var w = x1 - x0, h = y1 - y0, ppm = Math.min(14, 2048 / Math.max(w, h)), cv = document.createElement('canvas');
-    cv.width = Math.max(8, Math.round(w * ppm)); cv.height = Math.max(8, Math.round(h * ppm));
-    var ctx = cv.getContext('2d');
-    ctx.fillStyle = o.c; ctx.fillRect(0, 0, cv.width, cv.height);
-    (o.h || []).forEach(function (q) {
-      var cx = (q[0] - x0) * ppm, cy = (y1 - q[1]) * ppm;
-      ctx.fillStyle = '#b07a3e'; ctx.beginPath(); ctx.arc(cx, cy, 0.82 * ppm, 0, Math.PI * 2); ctx.fill();
-      ctx.fillStyle = '#2b2116'; ctx.beginPath(); ctx.arc(cx, cy, 0.48 * ppm, 0, Math.PI * 2); ctx.fill();
-    });
-    var tex = new T.CanvasTexture(cv);
-    tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-    tex.repeat.set(1 / w, 1 / h); tex.offset.set(-x0 / w, -y0 / h);
-    var cap = new T.MeshStandardMaterial({ map: tex, roughness: 0.7, metalness: 0 });
-    var side = new T.MeshStandardMaterial({ color: new T.Color(o.cs || '#a8863f'), roughness: 0.8 });
-    var m = new T.Mesh(g, [cap, side]);
-    m.userData.fixedMat = [cap, side];
+    function rel(a) { return (a || []).map(function (q) { return [Math.round((q[0] - x0) * 100) / 100, Math.round((q[1] - y0) * 100) / 100].concat(q.slice(2)); }); }
+    var hg = o.hg ? [Math.round((o.hg[0] - x0) * 100) / 100, o.hg[1], o.hg[2], Math.round((o.hg[3] - y0) * 100) / 100, o.hg[4], o.hg[5]] : null;
+    var P = rel(o.p), H = rel(o.h), M = rel(o.md), th = Math.round((o.z[1] - o.z[0]) * 100) / 100;
+    var key = JSON.stringify([P, H, M, hg, th, o.c, o.cs]), B = boardCache[key];
+    if (!B) {
+      var sh = new T.Shape(P.map(function (q) { return new T.Vector2(q[0], q[1]); }));
+      M.forEach(function (h) { var p = new T.Path(); p.absarc(h[0], h[1], h[2] / 2, 0, Math.PI * 2, true); sh.holes.push(p); });
+      var g = new T.ExtrudeGeometry(sh, { depth: th, bevelEnabled: false, curveSegments: 16 });
+      var w = x1 - x0, h = y1 - y0, ppm = Math.min(14, 2048 / Math.max(w, h)), cv = document.createElement('canvas');
+      cv.width = Math.max(8, Math.round(w * ppm)); cv.height = Math.max(8, Math.round(h * ppm));
+      var ctx = cv.getContext('2d');
+      ctx.fillStyle = o.c; ctx.fillRect(0, 0, cv.width, cv.height);
+      var holes = H.slice();
+      if (hg) for (var i = 0; i < hg[2]; i++) for (var j = 0; j < hg[5]; j++) holes.push([hg[0] + hg[1] * i, hg[3] + hg[4] * j]);
+      holes.forEach(function (q) {
+        var cx = q[0] * ppm, cy = (h - q[1]) * ppm;
+        ctx.fillStyle = '#b07a3e'; ctx.beginPath(); ctx.arc(cx, cy, 0.82 * ppm, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#2b2116'; ctx.beginPath(); ctx.arc(cx, cy, 0.48 * ppm, 0, Math.PI * 2); ctx.fill();
+      });
+      var tex = new T.CanvasTexture(cv);
+      tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+      tex.repeat.set(1 / w, 1 / h);
+      B = boardCache[key] = { g: g, mats: [new T.MeshStandardMaterial({ map: tex, roughness: 0.7, metalness: 0 }),
+                                           new T.MeshStandardMaterial({ color: new T.Color(o.cs || '#a8863f'), roughness: 0.8 })] };
+    }
+    var m = new T.Mesh(B.g, B.mats);
+    m.position.set(x0, y0, o.z[0]);
     return m;
   }
-  var padGeoRing = null, padGeoDome = null;
-  function padGroup(o) {
-    if (!padGeoRing) {
-      padGeoRing = new T.CylinderGeometry(0.86, 0.86, 0.07, 16); padGeoRing.rotateX(Math.PI / 2);
-      padGeoDome = new T.SphereGeometry(0.78, 14, 8, 0, Math.PI * 2, 0, Math.PI / 2); padGeoDome.rotateX(Math.PI / 2); padGeoDome.scale(1, 1, 0.75);
-    }
-    var gp = new T.Group(), list = [];
-    var rT = new T.Mesh(padGeoRing); rT.position.set(o.p[0], o.p[1], o.z[1] + 0.04);
-    var rB = new T.Mesh(padGeoRing); rB.position.set(o.p[0], o.p[1], o.z[0] - 0.04);
-    rT.userData.role = rB.userData.role = 'ring';
-    list.push(rT, rB);
-    if (o.s && o.s.indexOf('b') >= 0) { var d = new T.Mesh(padGeoDome); d.position.set(o.p[0], o.p[1], o.z[0] - 0.05); d.scale.z = -1; d.userData.role = 'dome'; list.push(d); }
-    if (o.s && o.s.indexOf('t') >= 0) { var u = new T.Mesh(padGeoDome); u.position.set(o.p[0], o.p[1], o.z[1] + 0.05); u.userData.role = 'dome'; list.push(u); }
-    list.forEach(function (m) { gp.add(m); });
-    return gp;
+  // pad templates (at the origin): copper ring, solder dome up / down
+  var padT = null;
+  function arrays(g) {
+    if (!g.attributes.normal) g.computeVertexNormals();
+    var r = { pos: g.attributes.position.array, nor: g.attributes.normal.array, idx: g.index ? g.index.array : null };
+    g.dispose();
+    return r;
+  }
+  function padTemplates() {
+    var ring = new T.CylinderGeometry(0.86, 0.86, 0.07, 12); ring.rotateX(Math.PI / 2);
+    var up = new T.SphereGeometry(0.78, 10, 5, 0, Math.PI * 2, 0, Math.PI / 2); up.rotateX(Math.PI / 2); up.scale(1, 1, 0.75);
+    var U = arrays(up), dn = { pos: new Float32Array(U.pos), nor: new Float32Array(U.nor), idx: new (U.idx.constructor)(U.idx) };
+    for (var i = 2; i < dn.pos.length; i += 3) { dn.pos[i] = -dn.pos[i]; dn.nor[i] = -dn.nor[i]; }
+    for (i = 0; i < dn.idx.length; i += 3) { var t = dn.idx[i + 1]; dn.idx[i + 1] = dn.idx[i + 2]; dn.idx[i + 2] = t; }
+    padT = { ring: arrays(ring), up: U, dn: dn };
+  }
+  function moved(t, x, y, z) {
+    var pos = new Float32Array(t.pos.length);
+    for (var i = 0; i < pos.length; i += 3) { pos[i] = t.pos[i] + x; pos[i + 1] = t.pos[i + 1] + y; pos[i + 2] = t.pos[i + 2] + z; }
+    return { pos: pos, nor: t.nor, idx: t.idx };
   }
 
-  // ------------------------------------------------------------------ scene load
+  // ------------------------------------------------------------------ scene load: every object -> primitives (arrays in model mm)
+  // Drawing: the primitives are merged into one mesh per material (colour / opacity / state), rebuilt when the style changes - the
+  // instrument scene has ~3500 objects and ~1100 pads, far too many for one draw call each. Picking: ray against the primitives.
+  function addPrim(o, a, role) {
+    var n = a.pos.length / 3, x0 = 1e9, y0 = 1e9, z0 = 1e9, x1 = -1e9, y1 = -1e9, z1 = -1e9, p = a.pos;
+    for (var i = 0; i < p.length; i += 3) {
+      if (p[i] < x0) x0 = p[i]; if (p[i] > x1) x1 = p[i];
+      if (p[i + 1] < y0) y0 = p[i + 1]; if (p[i + 1] > y1) y1 = p[i + 1];
+      if (p[i + 2] < z0) z0 = p[i + 2]; if (p[i + 2] > z1) z1 = p[i + 2];
+    }
+    prims.push({ o: o, role: role || '', pos: a.pos, nor: a.nor, idx: a.idx, n: n,
+                 c: [(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2], r: Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0) + (z1 - z0) * (z1 - z0)) / 2 + 0.05 });
+  }
   function clearScene() {
     if (root) {
       scene.remove(root);
-      root.traverse(function (m) {
-        if (m.geometry && m.geometry !== padGeoRing && m.geometry !== padGeoDome) m.geometry.dispose();
-        if (m.userData && m.userData.fixedMat) m.userData.fixedMat.forEach(function (x) { if (x.map) x.map.dispose(); x.dispose(); });
-      });
+      batches.forEach(function (m) { m.geometry.dispose(); });
     }
-    meshes = []; labels = []; picks = [];
+    prims = []; batches = []; boards = []; labels = [];
   }
   function loadScene(k) {
     clearScene();
-    S.sc = k; S.net = null; S.sel = null;
+    closePop();
+    S.sc = k; S.hot = null; S.sel = null;
     var sd = D.scenes[k];
+    JOIN = sd.join || {};
     root = new T.Group(); root.rotation.x = -Math.PI / 2; scene.add(root);
-    var bb = [1e9, 1e9, 1e9, -1e9, -1e9, -1e9];
-    function grow(b) { for (var i = 0; i < 3; i++) { bb[i] = Math.min(bb[i], b[i]); bb[i + 3] = Math.max(bb[i + 3], b[i + 3]); } }
+    if (!padT) padTemplates();
     sd.objs.forEach(function (o) {
-      var m = null;
+      var g = null;
       if (o.k === 'l') { labels.push(o); return; }
-      if (o.k === 'b') { m = new T.Mesh(boxGeo(o.b)); grow(o.b); }
-      else if (o.k === 'c') { m = new T.Mesh(cylGeo(o)); }
-      else if (o.k === 't') { m = new T.Mesh(tubeGeo(o.p, o.r)); }
-      else if (o.k === 'e') { var g = prismGeo(o.p, o.z[0], o.z[1], o.ax); if (!g) return; m = new T.Mesh(g); }
-      else if (o.k === 'B') { m = boardMesh(o); }
-      else if (o.k === 'p') { m = padGroup(o); }
-      if (!m) return;
-      m.userData.o = o;
-      root.add(m);
-      meshes.push(m);
-      if (o.k === 'p') m.children.forEach(function (c) { c.userData.o = o; picks.push(c); }); else picks.push(m);
+      if (o.k === 'b') g = boxGeo(o.b);
+      else if (o.k === 'c') g = cylGeo(o);
+      else if (o.k === 't') g = tubeGeo(o.p, o.r);
+      else if (o.k === 'e') g = prismGeo(o.p, o.z[0], o.z[1], o.ax);
+      else if (o.k === 'B') {
+        var m = boardMesh(o); m.userData.o = o; root.add(m); boards.push(m);
+        var x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+        o.p.forEach(function (q) { x0 = Math.min(x0, q[0]); y0 = Math.min(y0, q[1]); x1 = Math.max(x1, q[0]); y1 = Math.max(y1, q[1]); });
+        addPrim(o, arrays(boxGeo([x0, y0, o.z[0], x1, y1, o.z[1]])), 'pick');      // boards are drawn by their own mesh, this is for picking
+        return;
+      }
+      else if (o.k === 'p') {
+        addPrim(o, moved(padT.ring, o.p[0], o.p[1], o.z[1] + 0.04), 'ring');
+        addPrim(o, moved(padT.ring, o.p[0], o.p[1], o.z[0] - 0.04), 'ring');
+        if (o.s && o.s.indexOf('b') >= 0) addPrim(o, moved(padT.dn, o.p[0], o.p[1], o.z[0] - 0.05), 'dome');
+        if (o.s && o.s.indexOf('t') >= 0) addPrim(o, moved(padT.up, o.p[0], o.p[1], o.z[1] + 0.05), 'dome');
+        return;
+      }
+      if (g) addPrim(o, arrays(g));
     });
-    root.updateMatrixWorld(true);
-    var b3 = new T.Box3().setFromObject(root);
-    sd._box = [b3.min.x, -b3.max.z, b3.min.y, b3.max.x, -b3.min.z, b3.max.y];
+    var bb = [1e9, 1e9, 1e9, -1e9, -1e9, -1e9];
+    prims.forEach(function (p) { for (var i = 0; i < 3; i++) { bb[i] = Math.min(bb[i], p.c[i] - p.r); bb[i + 3] = Math.max(bb[i + 3], p.c[i] + p.r); } });
+    sd._box = bb;
     restyle();
     buildViews(sd);
     buildNets(sd);
     sceneBar.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', i === k ? 'true' : 'false'); });
     subEl.textContent = sd.s || '';
     notesEl.innerHTML = (sd.notes || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
-    showInfo(null);
     var v0 = sd.v0 && sd.views[sd.v0] ? sd.v0 : null;
     if (v0) setView(v0, true); else fit(sd._box, -0.6, 0.7, true);
   }
 
   // ------------------------------------------------------------------ style (layers, net highlight, selection)
+  // A net name is one net only inside its scope o.m (each module has its own HALL_C); the scene's join table ties scopes together
+  // (the end-part nets = the EXT nets of the end boards, one GND for the instrument).
+  var JOIN = {};
+  function netKey(o) { if (!o.n) return null; var k = (o.m || '') + '|' + o.n; return JOIN[k] || k; }
+  function isHot(o) { return !!(S.hot && o.n && (S.hot.key ? netKey(o) === S.hot.key : o.n === S.hot.name)); }
+  function sameItem(o, sel) { return o === sel || (sel.i && o.i === sel.i && (o.m || '') === (sel.m || '') && o.k !== 'p' && sel.k !== 'p'); }
+  function stateOf(o) {
+    var st = '';
+    if (S.hot) st = isHot(o) ? 'hot' : 'dim';
+    if (S.sel && sameItem(o, S.sel)) st = 'sel';
+    return st;
+  }
   function layerOn(o) {
     var g = o.g || 'part';
     if (g === 'pad') return S.lay.board;
     return S.lay[g] !== false;
   }
   function restyle() {
-    var hot = S.net, sel = S.sel;
-    meshes.forEach(function (m) {
-      var o = m.userData.o;
-      m.visible = layerOn(o);
-      if (!m.visible) return;
-      var state = '';
-      if (hot) state = (o.n === hot) ? 'hot' : 'dim';
-      if (sel && sameItem(o, sel)) state = 'sel';
-      if (o.k === 'B') {
-        var fm = m.userData.fixedMat;
-        fm.forEach(function (x) { x.transparent = state === 'dim'; x.opacity = state === 'dim' ? 0.25 : 1; x.depthWrite = state !== 'dim'; });
-        return;
-      }
+    batches.forEach(function (m) { root.remove(m); m.geometry.dispose(); });
+    batches = [];
+    var groups = {}, order = [], i, p, o;
+    for (i = 0; i < prims.length; i++) {
+      p = prims[i]; o = p.o;
+      p.st = null;
+      if (!layerOn(o)) continue;
+      var st = stateOf(o), c, op = o.o;
+      p.st = st;
+      if (p.role === 'pick') continue;
       if (o.k === 'p') {
-        m.children.forEach(function (c) {
-          var base = c.userData.role === 'ring' ? '#c9894b' : '#c9ccd2';
-          if (state === 'hot' || state === 'sel') base = o.n ? D.nets[o.n] || '#3b82f6' : '#3b82f6';
-          c.material = mat(base, null, state === 'dim' ? 'dim' : (state ? 'hot' : ''));
-        });
-        return;
+        c = p.role === 'ring' ? '#c9894b' : '#c9ccd2';
+        if (st === 'hot' || st === 'sel') c = o.n ? D.nets[o.n] || '#3b82f6' : '#3b82f6';
+        st = st === 'dim' ? 'dim' : (st ? 'hot' : ''); op = null;
+      } else c = o.c || '#888';
+      if (st === 'sel' || st === 'hot') op = null;                // a picked or lit thing is drawn solid, even a faint wire or a ghost
+      var key = c + '|' + (op == null ? 1 : op) + '|' + st, G = groups[key];
+      if (!G) { G = groups[key] = { c: c, o: op, st: st, list: [], nv: 0, ni: 0 }; order.push(key); }
+      G.list.push(p); G.nv += p.n; G.ni += p.idx ? p.idx.length : p.n;
+    }
+    order.forEach(function (key) {
+      var G = groups[key], pos = new Float32Array(G.nv * 3), nor = new Float32Array(G.nv * 3), idx = new Uint32Array(G.ni), vo = 0, io = 0, q;
+      for (var k = 0; k < G.list.length; k++) {
+        var p = G.list[k];
+        pos.set(p.pos, vo * 3); nor.set(p.nor, vo * 3);
+        if (p.idx) { for (q = 0; q < p.idx.length; q++) idx[io + q] = p.idx[q] + vo; io += p.idx.length; }
+        else { for (q = 0; q < p.n; q++) idx[io + q] = vo + q; io += p.n; }
+        vo += p.n;
       }
-      m.material = mat(o.c || '#888', o.o, state);
+      var g = new T.BufferGeometry();
+      g.setAttribute('position', new T.BufferAttribute(pos, 3));
+      g.setAttribute('normal', new T.BufferAttribute(nor, 3));
+      g.setIndex(new T.BufferAttribute(idx, 1));
+      var m = new T.Mesh(g, mat(G.c, G.o, G.st));
+      m.frustumCulled = false;
+      if (m.material.transparent) m.renderOrder = G.st === 'dim' ? 1 : 2;
+      root.add(m); batches.push(m);
+    });
+    var dimB = !!S.hot;
+    boards.forEach(function (m) {
+      m.visible = layerOn(m.userData.o);
+      m.material.forEach(function (x) { x.transparent = dimB; x.opacity = dimB ? 0.32 : 1; x.depthWrite = !dimB; x.needsUpdate = true; });
     });
     invalidate();
   }
-  function sameItem(o, sel) { return o === sel || (sel.i && o.i === sel.i && o.k !== 'p' && sel.k !== 'p'); }
 
   // ------------------------------------------------------------------ UI
   function button(txt, cls, fn) {
@@ -324,6 +388,7 @@
     b.addEventListener('click', fn);
     return b;
   }
+  function clearSel() { S.hot = null; S.sel = null; netSel.value = ''; restyle(); closePop(); }
   function buildUi() {
     sceneBar.innerHTML = '';
     D.scenes.forEach(function (s, k) {
@@ -339,8 +404,12 @@
       b.setAttribute('aria-pressed', 'true');
       togBar.appendChild(b);
     });
-    netSel.addEventListener('change', function () { S.net = netSel.value || null; S.sel = null; restyle(); showNet(); });
-    box.querySelector('.c3d-reset').addEventListener('click', function () { var sd = D.scenes[S.sc]; S.net = null; S.sel = null; netSel.value = ''; restyle(); showInfo(null); setView(sd.v0 || Object.keys(sd.views)[0]); });
+    netSel.addEventListener('change', function () {
+      S.sel = null; S.hot = netSel.value ? { name: netSel.value } : null; restyle();
+      if (S.hot) showPop(netHtml({ n: netSel.value }, true), null); else closePop();
+    });
+    box.querySelector('.c3d-reset').addEventListener('click', function () { var sd = D.scenes[S.sc]; clearSel(); setView(sd.v0 || Object.keys(sd.views)[0]); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && pop && !pop.hidden) clearSel(); });
   }
   function buildViews(sd) {
     viewBar.innerHTML = '';
@@ -358,29 +427,76 @@
     netSel.innerHTML = '<option value="">넷 강조: 없음</option>' + names.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + ' (' + seen[n] + ')</option>'; }).join('');
     netSel.disabled = !names.length;
   }
+
+  // ------------------------------------------------------------------ click info: what it is, the product, what it connects to
+  // The same block as the drawings' popup (page.py 'sheet hits'): title, lines, then the net - here with where the thing sits too.
   function infoOf(o) {
     var I = D.info, key = o.i || '', base = key.split('.')[0];
-    return I[key] || I[base] || null;
+    return (o.v && I[key + '@' + o.v]) || I[key] || (o.v && I[base + '@' + o.v]) || I[base] || null;
   }
-  function showInfo(o) {
-    if (!o) {
-      infoBox.innerHTML = '<p class="c3d-muted">부품·패드·선을 누르면 이름, 값, 넷, 구매 상태가 여기에 나옵니다. 패드나 선을 누르면 같은 넷이 함께 밝아집니다.</p>';
-      return;
+  function list(a) { return a && a.length ? '<ul>' + a.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : ''; }
+  function netText(o) {
+    var N = D.netinfo || {}, sd = D.scenes[S.sc], g = o.m || sd.g0 || '';
+    return N[g + '|' + o.n] || N[o.n] || { t: '넷 ' + o.n, d: [] };
+  }
+  function netHtml(o, byName) {
+    var sd = D.scenes[S.sc], N = netText(o), key = byName ? null : netKey(o), d = (N.d || []).slice(), pads = [], names = {}, cnt = 0, scopes = {};
+    sd.objs.forEach(function (x) {
+      if (!x.n || (byName ? x.n !== o.n : netKey(x) !== key)) return;
+      if (x.m) scopes[x.m] = 1;
+      if (x.n !== o.n || (!byName && (x.m || '') !== (o.m || ''))) names[(x.m ? x.m + '의 ' : '') + x.n] = 1;
+      if (x.k !== 'p') return;
+      cnt++;
+      var t = ((x.m || '') !== (o.m || '') && x.m ? x.m + ' ' : '') + x.i;
+      if (pads.indexOf(t) < 0) pads.push(t);
+    });
+    if (byName) {
+      var sc = Object.keys(scopes);
+      if (sc.length > 1) d.push('이 이름의 넷은 ' + sc.join(' · ') + '에 따로 있습니다 — 모두 밝혔습니다. 한 곳만 보려면 그 선이나 패드를 누르세요.');
+    } else {
+      var other = Object.keys(names).filter(function (t) { return !/GND$/.test(t); });
+      if (other.length) d.push('커넥터를 지나 같은 선으로 이어진 다른 이름: ' + other.join(', '));
+      if (o.n === 'GND' && Object.keys(scopes).length > 1) d.push('GND는 USB 선과 EXT 선으로 이어져 악기 전체가 한 접지입니다 — 모두 밝혔습니다.');
     }
-    var I = infoOf(o), key = o.i || '', pin = key.indexOf('.') > 0 ? key.slice(key.indexOf('.') + 1) : null;
-    var h = '<p class="c3d-it"><b>' + esc(I ? I.t : key) + '</b></p>';
-    if (pin) h += '<p class="c3d-net-l">패드 <span class="mono">' + esc(key) + '</span>' + (o.n ? ' · 넷 <b class="mono" style="color:' + esc(D.nets[o.n] || 'inherit') + '">' + esc(o.n) + '</b>' : ' · 연결 없음') + '</p>';
-    else if (o.n) h += '<p class="c3d-net-l">넷 <b class="mono" style="color:' + esc(D.nets[o.n] || 'inherit') + '">' + esc(o.n) + '</b>' + (o.w ? ' · ' + esc(o.w) : '') + '</p>';
-    if (I && I.d && I.d.length) h += '<ul>' + I.d.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
-    infoBox.innerHTML = h;
+    if (cnt) d.push(cnt > 40 ? '이 장면에서 이 넷에 이어진 패드 ' + cnt + '개 (밝아진 곳)' :
+                    '이 장면에서 이 넷에 이어진 패드 ' + cnt + '개: ' + pads.slice(0, 28).join(', ') + (pads.length > 28 ? ' …' : ''));
+    return '<div class="hit-n"><p><span class="sw" style="background:' + esc(D.nets[o.n] || '#555') + '"></span><b>' + esc(N.t) + '</b></p>' + list(d) + '</div>';
   }
-  function showNet() {
-    if (!S.net) { showInfo(null); return; }
-    var n = 0;
-    D.scenes[S.sc].objs.forEach(function (o) { if (o.n === S.net && o.k === 'p') n++; });
-    infoBox.innerHTML = '<p class="c3d-it"><b class="mono" style="color:' + esc(D.nets[S.net] || 'inherit') + '">' + esc(S.net) + '</b></p><p>이 장면에서 패드 ' + n +
-      '개와 그 넷의 선·핀이 밝아지고 나머지는 흐려집니다. 넷 목록에서 "없음"을 고르거나 빈 곳을 누르면 돌아갑니다.</p>';
+  function infoHtml(o) {
+    var I = infoOf(o), sd = D.scenes[S.sc], d = [];
+    if (o.q) d.push(o.q);
+    if (o.w) d.push('선 종류: ' + o.w);
+    if (I && I.d) d = d.concat(I.d);
+    var h = '<p class="hit-t"><b>' + esc(I ? I.t : (o.i || '')) + '</b></p>' + list(d);
+    var sc = o.m && sd.scopes && sd.scopes[o.m];
+    if (sc) h += '<div class="hit-n"><p><b>' + esc('자리 · ' + sc.t) + '</b></p>' + list(sc.d) + '</div>';
+    if (o.n) h += netHtml(o, false);
+    else if (o.k === 'p') h += '<div class="hit-n"><p>넷 없음 — 다른 곳과 이어지지 않는 패드입니다.</p></div>';
+    return h;
   }
+  var pop = null;
+  function showPop(html, at) {
+    if (!pop) {
+      pop = document.createElement('div'); pop.className = 'hitpop c3d-pop'; pop.setAttribute('role', 'region'); pop.setAttribute('aria-label', '3D 모델 항목 정보');
+      pop.setAttribute('aria-live', 'polite'); stage.appendChild(pop);
+      pop.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('.hitx')) clearSel(); });
+      ['pointerdown', 'wheel', 'dblclick'].forEach(function (t) { pop.addEventListener(t, function (ev) { ev.stopPropagation(); }); });
+    }
+    pop.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button>' + html;
+    pop.hidden = false; pop.scrollTop = 0;
+    // beside the click (right, else left) so the picked thing stays visible; a net chosen from the list goes to the top right corner
+    var W = stage.clientWidth, H = stage.clientHeight, pw = Math.min(360, W - 16), L, Tp;
+    pop.style.width = pw + 'px';
+    if (!at) { L = W - pw - 8; Tp = 8; }
+    else {
+      var r = stage.getBoundingClientRect(), x = at[0] - r.left, y = at[1] - r.top;
+      if (x + 22 + pw <= W - 8) L = x + 22; else if (x - 22 - pw >= 8) L = x - 22 - pw; else L = Math.max(8, Math.min(x - pw / 2, W - pw - 8));
+      Tp = y - 28;
+    }
+    pop.style.left = L + 'px';
+    pop.style.top = Math.max(8, Math.min(Tp, H - pop.offsetHeight - 8)) + 'px';
+  }
+  function closePop() { if (pop) pop.hidden = true; }
 
   // ------------------------------------------------------------------ camera
   function size() { return [Math.max(1, stage.clientWidth), Math.max(1, stage.clientHeight)]; }
@@ -453,7 +569,8 @@
     var wh = size(), placed = [], out = '';
     var list = labels.slice().sort(function (a, b) { return (a.lv || 0) - (b.lv || 0); });
     list.forEach(function (l) {
-      var v = m2t(l.p[0], l.p[1], l.p[2]).applyMatrix4(new T.Matrix4()).project(camera);
+      if (l.dz && cam.dist > l.dz) return;                       // a module's own labels only when the camera is near it
+      var v = m2t(l.p[0], l.p[1], l.p[2]).project(camera);
       if (v.z > 1 || v.z < -1) return;
       var x = (v.x + 1) / 2 * wh[0], y = (1 - v.y) / 2 * wh[1];
       if (x < 4 || y < 10 || x > wh[0] - 4 || y > wh[1] - 4) return;
@@ -474,10 +591,17 @@
       ptrs[e.pointerId] = { x: e.clientX, y: e.clientY };
       var np = Object.keys(ptrs).length;
       anim = null;
+      canvas.style.cursor = '';
       if (np === 1) drag = { mode: (e.button === 2 || e.shiftKey || e.ctrlKey || e.metaKey) ? 'pan' : 'rot', x: e.clientX, y: e.clientY, moved: false, t0: performance.now(), btn: e.button };
       else if (np === 2) { var p = Object.keys(ptrs).map(function (k) { return ptrs[k]; }); drag = { mode: 'pinch', d: Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y), cx: (p[0].x + p[1].x) / 2, cy: (p[0].y + p[1].y) / 2, moved: true, dist: cam.dist }; }
     });
+    var hov = 0, hovE = null;
     canvas.addEventListener('pointermove', function (e) {
+      if (!drag && (!e.pointerType || e.pointerType === 'mouse')) {       // hover: a pointer cursor over anything that can be picked
+        hovE = e;
+        if (!hov) hov = requestAnimationFrame(function () { hov = 0; if (!drag && camera) canvas.style.cursor = pick(hovE.clientX, hovE.clientY) ? 'pointer' : ''; });
+        return;
+      }
       if (!ptrs[e.pointerId] || !drag) return;
       ptrs[e.pointerId] = { x: e.clientX, y: e.clientY };
       if (drag.mode === 'pinch') {
@@ -510,10 +634,10 @@
       zoomAt(e.clientX, e.clientY, f);
     }, { passive: false });
     canvas.addEventListener('dblclick', function (e) {
-      var h = hit(e.clientX, e.clientY);
+      var h = pick(e.clientX, e.clientY);
       if (!h) return;
-      var p = h.point.clone();                    // three world -> model
-      animTo({ tx: p.x, ty: -p.z, tz: p.y, dist: Math.max(10, cam.dist * 0.45), az: cam.az, el: cam.el });
+      var R = h.R;                                 // the hit point in model mm
+      animTo({ tx: R.o[0] + R.d[0] * h.t, ty: R.o[1] + R.d[1] * h.t, tz: R.o[2] + R.d[2] * h.t, dist: Math.max(10, cam.dist * 0.45), az: cam.az, el: cam.el });
     });
     canvas.addEventListener('keydown', function (e) {
       var k = e.key, used = true;
@@ -539,28 +663,90 @@
     pan(-nx * wh[0] * k, -ny * wh[1] * k);
     invalidate();
   }
+  // ray against the primitives (model mm): bounding spheres first, then the triangles of the few candidates
   var ray = null;
-  function hit(cx, cy) {
+  function pickAll(cx, cy) {
     if (!ray) ray = new T.Raycaster();
     var r = canvas.getBoundingClientRect();
     ray.setFromCamera(new T.Vector2((cx - r.left) / r.width * 2 - 1, -((cy - r.top) / r.height) * 2 + 1), camera);
-    var vis = picks.filter(function (m) { var o = m.userData.o; return layerOn(o) && !(S.net && o.n !== S.net && o.g === 'ctx'); });
-    var hs = ray.intersectObjects(vis, false);
-    for (var i = 0; i < hs.length; i++) {
-      var o = hs[i].object.userData.o;
-      if (o.g === 'ctx' && hs.length > i + 1) continue;          // ghosts never hide what is behind them
-      if (S.net && o.n !== S.net && hs[i].object.material && hs[i].object.material.opacity < 0.2) continue;
-      return hs[i];
+    var O = ray.ray.origin, Dv = ray.ray.direction;
+    var ox = O.x, oy = -O.z, oz = O.y, dx = Dv.x, dy = -Dv.z, dz = Dv.y, hits = [];       // three (x, y, z) = model (x, z, -y)
+    for (var i = 0; i < prims.length; i++) {
+      var p = prims[i];
+      if (p.st === null) continue;                                // layer off
+      var lx = p.c[0] - ox, ly = p.c[1] - oy, lz = p.c[2] - oz, tc = lx * dx + ly * dy + lz * dz;
+      if (lx * lx + ly * ly + lz * lz - tc * tc > p.r * p.r) continue;
+      var pos = p.pos, idx = p.idx, nt = (idx ? idx.length : p.n) / 3, best = Infinity;
+      for (var k = 0; k < nt; k++) {
+        var a = (idx ? idx[k * 3] : k * 3) * 3, b = (idx ? idx[k * 3 + 1] : k * 3 + 1) * 3, c = (idx ? idx[k * 3 + 2] : k * 3 + 2) * 3;
+        var e1x = pos[b] - pos[a], e1y = pos[b + 1] - pos[a + 1], e1z = pos[b + 2] - pos[a + 2];
+        var e2x = pos[c] - pos[a], e2y = pos[c + 1] - pos[a + 1], e2z = pos[c + 2] - pos[a + 2];
+        var px = dy * e2z - dz * e2y, py = dz * e2x - dx * e2z, pz = dx * e2y - dy * e2x, det = e1x * px + e1y * py + e1z * pz;
+        if (det > -1e-12 && det < 1e-12) continue;
+        var inv = 1 / det, tx = ox - pos[a], ty = oy - pos[a + 1], tz = oz - pos[a + 2], u = (tx * px + ty * py + tz * pz) * inv;
+        if (u < 0 || u > 1) continue;
+        var qx = ty * e1z - tz * e1y, qy = tz * e1x - tx * e1z, qz = tx * e1y - ty * e1x, v = (dx * qx + dy * qy + dz * qz) * inv;
+        if (v < 0 || u + v > 1) continue;
+        var t = (e2x * qx + e2y * qy + e2z * qz) * inv;
+        if (t > 0.01 && t < best) best = t;
+      }
+      if (best < Infinity) hits.push({ t: best, p: p });
     }
-    return null;
+    hits.sort(function (a, b) { return a.t - b.t; });
+    return { hits: hits, o: [ox, oy, oz], d: [dx, dy, dz] };
+  }
+  // thin things (wires, cable cores, pads) are hard to hit exactly: the nearest one within a few pixels of the ray, not behind
+  // what the ray hits first (tmax)
+  function nearThin(R, tmax, wantSolid) {
+    var ox = R.o[0], oy = R.o[1], oz = R.o[2], dx = R.d[0], dy = R.d[1], dz = R.d[2], best = null, bd = 1e9, last = null;
+    var pxmm = 2 * TAN / size()[1];                                 // mm per pixel at 1 mm from the camera
+    function seg(p, ax, ay, az, bx, by, bz, rad) {
+      // closest approach of the ray and the segment a-b
+      var ux = bx - ax, uy = by - ay, uz = bz - az, wx = ox - ax, wy = oy - ay, wz = oz - az;
+      var b = dx * ux + dy * uy + dz * uz, c = ux * ux + uy * uy + uz * uz, d = dx * wx + dy * wy + dz * wz, e = ux * wx + uy * wy + uz * wz;
+      var den = c - b * b, s = den > 1e-9 ? (c * -d + b * e) / den : -d, u = den > 1e-9 ? (e - b * d) / den : 0;   // ray s, segment u
+      if (c < 1e-12) { u = 0; s = -d; } else { u = u < 0 ? 0 : (u > 1 ? 1 : u); s = b * u - d; }
+      if (s <= 0.01 || s > tmax) return;
+      var qx = ox + dx * s - (ax + ux * u), qy = oy + dy * s - (ay + uy * u), qz = oz + dz * s - (az + uz * u);
+      var dist = Math.sqrt(qx * qx + qy * qy + qz * qz) - rad, tol = 7 * pxmm * s;
+      if (dist > tol) return;
+      var score = Math.max(dist, 0) / tol + s * 1e-5;               // nearer to the ray first, then nearer to the camera
+      if (score < bd) { bd = score; best = { o: p.o, t: s, R: R }; }
+    }
+    for (var i = 0; i < prims.length; i++) {
+      var p = prims[i], o = p.o;
+      if (p.st === null || o === last || (wantSolid && p.st === 'dim')) continue;
+      if (o.k === 'p') { if (p.role === 'ring') { last = o; seg(p, o.p[0], o.p[1], o.z[0], o.p[0], o.p[1], o.z[1], 0.86); } continue; }
+      if (o.k !== 't' || o.r > 1.0 || o.g === 'part') continue;
+      // only tubes whose bounding sphere comes near the ray
+      var lx = p.c[0] - ox, ly = p.c[1] - oy, lz = p.c[2] - oz, tc = lx * dx + ly * dy + lz * dz, lim = p.r + 7 * pxmm * Math.max(tc, 1);
+      if (lx * lx + ly * ly + lz * lz - tc * tc > lim * lim) continue;
+      for (var k = 1; k < o.p.length; k++) seg(p, o.p[k - 1][0], o.p[k - 1][1], o.p[k - 1][2], o.p[k][0], o.p[k][1], o.p[k][2], o.r);
+    }
+    return best;
+  }
+  function pick(cx, cy) {
+    // what is drawn solid wins over what is dimmed or ghosted in front of it; a dimmed thing is still picked when nothing else is there.
+    // A board or nothing under the pointer: a wire / pad within a few pixels wins (it must not lie behind the board).
+    var R = pickAll(cx, cy), hs = R.hits, i, o, fall = null, hit = null;
+    for (i = 0; i < hs.length; i++) {
+      o = hs[i].p.o;
+      var ghost = o.g === 'ctx' || hs[i].p.st === 'dim' || (hs[i].p.role === 'pick' && S.hot);
+      if (!ghost) { hit = { o: o, t: hs[i].t, R: R, board: hs[i].p.role === 'pick' }; break; }
+      if (!fall || (fall.o.g === 'ctx' && o.g !== 'ctx')) fall = { o: o, t: hs[i].t, R: R };
+    }
+    if (hit && !hit.board) return hit;
+    var near = nearThin(R, hit ? hit.t + 0.6 : 1e9, !!S.hot && !hit && !fall);
+    return near || hit || fall;
   }
   function tap(cx, cy) {
-    var h = hit(cx, cy);
-    if (!h) { S.sel = null; S.net = null; netSel.value = ''; restyle(); showInfo(null); return; }
-    var o = h.object.userData.o;
+    var h = pick(cx, cy);
+    if (!h) { clearSel(); return; }
+    var o = h.o;
     S.sel = o;
-    if (o.n) { S.net = o.n; netSel.value = o.n; } else if (S.net && o.n !== S.net) { S.net = null; netSel.value = ''; }
+    S.hot = o.n ? { key: netKey(o) } : null;
+    netSel.value = o.n || '';
     restyle();
-    showInfo(o);
+    showPop(infoHtml(o), [cx, cy]);
   }
 })();

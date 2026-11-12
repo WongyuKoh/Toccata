@@ -424,6 +424,66 @@ def draw_sb_routes(s, X, Y):
         o.append(f'<polyline points="{d}" fill="none" stroke="{ncol(r["net"])}" stroke-width=".5" stroke-dasharray="1.1 .5" stroke-opacity=".95"/>')
         x, y = r["poly"][0]
         o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".75" fill="none" stroke="{ncol(r["net"])}" stroke-width=".35"/>')
+    # click data: the 16 underside wires in the order of wiring_SB.csv (= the 3D model's SBW-1..16). The ribs are not targets of
+    # their own (they cover most of the free board area): the board's text says what the dashed bands are
+    import hitkeys as HK
+    K = HK.Keys(s, X, Y)
+    for k, r in enumerate(rows):
+        dy = (k - 5.5) * 0.10
+        K.wire([(x, y + (dy if abs(y - 70.81) < 0.01 else 0)) for x, y in r["poly"]], "SBW-%d" % (k + 1), r["net"])
+    for k, r in enumerate(sb_pwr_rows()):
+        K.wire(r["poly"], "SBW-%d" % (len(rows) + k + 1), r["net"])
+
+
+def small_keys(s, which, X, Y):
+    """click targets (hitkeys.py) of one small board as BRD-07 and the BRD-03 insets draw it: 'j702', 'j501', 'ps'. Keys = the 3D
+    model's (pads_small.csv / wiring_small.csv order)."""
+    import hitkeys as HK
+    if which == "j702":
+        K = HK.Keys(s, X, Y, m="AUD")
+        for (ref, pin), ij in J7_PADS.items():
+            x, y = _p7(*ij)
+            K.pad(x, y, "%s.%s" % (ref, pin), J7_NET[(ref, pin)], r=1.3)
+        n = 0
+        for net, polys in J7_ROUTES.items():
+            for poly in polys:
+                n += 1
+                K.wire(poly, "J7W-%d" % n, net)
+        fx0, fx1, fy0, fy1 = J7_FIELD
+        for pin, tgt in (("T", (3, 3)), ("R", (8, 3)), ("S", (5, 6))):
+            tx, ty = _p7(*tgt)
+            K.wire([(fx0 if pin == "T" else (fx1 if pin == "R" else tx), ty if pin != "S" else fy1), (tx, ty)], "J7-LEG-" + pin,
+                   J7_NET[("J702", pin)])
+        for ref in ("C701", "C702", "C703", "C704", "R701", "R702"):
+            (x1, y1), (x2, y2) = _p7(*J7_PADS[(ref, "1")]), _p7(*J7_PADS[(ref, "2")])
+            K.box(min(x1, x2) - 0.5, min(y1, y2) - 0.5, max(x1, x2) + 0.5, max(y1, y2) + 0.5, key=ref)
+        jx0, jx1, jy0, jy1 = J7_JACK
+        K.box(jx0, jy0, jx1, jy1, key="J702")
+        K.box(fx0, fy0, fx1, fy1, key="J7-FIELD")
+        for (hx, hy) in J7_HOLES:
+            K.box(hx - 3.0, hy - 3.0, hx + 3.0, hy + 3.0, key="CTX-POST")
+        K.box(J7_BOX[0], J7_BOX[2], J7_BOX[1], J7_BOX[3], key="PCB-J702")
+    elif which == "j501":
+        K = HK.Keys(s, X, Y, m="PED")
+        for (ref, pin), ij in J5_PADS.items():
+            K.pad(j5x(ij[0]), j5y(ij[1]), "W502." + pin, J5_NET[pin], r=1.3)
+        jx0, jx1, jy0, jy1 = J5_JACK
+        K.box(jx0, jy0, jx1, min(jy1, J5_BOX[3] + 2.0), key="J501")
+        K.box(J5_FIELD[0], J5_FIELD[2], J5_FIELD[1], J5_FIELD[3], key="J5-FIELD")
+        K.box(J5_BOX[0], J5_BOX[2], J5_BOX[1], J5_BOX[3], key="PCB-J501")
+    else:
+        K = HK.Keys(s, X, Y, m="PED")
+        for (ref, pin), (c, r) in PS_PADS.items():
+            K.pad(psx(c), psy(r), ("W501.%s" % pin) if ref == "P501" else "%s.%s" % (ref, pin), PS_NET[(ref, pin)])
+        n = 0
+        for net, polys in PS_ROUTES.items():
+            for poly in polys:
+                n += 1
+                K.wire(poly, "PSW-%d" % n, net)
+        K.box(-1.0, 3.0, 3.0, 7.0, key="U551")
+        K.box(psx(3) + 0.6, psy(3) - 0.5, psx(6) - 0.6, psy(3) + 0.5, key="R551")
+        K.box(psx(3) - 0.4, psy(1), psx(3) + 0.4, psy(2), key="C551")
+        K.box(-1.27, -1.27, 16.51, 11.43, key="PCB-PS")
 
 
 # ====================================================================== BRD-07
@@ -521,6 +581,7 @@ def brd07():
     for (hx, hy) in J7_HOLES:
         s.text(X7(hx), Y7(hy) + (7.4 if hy < 270 else -6.0), "Ø3.2 (%g, %g)" % (hx, hy), "notes", "middle", size=1.7, check=False)
     s.regions["j702"] = (14.0, 24.0, 124.0, Y7(y0b) + 10.0)
+    small_keys(s, "j702", X7, Y7)
     # J702 tables
     rows = []
     for (ref, pin), ij in J7_PADS.items():
@@ -572,6 +633,7 @@ def brd07():
         o.append(f'<line x1="{X5(x):.2f}" y1="{Y5(fy0):.2f}" x2="{X5(x):.2f}" y2="{Y5(y):.2f}" stroke="#b86e00" stroke-width=".6" stroke-dasharray=".8 .6"/>')
     s.text(X5(j5x(4.5)), Y5(y0b) + 8.4, "앞 (−y) → W502 4가닥 → PB J502 1·2·3·4", "cabt", "middle", size=1.9, check=False)
     s.regions["j501"] = (14.0, oy5 - 10.0, 124.0, Y5(y0b) + 11.0)
+    small_keys(s, "j501", X5, Y5)
     rows5 = [["W502 %s" % pin, J5_NET[pin], "%d, %d" % ij, "%.2f" % j5x(ij[0]), "%.2f" % j5y(ij[1])] for (ref, pin), ij in J5_PADS.items()]
     yt5 = s.table(128, 134, ["패드", "넷", "i, j", "x", "y"], rows5, [18, 17, 10, 13, 13],
                   title="J501 조각 구멍 (x = 451.27 + 2.54·i, y = 317.77 + 2.54·j)", mono_cols=(0, 1, 2, 3, 4), rh=2.75)
@@ -612,6 +674,7 @@ def brd07():
     s.text(XP(psx(3)) + 1.8, YP(psy(1.5)) + 0.7, "C551", "ref", "start", size=1.8, check=False)
     s.text(XP(-1.27), YP(-1.27) + 4.0, "원점 = 왼쪽 아래 구멍 (0, 0) · 구멍 x = 2.54·c, y = 2.54·r", "notes", "start", size=1.75, check=False)
     s.regions["ps"] = (oxp - 8.0, YP(12.7) - 4.0, oxp + 17.78 * S4 + 30.0, YP(-1.27) + 6.0)
+    small_keys(s, "ps", XP, YP)
     pp = ps_check()
     s.board_check += ["PS: " + p for p in pp]
     rowsp = [["%s.%s" % (ref, pin) if ref != "P501" else "W501 %s" % pin, PS_NET[(ref, pin)].replace("N1", "U551 OUT–R551"), "%d, %d" % cr,
@@ -653,6 +716,9 @@ def brd07():
     s.text(XJ(16.0), ZJ(12.0), "선 홈 x−10.34~−6.34 · z3~8 → 뒤 통로", "notes", "start", size=1.65, check=False)
     s.text(XJ(0), ZJ(3.0) + 3.4, "밑에서 넣는 틈 z3~17.4 (바닥 3T 판이 덮음)", "notes", "start", size=1.65, check=False)
     s.regions["j701"] = (oxj - 8.0, oyj - 12.0, oxj + 40 * Sj + 8.0, ZJ(3.0) + 6.0)
+    import hitkeys as HK
+    HK.Keys(s).sbox(XJ(0), ZJ(22.5), XJ(14.0), ZJ(17.5), key="J701",
+                    q="왼쪽 볼(끝 블록) 포켓 안에 잭만 끼우고 다리에 W701 · W702를 직접 납땜합니다 (기판 없음).")
     jr = [["W701 흰색", "DAC_L", "T"], ["W701 빨강", "DAC_R", "R"], ["W701 차폐", "AGND", "S"],
           ["W702 흰색", "HP_TN_L", "TN"], ["W702 빨강", "HP_RN_R", "RN"], ["W702 차폐", "AGND", "S (W701 차폐와 함께)"]]
     yj = s.table(350, 92, ["선", "넷", "J701 다리"], jr, [16, 16, 26], title="J701 다리 연결", mono_cols=(1,), rh=2.75)
@@ -854,6 +920,33 @@ def brd08():
         "    넣어도 되고 빼도 된다. EXT2·EXT3은 O1만 쓰지만 7장을 같게 만든다.",
     ], size=1.95, lh=2.7)
     s.regions["mbu"] = (9.0, 20.0, 270.0, 222.0)
+    # click data for the page (build.py -> netlist/sheethits.json -> page.py): wires, pads and part boxes in sheet mm
+    def R2(v):
+        return round(v, 2)
+
+    def sp(ref, n, net=None):
+        x, y = S.mb_pad_xy(ref, n, net)
+        return X(x), Y(y)
+
+    def box(pts, pad=1.6, up=0.0, down=0.0):
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        return [R2(min(xs) - pad), R2(min(ys) - pad - up), R2(max(xs) + pad), R2(max(ys) + pad + down)]
+    hparts = [["A301", R2(X(zx0 + 18)), R2(Y(zy1)), R2(X(zx0 + 18) + 18 * SC), R2(Y(zy1) + 23.5 * SC)],
+              ["A302", R2(X(mx0 + S.MUX_W)), R2(Y(my0 + S.MUX_D)), R2(X(mx0 + S.MUX_W) + S.MUX_W * SC), R2(Y(my0 + S.MUX_D) + S.MUX_D * SC)],
+              ["J301"] + box([sp("J301", n) for n in range(1, 17)]),
+              ["J302"] + box([sp("J302", n) for n in range(1, 7)], up=2.4),
+              ["C301", R2(X(v_[0]) - 0.6), R2(Y(g_[1]) - 1.1), R2(X(g_[0]) + 0.6), R2(Y(g_[1]) + 1.1)],
+              ["W101~W107", R2(X(rx1)), R2(Y(ry1)), R2(X(rx0)), R2(Y(y0))]]
+    hparts += [[ref] + box([sp(ref, 1), sp(ref, 2)], up=1.8) for ref in S.R_EXT]
+    hparts += [[ref] + box([(X(sig[0]), Y(sig[1])), (X(gnd[0]), Y(gnd[1]))], pad=1.2, down=2.4) for ref, (sig, gnd) in S.JP_PADS.items()]
+    hparts += [[ref] + box([sp(ref, 1)], pad=1.3, up=1.8) for ref in S.TP_POS]
+    s.hits_custom = {
+        "wires": [dict(no=w["no"], net=w["net"], a=w["a"], b=w["b"], len=round(w["length"], 1), bends=w["bends"],
+                       pts=[[R2(X(x)), R2(Y(y))] for x, y in w["pts"]]) for w in rows],
+        "pads": [[ref, str(num), net, R2(X(MR.X(k))), R2(Y(MR.Y(m))), 1 if MR.soldered((ref, num, net)) else 0]
+                 for (k, m), (ref, num, net) in r.pads.items()],
+        "parts": hparts,
+    }
     s.frame()
     s.expected = {}
     return s

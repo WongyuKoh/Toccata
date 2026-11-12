@@ -29,6 +29,8 @@
 #p-circuit .c3d-info ul{margin:4px 0 0;padding-left:18px}
 #p-circuit .c3d-info li{margin:2px 0;color:var(--ink-2)}
 #p-circuit .c3d-it{font-size:14.5px}
+#p-circuit .c3d-stage .c3d-pop{max-height:calc(100% - 16px);font-size:13px}
+#p-circuit .c3d-stage .c3d-pop .hit-n b{overflow-wrap:anywhere}
 #p-circuit .c3d-muted{color:var(--ink-3)}
 #p-circuit .c3d-sub{font-size:13px;color:var(--ink-2);margin:0}
 #p-circuit .c3d-notes{margin:0;padding-left:18px;font-size:12.5px;color:var(--ink-2)}

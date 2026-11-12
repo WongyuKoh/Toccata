@@ -23,7 +23,7 @@ Status labels used below:
    - They are `74xx:CD74HC4067M` (SOIC-24W) and `74xx:CD74HC4067SM` (SSOP-24).
    - `Analog_Switch` only has `HEF4067BT` and `HEF4067BTT`.
    - Toccata uses a breakout module, so use a custom symbol, or `Conn_01x08` + `Conn_01x16`.
-3. **The DRV5055 symbol exists, but only under the "-Q1" names.**
+3. **The DRV5055 symbol exists, but only under the "-Q1" names.** (2026-11-04 △35: the part is now Winson WSH137-XPAN1. KiCad has no WSH137 symbol; keep `DRV5055A2xLPGxQ1`, whose TO-92 pins 1 VCC · 2 GND · 3 OUT match the WSH137 TO-92S, and set Value `WSH137-XPAN1`.)
    - Use `Sensor_Magnetic:DRV5055A2xLPGxQ1` for the TO-92 package and set its Value to `DRV5055A2QLPG`. The pinout is the same.
    - **The SOT-23 (DBZ) package has a different pin order** (1 VCC, 2 OUT, 3 GND). Never reuse TO-92 pad numbers for it.
 4. **`Connector_Audio:AudioJack3_SwitchTR` uses letters as pin numbers.**

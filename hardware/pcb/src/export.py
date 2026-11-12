@@ -25,7 +25,7 @@ EXCL = "보드 밖 (Exclude from board)"
 
 # (symbol name, value regex) -> (BOM key, KiCad symbol, footprint)
 KICAD = [
-    ("DRV5055", None, "DRV5055", "Sensor_Magnetic:DRV5055A2xLPGxQ1 (Value = DRV5055A2QLPG)",
+    ("DRV5055", None, "DRV5055", "Sensor_Magnetic:DRV5055A2xLPGxQ1 (핀 1 VCC · 2 GND · 3 OUT이 WSH137과 같음, Value = WSH137-XPAN1)",
      "Package_TO_SOT_THT:TO-92_Inline_W4.0mm_Horizontal_FlatSideUp → 2.54 간격으로 복사 수정"),
     ("C", r"100n", "C100n", "Device:C", "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"),
     ("C", r"10µ", "C10u", "Device:C", "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"),

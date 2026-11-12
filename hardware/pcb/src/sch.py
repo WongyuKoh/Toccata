@@ -566,7 +566,8 @@ class Sheet:
         nets = {}
         errors = []
         auto = 0
-        for g in groups.values():
+        root_name = {}
+        for root, g in groups.items():
             names = sorted(g["names"])
             if len(names) > 1:
                 errors.append(f"short: {names} pins {sorted(g['pins'])}")
@@ -575,10 +576,15 @@ class Sheet:
             else:
                 auto += 1
                 nm = f"~N{auto}"
+            root_name[root] = nm
             if nm in nets:
                 nets[nm] |= g["pins"]
             else:
                 nets[nm] = set(g["pins"])
+        # click data for the page (page.py -> 'sheet hits'): every drawn wire segment and pin with its net
+        self.hit_segs = [(x1, y1, x2, y2, root_name.get(find(_k(x1, y1)))) for x1, y1, x2, y2 in self.segs]
+        self.hit_pins = [(ref, num, p["name"], p["x"], p["y"], root_name.get(find(_k(p["x"], p["y"]))))
+                         for (ref, num), p in self.pins.items()]
         for (ref, num), p in self.pins.items():
             k = _k(p["x"], p["y"])
             g = groups[find(k)]
@@ -665,7 +671,7 @@ def sym_C(name="C", polar=False):
 
 
 def sym_hall():
-    """DRV5055 (TO-92 LPG): 1 VCC top, 2 GND bottom, 3 OUT right."""
+    """Linear hall, TO-92 flat (WSH137-XPAN1; was DRV5055 LPG, same pins): 1 VCC top, 2 GND bottom, 3 OUT right."""
     s = Sym("DRV5055", "box")
     s.rect(-5, -5, 10, 10)
     s.rect(-2.2, -1.6, 3.2, 3.2, "bodyl")
