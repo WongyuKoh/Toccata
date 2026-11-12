@@ -69,8 +69,8 @@ static void feed(sim_t *m) {
 static void sim_init(sim_t *m, uint8_t note, double span_factor, int sign, double noise) {
     *m = (sim_t){0};
     m->black = note_is_black(note);
-    m->rest = m->black ? 2138 : 2207;
-    m->span = span_factor * (m->black ? 824 : 655);
+    m->rest = m->black ? 2210 : 2285;
+    m->span = span_factor * (m->black ? 906 : 722);
     m->sign = sign;
     m->noise = noise;
     m->seed = 12345u + note;
@@ -116,16 +116,16 @@ static const key_event_t *last(const sim_t *m, key_ev_type_t type) {
 }
 
 static void test_design_table(void) {
-    // hardware/pcb/README.md: re-arm (magnet back 50 %) white ADC ~2373, black ~2282;
-    // 1 N settled bottom (gap 5.52 / 5.47 mm) white ~2890, black ~2907.
-    double w50 = 2207 + 655 * key_norm_depth(false, 0.5);
-    double b50 = 2138 + 824 * key_norm_depth(true, 0.5);
-    double w1n = 2207 + 655 * key_norm_depth(false, (10.82f - 5.52f) / 5.22f);
-    double b1n = 2138 + 824 * key_norm_depth(true, (13.35f - 5.47f) / 8.03f);
-    CHECK(fabs(w50 - 2373) <= 2, "white re-arm %.1f, design 2373", w50);
-    CHECK(fabs(b50 - 2282) <= 2, "black re-arm %.1f, design 2282", b50);
-    CHECK(fabs(w1n - 2890) <= 3, "white 1 N bottom %.1f, design 2890", w1n);
-    CHECK(fabs(b1n - 2907) <= 3, "black 1 N bottom %.1f, design 2907", b1n);
+    // hardware/pcb/README.md (△35 WSH137): re-arm (magnet back 50 %) white ADC ~2468, black ~2368;
+    // 1 N settled bottom (gap 5.52 / 5.47 mm) white ~3036, black ~3055.
+    double w50 = 2285 + 722 * key_norm_depth(false, 0.5);
+    double b50 = 2210 + 906 * key_norm_depth(true, 0.5);
+    double w1n = 2285 + 722 * key_norm_depth(false, (10.82f - 5.52f) / 5.22f);
+    double b1n = 2210 + 906 * key_norm_depth(true, (13.35f - 5.47f) / 8.03f);
+    CHECK(fabs(w50 - 2468) <= 2, "white re-arm %.1f, design 2468", w50);
+    CHECK(fabs(b50 - 2368) <= 2, "black re-arm %.1f, design 2368", b50);
+    CHECK(fabs(w1n - 3036) <= 3, "white 1 N bottom %.1f, design 3036", w1n);
+    CHECK(fabs(b1n - 3055) <= 3, "black 1 N bottom %.1f, design 3055", b1n);
 }
 
 static void test_velocity_curve(void) {
@@ -217,7 +217,7 @@ static void test_idle_noise_and_drift(void) {
     }
     CHECK(m.n == 0, "drift: %d events", m.n);
     int rest = (int)((m.key.rest_q16 + 0x8000) >> 16);
-    CHECK(abs(rest - (int)lround(m.rest + 655 * key_norm_depth(false, 0))) <= 4, "rest followed to %d", rest);
+    CHECK(abs(rest - (int)lround(m.rest + 722 * key_norm_depth(false, 0))) <= 4, "rest followed to %d", rest);
     stroke(&m, 0.8);
     stroke(&m, 0.8);
     const key_event_t *on = last(&m, KEY_EV_NOTE_ON);
@@ -288,7 +288,7 @@ static void test_e11_and_order(void) {
                 if (sign < 0) {
                     // Readings far below rest flip the key, which recomputes its lines.
                     key_event_t e;
-                    int low = rest - (black ? 824 : 655);
+                    int low = rest - (black ? 906 : 722);
                     for (int i = 0; i < 4; i++) key_step(&k, low, (uint32_t)i * DT_US, &e);
                     if (k.sign != -1) order++;
                 }

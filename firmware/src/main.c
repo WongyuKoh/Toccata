@@ -1,4 +1,4 @@
-// Toccata octave board (MB, SCH-03): RP2040-Zero + CD74HC4067 mux + 12 DRV5055 Hall sensors.
+// Toccata octave board (MB, SCH-03): RP2040-Zero + CD74HC4067 mux + 12 WSH137 Hall sensors.
 // Core 1 scans the keys (scan.c, keys.c). Core 0 runs USB: MIDI to the synth and a text
 // console on the CDC serial port for checking sensors on the bench.
 #include <stdarg.h>

@@ -11,9 +11,10 @@
 #define KEY_BLACK_GAP_REST    13.35f
 #define KEY_BLACK_GAP_BOTTOM   5.32f
 
-// Design ADC swing from rest to bottom (DRV5055A2 at 3.3 V): white 2207 -> 2862, black 2138 -> 2962.
-#define KEY_WHITE_SPAN_DESIGN 655
-#define KEY_BLACK_SPAN_DESIGN 824
+// Design ADC swing from rest to bottom (Winson WSH137-XPAN1 at 3.3 V, typical 1.70 V + 33 mV/mT, △35):
+// white 2285 -> 3007, black 2210 -> 3116. (Was DRV5055A2: 2207 -> 2862, 2138 -> 2962.)
+#define KEY_WHITE_SPAN_DESIGN 722
+#define KEY_BLACK_SPAN_DESIGN 906
 
 // W1 lever ratios (SCH-03 note 9): key front = magnet x 1.91 / 1.18, finger point = magnet x 1.74 / 1.05.
 #define KEY_WHITE_FRONT_RATIO  1.91f

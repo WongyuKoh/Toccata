@@ -249,7 +249,7 @@ def build_unit(parts, plan, tag, x0, label, notes_world, side=None):
                     name_en="sensor bar", kind="print", group="%s 프레임" % label, solid=T(sbm), color=COLORS["sensorbar"],
                     material="PETG 회색", print_name="센서바" + ("" if side is None else "_" + {"left": "왼쪽", "right": "오른쪽"}[side]),
                     print_folder="04_센서바·패드바·가림판·마개", print_solid=bed(sbm, R_NONE),
-                    print_note="v3 방향(포켓이 위). 홀센서 DRV5055 LPG를 포켓에 눕혀 넣고 왼쪽 끝을 M3×10(i058) 2개로 받침 기둥에 자가 탭",
+                    print_note="v3 방향(포켓이 위). 홀센서 WSH137-XPAN1을 포켓에 눕혀 넣고 왼쪽 끝을 M3×10(i058) 2개로 받침 기둥에 자가 탭",
                     source=SRC))
     for i, (sx, sy) in enumerate(FEAT["sb_screws"]):
         scr = union([cyl_z(sx, sy, 3.6, 13.6, 3.0), cyl_z(sx, sy, 13.6, 15.25, 5.7)])

@@ -36,9 +36,10 @@ def r(v, n):
 
 
 # =============================================================================== sensor law (SCH-02 table basis)
-# SCH-02 note: field on the axis of the Ø5x2 N35 disc magnet (Br 1.19 T), +-10 %; DRV5055A2 at 3.3 V = 1.65 V + 30 mV/mT
-# (A2 linear range +-44 mT), RP2040 ADC 12 bit ratiometric to the same 3.3 V.
-SENS = dict(Br_mT=1190.0, R=2.5, L=2.0, vq=1.65, mv_per_mT=30.0, vref=3.3, codes=4096, lin_mT=44.0)
+# SCH-02 note: field on the axis of the Ø5x2 N35 disc magnet (Br 1.19 T), +-10 %; Winson WSH137-XPAN1 at 3.3 V = 1.70 V + 33 mV/mT
+# (datasheet 2017/12/22 'Vout vs magnetic field, Vdd 3.3 V' fit y = 0.0033x + 1.7037, linear to about +-31 mT; typical, not guaranteed;
+# 11/04 △35 replaced the TI DRV5055A2 = 1.65 V + 30 mV/mT), RP2040 ADC 12 bit on the same 3.3 V.
+SENS = dict(Br_mT=1190.0, R=2.5, L=2.0, vq=1.70, mv_per_mT=33.0, vref=3.3, codes=4096, lin_mT=31.0)
 
 
 def field_mT(gap):
@@ -404,7 +405,7 @@ def pedal_path(rows, R_, PN, PNM, N_, bom_row, bcol, cables):
     assert sorted(n for n, _ in r502.values()) == sorted([tip, "GND"]), "R502 tip-GND"
     assert vcc in [n for n, _ in r503.values()] and "+3V3" in [n for n, _ in r503.values()], "R503 +3V3-PED_VCC"
     w501, w502, w208 = cables.get("W501", {}), cables.get("W502", {}), cables.get("W208", {})
-    usens = (bom_row("U551") or {}).get(bcol[3], "DRV5055")
+    usens = (bom_row("U551") or {}).get(bcol[3], "WSH137-XPAN1")
     path = [f"U551 {usens} OUT(핀 {p_out}) → R551 {val('R551')} → {tip} (PS 기판, 페달 안)",
             f"W501 {w501.get('선', '')} → P501 플러그 ⇄ J501 잭 (T {tip} · R {vcc} · S GND)",
             f"W502 리본 {w502.get('심', '')} {w502.get('자르는 길이 (mm)', '')} mm: {w502.get('한쪽', '')} → J502 PB 패드 {j502_txt}",
@@ -682,7 +683,7 @@ def main():
                          generated=time.strftime("%Y-%m-%d %H:%M"), units="mm, ms, N, deg; y from the white-key front lip, z from the desk",
                          seat_k=seat_v, seat_k_note="pad-seat stiffness of the verified run (metrics.json seat.k_min); build_geo here gave %s" % seat_fe_here, pad="design pad (micro-cell urethane 6T + felt 1T: P pad_E, pad_h, e_eff %.2f)" % P["pad_e"],
                          script="hardware/mechanical/key-action-v4/model/export_sim.py"),
-               sensor=dict(SENS, formula="B = Br/2 [(g+L)/sqrt(R²+(g+L)²) − g/sqrt(R²+g²)], OUT = 1.65 V + 30 mV/mT · B, ADC = OUT/3.3 V · 4096"),
+               sensor=dict(SENS, formula="B = Br/2 [(g+L)/sqrt(R²+(g+L)²) − g/sqrt(R²+g²)], OUT = 1.70 V + 33 mV/mT · B (WSH137 3.3 V 대표값), ADC = OUT/3.3 V · 4096"),
                thresholds=TH, vmap=dict(VMAP, formula="vel = 1 + 126 ln(v/0.05)/ln(2.0/0.05), 1~127"), colours={})
     secs = {}
     for colour, A, key, lever, ze, cc in (("white", g["Aw"], "key D", "lever D", P["z_elem_w"], "w"), ("black", g["Ab"], "key C#", "lever C#", P["z_elem_b"], "b")):
@@ -728,7 +729,7 @@ def main():
                              over_max=int(round(adc_of_gap(sens_m[colour]["ff"]))), rearm=int(round(adc_of_gap(g_bot + TH["rearm"] * (g_rest - g_bot)))),
                              noteon=int(round(adc_of_gap(g_bot + TH["noteon"] * (g_rest - g_bot)))), rest_settled=int(round(adc_of_gap(gap_rest_settled)))),
                     field=dict(rest=r(field_mT(g_rest), 2), bottom=r(field_mT(g_bot), 2), over=r(field_mT(sens_m[colour]["ff"]), 2)))
-        # the 1 N settled bottom with the pad (geometry.json key side_dip): magnet gap and ADC (README: 5.52 / 5.47, 2890 / 2907)
+        # the 1 N settled bottom with the pad (geometry.json key side_dip): magnet gap and ADC (README: 5.52 / 5.47, 3036 / 3055)
         hp = g["held_pad_w" if colour == "white" else "held_pad_b"] if ("held_pad_" + cc) in g else None
         if hp is None:
             hp = m.held_bottom(A, g["z_shelf"], 1.0, pad=g["pad_" + cc], seat_k=g["seat_k"])[0]
@@ -814,15 +815,15 @@ def main():
         out["colours"][colour] = cols
     # ---- sensor law vs README / SCH-02 table
     W, Bk = out["colours"]["white"], out["colours"]["black"]
-    check("ADC rest 2207 / 2138 (README)", W["adc"]["rest_design"] == 2207 and Bk["adc"]["rest_design"] == 2138, "%d / %d" % (W["adc"]["rest_design"], Bk["adc"]["rest_design"]))
-    check("ADC re-arm 2373 / 2282 (README)", W["adc"]["rearm"] == 2373 and Bk["adc"]["rearm"] == 2282, "%d / %d" % (W["adc"]["rearm"], Bk["adc"]["rearm"]))
-    check("ADC 1 N bottom 2890 / 2907 (README)", W["adc"]["held_1N"] == 2890 and Bk["adc"]["held_1N"] == 2907, "%d / %d" % (W["adc"]["held_1N"], Bk["adc"]["held_1N"]))
+    check("ADC rest 2285 / 2210 (README)", W["adc"]["rest_design"] == 2285 and Bk["adc"]["rest_design"] == 2210, "%d / %d" % (W["adc"]["rest_design"], Bk["adc"]["rest_design"]))
+    check("ADC re-arm 2468 / 2368 (README)", W["adc"]["rearm"] == 2468 and Bk["adc"]["rearm"] == 2368, "%d / %d" % (W["adc"]["rearm"], Bk["adc"]["rearm"]))
+    check("ADC 1 N bottom 3036 / 3055 (README)", W["adc"]["held_1N"] == 3036 and Bk["adc"]["held_1N"] == 3055, "%d / %d" % (W["adc"]["held_1N"], Bk["adc"]["held_1N"]))
     check("gap 1 N bottom 5.52 / 5.47 (README)", round(W["gap_held_1N"], 2) == 5.52 and round(Bk["gap_held_1N"], 2) == 5.47, "%.3f / %.3f" % (W["gap_held_1N"], Bk["gap_held_1N"]))
     # README 9.34 = 5.32 + 8.03 / 2 from the rounded table values; exact 9.334 (white 8.208): within 0.01
     check("re-arm gap 8.21 / 9.34 (README, rounded inputs) within 0.01", abs(W["gap_rearm"] - 8.21) < 0.01 and abs(Bk["gap_rearm"] - 9.34) < 0.01,
           "%.3f / %.3f" % (W["gap_rearm"], Bk["gap_rearm"]))
-    dw, db = W["adc"]["bottom_rigid"] - 2862, Bk["adc"]["bottom_rigid"] - 2962
-    check("ADC rigid bottom about 2862 / 2962 (README, within 5 codes)", abs(dw) <= 5 and abs(db) <= 5, "%d / %d (diff %+d / %+d)" % (W["adc"]["bottom_rigid"], Bk["adc"]["bottom_rigid"], dw, db))
+    dw, db = W["adc"]["bottom_rigid"] - 3007, Bk["adc"]["bottom_rigid"] - 3116
+    check("ADC rigid bottom about 3007 / 3116 (README, within 5 codes)", abs(dw) <= 5 and abs(db) <= 5, "%d / %d (diff %+d / %+d)" % (W["adc"]["bottom_rigid"], Bk["adc"]["bottom_rigid"], dw, db))
     check("field rest / bottom 4.3 / 21.9, 2.4 / 24.6 mT (SCH-02)", round(W["field"]["rest"], 1) == 4.3 and round(W["field"]["bottom"], 1) == 21.9
           and round(Bk["field"]["rest"], 1) == 2.4 and round(Bk["field"]["bottom"], 1) == 24.6,
           "%.2f / %.2f, %.2f / %.2f" % (W["field"]["rest"], W["field"]["bottom"], Bk["field"]["rest"], Bk["field"]["bottom"]))

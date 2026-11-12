@@ -42,7 +42,7 @@ static void core1_main(void) {
     adc_init();
     adc_gpio_init(PIN_MUX_SIG);
     adc_select_input(0);
-    sleep_ms(2);  // DRV5055 power-on time: allow at least 1 ms (research/hall.md 1.3)
+    sleep_ms(10);  // hall power-on: WSH137 gives no figure (DRV5055 was 0.33 ms max), so wait 10 ms (research/hall.md 7)
     calibrate();
     for (;;) {
         if (recal_wanted) {

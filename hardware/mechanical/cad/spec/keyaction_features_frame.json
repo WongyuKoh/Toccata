@@ -617,7 +617,7 @@
    "source": "hardware/mechanical/key-action-v4/DESIGN.md A02/A03 | hardware/mechanical/key-action-v4/model/geometry.json end_parts sensor bar prisms | hardware/pcb/board/BRD-02_sensor_board_placement.svg (rev B)"
   },
   "sensor": {
-   "part": "TI DRV5055A2QLPG (LPG = flat TO-92, 3 leads)",
+   "part": "Winson WSH137-XPAN1 (TO-92S flat, 3 leads) since circuit change 35 (2026-11-04); same body 4.0 x 3.15 x 1.52 and pin order as the TI DRV5055A2QLPG (LPG) this geometry was derived for",
    "mount": "laid flat, branded (chamfered, '55A2') face UP, leads toward +x, bent down 1.40~3.44 from the body at 2.54 spacing into the lead holes; pin1 VCC front (y64.46), GND y67.00, OUT rear y69.54",
    "element_row_y": 67.0,
    "body_thickness_derived": 1.52,
