@@ -2,12 +2,12 @@
  "generated": "2026-10-08",
  "page": {
   "path": "index.html",
-  "bytes": 1398829
+  "bytes": 1441583
  },
- "count": 350,
- "count_with_page": 351,
- "total_bytes": 60315867,
- "total_mb": 57.52,
+ "count": 354,
+ "count_with_page": 355,
+ "total_bytes": 62533710,
+ "total_mb": 59.64,
  "limits": {
   "per_file_mb": 15,
   "per_publish_files": 255,
@@ -29,7 +29,7 @@
   "dwg/": 14,
   "fin/asm": 15,
   "fin/bundle": 20,
-  "fin/circuit": 18,
+  "fin/circuit": 19,
   "fin/dwg": 13,
   "fin/loc": 5,
   "fin/parts": 128,
@@ -39,13 +39,13 @@
   "img/a12": 4,
   "img/bom": 89,
   "rear/": 13,
-  "sch/": 15
+  "sch/": 18
  },
  "bundles": [
   {
    "bundle": "fin/bundle/loc-detail-items-1.json",
    "files": 45,
-   "bytes": 1420936
+   "bytes": 1420946
   },
   {
    "bundle": "fin/bundle/loc-detail-items-2.json",
@@ -100,7 +100,7 @@
   {
    "bundle": "fin/bundle/parts-zip-04.json",
    "files": 13,
-   "bytes": 852876
+   "bytes": 852860
   },
   {
    "bundle": "fin/bundle/parts-zip-05-1.json",
@@ -211,6 +211,7 @@
    "fin/circuit/pins_rp2040.csv",
    "fin/circuit/rp2040_zero_pads.csv",
    "fin/circuit/sb_sensors.csv",
+   "fin/circuit/sheethits.json",
    "fin/circuit/toccata-circuit-revE.zip.b64.txt",
    "fin/circuit/wiring_MB.csv",
    "fin/circuit/wiring_PB.csv",
@@ -394,10 +395,10 @@
    "img/bom/i014.jpg",
    "img/bom/i022.jpg",
    "img/bom/i023.jpg",
-   "img/bom/i024.jpg",
-   "img/bom/i025.jpg"
+   "img/bom/i024.jpg"
   ],
   [
+   "img/bom/i025.jpg",
    "img/bom/i026.jpg",
    "img/bom/i027.jpg",
    "img/bom/i028.jpg",
@@ -491,6 +492,9 @@
    "sch/BRD-06_signal_harness.svg",
    "sch/BRD-07_small_boards.svg",
    "sch/BRD-08_control_board_underside.svg",
+   "sch/BRD-09_control_board_O1.svg",
+   "sch/BRD-10_control_board_O7.svg",
+   "sch/BRD-11_control_board_O2-O6.svg",
    "sch/SCH-01_system.svg",
    "sch/SCH-02_sensor_board.svg",
    "sch/SCH-03_control_board.svg",
@@ -511,7 +515,7 @@
   },
   {
    "path": "cad/parts.json",
-   "bytes": 568719,
+   "bytes": 568720,
    "owners": [
     "hardware/mechanical/cad/viewer/gen_viewer.py",
     "index.html"
@@ -774,7 +778,7 @@
   },
   {
    "path": "fin/bundle/loc-detail-items-1.json",
-   "bytes": 1420936,
+   "bytes": 1420946,
    "owners": [
     "index.html",
     "merge.py (bundle of 45 files)"
@@ -862,7 +866,7 @@
   },
   {
    "path": "fin/bundle/parts-zip-04.json",
-   "bytes": 852876,
+   "bytes": 852860,
    "owners": [
     "index.html",
     "merge.py (bundle of 13 files)"
@@ -934,7 +938,7 @@
   },
   {
    "path": "fin/circuit/bom.csv",
-   "bytes": 36522,
+   "bytes": 38779,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -950,7 +954,7 @@
   },
   {
    "path": "fin/circuit/circuit3d.json",
-   "bytes": 349791,
+   "bytes": 944026,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1037,8 +1041,16 @@
    ]
   },
   {
+   "path": "fin/circuit/sheethits.json",
+   "bytes": 770472,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
    "path": "fin/circuit/toccata-circuit-revE.zip.b64.txt",
-   "bytes": 337992,
+   "bytes": 472736,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1203,7 +1215,7 @@
   },
   {
    "path": "fin/loc/cards.json",
-   "bytes": 305866,
+   "bytes": 306715,
    "owners": [
     "index.html",
     "src/tabs/parts"
@@ -1211,7 +1223,7 @@
   },
   {
    "path": "fin/loc/overlays.json",
-   "bytes": 873215,
+   "bytes": 873221,
    "owners": [
     "index.html",
     "src/tabs/parts"
@@ -1539,7 +1551,7 @@
   },
   {
    "path": "fin/parts/P-04-01.svg",
-   "bytes": 69184,
+   "bytes": 69185,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1595,7 +1607,7 @@
   },
   {
    "path": "fin/parts/P-04-08.svg",
-   "bytes": 38929,
+   "bytes": 38930,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -1619,7 +1631,7 @@
   },
   {
    "path": "fin/parts/P-04-11.svg",
-   "bytes": 29586,
+   "bytes": 29587,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2219,7 +2231,7 @@
   },
   {
    "path": "fin/parts/all_dxf.zip.b64.txt",
-   "bytes": 3543208,
+   "bytes": 3543188,
    "owners": [
     "index.html",
     "src/tabs/partdwg"
@@ -2235,7 +2247,7 @@
   },
   {
    "path": "fin/parts/index.json",
-   "bytes": 202656,
+   "bytes": 202659,
    "owners": [
     "src/tabs/partdwg"
    ]
@@ -2313,7 +2325,7 @@
   },
   {
    "path": "fin/prep/lines.json",
-   "bytes": 212479,
+   "bytes": 212684,
    "owners": [
     "index.html",
     "src/tabs/prep"
@@ -2321,7 +2333,7 @@
   },
   {
    "path": "fin/sim/keyaction.json",
-   "bytes": 527603,
+   "bytes": 527627,
    "owners": [
     "index.html",
     "src/tabs/sim"
@@ -2329,7 +2341,7 @@
   },
   {
    "path": "fin/sim/system.json",
-   "bytes": 113856,
+   "bytes": 113854,
    "owners": [
     "index.html",
     "src/tabs/sim"
@@ -3302,7 +3314,7 @@
   },
   {
    "path": "sch/BRD-02_sensor_board_placement.svg",
-   "bytes": 80157,
+   "bytes": 80156,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html",
@@ -3359,8 +3371,32 @@
    ]
   },
   {
+   "path": "sch/BRD-09_control_board_O1.svg",
+   "bytes": 238307,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
+   "path": "sch/BRD-10_control_board_O7.svg",
+   "bytes": 237724,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
+   "path": "sch/BRD-11_control_board_O2-O6.svg",
+   "bytes": 238830,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
    "path": "sch/SCH-01_system.svg",
-   "bytes": 34634,
+   "bytes": 34633,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3368,7 +3404,7 @@
   },
   {
    "path": "sch/SCH-02_sensor_board.svg",
-   "bytes": 51465,
+   "bytes": 51512,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3384,7 +3420,7 @@
   },
   {
    "path": "sch/SCH-04_end_parts.svg",
-   "bytes": 38291,
+   "bytes": 38333,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3392,7 +3428,7 @@
   },
   {
    "path": "sch/SCH-05_pedal.svg",
-   "bytes": 35603,
+   "bytes": 35727,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3682,7 +3718,7 @@
   },
   {
    "path": "data/final_items.json",
-   "bytes": 260813
+   "bytes": 261696
   },
   {
    "path": "data/mux_module_pins.csv",

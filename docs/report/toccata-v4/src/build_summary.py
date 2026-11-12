@@ -54,7 +54,7 @@ def check(cond, msg):
 # ------------------------------------------------------------------ purchases (plan C, ordered 2026-10-08)
 FI = load(os.path.join(V4, "data", "final_items.json"))
 T = FI["totals"]
-EXPECT = {"school_items": 216652, "school_ship": 31200, "personal": 356771, "total": 604623, "budget_school": 200000}   # 10/16 A안 (+PETG 4, +세메다인 1); 10/31 A16 +만능기판 4장 14,140; 11/02 △34 XH2.54 키트 (+800 학교, +2,500 학교 배송)
+EXPECT = {"school_items": 240632, "school_ship": 31200, "personal": 356771, "total": 628603, "budget_school": 200000}   # 10/16 A안 (+PETG 4, +세메다인 1); 10/31 A16 +만능기판 4장 14,140; 11/02 △34 XH2.54 키트 (+800 학교, +2,500 학교 배송); 11/04 △35 홀센서 WSH137 + 100 nF Walsin (+23,980 학교)
 for k, v in EXPECT.items():
     check(T[k] == v, f"totals.{k} = {T[k]} (expected {v})")
 check(T["school_items"] + T["school_ship"] + T["personal"] == T["total"], "school + ship + personal != total")
@@ -162,13 +162,13 @@ m_conn = re.search(r"(\d+)장 모두 연결 오류 0", readme)
 check(m_conn is not None, "connectivity check line ('N장 모두 연결 오류 0') in hardware/pcb/README.md")
 CONN_N = int(m_conn.group(1)) if m_conn else 0
 check(CONN_N == n_sch + n_brd == len(SHEETS), f"README connectivity check covers {CONN_N} sheets; folders hold {n_sch} + {n_brd}")
-bomq = {"DRV5055": 0, "RP2040-Zero": 0, "4067": 0}
+bomq = {"WSH137": 0, "RP2040-Zero": 0, "4067": 0}
 with open(os.path.join(PCB, "netlist", "bom.csv"), encoding="utf-8-sig") as fh:
     for r in csv.DictReader(fh):
         for k in bomq:
             if r["값"].startswith(k) or (k == "4067" and r["값"].startswith("CD74HC4067")):
                 bomq[k] += int(r["전체 수량"])
-check(bomq == {"DRV5055": 89, "RP2040-Zero": 8, "4067": 7}, f"circuit bom {bomq}")
+check(bomq == {"WSH137": 89, "RP2040-Zero": 8, "4067": 7}, f"circuit bom {bomq}")
 
 # ------------------------------------------------------------------ print files (stl/print)
 TOOLS = {"06_출력공구"}
@@ -242,7 +242,7 @@ SPEC = [
     ("전원", "LiFePO4 12.8 V 6 Ah", f"76.8 Wh · 평균 {P_AVG} W, 순간 최대 {P_PEAK} W · 약 {P_LIFE}시간"),
     ("스피커", f"4인치 × 2 · 앞판 {ang:g}°", f"{DRIVER} 8 Ω · 밀폐 {vol:.2f} L · TPA3110 12.8 V에서 약 8 W/채널"),
     ("회로", REV_LABEL,
-     f"회로도 {n_sch}장 + 기판·배선도 {n_brd}장 · 자동 검사 {CONN_N}장 모두 오류 0 · 홀센서 {bomq['DRV5055']} · RP2040-Zero {bomq['RP2040-Zero']}"),
+     f"회로도 {n_sch}장 + 기판·배선도 {n_brd}장 · 자동 검사 {CONN_N}장 모두 오류 0 · 홀센서 {bomq['WSH137']} · RP2040-Zero {bomq['RP2040-Zero']}"),
     ("출력 (합판 없음)", f"{pf['inst_files']}종 {pf['inst_parts']}개",
      f"악기 출력 STL(PETG) · 공구 {pf['tools']} · 지그 {pf['jigs']} · 10/16부터 뒷바 판도 모두 출력 (가운데 아랫판·뒤판은 반턱 3토막)"),
 ]

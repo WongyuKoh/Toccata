@@ -534,7 +534,7 @@ def part_label(r):
     status = r.get("구매 상태 (최종 목록)", "") or ""
     if ref.startswith(("PCB-", "TP", "JP")) or "HDR" in ref or "부품 없음" in status or "선과 함께" in status:
         return None
-    if v.startswith("DRV5055"):
+    if v.startswith(("WSH137", "DRV5055")):
         return "홀센서"
     if "RP2040" in v:
         return "RP2040-Zero"

@@ -863,7 +863,7 @@
       var x0 = SYS.mod_x0[k.mb];
       row('부속', isEnd ? (k.part === 'EL' ? '왼쪽 끝 부속 EL (x0~47) → 모듈 O1이 읽음' : '오른쪽 끝 부속 ER (x1198.5~1222) → 모듈 O7이 읽음')
         : '옥타브 모듈 ' + k.mb + ' (x' + f(x0, 1) + '~' + f(x0 + 164.5, 1) + ')');
-      row('센서', k.sensor + ' DRV5055A2 · ' + (isEnd ? k.board + ' 기판' : 'SB 기판') + ' · x' + f(k.x_sensor, 2) + ' mm, y67, 소자 z' + (k.black ? '10.15' : '12.68'));
+      row('센서', k.sensor + ' WSH137-XPAN1 · ' + (isEnd ? k.board + ' 기판' : 'SB 기판') + ' · x' + f(k.x_sensor, 2) + ' mm, y67, 소자 z' + (k.black ? '10.15' : '12.68'));
       var col = k.black ? KA.colours.black : KA.colours.white;
       row('자석', 'Ø5×2 N35, S극 아래 · ' + (k.black ? '흑건' : '백건') + ' 대표값: 간격 쉼 ' + f(col.gap_rest_design, 2) + ' → 바닥 ' + f(col.gap_bottom_rigid, 2) + ' mm (ADC ' + col.adc.rest_design + ' → ' + col.adc.bottom_rigid + ')');
       var pd = row('신호선', '');
