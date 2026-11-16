@@ -2,7 +2,9 @@
    Data (lazy, on first open): fin/sim/keyaction.json + fin/sim/system.json, written by
    hardware/mechanical/key-action-v4/model/export_sim.py (model_v4.py r4.5 histories, netlist map, SCH-06 budget, CAD touch fold).
    API: window.toccata.sim = { ready: Promise<void>, setRun(colour 'white'|'black', runId 'push0.8'|'v0.5'|'v0.7'|'v1'|'v1.5'|'v2.5'),
-                               setTime(ms), noteOn(midi), noteOff(midi) } */
+                               setTime(ms), noteOn(midi), noteOff(midi) }
+   Click info (2026-11-16): every drawn part carries data-info; clicking it opens a popup (simPop) with what it is and does, its
+   print file / purchase items (export_sim.py info, from cad/parts.json) and the value at the current time for moving parts. */
 (function () {
   'use strict';
   var sec = document.getElementById('p-sim');
@@ -205,16 +207,19 @@
       var sec_ = C.section;
       var gS = $('sim-static'), gK = $('sim-keyg'), gL = $('sim-lever'), gP = $('sim-spring'), gM = $('sim-marks'), gO = $('sim-over');
       [gS, gK, gL, gP, gM, gO].forEach(function (g) { g.textContent = ''; });
+      closePop();
       drawn = {};
       setText('sim-side-title', '측면 단면 · ' + C.name);
       setText('sim-side-sub', 'x = ' + f(sec_.xsec, 3) + ' (건반 ' + C.key + ' 밸런스 핀 면, 모듈 좌표)');
       // fixed parts
-      (sec_.neighbours || []).forEach(function (nb) { sv('path', { d: ringsPath(nb.rings), 'class': 'm-nb' }, gS); });
-      sv('path', { d: ringsPath(sec_.frame), 'class': 'm-frame' }, gS);
+      (sec_.neighbours || []).forEach(function (nb) { sv('path', { d: ringsPath(nb.rings), 'class': 'm-nb', 'data-info': 'neighbour' }, gS); });
+      sv('path', { d: ringsPath(sec_.frame), 'class': 'm-frame', 'data-info': 'bed' }, gS);
+      // click regions over the one-piece frame: the print each region belongs to now (바닥틀 / 레버틀 / 밸런스 레일 / 가이드 탭)
+      (sec_.frame_hit || []).forEach(function (h) { sv('path', { d: ringsPath(h.rings), 'class': 'm-hit', 'data-info': h.k }, gS); });
       var cls = { felt: 'm-felt', sbar: 'm-sbar', steel: 'm-steel', pcb: 'm-pcb', bar: 'm-bar', pad: 'm-pad', cover: 'm-cover' };
       ['cover', 'bar', 'sbar', 'pcb', 'pad', 'felt', 'steel'].forEach(function (g) {
         (sec_.fixed[g] || []).forEach(function (it) {
-          var p = sv('path', { d: polyPath(it.ring), 'class': cls[g] }, gS);
+          var p = sv('path', { d: polyPath(it.ring), 'class': cls[g], 'data-info': it.info }, gS);
           sv('title', null, p).textContent = it.ko || it.part;
           if (g === 'pad') drawn.pad = p;
           if (g === 'felt' && /front felt/.test(it.part) && (C.key.indexOf('#') < 0 ? /white/.test(it.part) : /black/.test(it.part))) drawn.ffelt = p;
@@ -222,24 +227,24 @@
       });
       // spring (coil and long leg fixed while loaded)
       var sp = sec_.spring;
-      sv('path', { d: polyPath(sp.coil), 'class': 'm-spring' }, gP);
-      sv('path', { d: 'M' + sp.long_leg[0][0] + ',' + (-sp.long_leg[0][1]) + 'L' + sp.long_leg[1][0] + ',' + (-sp.long_leg[1][1]), 'class': 'm-spring' }, gP);
+      sv('path', { d: polyPath(sp.coil), 'class': 'm-spring', 'data-info': 'spring' }, gP);
+      sv('path', { d: 'M' + sp.long_leg[0][0] + ',' + (-sp.long_leg[0][1]) + 'L' + sp.long_leg[1][0] + ',' + (-sp.long_leg[1][1]), 'class': 'm-spring', 'data-info': 'spring' }, gP);
       // lever (b = 0 frame)
-      sec_.lever_beyond.forEach(function (r) { sv('path', { d: polyPath(r), 'class': 'm-beyond' }, gL); });
-      sv('path', { d: ringsPath(sec_.lever_cut), 'class': 'm-lever' }, gL);
-      sec_.lever_steel.forEach(function (r) { drawn.steel = sv('path', { d: polyPath(r), 'class': 'm-steel' }, gL); });
-      sec_.lever_felt.forEach(function (r) { drawn.lfelt = sv('path', { d: polyPath(r), 'class': 'm-felt' }, gL); });
-      sv('path', { d: 'M' + sp.short_leg_lf[0][0] + ',' + (-sp.short_leg_lf[0][1]) + 'L' + sp.short_leg_lf[1][0] + ',' + (-sp.short_leg_lf[1][1]), 'class': 'm-spring' }, gL);
+      sec_.lever_beyond.forEach(function (r) { sv('path', { d: polyPath(r), 'class': 'm-beyond', 'data-info': 'lever' }, gL); });
+      sv('path', { d: ringsPath(sec_.lever_cut), 'class': 'm-lever', 'data-info': 'lever' }, gL);
+      sec_.lever_steel.forEach(function (r) { drawn.steel = sv('path', { d: polyPath(r), 'class': 'm-steel', 'data-info': 'steel' }, gL); });
+      sec_.lever_felt.forEach(function (r) { drawn.lfelt = sv('path', { d: polyPath(r), 'class': 'm-felt', 'data-info': 'feltstrip' }, gL); });
+      sv('path', { d: 'M' + sp.short_leg_lf[0][0] + ',' + (-sp.short_leg_lf[0][1]) + 'L' + sp.short_leg_lf[1][0] + ',' + (-sp.short_leg_lf[1][1]), 'class': 'm-spring', 'data-info': 'spring' }, gL);
       // key (design frame)
-      sec_.key_beyond.forEach(function (r) { sv('path', { d: polyPath(r), 'class': 'm-beyond' }, gK); });
-      sv('path', { d: ringsPath(sec_.key_cut), 'class': C.key.indexOf('#') >= 0 ? 'm-keyb' : 'm-key' }, gK);
-      sec_.key_steel.forEach(function (r) { drawn.cap = sv('path', { d: polyPath(r), 'class': 'm-steel' }, gK); });
-      sec_.key_felt.forEach(function (r) { drawn.rfelt = sv('path', { d: polyPath(r), 'class': 'm-felt' }, gK); });
-      sv('path', { d: polyPath(sec_.magnet_S), 'class': 'm-magS' }, gK);
-      sv('path', { d: polyPath(sec_.magnet_N), 'class': 'm-magN' }, gK);
+      sec_.key_beyond.forEach(function (r) { sv('path', { d: polyPath(r), 'class': 'm-beyond', 'data-info': 'key' }, gK); });
+      sv('path', { d: ringsPath(sec_.key_cut), 'class': C.key.indexOf('#') >= 0 ? 'm-keyb' : 'm-key', 'data-info': 'key' }, gK);
+      sec_.key_steel.forEach(function (r) { drawn.cap = sv('path', { d: polyPath(r), 'class': 'm-steel', 'data-info': 'capstan' }, gK); });
+      sec_.key_felt.forEach(function (r) { drawn.rfelt = sv('path', { d: polyPath(r), 'class': 'm-felt', 'data-info': 'restfelt' }, gK); });
+      sv('path', { d: polyPath(sec_.magnet_S), 'class': 'm-magS', 'data-info': 'magnet' }, gK);
+      sv('path', { d: polyPath(sec_.magnet_N), 'class': 'm-magN', 'data-info': 'magnet' }, gK);
       // sensor element (diamond) - part of the world group so the inset shows it
       var y = C.y_elem, z = C.z_elem, s = 0.9;
-      sv('path', { d: 'M' + (y - s) + ',' + (-z) + 'L' + y + ',' + (-z - s) + 'L' + (y + s) + ',' + (-z) + 'L' + y + ',' + (-z + s) + 'Z', 'class': 'm-sensor' }, gM);
+      sv('path', { d: 'M' + (y - s) + ',' + (-z) + 'L' + y + ',' + (-z - s) + 'L' + (y + s) + ',' + (-z) + 'L' + y + ',' + (-z + s) + 'Z', 'class': 'm-sensor', 'data-info': 'sensor' }, gM);
       // labels (main view only)
       var sensRef = sensorRef();
       sv('text', { x: y, y: -0.3, 'text-anchor': 'middle', 'class': 't-lab' }, gO).textContent = '↑ ' + sensRef + ' 센서 (소자 z' + f(z, 2) + ')';
@@ -376,8 +381,98 @@
       var tl = $('sim-tl');
       if (!tl.matches(':active')) tl.value = String(Math.round(tToU(t) * 1000));
       setText('sim-tnow', f(t, 1) + ' ms');
+      if (simPop.key) popLive();
     }
     api.setTime = function (ms) { stop(); setTime(ms); };
+
+    /* ------------------------------------------------------------------ click info (2026-11-16)
+       User: '시뮬레이션 내 부품을 클릭하면 그 부품이 뭔지 알려주게'.  A click on a drawn part (side section, its inset copy, screen fold,
+       power boxes) opens a popup beside it: name, what it does, print file / purchase items (export_sim.py info from cad/parts.json,
+       the 04 tab's own names), the value at the current time for the moving parts, and '3D 모델에서 보기' (window.toccata.cad.focus).
+       Same .hitpop look as the circuit drawings; the picked part gets a blue outline in the drawing and in the inset. */
+    var simPop = { el: null, fig: null, key: null };
+    function infoFor(k) {
+      if (!k) return null;
+      if (k.indexOf('pw:') === 0) return ((SYS.power && SYS.power.info) || {})[k.slice(3)] || null;
+      if (k.indexOf('ts:') === 0) {
+        var T = SYS.touch, id = k.slice(3);
+        var all = T ? (T.parts || []).concat(T.static || [], T.leg ? [T.leg] : []) : [];
+        var e = all.filter(function (q) { return q.id === id; })[0];
+        return e ? (e.info || { t: e.name, d: [] }) : null;
+      }
+      return (C && C.section.info || {})[k] || null;
+    }
+    function liveText(live) {
+      if (!live || !R) return '';
+      var o = sample(S.t);
+      if (live === 'travel') return '건반 앞끝 ' + f(C.front_rest_z - o.fz, 2) + ' mm 내려감';
+      if (live === 'lever') return '레버 각 ' + signed((o.b - C.rest.b) * 180 / Math.PI, 2) + '° (쉼에서)';
+      if (live === 'gap') return '자석–센서 간격 ' + f(o.gap, 2) + ' mm';
+      if (live === 'field') return '자기장 ' + f(field(o.gap), 1) + ' mT · ADC ' + adc(o.gap) + ' (' + f(volt(o.gap), 3) + ' V)';
+      if (live === 'cap') return '캡스턴이 레버를 미는 힘 ' + f(o.Nc, 1) + ' N';
+      if (live === 'pad') return '업스톱 패드 힘 ' + f(o.fup, 0) + ' N';
+      if (live === 'front') return '앞 펠트 힘 ' + f(o.ffr, 1) + ' N';
+      if (live === 'rest') return '쉼 펠트 힘 ' + f(o.fre, 2) + ' N';
+      return '';
+    }
+    function escH(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function markPicked(svgEl, k) {
+      [].forEach.call(sec.querySelectorAll('.picked'), function (e) { e.classList.remove('picked'); });
+      if (!k) return;
+      var roots = svgEl && (svgEl.id === 'sim-svg' || svgEl.id === 'sim-inset') ? [$('sim-svg'), $('sim-inset')] : [svgEl];
+      roots.forEach(function (r) { if (r) [].forEach.call(r.querySelectorAll('[data-info="' + k + '"]'), function (e) { e.classList.add('picked'); }); });
+    }
+    function liveLine(e, k) {
+      var s = e && e.live && k.indexOf(':') < 0 ? liveText(e.live) : '';
+      return s ? '지금 t = ' + f(S.t, 1) + ' ms · ' + s : '';
+    }
+    function popLive() {
+      if (!simPop.el || simPop.el.hidden) return;
+      var p = simPop.el.querySelector('.hit-live');
+      if (p) p.textContent = liveLine(infoFor(simPop.key), simPop.key);
+    }
+    function showPop(k, ev, fig, svgEl) {
+      var e = infoFor(k);
+      if (!e) { closePop(); return; }
+      if (!simPop.el || simPop.fig !== fig) {
+        if (simPop.el && simPop.el.parentNode) simPop.el.parentNode.removeChild(simPop.el);
+        simPop.el = he('div', { 'class': 'hitpop sim-pop', role: 'region', 'aria-label': '시뮬레이션 부품 정보', 'aria-live': 'polite' }, null, fig);
+        simPop.fig = fig;
+        simPop.el.addEventListener('click', function (x) {
+          if (x.target.closest('.hitx')) { closePop(); return; }
+          var cur = infoFor(simPop.key);
+          if (x.target.closest('[data-cad]') && cur && cur.cad && window.toccata.cad && window.toccata.cad.focus) window.toccata.cad.focus(cur.cad, cur.t);
+        });
+      }
+      simPop.key = k;
+      var live = liveLine(e, k), name = e.t + (k === 'sensor' ? ' (' + sensorRef() + ')' : '');
+      simPop.el.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button><p class="hit-t"><b>' + escH(name) + '</b></p>' +
+        (e.d && e.d.length ? '<ul>' + e.d.map(function (x) { return '<li>' + escH(x) + '</li>'; }).join('') + '</ul>' : '') +
+        (live ? '<p class="hit-live mono">' + escH(live) + '</p>' : '') +
+        (e.cad && window.toccata.cad ? '<p class="hit-acts"><button type="button" class="sim-btn" data-cad="1">3D 모델에서 보기</button></p>' : '');
+      simPop.el.hidden = false;
+      markPicked(svgEl, k);
+      // beside the click (right, else left), below it when the figure is narrow
+      var fr = fig.getBoundingClientRect(), W = fig.clientWidth, pw = Math.min(380, W - 16), x = ev.clientX - fr.left, y = ev.clientY - fr.top, L, T;
+      simPop.el.style.width = pw + 'px';
+      if (x + 22 + pw <= W - 8) { L = x + 22; T = y - 28; }
+      else if (x - 22 - pw >= 8) { L = x - 22 - pw; T = y - 28; }
+      else { L = Math.max(8, Math.min(x - pw / 2, W - pw - 8)); T = y + 22; }
+      simPop.el.style.left = L + 'px'; simPop.el.style.top = Math.max(8, T) + 'px';
+    }
+    function closePop() { if (simPop.el) simPop.el.hidden = true; simPop.key = null; markPicked(null, null); }
+    function wirePick(svgId, figSel) {
+      var svgEl = $(svgId);
+      if (!svgEl) return;
+      var fig = svgEl.closest(figSel) || svgEl.parentNode;
+      svgEl.addEventListener('click', function (ev) {
+        var t = ev.target.closest && ev.target.closest('[data-info]');
+        if (!t || !svgEl.contains(t)) { closePop(); return; }
+        showPop(t.getAttribute('data-info'), ev, fig, svgEl);
+      });
+    }
+    wirePick('sim-svg', 'figure'); wirePick('sim-inset', 'figure'); wirePick('sim-tsvg', 'figure'); wirePick('sim-pwsvg', '.sim-pwgrid');
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && simPop.key) closePop(); });
 
     /* ------------------------------------------------------------------ playback */
     function frame(now) {
@@ -902,7 +997,7 @@
     (function buildPower() {
       var svg = $('sim-pwsvg');
       function box(id, x, y, w, h, t, s, v) {
-        var g = sv('g', null, svg);
+        var g = sv('g', { 'data-info': 'pw:' + id }, svg);
         pwEl[id] = { rect: sv('rect', { x: x, y: y, width: w, height: h, rx: 8, 'class': 'pw-box' }, g) };
         sv('text', { x: x + 10, y: y + 20, 'class': 'pw-t' }, g).textContent = t;
         sv('text', { x: x + 10, y: y + 37, 'class': 'pw-s' }, g).textContent = s;
@@ -983,15 +1078,15 @@
       var svg = $('sim-tsvg');
       if (!TS) { svg.parentNode.parentNode.hidden = true; return; }
       var AY = TS.axis[0], AZ = TS.axis[1];
-      (TS.static || []).forEach(function (s) { sv('path', { d: ringsPath(s.rings), 'class': 'm-frame' }, svg).appendChild(document.createElementNS(NS, 'title')).textContent = s.name; });
-      if (TS.leg) { legG = sv('g', null, svg); sv('path', { d: ringsPath(TS.leg.rings), 'class': 'm-lever' }, legG).appendChild(document.createElementNS(NS, 'title')).textContent = TS.leg.name + ' (x' + TS.leg.x + ', 사용 자세)'; }
+      (TS.static || []).forEach(function (s) { sv('path', { d: ringsPath(s.rings), 'class': 'm-frame', 'data-info': 'ts:' + s.id }, svg).appendChild(document.createElementNS(NS, 'title')).textContent = s.name; });
+      if (TS.leg) { legG = sv('g', null, svg); sv('path', { d: ringsPath(TS.leg.rings), 'class': 'm-lever', 'data-info': 'ts:' + TS.leg.id }, legG).appendChild(document.createElementNS(NS, 'title')).textContent = TS.leg.name + ' (x' + TS.leg.x + ', 사용 자세)'; }
       tsG = sv('g', null, svg);
       TS.parts.forEach(function (p) {
         var cl = p.kind === 'electronics' ? 'm-keyb' : (p.id === 'TS-WINCOVER' ? 'm-sbar' : 'm-lever');
         // rings are (u, w): drawn as (x = u, y = w) and placed by the pose matrix
         var d = '';
         p.rings.forEach(function (r) { d += 'M' + r.map(function (q) { return q[0] + ',' + q[1]; }).join('L') + 'Z'; });
-        sv('path', { d: d, 'class': cl }, tsG).appendChild(document.createElementNS(NS, 'title')).textContent = p.name;
+        sv('path', { d: d, 'class': cl, 'data-info': 'ts:' + p.id }, tsG).appendChild(document.createElementNS(NS, 'title')).textContent = p.name;
       });
       sv('circle', { cx: AY, cy: -AZ, r: 1.6, 'class': 'm-steel' }, svg);
       sv('path', { d: 'M' + (AY - 6) + ',' + (-AZ) + 'H' + (AY + 6) + 'M' + AY + ',' + (-AZ - 6) + 'V' + (-AZ + 6), 'class': 'm-axis' }, svg);

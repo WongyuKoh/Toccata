@@ -145,6 +145,172 @@ def ko_name(part):
     return None
 
 
+# =============================================================================== click info (2026-11-16)
+# User: '아티펙트에서 시뮬레이션 내 부품을 클릭하면 그 부품이 뭔지 알려주게 해줘'.  Every shape the 05 tab draws (side section, its inset,
+# the screen fold, the power boxes) carries an info key.  The popup = what the part does (ROLE below, written here) + the CAD record
+# of the same part in docs/report/toccata-v4/cad/parts.json (name, material, print file, purchase items: the 04 3D tab's own words)
+# + a '3D 모델에서 보기' button (window.toccata.cad.focus).  The side section is the r4.5 design (one-piece frame); the printed frame
+# is split since A12 / A16, so each frame region names the print it belongs to now (bed / cage / balance rail / guide tab).
+CAGE_RX_SIM = (r"^fin$", r"^fin boss$", r"^fin keel", r"^top plate", r"^pad bar rail$", r"^pad bar rail lip$", r"^rear wall",
+               r"^spring groove boss", r"^rear shelf$", r"^shelf rib$", r"^control-board boss.*shelf rib")   # = cad/src/keyaction.py CAGE_RX
+
+
+def frame_piece(n):
+    """which print of the A12 / A16 / A18 module a geometry.json frame feature is part of (keyaction.frame_split)"""
+    import re
+    if re.match(r"^(tab |keeper hook)", n):
+        return "tab"
+    if n.startswith("balance rail"):
+        return "rail"
+    if any(re.search(x, n) for x in CAGE_RX_SIM):
+        return "cage"
+    return "bed"
+
+
+FIXED_INFO = [("sensor board SB", "sb"), ("sensor bar", "sensorbar"), ("key rod", "keyrod"), ("lever rod", "leverrod"),
+              ("balance pin", "pin"), ("up-stop pad", "pad"), ("pad wedge", "padbar"), ("pad bar", "padbar"),
+              ("cover curtain", "curtain"), ("keeper felt", "keeperfelt"), ("white front felt", "frontfelt"), ("black front felt", "frontfelt")]
+
+
+def fixed_info_key(part):
+    for k, v in FIXED_INFO:
+        if part.startswith(k):
+            return v
+    return None
+
+
+# key -> (CAD id: str, list, or {white, black}; None = no CAD part), what it does, live readout on the page (script.js liveText), extra items
+_S = {"white": "D", "black": "Cs"}
+SIM_PARTS = {
+    "key": ({c: "O4-KEY-" + s for c, s in _S.items()},
+            "손가락이 누르는 건반입니다. 건반 봉(K)을 축으로 시소처럼 돌아, 앞을 누르면 꼬리가 올라가 캡스턴이 레버를 밀어 올립니다. "
+            "앞쪽 밑면에 자석이 박혀 있어 센서가 높이를 읽습니다.", "travel", ()),
+    "capstan": ({c: "O4-CAPSTAN-" + s for c, s in _S.items()},
+                "건반 꼬리 위로 나온 나사 머리입니다. 건반을 누르면 레버 밑 펠트 띠를 밀어 레버를 들어 올립니다. 돌려서 높이(헛누름 없음)를 맞추고, "
+                "꼬리 옆 홈의 M3 너트(i011)가 받습니다. 시뮬레이션에서 주황이면 지금 레버를 미는 중입니다.", "cap", ("i014", "i011")),
+    "restfelt": ({c: "O4-RESTFELT-" + s for c, s in _S.items()},
+                 "건반 꼬리 밑에 붙인 쉼 펠트입니다. 손을 떼면 꼬리가 여기에 내려앉아 건반의 쉼 높이가 정해지고, 밑에 넣는 종이 장수로 앞 높이를 맞춥니다. "
+                 "주황이면 지금 쉼 자리에 닿아 있습니다.", "rest", ("i107", "i062", "t09")),
+    "magnet": ({c: "O4-MAGNET-" + s for c, s in _S.items()},
+               "건반 밑면 포켓(y67)에 S극이 아래로 가게 넣은 자석입니다. 건반이 내려가면 아래 센서에 가까워져 센서가 받는 자기장이 커집니다.", "gap", ("i098",)),
+    "sensor": ("O4-SENSORBAR",
+               "자석과의 거리를 전압으로 바꾸는 홀센서입니다. 센서 바 포켓에 눕혀 넣고 다리를 센서 기판 SB에 납땜합니다. 전압(ADC 코드)이 정한 값을 넘으면 "
+               "note-on, 다시 내려가면 재무장합니다.", "field", ("i004",)),
+    "lever": ({c: "O4-LEVER-" + s for c, s in _S.items()},
+              "무게 레버(레버 캐리어)입니다. 레버 봉(L)에 매달려 돌고, 앞쪽 칸에 강철 블록을 품습니다. 건반을 누르면 캡스턴이 들어 올리고, "
+              "손을 떼면 무게와 스프링 힘으로 건반을 되돌립니다. A18부터 +x 옆벽은 끼워 붙이는 레버 덮개입니다.", "lever", ()),
+    "steel": ({c: "O4-STEEL-" + s for c, s in _S.items()},
+              "레버 칸에 넣는 무게 추(강철 띠 9T × 19를 40 mm로 자름)입니다. 건반을 누를 때의 무게감과 되돌림 힘을 만들고, 레버가 끝까지 올라가면 "
+              "윗면이 업스톱 패드에 닿습니다. 주황이면 지금 패드에 닿아 있습니다.", "pad", ()),
+    "feltstrip": ({c: "O4-FELTSTRIP-" + s for c, s in _S.items()},
+                  "캡스턴이 닿는 레버 밑 펠트 띠(2T)입니다. 닿는 소리와 미끄럼 마찰을 줄입니다. 주황이면 지금 캡스턴이 밀고 있습니다.", "cap", ()),
+    "spring": ({c: "O4-SPRING-" + s for c, s in _S.items()},
+               "레버 허브에 넣고 레버 봉에 꿰는 비틀림 스프링입니다. 짧은 다리는 허브 가둠 홈, 긴 다리는 프레임 홈에 걸려 레버를 쉼 쪽으로 눌러, "
+               "건반이 빨리 돌아오게 돕습니다.", None, ("i123",)),
+    "neighbour": (["O4-KEY-C", "O4-KEY-D"], "흑건 단면 면에 함께 잘린 이웃 백건(C · D)입니다. 쉼 자세 그대로 그렸습니다.", None, ()),
+    "bed": ("O4-FRAME",
+            "모듈의 바닥틀입니다. 앞 레일(앞 펠트 자리), 흑건 멈춤 레일, 센서 바 받침, 제어 기판 자리를 품고 EVA 3T 바닥 위에 놓입니다.", None, ()),
+    "cage": ("O4-CAGE",
+             "레버틀입니다. 레버 봉을 받치는 핀과 윗판·뒷벽·선반으로 이루어지고, 패드 바가 윗판 위에 놓입니다. A18부터 나사 대신 걸쇠 다리 4개로 "
+             "바닥틀에 끼웁니다.", None, ()),
+    "rail": ("O4-RAIL",
+             "밸런스 레일입니다. 건반 봉 받침(y141)과 밸런스 핀 자리(y135.3)를 가지고 제어 기판 위에 놓이며, A18부터 나사 없이 걸쇠로 끼웁니다.", None, ()),
+    "tab": ({c: "O4-TAB-" + s for c, s in _S.items()},
+            "가이드 탭입니다. 건반 앞쪽을 좌우로 안내하고, 위의 키퍼 훅이 건반이 위로 튀거나 봉에서 빠지지 않게 막습니다. 바닥틀 자리에 꽂아 붙입니다.", None, ()),
+    "frontfelt": ({"white": "O4-B-whitefrontfelt", "black": "O4-B-blackfrontfelt"},
+                  "건반 앞끝이 바닥까지 내려가면 닿는 멈춤 펠트입니다(울 펠트 2T 위, 밑에 하네나이트 1T가 튕김을 줄임). 주황이면 지금 바닥에 닿아 있습니다.",
+                  "front", ()),
+    "keeperfelt": ({"white": "O4-B-keeperfelt-D", "black": "O4-B-keeperfelt-Cs"},
+                   "가이드 탭의 키퍼 훅 밑에 붙인 2T 펠트입니다. 건반이 위로 튀어 훅에 닿을 때 소리를 줄입니다.", None, ()),
+    "sensorbar": ("O4-SENSORBAR", "홀센서 12개를 포켓에 담는 출력 바입니다. 센서 기판 SB 위에 놓고 왼쪽 끝을 M3×10 2개로 받침 기둥에 조입니다.", None, ("i058",)),
+    "sb": ("O4-E-SB", "센서 12개의 다리를 납땜하는 6행 띠 기판(161.6 × 15.24)입니다. 16심 리본 W104로 제어 기판 MB에 이어집니다.", None, ("i081",)),
+    "keyrod": ("O4-B-keyrod", "건반 시소의 축(K)입니다. 밸런스 레일의 봉 받침(y141, z21.5)에 놓고, 건반 노치가 위에서 스냅으로 뭅니다.", None, ()),
+    "pin": ({"white": "O4-B-balancepinD2-D", "black": "O4-B-balancepinD2-Cs"},
+            "밸런스 레일에 눌러 넣은 핀입니다. 건반 밑 홈이 이 핀을 물어 건반 뒤쪽의 좌우 위치를 잡습니다.", None, ()),
+    "leverrod": ("O4-B-leverrod", "무게 레버 12개가 매달려 도는 축(L)입니다. 레버틀 핀 보스와 레버 허브, 스프링 코일을 꿰고 끝을 출력 마개로 막습니다.", None, ()),
+    "padbar": ("O4-PADBAR-", "업스톱 패드를 붙이는 쐐기들이 있는 출력 바입니다(모듈마다 4칸). 레버틀 윗판 위에 놓입니다.", None, ()),
+    "pad": ({"white": "O4-B-upstoppad-D", "black": "O4-B-upstoppad-Cs"},
+            "레버가 가장 높이 올라갔을 때 강철 블록이 부딪히는 패드입니다(산 것은 PORON 5T + 펠트 1T). 소리와 튕김을 줄입니다. "
+            "주황이면 지금 강철이 닿아 있습니다.", "pad", ("i107",)),
+    "curtain": ("O4-CURTAIN", "건반 뒤쪽 틈으로 안쪽 기구가 보이지 않게 가리는 검정 출력 띠입니다.", None, ()),
+}
+SIM_TITLE = {"sensor": "홀센서 Winson WSH137-XPAN1", "neighbour": "이웃 백건 C4 · D4", "padbar": "패드 바 (칸 1~4)"}
+FRAME_NOTE = "단면은 r4.5 설계의 한 몸 프레임 모양으로 그렸고, 지금은 A12·A16에서 나뉜 이 부품으로 출력합니다."
+TS_ROLE = {"TS-CRADLE": "7인치 터치 화면을 담는 받침입니다. 경첩 축(M3×20)으로 CU 화면 뚜껑에 달려 25°로 세우거나 90°로 접습니다.",
+           "TS-LEDGE-L": "화면 유리 아래 가장자리를 받치는 턱 띠입니다. 따로 출력해 받침에 붙입니다(서포트 없는 출력, A14).",
+           "TS-E-SCREEN": "Waveshare 7-DSI-TOUCH-C 화면입니다. DSI 리본으로 Pi 5에, 전원선으로 GPIO 5 V에 이어집니다.",
+           "TS-WINCOVER": "받침 뒤 점검창 덮개입니다. 리본이 접히는 자리를 덮습니다.",
+           "CU-SCREENLID": "가운데 유닛 위의 화면 뚜껑입니다. 경첩 볼과 받침다리 주머니, 리본 구멍이 있고 움직이지 않습니다.",
+           "TS-LEG": "받침을 사용 각도로 받치는 다리입니다. 접을 때는 받침 뒤 클립에 끼웁니다."}
+PW_PARTS = {"bt": ("BAT-LFP", "악기 전체의 전원입니다. 12.8 V 리튬인산철 팩이 빨간 XT60으로 전원선에 이어지고, DC 잭으로 충전합니다."),
+            "xt": ("C-XT60", "전지와 전원선을 잇는 빨간 XT60 짝입니다. 뽑으면 모든 전원이 끊깁니다."),
+            "fu": ("CU-E-FUSE", "합선이 나면 끊어지는 5 A ATO 칼날 퓨즈(인라인 홀더)입니다. 켤 때 끊기면 7.5 A로 바꿉니다."),
+            "sw": ("CU-E-SWITCH", "전원 스위치입니다. 켜면 12.8 V 버스(+12V8)에 강압 모듈과 앰프가 이어집니다."),
+            "bk": ("CU-E-BUCK", "12.8 V를 5.1 V로 낮추는 강압 모듈입니다. Pi 5와 USB 허브가 여기서 전기를 받습니다."),
+            "pi": ("CU-E-PI5", "소리를 만드는 컴퓨터입니다. 허브로 들어온 건반 신호로 소프트 신스가 소리를 내고 터치 화면을 띄웁니다."),
+            "hb": ("PB-E-HUB", "모듈 7개와 페달 보드의 RP2040을 Pi에 잇는 유전원 USB 허브입니다. 5.1 V를 DC 플러그로 받습니다."),
+            "am": ("CU-E-AMP", "Pi의 소리를 키워 스피커를 울리는 앰프 보드입니다. 12.8 V 버스에서 바로 전기를 받습니다."),
+            "sp": (["SPK-L", "SPK-R"], "4인치 풀레인지 스피커 2개입니다. 앰프에서 파란 XT60 짝으로 이어집니다.")}
+
+_CAD = {}
+
+
+def cad_data():
+    """docs/report/toccata-v4/cad/parts.json (viewer/gen_viewer.py, the 04 tab) + data/final_items.json, read once"""
+    if not _CAD:
+        pg = os.path.join(ROOT, "docs", "report", "toccata-v4")
+        d = json.load(open(os.path.join(pg, "cad", "parts.json"), encoding="utf-8"))
+        fi = json.load(open(os.path.join(pg, "data", "final_items.json"), encoding="utf-8"))
+        fi = fi if isinstance(fi, list) else fi.get("items", [])
+        _CAD.update(parts={p["id"]: p for p in d["parts"]}, bom=d["bom"], items={it["id"]: it for it in fi})
+    return _CAD
+
+
+def resolve_cad(sel):
+    """exact id, else id prefix (as window.toccata.cad.focus): the parts it means"""
+    P_ = cad_data()["parts"]
+    out = []
+    for s in (sel if isinstance(sel, list) else [sel]):
+        out += [P_[s]] if s in P_ else [p for i, p in P_.items() if i.startswith(s)]
+    return out
+
+
+def info_entry(sel, role, live=None, items=(), title=None, note=None):
+    """popup record {t, d: lines, cad, live}: name / print file / purchase items from the CAD record (first part of sel)"""
+    C_ = cad_data()
+    ps = resolve_cad(sel) if sel else []
+    p = ps[0] if ps else None
+    d = [role]
+    if note:
+        d.append(note)
+    if p is not None and p.get("f"):
+        fd = (p.get("fd") or "").replace("@extra/", "print_extra/")
+        d.append("출력: %s%s (이 파일로 %d개%s)" % (fd + "/" if fd else "", p["f"], p.get("q", 0), ", " + p["m"] if p.get("m") else ""))
+    elif p is not None and p.get("m"):
+        d.append("재료: " + p["m"])
+    ids = []
+    for q in ps[:1]:
+        ids += [C_["bom"][k][0] for k in q.get("r", [])]
+    ids += [i for i in items if i not in ids]
+    for i in ids:
+        it = C_["items"].get(i)
+        if it:
+            d.append("구매 목록: %s %s (%s)" % (i, it["name"], it.get("source_ko") or it.get("source", "")))
+    t = title or (p["n"] if p is not None else sel)
+    return dict(t=t, d=d, cad=sel if ps else None, live=live)
+
+
+def sim_info(colour):
+    """info of every key the side section uses (script.js data-info)"""
+    out = {}
+    for k, (sel, role, live, items) in SIM_PARTS.items():
+        s = sel.get(colour) if isinstance(sel, dict) else sel
+        if k == "neighbour" and colour == "white":
+            continue
+        out[k] = info_entry(s, role, live, items, title=SIM_TITLE.get(k), note=FRAME_NOTE if k in ("bed", "cage", "rail", "tab") else None)
+    return out
+
+
 def cut_x(p, x):
     return p["x"][0] - 1e-9 <= x <= p["x"][1] + 1e-9
 
@@ -181,6 +347,12 @@ def section_geometry(G, A, colour, key, lever, xsec, extra_keys=()):
     frame = [p["side"] for p in fx if p["part"].startswith(FRAME_KEYS) and not p.get("female")]
     voids = [p["side"] for p in fx if p.get("female")]
     out["frame"] = union_rings(frame, subs=voids)
+    # click regions over the frame union: one per print it belongs to now (bed / cage / balance rail / guide tab)
+    hit = {}
+    for p in fx:
+        if p["part"].startswith(FRAME_KEYS) and not p.get("female"):
+            hit.setdefault(frame_piece(p["part"]), []).append(p["side"])
+    out["frame_hit"] = [dict(k=k, rings=union_rings(v, subs=voids)) for k, v in sorted(hit.items())]
     groups = {}
     for p in fx:
         n = p["part"]
@@ -189,7 +361,7 @@ def section_geometry(G, A, colour, key, lever, xsec, extra_keys=()):
         c = mat_of(n)
         if c in ("env", "void"):
             continue
-        groups.setdefault(c, []).append(dict(part=n, ko=ko_name(n), ring=rings(p["side"])))
+        groups.setdefault(c, []).append(dict(part=n, ko=ko_name(n), info=fixed_info_key(n), ring=rings(p["side"])))
     out["fixed"] = groups
     # neighbour white keys cut by the plane (black section): static, at rest
     ex = []
@@ -760,6 +932,7 @@ def main():
         xsec = [q for q in G["plan"] if q["part"] == f"{key} balance pin"][0]["circle"][0]
         extra = ("key C", "key D") if A.black else ()
         sec = section_geometry(G, A, colour, key, lever, xsec, extra_keys=extra)
+        sec["info"] = sim_info(colour)
         secs[colour] = sec
         cols["section"] = sec
         # ---- runs
@@ -838,6 +1011,18 @@ def main():
           "%s %s %s / %s %s %s" % (a0["sensor"], a0["ext"], a0["mux_ch"], c8["sensor"], c8["ext"], c8["mux_ch"]))
     unnamed = sorted({it["part"] for c_ in secs.values() for g_ in c_["fixed"].values() for it in g_ if not it.get("ko")})
     check("every drawn fixed part has a Korean final-part name (hover title)", not unnamed, ", ".join(unnamed))
+    # click info (2026-11-16): every drawn shape has an info key the popup can show, and its CAD part exists (3D 모델에서 보기)
+    noinfo = sorted({it["part"] for c_ in secs.values() for g_ in c_["fixed"].values() for it in g_ if it.get("info") not in c_["info"]})
+    nohit = sorted({h["k"] for c_ in secs.values() for h in c_["frame_hit"] if h["k"] not in c_["info"]})
+    check("every drawn fixed part and frame region has click info (popup)", not noinfo and not nohit, ", ".join(noinfo + nohit) or
+          "frame regions " + " · ".join(h["k"] for h in secs["white"]["frame_hit"]))
+    nocad = sorted({"%s:%s" % (c, k) for c, c_ in secs.items() for k, e in c_["info"].items() if not e["cad"]})
+    check("every click-info entry finds its CAD part in cad/parts.json", not nocad, ", ".join(nocad) or
+          "%d + %d entries" % (len(secs["white"]["info"]), len(secs["black"]["info"])))
+    SYS["power"]["info"] = {k: info_entry(sel, role, title="스피커 L · R (삼미 CW-100B25 4인치 풀레인지 8 Ω)" if k == "sp" else None)
+                            for k, (sel, role) in PW_PARTS.items()}
+    nocad = [k for k, e in SYS["power"]["info"].items() if not e["cad"]]
+    check("power boxes: click info with a CAD part each", not nocad, ", ".join(nocad) or " · ".join(e["t"][:12] for e in SYS["power"]["info"].values()))
     check("circuit revision from hardware/pcb/netlist/sheets.json", bool(SYS["circuit"]["rev"]), "개정 %s (%s)" % (SYS["circuit"]["rev"], SYS["circuit"]["date"]))
     check("pedal path from the SCH-05 netlist (W502 -> J502 -> R501 -> GP26)", any("J502" in q for q in SYS["pedal"]["path"]) and any("GP26" in q for q in SYS["pedal"]["path"]),
           " | ".join(SYS["pedal"]["path"][1:4]))
@@ -861,6 +1046,7 @@ def main():
         hard = _re.findall(r"USB-A → C \d", js)
         check("page script has no hard-coded USB cable length (reads k.usb_cable / k.usb_port)", not hard and "k.usb_cable" in js and "k.usb_port" in js,
               ", ".join(hard) or "ok")
+        check("page script shows click info (data-info on the drawn parts, popup with live values)", "data-info" in js and "liveText" in js and "simPop" in js)
     fz_ = SYS["power"]["fuse"]
     check("fuse F601 = bom.csv value (ATO blade)", "ATO" in fz_["value"], fz_["value"])
     b = SYS["power"]["budget"]
@@ -877,6 +1063,12 @@ def main():
         cad_check(parts, G, secs)
         try:
             SYS["touch"] = touch_fold(parts)
+            T_ = SYS["touch"]
+            for e_ in T_["parts"] + T_["static"] + ([T_["leg"]] if T_.get("leg") else []):
+                e_["info"] = info_entry(e_["id"], TS_ROLE.get(e_["id"], "화면 접기 부품입니다."), title=e_["name"])
+            miss = [e_["id"] for e_ in T_["parts"] + T_["static"] if e_["id"] not in TS_ROLE or not e_["info"]["cad"]]
+            check("touchscreen fold: every drawn part has click info and a CAD part", not miss, ", ".join(miss) or
+                  " · ".join(e_["id"] for e_ in T_["parts"] + T_["static"]))
             fc = SYS["touch"].get("fold_check", {})
             okf = bool(fc) and abs(fc["cad_z"][0] - fc["turned_z"][0]) < 0.05 and abs(fc["cad_z"][1] - fc["turned_z"][1]) < 0.05
             check("touchscreen fold: use-pose cradle turned to 90 deg = CAD folded cradle (z of the cut)", okf, json.dumps(fc))

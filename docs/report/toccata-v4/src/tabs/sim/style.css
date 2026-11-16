@@ -203,3 +203,28 @@
 }
 #p-sim .sim-restnote{margin:0}
 #p-sim .sim-restnote:empty{display:none}
+
+/* click info (2026-11-16): click a drawn part -> popup (same look as the circuit drawings' .hitpop) */
+#p-sim .sim-side,#p-sim .sim-insetfig,#p-sim .sim-touchfig,#p-sim .sim-pwgrid{position:relative}
+#p-sim .sim-draw [data-info],#p-sim .sim-pw g[data-info]{cursor:pointer}
+#p-sim .sim-draw .m-hit{fill:#000;fill-opacity:0;stroke:none}
+#p-sim .sim-draw .picked{stroke:#1f5fbf;stroke-width:2.2}
+#p-sim .sim-draw .m-hit.picked{fill:#1f5fbf;fill-opacity:.16;stroke:#1f5fbf;stroke-width:1.4}
+#p-sim .sim-draw .m-magS.picked,#p-sim .sim-draw .m-magN.picked,#p-sim .sim-draw .m-sensor.picked{stroke:#1f5fbf;stroke-width:1.6}
+#p-sim .sim-pw g.picked .pw-box{stroke:var(--blue);stroke-width:2.6}
+#p-sim .hitpop{position:absolute;z-index:6;max-height:min(62vh,540px);overflow:auto;background:var(--card);color:var(--ink);border:1px solid var(--rule-2);border-radius:10px;
+  box-shadow:0 8px 28px rgba(16,24,32,.22);padding:10px 12px 8px;font-size:13px;line-height:1.45;overflow-wrap:anywhere;text-align:left}
+#p-sim .hitpop[hidden]{display:none}
+#p-sim .hitpop p{margin:0 0 4px}
+#p-sim .hitpop .hit-t{font-size:14.5px;padding-right:30px}
+#p-sim .hitpop ul{margin:2px 0 6px;padding-left:17px}
+#p-sim .hitpop li{margin:2px 0;color:var(--ink-2)}
+#p-sim .hitpop .hit-live{border-top:1px solid var(--rule);padding-top:6px;margin-top:4px;color:var(--blue-ink);font-size:12.5px}
+#p-sim .hitpop .hit-acts{margin:6px 0 2px}
+#p-sim .hitpop .hitx{position:absolute;top:4px;right:4px;width:32px;height:32px;border:0;background:none;color:var(--ink-2);font:inherit;font-size:20px;line-height:1;cursor:pointer;border-radius:6px}
+#p-sim .hitpop .hitx:hover{background:var(--rule)}
+#p-sim .hitpop .hitx:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+@media (pointer:coarse){#p-sim .hitpop .hitx{width:44px;height:44px}}
+#p-sim .sim-pickhint{margin:6px 2px 0}
+/* a popup inside a drawing sheet (light in both themes): the light values of the tokens .sheet does not set */
+#p-sim .sheet .hitpop{--blue:#1F5FBF;--blue-ink:#184E9F;--rule:#DCE1E8;--rule-2:#C9D0DA}
