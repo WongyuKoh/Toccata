@@ -44,6 +44,7 @@ def main():
     h = re.sub(r'src="photo/(\w+)\.webp"', r'src="img/bom/\1.jpg"', h)
     h = re.sub(r'data-d="(BRD-[^"]+)"', r'data-d="sch/\1"', h)
     h = re.sub(r'data-d="(d\d\d[^"]+)"', r'data-d="dwg/\1"', h)
+    h = re.sub(r'data-d="A18_[^"]+"', 'data-d="img/a18/A18_detail.webp"', h)      # A18 detail sheet = the page's 09-tab copy
     # one <main> per page: the guide's column becomes a div
     h = h.replace('<main data-v3d-src="model/octave.json">', '<div class="a-main" data-v3d-src="fin/asm/octave.json">', 1)
     h = h.replace("</main>", "</div>", 1)

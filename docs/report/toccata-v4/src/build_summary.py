@@ -198,7 +198,7 @@ check("약 8 W/ch" in row17, "amp 8 W/ch at 12.8 V")
 check(not any(it["id"] in ("i096", "i057") for it in items), "plywood sheet and wood glue dropped (10/16 A안)")
 
 # ------------------------------------------------------------------ CAD solids (optional, ~4 s)
-n_cad = 1662                                       # 10/29 A12 +185 (레버틀 9, 가이드 탭 88, 레버 덮개 88), 10/30 A13 -88 (캡스턴 너트), A14 +3 (유리 턱 띠 L·R + 접은 보기), A15 +88 (캡스턴 너트 되살림), 10/31 A16 +7 (밸런스 레일; 레일 나사 14 = 옛 기판 나사 14)
+n_cad = 1648                                       # 10/29 A12 +185 (레버틀 9, 가이드 탭 88, 레버 덮개 88), 10/30 A13 -88 (캡스턴 너트), A14 +3 (유리 턱 띠 L·R + 접은 보기), A15 +88 (캡스턴 너트 되살림), 10/31 A16 +7 (밸런스 레일; 레일 나사 14 = 옛 기판 나사 14), 11/16 A18 -14 (레일 나사 → 걸쇠)
 SCREEN_UP_TOP = 189.23                             # CAD value (max z of the TS-* solids in the use pose); re-measured below
 if "--no-cad" not in sys.argv:
     sys.path.insert(0, os.path.join(CAD, "src"))
@@ -206,7 +206,7 @@ if "--no-cad" not in sys.argv:
     import build_all  # noqa: E402  (collect() only; build_all.main() would wipe stl/print)
     parts = build_all.collect()
     n_cad = len(parts)
-    check(n_cad == 1662, f"CAD parts {n_cad}")
+    check(n_cad == 1648, f"CAD parts {n_cad}")
     P = {p.id: p for p in parts}
     use = [p for p in parts if not (p.note or "").startswith("altview") and p.id != "PEDAL-DAMPER"]
     bb = [p.solid.bounding_box() for p in use]

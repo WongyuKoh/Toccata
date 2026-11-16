@@ -3,10 +3,10 @@
 <p class="a-src">따로 연 페이지: <a href="https://claude.ai/artifact/U6CnesuxwRDptj9u7QfwCY">한 옥타브 조립 가이드</a> (같은 내용, 작업대에서 휴대폰으로 보기 좋게)</p>
 <p class="a-lead" style="max-width:72ch">3D 프린팅한 한 옥타브(건반 12개)를 프레임 하나에 조립해 첫 소리를 내기까지의 순서입니다. 옥타브 모듈 7개는 모양이 같아 이 순서를 어느 옥타브에나 씁니다. 단계 그림은 CAD 조립 모델(O4 = C4~B4)을 그대로 띄운 3D 모델이라 돌려 보고 키워 볼 수 있고, 부품을 누르면 이름이 나옵니다. 숫자는 설계서·CAD 값 그대로입니다(mm, x = 모듈 왼쪽에서, y = 백건 앞끝에서 뒤로, z = 책상에서).</p>
   <div class="a-facts">
-    <span>출력 <b class="a-num">58</b>개 + 공구 <b class="a-num">4</b>개</span>
+    <span>출력 <b class="a-num">58</b>개 + 공구 <b class="a-num">4</b>개 + 구멍 시험편 <b class="a-num">2</b>개</span>
     <span>구매품 <b class="a-num">약 140</b>개 (모듈 1개)</span>
     <span>모듈 무게 <b class="a-num">약 1.37 kg</b></span>
-    <span>기준 <b>CAD 2026-11-01</b> (Bambu 기준 서포트 정리 A13 · 캡스턴 너트 A15 · 80 × 120 제어 기판 A16 · 건반 틈·캡스턴·너트 홈 A17)</span>
+    <span>기준 <b>CAD 2026-11-16</b> (Bambu 기준 서포트 정리 A13 · 캡스턴 너트 A15 · 80 × 120 제어 기판 A16 · 건반 틈·캡스턴·너트 홈 A17 · 드릴 없는 봉 구멍·끼우는 레버 덮개·나사 없는 레버틀·레일·기판 밑 공간 A18)</span>
   </div>
   <div class="a-progress"><span id="asm-progTxt">0 / 17 단계 끝냄</span><div class="a-bar"><i id="asm-progBar"></i></div><button id="asm-reset" class="a-chk" style="border:0;background:none;padding:0;text-decoration:underline">체크 지우기</button></div>
 
@@ -19,7 +19,7 @@
     <li class="a-grp">준비 · 부분 조립</li>
     <li><a href="#asm-s1" data-s="asm-s1"><span class="a-n">01</span><span>출력물 확인·후가공</span></a></li>
     <li><a href="#asm-s2" data-s="asm-s2"><span class="a-n">02</span><span>봉·강철·스프링·펠트 자르기</span></a></li>
-    <li><a href="#asm-s3" data-s="asm-s3"><span class="a-n">03</span><span>레버에 강철 붙이기 (24 h)</span></a></li>
+    <li><a href="#asm-s3" data-s="asm-s3"><span class="a-n">03</span><span>레버에 강철 끼우기 (덮개 딸깍)</span></a></li>
     <li><a href="#asm-s4" data-s="asm-s4"><span class="a-n">04</span><span>출력 공구 준비·교정</span></a></li>
     <li><a href="#asm-s5" data-s="asm-s5"><span class="a-n">05</span><span>건반 부품 붙이기</span></a></li>
     <li><a href="#asm-s6" data-s="asm-s6"><span class="a-n">06</span><span>벤치 지그: 높이·캡스턴</span></a></li>
@@ -49,17 +49,18 @@
   <h2>큰 순서와 이유</h2>
   <p class="a-lead">주황 칸 네 곳은 순서를 바꾸면 하루를 기다리거나 다시 분해해야 하는 곳입니다.</p>
   <div class="a-flow">
-    <div class="a-hot"><b>레버 접착부터 시작</b>MS 폴리머가 24시간 굳는 동안 공구·건반·프레임을 준비합니다.</div>
+    <div class="a-hot"><b>구멍 시험편부터 (A18)</b>15분짜리 시험편으로 Ø4 봉이 드릴 없이 레버 허브(Ø4.3)·레버틀 핀 구멍(Ø4.5)에 들어가는지 보고 나서 모듈을 뽑습니다.</div>
+    <div><b>강철 본드는 마지막에 (A18)</b>강철은 덮개를 딸깍 끼워 제자리에 잡아 두고, 시험이 끝난 뒤 MS 폴리머로 붙입니다(24시간).</div>
     <div><b>건반 높이는 프레임 밖에서</b>벤치 지그와 가짜 레버로 12개를 먼저 맞춥니다.</div>
-    <div class="a-hot"><b>제어 기판이 밸런스 레일·레버틀보다 먼저</b>80 × 120 기판을 자르지 않고 바닥틀 자리에 눕히고, 따로 출력한 밸런스 레일을 그 위에 얹어 조입니다(A16). 기판을 손볼 때는 건반 → 건반 봉 → 레버틀(나사 4개) → 레일(나사 2개) 순서로 들어 냅니다.</div>
-    <div class="a-hot"><b>레버가 건반보다 먼저</b>레버틀(윗판)을 바닥틀에 조인 뒤에는, 건반이 있으면 흑 레버가 지나갈 틈이 13.3 mm뿐입니다(레버 단면 20 이상).</div>
+    <div class="a-hot"><b>제어 기판이 밸런스 레일·레버틀보다 먼저</b>80 × 120 기판을 자르지 않고 바닥틀 자리에 눕히고, 따로 출력한 밸런스 레일을 그 위에 얹어 조입니다(A16). 기판을 손볼 때는 건반 → 레버 봉·레버 → 레버틀(걸쇠 다리 4개) → 레일(당겨 올림) 순서로 들어 냅니다. 나사는 쓰지 않습니다(A18).</div>
+    <div class="a-hot"><b>레버가 건반보다 먼저</b>레버틀(윗판)을 바닥틀에 끼운 뒤에는, 건반이 있으면 흑 레버가 지나갈 틈이 13.3 mm뿐입니다(레버 단면 20 이상).</div>
     <div><b>흑건 먼저, 백건 나중</b>뺄 때는 반대로 양옆 백건을 먼저 뺍니다.</div>
     <div class="a-hot"><b>시험 21은 EVA 전에</b>첫 모듈 정하중 시험은 바닥 EVA 없이 받침 빗 위에서 합니다.</div>
   </div>
-  <div class="a-note"><b>프레임은 네 가지 출력물입니다 (2026-10-29 서포트 없는 구조, 10-31 A16).</b> 바닥틀(바닥·앞 레일·기판 받침, 바로 세워 출력) + 밸런스 레일(바로 세워 출력, 제어 기판 위에 얹음) + 레버틀(윗판·핀·뒷벽·뒤 선반, 뒷벽을 베드에 눕혀 출력) + 가이드 탭 12개(옆으로 눕혀 출력, 바닥틀에 꽂음). 어느 것도 서포트를 떼지 않습니다. 레버도 캐리어 + 덮개 두 조각이고 03단계에서 강철과 함께 붙입니다. 레버틀은 바닥 밑 나사 4개로만 달면 나중에 레버째 들어낼 수 있습니다. <b>A13(10/30)</b>: 출력 자세에서 천장이 없는 모양이라 서포트가 생기지 않습니다 — 건반만 숨은 꼬리 밑에 Bambu 트리 서포트(빌드 플레이트에서만)를 켭니다.</div>
+  <div class="a-note"><b>프레임은 네 가지 출력물입니다 (2026-10-29 서포트 없는 구조, 10-31 A16, 11-16 A18).</b> 바닥틀(바닥·앞 레일·기판 받침, 바로 세워 출력) + 밸런스 레일(바로 세워 출력, 제어 기판 위에 얹음) + 레버틀(윗판·핀·뒷벽·뒤 선반, 뒷벽을 베드에 눕혀 출력) + 가이드 탭 12개(옆으로 눕혀 출력, 바닥틀에 꽂음). 어느 것도 서포트를 떼지 않습니다. 레버도 캐리어 + 덮개 두 조각이고, 03단계에서 강철을 넣고 덮개를 딸깍 끼웁니다(본드는 마지막에). 레버틀은 걸쇠 다리 4개, 밸런스 레일은 받침 턱 걸쇠로 바닥틀에 걸려 나사 없이 떼었다 붙일 수 있습니다(A18). <b>A13(10/30)</b>: 출력 자세에서 천장이 없는 모양이라 서포트가 생기지 않습니다 — 건반만 숨은 꼬리 밑에 Bambu 트리 서포트(빌드 플레이트에서만)를 켭니다.</div>
   <div class="a-note"><b>기판이 아직 납땜 전이면</b> 01~07단계를 모두 끝내 두고 08단계에서 기다리면 됩니다. 07단계까지는 기판이 없어도 됩니다.</div>
   <div class="a-warn"><b>하지 말 것.</b> 밸런스 핀을 망치로 치기(게이지 멈춤 면이 파여 모든 핀이 낮아짐) · 강철을 5분 에폭시로 붙이기(온도 변화에 떨어짐) · 손으로 건반을 누른 채 높이 재기(0.3~5 N 차이로 앞 높이가 0.5 mm 달라짐).</div>
-  <figure><div class="a-v3d" data-v3d="s10_done"><img src="fin/asm/s10_done.webp" alt="밑에서 본 완성 모듈과 바닥 EVA" loading="lazy"></div><figcaption>완성한 옥타브 모듈을 밑에서 본 모습. 바닥 EVA 3T는 한 장 그대로 붙입니다(기판 자리 구멍 없음).</figcaption></figure>
+  <figure><div class="a-v3d" data-v3d="s10_done"><img src="fin/asm/s10_done.webp" alt="밑에서 본 완성 모듈과 바닥 EVA" loading="lazy"></div><figcaption>완성한 옥타브 모듈을 밑에서 본 모습. 바닥 EVA 3T는 한 장 그대로 붙입니다(구멍 없음 — 기판 밑 바닥판 창도 EVA가 덮음).</figcaption></figure>
 </article>
 
 <article id="asm-parts">
@@ -71,16 +72,17 @@
     <tr><td>백건 C·D·E·F·G·A·B</td><td class="a-q">7</td><td>흰색</td><td>05, 06, 12</td></tr>
     <tr><td>흑건 C#·D# (같은 파일 2개), F#, G#, A#</td><td class="a-q">5</td><td>검정</td><td>05, 06, 12</td></tr>
     <tr><td>레버 캐리어 C ~ B (옆벽에 음 이름 새김)</td><td class="a-q">12</td><td>회색</td><td>03, 10</td></tr>
-    <tr><td>레버 덮개 (캐리어 +x 옆벽 + 립, 모두 같은 모양)</td><td class="a-q">12</td><td>회색</td><td>03</td></tr>
-    <tr><td>프레임 바닥틀 (모듈: 바닥·앞 레일·기판 받침)</td><td class="a-q">1</td><td>회색</td><td>07~</td></tr>
-    <tr><td>프레임 레버틀 (모듈: 윗판·핀 5장·뒷벽·뒤 선반)</td><td class="a-q">1</td><td>회색</td><td>07~</td></tr>
+    <tr><td>레버 덮개 (캐리어 +x 옆벽 + 걸쇠 날개 3개, 모두 같은 모양)</td><td class="a-q">12</td><td>회색</td><td>03</td></tr>
+    <tr><td>프레임 바닥틀 (모듈: 바닥·앞 레일·기판 가장자리 턱·레일 걸쇠 턱)</td><td class="a-q">1</td><td>회색</td><td>07~</td></tr>
+    <tr><td>프레임 레버틀 (모듈: 윗판·핀 5장·뒷벽·뒤 선반·걸쇠 다리 4)</td><td class="a-q">1</td><td>회색</td><td>07~</td></tr>
     <tr><td>프레임 가이드 탭 백건 / 흑건 (키퍼 훅 포함)</td><td class="a-q">7 + 5</td><td>회색</td><td>07</td></tr>
     <tr><td>센서 바</td><td class="a-q">1</td><td>회색</td><td>09</td></tr>
     <tr><td>패드 바 칸1 ~ 칸4 (PORON 5T용)</td><td class="a-q">4</td><td>검정</td><td>13</td></tr>
     <tr><td>가림판 띠</td><td class="a-q">1</td><td>검정</td><td>15</td></tr>
-    <tr><td>레버 봉 끝 마개 (Ø4 × 1.2)</td><td class="a-q">1</td><td>회색</td><td>11</td></tr>
+    <tr><td>레버 봉 끝 마개 (Ø4.5 × 1.2)</td><td class="a-q">1</td><td>회색</td><td>11</td></tr>
     <tr><td>공구 T1a 벤치 지그 받침, T1b 높이 블록, T2 캡스턴 게이지(가짜 레버), T3 밸런스 핀 높이 게이지</td><td class="a-q">4</td><td>회색·검정</td><td>04, 06, 07</td></tr>
     <tr><td>밸런스 레일 (A16, 바닥틀에서 떼어 따로 출력)</td><td class="a-q">1</td><td>회색</td><td>07 핀 · 08</td></tr>
+    <tr><td>구멍 시험편 세로·가로 (A18, 00_먼저_구멍시험편 — 모듈보다 먼저)</td><td class="a-q">2</td><td>아무 색</td><td>01</td></tr>
   </table></div>
   <h3>구매품·소모품</h3>
   <div class="a-parts">
@@ -91,8 +93,7 @@
     <div class="a-part"><img src="img/bom/i123.jpg" alt="" loading="lazy"><span class="a-nm">미스미 토션스프링 C-UA90R5-3-0.5</span><span class="a-qty">12개</span><span class="a-id">i123</span></div>
     <div class="a-part"><img src="img/bom/i119.jpg" alt="" loading="lazy"><span class="a-nm">강철 띠 9T×19 → 블록 40</span><span class="a-qty">13개 (T2용 1)</span><span class="a-id">i119</span></div>
     <div class="a-part"><img src="img/bom/i066.jpg" alt="" loading="lazy"><span class="a-nm">SUS304 환봉 Ø4</span><span class="a-qty">161.4 × 2 + 토막 3</span><span class="a-id">i066 · i067</span></div>
-    <div class="a-part"><img src="img/bom/i059.jpg" alt="" loading="lazy"><span class="a-nm">M3×6 볼트 (밸런스 레일)</span><span class="a-qty">2개</span><span class="a-id">i059</span></div>
-    <div class="a-part"><img src="img/bom/i058.jpg" alt="" loading="lazy"><span class="a-nm">M3×10 볼트 (센서 바 2 + 레버틀 4)</span><span class="a-qty">2개 + 4개</span><span class="a-id">i058</span></div>
+    <div class="a-part"><img src="img/bom/i058.jpg" alt="" loading="lazy"><span class="a-nm">M3×10 볼트 (센서 바)</span><span class="a-qty">2개</span><span class="a-id">i058</span></div>
     <div class="a-part"><img src="img/bom/i124.jpg" alt="" loading="lazy"><span class="a-nm">PORON 5T 점착</span><span class="a-qty">6×12.2 × 12</span><span class="a-id">i124</span></div>
     <div class="a-part"><img src="img/bom/i107.jpg" alt="" loading="lazy"><span class="a-nm">울 펠트 1T</span><span class="a-qty">패드 겉면 · 쉼 펠트 바탕</span><span class="a-id">i107</span></div>
     <div class="a-part"><img src="img/bom/i106.jpg" alt="" loading="lazy"><span class="a-nm">울 펠트 2T</span><span class="a-qty">캡스턴 띠 · 앞 · 키퍼</span><span class="a-id">i106</span></div>
@@ -111,22 +112,23 @@
   </div>
   <h3>공구</h3>
   <div class="a-parts">
-    <div class="a-part"><img src="img/bom/i126.jpg" alt="" loading="lazy"><span class="a-nm">HSS 드릴 날 Ø4.0</span><span class="a-qty">허브·핀 보스·공구 구멍</span><span class="a-id">i126</span></div>
+    <div class="a-part"><img src="img/bom/i126.jpg" alt="" loading="lazy"><span class="a-nm">HSS 드릴 날 Ø4.0</span><span class="a-qty">출력 공구 T1a·T2 구멍만</span><span class="a-id">i126</span></div>
     <div class="a-part"><img src="img/bom/i127.jpg" alt="" loading="lazy"><span class="a-nm">피아노선 니퍼</span><span class="a-qty">스프링 다리 24곳</span><span class="a-id">i127</span></div>
     <div class="a-part"><img src="img/bom/i065.jpg" alt="" loading="lazy"><span class="a-nm">육각 렌치 2.0</span><span class="a-qty">캡스턴 · M3 버튼헤드</span><span class="a-id">i065</span></div>
   </div>
-  <p class="a-lead">그 밖에 가진 것으로: 전동 드릴, 캘리퍼스, 사포 #120과 소독용 알코올, 줄, 커터칼, 이쑤시개 Ø2, 복사지(0.1 mm 펀칭), 영수증 종이(0.05 띠), 인두(기판).</p>
+  <p class="a-lead">A18부터 레버 허브·레버틀 핀 구멍은 드릴 없이 봉이 들어가고, 레버틀·레일 나사(M3×10 4 · M3×6 2)는 쓰지 않습니다. 그 밖에 가진 것으로: 전동 드릴, 캘리퍼스, 사포 #120과 소독용 알코올, 줄, 커터칼, 이쑤시개 Ø2, 복사지(0.1 mm 펀칭), 영수증 종이(0.05 띠), 인두(기판).</p>
 </article>
 
 <article id="asm-s1" data-step>
   <div class="a-sh"><span class="a-badge">01</span><h2>출력물 확인·후가공</h2><label class="a-chk"><input type="checkbox" id="asm-c-s1">끝냄</label></div>
-  <div class="a-need"><span>니퍼·커터칼</span><span>전동 드릴 + <b>Ø4.0</b></span><span>사포</span></div>
+  <div class="a-need"><span>니퍼·커터칼</span><span>구멍 시험편 <b>2</b></span><span>Ø4 봉</span><span>사포</span></div>
   <ol class="a-do">
     <li>개수를 위 표와 맞춥니다. 레버 캐리어는 옆벽의 음 이름(C ~ B)으로, 패드 바는 윗면의 칸 이름(칸1 ~ 칸4)으로 구분합니다.</li>
     <li><b>서포트</b>: 건반만 Bambu Studio 서포트를 켜고 뽑았습니다(트리 자동 · 빌드 플레이트에서만) — 숨은 빔·꼬리 밑(바닥에서 백 15 · 흑 27 mm, 위에 레버가 0.7 위라 채울 수 없음)에만 트리가 생기니 꼬리째 잡아 한 덩어리로 떼어 냅니다. 프레임·레버·패드 바·덮개는 천장이 없는 모양이라 서포트가 없습니다 (A13).</li>
     <li>건반 꼬리 밑(트리 서포트가 닿은 면)과 노치(R2.55) 안쪽에 실이 남지 않게 다듬습니다. A12의 떼는 빗·기둥은 없어졌습니다.</li>
     <li><b>패드 바</b>: 잎 혀(0.6 × 1.6 × 8)는 일부러 0.3 아래로 처지게 출력했으니 펴지 않습니다. 윗면은 한 평면입니다.</li>
-    <li><b>Ø4.0 드릴</b>: 레버 캐리어 허브 12곳, 레버틀 핀 보스의 레버 봉 구멍(눈물방울 Ø3.9). 낮은 속도로 곧게 뚫어 PETG가 녹아 붙지 않게 합니다.</li>
+    <li><b>봉 구멍 — 드릴 없음 (A18)</b>: 레버 허브는 Ø4.3, 레버틀 핀 보스는 Ø4.5 눈물방울로 출력해 Ø4 봉이 그대로 들어갑니다. 모듈을 뽑기 전에 묶음의 <code>00_먼저_구멍시험편</code> 두 개(세로 구멍 = 허브 방향, 가로 구멍 = 레버틀 방향, 약 15분)로 봉이 손으로 들어가는 가장 작은 구멍을 봅니다. 숫자 43 = Ø4.3. 허브 구멍은 봉에서 자유롭게 돌아야 하고, 레버틀 구멍은 봉이 밀려 지나가면 됩니다. 4.3 / 4.5보다 큰 구멍에서야 들어가면 그 값으로 CAD(keyaction.py FEAT 두 값)를 바꿔 다시 뽑습니다.</li>
+    <li><b>레버 덮개 걸쇠</b>: 덮개 날개 끝 갈고리(0.8 × 0.4)와, 캐리어 −x 벽의 낮춘 위·아래 가장자리에 실·거스러미가 없게 다듬습니다. 레버틀 걸쇠 다리 4개 끝 갈고리와 바닥틀의 다리 홈, 레일 양 끝 홈·받침 턱 걸쇠도 같이 봅니다.</li>
     <li>밸런스 핀 구멍(Ø1.95, 막힌 구멍)은 핀이 전혀 안 들어갈 때만 Ø1.9~2.0으로 다듬습니다. 가볍게 끼는 압입이 정상입니다.</li>
     <li>M3 너트를 건반 꼬리 +x 옆 홈(맞변 5.6 × 2.8)에 하나 넣어 보아 안쪽 어깨까지 들어가는지 확인합니다. 홈은 빔을 관통해 반대쪽(−x)에 폭 3 빼기 통로가 있으니, 홈에 출력 찌꺼기나 서포트가 남았으면 2 mm 육각 렌치를 통로로 넣어 밀어냅니다. 홈 천장은 구멍 없는 0.4 막입니다(A15: 서포트 없이 출력, 캡스턴 끝이 처음 들어갈 때 뚫음).</li>
   </ol>
@@ -153,35 +155,33 @@
   </table></div>
   <ol class="a-do">
     <li>봉 두 개는 끝의 버를 줄로 둥글게 다듬습니다. 허브와 칼라를 긁지 않게 하기 위해서입니다.</li>
-    <li>강철 블록은 캘리퍼스로 두께를 재어 8.9~9.1만 씁니다. 캐리어 칸이 9.2라 접착층이 한쪽 0.10이 됩니다. 모따기는 하지 않고 버만 뗍니다.</li>
+    <li>강철 블록은 캘리퍼스로 두께를 재어 8.9~9.1만 씁니다. 캐리어 칸이 9.2이고 덮개 안쪽 크러시 리브(0.17)가 강철을 −x 벽 쪽으로 누릅니다. 길이 39.7~39.9는 칸 뒷벽 리브(0.4)가 눌러 잡습니다. 모따기는 하지 않고 버만 뗍니다.</li>
     <li>스프링 다리는 피아노선 니퍼로 자릅니다(일반 니퍼는 날이 상함). 긴 다리는 코일 중심에서 끝까지 22.3, 짧은 다리는 코일을 떠나는 점에서 8.0. 굽히지 말고, 자른 끝 거스러미는 줄로 뗍니다.</li>
   </ol>
 </article>
 
 <article id="asm-s3" data-step>
-  <div class="a-sh"><span class="a-badge">03</span><h2>레버에 강철 붙이기 <span class="a-lead" style="font-weight:500">· 24시간 굳힘</span></h2><label class="a-chk"><input type="checkbox" id="asm-c-s3">끝냄</label></div>
-  <div class="a-need"><span>캐리어 <b>12</b></span><span>레버 덮개 <b>12</b></span><span>강철 블록 <b>12</b></span><span>MS 폴리머</span><span>사포 #120 · 알코올</span><span>고무줄</span></div>
+  <div class="a-sh"><span class="a-badge">03</span><h2>레버에 강철 끼우기 <span class="a-lead" style="font-weight:500">· 덮개 딸깍, 본드는 마지막에</span></h2><label class="a-chk"><input type="checkbox" id="asm-c-s3">끝냄</label></div>
+  <div class="a-need"><span>캐리어 <b>12</b></span><span>레버 덮개 <b>12</b></span><span>강철 블록 <b>12</b></span><span>캡스턴 펠트 띠 <b>12</b></span><span>(마지막에) MS 폴리머 · 사포 #120 · 알코올</span></div>
   <div class="a-split">
     <ol class="a-do">
-      <li>강철의 두 19 × 40 옆면, 캐리어 옆벽 안쪽, 레버 덮개 안쪽을 #120 사포로 거칠게 하고 알코올로 닦습니다.</li>
-      <li>강철 두 옆면에 MS 폴리머를 얇게 폅니다. 블록 하나에 약 0.2 mL입니다. 덮개가 닿는 캐리어 앞벽·뒷벽 옆면에도 조금 바릅니다.</li>
-      <li>캐리어를 −x 옆벽(음 이름 반대쪽)이 아래로 가게 눕히고, 열린 +x 쪽에서 강철을 칸에 내려 넣습니다. 아래 립·위 립에 걸쳐 앉습니다.</li>
-      <li>레버 덮개를 립이 안쪽으로 가게 덮습니다: 위 앞 립 앞끝이 캐리어 앞 뚜껑(y153)에, 위 뒤 립 뒤끝이 칸 뒷벽(y190)에 닿는 자리입니다. 고무줄로 둘러 눌러 둡니다.</li>
-      <li>윗 립·아래 립·펠트 자리로 밀려 나온 접착제는 바로 닦습니다. 강철 윗면은 패드가 닿는 면이라 깨끗해야 합니다.</li>
-      <li>24시간 그대로 둡니다. 그동안 04~07단계를 합니다.</li>
-      <li>굳은 뒤 캡스턴 펠트 띠 2T를 캐리어 밑(y176.5~192.0)에 붙입니다(설계서 표기: 흑연 처리).</li>
+      <li>캐리어를 −x 옆벽(음 이름 반대쪽)이 아래로 가게 눕히고, 열린 +x 쪽에서 강철을 칸에 눌러 넣습니다. 칸 뒷벽의 크러시 리브 2줄(0.4)이 강철을 앞벽 쪽으로 밀어 잡으니 엄지로 끝까지 누릅니다. 빡빡하면 앞쪽을 먼저 넣고 뒤를 누릅니다(리브 위끝이 45°).</li>
+      <li>레버 덮개를 날개가 강철 쪽으로 가게 대고 누릅니다: 위 날개 2곳(앞 y153~163 · 뒤 y184~190)과 아래 날개(y165~176.4)가 강철 위·아래 면을 건너가고, 날개 끝 갈고리가 캐리어 −x 벽의 위(z52)·아래(z33) 가장자리를 넘어가며 <b>딸깍</b> 걸립니다. 덮개 앞끝은 캐리어 앞 뚜껑(y153) 뒤, 뒤끝은 웹(y190.3) 앞에 들어갑니다.</li>
+      <li>덮개가 들뜨지 않고 강철이 흔들리지 않으면 됩니다. 덮개 안쪽 크러시 리브 2줄(0.17)이 강철을 −x 벽에 붙여 자리를 잡습니다. 뺄 때는 위 날개 끝(−x 쪽 갈고리)을 손톱이나 일자 드라이버로 들어 올립니다.</li>
+      <li>캡스턴 펠트 띠 2T를 캐리어 밑(y176.5~192.0)에 붙입니다(설계서 표기: 흑연 처리). 그대로 04단계로 넘어갑니다 — 굳힐 시간이 없습니다.</li>
+      <li><b>본드는 마지막에</b>: 16단계 시험까지 끝내 소리·움직임이 괜찮으면 레버를 빼(레버 봉을 빼면 레버가 나옴) 덮개를 엽니다. 강철 두 19 × 40 옆면과 캐리어 −x 벽 안쪽·덮개 안쪽을 #120 사포 + 알코올로 닦고, 강철 두 옆면에 MS 폴리머를 얇게(블록 하나에 약 0.2 mL) 펴서 강철을 다시 넣고 덮개를 끼웁니다. 덮개가 자리를 잡아 주므로 고무줄은 필요 없습니다. 밀려 나온 접착제는 바로 닦고(강철 윗면은 패드가 닿는 면), 24시간 둔 뒤 다시 넣습니다.</li>
     </ol>
-    <figure><div class="a-v3d" data-v3d="l_lever"><img src="fin/asm/l_lever.webp" alt="" loading="lazy"></div><figcaption>강철은 열린 +x 쪽에서 넣고 덮개(진한 초록)를 덮어 함께 붙입니다. 펠트 띠는 그 밑에 붙입니다. 스프링은 10단계에서 넣습니다.</figcaption></figure>
+    <figure><div class="a-v3d" data-v3d="l_lever"><img src="fin/asm/l_lever.webp" alt="" loading="lazy"></div><figcaption>강철은 열린 +x 쪽에서 눌러 넣고(칸 뒷벽 크러시 리브), 덮개(가운데 판, 위·아래 끝이 날개)를 딸깍 끼웁니다 — 날개 끝 갈고리가 −x 벽 가장자리에 걸립니다(A18). 펠트 띠는 그 밑에 붙입니다. 스프링은 10단계에서 넣습니다.</figcaption></figure>
   </div>
   <div class="a-warn"><b>5분 에폭시는 쓰지 않습니다.</b> 단단한 접착제는 강철과 PETG의 열팽창 차이(ΔT 15 K)로 떨어집니다. MS 폴리머의 탄성이 그 차이를 받습니다.</div>
-  <div class="a-dwgs"><button data-d="dwg/d07_lever_carrier_steel.svg">07 레버 부품도</button></div>
+  <div class="a-dwgs"><button data-d="img/a18/A18_detail.webp">A18 덮개 걸쇠·리브 단면</button><button data-d="dwg/d07_lever_carrier_steel.svg">07 레버 부품도 (r4.5)</button></div>
 </article>
 
 <article id="asm-s4" data-step>
   <div class="a-sh"><span class="a-badge">04</span><h2>출력 공구 준비·교정</h2><label class="a-chk"><input type="checkbox" id="asm-c-s4">끝냄</label></div>
   <p class="a-lead">한 번만 합니다. 이 공구들이 프레임 한 대의 자리를 재현하므로, 공구와 프레임은 같은 프린터·같은 층 설정으로 뽑은 것을 씁니다.</p>
   <ol class="a-do">
-    <li>Ø4.0 드릴로 T1a의 K·L 구멍과 T2 허브를 뚫습니다.</li>
+    <li>Ø4.0 드릴로 T1a의 K·L 구멍과 T2 허브를 뚫습니다. 출력 공구 구멍은 A18에서 바꾸지 않았습니다 — 봉 토막이 꽉 물려야 해서 Ø3.9로 뽑고 드릴로 맞춥니다.</li>
     <li>봉 토막을 끼웁니다: K 31.6(건반 봉 자리), L 20.6(레버 봉 자리). 교정봉 31.6은 따로 둡니다.</li>
     <li>13번째 강철 블록을 T2(가짜 레버) 주머니에 눌러 끼웁니다(스냅 립).</li>
     <li>예비 밸런스 핀 1개를 T3로 T1a 핀 구멍에 눌러 넣습니다. 이것이 T3의 첫 검증입니다.</li>
@@ -244,25 +244,26 @@
     </ol>
     <figure><div class="a-v3d" data-v3d="s1_frame"><img src="fin/asm/s1_frame.webp" alt="바닥틀에 앞 펠트, 키퍼 펠트를 붙이고 밸런스 레일에 핀을 넣은 모습" loading="lazy"></div><figcaption>프레임 준비가 끝난 모습: 밸런스 레일(핀 12), 앞 펠트(빨강), 키퍼 펠트. 레일은 08단계에서 제어 기판 위에 얹습니다.</figcaption></figure>
   </div>
-  <figure><div class="a-v3d" data-v3d="s0_split"><img src="fin/asm/s0_split.webp" alt="바닥틀, 가이드 탭, 레버틀을 벌려 본 모습" loading="lazy"></div><figcaption>프레임 네 가지: 바닥틀(아래), 가이드 탭 12, 밸런스 레일(A16, 따로 출력), 레버틀(위). 레일은 나사 2개, 레버틀은 바닥 밑 나사 4개로 바닥틀에 조입니다.</figcaption></figure>
+  <figure><div class="a-v3d" data-v3d="s0_split"><img src="fin/asm/s0_split.webp" alt="바닥틀, 가이드 탭, 레버틀을 벌려 본 모습" loading="lazy"></div><figcaption>프레임 네 가지: 바닥틀(아래), 가이드 탭 12, 밸런스 레일(A16, 따로 출력), 레버틀(위). 레일은 받침 턱 걸쇠에 눌러 끼우고, 레버틀은 걸쇠 다리 4개가 바닥판에 걸립니다 — 나사 없음 (A18).</figcaption></figure>
   <div class="a-warn"><b>망치 금지.</b> T3 멈춤 면이 파이면 그 뒤로 누르는 모든 핀이 낮아집니다.</div>
   <div class="a-dwgs"><button data-d="dwg/d08_frame.svg">08 프레임</button><button data-d="dwg/d04_module_cross_sections.svg">04 모듈 가로 단면</button></div>
 </article>
 
 <article id="asm-s8" data-step>
   <div class="a-sh"><span class="a-badge">08</span><h2>제어 기판 MB 놓기 → 밸런스 레일 → 레버틀 <span class="a-lead" style="font-weight:500">· 위에서</span></h2><label class="a-chk"><input type="checkbox" id="asm-c-s8">끝냄</label></div>
-  <div class="a-need"><span>MB (80 × 120 통째로 · RP2040-Zero · 먹스 · 리본 J301 · EXT 선 납땜)</span><span>밸런스 레일 (07단계)</span><span>M3×6 <b>2</b></span><span>육각 렌치 2.0</span><span>건반 봉</span><span>레버틀</span><span>M3×10 <b>4</b></span></div>
+  <div class="a-need"><span>MB (80 × 120 통째로 · RP2040-Zero · 먹스 · 리본 J301 · EXT 선 납땜)</span><span>밸런스 레일 (07단계)</span><span>건반 봉</span><span>레버틀</span><span>나사 없음 (A18)</span></div>
   <p class="a-lead">MB는 80 × 120 만능기판을 자르지 않고 통째로 씁니다(A16 — 가진 BE163 4장 + 새로 사는 8 × 12 3장). 납땜은 회로 도면 BRD-01(위)과 BRD-08(아랫면 배선)을 따르고, 기판 밑으로 나온 다리 끝은 1.0 mm 이하로 자릅니다.</p>
   <div class="a-split">
     <ol class="a-do">
-      <li>바닥틀의 기판 자리(x22.25~142.25 · y93.3~173.3)에 받침 리브(높이 2.0 — 판 밑 배선이 지나가는 높이)와 둘레 턱이 있습니다. 기판을 부품 쪽이 위로, RP2040-Zero의 USB-C가 뒤(레버틀 쪽)로 가게 들고 턱 안에 내려놓습니다(둘레 틈 0.3). 리본은 앞 리브 틈(x59.5~81.5)으로 기판 밑을 지나 앞으로 나옵니다.</li>
-      <li><b>밸런스 레일</b>을 양 끝벽 사이(틈 0.15)·받침 턱 사이로 곧게 내려 기판의 빈 띠(y132.3~144.5, 부품이 없는 줄) 위에 얹습니다. 양 끝의 깊은 구멍(Ø6.2)으로 <b>M3×6 2개</b>를 받침에 조입니다 — 받침의 Ø2.5 구멍에 나사산을 냅니다. 레일 밑면이 기판을 눌러 기판도 같이 잡힙니다.</li>
+      <li>바닥틀의 기판 자리(x22.25~142.25 · y93.3~173.3)는 <b>가장자리 턱(폭 2.5, 윗면 z7.0)만</b> 기판을 받치고, 그 안쪽 바닥판은 뚫려 있습니다(A18): 기판 밑 배선은 EVA 위까지 4.0 mm(옛 2.0)를 쓰고, 가운데를 막는 받침이 없습니다. 기판을 부품 쪽이 위로, RP2040-Zero의 USB-C가 뒤(레버틀 쪽)로 가게 들고 둘레 턱 안 가장자리 턱 위에 내려놓습니다(둘레 틈 0.3). 리본은 앞 턱이 끊긴 곳(x59.5~81.5)으로 기판 밑을 지나 앞으로 나옵니다.</li>
+      <li><b>밸런스 레일</b>을 양 끝벽 사이(틈 0.15)·받침 걸쇠 턱 사이로 곧게 내려 기판의 빈 띠(y132.3~144.5, 부품이 없는 줄) 위에 대고 <b>위에서 누르면 딸깍</b> — 받침 앞뒤 턱의 걸쇠(0.4)가 레일 양 끝 앞뒤 면의 홈에 걸립니다(A18, 나사 없음). 레일 밑면이 기판을 눌러 기판도 같이 잡힙니다. 뺄 때는 곧게 당겨 올립니다(걸쇠 양면 45°).</li>
       <li><b>건반 봉</b>을 봉 받침 위, 멈춤 기둥 사이에 놓습니다.</li>
-      <li><b>레버틀</b>을 바닥틀 위에 내려 놓습니다: 2·4번 핀의 발(기판 뒤 y174.9부터)과 양 끝 핀의 발이 바닥의 홈 둑 사이로 들어가고, 2·4번 핀 앞부분은 기판 위 0.9, F|F# 핀은 제로·USB 플러그 위로 지나며, 가운데 핀의 킬이 밸런스 레일 뒷면에 닿습니다. 모듈을 옆으로 세워 바닥 밑에서 <b>M3×10 4개</b>(핀 2·4번 x41.66·123.93 y186, 뒤 선반 밑 x29·143 y203)를 조입니다. 나중에 레버째 떼어 볼 일이 없다면 발·둑·뒷벽 밑에 MS 폴리머를 함께 발라도 됩니다.</li>
+      <li><b>레버틀</b>을 바닥틀 위에 곧게 내려 누릅니다: 2·4번 핀의 발(y185부터)과 양 끝 핀의 발이 바닥의 홈 둑 사이로 들어가고, <b>걸쇠 다리 4개</b>(뒷벽 x29·x143, 핀 2·4번 y178.5~182.4)가 바닥판의 홈을 지나 끝 갈고리가 바닥판 밑 0.8 홈에 <b>딸깍</b> 걸립니다(A18, 나사 없음, EVA는 그대로). 2·4번 핀 앞부분은 기판 위 z14, F|F# 핀은 제로·USB 플러그 위로 지나며, 가운데 핀의 킬이 밸런스 레일 뒷면에 닿습니다.</li>
+      <li><b>레버틀 빼기</b>(기판을 손볼 때): 건반과 레버를 먼저 빼고, 뒷벽 다리 2개는 모듈 뒤(y212)에서 바닥 홈으로 일자 드라이버를 넣어 다리를 −x 쪽으로 밀고, 핀 다리 2개는 위에서 −x 쪽으로 밀며 레버틀을 들어 올립니다.</li>
     </ol>
-    <figure><div class="a-v3d" data-v3d="s2_board"><img src="fin/asm/s2_board.webp" alt="바닥틀 자리에 놓은 80 × 120 제어 기판과 그 위의 밸런스 레일" loading="lazy"></div><figcaption>레버틀을 얹기 전: 80 × 120 제어 기판(색)이 바닥틀 자리에 놓이고, 따로 출력한 밸런스 레일이 그 위를 가로질러 M3×6 2개로 고정됩니다.</figcaption></figure>
+    <figure><div class="a-v3d" data-v3d="s2_board"><img src="fin/asm/s2_board.webp" alt="바닥틀 자리에 놓은 80 × 120 제어 기판과 그 위의 밸런스 레일" loading="lazy"></div><figcaption>레버틀을 얹기 전: 80 × 120 제어 기판(색)이 바닥틀 자리에 놓이고, 따로 출력한 밸런스 레일이 그 위를 가로질러 받침 턱 걸쇠에 눌러 끼워집니다(A18). 기판 밑 바닥판은 가장자리 턱만 남기고 뚫려 있습니다.</figcaption></figure>
   </div>
-  <div class="a-dwgs"><button data-d="sch/BRD-01_control_board_placement.svg">BRD-01 제어 기판 배치</button><button data-d="sch/BRD-08_control_board_underside.svg">BRD-08 아랫면 배선</button></div>
+  <div class="a-dwgs"><button data-d="img/a18/A18_detail.webp">A18 걸쇠·기판 밑 단면</button><button data-d="sch/BRD-01_control_board_placement.svg">BRD-01 제어 기판 배치</button><button data-d="sch/BRD-08_control_board_underside.svg">BRD-08 아랫면 배선</button></div>
 </article>
 
 <article id="asm-s9" data-step>
@@ -306,8 +307,8 @@
   <div class="a-sh"><span class="a-badge">11</span><h2>레버 봉·마개·긴 다리 걸기</h2><label class="a-chk"><input type="checkbox" id="asm-c-s11">끝냄</label></div>
   <div class="a-split">
     <ol class="a-do">
-      <li>Ø4 레버 봉(161.4)을 왼쪽 끝 핀부터 꿰어 나갑니다: 핀 보스 → 허브(칼라끼리 맞닿음) → 스프링 코일. 레버를 손으로 받쳐 허브 구멍을 맞추고, 각 레버의 이쑤시개는 봉이 오기 직전에 뽑습니다.</li>
-      <li>왼쪽 핀 보스 구멍에 출력 마개(Ø4.0 × 1.2)를 핀 면과 같게 눌러 끼웁니다. 오른쪽 끝 핀은 막힌 벽입니다.</li>
+      <li>Ø4 레버 봉(161.4)을 왼쪽 끝 핀부터 꿰어 나갑니다(A18: 핀 보스 Ø4.5 · 허브 Ø4.3이라 드릴 없이 들어감): 핀 보스 → 허브(칼라끼리 맞닿음) → 스프링 코일. 레버를 손으로 받쳐 허브 구멍을 맞추고, 각 레버의 이쑤시개는 봉이 오기 직전에 뽑습니다.</li>
+      <li>왼쪽 핀 보스 구멍에 출력 마개(Ø4.5 × 1.2)를 핀 면과 같게 눌러 끼웁니다. 오른쪽 끝 핀은 막힌 벽입니다.</li>
       <li>레버마다 들었다 놓아 제 무게로 자유롭게 도는지 봅니다. 뻑뻑하면 그 칼라 면을 사포질합니다(칸마다 축 놀음 0.30~0.46).</li>
       <li><b>긴 다리 걸기</b>: 긴 다리를 뒷벽 보스의 홈(2.4 × 3.2, 밑이 열림)에 밑에서 넣습니다. 바닥틀 위 레버(C·B)는 다리가 거의 풀린 채 홈 입구 안에 놓이고, 기판 위 레버는 거의 그대로(모자라면 살짝 감아), 제로 핀 헤더 위의 F·F#는 손가락으로 약 10° 감아 입구에 대고 놓습니다.</li>
     </ol>
@@ -378,7 +379,7 @@
 
 <article id="asm-s16" data-step>
   <div class="a-sh"><span class="a-badge">16</span><h2>첫 모듈 시험 → 바닥 EVA</h2><label class="a-chk"><input type="checkbox" id="asm-c-s16">끝냄</label></div>
-  <p class="a-lead">이 옥타브가 처음 조립한 모듈이면 나머지 6개를 뽑기 전에 아래 시험을 합니다. 절차와 결과표는 <code>최종본/05_조립·제작/03_단계0_시험_절차서.md</code>에 있습니다.</p>
+  <p class="a-lead">이 옥타브가 처음 조립한 모듈이면 나머지 6개를 뽑기 전에 아래 시험을 합니다. 절차와 결과표는 <code>최종본/05_조립·제작/03_단계0_시험_절차서.md</code>에 있습니다. 시험이 끝나면 레버 강철을 MS 폴리머로 붙입니다(03단계 5번, A18).</p>
   <div class="a-tbl"><table>
     <tr><th>시험</th><th>방법 (요약)</th><th>합격</th></tr>
     <tr><td>21 첫 모듈 정하중</td><td><b>EVA 없이</b> C17a 받침 빗(00_단계0_시험출력/C17a.stl) 위에 모듈을 얹고, D~G 여섯 패드 자리 위에 36.7 kg을 실어 E·F 옆 윗판 처짐을 다이얼로 3번</td><td>처짐 ≤ 0.13 mm</td></tr>
@@ -390,7 +391,7 @@
   <h3>바닥 EVA</h3>
   <div class="a-split">
     <ol class="a-do">
-      <li>EVA 3T를 163.5 × 211로 자르고, 레버틀 나사 머리 자리 Ø7 4곳(x41.66·123.93 y186, x29·143 y203)과 왼쪽 끝 암 도브테일 홈 밑 두 곳을 오려 냅니다. 기판 자리 구멍은 없습니다(A16: 기판은 바닥틀 위, 밸런스 레일 밑).</li>
+      <li>EVA 3T를 163.5 × 211로 자르고, 왼쪽 끝 암 도브테일 홈 밑 두 곳만 오려 냅니다. 레버틀 나사가 없어져 나사 머리 구멍도 없습니다(A18: 걸쇠 다리는 바닥판 두께 안에서 걸림). 기판 자리 구멍도 없습니다 — EVA가 기판 밑 바닥판 창을 덮습니다.</li>
       <li>종이 양면테이프 띠로 모듈 밑면에 붙입니다.</li>
     </ol>
     <figure><div class="a-v3d" data-v3d="s10_done"><img src="fin/asm/s10_done.webp" alt="" loading="lazy"></div><figcaption>EVA를 붙인 모듈 밑면.</figcaption></figure>
@@ -454,6 +455,7 @@
     <button data-d="sch/BRD-01_control_board_placement.svg">BRD-01 제어 기판</button>
     <button data-d="sch/BRD-02_sensor_board_placement.svg">BRD-02 센서 기판</button>
     <button data-d="sch/BRD-08_control_board_underside.svg">BRD-08 제어 기판 아랫면</button>
+    <button data-d="img/a18/A18_detail.webp">A18 한 옥타브 고침 (덮개·걸쇠·기판 밑·구멍)</button>
   </div>
   <p class="a-lead" style="font-size:13px">출처: hardware/mechanical/key-action-v4 (DESIGN 10~12장, tools.md), hardware/mechanical/cad (README 출력 목록·조립 순서), hardware/pcb, firmware/README.md. 그림은 CAD 조립 모델 O4에서 OpenSCAD로 그렸습니다.</p>
 </article>

@@ -1,13 +1,13 @@
 {
  "version": 1,
- "generated": "2026-11-04",
+ "generated": "2026-11-16",
  "about": "Toccata 최종 재료 목록 — 완성된 악기에 들어가는 모든 물건과 설계가 쓰는 개수 (build_items.py)",
  "sources": {
   "data": "hardware/bom/final-bom/data.json",
   "state": "hardware/bom/final-bom/state_main.json",
   "xlsx": "최종본/01_구매목록/Toccata_학교_사비_구매목록_2026-10-08.xlsx",
   "circuit": "hardware/pcb/netlist/bom.csv, cables.csv (회로 개정 E)",
-  "cad": "hardware/mechanical/cad/src build_all.collect() (1662 parts, 1159 non-print)",
+  "cad": "hardware/mechanical/cad/src build_all.collect() (1648 parts, 1145 non-print)",
   "cad_readme": "hardware/mechanical/cad/README.md"
  },
  "legend": {
@@ -3278,7 +3278,7 @@
    "unit": "장",
    "need_note": "A16 (10/31): 제어 기판 MB 7장 − 가진 BE163 4장(u06) = 3장 + 페달 보드 PED 70 × 50 조각 1장 = 4장 (CAD O1~O7-E-MB 80 × 120 + CU-E-PEDBOARD)",
    "pack_note": "4장 모두 사용",
-   "where": "제어 기판 MB 3장은 자르지 않고 통째로 모듈 바닥틀 자리(x22.25~142.25 × y93.3~173.3, 받침 리브 위)에 눕히고, 따로 출력한 밸런스 레일이 판의 빈 띠(y132.3~144.5)를 위에서 눌러 잡습니다. 나사·구멍이 없습니다. 1장은 지그 P-PED로 70 × 50을 잘라 페달 보드로 쓰고, 남는 반쪽은 예비입니다.",
+   "where": "제어 기판 MB 3장은 자르지 않고 통째로 모듈 바닥틀 자리(x22.25~142.25 × y93.3~173.3, 가장자리 턱 위 — A18: 안쪽 바닥판이 뚫려 판 밑 배선 공간 4.0)에 눕히고, 따로 출력한 밸런스 레일이 판의 빈 띠(y132.3~144.5)를 위에서 눌러 잡습니다. 나사·구멍이 없습니다. 1장은 지그 P-PED로 70 × 50을 잘라 페달 보드로 쓰고, 남는 반쪽은 예비입니다.",
    "specs": [
     [
      "크기",
@@ -3626,7 +3626,7 @@
    "unit": "장",
    "need_note": "A16 (10/31): 제어 기판 MB 7장을 80 × 120 통째로 씀 - 가진 4장 = MB 4장, 나머지 MB 3장 + 페달 보드 1장은 새로 사는 8 × 12 4장(i228) (CAD O1~O7-E-MB)",
    "pack_note": "",
-   "where": "제어 기판 MB 4장으로 자르지 않고 통째로 씁니다(A16). 모듈 바닥틀 자리(x22.25~142.25 × y93.3~173.3)의 받침 리브 위에 놓고, 따로 출력한 밸런스 레일이 판의 빈 띠(y132.3~144.5)를 위에서 눌러 잡습니다. 나사·구멍 뚫기가 없습니다.",
+   "where": "제어 기판 MB 4장으로 자르지 않고 통째로 씁니다(A16). 모듈 바닥틀 자리(x22.25~142.25 × y93.3~173.3)의 가장자리 턱 위에 놓고(A18: 받침 리브 없음, 판 밑 4.0), 따로 출력한 밸런스 레일이 판의 빈 띠(y132.3~144.5)를 위에서 눌러 잡습니다. 나사·구멍 뚫기가 없습니다.",
    "specs": [
     [
      "크기",
@@ -6436,11 +6436,11 @@
    "role": "부품",
    "optional": false,
    "ordered": null,
-   "qty_need": 26,
+   "qty_need": 12,
    "unit": "개",
-   "need_note": "모듈 밸런스 레일 7 × 2 = 14 + 앰프 4 + 강압 4 + J702 기판 2 + 페달 보드 2 = 26 (CAD RAILSCREW 14, 나머지 12는 CAD README 보드 나사 표; A16 전에는 제어 기판 나사 14)",
+   "need_note": "앰프 4 + 강압 4 + J702 기판 2 + 페달 보드 2 = 12 (CAD README 보드 나사 표; A16~A17의 밸런스 레일 나사 14는 A18에서 걸쇠로 바뀌어 없어짐)",
    "pack_note": "",
-   "where": "모듈마다 따로 출력한 밸런스 레일 양 끝의 깊은 구멍(Ø6.2)에 2개씩 넣어 바닥틀 받침에 자가 탭으로 조이고(A16), 가운데 유닛의 앰프(선반 받침)·강압 모듈·J702 기판·페달 보드를 5 mm 받침 기둥에 자가 탭으로 조입니다.",
+   "where": "가운데 유닛의 앰프(선반 받침)·강압 모듈·J702 기판·페달 보드를 5 mm 받침 기둥에 자가 탭으로 조입니다. 모듈의 밸런스 레일은 A18부터 나사 없이 받침 턱 걸쇠에 끼웁니다.",
    "specs": [
     [
      "규격",
@@ -6456,7 +6456,7 @@
     ],
     [
      "체결",
-     "모듈: 밸런스 레일 깊은 구멍 Ø6.2(바닥 z10.1) → 레일 1.5 + 바닥틀 받침 Ø2.5 막힌 구멍 4.5 물림 (A16). 가운데 유닛: 5 mm 받침 기둥 관통 구멍"
+     "가운데 유닛: 5 mm 받침 기둥 관통 구멍 (모듈 밸런스 레일은 A18부터 나사 없음)"
     ],
     [
      "위치",
@@ -6467,29 +6467,10 @@
    "img": "img/bom/i059.jpg",
    "img_note": "같은 종류 예시 사진 (받은 물건과 모양이 다를 수 있음)",
    "cad_match": {
-    "ids": [
-     "O1-RAILSCREW1",
-     "O1-RAILSCREW2",
-     "O2-RAILSCREW1",
-     "O2-RAILSCREW2",
-     "O3-RAILSCREW1",
-     "O3-RAILSCREW2",
-     "O4-RAILSCREW1",
-     "O4-RAILSCREW2",
-     "O5-RAILSCREW1",
-     "O5-RAILSCREW2",
-     "O6-RAILSCREW1",
-     "O6-RAILSCREW2",
-     "O7-RAILSCREW1",
-     "O7-RAILSCREW2"
-    ],
-    "count": 14,
-    "name_contains": [
-     "스텐 렌치볼트 M3 × 6 버튼헤드 (밸런스 레일 → 받침 자가 탭, i059)"
-    ],
-    "rules": [
-     "O\\d-RAILSCREW\\d"
-    ]
+    "ids": [],
+    "count": 0,
+    "name_contains": [],
+    "rules": []
    },
    "sch_refs": [],
    "sch_qty": null,
@@ -8312,7 +8293,7 @@
    "unit": "개",
    "need_note": "1",
    "pack_note": "",
-   "where": "출력한 Ø3.9 봉 구멍(레버 허브 88, 핀 보스 35 등 약 130곳)을 Ø4.0으로 넓힙니다.",
+   "where": "출력 공구 T1a·T2의 Ø3.9 봉 토막 구멍을 Ø4.0으로 맞춥니다. 레버 허브·레버틀 핀 보스는 A18부터 Ø4.3 · Ø4.5로 출력해 드릴이 필요 없습니다.",
    "specs": [
     [
      "규격",
