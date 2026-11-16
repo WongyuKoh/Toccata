@@ -31,6 +31,7 @@ import json
 import os
 import re
 import sys
+import time
 import zipfile
 
 import numpy as np
@@ -40,6 +41,8 @@ sys.path.insert(0, HERE)
 OUT = os.path.normpath(os.path.join(HERE, ".."))
 
 from cadlib import mesh_arrays, write_stl  # noqa: E402
+import machined  # noqa: E402
+import hole_coupon  # noqa: E402
 
 
 def safe(s):
@@ -378,7 +381,7 @@ def write_octave_zip(rows):
         "단계 0 시편(첫 모듈의 조립 시험 21에 쓰는 받침 빗은 00_단계0_시험출력/C17a.stl).",
         "",
         "파일 (한 옥타브 개수, 개당 속 꽉 채움 질량, 재료, 폴더/이름):",
-    ] + lines) + "\n"
+    ] + lines + machined.readme_lines() + hole_coupon.README) + "\n"
     zp = os.path.join(OUT, "Toccata_한옥타브_출력STL.zip")
     if os.path.exists(zp):
         os.remove(zp)
@@ -386,6 +389,7 @@ def write_octave_zip(rows):
         z.writestr(top + "/읽어보기.txt", readme)
         for full, arc in entries:
             z.write(full, arc)
+        write_machined(z, top)
     return zp
 
 
@@ -425,7 +429,7 @@ def write_p1s_zip(rows):
         "3. 자동 방향(Auto orient)은 누르지 않습니다. STL이 이미 베드에 놓을 방향이고, 건반은 윗면이 베드에 닿아야 합니다.",
         "4. PETG. P1S는 앞문이나 윗덮개를 열고 뽑습니다(노즐 위에서 필라멘트가 미리 녹아 막히는 heat creep 방지).",
         "5. 방향·서포트 자세한 설명: 최종본/05_조립·제작/01_CAD_출력·조립_안내.md '출력 목록'.",
-    ] + body) + "\n"
+    ] + body + machined.readme_lines() + hole_coupon.README) + "\n"
     zp = os.path.join(OUT, "Toccata_한옥타브_P1S4대.zip")
     if os.path.exists(zp):
         os.remove(zp)
@@ -433,7 +437,17 @@ def write_p1s_zip(rows):
         z.writestr(top + "/읽어보기.txt", readme)
         for full, arc in files:
             z.write(full, arc)
+        write_machined(z, top)
     return zp
+
+
+def write_machined(z, top):
+    """the steel weight blocks and Ø4 shafts of one octave (bought stock cut to length, not printed): STL + cutting sheet."""
+    for name, data, _qty, _note in machined.entries():
+        z.writestr("%s/%s/%s" % (top, machined.FOLDER, name), data)
+    z.writestr("%s/%s/%s" % (top, machined.FOLDER, machined.SHEET), machined.sheet_svg(time.strftime("%Y-%m-%d")))
+    for name, data in hole_coupon.entries():                  # A18: print first - does the D4 rod go into the new bores
+        z.writestr("%s/%s/%s" % (top, hole_coupon.FOLDER, name), data)
 
 
 # ------------------------------------------------------------------ assembly files

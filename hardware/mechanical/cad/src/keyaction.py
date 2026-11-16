@@ -38,7 +38,8 @@ FEAT = {
     "cap_tip_d": 3.3, "cap_tip_z": (21.0, 23.8),     # screw-tip clearance below the nut (spec ka1)
     "nut_af": 5.6, "nut_z": (23.8, 26.4),  # trap = M3 nut 5.5 AF x 2.4 + 0.1 / 0.2 (model_v4, stage-0 C08a)
     # lever hub bore: printed D3.9 -> drill D4.0 (S11); fin boss bores the same (P22, D18)
-    "hub_bore_print": 3.9, "fin_bore_print": 3.9,
+    # A18 (2026-11-16): printed to take the D4 h9 rod undrilled - hub D4.3 (running fit), fin bosses D4.5 teardrop
+    "hub_bore_print": 4.3, "fin_bore_print": 4.5,
     # control-board bosses (P35): screw bosses D2.5 blind to z15.4; locating pins D2.8 tip z7.8
     "cb_screw_bore": 2.5, "cb_screw_top": 15.4, "cb_pin_d": 2.8,
     # sensor bar + board fixed with M3x10 self-tapping into the left post (P111 / P36)
@@ -386,8 +387,12 @@ def lever_solid(parts, note, engrave=None, collars=None):
 def _lever_cover_items(parts):
     """A12: the far (+x) carrier side wall in front of the web (y < 190.3) with the +x snap lips (top y153..163 behind the
     front cap, top y184..190, bottom y165..176.5). Lying on the -x wall the carrier printed this wall as a 40 mm roof
-    over the steel pocket, the lips hanging under it (the old breakaway rib held its middle)."""
+    over the steel pocket, the lips hanging under it (the old breakaway rib held its middle).
+    A18: the lips become flanges across the steel that hook over the -x wall (a18_cover_items) - the cover clips on."""
     wall = [p for p in parts if p["part"].startswith("carrier side wall R")][0]
+    if A18_ON:
+        return [prism_x(wall["side_rigid0"], *wall["x"]) ^ box(wall["x"][0] - 1, wall["x"][1] + 1, 140.0, COVER_Y1, 0.0, 80.0)] \
+            + a18_cover_items(parts)
     core = [p for p in parts if p["part"].startswith("carrier core")][0]
     xm = (core["x"][0] + core["x"][1]) / 2.0
     items = [prism_x(wall["side_rigid0"], *wall["x"]) ^ box(wall["x"][0] - 1, wall["x"][1] + 1, 140.0, COVER_Y1, 0.0, 80.0)]
@@ -425,6 +430,8 @@ def lever_body_solid(parts, note, engrave=None, collars=None):
     -x wall with nothing over the pocket (no breakaway rib)."""
     m = lever_solid(parts, note, engrave=engrave, collars=collars)
     ADJUST.add("A12")
+    if A18_ON:
+        return clean(union([diff(m, [union(_lever_cover_items(parts))] + a18_body_cuts(parts))] + a18_body_ribs(parts)))
     return clean(diff(m, [union(_lever_cover_items(parts))]))
 
 
@@ -649,7 +656,9 @@ def curtain_solid(fx):
 
 
 def plug_solid(fx):
-    return union([prism_x(p["side"], *p["x"]) for p in fx.get("plug", [])])
+    """lever-rod end plug, pressed into the end fin's boss bore: A18 D4.5 round (the bore is printed D4.5 now, so a printed
+    D4.5 plug presses into it by the hole's FDM shrink)."""
+    return union([cyl_x(L_AXIS[0], L_AXIS[1], p["x"][0], p["x"][1], A18["plug_d"]) for p in fx.get("plug", [])])
 
 
 PAD_LABELS = {"패드바_칸1": "1 C·C#·D", "패드바_칸2": "2 D#·E·F", "패드바_칸3": "3 F#·G·G#", "패드바_칸4": "4 A·A#·B",
@@ -912,6 +921,7 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
     The geometry is the monolithic frame's (frame_solid) apart from the joint features and the print slopes."""
     clr = A12["clr"]
     bed_adds, cage_adds, bed_cuts, cage_cuts, tabs = [], [], [], [], []
+    cage_late = []
     has_female = False
     tab_by, hook_by = {}, {}
     for p in fx["frame"]:
@@ -1019,14 +1029,21 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
         ya, yb = min(foot) + 1.0, min(max(foot), 195.0)
         if side is None and A16["board"][0] < f_["x"][0] and f_["x"][1] < A16["board"][1]:
             ya = max(ya, A16["fin_y1"] + 1.0)              # A16: fins 2 / 4 stand on the floor only behind the board
+            if A18_ON:
+                ya = max(ya, A18["fin_foot_y"] + 1.0)      # A18: their feet start behind the clip legs
         if yb - ya < 1.0:
             continue
         for (xa, xb) in ((f_["x"][0] - clr - 1.0, f_["x"][0] - clr), (f_["x"][1] + clr, f_["x"][1] + clr + 1.0)):
             if xa < fl0 + 0.2 or xb > fl1 - 0.2:
                 continue                                   # unit edge: the neighbour's fin (or nothing) is there
             bed_adds.append(box(xa, xb, ya, yb, 5.0 - 0.01, 5.0 + A12["slot_h"]))
-    # ---- cage -> bed screws (modules)
-    if side is None:
+    # ---- cage -> bed screws (modules); A18: snap legs instead (a18_cage_clips)
+    if side is None and A18_ON:
+        ca, cc, bc = a18_cage_clips(fins)
+        cage_late += ca                                # after the fin cuts (the fin legs sit in the fins' z14 notch)
+        cage_cuts += cc
+        bed_cuts += bc
+    elif side is None:
         for (sx, sy, kind) in CAGE_SCREWS:
             r = SCREW["boss_d"] / 2.0
             if kind == "wall":
@@ -1085,7 +1102,7 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
         bed = union([bed, box(*hatch)])
         cage = cage - box(hatch[0], hatch[1], hatch[2], hatch[3], -1.0, hatch[5])    # F|F# fin + keel stand on it
     bed = clean(diff(bed, bed_cuts + list(extra_cuts)))
-    cage = clean(diff(cage, cage_cuts))
+    cage = clean(union([diff(cage, cage_cuts)] + cage_late)) if cage_late else clean(diff(cage, cage_cuts))
     ADJUST.add("A12")
     return {"bed": bed, "cage": cage, "tabs": tabs, "posts": posts, "rail": a16_rail(fx) if side is None else None}
 
@@ -1352,14 +1369,20 @@ def a16_rail(fx):
             ys = [q[0] for q in p["side"]]
             zs = [q[1] for q in p["side"]]
             cuts.append(cyl_z((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5, FEAT["bal_pin_hole_d"]))
-    d_cb, z_cb = A16["cb"]
-    for (sx, sy) in A16["rail_screws"]:
-        cuts += [cyl_z(sx, sy, zb - 0.1, z_cb + 0.1, SCREW["clear"]), cyl_z(sx, sy, z_cb, 21.0, d_cb)]
+    if A18_ON:
+        cuts += a18_rail_grooves()                     # A18: snaps between the pad lips, no screws
+    else:
+        d_cb, z_cb = A16["cb"]
+        for (sx, sy) in A16["rail_screws"]:
+            cuts += [cyl_z(sx, sy, zb - 0.1, z_cb + 0.1, SCREW["clear"]), cyl_z(sx, sy, z_cb, 21.0, d_cb)]
     return clean(diff(m, cuts))
 
 
 def a16_bed():
-    """(adds, cuts) of the module bed: rail end pads + lips, board support ribs, board edge lips, rail screw pilots."""
+    """(adds, cuts) of the module bed: rail end pads + lips, board support ribs, board edge lips, rail screw pilots.
+    A18: a18_bed (edge ledges over a floor window, snap lips for the rail, no pilots)."""
+    if A18_ON:
+        return a18_bed()
     bx0, bx1, by0, by1 = A16["board"]
     zr, zl, zb = A16["rib_top"], A16["lip_top"], A16["board_top"]
     c = A16["lip_clr"]
@@ -1391,7 +1414,10 @@ def a16_cage_cuts(fins):
     cuts = []
     for xs in sorted({(round(f["x"][0], 2), round(f["x"][1], 2)) for f in fins}):
         if bx0 < xs[0] and xs[1] < bx1 and not (A16["ffs"][0] <= xs[0] and xs[1] <= A16["ffs"][1]):
-            cuts.append(box(xs[0] - 0.01, xs[1] + 0.01, 144.0, A16["fin_y1"], 2.0, A16["fin_z"]))
+            if A18_ON:      # A18: lower edge z14 up to the foot (y185) - the clip leg hangs free in that notch
+                cuts.append(box(xs[0] - 0.01, xs[1] + 0.01, 144.0, A18["fin_foot_y"], 2.0, A18["fin_lift_z"]))
+            else:
+                cuts.append(box(xs[0] - 0.01, xs[1] + 0.01, 144.0, A16["fin_y1"], 2.0, A16["fin_z"]))
     x0, x1, z = A16["ffs"]
     cuts.append(box(x0, x1, 144.0, 209.0, 2.0, z))
     return cuts
@@ -1463,3 +1489,186 @@ def capstan_a17(head, cap):
 
 
 ADJUST.add("A17")
+
+
+# ------------------------------------------------------------------ A18 (2026-11-16): after printing one octave
+# The user printed one octave and came back with four things:
+# 1. "샤프트 들어갈 공간을 좀 더 늘려야될 거 같아. 지금 구멍은 약간 작아서 안들어가니까 1~2mm만 반지름을 늘려줘" - the lever-rod bores
+#    were printed D3.9 for a D4.0 drill (S11, P22) and the rod does not go in undrilled. They are now printed to take the D4 h9
+#    rod as they come off the plate (FEAT): lever hub D4.3 (a running fit after the usual 0.1..0.2 FDM shrink of a small hole),
+#    fin bosses D4.5 teardrop (the rod is threaded through 5 bosses and 24 hubs), end plug D4.5. Not the asked +1..2 mm on the
+#    radius: the lever hangs on the rod, so that play would drop it 1..2 mm (upstop, landing and capstan geometry) and let it
+#    rattle. The one-octave bundle carries a hole test coupon (D4.1..5.0, both print directions) to check the printer first.
+# 2. "결합 하는 부분에서 최대한 추가 나사를 사용하지 않고 구조상 물리적으로 결합이 되고, 뺄 수 있게 ... 무게추를 넣는 곳이 본드로
+#    붙이기에는 잘 정렬이 안되는 문제가 있어서 ... 마지막에 본드로 붙이기 위한 작업" -
+#    lever: the cover clips on. Its top lips (y153..163, y184..190) and bottom lip (y165..176.4) become flanges across the steel
+#    that hook over the -x wall's edges (notched to z52.0 / z33.0 there); the hooks are 0.8 x 0.4 teeth with 45 deg faces both
+#    ways, so the cover goes on by pressing and comes off by prying a flange. Crush ribs hold the steel in the pocket before the
+#    cover goes on (2 on the pocket's rear wall, 0.4 into the 40.0 pocket for a 39.7..39.9 block) and press it to the -x wall
+#    (2 on the cover's inner face, 0.17). Glue last, the parts already in place.
+#    cage: the 4 M3x10 cage screws (never in the BOM) become 4 flexible legs whose barbs snap under the floor - 2 cut out of the
+#    rear wall (x29 / x143, released from behind through the floor slot that opens at the rear edge) and 2 hanging from fins
+#    2 / 4 at y178.5..181.5 (their lower edge rises to z14 up to the foot at y185; released from above with the levers out).
+#    rail: the 2 M3x6 rail screws are gone - the rail snaps between lips in front of / behind its end pads (0.4 catches, 45 deg).
+# 3. "기판 자체는 맞는데, 높이가 너무 낮아서 ... 밑에 공간을 지금에 2~3배" and 4. "기판 밑에 기판을 일부 막는 부분 ... 빼줘. 그냥 끝
+#    모서리에 지지하도록" - the board stays at z7.0..8.6 (rail, Zero, USB plug, keys untouched), but the support ribs are gone and
+#    the floor under it is cut away inside a 2.5 ledge along its edges (no ledge at the front ribbon gap): the underside wiring
+#    has z3 (top of the EVA sheet) .. z7.0 = 4.0 under the board (2.0 before, over the floor) with nothing in the middle.
+#    (The module's underside stays at z3 on the EVA - lower would lift the keys above the lids.)
+A18_ON = True
+A18 = {
+    "hub_bore": 4.3, "fin_bore": 4.5, "plug_d": 4.5,
+    # lever cover clip
+    "flange_t": 0.9, "flange_gap": 0.1, "hook_x": 0.8, "hook_h": 0.4,
+    "top_segs": ((153.0, 163.0), (184.0, 190.0)), "bot_seg": (165.0, 176.4),
+    "rib_rear": 0.4, "rib_rear_z": (37.0, 48.0), "rib_cover": 0.17, "rib_cover_z": (37.0, 46.5), "rib_cover_y": (152.0, 188.0),
+    "rib_w": 0.6,
+    # board
+    "ledge": 2.5,
+    # rail snap lips: thickness, top z; x ranges (free of the end walls); catch depth
+    "rail_lip": (0.9, 12.2), "rail_lip_x": ((3.0, 20.0), (144.5, 161.5)), "catch": 0.4,
+    # cage snap legs
+    "leg_t": 1.2, "leg_room": 0.5, "barb": 0.5, "barb_z": (3.0, 3.75), "leg_top": 14.0, "clr": 0.15,
+    "rear_clips": ((29.0, 205.0), (143.0, 205.0)),     # leg x centre, leg front face y (to the wall's outer face y212)
+    "fin_clip_y": (178.5, 181.5), "fin_foot_y": 185.0, "fin_lift_z": 14.0,
+}
+
+
+def _a18_walls(parts):
+    wl = [p for p in parts if p["part"].startswith("carrier side wall L")][0]["x"]
+    wr = [p for p in parts if p["part"].startswith("carrier side wall R")][0]["x"]
+    return wl, wr
+
+
+def a18_cover_items(parts):
+    """the clip features of the lever cover (lever angle 0): top / bottom flanges over the steel, the hooks outside the -x wall
+    (0.8 x 0.4 teeth, 45 deg faces - printable on the cover's outer face), crush ribs on the inner face."""
+    (wl0, _wl1), (wr0, wr1) = _a18_walls(parts)
+    t, g, hx, hh = A18["flange_t"], A18["flange_gap"], A18["hook_x"], A18["hook_h"]
+    xo = wl0 - hx
+    zt, zb = 52.0 + g, 33.0 - g
+    out = []
+    for (a, b) in A18["top_segs"]:
+        out.append(box(xo, wr1, a, b, zt, zt + t))
+        out.append(prism_y([(xo, zt + 0.01), (wl0 - hx / 2.0, zt - hh), (wl0, zt + 0.01)], a, b))
+    a, b = A18["bot_seg"]
+    out.append(box(xo, wr1, a, b, zb - t, zb))
+    out.append(prism_y([(xo, zb - 0.01), (wl0, zb - 0.01), (wl0 - hx / 2.0, zb + hh)], a, b))
+    y0, y1 = A18["rib_cover_y"]
+    w = A18["rib_w"] / 2.0
+    for zc in A18["rib_cover_z"]:
+        out.append(box(wr0 - A18["rib_cover"], wr0 + 0.01, y0, y1, zc - w, zc + w))
+    return out
+
+
+def a18_body_cuts(parts):
+    """the carrier body under the cover's flanges: -x wall and L / R lips off at z52..53 (top) and z32..33 (bottom)."""
+    (wl0, _wl1), (wr0, _wr1) = _a18_walls(parts)
+    out = [box(wl0 - 0.01, wr0, a, b, 52.0, 53.01) for (a, b) in A18["top_segs"]]
+    a, b = A18["bot_seg"]
+    out.append(box(wl0 - 0.01, wr0, a, b + 0.11, 31.99, 33.0))
+    return out
+
+
+def a18_body_ribs(parts):
+    """2 crush ribs on the steel pocket's rear wall (0.4 into the 40.0 pocket), 45 deg lead-in at the open (+x) end."""
+    core = [p for p in parts if p["part"].startswith("carrier core")][0]
+    st = [p for p in parts if p["part"].startswith("steel block")][0]
+    xs0, xs1 = core["x"]
+    yb = max(q[0] for q in st["side_rigid0"])
+    r, w = A18["rib_rear"], A18["rib_w"] / 2.0
+    xe = xs1 - 0.8
+    poly = [(xs0 - 0.01, yb + 0.01), (xs0 - 0.01, yb - r), (xe, yb - r), (xe + r + 0.01, yb + 0.01)]
+    return [prism_z(poly, zc - w, zc + w) for zc in A18["rib_rear_z"]]
+
+
+def a18_rail_lip(x0, x1, side):
+    """snap lip in front of (side -1) / behind (+1) a rail end pad: 0.9 thick, 0.15 off the rail face, z5..12.2, a 0.4 catch
+    at the top with 45 deg faces (the rail goes in by pressing it down and comes out by pulling it up)."""
+    t, zt = A18["rail_lip"]
+    k = A18["catch"]
+    z1 = zt - 1.2
+    if side < 0:
+        yi = 132.31 - 0.15
+        yo = yi - t
+        poly = [(yo, 4.99), (yi, 4.99), (yi, z1), (yi + k, z1 + k), (yi + k, zt - k), (yi, zt), (yo, zt)]
+    else:
+        yi = 144.49 + 0.15
+        yo = yi + t
+        poly = [(yo, 4.99), (yi, 4.99), (yi, z1), (yi - k, z1 + k), (yi - k, zt - k), (yi, zt), (yo, zt)]
+    return prism_x(poly, x0, x1)
+
+
+def a18_rail_grooves():
+    """the rail's grooves for the lip catches (front and rear face, both ends): floor z10.85, 45 deg ceiling (no support)."""
+    _t, zt = A18["rail_lip"]
+    z0 = zt - 1.2 - 0.15
+    d = 0.45
+    out = []
+    for (a, b) in A18["rail_lip_x"]:
+        x0, x1 = a - 0.3, b + 0.3
+        yf, yb = 132.31, 144.49
+        out.append(prism_x([(yf - 0.5, z0), (yf + d, z0), (yf + d, zt - 0.25), (yf + d - 0.4, zt + 0.15), (yf - 0.5, zt + 0.15)], x0, x1))
+        out.append(prism_x([(yb + 0.5, z0), (yb - d, z0), (yb - d, zt - 0.25), (yb - d + 0.4, zt + 0.15), (yb + 0.5, zt + 0.15)], x0, x1))
+    return out
+
+
+def a18_bed():
+    """(adds, cuts) of the module bed: rail end pads + snap lips, board edge ledges over a floor window, board edge lips."""
+    bx0, bx1, by0, by1 = A16["board"]
+    zr, zl, zb = A16["rib_top"], A16["lip_top"], A16["board_top"]
+    c = A16["lip_clr"]
+    g0, g1 = A16["front_gap"]
+    L, e = A18["ledge"], 0.2
+    adds = [box(a, b, 132.31, 144.49, 4.99, zb) for (a, b) in A16["pads"]]
+    for (a, b) in A18["rail_lip_x"]:
+        adds += [a18_rail_lip(a, b, -1), a18_rail_lip(a, b, +1)]
+    # edge ledges z5..7.0 under the board's outer 2.5 (0.2 in from its edge); open at the front ribbon gap
+    adds += [box(bx0 + e, g0, by0 + e, by0 + L + 0.01, 4.99, zr), box(g1, bx1 - e, by0 + e, by0 + L + 0.01, 4.99, zr),
+             box(bx0 + e, bx1 - e, by1 - L - 0.01, by1 - e, 4.99, zr),
+             box(bx0 + e, bx0 + L + 0.01, by0 + e, by1 - e, 4.99, zr), box(bx1 - L - 0.01, bx1 - e, by0 + e, by1 - e, 4.99, zr)]
+    # edge lips (0.3 clearance), as A16
+    adds += [box(bx0, g0, by0 - c - 1.0, by0 - c - 0.01, 4.99, zl), box(g1, bx1, by0 - c - 1.0, by0 - c - 0.01, 4.99, zl),
+             box(bx0, bx1, by1 + c, by1 + c + 1.0, 4.99, zl),
+             box(bx0 - c - 1.0, bx0 - c, by0 - c - 1.0, by1 + c + 1.0, 4.99, zl),
+             box(bx1 + c, bx1 + c + 1.0, by0 - c - 1.0, by1 + c + 1.0, 4.99, zl)]
+    cuts = [box(bx0 + L, bx1 - L, by0 + L, by1 - L, 2.9, 5.1)]          # floor window: the wiring goes down to the EVA
+    return adds, cuts
+
+
+def a18_cage_clips(fins):
+    """(cage adds made after the fin cuts, cage cuts, bed cuts) of the 4 snap legs that replace the cage screws.
+    Each leg flexes in x (into a 0.5 room in its floor slot); its barb (0.5, 45 deg lead-in, flat top) snaps under the floor
+    in a 0.8 recess, so nothing reaches below the floor's underside (the EVA sheet stays whole)."""
+    t, room, bb, (zb0, zb1), top, c = (A18["leg_t"], A18["leg_room"], A18["barb"], A18["barb_z"], A18["leg_top"], A18["clr"])
+    late, cc, bc = [], [], []
+
+    def barb_xz(x1, y0, y1):
+        return prism_y([(x1 - 0.01, zb0), (x1 + bb, zb0 + bb), (x1 + bb, zb1), (x1 - 0.01, zb1)], y0, y1)
+
+    def floor(x0, x1, y0, y1):
+        return [box(x0 - room - c, x1 + c, y0 - c, y1 + c, 2.9, 5.1),                       # slot through the floor
+                box(x1 + c - 0.01, x1 + c + bb, y0 - c, y1 + c, 2.9, zb1 + 0.05)]            # recess the barb snaps into
+    for (sx, sy0) in A18["rear_clips"]:
+        x0, x1 = sx - t / 2.0, sx + t / 2.0
+        late += [box(x0, x1, sy0, 212.0, zb0, top + 2.0), barb_xz(x1, sy0, 212.0)]
+        cc += [box(x0 - 0.5, x0, sy0 - 1.0, 212.01, 4.9, top), box(x1, x1 + 0.5, sy0 - 1.0, 212.01, 4.9, top)]
+        bc += floor(x0, x1, sy0, 212.0 + 0.1)
+    bx0, bx1 = A16["board"][0], A16["board"][1]
+    seen = {}
+    for f_ in fins:
+        xc = round((f_["x"][0] + f_["x"][1]) / 2.0, 1)
+        if bx0 < f_["x"][0] and f_["x"][1] < bx1 and not (A16["ffs"][0] <= f_["x"][0] and f_["x"][1] <= A16["ffs"][1]):
+            if xc not in seen or f_["x"][1] - f_["x"][0] > seen[xc][1] - seen[xc][0]:
+                seen[xc] = tuple(f_["x"])
+    y0, y1 = A18["fin_clip_y"]
+    for (fx0, fx1) in seen.values():
+        v = (fx1 - fx0) / 2.0
+        fxc = (fx0 + fx1) / 2.0
+        # leg with a 45 deg V on its +y side (the cage prints on its back: that side faces down)
+        late.append(prism_z([(fx0, y0), (fx1, y0), (fx1, y1), (fxc, y1 + v), (fx0, y1)], zb0, top + 0.01))
+        late.append(prism_z([(fx1 - 0.01, y0), (fx1 + bb, y0), (fx1 + bb, y1 - bb), (fx1 - 0.01, y1 + 0.01)], zb0, zb1)
+                    ^ barb_xz(fx1, y0 - 1.0, y1 + 1.0))
+        bc += floor(fx0, fx1, y0, y1 + v)
+    ADJUST.add("A18")
+    return late, cc, bc

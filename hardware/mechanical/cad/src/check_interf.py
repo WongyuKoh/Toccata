@@ -5,9 +5,9 @@ from keyaction_parts import build_unit, G
 notes=["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
 EXPECTED = [
     (r"-LEVER-|-CAGE|-PLUG", r"leverrod", "Ø3.9 출력 구멍 → Ø4.0 드릴 (S11, P22) / 마개 압입"),
-    (r"-CAGE", r"-PLUG", "마개 Ø4.0 압입 (D18)"),
+    (r"-CAGE", r"-PLUG", "마개 Ø4.5 압입 (D18, A18)"),
     (r"-KEY-", r"-CAPSTAN-", "캡스턴 나사가 빔의 Ø2.8 잠김 구멍에 나사산을 내고 너트 홈 밑 0.4 막을 뚫음 (A15, D02)"),
-    (r"-LEVER-|-LEVERCOVER-", r"-STEEL-", "레버 쉼 각 회전 계산 오차 (< 0.001 mm)"),
+    (r"-LEVER-|-LEVERCOVER-", r"-STEEL-", "A18 크러시 리브가 강철을 누름 (칸 뒷벽 0.4, 덮개 안쪽 0.17) / 레버 쉼 각 회전 오차"),
     (r"-LEVER-", r"-FELTSTRIP-", "펠트 띠가 아래 립 끝면과 맞닿음"),
     (r"-FRAME|-CAGE", r"controlboard", "위치 핀 Ø2.8 ↔ 기판 구멍 Ø3.0"),
     (r"-FRAME", r"SBSCREW", "센서 바 M3×10이 Ø2.75 자리에 나사산을 냄 (P36)"),
