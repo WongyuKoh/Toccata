@@ -516,7 +516,7 @@ OVR_CHECK = [
     ("업스톱 패드는 설계가 6T인데, 구매 목록의 PORON은 5T다.",
      "업스톱 패드는 구매한 PORON 5T(i124)다(설계값 6T + 펠트 1T)."),
     ("강철은 캘리퍼로 골라 쓰거나 냉간 인발재를 산다. 패드 두께는 주문 전에 맞춘다.",
-     "받은 강철을 캘리퍼로 재서 8.9~9.1인 것만 쓴다. <code>stl/print/04</code>의 패드 바는 5T용(쐐기를 1.0 두껍게, 패드 면 위치는 설계와 같음)이므로 그대로 뽑는다. 6T를 쓸 때만 <code>stl/print_extra</code>의 ‘대안_패드바_PORON6T용’을 뽑는다."),
+     "강철 블록은 39.7~40.2로 자르고 두께 9.25·폭 19.5 이하면 그대로 쓴다(<a href='#build-a20'>A20</a> 칸 40.5 × 19.5 × 9.4). <code>stl/print/04</code>의 패드 바는 5T용(쐐기를 1.0 두껍게, 패드 면 위치는 설계와 같음)이므로 그대로 뽑는다. 6T를 쓸 때만 <code>stl/print_extra</code>의 ‘대안_패드바_PORON6T용’을 뽑는다."),
     ("센서 바 오른쪽 턱(r4.5 회로 2차에서 되살림)의", "센서 바 오른쪽 턱의"),
     ("지금 모델(<code>final</code>, r4.5, metrics.json)", "모델(<code>final</code>, metrics.json)"),
     ("DESIGN 1e 고침 2b", "DESIGN 1e"),
@@ -705,7 +705,7 @@ def tab_build(pm, items, misses):
     out.append('<div class="note"><b>패드 바는 5T용을 뽑습니다.</b> <code>stl/print/04</code>의 패드 바는 구매한 PORON 5T(i124)에 맞춰 '
                '쐐기를 1.0 두껍게 만든 것입니다(패드 면 위치는 설계와 같음). <code>stl/print_extra</code>의 ‘대안_패드바_PORON6T용’은 '
                '6T를 쓸 때만 뽑습니다.</div>')
-    out.append(A12_HTML + A13_HTML + A14_HTML + A16_HTML + A18_HTML)
+    out.append(A12_HTML + A13_HTML + A14_HTML + A16_HTML + A18_HTML + A19_HTML + A20_HTML)
     if orient:
         out.append('<h4 class="sub4">건반 액션 부품의 출력 방향 (설계서 15장 원문 — 서포트 칸은 위 A12~A14로 바뀜)</h4>' + tidy_html(orient))
     out.append(PLY_HTML)
@@ -785,6 +785,30 @@ A18_HTML = """<h3 id="build-a18">한 옥타브를 뽑아 본 뒤 고침 — 드�
 </ul>
 <figure class="sheet"><img src="img/a18/A18_detail.webp" alt="A18 레버 덮개 걸쇠, 레버틀 걸쇠 다리, 레일 걸쇠, 바닥틀 평면, 봉 구멍 표" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>실제 CAD 단면: ① 레버 덮개 걸쇠·크러시 리브 ② 레버틀 걸쇠 다리 ③ 레일 걸쇠 ④ 바닥판 창 ⑤ 봉 구멍.</figcaption></figure>
 <p class="small muted">CAD: <code>hardware/mechanical/cad/README.md</code> 부록 A18, <code>keyaction.a18_cover_items</code> · <code>a18_cage_clips</code> · <code>a18_rail_lip</code> · <code>a18_bed</code>, <code>src/hole_coupon.py</code>, 상세도 <code>drawings/detail/A18_한옥타브_고침_상세.png</code>. 확인: check_support 0 (125 파일) · check_interf 예상 밖 0 · check_electronics 199 · check_body 339.</p>
+"""
+
+A19_HTML = """<h3 id="build-a19">드릴 없음 — 남은 압입·자리 구멍은 반지름 +1 mm + 크러시 리브 (2026-11-16, A19)</h3>
+<p>“드릴 대신에 3D 프린팅에서 반지름을 1mm 씩 늘리는 식으로”: A18 뒤에도 드릴이 필요했던 구멍은 모두 무엇을 꽉 물거나 자리를 잡는 구멍이라, 반지름만 키우면 봉 토막이 덜렁거리고 Ø2 핀이 빠집니다. 그래서 구멍은 옛 반지름 + 1 mm로 키우고 세로 <b>크러시 리브 3줄</b>의 끝을 옛 드릴 지름에 둡니다 — 봉·핀을 눌러 넣으면 드릴 대신 리브 끝이 깎입니다.</p>
+<ul class="flow">
+<li><b>밸런스 핀 구멍</b>(레일·끝 부속 바닥틀) Ø1.95 → 구멍 Ø3.95 · 리브 끝 Ø1.95. 출력 공구 <b>T1a</b> 예비 핀 Ø3.9 · 끝 Ø1.9, K 봉 토막 Ø5.9 · 끝 Ø3.9(기둥을 1.0씩 키움), L 봉 토막 Ø4.8 · 끝 Ø3.9(건반 꼬리가 1.2 앞을 지나 더 못 키움).</li>
+<li><b>T2 허브</b>는 레버처럼 돌아야 해서 리브 없이 Ø4.3(A18 레버 허브와 같음). 캡스턴 너트 홈의 0.4 막은 나사가 뚫습니다. Ø4.0 드릴 날(<a href="#parts-i126">i126</a>)은 쓰지 않습니다.</li>
+<li>한 옥타브 묶음의 <code>00_먼저_구멍시험편</code>에 리브 구멍 시험편(가로 Ø5.9 끝 3.8/3.9/4.0, 세로 Ø3.95 끝 1.85/1.95/2.05)이 들어 있습니다.</li>
+</ul>
+<figure class="sheet"><img src="img/a19/A19_detail.webp" alt="A19 리브 구멍 단면" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>실제 CAD 단면: 밸런스 핀 구멍, T1a 봉 토막 구멍, T2 허브.</figcaption></figure>
+<p class="small muted">CAD: <code>hardware/mechanical/cad/README.md</code> 부록 A19, <code>src/no_drill.py</code>, 상세도 <code>drawings/detail/A19_드릴없음_리브구멍_상세.png</code>.</p>
+"""
+
+A20_HTML = """<h3 id="build-a20">한 옥타브를 조립해 본 뒤 고침 — 센서 바 홈을 뒤로 열기 · 센서 기판 밑 창 · 강철 칸 · 걸쇠 (2026-11-22, A20)</h3>
+<p>한 옥타브를 조립하며 나온 요청입니다. 건반·레버의 움직임(봉 위치, 패드 면, 센서 높이)은 그대로입니다.</p>
+<ul class="flow">
+<li><b>센서 바</b> — “홀센서 구멍 크게, 뒤쪽도 끼울 수 있게(옆으로 넣는 식)”, “기판 쪽 구멍이 제대로 안 나옴”: 홀센서 포켓을 사방 0.25씩 키워 4.05 × 4.9(몸통 3.15 × 4.0), 0.4 노즐로는 막혀 나오던 Ø0.9 다리 구멍 3개를 센서마다 폭 1.6 다리 홈 하나로 바꿨습니다. 포켓·다리 홈이 모두 <b>바 뒤 가장자리까지 열려</b> 있어 다리를 위에서 꽂거나, 센서를 먼저 기판에 납땜한 뒤 바를 뒤에서 밀어 끼울 수 있습니다(홈 앞끝에서 앞 다리가 멈춤).</li>
+<li><b>센서 기판 밑</b> — “기판 공간을 넓히고, 메인 기판처럼 밑에 뚫고 높이를 키우기”, “6개 구멍 중 3~4개밖에 공간이 안 나옴”: 6행 기판의 1·6행을 덮던 받침 리브 2줄을 빼고 기판 밑 바닥판을 뚫었습니다. 기판 밑이 EVA 위 z3~7.0 = <b>4.0</b>(옛 2.0)이고, 기판은 왼쪽 기둥(M3×10 그대로)과 쓰지 않는 가장자리 줄 밑 받침 패드(길이 3.5, 오른쪽 끝 + 바닥 다리 3곳 x32.4·88.3·141.6)에 놓입니다 — 6행 모두 밑에서 납땜·배선할 수 있습니다.</li>
+<li><b>강철 칸</b> — “무게 추 끼우는 게 사이즈가 안 맞음”: 칸이 40.0 × 19.0 × 9.2에 크러시 리브로 39.6 · 9.03이라 높이 여유가 0이고 길이도 간섭이었습니다. 칸을 <b>40.5 × 19.5 × 9.4</b>(옆벽 0.59, 덮개 판 0.6 · 날개 0.75)로 키우고 리브는 뒤 0.3(→ 40.2) · 덮개 0.17(→ 9.23). 강철은 39.7~40.2로 자릅니다. <code>00_먼저_구멍시험편</code>의 <b>무게추칸</b> 시험편(창 40.5 × 19.5 + 뒤 리브)으로 먼저 확인합니다.</li>
+<li><b>걸쇠</b> — “탈착이 너무 쉽게 되는 게 아닌지 테스트” (PLA 외팔보 계산): 레버 덮개는 갈고리 0.4 · 양면 45°라 3~4 N에 빠져 갈고리 0.5 · 빼는 쪽 60°로(약 10~16 N; 연주 중에 잡는 것은 마지막 MS 폴리머 — 그 전에는 세게 치지 않음). 레버틀 다리는 걸림면이 평평해 당겨서는 안 빠지지만 핀 다리 걸림(약 31 N)이 세게 칠 때의 힘(45~70 N)에 뭉개질 수 있어 걸림 0.65(갈고리 0.8) · 핀 다리 1.4 × 5.0으로(약 62 N). 밸런스 레일 립 4개는 84~106 N이라 그대로입니다.</li>
+<li><b>건반 각도</b> — “실제 피아노만큼의 각도인지 확인”: 앞끝 깊이는 백 10.0 · 흑 9.5 mm로 실제 피아노(약 10 mm)와 같고, CAD에서 건반 12개 모두 이 깊이까지 다른 부품에 먼저 닿지 않습니다. 회전각은 축이 앞끝에서 141 mm(흑 86.8)라 백 4.0° · 흑 6.2°로 업라이트(2.5° · 2.9°)·그랜드(2.0~2.4°)보다 가파릅니다. 맞추려면 프레임 깊이(축 위치)를 다시 설계해야 해서 바꾸지 않았습니다.</li>
+</ul>
+<figure class="sheet"><img src="img/a20/A20_detail.webp" alt="A20 센서 바 홈, 센서 기판 밑 창, 강철 칸 단면" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>실제 CAD 단면: ① 센서 바 평면 ② 다리 홈 옆 단면 ③ 바닥틀 평면(받침 패드·바닥 창) ④ 기판 밑 4.0 ⑤ 강철 칸.</figcaption></figure>
+<p class="small muted">CAD: <code>hardware/mechanical/cad/README.md</code> 부록 A20, <code>src/a20_fix.py</code>, <code>keyaction.a20_sb</code> · <code>a20_pocket</code>, 상세도 <code>drawings/detail/A20_센서바·기판밑·강철칸_상세.png</code>. 확인: check_support 서포트 0 · check_interf 예상 밖 0 · check_electronics 199 · check_body 339.</p>
 """
 
 PLY_HTML = """<h3 id="build-ply">판 (2026-10-16부터 모두 출력, 합판 없음)</h3>

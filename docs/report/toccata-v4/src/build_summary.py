@@ -172,7 +172,7 @@ check(bomq == {"WSH137": 89, "RP2040-Zero": 8, "4067": 7}, f"circuit bom {bomq}"
 
 # ------------------------------------------------------------------ print files (stl/print)
 TOOLS = {"06_출력공구"}
-JIGS = {"08_합판지그", "09_기판지그"}   # 08 gone since 2026-10-16 (A안: no plywood)
+JIGS = {"08_합판지그", "09_기판지그", "10_봉절단지그"}   # 08 gone since 2026-10-16 (A안: no plywood); 10 = rod cut jigs (11/22)
 pf = {"inst_files": 0, "inst_parts": 0, "tools": 0, "jigs": 0}
 for f in glob.glob(os.path.join(CAD, "stl", "print", "*", "*.stl")):
     folder = os.path.basename(os.path.dirname(f))
@@ -186,7 +186,7 @@ for f in glob.glob(os.path.join(CAD, "stl", "print", "*", "*.stl")):
         pf["inst_files"] += 1
         pf["inst_parts"] += q
 # 10/16 A안: + 판 10장 (12 파일), - 합판 지그 7; 10/29 A12: + 레버틀 3 파일 (9), 가이드 탭 2 파일 (88), 레버 덮개 1 파일 (88)
-check(pf == {"inst_files": 99, "inst_parts": 502, "tools": 4, "jigs": 1}, f"stl/print {pf}")   # 10/31 A16: + 밸런스레일 7, − 기판 지그 P-MB
+check(pf == {"inst_files": 99, "inst_parts": 502, "tools": 4, "jigs": 11}, f"stl/print {pf}")   # 10/31 A16: + 밸런스레일 7, − 기판 지그 P-MB; 11/22: + 봉 절단 지그 5 + 끝마개 5
 S0 = load(rp("hardware", "mechanical", "key-action-v4", "printables", "stage0", "stage0_geometry.json"))
 s0_files = len(glob.glob(rp("hardware", "mechanical", "key-action-v4", "printables", "stage0", "stl", "*.stl")))
 s0_pieces = sum(p["qty"] for p in S0["parts"])

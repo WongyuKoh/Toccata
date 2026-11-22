@@ -172,7 +172,7 @@ def item_lines(items_doc):
 B_SUBS = [
     ("01", "01 건반"), ("02", "02 레버 캐리어"), ("03", "03 프레임"),
     ("04", "04 센서 바·패드 바·가림판·마개"), ("05", "05 본체 출력물"), ("07", "07 터치스크린"),
-    ("jig", "공구·지그 (06 출력 공구 · 09 기판 지그)"),
+    ("jig", "공구·지그 (06 출력 공구 · 09 기판 지그 · 10 봉 절단 지그)"),
     ("extra", "선택·대안·예비 (stl/print_extra, 켜야 계산)"),
 ]
 
@@ -189,7 +189,7 @@ def print_lines(manifest, verify_stl):
         name = p["name"]
         if top == "print":
             fno = folder_dir[:2]
-            sub = "jig" if fno in ("06", "08", "09") else fno
+            sub = "jig" if fno in ("06", "08", "09", "10") else fno
             lid = "b-" + fno + "-" + hashlib.sha1(f"{folder_dir}/{name}".encode()).hexdigest()[:8]
             opt = False
             total_files += 1
@@ -303,8 +303,8 @@ def make_lines(parts, bom, cables, harness):
     n_steel = need(r".*-STEEL-.*", 88, "steel blocks")
     add("metal", "steel", "강철 블록 자르기 9 × 19 × 40", n_steel, "개",
         "강철 띠 9T × 19 × 1 m (i119) 4장 → 40 mm씩",
-        "블록은 캐리어 칸 길이 40.0에 딱 맞으므로 40 −0.1/−0.3으로 자르고 두께 8.9~9.1만 씁니다. "
-        "캐리어 칸 속 지지대를 떼고 밑에서 끼운 뒤 MS 폴리머(i071)로 붙입니다.",
+        "블록은 39.7~40.2로 자르고 두께 9.25 · 폭 19.5 이하면 그대로 씁니다(A20 캐리어 칸 40.5 × 19.5 × 9.4, 리브까지 40.2 × 9.23). "
+        "캐리어 +x 쪽에서 칸에 밀어 넣고 덮개를 딸깍 끼운 뒤, 시험이 끝나면 MS 폴리머(i071)로 붙입니다.",
         f"CAD 강철 블록 {n_steel}개 (…-STEEL-…)")
 
     def rod_meta(rx, what):
