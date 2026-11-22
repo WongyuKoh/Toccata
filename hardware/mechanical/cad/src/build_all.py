@@ -191,26 +191,36 @@ def write_print(parts):
     tools = os.path.normpath(os.path.join(HERE, "..", "..", "key-action-v4", "printables", "tools", "stl"))
     tnames = {"tool_bench_jig.stl": ("공구_벤치지그받침_T1a", 38.4), "tool_height_block.stl": ("공구_높이블록_T1b", 10.3),
               "tool_capstan_gauge.stl": ("공구_캡스턴벤치게이지_T2", 13.3), "tool_pin_gauge.stl": ("공구_밸런스핀높이게이지_T3", 6.3)}
+    # A19 (2026-11-16, no drill): T1a (K / L stub bores D5.9 / D4.8 + crush ribs, spare pin D3.9 + ribs) and T2 (hub D4.3)
+    # are rebuilt from the r4.4 STLs by no_drill.py; the other two are copied unchanged
+    import no_drill
+    a19 = no_drill.tool_solids()
     for fn, (nm, g) in tnames.items():
         src = os.path.join(tools, fn)
         if not os.path.exists(src):
             continue
         dst = os.path.join(OUT, "stl", "print", "06_출력공구", "%s__1개.stl" % nm)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
-        shutil.copyfile(src, dst)
         import trimesh
-        tb = trimesh.load(src).bounds
+        if fn in a19:
+            g = round(g * a19[fn].volume() / no_drill._load(fn).volume(), 1)
+            write_stl(a19[fn], dst, "Toccata %s A19 no drill" % fn)
+        else:
+            shutil.copyfile(src, dst)
+        tb = trimesh.load(dst).bounds
         rows.append({"file": os.path.relpath(dst, OUT), "name": nm, "qty": 1, "folder": "06_출력공구",
                      "size_mm": [round(float(tb[1][i] - tb[0][i]), 2) for i in range(3)],
                      "volume_cm3": 0, "mass_g_solid_petg": g, "material": "PETG",
                      "note": "건반 액션 설계의 출력 공구(DESIGN 10.1, key-action-v4/printables/tools/tools.md): 악기당 1벌, 서포트 없음; "
-                             "T2·T3는 채움 100 %·층 0.1", "ids": [], "name_ko": nm.replace("_", " "), "variant": True})
+                             "T2·T3는 채움 100 %·층 0.1" + (no_drill.TOOL_NOTE.get(fn, "") if fn in a19 else ""),
+                     "ids": [], "name_ko": nm.replace("_", " "), "variant": True})
     # printed plywood drilling jigs (W1 2026-10-02, src/plywood_jigs.py, how to use: cad/jigs/README.md): required -> stl/print/08_합판지그
     # (one set per instrument, all four J-b saddle gaps included), optional J-f -> stl/print_extra/선택_합판지그. Tools, not instrument parts
     # (variant True). A failure here only drops the jigs (warning), the rest of the build goes on.
     # 2026-10-16 (A안): no plywood left (all panels printed, holes / pilots / magnet seats in the prints) -> the 08 plywood drilling
     # jigs are no longer built (src/plywood_jigs.py kept for the record)
     rows += write_pcb_jigs()
+    rows += write_rod_jigs()     # 2026-11-22: 10_봉절단지그 - cut the 1 m D4 bars to the key / lever rod lengths
     # spare keys (optional) -> stl/print_extra/예비_건반: same STL as the 01 file, count = spares only
     for r in [r for r in rows if r["folder"] == "01_건반"]:
         spare = SPARE_KEYS.get(r["name"], 1 if r["name"].startswith("백건") else 0)
@@ -276,6 +286,31 @@ def write_pcb_jigs():
                      "volume_cm3": round(solid.volume() / 1000.0, 2), "mass_g_solid_petg": round(solid.volume() / 1000.0 * 1.27, 1),
                      "material": "PETG", "note": j.get("note", ""), "ids": [], "name_ko": j["name"].replace("_", " "),
                      "variant": True, "extra": False, "pcbjig": j.get("key"),
+                     "mass_g_print_est": round(g, 1), "print_min_est": round(minutes, 0)})
+    return rows
+
+
+def write_rod_jigs():
+    """rod_cut_jig.build() (2026-11-22: D4 rod cut jigs, one per length + end plugs) -> stl/print/10_봉절단지그."""
+    try:
+        import rod_cut_jig
+        jigs = rod_cut_jig.build()
+    except Exception as ex:  # noqa: BLE001
+        print("WARNING: rod_cut_jig failed (%s: %s) - no 10_봉절단지그 in this build" % (type(ex).__name__, ex))
+        return []
+    rows = []
+    for j in jigs:
+        solid, qty = j["solid"], int(j.get("qty", 1))
+        folder = rod_cut_jig.PRINT_SUB
+        path = print_path(folder, "%s__%d개.stl" % (safe(j["name"]), qty))
+        b = solid.bounding_box()
+        write_stl(solid, path, "Toccata %s x%d rod cut jig  %.1fx%.1fx%.1f mm" % (j["key"], qty, b[3] - b[0], b[4] - b[1], b[5] - b[2]))
+        g, minutes = rod_cut_jig.est_print(solid)
+        rows.append({"file": os.path.relpath(path, OUT), "name": j["name"], "qty": qty, "folder": folder,
+                     "size_mm": [round(b[3] - b[0], 2), round(b[4] - b[1], 2), round(b[5] - b[2], 2)],
+                     "volume_cm3": round(solid.volume() / 1000.0, 2), "mass_g_solid_petg": round(solid.volume() / 1000.0 * 1.27, 1),
+                     "material": "PLA/PETG", "note": j.get("note", ""), "ids": [], "name_ko": j["name"].replace("_", " "),
+                     "variant": True, "extra": False, "rodjig": j["key"],
                      "mass_g_print_est": round(g, 1), "print_min_est": round(minutes, 0)})
     return rows
 
@@ -358,7 +393,7 @@ def write_octave_zip(rows):
     lines, parts, tools, grams = [], 0, 0, [0.0, 0.0]
     entries = []
     for folder, name, qty, r, _run in octave_entries(rows):
-        is_tool = folder.startswith(("06_", "09_"))
+        is_tool = folder.startswith(("06_", "09_", "10_"))
         tools += qty if is_tool else 0
         parts += 0 if is_tool else qty
         grams[is_tool] += qty * r["mass_g_solid_petg"]

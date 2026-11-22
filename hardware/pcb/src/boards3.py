@@ -305,10 +305,13 @@ def ps_check():
 
 
 # ====================================================================== SB: OUT -> J201
-# W1 r4.5 P36 (geometry.json plan): the SB lies on its support ribs (top z7.0 = board underside) - front rib y61.0~62.8 and rear rib
-# y73.2~75.5 over x6.0~158.5, the rear rib open only at x59.0~82.0 (ribbon gap). No underside wire may lie on a rib: wires cross the rear
-# band y73.2~75.5 only inside the gap (wire centre >= 0.5 from the gap edges = about half a 1 mm insulated strand).
-SB_RIBS = [(6.0, 158.5, 61.0, 62.8), (6.0, 59.0, 73.2, 75.5), (82.0, 158.5, 73.2, 75.5)]
+# CAD A20 (2026-11-22, user: '홀센서 쪽 기판 공간을 넓히고, 메인 기판처럼 밑에 뚫고 높이를 키우기', '6개 구멍 중 3~4개밖에 공간이
+# 안나옴'): the old W1 P36 support ribs (front y61.0~62.8, rear y73.2~75.5 over x6.0~158.5) are gone and the floor under the board is
+# cut away (z3 EVA top .. z7.0 = 4.0 under the board, 2.0 over three floor bridges). The board rests on the left post (x0.5~6.0, M3x10)
+# and on 3.5-long pads under the unused edge rows y61.92 / y74.62: right end x158.9~162.4 and on the bridges x32.4 / 88.3 / 141.6
+# (cad/src/a20_fix.py). No underside wire or joint may lie on a pad (keep-out 0.5 around each, checked by sb_check).
+SB_RIBS = [(a, b, y0, y1) for (a, b) in ((158.9, 162.4), (30.65, 34.15), (86.55, 90.05), (139.85, 143.35))
+           for (y0, y1) in ((60.85, 62.85), (73.69, 75.69))]
 SB_RIB_KEEP = [(a0 - 0.5, a1 + 0.5, b0 - 0.5, b1 + 0.5) for (a0, a1, b0, b1) in SB_RIBS]
 
 
@@ -395,7 +398,7 @@ def sb_routes():
 
 def sb_check():
     routes, bare = sb_routes()
-    # U-notch holes for the M3 screws at (3.0, 61.9) / (3.0, 74.6), D3.4 + 0.5; the support ribs under the board (W1 P36)
+    # U-notch holes for the M3 screws at (3.0, 61.9) / (3.0, 74.6), D3.4 + 0.5; the support pads under the board (A20)
     keep = [(3.0 - 2.2, 3.0 + 2.2, 61.9 - 2.2, 61.9 + 2.2), (3.0 - 2.2, 3.0 + 2.2, 74.6 - 2.2, 74.6 + 2.2)] + SB_RIB_KEEP
     probs = route_check(sb_pads(), routes, keep=keep, bare=bare)
     # SCH-02: J201 power pins must sit on the nets the ribbon carries
@@ -407,11 +410,11 @@ def sb_check():
 
 
 def draw_sb_routes(s, X, Y):
-    """BRD-02 overlay: the support ribs (dashed bands), the 12 OUT wires (underside, dashed blue) + the 4 J201 power links (dashed red =
+    """BRD-02 overlay: the support pads (dashed boxes, A20), the 12 OUT wires (underside, dashed blue) + the 4 J201 power links (dashed red =
     3V3, black = GND). Wires bundled on lane y70.81 are drawn 0.1 mm apart so each stays visible (the lane itself is the half-pitch line
     given in wiring_SB.csv)."""
     o = s.out["body"]
-    for (a0, a1, b0, b1) in SB_RIBS:            # support ribs under the board (W1 P36): no underside wire on them
+    for (a0, a1, b0, b1) in SB_RIBS:            # support pads under the board (A20): no underside wire on them
         o.append(f'<rect x="{X(a0):.2f}" y="{Y(b1):.2f}" width="{(a1-a0)*2.2:.2f}" height="{(b1-b0)*2.2:.2f}" fill="#6b7690" fill-opacity=".10" '
                  f'stroke="#6b7690" stroke-width=".25" stroke-dasharray="1.0 .6"/>')
     rows = sb_rows()

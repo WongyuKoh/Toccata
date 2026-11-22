@@ -16,6 +16,9 @@ from manifold3d import CrossSection, Manifold
 
 from cadlib import (clean, box, cyl_x, cyl_y, cyl_z, diff, empty, hexagon_z, prism_x, prism_y, prism_z,
                     teardrop_x, text_xy, union, orient, rot_x, rot_y, rot_z, matmul)
+from no_drill import pin_hole  # noqa: E402  (A19: balance-pin holes with crush ribs, no drill)
+import a20_fix  # noqa: E402  (A20: sensor bar slots open to the rear, SB floor window, bigger steel pocket)
+from a20_fix import A20_ON, A20  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GEO = os.path.normpath(os.path.join(HERE, "..", "..", "key-action-v4", "model", "geometry.json"))
@@ -46,6 +49,8 @@ FEAT = {
     "sb_screws": [(3.0, 61.9), (3.0, 74.6)], "sb_pilot_d": 2.75, "sb_clear_d": 3.4,   # spec ka2
     # balance pins ISO 2338 D2 x 12, top z23.30 (P32) -> blind press hole in the rail
     "bal_pin_hole_d": 1.95,                           # spec ka2: light press for the D2 dowel
+    # A19 (2026-11-16): no drill - the hole is printed D3.95 (radius +1, the user's rule) with 3 crush ribs whose tips sit
+    # on D1.95 (no_drill.pin_hole); was a plain D1.95 hole trued with a D1.9..2.0 drill
     # note name engraved on the carrier side wall (parts_list "옆벽에 음 이름 새김")
     "engrave_depth": 0.4, "engrave_size": 4.0,
     "groove_ext": 2.0,
@@ -410,7 +415,12 @@ COVER_CAP_Y = 153.0    # front cap (full width, y150..153) stays on the body
 
 
 def lever_cover_solid(parts):
-    """A12 lever cover = carrier +x wall + its lips, lever angle 0 (side_rigid0), module coordinates."""
+    """A12 lever cover = carrier +x wall + its lips, lever angle 0 (side_rigid0), module coordinates.
+    A20: the steel pocket is cut out of it (wall 0.59, flanges 0.75) and the inner crush ribs sit on the new face x13.22."""
+    if A20_ON:
+        pk = a20_pocket(parts)
+        return clean(union([diff(union(_lever_cover_items(parts)), [a20_fix.steel_pocket(pk)])]
+                           + a20_fix.cover_ribs(pk, A18["rib_cover_z"], A18["rib_w"], A18["rib_cover_y"])))
     return clean(union(_lever_cover_items(parts)))
 
 
@@ -430,6 +440,10 @@ def lever_body_solid(parts, note, engrave=None, collars=None):
     -x wall with nothing over the pocket (no breakaway rib)."""
     m = lever_solid(parts, note, engrave=engrave, collars=collars)
     ADJUST.add("A12")
+    if A20_ON:      # A20: bigger steel pocket (40.5 x 19.5 x 9.4), rear crush ribs 0.3
+        pk = a20_pocket(parts)
+        return clean(union([diff(m, [union(_lever_cover_items(parts))] + a18_body_cuts(parts) + [a20_fix.steel_pocket(pk)])]
+                           + a20_fix.body_ribs(pk, A18["rib_rear_z"], A18["rib_w"])))
     if A18_ON:
         return clean(union([diff(m, [union(_lever_cover_items(parts))] + a18_body_cuts(parts))] + a18_body_ribs(parts)))
     return clean(diff(m, [union(_lever_cover_items(parts))]))
@@ -546,7 +560,13 @@ def frame_solid(fx, plan, extra_cuts=(), extra_adds=()):
         if "dovetail" in n and "female" in n:
             has_female = True                          # the box is the groove envelope, not material
             continue
+        if A20_ON and n.startswith("sensor board support rib"):
+            continue                                   # A20: no ribs under the sensor board (a20_sb)
         adds.append(prism_x(p["side"], *p["x"]))
+    if A20_ON:
+        a, c = a20_sb(fx)
+        adds += a
+        cuts += c
     males = [p for p in fx["frame"] if "dovetail male root" in p["part"]]
     if males:
         adds += dovetail_male_at(max(p["x"][1] for p in males))
@@ -560,7 +580,7 @@ def frame_solid(fx, plan, extra_cuts=(), extra_adds=()):
         adds.append(cyl_z(c["circle"][0], c["circle"][1], 7.8, 10.7, FEAT["cb_pin_d"]))
     for c in [q for q in plan if q["part"].startswith("control-board screw")]:
         cuts.append(cyl_z(c["circle"][0], c["circle"][1], 10.0, FEAT["cb_screw_top"], FEAT["cb_screw_bore"]))
-    # female prisms: spring grooves + chamfers as drawn; fin boss bores printed D3.9 teardrop (drill D4.0)
+    # female prisms: spring grooves + chamfers as drawn; fin boss bores printed D4.5 teardrop (A18; was D3.9 + drill D4.0)
     for p in fx.get("female", []):
         if p["part"].startswith("fin boss bore"):
             cuts.append(teardrop_x(L_AXIS[0], L_AXIS[1], p["x"][0] - 0.01, p["x"][1] + 0.01, FEAT["fin_bore_print"]))
@@ -581,7 +601,7 @@ def frame_solid(fx, plan, extra_cuts=(), extra_adds=()):
             zs = [q[1] for q in p["side"]]
             cx = (p["x"][0] + p["x"][1]) / 2
             cy = (min(ys) + max(ys)) / 2
-            cuts.append(cyl_z(cx, cy, min(zs), 19.5, FEAT["bal_pin_hole_d"]))    # bottom z11.3 = pin bottom (P32)
+            cuts.append(pin_hole(cx, cy, min(zs), 19.5))    # bottom z11.3 = pin bottom (P32)
     # sensor bar / board M3x10 self-tapping pilots in the left post (P111)
     for (sx, sy) in FEAT["sb_screws"]:
         cuts.append(cyl_z(sx, sy, 2.99, 7.01, FEAT["sb_pilot_d"]))       # through (tip reaches z3.6); the bottom EVA covers it
@@ -637,6 +657,9 @@ def sensor_pockets(side):
     cuts = []
     for p in items:
         zf = p["pocket_floor_z"]
+        if A20_ON:      # A20: pocket +0.25 a side, one lead slot, all open through the rear edge (slide in from behind)
+            cuts += a20_fix.sb_bar_cuts(p["pocket_x"], p["pocket_y"], zf, p["lead_x"])
+            continue
         cuts.append(box(p["pocket_x"][0], p["pocket_x"][1], p["pocket_y"][0], p["pocket_y"][1], zf, 14.5))
         cuts.append(box(p["lead_groove_x"][0], p["lead_groove_x"][1], p["lead_groove_y"][0], p["lead_groove_y"][1], zf, 14.5))
         for y in (64.46, 67.0, 69.54):
@@ -941,6 +964,8 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
             continue                                   # A13: the board sits on posts on the hatch floor (a13_board)
         if side is None and a16_is_rail(p):
             continue                                   # A16: the balance rail is its own print (a16_rail), laid on the board
+        if A20_ON and n.startswith("sensor board support rib"):
+            continue                                   # A20: no ribs under the sensor board (a20_sb)
         if not _is_cage(n):
             bed_adds.append(prism_x(p["side"], *p["x"]))
             continue
@@ -971,6 +996,10 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
     a16_adds, a16_cuts = a16_bed() if side is None else ([], [])
     bed_adds += a16_adds
     bed_cuts += a16_cuts
+    if A20_ON:      # A20: sensor board on the left post + edge-row pads, floor window under it
+        a20_adds, a20_cuts = a20_sb(fx, side)
+        bed_adds += a20_adds
+        bed_cuts += a20_cuts
     for p in fx.get("female", []):
         if p["part"].startswith("fin boss bore"):
             cage_cuts.append(teardrop_x_apex(L_AXIS[0], L_AXIS[1], p["x"][0] - 0.01, p["x"][1] + 0.01, FEAT["fin_bore_print"]))
@@ -985,7 +1014,7 @@ def frame_split(fx, plan, extra_cuts=(), extra_adds=(), side=None):
         if p["part"].startswith("balance pin D2") and side is not None:      # A16: in the module the pins go into the rail print
             ys = [q[0] for q in p["side"]]
             zs = [q[1] for q in p["side"]]
-            bed_cuts.append(cyl_z((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5, FEAT["bal_pin_hole_d"]))
+            bed_cuts.append(pin_hole((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5))
     for (sx, sy) in FEAT["sb_screws"]:
         bed_cuts.append(cyl_z(sx, sy, 2.99, 7.01, FEAT["sb_pilot_d"]))
     # hairline seams rail web <-> fin (as frame_solid), on the cage
@@ -1368,7 +1397,7 @@ def a16_rail(fx):
         if p["part"].startswith("balance pin D2"):
             ys = [q[0] for q in p["side"]]
             zs = [q[1] for q in p["side"]]
-            cuts.append(cyl_z((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5, FEAT["bal_pin_hole_d"]))
+            cuts.append(pin_hole((p["x"][0] + p["x"][1]) / 2, (min(ys) + max(ys)) / 2, min(zs), 19.5))
     if A18_ON:
         cuts += a18_rail_grooves()                     # A18: snaps between the pad lips, no screws
     else:
@@ -1545,15 +1574,19 @@ def a18_cover_items(parts):
     (0.8 x 0.4 teeth, 45 deg faces - printable on the cover's outer face), crush ribs on the inner face."""
     (wl0, _wl1), (wr0, wr1) = _a18_walls(parts)
     t, g, hx, hh = A18["flange_t"], A18["flange_gap"], A18["hook_x"], A18["hook_h"]
+    xa = wl0 - hx / 2.0                      # tooth apex x: 45 deg faces both sides (A18)
+    if A20_ON:      # A20: 0.5 deep, the return (+x) face at 60 deg so it does not pull off at 3~4 N
+        hh = A20["hook_h"]
+        xa = wl0 - hh / math.tan(math.radians(A20["hook_return_deg"]))
     xo = wl0 - hx
     zt, zb = 52.0 + g, 33.0 - g
     out = []
     for (a, b) in A18["top_segs"]:
         out.append(box(xo, wr1, a, b, zt, zt + t))
-        out.append(prism_y([(xo, zt + 0.01), (wl0 - hx / 2.0, zt - hh), (wl0, zt + 0.01)], a, b))
+        out.append(prism_y([(xo, zt + 0.01), (xa, zt - hh), (wl0, zt + 0.01)], a, b))
     a, b = A18["bot_seg"]
     out.append(box(xo, wr1, a, b, zb - t, zb))
-    out.append(prism_y([(xo, zb - 0.01), (wl0, zb - 0.01), (wl0 - hx / 2.0, zb + hh)], a, b))
+    out.append(prism_y([(xo, zb - 0.01), (wl0, zb - 0.01), (xa, zb + hh)], a, b))
     y0, y1 = A18["rib_cover_y"]
     w = A18["rib_w"] / 2.0
     for zc in A18["rib_cover_z"]:
@@ -1641,6 +1674,10 @@ def a18_cage_clips(fins):
     Each leg flexes in x (into a 0.5 room in its floor slot); its barb (0.5, 45 deg lead-in, flat top) snaps under the floor
     in a 0.8 recess, so nothing reaches below the floor's underside (the EVA sheet stays whole)."""
     t, room, bb, (zb0, zb1), top, c = (A18["leg_t"], A18["leg_room"], A18["barb"], A18["barb_z"], A18["leg_top"], A18["clr"])
+    fin_y, slit = A18["fin_clip_y"], 0.5
+    if A20_ON:      # A20: catch 0.35 -> 0.65, fin legs 1.4 thick x 5.0 long (the fin catch could crush under a hard hit)
+        room, bb, (zb0, zb1), fin_y = A20["leg_room"], A20["barb"], A20["barb_z"], A20["fin_clip_y"]
+        slit = room + 0.1
     late, cc, bc = [], [], []
 
     def barb_xz(x1, y0, y1):
@@ -1652,7 +1689,7 @@ def a18_cage_clips(fins):
     for (sx, sy0) in A18["rear_clips"]:
         x0, x1 = sx - t / 2.0, sx + t / 2.0
         late += [box(x0, x1, sy0, 212.0, zb0, top + 2.0), barb_xz(x1, sy0, 212.0)]
-        cc += [box(x0 - 0.5, x0, sy0 - 1.0, 212.01, 4.9, top), box(x1, x1 + 0.5, sy0 - 1.0, 212.01, 4.9, top)]
+        cc += [box(x0 - slit, x0, sy0 - 1.0, 212.01, 4.9, top), box(x1, x1 + 0.5, sy0 - 1.0, 212.01, 4.9, top)]
         bc += floor(x0, x1, sy0, 212.0 + 0.1)
     bx0, bx1 = A16["board"][0], A16["board"][1]
     seen = {}
@@ -1661,10 +1698,12 @@ def a18_cage_clips(fins):
         if bx0 < f_["x"][0] and f_["x"][1] < bx1 and not (A16["ffs"][0] <= f_["x"][0] and f_["x"][1] <= A16["ffs"][1]):
             if xc not in seen or f_["x"][1] - f_["x"][0] > seen[xc][1] - seen[xc][0]:
                 seen[xc] = tuple(f_["x"])
-    y0, y1 = A18["fin_clip_y"]
+    y0, y1 = fin_y
     for (fx0, fx1) in seen.values():
-        v = (fx1 - fx0) / 2.0
         fxc = (fx0 + fx1) / 2.0
+        if A20_ON:                                   # A20: leg thinner than the fin, centred on it
+            fx0, fx1 = fxc - A20["fin_leg_t"] / 2.0, fxc + A20["fin_leg_t"] / 2.0
+        v = (fx1 - fx0) / 2.0
         # leg with a 45 deg V on its +y side (the cage prints on its back: that side faces down)
         late.append(prism_z([(fx0, y0), (fx1, y0), (fx1, y1), (fxc, y1 + v), (fx0, y1)], zb0, top + 0.01))
         late.append(prism_z([(fx1 - 0.01, y0), (fx1 + bb, y0), (fx1 + bb, y1 - bb), (fx1 - 0.01, y1 + 0.01)], zb0, zb1)
@@ -1672,3 +1711,28 @@ def a18_cage_clips(fins):
         bc += floor(fx0, fx1, y0, y1 + v)
     ADJUST.add("A18")
     return late, cc, bc
+
+
+def a20_sb(fx, side=None):
+    """A20 (adds, cuts) of the bed under the sensor board (SB in a module, EL / ER in the end parts): the board rests on the
+    left post (unchanged) + edge-row pads; the floor is cut away under it (a20_fix.sb_bed)."""
+    boards = [p for p in fx["bought"] if re.match(r"^sensor board (SB|EL|ER)", p["part"])]
+    posts = [p for p in fx["frame"] if p["part"].startswith("sensor board support post")]
+    if not boards or not posts:
+        return [], []
+    b = boards[0]
+    ys = [q[0] for q in b["side"]]
+    kind = side or "module"
+    ADJUST.add("A20")
+    return a20_fix.sb_bed((b["x"][0], b["x"][1], min(ys), max(ys)), max(p["x"][1] for p in posts), A20["bridges"][kind])
+
+
+def a20_pocket(parts):
+    """A20 steel pocket of one lever (its own x): inner wall faces 0.1 further out (walls 0.69 -> 0.59), rear face 0.5 behind
+    the steel's rear face, 0.25 above / below the steel -> 40.5 x 19.5 x 9.4 for the 40 x 19 x 9 block."""
+    (_wl0, wl1), (wr0, _wr1) = _a18_walls(parts)
+    st = [p for p in parts if p["part"].startswith("steel block")][0]
+    ys = [q[0] for q in st["side_rigid0"]]
+    zs = [q[1] for q in st["side_rigid0"]]
+    t, r, dz = A20["wall_thin"], A20["rear_add"], A20["z_add"]
+    return (wl1 - t, wr0 + t, min(ys), max(ys) + r, min(zs) - dz, max(zs) + dz)

@@ -3,7 +3,7 @@
 They are bought stock cut to length (steel strip i119, SUS304 rods i066 / i067), so stl/print has no file for them. The
 bundles get a folder 05_가공부품_출력아님 with one STL per part (model size, for checking and for a slicer-free 3D view)
 and a dimensioned cutting sheet 가공도면_무게추·샤프트.svg (sizes, tolerances, quantities, cut plans from the 1 m stock).
-Sizes: DESIGN 4장 / 10장 (강철 9 × 19 × 40, 칸 40.0이라 40 −0.1/−0.3, 두께 8.9~9.1), CAD README A4 (봉 161.4 ± 0.2),
+Sizes: DESIGN 4장 / 10장 (강철 9 × 19 × 40; A20 칸 40.5 × 19.5 × 9.4, 리브까지 40.2 × 9.23), CAD README A4 (봉 161.4 ± 0.2),
 tools.md (공구 봉 토막 K 31.6 · L 20.6 · 교정 31.6), final_items i119 (띠 1 m에서 41.3 간격 24개).
 """
 import io
@@ -57,7 +57,7 @@ def readme_lines():
         lines.append("  %d개  %s  %s" % (qty, stem, note))
     lines += [
         "  %s: 치수·공차·수량·1 m 재료에서 자르는 배치. STL은 모델 치수 그대로(확인·보기용, 출력하지 않음)." % SHEET,
-        "  강철 블록: 40 −0.1/−0.3(39.7~39.9, 캐리어 칸 40.0), 두께 8.9~9.1만 씀, 모따기 없이 버만 제거. 띠 1 m에서 %.1f 간격 24개." % STRIP_PITCH,
+        "  강철 블록: 39.7~40.2로 자름(A20 캐리어 칸 40.5, 뒤 리브까지 40.2), 두께 9.25·폭 19.5 이하면 그대로 씀(칸 9.4 · 19.5), 모따기 없이 버만 제거. 띠 1 m에서 %.1f 간격 24개." % STRIP_PITCH,
         "  봉: Ø4 h9 SUS304, %.1f ± 0.2, 양 끝 버 제거. 1 m 봉 하나에서 6개(봉 4개 = 모듈 14 + 예비 2 + 끝 부속·공구 토막)." % ROD,
     ]
     return lines
@@ -116,13 +116,13 @@ def sheet_svg(date):
     o.append(_t(30, 110, "① 무게 추 — 강철 블록 9 × 19 × 40", 16, weight=700))
     fx, fy = 60, 172
     o.append(_rect(fx, fy, 40 * S, 19 * S, STEEL))
-    o += _dim_h(fx, fx + 40 * S, fy - 14, "40 −0.1 / −0.3  (39.7 ~ 39.9)")
+    o += _dim_h(fx, fx + 40 * S, fy - 14, "39.7 ~ 40.2 (A20 칸 40.5)")
     o += _dim_v(fx - 16, fy, fy + 19 * S, "19")
     o.append(_t(fx, fy + 19 * S + 18, "윗면 (40 × 19)", 12, color=MUTE))
     gy = fy + 19 * S + 44
     o.append(_rect(fx, gy, 40 * S, 9 * S, STEEL))
     o += _dim_v(fx - 16, gy, gy + 9 * S, "9")
-    o.append(_t(fx + 40 * S + 14, gy + 9 * S / 2 + 4, "두께 8.9 ~ 9.1만 씀 (캘리퍼스)", 12, color=DIM))
+    o.append(_t(fx + 40 * S + 14, gy + 9 * S / 2 + 4, "두께 9.25 이하 (A20 칸 9.4)", 12, color=DIM))
     o.append(_t(fx, gy + 9 * S + 18, "앞면 (40 × 9)", 12, color=MUTE))
     sx = fx + 40 * S + 70
     o.append(_rect(sx, fy, 9 * S, 19 * S, STEEL))
@@ -130,8 +130,8 @@ def sheet_svg(date):
     o.append(_t(sx, fy + 19 * S + 18, "옆면 (19 × 9)", 12, color=MUTE))
     nx = 470
     notes = ["재료: SS400 평철 9T × 19 (i119, 1 m 띠 4장)",
-             "길이 40 −0.1/−0.3: 레버 캐리어의 강철 칸이 40.0이라 딱 맞게",
-             "두께 8.9 ~ 9.1: 칸 9.2, 접착층 한쪽 0.10 (MS 폴리머)",
+             "길이 39.7 ~ 40.2: A20 캐리어 칸 40.5, 뒤 크러시 리브까지 40.2",
+             "두께·폭: 9.25 · 19.5 이하 (A20 칸 9.4 · 19.5, 덮개 리브까지 9.23)",
              "모서리 모따기 없음, 자른 면의 버만 줄로 제거",
              "두 19 × 40 옆면 = 접착면: 붙이기 전에 #120 사포 → 알코올",
              "수량: 옥타브당 12 · 처음 한 번 +1 (가짜 레버 T2에 끼움)",
