@@ -1,4 +1,4 @@
-"""Song-clock combo type and the rooftop broadcast's hundred-hit cut-in."""
+"""Song-clock combo counter, radio checkpoints and hundred-hit encore stamps."""
 
 from __future__ import annotations
 
@@ -141,6 +141,44 @@ class ComboDisplay:
                 surf.fill(accent if i < tier else mix(self.dark, D.STEEL, .35),
                           (x, y, max(1, pitch - 2), max(1, label_h // 6)))
 
+    def checkpoint(self, surf, rect, value: int, phase: float) -> None:
+        """Pulse at 50, 150, ... over the caller's roughly 600 ms interval."""
+        if value <= 0 or value % 100 != 50 or not 0 <= phase < 1:
+            return
+        box = pygame.Rect(rect)
+        with _clipped(surf, box) as visible:
+            if not visible:
+                return
+            h = max(1, round(.76 * box.h))
+            pad = max(1, round(.17 * h))
+            icon_w = round(.82 * h)
+            gap = max(1, round(.13 * h))
+            room = max(2, box.w - icon_w - 2 * pad - gap)
+            word = self._word("COMBO", max(1, round(.39 * h)), round(.55 * room), self.signal)
+            number = self._word(str(value), max(1, round(.62 * h)), room - word.get_width(), D.CREAM)
+            w = min(box.w, icon_w + number.get_width() + gap + word.get_width() + 2 * pad)
+            badge = pygame.Surface((w, h), pygame.SRCALPHA)
+            cut = min(pad, w // 2)
+            rim = [(cut, 0), (w - 1, 0), (w - 1, h - 1 - cut), (w - 1 - cut, h - 1),
+                   (0, h - 1), (0, cut)]
+            body = mix(self.dark, self.signal, .13)
+            pygame.draw.polygon(badge, body, rim)
+            pygame.draw.polygon(badge, mix(body, self.signal, .58), rim, 1)
+
+            center = (pad + icon_w // 2, h // 2)
+            for delay in (0., .18):
+                wave = (phase - delay) / .58
+                if 0 <= wave < 1:
+                    radius = max(1, round(h * (.13 + .26 * wave)))
+                    pygame.draw.circle(badge, mix(self.signal, body, wave), center, radius, 1)
+            pygame.draw.circle(badge, D.CREAM, center, max(1, round(.08 * h)))
+            x = pad + icon_w
+            badge.blit(number, number.get_rect(midleft=(x, h // 2)))
+            badge.blit(word, word.get_rect(midleft=(x + number.get_width() + gap, h // 2)))
+            if phase > .72:
+                badge.set_alpha(round(255 * (1 - phase) / .28))
+            surf.blit(badge, badge.get_rect(midleft=box.midleft))
+
     def _make_plate(self, w, h, value):
         plate = pygame.Surface((w, h), pygame.SRCALPHA)
         body = D.GLASS if self.pixel else (62, 39, 66)
@@ -206,14 +244,12 @@ class ComboDisplay:
         with _clipped(surf, box) as visible:
             if not visible:
                 return
-            enter = max(0., 1 - phase / .20)
-            leave = max(0., (phase - .79) / .21)
-            x = box.x + round(box.w * (leave ** 2 - enter ** 3))
-            y = box.y + round(box.h * .08 * (enter - leave))
             base, face, position = self._plate(box.w, box.h, value)
             plate = base.copy()
-            if .23 < phase < .60:
-                self._foil_sweep(plate, face, position, (phase - .23) / .37)
+            if phase < .17:
+                self._foil_sweep(plate, face, position, .27 + .73 * phase / .17)
+            elif .25 <= phase < .43:
+                self._foil_sweep(plate, face, position, (phase - .25) / .18)
 
             # A live scope in the leading tip of the ribbon.
             cy = round(.65 * box.h)
@@ -229,7 +265,7 @@ class ComboDisplay:
             pygame.draw.lines(plate, self.signal, False, trace, max(1, round(box.h / 48)))
 
             # A short specular flash passes between two corners of the foil.
-            for px, py, at in ((.535, .14, .27), (.60, .79, .49)):
+            for px, py, at in ((.535, .14, .045), (.60, .79, .32)):
                 shine = max(0., 1 - abs(phase - at) / .12)
                 if shine:
                     cx, cy = round(px * box.w), round(py * box.h)
@@ -237,4 +273,22 @@ class ComboDisplay:
                     n = max(1, r // 4)
                     pygame.draw.polygon(plate, _FOIL, [(cx, cy - r), (cx + n, cy - n), (cx + r, cy), (cx + n, cy + n),
                                                        (cx, cy + r), (cx - n, cy + n), (cx - r, cy), (cx - n, cy - n)])
-            surf.blit(plate, (x, y))
+            if phase < .20:
+                # Foil flecks fly out from the perimeter as the stamp makes contact.
+                t = phase / .20
+                tail = .68 * (1 - t)
+                edge = max(1, round(.043 * box.h * (1 - t)))
+                for px, py, dx, dy in ((.10, .21, -.08, -.17), (.11, .55, -.10, .11),
+                                       (.27, .84, -.09, .14), (.71, .14, .09, -.12),
+                                       (.89, .24, .10, -.15), (.89, .67, .09, .18)):
+                    x = (px + dx * t) * box.w
+                    y = (py + dy * t) * box.h
+                    tip = (round(x + dx * tail * box.w), round(y + dy * tail * box.h))
+                    pygame.draw.polygon(plate, _FOIL if dy < 0 else _GOLD,
+                                        [(round(x), round(y - edge)), tip, (round(x), round(y + edge))])
+
+                punch = (1 - t) ** 2 * math.cos(math.tau * t)
+                plate = self.resize(plate, _size(box.w * (1 + .15 * punch), box.h * (1 - .16 * punch)))
+            if phase > .73:
+                plate.set_alpha(round(255 * (1 - phase) / .27))
+            surf.blit(plate, plate.get_rect(center=box.center))
