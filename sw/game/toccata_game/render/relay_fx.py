@@ -17,21 +17,35 @@ from .geometry import KeyLayout
 @dataclass(frozen=True)
 class _Strike:
     ms: int
-    reach: int
+    reach: int  # Half-width in pixels at the 1024-wide logical resolution.
     lift: int
-    dots: int  # per hammer
+    grains: int  # per side
     alpha: int
 
 
 _STRIKES = {
-    PERFECT: _Strike(320, 74, 54, 3, 250),
-    GREAT: _Strike(250, 56, 38, 2, 222),
-    GOOD: _Strike(185, 39, 24, 1, 186),
+    PERFECT: _Strike(255, 94, 128, 5, 255),
+    GREAT: _Strike(225, 79, 103, 4, 237),
+    GOOD: _Strike(195, 61, 76, 3, 211),
 }
 _MISS_MS = 120
-_CLOSE_MS = 215
-_SIGNAL_MS = 360
+_PINCH_MS = 48
+_CLOSE_MS = 245
+_SIGNAL_MS = 335
 _CAPACITY = 48
+
+# Each fragment leaves at a different angle. Steep and shallow paths come first
+# so even a GOOD has a readable silhouette with its smaller particle budget.
+_GRAINS = ((.32, 1.04, 6), (1.03, .34, 6), (.72, .78, 5), (.91, .58, 4), (.13, .95, 4))
+# Points run from the contact point out into the positive half of the lane.
+_SWEEP = ((.04, .01), (.39, .15), (.95, .27), (1.02, .24), (.64, .07), (.33, .015))
+_WAVE = ((-1, 0), (-.48, .27), (-.23, .55), (-.49, .91), (-.29, 1),
+         (0, .61), (0, .40), (-.39, .08))
+_PETAL = ((.08, .035), (.37, .38), (.75, .59), (.64, .35), (.35, .13))
+_SPLINTER = ((.13, .12), (.22, .50), (.44, .86), (.39, .52), (.27, .29))
+_GLINT = ((.20, .12), (.43, .31), (.66, .49), (.51, .30))
+_CORE = ((-1, .03), (-.34, .20), (-.55, .48), (-.13, .33), (.06, 1),
+         (.16, .43), (.57, .63), (.38, .29), (1, .08), (.31, 0), (-.41, 0))
 
 
 @dataclass(frozen=True)
@@ -41,6 +55,8 @@ class _Cue:
     grade: str
     closing: bool
     broadcast: bool
+    velocity: int
+    lean: int
 
 
 _CUE_TIME = attrgetter("at")
@@ -52,28 +68,32 @@ class RelayFX:
         self.beat_ms = beat_ms
         self._cues: list[_Cue] = []
         self._inks = {
-            PERFECT: D.CYAN if pixel else D.MINT,
-            GREAT: D.WHITE if pixel else D.CREAM,
-            GOOD: D.STEEL if pixel else D.ORANGE,
+            PERFECT: D.CYAN if pixel else (55, 223, 197),
+            GREAT: (156, 199, 255) if pixel else (254, 200, 111),
+            GOOD: D.STEEL if pixel else (255, 145, 132),
             MISS: D.HOT if pixel else D.PINK,
         }
-        self._accent = D.HOT if pixel else D.ORANGE
-        # Leave the landing rule clear. A single reusable alpha strip also respects
-        # the destination's existing clip without changing it for subsequent notes.
-        bottom = round(layout.land_y) - 4
-        self._top = max(top, bottom - 88)
-        self._strip = pygame.Surface((layout.width, bottom - self._top), pygame.SRCALPHA)
-        self._floor = self._strip.get_height() - 1
-        self._reach = max(1, round(layout.white_w * 0.5))
+        self._accent = D.HOT if pixel else (255, 146, 112)
+        self._white = (255, 255, 250)
+        # Drawing into a reusable strip leaves the landing rule clear and obeys
+        # the destination clip. One unit is one pixel at the stage's design size.
+        key_scale = layout.white_w / (1024 / 7)
+        bottom = round(layout.land_y) - max(1, round(4 * key_scale))
+        self._scale = max(0., min(key_scale, (bottom - top) / 148))
+        height = math.ceil(148 * self._scale)
+        self._top = bottom - height
+        self._strip = pygame.Surface((layout.width, height), pygame.SRCALPHA)
+        self._floor = height - 1
 
-    def judged(self, judgment: Judgment, combo: int) -> None:
-        """Call once per decision with ScoreKeeper.combo immediately after add()."""
+    def judged(self, judgment: Judgment, combo: int, velocity: int = 80) -> None:
+        """Queue a score decision; a missing MIDI velocity uses a normal attack."""
         center = self.layout.x(judgment.key)
         if center is None:
             return
         success = judgment.grade != MISS
         cue = _Cue(judgment.at, round(center), judgment.grade,
-                   success and judgment.part == HOLD, success and combo > 0 and combo % 10 == 0)
+                   success and judgment.part == HOLD, success and combo > 0 and combo % 10 == 0,
+                   min(127, max(0, velocity)) if success else 0, 1 if judgment.note % 2 else -1)
         # Judge.update can flush multiple pitches out of timestamp order. Keep the
         # newest decisions even when old expirations arrive after a recent strike.
         index = bisect_right(self._cues, cue.at, key=_CUE_TIME)
@@ -84,12 +104,13 @@ class RelayFX:
             del self._cues[0]
 
     def reset(self) -> None:
-        """Clear a reused view on retry. A newly constructed view is already clear."""
         self._cues.clear()
 
     def draw(self, surface: pygame.Surface, now: float, judge: Judge) -> None:
         """Blit onto the logical playfield after its background and before its notes."""
         del self._cues[:bisect_right(self._cues, now - _SIGNAL_MS, key=_CUE_TIME)]
+        if self._scale <= 0:
+            return
         painted = False
         for key in range(self.layout.base, self.layout.base + 12):
             hold = judge.active_hold(key)
@@ -110,10 +131,10 @@ class RelayFX:
             strike = _STRIKES[cue.grade]
             if cue.closing:
                 if age < _CLOSE_MS:
-                    self._close(cue, strike, age / _CLOSE_MS)
+                    self._close(cue, strike, age)
                     painted = True
             elif age < strike.ms:
-                self._hammer(cue, strike, age / strike.ms)
+                self._burst(cue, strike, age / strike.ms)
                 painted = True
             if cue.broadcast:
                 self._signal(cue.x, age / _SIGNAL_MS)
@@ -122,75 +143,127 @@ class RelayFX:
             surface.blit(self._strip, (0, self._top))
             self._strip.fill((0, 0, 0, 0))
 
-    def _hammer(self, cue: _Cue, strike: _Strike, phase: float) -> None:
-        spread = 1 - (1 - phase) ** 2
-        span = round(6 + (min(self._reach, strike.reach) - 6) * spread)
-        lift = round(9 + (strike.lift - 9) * spread)
+    def _facet(self, ink, x, y, width, height, points):
+        """Draw a filled facet in local coordinates; positive height points up."""
+        pygame.draw.polygon(self._strip, ink, [(round(x + u * width), round(y - v * height))
+                                               for u, v in points])
+
+    def _burst(self, cue: _Cue, strike: _Strike, phase: float, *, release=False) -> None:
+        size = self._scale * (.83 + .17 * cue.velocity / 127)
+        reach = strike.reach * size
+        lift = strike.lift * size
+        if release:
+            reach *= 1.09
+            lift *= .77
         color = self._inks[cue.grade]
-        iron = (*color, round(strike.alpha * max(0, 1 - phase / 0.78)))
-        afterglow = (*color, round(strike.alpha * (1 - phase)))
-        # A flat ellipse reads as contact with the keyboard, even during a hold
-        # whose wide labelled head covers the origin of the burst.
-        ring_w = 2 * span + 18
-        pygame.draw.ellipse(self._strip, afterglow, (cue.x-ring_w//2, self._floor-13, ring_w, 11), 2)
+        # The arrival frame already has a silhouette. Open it quickly, then pull
+        # the bright material back into the key as the loose grains keep flying.
+        opening = 1 - (1 - min(1., phase / .34)) ** 2
+        body = max(0., 1 - max(0., phase - .17) / .40)
+        span = reach * (.76 + .24 * opening)
+        height = lift * (.72 + .28 * opening) * (.40 + .60 * body)
+        # A low, detached wave carries the hit sideways after the core collapses.
+        wave = max(0., 1 - phase / .82)
+        if wave > 0:
+            for side in (-1, 1):
+                edge = cue.x + side * reach * (1.17 - .52 * wave ** 2)
+                self._facet((*color, round(strike.alpha * wave)), edge, self._floor - size * (2 + 4 * opening),
+                            side * reach * (.16 + .24 * wave), size * (8 + 5 * wave), _WAVE)
+        if body > 0:
+            alpha = round(strike.alpha * body)
+            for side in (-1, 1):
+                width = side * span
+                h = height * (1.06 if side == cue.lean else .88)
+                self._facet((*color, alpha), cue.x, self._floor, width, h, _SWEEP)
+                self._facet((*self._accent, round(alpha * .84)), cue.x, self._floor, width, h, _SPLINTER)
+                self._facet((*color, alpha), cue.x, self._floor, width, h, _PETAL)
+                self._facet((*self._white, round(alpha * .86)), cue.x, self._floor, width, h, _GLINT)
+            self._facet((*self._white, alpha), cue.x, self._floor, cue.lean * span * .65,
+                        height * .54, _CORE)
+        self._grains(cue, strike, phase, reach, lift)
+
+    def _grains(self, cue, strike, phase, reach, lift):
+        scale = self._scale
+        travel = .64 + .54 * (1 - (1 - phase) ** 3)
+        fall = .42 * phase ** 2
+        fade = (1 - phase) ** .93
+        lag = max(0., phase - .10)
+        prev = .64 + .54 * (1 - (1 - lag) ** 3)
         for side in (-1, 1):
-            tip = cue.x + side * span
-            y = self._floor - lift
-            if iron[3]:
-                root = cue.x + side * round(span * .40)
-                pygame.draw.polygon(self._strip, iron, [(root, self._floor-5), (tip, y-5),
-                                                        (tip+side*2, y+3), (root+side*6, self._floor-5)])
-            for dot in range(strike.dots):
-                dx = round((0.42 + 0.20 * dot) * span)
-                dy = lift + 3 + round((4 + dot * 6) * spread)
-                size = 5 if dot == 0 else 3
-                self._strip.fill(afterglow, (cue.x + side * dx - 1, self._floor - dy, size, size))
+            for i in range(strike.grains):
+                u, v, diameter = _GRAINS[i]
+                sideways = side * reach * u
+                upward = lift * v * (.96 if side == cue.lean else .84)
+                dx, dy = sideways * travel, upward * travel - lift * fall
+                x, y = round(cue.x + dx), round(self._floor - dy)
+                color = self._accent if i == 1 else self._inks[cue.grade]
+                # The trail turns over as the fragment starts to fall.
+                px = round(cue.x + sideways * prev)
+                py = round(self._floor - upward * prev + lift * .42 * lag ** 2)
+                radius = max(1, round(diameter * scale * (.55 + .45 * fade)))
+                pygame.draw.line(self._strip, (*color, round(113 * fade)), (px, py), (x, y),
+                                 max(1, radius // 2))
+                self._strip.fill((*color, round(strike.alpha * fade)),
+                                 (x - radius // 2, y - radius // 2, radius, radius))
+                if i < 2:
+                    chip = max(1, radius // 2)
+                    self._strip.fill((*self._white, round(strike.alpha * fade)),
+                                     (x - chip // 2, y - chip // 2, chip, chip))
 
     def _hold_pulse(self, key: int, age: float) -> None:
-        pulse = (1 + math.cos(math.tau * age / self.beat_ms)) / 2
+        beat = age / self.beat_ms
+        pulse = (1 + math.cos(math.tau * beat)) / 2
         color = self._accent if self.layout.is_black(key) else self._inks[PERFECT]
-        ink = (*color, round(135 + 100 * pulse))
-        x = round(self.layout.x(key))
-        # The guide head is up to 29 px tall and the hold rail is 18 px wide.
-        y = max(4, self._floor - 29 - round(4 * pulse))
-        gap = 16 + round(8 * pulse)
+        x = self.layout.x(key)
+        s = self._scale
+        # Outside the 18 px rail and above the 29 px guide head, two tapered
+        # ribbons breathe on the beat. Brighter flecks climb through each ribbon.
         for side in (-1, 1):
-            inner = x + side * gap
-            pygame.draw.lines(self._strip, ink, False,
-                              [(inner, y), (inner + side * 11, y), (inner + side * 18, y - 7)], 3)
-            for index in range(2):
-                step = (age / self.beat_ms + index * .5) % 1
-                self._strip.fill((*color, round(160 * (1-step))),
-                                 (x + side*(11+round(12*step)), y-5-round(24*step), 3, 4))
+            width = side * s * (25 + 7 * pulse)
+            floor = self._floor - 22 * s
+            self._facet((*color, round(112 + 53 * pulse)), x, floor, width, s * (50 + 9 * pulse),
+                        ((.42, 0), (.95, .34), (1.05, .72), (.78, 1), (.87, .57), (.69, .30)))
+            for i in range(2):
+                step = (beat + i * .5 + side * .08) % 1
+                dx = side * s * (17 + 12 * math.sin(math.pi * step))
+                y = self._floor - s * (31 + 59 * step)
+                self._facet((*self._white, round(207 * (1 - step))), x + dx, y, side * 4 * s, 8 * s,
+                            ((-.5, 0), (-1, .4), (.4, 1), (.5, .4)))
 
-    def _close(self, cue: _Cue, strike: _Strike, phase: float) -> None:
-        ink = (*self._inks[cue.grade], round(strike.alpha * (1 - phase ** 2)))
-        y = self._floor - 9
-        gap = round(min(self._reach, strike.reach) * (1 - min(1, phase / 0.68)) ** 2)
+    def _close(self, cue: _Cue, strike: _Strike, age: float) -> None:
+        if age >= _PINCH_MS:
+            self._burst(cue, strike, (age - _PINCH_MS) / (_CLOSE_MS - _PINCH_MS), release=True)
+            return
+        pinch = (1 - age / _PINCH_MS) ** 1.5
+        s = self._scale
+        color = self._inks[cue.grade]
         for side in (-1, 1):
-            inner = cue.x + side * gap
-            outer = inner + side * 5
-            pygame.draw.lines(self._strip, ink, False, [(outer, y - 4), (inner, y), (outer, y + 4)], 2)
-        if gap <= 2:
-            pygame.draw.polygon(self._strip, ink, [(cue.x, y - 3), (cue.x + 3, y),
-                                                  (cue.x, y + 3), (cue.x - 3, y)])
+            x = cue.x + side * (4 + strike.reach * .65 * pinch) * s
+            y = self._floor - s * (9 + 10 * pinch)
+            self._facet((*color, strike.alpha), x, y, side * 20 * s, s * (28 + 17 * pinch),
+                        ((0, .5), (.88, 1), (1, .91), (.53, .5), (1, .11), (.86, 0)))
+        self._facet((*self._white, strike.alpha), cue.x, self._floor, s * (9 + 11 * (1 - pinch)),
+                    s * (36 - 22 * pinch), ((-1, .27), (0, 1), (1, .27), (0, 0)))
 
     def _miss(self, x: int, phase: float) -> None:
-        y = self._floor - 6 + round(4 * phase)
+        s = self._scale
+        y = self._floor - (6 - 4 * phase) * s
         ink = (*self._inks[MISS], round(98 * (1 - phase)))
         for dx in (-7, 3):
-            self._strip.fill(ink, (x + dx, y, 5, 2))
+            self._strip.fill(ink, (round(x + dx * s), round(y), max(1, round(5 * s)), max(1, round(2 * s))))
 
     def _signal(self, x: int, phase: float) -> None:
-        # A small transmitting aerial above the two hammers. The wavefronts
-        # travel in pairs, away from the centre of the incoming note.
-        y = max(5, self._floor - 43)
-        ink = (*self._accent, round(232 * (1 - phase ** 2)))
-        pygame.draw.lines(self._strip, ink, False, [(x - 4, y + 9), (x, y), (x + 4, y + 9)], 2)
-        self._strip.fill(ink, (x - 2, y - 2, 4, 4))
+        s = self._scale
+        y = self._floor - s * (107 + 18 * phase)
+        alpha = round(244 * (1 - phase ** 2))
+        # A floating transmitter with two wide, flat-ended radio waves is only
+        # emitted on the tenth decision. It sits above the strike, clear of its core.
+        star = ((0, 1), (.26, .25), (1, 0), (.26, -.25), (0, -1), (-.26, -.25), (-1, 0), (-.26, .25))
+        self._facet((*self._accent, alpha), x, y, 12 * s, 14 * s, star)
+        self._facet((*self._white, alpha), x, y, 5 * s, 7 * s, star)
         for wave in (0, 1):
-            radius = 15 + round(22 * phase) + wave * 12
+            radius = (17 + 26 * phase + wave * 12) * s
             for side in (-1, 1):
-                edge = x + side * radius
-                pygame.draw.lines(self._strip, ink, False,
-                                  [(edge, y - 5), (edge + side * 3, y), (edge, y + 5)], 2)
+                self._facet((*self._accent, alpha), x + side * radius, y, side * 9 * s, (9 + wave * 4) * s,
+                            ((0, 1), (.40, 1), (1, .42), (1, -.42), (.40, -1), (0, -1),
+                             (.57, -.30), (.57, .30)))
