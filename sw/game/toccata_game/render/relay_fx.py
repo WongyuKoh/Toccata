@@ -24,9 +24,9 @@ class _Strike:
 
 
 _STRIKES = {
-    PERFECT: _Strike(250, 33, 18, 3, 245),
-    GREAT: _Strike(205, 27, 14, 2, 215),
-    GOOD: _Strike(155, 20, 10, 1, 170),
+    PERFECT: _Strike(320, 74, 54, 3, 250),
+    GREAT: _Strike(250, 56, 38, 2, 222),
+    GOOD: _Strike(185, 39, 24, 1, 186),
 }
 _MISS_MS = 120
 _CLOSE_MS = 215
@@ -61,10 +61,10 @@ class RelayFX:
         # Leave the landing rule clear. A single reusable alpha strip also respects
         # the destination's existing clip without changing it for subsequent notes.
         bottom = round(layout.land_y) - 4
-        self._top = max(top, bottom - 56)
+        self._top = max(top, bottom - 88)
         self._strip = pygame.Surface((layout.width, bottom - self._top), pygame.SRCALPHA)
         self._floor = self._strip.get_height() - 1
-        self._reach = max(1, round(layout.white_w * 0.23))
+        self._reach = max(1, round(layout.white_w * 0.5))
 
     def judged(self, judgment: Judgment, combo: int) -> None:
         """Call once per decision with ScoreKeeper.combo immediately after add()."""
@@ -129,30 +129,39 @@ class RelayFX:
         color = self._inks[cue.grade]
         iron = (*color, round(strike.alpha * max(0, 1 - phase / 0.78)))
         afterglow = (*color, round(strike.alpha * (1 - phase)))
+        # A flat ellipse reads as contact with the keyboard, even during a hold
+        # whose wide labelled head covers the origin of the burst.
+        ring_w = 2 * span + 18
+        pygame.draw.ellipse(self._strip, afterglow, (cue.x-ring_w//2, self._floor-13, ring_w, 11), 2)
         for side in (-1, 1):
             tip = cue.x + side * span
             y = self._floor - lift
             if iron[3]:
-                pygame.draw.line(self._strip, iron, (cue.x + side * 3, self._floor - 1), (tip, y), 2)
-                pygame.draw.line(self._strip, iron, (tip - side * 2, y - 3), (tip + side * 2, y + 2), 4)
+                root = cue.x + side * round(span * .40)
+                pygame.draw.polygon(self._strip, iron, [(root, self._floor-5), (tip, y-5),
+                                                        (tip+side*2, y+3), (root+side*6, self._floor-5)])
             for dot in range(strike.dots):
                 dx = round((0.42 + 0.20 * dot) * span)
                 dy = lift + 3 + round((4 + dot * 6) * spread)
-                size = 3 if dot == 0 else 2
+                size = 5 if dot == 0 else 3
                 self._strip.fill(afterglow, (cue.x + side * dx - 1, self._floor - dy, size, size))
 
     def _hold_pulse(self, key: int, age: float) -> None:
         pulse = (1 + math.cos(math.tau * age / self.beat_ms)) / 2
         color = self._accent if self.layout.is_black(key) else self._inks[PERFECT]
-        ink = (*color, round(100 + 95 * pulse))
+        ink = (*color, round(135 + 100 * pulse))
         x = round(self.layout.x(key))
         # The guide head is up to 29 px tall and the hold rail is 18 px wide.
         y = max(4, self._floor - 29 - round(4 * pulse))
-        gap = 13 + round(5 * pulse)
+        gap = 16 + round(8 * pulse)
         for side in (-1, 1):
             inner = x + side * gap
             pygame.draw.lines(self._strip, ink, False,
-                              [(inner, y), (inner + side * 6, y), (inner + side * 10, y - 4)], 2)
+                              [(inner, y), (inner + side * 11, y), (inner + side * 18, y - 7)], 3)
+            for index in range(2):
+                step = (age / self.beat_ms + index * .5) % 1
+                self._strip.fill((*color, round(160 * (1-step))),
+                                 (x + side*(11+round(12*step)), y-5-round(24*step), 3, 4))
 
     def _close(self, cue: _Cue, strike: _Strike, phase: float) -> None:
         ink = (*self._inks[cue.grade], round(strike.alpha * (1 - phase ** 2)))
@@ -180,7 +189,7 @@ class RelayFX:
         pygame.draw.lines(self._strip, ink, False, [(x - 4, y + 9), (x, y), (x + 4, y + 9)], 2)
         self._strip.fill(ink, (x - 2, y - 2, 4, 4))
         for wave in (0, 1):
-            radius = 7 + round(6 * phase) + wave * 6
+            radius = 15 + round(22 * phase) + wave * 12
             for side in (-1, 1):
                 edge = x + side * radius
                 pygame.draw.lines(self._strip, ink, False,
