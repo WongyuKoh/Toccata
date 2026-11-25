@@ -78,6 +78,8 @@ class BackingTrackPlayer:
         self._speed = speed
         original = self._mixer.Sound(file=path)
         frames = memoryview(original).nbytes // 2
+        if not frames:
+            raise ValueError(f"믹서가 음원에서 샘플을 읽지 못했습니다: {path}")
         self.length_ms = frames * 1000 / self._rate
         self._sound = original
         if speed != 1.0 and frames:
