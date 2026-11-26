@@ -31,6 +31,17 @@ PIANO_TOUCH_BEATS = {
     242, 244, 250, 256, 257, 261,  # Verse 8: return to C/G
     273.5, 275, 276, 283, 293, 294, 298,  # Verse 9: treble Bb recedes to bass C
 }
+# Pedal down/up in SSC beats, before offset_ms, on the same clock as the keys.
+PIANO_PEDAL_BEATS = (
+    (49, 54), (57, 60),       # Verse 2A: lift between the two offbeat Eb/Bb calls
+    (97, 101),                # Verse 3B: clear C/Bb before its echo
+    (120.5, 124), (134.5, 138),  # Verse 4: let the short C and G holds ring in turn
+    (161, 167),               # Verse 5B: join alternating hands, lift before G
+    (186.5, 191),             # Verse 6A: carry G into C at the end of the run
+    (207.5, 211.5),           # Verse 7A: sustain the opening C/Bb accent
+    (243.5, 248.5), (255.5, 260.5),  # Verse 8: Eb/Bb, then the long C under G
+    (297.5, 301.5),           # Verse 9B: let the last piano C decay before Fin
+)
 SSC_SHA256 = "a594bd13b0728ecb2e9eb8e56ddb0e1744c0d2eef80466a42ea299703615e426"
 OGG_SHA256 = "6eb052cf8081ebb01d4b30e8db34e9eeca692635e2c1ed3ba7f7bd131c1b65c3"
 MIXER_FILE = "mixer.flac"
@@ -129,6 +140,13 @@ def main() -> None:
             "audio_length_ms": audio_ms,
             "notes": convert_notes(chart["NOTES"], beat_ms, piano=piano), "phrases": phrases,
         }
+        if piano:
+            pedals = []
+            for down, up in PIANO_PEDAL_BEATS:
+                start = round(Fraction(down) * beat_ms)
+                end = round(Fraction(up) * beat_ms)
+                pedals.append({"t": start, "d": end - start})
+            result["pedals"] = pedals
         output = CHARTS / f"{chart_id}.chart.json"
         data = (json.dumps(result, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
         if not output.exists() or output.read_bytes() != data:
