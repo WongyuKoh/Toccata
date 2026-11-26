@@ -31,16 +31,19 @@ PIANO_TOUCH_BEATS = {
     242, 244, 250, 256, 257, 261,  # Verse 8: return to C/G
     273.5, 275, 276, 283, 293, 294, 298,  # Verse 9: treble Bb recedes to bass C
 }
-# Pedal down/up in SSC beats, before offset_ms, on the same clock as the keys.
-PIANO_PEDAL_BEATS = (
-    (49, 54), (57, 60),       # Verse 2A: lift between the two offbeat Eb/Bb calls
-    (97, 101),                # Verse 3B: clear C/Bb before its echo
-    (120.5, 124), (134.5, 138),  # Verse 4: let the short C and G holds ring in turn
-    (161, 167),               # Verse 5B: join alternating hands, lift before G
-    (186.5, 191),             # Verse 6A: carry G into C at the end of the run
-    (207.5, 211.5),           # Verse 7A: sustain the opening C/Bb accent
-    (243.5, 248.5), (255.5, 260.5),  # Verse 8: Eb/Bb, then the long C under G
-    (297.5, 301.5),           # Verse 9B: let the last piano C decay before Fin
+# SSC onset beat, damping beat, MIDI keys handed from fingers to sustain.
+PIANO_RESONANCE_BEATS = (
+    (50.5, 53.5, (70,)),     # Verse 2A: Bb over the two C/Eb answers
+    (56, 58.5, (60,)),       # Let the quiet C ring underneath the next Eb/Bb
+    (83.5, 85.5, (60,)),     # Verse 3A: C under the repeated Eb
+    (121, 124, (60,)),       # Verse 4A: hold C for one beat, carry it under G
+    (135, 137, (67,)),       # Verse 4B: swap hands, clear G at the C/Bb chord
+    (163.5, 166, (67,)),     # Verse 5B: connect G through Eb and the left-hand C
+    (187.5, 189.5, (60,)),   # Verse 6A: quiet C under the Bb and repeated G
+    (214, 216, (70,)),       # Verse 7A: ring past the short Bb hold into G and Eb
+    (244, 246, (63, 70)),    # Verse 8A: both voices of Eb/Bb ring under G
+    (256, 260, (60,)),       # Verse 8B: extend the three-beat C to the G/Bb chord
+    (283, 286, (70,)),       # Verse 9A: leave Bb above the descending G, Eb, C
 )
 SSC_SHA256 = "a594bd13b0728ecb2e9eb8e56ddb0e1744c0d2eef80466a42ea299703615e426"
 OGG_SHA256 = "6eb052cf8081ebb01d4b30e8db34e9eeca692635e2c1ed3ba7f7bd131c1b65c3"
@@ -88,6 +91,28 @@ def convert_notes(pattern: str, beat_ms: Fraction, *, piano: bool = False) -> li
     if holds:
         raise ValueError("끝나지 않은 홀드가 있습니다")
     return notes
+
+
+def convert_resonances(notes: list[dict], beat_ms: Fraction) -> list[dict]:
+    resonances = []
+    previous_end = 0
+    for onset, damping, keys in PIANO_RESONANCE_BEATS:
+        start = round(Fraction(onset) * beat_ms)
+        end = round(Fraction(damping) * beat_ms)
+        heads = {n["k"]: n for n in notes if n["t"] == start}
+        if start < previous_end or end - start > 2000:
+            raise ValueError(f"{onset}박의 울림 구간이 겹치거나 너무 깁니다")
+        for key in keys:
+            if key not in heads or end - start < heads[key]["d"] + 220:
+                raise ValueError(f"{onset}박에 건반 {key}를 페달로 넘길 수 없습니다")
+        following = [n for n in notes if start < n["t"] <= end]
+        if any(n["k"] in keys for n in following):
+            raise ValueError(f"{onset}박에서 남긴 음이 댐핑 전에 다시 시작합니다")
+        if not any(n["t"] < end for n in following):
+            raise ValueError(f"{onset}박의 울림 위에 연주할 음이 없습니다")
+        resonances.append({"t": start, "d": end - start, "keys": list(keys)})
+        previous_end = end
+    return resonances
 
 
 def main() -> None:
@@ -141,12 +166,7 @@ def main() -> None:
             "notes": convert_notes(chart["NOTES"], beat_ms, piano=piano), "phrases": phrases,
         }
         if piano:
-            pedals = []
-            for down, up in PIANO_PEDAL_BEATS:
-                start = round(Fraction(down) * beat_ms)
-                end = round(Fraction(up) * beat_ms)
-                pedals.append({"t": start, "d": end - start})
-            result["pedals"] = pedals
+            result["resonances"] = convert_resonances(result["notes"], beat_ms)
         output = CHARTS / f"{chart_id}.chart.json"
         data = (json.dumps(result, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
         if not output.exists() or output.read_bytes() != data:
