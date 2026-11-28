@@ -52,14 +52,14 @@
  "all_stl": {
   "path": "fin/parts/all_stl.zip.b64.txt",
   "name": "Toccata_출력STL_전체.zip",
-  "bytes": 2831371,
+  "bytes": 2831786,
   "files": 110,
   "matches_stl_print": true
  },
  "all_dxf": {
   "path": "fin/parts/all_dxf.zip.b64.txt",
   "name": "Toccata_부품도면_DXF_전체.zip",
-  "bytes": 2737897,
+  "bytes": 2737743,
   "files": 125
  },
  "by_file": {
@@ -5439,31 +5439,31 @@
    "file": "hardware/mechanical/cad/stl/print/09_기판지그/P-PED_페달기판지그_PED1장__1개.stl",
    "stl_name": "P-PED_페달기판지그_PED1장__1개.stl",
    "size_mm": [
-    70.0,
-    50.0,
+    71.12,
+    49.53,
     6.2
    ],
    "draw_ext": [
-    70.0,
-    50.0,
+    71.12,
+    49.53,
     6.2
    ],
-   "mass_g": 21.9,
-   "mass_g_print_est": 13.3,
+   "mass_g": 22.1,
+   "mass_g_print_est": 13.4,
    "print_min_est": 24.0,
-   "volume_cm3": 17.28,
-   "note": "PED 페달 보드 1장용 지그: 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
+   "volume_cm3": 17.4,
+   "note": "PED 페달 보드 1장용 지그 (71.12 × 49.53 = 구멍 28 × 20): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
    "extra": false,
    "ids": [],
    "svg": "fin/parts/P-09-01.svg",
    "zip": "fin/parts/P-09-01.zip.b64.txt",
    "zip_name": "Toccata_P-09-01_P-PED_페달기판지그_PED1장.zip",
    "bytes": {
-    "svg": 49861,
-    "zip": 121079,
-    "zip_b64": 161440,
+    "svg": 49397,
+    "zip": 121349,
+    "zip_b64": 161800,
     "stl": 302584,
-    "dxf": 170290
+    "dxf": 167172
    },
    "sheet": "A3",
    "scale": "1:1",
