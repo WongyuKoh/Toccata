@@ -52,6 +52,8 @@
     return s;
   }
   function polyPath(r) { return ringsPath([r]); }
+  // one ring [[y, z], ...] or several rings [[[y, z], ...], ...] (the CAD cuts keep their holes: drawn even-odd)
+  function anyPath(r) { return r && r.length && Array.isArray(r[0]) && Array.isArray(r[0][0]) ? ringsPath(r) : polyPath(r); }
 
   var started = false;
   function start() { if (started) return; started = true; boot(); }
@@ -85,6 +87,23 @@
     SENS = KA.sensor;
     // circuit revision (hardware/pcb/netlist/sheets.json, via export_sim.py)
     if (SYS.circuit && SYS.circuit.rev) [].forEach.call(sec.querySelectorAll('.sim-rev'), function (e) { e.textContent = SYS.circuit.rev; });
+    // audio chain nodes (bom.csv A702 / C701 / C702 / R701 + SCH-07, via export_sim.py): no part names typed into this page
+    // thresholds = firmware/src/keys.h (export_sim.py reads the #defines): fill every number the text shows
+    var TH = KA.thresholds || {}, pc = function (x) { return String(Math.round(100 * x)); };
+    if (TH.p_on) {
+      [].forEach.call(sec.querySelectorAll('.sim-pon'), function (e) { e.textContent = pc(TH.p_on); });
+      [].forEach.call(sec.querySelectorAll('.sim-pvlo'), function (e) { e.textContent = pc(TH.p_vel_lo); });
+      [].forEach.call(sec.querySelectorAll('.sim-pre'), function (e) { e.textContent = pc(TH.p_rearm); });
+      [].forEach.call(sec.querySelectorAll('.sim-vmap'), function (e) { e.textContent = KA.vmap.v_lo.toFixed(2) + '~' + KA.vmap.v_hi.toFixed(2); });
+    }
+    var AU = SYS.audio || {};
+    if (AU.amp) {
+      setText('sim-amp-s', AU.amp + ' · ' + AU.amp_chip);
+      setText('sim-amp-w', '약 ' + f(AU.w_ch, 0) + ' W/ch');
+      setText('sim-hpf-c', AU.hpf_c_total + ' (' + AU.hpf_c.split(' ')[0] + ')');
+      setText('sim-hpf-r', AU.hpf_r);
+      setText('sim-hpf-f', '약 ' + AU.hpf_fc + ' · W707');
+    }
     // settled rest vs design rest (the readouts at t = 0 show the settled values)
     (function restNote() {
       var W = KA.colours.white, B = KA.colours.black;
@@ -213,16 +232,24 @@
       setText('sim-side-sub', 'x = ' + f(sec_.xsec, 3) + ' (건반 ' + C.key + ' 밸런스 핀 면, 모듈 좌표)');
       // fixed parts
       (sec_.neighbours || []).forEach(function (nb) { sv('path', { d: ringsPath(nb.rings), 'class': 'm-nb', 'data-info': 'neighbour' }, gS); });
-      sv('path', { d: ringsPath(sec_.frame), 'class': 'm-frame', 'data-info': 'bed' }, gS);
-      // click regions over the one-piece frame: the print each region belongs to now (바닥틀 / 레버틀 / 밸런스 레일 / 가이드 탭)
-      (sec_.frame_hit || []).forEach(function (h) { sv('path', { d: ringsPath(h.rings), 'class': 'm-hit', 'data-info': h.k }, gS); });
-      var cls = { felt: 'm-felt', sbar: 'm-sbar', steel: 'm-steel', pcb: 'm-pcb', bar: 'm-bar', pad: 'm-pad', cover: 'm-cover' };
-      ['cover', 'bar', 'sbar', 'pcb', 'pad', 'felt', 'steel'].forEach(function (g) {
+      if (sec_.frame_parts && sec_.frame_parts.length) {
+        // CAD cut (2026-11-23): every frame print is its own outline - 바닥틀 / 레버틀 / 밸런스 레일 / 가이드 탭
+        sec_.frame_parts.forEach(function (fp) {
+          var p = sv('path', { d: ringsPath(fp.rings), 'class': 'm-frame', 'data-info': fp.k }, gS);
+          sv('title', null, p).textContent = fp.ko || fp.part;
+        });
+      } else {
+        sv('path', { d: ringsPath(sec_.frame), 'class': 'm-frame', 'data-info': 'bed' }, gS);
+        // click regions over the one-piece frame: the print each region belongs to now (바닥틀 / 레버틀 / 밸런스 레일 / 가이드 탭)
+        (sec_.frame_hit || []).forEach(function (h) { sv('path', { d: ringsPath(h.rings), 'class': 'm-hit', 'data-info': h.k }, gS); });
+      }
+      var cls = { felt: 'm-felt', sbar: 'm-sbar', steel: 'm-steel', pcb: 'm-pcb', bar: 'm-bar', pad: 'm-pad', cover: 'm-cover', eva: 'm-eva' };
+      ['eva', 'cover', 'bar', 'sbar', 'pcb', 'pad', 'felt', 'steel'].forEach(function (g) {
         (sec_.fixed[g] || []).forEach(function (it) {
-          var p = sv('path', { d: polyPath(it.ring), 'class': cls[g], 'data-info': it.info }, gS);
+          var p = sv('path', { d: it.rings ? ringsPath(it.rings) : polyPath(it.ring), 'class': cls[g], 'data-info': it.info }, gS);
           sv('title', null, p).textContent = it.ko || it.part;
           if (g === 'pad') drawn.pad = p;
-          if (g === 'felt' && /front felt/.test(it.part) && (C.key.indexOf('#') < 0 ? /white/.test(it.part) : /black/.test(it.part))) drawn.ffelt = p;
+          if (g === 'felt' && /front ?felt/.test(it.part) && (C.key.indexOf('#') < 0 ? /white/.test(it.part) : /black/.test(it.part))) drawn.ffelt = p;
         });
       });
       // spring (coil and long leg fixed while loaded)
@@ -232,14 +259,14 @@
       // lever (b = 0 frame)
       sec_.lever_beyond.forEach(function (r) { sv('path', { d: polyPath(r), 'class': 'm-beyond', 'data-info': 'lever' }, gL); });
       sv('path', { d: ringsPath(sec_.lever_cut), 'class': 'm-lever', 'data-info': 'lever' }, gL);
-      sec_.lever_steel.forEach(function (r) { drawn.steel = sv('path', { d: polyPath(r), 'class': 'm-steel', 'data-info': 'steel' }, gL); });
-      sec_.lever_felt.forEach(function (r) { drawn.lfelt = sv('path', { d: polyPath(r), 'class': 'm-felt', 'data-info': 'feltstrip' }, gL); });
+      sec_.lever_steel.forEach(function (r) { drawn.steel = sv('path', { d: anyPath(r), 'class': 'm-steel', 'data-info': 'steel' }, gL); });
+      sec_.lever_felt.forEach(function (r) { drawn.lfelt = sv('path', { d: anyPath(r), 'class': 'm-felt', 'data-info': 'feltstrip' }, gL); });
       sv('path', { d: 'M' + sp.short_leg_lf[0][0] + ',' + (-sp.short_leg_lf[0][1]) + 'L' + sp.short_leg_lf[1][0] + ',' + (-sp.short_leg_lf[1][1]), 'class': 'm-spring', 'data-info': 'spring' }, gL);
       // key (design frame)
       sec_.key_beyond.forEach(function (r) { sv('path', { d: polyPath(r), 'class': 'm-beyond', 'data-info': 'key' }, gK); });
       sv('path', { d: ringsPath(sec_.key_cut), 'class': C.key.indexOf('#') >= 0 ? 'm-keyb' : 'm-key', 'data-info': 'key' }, gK);
-      sec_.key_steel.forEach(function (r) { drawn.cap = sv('path', { d: polyPath(r), 'class': 'm-steel', 'data-info': 'capstan' }, gK); });
-      sec_.key_felt.forEach(function (r) { drawn.rfelt = sv('path', { d: polyPath(r), 'class': 'm-felt', 'data-info': 'restfelt' }, gK); });
+      sec_.key_steel.forEach(function (r, i) { var p = sv('path', { d: anyPath(r), 'class': 'm-steel', 'data-info': 'capstan' }, gK); if (!i) drawn.cap = p; });
+      sec_.key_felt.forEach(function (r) { drawn.rfelt = sv('path', { d: anyPath(r), 'class': 'm-felt', 'data-info': 'restfelt' }, gK); });
       sv('path', { d: polyPath(sec_.magnet_S), 'class': 'm-magS', 'data-info': 'magnet' }, gK);
       sv('path', { d: polyPath(sec_.magnet_N), 'class': 'm-magN', 'data-info': 'magnet' }, gK);
       // sensor element (diamond) - part of the world group so the inset shows it
@@ -368,11 +395,11 @@
         noteKf.classList.add('on');
       } else if (ev.t_rearm !== null && t >= ev.t_rearm) {
         setText('sim-r-note', '재무장 · note-off');
-        setText('sim-r-vel', '놓은 뒤 ' + f(ev.t50_after_release, 1) + ' ms에 자석이 50 % 돌아옴 → 다시 칠 수 있음');
+        setText('sim-r-vel', '놓은 뒤 ' + f(ev.t50_after_release, 1) + ' ms에 자석이 ' + Math.round(100 * (KA.thresholds.p_rearm || 0.5)) + ' % 돌아옴 → 다시 칠 수 있음');
         noteKf.classList.remove('on');
       } else {
         setText('sim-r-note', 'note-on 전');
-        setText('sim-r-vel', 'ADC ' + C.adc.noteon + '(자석 90 % 내려감)을 넘으면 note-on');
+        setText('sim-r-vel', 'ADC ' + C.adc.noteon + '(자석 ' + Math.round(100 * (KA.thresholds.p_on || 0.85)) + ' % 내려감)을 넘으면 note-on');
         noteKf.classList.remove('on');
       }
       // plots
@@ -695,7 +722,7 @@
           f(mb.sensor_rest, 2) + ' · ' + f(mb.sensor_bottom, 2) + ' · ' + f(mb.sensor_ff, 2) + ' mm'],
         ['1 N 정착 바닥 간격 (패드 있음)', f(W.gap_held_1N, 2) + ' mm', f(B.gap_held_1N, 2) + ' mm'],
         ['ADC 쉼 → 강체 바닥 (이 페이지 식)', W.adc.rest_design + ' → ' + W.adc.bottom_rigid, B.adc.rest_design + ' → ' + B.adc.bottom_rigid],
-        ['ADC 재무장 50 % · 1 N 바닥 · note-on 문턱 (가정)', W.adc.rearm + ' · ' + W.adc.held_1N + ' · ' + W.adc.noteon, B.adc.rearm + ' · ' + B.adc.held_1N + ' · ' + B.adc.noteon],
+        ['ADC 재무장 ' + Math.round(100 * (KA.thresholds.p_rearm || 0.5)) + ' % · 1 N 바닥 · note-on 문턱 (펌웨어 값)', W.adc.rearm + ' · ' + W.adc.held_1N + ' · ' + W.adc.noteon, B.adc.rearm + ' · ' + B.adc.held_1N + ' · ' + B.adc.noteon],
         ['자기장 쉼 · 강체 바닥 · 최대 과다', f(W.field.rest, 1) + ' · ' + f(W.field.bottom, 1) + ' · ' + f(W.field.over, 1) + ' mT', f(B.field.rest, 1) + ' · ' + f(B.field.bottom, 1) + ' · ' + f(B.field.over, 1) + ' mT']
       ];
       var tb = $('sim-mtbl');
@@ -978,7 +1005,9 @@
       var ub = usbOf(k), w209 = (SYS.cables && SYS.cables.W209) || {};
       row('USB', k.usb + ' (' + ub.cable + ') → A604 ' + ub.port + ' → W209' + (w209['선'] ? ' (' + w209['선'] + ')' : '') + ' → Pi 5 · 장치 이름 ‘' + k.usb_name + '’');
       row('MIDI', 'note-on 음 ' + k.midi + ', 세기 ' + vv.vel + ' (' + (RUN_LAB[vv.run.id] || [vv.run.label])[0] + ', 추정 앞끝 ' + f(vv.run.events.v_front_est, 2) + ' m/s)');
-      row('소리', 'FluidSynth (Salamander) → USB 동글 A701 → J701(헤드폰 잭 노멀) → J702 → HPF 2 µF + 1 kΩ → TPA3110 A702 → XT60 → LS701 · LS702');
+      var au = SYS.audio || {};
+      row('소리', 'FluidSynth (Salamander) → USB 동글 A701 → J701(헤드폰 잭 노멀) → J702 → HPF ' + (au.hpf_c_total || '') + ' + ' + (au.hpf_r || '').replace('R701 ', '') +
+        ' (약 ' + (au.hpf_fc || '') + ') → 앰프 A702 ' + (au.amp || '') + ' (' + (au.amp_chip || '') + ') → XT60 → LS701 · LS702');
       if (isEnd) he('p', { 'class': 'muted' }, '끝 부속 선에는 센서 옆 1 kΩ 직렬 저항과 제어 기판 쪽 100 kΩ 풀다운이 있어, 끝 부속을 뽑아도 입력이 떠서 유령 음이 나지 않습니다(△8).', box);
     }
     function showPedal() {
@@ -1017,7 +1046,7 @@
       box('bk', 620, 5, 110, 70, 'A602 강압', 'XL4016 → 5.1 V');
       box('pi', 760, 0, 152, 70, 'Pi 5 A603', '+ 화면 2.15 W · 동글');
       box('hb', 760, 90, 152, 70, '허브 A604', 'RP2040 8개 · 센서 89개');
-      box('am', 620, 165, 110, 70, 'A702 앰프', 'TPA3110 · PVCC 버스');
+      box('am', 620, 165, 110, 70, 'A702 앰프', ((SYS.audio || {}).amp || '') + ' · PVCC 버스');
       box('sp', 760, 165, 152, 70, '스피커 L · R', 'XT60 파랑 SPK');
       sv('text', { x: 10, y: 130, 'class': 'pw-s' }, svg).textContent = '★ 별 접지점 = 강압 IN− (전지 −, 앰프 GND가 여기서만 만남)';
       pwEl.vbus = sv('text', { x: 430, y: 118, 'class': 'pw-v' }, svg);
@@ -1059,12 +1088,13 @@
       pwEl.w3.setAttribute('stroke-width', wv(buckIn / pw.vb)); pwEl.w3b.setAttribute('stroke-width', wv(iAmp));
       pwEl.w4.setAttribute('stroke-width', wv(iPi)); pwEl.w4b.setAttribute('stroke-width', wv(iHub));
       pwEl.w5.setAttribute('stroke-width', wv(iAmp));
-      pwEl.vbus.textContent = '버스 ' + f(pw.vb, 1) + ' V (강압은 약 ' + f(B.buck_min_v, 0) + ' V 이상, 앰프 8~26 V에서 동작)';
+      var pv = (SYS.audio || {}).pvcc || [4.5, 26];
+      pwEl.vbus.textContent = '버스 ' + f(pw.vb, 1) + ' V (강압은 약 ' + f(B.buck_min_v, 0) + ' V 이상, 앰프 ' + pv[0] + '~' + pv[1] + ' V에서 동작)';
       pwEl.cut.textContent = pw.vb <= B.v_min + 1e-9 ? 'BMS 저전압 차단 직전 (보통 약 10.0 V): 이 아래에서 전지가 출력을 끊어 모두 한꺼번에 꺼집니다.' : '전지 끝 10.0 V에서는 같은 부하가 ' + f(I10, 2) + ' A를 씁니다.';
       setText('sim-pw-note', '평균 ' + f(PW.budget.avg[0], 2) + '~' + f(PW.budget.avg[1], 2) + ' W (전류 ' + f(PW.budget.avg_a[0], 2) + '~' + f(PW.budget.avg_a[1], 2) + ' A), 가장 센 순간 ' + f(PW.budget.peak, 1) +
         ' W (' + f(PW.budget.peak_a, 2) + ' A, 10 V에서 ' + f(PW.budget.peak_a_min_v, 2) + ' A), 연주 시간 ' + f(PW.budget.run[1], 1) + '~' + f(PW.budget.run[0], 1) +
         ' h (SCH-06). F601은 ' + f(B.fuse_a, 0) + ' A ATO 블레이드 퓨즈입니다. 가장 센 순간도 10 V에서 ' + f(PW.budget.peak_a_min_v, 2) + ' A(정격의 ' +
-        f(100 * PW.budget.peak_a_min_v / B.fuse_a, 0) + ' %)라 연주 중에는 끊기지 않습니다. 켤 때 끊기면 7.5 A ATO(갈색)로 바꿉니다(bom.csv F601). 앰프는 12.8 V에서 약 8 W/ch라 소프트웨어 음량 상한을 약 4 dB 낮춥니다.');
+        f(100 * PW.budget.peak_a_min_v / B.fuse_a, 0) + ' %)라 연주 중에는 끊기지 않습니다. 켤 때 끊기면 7.5 A ATO(갈색)로 바꿉니다(bom.csv F601). 앰프(' + ((SYS.audio || {}).amp || '') + ')는 ' + f(B.v_nom, 1) + ' V에서 약 ' + f((SYS.audio || {}).w_ch || B.amp_w_ch, 0) + ' W/ch라 소프트웨어 음량 상한을 약 ' + f(-((SYS.audio || {}).amp_db || -4), 0) + ' dB 낮춥니다.');
     }
     $('sim-vol').addEventListener('input', function () { pw.amp = parseFloat(this.value); updPower(); });
     $('sim-vb').addEventListener('input', function () { pw.vb = parseFloat(this.value); updPower(); });

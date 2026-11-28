@@ -1,0 +1,38 @@
+{
+ "U-01": {
+  "file": "U-01_system.svg",
+  "title": "시스템 연결도 — 아두이노 버전 (노트북에서 실행)",
+  "subtitle": "Pi 버전(rev E)과 같은 건반·센서·전원·스피커에 RP2040 8개 + Pi 5 대신 Arduino Uno 1개 + 노트북. 센서는 그대로 두고 연결만 바꾼다. 회로 U-02~U-04.",
+  "rev": "U1",
+  "date": "2026-11-23",
+  "errors": 0,
+  "overlaps": 0
+ },
+ "U-02": {
+  "file": "U-02_control_board_MB-U.svg",
+  "title": "옥타브 제어 기판 MB-U (아두이노 버전)",
+  "subtitle": "RP2040-Zero를 빼고 4067 먹스만 남긴 기판. 센서 12개 + EXT 4채널을 먹스 하나로 골라 리본 10심(J303)으로 가운데 UB·우노에 보낸다. O1~O7 7장이 모두 같다(ID 점퍼 없음).",
+  "rev": "U1",
+  "date": "2026-11-23",
+  "errors": 0,
+  "overlaps": 0
+ },
+ "U-03": {
+  "file": "U-03_bus_board_UB_uno.svg",
+  "title": "버스 기판 UB + Arduino Uno + 페달 입력",
+  "subtitle": "옥타브 리본 7개를 받아 S0~S3를 나누고 EN을 하나씩, SIG를 하나로 모아 우노 A0에. 페달 잭은 우노 A1에 바로. 우노는 USB로 노트북에 — 노트북이 음원·게임을 돌린다.",
+  "rev": "U1",
+  "date": "2026-11-23",
+  "errors": 0,
+  "overlaps": 0
+ },
+ "U-04": {
+  "file": "U-04_power_audio.svg",
+  "title": "전원 · 오디오 (아두이노 버전)",
+  "subtitle": "전지 → 퓨즈 → 스위치 → 12.8 V 버스 → 앰프 + XL4016 5.1 V → UB(센서·먹스). Pi·허브·화면 전원선은 없다. 소리는 노트북 이어폰 단자 → J701부터 rev E SCH-07 그대로.",
+  "rev": "U1",
+  "date": "2026-11-23",
+  "errors": 0,
+  "overlaps": 0
+ }
+}

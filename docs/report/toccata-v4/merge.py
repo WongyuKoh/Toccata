@@ -709,7 +709,7 @@ def tab_build(pm, items, misses):
     if orient:
         out.append('<h4 class="sub4">건반 액션 부품의 출력 방향 (설계서 15장 원문 — 서포트 칸은 위 A12~A14로 바뀜)</h4>' + tidy_html(orient))
     out.append(PLY_HTML)
-    out.append(PCB_HTML.replace("__GAPNOTE__", ('<div class="note warn"><b>아직 준비처가 없는 물건:</b> ' + gap_txt + '. 센서 기판을 납땜하기 전에 구해야 합니다.</div>') if gap_txt else '<p>센서 기판 SB 띠(161.6 × 15.24, 7개)·끝 부속 EL·ER 띠·J702·J501·페달 센서 조각은 가진 양면 만능기판(i081)에서 자릅니다. SB 띠는 길이 161.6 mm라 162 mm보다 긴 방향이 있는 판에서 자릅니다.</p>'))
+    out.append(PCB_HTML.replace("__GAPNOTE__", ('<div class="note warn"><b>아직 준비처가 없는 물건:</b> ' + gap_txt + '. 센서 기판을 납땜하기 전에 구해야 합니다.</div>') if gap_txt else '<p>센서 기판 SB 띠(160.02 × 15.24 = 구멍 63 × 6, 7개)·끝 부속 EL·ER 띠·J702·J501·페달 센서 조각은 가진 양면 만능기판(i081)에서 자릅니다. SB 띠는 구멍 63개(160.02 mm)라 구멍이 65줄 이상 나란한 방향이 있는 판에서 자릅니다.</p>'))
     out.append(tidy_html(module))
     out.append(MODULE_NOTE)
     out.append(fill_cables(BODY_HTML, misses) + DESK_HTML + TS_HTML + LID_HTML + SERVICE_HTML)
@@ -808,6 +808,11 @@ A20_HTML = """<h3 id="build-a20">한 옥타브를 조립해 본 뒤 고침 — �
 <li><b>건반 각도</b> — “실제 피아노만큼의 각도인지 확인”: 앞끝 깊이는 백 10.0 · 흑 9.5 mm로 실제 피아노(약 10 mm)와 같고, CAD에서 건반 12개 모두 이 깊이까지 다른 부품에 먼저 닿지 않습니다. 회전각은 축이 앞끝에서 141 mm(흑 86.8)라 백 4.0° · 흑 6.2°로 업라이트(2.5° · 2.9°)·그랜드(2.0~2.4°)보다 가파릅니다. 맞추려면 프레임 깊이(축 위치)를 다시 설계해야 해서 바꾸지 않았습니다.</li>
 </ul>
 <figure class="sheet"><img src="img/a20/A20_detail.webp" alt="A20 센서 바 홈, 센서 기판 밑 창, 강철 칸 단면" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>실제 CAD 단면: ① 센서 바 평면 ② 다리 홈 옆 단면 ③ 바닥틀 평면(받침 패드·바닥 창) ④ 기판 밑 4.0 ⑤ 강철 칸.</figcaption></figure>
+<div class="figs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+<figure class="sheet"><img src="img/a20/A20_compare_1.webp" alt="A20 전후 비교 1: 센서 바와 센서 기판 밑, A19와 A20" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>전후 비교 ① 센서 바·센서 기판 밑 (왼쪽 A19, 오른쪽 A20): 다리 홈이 뒤로 열리고, 받침 리브가 없어지고 기판 밑 바닥이 뚫림.</figcaption></figure>
+<figure class="sheet"><img src="img/a20/A20_compare_2.webp" alt="A20 전후 비교 2: 무게 추 칸 단면과 걸쇠" loading="lazy" style="display:block;width:100%;height:auto"><figcaption>전후 비교 ② 무게 추 칸·걸쇠: 칸 높이 19.0 → 19.5, 길이(리브까지) 39.6 → 40.2, 덮개 갈고리 0.5 · 60°, 레버틀 다리 걸림 0.65.</figcaption></figure>
+</div>
+<p class="small muted">다시 뽑을 파일(11/15 묶음을 뽑았을 때 17개, 11/17 묶음도 안 뽑았으면 +7개)은 <a href="#asm-reprint">11 한 옥타브 조립 → A20 다시 출력</a>에 있습니다.</p>
 <p class="small muted">CAD: <code>hardware/mechanical/cad/README.md</code> 부록 A20, <code>src/a20_fix.py</code>, <code>keyaction.a20_sb</code> · <code>a20_pocket</code>, 상세도 <code>drawings/detail/A20_센서바·기판밑·강철칸_상세.png</code>. 확인: check_support 서포트 0 · check_interf 예상 밖 0 · check_electronics 199 · check_body 339.</p>
 """
 
@@ -823,7 +828,7 @@ PCB_HTML = """<h3 id="build-pcb">기판 자르기·납땜</h3>
 <p>제어 기판 MB 7장은 80 × 120 양면 만능기판을 <b>통째로</b> 씁니다(<a href="#build-a16">A16</a>) — 가진 Coms BE163 4장(<a href="#parts-u06">u06</a>) + 새로 사는 8 × 12 양면 3장(<a href="#parts-i228">i228</a>). 자르지도 뚫지도 않고, 납땜한 뒤 바닥틀 자리에 내려놓으면 밸런스 레일이 위에서 눌러 잡습니다. 판 밑으로 나온 다리 끝은 1.0 mm 이하로 자릅니다. 페달 기판 PED 1장만 새 판 1장에서 09 기판 지그 P-PED로 70 × 50을 자릅니다: 지그 밑의 Ø0.9 핀 6개를 시트 구멍에 꽂고, 네 옆면을 따라 커터칼로 긋고 꺾은 뒤, 지그 구멍으로 나사 Ø3.2 두 개와 위치 핀 Ø3.0 두 개 자리를 뚫습니다. 부품 배치와 배선은 <a href="#circuit">01 회로도</a>의 SCH·BRD 도면과 배선표대로 합니다.</p>
 __GAPNOTE__"""
 
-MODULE_NOTE = """<div class="note"><b>모듈 조립에서 더 지킬 것.</b> 모듈끼리는 도브테일(뿌리 6 → 끝 9, 깊이 4, 암은 밑이 열림)로 위에서 내려 끼웁니다. 뒤 꼬리는 높이 14라 빼려면 약 14 mm 들어야 하고, 모듈은 위로만 빠지므로 앞으로 밀지 않습니다. 모듈 밑 바닥 EVA는 한 장 그대로 붙이고 왼쪽 끝 암 도브테일 홈 밑 두 곳만 오려 냅니다(A18: 레버틀 나사가 없어져 나사 머리 구멍도 없음). 강철 블록은 40 −0.1/−0.3으로 자르고 두께 8.9~9.1만 씁니다 — 칸 뒷벽 크러시 리브가 눌러 잡습니다. 레버 허브·레버틀 핀 구멍은 드릴 없이 Ø4 봉이 들어갑니다(A18: Ø4.3 · Ø4.5).</div>"""
+MODULE_NOTE = """<div class="note"><b>모듈 조립에서 더 지킬 것.</b> 모듈끼리는 도브테일(뿌리 6 → 끝 9, 깊이 4, 암은 밑이 열림)로 위에서 내려 끼웁니다. 뒤 꼬리는 높이 14라 빼려면 약 14 mm 들어야 하고, 모듈은 위로만 빠지므로 앞으로 밀지 않습니다. 모듈 밑 바닥 EVA는 한 장 그대로 붙이고 왼쪽 끝 암 도브테일 홈 밑 두 곳만 오려 냅니다(A18: 레버틀 나사가 없어져 나사 머리 구멍도 없음). 강철 블록은 39.7~40.2로 자르고 두께 9.25 · 폭 19.5 이하면 그대로 씁니다 — 칸 뒷벽(0.3)·덮개(0.17) 크러시 리브가 눌러 잡습니다(<a href='#build-a20'>A20</a>). 레버 허브·레버틀 핀 구멍은 드릴 없이 Ø4 봉이 들어갑니다(A18: Ø4.3 · Ø4.5).</div>"""
 
 BODY_HTML = """<h3 id="build-body">뒷부분 조립 (책상 밖에서)</h3>
 <p>뒷부분은 스피커 상자 L·R과 가운데 유닛입니다. 책상 밖에서 따로 만든 뒤 건반 뒤에 놓습니다. 도면은 <a href="#rd1">D01 평면</a>, <a href="#rd2">D02 스피커 단면</a>, <a href="#rd3">D03 가운데 유닛 단면</a>, <a href="#rd4">D04 뒷면</a>, 안쪽은 <a href="#dwg-i02">I02 가운데 유닛 내부 상세</a>입니다.</p>
@@ -898,11 +903,11 @@ SERVICE_HTML = """<h3 id="build-service">분해·점검</h3>
 
 # --------------------------------------------------------------------------------------------- page parts
 FINAL_ONLY = True  # kept for older notes; the page has only the final structure now
-FINAL_TABS = [("summary", "요약", "한눈에 보기"), ("circuit", "01", "회로도"), ("dwg", "02", "설계도"),
+FINAL_TABS = [("summary", "요약", "한눈에 보기"), ("circuit", "01", "회로도"), ("uno", "01b", "아두이노 버전"), ("dwg", "02", "설계도"),
               ("partdwg", "03", "부품 도면·출력 파일"), ("cad", "04", "3D 모델"), ("sim", "05", "동작 시뮬레이션"),
               ("parts", "06", "부품·사용처"), ("prep", "07", "준비 체크"), ("design", "08", "건반 액션 원리"),
               ("build", "09", "출력·조립"), ("check", "10", "검증·남은 위험"), ("asm", "11", "한 옥타브 조립")]
-FRAG_TABS = ("dwg", "partdwg", "sim", "parts", "prep", "asm")
+FRAG_TABS = ("uno", "dwg", "partdwg", "sim", "parts", "prep", "asm")
 
 # old tabs and anchors -> new ones (links in the page are rewritten; the router maps old hashes the same way)
 HASH_ALIAS = {"overview": "summary", "drawings": "dwg", "rear": "dwg", "buy": "parts", "cost": "parts",

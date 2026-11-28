@@ -53,10 +53,30 @@ def adc_of_gap(gap):
 
 
 # =============================================================================== firmware-side assumptions of the page
-TH = dict(rearm=P.get("rearm", 0.50),          # model / firmware: re-arm when the magnet has come back 50 %
-          noteon=0.10,                          # page assumption: note-on when the magnet is 90 % down
-          vel_hi=0.50, vel_lo=0.10)             # page assumption: velocity = magnet time between 50 % and 90 % down
-VMAP = dict(v_lo=0.05, v_hi=2.0)                # page assumption: MIDI velocity = 1 + 126 ln(v/v_lo)/ln(v_hi/v_lo), clamp
+# 2026-11-23: read from the firmware (firmware/src/keys.h) instead of the page's own pre-firmware guesses (note-on 90 %, speed
+# 50 -> 90 %, 0.05~2.0 m/s).  keys.h counts the magnet travel p from rest (0) to bottom (1); TH here counts the gap share left
+# above the bottom (1 - p), as the crossings below use it.
+def _fw_defines():
+    pth = os.path.join(ROOT, "firmware", "src", "keys.h")
+    out = {}
+    try:
+        import re as _re
+        for ln in open(pth, encoding="utf-8"):
+            mm = _re.match(r"\s*#define\s+(KEY_\w+)\s+([0-9.]+)f?\b", ln)
+            if mm:
+                out[mm.group(1)] = float(mm.group(2))
+    except OSError:
+        pass
+    return out
+
+
+FW = _fw_defines()
+_P_ON, _P_VLO, _P_RE = FW.get("KEY_P_ON", 0.85), FW.get("KEY_P_VEL_LO", 0.55), FW.get("KEY_P_REARM", 0.50)
+TH = dict(rearm=1.0 - _P_RE,                    # firmware KEY_P_REARM: note-off / re-arm when the magnet has come back to this travel
+          noteon=1.0 - _P_ON,                   # firmware KEY_P_ON: note-on (and the strike timer stops)
+          vel_hi=1.0 - _P_VLO, vel_lo=1.0 - _P_ON,   # firmware: strike timer from KEY_P_VEL_LO to KEY_P_ON
+          p_on=_P_ON, p_vel_lo=_P_VLO, p_rearm=_P_RE, src="firmware/src/keys.h" if FW else "defaults (keys.h not found)")
+VMAP = dict(v_lo=FW.get("KEY_VEL_V_MIN", 0.10), v_hi=FW.get("KEY_VEL_V_MAX", 2.50))   # firmware key_velocity(): 1 + 126 ln(v/min)/ln(max/min)
 
 
 def midi_vel(v_front):
@@ -209,7 +229,8 @@ SIM_PARTS = {
                "건반이 빨리 돌아오게 돕습니다.", None, ("i123",)),
     "neighbour": (["O4-KEY-C", "O4-KEY-D"], "흑건 단면 면에 함께 잘린 이웃 백건(C · D)입니다. 쉼 자세 그대로 그렸습니다.", None, ()),
     "bed": ("O4-FRAME",
-            "모듈의 바닥틀입니다. 앞 레일(앞 펠트 자리), 흑건 멈춤 레일, 센서 바 받침, 제어 기판 자리를 품고 EVA 3T 바닥 위에 놓입니다.", None, ()),
+            "모듈의 바닥틀입니다. 앞 레일(앞 펠트 자리), 흑건 멈춤 레일, 센서 기판 받침, 제어 기판 자리를 품고 EVA 3T 바닥 위에 놓입니다. "
+            "제어 기판(A18)과 센서 기판(A20) 밑은 바닥판을 뚫어 EVA까지 4 mm가 비어 있습니다.", None, ()),
     "cage": ("O4-CAGE",
              "레버틀입니다. 레버 봉을 받치는 핀과 윗판·뒷벽·선반으로 이루어지고, 패드 바가 윗판 위에 놓입니다. A18부터 나사 대신 걸쇠 다리 4개로 "
              "바닥틀에 끼웁니다.", None, ()),
@@ -222,8 +243,16 @@ SIM_PARTS = {
                   "front", ()),
     "keeperfelt": ({"white": "O4-B-keeperfelt-D", "black": "O4-B-keeperfelt-Cs"},
                    "가이드 탭의 키퍼 훅 밑에 붙인 2T 펠트입니다. 건반이 위로 튀어 훅에 닿을 때 소리를 줄입니다.", None, ()),
-    "sensorbar": ("O4-SENSORBAR", "홀센서 12개를 포켓에 담는 출력 바입니다. 센서 기판 SB 위에 놓고 왼쪽 끝을 M3×10 2개로 받침 기둥에 조입니다.", None, ("i058",)),
-    "sb": ("O4-E-SB", "센서 12개의 다리를 납땜하는 6행 띠 기판(161.6 × 15.24)입니다. 16심 리본 W104로 제어 기판 MB에 이어집니다.", None, ("i081",)),
+    "sensorbar": ("O4-SENSORBAR", "홀센서 12개를 포켓에 담는 출력 바입니다. 센서 기판 SB 위에 놓고 왼쪽 끝을 M3×10 2개로 받침 기둥에 조입니다. "
+                  "A20: 포켓 4.05 × 4.9, 다리는 폭 1.6 홈 하나로 지나가고 포켓·홈이 바 뒤로 열려 있어, 센서를 기판에 먼저 납땜하고 바를 뒤에서 밀어 끼울 수 있습니다.",
+                  None, ("i058",)),
+    "sb": ("O4-E-SB", "센서 12개의 다리를 납땜하는 6행 띠 기판(161.6 × 15.24)입니다. 16심 리본 W104로 제어 기판 MB에 이어집니다. "
+           "A20: 받침 리브 2줄을 없애고 밑 바닥판을 뚫어 6행 모두 밑에서 납땜할 수 있습니다(기판 밑 4.0). 기판은 왼쪽 받침 기둥과 "
+           "쓰지 않는 1·6행 밑의 받침 패드(오른쪽 끝, 바닥 다리 x32.4 · 88.3 · 141.6 — 이 단면 밖)에 놓입니다.", None, ("i081",)),
+    "mb": ("O4-E-MB", "옥타브 제어 기판 MB(80 × 120 만능기판 통째, A16)입니다. 먹스 A302와 RP2040-Zero A301이 센서 12개를 차례로 읽어 USB-MIDI로 보냅니다. "
+           "바닥틀 자리에 눕혀 놓고 밸런스 레일이 그 위를 가로지르며, 밑 바닥판은 뚫려 있습니다(A18).", None, ()),
+    "eva": ("O4-EVA", "모듈 밑에 한 장 그대로 붙이는 EVA 고밀도 폼 3T입니다. 책상 위에서 미끄러지지 않고 진동 소리를 줄이며, 기판 밑 바닥 창도 덮습니다.",
+            None, ("i061",)),
     "keyrod": ("O4-B-keyrod", "건반 시소의 축(K)입니다. 밸런스 레일의 봉 받침(y141, z21.5)에 놓고, 건반 노치가 위에서 스냅으로 뭅니다.", None, ()),
     "pin": ({"white": "O4-B-balancepinD2-D", "black": "O4-B-balancepinD2-Cs"},
             "밸런스 레일에 눌러 넣은 핀입니다. 건반 밑 홈이 이 핀을 물어 건반 뒤쪽의 좌우 위치를 잡습니다.", None, ()),
@@ -235,7 +264,7 @@ SIM_PARTS = {
     "curtain": ("O4-CURTAIN", "건반 뒤쪽 틈으로 안쪽 기구가 보이지 않게 가리는 검정 출력 띠입니다.", None, ()),
 }
 SIM_TITLE = {"sensor": "홀센서 Winson WSH137-XPAN1", "neighbour": "이웃 백건 C4 · D4", "padbar": "패드 바 (칸 1~4)"}
-FRAME_NOTE = "단면은 r4.5 설계의 한 몸 프레임 모양으로 그렸고, 지금은 A12·A16에서 나뉜 이 부품으로 출력합니다."
+FRAME_NOTE = "단면은 지금 CAD(2026-11-22, A20)의 이 출력물을 같은 면에서 자른 모양입니다."
 TS_ROLE = {"TS-CRADLE": "7인치 터치 화면을 담는 받침입니다. 경첩 축(M3×20)으로 CU 화면 뚜껑에 달려 25°로 세우거나 90°로 접습니다.",
            "TS-LEDGE-L": "화면 유리 아래 가장자리를 받치는 턱 띠입니다. 따로 출력해 받침에 붙입니다(서포트 없는 출력, A14).",
            "TS-E-SCREEN": "Waveshare 7-DSI-TOUCH-C 화면입니다. DSI 리본으로 Pi 5에, 전원선으로 GPIO 5 V에 이어집니다.",
@@ -645,6 +674,9 @@ def system_data():
         if x[R_].startswith("U2") and x[PNM] == "OUT":
             sb[x[N_]] = x[R_]
     j201_of_net = {x[N_]: int(x[PN]) for x in rows(sheet="SCH-02", board="SB", ref="J201")}
+    # sensor ribbon cut length (cables.csv W101~W107, e.g. '70 × 7' -> 70 mm; A16 put the board on the floor next to the SB)
+    rib_row = [x for x in CB if x[list(x.keys())[0]] == "W101~W107"][0]
+    rib_mm = rib_row["자르는 길이 (mm)"].split("×")[0].strip()
     keys = []
     for midi in range(21, 109):
         nm = NOTE_NAMES[midi % 12]
@@ -676,7 +708,7 @@ def system_data():
             assert jp == j301_of_net[net]
             ch = ch_of_net[net]
             e.update(part=f"O{mod}", mb=f"O{mod}", sensor=u, board="SB", x_sensor=r(47.0 + 164.5 * (mod - 1) + S.SENSOR_X[i], 3), net=net,
-                     path=[f"{u} OUT (SB 기판 O{mod}) → J201.{jp}", f"리본 W10{mod} {jp}번 선 (16심, 약 180 mm)", f"O{mod} MB J301.{jp}"],
+                     path=[f"{u} OUT (SB 기판 O{mod}) → J201.{jp}", f"리본 W10{mod} {jp}번 선 (16심, {rib_mm} mm)", f"O{mod} MB J301.{jp}"],
                      j_pin=jp, ext=None, mux_ch=ch, mb_route=mb_route(net), ribbon=f"W10{mod}")
         chn = int(e["mux_ch"][1:])
         sp, hdr, hp = mux_hdr[e["mux_ch"]]
@@ -718,6 +750,19 @@ def system_data():
                              amp_hi=r(B["amp_hi"], 2), loss_new=r(B["loss_new"], 3), five_new=r(B["five_new"], 3)),
                  fuse=fuse,
                  src="hardware/pcb/src/sheets.py BATT · BUDGET_IN · DISP · budget() = SCH-06 전원 예산 (research/power.md 0.4 · 0.7); 퓨즈 F601 = netlist/bom.csv")
+    # audio chain as installed (bom.csv A702 / C701 / C702 / R701, sheets.BATT amp limits, SCH-07 note 3 for the HPF corner)
+    import re as _re
+    a7 = bom_row("A702")
+    chip = _re.search(r"TPA\w+", a7[bcol[4]])
+    sh_src = open(os.path.join(pcb, "src", "sheets.py"), encoding="utf-8").read()
+    fc_ = _re.search(r"fc ≈ ([0-9~]+ Hz)", sh_src)
+    caps = [bom_row(x)[bcol[3]] for x in ("C701", "C702")]
+    audio = dict(amp_ref="A702", amp=a7[bcol[3]].split(" (")[0], amp_chip=chip.group(0) if chip else "", amp_desc=a7[bcol[4]],
+                 pvcc=list(T["amp_pvcc"]), w_ch=T["amp_w_ch"], w_ch_20v=T["amp_w_ch_20v"],
+                 amp_db=r(10 * math.log10(T["amp_w_ch"] / T["amp_w_ch_20v"]), 1),
+                 hpf_c="C701·C702 %s ×2 병렬" % caps[0].replace("µ", " µF"), hpf_c_total="%g µF" % (2 * float(caps[0].replace("µ", ""))),
+                 hpf_r="R701 " + bom_row("R701")[bcol[3]].replace("k", " kΩ"), hpf_fc=fc_.group(1) if fc_ else "",
+                 src="hardware/pcb/netlist/bom.csv A702 · C701 · C702 · R701, sheets.py BATT amp_pvcc / amp_w_ch, SCH-07 주 3")
     # cable list: every column as written by hardware/pcb (column names change between circuit revisions: keep them all)
     cables = {x[list(x.keys())[0]]: {k: v for k, v in x.items()} for x in CB}
     # USB cable of each module (rev E: one cables.csv row per cable W201..W207, each with its own length and hub port)
@@ -755,7 +800,7 @@ def system_data():
     SJ = json.load(open(os.path.join(pcb, "netlist", "sheets.json"), encoding="utf-8"))
     revs = sorted({(v.get("rev"), v.get("date")) for v in SJ.values()}, key=lambda q: (q[1] or "", q[0] or ""))
     circuit = dict(rev=revs[-1][0], date=revs[-1][1], src="hardware/pcb/netlist/sheets.json")
-    return dict(keys=keys, scan=scan, scan_assume=scan_assume, sel_pins=sel_pins, power=power, cables=cables, pedal=pedal, circuit=circuit,
+    return dict(keys=keys, scan=scan, scan_assume=scan_assume, sel_pins=sel_pins, power=power, audio=audio, cables=cables, pedal=pedal, circuit=circuit,
                 mod_x0={f"O{k}": r(47.0 + 164.5 * (k - 1), 3) for k in range(1, 8)}, key_bed=dict(x0=0.0, x1=47.0 + 164.5 * 7 + 23.5, el=[0.0, 47.0], er=[1198.5, 1222.0]))
 
 
@@ -828,6 +873,156 @@ def cad_check(parts, G, secs):
             check(f"CAD {mid} = page magnet outline", dm < 0.02, "max diff %.3f mm" % dm)
 
 
+# =============================================================================== side section from the current CAD (2026-11-23)
+# User 2026-11-23: '아티펙트 회로쪽 보면 최신 디자인에 맞게 회로 시뮬레이션 업데이트가 안되어있어'.  The side section and the magnet /
+# sensor inset were drawn from geometry.json (r4.5, 2026-09-29): one-piece frame, sensor board on two support ribs, control
+# board on the old shelf.  With --cad-check every drawn outline is now cut from the CAD solids of module O4 (build_all.collect(),
+# the same parts as the 04 3D tab and the print files, A20 on 2026-11-22) at the same plane.  The motion is still the verified
+# r4.5 dynamics: the CAD key (rest) and lever carrier (b = 0) sit exactly where geometry.json has them, and every contact part
+# (pads, felts, rods, pin) is at the same y / z - checked below, so the replayed transforms apply to the CAD outlines unchanged.
+CAD_MOD, CAD_X0 = "O4", 47.0 + 164.5 * 3                               # module O4 (C4~B4, the click-info parts) starts at x540.5
+CAD_FIXED = [  # (id regex after 'O4-', page group, info key); first match wins.  Groups: frame pieces, script.js draw classes
+    (r"^FRAME$", "frame", "bed"), (r"^CAGE$", "frame", "cage"), (r"^RAIL$", "frame", "rail"), (r"^TAB-", "frame", "tab"),
+    (r"^SENSORBAR$", "sbar", "sensorbar"), (r"^E-SB$", "pcb", "sb"), (r"^E-MB$", "pcb", "mb"),
+    (r"^PADBAR-", "bar", "padbar"), (r"^CURTAIN$", "cover", "curtain"),
+    (r"^B-(white|black)frontfelt", "felt", "frontfelt"), (r"^B-keeperfelt", "felt", "keeperfelt"),
+    (r"^B-keyrod", "steel", "keyrod"), (r"^B-leverrod", "steel", "leverrod"), (r"^B-balancepin", "steel", "pin"),
+    (r"^B-upstoppad", "pad", "pad"), (r"^EVA$", "eva", "eva"),
+    (r"^(SPRING|MAGNET)-", None, None),                                # drawn from the model (spring turns, magnet = model rect)
+    (r"^C-", None, None)]                                              # loose cables (EXT W403 is in O1 only)
+
+
+def _rings(cs, eps=0.004):
+    return [[[r(float(a), 3), r(float(b), 3)] for a, b in ring] for ring in cs.simplify(eps).to_polygons() if len(ring) >= 3]
+
+
+def cad_cut(sol, X):
+    """outline rings of a CAD solid at the plane x = X, seen from +x: (y, z)"""
+    b = sol.bounding_box()
+    if not (b[0] < X < b[3]):
+        return []
+    R = np.array([[0, 1, 0, 0], [0, 0, 1, 0], [1, 0, 0, -X]], float)
+    return _rings(sol.transform(R).slice(0.0))
+
+
+def cad_beyond(sol, X):
+    """silhouette rings of the part of a CAD solid behind the plane (x < X), seen from +x"""
+    b = sol.bounding_box()
+    if b[0] >= X:
+        return []
+    s = sol.trim_by_plane((-1.0, 0.0, 0.0), -X) if b[3] > X else sol
+    R = np.array([[0, 1, 0, 0], [0, 0, 1, 0], [1, 0, 0, 0]], float)
+    return _rings(s.transform(R).project(), 0.01)
+
+
+def cad_sections(parts, G, secs):
+    """replace the r4.5 outlines of both side sections with cuts of the CAD module O4 (same plane, same frames)"""
+    import re
+    import manifold3d as m3
+    mods = [p for p in parts if p.id.startswith(CAD_MOD + "-")]
+    byid = {p.id: p for p in mods}
+
+    def bb(rr_):
+        ys = [q[0] for ring in rr_ for q in ring]
+        zs = [q[1] for ring in rr_ for q in ring]
+        return (min(ys), max(ys), min(zs), max(zs)) if ys else None
+
+    unknown = set()
+    for colour, sec in secs.items():
+        tok = "D" if colour == "white" else "Cs"
+        kname = "D" if colour == "white" else "C#"
+        gkey, glev = "key " + kname, "lever " + kname
+        X = sec["xsec"] + CAD_X0
+
+        def one(pid):
+            p = byid.get(pid)
+            return cad_cut(p.solid, X) if p is not None else []
+        # moving parts: key (rest = design frame), lever carrier + cover (b = 0 frame)
+        key = byid["%s-KEY-%s" % (CAD_MOD, tok)]
+        lev = [byid["%s-LEVER-%s" % (CAD_MOD, tok)], byid["%s-LEVERCOVER-%s" % (CAD_MOD, tok)]]
+        lsol = m3.Manifold.batch_boolean([p.solid for p in lev], m3.OpType.Add)
+        kc, lc = cad_cut(key.solid, X), cad_cut(lsol, X)
+        # extents vs the r4.5 outlines (whole body, all x): the CAD pose must equal the model pose
+        kb, lb_ = key.solid.bounding_box(), lsol.bounding_box()
+        gkb = bb([p["side_rest"] for p in G["parts"] if p["body"] == gkey and p["part"] not in ("capstan head", "rest felt")])
+        glb = bb([p["side_rigid0"] for p in G["parts"] if p["body"] == glev])
+        dk = max(abs(kb[1] - gkb[0]), abs(kb[4] - gkb[1]), abs(kb[2] - gkb[2]), abs(kb[5] - gkb[3]))
+        # pose of the lever: its rear end (hub around L) and its bottom (felt strip side) - the front edge and the top moved with
+        # the A12 / A18 / A20 carrier shape (front y -0.4, top 0.3 lower), not with the pose
+        dl = max(abs(lb_[4] - glb[1]), abs(lb_[2] - glb[2]))
+        check(f"{colour}: CAD key {key.id} rest pose = model key (y/z extents)", dk < 0.02, "max diff %.3f mm" % dk)
+        check(f"{colour}: CAD lever carrier + cover at b = 0 = model lever (rear end y, bottom z)", dl < 0.05,
+              "max diff %.3f mm (shape: front y %.2f / r4.5 %.2f, top z %.2f / %.2f)" % (dl, lb_[1], glb[0], lb_[5], glb[3]))
+        sec["key_cut"], sec["lever_cut"] = kc, lc
+        sec["key_beyond"] = cad_beyond(key.solid, X)
+        sec["lever_beyond"] = cad_beyond(lsol, X)
+        sec["key_steel"] = [g for g in (one("%s-CAPSTAN-%s" % (CAD_MOD, tok)), one("%s-NUT-%s" % (CAD_MOD, tok))) if g]
+        sec["key_felt"] = [g for g in (one("%s-RESTFELT-%s" % (CAD_MOD, tok)),) if g]
+        sec["lever_steel"] = [g for g in (one("%s-STEEL-%s" % (CAD_MOD, tok)),) if g]
+        sec["lever_felt"] = [g for g in (one("%s-FELTSTRIP-%s" % (CAD_MOD, tok)),) if g]
+        # fixed parts cut by the plane (inside the module: y < 212.5)
+        frame_parts, fixed = [], {}
+        nb = []
+        for p in mods:
+            sub = p.id[len(CAD_MOD) + 1:]
+            if re.match(r"^(KEY|CAPSTAN|NUT|RESTFELT|LEVER|LEVERCOVER|STEEL|FELTSTRIP)-", sub):
+                if re.match(r"^KEY-", sub) and p is not key and not sub.endswith("s"):
+                    g_ = cad_cut(p.solid, X)
+                    if g_:
+                        nb.append(dict(body=p.id, rings=g_))
+                continue
+            b = p.solid.bounding_box()
+            if not (b[0] < X < b[3]) or b[1] > 212.5:
+                continue
+            hit = [(g, k) for rx, g, k in CAD_FIXED if re.match(rx, sub)]
+            if not hit:
+                unknown.add(p.id)
+                continue
+            g, k = hit[0]
+            if g is None:
+                continue
+            rg = cad_cut(p.solid, X)
+            if not rg:
+                continue
+            if g == "frame":
+                frame_parts.append(dict(k=k, part=p.id, ko=p.name_ko, rings=rg))
+            else:
+                fixed.setdefault(g, []).append(dict(part=p.id, ko=p.name_ko, info=k, rings=rg))
+        sec["frame_parts"] = frame_parts
+        sec["frame"], sec["frame_hit"] = [], [dict(k=f_["k"], rings=f_["rings"]) for f_ in frame_parts]
+        sec["fixed"] = fixed
+        sec["neighbours"] = nb if colour == "black" else []
+        sec["src"] = "CAD %s (hardware/mechanical/cad build_all.collect(), A20 2026-11-22) cut at x = %.3f (module x %.3f)" % (CAD_MOD, X, sec["xsec"])
+        # contact parts at the model's y / z (the dynamics use them): up-stop pad, front / rest felts, key rod, pin, lever rod
+        pairs = [("%s-B-upstoppad-%s" % (CAD_MOD, tok), "up-stop pad " + kname),
+                 ("%s-B-keyrodSUS304D4" % CAD_MOD, "key rod SUS304 D4"), ("%s-B-balancepinD2-%s" % (CAD_MOD, tok), "balance pin D2 " + kname),
+                 ("%s-B-leverrodD4SUS304x151629" % CAD_MOD, "lever rod D4 SUS304 (x1.5-162.9)"),
+                 ("%s-RESTFELT-%s" % (CAD_MOD, tok), None)]
+        worst = []
+        for pid, gname in pairs:
+            p = byid.get(pid)
+            if p is None:
+                worst.append((pid, 99.0))
+                continue
+            cb = p.solid.bounding_box()
+            if gname is None:
+                gb = bb([q["side_rest"] for q in G["parts"] if q["body"] == gkey and q["part"] == "rest felt"])
+            else:
+                gp = [q["side"] for q in G["parts"] if q["body"] == "fixed" and q["part"] == gname]
+                gb = bb(gp) if gp else None
+            if gb is None:
+                worst.append((pid, 99.0))
+                continue
+            worst.append((pid, max(abs(cb[1] - gb[0]), abs(cb[4] - gb[1]), abs(cb[2] - gb[2]), abs(cb[5] - gb[3]))))
+        wmax = max(worst, key=lambda q: q[1])
+        check(f"{colour}: CAD contact parts (pad, rods, pin, rest felt) at the model's y / z", wmax[1] < 0.05,
+              "worst %s %.3f mm" % wmax)
+        pcs = sorted({f_["k"] for f_ in frame_parts}) + sorted({it["info"] for v in fixed.values() for it in v})
+        check(f"{colour}: CAD section draws the frame pieces, sensor bar, boards and EVA", all(k in pcs for k in ("bed", "cage", "rail", "sensorbar", "sb", "eva")),
+              " · ".join(pcs))
+    check("CAD section: every O4 part at the planes is classified (CAD_FIXED)", not unknown, ", ".join(sorted(unknown)) or "ok")
+
+
 # =============================================================================== main
 def main():
     ap = argparse.ArgumentParser()
@@ -856,7 +1051,7 @@ def main():
                          seat_k=seat_v, seat_k_note="pad-seat stiffness of the verified run (metrics.json seat.k_min); build_geo here gave %s" % seat_fe_here, pad="design pad (micro-cell urethane 6T + felt 1T: P pad_E, pad_h, e_eff %.2f)" % P["pad_e"],
                          script="hardware/mechanical/key-action-v4/model/export_sim.py"),
                sensor=dict(SENS, formula="B = Br/2 [(g+L)/sqrt(R²+(g+L)²) − g/sqrt(R²+g²)], OUT = 1.70 V + 33 mV/mT · B (WSH137 3.3 V 대표값), ADC = OUT/3.3 V · 4096"),
-               thresholds=TH, vmap=dict(VMAP, formula="vel = 1 + 126 ln(v/0.05)/ln(2.0/0.05), 1~127"), colours={})
+               thresholds=TH, vmap=dict(VMAP, formula="vel = 1 + 126 ln(v/%g)/ln(%g/%g), 1~127 (firmware key_velocity)" % (VMAP["v_lo"], VMAP["v_hi"], VMAP["v_lo"])), colours={})
     secs = {}
     for colour, A, key, lever, ze, cc in (("white", g["Aw"], "key D", "lever D", P["z_elem_w"], "w"), ("black", g["Ab"], "key C#", "lever C#", P["z_elem_b"], "b")):
         nm = key.split(" ")[1]
@@ -1003,22 +1198,17 @@ def main():
     # ---- system data
     SYS = system_data()
     check("88 keys mapped", len(SYS["keys"]) == 88 and len({k["midi"] for k in SYS["keys"]}) == 88)
+    AU = SYS["audio"]
+    check("audio chain from bom.csv: amp A702 board + chip, HPF parts, SCH-07 corner", AU["amp"] and AU["amp_chip"].startswith("TPA") and AU["hpf_fc"],
+          "%s (%s) · PVCC %s~%s V · %s + %s · %s" % (AU["amp"], AU["amp_chip"], AU["pvcc"][0], AU["pvcc"][1], AU["hpf_c"], AU["hpf_r"], AU["hpf_fc"]))
+    rl = [q for k in SYS["keys"] if k["ribbon"] for q in k["path"] if q.startswith("리본")]
+    check("ribbon length in each key path = cables.csv W101~W107 cut length", rl and all((SYS["cables"]["W101~W107"]["자르는 길이 (mm)"].split("×")[0].strip() + " mm") in q for q in rl), rl[0])
     k60 = [k for k in SYS["keys"] if k["midi"] == 60][0]
     check("C4 = O4 U201 C0", k60["mb"] == "O4" and k60["sensor"] == "U201" and k60["mux_ch"] == "C0", json.dumps({x: k60[x] for x in ("mb", "sensor", "mux_ch")}))
     a0 = [k for k in SYS["keys"] if k["midi"] == 21][0]
     c8 = [k for k in SYS["keys"] if k["midi"] == 108][0]
     check("A0 = EL U401 -> O1 EXT1 C12, C8 = ER U411 -> O7 EXT1 C12", a0["mb"] == "O1" and a0["mux_ch"] == "C12" and c8["mb"] == "O7" and c8["mux_ch"] == "C12",
           "%s %s %s / %s %s %s" % (a0["sensor"], a0["ext"], a0["mux_ch"], c8["sensor"], c8["ext"], c8["mux_ch"]))
-    unnamed = sorted({it["part"] for c_ in secs.values() for g_ in c_["fixed"].values() for it in g_ if not it.get("ko")})
-    check("every drawn fixed part has a Korean final-part name (hover title)", not unnamed, ", ".join(unnamed))
-    # click info (2026-11-16): every drawn shape has an info key the popup can show, and its CAD part exists (3D 모델에서 보기)
-    noinfo = sorted({it["part"] for c_ in secs.values() for g_ in c_["fixed"].values() for it in g_ if it.get("info") not in c_["info"]})
-    nohit = sorted({h["k"] for c_ in secs.values() for h in c_["frame_hit"] if h["k"] not in c_["info"]})
-    check("every drawn fixed part and frame region has click info (popup)", not noinfo and not nohit, ", ".join(noinfo + nohit) or
-          "frame regions " + " · ".join(h["k"] for h in secs["white"]["frame_hit"]))
-    nocad = sorted({"%s:%s" % (c, k) for c, c_ in secs.items() for k, e in c_["info"].items() if not e["cad"]})
-    check("every click-info entry finds its CAD part in cad/parts.json", not nocad, ", ".join(nocad) or
-          "%d + %d entries" % (len(secs["white"]["info"]), len(secs["black"]["info"])))
     SYS["power"]["info"] = {k: info_entry(sel, role, title="스피커 L · R (삼미 CW-100B25 4인치 풀레인지 8 Ω)" if k == "sp" else None)
                             for k, (sel, role) in PW_PARTS.items()}
     nocad = [k for k, e in SYS["power"]["info"].items() if not e["cad"]]
@@ -1061,6 +1251,7 @@ def main():
         parts = build_all.collect()
         print("collect(): %d parts, %.1f s" % (len(parts), time.time() - t1), flush=True)
         cad_check(parts, G, secs)
+        cad_sections(parts, G, secs)                           # 2026-11-23: draw the current CAD (A20), not the r4.5 outlines
         try:
             SYS["touch"] = touch_fold(parts)
             T_ = SYS["touch"]
@@ -1074,6 +1265,16 @@ def main():
             check("touchscreen fold: use-pose cradle turned to 90 deg = CAD folded cradle (z of the cut)", okf, json.dumps(fc))
         except Exception as e:                                 # optional
             check("touchscreen fold outlines from CAD", False, repr(e))
+    unnamed = sorted({it["part"] for c_ in secs.values() for g_ in c_["fixed"].values() for it in g_ if not it.get("ko")})
+    check("every drawn fixed part has a Korean final-part name (hover title)", not unnamed, ", ".join(unnamed))
+    # click info (2026-11-16): every drawn shape has an info key the popup can show, and its CAD part exists (3D 모델에서 보기)
+    noinfo = sorted({it["part"] for c_ in secs.values() for g_ in c_["fixed"].values() for it in g_ if it.get("info") not in c_["info"]})
+    nohit = sorted({h["k"] for c_ in secs.values() for h in c_["frame_hit"] if h["k"] not in c_["info"]})
+    check("every drawn fixed part and frame region has click info (popup)", not noinfo and not nohit, ", ".join(noinfo + nohit) or
+          "frame regions " + " · ".join(h["k"] for h in secs["white"]["frame_hit"]))
+    nocad = sorted({"%s:%s" % (c, k) for c, c_ in secs.items() for k, e in c_["info"].items() if not e["cad"]})
+    check("every click-info entry finds its CAD part in cad/parts.json", not nocad, ", ".join(nocad) or
+          "%d + %d entries" % (len(secs["white"]["info"]), len(secs["black"]["info"])))
     os.makedirs(a.out, exist_ok=True)
     out["checks"] = [dict(name=n, ok=o, detail=d) for n, o, d in CHECKS]
     p1 = os.path.join(a.out, "keyaction.json")

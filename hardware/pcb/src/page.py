@@ -95,39 +95,91 @@ def crop(fid, code, region, title, cap):
 
 
 def mb_kinds_block():
-    """MB per board kind (BRD-09~11, boards4.py): three tabs, each with the top-side and underside crops of its sheet."""
+    """MB of each module (BRD-09~15, boards4.py): seven tabs O1..O7, each with the top-side and underside crops of its own sheet; a sheet
+    draws only what that board carries (2026-11-23). The crops of a hidden tab load when the tab is first picked."""
     import boards4 as B4
     rows = MR.get()[1]
-    labels = (("O1", "왼쪽 끝 · O1"), ("O7", "오른쪽 끝 · O7"), ("MID", "나머지 · O2~O6"))
     tabs, panels = [], []
-    for i, (key, lab) in enumerate(labels):
+    for i, n in enumerate(range(1, 8)):
+        key = "O%d" % n
         v = B4.KINDS[key]
         code, pid = v["code"], "circuit-mbk-" + key.lower()
-        off = [w["no"] for w in rows if not B4.wire_used(v, w)]
-        if len(v["boards"]) == 1:
-            jp = "ID 점퍼: " + "·".join(sorted(B4.jp_closed(v["boards"][0]))) + " 닫음(아랫면 납땜 브리지), 나머지는 열림."
-        else:
-            jp = "ID 점퍼: " + " · ".join("O%d = %s" % (n, "+".join(sorted(B4.jp_closed(n)))) for n in v["boards"]) + " 닫음."
-        li = ["저항: " + (("·".join(v["r"]) + " (100 kΩ) %d개를 답니다. 나머지 자리는 비움." % len(v["r"])) if v["r"] else "R301~R304 모두 비움."),
+        used = B4.used_nos(v)
+        closed = sorted(B4.jp_closed(n))
+        li = ["ID 점퍼: " + " · ".join(closed) + " 연결하세요 (아랫면 두 구멍 납땜 브리지). 다른 점퍼 자리는 비워 둡니다.",
+              ("저항: " + "·".join(v["r"]) + " (100 kΩ) %d개를 답니다." % len(v["r"])) if v["r"] else "저항 R301~R304: 달지 않습니다.",
               ("J302: %s번 패드에 EXT 선 %s %d가닥을 윗면에서 납땜 → 끝 부속 %s (%s 건반)." % (
-                  "·".join(str(n) for n in sorted(v["ext"])), v["lead"], len(v["ext"]), v["end"], v["end_keys"])) if v["lead"]
-              else "J302: 비움 (끝 부속이 없는 기판). 1번 구멍만 GND 선의 이음 자리로 납땜.",
-              jp,
-              "아랫면 선 %d가닥 가운데 %s번(%d가닥)은 이 기판에서 쓰지 않아 점선으로 그렸습니다 — 넣어도 되고 빼도 동작은 같습니다." % (
-                  len(rows), B4._ranges(off), len(off)) if off else "아랫면 선 %d가닥을 모두 씁니다." % len(rows)]
+                  "·".join(str(m) for m in sorted(v["ext"])), v["lead"], len(v["ext"]), v["end"], v["end_keys"])) if v["lead"]
+              else "J302: EXT 선 없음 (끝 부속이 없는 기판).",
+              "아랫면 선: %d가닥 (BRD-08의 %d가닥 가운데 이 기판에 필요한 것만)." % (len(used), len(rows))]
+        lab = key + {1: " · 왼쪽 끝", 7: " · 오른쪽 끝"}.get(n, "")
         tabs.append(f'<button type="button" role="tab" id="{pid}-tab" aria-controls="{pid}" aria-selected="{"true" if i == 0 else "false"}" '
-                    f'tabindex="{0 if i == 0 else -1}">{E(lab)} <span class="q">{len(v["boards"])}장</span></button>')
+                    f'tabindex="{0 if i == 0 else -1}">{E(lab)}</button>')
         panels.append(f'<div class="mbk-panel" role="tabpanel" id="{pid}" aria-labelledby="{pid}-tab"{"" if i == 0 else " hidden"}>'
                       + '<ul class="mbk-diff small">' + "".join(f"<li>{E(x)}</li>" for x in li) + "</ul>"
-                      + crop(pid + "-front", code, "front", v["name"] + " · 앞 (윗면, 부품 쪽)",
-                             "위에서 본 그림. 색 띠가 있는 저항 = 이 기판에 다는 것, 점선 = 비우는 자리. 패드 색 = 넷(빨강 3V3 · 검정 GND · 파랑 센서 · 초록 EXT · 보라 먹스 선택 · 갈색 ID).")
-                      + crop(pid + "-back", code, "back", v["name"] + " · 뒤 (아랫면, 납땜·배선 쪽)",
-                             "기판을 좌우로 뒤집어 아래에서 본 거울상(왼쪽·오른쪽이 앞 그림과 반대). 선 번호 = BRD-08 · wiring_MB.csv. 점선 선 = 이 기판에서 쓰지 않는 선.")
+                      + crop(pid + "-front", code, "front", "제어 기판 %s · 앞 (윗면, 부품 쪽)" % v["name"],
+                             "위에서 본 그림. 이 기판에 다는 부품과 쓰는 자리만 그렸습니다. 패드 색 = 넷(빨강 3V3 · 검정 GND · 파랑 센서 · 초록 EXT · 보라 먹스 선택 · 갈색 ID).")
+                      + crop(pid + "-back", code, "back", "제어 기판 %s · 뒤 (아랫면, 납땜·배선 쪽)" % v["name"],
+                             "기판을 좌우로 뒤집어 아래에서 본 거울상(왼쪽·오른쪽이 앞 그림과 반대). 이 기판에 넣는 선만 그렸습니다. 선 번호 = BRD-08 · wiring_MB.csv.")
                       + "</div>")
-    return (h4("기판 종류별 도면 — 왼쪽 끝 · 오른쪽 끝 · 나머지 (앞·뒤)")
-            + '<p class="small">제어 기판 7장은 배선이 같고, 다는 부품만 세 가지로 갈립니다. 종류를 고르면 그 기판의 앞(윗면)과 뒤(아랫면) 그림이 나옵니다. '
-              '<b>전선·저항·패드·점퍼를 누르면</b> 무엇인지, 어디에 이어지는지, 이 기판에서 다는지 비우는지가 나옵니다.</p>'
-            + '<div class="mbk" id="circuit-mb-kinds"><div class="mbk-tabs" role="tablist" aria-label="기판 종류">' + "".join(tabs) + "</div>"
+    return (h4("기판별 도면 — O1 ~ O7 (앞·뒤)")
+            + '<p class="small">제어 기판 7장은 같은 만능기판에 같은 자리를 쓰지만, 다는 저항·점퍼·EXT 선과 그에 필요한 아랫면 선이 기판마다 다릅니다. '
+              '번호를 고르면 <b>그 기판에 실제로 다는 것만</b> 그린 앞(윗면)과 뒤(아랫면) 그림이 나옵니다 — 쓰지 않는 자리와 선은 그리지 않았습니다. '
+              '<b>전선·저항·패드·점퍼를 누르면</b> 무엇인지, 어디에 이어지는지가 나옵니다.</p>'
+            + '<div class="mbk" id="circuit-mb-kinds"><div class="mbk-tabs" role="tablist" aria-label="제어 기판 번호">' + "".join(tabs) + "</div>"
+            + "".join(panels) + "</div>")
+
+
+
+def strip_lists():
+    """what each sensor strip board carries (SB / EL / ER), for the BRD-02 blocks"""
+    import boards5 as B5
+    sb = B5.sb_board()
+    out = {"SB": ["윗면: 홀센서 U201~U212 12개만 (센서 바가 윗면을 덮음). 다리 3개를 꺾어 리드 구멍 열에 꽂습니다.",
+                  "아랫면: 3V3·GND 버스(주석 맨선) 2줄, 100 nF C201~C212 (1206, 센서마다 리드 열의 3V3–GND 납땜 위), 10 µF C213 · C214 (1206, 버스 양 끝).",
+                  "아랫면 선 %d가닥: 1~12 = 센서 OUT → J201, 13~16 = J201 전원 → 버스 (번호 = wiring_SB.csv). 리본 16심은 J201에 아랫면에서 납땜." % len(sb["strands"])]}
+    for tag in ("EL", "ER"):
+        B = B5.end_board(tag)
+        Bd = S.END_BOARDS[tag]
+        n = len(B["sens"])
+        out[tag] = ["윗면: 홀센서 %s (%s 건반)." % (" · ".join(se["u"] for se in B["sens"]), " · ".join(se["key"] for se in B["sens"])),
+                    "아랫면: 버스 2줄, 100 nF %s, 1 kΩ %s (OUT → y72.08), 10 µF %s — 모두 1206." % (
+                        " · ".join(se["cap"] for se in B["sens"]), " · ".join(se["res"] for se in B["sens"]), Bd["bulk"]),
+                    "아랫면 선 %d가닥: 1 = GND 버스 → %s.1, 2 = 3V3 버스 → %s.%d, 3~ = 1 kΩ 끝 → 패드 2~ (격자 경로, wiring_small.csv). 리드 %s %d심은 패드에 아랫면에서 납땜." % (
+                        len(B["strands"]), Bd["jref"], Bd["jref"], len(Bd["jx"]), "W401" if tag == "EL" else "W411", len(Bd["jx"]))]
+        del n
+    return out
+
+
+def sb_sides_block():
+    """BRD-02 SB: top view + underside view, clickable crops (the way the control boards are shown, 2026-11-28)"""
+    L = strip_lists()["SB"]
+    return (h4("기판 그림 — 윗면 · 아랫면 (SB, 7장 모두 같음)")
+            + '<p class="small">제어 기판 O1~O7처럼 센서 기판도 <b>윗면(부품 쪽)</b>과 <b>아랫면(납땜·배선 쪽)</b>을 따로 그렸습니다. 아랫면 그림은 기판을 좌우로 뒤집어 '
+              '아래에서 본 거울상이라 왼쪽·오른쪽이 윗면과 반대입니다. <b>센서·콘덴서·선·패드를 누르면</b> 무엇인지, 어디에 이어지는지가 나오고, 맞춤·2배·3배로 키워 볼 수 있습니다.</p>'
+            + '<ul class="mbk-diff small">' + "".join(f"<li>{E(x)}</li>" for x in L) + "</ul>"
+            + crop("circuit-brd-02-sb-front", "BRD-02", "sb-front", "센서 기판 SB · 윗면 (부품 쪽)",
+                   "위에서 본 그림. 센서 12개와 꺾은 다리, 리드 구멍(빨강 3V3 · 검정 GND · 파랑 OUT), J201 구멍, 고정 U홈, 점선 = 센서 바, 회색 = 오른쪽 턱.")
+            + crop("circuit-brd-02-sb-back", "BRD-02", "sb-back", "센서 기판 SB · 아랫면 (납땜·배선 쪽)",
+                   "아래에서 본 거울상. 3V3·GND 버스, 1206 콘덴서 14개(실제 크기), 선 16가닥(번호 = wiring_SB.csv), 납땜 자리, 리본, 받침 패드(회색 점선 상자)와 바닥 다리(흐린 띠, 기판 밑 2.0)."))
+
+
+def end_sides_block():
+    """BRD-02 EL / ER: two tabs, each a crop with the top view (left) and the mirrored underside (right)"""
+    L = strip_lists()
+    tabs, panels = [], []
+    for i, (tag, lab) in enumerate((("EL", "EL · 왼쪽 끝 (A0 · A#0 · B0)"), ("ER", "ER · 오른쪽 끝 (C8)"))):
+        pid = "circuit-endk-" + tag.lower()
+        tabs.append(f'<button type="button" role="tab" id="{pid}-tab" aria-controls="{pid}" aria-selected="{"true" if i == 0 else "false"}" '
+                    f'tabindex="{0 if i == 0 else -1}">{E(lab)}</button>')
+        panels.append(f'<div class="mbk-panel" role="tabpanel" id="{pid}" aria-labelledby="{pid}-tab"{"" if i == 0 else " hidden"}>'
+                      + '<ul class="mbk-diff small">' + "".join(f"<li>{E(x)}</li>" for x in L[tag]) + "</ul>"
+                      + crop("circuit-brd-02-" + tag.lower(), "BRD-02", tag.lower(), "끝 부속 %s · 윗면 (왼쪽) · 아랫면 (오른쪽, 거울상)" % tag,
+                             "왼쪽 = 위에서 본 센서, 오른쪽 = 아래에서 본 버스·1206(100 nF 황갈색 · 1 kΩ 검정 '102' · 10 µF)·선(번호)·리드 패드. 회색 점선 상자 = 받침 패드, 오른쪽 흐린 칸 = 왼쪽 받침 기둥.")
+                      + "</div>")
+    return (h4("기판 그림 — EL · ER 윗면 · 아랫면")
+            + '<p class="small">끝 부속 기판도 윗면(센서)과 아랫면(부품·배선, 거울상)을 나란히 그렸습니다. 기판을 고르면 그 기판 그림이 나오고, <b>누르면</b> 부품·선 설명이 나옵니다.</p>'
+            + '<div class="mbk" id="circuit-end-kinds"><div class="mbk-tabs" role="tablist" aria-label="끝 부속 기판">' + "".join(tabs) + "</div>"
             + "".join(panels) + "</div>")
 
 
@@ -365,7 +417,7 @@ def kicad_steps():
         "<b>ERC</b>: 선으로 들어오는 전원(SB +3V3, +3V3_EL·_ER, PB의 +3V3 출력, PS의 PED_VCC, +12V8, +5V1, +5V_PI, 각 GND)에 PWR_FLAG. GND는 로컬 라벨이 아니라 전원 심볼.",
         "<b>SW601</b> = Switch:SW_DPST(1–2 회로 A, 3–4 회로 B)를 입력 1·3, 출력 2·4로 묶는다. 맞물린 커넥터(&gt;&gt;)는 KiCad에서 연결이 아니므로 양쪽 핀에 같은 넷 이름.",
         f"<b>외곽·구멍</b>: 제어 기판 = BRD-01 (판 그대로 {S.MBX['board']}, 구멍·홈 없음, 격자 x = 30.18 + 2.54i, y = 96.47 + 2.54j, 레일 맨 띠 y{S.MB['strip'][0]}~{S.MB['strip'][1]}는 부품 금지 구역), 센서 기판·끝 부속 = BRD-02, 페달 보드 = BRD-03(구멍 표 pads_PB.csv), J702·J501·PS = BRD-07(pads_small.csv). 격자는 2.54, 모든 구멍 좌표가 표에 있다.",
-        "<b>배선 확인</b>: KiCad 넷리스트를 netlist.csv(그린 도면에서 다시 계산한 값)와 비교한다. 만능기판 배선은 wiring_MB.csv(BRD-08) · wiring_SB.csv · wiring_PB.csv · wiring_small.csv의 경로(꺾인 점 좌표).",
+        "<b>배선 확인</b>: KiCad 넷리스트를 netlist.csv(그린 도면에서 다시 계산한 값)와 비교한다. 만능기판 배선은 wiring_MB.csv(BRD-08) · wiring_SB.csv · wiring_PB.csv · wiring_small.csv(J702·PS·EL·ER)의 경로(꺾인 점 좌표).",
     ])
 
 
@@ -373,7 +425,7 @@ FILES = [("bom.csv", "부품표 (KiCad 심볼·풋프린트·구매 상태)"), (
          ("harness.csv", "선 심 하나하나 (양 끝 핀·색·자르는 길이)"), ("cables.csv", "선 목록 W (USB 선은 선마다 길이)"),
          ("wiring_MB.csv", "제어 기판 아랫면 배선 (꺾인 점, BRD-08)"), ("wiring_SB.csv", "센서 기판 OUT → J201 배선"),
          ("wiring_PB.csv", "페달 보드 아랫면 배선"), ("pads_PB.csv", "페달 보드 구멍 좌표"),
-         ("wiring_small.csv", "J702·PS 배선 (BRD-07)"), ("pads_small.csv", "J702·J501·PS 구멍 좌표 (BRD-07)"),
+         ("wiring_small.csv", "J702·PS (BRD-07) · EL·ER (BRD-02) 배선"), ("pads_small.csv", "J702·J501·PS 구멍 좌표 (BRD-07)"),
          ("pins_rp2040.csv", "RP2040-Zero 패드 → 넷 (MB · PB)"), ("mux_map.csv", "먹스 채널 → 건반·MIDI"),
          ("id_jumpers.csv", "ID 점퍼 · USB 이름 · 허브 포트"), ("sb_sensors.csv", "센서 자리"), ("mux_module_pins.csv", "4067 모듈 핀"),
          ("rp2040_zero_pads.csv", "RP2040-Zero 구멍 좌표")]
@@ -424,7 +476,7 @@ def build():
     n_sb_out = sum(1 for r in wsb[1:] if r[0].startswith("U"))
     n_sb_pwr = len(wsb) - 1 - n_sb_out
     body = (fig("circuit-sch-02", "SCH-02", "옥타브 센서 기판 (SB ×7)", "WSH137-XPAN1 ×12 (U201~U212, 핀 1 VDD · 2 GND · 3 OUT, △35), 센서마다 100 nF, 버스 양 끝 10 µF, 리본 16심 2×8 블록 J201.")
-            + crop("circuit-brd-02-sb", "BRD-02", "sb", "센서 기판 배치 (SB)", "161.6 × 15.24 띠: 센서 리드 구멍 열, 3V3·GND·OUT 행, 100 nF·10 µF 자리(아랫면), 리본 블록, OUT → J201 배선(파란 점선)과 J201 전원 4가닥(빨강 = 3V3, 검정 = GND), 고정 U홈. 모듈 좌표 mm.")
+            + sb_sides_block()
             + bom_block("circuit-sb-bom", "SB 한 장 (×7)", bom_rows(lambda r: r[0] == "SCH-02"))
             + h4("센서 자리와 채널")
             + table(["센서", "건반", "소자 x", "리드 구멍 x", "100 nF", "넷", "먹스 채널", "리본 심"], sbs[1:], mono=(0, 2, 3, 4, 5, 6, 7))
@@ -437,11 +489,12 @@ def build():
             + table(["심", "표시", "넷", "SB", "MB"], ribbon_rows(), mono=(0, 2, 3, 4))
             + h4("선") + cable_block(["W101~W107"]) + notes_block(["W101~W107"])
             + h4("만드는 순서와 확인")
-            + flow(["12 × 18 양면 만능기판에서 6행 띠 161.6 × 15.24를 자른다(x1.0~162.6 — 오른쪽 턱 기둥과 0.4).",
-                    "아랫면 먼저: 센서마다 100 nF 1206(3V3–GND 패드 사이), 버스 양 끝 10 µF(C213 x8.25, C214 x158.11). 아랫면 부품·납땜 ≤ 1.8 mm.",
-                    "3V3(y64.46)·GND(y67.00) 버스를 아랫면 주석선으로 x8.25~160.65. OUT(y69.54) → J201은 위 표의 경로대로 피복 단선 12가닥, 이어서 J201 전원 4가닥(J201.1·16 → 3V3 버스, J201.2·15 → GND 버스).",
-                    "센서: 표시면을 위로 눕혀 리드를 +x로, 1.40~3.44 mm에서 2.54 간격으로 벌려 꺾어 구멍(소자 x + 3.0 이상 첫 격자)에 꽂는다. 납땜 뒤 다리 1 mm 아래로.",
-                    "리본 16심을 J201에 아랫면 납땜(1번 = 빨간 줄 = 앞줄 왼쪽).",
+            + flow(["12 × 18 양면 만능기판에서 구멍 63열 × 6행 띠 160.02 × 15.24를 자른다(x1.90~161.92, 두 짧은 변은 구멍 사이 가운데 — 오른쪽 턱 기둥과 1.08).",
+                    "센서 먼저: 표시면을 위로 눕혀 리드를 +x로, 1.40~3.44 mm에서 2.54 간격으로 벌려 꺾어 구멍(소자 x + 3.0 이상 첫 격자)에 꽂고 납땜, 다리는 1 mm 아래로 자른다. (1206을 먼저 달면 리드 구멍이 납으로 막힌다. 센서 바는 나중에 뒤에서 밀어 끼운다.)",
+                    "3V3(y64.46)·GND(y67.00) 버스를 아랫면 주석선으로 x8.25~160.65, 지나는 센서 핀마다 납땜.",
+                    "1206 14개: 센서마다 100 nF(C201~C212)를 그 리드 열의 3V3·GND 납땜 위에 걸쳐 붙이고, 버스 양 끝 빈 구멍에 10 µF(C213 x8.25, C214 x158.11). 아랫면 부품·납땜 ≤ 1.8 mm.",
+                    "선 16가닥(BRD-02 아랫면 그림 번호 = 위 표 순서): OUT 12가닥을 y70.81 줄에 나란히 눕혀(겹쳐 쌓지 않음) J201로, 이어서 J201 전원 4가닥(J201.1·16 → 3V3 버스, J201.2·15 → GND 버스).",
+                    "리본 16심을 J201에 아랫면 납땜(1번 = 빨간 줄 = 앞줄 왼쪽, 아랫면 그림에서는 오른쪽).",
                     "확인: 3V3–GND 단락 없음, J201.1·J201.16 ↔ U201 핀 1 = 0 Ω, J201.2·J201.15 ↔ U201 핀 2 = 0 Ω, J201 핀 n과 센서 OUT 사이 0 Ω(표) → 3.3 V 넣고 자석 없이 OUT 1.59~1.71 V, S극을 가까이 하면 오름."]))
     body_parts.append(part("circuit-sb", "B", "센서 기판 SB", "×7 (모듈마다 1장)",
                            "건반 12개 밑 자석의 거리를 홀센서 WSH137 12개가 전압으로 바꿉니다. 출력 12선과 3V3·GND 두 가닥씩을 16심 리본으로 제어 기판에 보냅니다.", body))
@@ -457,7 +510,7 @@ def build():
             + table(["패드 dj505", "WS P1", "이름", "가장자리", "MB 넷", "헤더", "구멍 x", "구멍 y"], zr, mono=(0, 1, 2, 6, 7))
             + h4("먹스 채널 → 건반 (펌웨어 표, MIDI 번호)")
             + table(muxm[0], muxm[1:], mono=tuple(range(8)))
-            + h4("ID 점퍼 (닫음 = GND 납땜 브리지 = 1)")
+            + h4("ID 점퍼 (연결 = 두 구멍 GND 납땜 브리지 = 1, 연결 안 함 = 비움)")
             + table(idj[0], idj[1:], mono=(0, 7))
             + f'<details class="spec cbom" id="circuit-mb-wire"><summary>아랫면 배선 경로 (wiring_MB.csv, {len(wmb) - 1}가닥 — BRD-08 번호)</summary>'
             + table(wmb[0], wmb[1:], mono=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) + "</details>"
@@ -476,17 +529,20 @@ def build():
 
     # ---------------- 끝 부속
     body = (fig("circuit-sch-04", "SCH-04", "끝 부속 센서 기판 (EL · ER) + EXT", "A0·A#0·B0는 O1, C8은 O7의 EXT(먹스 C12~)로. 1 kΩ은 아랫면 1206(△13). XH2.54 EL 5P · ER 3P: 1 = GND … 끝번 = 3V3 (△34).")
-            + crop("circuit-brd-02-end", "BRD-02", "end", "끝 부속 EL·ER 기판 배치", "EL 45.5 × 15.24, ER 22.0 × 15.24 — 센서·아랫면 1206 부품·리드 패드·필요한 리브 틈.")
+            + end_sides_block()
+            + h4("EL·ER 아랫면 선 (wiring_small.csv, 끝 부속 좌표)")
+            + table(wsm[0], [r for r in wsm[1:] if r[0] in ("EL", "ER")], mono=(1, 2, 3))
             + crop("circuit-brd-06-ext", "BRD-06", "left", "리본·EXT 선 만들기", "W101~W107 리본, W401·W411 리드 → 헤더(수), W403·W413 EXT 선 → 하우징(암, 압착) — XH2.54 키트(△34).")
             + bom_block("circuit-end-bom", "EL · ER", bom_rows(lambda r: r[0] == "SCH-04"))
             + h4("EXT 커넥터 위치")
             + table(["끝", "XH", "넷", "끝 부속 패드", "제어 기판 패드", "먹스", "건반 = MIDI"], xh_rows(), mono=(1, 2, 3, 4, 5))
             + h4("선") + cable_block(["W401", "W403", "W411", "W413"]) + notes_block(["W401", "W403", "W411"])
             + h4("만드는 순서와 확인")
-            + flow(["12 × 18 기판에서 EL 45.5 × 15.24, ER 22.0 × 15.24 띠(6행)를 자른다. 부품은 모두 아랫면: 100 nF, 1 kΩ(OUT → y72.08), 10 µF.",
+            + flow(["12 × 18 기판에서 EL 43.18 × 15.24(구멍 17열), ER 20.32 × 15.24(구멍 8열) 띠(6행)를 구멍 사이 가운데로 자른다.",
+                    "SB와 같은 순서: 센서를 꽂아 납땜(다리 1 mm 아래로) → 버스 2줄 → 아랫면 1206(100 nF 3V3–GND, 1 kΩ OUT → y72.08, 10 µF x8.25) → 선(1 GND 버스 → 패드 1, 2 3V3 버스 → 끝 패드, 3~ 1 kΩ 끝 → 패드 2~, BRD-02 아랫면 그림·wiring_small.csv).",
                     f"리본 가닥(EL 5심 {HN.EXT_END_CUT['EL']}, ER 3심 {HN.EXT_END_CUT['ER']} mm)을 J401/J411에 납땜 → 기판·센서 바 고정 → 자유 끝을 리브 틈·레일 밑 차선·뒷벽 홈으로 꿴다(XH 헤더는 못 지나감).",
                     "뒤 통로에서 리본 끝을 XH2.54 헤더(EL 5P · ER 3P) 꼬리에 바로 납땜 + 수축 튜브. 모듈 쪽 W403·W413은 작업대에서 하우징에 단자를 압착해 둔다(XH 끝번 = 3V3 = J302 6번).",
-                    "확인: 끝 부속을 꽂으면 O1 C12~C14 / O7 C12에서 센서 값, 빼면 0.15 V 아래(100 kΩ 풀다운)."]))
+                    "확인: 패드 1 ↔ 센서 핀 2 = 0 Ω, 끝 패드 ↔ 센서 핀 1 = 0 Ω, 패드 2~ ↔ 그 센서 OUT = 1 kΩ → 끝 부속을 꽂으면 O1 C12~C14 / O7 C12에서 센서 값, 빼면 0.15 V 아래(100 kΩ 풀다운)."]))
     body_parts.append(part("circuit-end", "D", "끝 부속 EL · ER", "EL ×1 · ER ×1",
                            "88건반 중 옥타브 모듈 밖의 네 건반(왼쪽 A0·A#0·B0, 오른쪽 C8)의 센서입니다. 끝 부속을 떼어 보관할 수 있게 XH2.54 커넥터(EL 5핀 · ER 3핀)로 O1·O7 제어 기판의 EXT 입력에 잇습니다.", body))
 
@@ -494,8 +550,8 @@ def build():
     zped = [[r[0], r[2], r[5]] for r in pins_z[1:] if r[5] != "NC"]
     psm_ped = [r for r in psm[1:] if r[0] in ("J501 조각", "PS 조각")]
     body = (fig("circuit-sch-05", "SCH-05", "페달 보드 (PB) + 댐퍼 페달 센서 (PS)", "페달 안 WSH137 → R551 1 kΩ → 3 m TRS → J501(TN = GND) → W502 → J502 → 1 kΩ + 100 nF → GP26. 링 급전 20 Ω, 팁 100 kΩ, GP14 = GND.")
-            + fig("circuit-brd-03", "BRD-03", "페달 보드 배치 (PB)", "8 × 12 양면 기판에서 자른 70 × 50 (지그 P-PED), 모든 구멍 좌표와 아랫면 배선(굵은 실선 = 주석 맨선, 지나는 패드마다 납땜 · 점선 = 리본 가닥, 두 끝만). 배선 검사: SCH-05와 일치.")
-            + crop("circuit-brd-07-j501", "BRD-07", "j501", "J501 페달 잭 조각", "25 × 24 자투리(9 × 9 구멍): 잭 자리(점선)와 W502 앞 패드 T·TN·R·S 좌표.")
+            + fig("circuit-brd-03", "BRD-03", "페달 보드 배치 (PB)", "8 × 12 양면 기판에서 자른 71.12 × 49.53(구멍 28 × 20, 지그 P-PED), 모든 구멍 좌표와 아랫면 배선(굵은 실선 = 주석 맨선, 지나는 패드마다 납땜 · 점선 = 리본 가닥, 두 끝만). 배선 검사: SCH-05와 일치.")
+            + crop("circuit-brd-07-j501", "BRD-07", "j501", "J501 페달 잭 조각", "22.86 × 22.86 자투리(9 × 9 구멍): 잭 자리(점선)와 W502 앞 패드 T·TN·R·S 좌표.")
             + crop("circuit-brd-07-ps", "BRD-07", "ps", "PS 페달 안 센서 조각", "7 × 5 구멍(로컬 좌표): U551·C551·R551과 W501 패드, 아랫면 맨선. 배선 검사: SCH-05와 일치.")
             + crop("circuit-brd-06-ped", "BRD-06", "ped", "페달 선 만들기", "W501 3 m 스테레오(페달 쪽 잘라 납땜), W502 리본 가닥 4개.")
             + bom_block("circuit-ped-bom", "PB · PS · J501 조각", bom_rows(lambda r: r[0] == "SCH-05"))
@@ -508,7 +564,7 @@ def build():
             + h4("A501 쓰는 핀") + table(["패드", "이름", "PB 넷"], zped, mono=(0, 1))
             + h4("선") + cable_block(["W501", "W502"], ("W208",)) + notes_block(["W501", "W502"])
             + h4("만드는 순서와 확인")
-            + flow(["8 × 12 양면 기판(SE8b)을 지그 P-PED로 70 × 50 긋고 꺾기(남는 반쪽은 예비), 나사 Ø3.2 (430.5, 248)·(472.5, 310), 위치 핀 Ø3.0 (472.5, 248)·(430.5, 310).",
+            + flow(["8 × 12 양면 기판(SE8b)을 지그 P-PED로 71.12 × 49.53(구멍 28 × 20) 긋고 꺾기(남는 반쪽은 예비), 나사 Ø3.2 (430.5, 248)·(472.5, 310), 위치 핀 Ø3.0 (472.5, 248)·(430.5, 310).",
                     "BRD-03 배치표대로 R501·R502·R503(100 Ω ×5)·C501·JP504 → 아랫면 배선 → 헤더(몰드 뺌) → 캡톤 → A501. 주석 맨선(GND 레일·버스·R501.2 → R502.2 → J502.1 줄·짧은 다리)은 지나는 패드마다 납땜하고, 리본 가닥은 두 끝만 벗겨 끝의 패드·맨선에 납땜한다(가닥 중간은 아무것도 잇지 않음).",
                     "J501 조각(BRD-07): PJ-313을 잭 자리에 꽂고 다리 T·TN·R·S → 앞 패드 → W502 4가닥으로 J502와 잇고 → 조각을 뒤판 잭 선반에 MS 폴리머로.",
                     "페달: 마이크로스위치 배선을 떼고 발판 밑에 자석(S극 아래), 바닥판에 PS 조각(BRD-07: U551·C551·R551) + W501 끝(팁 → c6 r4, 링 → c6 r1, 슬리브 → c6 r2).",
@@ -548,7 +604,7 @@ def build():
     wsm_j7 = [r for r in wsm[1:] if r[0] == "J702"]
     body = (fig("circuit-sch-07", "SCH-07", "오디오 (CU)", "동글 → 볼 헤드폰 잭 J701(노멀) → J702 → 1 µF×2 + 1 kΩ(AGND) → HW-720(XH 3P 입력) → XT60 SPK → CW-100B25 ×2 (BTL). 앰프 전원 = +12V8을 DC 잭 다리에.")
             + crop("circuit-brd-05-aud", "BRD-05", "audio", "오디오 선 만들기", "W701·W702(BC256 반쪽), W707(J702 → 앰프 입력), W703·W705(앰프 → XT60 수 SPK), W704·W706(스피커 꼬리선).")
-            + crop("circuit-brd-07-j702", "BRD-07", "j702", "J702 앰프 입력 기판", "30 × 25(12 × 10 구멍, 모델 좌표): 잭 T·R·S 다리 → 모음 패드 → 1 µF ×2 → 출력 패드 L·G·R, 1 kΩ → G. TN·RN 다리는 비움. 실선 = 주석 맨선, 점선 = 피복 가닥(두 끝만). 배선 검사: SCH-07과 일치.")
+            + crop("circuit-brd-07-j702", "BRD-07", "j702", "J702 앰프 입력 기판", "30.48 × 25.4(12 × 10 구멍, 모델 좌표): 잭 T·R·S 다리 → 모음 패드 → 1 µF ×2 → 출력 패드 L·G·R, 1 kΩ → G. TN·RN 다리는 비움. 실선 = 주석 맨선, 점선 = 피복 가닥(두 끝만). 배선 검사: SCH-07과 일치.")
             + crop("circuit-brd-07-j701", "BRD-07", "j701", "J701 헤드폰 잭 (볼 포켓, 기판 없음)", "CAD 포켓 단면: 잭을 밑에서 넣고 다리에 W701·W702를 바로 납땜.")
             + bom_block("circuit-aud-bom", "오디오", bom_rows(aud_refs))
             + h4("잭·단자와 넷") + table(["부품", "단자", "넷", "메모"], audio_terms())
@@ -667,7 +723,12 @@ def build():
     with open(fz, "w", encoding="ascii") as f:
         f.write(base64.b64encode(buf.getvalue()).decode("ascii"))
     assets.append("fin/circuit/" + ZIPNAME + ".b64.txt")
-    shutil.copyfile(M3.OUT, os.path.join(FIN, "circuit3d.json"))
+    # the 3D viewer gets the same part cards as the drawing popups (photo, value, specs, connect / do-not-connect per module)
+    with open(M3.OUT, encoding="utf-8") as f_:
+        c3d = json.load(f_)
+    c3d["cards"] = HT.part_cards()
+    with open(os.path.join(FIN, "circuit3d.json"), "w", encoding="utf-8") as f_:
+        json.dump(c3d, f_, ensure_ascii=False, separators=(",", ":"))
     assets.append("fin/circuit/circuit3d.json")
     assets.append("fin/circuit/sheethits.json")
     sheet_assets = ["sch/" + v["file"] for v in SHEETS_JSON.values()]
@@ -723,7 +784,7 @@ CSS = """
   #p-circuit .circ-chips a{font-size:13px;padding:6px 12px}
 }
 @media (prefers-reduced-motion:reduce){#p-circuit *{scroll-behavior:auto!important;transition:none!important}}
-/* ---- MB board kinds (BRD-09~11): three tabs, front + back crops ---- */
+/* ---- MB per board (BRD-09~15): seven tabs O1~O7, front + back crops ---- */
 #p-circuit .mbk{margin:6px 0 14px}
 #p-circuit .mbk-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 10px}
 #p-circuit .mbk-tabs button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border:1px solid var(--rule-2);border-radius:999px;
@@ -758,6 +819,27 @@ CSS = """
 #p-circuit .hitpop li{margin:2px 0;color:var(--ink-2)}
 #p-circuit .hitpop .hit-n{border-top:1px solid var(--rule);padding-top:6px;margin-top:4px}
 #p-circuit .hitpop .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+/* part card + connect line: colours mixed from the popup's own --card / --ink, because a popup inside a drawing sheet is light
+   (.sheet switches --card / --ink / --ink-2 only) while the page around it may be dark */
+#p-circuit .hitpop .hit-act{border-radius:8px;padding:7px 9px;margin:4px 0 8px;border:1px solid color-mix(in srgb,var(--ink) 22%,var(--card));color:var(--ink)}
+#p-circuit .hitpop .hit-act p{margin:2px 0;color:color-mix(in srgb,var(--ink) 78%,var(--card))}
+#p-circuit .hitpop .hit-act .v{display:block;font-size:15px;font-weight:700;color:var(--ink)}
+#p-circuit .hitpop .hit-act.yes{background:color-mix(in srgb,#2e9b5a 14%,var(--card));border-color:color-mix(in srgb,#2e9b5a 70%,var(--card))}
+#p-circuit .hitpop .hit-act.no{background:color-mix(in srgb,#d9822b 16%,var(--card));border-color:color-mix(in srgb,#d9822b 75%,var(--card))}
+#p-circuit .hitpop .hit-act .row{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:baseline;color:var(--ink)}
+#p-circuit .hitpop .hit-act .row b.yes{color:color-mix(in srgb,#2e9b5a 70%,var(--ink))}
+#p-circuit .hitpop .hit-act .row b.no{color:color-mix(in srgb,#d9822b 70%,var(--ink))}
+#p-circuit .hitpop .hit-card{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;align-items:start;margin:4px 0 8px;padding:8px;
+  border:1px solid color-mix(in srgb,var(--ink) 16%,var(--card));border-radius:8px;background:color-mix(in srgb,var(--ink) 3%,var(--card));color:var(--ink)}
+#p-circuit .hitpop .hit-card.noimg{grid-template-columns:minmax(0,1fr)}
+#p-circuit .hitpop .hit-card img{width:118px;height:118px;object-fit:contain;background:#fff;border-radius:6px;border:1px solid color-mix(in srgb,var(--ink) 16%,var(--card))}
+#p-circuit .hitpop .hit-card .cap{font-size:12px;color:color-mix(in srgb,var(--ink) 62%,var(--card));margin-top:3px}
+#p-circuit .hitpop .hit-card .val{font-size:15px;margin:0 0 4px;color:var(--ink)}
+#p-circuit .hitpop .hit-card dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;margin:0;font-size:12.5px}
+#p-circuit .hitpop .hit-card dt{color:color-mix(in srgb,var(--ink) 62%,var(--card))}
+#p-circuit .hitpop .hit-card dd{margin:0;color:color-mix(in srgb,var(--ink) 85%,var(--card));overflow-wrap:anywhere}
+#p-circuit .hitpop .hit-card .id{font-size:12.5px;color:color-mix(in srgb,var(--ink) 78%,var(--card));margin:5px 0 0}
+@media (max-width:520px){#p-circuit .hitpop .hit-card{grid-template-columns:minmax(0,1fr)}#p-circuit .hitpop .hit-card img{width:100%;height:150px}}
 #p-circuit .hitpop .hitx{position:absolute;top:4px;right:4px;width:32px;height:32px;border:0;background:none;color:var(--ink-2);font:inherit;font-size:20px;line-height:1;cursor:pointer;border-radius:6px}
 #p-circuit .hitpop .hitx:hover{background:var(--rule)}
 #p-circuit .hitpop .hitx:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
@@ -778,18 +860,24 @@ JS = r"""
   var sec = document.getElementById('p-circuit'); if(!sec) return;
   // sheet crops: inline SVG <image> would load at once; give it its href only when the tab is first shown
   var started = false;
+  function loadImgs(root){
+    root.querySelectorAll('image[data-href]').forEach(function(im){
+      if(im.closest('.mbk-panel[hidden]') || im.getAttribute('href')) return;
+      im.setAttribute('href', im.getAttribute('data-href'));
+    });
+  }
   function start(){
     if(started || sec.hidden) return; started = true;
-    sec.querySelectorAll('image[data-href]').forEach(function(im){ im.setAttribute('href', im.getAttribute('data-href')); });
+    loadImgs(sec);
   }
   try { new MutationObserver(start).observe(sec, {attributes: true, attributeFilter: ['hidden']}); } catch(err) {}
   start();
-  // MB board-kind tabs (BRD-09~11): click or arrow keys
+  // MB board tabs O1~O7 (BRD-09~15): click or arrow keys; a tab's crops load the first time it is shown
   function pickKind(t){
     var box = t.closest('.mbk'); if(!box) return;
     box.querySelectorAll('.mbk-tabs [role=tab]').forEach(function(b){
       var on = b === t, p = document.getElementById(b.getAttribute('aria-controls'));
-      b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; if(p) p.hidden = !on;
+      b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; if(p){ p.hidden = !on; if(on) loadImgs(p); }
     });
   }
   sec.addEventListener('click', function(e){
@@ -832,6 +920,40 @@ JS = r"""
   });
 })();
 // ---- sheet hits: click a wire / pad / pin / part on a drawing -> what it is, the product and what it connects to.
+// Part card + connect / do-not-connect line (2026-11-23), shared by the drawing popups and the 3D viewer (circuit3d.js):
+// card = hits.py part_cards() {t, v, desc, img, cap, spec, ident, same, fit, act}; ctx = boards the clicked thing belongs to
+// (['O1'] on BRD-09 ... ['O7'] on BRD-15, the module of a 3D object), null = every board.
+(function(){
+  var T = window.toccata = window.toccata || {};
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]; }); }
+  function act(c, ctx){
+    var a = c && c.act; if(!a) return '';
+    var boards = (ctx && ctx.length ? ctx.filter(function(b){ return a.all.indexOf(b) >= 0; }) : []);
+    if(!boards.length) boards = a.all.slice();
+    var on = boards.filter(function(b){ return a.on.indexOf(b) >= 0; }), off = boards.filter(function(b){ return a.on.indexOf(b) < 0; });
+    var h;
+    if(!off.length || !on.length){
+      var yes = !off.length, who = boards.length === a.all.length && boards.length > 1 ? '모든 기판' : boards.join(' · ');
+      h = '<div class="hit-act ' + (yes ? 'yes' : 'no') + '"><span class="v">' + esc(who + ': ' + (yes ? a.yes : a.no)) + '</span><p>' + esc(yes ? a.how_yes : a.how_no) + '</p>';
+    } else {
+      h = '<div class="hit-act"><div class="row"><b class="yes">' + esc(a.yes) + '</b><span>' + esc(on.join(' · ')) + '</span>' +
+          '<b class="no">' + esc(a.no) + '</b><span>' + esc(off.join(' · ')) + '</span></div><p>' + esc(a.how_yes) + '</p><p>' + esc(a.how_no) + '</p>';
+    }
+    return h + (a.why ? '<p>' + esc(a.why) + '</p>' : '') + '</div>';
+  }
+  function card(c){
+    if(!c) return '';
+    var rows = (c.spec || []).map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
+    if(c.fit) rows += '<dt>다는 곳</dt><dd>' + esc(c.fit) + '</dd>';
+    if(c.board) rows += '<dt>수량</dt><dd>' + esc(c.board) + '</dd>';
+    var img = c.img ? '<div><img src="' + esc(c.img) + '" alt="' + esc(c.cap || c.t) + '" loading="lazy"><div class="cap">' + esc(c.item ? c.item + ' · ' : '') + esc(c.cap || '') + '</div></div>' : '';
+    return '<div class="hit-card' + (img ? '' : ' noimg') + '">' + img + '<div>' +
+      (c.v ? '<p class="val">값 <b>' + esc(c.v) + '</b></p>' : '') + '<p class="id" style="margin-top:0">' + esc(c.desc || '') + '</p>' +
+      (rows ? '<dl>' + rows + '</dl>' : '') + (c.ident ? '<p class="id">알아보기: ' + esc(c.ident) + '</p>' : '') +
+      (c.same ? '<p class="id">' + esc(c.same) + '</p>' : '') + '</div></div>';
+  }
+  T.partCard = {act: act, card: card};
+})();
 // Data fin/circuit/sheethits.json (hardware/pcb/src/hits.py), loaded on first pointer use. Geometry in sheet mm (420 x 297):
 // a full sheet is an <img> (overlay <svg> kept on top of it), a crop is an inline <svg> in sheet units (overlay <g> inside it).
 (function(){
@@ -906,6 +1028,8 @@ JS = r"""
       if(sel) shape(sel, 'sel', col(sel), o);
     }
     function list(a){ return a && a.length ? '<ul>' + a.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : ''; }
+    function cardOf(it){ var c = DATA && DATA._cards; return it && it.ref && c ? c[it.ref] || null : null; }
+    function ctxOf(it){ var d = D(); return (d && d.boards) || (it && it.m ? [it.m] : null); }
     function show(it, e){
       if(!pop){
         pop = document.createElement('div'); pop.className = 'hitpop'; pop.setAttribute('role', 'region'); pop.setAttribute('aria-label', code + ' 항목 정보');
@@ -913,11 +1037,13 @@ JS = r"""
         pop.addEventListener('click', function(ev){ if(ev.target.closest && ev.target.closest('.hitx')) close(); });
       }
       var d = D() || {nets: {}}, n = it.n && d.nets[it.n];
-      pop.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button><p class="hit-t"><b>' + esc(it.t) + '</b></p>' + list(it.d) +
+      var card = cardOf(it), CH = window.toccata && window.toccata.partCard;
+      pop.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button><p class="hit-t"><b>' + esc(it.t) + '</b></p>' +
+        (card && CH ? CH.act(card, ctxOf(it)) + CH.card(card) : '') + list(it.d) +
         (n ? '<div class="hit-n"><p><span class="sw" style="background:' + esc(n.c) + '"></span><b>' + esc(n.t) + '</b></p>' + list(n.d) + '</div>' : '');
       pop.hidden = false;
       // beside the click (right, else left) so the picked wire stays visible; below it when the figure is too narrow
-      var fr = fig.getBoundingClientRect(), W = fig.clientWidth, pw = Math.min(380, W - 16), x = e.clientX - fr.left, y = e.clientY - fr.top, L, T;
+      var fr = fig.getBoundingClientRect(), W = fig.clientWidth, pw = Math.min(card ? 460 : 380, W - 16), x = e.clientX - fr.left, y = e.clientY - fr.top, L, T;
       pop.style.width = pw + 'px';
       if(x + 22 + pw <= W - 8){ L = x + 22; T = y - 28; }
       else if(x - 22 - pw >= 8){ L = x - 22 - pw; T = y - 28; }

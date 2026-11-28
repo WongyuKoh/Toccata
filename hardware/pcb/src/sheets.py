@@ -3,7 +3,7 @@ from sch import (Sheet, sym_R, sym_C, sym_hall, sym_box, sym_conn, sym_jumper, s
                  sym_switch, sym_switch_dpst, sym_speaker, sym_jack, sym_plug, sym_conn2, sym_tp, sym_conn_pos)
 import parts as P
 
-TOTAL = 18
+TOTAL = 22
 KEYS = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 NET = {k: "HALL_" + k.replace("#", "S") for k in KEYS}           # HALL_C, HALL_CS, ...
 RIBBON = ["+3V3", "GND"] + ["HALL_" + k.replace("#", "S") for k in ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]] + ["GND", "+3V3"]
@@ -176,7 +176,7 @@ def sch02():
         "2. C201~C212: 1206 100 nF X7R 50 V (Walsin 범용, 디바이스마트 8898), 기판 아랫면 3V3–GND 패드 사이, 각 센서 핀 1·2 바로 옆.",
         "    아랫면 부품·납땜·리드 끝 ≤ 1.8 mm (기판 밑 z7.0 − 바닥 z5.0 = 2.0, W1 r4.5 P36): 칩은 납작하게, 센서 리드는 납땜 뒤 1 mm 이하로 자른다.",
         "3. C213·C214: 10 µF 1206 16 V (버스 양 끝, 구매 목록 L67). △1 글 사양에는 있으나 구매 목록에 없던 부품. 두께 1.6 ± 0.2라 1.8 한계 안.",
-        "4. 기판: 양면 도트 만능기판 x1.0~162.6 × y60.65~75.89 (6행; 바 끝 x162.9보다 0.3 짧게 → 오른쪽 턱 기둥 x163.0과 0.4). y64.46 = 3V3 버스, y67.00 = GND, y69.54 = OUT.",
+        "4. 기판: 양면 도트 만능기판 x1.90~161.92 × y60.65~75.89 (구멍 63열 × 6행 = 160.02 × 15.24, 구멍 사이 가운데에서 자름; 오른쪽 턱 기둥 x163.0과 1.08). y64.46 = 3V3 버스, y67.00 = GND, y69.54 = OUT.",
         "5. 고정: M3×10 자가 탭 2 (3.0, 61.9)·(3.0, 74.6) — 구멍 Ø3.4가 기판 앞·뒤 가장자리를 넘으므로 U자 홈으로 판다(BRD-02).",
         "6. △12 리본 16심(3V3·GND 2가닥씩)을 각 OUT 패드에서 아랫면을 따라 J201(2×8)로 모아 W1 리본 차선(x59~82)으로 제어 기판까지.",
         "7. 고정 나사 M3×10(구매 목록 L34, ISO 7380 머리 Ø5.7)은 센서 바 위(z13.6)에서 바·기판 U홈을 지나 받침 기둥(x0.5~6.0)에 조인다(W1 P36) —",
@@ -361,11 +361,11 @@ def sch03(sig_r=None):
     for m in range(1, 8):
         b = ID_BITS[m]
         ext = {1: "C12~14 → A0·A#0·B0 (21~23)", 7: "C12 → C8 (108)"}.get(m, "—")
-        rows.append([f"O{m}", "닫음" if b[0] else "—", "닫음" if b[1] else "—", "닫음" if b[2] else "—", "—",
+        rows.append([f"O{m}", "연결" if b[0] else "—", "연결" if b[1] else "—", "연결" if b[2] else "—", "—",
                      f"Toccata O{m}", f"{24+12*(m-1)} (C{m})", ext])
-    rows.append(["PED", "—", "—", "—", "JP504 닫음", "Toccata PED", "—", "페달 (SCH-05)"])
+    rows.append(["PED", "—", "—", "—", "JP504 연결", "Toccata PED", "—", "페달 (SCH-05)"])
     s.table(15, 132, ["보드", "JP301 GP6", "JP302 GP7", "JP303 GP8", "JP304 GP14", "USB 이름", "C 건반 MIDI", "EXT 입력"],
-            rows, [11, 17, 17, 17, 18, 24, 22, 46], title="ID 점퍼 (닫음 = GND 납땜 브리지 = 1, GP6 = 비트0)", mono_cols=(0,))
+            rows, [11, 17, 17, 17, 18, 24, 22, 46], title="ID 점퍼 (연결 = 두 구멍 GND 납땜 브리지 = 1, — = 연결하지 않음, GP6 = 비트0)", mono_cols=(0,))
     # pin map table (pad numbers from parts.py: dj505 library / Waveshare P1)
     zp_ = P.zero_pin
     ws = P.WS_P1
@@ -500,14 +500,14 @@ def sch04():
               "왼쪽 끝 부속 A0·A#0·B0 센서 3개는 O1, 오른쪽 C8 센서 1개는 O7 제어 기판의 EXT(먹스 C12~)로 읽는다. 파트 사이는 XH2.54 커넥터(EL 5P · ER 3P, R26·△34).",
               "EL · ER", qty="EL × 1 · ER × 1", basis="v4 W1+ r4.5 끝 부속", **REV_E)
     e = {}
-    s.box(14, 22, 380, 94, "EL — 왼쪽 끝 부속 센서 기판 (x1.0~46.5 × y60.65~75.89, 45.5 × 15.24 mm, 6행) — BRD-02 배치")
+    s.box(14, 22, 380, 94, "EL — 왼쪽 끝 부속 센서 기판 (x1.90~45.08 × y60.65~75.89, 43.18 × 15.24 mm, 구멍 17 × 6) — BRD-02 배치")
     _end_board(s, e, 22, "L", [("A0", "EL_A0", 1), ("A#0", "EL_AS0", 2), ("B0", "EL_B0", 3)],
                401, 401, 401, "J401", 401, "+3V3_EL")
-    s.box(14, 120, 380, 94, "ER — 오른쪽 끝 부속 센서 기판 (로컬 x1.0~23.0 × y60.65~75.89, 22.0 × 15.24 mm, 6행) — BRD-02 배치")
+    s.box(14, 120, 380, 94, "ER — 오른쪽 끝 부속 센서 기판 (로컬 x1.90~22.22 × y60.65~75.89, 20.32 × 15.24 mm, 구멍 8 × 6) — BRD-02 배치")
     _end_board(s, e, 120, "R", [("C8", "ER_C8", 1)], 411, 411, 411, "J411", 411, "+3V3_ER")
     s.para(15, 220, [
         "주  1. 끝 부속 센서도 SCH-02와 같다: WSH137-XPAN1 + 100 nF(센서 옆). W1 자석 x: 왼쪽 부속(x0~47) A0 10.287, A#0 26.927, B0 40.141, 오른쪽 부속(로컬 x0~23.5) C8 11.75.",
-        "        기판은 W1 r4.2 끝 부속 센서 바(왼 x0.5~46.5, 오른 x0.5~23.0) 안: EL x1.0~46.5, ER x1.0~23.0 (SB와 같은 6행 15.24). 리드 구멍 A0 13.33, A#0 31.11, B0 43.81, C8 15.87.",
+        "        기판은 W1 r4.2 끝 부속 센서 바(왼 x0.5~46.5, 오른 x0.5~23.0) 안: EL x1.90~45.08 (구멍 17열), ER x1.90~22.22 (구멍 8열) — 구멍 사이 가운데에서 자름 (SB와 같은 6행 15.24). 리드 구멍 A0 13.33, A#0 31.11, B0 43.81, C8 15.87.",
         "     2. △34 커넥터: XH2.54 DIY 키트(쿠팡 더모어샵) — 모듈 쪽 = 하우징(암, 사용자 선 끝에 단자 압착), 끝 부속 쪽 = 기판용 헤더(수)를 리본 끝에 납땜. ‘>>’ = 맞물림(KiCad 연결 아님 →",
         "        양쪽에 같은 넷 이름). +3V3_EL·+3V3_ER은 각각 O1·O7 제어 기판의 3V3 레일이다(프로젝트 전원 심볼로 추가).",
         "     3. △34 XH 위치: EL 1 GND · 2 A0 · 3 A#0 · 4 B0 · 5 3V3, ER 1 GND · 2 C8 · 3 3V3. J302 패드는 △6 그대로(1 GND, 2~5 = 먹스 C12~C15, 6 = 3V3) —",
@@ -591,7 +591,7 @@ def sch05(ring_r="20"):
     s.text(108, 97.0, "W502: J501 → PB J502, 리본 가닥 4개 (BRD-06)", "cabt", size=2.0)
     s.chg(196.5, 36.5, 19)
     # --- PB board
-    s.box(188, 22, 208, 110, "PB — 페달 보드 70 × 50 (8 × 12 양면 기판 조각, CU 칸 안) — 자리: BRD-03")
+    s.box(188, 22, 208, 110, "PB — 페달 보드 71.12 × 49.53 (8 × 12 양면 기판 조각, CU 칸 안) — 자리: BRD-03")
     jp = sym_conn_pos("Conn_01x04", 5, [(1, 0), (3, 2), (2, 3), (4, 4)], side="R", width=9)
     s.place(jp, "J502", "W502 패드 1×4", 190, jt[1] - 2.5, ref_at=(0, -1.2), val_at=(0, 29.6), meta=dict(bomkey="PADS"))
     for n, nm in ((1, "T"), (3, "R"), (2, "TN"), (4, "S")):
@@ -1198,8 +1198,9 @@ USB_RX = (78.91, 87.85)              # receptacle 8.94 wide, 4.67 from the right
 USB_RY = (163.18, 170.48)            # protrudes ~1.3 past the Zero edge (1.0~1.5, check on the part)
 PLUG = (77.13, 89.63, 170.48, 195.48, 9.9, 17.5)    # cable overmold limit 12.5 x 25 x 7.6 (centre x83.38 z13.7)
 WALL_OPEN = (76.45, 91.55)           # rear-wall opening: the USB cable and the EXT lead leave the module here
-# A302 4067 module: long axis +x, channel row in front (C0 at the left), control row behind it
-MUX_ORIGIN = (82.25, 100.28)         # module corner (C0 end, front edge)
+# A302 4067 module: long axis +x, channel row in front, control row behind it. Seen from above C15 is at the LEFT and C0 at the right,
+# the control row reads SIG S3 S2 S1 S0 EN VCC GND from the left (user 2026-11-23: the real module; earlier drawings had it mirrored)
+MUX_ORIGIN = (82.25, 100.28)         # module corner (C15 end, front edge)
 MUX_W, MUX_D = 40.64, 17.78
 RIB_X0, RIB_Y = lat(12), (latj(1), latj(2))       # J301 2x8: odd pins front row y99.01, even back row y101.55, x60.66~78.44
 RIB_C = round(RIB_X0 + 3.5 * 2.54, 2)             # J301 centre x69.55 (the ribbon runs centred x70.48 like SB J201)
@@ -1232,13 +1233,14 @@ def zero_hole(n):
 
 
 def mux_hole(name):
-    """4067 module pin -> board xy: u along +x and w along +y from the module corner (channel row C0..C15, control row behind)."""
+    """4067 module pin -> board xy: u along +x and w along +y from the module corner (channel row C15..C0 from the left, control row
+    SIG..GND behind it). u is measured from the C0 / GND end of the module (module-local), then mirrored onto the board (+x = C15 -> C0)."""
     n = P.mux_pin(name)
     if n <= 16:
         u, w = 1.27 + 2.54 * (n - 1), 1.27
     else:
         u, w = 11.43 + 2.54 * (n - 17), 16.51
-    return round(MUX_ORIGIN[0] + u, 2), round(MUX_ORIGIN[1] + w, 2)
+    return round(MUX_ORIGIN[0] + MUX_W - u, 2), round(MUX_ORIGIN[1] + w, 2)
 
 
 def jp_hole(ref, net):
@@ -1290,6 +1292,57 @@ def _hatch(o, x0, y0, x1, y1, step=3.0, col="#c2410c", w=.25, op=.45):
         if bx > ax:
             o.append(f'<line x1="{ax:.2f}" y1="{ay:.2f}" x2="{bx:.2f}" y2="{by:.2f}" stroke="{col}" stroke-width="{w}" stroke-opacity="{op}"/>')
         t += step
+
+
+SIZE_COL = "#b4380c"
+
+
+def size_dim(s, a, b, at, txt, vertical=False, fs=2.0):
+    """real-size dimension line on a sheet (sheet mm): from a to b along x (at = y of the line) or along y (vertical, at = x),
+    end bars + arrow heads, the text in the middle (above the line / left of it, turned)."""
+    o = s.out["body"]
+    c = SIZE_COL
+    lo, hi = min(a, b), max(a, b)
+    if not vertical:
+        o.append(f'<line x1="{lo:.2f}" y1="{at:.2f}" x2="{hi:.2f}" y2="{at:.2f}" stroke="{c}" stroke-width=".35"/>')
+        for x, d in ((lo, 1), (hi, -1)):
+            o.append(f'<line x1="{x:.2f}" y1="{at-1.6:.2f}" x2="{x:.2f}" y2="{at+1.6:.2f}" stroke="{c}" stroke-width=".35"/>')
+            o.append(f'<path d="M{x:.2f},{at:.2f} l{2.0*d:.2f},-.7 v1.4 z" fill="{c}"/>')
+        mx = (lo + hi) / 2
+        _tx(s, mx, at - 0.8, txt, "noteb", "middle", fs=fs)
+        s.out["text"][-1] = s.out["text"][-1].replace('style="', f'style="fill:{c};', 1)
+    else:
+        o.append(f'<line x1="{at:.2f}" y1="{lo:.2f}" x2="{at:.2f}" y2="{hi:.2f}" stroke="{c}" stroke-width=".35"/>')
+        for y, d in ((lo, 1), (hi, -1)):
+            o.append(f'<line x1="{at-1.6:.2f}" y1="{y:.2f}" x2="{at+1.6:.2f}" y2="{y:.2f}" stroke="{c}" stroke-width=".35"/>')
+            o.append(f'<path d="M{at:.2f},{y:.2f} l-.7,{2.0*d:.2f} h1.4 z" fill="{c}"/>')
+        my_ = (lo + hi) / 2
+        import html as _h
+        s.out["text"].append(f'<text x="{at-0.8:.2f}" y="{my_:.2f}" class="noteb" text-anchor="middle" style="fill:{c};font-size:{fs}px" '
+                             f'transform="rotate(-90 {at-0.8:.2f} {my_:.2f})">{_h.escape(txt)}</text>')
+
+
+def size_badge(s, x, y, txt, anchor="start", fs=2.3):
+    """'실제 크기 ...' tag: bold text in a pale box (sheet mm, baseline y)."""
+    from sch import text_w
+    w = text_w(txt, fs) + 2.4
+    x0 = x if anchor == "start" else (x - w if anchor == "end" else x - w / 2)
+    s.out["body"].append(f'<rect x="{x0:.2f}" y="{y-fs*0.95-0.6:.2f}" width="{w:.2f}" height="{fs*1.25+1.2:.2f}" rx=".8" fill="#fff4ec" '
+                         f'stroke="{SIZE_COL}" stroke-width=".4"/>')
+    _tx(s, x0 + 1.2, y, txt, "noteb", "start", fs=fs)
+    s.out["text"][-1] = s.out["text"][-1].replace('style="', f'style="fill:{SIZE_COL};', 1)
+
+
+def size_mark(s, sx0, sy0, sx1, sy1, w, h, badge=None, wy=None, hx=None, fs=2.0):
+    """real board size on a drawing: sheet rect (sx0, sy0)-(sx1, sy1) of a board that is w x h mm; width line at y = wy, height line
+    at x = hx (None = not drawn), badge = (x, y, text[, anchor])."""
+    f = lambda v: ("%.2f" % v).rstrip("0").rstrip(".")  # noqa: E731
+    if wy is not None:
+        size_dim(s, sx0, sx1, wy, f"{f(w)} mm", fs=fs)
+    if hx is not None:
+        size_dim(s, sy0, sy1, hx, f"{f(h)} mm", vertical=True, fs=fs)
+    if badge:
+        size_badge(s, badge[0], badge[1], badge[2], *(badge[3:] or ()))
 
 
 def mb_frame_draw(s, X, Y, mirror=False, top=True):
@@ -1356,6 +1409,8 @@ def brd01():
         return oy + (y1b - y) * S_
     o = s.out["body"]
     mb_frame_draw(s, X, Y)
+    size_mark(s, X(x0b), Y(y1b), X(MB["x1"]), Y(y0b), 120, 80, wy=225.0, hx=12.5,
+              badge=(X(x0b), 233.5, "실제 크기 120 × 80 mm — 8 × 12 cm 양면 기판 통째로 (구멍 42 × 30, 자르지 않음)"))
     s.chg(X(x0b) + 4.5, Y(y1b) + 4.5, 33)
     # ---- labels of the frame context
     _tx(s, X(x0b) + 1.5, Y(139.9), "밸런스 레일 (따로 출력, 점선 y%.1f~%.1f · z%.1f~%.1f, M3×6 ×2는 기판 밖 x11.2 / 154.2)" % MB["rail"][2:], "notes", fs=1.9)
@@ -1411,8 +1466,9 @@ def brd01():
     _tx(s, X(mx0 + 20.3), Y(my0 + 9.0) + 3.3, f"{MUX_W} × {MUX_D} · 채널 줄(C0~C15) 앞, 제어 줄 뒤", "notes", "middle", fs=1.8)
     gx_, gy_ = mux_hole("GND")
     vx_, _ = mux_hole("VCC")
-    o.append(f'<rect x="{X(gx_)-1.6:.2f}" y="{Y(gy_)-1.9:.2f}" width="{(vx_-gx_)*S_+3.2:.2f}" height="3.8" fill="none" stroke="#b86e00" stroke-width=".4" stroke-dasharray=".9 .5"/>')
-    _tx(s, X(gx_) - 1.6, Y(gy_) + 6.0, "C301 (아랫면, 점선)", "notes", "start", fs=1.7)
+    cxa, cxb = sorted((X(gx_), X(vx_)))
+    o.append(f'<rect x="{cxa-1.6:.2f}" y="{Y(gy_)-1.9:.2f}" width="{cxb-cxa+3.2:.2f}" height="3.8" fill="none" stroke="#b86e00" stroke-width=".4" stroke-dasharray=".9 .5"/>')
+    _tx(s, cxb + 1.6, Y(gy_) + 6.0, "C301 (아랫면, 점선)", "notes", "end", fs=1.7)
     # ---- J301 ribbon 2x8 (soldered from below), the ribbon under the front edge
     for n in range(1, 17):
         x, y = mb_pad_xy("J301", n)
@@ -1466,14 +1522,14 @@ def brd01():
     rows = [["MB 기판", MBX["board"], "통째로 80 × 120", "구멍·나사 없음"],
             ["A301 RP2040-Zero", MBX["zero"], "핀 i 18·24, j 20~28", "USB-C +y, 몰드 그대로"],
             ["USB-C 리셉터클", MBX["usb"], "가운데 x83.38", "플러그 → 뒷벽 개구"],
-            ["A302 4067 모듈", MBX["mux"], "채널 j 2 · 제어 j 8", "C0 왼쪽, 채널 줄 앞"],
+            ["A302 4067 모듈", MBX["mux"], "채널 j 2 · 제어 j 8", "C15 왼쪽 · C0 오른쪽, 채널 줄 앞"],
             ["J301 리본 2×8", MBX["rib"], "i 12~19, j 1·2", "1 = 앞줄 왼쪽, 아랫면"],
             ["J302 EXT 1×6", MBX["ext"], "i 27~32, j 28", "O1·O7, 윗면 납땜"],
             ["R301~R304", MBX["rext"], "i 29→32, j 27~21", "누워서, R304 비움"],
             ["JP301~JP303", f"x{f2(lat(26))}/{f2(lat(27))} × y{f2(latj(20))}~{f2(latj(22))}", "i 26·27, j 22~20", "왼쪽 = 신호(GP6~8)"],
             ["JP304", f"x{f2(lat(16))}/{f2(lat(15))} × y{f2(latj(20))}", "i 16·15, j 20", "GP14, 열어 둠"],
             ["TP301~303", MBX["tp"], "i 14~16, j 27", "3V3 · GND · SIG"],
-            ["C301 (아랫면)", f"x{f2(mux_hole('GND')[0])}~{f2(mux_hole('VCC')[0])} × y{f2(mux_hole('GND')[1])}", "먹스 GND–VCC", "1206 100 nF"]]
+            ["C301 (아랫면)", f"x{f2(mux_hole('VCC')[0])}~{f2(mux_hole('GND')[0])} × y{f2(mux_hole('GND')[1])}", "먹스 GND–VCC", "1206 100 nF"]]
     yt = s.table(272, 24, ["부품", "자리 (모듈 좌표)", "격자", "메모"], rows, [25, 46, 31, 36],
                  title="배치표 (격자 x = 30.18 + 2.54·i, y = 96.47 + 2.54·j)")
     s.para(272, yt + 5.5, [
@@ -1549,16 +1605,20 @@ def brd01():
     return s
 
 
-SB_X1 = 162.6   # SB right edge: 0.3 short of the bar end x162.9, 0.4 from the W1 r4.5 ledge post x163.0
+# Board cut lines are placed BY HOLE COUNT (2026-11-28): every edge is mid-gap, 1.27 from the outer hole centre, on the 0.63 + 2.54 i lattice
+# of this drawing set (the old 1.0 / 162.6 / 46.5 / 23.0 were CAD envelope numbers, not multiples of 2.54: 161.6 = 63.6 pitches, and the cut at
+# 1.0 sliced the hole column at 0.63).  The CAD sensor-bar pocket / support pads (END_BOARDS x1, bar, end_pads) keep the envelope.
+CUT_X0 = 1.90                 # left cut line (between hole columns i = 0 and 1)
+SB_X1 = 161.92                # SB right cut line (between i = 63 at 160.65 and i = 64): 63 columns = 160.02; was 162.6 = 0.4 from the W1 r4.5 ledge post x163.0, now 1.08
 
 
 # end-part sensor boards (EL, ER): same 6-row 15.24 stripe as the SB, inside the W1 r4.2 end-part sensor bars
 END_BOARDS = {
-    "EL": dict(x1=46.5, bar=(0.5, 46.5), low=(19.927, 33.927),
+    "EL": dict(x1=46.5, cut1=45.08, bar=(0.5, 46.5), low=(19.927, 33.927),
                keys=[("U401", "A0", 10.287, "C401", "R401"), ("U402", "A#0", 26.927, "C402", "R402"), ("U403", "B0", 40.141, "C403", "R403")],
                bulk="C404", jref="J401", jx=[18.41, 20.95, 23.49, 26.03, 28.57], jnames=["GND", "EL_A0", "EL_AS0", "EL_B0", "+3V3_EL"],
                gap=(15.0, 38.0)),
-    "ER": dict(x1=23.0, bar=(0.5, 23.0), low=None,
+    "ER": dict(x1=23.0, cut1=22.22, bar=(0.5, 23.0), low=None,
                keys=[("U411", "C8", 11.75, "C411", "R411")],
                bulk="C412", jref="J411", jx=[8.25, 10.79, 13.33], jnames=["GND", "ER_C8", "+3V3_ER"],
                gap=(6.0, 16.0)),
@@ -1569,228 +1629,24 @@ def end_col(xk):
     return round(min(0.63 + 2.54 * i for i in range(1, 70) if 0.63 + 2.54 * i >= xk + 3.0), 2)
 
 
-def _end_plans(s):
-    """BRD-02 insets: EL and ER placement (end-part local x, module y)."""
-    o = s.out["body"]
-    S = 2.4
-    rows_tab = []
-    for tag, ox in (("EL", 22), ("ER", 158)):
-        B = END_BOARDS[tag]
-        oy = 180
+def end_pads(tag):
+    """A20 support pads under the EL / ER board (end-part local x, module y) = hardware/mechanical/cad a20_fix.sb_bed with no floor
+    bridges: 3.5 long at the right end (inset 0.2), 2.0 deep from each long edge (inset 0.2)."""
+    x1 = END_BOARDS[tag]["x1"]
+    e, L, D = 0.2, 3.5, 2.0
+    return [(x1 - e - L, x1 - e, 60.65 + e, 60.65 + e + D), (x1 - e - L, x1 - e, 75.89 - e - D, 75.89 - e)]
 
-        def X(x, ox=ox):
-            return ox + x * S
 
-        def Y(y, oy=oy):
-            return oy + (77.5 - y) * S
-        s.text(X(0), oy - 10.0, f"{tag} — {'왼쪽' if tag == 'EL' else '오른쪽'} 끝 부속 x1.0~{B['x1']:g}"
-               + ("" if tag == "EL" else " (로컬, x0 = O7 이음)"), "noteb", size=2.4)
-        # sensor bar outline (dashed) + low section
-        bx0, bx1 = B["bar"]
-        o.append(f'<rect x="{X(bx0):.2f}" y="{Y(77.5):.2f}" width="{(bx1-bx0)*S:.2f}" height="{18.5*S:.2f}" fill="none" stroke="#6b7690" stroke-width=".3" stroke-dasharray="1.2 .8"/>')
-        if B["low"]:
-            lx0, lx1 = B["low"]
-            o.append(f'<rect x="{X(lx0):.2f}" y="{Y(77.5):.2f}" width="{(lx1-lx0)*S:.2f}" height="{18.5*S:.2f}" fill="#6b7690" fill-opacity=".06" stroke="none"/>')
-        # rear-rib gap needed under the lead pads (W1)
-        gx0, gx1 = B["gap"]
-        o.append(f'<rect x="{X(gx0):.2f}" y="{Y(75.5):.2f}" width="{(gx1-gx0)*S:.2f}" height="{2.3*S:.2f}" fill="#fde2d8" stroke="#c2410c" stroke-width=".3" stroke-dasharray="1 .6"/>')
-        # board
-        o.append(f'<rect x="{X(1.0):.2f}" y="{Y(75.89):.2f}" width="{(B["x1"]-1.0)*S:.2f}" height="{15.24*S:.2f}" fill="#eaf4e8" fill-opacity=".85" stroke="#2d6a3e" stroke-width=".5"/>')
-        cols = [0.63 + 2.54 * i for i in range(1, 20) if 1.0 < 0.63 + 2.54 * i < B["x1"]]
-        for y in (61.92, 64.46, 67.00, 69.54, 72.08, 74.62):
-            for x in cols:
-                o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".45" fill="#b9cdb6"/>')
-        last = max(end_col(k[2]) for k in B["keys"])
-        o.append(f'<line x1="{X(8.25):.2f}" y1="{Y(64.46):.2f}" x2="{X(last):.2f}" y2="{Y(64.46):.2f}" stroke="#c0392b" stroke-width="1.0" stroke-opacity=".55"/>')
-        o.append(f'<line x1="{X(8.25):.2f}" y1="{Y(67.00):.2f}" x2="{X(last):.2f}" y2="{Y(67.00):.2f}" stroke="#1d2433" stroke-width="1.0" stroke-opacity=".45"/>')
-        for (u, k, xk, c, r) in B["keys"]:
-            col = end_col(xk)
-            o.append(f'<rect x="{X(xk-1.54):.2f}" y="{Y(69.0):.2f}" width="{3.15*S:.2f}" height="{4.0*S:.2f}" fill="#222" fill-opacity=".8"/>')
-            for ly, lt in ((65.73, 64.46), (67.0, 67.0), (68.27, 69.54)):
-                o.append(f'<polyline points="{X(xk+1.61):.2f},{Y(ly):.2f} {X(xk+3.0):.2f},{Y(ly):.2f} {X(col):.2f},{Y(lt):.2f}" fill="none" stroke="#777" stroke-width=".35"/>')
-            for y, cc in ((64.46, "#c0392b"), (67.00, "#1d2433"), (69.54, "#1f5fbf")):
-                o.append(f'<circle cx="{X(col):.2f}" cy="{Y(y):.2f}" r="1.0" fill="{cc}"/>')
-            # 100n (3V3-GND) and 1k (OUT -> row 72.08), both 1206 on the underside
-            o.append(f'<rect x="{X(col)-0.9:.2f}" y="{Y(67.00)-0.2:.2f}" width="1.8" height="{2.54*S+0.4:.2f}" fill="none" stroke="#b86e00" stroke-width=".35" stroke-dasharray=".8 .5"/>')
-            o.append(f'<rect x="{X(col)-0.9:.2f}" y="{Y(72.08)-0.2:.2f}" width="1.8" height="{2.54*S+0.4:.2f}" fill="#fff1c2" fill-opacity=".6" stroke="#8a5a00" stroke-width=".35" stroke-dasharray=".8 .5"/>')
-            o.append(f'<circle cx="{X(col):.2f}" cy="{Y(72.08):.2f}" r=".8" fill="#8a5a00"/>')
-            s.text(X(xk), Y(75.89) - 2.2, k, "noteb", "middle", size=2.6, check=False)
-            s.text(X(xk), Y(60.65) + 4.2, u, "ref", "middle", size=2.2, check=False)
-            s.text(X(col) + 1.6, Y(70.8) + 0.8, r, "pinname", "start", size=1.7, check=False)
-            rows_tab.append([tag, u, k, f"{xk:.3f}", f"{col:.2f}", f"{c} · {r}", f"{col:.2f}"])
-        # bulk cap
-        o.append(f'<rect x="{X(8.25)-1.2:.2f}" y="{Y(67.00)-0.4:.2f}" width="2.4" height="{2.54*S+0.8:.2f}" fill="#fff1c2" stroke="#b86e00" stroke-width=".35" stroke-dasharray="1 .6"/>')
-        s.text(X(8.25), Y(60.65) + 8.4, B["bulk"] + " 10µ", "ref", "middle", size=2.0)
-        # lead pads + underside wires
-        jx = B["jx"]
-        for n, x in enumerate(jx, 1):
-            o.append(f'<rect x="{X(x)-1.3:.2f}" y="{Y(74.62)-1.3:.2f}" width="2.6" height="2.6" fill="#fff" stroke="#8a5a00" stroke-width=".4"/>')
-            s.text(X(x), Y(74.62) + 0.7, str(n), "pinnum", "middle", size=1.6, check=False)
-        wires = [((jx[0], 67.00), (jx[0], 74.62)), ((jx[-1], 64.46), (jx[-1], 74.62))]
-        for i, (u, k, xk, c, r) in enumerate(B["keys"]):
-            wires.append(((end_col(xk), 72.08), (jx[1 + i], 74.62)))
-        for (a1, a2) in wires:
-            o.append(f'<line x1="{X(a1[0]):.2f}" y1="{Y(a1[1]):.2f}" x2="{X(a2[0]):.2f}" y2="{Y(a2[1]):.2f}" stroke="#1f5fbf" stroke-width=".35" stroke-dasharray="1.1 .6"/>')
-        # click data (hitkeys.py), nets inside the end part's own scope
-        import hitkeys as HK
-        K = HK.Keys(s, X, Y, m=tag)
-        rail = B["jnames"][-1]
-        for i, (u, k, xk, c, r) in enumerate(B["keys"]):
-            col = end_col(xk)
-            K.box(xk - 1.54, 65.0, xk + 1.61, 69.0, key=u, q="%s 건반" % k)
-            K.pad(col, 64.46, u + ".1", rail)
-            K.pad(col, 67.00, u + ".2", "GND")
-            K.pad(col, 69.54, u + ".3")
-            K.pad(col, 72.08, r + ".1", B["jnames"][1 + i], r=0.8)
-            K.sbox(X(col) - 0.9, Y(67.00) - 0.2, X(col) + 0.9, Y(67.00) + 2.54 * S + 0.2, key=c)
-            K.sbox(X(col) - 0.9, Y(72.08) - 0.2, X(col) + 0.9, Y(72.08) + 2.54 * S + 0.2, key=r)
-        K.sbox(X(8.25) - 1.2, Y(67.00) - 0.4, X(8.25) + 1.2, Y(67.00) + 2.54 * S + 0.4, key=B["bulk"])
-        for n, x in enumerate(jx, 1):
-            K.pad(x, 74.62, "%s.%d" % (B["jref"], n), B["jnames"][n - 1], r=1.3)
-        for i, ((a1, a2), net) in enumerate(zip(wires, ["GND", rail] + [B["jnames"][1 + j] for j in range(len(B["keys"]))])):
-            K.wire([a1, a2], "%sW-%d" % (tag, i + 1), net)
-        K.wire([(8.25, 64.46), (last, 64.46)], "BUS-%s-3V3" % tag, rail)
-        K.wire([(8.25, 67.00), (last, 67.00)], "BUS-%s-GND" % tag, "GND")
-        K.box(1.0, 60.65, B["x1"], 75.89, key="PCB-" + tag)
-        K.box(bx0, 59.0, bx1, 77.5, key="CTX-BAR-END")
-        s.text(X(jx[0]) - 1.5, Y(75.89) - 6.0, f"{B['jref']} 리드 패드 ×{len(jx)} (1 GND … {len(jx)} 3V3)", "cabt", size=1.9, check=False)
-        # mounting U-notches (same as SB)
-        for (x, y, edge) in ((3.0, 61.9, 60.65), (3.0, 74.6, 75.89)):
-            y0_, y1_ = min(y, edge), max(y, edge)
-            o.append(f'<rect x="{X(x-1.7):.2f}" y="{Y(y1_):.2f}" width="{3.4*S:.2f}" height="{(y1_-y0_)*S:.2f}" fill="#fff" stroke="none"/>')
-            o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{1.7*S:.2f}" fill="#fff" stroke="#1d2433" stroke-width=".35"/>')
-    s.table(222, 172, ["보드", "센서", "건반", "소자 x", "리드 구멍 x", "100n · 1k (아랫면)", "구멍 x"], rows_tab, [10, 12, 10, 16, 20, 30, 14],
-            title="EL·ER 센서 (SB와 같은 규칙: 소자 x + 3.0 이상 첫 격자)", mono_cols=(1, 3, 4, 6))
-    s.para(222, 197, [
-        "EL·ER 주",
-        "1. 기판 = SB와 같은 6행(y61.92 예비·64.46 3V3·67.00 GND·69.54 OUT·72.08·74.62), W1 r4.2 끝 부속 센서 바 안.",
-        "    점선 = 센서 바(흐린 칸 = A#0 낮은 구간 x19.93~33.93). 고정: 왼쪽 U홈 M3×10 ×2(3.0, 61.9)·(3.0, 74.6) + 오른쪽 끝 받침 패드(A20, 리브 없음).",
-        "2. 센서 바가 기판 윗면을 덮으므로 부품은 모두 아랫면: 100 nF(3V3–GND)·1 kΩ(OUT → y72.08, △13)·10 µF 모두 1206.",
-        "3. 파란 점선 = 아랫면 피복 단선: 1k 끝 → 패드 2~, GND 버스 → 패드 1, 3V3 버스 → 끝 패드.",
-        "4. 리드(W401 5심 · W411 3심)는 패드에서 기판 밑으로 뒤쪽(+y). A20: 받침 리브가 없어지고 기판 밑 바닥판을 뚫어 4.0 — 주황 = 예전 리브 틈",
-        "    (EL x15~38 · ER x6~16, 리드는 그대로 이 안으로). W1 r4.4: y77.39 안에서 EL x14.83~21.18 · ER x8.89~12.70으로 모아 레일 밑 차선 EL x13.53~22.48 · ER x7.59~14.00(z5~10)",
-        "    → 뒷벽 홈(z5~12). XH 커넥터는 뒤 통로에서 잇는다(SCH-04 주 6). 아랫면 부품·납땜 ≤ 1.8 mm.",
-    ], size=2.0)
-    return rows_tab
+def end_check():
+    """EL / ER underside routes + support pads (boards5.end_check: route_check like the SB, 2026-11-28)."""
+    import boards5
+    return boards5.end_check()
 
 
 def brd02():
-    s = Sheet("BRD-02", 9, TOTAL, "센서 기판 배치 (SB · EL · ER, 위에서 봄)",
-              "SB 161.6 × 15.24 양면 도트 기판: 센서 12개 리드 구멍, 3V3·GND·OUT 행, 디커플링 자리, 리본 2×8 블록, 고정 U홈(모듈 좌표 mm). 아래: 끝 부속 EL·ER 기판.",
-              "SB · EL · ER", qty="SB × 7 · EL × 1 · ER × 1", basis="v4 W1+ r4.5", **REV_E)
-    S = 2.2
-    ox, oy = 40, 60
-
-    def X(x):
-        return ox + (x - 0) * S
-
-    def Y(y):
-        return oy + (77.5 - y) * S
-    o = s.out["body"]
-    o.append(f'<rect x="{X(1.0):.2f}" y="{Y(75.89):.2f}" width="{(SB_X1 - 1.0)*S:.2f}" height="{15.24*S:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
-    rowsy = [61.92, 64.46, 67.00, 69.54, 72.08, 74.62]
-    rowname = {61.92: "예비", 64.46: "3V3 버스", 67.00: "GND 버스", 69.54: "OUT", 72.08: "리본 홀수", 74.62: "리본 짝수"}
-    cols = [0.63 + 2.54 * i for i in range(1, 65)]
-    for y in rowsy:
-        for x in cols:
-            if 1.0 < x < SB_X1:
-                o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".45" fill="#b9cdb6"/>')
-        s.text(X(0.0) - 1, Y(y) + 0.8, f"y{y:.2f} {rowname[y]}", "tblm", "end", size=1.8, check=False)
-    # buses
-    o.append(f'<line x1="{X(8.25):.2f}" y1="{Y(64.46):.2f}" x2="{X(160.65):.2f}" y2="{Y(64.46):.2f}" stroke="#c0392b" stroke-width="1.0" stroke-opacity=".55"/>')
-    o.append(f'<line x1="{X(8.25):.2f}" y1="{Y(67.00):.2f}" x2="{X(160.65):.2f}" y2="{Y(67.00):.2f}" stroke="#1d2433" stroke-width="1.0" stroke-opacity=".45"/>')
-    tab = []
-    for i, (k, xk) in enumerate(zip(KEYS, SENSOR_X)):
-        col = min(c for c in cols if c >= xk + 3.0)
-        tab.append((f"U{201+i}", k, xk, col))
-        # body lying face up, leads toward +x
-        o.append(f'<rect x="{X(xk-1.54):.2f}" y="{Y(69.0):.2f}" width="{3.15*S:.2f}" height="{4.0*S:.2f}" fill="#222" fill-opacity=".8"/>')
-        for ly, lt in ((65.73, 64.46), (67.0, 67.0), (68.27, 69.54)):
-            o.append(f'<polyline points="{X(xk+1.61):.2f},{Y(ly):.2f} {X(xk+3.0):.2f},{Y(ly):.2f} {X(col):.2f},{Y(lt):.2f}" fill="none" stroke="#777" stroke-width=".35"/>')
-        for y, c in ((64.46, "#c0392b"), (67.00, "#1d2433"), (69.54, "#1f5fbf")):
-            o.append(f'<circle cx="{X(col):.2f}" cy="{Y(y):.2f}" r="1.0" fill="{c}"/>')
-        # 100n 1206 on bottom across 3V3-GND at next column
-        o.append(f'<rect x="{X(col)-0.9:.2f}" y="{Y(67.00)-0.2:.2f}" width="1.8" height="{2.54*S+0.4:.2f}" fill="none" stroke="#b86e00" stroke-width=".35" stroke-dasharray=".8 .5"/>')
-        s.text(X(xk), Y(75.89) - 2.2, k, "noteb", "middle", size=2.6, check=False)
-        s.text(X(xk), Y(60.65) + 4.2, f"U{201+i}", "ref", "middle", size=2.2, check=False)
-        s.text(X(xk), Y(60.65) + 6.9, f"{xk:.2f}", "tblm", "middle", size=1.8, check=False)
-    # bulk caps
-    for x, ref in ((8.25, "C213"), (158.11, "C214")):
-        o.append(f'<rect x="{X(x)-1.2:.2f}" y="{Y(67.00)-0.4:.2f}" width="2.4" height="{2.54*S+0.8:.2f}" fill="#fff1c2" stroke="#b86e00" stroke-width=".35" stroke-dasharray="1 .6"/>')
-        s.text(X(x), Y(60.65) + 11.5, ref + " 10µ", "ref", "middle", size=2.0, check=False)
-    # mounting holes
-    for (x, y, edge) in ((3.0, 61.9, 60.65), (3.0, 74.6, 75.89)):
-        y0_, y1_ = min(y, edge), max(y, edge)
-        o.append(f'<rect x="{X(x-1.7):.2f}" y="{Y(y1_):.2f}" width="{3.4*S:.2f}" height="{(y1_-y0_)*S:.2f}" fill="#fff" stroke="none"/>')
-        o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r="{1.7*S:.2f}" fill="#fff" stroke="#1d2433" stroke-width=".35"/>')
-    s.text(X(1.0), Y(75.89) - 6.5, "M3×10 자가 탭 ×2 (3.0, 61.9)·(3.0, 74.6) — 기판 앞·뒤에 U홈 Ø3.4", "notes", size=2.0)
-    # ribbon block
-    for i in range(16):
-        col, row = i // 2, i % 2
-        x, y = 61.59 + 2.54 * col, (72.08, 74.62)[row]
-        o.append(f'<rect x="{X(x)-1.3:.2f}" y="{Y(y)-1.3:.2f}" width="2.6" height="2.6" fill="#fff" stroke="#8a5a00" stroke-width=".4"/>')
-        s.text(X(x), Y(y) + 0.8, str(i + 1), "pinnum", "middle", size=1.6, check=False)
-    s.text(X(61.59), Y(75.89) - 6.5, "J201 리본 2×8 (x61.6~79.4, y72.08/74.62, 아랫면 납땜) → 기판 밑(A20 바닥 창) → 바닥 → MB J301 (△33)", "cabt", size=2.1)
-    # right ledge (W1 r4.5 P36): two inverted-L pieces, lip x161.5~163.0 over the bar end (z13.6~15.1), post x163.0~164.3 from the floor
-    for (ya, yb) in ((59.0, 63.4), (70.6, 77.5)):
-        o.append(f'<rect x="{X(161.5):.2f}" y="{Y(yb):.2f}" width="{1.5*S:.2f}" height="{(yb-ya)*S:.2f}" fill="#c9d0da" fill-opacity=".6" stroke="#6b7690" stroke-width=".3"/>')
-        o.append(f'<rect x="{X(163.0):.2f}" y="{Y(yb):.2f}" width="{1.3*S:.2f}" height="{(yb-ya)*S:.2f}" fill="#9aa6b8" stroke="#6b7690" stroke-width=".3"/>')
-    s.text(X(164.3), Y(58.5) + 16.5, "오른쪽 턱(W1 r4.5 P36): 립 x161.5~163.0 z13.6~15.1(바 끝 위 1.4), 기둥 x163.0~164.3 — 바를 1.5 왼쪽에 놓고 오른쪽으로 밀어 넣은 뒤 왼쪽 M3", "notes", "end", size=2.0)
-    # click data (hitkeys.py): sensors, lead pads, capacitors, J201, buses; draw_sb_routes adds the wires and the ribs
-    import hitkeys as HK
-    K = HK.Keys(s, X, Y)
-    for i, (u, k, xk, col) in enumerate(tab):
-        K.box(xk - 1.54, 65.0, xk + 1.61, 69.0, key=u, q="%s 건반 · 리본 %d번 심 → 먹스 C%d" % (k, 3 + i, i))
-        for y, pin, net in ((64.46, "1", "+3V3"), (67.00, "2", "GND"), (69.54, "3", RIBBON[2 + i])):
-            K.pad(col, y, "%s.%s" % (u, pin), net)
-        K.sbox(X(col) - 0.9, Y(67.00) - 0.2, X(col) + 0.9, Y(67.00) + 2.54 * S + 0.2, key="C%d" % (201 + i))
-    for x, ref in ((8.25, "C213"), (158.11, "C214")):
-        K.sbox(X(x) - 1.2, Y(67.00) - 0.4, X(x) + 1.2, Y(67.00) + 2.54 * S + 0.4, key=ref)
-    for i in range(16):
-        K.pad(61.59 + 2.54 * (i // 2), (72.08, 74.62)[i % 2], "J201.%d" % (i + 1), RIBBON[i], r=1.3)
-    K.wire([(8.25, 64.46), (160.65, 64.46)], "BUS-SB-+3V3", "+3V3")
-    K.wire([(8.25, 67.00), (160.65, 67.00)], "BUS-SB-GND", "GND")
-    for (x, y) in ((3.0, 61.9), (3.0, 74.6)):
-        K.box(x - 1.7, y - 1.7, x + 1.7, y + 1.7, t="고정 U홈 (M3×10 자가 탭 나사 자리)",
-              d=["기판 왼쪽 끝의 앞·뒤에 Ø3.4 U홈이 하나씩 있습니다: (3.0, 61.9) · (3.0, 74.6).",
-                 "센서 바와 기판을 함께 M3×10 자가 탭 나사 2개로 프레임 받침에 고정합니다.", "오른쪽 끝은 나사 없이 프레임의 턱 밑으로 밀어 넣습니다."])
-    for (ya, yb) in ((59.0, 63.4), (70.6, 77.5)):
-        K.box(161.5, ya, 164.3, yb, t="오른쪽 턱 (프레임, W1 r4.5 P36)",
-              d=["립 x161.5~163.0 (z13.6~15.1, 센서 바 끝 위 1.4) + 바닥에서 올라온 기둥 x163.0~164.3.",
-                 "센서 바를 1.5 mm 왼쪽에 놓고 오른쪽으로 밀어 넣은 뒤 왼쪽 나사 2개로 고정합니다."])
-    # OUT -> J201 wires (underside), from boards3.sb_rows() + route check
-    import boards3
-    boards3.draw_sb_routes(s, X, Y)
-    s.board_check = ["SB: " + p for p in boards3.sb_check()]
-    K.box(1.0, 60.65, SB_X1, 75.89, key="PCB-SB",
-          q="회색 점선 띠 = 기판 밑의 받침 리브(프레임)입니다. 그 위로는 아랫면 선이 지나지 않고, 뒤 띠는 리본 틈 x59~82에서만 건넙니다.")
-    # table
-    rows = [[u, k, f"{xk:.3f}", f"{col:.2f}", f"C{201+i}", f"{col:.2f}"] for i, (u, k, xk, col) in enumerate(tab)]
-    s.table(15, 118, ["센서", "건반", "소자 x", "리드 구멍 x (3행)", "100n", "100n 구멍 x"], rows, [16, 12, 18, 30, 14, 22],
-            title="센서 리드 구멍 (x = 소자 x + 3.0 이상 첫 격자 0.63 + 2.54·i)", mono_cols=(0, 2, 3, 4, 5))
-    s.para(150, 118, [
-        "주",
-        "1. 기판 x1.0~162.6 × y60.65~75.89, 6행 2.54 간격(바 끝 x162.9보다 0.3 짧게 — 오른쪽 턱 기둥 x163.0과 0.4, 손으로 자른 공차 ±0.3).",
-        "    색 원: 빨강 = 3V3(y64.46), 검정 = GND(y67.00), 파랑 = OUT(y69.54).",
-        "2. WSH137은 표시면(모따기 면, 'W137' 인쇄)을 위로 눕혀 센서 바 포켓에 넣는다. 리드는 +x로 빼서",
-        "    1.40~3.44 mm 지점에서 2.54 간격으로 벌려 아래로 꺾는다 — 넓어지는 댐바 부분 아래에서 꺾을 것.",
-        "    위에서 봐서 리드가 오른쪽(+x)이면 핀 1(VCC)이 앞(작은 y)이다 → y64.46. 가운데 GND, 뒤 OUT.",
-        "3. 확인: 3.3 V를 주고 자석 없이 OUT 1.59~1.71 V, S극을 표시면에 가까이 하면 올라간다. 건반을 얹은 쉼 백 ≈1.78 · 흑 ≈1.72 V.",
-        "4. 100 nF 1206: 아랫면, 각 센서 리드 구멍 열의 3V3(y64.46)–GND(y67.00) 패드 사이(점선). 10 µF도 아랫면:",
-        "    C213 x8.25(왼쪽 받침 기둥 x0.5~6.0과 U201 리드 x10.79 사이), C214 x158.11. 버스는 x8.25부터.",
-        "5. 3V3·GND 버스 = 아랫면 주석선 x8.25~160.65. OUT → J201 피복 단선 12가닥(파란 점선) + △27 J201 전원 4가닥(빨강 J201.1·16 → 3V3, 검정 J201.2·15 → GND,",
-        "    끝은 버스가 지나는 빈 구멍 ○에 버스와 함께 납땜) — wiring_SB.csv. J201: 홀수 = 앞줄 y72.08, 짝수 = 뒷줄 y74.62, x = 61.59 + 2.54·⌊(n−1)/2⌋.",
-        "    OUT 선은 모두 y70.81 줄, 짝수행은 핀 옆 반 칸 기둥에서 앞줄을 건너 y73.35로 1.27만. 받침 패드(점선 상자, A20) 위에는 선·납땜이 없음.",
-        "    확인: J201.1·16 ↔ U201 핀 1 = 0 Ω, J201.2·15 ↔ U201 핀 2 = 0 Ω, J201 핀 n ↔ 센서 OUT = 0 Ω.",
-        "6. 리본 16심은 아랫면에서 2×8 블록에 납땜(선 n = 핀 n, 15 = GND, 16 = 3V3). IDC 2×8 헤더로 바꿔도 번호가 같다.",
-        "    리본(중심 x70.48, x60.32~80.64)은 기판 밑(A20 바닥 창, 리브 없음)에서 바닥으로 내려가 MB 앞 틈 x59.5~81.5로 기판 밑에 들어간다(△33).",
-    ], size=2.2)
-    ep = _end_plans(s)
-    s.regions["sb"] = (9.0, 20.0, 411.0, 166.5)
-    s.regions["end"] = (9.0, 166.5, 411.0, 253.0)
-    s.frame()
-    s.expected = {}
-    return s
+    """BRD-02 = SB + EL + ER, each as a top view and a mirrored underside view (boards5.py, 2026-11-28)."""
+    import boards5
+    return boards5.brd02()
 
 
 SHEETS += [brd01, brd02]
@@ -1940,6 +1796,6 @@ import boards3  # noqa: E402
 
 SHEETS += [boards3.brd07, boards3.brd08]
 
-import boards4  # noqa: E402  (BRD-09~11: MB per board kind, top + underside; imports this module lazily)
+import boards4  # noqa: E402  (BRD-09~15: MB of each module O1~O7, top + underside; imports this module lazily)
 
-SHEETS += [boards4.brd09, boards4.brd10, boards4.brd11]
+SHEETS += [boards4.brd09, boards4.brd10, boards4.brd11, boards4.brd12, boards4.brd13, boards4.brd14, boards4.brd15]

@@ -56,11 +56,12 @@
 #p-sim .sim-draw .m-nb{fill:var(--d-keyfar);stroke:var(--d-key-h);stroke-width:.7;fill-rule:evenodd}
 #p-sim .sim-draw .m-beyond{fill:none;stroke:var(--d-key-h);stroke-width:.6}
 #p-sim .sim-draw .m-lever{fill:var(--d-print2);stroke:var(--d-ink);stroke-width:1;fill-rule:evenodd}
-#p-sim .sim-draw .m-steel{fill:var(--d-steel);stroke:var(--d-steel-h);stroke-width:.8}
+#p-sim .sim-draw .m-steel{fill:var(--d-steel);stroke:var(--d-steel-h);stroke-width:.8;fill-rule:evenodd}
 #p-sim .sim-draw .m-felt{fill:var(--d-felt);stroke:var(--d-ink);stroke-width:.5}
 #p-sim .sim-draw .m-pad{fill:var(--d-wood);stroke:var(--d-wood-h);stroke-width:.8}
-#p-sim .sim-draw .m-bar{fill:var(--d-print);stroke:var(--d-print-h);stroke-width:.8}
-#p-sim .sim-draw .m-sbar{fill:var(--d-print2);stroke:var(--d-print-h);stroke-width:.8}
+#p-sim .sim-draw .m-bar{fill:var(--d-print);stroke:var(--d-print-h);stroke-width:.8;fill-rule:evenodd}
+#p-sim .sim-draw .m-sbar{fill:var(--d-print2);stroke:var(--d-print-h);stroke-width:.8;fill-rule:evenodd}
+#p-sim .sim-draw .m-eva{fill:var(--d-wood);fill-opacity:.45;stroke:var(--d-wood-h);stroke-width:.5;fill-rule:evenodd}
 #p-sim .sim-draw .m-pcb{fill:#2f7d4a;stroke:#1d5532;stroke-width:.6}
 #p-sim .sim-draw .m-cover{fill:var(--d-keyfar);stroke:var(--d-key-h);stroke-width:.6}
 #p-sim .sim-draw .m-magS{fill:var(--d-magS)}
@@ -84,6 +85,8 @@
 #p-sim .sim-lg-steel{background:var(--d-steel)}
 #p-sim .sim-lg-felt{background:var(--d-felt)}
 #p-sim .sim-lg-pad{background:var(--d-wood)}
+#p-sim .sheet .sim-lg-pcb{background:#2f7d4a}
+#p-sim .sim-lg-eva{background:var(--d-wood);opacity:.5}
 #p-sim .sim-lg-mag{background:linear-gradient(to top,var(--d-magS) 50%,var(--d-magN) 50%)}
 #p-sim .sim-lg-hot{background:transparent;border:2px solid var(--d-press)!important}
 

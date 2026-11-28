@@ -22,7 +22,9 @@ NAMES = {"sch01": "SCH-01_system", "sch02": "SCH-02_sensor_board", "sch03": "SCH
          "brd03": "BRD-03_pedal_board_placement", "brd04": "BRD-04_centre_unit_wiring",
          "brd05": "BRD-05_power_audio_harness", "brd06": "BRD-06_signal_harness",
          "brd07": "BRD-07_small_boards", "brd08": "BRD-08_control_board_underside",
-         "brd09": "BRD-09_control_board_O1", "brd10": "BRD-10_control_board_O7", "brd11": "BRD-11_control_board_O2-O6"}
+         "brd09": "BRD-09_control_board_O1", "brd10": "BRD-10_control_board_O2", "brd11": "BRD-11_control_board_O3",
+         "brd12": "BRD-12_control_board_O4", "brd13": "BRD-13_control_board_O5", "brd14": "BRD-14_control_board_O6",
+         "brd15": "BRD-15_control_board_O7"}
 
 
 def main():

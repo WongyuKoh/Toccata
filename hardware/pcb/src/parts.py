@@ -43,7 +43,8 @@ def zero_pin(name):
 # CD74HC4067 breakout (parts-parts PP-A324 = TENSTAR copy of SparkFun BOB-09056 v11), 40.64 x 17.78 mm.
 # Channel header J1 (1x16): pins 1-16 = C0..C15.  Control header J2 (1x8, square pad = GND):
 # J2-1 GND, J2-2 VCC, J2-3 EN, J2-4 S0, J2-5 S1, J2-6 S2, J2-7 S3, J2-8 SIG  -> symbol pins 17-24.
-# On-board: 100 nF VCC-GND, 10 kohm EN-GND pull-down.  Rows 15.24 apart; J2-1 (GND) is in line with C4.
+# On-board: 100 nF VCC-GND, 10 kohm EN-GND pull-down.  Rows 15.24 apart; J2-1 (GND) is in line with C4 (in BOTH rows the
+# header order runs right -> left seen from above: C0 and GND at the right end - sheets.mux_hole).
 MUX_CH = [(1 + i, f"C{i}") for i in range(16)]
 MUX_CTRL = [(17, "GND"), (18, "VCC"), (19, "EN"), (20, "S0"), (21, "S1"), (22, "S2"), (23, "S3"), (24, "SIG")]
 
@@ -84,9 +85,9 @@ BOM = {
     # △33 (2026-10-31): the 7 control boards MB use whole 80 x 120 boards (no jig); only the PED piece is still cut (P-PED)
     "PERFW": ("u06 · SE8b", "Coms BE163 양면 만능기판 80 × 120 (30 × 42 구멍) 통째로 — 자르지 않음, 고정 구멍 없음",
               "사용자 보유 BE163 4장 (u06) + 디바이스마트 Voltly VLT-PCB009 8 × 12 cm 양면 2.54 3장 (SE8b i228)"),
-    "PERF": ("SE8b", "8 × 12 cm 양면 만능기판 (Voltly VLT-PCB009)에서 자른 70 × 50 조각 (지그 09_기판지그 P-PED), 남는 반쪽은 예비",
+    "PERF": ("SE8b", "8 × 12 cm 양면 만능기판 (Voltly VLT-PCB009)에서 자른 71.12 × 49.53 조각 (구멍 28 × 20, 지그 09_기판지그 P-PED), 남는 반쪽은 예비",
              "디바이스마트 Voltly VLT-PCB009 (SE8b i228, 4장 중 1장)"),
-    "PERF1218": ("L22", "양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 161.6 × 15.24, EL 45.5, ER 22.0) · 자투리", "메카솔루션 540645"),
+    "PERF1218": ("L22", "양면 만능기판 12 × 18 cm에서 자른 6행 띠 (SB 160.02 × 15.24, EL 43.18, ER 20.32 — 구멍 사이 가운데) · 자투리", "메카솔루션 540645"),
     "RIBBON": ("C05", "EUNSUNG 2651-16P 플랫 케이블 28 AWG (16심 전부 사용)", "엘레파츠 425"),
     "RIBBONW": ("SE12", "EUNSUNG 2651-16P 1 m 더 — 가닥으로 갈라 기판 배선(SB·MB 아랫면, MB는 기판 밑 2.0이라 두 가닥이 겹쳐도 1.8)·W502", "엘레파츠 425"),
     # △34 (2026-11-02): the user's choice, XH2.54 DIY kit (2~5P housings + PCB headers + loose terminals), crimped with the user's tool

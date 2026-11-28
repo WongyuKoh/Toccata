@@ -243,9 +243,10 @@ def gap_cols():
     return [X(k) for k in range(kx(GAP_X[0]) - 1, kx(GAP_X[1]) + 2) if GAP_X[0] + RIB_CLR <= X(k) <= GAP_X[1] - RIB_CLR]
 
 
-def mst(pts, single=()):
+def mst(pts, single=(), tight=()):
     """minimum spanning tree of a net's pads. Pads in `single` (the J301 block: each hole has one exit toward +y, the ribbon strands
-    take the front) get one wire each where the net allows: links between two of them are penalised."""
+    take the front) get one wire each where the net allows: links between two of them are penalised. Pads in `tight` (the mux
+    header pins: one side of GND / VCC is the C301 chip, the control row is crowded) take at most two wires where the net allows (and a `single` pad that already has its wire takes no second one)."""
     g0, g1 = min(gap_cols()), max(gap_cols())
 
     def cost(a, b):
@@ -257,8 +258,12 @@ def mst(pts, single=()):
             return (dx + abs(ya - yb)) / H + 40 + pen
         return (abs(xa - xb) + abs(ya - yb)) / H + pen
     inside, rest, out = [pts[0]], list(pts[1:]), []
+    deg = {}
     while rest:
-        c, a, b = min(((cost(i, r), i, r) for i in inside for r in rest), key=lambda t: t[0])
+        c, a, b = min(((cost(i, r) + (60 if (i in tight and deg.get(i, 0) >= 2) or (i in single and deg.get(i, 0) >= 1) else 0), i, r) for i in inside for r in rest),
+                      key=lambda t: t[0])
+        deg[a] = deg.get(a, 0) + 1
+        deg[b] = deg.get(b, 0) + 1
         out.append((a, b))
         inside.append(b)
         rest.remove(b)
@@ -337,10 +342,11 @@ def route_all(iters=60):
     """negotiated-congestion routing of every MST connection, then strict commit + rip-up improvement."""
     base = Router()
     j301 = {n for n, pd in base.pads.items() if pd[0] == "J301"}
+    mux = {n for n, pd in base.pads.items() if pd[0] == "A302"}
     conns = []
     for net, pts in sorted(base.nets.items()):
         if len(pts) >= 2:
-            for a, b in mst(sorted(pts), j301):
+            for a, b in mst(sorted(pts), j301, mux):
                 conns.append((net, a, b))
     conns.sort(key=lambda c: abs(c[1][0] - c[2][0]) + abs(c[1][1] - c[2][1]))
     hist, paths = {}, {}

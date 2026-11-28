@@ -11,18 +11,24 @@
   var sec = document.getElementById('p-circuit'); if(!sec) return;
   // sheet crops: inline SVG <image> would load at once; give it its href only when the tab is first shown
   var started = false;
+  function loadImgs(root){
+    root.querySelectorAll('image[data-href]').forEach(function(im){
+      if(im.closest('.mbk-panel[hidden]') || im.getAttribute('href')) return;
+      im.setAttribute('href', im.getAttribute('data-href'));
+    });
+  }
   function start(){
     if(started || sec.hidden) return; started = true;
-    sec.querySelectorAll('image[data-href]').forEach(function(im){ im.setAttribute('href', im.getAttribute('data-href')); });
+    loadImgs(sec);
   }
   try { new MutationObserver(start).observe(sec, {attributes: true, attributeFilter: ['hidden']}); } catch(err) {}
   start();
-  // MB board-kind tabs (BRD-09~11): click or arrow keys
+  // MB board tabs O1~O7 (BRD-09~15): click or arrow keys; a tab's crops load the first time it is shown
   function pickKind(t){
     var box = t.closest('.mbk'); if(!box) return;
     box.querySelectorAll('.mbk-tabs [role=tab]').forEach(function(b){
       var on = b === t, p = document.getElementById(b.getAttribute('aria-controls'));
-      b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; if(p) p.hidden = !on;
+      b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; if(p){ p.hidden = !on; if(on) loadImgs(p); }
     });
   }
   sec.addEventListener('click', function(e){
@@ -65,6 +71,40 @@
   });
 })();
 // ---- sheet hits: click a wire / pad / pin / part on a drawing -> what it is, the product and what it connects to.
+// Part card + connect / do-not-connect line (2026-11-23), shared by the drawing popups and the 3D viewer (circuit3d.js):
+// card = hits.py part_cards() {t, v, desc, img, cap, spec, ident, same, fit, act}; ctx = boards the clicked thing belongs to
+// (['O1'] on BRD-09 ... ['O7'] on BRD-15, the module of a 3D object), null = every board.
+(function(){
+  var T = window.toccata = window.toccata || {};
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]; }); }
+  function act(c, ctx){
+    var a = c && c.act; if(!a) return '';
+    var boards = (ctx && ctx.length ? ctx.filter(function(b){ return a.all.indexOf(b) >= 0; }) : []);
+    if(!boards.length) boards = a.all.slice();
+    var on = boards.filter(function(b){ return a.on.indexOf(b) >= 0; }), off = boards.filter(function(b){ return a.on.indexOf(b) < 0; });
+    var h;
+    if(!off.length || !on.length){
+      var yes = !off.length, who = boards.length === a.all.length && boards.length > 1 ? '모든 기판' : boards.join(' · ');
+      h = '<div class="hit-act ' + (yes ? 'yes' : 'no') + '"><span class="v">' + esc(who + ': ' + (yes ? a.yes : a.no)) + '</span><p>' + esc(yes ? a.how_yes : a.how_no) + '</p>';
+    } else {
+      h = '<div class="hit-act"><div class="row"><b class="yes">' + esc(a.yes) + '</b><span>' + esc(on.join(' · ')) + '</span>' +
+          '<b class="no">' + esc(a.no) + '</b><span>' + esc(off.join(' · ')) + '</span></div><p>' + esc(a.how_yes) + '</p><p>' + esc(a.how_no) + '</p>';
+    }
+    return h + (a.why ? '<p>' + esc(a.why) + '</p>' : '') + '</div>';
+  }
+  function card(c){
+    if(!c) return '';
+    var rows = (c.spec || []).map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
+    if(c.fit) rows += '<dt>다는 곳</dt><dd>' + esc(c.fit) + '</dd>';
+    if(c.board) rows += '<dt>수량</dt><dd>' + esc(c.board) + '</dd>';
+    var img = c.img ? '<div><img src="' + esc(c.img) + '" alt="' + esc(c.cap || c.t) + '" loading="lazy"><div class="cap">' + esc(c.item ? c.item + ' · ' : '') + esc(c.cap || '') + '</div></div>' : '';
+    return '<div class="hit-card' + (img ? '' : ' noimg') + '">' + img + '<div>' +
+      (c.v ? '<p class="val">값 <b>' + esc(c.v) + '</b></p>' : '') + '<p class="id" style="margin-top:0">' + esc(c.desc || '') + '</p>' +
+      (rows ? '<dl>' + rows + '</dl>' : '') + (c.ident ? '<p class="id">알아보기: ' + esc(c.ident) + '</p>' : '') +
+      (c.same ? '<p class="id">' + esc(c.same) + '</p>' : '') + '</div></div>';
+  }
+  T.partCard = {act: act, card: card};
+})();
 // Data fin/circuit/sheethits.json (hardware/pcb/src/hits.py), loaded on first pointer use. Geometry in sheet mm (420 x 297):
 // a full sheet is an <img> (overlay <svg> kept on top of it), a crop is an inline <svg> in sheet units (overlay <g> inside it).
 (function(){
@@ -139,6 +179,8 @@
       if(sel) shape(sel, 'sel', col(sel), o);
     }
     function list(a){ return a && a.length ? '<ul>' + a.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : ''; }
+    function cardOf(it){ var c = DATA && DATA._cards; return it && it.ref && c ? c[it.ref] || null : null; }
+    function ctxOf(it){ var d = D(); return (d && d.boards) || (it && it.m ? [it.m] : null); }
     function show(it, e){
       if(!pop){
         pop = document.createElement('div'); pop.className = 'hitpop'; pop.setAttribute('role', 'region'); pop.setAttribute('aria-label', code + ' 항목 정보');
@@ -146,11 +188,13 @@
         pop.addEventListener('click', function(ev){ if(ev.target.closest && ev.target.closest('.hitx')) close(); });
       }
       var d = D() || {nets: {}}, n = it.n && d.nets[it.n];
-      pop.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button><p class="hit-t"><b>' + esc(it.t) + '</b></p>' + list(it.d) +
+      var card = cardOf(it), CH = window.toccata && window.toccata.partCard;
+      pop.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button><p class="hit-t"><b>' + esc(it.t) + '</b></p>' +
+        (card && CH ? CH.act(card, ctxOf(it)) + CH.card(card) : '') + list(it.d) +
         (n ? '<div class="hit-n"><p><span class="sw" style="background:' + esc(n.c) + '"></span><b>' + esc(n.t) + '</b></p>' + list(n.d) + '</div>' : '');
       pop.hidden = false;
       // beside the click (right, else left) so the picked wire stays visible; below it when the figure is too narrow
-      var fr = fig.getBoundingClientRect(), W = fig.clientWidth, pw = Math.min(380, W - 16), x = e.clientX - fr.left, y = e.clientY - fr.top, L, T;
+      var fr = fig.getBoundingClientRect(), W = fig.clientWidth, pw = Math.min(card ? 460 : 380, W - 16), x = e.clientX - fr.left, y = e.clientY - fr.top, L, T;
       pop.style.width = pw + 'px';
       if(x + 22 + pw <= W - 8){ L = x + 22; T = y - 28; }
       else if(x - 22 - pw >= 8){ L = x - 22 - pw; T = y - 28; }
@@ -650,7 +694,9 @@
     if (o.q) d.push(o.q);
     if (o.w) d.push('선 종류: ' + o.w);
     if (I && I.d) d = d.concat(I.d);
-    var h = '<p class="hit-t"><b>' + esc(I ? I.t : (o.i || '')) + '</b></p>' + list(d);
+    // part card + connect / do-not-connect for this module (page.py window.toccata.partCard, data D.cards = hits.part_cards())
+    var ref = String(o.i || '').split('.')[0], card = D.cards && (D.cards[ref] || D.cards[ref.split('-')[0]]), CH = window.toccata && window.toccata.partCard;
+    var h = '<p class="hit-t"><b>' + esc(I ? I.t : (o.i || '')) + '</b></p>' + (card && CH ? CH.act(card, o.m ? [o.m] : null) + CH.card(card) : '') + list(d);
     var sc = o.m && sd.scopes && sd.scopes[o.m];
     if (sc) h += '<div class="hit-n"><p><b>' + esc('자리 · ' + sc.t) + '</b></p>' + list(sc.d) + '</div>';
     if (o.n) h += netHtml(o, false);
@@ -668,7 +714,7 @@
     pop.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button>' + html;
     pop.hidden = false; pop.scrollTop = 0;
     // beside the click (right, else left) so the picked thing stays visible; a net chosen from the list goes to the top right corner
-    var W = stage.clientWidth, H = stage.clientHeight, pw = Math.min(360, W - 16), L, Tp;
+    var W = stage.clientWidth, H = stage.clientHeight, pw = Math.min(/hit-card/.test(html) ? 440 : 360, W - 16), L, Tp;
     pop.style.width = pw + 'px';
     if (!at) { L = W - pw - 8; Tp = 8; }
     else {

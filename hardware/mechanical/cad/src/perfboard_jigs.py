@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Toccata - printed perfboard jig for cutting / drilling the PED board out of a Coms BE163 sheet
 (new 2026-10-07, user: no 5x7 perfboards - their own BE163 double-sided 80 x 120, 30 x 42 holes at 2.54, ~1.6 thick; one sheet
-gives two 70 x 50 pieces). A16 (2026-10-31, user: "80 120 으로 설계를 다시"): the 7 control boards MB use a whole sheet each, uncut
+gives two PED pieces; since 2026-11-28 each is 71.12 x 49.53 = 28 x 20 holes, see PED_COLS). A16 (2026-10-31, user: "80 120 으로 설계를 다시"): the 7 control boards MB use a whole sheet each, uncut
 and undrilled, on the module floor (keyaction.py A16) - the MB jig P-MB is gone; only the PED piece is still cut.
 How to use: cad/jigs/README.md section '기판 지그'.
 
@@ -16,7 +16,8 @@ fixing points.
 
 Numbers come from the models, not typed again:
   PED electronics.py CU-E-PEDBOARD (x426.5~476.5 y244~314, turned 90 deg): screws D3.2 at (x0+4, y0+4) (x1-4, y1-4), pins D3.0
-      at the other corners; no circuit grid -> the two outline edges at the Zero end / left side sit mid-gap (1.27 from the holes)
+      at the other corners (the fixing points come from the CAD box; the CUT SIZE comes from the hole counts, PED_COLS x PED_ROWS above:
+      71.12 x 49.53, not the CAD box 70 x 50); the two outline edges at the Zero end / left side sit mid-gap (1.27 from the holes)
 
 Use frame (u, v, w): u along the 70 side, v along the 50 side, w = 0 the sheet's top face, +w up through the plate (toward the drill).
 PED: (u, v) = (y - 244, 476.5 - x) - the Zero end (USB-C, -y in the world) is u = 0.
@@ -40,8 +41,14 @@ PRINT_SUB = "09_기판지그"
 
 PITCH = 2.54
 SHEET = dict(name="Coms BE163", w=80.0, h=120.0, cols=30, rows=42, t=1.6, hole_d=1.0)   # user 2026-10-07 (thickness unverified)
-BOARD = (70.0, 50.0)                 # MB and PED outline (u, v)
-PLATE_T = 5.0                        # plate = knife guide height = drill guide length
+# PED cut size by HOLE COUNT (2026-11-28; was the CAD box 70 x 50, which is not a multiple of the 2.54 pitch and sliced the last hole
+# column / row): u = 28 hole columns, both edges mid-gap (28 x 2.54 = 71.12); v = 20 hole rows, the back cut runs along the CENTRE LINE of
+# row 20 (1.27 + 19 x 2.54 = 49.53, row 20 is halved) - a 20-row mid-gap edge (50.8) would touch the CU-BATFRAME wall (x <= 426.0 at
+# y244~258.5) by 0.3 mm, a 19-row one (48.26) leaves only 2.26 from the v46 screw / pin holes to the edge.
+# CAD clearance probe (2026-11-28, real meshes): u + 1.12 (y314 -> 315.12) free, v 50 -> 49.53 only shrinks.
+PED_COLS = 28
+PED_ROWS = 20
+PLATE_T = 5.0                       # plate = knife guide height = drill guide length
 PIN_D, PIN_L, PIN_TIP = 0.9, 1.2, 0.5     # registration pins: D0.9 into the D1.0 grid holes, 1.2 long (< 1.6 board), tip D0.5
 PIN_CHAMFER = 0.4                    # cone length at the pin tip
 BORE_CLR = 0.2                       # guide bore = bit + 0.2 (printed holes come out ~0.1-0.2 small; ream once with the same bit)
@@ -59,7 +66,7 @@ def _ped():
     pts = [(x0 + 4, y0 + 4, 3.2, "screw"), (x1 - 4, y1 - 4, 3.2, "screw"), (x1 - 4, y0 + 4, 3.0, "pin"), (x0 + 4, y1 - 4, 3.0, "pin")]
     holes = [dict(u=y - y0, v=x1 - x, bit=d, kind=k, world=(x, y)) for (x, y, d, k) in pts]
     return dict(key="P-PED", name="P-PED_페달기판지그_PED1장", title="PED 페달 보드 지그", qty_boards=1,
-                size=(y1 - y0, x1 - x0), origin=None, grid0=(PITCH / 2, PITCH / 2), slot=None, holes=holes,
+                size=(PED_COLS * PITCH, PITCH / 2 + (PED_ROWS - 1) * PITCH), origin=None, grid0=(PITCH / 2, PITCH / 2), slot=None, holes=holes,
                 src="electronics.py / body.py CU-E-PEDBOARD (x%.1f~%.1f y%.0f~%.0f) + CU-POST-PED corners" % (x0, x1, y0, y1))
 
 
@@ -173,7 +180,7 @@ def specs():
 
 
 def _note(spec):
-    return ("PED 페달 보드 1장용 지그: 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 "
+    return ("PED 페달 보드 1장용 지그 (71.12 × 49.53 = 구멍 28 × 20): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 "
             "뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로")
 
 

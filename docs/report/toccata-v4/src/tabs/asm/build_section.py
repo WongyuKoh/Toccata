@@ -40,12 +40,15 @@ def main():
     h = re.sub(r'href="#([^"]+)"', r'href="#asm-\1"', h)
     h = re.sub(r'data-s="([^"]+)"', r'data-s="asm-\1"', h)
     h = re.sub(r'class="([^"]+)"', lambda m: 'class="%s"' % " ".join("a-" + c for c in m.group(1).split()), h)
-    h = re.sub(r'src="img/([^"]+)"', r'src="fin/asm/\1"', h)
+    # A20 before / after sheets: the page's own img/a20 copies (also shown in the 09 tab), not a second copy in fin/asm
+    h = re.sub(r'src="img/a20_cmp(\d)\.webp"', r'src="img/a20/A20_compare_\1.webp"', h)
+    h = re.sub(r'src="img/(?!a20/)([^"]+)"', r'src="fin/asm/\1"', h)
     h = re.sub(r'src="photo/(\w+)\.webp"', r'src="img/bom/\1.jpg"', h)
     h = re.sub(r'data-d="(BRD-[^"]+)"', r'data-d="sch/\1"', h)
     h = re.sub(r'data-d="(d\d\d[^"]+)"', r'data-d="dwg/\1"', h)
     h = re.sub(r'data-d="A18_[^"]+"', 'data-d="img/a18/A18_detail.webp"', h)      # A18 detail sheet = the page's 09-tab copy
     h = re.sub(r'data-d="A19_[^"]+"', 'data-d="img/a19/A19_detail.webp"', h)      # A19 / A20 detail sheets (09 tab copies)
+    h = re.sub(r'data-d="A20_전후비교_(\d)_[^"]+"', r'data-d="img/a20/A20_compare_\1.webp"', h)   # A20 before / after sheets
     h = re.sub(r'data-d="A20_[^"]+"', 'data-d="img/a20/A20_detail.webp"', h)
     # one <main> per page: the guide's column becomes a div
     h = h.replace('<main data-v3d-src="model/octave.json">', '<div class="a-main" data-v3d-src="fin/asm/octave.json">', 1)
@@ -66,6 +69,7 @@ def main():
     shutil.copyfile(os.path.join(SRC, "model", "octave.json"), os.path.join(FIN, "octave.json"))
     assets.append("fin/asm/octave.json")
     assets += sorted(set(re.findall(r'src="(img/bom/[^"]+)"', sec)))
+    assets += sorted(set(re.findall(r'\ssrc="(img/a20/[^"]+)"', sec)))
     assets += sorted(set(re.findall(r'data-d="([^"]+)"', sec)))
     miss = [a for a in assets if not os.path.isfile(os.path.join(PAGE, a))]
     if miss:

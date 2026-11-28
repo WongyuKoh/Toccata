@@ -44,7 +44,7 @@
   #p-circuit .circ-chips a{font-size:13px;padding:6px 12px}
 }
 @media (prefers-reduced-motion:reduce){#p-circuit *{scroll-behavior:auto!important;transition:none!important}}
-/* ---- MB board kinds (BRD-09~11): three tabs, front + back crops ---- */
+/* ---- MB per board (BRD-09~15): seven tabs O1~O7, front + back crops ---- */
 #p-circuit .mbk{margin:6px 0 14px}
 #p-circuit .mbk-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 10px}
 #p-circuit .mbk-tabs button{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:6px 14px;border:1px solid var(--rule-2);border-radius:999px;
@@ -79,6 +79,27 @@
 #p-circuit .hitpop li{margin:2px 0;color:var(--ink-2)}
 #p-circuit .hitpop .hit-n{border-top:1px solid var(--rule);padding-top:6px;margin-top:4px}
 #p-circuit .hitpop .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+/* part card + connect line: colours mixed from the popup's own --card / --ink, because a popup inside a drawing sheet is light
+   (.sheet switches --card / --ink / --ink-2 only) while the page around it may be dark */
+#p-circuit .hitpop .hit-act{border-radius:8px;padding:7px 9px;margin:4px 0 8px;border:1px solid color-mix(in srgb,var(--ink) 22%,var(--card));color:var(--ink)}
+#p-circuit .hitpop .hit-act p{margin:2px 0;color:color-mix(in srgb,var(--ink) 78%,var(--card))}
+#p-circuit .hitpop .hit-act .v{display:block;font-size:15px;font-weight:700;color:var(--ink)}
+#p-circuit .hitpop .hit-act.yes{background:color-mix(in srgb,#2e9b5a 14%,var(--card));border-color:color-mix(in srgb,#2e9b5a 70%,var(--card))}
+#p-circuit .hitpop .hit-act.no{background:color-mix(in srgb,#d9822b 16%,var(--card));border-color:color-mix(in srgb,#d9822b 75%,var(--card))}
+#p-circuit .hitpop .hit-act .row{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:baseline;color:var(--ink)}
+#p-circuit .hitpop .hit-act .row b.yes{color:color-mix(in srgb,#2e9b5a 70%,var(--ink))}
+#p-circuit .hitpop .hit-act .row b.no{color:color-mix(in srgb,#d9822b 70%,var(--ink))}
+#p-circuit .hitpop .hit-card{display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px;align-items:start;margin:4px 0 8px;padding:8px;
+  border:1px solid color-mix(in srgb,var(--ink) 16%,var(--card));border-radius:8px;background:color-mix(in srgb,var(--ink) 3%,var(--card));color:var(--ink)}
+#p-circuit .hitpop .hit-card.noimg{grid-template-columns:minmax(0,1fr)}
+#p-circuit .hitpop .hit-card img{width:118px;height:118px;object-fit:contain;background:#fff;border-radius:6px;border:1px solid color-mix(in srgb,var(--ink) 16%,var(--card))}
+#p-circuit .hitpop .hit-card .cap{font-size:12px;color:color-mix(in srgb,var(--ink) 62%,var(--card));margin-top:3px}
+#p-circuit .hitpop .hit-card .val{font-size:15px;margin:0 0 4px;color:var(--ink)}
+#p-circuit .hitpop .hit-card dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;margin:0;font-size:12.5px}
+#p-circuit .hitpop .hit-card dt{color:color-mix(in srgb,var(--ink) 62%,var(--card))}
+#p-circuit .hitpop .hit-card dd{margin:0;color:color-mix(in srgb,var(--ink) 85%,var(--card));overflow-wrap:anywhere}
+#p-circuit .hitpop .hit-card .id{font-size:12.5px;color:color-mix(in srgb,var(--ink) 78%,var(--card));margin:5px 0 0}
+@media (max-width:520px){#p-circuit .hitpop .hit-card{grid-template-columns:minmax(0,1fr)}#p-circuit .hitpop .hit-card img{width:100%;height:150px}}
 #p-circuit .hitpop .hitx{position:absolute;top:4px;right:4px;width:32px;height:32px;border:0;background:none;color:var(--ink-2);font:inherit;font-size:20px;line-height:1;cursor:pointer;border-radius:6px}
 #p-circuit .hitpop .hitx:hover{background:var(--rule)}
 #p-circuit .hitpop .hitx:focus-visible{outline:2px solid var(--blue);outline-offset:1px}

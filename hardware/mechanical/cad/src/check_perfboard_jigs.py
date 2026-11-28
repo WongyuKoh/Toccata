@@ -8,8 +8,10 @@
     centre <= 0.05, D = bit + 0.2; and the same points measured from the electronics.py model board (CU-E-PEDBOARD holes) <= 0.05
 (3) registration pins measured from the STL: on a grid hole centre (<= 0.02), D0.9 in the D1.0 hole, >= 2.0 from every cut line,
     clear of the bores
-(4) cut edges: plate section = the board outline (0..70 x 0..50, <= 0.02)
-(5) BE163 layout: two 70 x 50 pieces on the 30 x 42 grid with a waste strip >= 1.0 between the cuts (one PED + one spare)
+(4) cut edges: plate section = the board outline (0..71.12 x 0..49.53, <= 0.02)
+(5) BE163 layout: two PED pieces on the 30 x 42 grid with a waste strip >= 1.0 between the cuts (one PED + one spare)
+(6) cut size by hole count (2026-11-28): every cut line is a multiple of the 2.54 pitch from the first hole (mid-gap) or runs along a hole
+    row / column centre; the part of the piece outside the CAD board box (x426.5~476.5 y244~314) touches no other CAD part
 """
 import math
 import os
@@ -173,7 +175,40 @@ def main():
            "of %d (waste strip %.2f between the two cuts)" % (PB.SHEET["w"], PB.SHEET["h"], PB.SHEET["cols"], PB.SHEET["rows"], a, b_, L["cols_used"],
                                                              PB.SHEET["cols"], L["a"]["u_first"], L["margin_u"], L["a"]["rows"], L["gap_rows"], L["b"]["rows"],
                                                              L["rows_used"], PB.SHEET["rows"], L["strip"]))
-    print(".. boards (A16): MB 7 whole sheets (no jig) + PED %d piece -> 1 more sheet, its second 70 x 50 is a spare" % S["P-PED"]["qty_boards"])
+    # (6) cut size by hole count + CAD clearance of the part of the piece that sticks out of the CAD board box
+    s = S["P-PED"]
+    W, H = s["size"]
+    gu0, gv0 = s["grid0"]
+    on_u = abs((W - gu0) / PB.PITCH - round((W - gu0) / PB.PITCH)) < 0.01 or abs(W / PB.PITCH - round(W / PB.PITCH)) < 0.01
+    on_v = abs((H - gv0) / PB.PITCH - round((H - gv0) / PB.PITCH)) < 0.01 or abs(H / PB.PITCH - round(H / PB.PITCH)) < 0.01
+    us, vs = PB.grid_nodes(s)
+    ok(on_u and on_v and len(us) == PB.PED_COLS and len(vs) == PB.PED_ROWS,
+       "P-PED cut %.2f x %.2f = %d x %d holes: every cut line is mid-gap (n x 2.54) or on a hole row / column centre (u edges 0 / %.2f, v edges 0 / %.2f)" % (
+           W, H, len(us), len(vs), W, H))
+    import body as B
+    import electronics as E
+    import keyaction_parts
+    parts = [p for p in list(E.build()) + list(B.build()) + list(keyaction_parts.build_all()) if p.id != "CU-E-PEDBOARD"]
+    x0_, x1_, y0_, y1_, z0_, z1_ = B.CC["CU-E-PEDBOARD"][:6]
+    px0, px1, py0, py1 = x1_ - H, x1_, y0_, y0_ + W                      # the piece in world x / y (u = y - y0, v = x1 - x)
+    ext = []                                                             # parts of the piece outside the CAD board box
+    if py1 > y1_ + 1e-6:
+        ext.append((min(px0, x0_), px1, y1_, py1))
+    if px0 < x0_ - 1e-6:
+        ext.append((px0, x0_, y0_, py1))
+    hits = []
+    for (ex0, ex1, ey0, ey1) in ext:
+        pr = box(ex0, ex1, ey0, ey1, z0_, z1_)
+        for p in parts:
+            bb_ = p.solid.bounding_box()
+            if bb_[0] > ex1 or bb_[3] < ex0 or bb_[1] > ey1 or bb_[4] < ey0 or bb_[2] > z1_ or bb_[5] < z0_:
+                continue
+            v_ = (p.solid ^ pr).volume()
+            if v_ > 0.01:
+                hits.append("%s %.2f mm3" % (p.id, v_))
+    ok(not hits, "P-PED piece x%.2f~%.2f y%.2f~%.2f: the %d strip(s) outside the CAD board box x%.1f~%.1f y%.0f~%.0f touch no CAD part %s" % (
+        px0, px1, py0, py1, len(ext), x0_, x1_, y0_, y1_, "; ".join(hits)))
+    print(".. boards (A16): MB 7 whole sheets (no jig) + PED %d piece -> 1 more sheet, its second PED piece is a spare" % S["P-PED"]["qty_boards"])
     print()
     print("checks: %d OK, %d failed" % (N_OK[0], len(FAIL)))
     if FAIL:

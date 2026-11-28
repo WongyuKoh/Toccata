@@ -31,10 +31,12 @@ def _path(polys, X, Y):
 
 
 # ====================================================================== BRD-03 PED board
-# BE163 piece 70 x 50 cut with the printed jig P-PED: board = CAD CU-E-PEDBOARD x426.5..476.5 (v) y244..314 (u), turned 90 deg.
-# Jig frame: u = y - 244 (0..70, along the long side, u = 0 at the USB / front edge), v = 476.5 - x (0..50).
+# BE163 piece 71.12 x 49.53 (28 x 20 holes, cut by hole count 2026-11-28; the CAD box is 70 x 50) cut with the printed jig P-PED: board = CAD CU-E-PEDBOARD x426.5..476.5 (v) y244..314 (u), turned 90 deg.
+# Jig frame: u = y - 244 (0..71.12, along the long side, u = 0 at the USB / front edge), v = 476.5 - x (0..49.53).
 # Holes: u = 1.27 + 2.54 i (i = 0..27), v = 1.27 + 2.54 j (j = 0..19) - the jig puts both reference edges mid-gap.
-PB_BOX = (426.5, 476.5, 244.0, 314.0)
+PB_BOX = (426.97, 476.5, 244.0, 315.12)   # the real piece: u 28 cols mid-gap (+1.12 past the CAD box y314, clear of every CAD part), v edge on the centre line of
+#                                          row 20 (-0.47 inside the CAD box x426.5: a mid-gap 50.8 would touch CU-BATFRAME x<=426.0 at y244~258.5)
+PB_CAD_BOX = (426.5, 476.5, 244.0, 314.0)  # CAD CU-E-PEDBOARD envelope (fixing points, posts)
 PB_Z = (21.5, 23.1)                       # board on 5 mm posts (CAD)
 
 
@@ -153,7 +155,7 @@ def _wire_len(poly):
 def brd03():
     from sheets import TOTAL, REV_E
     s = Sheet("BRD-03", 10, TOTAL, "페달 보드 배치 (PB · 위에서 봄)",
-              "8 × 12 양면 만능기판에서 자른 70 × 50 조각(지그 P-PED), 가운데 유닛 C칸 5 mm 기둥 위. 모든 구멍 = 지그가 맞추는 2.54 격자. 배선은 아랫면. 아래: J501 잭 조각, 페달 안 센서 조각.",
+              "8 × 12 양면 만능기판에서 자른 71.12 × 49.53(구멍 28 × 20) 조각(지그 P-PED), 가운데 유닛 C칸 5 mm 기둥 위. 모든 구멍 = 지그가 맞추는 2.54 격자. 배선은 아랫면. 아래: J501 잭 조각, 페달 안 센서 조각.",
               "PB", qty="PB · J501 · PS", basis="CU-E-PEDBOARD · SCH-05", **REV_E)
     S = 2.0
     ox, oy = 46.0, 36.0
@@ -167,6 +169,9 @@ def brd03():
     o = s.out["body"]
     # board + posts (dashed squares) + lattice
     o.append(f'<rect x="{X(x0b):.2f}" y="{Y(y1b):.2f}" width="{(x1b-x0b)*S:.2f}" height="{(y1b-y0b)*S:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
+    import sheets as _S
+    _S.size_mark(s, X(x0b), Y(y1b), X(x1b), Y(y0b), x1b - x0b, y1b - y0b, hx=X(x1b) + 9.0,
+                 badge=(ox, 26.0, "PB 자르는 크기 49.53 × 71.12 mm (구멍 20 × 28, 8 × 12 cm 기판에서 잘라 냄 — 긴 변 안쪽·짧은 변 뒤쪽 선은 구멍 가운데 지남)"))
     for (hx, hy, d, t) in PB_HOLES:
         o.append(f'<rect x="{X(hx-3.0):.2f}" y="{Y(hy+3.0):.2f}" width="{6*S:.2f}" height="{6*S:.2f}" fill="#c9d0da" fill-opacity=".35" '
                  f'stroke="#6b7690" stroke-width=".3" stroke-dasharray="1.2 .7"/>')
@@ -298,7 +303,7 @@ def brd03():
     # notes
     s.para(160, yt + 9.0, [
         "주",
-        "1. 기판: 8 × 12 양면 만능기판(구매 목록 SE8b, 2.54 격자 — △33 이후 BE163 4장은 MB에)에서 지그 P-PED로 70 × 50을 긋고 꺾는다. 나사 Ø3.2 ×2, 위치 핀 Ø3.0 ×2를 지그 안내 구멍으로 먼저 뚫는다.",
+        "1. 기판: 8 × 12 양면 만능기판(구매 목록 SE8b, 2.54 격자 — △33 이후 BE163 4장은 MB에)에서 지그 P-PED로 71.12 × 49.53(구멍 28 × 20)을 긋고 꺾는다. 나사 Ø3.2 ×2, 위치 핀 Ø3.0 ×2를 지그 안내 구멍으로 먼저 뚫는다.",
         "    지그는 USB 끝(u = 0)·왼쪽 모서리를 구멍 사이 가운데(구멍에서 1.27)에 둔다 → 구멍 (i, j) = (u, v) = (1.27 + 2.54·i, 1.27 + 2.54·j).",
         f"2. A501은 CAD 상자(x449~467 y244~268.8)보다 x {ZERO_SNAP[0]:+.2f}, y {ZERO_SNAP[1]:+.2f} — 핀이 격자 구멍에 들어가는 가장 가까운 자리. USB-C 리셉터클 면 y{ry0:.2f}는",
         "    기판 앞 모서리 y244보다 1.62 앞이라 플러그 몰드가 기판에 걸리지 않는다. 플러그 축 x457.59 (CAD 458.14).",
@@ -334,6 +339,7 @@ def brd03():
     K.box(x0b, y0b, x1b, y1b, key="PCB-PB")
     # ---------------- insets: J501 scrap (2 : 1) and the pedal sensor scrap PS (3 : 1)
     jb = HN.PTS.get("j501_board", [450.0, 475.0, 316.5, 340.5, 36.4, 38.0])
+    jb = [jb[0], round(jb[0] + 2.54 * 9, 2), jb[2], round(jb[2] + 2.54 * 9, 2)] + list(jb[4:])      # 9 x 9 holes, edges mid-gap = 22.86 x 22.86 (CAD box 25 x 24)
     jj = HN.PTS.get("j501", [459.5, 465.5, 328.5, 342.5, 38.0, 43.0])
     ix, iy, S2 = 18.0, 203.0, 2.0
 
@@ -342,8 +348,11 @@ def brd03():
 
     def YJ(y):
         return iy + (jb[3] - y) * S2
-    s.text(ix, iy - 7.5, "J501 잭 조각 (12 × 18 기판 자투리, 25 × 24) — 뒤판 출력물 잭 선반 위, 2 : 1", "noteb", size=2.3)
+    s.text(ix, iy - 7.5, "J501 잭 조각 (12 × 18 기판 자투리, 22.86 × 22.86) — 뒤판 출력물 잭 선반 위, 2 : 1", "noteb", size=2.3)
     o.append(f'<rect x="{XJ(jb[0]):.2f}" y="{YJ(jb[3]):.2f}" width="{(jb[1]-jb[0])*S2:.2f}" height="{(jb[3]-jb[2])*S2:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".45"/>')
+    import sheets as _S
+    _S.size_mark(s, XJ(jb[0]), YJ(jb[3]), XJ(jb[1]), YJ(jb[2]), jb[1] - jb[0], jb[3] - jb[2], wy=YJ(jb[2]) + 7.0, hx=XJ(jb[0]) - 4.5,
+                 badge=(XJ(jb[0]), YJ(jb[2]) + 12.5, "J501 자르는 크기 %g × %g mm (구멍 9 × 9)" % (jb[1] - jb[0], jb[3] - jb[2])))
     o.append(f'<rect x="{XJ(jj[0]):.2f}" y="{YJ(jj[3]):.2f}" width="{(jj[1]-jj[0])*S2:.2f}" height="{(jj[3]-jj[2])*S2:.2f}" fill="#222" fill-opacity=".75"/>')
     s.text(XJ(jj[1]) + 1.5, YJ(jj[3]) + 3.0, "← 잭 코 → 뒤판 Ø6 (y342.5)", "notes", "start", size=1.8, check=False)
     import boards3 as B3
@@ -352,7 +361,7 @@ def brd03():
         o.append(f'<rect x="{XJ(px)-1.2:.2f}" y="{YJ(py_)-1.2:.2f}" width="2.4" height="2.4" fill="#fff" stroke="#8a5a00" stroke-width=".4"/>')
         s.text(XJ(px), YJ(py_) + 4.0, nm.split()[1], "pinname", "middle", size=1.7, check=False)
     s.para(XJ(jb[1]) + 4.0, iy + 4.0, [
-        f"조각 x{jb[0]:g}~{jb[1]:g} × y{jb[2]:g}~{jb[3]:g} (CAD CU-E-J501BOARD), 잭 x{jj[0]:g}~{jj[1]:g}.",
+        f"조각 x{jb[0]:g}~{jb[1]:g} × y{jb[2]:g}~{jb[3]:g} (CAD CU-E-J501BOARD 상자 x450~475 × y316.5~340.5 안), 잭 x{jj[0]:g}~{jj[1]:g}.",
         "구멍 좌표·잭 다리 연결 = BRD-07 (잭 다리는 2.54 격자 밖).",
         "앞 패드 4개(T·TN·R·S, y317.77)에 W502 4가닥 → PB J502 1·2·3·4.",
         "TN·S는 둘 다 GND — 통전으로 T/TN/R/RN/S를 먼저 찾는다.",
@@ -369,6 +378,8 @@ def brd03():
     def YP(y):
         return py0 - y * S3
     o.append(f'<rect x="{XP(-1.27):.2f}" y="{YP(11.43):.2f}" width="{17.78*S3:.2f}" height="{12.7*S3:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".45"/>')
+    _S.size_mark(s, XP(-1.27), YP(11.43), XP(16.51), YP(-1.27), 17.78, 12.7, wy=YP(-1.27) + 5.5, hx=XP(-1.27) - 4.5,
+                 badge=(XP(-1.27), YP(-1.27) + 11.0, "PS 실제 크기 17.78 × 12.7 mm (구멍 7 × 5)"))
     for c in range(7):
         for r in range(5):
             o.append(f'<circle cx="{XP(2.54*c):.2f}" cy="{YP(2.54*r):.2f}" r=".5" fill="#b9cdb6"/>')

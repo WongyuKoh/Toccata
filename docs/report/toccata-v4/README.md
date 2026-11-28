@@ -11,6 +11,7 @@
 |---|---|---|---|
 | 요약 | 한눈에 보기 (`p-summary`, 첫 화면) | `src/summary.html` | `python3 docs/report/toccata-v4/src/build_summary.py` |
 | 01 | 회로도 (`p-circuit`) | `hardware/pcb/page/circuit.{html,css,js}` + `assets.txt` | `python3 hardware/pcb/src/build.py` → `python3 hardware/pcb/src/page.py` (SVG는 merge.py가 `sch/`로 복사) |
+| 01b | 아두이노 버전 (`p-uno`) | `src/tabs/uno/` (도면·CSV는 `uno/`로 복사) | `python3 hardware/pcb/src/build_uno.py` → `python3 docs/report/toccata-v4/src/tabs/uno/build_section.py` |
 | 02 | 설계도 (`p-dwg`) | `src/tabs/dwg/` | `python3 hardware/mechanical/cad/src/drawings_final.py` → `python3 docs/report/toccata-v4/src/tabs/dwg/build_section.py` |
 | 03 | 부품 도면·출력 파일 (`p-partdwg`) | `src/tabs/partdwg/` | `python3 hardware/mechanical/cad/src/part_sheets.py` (약 3분) |
 | 04 | 3D 모델 (`p-cad`) | `hardware/mechanical/cad/viewer/cad.{html,css,js}` | `python3 hardware/mechanical/cad/viewer/gen_viewer.py` (GLB는 merge.py가 base64로 `cad/`에) |

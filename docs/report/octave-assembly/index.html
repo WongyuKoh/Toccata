@@ -105,6 +105,19 @@ figure > img { width: 100%; height: auto; border-radius: 8px; background: #f8f8f
 .v3d.v3d-full .v3d-hint { top: calc(env(safe-area-inset-top, 0px) + 12px); left: max(12px, env(safe-area-inset-left, 0px)) }
 .v3d.v3d-full .v3d-btns { bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); right: max(12px, env(safe-area-inset-right, 0px)) }
 @media (pointer: coarse) { .v3d-btns button { min-height: 40px; padding: 6px 12px } }
+/* rod cut jig simulation (rodjig.js): own canvas inside the box */
+.rj { display: grid; gap: 10px; border: 1px solid var(--rule); border-radius: 10px; padding: 14px; background: color-mix(in srgb, var(--dim-soft) 35%, var(--sheet)) }
+.rj-bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center }
+.rj-bar .lbl { font-size: 12.5px; color: var(--muted); margin-right: 2px }
+.rj button { font: 600 12.5px var(--sans); border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: 6px; padding: 5px 10px; cursor: pointer; white-space: nowrap }
+.rj button:hover { background: var(--dim-soft) }
+.rj button[aria-pressed="true"], .rj button[aria-current="step"] { background: var(--dim); border-color: var(--dim); color: #fff }
+.rj-stage { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--rule); border-radius: 8px; background: #f6f7f8; overflow: hidden; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none }
+.rj-stage canvas { display: block; width: 100%; height: 100% }
+.rj-hint { position: absolute; left: 8px; top: 8px; font-size: 12px; line-height: 1.35; color: #3c4450; background: rgba(255,255,255,.88); border-radius: 6px; padding: 3px 8px; pointer-events: none }
+.rj-cap { min-height: 3.2em; font-size: 14px; line-height: 1.55; max-width: 80ch }
+.rj-info { font-size: 12.5px; color: var(--muted) }
+@media (max-width: 600px) { .rj-stage { aspect-ratio: 4 / 3 } }
 figcaption { font-size: 12.5px; color: var(--muted); line-height: 1.5 }
 .figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px }
 
@@ -161,6 +174,7 @@ html { scroll-behavior: smooth }
   <p class="lead" style="max-width:72ch">3D 프린팅한 한 옥타브(건반 12개)를 프레임 하나에 조립해 첫 소리를 내기까지의 순서입니다. 옥타브 모듈 7개는 모양이 같아 이 순서를 어느 옥타브에나 씁니다. 단계 그림은 CAD 조립 모델(O4 = C4~B4)을 그대로 띄운 3D 모델이라 돌려 보고 키워 볼 수 있고, 부품을 누르면 이름이 나옵니다. 숫자는 설계서·CAD 값 그대로입니다(mm, x = 모듈 왼쪽에서, y = 백건 앞끝에서 뒤로, z = 책상에서).</p>
   <div class="facts">
     <span>출력 <b class="num">58</b>개 + 공구 <b class="num">4</b>개 + 구멍 시험편 <b class="num">4</b>개</span>
+    <span>11/22 다시 출력 <b class="num">17</b>개 (+ 11/17 묶음 7개, <a href="#reprint">목록</a>)</span>
     <span>구매품 <b class="num">약 140</b>개 (모듈 1개)</span>
     <span>모듈 무게 <b class="num">약 1.37 kg</b></span>
     <span>기준 <b>CAD 2026-11-22</b> (Bambu 기준 서포트 정리 A13 · 캡스턴 너트 A15 · 80 × 120 제어 기판 A16 · 건반 틈·캡스턴·너트 홈 A17 · 드릴 없는 봉 구멍·끼우는 레버 덮개·나사 없는 레버틀·레일·기판 밑 공간 A18 · 드릴 없음(크러시 리브) A19 · 센서 바 뒤로 열린 홈·센서 기판 밑 창·큰 강철 칸 A20)</span>
@@ -173,6 +187,7 @@ html { scroll-behavior: smooth }
   <ol>
     <li class="grp">시작 전에</li>
     <li><a href="#order"><span class="n">·</span><span>큰 순서와 이유</span></a></li>
+    <li><a href="#reprint"><span class="n">·</span><span>A20 다시 출력</span></a></li>
     <li><a href="#parts"><span class="n">·</span><span>준비물 (사진)</span></a></li>
     <li class="grp">준비 · 부분 조립</li>
     <li><a href="#s1" data-s="s1"><span class="n">01</span><span>출력물 확인·후가공</span></a></li>
@@ -221,6 +236,43 @@ html { scroll-behavior: smooth }
   <figure><div class="v3d" data-v3d="s10_done"><img src="img/s10_done.webp" alt="밑에서 본 완성 모듈과 바닥 EVA" loading="lazy"></div><figcaption>완성한 옥타브 모듈을 밑에서 본 모습. 바닥 EVA 3T는 한 장 그대로 붙입니다(구멍 없음 — 기판 밑 바닥판 창도 EVA가 덮음).</figcaption></figure>
 </section>
 
+<section id="reprint">
+  <h2>A20 다시 출력 (11/22) · 크게 바뀐 곳</h2>
+  <p class="lead">11/15 한 옥타브 묶음을 이미 뽑았다면 아래 파일만 다시 뽑습니다. 파일은 <code>최종본/04_3D출력_STL/Toccata_한옥타브_다시출력STL_1122.zip</code>에 두 폴더로 나눠 두었습니다(지금 한 옥타브 묶음에서 그대로 꺼낸 같은 파일, 방향·서포트도 같음).</p>
+  <h3>1_A20_다시출력_17개 — 이미 뽑았어도 다시</h3>
+  <div class="tbl"><table>
+    <tr><th>파일 (폴더)</th><th>개수</th><th>왜 다시</th><th>단계</th></tr>
+    <tr><td>구멍시험편_무게추칸_강철블록용 (00_먼저_구멍시험편) — <b>가장 먼저</b></td><td class="q">1</td><td>자른 강철 블록이 새 칸 입구 40.5 × 19.5로 손으로 밀려 들어가는지 15분 만에 봅니다. 들어가면 캐리어를 뽑습니다.</td><td>01</td></tr>
+    <tr><td>레버캐리어 C ~ B (02_레버캐리어)</td><td class="q">12</td><td>무게 추 칸 40.0 × 19.0 × 9.2 → 40.5 × 19.5 × 9.4. 예전 칸은 리브까지 길이 39.6, 높이 여유 0이라 강철이 들어가지 않았습니다.</td><td>03</td></tr>
+    <tr><td>레버덮개 (02_레버캐리어)</td><td class="q">12</td><td>날개 끝 갈고리 0.4 · 45° → 0.5 · 빼는 쪽 60°(3~4 N에 빠지던 것이 약 10~16 N). 칸 쪽 리브 0.17.</td><td>03</td></tr>
+    <tr><td>프레임_바닥틀_모듈 (03_프레임)</td><td class="q">1</td><td>센서 기판 밑 받침 리브 2줄을 없애고 바닥판을 뚫음(기판 밑 2.0 → 4.0), 받침 패드. 레버틀 걸쇠 다리 자리도 새 갈고리에 맞춤.</td><td>07 · 09</td></tr>
+    <tr><td>프레임_레버틀_모듈 (03_프레임)</td><td class="q">1</td><td>걸쇠 다리 걸림 0.35 → 0.65(갈고리 0.8, 휨 틈 0.8), 핀 다리 1.4 × 5.0. 세게 칠 때도 갈고리가 뭉개지지 않습니다.</td><td>08</td></tr>
+    <tr><td>센서바 (04_센서바·패드바·가림판·마개)</td><td class="q">1</td><td>포켓 3.55 × 4.4 → 4.05 × 4.9, 다리 구멍 Ø0.9 3개 → 폭 1.6 홈 하나. 포켓과 홈이 바 뒤 가장자리까지 열림.</td><td>09</td></tr>
+  </table></div>
+  <div class="note"><b>짝으로 뽑습니다.</b> 바닥틀과 레버틀은 걸쇠의 암·수가 함께 바뀌었고, 캐리어와 덮개도 칸 리브가 함께 바뀌었습니다. 한쪽만 새로 뽑으면 맞지 않습니다.</div>
+  <h3>2_1117묶음을_안뽑았으면_7개 — 11/17 묶음을 아직 안 뽑았을 때만</h3>
+  <div class="tbl"><table>
+    <tr><th>파일 (폴더)</th><th>개수</th><th>무엇</th><th>단계</th></tr>
+    <tr><td>구멍시험편 세로(레버 허브용) · 가로(레버틀 핀용) · 리브 구멍(봉 토막·밸런스 핀용) (00_먼저_구멍시험편)</td><td class="q">3</td><td>A18 드릴 없는 봉 구멍(Ø4.3 · Ø4.5)과 A19 리브 구멍 확인용.</td><td>01</td></tr>
+    <tr><td>밸런스레일 (03_프레임)</td><td class="q">1</td><td>A19: 밸런스 핀 구멍을 반지름 +1로 키우고 크러시 리브 3개(드릴 없음).</td><td>07 · 08</td></tr>
+    <tr><td>레버봉끝마개 (04_센서바·패드바·가림판·마개)</td><td class="q">1</td><td>A18·A19 드릴 없는 구멍 크기에 맞춘 마개.</td><td>11</td></tr>
+    <tr><td>공구_벤치지그받침_T1a · 공구_캡스턴벤치게이지_T2 (06_출력공구)</td><td class="q">2</td><td>A19: T1a 봉 토막 구멍 리브, T2 허브 Ø4.3.</td><td>04 · 06</td></tr>
+  </table></div>
+  <h3>크게 바뀐 곳 네 가지</h3>
+  <div class="flow">
+    <div><b>센서 바 — 홈이 뒤로 열림</b>홀센서 포켓을 사방 0.25씩 키워 4.05 × 4.9(몸통 3.15 × 4.0)입니다. 0.4 노즐로는 막혀 나오던 Ø0.9 다리 구멍 3개를 센서마다 폭 1.6 홈 하나로 바꿨습니다. 포켓과 홈이 바 뒤 가장자리(y77.5)까지 열려 있어, 센서를 먼저 기판에 납땜하고 바를 뒤에서 밀어 끼울 수 있습니다. 홈 앞끝 y63.9에서 앞 다리가 멈춥니다.</div>
+    <div><b>센서 기판 밑 — 창과 받침 패드</b>6행 기판의 1·6행을 덮던 받침 리브 2줄을 없애고 기판 밑 바닥판을 뚫었습니다. 기판 밑은 EVA 위 z3~7 = 4.0(예전 2.0)이라 6행 모두 밑에서 납땜·배선합니다. 기판은 왼쪽 기둥(M3×10 그대로)과 쓰지 않는 1·6행 밑의 받침 패드(길이 3.5, 오른쪽 끝 + 바닥 다리 x32.4 · 88.3 · 141.6)에 놓입니다.</div>
+    <div class="hot"><b>무게 추 칸 — 40.5 × 19.5 × 9.4</b>예전 칸 40.0 × 19.0 × 9.2는 크러시 리브까지 39.6 · 9.03이라 높이 여유가 0이었습니다. 이제 뒤 리브 0.3(→ 40.2), 덮개 리브 0.17(→ 9.23)입니다. 강철은 39.7~40.2로 자르고, 두께 9.25 · 폭 19.5 이하면 그대로 씁니다.</div>
+    <div><b>걸쇠 — 덜 쉽게 빠지게</b>레버 덮개는 갈고리 0.4 · 양면 45°라 3~4 N에 빠졌습니다. 이제 갈고리 0.5 · 빼는 쪽 60°로 약 10~16 N입니다(연주 중에 잡는 것은 마지막 MS 폴리머). 레버틀 걸쇠 다리는 걸림 0.65 · 핀 다리 1.4 × 5.0으로 약 31 → 62 N입니다. 밸런스 레일 립(84~106 N)은 그대로입니다.</div>
+  </div>
+  <p class="lead" style="font-size:14px">건반 각도는 확인만 했습니다. 앞끝 깊이 백 10.0 · 흑 9.5 mm는 실제 피아노와 같고, 각도(백 4.0° · 흑 6.2°)가 가파른 것은 축이 앞끝에서 141 mm에 있어서입니다. 바꾸려면 프레임 깊이를 다시 설계해야 해서 그대로 둡니다.</p>
+  <div class="figs">
+    <figure><img src="img/a20_cmp1.webp" alt="A20 전후 비교 1: 센서 바 포켓·다리 홈과 센서 기판 밑, 고치기 전 A19와 고친 뒤 A20" loading="lazy"><figcaption>전후 비교 ① 센서 바·센서 기판 밑 (실제 CAD). 왼쪽 A19, 오른쪽 A20 — 다리 홈이 뒤로 열리고, 기판 밑 리브가 없어지고 바닥이 뚫림.</figcaption></figure>
+    <figure><img src="img/a20_cmp2.webp" alt="A20 전후 비교 2: 레버 C 무게 추 칸 단면과 덮개 갈고리, 레버틀 걸쇠 다리" loading="lazy"><figcaption>전후 비교 ② 무게 추 칸·걸쇠 (실제 CAD 단면). 칸 높이 19.0 → 19.5, 길이 39.6 → 40.2, 덮개 갈고리 0.5 · 60°, 레버틀 다리 걸림 0.65.</figcaption></figure>
+  </div>
+  <div class="dwgs"><button data-d="A20_전후비교_1_센서바·기판밑.png">A20 전후 비교 ① 센서 바·기판 밑</button><button data-d="A20_전후비교_2_무게추칸·걸쇠.png">A20 전후 비교 ② 무게 추 칸·걸쇠</button><button data-d="A20_센서바·기판밑·강철칸_상세.png">A20 센서 바·기판 밑·강철 칸</button></div>
+</section>
+
 <section id="parts">
   <h2>준비물</h2>
   <p class="lead">모듈 하나에 드는 양입니다. 사진은 구매 목록의 실제 상품 사진, 회색 글자는 구매 목록 번호입니다.</p>
@@ -240,6 +292,7 @@ html { scroll-behavior: smooth }
     <tr><td>레버 봉 끝 마개 (Ø4.5 × 1.2)</td><td class="q">1</td><td>회색</td><td>11</td></tr>
     <tr><td>공구 T1a 벤치 지그 받침, T1b 높이 블록, T2 캡스턴 게이지(가짜 레버), T3 밸런스 핀 높이 게이지</td><td class="q">4</td><td>회색·검정</td><td>04, 06, 07</td></tr>
     <tr><td>밸런스 레일 (A16, 바닥틀에서 떼어 따로 출력)</td><td class="q">1</td><td>회색</td><td>07 핀 · 08</td></tr>
+    <tr><td>봉 절단 지그 161.4 (+ 끝 부속용 45.9 · 43.9 · 22.2 · 20.4) + 끝 마개, 10_봉절단지그 — 02단계</td><td class="q">1 + 1</td><td>아무 색</td><td>02</td></tr>
     <tr><td>구멍 시험편 세로·가로 (A18) + 리브 구멍 (A19) + 무게추칸 (A20), 00_먼저_구멍시험편 — 모듈보다 먼저</td><td class="q">4</td><td>아무 색</td><td>01</td></tr>
   </table></div>
   <h3>구매품·소모품</h3>
@@ -296,7 +349,7 @@ html { scroll-behavior: smooth }
   <div class="sh"><span class="badge">02</span><h2>봉·강철·스프링·펠트 자르기</h2><label class="chk"><input type="checkbox" id="c-s2">끝냄</label></div>
   <div class="tbl"><table>
     <tr><th>무엇</th><th>재료</th><th>크기 (mm)</th><th>개수</th><th>붙는 곳</th></tr>
-    <tr><td>건반 봉 · 레버 봉</td><td>SUS304 Ø4 (i066 · i067)</td><td class="m">161.4 ± 0.2</td><td class="q">1 + 1</td><td>봉 받침 / 핀 보스·허브</td></tr>
+    <tr><td>건반 봉 · 레버 봉</td><td>SUS304 Ø4 (i066 · i067)</td><td class="m">161.4 (허용 160.8~161.5, 절단 지그)</td><td class="q">1 + 1</td><td>봉 받침 / 핀 보스·허브</td></tr>
     <tr><td>공구용 봉 토막</td><td>같은 봉</td><td class="m">K 31.6 · L 20.6 · 교정 31.6</td><td class="q">3</td><td>T1a 지그</td></tr>
     <tr><td>강철 블록</td><td>강철 띠 9T×19 (i119)</td><td class="m">39.7~40.2 (A20 칸 40.5), 두께 9.25·폭 19.5 이하</td><td class="q">13</td><td>레버 12 + T2 1</td></tr>
     <tr><td>스프링 다리</td><td>미스미 C-UA90R5-3-0.5</td><td class="m">긴 다리 22.3 · 짧은 다리 8.0</td><td class="q">12</td><td>레버 허브</td></tr>
@@ -310,6 +363,30 @@ html { scroll-behavior: smooth }
     <tr><td>부싱 천</td><td>0.5T 펠트지 (i062)</td><td class="m">자리에 맞춰</td><td class="q">—</td><td>건반 노치·핀 홈 양벽, 프레임 가이드 탭 양옆</td></tr>
     <tr><td>PET 심</td><td>OHP 0.1 (i069)</td><td class="m">6 × 12.2</td><td class="q">몇 장</td><td>패드 밑 (14단계)</td></tr>
   </table></div>
+  <h3>봉 절단 지그로 자르기</h3>
+  <p class="lead">1 m Ø4 봉은 출력한 <b>봉 절단 지그</b>로 자릅니다(<code>stl/print/10_봉절단지그</code>, 지그마다 끝 마개 1개, 둘 다 서포트 없이 판·플랜지를 베드에). 길이마다 지그가 하나씩 있고 조립할 것은 없습니다 — 끝 마개만 끼웁니다. 아래 3D는 실제 지그 STL과 같은 모양이고, 버튼으로 길이를 바꿔 볼 수 있습니다.</p>
+  <div class="rj" data-rj-src="model/rodjig.json">
+    <div class="rj-bar"><span class="lbl">길이</span><button type="button" data-len="161.4" aria-pressed="true">161.4 모듈</button><button type="button" data-len="45.9" aria-pressed="false">45.9 EL 레버</button><button type="button" data-len="43.9" aria-pressed="false">43.9 EL 건반</button><button type="button" data-len="22.2" aria-pressed="false">22.2 ER 레버</button><button type="button" data-len="20.4" aria-pressed="false">20.4 ER 건반</button></div>
+    <div class="rj-stage"><span class="rj-hint">3D는 화면에 보이면 불러옵니다</span></div>
+    <div class="rj-bar"><button type="button" data-a="play" aria-pressed="true">일시정지</button><button type="button" data-ph="0">① 마개</button><button type="button" data-ph="1">② 봉 넣기</button><button type="button" data-ph="2">③ 자르기</button><button type="button" data-ph="3">④ 봉 빼기</button><button type="button" data-ph="4">⑤ 마개 빼기</button><button type="button" data-ph="5">⑥ 토막 꺼내기</button><button type="button" data-ph="6">⑦ 끝 다듬기</button></div>
+    <p class="rj-cap" aria-live="polite">① 끝 마개를 "마개" 쪽 끝 구멍에 꽂습니다.</p>
+    <p class="rj-info"></p>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>지그 (판에 새긴 길이)</th><th>토막</th><th>허용</th><th>크기 (mm)</th></tr>
+    <tr><td>161.4 모듈 건반 봉·레버 봉</td><td class="q">모듈마다 2 (88건반 전체 14)</td><td class="m">160.8~161.5</td><td class="m">177 × 40 × 16</td></tr>
+    <tr><td>45.9 EL 레버 봉 · 43.9 EL 건반 봉</td><td class="q">1 · 1</td><td class="m">45.3~46.0 · 43.0~44.2</td><td class="m">62 · 60 × 40 × 16</td></tr>
+    <tr><td>22.2 ER 레버 봉 · 20.4 ER 건반 봉</td><td class="q">1 · 1</td><td class="m">19.5~22.3 · 19.5~20.7</td><td class="m">38 · 36 × 40 × 16</td></tr>
+  </table></div>
+  <ol class="do">
+    <li><b>마개</b>: 끝 마개 꼭지를 '마개'라고 새긴 쪽 끝면 구멍에 밀어 넣어 플랜지가 끝면에 빈틈 없이 닿게 합니다. 꼭지 리브 3줄이 물어 저절로 빠지지 않습니다(빡빡하면 리브를 칼로 살짝, 헐거우면 테이프 한 바퀴). 날개는 위로.</li>
+    <li><b>봉 넣기</b>: 봉 끝을 줄로 직각으로 다듬고 거스러미를 뗀 뒤, 반대쪽 모따기 입구로 밀어 넣어 꼭지에 닿게 합니다. 마개 옆 위쪽 창에서 닿은 것을 봅니다. 구멍은 Ø4.5 눈물방울(레버틀 핀 구멍과 같음)입니다.</li>
+    <li><b>자르기</b>: 지그를 손이나 클램프로 책상에 누르고, 봉을 마개 쪽으로 민 채 쇠톱을 '톱' 홈(폭 1.3)에 넣어 자릅니다. 홈 바닥이 봉 밑 1.5 아래라 판은 자르지 않습니다.</li>
+    <li><b>꺼내기</b>: 남은 봉을 입구로 빼고, 마개를 날개로 당겨 뺀 뒤 토막을 마개 쪽으로 밀어 꺼냅니다. 토막 끝을 줄로 0.1~0.3 다듬고 모서리를 살짝 깎습니다(허브·칼라를 긁지 않게).</li>
+    <li><b>다음 토막 전</b>: 남은 봉의 잘린 끝을 다시 직각으로 다듬습니다. 그 끝이 다음 토막의 0점입니다.</li>
+  </ol>
+  <div class="note"><b>첫 토막은 꼭 잽니다.</b> 출력 수축으로 지그가 0.2~0.5 짧거나 길 수 있습니다. 길게 나오면 마개 꼭지 끝에 테이프를 붙이고, 허용 범위보다 짧으면 CAD <code>rod_cut_jig.py</code>의 <code>LENGTHS</code>를 고쳐 다시 뽑습니다. 봉이 구멍에 빡빡하면 <code>J["bore"]</code>를 4.6~4.8로. ER 두 토막은 20.0~20.5로 자르면 어느 쪽에나 맞습니다.</div>
+  <h3>그 밖의 자르기</h3>
   <ol class="do">
     <li>봉 두 개는 끝의 버를 줄로 둥글게 다듬습니다. 허브와 칼라를 긁지 않게 하기 위해서입니다.</li>
     <li>강철 블록은 39.7~40.2로 자릅니다. A20부터 캐리어 칸은 40.5 × 19.5 × 9.4(예전 40.0 × 19.0 × 9.2라 실제 평철이 들어가지 않았음)이고, 칸 뒷벽 크러시 리브(0.3)가 40.2까지, 덮개 안쪽 리브(0.17)가 9.23까지 눌러 잡습니다. 두께 9.25·폭 19.5 이하면 그대로 씁니다. 모따기는 하지 않고 버만 뗍니다.</li>
@@ -614,6 +691,9 @@ html { scroll-behavior: smooth }
     <button data-d="BRD-08_control_board_underside.svg">BRD-08 제어 기판 아랫면</button>
     <button data-d="A18_한옥타브_고침_상세.png">A18 한 옥타브 고침 (덮개·걸쇠·기판 밑·구멍)</button>
     <button data-d="A19_드릴없음_리브구멍_상세.png">A19 드릴 없음 (리브 구멍)</button>
+    <button data-d="A20_센서바·기판밑·강철칸_상세.png">A20 센서 바·기판 밑·강철 칸</button>
+    <button data-d="A20_전후비교_1_센서바·기판밑.png">A20 전후 비교 ① 센서 바·기판 밑</button>
+    <button data-d="A20_전후비교_2_무게추칸·걸쇠.png">A20 전후 비교 ② 무게 추 칸·걸쇠</button>
   </div>
   <p class="lead" style="font-size:13px">출처: hardware/mechanical/key-action-v4 (DESIGN 10~12장, tools.md), hardware/mechanical/cad (README 출력 목록·조립 순서), hardware/pcb, firmware/README.md. 그림은 CAD 조립 모델 O4에서 OpenSCAD로 그렸습니다.</p>
 </section>
@@ -695,3 +775,4 @@ html { scroll-behavior: smooth }
 })();
 </script>
 <script src="viewer3d.js"></script>
+<script src="rodjig.js"></script>

@@ -281,9 +281,9 @@ if gaps:
     g = gaps[0]
     gap_html = (f'<div class="note warn sum-gap" id="sum-gap"><b>아직 준비처가 없는 물건 {len(gaps)}줄.</b> '
                 f'{E(g["name"])} {g["qty_need"]}{E(g["unit"])}({E(g["id"])}). '
-                + ('센서 기판 띠(161.6 × 15.24 mm) 7개와 끝 부속·J702·J501·페달 센서 조각을 이 판에서 자릅니다. '
+                + ('센서 기판 띠(160.02 × 15.24 mm, 구멍 63 × 6) 7개와 끝 부속·J702·J501·페달 센서 조각을 이 판에서 자릅니다. '
                    '가진 Coms BE163(80 × 120)으로는 120 mm보다 긴 띠가 나오지 않으므로 따로 사야 합니다.'
-                   if g["id"] == "i081" and "161.6 × 15.24" in g["where"] else E(g.get("check_on_arrival") or ""))
+                   if g["id"] == "i081" and ("161.6 × 15.24" in g["where"] or "160.02 × 15.24" in g["where"]) else E(g.get("check_on_arrival") or ""))
                 + (' 예: 메카솔루션 양면 만능기판 2,200원 × 2.' if g["id"] == "i081" and gap_issue and "메카솔루션" in gap_issue["text"] else '')
                 + ' 자세한 자리는 <a href="#parts">06 부품·사용처</a>에 있습니다.</div>')
 aircon_html = ""

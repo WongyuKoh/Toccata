@@ -467,7 +467,9 @@
     if (o.q) d.push(o.q);
     if (o.w) d.push('선 종류: ' + o.w);
     if (I && I.d) d = d.concat(I.d);
-    var h = '<p class="hit-t"><b>' + esc(I ? I.t : (o.i || '')) + '</b></p>' + list(d);
+    // part card + connect / do-not-connect for this module (page.py window.toccata.partCard, data D.cards = hits.part_cards())
+    var ref = String(o.i || '').split('.')[0], card = D.cards && (D.cards[ref] || D.cards[ref.split('-')[0]]), CH = window.toccata && window.toccata.partCard;
+    var h = '<p class="hit-t"><b>' + esc(I ? I.t : (o.i || '')) + '</b></p>' + (card && CH ? CH.act(card, o.m ? [o.m] : null) + CH.card(card) : '') + list(d);
     var sc = o.m && sd.scopes && sd.scopes[o.m];
     if (sc) h += '<div class="hit-n"><p><b>' + esc('자리 · ' + sc.t) + '</b></p>' + list(sc.d) + '</div>';
     if (o.n) h += netHtml(o, false);
@@ -485,7 +487,7 @@
     pop.innerHTML = '<button type="button" class="hitx" aria-label="닫기">×</button>' + html;
     pop.hidden = false; pop.scrollTop = 0;
     // beside the click (right, else left) so the picked thing stays visible; a net chosen from the list goes to the top right corner
-    var W = stage.clientWidth, H = stage.clientHeight, pw = Math.min(360, W - 16), L, Tp;
+    var W = stage.clientWidth, H = stage.clientHeight, pw = Math.min(/hit-card/.test(html) ? 440 : 360, W - 16), L, Tp;
     pop.style.width = pw + 'px';
     if (!at) { L = W - pw - 8; Tp = 8; }
     else {

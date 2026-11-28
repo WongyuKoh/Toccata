@@ -519,7 +519,7 @@
       11.1,
       12.7
      ],
-     "label": "module PCB 40.64 x 17.78 x 1.6 (C0 at the left, C15 at the right)"
+     "label": "module PCB 40.64 x 17.78 x 1.6 (seen from above C15 at the left, C0 at the right; control row SIG..GND from the left - user 2026-11-23)"
     },
     {
      "x": [
@@ -561,38 +561,38 @@
     "channel_row": {
      "y": 101.55,
      "x": [
-      83.52,
-      86.06,
-      88.6,
-      91.14,
-      93.68,
-      96.22,
-      98.76,
-      101.3,
-      103.84,
-      106.38,
-      108.92,
-      111.46,
-      114.0,
-      116.54,
+      121.62,
       119.08,
-      121.62
+      116.54,
+      114.0,
+      111.46,
+      108.92,
+      106.38,
+      103.84,
+      101.3,
+      98.76,
+      96.22,
+      93.68,
+      91.14,
+      88.6,
+      86.06,
+      83.52
      ],
-     "names": "C0..C15"
+     "names": "C0..C15 (x runs right -> left: C0 at x121.62)"
     },
     "control_row": {
      "y": 116.79,
      "x": [
-      93.68,
-      96.22,
-      98.76,
-      101.3,
-      103.84,
-      106.38,
+      111.46,
       108.92,
-      111.46
+      106.38,
+      103.84,
+      101.3,
+      98.76,
+      96.22,
+      93.68
      ],
-     "names": "GND,VCC,EN,S0,S1,S2,S3,SIG"
+     "names": "GND,VCC,EN,S0,S1,S2,S3,SIG (GND at x111.46, SIG at x93.68)"
     }
    },
    "assumed_note": "header mold 2.5 (standard 11.5 mm 1-mold header: tail 3.0 / mold 2.5 / top 6.0), PCB 1.6, chip placement centred; the 2 x D3.3 mounting holes are unused and their positions are not documented"

@@ -186,7 +186,9 @@ def j7y(j):
     return round(J7_BOX[2] + 1.27 + 2.54 * j, 2)
 
 
-J7_NI, J7_NJ = 12, 10                      # 30 x 25 -> 12 x 10 holes, edges mid-gap (1.27 from the outer holes)
+J7_NI, J7_NJ = 12, 10                      # 12 x 10 holes, edges mid-gap (1.27 from the outer holes) = 30.48 x 25.4 (CAD box 30 x 25: +0.48 / +0.4, clear of every CAD part)
+J7_CAD_BOX = J7_BOX
+J7_BOX = (J7_CAD_BOX[0], round(J7_CAD_BOX[0] + 2.54 * J7_NI, 2), J7_CAD_BOX[2], round(J7_CAD_BOX[2] + 2.54 * J7_NJ, 2))
 # pads (ref, pin) -> (i, j). 'J702' T / R / S = collector pads the jack legs are linked to (the legs themselves sit in the jack field)
 J7_PADS = {
     ("J702", "T"): (3, 3), ("J702", "R"): (8, 3), ("J702", "S"): (5, 6),
@@ -256,7 +258,9 @@ def j5y(j):
     return round(J5_BOX[2] + 1.27 + 2.54 * j, 2)
 
 
-J5_NI, J5_NJ = 9, 9                        # 25 x 24 -> 9 x 9 holes (x451.27~471.59, y317.77~338.09)
+J5_NI, J5_NJ = 9, 9                        # 9 x 9 holes (x451.27~471.59, y317.77~338.09), edges mid-gap = 22.86 x 22.86 (CAD box 25 x 24: inside it)
+J5_CAD_BOX = J5_BOX
+J5_BOX = (J5_CAD_BOX[0], round(J5_CAD_BOX[0] + 2.54 * J5_NI, 2), J5_CAD_BOX[2], round(J5_CAD_BOX[2] + 2.54 * J5_NJ, 2))
 J5_PADS = {("J502w", "1 T"): (3, 0), ("J502w", "2 TN"): (4, 0), ("J502w", "3 R"): (5, 0), ("J502w", "4 S"): (6, 0)}
 J5_NET = {"1 T": "PED_TIP", "2 TN": "GND", "3 R": "PED_VCC", "4 S": "GND"}
 J5_FIELD = (j5x(3) - 1.27, j5x(6) + 1.27, j5y(4) - 1.27, J5_BOX[3])
@@ -533,8 +537,11 @@ def brd07():
 
     def Y7(y):
         return oy + (y1b - y) * S3
-    s.text(ox - 6.0, oy - 6.5, "J702 앰프 입력 기판 (12 × 18 자투리 30 × 25, 3 : 1, 위에서 봄)", "noteb", size=2.6)
+    s.text(ox - 6.0, oy - 6.5, "J702 앰프 입력 기판 (12 × 18 자투리 30.48 × 25.4, 3 : 1, 위에서 봄)", "noteb", size=2.6)
     o.append(f'<rect x="{X7(x0b):.2f}" y="{Y7(y1b):.2f}" width="{(x1b-x0b)*S3:.2f}" height="{(y1b-y0b)*S3:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
+    import sheets as S
+    S.size_mark(s, X7(x0b), Y7(y1b), X7(x1b), Y7(y0b), x1b - x0b, y1b - y0b, wy=Y7(y0b) + 12.5, hx=X7(x1b) + 5.0,
+                badge=(X7(x0b), Y7(y0b) + 17.2, "J702 자르는 크기 %g × %g mm (구멍 %d × %d)" % (x1b - x0b, y1b - y0b, J7_NI, J7_NJ)))
     for (a0, a1, b0, b1) in J7_POSTS:
         o.append(f'<rect x="{X7(a0+0.5):.2f}" y="{Y7(b1-0.5):.2f}" width="{6*S3:.2f}" height="{6*S3:.2f}" fill="#c9d0da" fill-opacity=".35" '
                  f'stroke="#6b7690" stroke-width=".3" stroke-dasharray="1.2 .7"/>')
@@ -619,8 +626,10 @@ def brd07():
 
     def Y5(y):
         return oy5 + (y1b - y) * S3
-    s.text(ox5 - 6.0, oy5 - 6.5, "J501 페달 잭 조각 (12 × 18 자투리 25 × 24, 3 : 1, 위에서 봄)", "noteb", size=2.6)
+    s.text(ox5 - 6.0, oy5 - 6.5, "J501 페달 잭 조각 (12 × 18 자투리 22.86 × 22.86, 3 : 1, 위에서 봄)", "noteb", size=2.6)
     o.append(f'<rect x="{X5(x0b):.2f}" y="{Y5(y1b):.2f}" width="{(x1b-x0b)*S3:.2f}" height="{(y1b-y0b)*S3:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
+    S.size_mark(s, X5(x0b), Y5(y1b), X5(x1b), Y5(y0b), x1b - x0b, y1b - y0b, wy=Y5(y0b) + 14.0, hx=X5(x0b) - 4.5,
+                badge=(X5(x0b), Y5(y0b) + 19.5, "J501 자르는 크기 %g × %g mm (구멍 %d × %d)" % (x1b - x0b, y1b - y0b, J5_NI, J5_NJ)))
     holes(X5, Y5, [j5x(i) for i in range(J5_NI)], [j5y(j) for j in range(J5_NJ)])
     fx0, fx1, fy0, fy1 = J5_FIELD
     o.append(f'<rect x="{X5(fx0):.2f}" y="{Y5(fy1):.2f}" width="{(fx1-fx0)*S3:.2f}" height="{(fy1-fy0)*S3:.2f}" fill="#fff6db" fill-opacity=".6" '
@@ -649,15 +658,17 @@ def brd07():
     ], "notes", size=1.85, lh=2.55)
     # ------------------------------------------------------------ PS pedal sensor scrap, 4 : 1 (local frame)
     S4 = 4.0
-    oxp, oyp = 136.0, 226.0
+    oxp, oyp = 136.0, 221.0
 
     def XP(x):
         return oxp + x * S4
 
     def YP(y):
         return oyp - y * S4
-    s.text(oxp - 6.0, oyp - 12.7 * S4 + 0.5, "PS 페달 센서 조각 (7 × 5 구멍, 4 : 1, 로컬 mm)", "noteb", size=2.6)
+    s.text(oxp - 6.0, oyp - 12.7 * S4 + 0.5, "PS 페달 센서 조각 (4 : 1, 로컬 mm)", "noteb", size=2.6)
     o.append(f'<rect x="{XP(-1.27):.2f}" y="{YP(11.43):.2f}" width="{17.78*S4:.2f}" height="{12.7*S4:.2f}" fill="#eaf4e8" stroke="#2d6a3e" stroke-width=".5"/>')
+    S.size_mark(s, XP(-1.27), YP(11.43), XP(16.51), YP(-1.27), 17.78, 12.7, wy=YP(-1.27) + 4.0, hx=XP(-1.27) - 4.5,
+                badge=(oxp + 33.5, oyp - 12.7 * S4 + 0.5, "PS 실제 크기 17.78 × 12.7 mm · 구멍 7 × 5", "start", 1.95))
     holes(XP, YP, [psx(c) for c in range(7)], [psy(r) for r in range(5)])
     o.append(f'<rect x="{XP(-1.0):.2f}" y="{YP(7.0):.2f}" width="{4.0*S4:.2f}" height="{4.0*S4:.2f}" fill="#222" fill-opacity=".55"/>')
     s.text(XP(1.0), YP(9.6), "U551 표시면 위", "notes", "middle", size=1.8, check=False)
@@ -675,7 +686,7 @@ def brd07():
         s.text(XP(psx(c)) + 2.6, YP(psy(r)) + 0.7, t, "pinnum", "start", size=1.8, check=False)
     s.text(XP(psx(4.5)), YP(psy(3)) - 2.4, "R551 1 kΩ", "ref", "middle", size=1.9, check=False)
     s.text(XP(psx(3)) + 1.8, YP(psy(1.5)) + 0.7, "C551", "ref", "start", size=1.8, check=False)
-    s.text(XP(-1.27), YP(-1.27) + 4.0, "원점 = 왼쪽 아래 구멍 (0, 0) · 구멍 x = 2.54·c, y = 2.54·r", "notes", "start", size=1.75, check=False)
+    s.text(XP(-1.27), YP(-1.27) + 8.0, "원점 = 왼쪽 아래 구멍 (0, 0) · 구멍 x = 2.54·c, y = 2.54·r", "notes", "start", size=1.75, check=False)
     s.regions["ps"] = (oxp - 8.0, YP(12.7) - 4.0, oxp + 17.78 * S4 + 30.0, YP(-1.27) + 6.0)
     small_keys(s, "ps", XP, YP)
     pp = ps_check()
@@ -771,6 +782,8 @@ def brd08():
         return oy + (y1 - y) * SC
     o = s.out["body"]
     S.mb_frame_draw(s, X, Y, top=False)
+    S.size_mark(s, X(x1), Y(y1), X(x0), Y(y0), 120, 80, wy=225.0, hx=12.5,
+                badge=(X(x1), 233.5, "실제 크기 120 × 80 mm — 8 × 12 cm 양면 기판 통째로 (구멍 42 × 30, 자르지 않음)"))
     s.chg(X(x1) + 4.5, Y(y1) + 4.5, 33)
     # flat ribbon + strand fan under the front edge (no wires) and the strand lanes between the J301 front-row pads
     rx0, rx1, ry1 = S.MB["ribbon"]
@@ -804,9 +817,10 @@ def brd08():
         o.append(f'<circle cx="{X(x):.2f}" cy="{Y(y):.2f}" r=".95" fill="{c}" stroke="#1f2a44" stroke-width=".3"/>')
     # C301 1206 across the mux GND / VCC tails; JP solder-bridge places (dashed, closed per board ID)
     g_, v_ = S.mux_hole("GND"), S.mux_hole("VCC")
-    o.append(f'<rect x="{X(v_[0])-0.4:.2f}" y="{Y(g_[1])-0.9:.2f}" width="{(v_[0]-g_[0])*SC+0.8:.2f}" height="1.8" rx=".3" fill="#b98b5a" '
+    cxa, cxb = sorted((X(g_[0]), X(v_[0])))
+    o.append(f'<rect x="{cxa-0.4:.2f}" y="{Y(g_[1])-0.9:.2f}" width="{cxb-cxa+0.8:.2f}" height="1.8" rx=".3" fill="#b98b5a" '
              f'fill-opacity=".85" stroke="#8a5a00" stroke-width=".25"/>')
-    S._tx(s, X(g_[0]) - 1.6, Y(g_[1]) - 1.7, "C301", "pinname", "start", fs=1.4)
+    S._tx(s, cxa - 1.6, Y(g_[1]) - 1.7, "C301", "pinname", "start", fs=1.4)
     for ref, (sig, gnd) in S.JP_PADS.items():
         o.append(f'<rect x="{min(X(sig[0]), X(gnd[0]))-0.3:.2f}" y="{Y(sig[1])-0.8:.2f}" width="{abs(sig[0]-gnd[0])*SC+0.6:.2f}" height="1.6" rx=".6" '
                  f'fill="none" stroke="#8a96ab" stroke-width=".3" stroke-dasharray=".6 .4"/>')
@@ -984,7 +998,8 @@ def wiring_small_rows():
             for k, poly in enumerate(polys):
                 out.append([board, net if net != "N1" else "U551 OUT–R551", " → ".join("(%.2f,%.2f)" % p for p in poly), "%.1f" % wlen(poly),
                             "주석 맨선" if (net, k) in bare else "피복 가닥"])
-    return out
+    import boards5                     # EL / ER underside (BRD-02, lattice routes since 2026-11-28)
+    return out + boards5.wiring_end_rows()
 
 
 def pads_small_rows():

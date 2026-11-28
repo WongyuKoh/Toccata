@@ -4,6 +4,7 @@
 <p class="a-lead" style="max-width:72ch">3D 프린팅한 한 옥타브(건반 12개)를 프레임 하나에 조립해 첫 소리를 내기까지의 순서입니다. 옥타브 모듈 7개는 모양이 같아 이 순서를 어느 옥타브에나 씁니다. 단계 그림은 CAD 조립 모델(O4 = C4~B4)을 그대로 띄운 3D 모델이라 돌려 보고 키워 볼 수 있고, 부품을 누르면 이름이 나옵니다. 숫자는 설계서·CAD 값 그대로입니다(mm, x = 모듈 왼쪽에서, y = 백건 앞끝에서 뒤로, z = 책상에서).</p>
   <div class="a-facts">
     <span>출력 <b class="a-num">58</b>개 + 공구 <b class="a-num">4</b>개 + 구멍 시험편 <b class="a-num">4</b>개</span>
+    <span>11/22 다시 출력 <b class="a-num">17</b>개 (+ 11/17 묶음 7개, <a href="#asm-reprint">목록</a>)</span>
     <span>구매품 <b class="a-num">약 140</b>개 (모듈 1개)</span>
     <span>모듈 무게 <b class="a-num">약 1.37 kg</b></span>
     <span>기준 <b>CAD 2026-11-22</b> (Bambu 기준 서포트 정리 A13 · 캡스턴 너트 A15 · 80 × 120 제어 기판 A16 · 건반 틈·캡스턴·너트 홈 A17 · 드릴 없는 봉 구멍·끼우는 레버 덮개·나사 없는 레버틀·레일·기판 밑 공간 A18 · 드릴 없음(크러시 리브) A19 · 센서 바 뒤로 열린 홈·센서 기판 밑 창·큰 강철 칸 A20)</span>
@@ -15,6 +16,7 @@
   <ol>
     <li class="a-grp">시작 전에</li>
     <li><a href="#asm-order"><span class="a-n">·</span><span>큰 순서와 이유</span></a></li>
+    <li><a href="#asm-reprint"><span class="a-n">·</span><span>A20 다시 출력</span></a></li>
     <li><a href="#asm-parts"><span class="a-n">·</span><span>준비물 (사진)</span></a></li>
     <li class="a-grp">준비 · 부분 조립</li>
     <li><a href="#asm-s1" data-s="asm-s1"><span class="a-n">01</span><span>출력물 확인·후가공</span></a></li>
@@ -61,6 +63,43 @@
   <div class="a-note"><b>기판이 아직 납땜 전이면</b> 01~07단계를 모두 끝내 두고 08단계에서 기다리면 됩니다. 07단계까지는 기판이 없어도 됩니다.</div>
   <div class="a-warn"><b>하지 말 것.</b> 밸런스 핀을 망치로 치기(게이지 멈춤 면이 파여 모든 핀이 낮아짐) · 강철을 5분 에폭시로 붙이기(온도 변화에 떨어짐) · 손으로 건반을 누른 채 높이 재기(0.3~5 N 차이로 앞 높이가 0.5 mm 달라짐).</div>
   <figure><div class="a-v3d" data-v3d="s10_done"><img src="fin/asm/s10_done.webp" alt="밑에서 본 완성 모듈과 바닥 EVA" loading="lazy"></div><figcaption>완성한 옥타브 모듈을 밑에서 본 모습. 바닥 EVA 3T는 한 장 그대로 붙입니다(구멍 없음 — 기판 밑 바닥판 창도 EVA가 덮음).</figcaption></figure>
+</article>
+
+<article id="asm-reprint">
+  <h2>A20 다시 출력 (11/22) · 크게 바뀐 곳</h2>
+  <p class="a-lead">11/15 한 옥타브 묶음을 이미 뽑았다면 아래 파일만 다시 뽑습니다. 파일은 <code>최종본/04_3D출력_STL/Toccata_한옥타브_다시출력STL_1122.zip</code>에 두 폴더로 나눠 두었습니다(지금 한 옥타브 묶음에서 그대로 꺼낸 같은 파일, 방향·서포트도 같음).</p>
+  <h3>1_A20_다시출력_17개 — 이미 뽑았어도 다시</h3>
+  <div class="a-tbl"><table>
+    <tr><th>파일 (폴더)</th><th>개수</th><th>왜 다시</th><th>단계</th></tr>
+    <tr><td>구멍시험편_무게추칸_강철블록용 (00_먼저_구멍시험편) — <b>가장 먼저</b></td><td class="a-q">1</td><td>자른 강철 블록이 새 칸 입구 40.5 × 19.5로 손으로 밀려 들어가는지 15분 만에 봅니다. 들어가면 캐리어를 뽑습니다.</td><td>01</td></tr>
+    <tr><td>레버캐리어 C ~ B (02_레버캐리어)</td><td class="a-q">12</td><td>무게 추 칸 40.0 × 19.0 × 9.2 → 40.5 × 19.5 × 9.4. 예전 칸은 리브까지 길이 39.6, 높이 여유 0이라 강철이 들어가지 않았습니다.</td><td>03</td></tr>
+    <tr><td>레버덮개 (02_레버캐리어)</td><td class="a-q">12</td><td>날개 끝 갈고리 0.4 · 45° → 0.5 · 빼는 쪽 60°(3~4 N에 빠지던 것이 약 10~16 N). 칸 쪽 리브 0.17.</td><td>03</td></tr>
+    <tr><td>프레임_바닥틀_모듈 (03_프레임)</td><td class="a-q">1</td><td>센서 기판 밑 받침 리브 2줄을 없애고 바닥판을 뚫음(기판 밑 2.0 → 4.0), 받침 패드. 레버틀 걸쇠 다리 자리도 새 갈고리에 맞춤.</td><td>07 · 09</td></tr>
+    <tr><td>프레임_레버틀_모듈 (03_프레임)</td><td class="a-q">1</td><td>걸쇠 다리 걸림 0.35 → 0.65(갈고리 0.8, 휨 틈 0.8), 핀 다리 1.4 × 5.0. 세게 칠 때도 갈고리가 뭉개지지 않습니다.</td><td>08</td></tr>
+    <tr><td>센서바 (04_센서바·패드바·가림판·마개)</td><td class="a-q">1</td><td>포켓 3.55 × 4.4 → 4.05 × 4.9, 다리 구멍 Ø0.9 3개 → 폭 1.6 홈 하나. 포켓과 홈이 바 뒤 가장자리까지 열림.</td><td>09</td></tr>
+  </table></div>
+  <div class="a-note"><b>짝으로 뽑습니다.</b> 바닥틀과 레버틀은 걸쇠의 암·수가 함께 바뀌었고, 캐리어와 덮개도 칸 리브가 함께 바뀌었습니다. 한쪽만 새로 뽑으면 맞지 않습니다.</div>
+  <h3>2_1117묶음을_안뽑았으면_7개 — 11/17 묶음을 아직 안 뽑았을 때만</h3>
+  <div class="a-tbl"><table>
+    <tr><th>파일 (폴더)</th><th>개수</th><th>무엇</th><th>단계</th></tr>
+    <tr><td>구멍시험편 세로(레버 허브용) · 가로(레버틀 핀용) · 리브 구멍(봉 토막·밸런스 핀용) (00_먼저_구멍시험편)</td><td class="a-q">3</td><td>A18 드릴 없는 봉 구멍(Ø4.3 · Ø4.5)과 A19 리브 구멍 확인용.</td><td>01</td></tr>
+    <tr><td>밸런스레일 (03_프레임)</td><td class="a-q">1</td><td>A19: 밸런스 핀 구멍을 반지름 +1로 키우고 크러시 리브 3개(드릴 없음).</td><td>07 · 08</td></tr>
+    <tr><td>레버봉끝마개 (04_센서바·패드바·가림판·마개)</td><td class="a-q">1</td><td>A18·A19 드릴 없는 구멍 크기에 맞춘 마개.</td><td>11</td></tr>
+    <tr><td>공구_벤치지그받침_T1a · 공구_캡스턴벤치게이지_T2 (06_출력공구)</td><td class="a-q">2</td><td>A19: T1a 봉 토막 구멍 리브, T2 허브 Ø4.3.</td><td>04 · 06</td></tr>
+  </table></div>
+  <h3>크게 바뀐 곳 네 가지</h3>
+  <div class="a-flow">
+    <div><b>센서 바 — 홈이 뒤로 열림</b>홀센서 포켓을 사방 0.25씩 키워 4.05 × 4.9(몸통 3.15 × 4.0)입니다. 0.4 노즐로는 막혀 나오던 Ø0.9 다리 구멍 3개를 센서마다 폭 1.6 홈 하나로 바꿨습니다. 포켓과 홈이 바 뒤 가장자리(y77.5)까지 열려 있어, 센서를 먼저 기판에 납땜하고 바를 뒤에서 밀어 끼울 수 있습니다. 홈 앞끝 y63.9에서 앞 다리가 멈춥니다.</div>
+    <div><b>센서 기판 밑 — 창과 받침 패드</b>6행 기판의 1·6행을 덮던 받침 리브 2줄을 없애고 기판 밑 바닥판을 뚫었습니다. 기판 밑은 EVA 위 z3~7 = 4.0(예전 2.0)이라 6행 모두 밑에서 납땜·배선합니다. 기판은 왼쪽 기둥(M3×10 그대로)과 쓰지 않는 1·6행 밑의 받침 패드(길이 3.5, 오른쪽 끝 + 바닥 다리 x32.4 · 88.3 · 141.6)에 놓입니다.</div>
+    <div class="a-hot"><b>무게 추 칸 — 40.5 × 19.5 × 9.4</b>예전 칸 40.0 × 19.0 × 9.2는 크러시 리브까지 39.6 · 9.03이라 높이 여유가 0이었습니다. 이제 뒤 리브 0.3(→ 40.2), 덮개 리브 0.17(→ 9.23)입니다. 강철은 39.7~40.2로 자르고, 두께 9.25 · 폭 19.5 이하면 그대로 씁니다.</div>
+    <div><b>걸쇠 — 덜 쉽게 빠지게</b>레버 덮개는 갈고리 0.4 · 양면 45°라 3~4 N에 빠졌습니다. 이제 갈고리 0.5 · 빼는 쪽 60°로 약 10~16 N입니다(연주 중에 잡는 것은 마지막 MS 폴리머). 레버틀 걸쇠 다리는 걸림 0.65 · 핀 다리 1.4 × 5.0으로 약 31 → 62 N입니다. 밸런스 레일 립(84~106 N)은 그대로입니다.</div>
+  </div>
+  <p class="a-lead" style="font-size:14px">건반 각도는 확인만 했습니다. 앞끝 깊이 백 10.0 · 흑 9.5 mm는 실제 피아노와 같고, 각도(백 4.0° · 흑 6.2°)가 가파른 것은 축이 앞끝에서 141 mm에 있어서입니다. 바꾸려면 프레임 깊이를 다시 설계해야 해서 그대로 둡니다.</p>
+  <div class="a-figs">
+    <figure><img src="img/a20/A20_compare_1.webp" alt="A20 전후 비교 1: 센서 바 포켓·다리 홈과 센서 기판 밑, 고치기 전 A19와 고친 뒤 A20" loading="lazy"><figcaption>전후 비교 ① 센서 바·센서 기판 밑 (실제 CAD). 왼쪽 A19, 오른쪽 A20 — 다리 홈이 뒤로 열리고, 기판 밑 리브가 없어지고 바닥이 뚫림.</figcaption></figure>
+    <figure><img src="img/a20/A20_compare_2.webp" alt="A20 전후 비교 2: 레버 C 무게 추 칸 단면과 덮개 갈고리, 레버틀 걸쇠 다리" loading="lazy"><figcaption>전후 비교 ② 무게 추 칸·걸쇠 (실제 CAD 단면). 칸 높이 19.0 → 19.5, 길이 39.6 → 40.2, 덮개 갈고리 0.5 · 60°, 레버틀 다리 걸림 0.65.</figcaption></figure>
+  </div>
+  <div class="a-dwgs"><button data-d="img/a20/A20_compare_1.webp">A20 전후 비교 ① 센서 바·기판 밑</button><button data-d="img/a20/A20_compare_2.webp">A20 전후 비교 ② 무게 추 칸·걸쇠</button><button data-d="img/a20/A20_detail.webp">A20 센서 바·기판 밑·강철 칸</button></div>
 </article>
 
 <article id="asm-parts">
@@ -456,6 +495,9 @@
     <button data-d="sch/BRD-08_control_board_underside.svg">BRD-08 제어 기판 아랫면</button>
     <button data-d="img/a18/A18_detail.webp">A18 한 옥타브 고침 (덮개·걸쇠·기판 밑·구멍)</button>
     <button data-d="img/a19/A19_detail.webp">A19 드릴 없음 (리브 구멍)</button>
+    <button data-d="img/a20/A20_detail.webp">A20 센서 바·기판 밑·강철 칸</button>
+    <button data-d="img/a20/A20_compare_1.webp">A20 전후 비교 ① 센서 바·기판 밑</button>
+    <button data-d="img/a20/A20_compare_2.webp">A20 전후 비교 ② 무게 추 칸·걸쇠</button>
   </div>
   <p class="a-lead" style="font-size:13px">출처: hardware/mechanical/key-action-v4 (DESIGN 10~12장, tools.md), hardware/mechanical/cad (README 출력 목록·조립 순서), hardware/pcb, firmware/README.md. 그림은 CAD 조립 모델 O4에서 OpenSCAD로 그렸습니다.</p>
 </article>

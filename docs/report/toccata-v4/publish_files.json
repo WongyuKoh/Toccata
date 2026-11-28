@@ -2,12 +2,12 @@
  "generated": "2026-10-08",
  "page": {
   "path": "index.html",
-  "bytes": 1478931
+  "bytes": 1537353
  },
- "count": 356,
- "count_with_page": 357,
- "total_bytes": 62591088,
- "total_mb": 59.69,
+ "count": 370,
+ "count_with_page": 371,
+ "total_bytes": 64523747,
+ "total_mb": 61.53,
  "limits": {
   "per_file_mb": 15,
   "per_publish_files": 255,
@@ -39,10 +39,11 @@
   "img/a12": 4,
   "img/a18": 1,
   "img/a19": 1,
-  "img/a20": 1,
+  "img/a20": 3,
   "img/bom": 89,
   "rear/": 13,
-  "sch/": 18
+  "sch/": 22,
+  "uno/": 8
  },
  "bundles": [
   {
@@ -379,6 +380,8 @@
    "img/a12/lever_split.webp",
    "img/a18/A18_detail.webp",
    "img/a19/A19_detail.webp",
+   "img/a20/A20_compare_1.webp",
+   "img/a20/A20_compare_2.webp",
    "img/a20/A20_detail.webp",
    "img/bom/i001.jpg",
    "img/bom/i003.jpg",
@@ -391,11 +394,11 @@
    "img/bom/i010.jpg",
    "img/bom/i011.jpg",
    "img/bom/i012.jpg",
-   "img/bom/i013.jpg",
-   "img/bom/i014.jpg",
-   "img/bom/i022.jpg"
+   "img/bom/i013.jpg"
   ],
   [
+   "img/bom/i014.jpg",
+   "img/bom/i022.jpg",
    "img/bom/i023.jpg",
    "img/bom/i024.jpg",
    "img/bom/i025.jpg",
@@ -493,15 +496,27 @@
    "sch/BRD-07_small_boards.svg",
    "sch/BRD-08_control_board_underside.svg",
    "sch/BRD-09_control_board_O1.svg",
-   "sch/BRD-10_control_board_O7.svg",
-   "sch/BRD-11_control_board_O2-O6.svg",
+   "sch/BRD-10_control_board_O2.svg",
+   "sch/BRD-11_control_board_O3.svg",
+   "sch/BRD-12_control_board_O4.svg",
+   "sch/BRD-13_control_board_O5.svg",
+   "sch/BRD-14_control_board_O6.svg",
+   "sch/BRD-15_control_board_O7.svg",
    "sch/SCH-01_system.svg",
    "sch/SCH-02_sensor_board.svg",
    "sch/SCH-03_control_board.svg",
    "sch/SCH-04_end_parts.svg",
    "sch/SCH-05_pedal.svg",
    "sch/SCH-06_power.svg",
-   "sch/SCH-07_audio.svg"
+   "sch/SCH-07_audio.svg",
+   "uno/U-01_system.svg",
+   "uno/U-02_control_board_MB-U.svg",
+   "uno/U-03_bus_board_UB_uno.svg",
+   "uno/U-04_power_audio.svg",
+   "uno/changes_uno.csv",
+   "uno/netlist_uno.csv",
+   "uno/pins_uno.csv",
+   "uno/ribbon_uno.csv"
   ]
  ],
  "files": [
@@ -930,7 +945,7 @@
   },
   {
    "path": "fin/circuit/bom.csv",
-   "bytes": 38779,
+   "bytes": 39391,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -946,7 +961,7 @@
   },
   {
    "path": "fin/circuit/circuit3d.json",
-   "bytes": 948526,
+   "bytes": 1024332,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -962,7 +977,7 @@
   },
   {
    "path": "fin/circuit/id_jumpers.csv",
-   "bytes": 492,
+   "bytes": 647,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1034,7 +1049,7 @@
   },
   {
    "path": "fin/circuit/sheethits.json",
-   "bytes": 770519,
+   "bytes": 1174151,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1042,7 +1057,7 @@
   },
   {
    "path": "fin/circuit/toccata-circuit-revE.zip.b64.txt",
-   "bytes": 472788,
+   "bytes": 596460,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1050,7 +1065,7 @@
   },
   {
    "path": "fin/circuit/wiring_MB.csv",
-   "bytes": 6674,
+   "bytes": 6904,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1074,7 +1089,7 @@
   },
   {
    "path": "fin/circuit/wiring_small.csv",
-   "bytes": 971,
+   "bytes": 2288,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -1207,7 +1222,7 @@
   },
   {
    "path": "fin/loc/cards.json",
-   "bytes": 315202,
+   "bytes": 315485,
    "owners": [
     "index.html",
     "src/tabs/parts"
@@ -2317,7 +2332,7 @@
   },
   {
    "path": "fin/prep/lines.json",
-   "bytes": 225741,
+   "bytes": 226136,
    "owners": [
     "index.html",
     "src/tabs/prep"
@@ -2325,7 +2340,7 @@
   },
   {
    "path": "fin/sim/keyaction.json",
-   "bytes": 553703,
+   "bytes": 557205,
    "owners": [
     "index.html",
     "src/tabs/sim"
@@ -2333,7 +2348,7 @@
   },
   {
    "path": "fin/sim/system.json",
-   "bytes": 117756,
+   "bytes": 117945,
    "owners": [
     "index.html",
     "src/tabs/sim"
@@ -2378,6 +2393,22 @@
   {
    "path": "img/a19/A19_detail.webp",
    "bytes": 112268,
+   "owners": [
+    "index.html",
+    "src/tabs/asm"
+   ]
+  },
+  {
+   "path": "img/a20/A20_compare_1.webp",
+   "bytes": 109792,
+   "owners": [
+    "index.html",
+    "src/tabs/asm"
+   ]
+  },
+  {
+   "path": "img/a20/A20_compare_2.webp",
+   "bytes": 78386,
    "owners": [
     "index.html",
     "src/tabs/asm"
@@ -3319,7 +3350,7 @@
   },
   {
    "path": "sch/BRD-01_control_board_placement.svg",
-   "bytes": 124187,
+   "bytes": 125549,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html",
@@ -3328,7 +3359,7 @@
   },
   {
    "path": "sch/BRD-02_sensor_board_placement.svg",
-   "bytes": 80941,
+   "bytes": 164975,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html",
@@ -3337,7 +3368,7 @@
   },
   {
    "path": "sch/BRD-03_pedal_board_placement.svg",
-   "bytes": 71656,
+   "bytes": 75251,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3369,7 +3400,7 @@
   },
   {
    "path": "sch/BRD-07_small_boards.svg",
-   "bytes": 58752,
+   "bytes": 62621,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3377,7 +3408,7 @@
   },
   {
    "path": "sch/BRD-08_control_board_underside.svg",
-   "bytes": 155611,
+   "bytes": 156977,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html",
@@ -3386,23 +3417,55 @@
   },
   {
    "path": "sch/BRD-09_control_board_O1.svg",
-   "bytes": 238307,
+   "bytes": 231103,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
    ]
   },
   {
-   "path": "sch/BRD-10_control_board_O7.svg",
-   "bytes": 237724,
+   "path": "sch/BRD-10_control_board_O2.svg",
+   "bytes": 220879,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
    ]
   },
   {
-   "path": "sch/BRD-11_control_board_O2-O6.svg",
-   "bytes": 238830,
+   "path": "sch/BRD-11_control_board_O3.svg",
+   "bytes": 222836,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
+   "path": "sch/BRD-12_control_board_O4.svg",
+   "bytes": 221444,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
+   "path": "sch/BRD-13_control_board_O5.svg",
+   "bytes": 223395,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
+   "path": "sch/BRD-14_control_board_O6.svg",
+   "bytes": 222836,
+   "owners": [
+    "hardware/pcb/src/page.py",
+    "index.html"
+   ]
+  },
+  {
+   "path": "sch/BRD-15_control_board_O7.svg",
+   "bytes": 228464,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3418,7 +3481,7 @@
   },
   {
    "path": "sch/SCH-02_sensor_board.svg",
-   "bytes": 51512,
+   "bytes": 51551,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3426,7 +3489,7 @@
   },
   {
    "path": "sch/SCH-03_control_board.svg",
-   "bytes": 58735,
+   "bytes": 58773,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3434,7 +3497,7 @@
   },
   {
    "path": "sch/SCH-04_end_parts.svg",
-   "bytes": 38333,
+   "bytes": 38432,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3442,7 +3505,7 @@
   },
   {
    "path": "sch/SCH-05_pedal.svg",
-   "bytes": 35727,
+   "bytes": 35733,
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
@@ -3462,6 +3525,62 @@
    "owners": [
     "hardware/pcb/src/page.py",
     "index.html"
+   ]
+  },
+  {
+   "path": "uno/U-01_system.svg",
+   "bytes": 28976,
+   "owners": [
+    "src/tabs/uno"
+   ]
+  },
+  {
+   "path": "uno/U-02_control_board_MB-U.svg",
+   "bytes": 48693,
+   "owners": [
+    "src/tabs/uno"
+   ]
+  },
+  {
+   "path": "uno/U-03_bus_board_UB_uno.svg",
+   "bytes": 74893,
+   "owners": [
+    "src/tabs/uno"
+   ]
+  },
+  {
+   "path": "uno/U-04_power_audio.svg",
+   "bytes": 26440,
+   "owners": [
+    "src/tabs/uno"
+   ]
+  },
+  {
+   "path": "uno/changes_uno.csv",
+   "bytes": 1116,
+   "owners": [
+    "src/tabs/uno"
+   ]
+  },
+  {
+   "path": "uno/netlist_uno.csv",
+   "bytes": 2652,
+   "owners": [
+    "src/tabs/uno"
+   ]
+  },
+  {
+   "path": "uno/pins_uno.csv",
+   "bytes": 810,
+   "owners": [
+    "src/tabs/uno"
+   ]
+  },
+  {
+   "path": "uno/ribbon_uno.csv",
+   "bytes": 604,
+   "owners": [
+    "src/tabs/uno"
    ]
   }
  ],
@@ -3732,7 +3851,7 @@
   },
   {
    "path": "data/final_items.json",
-   "bytes": 261476
+   "bytes": 261759
   },
   {
    "path": "data/mux_module_pins.csv",

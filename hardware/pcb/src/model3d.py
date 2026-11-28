@@ -341,7 +341,7 @@ def cond_net(wid, colour):
 
 
 def kind_of(k):
-    return "O1" if k == 1 else ("O7" if k == 7 else "MID")
+    return "O%d" % k                  # one drawing per board since 2026-11-23 (boards4.KINDS O1..O7 = BRD-09..15)
 
 
 _KT = {}
@@ -356,7 +356,7 @@ def _fix(t):
 
 
 def kind_texts(kind):
-    """click texts of the control board for one board kind - the same texts as the drawings BRD-09 / 10 / 11 (boards4.py -> hits.py),
+    """click texts of the control board for one board kind - the same texts as the drawings BRD-09 ~ 15 (boards4.py -> hits.py),
     put into OVR. Returns (keys whose text differs on this kind, the EXT lead strand items)."""
     if kind not in _KT:
         V = B4.KINDS[kind]
@@ -373,7 +373,7 @@ def kind_texts(kind):
                 continue
             key = "MBW-" + ref if typ == "w" else ref
             title = ("MB 아랫면 " + it["t"]) if typ == "w" else it["t"]
-            more = ["도면 BRD-08 (아랫면 배선) · BRD-09~11 (기판 종류별 앞·뒤)"] if typ == "w" else []
+            more = ["도면 BRD-08 (아랫면 배선) · BRD-09~15 (기판별 앞·뒤)"] if typ == "w" else []
             if vinfo(key, kind, title, [_fix(x) for x in it["d"]] + more):
                 var.add(key)
         _KT[kind] = (var, [e for e in sh.hits_custom["extra"] if e["k"] == "w"])
@@ -386,7 +386,7 @@ def scope_module(k):
     V = B4.KINDS[kind_of(k)]
     row = ID_ROWS[tag]
     midi = 24 + 12 * (k - 1)
-    jp = " · ".join("%s %s" % (ref, "닫음" if ref in B4.jp_closed(k) else "열림") for ref in ("JP301", "JP302", "JP303"))
+    jp = " · ".join("%s %s" % (ref, "연결" if ref in B4.jp_closed(k) else "연결 안 함") for ref in ("JP301", "JP302", "JP303"))
     d = ["USB 이름 '%s' · 선 W20%d → 허브 포트 %s" % (row["USB 이름"], k, row["허브 포트"]),
          "ID 점퍼: " + jp,
          "제어 기판 종류: %s — R30x %s, J302 %s (도면 %s)" % (V["name"], " · ".join(V["r"]) if V["r"] else "없음",
@@ -698,7 +698,7 @@ def module_objs(sc, SP, k=1, whole=False):
     cols = [0.63 + 2.54 * i for i in range(1, 70) if sbb["x"][0] + 0.6 < 0.63 + 2.54 * i < sbb["x"][1] - 0.6]
     sc.board(outline, (zb0, zb1), lattice(cols, rows, lambda x, y: math.hypot(x - 3.0, y - 61.9) > 2.2 and math.hypot(x - 3.0, y - 74.6) > 2.2),
              C["perf"], "PCB-SB")
-    board_info("PCB-SB", "센서 기판 SB (6행 양면 도트 띠 161.6 × 15.24 × 1.6)", [
+    board_info("PCB-SB", "센서 기판 SB (6행 양면 도트 띠 160.02 × 15.24 × 1.6, 구멍 63 × 6)", [
         "모듈마다 1장 (×7). 건반 12개의 홀 센서 U201~U212 출력을 리본(J201)으로 제어 기판 MB에 보냅니다.",
         "줄: y61.92 예비 · 64.46 3V3 버스 · 67.00 GND 버스 · 69.54 OUT · 72.08 / 74.62 리본 J201.",
         "센서 바(출력물)가 기판 윗면을 덮어서 기판 부품은 모두 아랫면에 있습니다(1206). 센서는 바의 홈 안에 눕혀 리드를 아래로 꽂습니다.",
@@ -828,7 +828,7 @@ def scene_module(SP, BOM):
     sc.view("MB 아랫면", [20, 90, 4, 145, 178, 20], az=-30, el=-55)
     sc.view("MB 위", [20, 90, 4, 145, 178, 20], az=0, el=89)
     sc.view("레일 · 핀 (주변)", [20, 88, 2, 145, 212, 32], az=-22, el=26)
-    sc.note("ID 점퍼는 O1 = JP301 닫음, R301~R303 100 kΩ와 J302 EXT는 O1·O7에만 (O7은 R301만). 다른 모듈은 같은 자리를 비웁니다.")
+    sc.note("ID 점퍼는 O1 = JP301 연결(나머지 연결 안 함), R301~R303 100 kΩ와 J302 EXT는 O1·O7에만 (O7은 R301만). 다른 모듈은 같은 자리를 비웁니다.")
     sc.note("센서 바·받침 리브·밸런스 레일·프레임 핀은 위치만 흐리게(주변 출력물). 센서가 기판보다 떠 있는 것은 바의 홈 안에 눕혀 있기 때문입니다.")
     sc.note("MB는 80 × 120 한 장을 통째로 모듈 바닥 자리에 놓고, 따로 출력한 밸런스 레일이 맨 띠를 눌러 잡습니다(△33) — 레일·핀을 누르면 이유가 나옵니다. "
             "'주변 출력물'을 끄면 숨겨집니다.")
@@ -838,8 +838,8 @@ def scene_module(SP, BOM):
 def mb_scene_parts(sc, SP, k=1, whole=False):
     """the control board MB of module k as that board is built (boards4.KINDS: O1 = R301~R303 + EXT lead W403 5 strands, O7 = R301 +
     W413 3 strands, O2~O6 = neither; ID jumpers by the board number): board, Zero, mux, headers, J301 / J302 pads, R30x, JP, TP, C301,
-    USB plug, EXT lead, underside wiring (△33: the whole 80 x 120 board on the module floor). Wires and pads a kind does not use are
-    drawn faint / without solder. Click texts = the drawings' (kind_texts)."""
+    USB plug, EXT lead, underside wiring (△33: the whole 80 x 120 board on the module floor). Wires and pads a board does not use are
+    not drawn (2026-11-23). Click texts = the drawings' (kind_texts)."""
     kind = kind_of(k)
     V = B4.KINDS[kind]
     var, leads = kind_texts(kind)
@@ -863,7 +863,7 @@ def mb_scene_parts(sc, SP, k=1, whole=False):
         % (S.MB["x0"], S.MB["x1"], S.MB["y0"], S.MB["y1"]),
         "앞 구역(J301·먹스) 부품 ≤ z17.27, 뒤 구역(제로·J302·R30x·JP·TP) ≤ z20.9. 아랫면은 바닥까지 %.1f — 다리 끝 ≤ 1.0, 선은 리본 가닥(겹쳐도 1.8)."
         % (z0 - S.MB["floor"]),
-        "도면 BRD-01 (윗면), BRD-08 (아랫면 배선), BRD-09~11 (기판 종류별), SCH-03"])
+        "도면 BRD-01 (윗면), BRD-08 (아랫면 배선), BRD-09~15 (기판별 O1~O7), SCH-03"])
     sc.label((82.25, 91.0, z1), "MB 제어 기판", 0)
     pads, _nets = MR.pads_and_nets()
     # ---- Zero A301 on standard headers with the 2.5 mold (PCB z11.1~12.1)
@@ -906,13 +906,14 @@ def mb_scene_parts(sc, SP, k=1, whole=False):
             sc.pad(x, y, (z0, z1), nn, pid, "b")
         elif ref == "J301":
             sc.pad(x, y, (z0, z1), nn, pid, "bt")                 # strands soldered on the top, board wires below
-        elif ref == "J302":                                       # the EXT lead is soldered on the top of the pads this kind uses
-            sc.pad(x, y, (z0, z1), nn, pid, ("bt" if int(num) in V["ext"] else "b") if sol else "")
+        elif ref == "J302":                                       # the EXT lead is soldered on the top of the pads this board uses
+            if sol:                                               # a J302 place this board does not use is not drawn (2026-11-23)
+                sc.pad(x, y, (z0, z1), nn, pid, "bt" if int(num) in V["ext"] else "b")
         elif ref.startswith("TP"):
             sc.pad(x, y, (z0, z1), nn, pid, "bt")
             sc.add(k="c", a="x", p=[r2(y), r2(z1 + 1.6)], r=1.1, s=[r2(x - 0.25), r2(x + 0.25)], c=C["tin"], i=pid, g="part", n=nn, ring=1)
-        else:                                                     # R30x, JP30x: soldered where this kind has a part or a wire joint
-            sc.pad(x, y, (z0, z1), nn, pid, "b" if sol else "")
+        elif sol:                                                 # R30x, JP30x: only where this board has a part or a wire joint
+            sc.pad(x, y, (z0, z1), nn, pid, "b")
     # EXT pull-downs this kind carries (O1: R301~R303, O7: R301; R304 on no board)
     for ref, (x, y) in S.R_EXT.items():
         if ref in V["r"]:
@@ -945,9 +946,9 @@ def mb_scene_parts(sc, SP, k=1, whole=False):
     # underside wiring (BRD-08 / wiring_MB.csv): single 2651 ribbon strands (OD ~0.9), joins only at pads
     zu = z0 - 0.47
     for n_, w in enumerate(wires):
-        o = strand(sc, down_ends(list(w["pts"]), zu - 0.04 * (n_ % 3), z0), w["net"], "MBW-%d" % w["no"], r=0.42)
-        if o is not None and not B4.wire_used(V, w):
-            o["o"], o["w"] = 0.3, "피복 가닥 — 이 기판에서는 쓰지 않아 흐리게 그림"
+        if not B4.wire_used(V, w):                                # a wire this board does not need is not drawn (2026-11-23)
+            continue
+        strand(sc, down_ends(list(w["pts"]), zu - 0.04 * (n_ % 3), z0), w["net"], "MBW-%d" % w["no"], r=0.42)
     for o in sc.d["objs"][start:]:
         if o.get("i") in var:
             o["v"] = kind
@@ -1004,7 +1005,7 @@ def end_objs(sc, SP, tag, whole=False):
     rows = [61.92, 64.46, 67.00, 69.54, 72.08, 74.62]
     sc.board(outline, (zb0, zb1),
              lattice(cols, rows, lambda x, y: math.hypot(x - 3.0, y - 61.9) > 2.2 and math.hypot(x - 3.0, y - 74.6) > 2.2), C["perf"], "PCB-" + tag)
-    board_info("PCB-" + tag, "%s 센서 기판 (6행 띠 %s × 15.24)" % (tag, "45.5" if tag == "EL" else "22.0"), [
+    board_info("PCB-" + tag, "%s 센서 기판 (6행 띠 %s × 15.24, 구멍 %s × 6)" % (tag, "43.18" if tag == "EL" else "20.32", "17" if tag == "EL" else "8"), [
         "끝 건반(%s) 센서 기판: 옥타브 모듈에 들지 않는 %s 끝 건반의 홀 센서를 달고, 리드선으로 %s 제어 기판에 보냅니다."
         % (" · ".join(k_[1] for k_ in Bd["keys"]), "왼쪽" if tag == "EL" else "오른쪽", mod),
         "끝 부속 센서 바 안 (EL x1.0~46.5, ER 로컬 x1.0~23.0). 줄은 SB와 같음.",
@@ -1036,15 +1037,15 @@ def end_objs(sc, SP, tag, whole=False):
     info("BUS-%s-GND" % tag, "%s GND 버스 (주석 맨선)" % tag, ["아랫면 y67.00, x8.25 → %.2f" % last, "도면 BRD-02 (끝 부속 칸)"])
     for n, x in enumerate(jx, 1):
         sc.pad(x, 74.62, (zb0, zb1), pin_net(tag, Bd["jref"], n), "%s.%d" % (Bd["jref"], n), "b")
-    wires = [((jx[0], 67.00), (jx[0], 74.62), "GND", "GND 버스 → %s.1" % Bd["jref"]),
-             ((jx[-1], 64.46), (jx[-1], 74.62), rail, "3V3 버스 → %s.%d" % (Bd["jref"], len(jx)))]
-    for n_, (u, key, xk, cref, rref) in enumerate(Bd["keys"]):
-        wires.append(((S.end_col(xk), 72.08), (jx[1 + n_], 74.62), pin_net(tag, rref, "1"), "%s (%s 건반) → %s.%d" % (rref, key, Bd["jref"], n_ + 2)))
-    for n_, (a, b_, net, nm) in enumerate(wires):
-        wid = "%sW-%d" % (tag, n_ + 1)
-        strand(sc, down_ends([(a[0], a[1]), (b_[0], b_[1])], zu - 0.1, zb0), net, wid)
-        info(wid, "%s 아랫면 선: %s" % (tag, nm),
-             ["넷 %s · 피복 단선, 점 대 점" % net, "선: EUNSUNG 2651-16P 리본에서 가른 1가닥 (구매 %s · %s)" % (HT.STRAND[0], HT.STRAND[2]), "도면 BRD-02 (끝 부속 칸)"])
+    import boards5 as B5                      # lattice routes of the underside strands (BRD-02, wiring_small.csv EL / ER)
+    for r in B5.end_rows(tag):
+        wid = r["key"]
+        strand(sc, down_ends(r["poly"], zu - 0.1, zb0), r["net"], wid)
+        info(wid, "%s 아랫면 선 %s: %s → %s" % (tag, wid.split("-")[1], r["a"], r["b"]),
+             ["넷 %s · 피복 단선 · 길이 %.1f mm" % (r["net"], r["length"]),
+              "선: EUNSUNG 2651-16P 리본에서 가른 1가닥 (구매 %s · %s)" % (HT.STRAND[0], HT.STRAND[2]),
+              "꺾인 점 (끝 부속 좌표): " + " → ".join("(%.2f,%.2f)" % p for p in r["poly"]),
+              "wiring_small.csv (기판 %s) · 도면 BRD-02 (끝 부속 칸)" % tag])
     # lead strands: down from the J pads inside the rear-rib gap, gathered, flat on the floor toward the rear wall
     gx0 = 14.825 if tag == "EL" else 8.885
     wid = "W401" if tag == "EL" else "W411"
@@ -1058,9 +1059,12 @@ def end_objs(sc, SP, tag, whole=False):
     if whole:                                                      # the rest of the lead: CAD lane under the balance rail to the rear wall
         sc.box(bx(SP["el_lead" if tag == "EL" else "er_lead"]["boxes"][2]), C["ribbon"], i=wid, g="cable")
     sc.label((gx0 + 3.0, 92.0, 6.5), "%s → 뒤 통로 XH" % wid, 1)
-    for (a0, a1, b0, b1) in ([(6.0, Bd["gap"][0], 73.2, 75.5), (Bd["gap"][1], Bd["x1"], 73.2, 75.5), (6.0, Bd["x1"] - 0.5, 61.0, 62.8)]):
-        if a1 > a0:
-            sc.box([a0, b0, 5.0, a1, b1, zb0], C["ctx"], i="CTX-RIB", g="ctx", o=0.35)
+    for (a0, a1, b0, b1) in S.end_pads(tag):                     # A20 support pads (right end); the W1 ribs are gone, floor open
+        sc.box([a0, b0, 5.0, a1, b1, zb0], C["ctx"], i="CTX-PAD-END", g="ctx", o=0.35)
+    info("CTX-PAD-END", "끝 부속 받침 패드 (바닥틀, A20)",
+         ["윗면 z7.0 = 기판 밑면. 오른쪽 끝의 쓰지 않는 가장자리 줄(y61.92 · y74.62) 밑, 길이 3.5 (EL x42.8~46.3 · ER x19.3~22.8).",
+          "왼쪽 끝은 받침 기둥 + M3×10 ×2. 그 밖의 기판 밑은 바닥판이 뚫려 4.0 — 예전 받침 리브는 없어짐 (A20).",
+          "패드 둘레 0.5 안에는 아랫면 선·납땜을 두지 않습니다 (도면 BRD-02 자동 검사)."])
     info("CTX-BAR-END", "끝 부속 센서 바 (출력물, 윤곽만)", ["EL 바 x0.5~46.5 (A#0 낮은 구간 x19.93~33.93), ER 바 로컬 x0.5~23.0. 센서는 바의 홈에 눕혀 있습니다."])
     sc.bd = None
 
@@ -1085,14 +1089,14 @@ def scene_end(SP):
 # ====================================================================== pedal: PB + J501 scrap + PS
 def scene_pedal():
     sc = Scene("pedal", "페달: PED 보드 PB + J501 잭 조각 + 페달 안 센서 PS",
-               "가운데 유닛 세계 좌표 (PB x426.5~476.5 · y244~314). PS는 페달 안에 있어 보기 위해 PB 옆에 둠.", "world", "페달 PB·J501·PS")
+               "가운데 유닛 세계 좌표 (PB x426.97~476.5 · y244~315.12). PS는 페달 안에 있어 보기 위해 PB 옆에 둠.", "world", "페달 PB·J501·PS")
     sc.m, sc.bd = "PED", "PB"
     z0, z1 = B2.PB_Z
     bx0, bx1, by0, by1 = B2.PB_BOX
     holes = lattice([B2.pb_x(j) for j in range(20)], [B2.pb_y(i) for i in range(28)],
                     lambda x, y: min(math.hypot(x - a, y - b) for a, b, _, _ in B2.PB_HOLES) > 2.2)
     sc.board(rect(bx0, by0, bx1, by1), (z0, z1), holes, C["perf"], "PCB-PB", mholes=[(a, b, d) for a, b, d, _ in B2.PB_HOLES])
-    board_info("PCB-PB", "PED 페달 보드 PB (8 × 12 양면 기판에서 자른 70 × 50)", [
+    board_info("PCB-PB", "PED 페달 보드 PB (8 × 12 양면 기판에서 자른 71.12 × 49.53)", [
         "페달(서스테인, MIDI CC64) 보드: 페달 안 홀 센서 PS의 전압을 A501 RP2040-Zero가 ADC로 읽어 USB 선 W208로 Pi에 보냅니다.",
         "가운데 유닛 바닥 5 mm 기둥 위 (z21.5~23.1). 격자 x = 475.23 − 2.54 j, y = 245.27 + 2.54 i (지그 P-PED).",
         "A501 RP2040-Zero (180° 돌림, USB-C −y) · R501 1 kΩ · R502 100 kΩ · R503 100 Ω × 5 = 20 Ω · C501 100 nF · JP504 닫음.",
@@ -1501,7 +1505,7 @@ def scene_all(SP, CAD, JK):
     sc.view("오디오 · Pi · 허브", [500, 214, 14, 920, 335, 62], az=-25, el=50)
     sc.view("위에서", [-14, 0, 0, 1232, 346, 60], az=0, el=89)
     sc.note("모듈마다 실제로 다른 것까지 그렸습니다: O1은 R301~R303 + EXT 선 W403 5가닥, O7은 R301 + W413 3가닥, O2~O6은 둘 다 없음, ID 점퍼는 모듈 번호대로. "
-            "그 기판에서 쓰지 않는 아랫면 선은 흐리게 보입니다.")
+            "그 기판에서 쓰지 않는 저항 자리·점퍼·아랫면 선은 그리지 않았습니다.")
     sc.note("끝 부속의 센서 넷(EL_A0 등)은 XH 커넥터를 지나 O1·O7의 EXT 넷과 같은 선이라, 누르면 양쪽이 함께 밝아집니다. GND는 악기 전체가 한 덩어리입니다.")
     sc.note("가운데 유닛 뚜껑 · 화면 · 스피커 통은 빼고, 아랫판 · 끝벽 · 뒤판 · 배터리 틀 · 기둥만 흐리게 보입니다. 선은 CAD의 선 중심선 (빨강 + 검정 두 가닥은 옆으로 나란히).")
     sc.note("화면 DSI · 화면 전원선(W606~W608)은 뚜껑 위 화면으로 올라가므로 여기서는 뺐습니다(04 3D 모델에 있음). USB 선은 지름 3.5 어림, 허브 쪽 플러그는 상자.")
@@ -1677,8 +1681,9 @@ def check(data):
         lead = sum(1 for o in mine if str(o.get("i", "")).startswith(("W403-", "W413-")))
         if lead != len(V["ext"]):
             probs.append("all: %s EXT lead strands %d, its kind wants %d" % (tag, lead, len(V["ext"])))
-        if sum(1 for o in mine if o["k"] == "p") < 140 or sum(1 for o in mine if str(o.get("i", "")).startswith("MBW-")) != MR.stats()["wires"]:
-            probs.append("all: %s is not drawn in detail (pads / underside wires missing)" % tag)
+        nw = len({o.get("i") for o in mine if str(o.get("i", "")).startswith("MBW-")})
+        if sum(1 for o in mine if o["k"] == "p") < 120 or nw != len(B4.used_nos(V)):
+            probs.append("all: %s is not drawn in detail (pads / underside wires %d, its board needs %d)" % (tag, nw, len(B4.used_nos(V))))
     return probs
 
 

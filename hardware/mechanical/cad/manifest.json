@@ -2603,20 +2603,20 @@
    "qty": 1,
    "folder": "09_기판지그",
    "size_mm": [
-    70.0,
-    50.0,
+    71.12,
+    49.53,
     6.2
    ],
-   "volume_cm3": 17.28,
-   "mass_g_solid_petg": 21.9,
+   "volume_cm3": 17.4,
+   "mass_g_solid_petg": 22.1,
    "material": "PETG",
-   "note": "PED 페달 보드 1장용 지그: 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
+   "note": "PED 페달 보드 1장용 지그 (71.12 × 49.53 = 구멍 28 × 20): 핀 6개를 시트 구멍에 꽂고 네 옆면을 따라 칼로 긋고 꺾음, 나사 Ø3.2 ×2·핀 구멍 Ø3.0 ×2를 안내 구멍으로 뚫음 (cad/jigs/README.md '기판 지그'). 제어 기판 MB 7장은 자르지 않고 통째로 씀 (A16). PETG 0.2 mm, 서포트 없음, STL 방향 그대로",
    "ids": [],
    "name_ko": "P-PED 페달기판지그 PED1장",
    "variant": true,
    "extra": false,
    "pcbjig": "P-PED",
-   "mass_g_print_est": 13.3,
+   "mass_g_print_est": 13.4,
    "print_min_est": 24.0
   },
   {
